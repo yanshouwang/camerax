@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:camerax/camerax.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('camerax');
+  const channel = MethodChannel('camerax');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
