@@ -30,9 +30,9 @@ flutter:
     platforms:
       android:
         package: dev.yanshouwang.camerax
-        pluginClass: CameraxPlugin
+        pluginClass: CameraXPlugin
       ios:
-        pluginClass: CameraxPlugin
+        pluginClass: CameraXPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
