@@ -88,10 +88,9 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
         future.addListener(Runnable {
             cameraProvider = future.get()
             val lifecycleOwner = activity as LifecycleOwner
-            val selector = when (call.arguments) {
-                "front" -> CameraSelector.DEFAULT_FRONT_CAMERA
-                else -> CameraSelector.DEFAULT_BACK_CAMERA
-            }
+            val selector =
+                    if (call.arguments == "front") CameraSelector.DEFAULT_FRONT_CAMERA
+                    else CameraSelector.DEFAULT_BACK_CAMERA
             // Preview
             val surfaceProvider = Preview.SurfaceProvider { request ->
                 val resolution = request.resolution
