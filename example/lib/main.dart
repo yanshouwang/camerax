@@ -43,7 +43,7 @@ class HomeView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(40.0),
           child: Text(
-            "Click the camera button at bottom to start scan a barcode:)",
+            'Click the camera button at bottom to start scan a barcode:)',
             style: TextStyle(fontSize: 20.0),
             textAlign: TextAlign.center,
           ),
