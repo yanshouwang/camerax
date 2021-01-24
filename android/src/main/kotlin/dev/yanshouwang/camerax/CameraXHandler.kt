@@ -18,7 +18,8 @@ import androidx.lifecycle.LifecycleOwner
 import io.flutter.plugin.common.*
 import io.flutter.view.TextureRegistry
 
-class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMessenger, private val textureRegistry: TextureRegistry) : MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
+class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMessenger, private val textureRegistry: TextureRegistry)
+    : MethodChannel.MethodCallHandler, EventChannel.StreamHandler, PluginRegistry.RequestPermissionsResultListener {
     companion object {
         const val CAMERA_REQUEST_CODE = 1993
         val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
@@ -36,11 +37,6 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
     private var textureEntry: TextureRegistry.SurfaceTextureEntry? = null
     private var streamSink: EventChannel.EventSink? = null
 
-    init {
-        method.setMethodCallHandler(this)
-        event.setStreamHandler(this)
-    }
-
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
         when (call.method) {
             "init" -> init(call, result)
@@ -55,6 +51,15 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
 
     override fun onCancel(arguments: Any?) {
         streamSink = null
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>?, grantResults: IntArray?): Boolean {
+        return listener?.onRequestPermissionsResult(requestCode, permissions, grantResults) ?: false
+    }
+
+    fun startListening() {
+        method.setMethodCallHandler(this)
+        event.setStreamHandler(this)
     }
 
     fun stopListening() {
@@ -73,8 +78,10 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
                     if (requestCode == CAMERA_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         startCamera(call, result)
                         listener = null
+                        true
+                    } else {
+                        false
                     }
-                    true
                 }
                 ActivityCompat.requestPermissions(activity, PERMISSIONS_REQUIRED, CAMERA_REQUEST_CODE)
             }
@@ -119,7 +126,7 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
             // TODO: seems there's not a better way to get the final resolution
             @SuppressLint("RestrictedApi")
             val resolution = preview.attachedSurfaceResolution!!
-            val natural = camera.cameraInfo.sensorRotationDegrees % 90 == 0
+            val natural = camera.cameraInfo.sensorRotationDegrees % 180 == 0
             val width = if (natural) resolution.width else resolution.height
             val height = if (natural) resolution.height else resolution.width
             val answer = mapOf("textureId" to textureEntry!!.id(), "width" to width, "height" to height)

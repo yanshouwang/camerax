@@ -8,19 +8,23 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
 /** CameraXPlugin */
 class CameraXPlugin : FlutterPlugin, ActivityAware {
-    private var binding: FlutterPlugin.FlutterPluginBinding? = null
+    private var flutter: FlutterPlugin.FlutterPluginBinding? = null
+    private var activity: ActivityPluginBinding? = null
     private var handler: CameraXHandler? = null
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        this.binding = binding
+        this.flutter = binding
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        this.binding = null
+        this.flutter = null
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        handler = CameraXHandler(binding.activity, this.binding!!.binaryMessenger, this.binding!!.textureRegistry)
+        handler = CameraXHandler(binding.activity, this.flutter!!.binaryMessenger, this.flutter!!.textureRegistry)
+        handler!!.startListening()
+        activity = binding
+        activity!!.addRequestPermissionsResultListener(handler!!)
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -28,6 +32,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onDetachedFromActivity() {
+        activity!!.removeRequestPermissionsResultListener(handler!!)
+        activity = null
         handler!!.stopListening()
         handler = null
     }
