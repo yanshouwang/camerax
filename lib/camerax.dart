@@ -1,12 +1,4 @@
-import 'dart:async';
+library camerax;
 
-import 'package:flutter/services.dart';
-
-class Camerax {
-  static const MethodChannel _channel = MethodChannel('camerax');
-
-  static Future<String> get platformVersion async {
-    final version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-}
+export 'src/camera_controller.dart';
+export 'src/camera_widget.dart';

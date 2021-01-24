@@ -1,9 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:camerax/camerax.dart';
 
 void main() {
-  const channel = MethodChannel('camerax');
+  const channel = MethodChannel('yanshouwang.dev/camerax/method');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -15,9 +14,5 @@ void main() {
 
   tearDown(() {
     channel.setMockMethodCallHandler(null);
-  });
-
-  test('getPlatformVersion', () async {
-    expect(await Camerax.platformVersion, '42');
   });
 }
