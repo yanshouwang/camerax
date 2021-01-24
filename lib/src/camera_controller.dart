@@ -49,9 +49,9 @@ class _CameraController implements CameraController {
   Future<void> initAsync() async {
     final answer =
         await method.invokeMapMethod<String, dynamic>('init', '$facing');
-    textureId = answer['textureId'] as int;
-    final width = answer['width'] as double;
-    final height = answer['height'] as double;
+    textureId = answer['textureId'];
+    final width = (answer['width'] as int).toDouble();
+    final height = (answer['height'] as int).toDouble();
     resolution = Size(width, height);
   }
 
