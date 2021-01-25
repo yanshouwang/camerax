@@ -1,3 +1,4 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+- Add CameraWidget and CameraController on Android.
+- Add camerax example.
