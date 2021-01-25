@@ -13,6 +13,11 @@ A camera plugin for flutter, which use CameraX on Android, native API on iOS, su
 
 Add `camerax` as a [dependency in your pubspec.yaml file](https://flutter.dev/using-packages/).
 
+```
+dependencies:
+  camerax: ^<latest-version>
+```
+
 ### Android
 
 Make sure you have a `miniSdkVersion` with 21 or higher in your `android/app/build.gradle` file, because the camera2 API which CameraX used only support Android 5.0 or above.
@@ -28,3 +33,8 @@ Make sure you have a `miniSdkVersion` with 21 or higher in your `android/app/bui
 - iOS still under developement.
 - Doesn't work with horizontal orientation now.
 - No tests for now.
+
+## Screenshots
+
+![Home](https://github.com/yanshouwang/docs/blob/master/camerax/home.png?raw=true)
+![Camera](https://github.com/yanshouwang/docs/blob/master/camerax/camera.png?raw=true)
