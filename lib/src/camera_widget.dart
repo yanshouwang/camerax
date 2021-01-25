@@ -14,10 +14,10 @@ class CameraWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRect(
       child: Transform.scale(
-        scale: MediaQuery.of(context).scale(controller),
+        scale: controller.resolution.fill(MediaQuery.of(context).size),
         child: Center(
           child: AspectRatio(
-            aspectRatio: controller.aspectRatio,
+            aspectRatio: controller.resolution.aspectRatio,
             child: controller.view,
           ),
         ),
@@ -26,15 +26,12 @@ class CameraWidget extends StatelessWidget {
   }
 }
 
-extension on MediaQueryData {
-  double scale(CameraController controller) {
-    final logicalWidth = size.width;
-    final logicalHeight = controller.aspectRatio * logicalWidth;
-    final height = size.height;
-    return height / logicalHeight;
+extension on Size {
+  double fill(Size targetSize) {
+    if (targetSize.aspectRatio < aspectRatio) {
+      return targetSize.height * aspectRatio / targetSize.width;
+    } else {
+      return targetSize.width / aspectRatio / targetSize.height;
+    }
   }
-}
-
-extension on CameraController {
-  double get aspectRatio => resolution.width / resolution.height;
 }

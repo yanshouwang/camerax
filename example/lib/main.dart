@@ -16,6 +16,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     final style =
         SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(style);

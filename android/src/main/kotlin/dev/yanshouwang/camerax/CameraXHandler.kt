@@ -21,8 +21,8 @@ import io.flutter.view.TextureRegistry
 class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMessenger, private val textureRegistry: TextureRegistry)
     : MethodChannel.MethodCallHandler, EventChannel.StreamHandler, PluginRegistry.RequestPermissionsResultListener {
     companion object {
-        const val CAMERA_REQUEST_CODE = 1993
-        val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
+        private const val CAMERA_REQUEST_CODE = 1993
+        private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
     }
 
     /// The MethodChannel that will the communication between Flutter and native Android
@@ -31,11 +31,11 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
     /// when the Flutter Engine is detached from the Activity
     private val method = MethodChannel(binaryMessenger, "yanshouwang.dev/camerax/method")
     private val event = EventChannel(binaryMessenger, "yanshouwang.dev/camerax/event")
+    private var streamSink: EventChannel.EventSink? = null
     private var listener: PluginRegistry.RequestPermissionsResultListener? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private var camera: CameraControl? = null
     private var textureEntry: TextureRegistry.SurfaceTextureEntry? = null
-    private var streamSink: EventChannel.EventSink? = null
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
         when (call.method) {
@@ -121,6 +121,7 @@ class CameraXHandler(private val activity: Activity, binaryMessenger: BinaryMess
             }
             val analysis = ImageAnalysis.Builder().build().apply { setAnalyzer(executor, analyzer) }
             // Start camera
+            cameraProvider!!.unbindAll()
             val camera = cameraProvider!!.bindToLifecycle(lifecycleOwner, selector, preview, analysis)
             this.camera = camera.cameraControl
             // TODO: seems there's not a better way to get the final resolution
