@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:camerax/camerax.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +42,7 @@ class HomeView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(40.0),
           child: Text(
-            'Click the camera button at bottom to start scan a barcode:)',
+            'Click the camera button at bottom to start a preview:)',
             style: TextStyle(fontSize: 20.0),
             textAlign: TextAlign.center,
           ),
@@ -97,7 +96,6 @@ class _CameraViewState extends State<CameraView>
   Animation<double> offsetAnimation;
   Animation<double> opacityAnimation;
   bool detecting = false;
-  BarcodeDetector detector = FirebaseVision.instance.barcodeDetector();
 
   @override
   void initState() {
@@ -151,7 +149,6 @@ class _CameraViewState extends State<CameraView>
   void dispose() {
     subscription.cancel();
     cameraController.dispose();
-    detector.close();
     animationConrtroller.dispose();
     super.dispose();
   }
@@ -162,12 +159,7 @@ class _CameraViewState extends State<CameraView>
     }
     detecting = true;
     try {
-      final barcodes = await detector.detectInImage(image.vision);
-      if (barcodes.isEmpty) {
-        return;
-      }
-      await Navigator.of(navigatorKey.currentContext)
-          .popAndPushNamed('show', arguments: barcodes[0].rawValue);
+      // Analysize codes here...
     } catch (e) {
       print(e);
     } finally {
@@ -239,42 +231,6 @@ class LinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
-}
-
-extension on CameraImage {
-  FirebaseVisionImage get vision {
-    final writer = WriteBuffer();
-    for (var plain in planes) {
-      writer.putUint8List(plain.bytes);
-    }
-    final bytes = writer.done().buffer.asUint8List();
-    final planeData = planes
-        .map((e) => FirebaseVisionImagePlaneMetadata(
-            bytesPerRow: e.rowStride, height: height, width: width))
-        .toList();
-    final metadata = FirebaseVisionImageMetadata(
-        size: Size(width.toDouble(), height.toDouble()),
-        rawFormat: format,
-        planeData: planeData,
-        rotation: rotation.rotation);
-    return FirebaseVisionImage.fromBytes(bytes, metadata);
-  }
-}
-
-extension on int {
-  ImageRotation get rotation {
-    switch (this) {
-      case 0:
-        return ImageRotation.rotation0;
-      case 90:
-        return ImageRotation.rotation90;
-      case 180:
-        return ImageRotation.rotation180;
-      default:
-        assert(this == 270);
-        return ImageRotation.rotation270;
-    }
-  }
 }
 
 class ShowView extends StatelessWidget {
