@@ -1,6 +1,7 @@
 import Flutter
 import UIKit
 import AVFoundation
+import CoreMotion
 
 public class SwiftCameraXPlugin:
     NSObject,
@@ -12,7 +13,8 @@ public class SwiftCameraXPlugin:
     var device: AVCaptureDevice!
     var captureSession: AVCaptureSession!
     var textureId: Int64!
-    var latestPixelBuffer: CVImageBuffer?
+    var latestPixelBuffer: CVImageBuffer!
+    var motionManager: CMMotionManager!
     
     init(_ registry: FlutterTextureRegistry) {
         self.registry = registry
@@ -34,7 +36,7 @@ public class SwiftCameraXPlugin:
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "init":
-            initCameraX(call,result)
+            checkStatus(call,result)
         case "dispose":
             dispose()
             result(nil)
@@ -52,17 +54,37 @@ public class SwiftCameraXPlugin:
     }
     
     public func copyPixelBuffer() -> Unmanaged<CVPixelBuffer>? {
-        if latestPixelBuffer == nil {
-            return nil
-        }
-        return Unmanaged<CVPixelBuffer>.passRetained(latestPixelBuffer!)
+        return Unmanaged<CVPixelBuffer>.passRetained(latestPixelBuffer)
     }
     
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         latestPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+        registry.textureFrameAvailable(textureId)
     }
     
-    func initCameraX(_ call: FlutterMethodCall, _ result: FlutterResult) {
+    func checkStatus(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        if status == .notDetermined {
+            AVCaptureDevice.requestAccess(
+                for: .video,
+                completionHandler: {
+                    (authorized) in
+                    if !authorized {
+                        let error = FlutterError()
+                        result(error)
+                    }
+                    self.startCamera(call, result)
+                }
+            )
+        }else if status != .authorized{
+            let error = FlutterError()
+            result(error)
+        }else{
+            startCamera(call, result)
+        }
+    }
+    
+    func startCamera(_ call: FlutterMethodCall, _ result: FlutterResult) {
         let facing = call.arguments as! String == "front"
             ? AVCaptureDevice.Position.front
             : AVCaptureDevice.Position.back
@@ -82,7 +104,8 @@ public class SwiftCameraXPlugin:
             let input = try AVCaptureDeviceInput(device: device)
             captureSession.addInput(input)
         } catch {
-            result(error.localizedDescription)
+            let err = FlutterError(code: error.localizedDescription, message: nil, details: nil)
+            result(err)
         }
         let output = AVCaptureVideoDataOutput()
         output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String:  kCVPixelFormatType_32BGRA]
@@ -100,9 +123,11 @@ public class SwiftCameraXPlugin:
             height = 1920
         }
         captureSession.commitConfiguration()
+        let connection = output.connection(with: .video)!
+        connection.videoOrientation = .portrait
         captureSession.startRunning()
         textureId =  registry.register(self)
-        let answer: [String: Any] = ["textureId": textureId, "width": width, "height": height]
+        let answer: [String: Any] = ["textureId": textureId!, "width": width, "height": height]
         result(answer)
     }
     
