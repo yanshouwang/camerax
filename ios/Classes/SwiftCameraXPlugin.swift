@@ -14,7 +14,7 @@ public class SwiftCameraXPlugin:
     var captureSession: AVCaptureSession!
     var textureId: Int64!
     var latestPixelBuffer: CVImageBuffer!
-    var motionManager: CMMotionManager!
+    var events: FlutterEventSink!
     
     init(_ registry: FlutterTextureRegistry) {
         self.registry = registry
@@ -22,12 +22,8 @@ public class SwiftCameraXPlugin:
     }
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let method = FlutterMethodChannel(
-            name: "yanshouwang.dev/camerax/method",
-            binaryMessenger: registrar.messenger())
-        let event = FlutterEventChannel(
-            name: "yanshouwang.dev/camerax/event",
-            binaryMessenger: registrar.messenger())
+        let method = FlutterMethodChannel(name: "yanshouwang.dev/camerax/method", binaryMessenger: registrar.messenger())
+        let event = FlutterEventChannel(name: "yanshouwang.dev/camerax/event", binaryMessenger: registrar.messenger())
         let instance = SwiftCameraXPlugin(registrar.textures())
         registrar.addMethodCallDelegate(instance, channel: method)
         event.setStreamHandler(instance)
@@ -46,14 +42,19 @@ public class SwiftCameraXPlugin:
     }
     
     public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        self.events = events
         return nil
     }
     
     public func onCancel(withArguments arguments: Any?) -> FlutterError? {
+        self.events = nil
         return nil
     }
     
     public func copyPixelBuffer() -> Unmanaged<CVPixelBuffer>? {
+        if latestPixelBuffer == nil {
+            return nil
+        }
         return Unmanaged<CVPixelBuffer>.passRetained(latestPixelBuffer)
     }
     
@@ -140,5 +141,10 @@ public class SwiftCameraXPlugin:
             captureSession.removeOutput(output)
         }
         registry.unregisterTexture(textureId)
+        events = nil
+        latestPixelBuffer = nil
+        textureId = nil
+        captureSession = nil
+        device = nil
     }
 }
