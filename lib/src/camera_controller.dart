@@ -50,8 +50,8 @@ class _CameraController implements CameraController {
     final answer =
         await method.invokeMapMethod<String, dynamic>('init', '$facing');
     textureId = answer['textureId'];
-    final width = (answer['width'] as int).toDouble();
-    final height = (answer['height'] as int).toDouble();
+    final width = answer['width'];
+    final height = answer['height'];
     resolution = Size(width, height);
   }
 
