@@ -8,7 +8,8 @@ public class SwiftCameraXPlugin:
     FlutterPlugin,
     FlutterStreamHandler,
     FlutterTexture,
-    AVCaptureVideoDataOutputSampleBufferDelegate {
+    AVCaptureVideoDataOutputSampleBufferDelegate,
+    AVCaptureMetadataOutputObjectsDelegate {
     
     let registry: FlutterTextureRegistry
     var device: AVCaptureDevice!
@@ -63,48 +64,10 @@ public class SwiftCameraXPlugin:
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         latestPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         registry.textureFrameAvailable(textureId)
-        // Stream camera image data.
-        if events != nil {
-            let buffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-            CVPixelBufferLockBaseAddress(buffer, .readOnly)
-            let imageWidth = CVPixelBufferGetWidth(buffer)
-            let imageHeight = CVPixelBufferGetHeight(buffer)
-            let planes = NSMutableArray()
-            let planar = CVPixelBufferIsPlanar(buffer)
-            let count = planar ? CVPixelBufferGetPlaneCount(buffer) : 1
-            for i in 0 ..< count {
-                var address: UnsafeMutableRawPointer!
-                var bytesPerRow: Int
-                var width: Int
-                var height: Int
-                if planar {
-                    address = CVPixelBufferGetBaseAddressOfPlane(buffer, i)
-                    bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(buffer, i)
-                    width = CVPixelBufferGetWidthOfPlane(buffer, i)
-                    height = CVPixelBufferGetHeightOfPlane(buffer, i)
-                } else {
-                    address = CVPixelBufferGetBaseAddress(buffer)
-                    bytesPerRow = CVPixelBufferGetBytesPerRow(buffer)
-                    width = CVPixelBufferGetWidth(buffer)
-                    height = CVPixelBufferGetHeight(buffer)
-                }
-                let length = bytesPerRow * height
-                let bytes = Data(bytesNoCopy: address, count: count, deallocator: address.deallocate())
-                let plane = NSMutableDictionary()
-                plane["bytesPerRow"] = bytesPerRow
-                plane["width"] = width
-                plane["height"] = height
-                plane["bytes"] = FlutterStandardTypedData(bytes: bytes)
-                planes.add(plane)
-            }
-            let image = NSMutableDictionary()
-            image["width"] = imageWidth
-            image["height"] = imageHeight
-            image["format"] = kCVPixelFormatType_32BGRA
-            image["planes"] = planes
-            events(image)
-            CVPixelBufferUnlockBaseAddress(buffer, .readOnly)
-        }
+    }
+    
+    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        NSLog("%@", metadataObjects)
     }
     
     func checkStatus(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
@@ -154,11 +117,18 @@ public class SwiftCameraXPlugin:
                 let err = FlutterError(code: error.localizedDescription, message: nil, details: nil)
                 result(err)
             }
-            let output = AVCaptureVideoDataOutput()
-            output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String:  kCVPixelFormatType_32BGRA]
-            output.alwaysDiscardsLateVideoFrames = true
-            output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
-            captureSession.addOutput(output)
+            // Add video output.
+            let videoOutput = AVCaptureVideoDataOutput()
+            captureSession.addOutput(videoOutput)
+            videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String:  kCVPixelFormatType_32BGRA]
+            videoOutput.alwaysDiscardsLateVideoFrames = true
+            videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+            // Add metadata output.
+            let metadataOutput = AVCaptureMetadataOutput()
+            captureSession.addOutput(metadataOutput)
+            metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            // Set resolution.
             if #available(iOS 9.0, *) {
                 captureSession.sessionPreset = .hd4K3840x2160
                 resolution = CGSize(width: 2160, height: 3840)
@@ -167,7 +137,7 @@ public class SwiftCameraXPlugin:
                 resolution = CGSize(width: 1080, height: 1920)
             }
             captureSession.commitConfiguration()
-            let connection = output.connection(with: .video)!
+            let connection = videoOutput.connection(with: .video)!
             connection.videoOrientation = .portrait
             captureSession.startRunning()
             textureId =  registry.register(self)
