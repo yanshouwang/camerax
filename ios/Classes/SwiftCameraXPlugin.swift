@@ -11,19 +11,6 @@ public class SwiftCameraXPlugin:
     AVCaptureVideoDataOutputSampleBufferDelegate,
     AVCaptureMetadataOutputObjectsDelegate {
     
-    let registry: FlutterTextureRegistry
-    var device: AVCaptureDevice!
-    var captureSession: AVCaptureSession!
-    var textureId: Int64!
-    var resolution: CGSize!
-    var latestPixelBuffer: CVImageBuffer!
-    var events: FlutterEventSink!
-    
-    init(_ registry: FlutterTextureRegistry) {
-        self.registry = registry
-        super.init()
-    }
-    
     public static func register(with registrar: FlutterPluginRegistrar) {
         let method = FlutterMethodChannel(name: "yanshouwang.dev/camerax/method", binaryMessenger: registrar.messenger())
         let event = FlutterEventChannel(name: "yanshouwang.dev/camerax/event", binaryMessenger: registrar.messenger())
@@ -32,12 +19,38 @@ public class SwiftCameraXPlugin:
         event.setStreamHandler(instance)
     }
     
+    let registry: FlutterTextureRegistry
+    var events: FlutterEventSink!
+    var controllerId: Int!
+    var device: AVCaptureDevice!
+    var textureId: Int64!
+    var captureSession: AVCaptureSession!
+    var resolution: CGSize!
+    var latestPixelBuffer: CVImageBuffer!
+    
+    init(_ registry: FlutterTextureRegistry) {
+        self.registry = registry
+        super.init()
+    }
+    
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        do {
+            try <#throwing expression#>
+        } catch {
+            let err = 
+            result(err)
+        }
         switch call.method {
         case "init":
-            checkStatus(call,result)
+            let arguments = call.arguments as! [Any?]
+            controllerId = arguments[0]
+            let position = arguments[1] == "front" ? AVCaptureDevice.Position.front : AVCaptureDevice.Position.back
+            checkStatus(position)
         case "dispose":
-            closeCamera()
+            let id = arguments as! Int
+            if id == controllerId {
+                closeCamera()
+            }
             result(nil)
         default:
             result(FlutterMethodNotImplemented)
@@ -70,7 +83,7 @@ public class SwiftCameraXPlugin:
         NSLog("%@", metadataObjects)
     }
     
-    func checkStatus(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    func checkStatus() throws {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         if status == .notDetermined {
             AVCaptureDevice.requestAccess(
@@ -78,21 +91,22 @@ public class SwiftCameraXPlugin:
                 completionHandler: {
                     (authorized) in
                     if !authorized {
-                        let error = FlutterError()
+                        let error = FlutterError(code: "ACCESS DENIED!", message: nil, details: nil)
                         result(error)
                     }
                     self.openCamera(call, result)
                 }
             )
         } else if status != .authorized {
-            let error = FlutterError()
+            let error = FlutterError(code: "ACCESS DENIED", message: nil, details: nil)
             result(error)
+            throw Error
         } else {
-            openCamera(call, result)
+            openCamera()
         }
     }
     
-    func openCamera(_ call: FlutterMethodCall, _ result: FlutterResult) {
+    func openCamera(_ position: AVCaptureDevice.Position) throws -> [String : Any?] {
         // Make sure this is not a hot reload.
         if device == nil {
             let facing = call.arguments as! String == "front"
@@ -108,6 +122,7 @@ public class SwiftCameraXPlugin:
                     .filter({$0.position == facing})
                     .first
             }
+            textureId =  registry.register(self)
             captureSession = AVCaptureSession()
             captureSession.beginConfiguration()
             do {
@@ -140,16 +155,8 @@ public class SwiftCameraXPlugin:
             let connection = videoOutput.connection(with: .video)!
             connection.videoOrientation = .portrait
             captureSession.startRunning()
-            textureId =  registry.register(self)
-            let width = resolution.width.native
-            let height = resolution.height.native
-            let answer: [String: Any] = ["textureId": textureId!, "width": width, "height": height]
-            result(answer)
         }
-        let textureId = self.textureId!
-        let width = resolution.width
-        let height = resolution.height
-        let answer: [String: Any] = ["textureId": textureId, "width": width, "height": height]
+        let answer: [String : Any?] = ["textureId": textureId, "width": resolution.width, "height": resolution.height]
         result(answer)
     }
     
@@ -161,12 +168,11 @@ public class SwiftCameraXPlugin:
         for output in captureSession.outputs {
             captureSession.removeOutput(output)
         }
-        registry.unregisterTexture(textureId)
-        events = nil
+        captureSession = nil
         latestPixelBuffer = nil
+        registry.unregisterTexture(textureId)
         resolution = nil
         textureId = nil
-        captureSession = nil
         device = nil
     }
 }

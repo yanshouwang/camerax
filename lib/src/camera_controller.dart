@@ -47,8 +47,9 @@ class _CameraController implements CameraController {
 
   @override
   Future<void> initAsync() async {
+    final arguments = [hashCode, '$facing'];
     final answer =
-        await method.invokeMapMethod<String, dynamic>('init', '$facing');
+        await method.invokeMapMethod<String, dynamic>('init', arguments);
     textureId = answer['textureId'];
     final width = answer['width'];
     final height = answer['height'];
@@ -57,7 +58,7 @@ class _CameraController implements CameraController {
 
   @override
   void dispose() {
-    method.invokeMethod('dispose');
+    method.invokeMethod('dispose', hashCode);
   }
 }
 
