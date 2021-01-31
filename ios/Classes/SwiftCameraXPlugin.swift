@@ -12,18 +12,20 @@ public class SwiftCameraXPlugin:
     AVCaptureMetadataOutputObjectsDelegate {
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let method = FlutterMethodChannel(name: "yanshouwang.dev/camerax/method", binaryMessenger: registrar.messenger())
-        let event = FlutterEventChannel(name: "yanshouwang.dev/camerax/event", binaryMessenger: registrar.messenger())
         let instance = SwiftCameraXPlugin(registrar.textures())
+        
+        let method = FlutterMethodChannel(name: "yanshouwang.dev/camerax/method", binaryMessenger: registrar.messenger())
         registrar.addMethodCallDelegate(instance, channel: method)
+        
+        let event = FlutterEventChannel(name: "yanshouwang.dev/camerax/event", binaryMessenger: registrar.messenger())
         event.setStreamHandler(instance)
     }
     
     let registry: FlutterTextureRegistry
-    var events: FlutterEventSink!
-    var controllerId: Int!
-    var device: AVCaptureDevice!
+    var stream: FlutterEventSink!
+    var instanceId: Int!
     var textureId: Int64!
+    var device: AVCaptureDevice!
     var captureSession: AVCaptureSession!
     var resolution: CGSize!
     var latestPixelBuffer: CVImageBuffer!
@@ -34,36 +36,27 @@ public class SwiftCameraXPlugin:
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        do {
-            try <#throwing expression#>
-        } catch {
-            let err = 
-            result(err)
-        }
         switch call.method {
+        case "state":
+            stateNative(call, result)
+        case "request":
+            requestNative(call, result)
         case "init":
-            let arguments = call.arguments as! [Any?]
-            controllerId = arguments[0]
-            let position = arguments[1] == "front" ? AVCaptureDevice.Position.front : AVCaptureDevice.Position.back
-            checkStatus(position)
+            initNative(call, result)
         case "dispose":
-            let id = arguments as! Int
-            if id == controllerId {
-                closeCamera()
-            }
-            result(nil)
+            disposeNative(call, result)
         default:
             result(FlutterMethodNotImplemented)
         }
     }
     
     public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-        self.events = events
+        stream = events
         return nil
     }
     
     public func onCancel(withArguments arguments: Any?) -> FlutterError? {
-        self.events = nil
+        stream = nil
         return nil
     }
     
@@ -80,84 +73,107 @@ public class SwiftCameraXPlugin:
     }
     
     public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        NSLog("%@", metadataObjects)
+        for mo in metadataObjects {
+            if let mmo = mo as? AVMetadataMachineReadableCodeObject {
+                let data: [String: Any?] = [
+                    "type": mmo.type.rawValue,
+                    "value": mmo.stringValue,
+                    "corners": mmo.corners.map({["x": Double($0.x), "y": Double($0.y)]})
+                ]
+                stream?(data)
+            }
+        }
     }
     
-    func checkStatus() throws {
+    func stateNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
-        if status == .notDetermined {
-            AVCaptureDevice.requestAccess(
-                for: .video,
-                completionHandler: {
-                    (authorized) in
-                    if !authorized {
-                        let error = FlutterError(code: "ACCESS DENIED!", message: nil, details: nil)
-                        result(error)
-                    }
-                    self.openCamera(call, result)
-                }
-            )
-        } else if status != .authorized {
-            let error = FlutterError(code: "ACCESS DENIED", message: nil, details: nil)
-            result(error)
-            throw Error
-        } else {
-            openCamera()
+        switch status {
+        case .notDetermined:
+            result(0)
+        case .authorized:
+            result(1)
+        default:
+            result(2)
         }
     }
     
-    func openCamera(_ position: AVCaptureDevice.Position) throws -> [String : Any?] {
-        // Make sure this is not a hot reload.
-        if device == nil {
-            let facing = call.arguments as! String == "front"
-                ? AVCaptureDevice.Position.front
-                : AVCaptureDevice.Position.back
-            if #available(iOS 10.0, *) {
-                device = AVCaptureDevice.DiscoverySession(
-                    deviceTypes: [.builtInWideAngleCamera],
-                    mediaType: .video,
-                    position: facing).devices.first
-            } else {
-                device = AVCaptureDevice.devices(for: .video)
-                    .filter({$0.position == facing})
-                    .first
-            }
-            textureId =  registry.register(self)
-            captureSession = AVCaptureSession()
-            captureSession.beginConfiguration()
-            do {
-                let input = try AVCaptureDeviceInput(device: device)
-                captureSession.addInput(input)
-            } catch {
-                let err = FlutterError(code: error.localizedDescription, message: nil, details: nil)
-                result(err)
-            }
-            // Add video output.
-            let videoOutput = AVCaptureVideoDataOutput()
-            captureSession.addOutput(videoOutput)
-            videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String:  kCVPixelFormatType_32BGRA]
-            videoOutput.alwaysDiscardsLateVideoFrames = true
-            videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
-            // Add metadata output.
-            let metadataOutput = AVCaptureMetadataOutput()
-            captureSession.addOutput(metadataOutput)
-            metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            // Set resolution.
-            if #available(iOS 9.0, *) {
-                captureSession.sessionPreset = .hd4K3840x2160
-                resolution = CGSize(width: 2160, height: 3840)
-            } else {
-                captureSession.sessionPreset = .hd1920x1080
-                resolution = CGSize(width: 1080, height: 1920)
-            }
-            captureSession.commitConfiguration()
-            let connection = videoOutput.connection(with: .video)!
-            connection.videoOrientation = .portrait
-            captureSession.startRunning()
+    func requestNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        AVCaptureDevice.requestAccess(
+            for: .video,
+            completionHandler: { result($0) }
+        )
+    }
+    
+    func initNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        if instanceId != nil {
+            closeCamera()
+            instanceId = nil
         }
-        let answer: [String : Any?] = ["textureId": textureId, "width": resolution.width, "height": resolution.height]
-        result(answer)
+        let arguments = call.arguments as! [Any]
+        let id = arguments[0] as! Int
+        let position = arguments[1] as! Int == 0 ? AVCaptureDevice.Position.front : .back
+        do {
+            try openCamera(position)
+            instanceId = id
+            let answer: [String : Any?] = [
+                "textureId": textureId,
+                "width": resolution.width,
+                "height": resolution.height
+            ]
+            result(answer)
+        } catch {
+            error.throwNative(result)
+        }
+    }
+    
+    func disposeNative(_ call: FlutterMethodCall, _ result: FlutterResult) {
+        let id = call.arguments as! Int
+        if id == instanceId {
+            closeCamera()
+            instanceId = nil
+        }
+        result(nil)
+    }
+    
+    func openCamera(_ position: AVCaptureDevice.Position) throws {
+        textureId = registry.register(self)
+        if #available(iOS 10.0, *) {
+            device = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: position).devices.first
+        } else {
+            device = AVCaptureDevice.devices(for: .video).filter({$0.position == position}).first
+        }
+        captureSession = AVCaptureSession()
+        captureSession.beginConfiguration()
+        let input = try AVCaptureDeviceInput(device: device)
+        captureSession.addInput(input)
+        // Add video output.
+        let videoOutput = AVCaptureVideoDataOutput()
+        captureSession.addOutput(videoOutput)
+        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String:  kCVPixelFormatType_32BGRA]
+        videoOutput.alwaysDiscardsLateVideoFrames = true
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        // Add metadata output.
+        let metadataOutput = AVCaptureMetadataOutput()
+        captureSession.addOutput(metadataOutput)
+        metadataOutput.metadataObjectTypes = [
+            .aztec,
+            .dataMatrix,
+            .pdf417,
+            .qr,
+        ]
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        for connection in videoOutput.connections {
+            connection.videoOrientation = .portrait
+            if position == .front && connection.isVideoMirroringSupported {
+                connection.isVideoMirrored = true
+            }
+        }
+        captureSession.commitConfiguration()
+        captureSession.startRunning()
+        let demensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription)
+        let width = Int(demensions.height)
+        let height = Int(demensions.width)
+        resolution = CGSize(width: width, height: height)
     }
     
     func closeCamera() {
@@ -170,9 +186,15 @@ public class SwiftCameraXPlugin:
         }
         captureSession = nil
         latestPixelBuffer = nil
-        registry.unregisterTexture(textureId)
-        resolution = nil
-        textureId = nil
         device = nil
+        registry.unregisterTexture(textureId)
+        textureId = nil
+    }
+}
+
+extension Error {
+    func throwNative(_ result: FlutterResult) {
+        let error = FlutterError(code: localizedDescription, message: nil, details: nil)
+        result(error)
     }
 }

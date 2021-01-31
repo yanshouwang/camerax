@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:camerax/camerax.dart';
@@ -6,11 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(MyApp());
 }
-
-final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   @override
@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
         'camerax': (context) => CameraView(),
         'show': (context) => ShowView(),
       },
-      navigatorKey: navigatorKey,
     );
   }
 }
@@ -91,7 +90,6 @@ class CameraView extends StatefulWidget {
 class _CameraViewState extends State<CameraView>
     with SingleTickerProviderStateMixin {
   CameraController cameraController;
-  StreamSubscription<CameraImage> subscription;
   AnimationController animationConrtroller;
   Animation<double> offsetAnimation;
   Animation<double> opacityAnimation;
@@ -101,7 +99,7 @@ class _CameraViewState extends State<CameraView>
   void initState() {
     super.initState();
     cameraController = CameraController(CameraFacing.back);
-    subscription = cameraController.stream.listen(detect);
+    cameraController.stream.first.then(onDetected);
     animationConrtroller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
@@ -147,24 +145,13 @@ class _CameraViewState extends State<CameraView>
 
   @override
   void dispose() {
-    subscription.cancel();
     cameraController.dispose();
     animationConrtroller.dispose();
     super.dispose();
   }
 
-  void detect(CameraImage image) async {
-    if (detecting) {
-      return;
-    }
-    detecting = true;
-    try {
-      // Analysize codes here...
-    } catch (e) {
-      print(e);
-    } finally {
-      detecting = false;
-    }
+  void onDetected(MachineCode code) {
+    Navigator.of(context).popAndPushNamed('show', arguments: code.value);
   }
 }
 
