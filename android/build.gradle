@@ -8,14 +8,14 @@ buildscript {
     repositories {
         google()
         jcenter()
-        // Add HMS Core SDK repository
+        // HMS Core SDK repository
         maven {url 'https://developer.huawei.com/repo/'}
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // Add agcp dependency
+        // AGCP dependency
         classpath 'com.huawei.agconnect:agcp:1.4.2.300'
     }
 }
@@ -24,13 +24,14 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
-        // Add HMS Core SDK repository
+        // HMS Core SDK repository
         maven {url 'https://developer.huawei.com/repo/'}
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+// AGConnect plugin
 apply plugin: 'com.huawei.agconnect'
 
 android {
@@ -51,5 +52,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    // HMS Scan package
     implementation "com.huawei.hms:scan:$hms_version"
 }

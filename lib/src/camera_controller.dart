@@ -82,7 +82,7 @@ enum CameraFacing {
 }
 
 class MachineCode {
-  final String type;
+  final int type;
   final String value;
   final List<Offset> corners;
 
