@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:camerax/camerax.dart';
@@ -90,6 +91,7 @@ class CameraView extends StatefulWidget {
 class _CameraViewState extends State<CameraView>
     with SingleTickerProviderStateMixin {
   CameraController cameraController;
+  StreamSubscription subscription;
   AnimationController animationConrtroller;
   Animation<double> offsetAnimation;
   Animation<double> opacityAnimation;
@@ -99,7 +101,7 @@ class _CameraViewState extends State<CameraView>
   void initState() {
     super.initState();
     cameraController = CameraController(CameraFacing.back);
-    cameraController.stream.first.then(onDetected);
+    subscription = cameraController.stream.listen(detect);
     animationConrtroller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
@@ -145,13 +147,14 @@ class _CameraViewState extends State<CameraView>
 
   @override
   void dispose() {
+    subscription.cancel();
     cameraController.dispose();
     animationConrtroller.dispose();
     super.dispose();
   }
 
-  void onDetected(MachineCode code) {
-    Navigator.of(context).popAndPushNamed('show', arguments: code.value);
+  void detect(CameraImage image) {
+    //Navigator.of(context).popAndPushNamed('show', arguments: code.value);
   }
 }
 

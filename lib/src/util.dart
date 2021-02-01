@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
-List<Offset> toCorners(List<dynamic> data) {
-  return List.unmodifiable(data.map((e) => Offset(e['x'], e['y'])));
+import 'camera_controller.dart';
+
+Size toSize(Map<dynamic, dynamic> data) {
+  final width = data['width'];
+  final height = data['height'];
+  return Size(width, height);
+}
+
+List<PlaneMetadata> toMetadata(List<dynamic> data) {
+  return data?.map((e) => PlaneMetadata.fromNative(e));
 }

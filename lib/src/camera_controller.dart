@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:camerax/src/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +13,7 @@ abstract class CameraController {
   Size get resolution;
 
   /// A image stream of the camera, available when initAsync completed.
-  Stream<MachineCode> get stream;
+  Stream<CameraImage> get stream;
 
   /// Create a camera controller with [CameraFacing]
   factory CameraController(CameraFacing facing) => _CameraController(facing);
@@ -42,9 +44,8 @@ class _CameraController implements CameraController {
   @override
   Widget get view => Texture(textureId: textureId);
   @override
-  Stream<MachineCode> get stream => event
-      .receiveBroadcastStream()
-      .map((data) => MachineCode.fromNative(data));
+  Stream<CameraImage> get stream =>
+      event.receiveBroadcastStream().map((e) => CameraImage.fromNative(e));
 
   _CameraController(this.facing);
 
@@ -81,13 +82,55 @@ enum CameraFacing {
   back,
 }
 
-class MachineCode {
-  final int type;
-  final String value;
-  final List<Offset> corners;
+class CameraImage {
+  /// A list of bytes of the image.
+  final Uint8List bytes;
 
-  MachineCode.fromNative(Map<dynamic, dynamic> data)
-      : type = data['type'],
-        value = data['value'],
-        corners = toCorners(data['corners']);
+  /// Size of the image in pixels.
+  final Size size;
+
+  /// Raw version of the format from the iOS platform.
+  ///
+  /// Since iOS can use any planar format, this format will be used to create
+  /// the image buffer on iOS.
+  ///
+  /// On iOS, this is a `FourCharCode` constant from Pixel Format Identifiers.
+  /// See https://developer.apple.com/documentation/corevideo/1563591-pixel_format_identifiers?language=objc
+  ///
+  /// Not used on Android.
+  final int format;
+
+  /// Rotation of the image for Android.
+  ///
+  /// Not currently used on iOS.
+  final int rotation;
+
+  /// The plane attributes to create the image buffer on iOS.
+  ///
+  /// Not used on Android.
+  final List<PlaneMetadata> metadata;
+
+  CameraImage.fromNative(Map<dynamic, dynamic> data)
+      : bytes = data['bytes'],
+        size = toSize(data['size']),
+        format = data['format'],
+        rotation = data['rotation'],
+        metadata = toMetadata(data['metadata']);
+}
+
+/// Plane attributes to create image buffer on iOS
+class PlaneMetadata {
+  /// The row stride for this color plane, in bytes.
+  final int rowStride;
+
+  /// Height of the pixel buffer on iOS.
+  final int width;
+
+  /// Width of the pixel buffer on iOS.
+  final int height;
+
+  PlaneMetadata.fromNative(Map<dynamic, dynamic> data)
+      : rowStride = data['rowStride'],
+        width = data['width'],
+        height = data['height'];
 }

@@ -5,10 +5,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.*
-import android.media.ImageReader
 import android.os.Handler
 import android.os.Looper
-import android.text.TextUtils
 import android.util.Size
 import android.view.Surface
 import androidx.annotation.NonNull
@@ -18,10 +16,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
-import com.huawei.hms.hmsscankit.ScanUtil
-import com.huawei.hms.ml.scan.HmsScan
-import com.huawei.hms.ml.scan.HmsScanAnalyzerOptions
-import io.flutter.plugin.common.*
+import io.flutter.plugin.common.EventChannel
+import io.flutter.plugin.common.MethodCall
+import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugin.common.PluginRegistry
 import io.flutter.view.TextureRegistry
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.ExecutorService
@@ -100,7 +98,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         val arguments = call.arguments as List<*>
         val id = arguments[0] as Int
         val selector =
-                if (call.arguments == "front") CameraSelector.DEFAULT_FRONT_CAMERA
+                if (arguments[1] == 0) CameraSelector.DEFAULT_FRONT_CAMERA
                 else CameraSelector.DEFAULT_BACK_CAMERA
         val future = ProcessCameraProvider.getInstance(activity)
         val executor = ContextCompat.getMainExecutor(activity)
@@ -127,44 +125,29 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
     private fun startCamera(selector: CameraSelector) {
         textureEntry = textureRegistry.createSurfaceTexture()
         textureId = textureEntry!!.id()
+        val executor = ContextCompat.getMainExecutor(activity)
         // Preview
         val surfaceProvider = Preview.SurfaceProvider { request ->
             val resolution = request.resolution
             val texture = textureEntry!!.surfaceTexture()
             texture.setDefaultBufferSize(resolution.width, resolution.height)
             val surface = Surface(texture)
-            val executor = ContextCompat.getMainExecutor(activity)
             request.provideSurface(surface, executor, Consumer { })
         }
         val preview = Preview.Builder().build().apply { setSurfaceProvider(surfaceProvider) }
         // Analysis
         val analyzer = ImageAnalysis.Analyzer { image -> // YUV_420_888 format
-            val bitmap1 = image.bitmap
-            val options = HmsScanAnalyzerOptions.Creator().setHmsScanTypes(HmsScan.ALL_SCAN_TYPE).setPhotoMode(false).create()
-            var scans = ScanUtil.decodeWithBitmap(activity, bitmap1, options).filter { scan -> !TextUtils.isEmpty(scan.originalValue) }
-            if (scans.isEmpty()) {
-                // Rotate 90 degrees
-                val matrix: Matrix = Matrix().apply {
-                    val degrees = 90f
-                    val x = bitmap1.width / 2f
-                    val y = bitmap1.height / 2f
-                    setRotate(degrees, x, y)
-                }
-                val bitmap2 = Bitmap.createBitmap(bitmap1, 0, 0, bitmap1.width, bitmap1.height, matrix, true)
-                scans = ScanUtil.decodeWithBitmap(activity, bitmap2, options).filter { scan -> !TextUtils.isEmpty(scan.originalValue) }
-                bitmap2.recycle()
-            }
-            bitmap1.recycle()
-            for (scan in scans) {
-                val data = mapOf("type" to scan.scanType, "value" to scan.originalValue, "corners" to scan.corners)
-                // Jump to the UI thread.
-                val looper = Looper.getMainLooper()
-                Handler(looper).post { sink?.success(data) }
-            }
+            val bytes = image.nv21
+            val size = mapOf("width" to image.width.toDouble(), "height" to image.height.toDouble())
+            val format = ImageFormat.NV21
+            val rotation = image.imageInfo.rotationDegrees
+            val data = mapOf("bytes" to bytes, "size" to size, "format" to format, "rotation" to rotation)
+            val looper = Looper.getMainLooper()
+            Handler(looper).post { sink?.success(data) }
             image.close()
         }
         val analysis = ImageAnalysis.Builder()
-                .setTargetResolution(Size(1920, 1080))  // 1080P
+                //.setTargetResolution(Size(1920, 1080))  // 1080P
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build().apply {
                     this@CameraXHandler.executor = Executors.newSingleThreadExecutor()
@@ -195,24 +178,24 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
     }
 }
 
-val ImageProxy.bitmap: Bitmap
+val ImageProxy.yuv: ByteArray
     get() {
-        val stream = ByteArrayOutputStream()
-        val rectangle = Rect(0, 0, width, height)
-        // Only support ImageFormat.NV21 and ImageFormat.YUY2 for now
-        YuvImage(nv21, ImageFormat.NV21, width, height, null).compressToJpeg(rectangle, 100, stream)
-        val data = stream.toByteArray()
-        return BitmapFactory.decodeByteArray(data, 0, data.size)
+        val ySize = y.buffer.remaining()
+        val uSize = u.buffer.remaining()
+        val vSize = v.buffer.remaining()
+
+        val size = ySize + uSize + vSize
+        val data = ByteArray(size)
+
+        var offset = 0
+        y.buffer.get(data, offset, ySize)
+        offset += ySize
+        u.buffer.get(data, offset, uSize)
+        offset += uSize
+        v.buffer.get(data, offset, vSize)
+
+        return data
     }
-
-val ImageProxy.y: ImageProxy.PlaneProxy
-    get() = planes[0]
-
-val ImageProxy.u: ImageProxy.PlaneProxy
-    get() = planes[1]
-
-val ImageProxy.v: ImageProxy.PlaneProxy
-    get() = planes[2]
 
 val ImageProxy.nv21: ByteArray
     get() {
@@ -275,27 +258,14 @@ val ImageProxy.nv21: ByteArray
         return data
     }
 
-val ImageProxy.yuv: ByteArray
-    get() {
-        val ySize = y.buffer.remaining()
-        val uSize = u.buffer.remaining()
-        val vSize = v.buffer.remaining()
-
-        val size = ySize + uSize + vSize
-        val data = ByteArray(size)
-
-        var offset = 0
-        y.buffer.get(data, offset, ySize)
-        offset += ySize
-        u.buffer.get(data, offset, uSize)
-        offset += uSize
-        v.buffer.get(data, offset, vSize)
-
-        return data
-    }
-
 val ImageProxy.PlaneProxy.size
     get() = buffer.remaining()
 
-val HmsScan.corners: List<Map<String, Double>>
-    get() = cornerPoints.map { point -> mapOf("x" to point.x.toDouble(), "y" to point.y.toDouble()) }
+val ImageProxy.y: ImageProxy.PlaneProxy
+    get() = planes[0]
+
+val ImageProxy.u: ImageProxy.PlaneProxy
+    get() = planes[1]
+
+val ImageProxy.v: ImageProxy.PlaneProxy
+    get() = planes[2]
