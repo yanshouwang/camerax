@@ -12,8 +12,8 @@ abstract class CameraController {
   /// Resolution of the camera, available when initAsync completed.
   Size get resolution;
 
-  /// A image stream of the camera, available when initAsync completed.
-  Stream<CameraFrame> get stream;
+  /// A barcode stream, available when initAsync completed.
+  Stream<Barcode> get barcodes;
 
   /// Create a camera controller with [CameraFacing]
   factory CameraController(CameraFacing facing) => _CameraController(facing);
@@ -44,8 +44,8 @@ class _CameraController implements CameraController {
   @override
   Widget get view => Texture(textureId: textureId);
   @override
-  Stream<CameraFrame> get stream =>
-      event.receiveBroadcastStream().map((e) => CameraFrame.fromNative(e));
+  Stream<Barcode> get barcodes =>
+      event.receiveBroadcastStream().map((e) => Barcode.fromNative(e));
 
   _CameraController(this.facing);
 
@@ -82,68 +82,17 @@ enum CameraFacing {
   back,
 }
 
-/// A frame of a live camera.
-class CameraFrame {
-  /// A list of bytes of the image.
-  final Uint8List bytes;
-
-  /// Metadata of the image.
-  final CameraFrameMetadata metadata;
-
-  /// Create a [CameraFrame] from native data.
-  CameraFrame.fromNative(Map<dynamic, dynamic> data)
-      : bytes = data['bytes'],
-        metadata = CameraFrameMetadata.fromNative(data);
-}
-
-/// Metadata of a [CameraFrame].
-class CameraFrameMetadata {
-  /// Size of the image in pixels.
-  final Size size;
-
-  /// Raw version of the format from the iOS platform.
-  ///
-  /// Since iOS can use any planar format, this format will be used to create
-  /// the image buffer on iOS.
-  ///
-  /// On iOS, this is a `FourCharCode` constant from Pixel Format Identifiers.
-  /// See https://developer.apple.com/documentation/corevideo/1563591-pixel_format_identifiers?language=objc
-  ///
-  /// Not used on Android.
+class Barcode {
+  final List<Offset> corners;
   final int format;
+  final Uint8List rawBytes;
+  final String rawValue;
+  final int type;
 
-  /// Rotation of the image for Android.
-  ///
-  /// Not currently used on iOS.
-  final int rotation;
-
-  /// The plane attributes to create the image buffer on iOS.
-  ///
-  /// Not used on Android.
-  final List<CameraPlaneMetadata> planes;
-
-  /// Create a [CameraFrameMetadata] from native data.
-  CameraFrameMetadata.fromNative(Map<dynamic, dynamic> data)
-      : size = toSize(data['size']),
+  Barcode.fromNative(Map<dynamic, dynamic> data)
+      : corners = toCorners(data['corners']),
         format = data['format'],
-        rotation = data['rotation'],
-        planes = toPlanes(data['metadata']);
-}
-
-/// Plane attributes to create image buffer on iOS
-class CameraPlaneMetadata {
-  /// The row stride for this color plane, in bytes.
-  final int rowStride;
-
-  /// Height of the pixel buffer on iOS.
-  final int width;
-
-  /// Width of the pixel buffer on iOS.
-  final int height;
-
-  /// Create a [CameraPlaneMetadata] from native data.
-  CameraPlaneMetadata.fromNative(Map<dynamic, dynamic> data)
-      : rowStride = data['rowStride'],
-        width = data['width'],
-        height = data['height'];
+        rawBytes = data['rawBytes'],
+        rawValue = data['rawValue'],
+        type = data['type'];
 }

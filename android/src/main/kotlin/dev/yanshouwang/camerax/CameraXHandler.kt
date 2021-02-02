@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.graphics.ImageFormat
 import android.os.Handler
 import android.os.Looper
 import android.util.Size
@@ -16,6 +15,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -135,16 +136,36 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         }
         val preview = Preview.Builder().build().apply { setSurfaceProvider(surfaceProvider) }
         // Analysis
-        val analyzer = ImageAnalysis.Analyzer { image -> // YUV_420_888 format
-            val bytes = image.yuv
-            val size = mapOf("width" to image.width.toDouble(), "height" to image.height.toDouble())
-            val format = ImageFormat.YUV_420_888
-            val rotation = image.imageInfo.rotationDegrees
-            val metadata = image.planes.map { plane -> mapOf("rowStride" to plane.rowStride) }
-            val data = mapOf("bytes" to bytes, "size" to size, "format" to format, "rotation" to rotation, "metadata" to metadata)
-            val looper = Looper.getMainLooper()
-            Handler(looper).post { sink?.success(data) }
-            image.close()
+        val analyzer = ImageAnalysis.Analyzer { imageProxy -> // YUV_420_888 format
+            val mediaImage = imageProxy.image ?: return@Analyzer
+            val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+            val scanner = BarcodeScanning.getClient()
+            scanner.process(inputImage)
+                    .addOnSuccessListener { barcodes ->
+                        for (barcode in barcodes) {
+                            val corners = barcode.cornerPoints?.map { point ->
+                                mapOf("x" to point.x.toDouble(), "y" to point.y.toDouble())
+                            }
+                            val format = barcode.format
+                            val rawBytes = barcode.rawBytes
+                            val rawValue = barcode.rawValue
+                            val type = barcode.valueType
+                            val data = mapOf(
+                                    "corners" to corners,
+                                    "format" to format,
+                                    "rawBytes" to rawBytes,
+                                    "rawValue" to rawValue,
+                                    "type" to type)
+                            val looper = Looper.getMainLooper()
+                            Handler(looper).post { sink?.success(data) }
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        e.printStackTrace()
+                    }
+                    .addOnCompleteListener {
+                        imageProxy.close()
+                    }
         }
         val analysis = ImageAnalysis.Builder()
                 //.setTargetResolution(Size(1920, 1080))  // 1080P
