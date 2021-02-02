@@ -8,6 +8,6 @@ Size toSize(Map<dynamic, dynamic> data) {
   return Size(width, height);
 }
 
-List<PlaneMetadata> toMetadata(List<dynamic> data) {
-  return data?.map((e) => PlaneMetadata.fromNative(e));
+List<CameraPlaneMetadata> toPlanes(List<dynamic> data) {
+  return data?.map((e) => CameraPlaneMetadata.fromNative(e))?.toList() ?? [];
 }

@@ -13,7 +13,7 @@ abstract class CameraController {
   Size get resolution;
 
   /// A image stream of the camera, available when initAsync completed.
-  Stream<CameraImage> get stream;
+  Stream<CameraFrame> get stream;
 
   /// Create a camera controller with [CameraFacing]
   factory CameraController(CameraFacing facing) => _CameraController(facing);
@@ -44,8 +44,8 @@ class _CameraController implements CameraController {
   @override
   Widget get view => Texture(textureId: textureId);
   @override
-  Stream<CameraImage> get stream =>
-      event.receiveBroadcastStream().map((e) => CameraImage.fromNative(e));
+  Stream<CameraFrame> get stream =>
+      event.receiveBroadcastStream().map((e) => CameraFrame.fromNative(e));
 
   _CameraController(this.facing);
 
@@ -82,10 +82,22 @@ enum CameraFacing {
   back,
 }
 
-class CameraImage {
+/// A frame of a live camera.
+class CameraFrame {
   /// A list of bytes of the image.
   final Uint8List bytes;
 
+  /// Metadata of the image.
+  final CameraFrameMetadata metadata;
+
+  /// Create a [CameraFrame] from native data.
+  CameraFrame.fromNative(Map<dynamic, dynamic> data)
+      : bytes = data['bytes'],
+        metadata = CameraFrameMetadata.fromNative(data);
+}
+
+/// Metadata of a [CameraFrame].
+class CameraFrameMetadata {
   /// Size of the image in pixels.
   final Size size;
 
@@ -108,18 +120,18 @@ class CameraImage {
   /// The plane attributes to create the image buffer on iOS.
   ///
   /// Not used on Android.
-  final List<PlaneMetadata> metadata;
+  final List<CameraPlaneMetadata> planes;
 
-  CameraImage.fromNative(Map<dynamic, dynamic> data)
-      : bytes = data['bytes'],
-        size = toSize(data['size']),
+  /// Create a [CameraFrameMetadata] from native data.
+  CameraFrameMetadata.fromNative(Map<dynamic, dynamic> data)
+      : size = toSize(data['size']),
         format = data['format'],
         rotation = data['rotation'],
-        metadata = toMetadata(data['metadata']);
+        planes = toPlanes(data['metadata']);
 }
 
 /// Plane attributes to create image buffer on iOS
-class PlaneMetadata {
+class CameraPlaneMetadata {
   /// The row stride for this color plane, in bytes.
   final int rowStride;
 
@@ -129,7 +141,8 @@ class PlaneMetadata {
   /// Width of the pixel buffer on iOS.
   final int height;
 
-  PlaneMetadata.fromNative(Map<dynamic, dynamic> data)
+  /// Create a [CameraPlaneMetadata] from native data.
+  CameraPlaneMetadata.fromNative(Map<dynamic, dynamic> data)
       : rowStride = data['rowStride'],
         width = data['width'],
         height = data['height'];

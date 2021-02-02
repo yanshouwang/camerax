@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:camerax/camerax.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/services.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
   runApp(MyApp());
 }
 
@@ -42,7 +42,7 @@ class HomeView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(40.0),
           child: Text(
-            'Click the camera button at bottom to start a preview:)',
+            'Click the camera button at bottom to start scan:)',
             style: TextStyle(fontSize: 20.0),
             textAlign: TextAlign.center,
           ),
@@ -90,24 +90,24 @@ class CameraView extends StatefulWidget {
 
 class _CameraViewState extends State<CameraView>
     with SingleTickerProviderStateMixin {
-  CameraController cameraController;
-  StreamSubscription subscription;
+  bool detecting = false;
+  BarcodeDetector detector = FirebaseVision.instance.barcodeDetector();
+  CameraController cameraController = CameraController(CameraFacing.back);
   AnimationController animationConrtroller;
   Animation<double> offsetAnimation;
   Animation<double> opacityAnimation;
-  bool detecting = false;
+  StreamSubscription subscription;
 
   @override
   void initState() {
     super.initState();
-    cameraController = CameraController(CameraFacing.back);
-    subscription = cameraController.stream.listen(detect);
     animationConrtroller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
     opacityAnimation =
         CurvedAnimation(parent: animationConrtroller, curve: OpacityCurve());
     animationConrtroller.repeat();
+    subscription = cameraController.stream.listen(detect);
   }
 
   @override
@@ -148,13 +148,28 @@ class _CameraViewState extends State<CameraView>
   @override
   void dispose() {
     subscription.cancel();
-    cameraController.dispose();
     animationConrtroller.dispose();
+    cameraController.dispose();
+    detector.close();
     super.dispose();
   }
 
-  void detect(CameraImage image) {
-    //Navigator.of(context).popAndPushNamed('show', arguments: code.value);
+  void detect(CameraFrame image) async {
+    if (detecting) {
+      return;
+    }
+    detecting = true;
+    final vision = image.vision;
+    final codes = await detector.detectInImage(vision);
+    try {
+      final code = codes.firstWhere((e) => e.rawValue.isNotEmpty);
+      await Navigator.of(context)
+          .popAndPushNamed('show', arguments: code.rawValue);
+    } catch (_) {
+      // Not found.
+    } finally {
+      detecting = false;
+    }
   }
 }
 
@@ -236,5 +251,37 @@ class ShowView extends StatelessWidget {
         child: Text(text),
       ),
     );
+  }
+}
+
+extension on CameraFrame {
+  FirebaseVisionImage get vision {
+    final planeData = this
+        .metadata
+        .planes
+        .map((e) => FirebaseVisionImagePlaneMetadata(
+            bytesPerRow: e.rowStride, height: e.height, width: e.width))
+        .toList();
+    final rotation = toImageRotation(this.metadata.rotation);
+    final metadata = FirebaseVisionImageMetadata(
+        size: this.metadata.size,
+        rawFormat: this.metadata.format,
+        planeData: planeData,
+        rotation: rotation);
+    return FirebaseVisionImage.fromBytes(bytes, metadata);
+  }
+}
+
+ImageRotation toImageRotation(int rotation) {
+  switch (rotation) {
+    case 0:
+      return ImageRotation.rotation0;
+    case 90:
+      return ImageRotation.rotation90;
+    case 180:
+      return ImageRotation.rotation180;
+    default:
+      assert(rotation == 270);
+      return ImageRotation.rotation270;
   }
 }

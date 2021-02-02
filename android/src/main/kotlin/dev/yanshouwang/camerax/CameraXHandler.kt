@@ -4,7 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.graphics.*
+import android.graphics.ImageFormat
 import android.os.Handler
 import android.os.Looper
 import android.util.Size
@@ -21,7 +21,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.view.TextureRegistry
-import java.io.ByteArrayOutputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -137,6 +136,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         val preview = Preview.Builder().build().apply { setSurfaceProvider(surfaceProvider) }
         // Analysis
         val analyzer = ImageAnalysis.Analyzer { image -> // YUV_420_888 format
+            // Flutter firebase plugin needs NV21 format.
             val bytes = image.nv21
             val size = mapOf("width" to image.width.toDouble(), "height" to image.height.toDouble())
             val format = ImageFormat.NV21
