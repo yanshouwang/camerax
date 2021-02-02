@@ -136,12 +136,12 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         val preview = Preview.Builder().build().apply { setSurfaceProvider(surfaceProvider) }
         // Analysis
         val analyzer = ImageAnalysis.Analyzer { image -> // YUV_420_888 format
-            // Flutter firebase plugin needs NV21 format.
-            val bytes = image.nv21
+            val bytes = image.yuv
             val size = mapOf("width" to image.width.toDouble(), "height" to image.height.toDouble())
-            val format = ImageFormat.NV21
+            val format = ImageFormat.YUV_420_888
             val rotation = image.imageInfo.rotationDegrees
-            val data = mapOf("bytes" to bytes, "size" to size, "format" to format, "rotation" to rotation)
+            val metadata = image.planes.map { plane -> mapOf("rowStride" to plane.rowStride) }
+            val data = mapOf("bytes" to bytes, "size" to size, "format" to format, "rotation" to rotation, "metadata" to metadata)
             val looper = Looper.getMainLooper()
             Handler(looper).post { sink?.success(data) }
             image.close()
