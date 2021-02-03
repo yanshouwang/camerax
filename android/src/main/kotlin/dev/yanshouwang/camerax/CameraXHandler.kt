@@ -4,8 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.util.Size
 import android.view.Surface
@@ -14,10 +12,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
-import com.google.gson.Gson
-import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import io.flutter.plugin.common.*
@@ -99,7 +94,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
                 else CameraSelector.DEFAULT_BACK_CAMERA
         val future = ProcessCameraProvider.getInstance(activity)
         val executor = ContextCompat.getMainExecutor(activity)
-        future.addListener(Runnable {
+        future.addListener({
             cameraProvider = future.get()
             startCamera(selector)
             instanceId = id

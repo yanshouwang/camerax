@@ -31,7 +31,7 @@ BarcodeFormat toFormat(int value) {
     case 128:
       return BarcodeFormat.itf;
     case 256:
-      return BarcodeFormat.qr;
+      return BarcodeFormat.qrCode;
     case 512:
       return BarcodeFormat.upcA;
     case 1024:

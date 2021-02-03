@@ -209,7 +209,7 @@ enum BarcodeFormat {
   ean13,
   ean8,
   itf,
-  qr,
+  qrCode,
   upcA,
   upcE,
   pdf417,
@@ -237,7 +237,7 @@ extension on BarcodeFormat {
         return 64;
       case BarcodeFormat.itf:
         return 128;
-      case BarcodeFormat.qr:
+      case BarcodeFormat.qrCode:
         return 256;
       case BarcodeFormat.upcA:
         return 512;
