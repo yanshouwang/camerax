@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.util.Size
 import android.view.Surface
 import androidx.annotation.NonNull
@@ -15,15 +16,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
+import com.google.gson.Gson
+import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
-import io.flutter.plugin.common.EventChannel
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.PluginRegistry
+import io.flutter.plugin.common.*
 import io.flutter.view.TextureRegistry
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 class CameraXHandler(private val activity: Activity, private val textureRegistry: TextureRegistry)
     : MethodChannel.MethodCallHandler, EventChannel.StreamHandler, PluginRegistry.RequestPermissionsResultListener {
@@ -37,15 +35,14 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
     private var listener: PluginRegistry.RequestPermissionsResultListener? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private var camera: CameraControl? = null
-    private var executor: ExecutorService? = null
     private var textureEntry: TextureRegistry.SurfaceTextureEntry? = null
     private var textureId: Long? = null
     private var resolution: Size? = null
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
         when (call.method) {
-            "state" -> stateNative(call, result)
-            "request" -> requestNative(call, result)
+            "state" -> stateNative(result)
+            "request" -> requestNative(result)
             "init" -> initNative(call, result)
             "dispose" -> disposeNative(call, result)
             else -> result.notImplemented()
@@ -64,7 +61,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         return listener?.onRequestPermissionsResult(requestCode, permissions, grantResults) ?: false
     }
 
-    private fun stateNative(call: MethodCall, result: MethodChannel.Result) {
+    private fun stateNative(result: MethodChannel.Result) {
         // Can't get exact denied or not_determined state without request. Just return not_determined when state isn't authorized
         val state =
                 if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) 1
@@ -72,7 +69,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         result.success(state)
     }
 
-    private fun requestNative(call: MethodCall, result: MethodChannel.Result) {
+    private fun requestNative(result: MethodChannel.Result) {
         if (listener != null) {
             result.error("REQUEST DUPLICATED", null, null)
         } else {
@@ -132,9 +129,10 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
             val texture = textureEntry!!.surfaceTexture()
             texture.setDefaultBufferSize(resolution.width, resolution.height)
             val surface = Surface(texture)
-            request.provideSurface(surface, executor, Consumer { })
+            request.provideSurface(surface, executor, { })
         }
-        val preview = Preview.Builder().build().apply { setSurfaceProvider(surfaceProvider) }
+        val preview = Preview.Builder()
+                .build().apply { setSurfaceProvider(surfaceProvider) }
         // Analysis
         val analyzer = ImageAnalysis.Analyzer { imageProxy -> // YUV_420_888 format
             val mediaImage = imageProxy.image ?: return@Analyzer
@@ -143,37 +141,16 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
             scanner.process(inputImage)
                     .addOnSuccessListener { barcodes ->
                         for (barcode in barcodes) {
-                            val corners = barcode.cornerPoints?.map { point ->
-                                mapOf("x" to point.x.toDouble(), "y" to point.y.toDouble())
-                            }
-                            val format = barcode.format
-                            val rawBytes = barcode.rawBytes
-                            val rawValue = barcode.rawValue
-                            val type = barcode.valueType
-                            val data = mapOf(
-                                    "corners" to corners,
-                                    "format" to format,
-                                    "rawBytes" to rawBytes,
-                                    "rawValue" to rawValue,
-                                    "type" to type)
-                            val looper = Looper.getMainLooper()
-                            Handler(looper).post { sink?.success(data) }
+                            sink?.success(barcode.data)
                         }
                     }
-                    .addOnFailureListener { e ->
-                        e.printStackTrace()
-                    }
-                    .addOnCompleteListener {
-                        imageProxy.close()
-                    }
+                    .addOnFailureListener { e -> Log.e(TAG, e.message, e) }
+                    .addOnCompleteListener { imageProxy.close() }
         }
         val analysis = ImageAnalysis.Builder()
                 //.setTargetResolution(Size(1920, 1080))  // 1080P
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build().apply {
-                    this@CameraXHandler.executor = Executors.newSingleThreadExecutor()
-                    setAnalyzer(this@CameraXHandler.executor!!, analyzer)
-                }
+                .build().apply { setAnalyzer(executor, analyzer) }
         // Start camera
         val lifecycleOwner = activity as LifecycleOwner
         val camera = cameraProvider!!.bindToLifecycle(lifecycleOwner, selector, preview, analysis)
@@ -189,8 +166,6 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
 
     private fun closeCamera() {
         resolution = null
-        executor!!.shutdown()
-        executor = null
         camera = null
         textureId = null
         textureEntry!!.release()
@@ -198,95 +173,3 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         cameraProvider = null
     }
 }
-
-val ImageProxy.yuv: ByteArray
-    get() {
-        val ySize = y.buffer.remaining()
-        val uSize = u.buffer.remaining()
-        val vSize = v.buffer.remaining()
-
-        val size = ySize + uSize + vSize
-        val data = ByteArray(size)
-
-        var offset = 0
-        y.buffer.get(data, offset, ySize)
-        offset += ySize
-        u.buffer.get(data, offset, uSize)
-        offset += uSize
-        v.buffer.get(data, offset, vSize)
-
-        return data
-    }
-
-val ImageProxy.nv21: ByteArray
-    get() {
-        val degrees = imageInfo.rotationDegrees
-
-        if (BuildConfig.DEBUG) {
-            if (y.pixelStride != 1 || u.rowStride != v.rowStride || u.pixelStride != v.pixelStride) {
-                error("Assertion failed")
-            }
-        }
-
-        val ySize = width * height
-        val uvSize = ySize / 2
-        val size = ySize + uvSize
-        val data = ByteArray(size)
-
-        var offset = 0
-        // Y Plane
-        if (y.rowStride == width) {
-            y.buffer.get(data, offset, ySize)
-            offset += ySize
-        } else {
-            for (row in 0 until height) {
-                y.buffer.get(data, offset, width)
-                offset += width
-            }
-
-            if (BuildConfig.DEBUG && offset != ySize) {
-                error("Assertion failed")
-            }
-        }
-        // U,V Planes
-        if (v.rowStride == width && v.pixelStride == 2) {
-            if (BuildConfig.DEBUG && v.size != uvSize - 1) {
-                error("Assertion failed")
-            }
-
-            v.buffer.get(data, offset, 1)
-            offset += 1
-            u.buffer.get(data, offset, u.size)
-            if (BuildConfig.DEBUG) {
-                val value = v.buffer.get()
-                if (data[offset] != value) {
-                    error("Assertion failed")
-                }
-            }
-        } else {
-            for (row in 0 until height / 2)
-                for (col in 0 until width / 2) {
-                    val index = row * v.rowStride + col * v.pixelStride
-                    data[offset++] = v.buffer.get(index)
-                    data[offset++] = u.buffer.get(index)
-                }
-
-            if (BuildConfig.DEBUG && offset != size) {
-                error("Assertion failed")
-            }
-        }
-
-        return data
-    }
-
-val ImageProxy.PlaneProxy.size
-    get() = buffer.remaining()
-
-val ImageProxy.y: ImageProxy.PlaneProxy
-    get() = planes[0]
-
-val ImageProxy.u: ImageProxy.PlaneProxy
-    get() = planes[1]
-
-val ImageProxy.v: ImageProxy.PlaneProxy
-    get() = planes[2]

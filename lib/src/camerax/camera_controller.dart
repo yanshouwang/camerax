@@ -1,6 +1,4 @@
-import 'dart:typed_data';
-
-import 'package:camerax/src/util.dart';
+import 'package:camerax/mlkit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -80,19 +78,4 @@ enum CameraFacing {
 
   /// Back facing camera.
   back,
-}
-
-class Barcode {
-  final List<Offset> corners;
-  final int format;
-  final Uint8List rawBytes;
-  final String rawValue;
-  final int type;
-
-  Barcode.fromNative(Map<dynamic, dynamic> data)
-      : corners = toCorners(data['corners']),
-        format = data['format'],
-        rawBytes = data['rawBytes'],
-        rawValue = data['rawValue'],
-        type = data['type'];
 }

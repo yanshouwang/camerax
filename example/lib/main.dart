@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:camerax/camerax.dart';
+import 'package:camerax/mlkit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
