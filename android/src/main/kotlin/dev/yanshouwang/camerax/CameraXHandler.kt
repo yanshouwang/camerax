@@ -96,7 +96,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         val executor = ContextCompat.getMainExecutor(activity)
         future.addListener({
             cameraProvider = future.get()
-            startCamera(selector)
+            openCamera(selector)
             instanceId = id
             val width = resolution!!.width.toDouble()
             val height = resolution!!.height.toDouble()
@@ -114,7 +114,7 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
         result.success(null)
     }
 
-    private fun startCamera(selector: CameraSelector) {
+    private fun openCamera(selector: CameraSelector) {
         textureEntry = textureRegistry.createSurfaceTexture()
         textureId = textureEntry!!.id()
         val executor = ContextCompat.getMainExecutor(activity)
