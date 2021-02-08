@@ -143,7 +143,6 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
                     .addOnCompleteListener { imageProxy.close() }
         }
         val analysis = ImageAnalysis.Builder()
-                //.setTargetResolution(Size(1920, 1080))  // 1080P
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build().apply { setAnalyzer(executor, analyzer) }
         // Start camera

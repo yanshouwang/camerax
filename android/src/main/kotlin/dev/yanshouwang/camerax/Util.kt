@@ -4,6 +4,9 @@ import android.graphics.Point
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.barcode.Barcode
 
+val Any.TAG: String
+    get() = javaClass.simpleName
+
 val ImageProxy.yuv: ByteArray
     get() {
         val ySize = y.buffer.remaining()
@@ -93,9 +96,6 @@ val ImageProxy.u: ImageProxy.PlaneProxy
 
 val ImageProxy.v: ImageProxy.PlaneProxy
     get() = planes[2]
-
-val Any.TAG: String
-    get() = javaClass.simpleName
 
 val Barcode.data: Map<String, Any?>
     get() = mapOf("corners" to cornerPoints?.map { corner -> corner.data }, "format" to format,
