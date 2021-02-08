@@ -1,4 +1,4 @@
-#import "CameraxPlugin.h"
+#import "CameraXPlugin.h"
 #if __has_include(<camerax/camerax-Swift.h>)
 #import <camerax/camerax-Swift.h>
 #else
@@ -8,8 +8,8 @@
 #import "camerax-Swift.h"
 #endif
 
-@implementation CameraxPlugin
+@implementation CameraXPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftCameraxPlugin registerWithRegistrar:registrar];
+  [SwiftCameraXPlugin registerWithRegistrar:registrar];
 }
 @end

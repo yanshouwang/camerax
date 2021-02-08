@@ -1,4 +1,4 @@
-package dev.yanshouwang.camerax_example
+package dev.yanshouwang.camerax.example
 
 import io.flutter.embedding.android.FlutterActivity
 

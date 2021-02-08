@@ -2,12 +2,12 @@
 
 A camera plugin for flutter, which use CameraX on Android, native API on iOS, supports preview and image analysis.
 
-*Note*: This plugin is only available on Android now, iOS is under development and will be available soon. After that, I will try to add more features such as flash light control, take picutres and so on... This plugin is inspired by the official [camera](https://pub.dev/packages/camera) project but more simple to use.
+*Note*: This plugin only support preview and scan barcode for now, I think it's not a good idea to transport plane data to flutter and transport it back to native again to detect someting. I will try to add more features such as flash light control, take picutres and so on... This plugin is inspired by the official [camera](https://pub.dev/packages/camera) project but more simple to use.
 
 ## Features
 
 - Camera preview
-- Access to a camera image stream
+- Access to a barcode stream
 
 ## Getting Started
 
@@ -26,13 +26,13 @@ Make sure you have a `miniSdkVersion` with 21 or higher in your `android/app/bui
 
 ### iOS
 
-// TODO: Add iOS guide.
+Make sure you have a minimum deployment target of 10.0, because the `MLKit` only support iOS 10.0 or above, you can uncomment the first line `platform :ios, '10.0'` in your iOS project's `Podfile`
 
 ## Issues
 
-- iOS still under developement.
 - Doesn't work with horizontal orientation now.
 - No tests for now.
+- Need to support more features.
 
 ## Screenshots
 
