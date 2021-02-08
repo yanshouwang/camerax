@@ -109,13 +109,9 @@ val Point.data: Map<String, Double>
     get() = mapOf("x" to x.toDouble(), "y" to y.toDouble())
 
 val Barcode.CalendarEvent.data: Map<String, Any?>
-    get() = mapOf("description" to description, "end" to end?.data, "location" to location,
-            "organizer" to organizer, "start" to start?.data, "status" to status,
+    get() = mapOf("description" to description, "end" to end?.rawValue, "location" to location,
+            "organizer" to organizer, "start" to start?.rawValue, "status" to status,
             "summary" to summary)
-
-val Barcode.CalendarDateTime.data: Map<String, Any?>
-    get() = mapOf("day" to day, "hours" to hours, "isUtc" to isUtc, "minutes" to minutes,
-            "month" to month, "rawValue" to rawValue, "seconds" to seconds, "year" to year)
 
 val Barcode.ContactInfo.data: Map<String, Any?>
     get() = mapOf("addresses" to addresses.map { address -> address.data },

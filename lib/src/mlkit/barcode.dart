@@ -47,8 +47,8 @@ class CalendarEvent {
 
   CalendarEvent.fromNative(Map<dynamic, dynamic> data)
       : description = data['description'],
-        start = toDateTime(data['start']),
-        end = toDateTime(data['end']),
+        start = DateTime.tryParse(data['start']),
+        end = DateTime.tryParse(data['end']),
         location = data['location'],
         organizer = data['organizer'],
         status = data['status'],

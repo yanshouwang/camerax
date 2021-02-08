@@ -1,15 +1,14 @@
-import Flutter
-import UIKit
 import AVFoundation
-import CoreMotion
+import Flutter
+import MLKitVision
+import MLKitBarcodeScanning
 
 public class SwiftCameraXPlugin:
     NSObject,
     FlutterPlugin,
     FlutterStreamHandler,
     FlutterTexture,
-    AVCaptureVideoDataOutputSampleBufferDelegate,
-    AVCaptureMetadataOutputObjectsDelegate {
+    AVCaptureVideoDataOutputSampleBufferDelegate {
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let instance = SwiftCameraXPlugin(registrar.textures())
@@ -22,13 +21,14 @@ public class SwiftCameraXPlugin:
     }
     
     let registry: FlutterTextureRegistry
-    var stream: FlutterEventSink!
+    var detecting = false
+    var sink: FlutterEventSink!
     var instanceId: Int!
     var textureId: Int64!
     var device: AVCaptureDevice!
     var captureSession: AVCaptureSession!
     var resolution: CGSize!
-    var latestPixelBuffer: CVImageBuffer!
+    var latestBuffer: CVImageBuffer!
     
     init(_ registry: FlutterTextureRegistry) {
         self.registry = registry
@@ -51,36 +51,41 @@ public class SwiftCameraXPlugin:
     }
     
     public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-        stream = events
+        sink = events
         return nil
     }
     
     public func onCancel(withArguments arguments: Any?) -> FlutterError? {
-        stream = nil
+        sink = nil
         return nil
     }
     
     public func copyPixelBuffer() -> Unmanaged<CVPixelBuffer>? {
-        if latestPixelBuffer == nil {
+        if latestBuffer == nil {
             return nil
         }
-        return Unmanaged<CVPixelBuffer>.passRetained(latestPixelBuffer)
+        return Unmanaged<CVPixelBuffer>.passRetained(latestBuffer)
     }
     
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        latestPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+        
+        latestBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         registry.textureFrameAvailable(textureId)
-    }
-    
-    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        for mo in metadataObjects {
-            if let mmo = mo as? AVMetadataMachineReadableCodeObject {
-                let data: [String: Any?] = [
-                    "type": mmo.type.rawValue,
-                    "value": mmo.stringValue,
-                    "corners": mmo.corners.map({["x": Double($0.x), "y": Double($0.y)]})
-                ]
-                stream?(data)
+        
+        if !detecting {
+            detecting = true
+            
+            let buffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+            let image = VisionImage(image: buffer!.image)
+            let scanner = BarcodeScanner.barcodeScanner()
+            scanner.process(image) { barcodes, error in
+                if error == nil && barcodes != nil {
+                    for barcode in barcodes! {
+                        let item = barcode.data
+                        self.sink?(item)
+                    }
+                }
+                self.detecting = false
             }
         }
     }
@@ -152,16 +157,6 @@ public class SwiftCameraXPlugin:
         videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String:  kCVPixelFormatType_32BGRA]
         videoOutput.alwaysDiscardsLateVideoFrames = true
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
-        // Add metadata output.
-        let metadataOutput = AVCaptureMetadataOutput()
-        captureSession.addOutput(metadataOutput)
-        metadataOutput.metadataObjectTypes = [
-            .aztec,
-            .dataMatrix,
-            .pdf417,
-            .qr,
-        ]
-        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         for connection in videoOutput.connections {
             connection.videoOrientation = .portrait
             if position == .front && connection.isVideoMirroringSupported {
@@ -185,16 +180,9 @@ public class SwiftCameraXPlugin:
             captureSession.removeOutput(output)
         }
         captureSession = nil
-        latestPixelBuffer = nil
+        latestBuffer = nil
         device = nil
         registry.unregisterTexture(textureId)
         textureId = nil
-    }
-}
-
-extension Error {
-    func throwNative(_ result: FlutterResult) {
-        let error = FlutterError(code: localizedDescription, message: nil, details: nil)
-        result(error)
     }
 }
