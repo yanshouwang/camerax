@@ -27,7 +27,7 @@ public class SwiftCameraXPlugin:
     var textureId: Int64!
     var device: AVCaptureDevice!
     var captureSession: AVCaptureSession!
-    var resolution: CGSize!
+    var size: [String: Double]!
     var latestBuffer: CVImageBuffer!
     
     init(_ registry: FlutterTextureRegistry) {
@@ -120,11 +120,7 @@ public class SwiftCameraXPlugin:
         do {
             try openCamera(position)
             instanceId = id
-            let answer: [String : Any?] = [
-                "textureId": textureId,
-                "width": resolution.width,
-                "height": resolution.height
-            ]
+            let answer: [String : Any?] = ["textureId": textureId, "size": size, "torchable": device.hasTorch]
             result(answer)
         } catch {
             error.throwNative(result)
@@ -166,9 +162,9 @@ public class SwiftCameraXPlugin:
         captureSession.commitConfiguration()
         captureSession.startRunning()
         let demensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription)
-        let width = Int(demensions.height)
-        let height = Int(demensions.width)
-        resolution = CGSize(width: width, height: height)
+        let width = Double(demensions.height)
+        let height = Double(demensions.width)
+        size = ["width": width, "height": height]
     }
     
     func closeCamera() {
@@ -179,10 +175,12 @@ public class SwiftCameraXPlugin:
         for output in captureSession.outputs {
             captureSession.removeOutput(output)
         }
-        captureSession = nil
-        latestBuffer = nil
-        device = nil
         registry.unregisterTexture(textureId)
+        
+        latestBuffer = nil
+        size = nil
+        captureSession = nil
+        device = nil
         textureId = nil
     }
 }

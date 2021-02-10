@@ -91,7 +91,7 @@ class _CameraViewState extends State<CameraView>
   @override
   void initState() {
     super.initState();
-    cameraController = CameraController(CameraFacing.back);
+    cameraController = CameraController();
     cameraController.barcodes.first.then(display);
     animationConrtroller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
@@ -119,11 +119,25 @@ class _CameraViewState extends State<CameraView>
                   left: 24.0,
                   top: 32.0,
                   child: IconButton(
-                    icon: Icon(
-                      Icons.cancel,
-                      color: Colors.white,
-                    ),
+                    icon: Icon(Icons.cancel, color: Colors.white),
                     onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(bottom: 80.0),
+                  child: IconButton(
+                    icon: ValueListenableBuilder(
+                      valueListenable: cameraController.torchState,
+                      builder: (context, state, child) {
+                        final color = state == TorchState.off
+                            ? Colors.grey
+                            : Colors.white;
+                        return Icon(Icons.bolt, color: color);
+                      },
+                    ),
+                    iconSize: 32.0,
+                    onPressed: () => cameraController.torch(),
                   ),
                 ),
               ],

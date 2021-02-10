@@ -14,10 +14,10 @@ class CameraWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRect(
       child: Transform.scale(
-        scale: controller.resolution.fill(MediaQuery.of(context).size),
+        scale: controller.size.fill(MediaQuery.of(context).size),
         child: Center(
           child: AspectRatio(
-            aspectRatio: controller.resolution.aspectRatio,
+            aspectRatio: controller.size.aspectRatio,
             child: controller.view,
           ),
         ),
