@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:camerax/camerax.dart';
-import 'package:camerax/mlkit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       home: HomeView(),
       theme: ThemeData.light().copyWith(platform: TargetPlatform.iOS),
       routes: {
-        'camera': (context) => CameraView(),
+        'camera': (context) => AnalyzeView(),
         'display': (context) => DisplayView(),
       },
     );
@@ -76,12 +75,12 @@ class HomeView extends StatelessWidget {
   }
 }
 
-class CameraView extends StatefulWidget {
+class AnalyzeView extends StatefulWidget {
   @override
-  _CameraViewState createState() => _CameraViewState();
+  _AnalyzeViewState createState() => _AnalyzeViewState();
 }
 
-class _CameraViewState extends State<CameraView>
+class _AnalyzeViewState extends State<AnalyzeView>
     with SingleTickerProviderStateMixin {
   CameraController cameraController;
   AnimationController animationConrtroller;
@@ -92,60 +91,51 @@ class _CameraViewState extends State<CameraView>
   void initState() {
     super.initState();
     cameraController = CameraController();
-    cameraController.barcodes.first.then(display);
     animationConrtroller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     offsetAnimation = Tween(begin: 0.2, end: 0.8).animate(animationConrtroller);
     opacityAnimation =
         CurvedAnimation(parent: animationConrtroller, curve: OpacityCurve());
     animationConrtroller.repeat();
+
+    start();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: cameraController.initAsync(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Stack(
-              children: [
-                CameraWidget(cameraController),
-                AnimatedLine(
-                  offsetAnimation: offsetAnimation,
-                  opacityAnimation: opacityAnimation,
-                ),
-                Positioned(
-                  left: 24.0,
-                  top: 32.0,
-                  child: IconButton(
-                    icon: Icon(Icons.cancel, color: Colors.white),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  margin: EdgeInsets.only(bottom: 80.0),
-                  child: IconButton(
-                    icon: ValueListenableBuilder(
-                      valueListenable: cameraController.torchState,
-                      builder: (context, state, child) {
-                        final color = state == TorchState.off
-                            ? Colors.grey
-                            : Colors.white;
-                        return Icon(Icons.bolt, color: color);
-                      },
-                    ),
-                    iconSize: 32.0,
-                    onPressed: () => cameraController.torch(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return Container(color: Colors.black);
-          }
-        },
+      body: Stack(
+        children: [
+          CameraView(cameraController),
+          AnimatedLine(
+            offsetAnimation: offsetAnimation,
+            opacityAnimation: opacityAnimation,
+          ),
+          Positioned(
+            left: 24.0,
+            top: 32.0,
+            child: IconButton(
+              icon: Icon(Icons.cancel, color: Colors.white),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            margin: EdgeInsets.only(bottom: 80.0),
+            child: IconButton(
+              icon: ValueListenableBuilder(
+                valueListenable: cameraController.torchState,
+                builder: (context, state, child) {
+                  final color =
+                      state == TorchState.off ? Colors.grey : Colors.white;
+                  return Icon(Icons.bolt, color: color);
+                },
+              ),
+              iconSize: 32.0,
+              onPressed: () => cameraController.torch(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -155,6 +145,16 @@ class _CameraViewState extends State<CameraView>
     animationConrtroller.dispose();
     cameraController.dispose();
     super.dispose();
+  }
+
+  void start() async {
+    await cameraController.startAsync();
+    try {
+      final barcode = await cameraController.barcodes.first;
+      display(barcode);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void display(Barcode barcode) {
