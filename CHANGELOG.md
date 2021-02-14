@@ -1,3 +1,14 @@
+## 0.0.3
+
+- Add comments.
+- Add torchState property.
+- Add torch function.
+- Change CameraWidget to CameraView.
+- Change CameraController.initAsync to CameraController.startAsync.
+- Change CameraController.detectBarcode to CameraController.barcodes.
+- Change CameraController.view to CameraController.args.
+- Merge mlkit into camerax.
+
 ## 0.0.2
 
 - Add CameraWidget and CameraController on iOS.
