@@ -1,6 +1,6 @@
 # CameraX
 
-A camera plugin for flutter, which use CameraX on Android, native API on iOS, supports preview and image analysis.
+A camera plugin for flutter, which use CameraX on Android, native API on iOS, supports camera preview, capture and analyze.
 
 *Note*: This plugin is inspired by the official [camera](https://pub.dev/packages/camera) project but more simple to use, and use [MLKit](https://developers.google.cn/ml-kit) in native for image analyze.
 
