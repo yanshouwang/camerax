@@ -5,8 +5,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.util.Log
-import android.util.Size
 import android.view.Surface
+import androidx.annotation.IntDef
 import androidx.annotation.NonNull
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -21,31 +21,33 @@ import io.flutter.view.TextureRegistry
 class CameraXHandler(private val activity: Activity, private val textureRegistry: TextureRegistry)
     : MethodChannel.MethodCallHandler, EventChannel.StreamHandler, PluginRegistry.RequestPermissionsResultListener {
     companion object {
-        private const val CAMERA_REQUEST_CODE = 1993
-        private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE = 19930430
     }
 
     private var sink: EventChannel.EventSink? = null
-    private var instanceId: Int? = null
     private var listener: PluginRegistry.RequestPermissionsResultListener? = null
+
     private var cameraProvider: ProcessCameraProvider? = null
-    private var camera: CameraControl? = null
+    private var camera: Camera? = null
     private var textureEntry: TextureRegistry.SurfaceTextureEntry? = null
-    private var textureId: Long? = null
-    private var resolution: Size? = null
+
+    @AnalyzeMode
+    private var analyzeMode: Int = AnalyzeMode.NONE
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: MethodChannel.Result) {
         when (call.method) {
             "state" -> stateNative(result)
             "request" -> requestNative(result)
-            "init" -> initNative(call, result)
-            "dispose" -> disposeNative(call, result)
+            "start" -> startNative(call, result)
+            "torch" -> torchNative(call, result)
+            "analyze" -> analyzeNative(call, result)
+            "stop" -> stopNative(result)
             else -> result.notImplemented()
         }
     }
 
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
-        sink = events
+        this.sink = events
     }
 
     override fun onCancel(arguments: Any?) {
@@ -65,105 +67,114 @@ class CameraXHandler(private val activity: Activity, private val textureRegistry
     }
 
     private fun requestNative(result: MethodChannel.Result) {
-        if (listener != null) {
-            result.error("REQUEST DUPLICATED", null, null)
-        } else {
-            listener = PluginRegistry.RequestPermissionsResultListener { requestCode, _, grantResults ->
-                if (requestCode != CAMERA_REQUEST_CODE) {
-                    false
-                } else {
-                    val authorized = grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    result.success(authorized)
-                    listener = null
-                    true
-                }
+        listener = PluginRegistry.RequestPermissionsResultListener { requestCode, _, grantResults ->
+            if (requestCode != REQUEST_CODE) {
+                false
+            } else {
+                val authorized = grantResults[0] == PackageManager.PERMISSION_GRANTED
+                result.success(authorized)
+                listener = null
+                true
             }
-            ActivityCompat.requestPermissions(activity, PERMISSIONS_REQUIRED, CAMERA_REQUEST_CODE)
         }
+        val permissions = arrayOf(Manifest.permission.CAMERA)
+        ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE)
     }
 
-    private fun initNative(call: MethodCall, result: MethodChannel.Result) {
-        if (instanceId != null) {
-            closeCamera()
-            instanceId = null
-        }
-        val arguments = call.arguments as List<*>
-        val id = arguments[0] as Int
-        val selector =
-                if (arguments[1] == 0) CameraSelector.DEFAULT_FRONT_CAMERA
-                else CameraSelector.DEFAULT_BACK_CAMERA
+    private fun startNative(call: MethodCall, result: MethodChannel.Result) {
         val future = ProcessCameraProvider.getInstance(activity)
         val executor = ContextCompat.getMainExecutor(activity)
         future.addListener({
             cameraProvider = future.get()
-            openCamera(selector)
-            instanceId = id
-            val width = resolution!!.width.toDouble()
-            val height = resolution!!.height.toDouble()
-            val answer = mapOf("textureId" to textureId, "width" to width, "height" to height)
+            textureEntry = textureRegistry.createSurfaceTexture()
+            val textureId = textureEntry!!.id()
+            // Preview
+            val surfaceProvider = Preview.SurfaceProvider { request ->
+                val resolution = request.resolution
+                val texture = textureEntry!!.surfaceTexture()
+                texture.setDefaultBufferSize(resolution.width, resolution.height)
+                val surface = Surface(texture)
+                request.provideSurface(surface, executor, { })
+            }
+            val preview = Preview.Builder().build().apply { setSurfaceProvider(surfaceProvider) }
+            // Analyzer
+            val analyzer = ImageAnalysis.Analyzer { imageProxy -> // YUV_420_888 format
+                when (analyzeMode) {
+                    AnalyzeMode.BARCODE -> {
+                        val mediaImage = imageProxy.image ?: return@Analyzer
+                        val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                        val scanner = BarcodeScanning.getClient()
+                        scanner.process(inputImage)
+                                .addOnSuccessListener { barcodes ->
+                                    for (barcode in barcodes) {
+                                        val event = mapOf("name" to "barcode", "data" to barcode.data)
+                                        sink?.success(event)
+                                    }
+                                }
+                                .addOnFailureListener { e -> Log.e(TAG, e.message, e) }
+                                .addOnCompleteListener { imageProxy.close() }
+                    }
+                    else -> imageProxy.close()
+                }
+            }
+            val analysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build().apply { setAnalyzer(executor, analyzer) }
+            // Bind to lifecycle.
+            val owner = activity as LifecycleOwner
+            val selector =
+                    if (call.arguments == 0) CameraSelector.DEFAULT_FRONT_CAMERA
+                    else CameraSelector.DEFAULT_BACK_CAMERA
+            camera = cameraProvider!!.bindToLifecycle(owner, selector, preview, analysis)
+            camera!!.cameraInfo.torchState.observe(owner, { state ->
+                // TorchState.OFF = 0; TorchState.ON = 1
+                val event = mapOf("name" to "torchState", "data" to state)
+                sink?.success(event)
+            })
+            // TODO: seems there's not a better way to get the final resolution
+            @SuppressLint("RestrictedApi")
+            val resolution = preview.attachedSurfaceResolution!!
+            val portrait = camera!!.cameraInfo.sensorRotationDegrees % 180 == 0
+            val width = resolution.width.toDouble()
+            val height = resolution.height.toDouble()
+            val size = if (portrait) mapOf("width" to width, "height" to height) else mapOf("width" to height, "height" to width)
+            val answer = mapOf("textureId" to textureId, "size" to size, "torchable" to camera!!.torchable)
             result.success(answer)
         }, executor)
     }
 
-    private fun disposeNative(call: MethodCall, result: MethodChannel.Result) {
-        val id = call.arguments as Int
-        if (id == instanceId) {
-            closeCamera()
-            instanceId = null
-        }
+    private fun torchNative(call: MethodCall, result: MethodChannel.Result) {
+        val state = call.arguments == 1
+        camera!!.cameraControl.enableTorch(state)
         result.success(null)
     }
 
-    private fun openCamera(selector: CameraSelector) {
-        textureEntry = textureRegistry.createSurfaceTexture()
-        textureId = textureEntry!!.id()
-        val executor = ContextCompat.getMainExecutor(activity)
-        // Preview
-        val surfaceProvider = Preview.SurfaceProvider { request ->
-            val resolution = request.resolution
-            val texture = textureEntry!!.surfaceTexture()
-            texture.setDefaultBufferSize(resolution.width, resolution.height)
-            val surface = Surface(texture)
-            request.provideSurface(surface, executor, { })
-        }
-        val preview = Preview.Builder()
-                .build().apply { setSurfaceProvider(surfaceProvider) }
-        // Analysis
-        val analyzer = ImageAnalysis.Analyzer { imageProxy -> // YUV_420_888 format
-            val mediaImage = imageProxy.image ?: return@Analyzer
-            val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-            val scanner = BarcodeScanning.getClient()
-            scanner.process(inputImage)
-                    .addOnSuccessListener { barcodes ->
-                        for (barcode in barcodes) {
-                            sink?.success(barcode.data)
-                        }
-                    }
-                    .addOnFailureListener { e -> Log.e(TAG, e.message, e) }
-                    .addOnCompleteListener { imageProxy.close() }
-        }
-        val analysis = ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build().apply { setAnalyzer(executor, analyzer) }
-        // Start camera
-        val lifecycleOwner = activity as LifecycleOwner
-        val camera = cameraProvider!!.bindToLifecycle(lifecycleOwner, selector, preview, analysis)
-        this.camera = camera.cameraControl
-        // TODO: seems there's not a better way to get the final resolution
-        @SuppressLint("RestrictedApi")
-        val cameraSize = preview.attachedSurfaceResolution!!
-        val natural = camera.cameraInfo.sensorRotationDegrees % 180 == 0
-        val width = if (natural) cameraSize.width else cameraSize.height
-        val height = if (natural) cameraSize.height else cameraSize.width
-        resolution = Size(width, height)
+    private fun analyzeNative(call: MethodCall, result: MethodChannel.Result) {
+        analyzeMode = call.arguments as Int
+        result.success(null)
     }
 
-    private fun closeCamera() {
-        resolution = null
-        camera = null
-        textureId = null
-        textureEntry!!.release()
+    private fun stopNative(result: MethodChannel.Result) {
+        val owner = activity as LifecycleOwner
+        camera!!.cameraInfo.torchState.removeObservers(owner)
         cameraProvider!!.unbindAll()
+        textureEntry!!.release()
+
+        analyzeMode = AnalyzeMode.NONE
+        camera = null
+        textureEntry = null
         cameraProvider = null
+
+        result.success(null)
+    }
+}
+
+@IntDef(AnalyzeMode.NONE, AnalyzeMode.BARCODE)
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.SOURCE)
+annotation class AnalyzeMode {
+    companion object {
+        const val NONE = 0
+        const val BARCODE = 1
     }
 }
