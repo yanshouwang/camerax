@@ -6,8 +6,19 @@ A camera plugin for flutter, which use CameraX on Android, native API on iOS, su
 
 ## Features
 
-- Camera preview
-- Access to a barcode stream
+- [x] CameraView widget.
+- [x] Control the torch.
+- [ ] Access to a text stream.
+- [ ] Access to a face stream.
+- [ ] Access to a pose stream.
+- [x] Access to a barcode stream.
+- [ ] Access to image labels stream.
+- [ ] Access to a object detection and tracking stream.
+- [ ] Access to a digital ink recoginition stream.
+- [ ] Access to custom models stream.
+- [ ] Detect barcode from an image.
+- [ ] Photo capture ability.
+- [ ] Video record ability.
 
 ## Getting Started
 
@@ -30,9 +41,8 @@ Make sure you have a minimum deployment target of 10.0, because the `MLKit` only
 
 ## Issues
 
-- Doesn't work with horizontal orientation now.
+- Doesn't work with horizontal orientation.
 - No tests for now.
-- Need to support more features.
 
 ## Screenshots
 
