@@ -8,10 +8,10 @@ class AnalyzeView extends StatefulWidget {
 
 class _AnalyzeViewState extends State<AnalyzeView>
     with SingleTickerProviderStateMixin {
-  CameraController cameraController;
-  AnimationController animationConrtroller;
-  Animation<double> offsetAnimation;
-  Animation<double> opacityAnimation;
+  late CameraController cameraController;
+  late AnimationController animationConrtroller;
+  late Animation<double> offsetAnimation;
+  late Animation<double> opacityAnimation;
 
   @override
   void initState() {
@@ -106,9 +106,7 @@ class AnimatedLine extends AnimatedWidget {
   final Animation opacityAnimation;
 
   AnimatedLine(
-      {Key key,
-      @required this.offsetAnimation,
-      @required this.opacityAnimation})
+      {Key? key, required this.offsetAnimation, required this.opacityAnimation})
       : super(key: key, listenable: offsetAnimation);
 
   @override

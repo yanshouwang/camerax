@@ -15,11 +15,11 @@ class CameraView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: controller.args,
-      builder: (context, value, child) => _build(context, value),
+      builder: (context, value, child) => _build(context, value as CameraArgs?),
     );
   }
 
-  Widget _build(BuildContext context, CameraArgs value) {
+  Widget _build(BuildContext context, CameraArgs? value) {
     if (value == null) {
       return Container(color: Colors.black);
     } else {

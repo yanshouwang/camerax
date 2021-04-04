@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class DisplayView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final barcode = ModalRoute.of(context).settings.arguments as Barcode;
+    final barcode = ModalRoute.of(context)?.settings.arguments as Barcode;
     return Scaffold(
       appBar: AppBar(
         title: Text('扫描结果'),
@@ -99,9 +99,9 @@ class DisplayView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0)),
                 textTheme: ButtonTextTheme.primary,
-                child: RaisedButton(
-                  child: Text('复制'),
+                child: ElevatedButton(
                   onPressed: () {},
+                  child: Text('复制'),
                 ),
               )
             ],

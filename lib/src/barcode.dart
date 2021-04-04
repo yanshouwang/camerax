@@ -10,7 +10,7 @@ class Barcode {
   /// Due to the possible perspective distortions, this is not necessarily a rectangle.
   ///
   /// Returns null if the corner points can not be determined.
-  final List<Offset> corners;
+  final List<Offset>? corners;
 
   /// Returns barcode format
   final BarcodeFormat format;
@@ -37,31 +37,31 @@ class Barcode {
   final BarcodeType type;
 
   /// Gets parsed calendar event details.
-  final CalendarEvent calendarEvent;
+  final CalendarEvent? calendarEvent;
 
   /// Gets parsed contact details.
-  final ContactInfo contactInfo;
+  final ContactInfo? contactInfo;
 
   /// Gets parsed driver license details.
-  final DriverLicense driverLicense;
+  final DriverLicense? driverLicense;
 
   /// Gets parsed email details.
-  final Email email;
+  final Email? email;
 
   /// Gets parsed geo coordinates.
-  final GeoPoint geoPoint;
+  final GeoPoint? geoPoint;
 
   /// Gets parsed phone number details.
-  final Phone phone;
+  final Phone? phone;
 
   /// Gets parsed SMS details.
-  final SMS sms;
+  final SMS? sms;
 
   /// Gets parsed URL bookmark details.
-  final UrlBookmark url;
+  final UrlBookmark? url;
 
   /// Gets parsed WiFi AP details.
-  final WiFi wifi;
+  final WiFi? wifi;
 
   /// Create a [Barcode] from native data.
   Barcode.fromNative(Map<dynamic, dynamic> data)
@@ -86,37 +86,37 @@ class CalendarEvent {
   /// Gets the description of the calendar event.
   ///
   /// Returns null if not available.
-  final String description;
+  final String? description;
 
   /// Gets the start date time of the calendar event.
   ///
   /// Returns null if not available.
-  final DateTime start;
+  final DateTime? start;
 
   /// Gets the end date time of the calendar event.
   ///
   /// Returns null if not available.
-  final DateTime end;
+  final DateTime? end;
 
   /// Gets the location of the calendar event.
   ///
   /// Returns null if not available.
-  final String location;
+  final String? location;
 
   /// Gets the organizer of the calendar event.
   ///
   /// Returns null if not available.
-  final String organizer;
+  final String? organizer;
 
   /// Gets the status of the calendar event.
   ///
   /// Returns null if not available.
-  final String status;
+  final String? status;
 
   /// Gets the summary of the calendar event.
   ///
   /// Returns null if not available.
-  final String summary;
+  final String? summary;
 
   /// Create a [CalendarEvent] from native data.
   CalendarEvent.fromNative(Map<dynamic, dynamic> data)
@@ -144,7 +144,7 @@ class ContactInfo {
   /// Gets contact person's name.
   ///
   /// Returns null if not available.
-  final PersonName name;
+  final PersonName? name;
 
   /// Gets contact person's organization.
   ///

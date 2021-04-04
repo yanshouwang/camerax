@@ -8,7 +8,7 @@ Size toSize(Map<dynamic, dynamic> data) {
   return Size(width, height);
 }
 
-List<Offset> toCorners(List<dynamic> data) {
+List<Offset>? toCorners(List<dynamic>? data) {
   if (data != null) {
     return List.unmodifiable(data.map((e) => Offset(e['x'], e['y'])));
   } else {
@@ -51,7 +51,7 @@ BarcodeFormat toFormat(int value) {
   }
 }
 
-CalendarEvent toCalendarEvent(Map<dynamic, dynamic> data) {
+CalendarEvent? toCalendarEvent(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return CalendarEvent.fromNative(data);
   } else {
@@ -59,7 +59,7 @@ CalendarEvent toCalendarEvent(Map<dynamic, dynamic> data) {
   }
 }
 
-DateTime toDateTime(Map<dynamic, dynamic> data) {
+DateTime? toDateTime(Map<dynamic, dynamic>? data) {
   if (data != null) {
     final year = data['year'];
     final month = data['month'];
@@ -75,7 +75,7 @@ DateTime toDateTime(Map<dynamic, dynamic> data) {
   }
 }
 
-ContactInfo toContactInfo(Map<dynamic, dynamic> data) {
+ContactInfo? toContactInfo(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return ContactInfo.fromNative(data);
   } else {
@@ -83,7 +83,7 @@ ContactInfo toContactInfo(Map<dynamic, dynamic> data) {
   }
 }
 
-PersonName toName(Map<dynamic, dynamic> data) {
+PersonName? toName(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return PersonName.fromNative(data);
   } else {
@@ -91,7 +91,7 @@ PersonName toName(Map<dynamic, dynamic> data) {
   }
 }
 
-DriverLicense toDriverLicense(Map<dynamic, dynamic> data) {
+DriverLicense? toDriverLicense(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return DriverLicense.fromNative(data);
   } else {
@@ -99,7 +99,7 @@ DriverLicense toDriverLicense(Map<dynamic, dynamic> data) {
   }
 }
 
-Email toEmail(Map<dynamic, dynamic> data) {
+Email? toEmail(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return Email.fromNative(data);
   } else {
@@ -107,7 +107,7 @@ Email toEmail(Map<dynamic, dynamic> data) {
   }
 }
 
-GeoPoint toGeoPoint(Map<dynamic, dynamic> data) {
+GeoPoint? toGeoPoint(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return GeoPoint.fromNative(data);
   } else {
@@ -115,7 +115,7 @@ GeoPoint toGeoPoint(Map<dynamic, dynamic> data) {
   }
 }
 
-Phone toPhone(Map<dynamic, dynamic> data) {
+Phone? toPhone(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return Phone.fromNative(data);
   } else {
@@ -123,7 +123,7 @@ Phone toPhone(Map<dynamic, dynamic> data) {
   }
 }
 
-SMS toSMS(Map<dynamic, dynamic> data) {
+SMS? toSMS(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return SMS.fromNative(data);
   } else {
@@ -131,7 +131,7 @@ SMS toSMS(Map<dynamic, dynamic> data) {
   }
 }
 
-UrlBookmark toUrl(Map<dynamic, dynamic> data) {
+UrlBookmark? toUrl(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return UrlBookmark.fromNative(data);
   } else {
@@ -139,7 +139,7 @@ UrlBookmark toUrl(Map<dynamic, dynamic> data) {
   }
 }
 
-WiFi toWiFi(Map<dynamic, dynamic> data) {
+WiFi? toWiFi(Map<dynamic, dynamic>? data) {
   if (data != null) {
     return WiFi.fromNative(data);
   } else {
