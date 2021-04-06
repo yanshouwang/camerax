@@ -1,6 +1,6 @@
 name: camerax
 description: A camera plugin for flutter, which use CameraX on Android, native API on iOS, supports camera preview, capture and analyze.
-version: 0.0.3
+version: 0.1.0
 homepage: https://github.com/yanshouwang/camerax
 publish_to: https://pub.dev
 
