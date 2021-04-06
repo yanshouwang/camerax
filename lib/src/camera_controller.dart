@@ -12,7 +12,7 @@ import 'util.dart';
 /// A camera controller.
 abstract class CameraController {
   /// Arguments for [CameraView].
-  ValueNotifier<CameraArgs> get args;
+  ValueNotifier<CameraArgs?> get args;
 
   /// Torch state of the camera.
   ValueNotifier<TorchState> get torchState;
@@ -51,17 +51,17 @@ class _CameraController implements CameraController {
   static const analyze_none = 0;
   static const analyze_barcode = 1;
 
-  static int id;
-  static StreamSubscription subscription;
+  static int? id;
+  static StreamSubscription? subscription;
 
   final CameraFacing facing;
   @override
-  final ValueNotifier<CameraArgs> args;
+  final ValueNotifier<CameraArgs?> args;
   @override
   final ValueNotifier<TorchState> torchState;
 
   bool torchable;
-  StreamController<Barcode> barcodesController;
+  late StreamController<Barcode> barcodesController;
 
   @override
   Stream<Barcode> get barcodes => barcodesController.stream;
@@ -124,10 +124,10 @@ class _CameraController implements CameraController {
     // Start camera.
     final answer =
         await method.invokeMapMethod<String, dynamic>('start', facing.index);
-    final textureId = answer['textureId'];
-    final size = toSize(answer['size']);
+    final textureId = answer?['textureId'];
+    final size = toSize(answer?['size']);
     args.value = CameraArgs(textureId, size);
-    torchable = answer['torchable'];
+    torchable = answer?['torchable'];
   }
 
   @override
@@ -145,7 +145,7 @@ class _CameraController implements CameraController {
   void dispose() {
     if (hashCode == id) {
       stop();
-      subscription.cancel();
+      subscription?.cancel();
       subscription = null;
       id = null;
     }

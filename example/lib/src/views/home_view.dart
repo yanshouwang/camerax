@@ -35,11 +35,11 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
+        onPressed: () => Navigator.of(context).pushNamed('analyze'),
         child: Icon(
           Icons.camera,
           color: Colors.white,
         ),
-        onPressed: () => Navigator.of(context).pushNamed('analyze'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
