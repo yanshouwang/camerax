@@ -1,9 +1,9 @@
 import AVFoundation
 import Flutter
-import MLKitVision
-import MLKitBarcodeScanning
+//import MLKitVision
+//import MLKitBarcodeScanning
 
-public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterTexture, AVCaptureVideoDataOutputSampleBufferDelegate {
+public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterTexture, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate {
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let instance = SwiftCameraXPlugin(registrar.textures())
@@ -79,17 +79,17 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
             }
             analyzing = true
             let buffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-            let image = VisionImage(image: buffer!.image)
-            let scanner = BarcodeScanner.barcodeScanner()
-            scanner.process(image) { [self] barcodes, error in
-                if error == nil && barcodes != nil {
-                    for barcode in barcodes! {
-                        let event: [String: Any?] = ["name": "barcode", "data": barcode.data]
-                        sink?(event)
-                    }
-                }
-                analyzing = false
-            }
+//            let image = VisionImage(image: buffer!.image)
+//            let scanner = BarcodeScanner.barcodeScanner()
+//            scanner.process(image) { [self] barcodes, error in
+//                if error == nil && barcodes != nil {
+//                    for barcode in barcodes! {
+//                        let event: [String: Any?] = ["name": "barcode", "data": barcode.data]
+//                        sink?(event)
+//                    }
+//                }
+//                analyzing = false
+//            }
         default: // none
             break
         }
@@ -131,7 +131,7 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         }
         // Add video output.
         let videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
+//        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         videoOutput.alwaysDiscardsLateVideoFrames = true
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession.addOutput(videoOutput)
@@ -141,7 +141,14 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
                 connection.isVideoMirrored = true
             }
         }
+        let metadataOutput = AVCaptureMetadataOutput()
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        if captureSession.canAddOutput(metadataOutput) {
+            captureSession.addOutput(metadataOutput)
+            metadataOutput.metadataObjectTypes = [.qr]
+        }
         captureSession.commitConfiguration()
+        captureSession.sessionPreset = .hd4K3840x2160
         captureSession.startRunning()
         let demensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription)
         let width = Double(demensions.height)
@@ -149,6 +156,12 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         let size = ["width": width, "height": height]
         let answer: [String : Any?] = ["textureId": textureId, "size": size, "torchable": device.hasTorch]
         result(answer)
+    }
+    
+    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        if let qrData = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
+            debugPrint("qr detected \(qrData.stringValue ?? "")")
+        }
     }
     
     func torchNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
