@@ -90,7 +90,6 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         
         latestBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         registry.textureFrameAvailable(textureId)
-        
     }
     
     func stateNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
@@ -144,6 +143,7 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         metadataOutput.setMetadataObjectsDelegate(self, queue: metadataOutputQueue)
         enableQR(enable: true)
         captureSession.commitConfiguration()
+        captureSession.sessionPreset = .hd4K3840x2160
         captureSession.startRunning()
         let demensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription)
         let width = Double(demensions.height)
