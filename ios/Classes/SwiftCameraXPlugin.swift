@@ -30,17 +30,12 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
     private var device: AVCaptureDevice!
     private var latestBuffer: CVImageBuffer!
     private let metadataOutput: AVCaptureMetadataOutput = AVCaptureMetadataOutput()
-    private var analyzeMode: Int
-    private var analyzing: Bool
     private let cameraOutputQueue = DispatchQueue(label:"flutter_camera_output_queue", qos: .userInteractive)
     private let metadataOutputQueue = DispatchQueue(label:"flutter_camera_metadata_output_queue", qos: .userInteractive)
-    private var previewSize = CGSize.zero
 
     
     init(_ registry: FlutterTextureRegistry) {
         self.registry = registry
-        analyzeMode = 0
-        analyzing = false
         super.init()
     }
     
@@ -54,8 +49,6 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
             startNative(call, result)
         case "torch":
             torchNative(call, result)
-        case "analyze":
-            analyzeNative(call, result)
         case "stop":
             stopNative(result)
         case "getMaxZoomLevel":
@@ -64,9 +57,9 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
             getMinZoomLevel(result: result)
         case "setZoomLevel":
             setZoomLevel(call, result)
-        case "startQRDetection":
+        case "startScan":
             enableQRDetection(enable: true)
-        case "stopQRDetection":
+        case "stopScan":
             enableQRDetection(enable: false)
         default:
             result(FlutterMethodNotImplemented)
@@ -157,11 +150,6 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         result(answer)
     }
     
-    private func analyzeNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
-        analyzeMode = call.arguments as! Int
-        result(nil)
-    }
-    
     private func stopNative(_ result: FlutterResult) {
         captureSession.stopRunning()
         for input in captureSession.inputs {
@@ -173,7 +161,6 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         device.removeObserver(self, forKeyPath: #keyPath(AVCaptureDevice.torchMode))
         registry.unregisterTexture(textureId)
         
-        analyzeMode = 0
         latestBuffer = nil
         captureSession = nil
         device = nil
@@ -236,42 +223,35 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         case .max,.ultraHigh:
             if captureSession.canSetSessionPreset(.hd4K3840x2160) {
                 captureSession.sessionPreset = .hd4K3840x2160
-                previewSize = CGSize(width: 3840, height: 2160)
                 break
             }
             if captureSession.canSetSessionPreset(.high) {
                 captureSession.sessionPreset = .high
-                previewSize = CGSize(width: Int(device.activeFormat.highResolutionStillImageDimensions.width), height: Int(device.activeFormat.highResolutionStillImageDimensions.height))
                 break
             }
         case .veryHigh:
             if captureSession.canSetSessionPreset(.hd1920x1080) {
                 captureSession.sessionPreset = .hd1920x1080
-                previewSize = CGSize(width: 1920, height: 1080)
                 break
             }
         case .high:
             if captureSession.canSetSessionPreset(.hd1280x720) {
                 captureSession.sessionPreset = .hd1280x720
-                previewSize = CGSize(width: 1280, height: 720)
                 break
             }
         case .medium:
             if captureSession.canSetSessionPreset(.vga640x480) {
                 captureSession.sessionPreset = .vga640x480
-                previewSize = CGSize(width: 640, height: 480)
                 break
             }
         case .low:
             if captureSession.canSetSessionPreset(.cif352x288) {
                 captureSession.sessionPreset = .cif352x288
-                previewSize = CGSize(width: 352, height: 288)
                 break
             }
         default:
             if captureSession.canSetSessionPreset(.cif352x288) {
                 captureSession.sessionPreset = .cif352x288
-                previewSize = CGSize(width: 352, height: 288)
                 break
             }
         }
