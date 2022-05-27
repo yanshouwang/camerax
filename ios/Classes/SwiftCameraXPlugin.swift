@@ -64,6 +64,10 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
             getMinZoomLevel(result: result)
         case "setZoomLevel":
             setZoomLevel(call, result)
+        case "startQRDetection":
+            enableQRDetection(enable: true)
+        case "stopQRDetection":
+            enableQRDetection(enable: false)
         default:
             result(FlutterMethodNotImplemented)
         }
