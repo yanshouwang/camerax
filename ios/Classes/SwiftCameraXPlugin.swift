@@ -1,9 +1,17 @@
 import AVFoundation
 import Flutter
-//import MLKitVision
-//import MLKitBarcodeScanning
 
 public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterTexture, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate {
+    
+    enum FLTResolutionPreset : String {
+        case veryLow
+        case low
+        case medium
+        case high
+        case veryHigh
+        case ultraHigh
+        case max
+    }
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let instance = SwiftCameraXPlugin(registrar.textures())
@@ -15,14 +23,19 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         event.setStreamHandler(instance)
     }
     
-    let registry: FlutterTextureRegistry
-    var sink: FlutterEventSink!
-    var textureId: Int64!
-    var captureSession: AVCaptureSession!
-    var device: AVCaptureDevice!
-    var latestBuffer: CVImageBuffer!
-    var analyzeMode: Int
-    var analyzing: Bool
+    private let registry: FlutterTextureRegistry
+    private var sink: FlutterEventSink!
+    private var textureId: Int64!
+    private var captureSession: AVCaptureSession!
+    private var device: AVCaptureDevice!
+    private var latestBuffer: CVImageBuffer!
+    private let metadataOutput: AVCaptureMetadataOutput = AVCaptureMetadataOutput()
+    private var analyzeMode: Int
+    private var analyzing: Bool
+    private let cameraOutputQueue = DispatchQueue(label:"flutter_camera_output_queue", qos: .userInteractive)
+    private let metadataOutputQueue = DispatchQueue(label:"flutter_camera_metadata_output_queue", qos: .userInteractive)
+    private var previewSize = CGSize.zero
+
     
     init(_ registry: FlutterTextureRegistry) {
         self.registry = registry
@@ -45,6 +58,16 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
             analyzeNative(call, result)
         case "stop":
             stopNative(result)
+        case "getMaxZoomLevel":
+            getMaxZoomLevel(result: result)
+        case "getMinZoomLevel":
+            getMinZoomLevel(result: result)
+        case "setZoomLevel":
+            setZoomLevel(call, result)
+        case "startQRDetection":
+            enableQRDetection(enable: true)
+        case "stopQRDetection":
+            enableQRDetection(enable: false)
         default:
             result(FlutterMethodNotImplemented)
         }
@@ -72,27 +95,6 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         latestBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         registry.textureFrameAvailable(textureId)
         
-        switch analyzeMode {
-        case 1: // barcode
-            if analyzing {
-                break
-            }
-            analyzing = true
-            let buffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-//            let image = VisionImage(image: buffer!.image)
-//            let scanner = BarcodeScanner.barcodeScanner()
-//            scanner.process(image) { [self] barcodes, error in
-//                if error == nil && barcodes != nil {
-//                    for barcode in barcodes! {
-//                        let event: [String: Any?] = ["name": "barcode", "data": barcode.data]
-//                        sink?(event)
-//                    }
-//                }
-//                analyzing = false
-//            }
-        default: // none
-            break
-        }
     }
     
     func stateNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
@@ -131,9 +133,8 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         }
         // Add video output.
         let videoOutput = AVCaptureVideoDataOutput()
-//        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         videoOutput.alwaysDiscardsLateVideoFrames = true
-        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        videoOutput.setSampleBufferDelegate(self, queue: cameraOutputQueue)
         captureSession.addOutput(videoOutput)
         for connection in videoOutput.connections {
             connection.videoOrientation = .portrait
@@ -141,14 +142,12 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
                 connection.isVideoMirrored = true
             }
         }
-        let metadataOutput = AVCaptureMetadataOutput()
-        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
-            metadataOutput.metadataObjectTypes = [.qr]
+        if let sessionPreset = (call.arguments as? [String: Any])?["resolutionPreset"] as? String, let preset = FLTResolutionPreset(rawValue: sessionPreset) {
+            setSessionPresetAndPreview(flutterPreset: preset)
         }
+        metadataOutput.setMetadataObjectsDelegate(self, queue: metadataOutputQueue)
+        enableQR(enable: true)
         captureSession.commitConfiguration()
-        captureSession.sessionPreset = .hd4K3840x2160
         captureSession.startRunning()
         let demensions = CMVideoFormatDescriptionGetDimensions(device.activeFormat.formatDescription)
         let width = Double(demensions.height)
@@ -158,29 +157,12 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
         result(answer)
     }
     
-    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if let qrData = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
-            debugPrint("qr detected \(qrData.stringValue ?? "")")
-        }
-    }
-    
-    func torchNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
-        do {
-            try device.lockForConfiguration()
-            device.torchMode = call.arguments as! Int == 1 ? .on : .off
-            device.unlockForConfiguration()
-            result(nil)
-        } catch {
-            error.throwNative(result)
-        }
-    }
-    
-    func analyzeNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    private func analyzeNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         analyzeMode = call.arguments as! Int
         result(nil)
     }
     
-    func stopNative(_ result: FlutterResult) {
+    private func stopNative(_ result: FlutterResult) {
         captureSession.stopRunning()
         for input in captureSession.inputs {
             captureSession.removeInput(input)
@@ -209,6 +191,129 @@ public class SwiftCameraXPlugin: NSObject, FlutterPlugin, FlutterStreamHandler, 
             sink?(event)
         default:
             break
+        }
+    }
+    
+    //MARK: TORCH
+    private func torchNative(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        do {
+            try device.lockForConfiguration()
+            device.torchMode = call.arguments as! Int == 1 ? .on : .off
+            device.unlockForConfiguration()
+            result(nil)
+        } catch {
+            error.throwNative(result)
+        }
+    }
+    
+    //MARK: METADATA
+    public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        if let qrData = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
+            debugPrint("qr detected \(qrData.stringValue ?? "")")
+        }
+    }
+    
+    private func enableQRDetection(enable: Bool) {
+        captureSession.beginConfiguration()
+        enableQR(enable: enable)
+        captureSession.commitConfiguration()
+    }
+    
+    private func enableQR(enable: Bool) {
+        if enable {
+            if captureSession.canAddOutput(metadataOutput) {
+                captureSession.addOutput(metadataOutput)
+                metadataOutput.metadataObjectTypes = [.qr]
+            }
+        } else {
+            captureSession.removeOutput(metadataOutput)
+        }
+    }
+    
+    //MARK: SESSION PRESET
+    private func setSessionPresetAndPreview(flutterPreset: FLTResolutionPreset) {
+        switch flutterPreset {
+        case .max,.ultraHigh:
+            if captureSession.canSetSessionPreset(.hd4K3840x2160) {
+                captureSession.sessionPreset = .hd4K3840x2160
+                previewSize = CGSize(width: 3840, height: 2160)
+                break
+            }
+            if captureSession.canSetSessionPreset(.high) {
+                captureSession.sessionPreset = .high
+                previewSize = CGSize(width: Int(device.activeFormat.highResolutionStillImageDimensions.width), height: Int(device.activeFormat.highResolutionStillImageDimensions.height))
+                break
+            }
+        case .veryHigh:
+            if captureSession.canSetSessionPreset(.hd1920x1080) {
+                captureSession.sessionPreset = .hd1920x1080
+                previewSize = CGSize(width: 1920, height: 1080)
+                break
+            }
+        case .high:
+            if captureSession.canSetSessionPreset(.hd1280x720) {
+                captureSession.sessionPreset = .hd1280x720
+                previewSize = CGSize(width: 1280, height: 720)
+                break
+            }
+        case .medium:
+            if captureSession.canSetSessionPreset(.vga640x480) {
+                captureSession.sessionPreset = .vga640x480
+                previewSize = CGSize(width: 640, height: 480)
+                break
+            }
+        case .low:
+            if captureSession.canSetSessionPreset(.cif352x288) {
+                captureSession.sessionPreset = .cif352x288
+                previewSize = CGSize(width: 352, height: 288)
+                break
+            }
+        default:
+            if captureSession.canSetSessionPreset(.cif352x288) {
+                captureSession.sessionPreset = .cif352x288
+                previewSize = CGSize(width: 352, height: 288)
+                break
+            }
+        }
+    }
+    
+    //MARK: ZOOM
+    private func getMaxZoomLevel(result: @escaping FlutterResult) {
+        @MainThreadClosure var mainThreadResult: ((Any?) -> Void)? = result
+        mainThreadResult?(NSNumber(floatLiteral: device.maxZoom))
+
+    }
+    
+    private func getMinZoomLevel(result: @escaping FlutterResult) {
+        @MainThreadClosure var mainThreadResult: ((Any?) -> Void)? = result
+        mainThreadResult?(NSNumber(floatLiteral: device.minZoom))
+    }
+    
+    private func setZoomLevel(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        if let zoomLevel = (call.arguments as? [String:Any])?["zoom"] as? NSNumber {
+            setZoomLevel(zoomLevel: CGFloat(zoomLevel.floatValue), result: result)
+        } else {
+            @MainThreadClosure var mainThreadResult: ((Any?) -> Void)? = result
+            mainThreadResult?(FlutterError(code: "zoom_error", message: "zoom value not passed", details: nil))
+        }
+    }
+    
+    private func setZoomLevel(zoomLevel: CGFloat, result: @escaping FlutterResult) {
+        @MainThreadClosure var mainThreadResult: ((Any?) -> Void)? = result
+        var newZoom = zoomLevel
+        if zoomLevel < device.minZoom {
+            newZoom = device.minZoom
+        }
+        if zoomLevel > device.maxZoom {
+            newZoom = device.maxZoom
+        }
+        do {
+            try device.lockForConfiguration()
+            device.videoZoomFactor = newZoom
+            device.unlockForConfiguration()
+            mainThreadResult?(nil)
+        } catch {
+            mainThreadResult?(FlutterError(code: "zoom_error", message: "couldn't lock device", details: nil))
         }
     }
 }
