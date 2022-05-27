@@ -25,8 +25,7 @@ abstract class CameraController {
   /// [facing] target facing used to select camera.
   ///
   /// [formats] the barcode formats for image analyzer.
-  factory CameraController([CameraFacing facing = CameraFacing.back]) =>
-      _CameraController(facing);
+  factory CameraController([CameraFacing facing = CameraFacing.back]) => _CameraController(facing);
 
   /// Start the camera asynchronously.
   Future<void> startAsync();
@@ -36,13 +35,21 @@ abstract class CameraController {
 
   /// Release the resources of the camera.
   void dispose();
+
+  /// IOS only
+  /// will add meta data detection for qr in camera capture session
+  /// wil throw error in android
+  void startScan();
+
+  /// IOS only
+  /// will remove meta data detection for qr in camera capture session
+  /// /// wil throw error in android
+  void stopScan();
 }
 
 class _CameraController implements CameraController {
-  static const MethodChannel method =
-      MethodChannel('yanshouwang.dev/camerax/method');
-  static const EventChannel event =
-      EventChannel('yanshouwang.dev/camerax/event');
+  static const MethodChannel method = MethodChannel('yanshouwang.dev/camerax/method');
+  static const EventChannel event = EventChannel('yanshouwang.dev/camerax/event');
 
   static const undetermined = 0;
   static const authorized = 1;
@@ -160,4 +167,11 @@ class _CameraController implements CameraController {
         'CameraController methods should not be used after calling dispose.';
     assert(hashCode == id, message);
   }
+
+
+  @override
+  void startScan() => method.invokeMethod('startScan');
+
+  @override
+  void stopScan() => method.invokeMethod('stopScan');
 }
