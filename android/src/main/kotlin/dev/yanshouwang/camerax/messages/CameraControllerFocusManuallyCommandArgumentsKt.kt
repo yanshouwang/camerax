@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraControllerFocusManuallyCommandArguments")
-public inline fun cameraControllerFocusManuallyCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments =
+inline fun cameraControllerFocusManuallyCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.newBuilder()).apply { block() }._build()
-public object CameraControllerFocusManuallyCommandArgumentsKt {
+object CameraControllerFocusManuallyCommandArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+    var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
       @JvmName("getSelector")
       get() = _builder.getSelector()
       @JvmName("setSelector")
@@ -35,21 +35,21 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public fun clearSelector() {
+    fun clearSelector() {
       _builder.clearSelector()
     }
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
-    public fun hasSelector(): kotlin.Boolean {
+    fun hasSelector(): kotlin.Boolean {
       return _builder.hasSelector()
     }
 
     /**
      * <code>double width = 2;</code>
      */
-    public var width: kotlin.Double
+    var width: kotlin.Double
       @JvmName("getWidth")
       get() = _builder.getWidth()
       @JvmName("setWidth")
@@ -59,14 +59,14 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
     /**
      * <code>double width = 2;</code>
      */
-    public fun clearWidth() {
+    fun clearWidth() {
       _builder.clearWidth()
     }
 
     /**
      * <code>double height = 3;</code>
      */
-    public var height: kotlin.Double
+    var height: kotlin.Double
       @JvmName("getHeight")
       get() = _builder.getHeight()
       @JvmName("setHeight")
@@ -76,14 +76,14 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
     /**
      * <code>double height = 3;</code>
      */
-    public fun clearHeight() {
+    fun clearHeight() {
       _builder.clearHeight()
     }
 
     /**
      * <code>double x = 4;</code>
      */
-    public var x: kotlin.Double
+    var x: kotlin.Double
       @JvmName("getX")
       get() = _builder.getX()
       @JvmName("setX")
@@ -93,14 +93,14 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
     /**
      * <code>double x = 4;</code>
      */
-    public fun clearX() {
+    fun clearX() {
       _builder.clearX()
     }
 
     /**
      * <code>double y = 5;</code>
      */
-    public var y: kotlin.Double
+    var y: kotlin.Double
       @JvmName("getY")
       get() = _builder.getY()
       @JvmName("setY")
@@ -110,13 +110,13 @@ public object CameraControllerFocusManuallyCommandArgumentsKt {
     /**
      * <code>double y = 5;</code>
      */
-    public fun clearY() {
+    fun clearY() {
       _builder.clearY()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerFocusManuallyCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArgumentsOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?

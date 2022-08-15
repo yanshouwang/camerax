@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        camerax_version = '1.1.0-beta02'
+        camerax_version = '1.1.0'
     }
     repositories {
         maven { url = 'https://maven.aliyun.com/repository/google' }
@@ -30,7 +30,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

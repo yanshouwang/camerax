@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraControllerTorchCommandArguments")
-public inline fun cameraControllerTorchCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments =
+inline fun cameraControllerTorchCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.newBuilder()).apply { block() }._build()
-public object CameraControllerTorchCommandArgumentsKt {
+object CameraControllerTorchCommandArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraControllerTorchCommandArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+    var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
       @JvmName("getSelector")
       get() = _builder.getSelector()
       @JvmName("setSelector")
@@ -35,21 +35,21 @@ public object CameraControllerTorchCommandArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public fun clearSelector() {
+    fun clearSelector() {
       _builder.clearSelector()
     }
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
-    public fun hasSelector(): kotlin.Boolean {
+    fun hasSelector(): kotlin.Boolean {
       return _builder.hasSelector()
     }
 
     /**
      * <code>bool state = 2;</code>
      */
-    public var state: kotlin.Boolean
+    var state: kotlin.Boolean
       @JvmName("getState")
       get() = _builder.getState()
       @JvmName("setState")
@@ -59,13 +59,13 @@ public object CameraControllerTorchCommandArgumentsKt {
     /**
      * <code>bool state = 2;</code>
      */
-    public fun clearState() {
+    fun clearState() {
       _builder.clearState()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerTorchCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArgumentsOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?

@@ -44,17 +44,25 @@ public final class Messages {
      */
     COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM(5),
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 6;</code>
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM = 6;</code>
      */
-    COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY(6),
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM(6),
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 7;</code>
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 7;</code>
      */
-    COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY(7),
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY(7),
     /**
-     * <code>COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 8;</code>
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 8;</code>
      */
-    COMMAND_CATEGORY_IMAGE_PROXY_CLOSE(8),
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY(8),
+    /**
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY = 9;</code>
+     */
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY(9),
+    /**
+     * <code>COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 10;</code>
+     */
+    COMMAND_CATEGORY_IMAGE_PROXY_CLOSE(10),
     UNRECOGNIZED(-1),
     ;
 
@@ -83,17 +91,25 @@ public final class Messages {
      */
     public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM_VALUE = 5;
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 6;</code>
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM = 6;</code>
      */
-    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_VALUE = 6;
+    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM_VALUE = 6;
     /**
-     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 7;</code>
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 7;</code>
      */
-    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY_VALUE = 7;
+    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_VALUE = 7;
     /**
-     * <code>COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 8;</code>
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 8;</code>
      */
-    public static final int COMMAND_CATEGORY_IMAGE_PROXY_CLOSE_VALUE = 8;
+    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY_VALUE = 8;
+    /**
+     * <code>COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY = 9;</code>
+     */
+    public static final int COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_VALUE = 9;
+    /**
+     * <code>COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 10;</code>
+     */
+    public static final int COMMAND_CATEGORY_IMAGE_PROXY_CLOSE_VALUE = 10;
 
 
     public final int getNumber() {
@@ -126,9 +142,11 @@ public final class Messages {
         case 3: return COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND;
         case 4: return COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH;
         case 5: return COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM;
-        case 6: return COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY;
-        case 7: return COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY;
-        case 8: return COMMAND_CATEGORY_IMAGE_PROXY_CLOSE;
+        case 6: return COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM;
+        case 7: return COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY;
+        case 8: return COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY;
+        case 9: return COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY;
+        case 10: return COMMAND_CATEGORY_IMAGE_PROXY_CLOSE;
         default: return null;
       }
     }
@@ -477,47 +495,77 @@ public final class Messages {
     dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArgumentsOrBuilder getCameraControllerZoomArgumentsOrBuilder();
 
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     * @return Whether the cameraControllerLinearZoomArguments field is set.
+     */
+    boolean hasCameraControllerLinearZoomArguments();
+    /**
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     * @return The cameraControllerLinearZoomArguments.
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments getCameraControllerLinearZoomArguments();
+    /**
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder getCameraControllerLinearZoomArgumentsOrBuilder();
+
+    /**
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      * @return Whether the cameraControllerFocusAutomaticallyArguments field is set.
      */
     boolean hasCameraControllerFocusAutomaticallyArguments();
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      * @return The cameraControllerFocusAutomaticallyArguments.
      */
     dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments getCameraControllerFocusAutomaticallyArguments();
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      */
     dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder getCameraControllerFocusAutomaticallyArgumentsOrBuilder();
 
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      * @return Whether the cameraControllerFocusManuallyArguments field is set.
      */
     boolean hasCameraControllerFocusManuallyArguments();
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      * @return The cameraControllerFocusManuallyArguments.
      */
     dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments getCameraControllerFocusManuallyArguments();
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      */
     dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArgumentsOrBuilder getCameraControllerFocusManuallyArgumentsOrBuilder();
 
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+     */
+    boolean hasCameraControllerCaptureToMemoryArguments();
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     * @return The cameraControllerCaptureToMemoryArguments.
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments getCameraControllerCaptureToMemoryArguments();
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder getCameraControllerCaptureToMemoryArgumentsOrBuilder();
+
+    /**
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      * @return Whether the imageProxyCloseArguments field is set.
      */
     boolean hasImageProxyCloseArguments();
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      * @return The imageProxyCloseArguments.
      */
     dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments getImageProxyCloseArguments();
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      */
     dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArgumentsOrBuilder getImageProxyCloseArgumentsOrBuilder();
 
@@ -632,8 +680,22 @@ public final class Messages {
               break;
             }
             case 50: {
-              dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder subBuilder = null;
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder subBuilder = null;
               if (argumentsCase_ == 6) {
+                subBuilder = ((dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_).toBuilder();
+              }
+              arguments_ =
+                  input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_);
+                arguments_ = subBuilder.buildPartial();
+              }
+              argumentsCase_ = 6;
+              break;
+            }
+            case 58: {
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder subBuilder = null;
+              if (argumentsCase_ == 7) {
                 subBuilder = ((dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_).toBuilder();
               }
               arguments_ =
@@ -642,12 +704,12 @@ public final class Messages {
                 subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_);
                 arguments_ = subBuilder.buildPartial();
               }
-              argumentsCase_ = 6;
+              argumentsCase_ = 7;
               break;
             }
-            case 58: {
+            case 66: {
               dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder subBuilder = null;
-              if (argumentsCase_ == 7) {
+              if (argumentsCase_ == 8) {
                 subBuilder = ((dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_).toBuilder();
               }
               arguments_ =
@@ -656,12 +718,26 @@ public final class Messages {
                 subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_);
                 arguments_ = subBuilder.buildPartial();
               }
-              argumentsCase_ = 7;
+              argumentsCase_ = 8;
               break;
             }
-            case 66: {
+            case 74: {
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder subBuilder = null;
+              if (argumentsCase_ == 9) {
+                subBuilder = ((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_).toBuilder();
+              }
+              arguments_ =
+                  input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_);
+                arguments_ = subBuilder.buildPartial();
+              }
+              argumentsCase_ = 9;
+              break;
+            }
+            case 82: {
               dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.Builder subBuilder = null;
-              if (argumentsCase_ == 8) {
+              if (argumentsCase_ == 10) {
                 subBuilder = ((dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_).toBuilder();
               }
               arguments_ =
@@ -670,7 +746,7 @@ public final class Messages {
                 subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_);
                 arguments_ = subBuilder.buildPartial();
               }
-              argumentsCase_ = 8;
+              argumentsCase_ = 10;
               break;
             }
             default: {
@@ -716,9 +792,11 @@ public final class Messages {
       CAMERA_CONTROLLER_UNBIND_ARGUMENTS(3),
       CAMERA_CONTROLLER_TORCH_ARGUMENTS(4),
       CAMERA_CONTROLLER_ZOOM_ARGUMENTS(5),
-      CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS(6),
-      CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS(7),
-      IMAGE_PROXY_CLOSE_ARGUMENTS(8),
+      CAMERA_CONTROLLER_LINEAR_ZOOM_ARGUMENTS(6),
+      CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS(7),
+      CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS(8),
+      CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS(9),
+      IMAGE_PROXY_CLOSE_ARGUMENTS(10),
       ARGUMENTS_NOT_SET(0);
       private final int value;
       private ArgumentsCase(int value) {
@@ -740,9 +818,11 @@ public final class Messages {
           case 3: return CAMERA_CONTROLLER_UNBIND_ARGUMENTS;
           case 4: return CAMERA_CONTROLLER_TORCH_ARGUMENTS;
           case 5: return CAMERA_CONTROLLER_ZOOM_ARGUMENTS;
-          case 6: return CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS;
-          case 7: return CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS;
-          case 8: return IMAGE_PROXY_CLOSE_ARGUMENTS;
+          case 6: return CAMERA_CONTROLLER_LINEAR_ZOOM_ARGUMENTS;
+          case 7: return CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS;
+          case 8: return CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS;
+          case 9: return CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS;
+          case 10: return IMAGE_PROXY_CLOSE_ARGUMENTS;
           case 0: return ARGUMENTS_NOT_SET;
           default: return null;
         }
@@ -901,94 +981,156 @@ public final class Messages {
       return dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.getDefaultInstance();
     }
 
-    public static final int CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS_FIELD_NUMBER = 6;
+    public static final int CAMERA_CONTROLLER_LINEAR_ZOOM_ARGUMENTS_FIELD_NUMBER = 6;
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     * @return Whether the cameraControllerLinearZoomArguments field is set.
+     */
+    @java.lang.Override
+    public boolean hasCameraControllerLinearZoomArguments() {
+      return argumentsCase_ == 6;
+    }
+    /**
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     * @return The cameraControllerLinearZoomArguments.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments getCameraControllerLinearZoomArguments() {
+      if (argumentsCase_ == 6) {
+         return (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_;
+      }
+      return dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+    }
+    /**
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder getCameraControllerLinearZoomArgumentsOrBuilder() {
+      if (argumentsCase_ == 6) {
+         return (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_;
+      }
+      return dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+    }
+
+    public static final int CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS_FIELD_NUMBER = 7;
+    /**
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      * @return Whether the cameraControllerFocusAutomaticallyArguments field is set.
      */
     @java.lang.Override
     public boolean hasCameraControllerFocusAutomaticallyArguments() {
-      return argumentsCase_ == 6;
+      return argumentsCase_ == 7;
     }
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      * @return The cameraControllerFocusAutomaticallyArguments.
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments getCameraControllerFocusAutomaticallyArguments() {
-      if (argumentsCase_ == 6) {
+      if (argumentsCase_ == 7) {
          return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_;
       }
       return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance();
     }
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder getCameraControllerFocusAutomaticallyArgumentsOrBuilder() {
-      if (argumentsCase_ == 6) {
+      if (argumentsCase_ == 7) {
          return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_;
       }
       return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance();
     }
 
-    public static final int CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS_FIELD_NUMBER = 7;
+    public static final int CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS_FIELD_NUMBER = 8;
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      * @return Whether the cameraControllerFocusManuallyArguments field is set.
      */
     @java.lang.Override
     public boolean hasCameraControllerFocusManuallyArguments() {
-      return argumentsCase_ == 7;
+      return argumentsCase_ == 8;
     }
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      * @return The cameraControllerFocusManuallyArguments.
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments getCameraControllerFocusManuallyArguments() {
-      if (argumentsCase_ == 7) {
+      if (argumentsCase_ == 8) {
          return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_;
       }
       return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance();
     }
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArgumentsOrBuilder getCameraControllerFocusManuallyArgumentsOrBuilder() {
-      if (argumentsCase_ == 7) {
+      if (argumentsCase_ == 8) {
          return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_;
       }
       return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance();
     }
 
-    public static final int IMAGE_PROXY_CLOSE_ARGUMENTS_FIELD_NUMBER = 8;
+    public static final int CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS_FIELD_NUMBER = 9;
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+     */
+    @java.lang.Override
+    public boolean hasCameraControllerCaptureToMemoryArguments() {
+      return argumentsCase_ == 9;
+    }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     * @return The cameraControllerCaptureToMemoryArguments.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments getCameraControllerCaptureToMemoryArguments() {
+      if (argumentsCase_ == 9) {
+         return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_;
+      }
+      return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+    }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder getCameraControllerCaptureToMemoryArgumentsOrBuilder() {
+      if (argumentsCase_ == 9) {
+         return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_;
+      }
+      return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+    }
+
+    public static final int IMAGE_PROXY_CLOSE_ARGUMENTS_FIELD_NUMBER = 10;
+    /**
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      * @return Whether the imageProxyCloseArguments field is set.
      */
     @java.lang.Override
     public boolean hasImageProxyCloseArguments() {
-      return argumentsCase_ == 8;
+      return argumentsCase_ == 10;
     }
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      * @return The imageProxyCloseArguments.
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments getImageProxyCloseArguments() {
-      if (argumentsCase_ == 8) {
+      if (argumentsCase_ == 10) {
          return (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_;
       }
       return dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance();
     }
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArgumentsOrBuilder getImageProxyCloseArgumentsOrBuilder() {
-      if (argumentsCase_ == 8) {
+      if (argumentsCase_ == 10) {
          return (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_;
       }
       return dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance();
@@ -1024,13 +1166,19 @@ public final class Messages {
         output.writeMessage(5, (dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments) arguments_);
       }
       if (argumentsCase_ == 6) {
-        output.writeMessage(6, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_);
+        output.writeMessage(6, (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_);
       }
       if (argumentsCase_ == 7) {
-        output.writeMessage(7, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_);
+        output.writeMessage(7, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_);
       }
       if (argumentsCase_ == 8) {
-        output.writeMessage(8, (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_);
+        output.writeMessage(8, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_);
+      }
+      if (argumentsCase_ == 9) {
+        output.writeMessage(9, (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_);
+      }
+      if (argumentsCase_ == 10) {
+        output.writeMessage(10, (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_);
       }
       unknownFields.writeTo(output);
     }
@@ -1063,15 +1211,23 @@ public final class Messages {
       }
       if (argumentsCase_ == 6) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_);
+          .computeMessageSize(6, (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_);
       }
       if (argumentsCase_ == 7) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_);
+          .computeMessageSize(7, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_);
       }
       if (argumentsCase_ == 8) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_);
+          .computeMessageSize(8, (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_);
+      }
+      if (argumentsCase_ == 9) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_);
+      }
+      if (argumentsCase_ == 10) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1108,14 +1264,22 @@ public final class Messages {
               .equals(other.getCameraControllerZoomArguments())) return false;
           break;
         case 6:
+          if (!getCameraControllerLinearZoomArguments()
+              .equals(other.getCameraControllerLinearZoomArguments())) return false;
+          break;
+        case 7:
           if (!getCameraControllerFocusAutomaticallyArguments()
               .equals(other.getCameraControllerFocusAutomaticallyArguments())) return false;
           break;
-        case 7:
+        case 8:
           if (!getCameraControllerFocusManuallyArguments()
               .equals(other.getCameraControllerFocusManuallyArguments())) return false;
           break;
-        case 8:
+        case 9:
+          if (!getCameraControllerCaptureToMemoryArguments()
+              .equals(other.getCameraControllerCaptureToMemoryArguments())) return false;
+          break;
+        case 10:
           if (!getImageProxyCloseArguments()
               .equals(other.getImageProxyCloseArguments())) return false;
           break;
@@ -1153,14 +1317,22 @@ public final class Messages {
           hash = (53 * hash) + getCameraControllerZoomArguments().hashCode();
           break;
         case 6:
+          hash = (37 * hash) + CAMERA_CONTROLLER_LINEAR_ZOOM_ARGUMENTS_FIELD_NUMBER;
+          hash = (53 * hash) + getCameraControllerLinearZoomArguments().hashCode();
+          break;
+        case 7:
           hash = (37 * hash) + CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS_FIELD_NUMBER;
           hash = (53 * hash) + getCameraControllerFocusAutomaticallyArguments().hashCode();
           break;
-        case 7:
+        case 8:
           hash = (37 * hash) + CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS_FIELD_NUMBER;
           hash = (53 * hash) + getCameraControllerFocusManuallyArguments().hashCode();
           break;
-        case 8:
+        case 9:
+          hash = (37 * hash) + CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS_FIELD_NUMBER;
+          hash = (53 * hash) + getCameraControllerCaptureToMemoryArguments().hashCode();
+          break;
+        case 10:
           hash = (37 * hash) + IMAGE_PROXY_CLOSE_ARGUMENTS_FIELD_NUMBER;
           hash = (53 * hash) + getImageProxyCloseArguments().hashCode();
           break;
@@ -1360,20 +1532,34 @@ public final class Messages {
           }
         }
         if (argumentsCase_ == 6) {
+          if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+            result.arguments_ = arguments_;
+          } else {
+            result.arguments_ = cameraControllerLinearZoomArgumentsBuilder_.build();
+          }
+        }
+        if (argumentsCase_ == 7) {
           if (cameraControllerFocusAutomaticallyArgumentsBuilder_ == null) {
             result.arguments_ = arguments_;
           } else {
             result.arguments_ = cameraControllerFocusAutomaticallyArgumentsBuilder_.build();
           }
         }
-        if (argumentsCase_ == 7) {
+        if (argumentsCase_ == 8) {
           if (cameraControllerFocusManuallyArgumentsBuilder_ == null) {
             result.arguments_ = arguments_;
           } else {
             result.arguments_ = cameraControllerFocusManuallyArgumentsBuilder_.build();
           }
         }
-        if (argumentsCase_ == 8) {
+        if (argumentsCase_ == 9) {
+          if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+            result.arguments_ = arguments_;
+          } else {
+            result.arguments_ = cameraControllerCaptureToMemoryArgumentsBuilder_.build();
+          }
+        }
+        if (argumentsCase_ == 10) {
           if (imageProxyCloseArgumentsBuilder_ == null) {
             result.arguments_ = arguments_;
           } else {
@@ -1449,12 +1635,20 @@ public final class Messages {
             mergeCameraControllerZoomArguments(other.getCameraControllerZoomArguments());
             break;
           }
+          case CAMERA_CONTROLLER_LINEAR_ZOOM_ARGUMENTS: {
+            mergeCameraControllerLinearZoomArguments(other.getCameraControllerLinearZoomArguments());
+            break;
+          }
           case CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY_ARGUMENTS: {
             mergeCameraControllerFocusAutomaticallyArguments(other.getCameraControllerFocusAutomaticallyArguments());
             break;
           }
           case CAMERA_CONTROLLER_FOCUS_MANUALLY_ARGUMENTS: {
             mergeCameraControllerFocusManuallyArguments(other.getCameraControllerFocusManuallyArguments());
+            break;
+          }
+          case CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS: {
+            mergeCameraControllerCaptureToMemoryArguments(other.getCameraControllerCaptureToMemoryArguments());
             break;
           }
           case IMAGE_PROXY_CLOSE_ARGUMENTS: {
@@ -2132,35 +2326,177 @@ public final class Messages {
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder> cameraControllerLinearZoomArgumentsBuilder_;
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       * @return Whether the cameraControllerLinearZoomArguments field is set.
+       */
+      @java.lang.Override
+      public boolean hasCameraControllerLinearZoomArguments() {
+        return argumentsCase_ == 6;
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       * @return The cameraControllerLinearZoomArguments.
+       */
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments getCameraControllerLinearZoomArguments() {
+        if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 6) {
+            return (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_;
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+        } else {
+          if (argumentsCase_ == 6) {
+            return cameraControllerLinearZoomArgumentsBuilder_.getMessage();
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      public Builder setCameraControllerLinearZoomArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments value) {
+        if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          arguments_ = value;
+          onChanged();
+        } else {
+          cameraControllerLinearZoomArgumentsBuilder_.setMessage(value);
+        }
+        argumentsCase_ = 6;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      public Builder setCameraControllerLinearZoomArguments(
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder builderForValue) {
+        if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+          arguments_ = builderForValue.build();
+          onChanged();
+        } else {
+          cameraControllerLinearZoomArgumentsBuilder_.setMessage(builderForValue.build());
+        }
+        argumentsCase_ = 6;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      public Builder mergeCameraControllerLinearZoomArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments value) {
+        if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 6 &&
+              arguments_ != dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance()) {
+            arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.newBuilder((dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            arguments_ = value;
+          }
+          onChanged();
+        } else {
+          if (argumentsCase_ == 6) {
+            cameraControllerLinearZoomArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerLinearZoomArgumentsBuilder_.setMessage(value);
+          }
+        }
+        argumentsCase_ = 6;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      public Builder clearCameraControllerLinearZoomArguments() {
+        if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 6) {
+            argumentsCase_ = 0;
+            arguments_ = null;
+            onChanged();
+          }
+        } else {
+          if (argumentsCase_ == 6) {
+            argumentsCase_ = 0;
+            arguments_ = null;
+          }
+          cameraControllerLinearZoomArgumentsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder getCameraControllerLinearZoomArgumentsBuilder() {
+        return getCameraControllerLinearZoomArgumentsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder getCameraControllerLinearZoomArgumentsOrBuilder() {
+        if ((argumentsCase_ == 6) && (cameraControllerLinearZoomArgumentsBuilder_ != null)) {
+          return cameraControllerLinearZoomArgumentsBuilder_.getMessageOrBuilder();
+        } else {
+          if (argumentsCase_ == 6) {
+            return (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_;
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder> 
+          getCameraControllerLinearZoomArgumentsFieldBuilder() {
+        if (cameraControllerLinearZoomArgumentsBuilder_ == null) {
+          if (!(argumentsCase_ == 6)) {
+            arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+          }
+          cameraControllerLinearZoomArgumentsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder>(
+                  (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) arguments_,
+                  getParentForChildren(),
+                  isClean());
+          arguments_ = null;
+        }
+        argumentsCase_ = 6;
+        onChanged();;
+        return cameraControllerLinearZoomArgumentsBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder> cameraControllerFocusAutomaticallyArgumentsBuilder_;
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        * @return Whether the cameraControllerFocusAutomaticallyArguments field is set.
        */
       @java.lang.Override
       public boolean hasCameraControllerFocusAutomaticallyArguments() {
-        return argumentsCase_ == 6;
+        return argumentsCase_ == 7;
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        * @return The cameraControllerFocusAutomaticallyArguments.
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments getCameraControllerFocusAutomaticallyArguments() {
         if (cameraControllerFocusAutomaticallyArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 6) {
+          if (argumentsCase_ == 7) {
             return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_;
           }
           return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance();
         } else {
-          if (argumentsCase_ == 6) {
+          if (argumentsCase_ == 7) {
             return cameraControllerFocusAutomaticallyArgumentsBuilder_.getMessage();
           }
           return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance();
         }
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       public Builder setCameraControllerFocusAutomaticallyArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments value) {
         if (cameraControllerFocusAutomaticallyArgumentsBuilder_ == null) {
@@ -2172,11 +2508,11 @@ public final class Messages {
         } else {
           cameraControllerFocusAutomaticallyArgumentsBuilder_.setMessage(value);
         }
-        argumentsCase_ = 6;
+        argumentsCase_ = 7;
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       public Builder setCameraControllerFocusAutomaticallyArguments(
           dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder builderForValue) {
@@ -2186,15 +2522,15 @@ public final class Messages {
         } else {
           cameraControllerFocusAutomaticallyArgumentsBuilder_.setMessage(builderForValue.build());
         }
-        argumentsCase_ = 6;
+        argumentsCase_ = 7;
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       public Builder mergeCameraControllerFocusAutomaticallyArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments value) {
         if (cameraControllerFocusAutomaticallyArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 6 &&
+          if (argumentsCase_ == 7 &&
               arguments_ != dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance()) {
             arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.newBuilder((dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_)
                 .mergeFrom(value).buildPartial();
@@ -2203,27 +2539,27 @@ public final class Messages {
           }
           onChanged();
         } else {
-          if (argumentsCase_ == 6) {
+          if (argumentsCase_ == 7) {
             cameraControllerFocusAutomaticallyArgumentsBuilder_.mergeFrom(value);
           } else {
             cameraControllerFocusAutomaticallyArgumentsBuilder_.setMessage(value);
           }
         }
-        argumentsCase_ = 6;
+        argumentsCase_ = 7;
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       public Builder clearCameraControllerFocusAutomaticallyArguments() {
         if (cameraControllerFocusAutomaticallyArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 6) {
+          if (argumentsCase_ == 7) {
             argumentsCase_ = 0;
             arguments_ = null;
             onChanged();
           }
         } else {
-          if (argumentsCase_ == 6) {
+          if (argumentsCase_ == 7) {
             argumentsCase_ = 0;
             arguments_ = null;
           }
@@ -2232,33 +2568,33 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder getCameraControllerFocusAutomaticallyArgumentsBuilder() {
         return getCameraControllerFocusAutomaticallyArgumentsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder getCameraControllerFocusAutomaticallyArgumentsOrBuilder() {
-        if ((argumentsCase_ == 6) && (cameraControllerFocusAutomaticallyArgumentsBuilder_ != null)) {
+        if ((argumentsCase_ == 7) && (cameraControllerFocusAutomaticallyArgumentsBuilder_ != null)) {
           return cameraControllerFocusAutomaticallyArgumentsBuilder_.getMessageOrBuilder();
         } else {
-          if (argumentsCase_ == 6) {
+          if (argumentsCase_ == 7) {
             return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments) arguments_;
           }
           return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance();
         }
       }
       /**
-       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+       * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder> 
           getCameraControllerFocusAutomaticallyArgumentsFieldBuilder() {
         if (cameraControllerFocusAutomaticallyArgumentsBuilder_ == null) {
-          if (!(argumentsCase_ == 6)) {
+          if (!(argumentsCase_ == 7)) {
             arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments.getDefaultInstance();
           }
           cameraControllerFocusAutomaticallyArgumentsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -2268,7 +2604,7 @@ public final class Messages {
                   isClean());
           arguments_ = null;
         }
-        argumentsCase_ = 6;
+        argumentsCase_ = 7;
         onChanged();;
         return cameraControllerFocusAutomaticallyArgumentsBuilder_;
       }
@@ -2276,33 +2612,33 @@ public final class Messages {
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArgumentsOrBuilder> cameraControllerFocusManuallyArgumentsBuilder_;
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        * @return Whether the cameraControllerFocusManuallyArguments field is set.
        */
       @java.lang.Override
       public boolean hasCameraControllerFocusManuallyArguments() {
-        return argumentsCase_ == 7;
+        return argumentsCase_ == 8;
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        * @return The cameraControllerFocusManuallyArguments.
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments getCameraControllerFocusManuallyArguments() {
         if (cameraControllerFocusManuallyArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 7) {
+          if (argumentsCase_ == 8) {
             return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_;
           }
           return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance();
         } else {
-          if (argumentsCase_ == 7) {
+          if (argumentsCase_ == 8) {
             return cameraControllerFocusManuallyArgumentsBuilder_.getMessage();
           }
           return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance();
         }
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       public Builder setCameraControllerFocusManuallyArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments value) {
         if (cameraControllerFocusManuallyArgumentsBuilder_ == null) {
@@ -2314,11 +2650,11 @@ public final class Messages {
         } else {
           cameraControllerFocusManuallyArgumentsBuilder_.setMessage(value);
         }
-        argumentsCase_ = 7;
+        argumentsCase_ = 8;
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       public Builder setCameraControllerFocusManuallyArguments(
           dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder builderForValue) {
@@ -2328,15 +2664,15 @@ public final class Messages {
         } else {
           cameraControllerFocusManuallyArgumentsBuilder_.setMessage(builderForValue.build());
         }
-        argumentsCase_ = 7;
+        argumentsCase_ = 8;
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       public Builder mergeCameraControllerFocusManuallyArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments value) {
         if (cameraControllerFocusManuallyArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 7 &&
+          if (argumentsCase_ == 8 &&
               arguments_ != dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance()) {
             arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.newBuilder((dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_)
                 .mergeFrom(value).buildPartial();
@@ -2345,27 +2681,27 @@ public final class Messages {
           }
           onChanged();
         } else {
-          if (argumentsCase_ == 7) {
+          if (argumentsCase_ == 8) {
             cameraControllerFocusManuallyArgumentsBuilder_.mergeFrom(value);
           } else {
             cameraControllerFocusManuallyArgumentsBuilder_.setMessage(value);
           }
         }
-        argumentsCase_ = 7;
+        argumentsCase_ = 8;
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       public Builder clearCameraControllerFocusManuallyArguments() {
         if (cameraControllerFocusManuallyArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 7) {
+          if (argumentsCase_ == 8) {
             argumentsCase_ = 0;
             arguments_ = null;
             onChanged();
           }
         } else {
-          if (argumentsCase_ == 7) {
+          if (argumentsCase_ == 8) {
             argumentsCase_ = 0;
             arguments_ = null;
           }
@@ -2374,33 +2710,33 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder getCameraControllerFocusManuallyArgumentsBuilder() {
         return getCameraControllerFocusManuallyArgumentsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArgumentsOrBuilder getCameraControllerFocusManuallyArgumentsOrBuilder() {
-        if ((argumentsCase_ == 7) && (cameraControllerFocusManuallyArgumentsBuilder_ != null)) {
+        if ((argumentsCase_ == 8) && (cameraControllerFocusManuallyArgumentsBuilder_ != null)) {
           return cameraControllerFocusManuallyArgumentsBuilder_.getMessageOrBuilder();
         } else {
-          if (argumentsCase_ == 7) {
+          if (argumentsCase_ == 8) {
             return (dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments) arguments_;
           }
           return dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance();
         }
       }
       /**
-       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+       * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArgumentsOrBuilder> 
           getCameraControllerFocusManuallyArgumentsFieldBuilder() {
         if (cameraControllerFocusManuallyArgumentsBuilder_ == null) {
-          if (!(argumentsCase_ == 7)) {
+          if (!(argumentsCase_ == 8)) {
             arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments.getDefaultInstance();
           }
           cameraControllerFocusManuallyArgumentsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -2410,41 +2746,183 @@ public final class Messages {
                   isClean());
           arguments_ = null;
         }
-        argumentsCase_ = 7;
+        argumentsCase_ = 8;
         onChanged();;
         return cameraControllerFocusManuallyArgumentsBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder> cameraControllerCaptureToMemoryArgumentsBuilder_;
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+       */
+      @java.lang.Override
+      public boolean hasCameraControllerCaptureToMemoryArguments() {
+        return argumentsCase_ == 9;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       * @return The cameraControllerCaptureToMemoryArguments.
+       */
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments getCameraControllerCaptureToMemoryArguments() {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 9) {
+            return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_;
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+        } else {
+          if (argumentsCase_ == 9) {
+            return cameraControllerCaptureToMemoryArgumentsBuilder_.getMessage();
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      public Builder setCameraControllerCaptureToMemoryArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments value) {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          arguments_ = value;
+          onChanged();
+        } else {
+          cameraControllerCaptureToMemoryArgumentsBuilder_.setMessage(value);
+        }
+        argumentsCase_ = 9;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      public Builder setCameraControllerCaptureToMemoryArguments(
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder builderForValue) {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          arguments_ = builderForValue.build();
+          onChanged();
+        } else {
+          cameraControllerCaptureToMemoryArgumentsBuilder_.setMessage(builderForValue.build());
+        }
+        argumentsCase_ = 9;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      public Builder mergeCameraControllerCaptureToMemoryArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments value) {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 9 &&
+              arguments_ != dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance()) {
+            arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.newBuilder((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            arguments_ = value;
+          }
+          onChanged();
+        } else {
+          if (argumentsCase_ == 9) {
+            cameraControllerCaptureToMemoryArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerCaptureToMemoryArgumentsBuilder_.setMessage(value);
+          }
+        }
+        argumentsCase_ = 9;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      public Builder clearCameraControllerCaptureToMemoryArguments() {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 9) {
+            argumentsCase_ = 0;
+            arguments_ = null;
+            onChanged();
+          }
+        } else {
+          if (argumentsCase_ == 9) {
+            argumentsCase_ = 0;
+            arguments_ = null;
+          }
+          cameraControllerCaptureToMemoryArgumentsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder getCameraControllerCaptureToMemoryArgumentsBuilder() {
+        return getCameraControllerCaptureToMemoryArgumentsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder getCameraControllerCaptureToMemoryArgumentsOrBuilder() {
+        if ((argumentsCase_ == 9) && (cameraControllerCaptureToMemoryArgumentsBuilder_ != null)) {
+          return cameraControllerCaptureToMemoryArgumentsBuilder_.getMessageOrBuilder();
+        } else {
+          if (argumentsCase_ == 9) {
+            return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_;
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder> 
+          getCameraControllerCaptureToMemoryArgumentsFieldBuilder() {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (!(argumentsCase_ == 9)) {
+            arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+          }
+          cameraControllerCaptureToMemoryArgumentsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder>(
+                  (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) arguments_,
+                  getParentForChildren(),
+                  isClean());
+          arguments_ = null;
+        }
+        argumentsCase_ = 9;
+        onChanged();;
+        return cameraControllerCaptureToMemoryArgumentsBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments, dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArgumentsOrBuilder> imageProxyCloseArgumentsBuilder_;
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        * @return Whether the imageProxyCloseArguments field is set.
        */
       @java.lang.Override
       public boolean hasImageProxyCloseArguments() {
-        return argumentsCase_ == 8;
+        return argumentsCase_ == 10;
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        * @return The imageProxyCloseArguments.
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments getImageProxyCloseArguments() {
         if (imageProxyCloseArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 8) {
+          if (argumentsCase_ == 10) {
             return (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_;
           }
           return dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance();
         } else {
-          if (argumentsCase_ == 8) {
+          if (argumentsCase_ == 10) {
             return imageProxyCloseArgumentsBuilder_.getMessage();
           }
           return dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance();
         }
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       public Builder setImageProxyCloseArguments(dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments value) {
         if (imageProxyCloseArgumentsBuilder_ == null) {
@@ -2456,11 +2934,11 @@ public final class Messages {
         } else {
           imageProxyCloseArgumentsBuilder_.setMessage(value);
         }
-        argumentsCase_ = 8;
+        argumentsCase_ = 10;
         return this;
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       public Builder setImageProxyCloseArguments(
           dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.Builder builderForValue) {
@@ -2470,15 +2948,15 @@ public final class Messages {
         } else {
           imageProxyCloseArgumentsBuilder_.setMessage(builderForValue.build());
         }
-        argumentsCase_ = 8;
+        argumentsCase_ = 10;
         return this;
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       public Builder mergeImageProxyCloseArguments(dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments value) {
         if (imageProxyCloseArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 8 &&
+          if (argumentsCase_ == 10 &&
               arguments_ != dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance()) {
             arguments_ = dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.newBuilder((dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_)
                 .mergeFrom(value).buildPartial();
@@ -2487,27 +2965,27 @@ public final class Messages {
           }
           onChanged();
         } else {
-          if (argumentsCase_ == 8) {
+          if (argumentsCase_ == 10) {
             imageProxyCloseArgumentsBuilder_.mergeFrom(value);
           } else {
             imageProxyCloseArgumentsBuilder_.setMessage(value);
           }
         }
-        argumentsCase_ = 8;
+        argumentsCase_ = 10;
         return this;
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       public Builder clearImageProxyCloseArguments() {
         if (imageProxyCloseArgumentsBuilder_ == null) {
-          if (argumentsCase_ == 8) {
+          if (argumentsCase_ == 10) {
             argumentsCase_ = 0;
             arguments_ = null;
             onChanged();
           }
         } else {
-          if (argumentsCase_ == 8) {
+          if (argumentsCase_ == 10) {
             argumentsCase_ = 0;
             arguments_ = null;
           }
@@ -2516,33 +2994,33 @@ public final class Messages {
         return this;
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       public dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.Builder getImageProxyCloseArgumentsBuilder() {
         return getImageProxyCloseArgumentsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       @java.lang.Override
       public dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArgumentsOrBuilder getImageProxyCloseArgumentsOrBuilder() {
-        if ((argumentsCase_ == 8) && (imageProxyCloseArgumentsBuilder_ != null)) {
+        if ((argumentsCase_ == 10) && (imageProxyCloseArgumentsBuilder_ != null)) {
           return imageProxyCloseArgumentsBuilder_.getMessageOrBuilder();
         } else {
-          if (argumentsCase_ == 8) {
+          if (argumentsCase_ == 10) {
             return (dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments) arguments_;
           }
           return dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance();
         }
       }
       /**
-       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+       * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments, dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArgumentsOrBuilder> 
           getImageProxyCloseArgumentsFieldBuilder() {
         if (imageProxyCloseArgumentsBuilder_ == null) {
-          if (!(argumentsCase_ == 8)) {
+          if (!(argumentsCase_ == 10)) {
             arguments_ = dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments.getDefaultInstance();
           }
           imageProxyCloseArgumentsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
@@ -2552,7 +3030,7 @@ public final class Messages {
                   isClean());
           arguments_ = null;
         }
-        argumentsCase_ = 8;
+        argumentsCase_ = 10;
         onChanged();;
         return imageProxyCloseArgumentsBuilder_;
       }
@@ -5244,6 +5722,701 @@ public final class Messages {
 
   }
 
+  public interface CameraControllerLinearZoomCommandArgumentsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:messages.CameraControllerLinearZoomCommandArguments)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    boolean hasSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
+
+    /**
+     * <code>double value = 2;</code>
+     * @return The value.
+     */
+    double getValue();
+  }
+  /**
+   * Protobuf type {@code messages.CameraControllerLinearZoomCommandArguments}
+   */
+  public static final class CameraControllerLinearZoomCommandArguments extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:messages.CameraControllerLinearZoomCommandArguments)
+      CameraControllerLinearZoomCommandArgumentsOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CameraControllerLinearZoomCommandArguments.newBuilder() to construct.
+    private CameraControllerLinearZoomCommandArguments(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CameraControllerLinearZoomCommandArguments() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CameraControllerLinearZoomCommandArguments();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CameraControllerLinearZoomCommandArguments(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 17: {
+
+              value_ = input.readDouble();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerLinearZoomCommandArguments_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerLinearZoomCommandArguments_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder.class);
+    }
+
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    @java.lang.Override
+    public boolean hasSelector() {
+      return selector_ != null;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
+    }
+
+    public static final int VALUE_FIELD_NUMBER = 2;
+    private double value_;
+    /**
+     * <code>double value = 2;</code>
+     * @return The value.
+     */
+    @java.lang.Override
+    public double getValue() {
+      return value_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
+      }
+      if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
+        output.writeDouble(2, value_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
+      }
+      if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, value_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments)) {
+        return super.equals(obj);
+      }
+      dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) obj;
+
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
+      if (java.lang.Double.doubleToLongBits(getValue())
+          != java.lang.Double.doubleToLongBits(
+              other.getValue())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
+      hash = (37 * hash) + VALUE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getValue()));
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code messages.CameraControllerLinearZoomCommandArguments}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:messages.CameraControllerLinearZoomCommandArguments)
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArgumentsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerLinearZoomCommandArguments_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerLinearZoomCommandArguments_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.Builder.class);
+      }
+
+      // Construct using dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+        value_ = 0D;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerLinearZoomCommandArguments_descriptor;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments build() {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments buildPartial() {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments(this);
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
+        result.value_ = value_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) {
+          return mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments other) {
+        if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments.getDefaultInstance()) return this;
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
+        }
+        if (other.getValue() != 0D) {
+          setValue(other.getValue());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
+       */
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+        } else {
+          return selectorBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+        }
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
+      }
+
+      private double value_ ;
+      /**
+       * <code>double value = 2;</code>
+       * @return The value.
+       */
+      @java.lang.Override
+      public double getValue() {
+        return value_;
+      }
+      /**
+       * <code>double value = 2;</code>
+       * @param value The value to set.
+       * @return This builder for chaining.
+       */
+      public Builder setValue(double value) {
+        
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double value = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearValue() {
+        
+        value_ = 0D;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:messages.CameraControllerLinearZoomCommandArguments)
+    }
+
+    // @@protoc_insertion_point(class_scope:messages.CameraControllerLinearZoomCommandArguments)
+    private static final dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments();
+    }
+
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CameraControllerLinearZoomCommandArguments>
+        PARSER = new com.google.protobuf.AbstractParser<CameraControllerLinearZoomCommandArguments>() {
+      @java.lang.Override
+      public CameraControllerLinearZoomCommandArguments parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CameraControllerLinearZoomCommandArguments(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CameraControllerLinearZoomCommandArguments> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CameraControllerLinearZoomCommandArguments> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface CameraControllerFocusAutomaticallyCommandArgumentsOrBuilder extends
       // @@protoc_insertion_point(interface_extends:messages.CameraControllerFocusAutomaticallyCommandArguments)
       com.google.protobuf.MessageOrBuilder {
@@ -6778,6 +7951,629 @@ public final class Messages {
 
   }
 
+  public interface CameraControllerCaptureToMemoryCommandArgumentsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:messages.CameraControllerCaptureToMemoryCommandArguments)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    boolean hasSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector();
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder();
+  }
+  /**
+   * Protobuf type {@code messages.CameraControllerCaptureToMemoryCommandArguments}
+   */
+  public static final class CameraControllerCaptureToMemoryCommandArguments extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:messages.CameraControllerCaptureToMemoryCommandArguments)
+      CameraControllerCaptureToMemoryCommandArgumentsOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CameraControllerCaptureToMemoryCommandArguments.newBuilder() to construct.
+    private CameraControllerCaptureToMemoryCommandArguments(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CameraControllerCaptureToMemoryCommandArguments() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CameraControllerCaptureToMemoryCommandArguments();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CameraControllerCaptureToMemoryCommandArguments(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder subBuilder = null;
+              if (selector_ != null) {
+                subBuilder = selector_.toBuilder();
+              }
+              selector_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraSelector.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(selector_);
+                selector_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder.class);
+    }
+
+    public static final int SELECTOR_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return Whether the selector field is set.
+     */
+    @java.lang.Override
+    public boolean hasSelector() {
+      return selector_ != null;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     * @return The selector.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+      return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+    }
+    /**
+     * <code>.messages.CameraSelector selector = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+      return getSelector();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (selector_ != null) {
+        output.writeMessage(1, getSelector());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (selector_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getSelector());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments)) {
+        return super.equals(obj);
+      }
+      dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) obj;
+
+      if (hasSelector() != other.hasSelector()) return false;
+      if (hasSelector()) {
+        if (!getSelector()
+            .equals(other.getSelector())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSelector()) {
+        hash = (37 * hash) + SELECTOR_FIELD_NUMBER;
+        hash = (53 * hash) + getSelector().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code messages.CameraControllerCaptureToMemoryCommandArguments}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:messages.CameraControllerCaptureToMemoryCommandArguments)
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArgumentsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.Builder.class);
+      }
+
+      // Construct using dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_descriptor;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments build() {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments buildPartial() {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments(this);
+        if (selectorBuilder_ == null) {
+          result.selector_ = selector_;
+        } else {
+          result.selector_ = selectorBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) {
+          return mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments other) {
+        if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments.getDefaultInstance()) return this;
+        if (other.hasSelector()) {
+          mergeSelector(other.getSelector());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private dev.yanshouwang.camerax.messages.Messages.CameraSelector selector_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> selectorBuilder_;
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return Whether the selector field is set.
+       */
+      public boolean hasSelector() {
+        return selectorBuilder_ != null || selector_ != null;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       * @return The selector.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector getSelector() {
+        if (selectorBuilder_ == null) {
+          return selector_ == null ? dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+        } else {
+          return selectorBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          selector_ = value;
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder setSelector(
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder builderForValue) {
+        if (selectorBuilder_ == null) {
+          selector_ = builderForValue.build();
+          onChanged();
+        } else {
+          selectorBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder mergeSelector(dev.yanshouwang.camerax.messages.Messages.CameraSelector value) {
+        if (selectorBuilder_ == null) {
+          if (selector_ != null) {
+            selector_ =
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder(selector_).mergeFrom(value).buildPartial();
+          } else {
+            selector_ = value;
+          }
+          onChanged();
+        } else {
+          selectorBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public Builder clearSelector() {
+        if (selectorBuilder_ == null) {
+          selector_ = null;
+          onChanged();
+        } else {
+          selector_ = null;
+          selectorBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder getSelectorBuilder() {
+        
+        onChanged();
+        return getSelectorFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder getSelectorOrBuilder() {
+        if (selectorBuilder_ != null) {
+          return selectorBuilder_.getMessageOrBuilder();
+        } else {
+          return selector_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector.getDefaultInstance() : selector_;
+        }
+      }
+      /**
+       * <code>.messages.CameraSelector selector = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder> 
+          getSelectorFieldBuilder() {
+        if (selectorBuilder_ == null) {
+          selectorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraSelector, dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder, dev.yanshouwang.camerax.messages.Messages.CameraSelectorOrBuilder>(
+                  getSelector(),
+                  getParentForChildren(),
+                  isClean());
+          selector_ = null;
+        }
+        return selectorBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:messages.CameraControllerCaptureToMemoryCommandArguments)
+    }
+
+    // @@protoc_insertion_point(class_scope:messages.CameraControllerCaptureToMemoryCommandArguments)
+    private static final dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments();
+    }
+
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CameraControllerCaptureToMemoryCommandArguments>
+        PARSER = new com.google.protobuf.AbstractParser<CameraControllerCaptureToMemoryCommandArguments>() {
+      @java.lang.Override
+      public CameraControllerCaptureToMemoryCommandArguments parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CameraControllerCaptureToMemoryCommandArguments(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CameraControllerCaptureToMemoryCommandArguments> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CameraControllerCaptureToMemoryCommandArguments> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ImageProxyCloseCommandArgumentsOrBuilder extends
       // @@protoc_insertion_point(interface_extends:messages.ImageProxyCloseCommandArguments)
       com.google.protobuf.MessageOrBuilder {
@@ -7600,6 +9396,21 @@ public final class Messages {
      */
     dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArgumentsOrBuilder getCameraControllerBindArgumentsOrBuilder();
 
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+     */
+    boolean hasCameraControllerCaptureToMemoryArguments();
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     * @return The cameraControllerCaptureToMemoryArguments.
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments getCameraControllerCaptureToMemoryArguments();
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder getCameraControllerCaptureToMemoryArgumentsOrBuilder();
+
     public dev.yanshouwang.camerax.messages.Messages.Reply.ArgumentsCase getArgumentsCase();
   }
   /**
@@ -7689,6 +9500,20 @@ public final class Messages {
               argumentsCase_ = 3;
               break;
             }
+            case 34: {
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder subBuilder = null;
+              if (argumentsCase_ == 4) {
+                subBuilder = ((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_).toBuilder();
+              }
+              arguments_ =
+                  input.readMessage(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_);
+                arguments_ = subBuilder.buildPartial();
+              }
+              argumentsCase_ = 4;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -7731,6 +9556,7 @@ public final class Messages {
       GET_QUARTER_TURNS_ARGUMENTS(1),
       CAMERA_CONTROLLER_REQUEST_PERMISSION_ARGUMENTS(2),
       CAMERA_CONTROLLER_BIND_ARGUMENTS(3),
+      CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS(4),
       ARGUMENTS_NOT_SET(0);
       private final int value;
       private ArgumentsCase(int value) {
@@ -7751,6 +9577,7 @@ public final class Messages {
           case 1: return GET_QUARTER_TURNS_ARGUMENTS;
           case 2: return CAMERA_CONTROLLER_REQUEST_PERMISSION_ARGUMENTS;
           case 3: return CAMERA_CONTROLLER_BIND_ARGUMENTS;
+          case 4: return CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS;
           case 0: return ARGUMENTS_NOT_SET;
           default: return null;
         }
@@ -7859,6 +9686,37 @@ public final class Messages {
       return dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.getDefaultInstance();
     }
 
+    public static final int CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS_FIELD_NUMBER = 4;
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+     */
+    @java.lang.Override
+    public boolean hasCameraControllerCaptureToMemoryArguments() {
+      return argumentsCase_ == 4;
+    }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     * @return The cameraControllerCaptureToMemoryArguments.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments getCameraControllerCaptureToMemoryArguments() {
+      if (argumentsCase_ == 4) {
+         return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_;
+      }
+      return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+    }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder getCameraControllerCaptureToMemoryArgumentsOrBuilder() {
+      if (argumentsCase_ == 4) {
+         return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_;
+      }
+      return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -7882,6 +9740,9 @@ public final class Messages {
       if (argumentsCase_ == 3) {
         output.writeMessage(3, (dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments) arguments_);
       }
+      if (argumentsCase_ == 4) {
+        output.writeMessage(4, (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -7902,6 +9763,10 @@ public final class Messages {
       if (argumentsCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, (dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments) arguments_);
+      }
+      if (argumentsCase_ == 4) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -7932,6 +9797,10 @@ public final class Messages {
           if (!getCameraControllerBindArguments()
               .equals(other.getCameraControllerBindArguments())) return false;
           break;
+        case 4:
+          if (!getCameraControllerCaptureToMemoryArguments()
+              .equals(other.getCameraControllerCaptureToMemoryArguments())) return false;
+          break;
         case 0:
         default:
       }
@@ -7958,6 +9827,10 @@ public final class Messages {
         case 3:
           hash = (37 * hash) + CAMERA_CONTROLLER_BIND_ARGUMENTS_FIELD_NUMBER;
           hash = (53 * hash) + getCameraControllerBindArguments().hashCode();
+          break;
+        case 4:
+          hash = (37 * hash) + CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS_FIELD_NUMBER;
+          hash = (53 * hash) + getCameraControllerCaptureToMemoryArguments().hashCode();
           break;
         case 0:
         default:
@@ -8144,6 +10017,13 @@ public final class Messages {
             result.arguments_ = cameraControllerBindArgumentsBuilder_.build();
           }
         }
+        if (argumentsCase_ == 4) {
+          if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+            result.arguments_ = arguments_;
+          } else {
+            result.arguments_ = cameraControllerCaptureToMemoryArgumentsBuilder_.build();
+          }
+        }
         result.argumentsCase_ = argumentsCase_;
         onBuilt();
         return result;
@@ -8204,6 +10084,10 @@ public final class Messages {
           }
           case CAMERA_CONTROLLER_BIND_ARGUMENTS: {
             mergeCameraControllerBindArguments(other.getCameraControllerBindArguments());
+            break;
+          }
+          case CAMERA_CONTROLLER_CAPTURE_TO_MEMORY_ARGUMENTS: {
+            mergeCameraControllerCaptureToMemoryArguments(other.getCameraControllerCaptureToMemoryArguments());
             break;
           }
           case ARGUMENTS_NOT_SET: {
@@ -8678,6 +10562,148 @@ public final class Messages {
         argumentsCase_ = 3;
         onChanged();;
         return cameraControllerBindArgumentsBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder> cameraControllerCaptureToMemoryArgumentsBuilder_;
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+       */
+      @java.lang.Override
+      public boolean hasCameraControllerCaptureToMemoryArguments() {
+        return argumentsCase_ == 4;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       * @return The cameraControllerCaptureToMemoryArguments.
+       */
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments getCameraControllerCaptureToMemoryArguments() {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 4) {
+            return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_;
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+        } else {
+          if (argumentsCase_ == 4) {
+            return cameraControllerCaptureToMemoryArgumentsBuilder_.getMessage();
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      public Builder setCameraControllerCaptureToMemoryArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments value) {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          arguments_ = value;
+          onChanged();
+        } else {
+          cameraControllerCaptureToMemoryArgumentsBuilder_.setMessage(value);
+        }
+        argumentsCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      public Builder setCameraControllerCaptureToMemoryArguments(
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder builderForValue) {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          arguments_ = builderForValue.build();
+          onChanged();
+        } else {
+          cameraControllerCaptureToMemoryArgumentsBuilder_.setMessage(builderForValue.build());
+        }
+        argumentsCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      public Builder mergeCameraControllerCaptureToMemoryArguments(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments value) {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 4 &&
+              arguments_ != dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance()) {
+            arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.newBuilder((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            arguments_ = value;
+          }
+          onChanged();
+        } else {
+          if (argumentsCase_ == 4) {
+            cameraControllerCaptureToMemoryArgumentsBuilder_.mergeFrom(value);
+          } else {
+            cameraControllerCaptureToMemoryArgumentsBuilder_.setMessage(value);
+          }
+        }
+        argumentsCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      public Builder clearCameraControllerCaptureToMemoryArguments() {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (argumentsCase_ == 4) {
+            argumentsCase_ = 0;
+            arguments_ = null;
+            onChanged();
+          }
+        } else {
+          if (argumentsCase_ == 4) {
+            argumentsCase_ = 0;
+            arguments_ = null;
+          }
+          cameraControllerCaptureToMemoryArgumentsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder getCameraControllerCaptureToMemoryArgumentsBuilder() {
+        return getCameraControllerCaptureToMemoryArgumentsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder getCameraControllerCaptureToMemoryArgumentsOrBuilder() {
+        if ((argumentsCase_ == 4) && (cameraControllerCaptureToMemoryArgumentsBuilder_ != null)) {
+          return cameraControllerCaptureToMemoryArgumentsBuilder_.getMessageOrBuilder();
+        } else {
+          if (argumentsCase_ == 4) {
+            return (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_;
+          }
+          return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder> 
+          getCameraControllerCaptureToMemoryArgumentsFieldBuilder() {
+        if (cameraControllerCaptureToMemoryArgumentsBuilder_ == null) {
+          if (!(argumentsCase_ == 4)) {
+            arguments_ = dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+          }
+          cameraControllerCaptureToMemoryArgumentsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder>(
+                  (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) arguments_,
+                  getParentForChildren(),
+                  isClean());
+          arguments_ = null;
+        }
+        argumentsCase_ = 4;
+        onChanged();;
+        return cameraControllerCaptureToMemoryArgumentsBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -10331,6 +12357,629 @@ public final class Messages {
 
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CameraControllerCaptureToMemoryReplyArgumentsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:messages.CameraControllerCaptureToMemoryReplyArguments)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.messages.ImageProxy imageProxy = 1;</code>
+     * @return Whether the imageProxy field is set.
+     */
+    boolean hasImageProxy();
+    /**
+     * <code>.messages.ImageProxy imageProxy = 1;</code>
+     * @return The imageProxy.
+     */
+    dev.yanshouwang.camerax.messages.Messages.ImageProxy getImageProxy();
+    /**
+     * <code>.messages.ImageProxy imageProxy = 1;</code>
+     */
+    dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder getImageProxyOrBuilder();
+  }
+  /**
+   * Protobuf type {@code messages.CameraControllerCaptureToMemoryReplyArguments}
+   */
+  public static final class CameraControllerCaptureToMemoryReplyArguments extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:messages.CameraControllerCaptureToMemoryReplyArguments)
+      CameraControllerCaptureToMemoryReplyArgumentsOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use CameraControllerCaptureToMemoryReplyArguments.newBuilder() to construct.
+    private CameraControllerCaptureToMemoryReplyArguments(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CameraControllerCaptureToMemoryReplyArguments() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CameraControllerCaptureToMemoryReplyArguments();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CameraControllerCaptureToMemoryReplyArguments(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder subBuilder = null;
+              if (imageProxy_ != null) {
+                subBuilder = imageProxy_.toBuilder();
+              }
+              imageProxy_ = input.readMessage(dev.yanshouwang.camerax.messages.Messages.ImageProxy.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(imageProxy_);
+                imageProxy_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder.class);
+    }
+
+    public static final int IMAGEPROXY_FIELD_NUMBER = 1;
+    private dev.yanshouwang.camerax.messages.Messages.ImageProxy imageProxy_;
+    /**
+     * <code>.messages.ImageProxy imageProxy = 1;</code>
+     * @return Whether the imageProxy field is set.
+     */
+    @java.lang.Override
+    public boolean hasImageProxy() {
+      return imageProxy_ != null;
+    }
+    /**
+     * <code>.messages.ImageProxy imageProxy = 1;</code>
+     * @return The imageProxy.
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.ImageProxy getImageProxy() {
+      return imageProxy_ == null ? dev.yanshouwang.camerax.messages.Messages.ImageProxy.getDefaultInstance() : imageProxy_;
+    }
+    /**
+     * <code>.messages.ImageProxy imageProxy = 1;</code>
+     */
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder getImageProxyOrBuilder() {
+      return getImageProxy();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (imageProxy_ != null) {
+        output.writeMessage(1, getImageProxy());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (imageProxy_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getImageProxy());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments)) {
+        return super.equals(obj);
+      }
+      dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments other = (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) obj;
+
+      if (hasImageProxy() != other.hasImageProxy()) return false;
+      if (hasImageProxy()) {
+        if (!getImageProxy()
+            .equals(other.getImageProxy())) return false;
+      }
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasImageProxy()) {
+        hash = (37 * hash) + IMAGEPROXY_FIELD_NUMBER;
+        hash = (53 * hash) + getImageProxy().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code messages.CameraControllerCaptureToMemoryReplyArguments}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:messages.CameraControllerCaptureToMemoryReplyArguments)
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArgumentsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.class, dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.Builder.class);
+      }
+
+      // Construct using dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (imageProxyBuilder_ == null) {
+          imageProxy_ = null;
+        } else {
+          imageProxy_ = null;
+          imageProxyBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_descriptor;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments getDefaultInstanceForType() {
+        return dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments build() {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments buildPartial() {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments result = new dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments(this);
+        if (imageProxyBuilder_ == null) {
+          result.imageProxy_ = imageProxy_;
+        } else {
+          result.imageProxy_ = imageProxyBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) {
+          return mergeFrom((dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments other) {
+        if (other == dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments.getDefaultInstance()) return this;
+        if (other.hasImageProxy()) {
+          mergeImageProxy(other.getImageProxy());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private dev.yanshouwang.camerax.messages.Messages.ImageProxy imageProxy_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.ImageProxy, dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder> imageProxyBuilder_;
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       * @return Whether the imageProxy field is set.
+       */
+      public boolean hasImageProxy() {
+        return imageProxyBuilder_ != null || imageProxy_ != null;
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       * @return The imageProxy.
+       */
+      public dev.yanshouwang.camerax.messages.Messages.ImageProxy getImageProxy() {
+        if (imageProxyBuilder_ == null) {
+          return imageProxy_ == null ? dev.yanshouwang.camerax.messages.Messages.ImageProxy.getDefaultInstance() : imageProxy_;
+        } else {
+          return imageProxyBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      public Builder setImageProxy(dev.yanshouwang.camerax.messages.Messages.ImageProxy value) {
+        if (imageProxyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          imageProxy_ = value;
+          onChanged();
+        } else {
+          imageProxyBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      public Builder setImageProxy(
+          dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder builderForValue) {
+        if (imageProxyBuilder_ == null) {
+          imageProxy_ = builderForValue.build();
+          onChanged();
+        } else {
+          imageProxyBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      public Builder mergeImageProxy(dev.yanshouwang.camerax.messages.Messages.ImageProxy value) {
+        if (imageProxyBuilder_ == null) {
+          if (imageProxy_ != null) {
+            imageProxy_ =
+              dev.yanshouwang.camerax.messages.Messages.ImageProxy.newBuilder(imageProxy_).mergeFrom(value).buildPartial();
+          } else {
+            imageProxy_ = value;
+          }
+          onChanged();
+        } else {
+          imageProxyBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      public Builder clearImageProxy() {
+        if (imageProxyBuilder_ == null) {
+          imageProxy_ = null;
+          onChanged();
+        } else {
+          imageProxy_ = null;
+          imageProxyBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder getImageProxyBuilder() {
+        
+        onChanged();
+        return getImageProxyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      public dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder getImageProxyOrBuilder() {
+        if (imageProxyBuilder_ != null) {
+          return imageProxyBuilder_.getMessageOrBuilder();
+        } else {
+          return imageProxy_ == null ?
+              dev.yanshouwang.camerax.messages.Messages.ImageProxy.getDefaultInstance() : imageProxy_;
+        }
+      }
+      /**
+       * <code>.messages.ImageProxy imageProxy = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          dev.yanshouwang.camerax.messages.Messages.ImageProxy, dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder> 
+          getImageProxyFieldBuilder() {
+        if (imageProxyBuilder_ == null) {
+          imageProxyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              dev.yanshouwang.camerax.messages.Messages.ImageProxy, dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder>(
+                  getImageProxy(),
+                  getParentForChildren(),
+                  isClean());
+          imageProxy_ = null;
+        }
+        return imageProxyBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:messages.CameraControllerCaptureToMemoryReplyArguments)
+    }
+
+    // @@protoc_insertion_point(class_scope:messages.CameraControllerCaptureToMemoryReplyArguments)
+    private static final dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments();
+    }
+
+    public static dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CameraControllerCaptureToMemoryReplyArguments>
+        PARSER = new com.google.protobuf.AbstractParser<CameraControllerCaptureToMemoryReplyArguments>() {
+      @java.lang.Override
+      public CameraControllerCaptureToMemoryReplyArguments parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CameraControllerCaptureToMemoryReplyArguments(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CameraControllerCaptureToMemoryReplyArguments> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CameraControllerCaptureToMemoryReplyArguments> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -13927,6 +16576,12 @@ public final class Messages {
      * @return The height.
      */
     int getHeight();
+
+    /**
+     * <code>int32 rotationDegrees = 6;</code>
+     * @return The rotationDegrees.
+     */
+    int getRotationDegrees();
   }
   /**
    * Protobuf type {@code messages.ImageProxy}
@@ -14007,6 +16662,11 @@ public final class Messages {
             case 40: {
 
               height_ = input.readInt32();
+              break;
+            }
+            case 48: {
+
+              rotationDegrees_ = input.readInt32();
               break;
             }
             default: {
@@ -14140,6 +16800,17 @@ public final class Messages {
       return height_;
     }
 
+    public static final int ROTATIONDEGREES_FIELD_NUMBER = 6;
+    private int rotationDegrees_;
+    /**
+     * <code>int32 rotationDegrees = 6;</code>
+     * @return The rotationDegrees.
+     */
+    @java.lang.Override
+    public int getRotationDegrees() {
+      return rotationDegrees_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -14169,6 +16840,9 @@ public final class Messages {
       if (height_ != 0) {
         output.writeInt32(5, height_);
       }
+      if (rotationDegrees_ != 0) {
+        output.writeInt32(6, rotationDegrees_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -14196,6 +16870,10 @@ public final class Messages {
       if (height_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, height_);
+      }
+      if (rotationDegrees_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, rotationDegrees_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -14225,6 +16903,8 @@ public final class Messages {
           != other.getWidth()) return false;
       if (getHeight()
           != other.getHeight()) return false;
+      if (getRotationDegrees()
+          != other.getRotationDegrees()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -14248,6 +16928,8 @@ public final class Messages {
       hash = (53 * hash) + getWidth();
       hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
       hash = (53 * hash) + getHeight();
+      hash = (37 * hash) + ROTATIONDEGREES_FIELD_NUMBER;
+      hash = (53 * hash) + getRotationDegrees();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -14395,6 +17077,8 @@ public final class Messages {
 
         height_ = 0;
 
+        rotationDegrees_ = 0;
+
         return this;
       }
 
@@ -14430,6 +17114,7 @@ public final class Messages {
         result.data_ = data_;
         result.width_ = width_;
         result.height_ = height_;
+        result.rotationDegrees_ = rotationDegrees_;
         onBuilt();
         return result;
       }
@@ -14493,6 +17178,9 @@ public final class Messages {
         }
         if (other.getHeight() != 0) {
           setHeight(other.getHeight());
+        }
+        if (other.getRotationDegrees() != 0) {
+          setRotationDegrees(other.getRotationDegrees());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -14813,6 +17501,37 @@ public final class Messages {
         onChanged();
         return this;
       }
+
+      private int rotationDegrees_ ;
+      /**
+       * <code>int32 rotationDegrees = 6;</code>
+       * @return The rotationDegrees.
+       */
+      @java.lang.Override
+      public int getRotationDegrees() {
+        return rotationDegrees_;
+      }
+      /**
+       * <code>int32 rotationDegrees = 6;</code>
+       * @param value The rotationDegrees to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRotationDegrees(int value) {
+        
+        rotationDegrees_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 rotationDegrees = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRotationDegrees() {
+        
+        rotationDegrees_ = 0;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -14892,6 +17611,11 @@ public final class Messages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_CameraControllerZoomCommandArguments_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_messages_CameraControllerLinearZoomCommandArguments_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_messages_CameraControllerLinearZoomCommandArguments_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -14901,6 +17625,11 @@ public final class Messages {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_CameraControllerFocusManuallyCommandArguments_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_ImageProxyCloseCommandArguments_descriptor;
   private static final 
@@ -14926,6 +17655,11 @@ public final class Messages {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_CameraControllerBindReplyArguments_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_Event_descriptor;
   private static final 
@@ -14965,7 +17699,7 @@ public final class Messages {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016messages.proto\022\010messages\"\363\005\n\007Command\022+" +
+      "\n\016messages.proto\022\010messages\"\320\007\n\007Command\022+" +
       "\n\010category\030\001 \001(\0162\031.messages.CommandCateg" +
       "ory\022Z\n camera_controller_bind_arguments\030" +
       "\002 \001(\0132..messages.CameraControllerBindCom" +
@@ -14976,81 +17710,100 @@ public final class Messages {
       "sages.CameraControllerTorchCommandArgume" +
       "ntsH\000\022Z\n camera_controller_zoom_argument" +
       "s\030\005 \001(\0132..messages.CameraControllerZoomC" +
-      "ommandArgumentsH\000\022w\n/camera_controller_f" +
-      "ocus_automatically_arguments\030\006 \001(\0132<.mes" +
-      "sages.CameraControllerFocusAutomatically" +
-      "CommandArgumentsH\000\022m\n*camera_controller_" +
-      "focus_manually_arguments\030\007 \001(\01327.message" +
-      "s.CameraControllerFocusManuallyCommandAr" +
-      "gumentsH\000\022P\n\033image_proxy_close_arguments" +
-      "\030\010 \001(\0132).messages.ImageProxyCloseCommand" +
-      "ArgumentsH\000B\013\n\targuments\"R\n$CameraContro" +
-      "llerBindCommandArguments\022*\n\010selector\030\001 \001" +
-      "(\0132\030.messages.CameraSelector\"T\n&CameraCo" +
-      "ntrollerUnbindCommandArguments\022*\n\010select" +
-      "or\030\001 \001(\0132\030.messages.CameraSelector\"b\n%Ca" +
-      "meraControllerTorchCommandArguments\022*\n\010s" +
+      "ommandArgumentsH\000\022g\n\'camera_controller_l" +
+      "inear_zoom_arguments\030\006 \001(\01324.messages.Ca" +
+      "meraControllerLinearZoomCommandArguments" +
+      "H\000\022w\n/camera_controller_focus_automatica" +
+      "lly_arguments\030\007 \001(\0132<.messages.CameraCon" +
+      "trollerFocusAutomaticallyCommandArgument" +
+      "sH\000\022m\n*camera_controller_focus_manually_" +
+      "arguments\030\010 \001(\01327.messages.CameraControl" +
+      "lerFocusManuallyCommandArgumentsH\000\022r\n-ca" +
+      "mera_controller_capture_to_memory_argume" +
+      "nts\030\t \001(\01329.messages.CameraControllerCap" +
+      "tureToMemoryCommandArgumentsH\000\022P\n\033image_" +
+      "proxy_close_arguments\030\n \001(\0132).messages.I" +
+      "mageProxyCloseCommandArgumentsH\000B\013\n\targu" +
+      "ments\"R\n$CameraControllerBindCommandArgu" +
+      "ments\022*\n\010selector\030\001 \001(\0132\030.messages.Camer" +
+      "aSelector\"T\n&CameraControllerUnbindComma" +
+      "ndArguments\022*\n\010selector\030\001 \001(\0132\030.messages" +
+      ".CameraSelector\"b\n%CameraControllerTorch" +
+      "CommandArguments\022*\n\010selector\030\001 \001(\0132\030.mes" +
+      "sages.CameraSelector\022\r\n\005state\030\002 \001(\010\"a\n$C" +
+      "ameraControllerZoomCommandArguments\022*\n\010s" +
       "elector\030\001 \001(\0132\030.messages.CameraSelector\022" +
-      "\r\n\005state\030\002 \001(\010\"a\n$CameraControllerZoomCo" +
+      "\r\n\005value\030\002 \001(\001\"g\n*CameraControllerLinear" +
+      "ZoomCommandArguments\022*\n\010selector\030\001 \001(\0132\030" +
+      ".messages.CameraSelector\022\r\n\005value\030\002 \001(\001\"" +
+      "`\n2CameraControllerFocusAutomaticallyCom" +
+      "mandArguments\022*\n\010selector\030\001 \001(\0132\030.messag" +
+      "es.CameraSelector\"\220\001\n-CameraControllerFo" +
+      "cusManuallyCommandArguments\022*\n\010selector\030" +
+      "\001 \001(\0132\030.messages.CameraSelector\022\r\n\005width" +
+      "\030\002 \001(\001\022\016\n\006height\030\003 \001(\001\022\t\n\001x\030\004 \001(\001\022\t\n\001y\030\005" +
+      " \001(\001\"]\n/CameraControllerCaptureToMemoryC" +
+      "ommandArguments\022*\n\010selector\030\001 \001(\0132\030.mess" +
+      "ages.CameraSelector\"Y\n\037ImageProxyCloseCo" +
       "mmandArguments\022*\n\010selector\030\001 \001(\0132\030.messa" +
-      "ges.CameraSelector\022\r\n\005value\030\002 \001(\001\"`\n2Cam" +
-      "eraControllerFocusAutomaticallyCommandAr" +
-      "guments\022*\n\010selector\030\001 \001(\0132\030.messages.Cam" +
-      "eraSelector\"\220\001\n-CameraControllerFocusMan" +
-      "uallyCommandArguments\022*\n\010selector\030\001 \001(\0132" +
-      "\030.messages.CameraSelector\022\r\n\005width\030\002 \001(\001" +
-      "\022\016\n\006height\030\003 \001(\001\022\t\n\001x\030\004 \001(\001\022\t\n\001y\030\005 \001(\001\"Y" +
-      "\n\037ImageProxyCloseCommandArguments\022*\n\010sel" +
-      "ector\030\001 \001(\0132\030.messages.CameraSelector\022\n\n" +
-      "\002id\030\002 \001(\t\"\263\002\n\005Reply\022N\n\033get_quarter_turns" +
-      "_arguments\030\001 \001(\0132\'.messages.GetQuarterTu" +
-      "rnsReplyArgumentsH\000\022s\n.camera_controller" +
-      "_request_permission_arguments\030\002 \001(\01329.me" +
-      "ssages.CameraControllerRequestPermission" +
-      "ReplyArgumentsH\000\022X\n camera_controller_bi" +
-      "nd_arguments\030\003 \001(\0132,.messages.CameraCont" +
-      "rollerBindReplyArgumentsH\000B\013\n\targuments\"" +
-      "6\n\035GetQuarterTurnsReplyArguments\022\025\n\rquar" +
-      "ter_turns\030\001 \001(\005\"B\n/CameraControllerReque" +
-      "stPermissionReplyArguments\022\017\n\007granted\030\001 " +
-      "\001(\010\"Q\n\"CameraControllerBindReplyArgument" +
-      "s\022+\n\014camera_value\030\001 \001(\0132\025.messages.Camer" +
-      "aValue\"\202\002\n\005Event\022)\n\010category\030\001 \001(\0162\027.mes" +
-      "sages.EventCategory\022V\n\037quarter_turns_cha" +
-      "nged_arguments\030\002 \001(\0132+.messages.QuarterT" +
-      "urnsChangedEventArgumentsH\000\022i\n)camera_co" +
-      "ntroller_image_proxied_arguments\030\003 \001(\01324" +
-      ".messages.CameraControllerImageProxiedEv" +
-      "entArgumentsH\000B\013\n\targuments\":\n!QuarterTu" +
-      "rnsChangedEventArguments\022\025\n\rquarter_turn" +
-      "s\030\001 \001(\005\"W\n*CameraControllerImageProxiedE" +
-      "ventArguments\022)\n\013image_proxy\030\001 \001(\0132\024.mes" +
-      "sages.ImageProxy\"8\n\016CameraSelector\022&\n\006fa" +
-      "cing\030\001 \001(\0162\026.messages.CameraFacing\"\225\001\n\013C" +
-      "ameraValue\022\022\n\ntexture_id\030\001 \001(\005\022\025\n\rtextur" +
-      "e_width\030\002 \001(\005\022\026\n\016texture_height\030\003 \001(\005\022\027\n" +
-      "\017torch_available\030\004 \001(\010\022\024\n\014zoom_minimum\030\005" +
-      " \001(\001\022\024\n\014zoom_maximum\030\006 \001(\001\"q\n\nImageProxy" +
-      "\022*\n\010selector\030\001 \001(\0132\030.messages.CameraSele" +
-      "ctor\022\n\n\002id\030\002 \001(\t\022\014\n\004data\030\003 \001(\014\022\r\n\005width\030" +
-      "\004 \001(\005\022\016\n\006height\030\005 \001(\005*\306\003\n\017CommandCategor" +
-      "y\022&\n\"COMMAND_CATEGORY_GET_QUARTER_TURNS\020" +
-      "\000\0229\n5COMMAND_CATEGORY_CAMERA_CONTROLLER_" +
-      "REQUEST_PERMISSION\020\001\022+\n\'COMMAND_CATEGORY" +
-      "_CAMERA_CONTROLLER_BIND\020\002\022-\n)COMMAND_CAT" +
-      "EGORY_CAMERA_CONTROLLER_UNBIND\020\003\022,\n(COMM" +
-      "AND_CATEGORY_CAMERA_CONTROLLER_TORCH\020\004\022+" +
-      "\n\'COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOO" +
-      "M\020\005\022:\n6COMMAND_CATEGORY_CAMERA_CONTROLLE" +
-      "R_FOCUS_AUTOMATICALLY\020\006\0225\n1COMMAND_CATEG" +
-      "ORY_CAMERA_CONTROLLER_FOCUS_MANUALLY\020\007\022&" +
-      "\n\"COMMAND_CATEGORY_IMAGE_PROXY_CLOSE\020\010*m" +
-      "\n\rEventCategory\022(\n$EVENT_CATEGORY_QUARTE" +
-      "R_TURNS_CHANGED\020\000\0222\n.EVENT_CATEGORY_CAME" +
-      "RA_CONTROLLER_IMAGE_PROXIED\020\001*?\n\014CameraF" +
-      "acing\022\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMERA_" +
-      "FACING_FRONT\020\001B\"\n dev.yanshouwang.camera" +
-      "x.messagesb\006proto3"
+      "ges.CameraSelector\022\n\n\002id\030\002 \001(\t\"\245\003\n\005Reply" +
+      "\022N\n\033get_quarter_turns_arguments\030\001 \001(\0132\'." +
+      "messages.GetQuarterTurnsReplyArgumentsH\000" +
+      "\022s\n.camera_controller_request_permission" +
+      "_arguments\030\002 \001(\01329.messages.CameraContro" +
+      "llerRequestPermissionReplyArgumentsH\000\022X\n" +
+      " camera_controller_bind_arguments\030\003 \001(\0132" +
+      ",.messages.CameraControllerBindReplyArgu" +
+      "mentsH\000\022p\n-camera_controller_capture_to_" +
+      "memory_arguments\030\004 \001(\01327.messages.Camera" +
+      "ControllerCaptureToMemoryReplyArgumentsH" +
+      "\000B\013\n\targuments\"6\n\035GetQuarterTurnsReplyAr" +
+      "guments\022\025\n\rquarter_turns\030\001 \001(\005\"B\n/Camera" +
+      "ControllerRequestPermissionReplyArgument" +
+      "s\022\017\n\007granted\030\001 \001(\010\"Q\n\"CameraControllerBi" +
+      "ndReplyArguments\022+\n\014camera_value\030\001 \001(\0132\025" +
+      ".messages.CameraValue\"Y\n-CameraControlle" +
+      "rCaptureToMemoryReplyArguments\022(\n\nimageP" +
+      "roxy\030\001 \001(\0132\024.messages.ImageProxy\"\202\002\n\005Eve" +
+      "nt\022)\n\010category\030\001 \001(\0162\027.messages.EventCat" +
+      "egory\022V\n\037quarter_turns_changed_arguments" +
+      "\030\002 \001(\0132+.messages.QuarterTurnsChangedEve" +
+      "ntArgumentsH\000\022i\n)camera_controller_image" +
+      "_proxied_arguments\030\003 \001(\01324.messages.Came" +
+      "raControllerImageProxiedEventArgumentsH\000" +
+      "B\013\n\targuments\":\n!QuarterTurnsChangedEven" +
+      "tArguments\022\025\n\rquarter_turns\030\001 \001(\005\"W\n*Cam" +
+      "eraControllerImageProxiedEventArguments\022" +
+      ")\n\013image_proxy\030\001 \001(\0132\024.messages.ImagePro" +
+      "xy\"8\n\016CameraSelector\022&\n\006facing\030\001 \001(\0162\026.m" +
+      "essages.CameraFacing\"\225\001\n\013CameraValue\022\022\n\n" +
+      "texture_id\030\001 \001(\005\022\025\n\rtexture_width\030\002 \001(\005\022" +
+      "\026\n\016texture_height\030\003 \001(\005\022\027\n\017torch_availab" +
+      "le\030\004 \001(\010\022\024\n\014zoom_minimum\030\005 \001(\001\022\024\n\014zoom_m" +
+      "aximum\030\006 \001(\001\"\212\001\n\nImageProxy\022*\n\010selector\030" +
+      "\001 \001(\0132\030.messages.CameraSelector\022\n\n\002id\030\002 " +
+      "\001(\t\022\014\n\004data\030\003 \001(\014\022\r\n\005width\030\004 \001(\005\022\016\n\006heig" +
+      "ht\030\005 \001(\005\022\027\n\017rotationDegrees\030\006 \001(\005*\264\004\n\017Co" +
+      "mmandCategory\022&\n\"COMMAND_CATEGORY_GET_QU" +
+      "ARTER_TURNS\020\000\0229\n5COMMAND_CATEGORY_CAMERA" +
+      "_CONTROLLER_REQUEST_PERMISSION\020\001\022+\n\'COMM" +
+      "AND_CATEGORY_CAMERA_CONTROLLER_BIND\020\002\022-\n" +
+      ")COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBI" +
+      "ND\020\003\022,\n(COMMAND_CATEGORY_CAMERA_CONTROLL" +
+      "ER_TORCH\020\004\022+\n\'COMMAND_CATEGORY_CAMERA_CO" +
+      "NTROLLER_ZOOM\020\005\0222\n.COMMAND_CATEGORY_CAME" +
+      "RA_CONTROLLER_LINEAR_ZOOM\020\006\022:\n6COMMAND_C" +
+      "ATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATI" +
+      "CALLY\020\007\0225\n1COMMAND_CATEGORY_CAMERA_CONTR" +
+      "OLLER_FOCUS_MANUALLY\020\010\0228\n4COMMAND_CATEGO" +
+      "RY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY\020\t" +
+      "\022&\n\"COMMAND_CATEGORY_IMAGE_PROXY_CLOSE\020\n" +
+      "*m\n\rEventCategory\022(\n$EVENT_CATEGORY_QUAR" +
+      "TER_TURNS_CHANGED\020\000\0222\n.EVENT_CATEGORY_CA" +
+      "MERA_CONTROLLER_IMAGE_PROXIED\020\001*?\n\014Camer" +
+      "aFacing\022\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMER" +
+      "A_FACING_FRONT\020\001B\"\n dev.yanshouwang.came" +
+      "rax.messagesb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -15061,7 +17814,7 @@ public final class Messages {
     internal_static_messages_Command_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Command_descriptor,
-        new java.lang.String[] { "Category", "CameraControllerBindArguments", "CameraControllerUnbindArguments", "CameraControllerTorchArguments", "CameraControllerZoomArguments", "CameraControllerFocusAutomaticallyArguments", "CameraControllerFocusManuallyArguments", "ImageProxyCloseArguments", "Arguments", });
+        new java.lang.String[] { "Category", "CameraControllerBindArguments", "CameraControllerUnbindArguments", "CameraControllerTorchArguments", "CameraControllerZoomArguments", "CameraControllerLinearZoomArguments", "CameraControllerFocusAutomaticallyArguments", "CameraControllerFocusManuallyArguments", "CameraControllerCaptureToMemoryArguments", "ImageProxyCloseArguments", "Arguments", });
     internal_static_messages_CameraControllerBindCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_messages_CameraControllerBindCommandArguments_fieldAccessorTable = new
@@ -15086,84 +17839,102 @@ public final class Messages {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerZoomCommandArguments_descriptor,
         new java.lang.String[] { "Selector", "Value", });
-    internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_descriptor =
+    internal_static_messages_CameraControllerLinearZoomCommandArguments_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_messages_CameraControllerLinearZoomCommandArguments_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_messages_CameraControllerLinearZoomCommandArguments_descriptor,
+        new java.lang.String[] { "Selector", "Value", });
+    internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_descriptor =
+      getDescriptor().getMessageTypes().get(6);
     internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerFocusAutomaticallyCommandArguments_descriptor,
         new java.lang.String[] { "Selector", });
     internal_static_messages_CameraControllerFocusManuallyCommandArguments_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_messages_CameraControllerFocusManuallyCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerFocusManuallyCommandArguments_descriptor,
         new java.lang.String[] { "Selector", "Width", "Height", "X", "Y", });
+    internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_messages_CameraControllerCaptureToMemoryCommandArguments_descriptor,
+        new java.lang.String[] { "Selector", });
     internal_static_messages_ImageProxyCloseCommandArguments_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_messages_ImageProxyCloseCommandArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxyCloseCommandArguments_descriptor,
         new java.lang.String[] { "Selector", "Id", });
     internal_static_messages_Reply_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_messages_Reply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Reply_descriptor,
-        new java.lang.String[] { "GetQuarterTurnsArguments", "CameraControllerRequestPermissionArguments", "CameraControllerBindArguments", "Arguments", });
+        new java.lang.String[] { "GetQuarterTurnsArguments", "CameraControllerRequestPermissionArguments", "CameraControllerBindArguments", "CameraControllerCaptureToMemoryArguments", "Arguments", });
     internal_static_messages_GetQuarterTurnsReplyArguments_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_messages_GetQuarterTurnsReplyArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_GetQuarterTurnsReplyArguments_descriptor,
         new java.lang.String[] { "QuarterTurns", });
     internal_static_messages_CameraControllerRequestPermissionReplyArguments_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_messages_CameraControllerRequestPermissionReplyArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerRequestPermissionReplyArguments_descriptor,
         new java.lang.String[] { "Granted", });
     internal_static_messages_CameraControllerBindReplyArguments_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_messages_CameraControllerBindReplyArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerBindReplyArguments_descriptor,
         new java.lang.String[] { "CameraValue", });
+    internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_messages_CameraControllerCaptureToMemoryReplyArguments_descriptor,
+        new java.lang.String[] { "ImageProxy", });
     internal_static_messages_Event_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_messages_Event_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Event_descriptor,
         new java.lang.String[] { "Category", "QuarterTurnsChangedArguments", "CameraControllerImageProxiedArguments", "Arguments", });
     internal_static_messages_QuarterTurnsChangedEventArguments_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_messages_QuarterTurnsChangedEventArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_QuarterTurnsChangedEventArguments_descriptor,
         new java.lang.String[] { "QuarterTurns", });
     internal_static_messages_CameraControllerImageProxiedEventArguments_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_messages_CameraControllerImageProxiedEventArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraControllerImageProxiedEventArguments_descriptor,
         new java.lang.String[] { "ImageProxy", });
     internal_static_messages_CameraSelector_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_messages_CameraSelector_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraSelector_descriptor,
         new java.lang.String[] { "Facing", });
     internal_static_messages_CameraValue_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_messages_CameraValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraValue_descriptor,
         new java.lang.String[] { "TextureId", "TextureWidth", "TextureHeight", "TorchAvailable", "ZoomMinimum", "ZoomMaximum", });
     internal_static_messages_ImageProxy_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_messages_ImageProxy_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxy_descriptor,
-        new java.lang.String[] { "Selector", "Id", "Data", "Width", "Height", });
+        new java.lang.String[] { "Selector", "Id", "Data", "Width", "Height", "RotationDegrees", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -16,6 +16,9 @@ abstract class CameraController {
   Future<void> unbind();
   Future<void> torch(bool state);
   Future<void> zoom(double value);
+  Future<void> linearZoom(double value);
   Future<void> focusAutomatically();
   Future<void> focusManually(double width, double height, double x, double y);
+  Future<ImageProxy> captureToMemory();
+  // Future<void> captureToFile(String filePath);
 }

@@ -22,6 +22,8 @@ class _ScannerViewState extends State<ScannerView>
   late Animation<double> opacityAnimation;
   late StreamSubscription<ImageProxy> imageStreamSubscription;
 
+  late ValueNotifier<double> zoomValue;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,9 @@ class _ScannerViewState extends State<ScannerView>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
+
+    zoomValue = ValueNotifier(0.0);
+
     imageStreamSubscription = cameraController.imageStream.listen(analyze);
     animationConrtroller.repeat();
     initAsync();
@@ -50,6 +55,8 @@ class _ScannerViewState extends State<ScannerView>
   //   Navigator.of(context).popAndPushNamed('display', arguments: barcode);
   // }
 
+  bool zooming = false;
+
   @override
   Widget build(BuildContext context) {
     final cameraValue =
@@ -67,36 +74,6 @@ class _ScannerViewState extends State<ScannerView>
           CameraView(
             cameraValue: cameraValue,
           ),
-          // 闪光灯
-          Container(
-            margin: const EdgeInsets.only(bottom: 80.0),
-            alignment: Alignment.bottomCenter,
-            child: ValueListenableBuilder<TorchState>(
-              valueListenable: torchStateNotifier,
-              builder: (context, torchState, child) {
-                final torchAvailable = cameraValue.torchAvailable;
-                final color = torchState == TorchState.torchedOn
-                    ? Colors.white
-                    : Colors.grey;
-                return IconButton(
-                  icon: Icon(Icons.bolt, color: color),
-                  iconSize: 32.0,
-                  onPressed: torchAvailable && torchState != TorchState.torching
-                      ? () async {
-                          torchStateNotifier.value = TorchState.torching;
-                          if (torchState == TorchState.torchedOff) {
-                            await cameraController.torch(true);
-                            torchStateNotifier.value = TorchState.torchedOn;
-                          } else {
-                            await cameraController.torch(false);
-                            torchStateNotifier.value = TorchState.torchedOff;
-                          }
-                        }
-                      : null,
-                );
-              },
-            ),
-          ),
           // 扫描线
           AnimatedBuilder(
             animation: animationConrtroller,
@@ -110,13 +87,58 @@ class _ScannerViewState extends State<ScannerView>
               );
             },
           ),
-          // 返回按钮
-          Positioned(
-            left: 24.0,
-            top: 32.0,
-            child: IconButton(
-              icon: const Icon(Icons.cancel, color: Colors.white),
-              onPressed: () => Navigator.of(context).pop(),
+          SafeArea(
+            child: Column(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.cancel),
+                  color: Colors.white,
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                ValueListenableBuilder<TorchState>(
+                  valueListenable: torchStateNotifier,
+                  builder: (context, torchState, child) {
+                    final torchAvailable = cameraValue.torchAvailable;
+                    final color = torchState == TorchState.torchedOn
+                        ? Colors.white
+                        : Colors.grey;
+                    return IconButton(
+                      icon: const Icon(Icons.bolt),
+                      iconSize: 32.0,
+                      color: color,
+                      onPressed: torchAvailable &&
+                              torchState != TorchState.torching
+                          ? () async {
+                              torchStateNotifier.value = TorchState.torching;
+                              if (torchState == TorchState.torchedOff) {
+                                await cameraController.torch(true);
+                                torchStateNotifier.value = TorchState.torchedOn;
+                              } else {
+                                await cameraController.torch(false);
+                                torchStateNotifier.value =
+                                    TorchState.torchedOff;
+                              }
+                            }
+                          : null,
+                    );
+                  },
+                ),
+                ValueListenableBuilder<double>(
+                  valueListenable: zoomValue,
+                  builder: (context, zoomValue, child) {
+                    return Slider(
+                      value: zoomValue,
+                      onChanged: (value) async {
+                        cameraController.linearZoom(value).ignore();
+                        this.zoomValue.value = value;
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ],

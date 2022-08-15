@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecommand")
-public inline fun command(block: dev.yanshouwang.camerax.messages.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Command =
+inline fun command(block: dev.yanshouwang.camerax.messages.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Command =
   dev.yanshouwang.camerax.messages.CommandKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.Command.newBuilder()).apply { block() }._build()
-public object CommandKt {
+object CommandKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.Command.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.Command.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CommandKt {
     /**
      * <code>.messages.CommandCategory category = 1;</code>
      */
-    public var category: dev.yanshouwang.camerax.messages.Messages.CommandCategory
+     var category: dev.yanshouwang.camerax.messages.Messages.CommandCategory
       @JvmName("getCategory")
       get() = _builder.getCategory()
       @JvmName("setCategory")
@@ -35,14 +35,14 @@ public object CommandKt {
     /**
      * <code>.messages.CommandCategory category = 1;</code>
      */
-    public fun clearCategory() {
+    fun clearCategory() {
       _builder.clearCategory()
     }
 
     /**
      * <code>.messages.CameraControllerBindCommandArguments camera_controller_bind_arguments = 2;</code>
      */
-    public var cameraControllerBindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments
+    var cameraControllerBindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments
       @JvmName("getCameraControllerBindArguments")
       get() = _builder.getCameraControllerBindArguments()
       @JvmName("setCameraControllerBindArguments")
@@ -52,21 +52,21 @@ public object CommandKt {
     /**
      * <code>.messages.CameraControllerBindCommandArguments camera_controller_bind_arguments = 2;</code>
      */
-    public fun clearCameraControllerBindArguments() {
+    fun clearCameraControllerBindArguments() {
       _builder.clearCameraControllerBindArguments()
     }
     /**
      * <code>.messages.CameraControllerBindCommandArguments camera_controller_bind_arguments = 2;</code>
      * @return Whether the cameraControllerBindArguments field is set.
      */
-    public fun hasCameraControllerBindArguments(): kotlin.Boolean {
+    fun hasCameraControllerBindArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerBindArguments()
     }
 
     /**
      * <code>.messages.CameraControllerUnbindCommandArguments camera_controller_unbind_arguments = 3;</code>
      */
-    public var cameraControllerUnbindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments
+    var cameraControllerUnbindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerUnbindCommandArguments
       @JvmName("getCameraControllerUnbindArguments")
       get() = _builder.getCameraControllerUnbindArguments()
       @JvmName("setCameraControllerUnbindArguments")
@@ -76,21 +76,21 @@ public object CommandKt {
     /**
      * <code>.messages.CameraControllerUnbindCommandArguments camera_controller_unbind_arguments = 3;</code>
      */
-    public fun clearCameraControllerUnbindArguments() {
+    fun clearCameraControllerUnbindArguments() {
       _builder.clearCameraControllerUnbindArguments()
     }
     /**
      * <code>.messages.CameraControllerUnbindCommandArguments camera_controller_unbind_arguments = 3;</code>
      * @return Whether the cameraControllerUnbindArguments field is set.
      */
-    public fun hasCameraControllerUnbindArguments(): kotlin.Boolean {
+    fun hasCameraControllerUnbindArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerUnbindArguments()
     }
 
     /**
      * <code>.messages.CameraControllerTorchCommandArguments camera_controller_torch_arguments = 4;</code>
      */
-    public var cameraControllerTorchArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments
+    var cameraControllerTorchArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerTorchCommandArguments
       @JvmName("getCameraControllerTorchArguments")
       get() = _builder.getCameraControllerTorchArguments()
       @JvmName("setCameraControllerTorchArguments")
@@ -100,21 +100,21 @@ public object CommandKt {
     /**
      * <code>.messages.CameraControllerTorchCommandArguments camera_controller_torch_arguments = 4;</code>
      */
-    public fun clearCameraControllerTorchArguments() {
+    fun clearCameraControllerTorchArguments() {
       _builder.clearCameraControllerTorchArguments()
     }
     /**
      * <code>.messages.CameraControllerTorchCommandArguments camera_controller_torch_arguments = 4;</code>
      * @return Whether the cameraControllerTorchArguments field is set.
      */
-    public fun hasCameraControllerTorchArguments(): kotlin.Boolean {
+    fun hasCameraControllerTorchArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerTorchArguments()
     }
 
     /**
      * <code>.messages.CameraControllerZoomCommandArguments camera_controller_zoom_arguments = 5;</code>
      */
-    public var cameraControllerZoomArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments
+    var cameraControllerZoomArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments
       @JvmName("getCameraControllerZoomArguments")
       get() = _builder.getCameraControllerZoomArguments()
       @JvmName("setCameraControllerZoomArguments")
@@ -124,21 +124,45 @@ public object CommandKt {
     /**
      * <code>.messages.CameraControllerZoomCommandArguments camera_controller_zoom_arguments = 5;</code>
      */
-    public fun clearCameraControllerZoomArguments() {
+    fun clearCameraControllerZoomArguments() {
       _builder.clearCameraControllerZoomArguments()
     }
     /**
      * <code>.messages.CameraControllerZoomCommandArguments camera_controller_zoom_arguments = 5;</code>
      * @return Whether the cameraControllerZoomArguments field is set.
      */
-    public fun hasCameraControllerZoomArguments(): kotlin.Boolean {
+    fun hasCameraControllerZoomArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerZoomArguments()
     }
 
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
      */
-    public var cameraControllerFocusAutomaticallyArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments
+    var cameraControllerLinearZoomArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments
+      @JvmName("getCameraControllerLinearZoomArguments")
+      get() = _builder.getCameraControllerLinearZoomArguments()
+      @JvmName("setCameraControllerLinearZoomArguments")
+      set(value) {
+        _builder.setCameraControllerLinearZoomArguments(value)
+      }
+    /**
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     */
+    fun clearCameraControllerLinearZoomArguments() {
+      _builder.clearCameraControllerLinearZoomArguments()
+    }
+    /**
+     * <code>.messages.CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;</code>
+     * @return Whether the cameraControllerLinearZoomArguments field is set.
+     */
+    fun hasCameraControllerLinearZoomArguments(): kotlin.Boolean {
+      return _builder.hasCameraControllerLinearZoomArguments()
+    }
+
+    /**
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
+     */
+    var cameraControllerFocusAutomaticallyArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments
       @JvmName("getCameraControllerFocusAutomaticallyArguments")
       get() = _builder.getCameraControllerFocusAutomaticallyArguments()
       @JvmName("setCameraControllerFocusAutomaticallyArguments")
@@ -146,23 +170,23 @@ public object CommandKt {
         _builder.setCameraControllerFocusAutomaticallyArguments(value)
       }
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      */
-    public fun clearCameraControllerFocusAutomaticallyArguments() {
+    fun clearCameraControllerFocusAutomaticallyArguments() {
       _builder.clearCameraControllerFocusAutomaticallyArguments()
     }
     /**
-     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;</code>
+     * <code>.messages.CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;</code>
      * @return Whether the cameraControllerFocusAutomaticallyArguments field is set.
      */
-    public fun hasCameraControllerFocusAutomaticallyArguments(): kotlin.Boolean {
+    fun hasCameraControllerFocusAutomaticallyArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerFocusAutomaticallyArguments()
     }
 
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      */
-    public var cameraControllerFocusManuallyArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments
+    var cameraControllerFocusManuallyArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments
       @JvmName("getCameraControllerFocusManuallyArguments")
       get() = _builder.getCameraControllerFocusManuallyArguments()
       @JvmName("setCameraControllerFocusManuallyArguments")
@@ -170,23 +194,47 @@ public object CommandKt {
         _builder.setCameraControllerFocusManuallyArguments(value)
       }
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      */
-    public fun clearCameraControllerFocusManuallyArguments() {
+    fun clearCameraControllerFocusManuallyArguments() {
       _builder.clearCameraControllerFocusManuallyArguments()
     }
     /**
-     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;</code>
+     * <code>.messages.CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;</code>
      * @return Whether the cameraControllerFocusManuallyArguments field is set.
      */
-    public fun hasCameraControllerFocusManuallyArguments(): kotlin.Boolean {
+    fun hasCameraControllerFocusManuallyArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerFocusManuallyArguments()
     }
 
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
      */
-    public var imageProxyCloseArguments: dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments
+    var cameraControllerCaptureToMemoryArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments
+      @JvmName("getCameraControllerCaptureToMemoryArguments")
+      get() = _builder.getCameraControllerCaptureToMemoryArguments()
+      @JvmName("setCameraControllerCaptureToMemoryArguments")
+      set(value) {
+        _builder.setCameraControllerCaptureToMemoryArguments(value)
+      }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     */
+    fun clearCameraControllerCaptureToMemoryArguments() {
+      _builder.clearCameraControllerCaptureToMemoryArguments()
+    }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;</code>
+     * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+     */
+    fun hasCameraControllerCaptureToMemoryArguments(): kotlin.Boolean {
+      return _builder.hasCameraControllerCaptureToMemoryArguments()
+    }
+
+    /**
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
+     */
+    var imageProxyCloseArguments: dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments
       @JvmName("getImageProxyCloseArguments")
       get() = _builder.getImageProxyCloseArguments()
       @JvmName("setImageProxyCloseArguments")
@@ -194,29 +242,29 @@ public object CommandKt {
         _builder.setImageProxyCloseArguments(value)
       }
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      */
-    public fun clearImageProxyCloseArguments() {
+    fun clearImageProxyCloseArguments() {
       _builder.clearImageProxyCloseArguments()
     }
     /**
-     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;</code>
+     * <code>.messages.ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;</code>
      * @return Whether the imageProxyCloseArguments field is set.
      */
-    public fun hasImageProxyCloseArguments(): kotlin.Boolean {
+    fun hasImageProxyCloseArguments(): kotlin.Boolean {
       return _builder.hasImageProxyCloseArguments()
     }
-    public val argumentsCase: dev.yanshouwang.camerax.messages.Messages.Command.ArgumentsCase
+    val argumentsCase: dev.yanshouwang.camerax.messages.Messages.Command.ArgumentsCase
       @JvmName("getArgumentsCase")
       get() = _builder.getArgumentsCase()
 
-    public fun clearArguments() {
+    fun clearArguments() {
       _builder.clearArguments()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.Command.copy(block: dev.yanshouwang.camerax.messages.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Command =
+inline fun dev.yanshouwang.camerax.messages.Messages.Command.copy(block: dev.yanshouwang.camerax.messages.CommandKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Command =
   dev.yanshouwang.camerax.messages.CommandKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerBindArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindCommandArguments?
@@ -231,11 +279,17 @@ val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerT
 val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerZoomArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments?
   get() = if (hasCameraControllerZoomArguments()) getCameraControllerZoomArguments() else null
 
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerLinearZoomArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerLinearZoomCommandArguments?
+  get() = if (hasCameraControllerLinearZoomArguments()) getCameraControllerLinearZoomArguments() else null
+
 val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerFocusAutomaticallyArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusAutomaticallyCommandArguments?
   get() = if (hasCameraControllerFocusAutomaticallyArguments()) getCameraControllerFocusAutomaticallyArguments() else null
 
 val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerFocusManuallyArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerFocusManuallyCommandArguments?
   get() = if (hasCameraControllerFocusManuallyArguments()) getCameraControllerFocusManuallyArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.cameraControllerCaptureToMemoryArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryCommandArguments?
+  get() = if (hasCameraControllerCaptureToMemoryArguments()) getCameraControllerCaptureToMemoryArguments() else null
 
 val dev.yanshouwang.camerax.messages.Messages.CommandOrBuilder.imageProxyCloseArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.ImageProxyCloseCommandArguments?
   get() = if (hasImageProxyCloseArguments()) getImageProxyCloseArguments() else null

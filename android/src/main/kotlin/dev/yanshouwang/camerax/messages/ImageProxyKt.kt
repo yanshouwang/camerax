@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializeimageProxy")
-public inline fun imageProxy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
+inline fun imageProxy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
   dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.ImageProxy.newBuilder()).apply { block() }._build()
-public object ImageProxyKt {
+object ImageProxyKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.ImageProxy.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object ImageProxyKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+    var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
       @JvmName("getSelector")
       get() = _builder.getSelector()
       @JvmName("setSelector")
@@ -35,21 +35,21 @@ public object ImageProxyKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public fun clearSelector() {
+    fun clearSelector() {
       _builder.clearSelector()
     }
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
-    public fun hasSelector(): kotlin.Boolean {
+    fun hasSelector(): kotlin.Boolean {
       return _builder.hasSelector()
     }
 
     /**
      * <code>string id = 2;</code>
      */
-    public var id: kotlin.String
+    var id: kotlin.String
       @JvmName("getId")
       get() = _builder.getId()
       @JvmName("setId")
@@ -59,14 +59,14 @@ public object ImageProxyKt {
     /**
      * <code>string id = 2;</code>
      */
-    public fun clearId() {
+    fun clearId() {
       _builder.clearId()
     }
 
     /**
      * <code>bytes data = 3;</code>
      */
-    public var data: com.google.protobuf.ByteString
+    var data: com.google.protobuf.ByteString
       @JvmName("getData")
       get() = _builder.getData()
       @JvmName("setData")
@@ -76,14 +76,14 @@ public object ImageProxyKt {
     /**
      * <code>bytes data = 3;</code>
      */
-    public fun clearData() {
+    fun clearData() {
       _builder.clearData()
     }
 
     /**
      * <code>int32 width = 4;</code>
      */
-    public var width: kotlin.Int
+    var width: kotlin.Int
       @JvmName("getWidth")
       get() = _builder.getWidth()
       @JvmName("setWidth")
@@ -93,14 +93,14 @@ public object ImageProxyKt {
     /**
      * <code>int32 width = 4;</code>
      */
-    public fun clearWidth() {
+    fun clearWidth() {
       _builder.clearWidth()
     }
 
     /**
      * <code>int32 height = 5;</code>
      */
-    public var height: kotlin.Int
+    var height: kotlin.Int
       @JvmName("getHeight")
       get() = _builder.getHeight()
       @JvmName("setHeight")
@@ -110,13 +110,30 @@ public object ImageProxyKt {
     /**
      * <code>int32 height = 5;</code>
      */
-    public fun clearHeight() {
+    fun clearHeight() {
       _builder.clearHeight()
+    }
+
+    /**
+     * <code>int32 rotationDegrees = 6;</code>
+     */
+    var rotationDegrees: kotlin.Int
+      @JvmName("getRotationDegrees")
+      get() = _builder.getRotationDegrees()
+      @JvmName("setRotationDegrees")
+      set(value) {
+        _builder.setRotationDegrees(value)
+      }
+    /**
+     * <code>int32 rotationDegrees = 6;</code>
+     */
+    fun clearRotationDegrees() {
+      _builder.clearRotationDegrees()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.ImageProxy.copy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
+inline fun dev.yanshouwang.camerax.messages.Messages.ImageProxy.copy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.ImageProxy =
   dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.ImageProxyOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?

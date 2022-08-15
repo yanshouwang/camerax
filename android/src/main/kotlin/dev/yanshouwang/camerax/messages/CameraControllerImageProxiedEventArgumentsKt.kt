@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraControllerImageProxiedEventArguments")
-public inline fun cameraControllerImageProxiedEventArguments(block: dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments =
+inline fun cameraControllerImageProxiedEventArguments(block: dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments =
   dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.newBuilder()).apply { block() }._build()
-public object CameraControllerImageProxiedEventArgumentsKt {
+object CameraControllerImageProxiedEventArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraControllerImageProxiedEventArgumentsKt {
     /**
      * <code>.messages.ImageProxy image_proxy = 1;</code>
      */
-    public var imageProxy: dev.yanshouwang.camerax.messages.Messages.ImageProxy
+    var imageProxy: dev.yanshouwang.camerax.messages.Messages.ImageProxy
       @JvmName("getImageProxy")
       get() = _builder.getImageProxy()
       @JvmName("setImageProxy")
@@ -35,20 +35,20 @@ public object CameraControllerImageProxiedEventArgumentsKt {
     /**
      * <code>.messages.ImageProxy image_proxy = 1;</code>
      */
-    public fun clearImageProxy() {
+    fun clearImageProxy() {
       _builder.clearImageProxy()
     }
     /**
      * <code>.messages.ImageProxy image_proxy = 1;</code>
      * @return Whether the imageProxy field is set.
      */
-    public fun hasImageProxy(): kotlin.Boolean {
+    fun hasImageProxy(): kotlin.Boolean {
       return _builder.hasImageProxy()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArguments =
   dev.yanshouwang.camerax.messages.CameraControllerImageProxiedEventArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.CameraControllerImageProxiedEventArgumentsOrBuilder.imageProxyOrNull: dev.yanshouwang.camerax.messages.Messages.ImageProxy?

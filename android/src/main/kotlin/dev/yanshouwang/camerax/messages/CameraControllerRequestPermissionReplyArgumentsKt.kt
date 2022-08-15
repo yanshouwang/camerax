@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraControllerRequestPermissionReplyArguments")
-public inline fun cameraControllerRequestPermissionReplyArguments(block: dev.yanshouwang.camerax.messages.CameraControllerRequestPermissionReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments =
+inline fun cameraControllerRequestPermissionReplyArguments(block: dev.yanshouwang.camerax.messages.CameraControllerRequestPermissionReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments =
   dev.yanshouwang.camerax.messages.CameraControllerRequestPermissionReplyArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments.newBuilder()).apply { block() }._build()
-public object CameraControllerRequestPermissionReplyArgumentsKt {
+object CameraControllerRequestPermissionReplyArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraControllerRequestPermissionReplyArgumentsKt {
     /**
      * <code>bool granted = 1;</code>
      */
-    public var granted: kotlin.Boolean
+    var granted: kotlin.Boolean
       @JvmName("getGranted")
       get() = _builder.getGranted()
       @JvmName("setGranted")
@@ -35,12 +35,12 @@ public object CameraControllerRequestPermissionReplyArgumentsKt {
     /**
      * <code>bool granted = 1;</code>
      */
-    public fun clearGranted() {
+    fun clearGranted() {
       _builder.clearGranted()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerRequestPermissionReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerRequestPermissionReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments =
   dev.yanshouwang.camerax.messages.CameraControllerRequestPermissionReplyArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 

@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraControllerBindReplyArguments")
-public inline fun cameraControllerBindReplyArguments(block: dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments =
+inline fun cameraControllerBindReplyArguments(block: dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments =
   dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.newBuilder()).apply { block() }._build()
-public object CameraControllerBindReplyArgumentsKt {
+object CameraControllerBindReplyArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraControllerBindReplyArgumentsKt {
     /**
      * <code>.messages.CameraValue camera_value = 1;</code>
      */
-    public var cameraValue: dev.yanshouwang.camerax.messages.Messages.CameraValue
+    var cameraValue: dev.yanshouwang.camerax.messages.Messages.CameraValue
       @JvmName("getCameraValue")
       get() = _builder.getCameraValue()
       @JvmName("setCameraValue")
@@ -35,20 +35,20 @@ public object CameraControllerBindReplyArgumentsKt {
     /**
      * <code>.messages.CameraValue camera_value = 1;</code>
      */
-    public fun clearCameraValue() {
+    fun clearCameraValue() {
       _builder.clearCameraValue()
     }
     /**
      * <code>.messages.CameraValue camera_value = 1;</code>
      * @return Whether the cameraValue field is set.
      */
-    public fun hasCameraValue(): kotlin.Boolean {
+    fun hasCameraValue(): kotlin.Boolean {
       return _builder.hasCameraValue()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments =
   dev.yanshouwang.camerax.messages.CameraControllerBindReplyArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArgumentsOrBuilder.cameraValueOrNull: dev.yanshouwang.camerax.messages.Messages.CameraValue?

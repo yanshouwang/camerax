@@ -46,22 +46,34 @@ class CommandCategory extends $pb.ProtobufEnum {
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM');
+  static const CommandCategory COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM =
+      CommandCategory._(
+          6,
+          const $core.bool.fromEnvironment('protobuf.omit_enum_names')
+              ? ''
+              : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM');
   static const CommandCategory
       COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY =
       CommandCategory._(
-          6,
+          7,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY');
   static const CommandCategory
       COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = CommandCategory._(
-          7,
+          8,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY');
+  static const CommandCategory
+      COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY = CommandCategory._(
+          9,
+          const $core.bool.fromEnvironment('protobuf.omit_enum_names')
+              ? ''
+              : 'COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY');
   static const CommandCategory COMMAND_CATEGORY_IMAGE_PROXY_CLOSE =
       CommandCategory._(
-          8,
+          10,
           const $core.bool.fromEnvironment('protobuf.omit_enum_names')
               ? ''
               : 'COMMAND_CATEGORY_IMAGE_PROXY_CLOSE');
@@ -73,8 +85,10 @@ class CommandCategory extends $pb.ProtobufEnum {
     COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM,
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY,
     COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY,
+    COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY,
     COMMAND_CATEGORY_IMAGE_PROXY_CLOSE,
   ];
 

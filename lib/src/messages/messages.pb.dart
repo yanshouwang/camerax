@@ -18,8 +18,10 @@ enum Command_Arguments {
   cameraControllerUnbindArguments,
   cameraControllerTorchArguments,
   cameraControllerZoomArguments,
+  cameraControllerLinearZoomArguments,
   cameraControllerFocusAutomaticallyArguments,
   cameraControllerFocusManuallyArguments,
+  cameraControllerCaptureToMemoryArguments,
   imageProxyCloseArguments,
   notSet
 }
@@ -31,9 +33,11 @@ class Command extends $pb.GeneratedMessage {
     3: Command_Arguments.cameraControllerUnbindArguments,
     4: Command_Arguments.cameraControllerTorchArguments,
     5: Command_Arguments.cameraControllerZoomArguments,
-    6: Command_Arguments.cameraControllerFocusAutomaticallyArguments,
-    7: Command_Arguments.cameraControllerFocusManuallyArguments,
-    8: Command_Arguments.imageProxyCloseArguments,
+    6: Command_Arguments.cameraControllerLinearZoomArguments,
+    7: Command_Arguments.cameraControllerFocusAutomaticallyArguments,
+    8: Command_Arguments.cameraControllerFocusManuallyArguments,
+    9: Command_Arguments.cameraControllerCaptureToMemoryArguments,
+    10: Command_Arguments.imageProxyCloseArguments,
     0: Command_Arguments.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -45,7 +49,7 @@ class Command extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3, 4, 5, 6, 7, 8])
+    ..oo(0, [2, 3, 4, 5, 6, 7, 8, 9, 10])
     ..e<CommandCategory>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -79,20 +83,32 @@ class Command extends $pb.GeneratedMessage {
             ? ''
             : 'cameraControllerZoomArguments',
         subBuilder: CameraControllerZoomCommandArguments.create)
-    ..aOM<CameraControllerFocusAutomaticallyCommandArguments>(
+    ..aOM<CameraControllerLinearZoomCommandArguments>(
         6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cameraControllerLinearZoomArguments',
+        subBuilder: CameraControllerLinearZoomCommandArguments.create)
+    ..aOM<CameraControllerFocusAutomaticallyCommandArguments>(
+        7,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'cameraControllerFocusAutomaticallyArguments',
         subBuilder: CameraControllerFocusAutomaticallyCommandArguments.create)
     ..aOM<CameraControllerFocusManuallyCommandArguments>(
-        7,
+        8,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'cameraControllerFocusManuallyArguments',
         subBuilder: CameraControllerFocusManuallyCommandArguments.create)
+    ..aOM<CameraControllerCaptureToMemoryCommandArguments>(
+        9,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cameraControllerCaptureToMemoryArguments',
+        subBuilder: CameraControllerCaptureToMemoryCommandArguments.create)
     ..aOM<ImageProxyCloseCommandArguments>(
-        8,
+        10,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
             ? ''
             : 'imageProxyCloseArguments',
@@ -106,10 +122,14 @@ class Command extends $pb.GeneratedMessage {
     CameraControllerUnbindCommandArguments? cameraControllerUnbindArguments,
     CameraControllerTorchCommandArguments? cameraControllerTorchArguments,
     CameraControllerZoomCommandArguments? cameraControllerZoomArguments,
+    CameraControllerLinearZoomCommandArguments?
+        cameraControllerLinearZoomArguments,
     CameraControllerFocusAutomaticallyCommandArguments?
         cameraControllerFocusAutomaticallyArguments,
     CameraControllerFocusManuallyCommandArguments?
         cameraControllerFocusManuallyArguments,
+    CameraControllerCaptureToMemoryCommandArguments?
+        cameraControllerCaptureToMemoryArguments,
     ImageProxyCloseCommandArguments? imageProxyCloseArguments,
   }) {
     final _result = create();
@@ -128,6 +148,10 @@ class Command extends $pb.GeneratedMessage {
     if (cameraControllerZoomArguments != null) {
       _result.cameraControllerZoomArguments = cameraControllerZoomArguments;
     }
+    if (cameraControllerLinearZoomArguments != null) {
+      _result.cameraControllerLinearZoomArguments =
+          cameraControllerLinearZoomArguments;
+    }
     if (cameraControllerFocusAutomaticallyArguments != null) {
       _result.cameraControllerFocusAutomaticallyArguments =
           cameraControllerFocusAutomaticallyArguments;
@@ -135,6 +159,10 @@ class Command extends $pb.GeneratedMessage {
     if (cameraControllerFocusManuallyArguments != null) {
       _result.cameraControllerFocusManuallyArguments =
           cameraControllerFocusManuallyArguments;
+    }
+    if (cameraControllerCaptureToMemoryArguments != null) {
+      _result.cameraControllerCaptureToMemoryArguments =
+          cameraControllerCaptureToMemoryArguments;
     }
     if (imageProxyCloseArguments != null) {
       _result.imageProxyCloseArguments = imageProxyCloseArguments;
@@ -249,53 +277,87 @@ class Command extends $pb.GeneratedMessage {
       $_ensure(4);
 
   @$pb.TagNumber(6)
-  CameraControllerFocusAutomaticallyCommandArguments
-      get cameraControllerFocusAutomaticallyArguments => $_getN(5);
+  CameraControllerLinearZoomCommandArguments
+      get cameraControllerLinearZoomArguments => $_getN(5);
   @$pb.TagNumber(6)
-  set cameraControllerFocusAutomaticallyArguments(
-      CameraControllerFocusAutomaticallyCommandArguments v) {
+  set cameraControllerLinearZoomArguments(
+      CameraControllerLinearZoomCommandArguments v) {
     setField(6, v);
   }
 
   @$pb.TagNumber(6)
-  $core.bool hasCameraControllerFocusAutomaticallyArguments() => $_has(5);
+  $core.bool hasCameraControllerLinearZoomArguments() => $_has(5);
   @$pb.TagNumber(6)
-  void clearCameraControllerFocusAutomaticallyArguments() => clearField(6);
+  void clearCameraControllerLinearZoomArguments() => clearField(6);
   @$pb.TagNumber(6)
-  CameraControllerFocusAutomaticallyCommandArguments
-      ensureCameraControllerFocusAutomaticallyArguments() => $_ensure(5);
+  CameraControllerLinearZoomCommandArguments
+      ensureCameraControllerLinearZoomArguments() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  CameraControllerFocusManuallyCommandArguments
-      get cameraControllerFocusManuallyArguments => $_getN(6);
+  CameraControllerFocusAutomaticallyCommandArguments
+      get cameraControllerFocusAutomaticallyArguments => $_getN(6);
   @$pb.TagNumber(7)
-  set cameraControllerFocusManuallyArguments(
-      CameraControllerFocusManuallyCommandArguments v) {
+  set cameraControllerFocusAutomaticallyArguments(
+      CameraControllerFocusAutomaticallyCommandArguments v) {
     setField(7, v);
   }
 
   @$pb.TagNumber(7)
-  $core.bool hasCameraControllerFocusManuallyArguments() => $_has(6);
+  $core.bool hasCameraControllerFocusAutomaticallyArguments() => $_has(6);
   @$pb.TagNumber(7)
-  void clearCameraControllerFocusManuallyArguments() => clearField(7);
+  void clearCameraControllerFocusAutomaticallyArguments() => clearField(7);
   @$pb.TagNumber(7)
-  CameraControllerFocusManuallyCommandArguments
-      ensureCameraControllerFocusManuallyArguments() => $_ensure(6);
+  CameraControllerFocusAutomaticallyCommandArguments
+      ensureCameraControllerFocusAutomaticallyArguments() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  ImageProxyCloseCommandArguments get imageProxyCloseArguments => $_getN(7);
+  CameraControllerFocusManuallyCommandArguments
+      get cameraControllerFocusManuallyArguments => $_getN(7);
   @$pb.TagNumber(8)
-  set imageProxyCloseArguments(ImageProxyCloseCommandArguments v) {
+  set cameraControllerFocusManuallyArguments(
+      CameraControllerFocusManuallyCommandArguments v) {
     setField(8, v);
   }
 
   @$pb.TagNumber(8)
-  $core.bool hasImageProxyCloseArguments() => $_has(7);
+  $core.bool hasCameraControllerFocusManuallyArguments() => $_has(7);
   @$pb.TagNumber(8)
-  void clearImageProxyCloseArguments() => clearField(8);
+  void clearCameraControllerFocusManuallyArguments() => clearField(8);
   @$pb.TagNumber(8)
+  CameraControllerFocusManuallyCommandArguments
+      ensureCameraControllerFocusManuallyArguments() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  CameraControllerCaptureToMemoryCommandArguments
+      get cameraControllerCaptureToMemoryArguments => $_getN(8);
+  @$pb.TagNumber(9)
+  set cameraControllerCaptureToMemoryArguments(
+      CameraControllerCaptureToMemoryCommandArguments v) {
+    setField(9, v);
+  }
+
+  @$pb.TagNumber(9)
+  $core.bool hasCameraControllerCaptureToMemoryArguments() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearCameraControllerCaptureToMemoryArguments() => clearField(9);
+  @$pb.TagNumber(9)
+  CameraControllerCaptureToMemoryCommandArguments
+      ensureCameraControllerCaptureToMemoryArguments() => $_ensure(8);
+
+  @$pb.TagNumber(10)
+  ImageProxyCloseCommandArguments get imageProxyCloseArguments => $_getN(9);
+  @$pb.TagNumber(10)
+  set imageProxyCloseArguments(ImageProxyCloseCommandArguments v) {
+    setField(10, v);
+  }
+
+  @$pb.TagNumber(10)
+  $core.bool hasImageProxyCloseArguments() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearImageProxyCloseArguments() => clearField(10);
+  @$pb.TagNumber(10)
   ImageProxyCloseCommandArguments ensureImageProxyCloseArguments() =>
-      $_ensure(7);
+      $_ensure(9);
 }
 
 class CameraControllerBindCommandArguments extends $pb.GeneratedMessage {
@@ -645,6 +707,105 @@ class CameraControllerZoomCommandArguments extends $pb.GeneratedMessage {
   void clearValue() => clearField(2);
 }
 
+class CameraControllerLinearZoomCommandArguments extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CameraControllerLinearZoomCommandArguments',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'messages'),
+      createEmptyInstance: create)
+    ..aOM<CameraSelector>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'selector',
+        subBuilder: CameraSelector.create)
+    ..a<$core.double>(
+        2,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'value',
+        $pb.PbFieldType.OD)
+    ..hasRequiredFields = false;
+
+  CameraControllerLinearZoomCommandArguments._() : super();
+  factory CameraControllerLinearZoomCommandArguments({
+    CameraSelector? selector,
+    $core.double? value,
+  }) {
+    final _result = create();
+    if (selector != null) {
+      _result.selector = selector;
+    }
+    if (value != null) {
+      _result.value = value;
+    }
+    return _result;
+  }
+  factory CameraControllerLinearZoomCommandArguments.fromBuffer(
+          $core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CameraControllerLinearZoomCommandArguments.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CameraControllerLinearZoomCommandArguments clone() =>
+      CameraControllerLinearZoomCommandArguments()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CameraControllerLinearZoomCommandArguments copyWith(
+          void Function(CameraControllerLinearZoomCommandArguments) updates) =>
+      super.copyWith((message) =>
+              updates(message as CameraControllerLinearZoomCommandArguments))
+          as CameraControllerLinearZoomCommandArguments; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerLinearZoomCommandArguments create() =>
+      CameraControllerLinearZoomCommandArguments._();
+  CameraControllerLinearZoomCommandArguments createEmptyInstance() => create();
+  static $pb.PbList<CameraControllerLinearZoomCommandArguments>
+      createRepeated() =>
+          $pb.PbList<CameraControllerLinearZoomCommandArguments>();
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerLinearZoomCommandArguments getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<
+          CameraControllerLinearZoomCommandArguments>(create);
+  static CameraControllerLinearZoomCommandArguments? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  CameraSelector get selector => $_getN(0);
+  @$pb.TagNumber(1)
+  set selector(CameraSelector v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSelector() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.double get value => $_getN(1);
+  @$pb.TagNumber(2)
+  set value($core.double v) {
+    $_setDouble(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasValue() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearValue() => clearField(2);
+}
+
 class CameraControllerFocusAutomaticallyCommandArguments
     extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -895,6 +1056,87 @@ class CameraControllerFocusManuallyCommandArguments
   void clearY() => clearField(5);
 }
 
+class CameraControllerCaptureToMemoryCommandArguments
+    extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CameraControllerCaptureToMemoryCommandArguments',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'messages'),
+      createEmptyInstance: create)
+    ..aOM<CameraSelector>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'selector',
+        subBuilder: CameraSelector.create)
+    ..hasRequiredFields = false;
+
+  CameraControllerCaptureToMemoryCommandArguments._() : super();
+  factory CameraControllerCaptureToMemoryCommandArguments({
+    CameraSelector? selector,
+  }) {
+    final _result = create();
+    if (selector != null) {
+      _result.selector = selector;
+    }
+    return _result;
+  }
+  factory CameraControllerCaptureToMemoryCommandArguments.fromBuffer(
+          $core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CameraControllerCaptureToMemoryCommandArguments.fromJson(
+          $core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CameraControllerCaptureToMemoryCommandArguments clone() =>
+      CameraControllerCaptureToMemoryCommandArguments()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CameraControllerCaptureToMemoryCommandArguments copyWith(
+          void Function(CameraControllerCaptureToMemoryCommandArguments)
+              updates) =>
+      super.copyWith((message) => updates(
+              message as CameraControllerCaptureToMemoryCommandArguments))
+          as CameraControllerCaptureToMemoryCommandArguments; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerCaptureToMemoryCommandArguments create() =>
+      CameraControllerCaptureToMemoryCommandArguments._();
+  CameraControllerCaptureToMemoryCommandArguments createEmptyInstance() =>
+      create();
+  static $pb.PbList<CameraControllerCaptureToMemoryCommandArguments>
+      createRepeated() =>
+          $pb.PbList<CameraControllerCaptureToMemoryCommandArguments>();
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerCaptureToMemoryCommandArguments getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<
+          CameraControllerCaptureToMemoryCommandArguments>(create);
+  static CameraControllerCaptureToMemoryCommandArguments? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  CameraSelector get selector => $_getN(0);
+  @$pb.TagNumber(1)
+  set selector(CameraSelector v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasSelector() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSelector() => clearField(1);
+  @$pb.TagNumber(1)
+  CameraSelector ensureSelector() => $_ensure(0);
+}
+
 class ImageProxyCloseCommandArguments extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
       const $core.bool.fromEnvironment('protobuf.omit_message_names')
@@ -995,6 +1237,7 @@ enum Reply_Arguments {
   getQuarterTurnsArguments,
   cameraControllerRequestPermissionArguments,
   cameraControllerBindArguments,
+  cameraControllerCaptureToMemoryArguments,
   notSet
 }
 
@@ -1003,6 +1246,7 @@ class Reply extends $pb.GeneratedMessage {
     1: Reply_Arguments.getQuarterTurnsArguments,
     2: Reply_Arguments.cameraControllerRequestPermissionArguments,
     3: Reply_Arguments.cameraControllerBindArguments,
+    4: Reply_Arguments.cameraControllerCaptureToMemoryArguments,
     0: Reply_Arguments.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
@@ -1014,7 +1258,7 @@ class Reply extends $pb.GeneratedMessage {
               ? ''
               : 'messages'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
+    ..oo(0, [1, 2, 3, 4])
     ..aOM<GetQuarterTurnsReplyArguments>(
         1,
         const $core.bool.fromEnvironment('protobuf.omit_field_names')
@@ -1033,6 +1277,12 @@ class Reply extends $pb.GeneratedMessage {
             ? ''
             : 'cameraControllerBindArguments',
         subBuilder: CameraControllerBindReplyArguments.create)
+    ..aOM<CameraControllerCaptureToMemoryReplyArguments>(
+        4,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'cameraControllerCaptureToMemoryArguments',
+        subBuilder: CameraControllerCaptureToMemoryReplyArguments.create)
     ..hasRequiredFields = false;
 
   Reply._() : super();
@@ -1041,6 +1291,8 @@ class Reply extends $pb.GeneratedMessage {
     CameraControllerRequestPermissionReplyArguments?
         cameraControllerRequestPermissionArguments,
     CameraControllerBindReplyArguments? cameraControllerBindArguments,
+    CameraControllerCaptureToMemoryReplyArguments?
+        cameraControllerCaptureToMemoryArguments,
   }) {
     final _result = create();
     if (getQuarterTurnsArguments != null) {
@@ -1052,6 +1304,10 @@ class Reply extends $pb.GeneratedMessage {
     }
     if (cameraControllerBindArguments != null) {
       _result.cameraControllerBindArguments = cameraControllerBindArguments;
+    }
+    if (cameraControllerCaptureToMemoryArguments != null) {
+      _result.cameraControllerCaptureToMemoryArguments =
+          cameraControllerCaptureToMemoryArguments;
     }
     return _result;
   }
@@ -1130,6 +1386,23 @@ class Reply extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   CameraControllerBindReplyArguments ensureCameraControllerBindArguments() =>
       $_ensure(2);
+
+  @$pb.TagNumber(4)
+  CameraControllerCaptureToMemoryReplyArguments
+      get cameraControllerCaptureToMemoryArguments => $_getN(3);
+  @$pb.TagNumber(4)
+  set cameraControllerCaptureToMemoryArguments(
+      CameraControllerCaptureToMemoryReplyArguments v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasCameraControllerCaptureToMemoryArguments() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCameraControllerCaptureToMemoryArguments() => clearField(4);
+  @$pb.TagNumber(4)
+  CameraControllerCaptureToMemoryReplyArguments
+      ensureCameraControllerCaptureToMemoryArguments() => $_ensure(3);
 }
 
 class GetQuarterTurnsReplyArguments extends $pb.GeneratedMessage {
@@ -1355,6 +1628,87 @@ class CameraControllerBindReplyArguments extends $pb.GeneratedMessage {
   void clearCameraValue() => clearField(1);
   @$pb.TagNumber(1)
   CameraValue ensureCameraValue() => $_ensure(0);
+}
+
+class CameraControllerCaptureToMemoryReplyArguments
+    extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      const $core.bool.fromEnvironment('protobuf.omit_message_names')
+          ? ''
+          : 'CameraControllerCaptureToMemoryReplyArguments',
+      package: const $pb.PackageName(
+          const $core.bool.fromEnvironment('protobuf.omit_message_names')
+              ? ''
+              : 'messages'),
+      createEmptyInstance: create)
+    ..aOM<ImageProxy>(
+        1,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'imageProxy',
+        protoName: 'imageProxy',
+        subBuilder: ImageProxy.create)
+    ..hasRequiredFields = false;
+
+  CameraControllerCaptureToMemoryReplyArguments._() : super();
+  factory CameraControllerCaptureToMemoryReplyArguments({
+    ImageProxy? imageProxy,
+  }) {
+    final _result = create();
+    if (imageProxy != null) {
+      _result.imageProxy = imageProxy;
+    }
+    return _result;
+  }
+  factory CameraControllerCaptureToMemoryReplyArguments.fromBuffer(
+          $core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CameraControllerCaptureToMemoryReplyArguments.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
+  CameraControllerCaptureToMemoryReplyArguments clone() =>
+      CameraControllerCaptureToMemoryReplyArguments()..mergeFromMessage(this);
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  CameraControllerCaptureToMemoryReplyArguments copyWith(
+          void Function(CameraControllerCaptureToMemoryReplyArguments)
+              updates) =>
+      super.copyWith((message) =>
+              updates(message as CameraControllerCaptureToMemoryReplyArguments))
+          as CameraControllerCaptureToMemoryReplyArguments; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerCaptureToMemoryReplyArguments create() =>
+      CameraControllerCaptureToMemoryReplyArguments._();
+  CameraControllerCaptureToMemoryReplyArguments createEmptyInstance() =>
+      create();
+  static $pb.PbList<CameraControllerCaptureToMemoryReplyArguments>
+      createRepeated() =>
+          $pb.PbList<CameraControllerCaptureToMemoryReplyArguments>();
+  @$core.pragma('dart2js:noInline')
+  static CameraControllerCaptureToMemoryReplyArguments getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<
+          CameraControllerCaptureToMemoryReplyArguments>(create);
+  static CameraControllerCaptureToMemoryReplyArguments? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ImageProxy get imageProxy => $_getN(0);
+  @$pb.TagNumber(1)
+  set imageProxy(ImageProxy v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasImageProxy() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearImageProxy() => clearField(1);
+  @$pb.TagNumber(1)
+  ImageProxy ensureImageProxy() => $_ensure(0);
 }
 
 enum Event_Arguments {
@@ -1933,6 +2287,13 @@ class ImageProxy extends $pb.GeneratedMessage {
             ? ''
             : 'height',
         $pb.PbFieldType.O3)
+    ..a<$core.int>(
+        6,
+        const $core.bool.fromEnvironment('protobuf.omit_field_names')
+            ? ''
+            : 'rotationDegrees',
+        $pb.PbFieldType.O3,
+        protoName: 'rotationDegrees')
     ..hasRequiredFields = false;
 
   ImageProxy._() : super();
@@ -1942,6 +2303,7 @@ class ImageProxy extends $pb.GeneratedMessage {
     $core.List<$core.int>? data,
     $core.int? width,
     $core.int? height,
+    $core.int? rotationDegrees,
   }) {
     final _result = create();
     if (selector != null) {
@@ -1958,6 +2320,9 @@ class ImageProxy extends $pb.GeneratedMessage {
     }
     if (height != null) {
       _result.height = height;
+    }
+    if (rotationDegrees != null) {
+      _result.rotationDegrees = rotationDegrees;
     }
     return _result;
   }
@@ -2048,4 +2413,16 @@ class ImageProxy extends $pb.GeneratedMessage {
   $core.bool hasHeight() => $_has(4);
   @$pb.TagNumber(5)
   void clearHeight() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get rotationDegrees => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set rotationDegrees($core.int v) {
+    $_setSignedInt32(5, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasRotationDegrees() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRotationDegrees() => clearField(6);
 }

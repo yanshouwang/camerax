@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraControllerZoomCommandArguments")
-public inline fun cameraControllerZoomCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments =
+inline fun cameraControllerZoomCommandArguments(block: dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.newBuilder()).apply { block() }._build()
-public object CameraControllerZoomCommandArgumentsKt {
+object CameraControllerZoomCommandArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraControllerZoomCommandArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
+    var selector: dev.yanshouwang.camerax.messages.Messages.CameraSelector
       @JvmName("getSelector")
       get() = _builder.getSelector()
       @JvmName("setSelector")
@@ -35,21 +35,21 @@ public object CameraControllerZoomCommandArgumentsKt {
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      */
-    public fun clearSelector() {
+    fun clearSelector() {
       _builder.clearSelector()
     }
     /**
      * <code>.messages.CameraSelector selector = 1;</code>
      * @return Whether the selector field is set.
      */
-    public fun hasSelector(): kotlin.Boolean {
+    fun hasSelector(): kotlin.Boolean {
       return _builder.hasSelector()
     }
 
     /**
      * <code>double value = 2;</code>
      */
-    public var value: kotlin.Double
+    var value: kotlin.Double
       @JvmName("getValue")
       get() = _builder.getValue()
       @JvmName("setValue")
@@ -59,13 +59,13 @@ public object CameraControllerZoomCommandArgumentsKt {
     /**
      * <code>double value = 2;</code>
      */
-    public fun clearValue() {
+    fun clearValue() {
       _builder.clearValue()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments.copy(block: dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArguments =
   dev.yanshouwang.camerax.messages.CameraControllerZoomCommandArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.CameraControllerZoomCommandArgumentsOrBuilder.selectorOrNull: dev.yanshouwang.camerax.messages.Messages.CameraSelector?

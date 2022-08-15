@@ -109,6 +109,22 @@ class $CameraController implements CameraController {
   }
 
   @override
+  Future<void> linearZoom(double value) {
+    final command = messages.Command(
+      category: messages
+          .CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM,
+      cameraControllerLinearZoomArguments:
+          messages.CameraControllerLinearZoomCommandArguments(
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
+        value: value,
+      ),
+    );
+    return methodChannel.invokeCommand(command);
+  }
+
+  @override
   Future<void> focusAutomatically() {
     final command = messages.Command(
       category: messages.CommandCategory
@@ -140,6 +156,25 @@ class $CameraController implements CameraController {
       ),
     );
     return methodChannel.invokeCommand(command);
+  }
+
+  @override
+  Future<ImageProxy> captureToMemory() {
+    final command = messages.Command(
+      category: messages
+          .CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY,
+      cameraControllerCaptureToMemoryArguments:
+          messages.CameraControllerCaptureToMemoryCommandArguments(
+        selector: messages.CameraSelector(
+          facing: messages.CameraFacing.values[selector.facing.index],
+        ),
+      ),
+    );
+    return methodChannel.invokeCommand(command).then((reply) {
+      final imageProxy =
+          reply!.cameraControllerCaptureToMemoryArguments.imageProxy;
+      return $ImageProxy.fromMessage(imageProxy);
+    });
   }
 }
 
@@ -236,6 +271,8 @@ class $ImageProxy implements ImageProxy {
   final int width;
   @override
   final int height;
+  @override
+  final int rotationDegrees;
 
   const $ImageProxy(
     this.selector,
@@ -243,6 +280,7 @@ class $ImageProxy implements ImageProxy {
     this.data,
     this.width,
     this.height,
+    this.rotationDegrees,
   );
 
   factory $ImageProxy.fromMessage(
@@ -253,7 +291,16 @@ class $ImageProxy implements ImageProxy {
     final data = Uint8List.fromList(imageProxy.data);
     final width = imageProxy.width;
     final height = imageProxy.height;
-    return $ImageProxy(selector, id, data, width, height);
+    final rotationDegrees =
+        imageProxy.hasRotationDegrees() ? imageProxy.rotationDegrees : 0;
+    return $ImageProxy(
+      selector,
+      id,
+      data,
+      width,
+      height,
+      rotationDegrees,
+    );
   }
 
   @override

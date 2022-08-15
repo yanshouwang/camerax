@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializecameraSelector")
-public inline fun cameraSelector(block: dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraSelector =
+inline fun cameraSelector(block: dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraSelector =
   dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.CameraSelector.newBuilder()).apply { block() }._build()
-public object CameraSelectorKt {
+object CameraSelectorKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.CameraSelector.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object CameraSelectorKt {
     /**
      * <code>.messages.CameraFacing facing = 1;</code>
      */
-    public var facing: dev.yanshouwang.camerax.messages.Messages.CameraFacing
+     var facing: dev.yanshouwang.camerax.messages.Messages.CameraFacing
       @JvmName("getFacing")
       get() = _builder.getFacing()
       @JvmName("setFacing")
@@ -35,12 +35,12 @@ public object CameraSelectorKt {
     /**
      * <code>.messages.CameraFacing facing = 1;</code>
      */
-    public fun clearFacing() {
+    fun clearFacing() {
       _builder.clearFacing()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.CameraSelector.copy(block: dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraSelector =
+inline fun dev.yanshouwang.camerax.messages.Messages.CameraSelector.copy(block: dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.CameraSelector =
   dev.yanshouwang.camerax.messages.CameraSelectorKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 

@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializereply")
-public inline fun reply(block: dev.yanshouwang.camerax.messages.ReplyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Reply =
+inline fun reply(block: dev.yanshouwang.camerax.messages.ReplyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Reply =
   dev.yanshouwang.camerax.messages.ReplyKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.Reply.newBuilder()).apply { block() }._build()
-public object ReplyKt {
+object ReplyKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.Reply.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.Reply.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object ReplyKt {
     /**
      * <code>.messages.GetQuarterTurnsReplyArguments get_quarter_turns_arguments = 1;</code>
      */
-    public var getQuarterTurnsArguments: dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments
+    var getQuarterTurnsArguments: dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments
       @JvmName("getGetQuarterTurnsArguments")
       get() = _builder.getGetQuarterTurnsArguments()
       @JvmName("setGetQuarterTurnsArguments")
@@ -35,21 +35,21 @@ public object ReplyKt {
     /**
      * <code>.messages.GetQuarterTurnsReplyArguments get_quarter_turns_arguments = 1;</code>
      */
-    public fun clearGetQuarterTurnsArguments() {
+    fun clearGetQuarterTurnsArguments() {
       _builder.clearGetQuarterTurnsArguments()
     }
     /**
      * <code>.messages.GetQuarterTurnsReplyArguments get_quarter_turns_arguments = 1;</code>
      * @return Whether the getQuarterTurnsArguments field is set.
      */
-    public fun hasGetQuarterTurnsArguments(): kotlin.Boolean {
+    fun hasGetQuarterTurnsArguments(): kotlin.Boolean {
       return _builder.hasGetQuarterTurnsArguments()
     }
 
     /**
      * <code>.messages.CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;</code>
      */
-    public var cameraControllerRequestPermissionArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments
+    var cameraControllerRequestPermissionArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerRequestPermissionReplyArguments
       @JvmName("getCameraControllerRequestPermissionArguments")
       get() = _builder.getCameraControllerRequestPermissionArguments()
       @JvmName("setCameraControllerRequestPermissionArguments")
@@ -59,21 +59,21 @@ public object ReplyKt {
     /**
      * <code>.messages.CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;</code>
      */
-    public fun clearCameraControllerRequestPermissionArguments() {
+    fun clearCameraControllerRequestPermissionArguments() {
       _builder.clearCameraControllerRequestPermissionArguments()
     }
     /**
      * <code>.messages.CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;</code>
      * @return Whether the cameraControllerRequestPermissionArguments field is set.
      */
-    public fun hasCameraControllerRequestPermissionArguments(): kotlin.Boolean {
+    fun hasCameraControllerRequestPermissionArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerRequestPermissionArguments()
     }
 
     /**
      * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;</code>
      */
-    public var cameraControllerBindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments
+    var cameraControllerBindArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments
       @JvmName("getCameraControllerBindArguments")
       get() = _builder.getCameraControllerBindArguments()
       @JvmName("setCameraControllerBindArguments")
@@ -83,27 +83,51 @@ public object ReplyKt {
     /**
      * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;</code>
      */
-    public fun clearCameraControllerBindArguments() {
+    fun clearCameraControllerBindArguments() {
       _builder.clearCameraControllerBindArguments()
     }
     /**
      * <code>.messages.CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;</code>
      * @return Whether the cameraControllerBindArguments field is set.
      */
-    public fun hasCameraControllerBindArguments(): kotlin.Boolean {
+    fun hasCameraControllerBindArguments(): kotlin.Boolean {
       return _builder.hasCameraControllerBindArguments()
     }
-    public val argumentsCase: dev.yanshouwang.camerax.messages.Messages.Reply.ArgumentsCase
+
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     */
+    var cameraControllerCaptureToMemoryArguments: dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments
+      @JvmName("getCameraControllerCaptureToMemoryArguments")
+      get() = _builder.getCameraControllerCaptureToMemoryArguments()
+      @JvmName("setCameraControllerCaptureToMemoryArguments")
+      set(value) {
+        _builder.setCameraControllerCaptureToMemoryArguments(value)
+      }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     */
+    fun clearCameraControllerCaptureToMemoryArguments() {
+      _builder.clearCameraControllerCaptureToMemoryArguments()
+    }
+    /**
+     * <code>.messages.CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;</code>
+     * @return Whether the cameraControllerCaptureToMemoryArguments field is set.
+     */
+    fun hasCameraControllerCaptureToMemoryArguments(): kotlin.Boolean {
+      return _builder.hasCameraControllerCaptureToMemoryArguments()
+    }
+    val argumentsCase: dev.yanshouwang.camerax.messages.Messages.Reply.ArgumentsCase
       @JvmName("getArgumentsCase")
       get() = _builder.getArgumentsCase()
 
-    public fun clearArguments() {
+    fun clearArguments() {
       _builder.clearArguments()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.Reply.copy(block: dev.yanshouwang.camerax.messages.ReplyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Reply =
+inline fun dev.yanshouwang.camerax.messages.Messages.Reply.copy(block: dev.yanshouwang.camerax.messages.ReplyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.Reply =
   dev.yanshouwang.camerax.messages.ReplyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
 val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.getQuarterTurnsArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.GetQuarterTurnsReplyArguments?
@@ -114,4 +138,7 @@ val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.cameraControllerReq
 
 val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.cameraControllerBindArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerBindReplyArguments?
   get() = if (hasCameraControllerBindArguments()) getCameraControllerBindArguments() else null
+
+val dev.yanshouwang.camerax.messages.Messages.ReplyOrBuilder.cameraControllerCaptureToMemoryArgumentsOrNull: dev.yanshouwang.camerax.messages.Messages.CameraControllerCaptureToMemoryReplyArguments?
+  get() = if (hasCameraControllerCaptureToMemoryArguments()) getCameraControllerCaptureToMemoryArguments() else null
 

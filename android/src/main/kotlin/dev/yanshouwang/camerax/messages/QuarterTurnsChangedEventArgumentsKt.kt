@@ -4,15 +4,15 @@
 package dev.yanshouwang.camerax.messages;
 
 @kotlin.jvm.JvmName("-initializequarterTurnsChangedEventArguments")
-public inline fun quarterTurnsChangedEventArguments(block: dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments =
+inline fun quarterTurnsChangedEventArguments(block: dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments =
   dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl._create(dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.newBuilder()).apply { block() }._build()
-public object QuarterTurnsChangedEventArgumentsKt {
+object QuarterTurnsChangedEventArgumentsKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
-  public class Dsl private constructor(
+  class Dsl private constructor(
     private val _builder: dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.Builder
   ) {
-    public companion object {
+    companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
       internal fun _create(builder: dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.Builder): Dsl = Dsl(builder)
@@ -25,7 +25,7 @@ public object QuarterTurnsChangedEventArgumentsKt {
     /**
      * <code>int32 quarter_turns = 1;</code>
      */
-    public var quarterTurns: kotlin.Int
+    var quarterTurns: kotlin.Int
       @JvmName("getQuarterTurns")
       get() = _builder.getQuarterTurns()
       @JvmName("setQuarterTurns")
@@ -35,12 +35,12 @@ public object QuarterTurnsChangedEventArgumentsKt {
     /**
      * <code>int32 quarter_turns = 1;</code>
      */
-    public fun clearQuarterTurns() {
+    fun clearQuarterTurns() {
       _builder.clearQuarterTurns()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-public inline fun dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.copy(block: dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments =
+inline fun dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments.copy(block: dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Messages.QuarterTurnsChangedEventArguments =
   dev.yanshouwang.camerax.messages.QuarterTurnsChangedEventArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 

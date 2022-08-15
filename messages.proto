@@ -10,9 +10,11 @@ message Command {
     CameraControllerUnbindCommandArguments camera_controller_unbind_arguments = 3;
     CameraControllerTorchCommandArguments camera_controller_torch_arguments = 4;
     CameraControllerZoomCommandArguments camera_controller_zoom_arguments = 5;
-    CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 6;
-    CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 7;
-    ImageProxyCloseCommandArguments image_proxy_close_arguments = 8;
+    CameraControllerLinearZoomCommandArguments camera_controller_linear_zoom_arguments = 6;
+    CameraControllerFocusAutomaticallyCommandArguments camera_controller_focus_automatically_arguments = 7;
+    CameraControllerFocusManuallyCommandArguments camera_controller_focus_manually_arguments = 8;
+    CameraControllerCaptureToMemoryCommandArguments camera_controller_capture_to_memory_arguments = 9;
+    ImageProxyCloseCommandArguments image_proxy_close_arguments = 10;
   }
 }
 
@@ -23,9 +25,11 @@ enum CommandCategory {
   COMMAND_CATEGORY_CAMERA_CONTROLLER_UNBIND = 3;
   COMMAND_CATEGORY_CAMERA_CONTROLLER_TORCH = 4;
   COMMAND_CATEGORY_CAMERA_CONTROLLER_ZOOM = 5;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 6;
-  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 7;
-  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 8;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM = 6;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_AUTOMATICALLY = 7;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_FOCUS_MANUALLY = 8;
+  COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY = 9;
+  COMMAND_CATEGORY_IMAGE_PROXY_CLOSE = 10;
 }
 
 message CameraControllerBindCommandArguments {
@@ -46,6 +50,11 @@ message CameraControllerZoomCommandArguments {
   double value = 2;
 }
 
+message CameraControllerLinearZoomCommandArguments {
+  CameraSelector selector = 1;
+  double value = 2;
+}
+
 message CameraControllerFocusAutomaticallyCommandArguments {
   CameraSelector selector = 1;
 }
@@ -58,6 +67,10 @@ message CameraControllerFocusManuallyCommandArguments {
   double y = 5;
 }
 
+message CameraControllerCaptureToMemoryCommandArguments {
+  CameraSelector selector = 1;
+}
+
 message ImageProxyCloseCommandArguments {
   CameraSelector selector = 1;
   string id = 2;
@@ -68,6 +81,7 @@ message Reply {
     GetQuarterTurnsReplyArguments get_quarter_turns_arguments = 1;
     CameraControllerRequestPermissionReplyArguments camera_controller_request_permission_arguments = 2;
     CameraControllerBindReplyArguments camera_controller_bind_arguments = 3;
+    CameraControllerCaptureToMemoryReplyArguments camera_controller_capture_to_memory_arguments = 4;
   }
 }
 
@@ -81,6 +95,10 @@ message CameraControllerRequestPermissionReplyArguments {
 
 message CameraControllerBindReplyArguments {
   CameraValue camera_value = 1;
+}
+
+message CameraControllerCaptureToMemoryReplyArguments {
+  ImageProxy imageProxy = 1;
 }
 
 message Event {
@@ -128,4 +146,5 @@ message ImageProxy {
   bytes data = 3;
   int32 width = 4;
   int32 height = 5;
+  int32 rotationDegrees = 6;
 }

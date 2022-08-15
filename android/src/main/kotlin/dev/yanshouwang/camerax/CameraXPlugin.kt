@@ -7,6 +7,7 @@ import android.graphics.ImageFormat
 import android.graphics.Rect
 import android.os.Build
 import android.util.Log
+import android.util.Size
 import android.view.Surface
 import androidx.annotation.NonNull
 import androidx.camera.core.*
@@ -60,8 +61,7 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val permissions = arrayOf(Manifest.permission.CAMERA)
                     val permissionsGranted = permissions.all { permission ->
                         ContextCompat.checkSelfPermission(
-                            activity,
-                            permission
+                            activity, permission
                         ) == PackageManager.PERMISSION_GRANTED
                     }
 
@@ -99,20 +99,31 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                 .setTargetRotation(Surface.ROTATION_0)
                                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                                 .build()
+                            val imageCapture = ImageCapture.Builder()
+                                .setTargetRotation(Surface.ROTATION_0)
+//                                .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+                                .setTargetResolution(Size(1080, 1920))
+                                .build()
                             val camera = provider.bindToLifecycle(
                                 lifecycleOwner,
                                 selector.cameraxSelector,
                                 preview,
-                                imageAnalysis
+                                imageAnalysis,
+                                imageCapture,
                             )
                             val controller =
-                                CameraController(camera, textureEntry, preview, imageAnalysis)
+                                CameraController(
+                                    camera,
+                                    textureEntry,
+                                    preview,
+                                    imageAnalysis,
+                                    imageCapture
+                                )
                             preview.setSurfaceProvider { request ->
                                 val texture = textureEntry.surfaceTexture()
                                 val resolution = request.resolution
                                 texture.setDefaultBufferSize(
-                                    resolution.width,
-                                    resolution.height
+                                    resolution.width, resolution.height
                                 )
                                 val surface = Surface(texture)
                                 request.provideSurface(surface, mainExecutor) { }
@@ -130,13 +141,10 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                                                     this.textureWidth = resolution.height
                                                     this.textureHeight = resolution.width
                                                 }
-                                                this.torchAvailable =
-                                                    cameraInfo.hasFlashUnit()
+                                                this.torchAvailable = cameraInfo.hasFlashUnit()
                                                 val zoomState = cameraInfo.zoomState.value!!
-                                                this.zoomMinimum =
-                                                    zoomState.minZoomRatio.toDouble()
-                                                this.zoomMaximum =
-                                                    zoomState.maxZoomRatio.toDouble()
+                                                this.zoomMinimum = zoomState.minZoomRatio.toDouble()
+                                                this.zoomMaximum = zoomState.maxZoomRatio.toDouble()
                                             }
                                         }
                                 }.toByteArray()
@@ -231,7 +239,8 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                             val controller = controllers.remove(selector)!!
                             val preview = controller.preview
                             val imageAnalysis = controller.imageAnalysis
-                            provider.unbind(preview, imageAnalysis)
+                            val imageCapture = controller.imageCapture
+                            provider.unbind(preview, imageAnalysis, imageCapture)
                             val textureEntry = controller.textureEntry
                             textureEntry.release()
                             result.success()
@@ -265,6 +274,24 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                     val controller = controllers[selector]!!
                     val camera = controller.camera
                     val listenable = camera.cameraControl.setZoomRatio(ratio)
+                    val activity = binding.activity
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    listenable.addListener({
+                        try {
+                            listenable.get()
+                            result.success()
+                        } catch (e: Exception) {
+                            result.error(e)
+                        }
+                    }, mainExecutor)
+                }
+                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_LINEAR_ZOOM -> {
+                    val arguments = command.cameraControllerLinearZoomArguments
+                    val selector = arguments.selector
+                    val linearZoom = arguments.value.toFloat()
+                    val controller = controllers[selector]!!
+                    val camera = controller.camera
+                    val listenable = camera.cameraControl.setLinearZoom(linearZoom)
                     val activity = binding.activity
                     val mainExecutor = ContextCompat.getMainExecutor(activity)
                     listenable.addListener({
@@ -316,29 +343,24 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
                         }
                         90 -> {
                             SurfaceOrientedMeteringPointFactory(height, width).createPoint(
-                                y,
-                                width - x
+                                y, width - x
                             )
                         }
                         180 -> {
                             SurfaceOrientedMeteringPointFactory(
-                                width,
-                                height
+                                width, height
                             ).createPoint(width - x, height - y)
                         }
                         270 -> {
                             SurfaceOrientedMeteringPointFactory(
-                                height,
-                                width
+                                height, width
                             ).createPoint(height - y, x)
                         }
                         else -> {
                             throw NotImplementedError()
                         }
                     }
-                    val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
-                        .disableAutoCancel()
-                        .build()
+                    val action = FocusMeteringAction.Builder(point).disableAutoCancel().build()
                     val listenable = camera.cameraControl.startFocusAndMetering(action)
                     // TODO: 目前 CameraX 在某些手机上不触发回调，等待官方解决
                     methodExecutor.execute {
@@ -364,6 +386,49 @@ class CameraXPlugin : FlutterPlugin, ActivityAware {
 //                            result.error(e)
 //                        }
 //                    }, mainExecutor)
+                }
+                Messages.CommandCategory.COMMAND_CATEGORY_CAMERA_CONTROLLER_CAPTURE_TO_MEMORY -> {
+                    val arguments = command.cameraControllerCaptureToMemoryArguments
+                    val selector = arguments.selector
+                    val controller = controllers[selector]!!
+                    val imageCapture = controller.imageCapture
+                    val activity = binding.activity
+                    val mainExecutor = ContextCompat.getMainExecutor(activity)
+                    imageCapture.takePicture(
+                        mainExecutor,
+                        object : ImageCapture.OnImageCapturedCallback() {
+                            override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                                super.onCaptureSuccess(imageProxy)
+                                val imageProxyId = imageProxy.hashCode().toString()
+                                val imageProxies = controller.imageProxies
+                                imageProxies[imageProxyId] = imageProxy
+                                val reply = reply {
+                                    this.cameraControllerCaptureToMemoryArguments =
+                                        cameraControllerCaptureToMemoryReplyArguments {
+                                            this.imageProxy = imageProxy {
+                                                this.selector = selector
+                                                this.id = imageProxyId
+                                                // JPG format
+                                                val buffer = imageProxy.planes[0].buffer
+                                                val bufferSize = buffer.remaining()
+                                                val bytes = ByteArray(bufferSize)
+                                                buffer.get(bytes)
+                                                this.data = ByteString.copyFrom(bytes)
+                                                this.width = imageProxy.width
+                                                this.height = imageProxy.height
+                                                this.rotationDegrees =
+                                                    imageProxy.imageInfo.rotationDegrees
+                                            }
+                                        }
+                                }.toByteArray()
+                                result.success(reply)
+                            }
+
+                            override fun onError(e: ImageCaptureException) {
+                                super.onError(e)
+                                result.error(e)
+                            }
+                        })
                 }
                 Messages.CommandCategory.COMMAND_CATEGORY_IMAGE_PROXY_CLOSE -> {
                     val arguments = command.imageProxyCloseArguments
@@ -594,17 +659,16 @@ val ImageProxy.bytes: ByteArray
             // Intermediate buffer used to store the bytes of each row
             val rawBytes = ByteArray(plane.rowStride)
             // Size of each row in bytes
-            val rowLength =
-                if (pixelStride == 1 && stride == 1) width
-                // Take into account that the stride may include data from pixels other than this
-                // particular plane and row, and that could be between pixels and not after every
-                // pixel:
-                //
-                // |---- Pixel stride ----|                    Row ends here --> |
-                // | Pixel 1 | Other Data | Pixel 2 | Other Data | ... | Pixel N |
-                //
-                // We need to get (N-1) * (pixel stride bytes) per row + 1 byte for the last pixel
-                else (width - 1) * pixelStride + 1
+            val rowLength = if (pixelStride == 1 && stride == 1) width
+            // Take into account that the stride may include data from pixels other than this
+            // particular plane and row, and that could be between pixels and not after every
+            // pixel:
+            //
+            // |---- Pixel stride ----|                    Row ends here --> |
+            // | Pixel 1 | Other Data | Pixel 2 | Other Data | ... | Pixel N |
+            //
+            // We need to get (N-1) * (pixel stride bytes) per row + 1 byte for the last pixel
+            else (width - 1) * pixelStride + 1
             for (row in 0 until height) {
                 // Move buffer position to the beginning of this row
                 val newPosition = (row + cropRect.top) * rowStride + cropRect.left * pixelStride
