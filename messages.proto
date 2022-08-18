@@ -1,0 +1,54 @@
+syntax = "proto3";
+package messages;
+
+option java_package = "dev.yanshouwang.camerax.messages";
+option java_multiple_files = true;
+
+message CameraViewArguments {
+    ScaleType scale_type = 1;
+}
+
+enum ScaleType {
+    SCALE_TYPE_FILL_START = 0;
+    SCALE_TYPE_FILL_CENTER = 1;
+    SCALE_TYPE_FILL_END = 2;
+    SCALE_TYPE_FIT_START = 3;
+    SCALE_TYPE_FIT_CENTER = 4;
+    SCALE_TYPE_FIT_END = 5;
+}
+
+message CameraSelector {
+    CameraFacing facing = 1;
+}
+
+enum CameraFacing {
+    CAMERA_FACING_BACK = 0;
+    CAMERA_FACING_FRONT = 1;
+}
+
+message UseCase {
+    string id = 1;
+    oneof use_case {
+        Preview preview = 2;
+        ImageAnalysis image_analysis = 3;
+        ImageCapture Image_capture = 4;
+        VideoCapture video_capture = 5;
+    }
+}
+
+message Preview {
+    int32 viewId = 1;
+}
+
+message ImageAnalysis {
+}
+
+message ImageCapture {
+}
+
+message VideoCapture {
+}
+
+message Camera {
+    string id = 1;
+}
