@@ -1,6 +1,0 @@
-package dev.yanshouwang.camerax.example
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity() {
-}
