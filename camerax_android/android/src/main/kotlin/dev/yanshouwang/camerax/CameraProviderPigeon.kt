@@ -14,7 +14,7 @@ import dev.yanshouwang.camerax.messages.CameraSelector
 import dev.yanshouwang.camerax.messages.UseCase
 import dev.yanshouwang.camerax.messages.camera
 
-internal class CameraProviderPigeon(private val cameraViewFactory: CameraViewFactory) :
+internal class CameraProviderPigeon :
     Pigeons.CameraProviderHostPigeon {
     var activity: Activity? = null
     private val mUseCases = mutableMapOf<String, MUseCase>()
@@ -40,7 +40,8 @@ internal class CameraProviderPigeon(private val cameraViewFactory: CameraViewFac
                 val useCase = UseCase.parseFrom(useCaseByteArray)
                 when (useCase.useCaseCase) {
                     UseCase.UseCaseCase.PREVIEW -> MPreview.Builder().build().apply {
-                        val cameraView = cameraViewFactory.views[useCase.preview.viewId]
+                        val key = useCase.preview.viewId
+                        val cameraView = InstanceManager.findInstance<CameraView>(key)
                         this.setSurfaceProvider(cameraView!!.surfaceProvider)
                     }
                     UseCase.UseCaseCase.IMAGE_ANALYSIS -> MImageAnalysis.Builder().build()

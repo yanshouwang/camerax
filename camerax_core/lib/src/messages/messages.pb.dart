@@ -239,13 +239,13 @@ class UseCase extends $pb.GeneratedMessage {
 
 class Preview extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Preview', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'viewId', $pb.PbFieldType.O3, protoName: 'viewId')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'viewId', protoName: 'viewId')
     ..hasRequiredFields = false
   ;
 
   Preview._() : super();
   factory Preview({
-    $core.int? viewId,
+    $core.String? viewId,
   }) {
     final _result = create();
     if (viewId != null) {
@@ -275,9 +275,9 @@ class Preview extends $pb.GeneratedMessage {
   static Preview? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get viewId => $_getIZ(0);
+  $core.String get viewId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set viewId($core.int v) { $_setSignedInt32(0, v); }
+  set viewId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasViewId() => $_has(0);
   @$pb.TagNumber(1)

@@ -37,7 +37,7 @@ message UseCase {
 }
 
 message Preview {
-    int32 viewId = 1;
+    string viewId = 1;
 }
 
 message ImageAnalysis {

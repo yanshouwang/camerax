@@ -8,8 +8,14 @@ public interface PreviewOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 viewId = 1;</code>
+   * <code>string viewId = 1;</code>
    * @return The viewId.
    */
-  int getViewId();
+  java.lang.String getViewId();
+  /**
+   * <code>string viewId = 1;</code>
+   * @return The bytes for viewId.
+   */
+  com.google.protobuf.ByteString
+      getViewIdBytes();
 }

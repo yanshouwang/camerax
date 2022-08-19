@@ -69,3 +69,49 @@ abstract class TestCameraProviderHostPigeon {
     }
   }
 }
+
+class _TestCameraViewHostPigeonCodec extends StandardMessageCodec {
+  const _TestCameraViewHostPigeonCodec();
+}
+abstract class TestCameraViewHostPigeon {
+  static const MessageCodec<Object?> codec = _TestCameraViewHostPigeonCodec();
+
+  void create(String id, Uint8List argumentsByteArray);
+  void dispose(String id);
+  static void setup(TestCameraViewHostPigeon? api, {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.CameraViewHostPigeon.create', codec, binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMockMessageHandler(null);
+      } else {
+        channel.setMockMessageHandler((Object? message) async {
+          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final String? arg_id = (args[0] as String?);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null, expected non-null String.');
+          final Uint8List? arg_argumentsByteArray = (args[1] as Uint8List?);
+          assert(arg_argumentsByteArray != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null, expected non-null Uint8List.');
+          api.create(arg_id!, arg_argumentsByteArray!);
+          return <Object?, Object?>{};
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.CameraViewHostPigeon.dispose', codec, binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMockMessageHandler(null);
+      } else {
+        channel.setMockMessageHandler((Object? message) async {
+          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.dispose was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final String? arg_id = (args[0] as String?);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.dispose was null, expected non-null String.');
+          api.dispose(arg_id!);
+          return <Object?, Object?>{};
+        });
+      }
+    }
+  }
+}

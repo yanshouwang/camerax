@@ -1,9 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'messages.dart';
-
-typedef CameraViewCreatedCallback = void Function(int id);
+typedef CameraViewCreatedCallback = void Function(String id);
 
 abstract class CameraViewBuilder extends PlatformInterface {
   /// Constructs a [CameraViewBuilder].
@@ -27,7 +25,7 @@ abstract class CameraViewBuilder extends PlatformInterface {
   }
 
   Widget build({
-    required CameraViewArguments arguments,
+    required String id,
     CameraViewCreatedCallback? onCreated,
   });
 }
@@ -35,7 +33,7 @@ abstract class CameraViewBuilder extends PlatformInterface {
 class _CameraViewBuilder extends CameraViewBuilder {
   @override
   Widget build({
-    required CameraViewArguments arguments,
+    required String id,
     CameraViewCreatedCallback? onCreated,
   }) {
     throw UnimplementedError();

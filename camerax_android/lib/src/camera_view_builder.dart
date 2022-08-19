@@ -3,14 +3,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-const viewType = 'dev.yanshouwang.camerax/camera_view';
-
 class CameraViewBuilder extends core.CameraViewBuilder {
   @override
   Widget build({
-    required core.CameraViewArguments arguments,
+    required String id,
     core.CameraViewCreatedCallback? onCreated,
   }) {
+    const viewType = 'dev.yanshouwang.camerax/camera_view';
     return PlatformViewLink(
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(
@@ -24,15 +23,13 @@ class CameraViewBuilder extends core.CameraViewBuilder {
           id: params.id,
           viewType: viewType,
           layoutDirection: TextDirection.ltr,
-          creationParams: arguments.writeToBuffer(),
+          creationParams: id,
           creationParamsCodec: const StandardMessageCodec(),
           onFocus: () => params.onFocusChanged(true),
         )
-          ..addOnPlatformViewCreatedListener((id) {
-            params.onPlatformViewCreated(id);
-            if (onCreated != null) {
-              onCreated(id);
-            }
+          ..addOnPlatformViewCreatedListener((viewId) {
+            params.onPlatformViewCreated(viewId);
+            onCreated?.call(id);
           })
           ..create();
       },

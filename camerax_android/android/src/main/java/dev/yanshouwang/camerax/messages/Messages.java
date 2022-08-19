@@ -72,7 +72,7 @@ public final class Messages {
       "sages.ImageAnalysisH\000\022/\n\rImage_capture\030\004" +
       " \001(\0132\026.messages.ImageCaptureH\000\022/\n\rvideo_" +
       "capture\030\005 \001(\0132\026.messages.VideoCaptureH\000B" +
-      "\n\n\010use_case\"\031\n\007Preview\022\016\n\006viewId\030\001 \001(\005\"\017" +
+      "\n\n\010use_case\"\031\n\007Preview\022\016\n\006viewId\030\001 \001(\t\"\017" +
       "\n\rImageAnalysis\"\016\n\014ImageCapture\"\016\n\014Video" +
       "Capture\"\024\n\006Camera\022\n\n\002id\030\001 \001(\t*\250\001\n\tScaleT" +
       "ype\022\031\n\025SCALE_TYPE_FILL_START\020\000\022\032\n\026SCALE_" +

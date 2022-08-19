@@ -23,9 +23,9 @@ object PreviewKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Preview = _builder.build()
 
     /**
-     * <code>int32 viewId = 1;</code>
+     * <code>string viewId = 1;</code>
      */
-    var viewId: kotlin.Int
+    var viewId: kotlin.String
       @JvmName("getViewId")
       get() = _builder.getViewId()
       @JvmName("setViewId")
@@ -33,7 +33,7 @@ object PreviewKt {
         _builder.setViewId(value)
       }
     /**
-     * <code>int32 viewId = 1;</code>
+     * <code>string viewId = 1;</code>
      */
     fun clearViewId() {
       _builder.clearViewId()

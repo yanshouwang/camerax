@@ -147,6 +147,77 @@ public class Pigeons {
       }
     }
   }
+  private static class CameraViewHostPigeonCodec extends StandardMessageCodec {
+    public static final CameraViewHostPigeonCodec INSTANCE = new CameraViewHostPigeonCodec();
+    private CameraViewHostPigeonCodec() {}
+  }
+
+  /** Generated interface from Pigeon that represents a handler of messages from Flutter.*/
+  public interface CameraViewHostPigeon {
+    void create(@NonNull String id, @NonNull byte[] argumentsByteArray);
+    void dispose(@NonNull String id);
+
+    /** The codec used by CameraViewHostPigeon. */
+    static MessageCodec<Object> getCodec() {
+      return CameraViewHostPigeonCodec.INSTANCE;
+    }
+
+    /** Sets up an instance of `CameraViewHostPigeon` to handle messages through the `binaryMessenger`. */
+    static void setup(BinaryMessenger binaryMessenger, CameraViewHostPigeon api) {
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.CameraViewHostPigeon.create", getCodec());
+        if (api != null) {
+          channel.setMessageHandler((message, reply) -> {
+            Map<String, Object> wrapped = new HashMap<>();
+            try {
+              ArrayList<Object> args = (ArrayList<Object>)message;
+              String idArg = (String)args.get(0);
+              if (idArg == null) {
+                throw new NullPointerException("idArg unexpectedly null.");
+              }
+              byte[] argumentsByteArrayArg = (byte[])args.get(1);
+              if (argumentsByteArrayArg == null) {
+                throw new NullPointerException("argumentsByteArrayArg unexpectedly null.");
+              }
+              api.create(idArg, argumentsByteArrayArg);
+              wrapped.put("result", null);
+            }
+            catch (Error | RuntimeException exception) {
+              wrapped.put("error", wrapError(exception));
+            }
+            reply.reply(wrapped);
+          });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.CameraViewHostPigeon.dispose", getCodec());
+        if (api != null) {
+          channel.setMessageHandler((message, reply) -> {
+            Map<String, Object> wrapped = new HashMap<>();
+            try {
+              ArrayList<Object> args = (ArrayList<Object>)message;
+              String idArg = (String)args.get(0);
+              if (idArg == null) {
+                throw new NullPointerException("idArg unexpectedly null.");
+              }
+              api.dispose(idArg);
+              wrapped.put("result", null);
+            }
+            catch (Error | RuntimeException exception) {
+              wrapped.put("error", wrapError(exception));
+            }
+            reply.reply(wrapped);
+          });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+    }
+  }
   private static Map<String, Object> wrapError(Throwable exception) {
     Map<String, Object> errorMap = new HashMap<>();
     errorMap.put("message", exception.toString());

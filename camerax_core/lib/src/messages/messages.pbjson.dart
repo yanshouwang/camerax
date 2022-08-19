@@ -75,12 +75,12 @@ final $typed_data.Uint8List useCaseDescriptor = $convert.base64Decode('CgdVc2VDY
 const Preview$json = const {
   '1': 'Preview',
   '2': const [
-    const {'1': 'viewId', '3': 1, '4': 1, '5': 5, '10': 'viewId'},
+    const {'1': 'viewId', '3': 1, '4': 1, '5': 9, '10': 'viewId'},
   ],
 };
 
 /// Descriptor for `Preview`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List previewDescriptor = $convert.base64Decode('CgdQcmV2aWV3EhYKBnZpZXdJZBgBIAEoBVIGdmlld0lk');
+final $typed_data.Uint8List previewDescriptor = $convert.base64Decode('CgdQcmV2aWV3EhYKBnZpZXdJZBgBIAEoCVIGdmlld0lk');
 @$core.Deprecated('Use imageAnalysisDescriptor instead')
 const ImageAnalysis$json = const {
   '1': 'ImageAnalysis',

@@ -12,3 +12,9 @@ abstract class CameraProviderHostPigeon {
   @async
   void unbindAll();
 }
+
+@HostApi(dartHostTestHandler: 'TestCameraViewHostPigeon')
+abstract class CameraViewHostPigeon {
+  void create(String id, Uint8List argumentsByteArray);
+  void dispose(String id);
+}
