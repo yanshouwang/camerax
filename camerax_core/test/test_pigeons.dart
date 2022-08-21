@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart' show WriteBuffer, ReadBuffer;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '..\\lib\\src\\pigeons.dart';
+import '../lib/src/pigeons.dart';
 
 class _TestCameraProviderHostPigeonCodec extends StandardMessageCodec {
   const _TestCameraProviderHostPigeonCodec();
