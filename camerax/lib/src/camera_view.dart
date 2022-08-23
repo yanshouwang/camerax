@@ -36,10 +36,8 @@ class _CameraViewState extends State<CameraView> {
   void createOrSetArguments() async {
     await core.CameraViewPigeon.instance.createOrSetArguments(
       id,
-      arguments: core.CameraViewArguments(
-        controllerId: widget.controller.id,
-        scaleType: core.ScaleType.valueOf(widget.scaleType.index),
-      ),
+      controllerId: widget.controller.id,
+      scaleType: widget.scaleType.index,
     );
   }
 

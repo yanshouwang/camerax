@@ -5,31 +5,31 @@ import 'image_proxy.dart';
 import 'ml_metadata.dart';
 
 abstract class ImageAnalyzer {
-  Stream<ImageProxy> get imageProxyStream;
+  ImageAnalyzer() {
+    finalizer.attach(this, id);
+  }
 
-  factory ImageAnalyzer() => _ImageAnalyzer();
+  void analyze(ImageProxy imageProxy);
 }
 
 abstract class MLAnalyzer extends ImageAnalyzer {
-  Stream<MLMetadata> get mlMetadataStream;
-
-  factory MLAnalyzer() => _MLAnalyzer();
+  factory MLAnalyzer(
+          void Function(List<MLMetadata> recognition) onRecognized) =>
+      _MLAnalyzer(onRecognized);
 }
 
-class _ImageAnalyzer implements ImageAnalyzer {
-  _ImageAnalyzer() {
+class _MLAnalyzer implements MLAnalyzer {
+  final void Function(List<MLMetadata> recognition) onRecognized;
+
+  _MLAnalyzer(this.onRecognized) {
+    core.MLAnalyzerPigeon.instance.create(id);
     finalizer.attach(this, id);
   }
 
   @override
-  // TODO: implement imageProxyStream
-  Stream<ImageProxy> get imageProxyStream => throw UnimplementedError();
-}
-
-class _MLAnalyzer extends _ImageAnalyzer implements MLAnalyzer {
-  @override
-  // TODO: implement mlMetadataStream
-  Stream<MLMetadata> get mlMetadataStream => throw UnimplementedError();
+  void analyze(ImageProxy imageProxy) {
+    throw UnimplementedError();
+  }
 }
 
 extension on ImageAnalyzer {

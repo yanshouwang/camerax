@@ -23,84 +23,24 @@ object BarcodeKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.Barcode = _builder.build()
 
     /**
-     * <code>optional .messages.Rect bounding_box = 1;</code>
+     * <code>string value = 1;</code>
      */
-    var boundingBox: dev.yanshouwang.camerax.messages.Rect
-      @JvmName("getBoundingBox")
-      get() = _builder.getBoundingBox()
-      @JvmName("setBoundingBox")
+    var value: kotlin.String
+      @JvmName("getValue")
+      get() = _builder.getValue()
+      @JvmName("setValue")
       set(value) {
-        _builder.setBoundingBox(value)
+        _builder.setValue(value)
       }
     /**
-     * <code>optional .messages.Rect bounding_box = 1;</code>
+     * <code>string value = 1;</code>
      */
-    fun clearBoundingBox() {
-      _builder.clearBoundingBox()
-    }
-    /**
-     * <code>optional .messages.Rect bounding_box = 1;</code>
-     * @return Whether the boundingBox field is set.
-     */
-    fun hasBoundingBox(): kotlin.Boolean {
-      return _builder.hasBoundingBox()
-    }
-    val BarcodeKt.Dsl.boundingBoxOrNull: dev.yanshouwang.camerax.messages.Rect?
-      get() = _builder.boundingBoxOrNull
-
-    /**
-     * <code>optional string raw_value = 2;</code>
-     */
-    var rawValue: kotlin.String
-      @JvmName("getRawValue")
-      get() = _builder.getRawValue()
-      @JvmName("setRawValue")
-      set(value) {
-        _builder.setRawValue(value)
-      }
-    /**
-     * <code>optional string raw_value = 2;</code>
-     */
-    fun clearRawValue() {
-      _builder.clearRawValue()
-    }
-    /**
-     * <code>optional string raw_value = 2;</code>
-     * @return Whether the rawValue field is set.
-     */
-    fun hasRawValue(): kotlin.Boolean {
-      return _builder.hasRawValue()
-    }
-
-    /**
-     * <code>optional bytes raw_bytes = 3;</code>
-     */
-    var rawBytes: com.google.protobuf.ByteString
-      @JvmName("getRawBytes")
-      get() = _builder.getRawBytes()
-      @JvmName("setRawBytes")
-      set(value) {
-        _builder.setRawBytes(value)
-      }
-    /**
-     * <code>optional bytes raw_bytes = 3;</code>
-     */
-    fun clearRawBytes() {
-      _builder.clearRawBytes()
-    }
-    /**
-     * <code>optional bytes raw_bytes = 3;</code>
-     * @return Whether the rawBytes field is set.
-     */
-    fun hasRawBytes(): kotlin.Boolean {
-      return _builder.hasRawBytes()
+    fun clearValue() {
+      _builder.clearValue()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
 inline fun dev.yanshouwang.camerax.messages.Barcode.copy(block: dev.yanshouwang.camerax.messages.BarcodeKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.Barcode =
   dev.yanshouwang.camerax.messages.BarcodeKt.Dsl._create(this.toBuilder()).apply { block() }._build()
-
-val dev.yanshouwang.camerax.messages.BarcodeOrBuilder.boundingBoxOrNull: dev.yanshouwang.camerax.messages.Rect?
-  get() = if (hasBoundingBox()) getBoundingBox() else null
 

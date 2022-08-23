@@ -4,26 +4,25 @@
 package dev.yanshouwang.camerax.messages;
 
 /**
- * Protobuf type {@code messages.Barcode}
+ * Protobuf type {@code messages.Offset}
  */
-public final class Barcode extends
+public final class Offset extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:messages.Barcode)
-    BarcodeOrBuilder {
+    // @@protoc_insertion_point(message_implements:messages.Offset)
+    OffsetOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Barcode.newBuilder() to construct.
-  private Barcode(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use Offset.newBuilder() to construct.
+  private Offset(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Barcode() {
-    value_ = "";
+  private Offset() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Barcode();
+    return new Offset();
   }
 
   @java.lang.Override
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private Barcode(
+  private Offset(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -49,10 +48,14 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            value_ = s;
+            dx_ = input.readInt32();
+            break;
+          }
+          case 16: {
+
+            dy_ = input.readInt32();
             break;
           }
           default: {
@@ -78,53 +81,37 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Barcode_descriptor;
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Offset_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Barcode_fieldAccessorTable
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Offset_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            dev.yanshouwang.camerax.messages.Barcode.class, dev.yanshouwang.camerax.messages.Barcode.Builder.class);
+            dev.yanshouwang.camerax.messages.Offset.class, dev.yanshouwang.camerax.messages.Offset.Builder.class);
   }
 
-  public static final int VALUE_FIELD_NUMBER = 1;
-  private volatile java.lang.Object value_;
+  public static final int DX_FIELD_NUMBER = 1;
+  private int dx_;
   /**
-   * <code>string value = 1;</code>
-   * @return The value.
+   * <code>int32 dx = 1;</code>
+   * @return The dx.
    */
   @java.lang.Override
-  public java.lang.String getValue() {
-    java.lang.Object ref = value_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      value_ = s;
-      return s;
-    }
+  public int getDx() {
+    return dx_;
   }
+
+  public static final int DY_FIELD_NUMBER = 2;
+  private int dy_;
   /**
-   * <code>string value = 1;</code>
-   * @return The bytes for value.
+   * <code>int32 dy = 2;</code>
+   * @return The dy.
    */
   @java.lang.Override
-  public com.google.protobuf.ByteString
-      getValueBytes() {
-    java.lang.Object ref = value_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      value_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getDy() {
+    return dy_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -141,8 +128,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(value_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, value_);
+    if (dx_ != 0) {
+      output.writeInt32(1, dx_);
+    }
+    if (dy_ != 0) {
+      output.writeInt32(2, dy_);
     }
     unknownFields.writeTo(output);
   }
@@ -153,8 +143,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(value_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, value_);
+    if (dx_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, dx_);
+    }
+    if (dy_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, dy_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -166,13 +161,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof dev.yanshouwang.camerax.messages.Barcode)) {
+    if (!(obj instanceof dev.yanshouwang.camerax.messages.Offset)) {
       return super.equals(obj);
     }
-    dev.yanshouwang.camerax.messages.Barcode other = (dev.yanshouwang.camerax.messages.Barcode) obj;
+    dev.yanshouwang.camerax.messages.Offset other = (dev.yanshouwang.camerax.messages.Offset) obj;
 
-    if (!getValue()
-        .equals(other.getValue())) return false;
+    if (getDx()
+        != other.getDx()) return false;
+    if (getDy()
+        != other.getDy()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -184,76 +181,78 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + VALUE_FIELD_NUMBER;
-    hash = (53 * hash) + getValue().hashCode();
+    hash = (37 * hash) + DX_FIELD_NUMBER;
+    hash = (53 * hash) + getDx();
+    hash = (37 * hash) + DY_FIELD_NUMBER;
+    hash = (53 * hash) + getDy();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(byte[] data)
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseDelimitedFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.Offset parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseDelimitedFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.Barcode parseFrom(
+  public static dev.yanshouwang.camerax.messages.Offset parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -266,7 +265,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(dev.yanshouwang.camerax.messages.Barcode prototype) {
+  public static Builder newBuilder(dev.yanshouwang.camerax.messages.Offset prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -282,26 +281,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code messages.Barcode}
+   * Protobuf type {@code messages.Offset}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:messages.Barcode)
-      dev.yanshouwang.camerax.messages.BarcodeOrBuilder {
+      // @@protoc_insertion_point(builder_implements:messages.Offset)
+      dev.yanshouwang.camerax.messages.OffsetOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Barcode_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Offset_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Barcode_fieldAccessorTable
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Offset_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.messages.Barcode.class, dev.yanshouwang.camerax.messages.Barcode.Builder.class);
+              dev.yanshouwang.camerax.messages.Offset.class, dev.yanshouwang.camerax.messages.Offset.Builder.class);
     }
 
-    // Construct using dev.yanshouwang.camerax.messages.Barcode.newBuilder()
+    // Construct using dev.yanshouwang.camerax.messages.Offset.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -319,7 +318,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      value_ = "";
+      dx_ = 0;
+
+      dy_ = 0;
 
       return this;
     }
@@ -327,17 +328,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Barcode_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Offset_descriptor;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.Barcode getDefaultInstanceForType() {
-      return dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
+    public dev.yanshouwang.camerax.messages.Offset getDefaultInstanceForType() {
+      return dev.yanshouwang.camerax.messages.Offset.getDefaultInstance();
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.Barcode build() {
-      dev.yanshouwang.camerax.messages.Barcode result = buildPartial();
+    public dev.yanshouwang.camerax.messages.Offset build() {
+      dev.yanshouwang.camerax.messages.Offset result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -345,9 +346,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.Barcode buildPartial() {
-      dev.yanshouwang.camerax.messages.Barcode result = new dev.yanshouwang.camerax.messages.Barcode(this);
-      result.value_ = value_;
+    public dev.yanshouwang.camerax.messages.Offset buildPartial() {
+      dev.yanshouwang.camerax.messages.Offset result = new dev.yanshouwang.camerax.messages.Offset(this);
+      result.dx_ = dx_;
+      result.dy_ = dy_;
       onBuilt();
       return result;
     }
@@ -386,19 +388,21 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof dev.yanshouwang.camerax.messages.Barcode) {
-        return mergeFrom((dev.yanshouwang.camerax.messages.Barcode)other);
+      if (other instanceof dev.yanshouwang.camerax.messages.Offset) {
+        return mergeFrom((dev.yanshouwang.camerax.messages.Offset)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(dev.yanshouwang.camerax.messages.Barcode other) {
-      if (other == dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance()) return this;
-      if (!other.getValue().isEmpty()) {
-        value_ = other.value_;
-        onChanged();
+    public Builder mergeFrom(dev.yanshouwang.camerax.messages.Offset other) {
+      if (other == dev.yanshouwang.camerax.messages.Offset.getDefaultInstance()) return this;
+      if (other.getDx() != 0) {
+        setDx(other.getDx());
+      }
+      if (other.getDy() != 0) {
+        setDy(other.getDy());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -415,11 +419,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      dev.yanshouwang.camerax.messages.Barcode parsedMessage = null;
+      dev.yanshouwang.camerax.messages.Offset parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (dev.yanshouwang.camerax.messages.Barcode) e.getUnfinishedMessage();
+        parsedMessage = (dev.yanshouwang.camerax.messages.Offset) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -429,78 +433,64 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object value_ = "";
+    private int dx_ ;
     /**
-     * <code>string value = 1;</code>
-     * @return The value.
+     * <code>int32 dx = 1;</code>
+     * @return The dx.
      */
-    public java.lang.String getValue() {
-      java.lang.Object ref = value_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        value_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    @java.lang.Override
+    public int getDx() {
+      return dx_;
     }
     /**
-     * <code>string value = 1;</code>
-     * @return The bytes for value.
-     */
-    public com.google.protobuf.ByteString
-        getValueBytes() {
-      java.lang.Object ref = value_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        value_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string value = 1;</code>
-     * @param value The value to set.
+     * <code>int32 dx = 1;</code>
+     * @param value The dx to set.
      * @return This builder for chaining.
      */
-    public Builder setValue(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      value_ = value;
+    public Builder setDx(int value) {
+      
+      dx_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string value = 1;</code>
+     * <code>int32 dx = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearValue() {
+    public Builder clearDx() {
       
-      value_ = getDefaultInstance().getValue();
+      dx_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int dy_ ;
+    /**
+     * <code>int32 dy = 2;</code>
+     * @return The dy.
+     */
+    @java.lang.Override
+    public int getDy() {
+      return dy_;
+    }
+    /**
+     * <code>int32 dy = 2;</code>
+     * @param value The dy to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDy(int value) {
+      
+      dy_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string value = 1;</code>
-     * @param value The bytes for value to set.
+     * <code>int32 dy = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder setValueBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+    public Builder clearDy() {
       
-      value_ = value;
+      dy_ = 0;
       onChanged();
       return this;
     }
@@ -517,41 +507,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:messages.Barcode)
+    // @@protoc_insertion_point(builder_scope:messages.Offset)
   }
 
-  // @@protoc_insertion_point(class_scope:messages.Barcode)
-  private static final dev.yanshouwang.camerax.messages.Barcode DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:messages.Offset)
+  private static final dev.yanshouwang.camerax.messages.Offset DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.Barcode();
+    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.Offset();
   }
 
-  public static dev.yanshouwang.camerax.messages.Barcode getDefaultInstance() {
+  public static dev.yanshouwang.camerax.messages.Offset getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Barcode>
-      PARSER = new com.google.protobuf.AbstractParser<Barcode>() {
+  private static final com.google.protobuf.Parser<Offset>
+      PARSER = new com.google.protobuf.AbstractParser<Offset>() {
     @java.lang.Override
-    public Barcode parsePartialFrom(
+    public Offset parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new Barcode(input, extensionRegistry);
+      return new Offset(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<Barcode> parser() {
+  public static com.google.protobuf.Parser<Offset> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Barcode> getParserForType() {
+  public com.google.protobuf.Parser<Offset> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public dev.yanshouwang.camerax.messages.Barcode getDefaultInstanceForType() {
+  public dev.yanshouwang.camerax.messages.Offset getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

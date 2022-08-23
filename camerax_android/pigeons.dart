@@ -39,10 +39,10 @@ abstract class MLAnalyzerHostPigeon {
 
 @FlutterApi()
 abstract class MLAnalyzerFlutterPigeon {
-  void onAnalyzed(String id, Uint8List mlMetadataBuffer);
+  void onAnalyzed(String id, List<Uint8List> recognitionBuffer);
 }
 
 @HostApi(dartHostTestHandler: 'TestCameraViewHostPigeon')
 abstract class CameraViewHostPigeon {
-  void createOrSetArguments(String id, Uint8List argumentsBuffer);
+  void createOrSetArguments(String id, String controllerId, int scaleType);
 }

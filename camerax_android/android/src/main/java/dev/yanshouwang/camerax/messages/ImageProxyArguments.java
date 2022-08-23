@@ -4,18 +4,18 @@
 package dev.yanshouwang.camerax.messages;
 
 /**
- * Protobuf type {@code messages.MLMetadataObjectArguments}
+ * Protobuf type {@code messages.ImageProxyArguments}
  */
-public final class MLMetadataObjectArguments extends
+public final class ImageProxyArguments extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:messages.MLMetadataObjectArguments)
-    MLMetadataObjectArgumentsOrBuilder {
+    // @@protoc_insertion_point(message_implements:messages.ImageProxyArguments)
+    ImageProxyArgumentsOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use MLMetadataObjectArguments.newBuilder() to construct.
-  private MLMetadataObjectArguments(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use ImageProxyArguments.newBuilder() to construct.
+  private ImageProxyArguments(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private MLMetadataObjectArguments() {
+  private ImageProxyArguments() {
     id_ = "";
   }
 
@@ -23,7 +23,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new MLMetadataObjectArguments();
+    return new ImageProxyArguments();
   }
 
   @java.lang.Override
@@ -31,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private MLMetadataObjectArguments(
+  private ImageProxyArguments(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -56,14 +56,14 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 18: {
-            dev.yanshouwang.camerax.messages.MLMetadataObject.Builder subBuilder = null;
-            if (mlObject_ != null) {
-              subBuilder = mlObject_.toBuilder();
+            dev.yanshouwang.camerax.messages.ImageProxy.Builder subBuilder = null;
+            if (imageProxy_ != null) {
+              subBuilder = imageProxy_.toBuilder();
             }
-            mlObject_ = input.readMessage(dev.yanshouwang.camerax.messages.MLMetadataObject.parser(), extensionRegistry);
+            imageProxy_ = input.readMessage(dev.yanshouwang.camerax.messages.ImageProxy.parser(), extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom(mlObject_);
-              mlObject_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom(imageProxy_);
+              imageProxy_ = subBuilder.buildPartial();
             }
 
             break;
@@ -91,15 +91,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadataObjectArguments_descriptor;
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxyArguments_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadataObjectArguments_fieldAccessorTable
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxyArguments_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.class, dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.Builder.class);
+            dev.yanshouwang.camerax.messages.ImageProxyArguments.class, dev.yanshouwang.camerax.messages.ImageProxyArguments.Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
@@ -140,30 +140,30 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ML_OBJECT_FIELD_NUMBER = 2;
-  private dev.yanshouwang.camerax.messages.MLMetadataObject mlObject_;
+  public static final int IMAGE_PROXY_FIELD_NUMBER = 2;
+  private dev.yanshouwang.camerax.messages.ImageProxy imageProxy_;
   /**
-   * <code>.messages.MLMetadataObject ml_object = 2;</code>
-   * @return Whether the mlObject field is set.
+   * <code>.messages.ImageProxy image_proxy = 2;</code>
+   * @return Whether the imageProxy field is set.
    */
   @java.lang.Override
-  public boolean hasMlObject() {
-    return mlObject_ != null;
+  public boolean hasImageProxy() {
+    return imageProxy_ != null;
   }
   /**
-   * <code>.messages.MLMetadataObject ml_object = 2;</code>
-   * @return The mlObject.
+   * <code>.messages.ImageProxy image_proxy = 2;</code>
+   * @return The imageProxy.
    */
   @java.lang.Override
-  public dev.yanshouwang.camerax.messages.MLMetadataObject getMlObject() {
-    return mlObject_ == null ? dev.yanshouwang.camerax.messages.MLMetadataObject.getDefaultInstance() : mlObject_;
+  public dev.yanshouwang.camerax.messages.ImageProxy getImageProxy() {
+    return imageProxy_ == null ? dev.yanshouwang.camerax.messages.ImageProxy.getDefaultInstance() : imageProxy_;
   }
   /**
-   * <code>.messages.MLMetadataObject ml_object = 2;</code>
+   * <code>.messages.ImageProxy image_proxy = 2;</code>
    */
   @java.lang.Override
-  public dev.yanshouwang.camerax.messages.MLMetadataObjectOrBuilder getMlObjectOrBuilder() {
-    return getMlObject();
+  public dev.yanshouwang.camerax.messages.ImageProxyOrBuilder getImageProxyOrBuilder() {
+    return getImageProxy();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -183,8 +183,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
     }
-    if (mlObject_ != null) {
-      output.writeMessage(2, getMlObject());
+    if (imageProxy_ != null) {
+      output.writeMessage(2, getImageProxy());
     }
     unknownFields.writeTo(output);
   }
@@ -198,9 +198,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
     }
-    if (mlObject_ != null) {
+    if (imageProxy_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, getMlObject());
+        .computeMessageSize(2, getImageProxy());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -212,17 +212,17 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof dev.yanshouwang.camerax.messages.MLMetadataObjectArguments)) {
+    if (!(obj instanceof dev.yanshouwang.camerax.messages.ImageProxyArguments)) {
       return super.equals(obj);
     }
-    dev.yanshouwang.camerax.messages.MLMetadataObjectArguments other = (dev.yanshouwang.camerax.messages.MLMetadataObjectArguments) obj;
+    dev.yanshouwang.camerax.messages.ImageProxyArguments other = (dev.yanshouwang.camerax.messages.ImageProxyArguments) obj;
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (hasMlObject() != other.hasMlObject()) return false;
-    if (hasMlObject()) {
-      if (!getMlObject()
-          .equals(other.getMlObject())) return false;
+    if (hasImageProxy() != other.hasImageProxy()) return false;
+    if (hasImageProxy()) {
+      if (!getImageProxy()
+          .equals(other.getImageProxy())) return false;
     }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -237,78 +237,78 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    if (hasMlObject()) {
-      hash = (37 * hash) + ML_OBJECT_FIELD_NUMBER;
-      hash = (53 * hash) + getMlObject().hashCode();
+    if (hasImageProxy()) {
+      hash = (37 * hash) + IMAGE_PROXY_FIELD_NUMBER;
+      hash = (53 * hash) + getImageProxy().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(byte[] data)
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseDelimitedFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseDelimitedFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -321,7 +321,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(dev.yanshouwang.camerax.messages.MLMetadataObjectArguments prototype) {
+  public static Builder newBuilder(dev.yanshouwang.camerax.messages.ImageProxyArguments prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -337,26 +337,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code messages.MLMetadataObjectArguments}
+   * Protobuf type {@code messages.ImageProxyArguments}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:messages.MLMetadataObjectArguments)
-      dev.yanshouwang.camerax.messages.MLMetadataObjectArgumentsOrBuilder {
+      // @@protoc_insertion_point(builder_implements:messages.ImageProxyArguments)
+      dev.yanshouwang.camerax.messages.ImageProxyArgumentsOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadataObjectArguments_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxyArguments_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadataObjectArguments_fieldAccessorTable
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxyArguments_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.class, dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.Builder.class);
+              dev.yanshouwang.camerax.messages.ImageProxyArguments.class, dev.yanshouwang.camerax.messages.ImageProxyArguments.Builder.class);
     }
 
-    // Construct using dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.newBuilder()
+    // Construct using dev.yanshouwang.camerax.messages.ImageProxyArguments.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -376,11 +376,11 @@ private static final long serialVersionUID = 0L;
       super.clear();
       id_ = "";
 
-      if (mlObjectBuilder_ == null) {
-        mlObject_ = null;
+      if (imageProxyBuilder_ == null) {
+        imageProxy_ = null;
       } else {
-        mlObject_ = null;
-        mlObjectBuilder_ = null;
+        imageProxy_ = null;
+        imageProxyBuilder_ = null;
       }
       return this;
     }
@@ -388,17 +388,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadataObjectArguments_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxyArguments_descriptor;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.MLMetadataObjectArguments getDefaultInstanceForType() {
-      return dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.getDefaultInstance();
+    public dev.yanshouwang.camerax.messages.ImageProxyArguments getDefaultInstanceForType() {
+      return dev.yanshouwang.camerax.messages.ImageProxyArguments.getDefaultInstance();
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.MLMetadataObjectArguments build() {
-      dev.yanshouwang.camerax.messages.MLMetadataObjectArguments result = buildPartial();
+    public dev.yanshouwang.camerax.messages.ImageProxyArguments build() {
+      dev.yanshouwang.camerax.messages.ImageProxyArguments result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -406,13 +406,13 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.MLMetadataObjectArguments buildPartial() {
-      dev.yanshouwang.camerax.messages.MLMetadataObjectArguments result = new dev.yanshouwang.camerax.messages.MLMetadataObjectArguments(this);
+    public dev.yanshouwang.camerax.messages.ImageProxyArguments buildPartial() {
+      dev.yanshouwang.camerax.messages.ImageProxyArguments result = new dev.yanshouwang.camerax.messages.ImageProxyArguments(this);
       result.id_ = id_;
-      if (mlObjectBuilder_ == null) {
-        result.mlObject_ = mlObject_;
+      if (imageProxyBuilder_ == null) {
+        result.imageProxy_ = imageProxy_;
       } else {
-        result.mlObject_ = mlObjectBuilder_.build();
+        result.imageProxy_ = imageProxyBuilder_.build();
       }
       onBuilt();
       return result;
@@ -452,22 +452,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof dev.yanshouwang.camerax.messages.MLMetadataObjectArguments) {
-        return mergeFrom((dev.yanshouwang.camerax.messages.MLMetadataObjectArguments)other);
+      if (other instanceof dev.yanshouwang.camerax.messages.ImageProxyArguments) {
+        return mergeFrom((dev.yanshouwang.camerax.messages.ImageProxyArguments)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(dev.yanshouwang.camerax.messages.MLMetadataObjectArguments other) {
-      if (other == dev.yanshouwang.camerax.messages.MLMetadataObjectArguments.getDefaultInstance()) return this;
+    public Builder mergeFrom(dev.yanshouwang.camerax.messages.ImageProxyArguments other) {
+      if (other == dev.yanshouwang.camerax.messages.ImageProxyArguments.getDefaultInstance()) return this;
       if (!other.getId().isEmpty()) {
         id_ = other.id_;
         onChanged();
       }
-      if (other.hasMlObject()) {
-        mergeMlObject(other.getMlObject());
+      if (other.hasImageProxy()) {
+        mergeImageProxy(other.getImageProxy());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -484,11 +484,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      dev.yanshouwang.camerax.messages.MLMetadataObjectArguments parsedMessage = null;
+      dev.yanshouwang.camerax.messages.ImageProxyArguments parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (dev.yanshouwang.camerax.messages.MLMetadataObjectArguments) e.getUnfinishedMessage();
+        parsedMessage = (dev.yanshouwang.camerax.messages.ImageProxyArguments) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -574,123 +574,123 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private dev.yanshouwang.camerax.messages.MLMetadataObject mlObject_;
+    private dev.yanshouwang.camerax.messages.ImageProxy imageProxy_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        dev.yanshouwang.camerax.messages.MLMetadataObject, dev.yanshouwang.camerax.messages.MLMetadataObject.Builder, dev.yanshouwang.camerax.messages.MLMetadataObjectOrBuilder> mlObjectBuilder_;
+        dev.yanshouwang.camerax.messages.ImageProxy, dev.yanshouwang.camerax.messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.ImageProxyOrBuilder> imageProxyBuilder_;
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
-     * @return Whether the mlObject field is set.
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * @return Whether the imageProxy field is set.
      */
-    public boolean hasMlObject() {
-      return mlObjectBuilder_ != null || mlObject_ != null;
+    public boolean hasImageProxy() {
+      return imageProxyBuilder_ != null || imageProxy_ != null;
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
-     * @return The mlObject.
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
+     * @return The imageProxy.
      */
-    public dev.yanshouwang.camerax.messages.MLMetadataObject getMlObject() {
-      if (mlObjectBuilder_ == null) {
-        return mlObject_ == null ? dev.yanshouwang.camerax.messages.MLMetadataObject.getDefaultInstance() : mlObject_;
+    public dev.yanshouwang.camerax.messages.ImageProxy getImageProxy() {
+      if (imageProxyBuilder_ == null) {
+        return imageProxy_ == null ? dev.yanshouwang.camerax.messages.ImageProxy.getDefaultInstance() : imageProxy_;
       } else {
-        return mlObjectBuilder_.getMessage();
+        return imageProxyBuilder_.getMessage();
       }
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
-    public Builder setMlObject(dev.yanshouwang.camerax.messages.MLMetadataObject value) {
-      if (mlObjectBuilder_ == null) {
+    public Builder setImageProxy(dev.yanshouwang.camerax.messages.ImageProxy value) {
+      if (imageProxyBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        mlObject_ = value;
+        imageProxy_ = value;
         onChanged();
       } else {
-        mlObjectBuilder_.setMessage(value);
+        imageProxyBuilder_.setMessage(value);
       }
 
       return this;
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
-    public Builder setMlObject(
-        dev.yanshouwang.camerax.messages.MLMetadataObject.Builder builderForValue) {
-      if (mlObjectBuilder_ == null) {
-        mlObject_ = builderForValue.build();
+    public Builder setImageProxy(
+        dev.yanshouwang.camerax.messages.ImageProxy.Builder builderForValue) {
+      if (imageProxyBuilder_ == null) {
+        imageProxy_ = builderForValue.build();
         onChanged();
       } else {
-        mlObjectBuilder_.setMessage(builderForValue.build());
+        imageProxyBuilder_.setMessage(builderForValue.build());
       }
 
       return this;
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
-    public Builder mergeMlObject(dev.yanshouwang.camerax.messages.MLMetadataObject value) {
-      if (mlObjectBuilder_ == null) {
-        if (mlObject_ != null) {
-          mlObject_ =
-            dev.yanshouwang.camerax.messages.MLMetadataObject.newBuilder(mlObject_).mergeFrom(value).buildPartial();
+    public Builder mergeImageProxy(dev.yanshouwang.camerax.messages.ImageProxy value) {
+      if (imageProxyBuilder_ == null) {
+        if (imageProxy_ != null) {
+          imageProxy_ =
+            dev.yanshouwang.camerax.messages.ImageProxy.newBuilder(imageProxy_).mergeFrom(value).buildPartial();
         } else {
-          mlObject_ = value;
+          imageProxy_ = value;
         }
         onChanged();
       } else {
-        mlObjectBuilder_.mergeFrom(value);
+        imageProxyBuilder_.mergeFrom(value);
       }
 
       return this;
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
-    public Builder clearMlObject() {
-      if (mlObjectBuilder_ == null) {
-        mlObject_ = null;
+    public Builder clearImageProxy() {
+      if (imageProxyBuilder_ == null) {
+        imageProxy_ = null;
         onChanged();
       } else {
-        mlObject_ = null;
-        mlObjectBuilder_ = null;
+        imageProxy_ = null;
+        imageProxyBuilder_ = null;
       }
 
       return this;
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
-    public dev.yanshouwang.camerax.messages.MLMetadataObject.Builder getMlObjectBuilder() {
+    public dev.yanshouwang.camerax.messages.ImageProxy.Builder getImageProxyBuilder() {
       
       onChanged();
-      return getMlObjectFieldBuilder().getBuilder();
+      return getImageProxyFieldBuilder().getBuilder();
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
-    public dev.yanshouwang.camerax.messages.MLMetadataObjectOrBuilder getMlObjectOrBuilder() {
-      if (mlObjectBuilder_ != null) {
-        return mlObjectBuilder_.getMessageOrBuilder();
+    public dev.yanshouwang.camerax.messages.ImageProxyOrBuilder getImageProxyOrBuilder() {
+      if (imageProxyBuilder_ != null) {
+        return imageProxyBuilder_.getMessageOrBuilder();
       } else {
-        return mlObject_ == null ?
-            dev.yanshouwang.camerax.messages.MLMetadataObject.getDefaultInstance() : mlObject_;
+        return imageProxy_ == null ?
+            dev.yanshouwang.camerax.messages.ImageProxy.getDefaultInstance() : imageProxy_;
       }
     }
     /**
-     * <code>.messages.MLMetadataObject ml_object = 2;</code>
+     * <code>.messages.ImageProxy image_proxy = 2;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        dev.yanshouwang.camerax.messages.MLMetadataObject, dev.yanshouwang.camerax.messages.MLMetadataObject.Builder, dev.yanshouwang.camerax.messages.MLMetadataObjectOrBuilder> 
-        getMlObjectFieldBuilder() {
-      if (mlObjectBuilder_ == null) {
-        mlObjectBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            dev.yanshouwang.camerax.messages.MLMetadataObject, dev.yanshouwang.camerax.messages.MLMetadataObject.Builder, dev.yanshouwang.camerax.messages.MLMetadataObjectOrBuilder>(
-                getMlObject(),
+        dev.yanshouwang.camerax.messages.ImageProxy, dev.yanshouwang.camerax.messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.ImageProxyOrBuilder> 
+        getImageProxyFieldBuilder() {
+      if (imageProxyBuilder_ == null) {
+        imageProxyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            dev.yanshouwang.camerax.messages.ImageProxy, dev.yanshouwang.camerax.messages.ImageProxy.Builder, dev.yanshouwang.camerax.messages.ImageProxyOrBuilder>(
+                getImageProxy(),
                 getParentForChildren(),
                 isClean());
-        mlObject_ = null;
+        imageProxy_ = null;
       }
-      return mlObjectBuilder_;
+      return imageProxyBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
@@ -705,41 +705,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:messages.MLMetadataObjectArguments)
+    // @@protoc_insertion_point(builder_scope:messages.ImageProxyArguments)
   }
 
-  // @@protoc_insertion_point(class_scope:messages.MLMetadataObjectArguments)
-  private static final dev.yanshouwang.camerax.messages.MLMetadataObjectArguments DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:messages.ImageProxyArguments)
+  private static final dev.yanshouwang.camerax.messages.ImageProxyArguments DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.MLMetadataObjectArguments();
+    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.ImageProxyArguments();
   }
 
-  public static dev.yanshouwang.camerax.messages.MLMetadataObjectArguments getDefaultInstance() {
+  public static dev.yanshouwang.camerax.messages.ImageProxyArguments getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<MLMetadataObjectArguments>
-      PARSER = new com.google.protobuf.AbstractParser<MLMetadataObjectArguments>() {
+  private static final com.google.protobuf.Parser<ImageProxyArguments>
+      PARSER = new com.google.protobuf.AbstractParser<ImageProxyArguments>() {
     @java.lang.Override
-    public MLMetadataObjectArguments parsePartialFrom(
+    public ImageProxyArguments parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new MLMetadataObjectArguments(input, extensionRegistry);
+      return new ImageProxyArguments(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<MLMetadataObjectArguments> parser() {
+  public static com.google.protobuf.Parser<ImageProxyArguments> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<MLMetadataObjectArguments> getParserForType() {
+  public com.google.protobuf.Parser<ImageProxyArguments> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public dev.yanshouwang.camerax.messages.MLMetadataObjectArguments getDefaultInstanceForType() {
+  public dev.yanshouwang.camerax.messages.ImageProxyArguments getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

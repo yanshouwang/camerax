@@ -4,20 +4,6 @@ package messages;
 option java_package = "dev.yanshouwang.camerax.messages";
 option java_multiple_files = true;
 
-message CameraViewArguments {
-    string controller_id = 1;
-    ScaleType scale_type = 2;
-}
-
-enum ScaleType {
-    SCALE_TYPE_FILL_START = 0;
-    SCALE_TYPE_FILL_CENTER = 1;
-    SCALE_TYPE_FILL_END = 2;
-    SCALE_TYPE_FIT_START = 3;
-    SCALE_TYPE_FIT_CENTER = 4;
-    SCALE_TYPE_FIT_END = 5;
-}
-
 message CameraSelector {
     CameraFacing facing = 1;
 }
@@ -32,24 +18,32 @@ message TorchStateArguments {
     bool state = 2;
 }
 
-message MLMetadataObjectArguments {
+message ImageProxyArguments {
     string id = 1;
-    MLMetadataObject ml_object = 2;
+    ImageProxy image_proxy = 2;
 }
 
-message MLMetadataObject {
-    repeated Barcode barcodes = 1;
+message ImageProxy {
+    string id = 1;
+}
+
+message MLRecognitionArguments {
+    string id = 1;
+    repeated MLMetadata recognition = 2;
+}
+
+message MLMetadata {
+    repeated Offset corners = 1;
+    oneof metadata {
+        Barcode barcode = 2;
+    }
+}
+
+message Offset {
+    int32 dx = 1;
+    int32 dy = 2;
 }
 
 message Barcode {
-    optional Rect bounding_box = 1;
-    optional string raw_value = 2;
-    optional bytes raw_bytes = 3;
-}
-
-message Rect {
-    int32 left = 1;
-    int32 top = 2;
-    int32 right = 3;
-    int32 bottom = 4;
+    string value = 1;
 }

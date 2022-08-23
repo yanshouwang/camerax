@@ -8,45 +8,14 @@ public interface BarcodeOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>optional .messages.Rect bounding_box = 1;</code>
-   * @return Whether the boundingBox field is set.
+   * <code>string value = 1;</code>
+   * @return The value.
    */
-  boolean hasBoundingBox();
+  java.lang.String getValue();
   /**
-   * <code>optional .messages.Rect bounding_box = 1;</code>
-   * @return The boundingBox.
-   */
-  dev.yanshouwang.camerax.messages.Rect getBoundingBox();
-  /**
-   * <code>optional .messages.Rect bounding_box = 1;</code>
-   */
-  dev.yanshouwang.camerax.messages.RectOrBuilder getBoundingBoxOrBuilder();
-
-  /**
-   * <code>optional string raw_value = 2;</code>
-   * @return Whether the rawValue field is set.
-   */
-  boolean hasRawValue();
-  /**
-   * <code>optional string raw_value = 2;</code>
-   * @return The rawValue.
-   */
-  java.lang.String getRawValue();
-  /**
-   * <code>optional string raw_value = 2;</code>
-   * @return The bytes for rawValue.
+   * <code>string value = 1;</code>
+   * @return The bytes for value.
    */
   com.google.protobuf.ByteString
-      getRawValueBytes();
-
-  /**
-   * <code>optional bytes raw_bytes = 3;</code>
-   * @return Whether the rawBytes field is set.
-   */
-  boolean hasRawBytes();
-  /**
-   * <code>optional bytes raw_bytes = 3;</code>
-   * @return The rawBytes.
-   */
-  com.google.protobuf.ByteString getRawBytes();
+      getValueBytes();
 }

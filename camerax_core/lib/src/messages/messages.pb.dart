@@ -13,67 +13,6 @@ import 'messages.pbenum.dart';
 
 export 'messages.pbenum.dart';
 
-class CameraViewArguments extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraViewArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'controllerId')
-    ..e<ScaleType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'scaleType', $pb.PbFieldType.OE, defaultOrMaker: ScaleType.SCALE_TYPE_FILL_START, valueOf: ScaleType.valueOf, enumValues: ScaleType.values)
-    ..hasRequiredFields = false
-  ;
-
-  CameraViewArguments._() : super();
-  factory CameraViewArguments({
-    $core.String? controllerId,
-    ScaleType? scaleType,
-  }) {
-    final _result = create();
-    if (controllerId != null) {
-      _result.controllerId = controllerId;
-    }
-    if (scaleType != null) {
-      _result.scaleType = scaleType;
-    }
-    return _result;
-  }
-  factory CameraViewArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CameraViewArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  CameraViewArguments clone() => CameraViewArguments()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  CameraViewArguments copyWith(void Function(CameraViewArguments) updates) => super.copyWith((message) => updates(message as CameraViewArguments)) as CameraViewArguments; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static CameraViewArguments create() => CameraViewArguments._();
-  CameraViewArguments createEmptyInstance() => create();
-  static $pb.PbList<CameraViewArguments> createRepeated() => $pb.PbList<CameraViewArguments>();
-  @$core.pragma('dart2js:noInline')
-  static CameraViewArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraViewArguments>(create);
-  static CameraViewArguments? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get controllerId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set controllerId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasControllerId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearControllerId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  ScaleType get scaleType => $_getN(1);
-  @$pb.TagNumber(2)
-  set scaleType(ScaleType v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasScaleType() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearScaleType() => clearField(2);
-}
-
 class CameraSelector extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraSelector', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..e<CameraFacing>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'facing', $pb.PbFieldType.OE, defaultOrMaker: CameraFacing.CAMERA_FACING_BACK, valueOf: CameraFacing.valueOf, enumValues: CameraFacing.values)
@@ -182,47 +121,47 @@ class TorchStateArguments extends $pb.GeneratedMessage {
   void clearState() => clearField(2);
 }
 
-class MLMetadataObjectArguments extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLMetadataObjectArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+class ImageProxyArguments extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageProxyArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
-    ..aOM<MLMetadataObject>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mlObject', subBuilder: MLMetadataObject.create)
+    ..aOM<ImageProxy>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imageProxy', subBuilder: ImageProxy.create)
     ..hasRequiredFields = false
   ;
 
-  MLMetadataObjectArguments._() : super();
-  factory MLMetadataObjectArguments({
+  ImageProxyArguments._() : super();
+  factory ImageProxyArguments({
     $core.String? id,
-    MLMetadataObject? mlObject,
+    ImageProxy? imageProxy,
   }) {
     final _result = create();
     if (id != null) {
       _result.id = id;
     }
-    if (mlObject != null) {
-      _result.mlObject = mlObject;
+    if (imageProxy != null) {
+      _result.imageProxy = imageProxy;
     }
     return _result;
   }
-  factory MLMetadataObjectArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MLMetadataObjectArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ImageProxyArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageProxyArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MLMetadataObjectArguments clone() => MLMetadataObjectArguments()..mergeFromMessage(this);
+  ImageProxyArguments clone() => ImageProxyArguments()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MLMetadataObjectArguments copyWith(void Function(MLMetadataObjectArguments) updates) => super.copyWith((message) => updates(message as MLMetadataObjectArguments)) as MLMetadataObjectArguments; // ignore: deprecated_member_use
+  ImageProxyArguments copyWith(void Function(ImageProxyArguments) updates) => super.copyWith((message) => updates(message as ImageProxyArguments)) as ImageProxyArguments; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static MLMetadataObjectArguments create() => MLMetadataObjectArguments._();
-  MLMetadataObjectArguments createEmptyInstance() => create();
-  static $pb.PbList<MLMetadataObjectArguments> createRepeated() => $pb.PbList<MLMetadataObjectArguments>();
+  static ImageProxyArguments create() => ImageProxyArguments._();
+  ImageProxyArguments createEmptyInstance() => create();
+  static $pb.PbList<ImageProxyArguments> createRepeated() => $pb.PbList<ImageProxyArguments>();
   @$core.pragma('dart2js:noInline')
-  static MLMetadataObjectArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLMetadataObjectArguments>(create);
-  static MLMetadataObjectArguments? _defaultInstance;
+  static ImageProxyArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageProxyArguments>(create);
+  static ImageProxyArguments? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -234,81 +173,263 @@ class MLMetadataObjectArguments extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  MLMetadataObject get mlObject => $_getN(1);
+  ImageProxy get imageProxy => $_getN(1);
   @$pb.TagNumber(2)
-  set mlObject(MLMetadataObject v) { setField(2, v); }
+  set imageProxy(ImageProxy v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMlObject() => $_has(1);
+  $core.bool hasImageProxy() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMlObject() => clearField(2);
+  void clearImageProxy() => clearField(2);
   @$pb.TagNumber(2)
-  MLMetadataObject ensureMlObject() => $_ensure(1);
+  ImageProxy ensureImageProxy() => $_ensure(1);
 }
 
-class MLMetadataObject extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLMetadataObject', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..pc<Barcode>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'barcodes', $pb.PbFieldType.PM, subBuilder: Barcode.create)
+class ImageProxy extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageProxy', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..hasRequiredFields = false
   ;
 
-  MLMetadataObject._() : super();
-  factory MLMetadataObject({
-    $core.Iterable<Barcode>? barcodes,
+  ImageProxy._() : super();
+  factory ImageProxy({
+    $core.String? id,
   }) {
     final _result = create();
-    if (barcodes != null) {
-      _result.barcodes.addAll(barcodes);
+    if (id != null) {
+      _result.id = id;
     }
     return _result;
   }
-  factory MLMetadataObject.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MLMetadataObject.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ImageProxy.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageProxy.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MLMetadataObject clone() => MLMetadataObject()..mergeFromMessage(this);
+  ImageProxy clone() => ImageProxy()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MLMetadataObject copyWith(void Function(MLMetadataObject) updates) => super.copyWith((message) => updates(message as MLMetadataObject)) as MLMetadataObject; // ignore: deprecated_member_use
+  ImageProxy copyWith(void Function(ImageProxy) updates) => super.copyWith((message) => updates(message as ImageProxy)) as ImageProxy; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static MLMetadataObject create() => MLMetadataObject._();
-  MLMetadataObject createEmptyInstance() => create();
-  static $pb.PbList<MLMetadataObject> createRepeated() => $pb.PbList<MLMetadataObject>();
+  static ImageProxy create() => ImageProxy._();
+  ImageProxy createEmptyInstance() => create();
+  static $pb.PbList<ImageProxy> createRepeated() => $pb.PbList<ImageProxy>();
   @$core.pragma('dart2js:noInline')
-  static MLMetadataObject getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLMetadataObject>(create);
-  static MLMetadataObject? _defaultInstance;
+  static ImageProxy getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageProxy>(create);
+  static ImageProxy? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<Barcode> get barcodes => $_getList(0);
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class MLRecognitionArguments extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLRecognitionArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..pc<MLMetadata>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'recognition', $pb.PbFieldType.PM, subBuilder: MLMetadata.create)
+    ..hasRequiredFields = false
+  ;
+
+  MLRecognitionArguments._() : super();
+  factory MLRecognitionArguments({
+    $core.String? id,
+    $core.Iterable<MLMetadata>? recognition,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    if (recognition != null) {
+      _result.recognition.addAll(recognition);
+    }
+    return _result;
+  }
+  factory MLRecognitionArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MLRecognitionArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MLRecognitionArguments clone() => MLRecognitionArguments()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MLRecognitionArguments copyWith(void Function(MLRecognitionArguments) updates) => super.copyWith((message) => updates(message as MLRecognitionArguments)) as MLRecognitionArguments; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static MLRecognitionArguments create() => MLRecognitionArguments._();
+  MLRecognitionArguments createEmptyInstance() => create();
+  static $pb.PbList<MLRecognitionArguments> createRepeated() => $pb.PbList<MLRecognitionArguments>();
+  @$core.pragma('dart2js:noInline')
+  static MLRecognitionArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLRecognitionArguments>(create);
+  static MLRecognitionArguments? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<MLMetadata> get recognition => $_getList(1);
+}
+
+enum MLMetadata_Metadata {
+  barcode, 
+  notSet
+}
+
+class MLMetadata extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, MLMetadata_Metadata> _MLMetadata_MetadataByTag = {
+    2 : MLMetadata_Metadata.barcode,
+    0 : MLMetadata_Metadata.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLMetadata', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..oo(0, [2])
+    ..pc<Offset>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'corners', $pb.PbFieldType.PM, subBuilder: Offset.create)
+    ..aOM<Barcode>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'barcode', subBuilder: Barcode.create)
+    ..hasRequiredFields = false
+  ;
+
+  MLMetadata._() : super();
+  factory MLMetadata({
+    $core.Iterable<Offset>? corners,
+    Barcode? barcode,
+  }) {
+    final _result = create();
+    if (corners != null) {
+      _result.corners.addAll(corners);
+    }
+    if (barcode != null) {
+      _result.barcode = barcode;
+    }
+    return _result;
+  }
+  factory MLMetadata.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MLMetadata.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MLMetadata clone() => MLMetadata()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MLMetadata copyWith(void Function(MLMetadata) updates) => super.copyWith((message) => updates(message as MLMetadata)) as MLMetadata; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static MLMetadata create() => MLMetadata._();
+  MLMetadata createEmptyInstance() => create();
+  static $pb.PbList<MLMetadata> createRepeated() => $pb.PbList<MLMetadata>();
+  @$core.pragma('dart2js:noInline')
+  static MLMetadata getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLMetadata>(create);
+  static MLMetadata? _defaultInstance;
+
+  MLMetadata_Metadata whichMetadata() => _MLMetadata_MetadataByTag[$_whichOneof(0)]!;
+  void clearMetadata() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  $core.List<Offset> get corners => $_getList(0);
+
+  @$pb.TagNumber(2)
+  Barcode get barcode => $_getN(1);
+  @$pb.TagNumber(2)
+  set barcode(Barcode v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasBarcode() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearBarcode() => clearField(2);
+  @$pb.TagNumber(2)
+  Barcode ensureBarcode() => $_ensure(1);
+}
+
+class Offset extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Offset', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dx', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'dy', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  Offset._() : super();
+  factory Offset({
+    $core.int? dx,
+    $core.int? dy,
+  }) {
+    final _result = create();
+    if (dx != null) {
+      _result.dx = dx;
+    }
+    if (dy != null) {
+      _result.dy = dy;
+    }
+    return _result;
+  }
+  factory Offset.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Offset.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Offset clone() => Offset()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Offset copyWith(void Function(Offset) updates) => super.copyWith((message) => updates(message as Offset)) as Offset; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Offset create() => Offset._();
+  Offset createEmptyInstance() => create();
+  static $pb.PbList<Offset> createRepeated() => $pb.PbList<Offset>();
+  @$core.pragma('dart2js:noInline')
+  static Offset getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Offset>(create);
+  static Offset? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get dx => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set dx($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasDx() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearDx() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get dy => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set dy($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasDy() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearDy() => clearField(2);
 }
 
 class Barcode extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Barcode', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..aOM<Rect>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boundingBox', subBuilder: Rect.create)
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rawValue')
-    ..a<$core.List<$core.int>>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rawBytes', $pb.PbFieldType.OY)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'value')
     ..hasRequiredFields = false
   ;
 
   Barcode._() : super();
   factory Barcode({
-    Rect? boundingBox,
-    $core.String? rawValue,
-    $core.List<$core.int>? rawBytes,
+    $core.String? value,
   }) {
     final _result = create();
-    if (boundingBox != null) {
-      _result.boundingBox = boundingBox;
-    }
-    if (rawValue != null) {
-      _result.rawValue = rawValue;
-    }
-    if (rawBytes != null) {
-      _result.rawBytes = rawBytes;
+    if (value != null) {
+      _result.value = value;
     }
     return _result;
   }
@@ -334,121 +455,12 @@ class Barcode extends $pb.GeneratedMessage {
   static Barcode? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Rect get boundingBox => $_getN(0);
+  $core.String get value => $_getSZ(0);
   @$pb.TagNumber(1)
-  set boundingBox(Rect v) { setField(1, v); }
+  set value($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasBoundingBox() => $_has(0);
+  $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
-  void clearBoundingBox() => clearField(1);
-  @$pb.TagNumber(1)
-  Rect ensureBoundingBox() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $core.String get rawValue => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set rawValue($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasRawValue() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearRawValue() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.List<$core.int> get rawBytes => $_getN(2);
-  @$pb.TagNumber(3)
-  set rawBytes($core.List<$core.int> v) { $_setBytes(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasRawBytes() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearRawBytes() => clearField(3);
-}
-
-class Rect extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Rect', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'left', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'top', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'right', $pb.PbFieldType.O3)
-    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bottom', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  Rect._() : super();
-  factory Rect({
-    $core.int? left,
-    $core.int? top,
-    $core.int? right,
-    $core.int? bottom,
-  }) {
-    final _result = create();
-    if (left != null) {
-      _result.left = left;
-    }
-    if (top != null) {
-      _result.top = top;
-    }
-    if (right != null) {
-      _result.right = right;
-    }
-    if (bottom != null) {
-      _result.bottom = bottom;
-    }
-    return _result;
-  }
-  factory Rect.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Rect.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Rect clone() => Rect()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Rect copyWith(void Function(Rect) updates) => super.copyWith((message) => updates(message as Rect)) as Rect; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Rect create() => Rect._();
-  Rect createEmptyInstance() => create();
-  static $pb.PbList<Rect> createRepeated() => $pb.PbList<Rect>();
-  @$core.pragma('dart2js:noInline')
-  static Rect getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Rect>(create);
-  static Rect? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get left => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set left($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasLeft() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearLeft() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get top => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set top($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasTop() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTop() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.int get right => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set right($core.int v) { $_setSignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasRight() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearRight() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.int get bottom => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set bottom($core.int v) { $_setSignedInt32(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasBottom() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearBottom() => clearField(4);
+  void clearValue() => clearField(1);
 }
 

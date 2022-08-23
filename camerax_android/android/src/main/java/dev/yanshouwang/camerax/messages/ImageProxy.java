@@ -4,25 +4,26 @@
 package dev.yanshouwang.camerax.messages;
 
 /**
- * Protobuf type {@code messages.Rect}
+ * Protobuf type {@code messages.ImageProxy}
  */
-public final class Rect extends
+public final class ImageProxy extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:messages.Rect)
-    RectOrBuilder {
+    // @@protoc_insertion_point(message_implements:messages.ImageProxy)
+    ImageProxyOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Rect.newBuilder() to construct.
-  private Rect(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use ImageProxy.newBuilder() to construct.
+  private ImageProxy(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Rect() {
+  private ImageProxy() {
+    id_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Rect();
+    return new ImageProxy();
   }
 
   @java.lang.Override
@@ -30,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private Rect(
+  private ImageProxy(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -48,24 +49,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            left_ = input.readInt32();
-            break;
-          }
-          case 16: {
-
-            top_ = input.readInt32();
-            break;
-          }
-          case 24: {
-
-            right_ = input.readInt32();
-            break;
-          }
-          case 32: {
-
-            bottom_ = input.readInt32();
+            id_ = s;
             break;
           }
           default: {
@@ -91,59 +78,53 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Rect_descriptor;
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxy_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Rect_fieldAccessorTable
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxy_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            dev.yanshouwang.camerax.messages.Rect.class, dev.yanshouwang.camerax.messages.Rect.Builder.class);
+            dev.yanshouwang.camerax.messages.ImageProxy.class, dev.yanshouwang.camerax.messages.ImageProxy.Builder.class);
   }
 
-  public static final int LEFT_FIELD_NUMBER = 1;
-  private int left_;
+  public static final int ID_FIELD_NUMBER = 1;
+  private volatile java.lang.Object id_;
   /**
-   * <code>int32 left = 1;</code>
-   * @return The left.
+   * <code>string id = 1;</code>
+   * @return The id.
    */
   @java.lang.Override
-  public int getLeft() {
-    return left_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      id_ = s;
+      return s;
+    }
   }
-
-  public static final int TOP_FIELD_NUMBER = 2;
-  private int top_;
   /**
-   * <code>int32 top = 2;</code>
-   * @return The top.
+   * <code>string id = 1;</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
-  public int getTop() {
-    return top_;
-  }
-
-  public static final int RIGHT_FIELD_NUMBER = 3;
-  private int right_;
-  /**
-   * <code>int32 right = 3;</code>
-   * @return The right.
-   */
-  @java.lang.Override
-  public int getRight() {
-    return right_;
-  }
-
-  public static final int BOTTOM_FIELD_NUMBER = 4;
-  private int bottom_;
-  /**
-   * <code>int32 bottom = 4;</code>
-   * @return The bottom.
-   */
-  @java.lang.Override
-  public int getBottom() {
-    return bottom_;
+  public com.google.protobuf.ByteString
+      getIdBytes() {
+    java.lang.Object ref = id_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      id_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -160,17 +141,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (left_ != 0) {
-      output.writeInt32(1, left_);
-    }
-    if (top_ != 0) {
-      output.writeInt32(2, top_);
-    }
-    if (right_ != 0) {
-      output.writeInt32(3, right_);
-    }
-    if (bottom_ != 0) {
-      output.writeInt32(4, bottom_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
     }
     unknownFields.writeTo(output);
   }
@@ -181,21 +153,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (left_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, left_);
-    }
-    if (top_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, top_);
-    }
-    if (right_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(3, right_);
-    }
-    if (bottom_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, bottom_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -207,19 +166,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof dev.yanshouwang.camerax.messages.Rect)) {
+    if (!(obj instanceof dev.yanshouwang.camerax.messages.ImageProxy)) {
       return super.equals(obj);
     }
-    dev.yanshouwang.camerax.messages.Rect other = (dev.yanshouwang.camerax.messages.Rect) obj;
+    dev.yanshouwang.camerax.messages.ImageProxy other = (dev.yanshouwang.camerax.messages.ImageProxy) obj;
 
-    if (getLeft()
-        != other.getLeft()) return false;
-    if (getTop()
-        != other.getTop()) return false;
-    if (getRight()
-        != other.getRight()) return false;
-    if (getBottom()
-        != other.getBottom()) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -231,82 +184,76 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + LEFT_FIELD_NUMBER;
-    hash = (53 * hash) + getLeft();
-    hash = (37 * hash) + TOP_FIELD_NUMBER;
-    hash = (53 * hash) + getTop();
-    hash = (37 * hash) + RIGHT_FIELD_NUMBER;
-    hash = (53 * hash) + getRight();
-    hash = (37 * hash) + BOTTOM_FIELD_NUMBER;
-    hash = (53 * hash) + getBottom();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + getId().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(byte[] data)
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseDelimitedFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseDelimitedFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.Rect parseFrom(
+  public static dev.yanshouwang.camerax.messages.ImageProxy parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -319,7 +266,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(dev.yanshouwang.camerax.messages.Rect prototype) {
+  public static Builder newBuilder(dev.yanshouwang.camerax.messages.ImageProxy prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -335,26 +282,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code messages.Rect}
+   * Protobuf type {@code messages.ImageProxy}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:messages.Rect)
-      dev.yanshouwang.camerax.messages.RectOrBuilder {
+      // @@protoc_insertion_point(builder_implements:messages.ImageProxy)
+      dev.yanshouwang.camerax.messages.ImageProxyOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Rect_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxy_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Rect_fieldAccessorTable
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxy_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.messages.Rect.class, dev.yanshouwang.camerax.messages.Rect.Builder.class);
+              dev.yanshouwang.camerax.messages.ImageProxy.class, dev.yanshouwang.camerax.messages.ImageProxy.Builder.class);
     }
 
-    // Construct using dev.yanshouwang.camerax.messages.Rect.newBuilder()
+    // Construct using dev.yanshouwang.camerax.messages.ImageProxy.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -372,13 +319,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      left_ = 0;
-
-      top_ = 0;
-
-      right_ = 0;
-
-      bottom_ = 0;
+      id_ = "";
 
       return this;
     }
@@ -386,17 +327,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_Rect_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_ImageProxy_descriptor;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.Rect getDefaultInstanceForType() {
-      return dev.yanshouwang.camerax.messages.Rect.getDefaultInstance();
+    public dev.yanshouwang.camerax.messages.ImageProxy getDefaultInstanceForType() {
+      return dev.yanshouwang.camerax.messages.ImageProxy.getDefaultInstance();
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.Rect build() {
-      dev.yanshouwang.camerax.messages.Rect result = buildPartial();
+    public dev.yanshouwang.camerax.messages.ImageProxy build() {
+      dev.yanshouwang.camerax.messages.ImageProxy result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -404,12 +345,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.Rect buildPartial() {
-      dev.yanshouwang.camerax.messages.Rect result = new dev.yanshouwang.camerax.messages.Rect(this);
-      result.left_ = left_;
-      result.top_ = top_;
-      result.right_ = right_;
-      result.bottom_ = bottom_;
+    public dev.yanshouwang.camerax.messages.ImageProxy buildPartial() {
+      dev.yanshouwang.camerax.messages.ImageProxy result = new dev.yanshouwang.camerax.messages.ImageProxy(this);
+      result.id_ = id_;
       onBuilt();
       return result;
     }
@@ -448,27 +386,19 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof dev.yanshouwang.camerax.messages.Rect) {
-        return mergeFrom((dev.yanshouwang.camerax.messages.Rect)other);
+      if (other instanceof dev.yanshouwang.camerax.messages.ImageProxy) {
+        return mergeFrom((dev.yanshouwang.camerax.messages.ImageProxy)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(dev.yanshouwang.camerax.messages.Rect other) {
-      if (other == dev.yanshouwang.camerax.messages.Rect.getDefaultInstance()) return this;
-      if (other.getLeft() != 0) {
-        setLeft(other.getLeft());
-      }
-      if (other.getTop() != 0) {
-        setTop(other.getTop());
-      }
-      if (other.getRight() != 0) {
-        setRight(other.getRight());
-      }
-      if (other.getBottom() != 0) {
-        setBottom(other.getBottom());
+    public Builder mergeFrom(dev.yanshouwang.camerax.messages.ImageProxy other) {
+      if (other == dev.yanshouwang.camerax.messages.ImageProxy.getDefaultInstance()) return this;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -485,11 +415,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      dev.yanshouwang.camerax.messages.Rect parsedMessage = null;
+      dev.yanshouwang.camerax.messages.ImageProxy parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (dev.yanshouwang.camerax.messages.Rect) e.getUnfinishedMessage();
+        parsedMessage = (dev.yanshouwang.camerax.messages.ImageProxy) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -499,126 +429,78 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int left_ ;
+    private java.lang.Object id_ = "";
     /**
-     * <code>int32 left = 1;</code>
-     * @return The left.
+     * <code>string id = 1;</code>
+     * @return The id.
      */
-    @java.lang.Override
-    public int getLeft() {
-      return left_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        id_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>int32 left = 1;</code>
-     * @param value The left to set.
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
+      java.lang.Object ref = id_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        id_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setLeft(int value) {
-      
-      left_ = value;
+    public Builder setId(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      id_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 left = 1;</code>
+     * <code>string id = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearLeft() {
+    public Builder clearId() {
       
-      left_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int top_ ;
-    /**
-     * <code>int32 top = 2;</code>
-     * @return The top.
-     */
-    @java.lang.Override
-    public int getTop() {
-      return top_;
-    }
-    /**
-     * <code>int32 top = 2;</code>
-     * @param value The top to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTop(int value) {
-      
-      top_ = value;
+      id_ = getDefaultInstance().getId();
       onChanged();
       return this;
     }
     /**
-     * <code>int32 top = 2;</code>
+     * <code>string id = 1;</code>
+     * @param value The bytes for id to set.
      * @return This builder for chaining.
      */
-    public Builder clearTop() {
+    public Builder setIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
       
-      top_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int right_ ;
-    /**
-     * <code>int32 right = 3;</code>
-     * @return The right.
-     */
-    @java.lang.Override
-    public int getRight() {
-      return right_;
-    }
-    /**
-     * <code>int32 right = 3;</code>
-     * @param value The right to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRight(int value) {
-      
-      right_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 right = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearRight() {
-      
-      right_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int bottom_ ;
-    /**
-     * <code>int32 bottom = 4;</code>
-     * @return The bottom.
-     */
-    @java.lang.Override
-    public int getBottom() {
-      return bottom_;
-    }
-    /**
-     * <code>int32 bottom = 4;</code>
-     * @param value The bottom to set.
-     * @return This builder for chaining.
-     */
-    public Builder setBottom(int value) {
-      
-      bottom_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 bottom = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearBottom() {
-      
-      bottom_ = 0;
+      id_ = value;
       onChanged();
       return this;
     }
@@ -635,41 +517,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:messages.Rect)
+    // @@protoc_insertion_point(builder_scope:messages.ImageProxy)
   }
 
-  // @@protoc_insertion_point(class_scope:messages.Rect)
-  private static final dev.yanshouwang.camerax.messages.Rect DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:messages.ImageProxy)
+  private static final dev.yanshouwang.camerax.messages.ImageProxy DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.Rect();
+    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.ImageProxy();
   }
 
-  public static dev.yanshouwang.camerax.messages.Rect getDefaultInstance() {
+  public static dev.yanshouwang.camerax.messages.ImageProxy getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Rect>
-      PARSER = new com.google.protobuf.AbstractParser<Rect>() {
+  private static final com.google.protobuf.Parser<ImageProxy>
+      PARSER = new com.google.protobuf.AbstractParser<ImageProxy>() {
     @java.lang.Override
-    public Rect parsePartialFrom(
+    public ImageProxy parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new Rect(input, extensionRegistry);
+      return new ImageProxy(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<Rect> parser() {
+  public static com.google.protobuf.Parser<ImageProxy> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Rect> getParserForType() {
+  public com.google.protobuf.Parser<ImageProxy> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public dev.yanshouwang.camerax.messages.Rect getDefaultInstanceForType() {
+  public dev.yanshouwang.camerax.messages.ImageProxy getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
