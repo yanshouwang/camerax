@@ -7,9 +7,8 @@ class CameraViewBuilder extends core.CameraViewBuilder {
   @override
   Widget build({
     required String id,
-    core.CameraViewCreatedCallback? onCreated,
+    required String viewType,
   }) {
-    const viewType = 'dev.yanshouwang.camerax/camera_view';
     return PlatformViewLink(
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(
@@ -19,21 +18,47 @@ class CameraViewBuilder extends core.CameraViewBuilder {
         );
       },
       onCreatePlatformView: (params) {
-        return PlatformViewsService.initExpensiveAndroidView(
+        return _createViewController(
+          hybridComposition: true,
           id: params.id,
           viewType: viewType,
           layoutDirection: TextDirection.ltr,
           creationParams: id,
-          creationParamsCodec: const StandardMessageCodec(),
           onFocus: () => params.onFocusChanged(true),
         )
-          ..addOnPlatformViewCreatedListener((viewId) {
-            params.onPlatformViewCreated(viewId);
-            onCreated?.call(id);
-          })
+          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
           ..create();
       },
       viewType: viewType,
     );
+  }
+
+  AndroidViewController _createViewController({
+    required bool hybridComposition,
+    required int id,
+    required String viewType,
+    required TextDirection layoutDirection,
+    required dynamic creationParams,
+    required void Function() onFocus,
+  }) {
+    if (hybridComposition) {
+      return PlatformViewsService.initExpensiveAndroidView(
+        id: id,
+        viewType: viewType,
+        layoutDirection: layoutDirection,
+        creationParams: creationParams,
+        creationParamsCodec: const StandardMessageCodec(),
+        onFocus: onFocus,
+      );
+    } else {
+      return PlatformViewsService.initSurfaceAndroidView(
+        id: id,
+        viewType: viewType,
+        layoutDirection: layoutDirection,
+        creationParams: creationParams,
+        creationParamsCodec: const StandardMessageCodec(),
+        onFocus: onFocus,
+      );
+    }
   }
 }

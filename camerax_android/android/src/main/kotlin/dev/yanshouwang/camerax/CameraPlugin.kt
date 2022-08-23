@@ -1,23 +1,28 @@
 package dev.yanshouwang.camerax
 
+import android.app.Activity
 import androidx.annotation.NonNull
+import dev.yanshouwang.camerax.pigeons.*
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
+import io.flutter.plugin.common.BinaryMessenger
+import io.flutter.plugin.platform.PlatformViewRegistry
+import java.util.concurrent.Executors
 
-/** CameraxPlugin */
+/** CameraPlugin */
 class CameraPlugin : FlutterPlugin, ActivityAware {
-    private lateinit var cameraProviderPigeon: CameraProviderPigeon
-    private lateinit var cameraViewPigeon: CameraViewPigeon
+    private val executor by lazy { Executors.newSingleThreadExecutor() }
+    private val finalizerPigeon by lazy { FinalizerPigeon() }
+    private val cameraControllerPigeon by lazy { CameraControllerPigeon(executor) }
+    private val imageAnalyzerPigeon by lazy { ImageAnalyzerPigeon() }
+    private val mlAnalyzerPigeon by lazy { MLAnalyzerPigeon(executor) }
+    private val cameraViewPigeon by lazy { CameraViewPigeon() }
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        val cameraViewType = "dev.yanshouwang.camerax/camera_view"
-        binding.platformViewRegistry.registerViewFactory(cameraViewType, CameraViewFactory)
-        cameraProviderPigeon = CameraProviderPigeon()
-        cameraViewPigeon = CameraViewPigeon()
-        Pigeons.CameraProviderHostPigeon.setup(binding.binaryMessenger, cameraProviderPigeon)
-        Pigeons.CameraViewHostPigeon.setup(binding.binaryMessenger, cameraViewPigeon)
+        registerViews(binding.platformViewRegistry)
+        setupPigeons(binding.binaryMessenger)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
@@ -25,22 +30,39 @@ class CameraPlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        cameraProviderPigeon.activity = binding.activity
-        cameraViewPigeon.activity = binding.activity
+        setActivity(binding.activity)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
-        cameraProviderPigeon.activity = null
-        cameraViewPigeon.activity = null
+        setActivity(null)
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        cameraProviderPigeon.activity = binding.activity
-        cameraViewPigeon.activity = binding.activity
+        setActivity(binding.activity)
     }
 
     override fun onDetachedFromActivity() {
-        cameraProviderPigeon.activity = null
-        cameraViewPigeon.activity = null
+        setActivity(null)
+    }
+
+    private fun registerViews(registry: PlatformViewRegistry) {
+        registry.registerViewFactory(CameraViewFactory.viewType, CameraViewFactory)
+    }
+
+    private fun setupPigeons(binaryMessenger: BinaryMessenger) {
+        cameraControllerPigeon.binaryMessenger = binaryMessenger
+        imageAnalyzerPigeon.binaryMessenger = binaryMessenger
+        mlAnalyzerPigeon.binaryMessenger = binaryMessenger
+
+        Pigeons.FinalizerHostPigeon.setup(binaryMessenger, finalizerPigeon)
+        Pigeons.CameraControllerHostPigeon.setup(binaryMessenger, cameraControllerPigeon)
+        Pigeons.ImageAnalyzerHostPigeon.setup(binaryMessenger, imageAnalyzerPigeon)
+        Pigeons.MLAnalyzerHostPigeon.setup(binaryMessenger, mlAnalyzerPigeon)
+        Pigeons.CameraViewHostPigeon.setup(binaryMessenger, cameraViewPigeon)
+    }
+
+    private fun setActivity(activity: Activity?) {
+        cameraControllerPigeon.activity = activity
+        cameraViewPigeon.activity = activity
     }
 }

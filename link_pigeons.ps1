@@ -5,7 +5,7 @@ $ANDROID = "camerax_android"
 $PIGEONS = "pigeons.dart"
 
 # Android
-New-Item $ANDROID/$PIGEONS -ItemType HardLink -Value $CORE/$PIGEONS
+New-Item "${ANDROID}/$PIGEONS" -ItemType HardLink -Value "${CORE}/$PIGEONS"
 
 # iOS
-# New-Item $IOS/$PIGEONS -ItemType HardLink -Value $CORE/$PIGEONS
+# New-Item "${IOS}/$PIGEONS" -ItemType HardLink -Value "${CORE}/$PIGEONS"

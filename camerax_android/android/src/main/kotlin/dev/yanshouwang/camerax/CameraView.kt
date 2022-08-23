@@ -2,28 +2,30 @@ package dev.yanshouwang.camerax
 
 import android.content.Context
 import android.view.View
-import androidx.camera.view.PreviewView
-import dev.yanshouwang.camerax.messages.ScaleType
 import io.flutter.plugin.platform.PlatformView
+import androidx.camera.view.PreviewView as MyCameraView
 
 internal class CameraView(context: Context) : PlatformView {
-    private val view: PreviewView
+    private val myView: MyCameraView
 
     init {
-        view = PreviewView(context)
+        myView = MyCameraView(context)
     }
 
-    val surfaceProvider get() = view.surfaceProvider
-    var scaleType: ScaleType
-        get() = ScaleType.forNumber(view.scaleType.ordinal)
+    val surfaceProvider get() = myView.surfaceProvider
+    var controller
+        get() = myView.controller
         set(value) {
-            view.scaleType = PreviewView.ScaleType.values().first { scaleType ->
-                scaleType.ordinal == value.ordinal
-            }
+            myView.controller = value
+        }
+    var scaleType
+        get() = myView.scaleType
+        set(value) {
+            myView.scaleType = value
         }
 
     override fun getView(): View {
-        return view
+        return myView
     }
 
     override fun dispose() {

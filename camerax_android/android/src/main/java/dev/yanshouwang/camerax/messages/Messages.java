@@ -25,35 +25,30 @@ public final class Messages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_CameraSelector_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_UseCase_descriptor;
+    internal_static_messages_TorchStateArguments_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_UseCase_fieldAccessorTable;
+      internal_static_messages_TorchStateArguments_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_Preview_descriptor;
+    internal_static_messages_MLMetadataObjectArguments_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_Preview_fieldAccessorTable;
+      internal_static_messages_MLMetadataObjectArguments_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_ImageAnalysis_descriptor;
+    internal_static_messages_MLMetadataObject_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_ImageAnalysis_fieldAccessorTable;
+      internal_static_messages_MLMetadataObject_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_ImageCapture_descriptor;
+    internal_static_messages_Barcode_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_ImageCapture_fieldAccessorTable;
+      internal_static_messages_Barcode_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_VideoCapture_descriptor;
+    internal_static_messages_Rect_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_VideoCapture_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_Camera_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_Camera_fieldAccessorTable;
+      internal_static_messages_Rect_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -63,25 +58,28 @@ public final class Messages {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016messages.proto\022\010messages\">\n\023CameraView" +
-      "Arguments\022\'\n\nscale_type\030\001 \001(\0162\023.messages" +
-      ".ScaleType\"8\n\016CameraSelector\022&\n\006facing\030\001" +
-      " \001(\0162\026.messages.CameraFacing\"\334\001\n\007UseCase" +
-      "\022\n\n\002id\030\001 \001(\t\022$\n\007preview\030\002 \001(\0132\021.messages" +
-      ".PreviewH\000\0221\n\016image_analysis\030\003 \001(\0132\027.mes" +
-      "sages.ImageAnalysisH\000\022/\n\rImage_capture\030\004" +
-      " \001(\0132\026.messages.ImageCaptureH\000\022/\n\rvideo_" +
-      "capture\030\005 \001(\0132\026.messages.VideoCaptureH\000B" +
-      "\n\n\010use_case\"\031\n\007Preview\022\016\n\006viewId\030\001 \001(\t\"\017" +
-      "\n\rImageAnalysis\"\016\n\014ImageCapture\"\016\n\014Video" +
-      "Capture\"\024\n\006Camera\022\n\n\002id\030\001 \001(\t*\250\001\n\tScaleT" +
-      "ype\022\031\n\025SCALE_TYPE_FILL_START\020\000\022\032\n\026SCALE_" +
-      "TYPE_FILL_CENTER\020\001\022\027\n\023SCALE_TYPE_FILL_EN" +
-      "D\020\002\022\030\n\024SCALE_TYPE_FIT_START\020\003\022\031\n\025SCALE_T" +
-      "YPE_FIT_CENTER\020\004\022\026\n\022SCALE_TYPE_FIT_END\020\005" +
-      "*?\n\014CameraFacing\022\026\n\022CAMERA_FACING_BACK\020\000" +
-      "\022\027\n\023CAMERA_FACING_FRONT\020\001B$\n dev.yanshou" +
-      "wang.camerax.messagesP\001b\006proto3"
+      "\n\016messages.proto\022\010messages\"U\n\023CameraView" +
+      "Arguments\022\025\n\rcontroller_id\030\001 \001(\t\022\'\n\nscal" +
+      "e_type\030\002 \001(\0162\023.messages.ScaleType\"8\n\016Cam" +
+      "eraSelector\022&\n\006facing\030\001 \001(\0162\026.messages.C" +
+      "ameraFacing\"0\n\023TorchStateArguments\022\n\n\002id" +
+      "\030\001 \001(\t\022\r\n\005state\030\002 \001(\010\"V\n\031MLMetadataObjec" +
+      "tArguments\022\n\n\002id\030\001 \001(\t\022-\n\tml_object\030\002 \001(" +
+      "\0132\032.messages.MLMetadataObject\"7\n\020MLMetad" +
+      "ataObject\022#\n\010barcodes\030\001 \003(\0132\021.messages.B" +
+      "arcode\"\221\001\n\007Barcode\022)\n\014bounding_box\030\001 \001(\013" +
+      "2\016.messages.RectH\000\210\001\001\022\026\n\traw_value\030\002 \001(\t" +
+      "H\001\210\001\001\022\026\n\traw_bytes\030\003 \001(\014H\002\210\001\001B\017\n\r_boundi" +
+      "ng_boxB\014\n\n_raw_valueB\014\n\n_raw_bytes\"@\n\004Re" +
+      "ct\022\014\n\004left\030\001 \001(\005\022\013\n\003top\030\002 \001(\005\022\r\n\005right\030\003" +
+      " \001(\005\022\016\n\006bottom\030\004 \001(\005*\250\001\n\tScaleType\022\031\n\025SC" +
+      "ALE_TYPE_FILL_START\020\000\022\032\n\026SCALE_TYPE_FILL" +
+      "_CENTER\020\001\022\027\n\023SCALE_TYPE_FILL_END\020\002\022\030\n\024SC" +
+      "ALE_TYPE_FIT_START\020\003\022\031\n\025SCALE_TYPE_FIT_C" +
+      "ENTER\020\004\022\026\n\022SCALE_TYPE_FIT_END\020\005*?\n\014Camer" +
+      "aFacing\022\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMER" +
+      "A_FACING_FRONT\020\001B$\n dev.yanshouwang.came" +
+      "rax.messagesP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -92,49 +90,43 @@ public final class Messages {
     internal_static_messages_CameraViewArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraViewArguments_descriptor,
-        new java.lang.String[] { "ScaleType", });
+        new java.lang.String[] { "ControllerId", "ScaleType", });
     internal_static_messages_CameraSelector_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_messages_CameraSelector_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_CameraSelector_descriptor,
         new java.lang.String[] { "Facing", });
-    internal_static_messages_UseCase_descriptor =
+    internal_static_messages_TorchStateArguments_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_messages_UseCase_fieldAccessorTable = new
+    internal_static_messages_TorchStateArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_UseCase_descriptor,
-        new java.lang.String[] { "Id", "Preview", "ImageAnalysis", "ImageCapture", "VideoCapture", "UseCase", });
-    internal_static_messages_Preview_descriptor =
+        internal_static_messages_TorchStateArguments_descriptor,
+        new java.lang.String[] { "Id", "State", });
+    internal_static_messages_MLMetadataObjectArguments_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_messages_Preview_fieldAccessorTable = new
+    internal_static_messages_MLMetadataObjectArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_Preview_descriptor,
-        new java.lang.String[] { "ViewId", });
-    internal_static_messages_ImageAnalysis_descriptor =
+        internal_static_messages_MLMetadataObjectArguments_descriptor,
+        new java.lang.String[] { "Id", "MlObject", });
+    internal_static_messages_MLMetadataObject_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_messages_ImageAnalysis_fieldAccessorTable = new
+    internal_static_messages_MLMetadataObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_ImageAnalysis_descriptor,
-        new java.lang.String[] { });
-    internal_static_messages_ImageCapture_descriptor =
+        internal_static_messages_MLMetadataObject_descriptor,
+        new java.lang.String[] { "Barcodes", });
+    internal_static_messages_Barcode_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_messages_ImageCapture_fieldAccessorTable = new
+    internal_static_messages_Barcode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_ImageCapture_descriptor,
-        new java.lang.String[] { });
-    internal_static_messages_VideoCapture_descriptor =
+        internal_static_messages_Barcode_descriptor,
+        new java.lang.String[] { "BoundingBox", "RawValue", "RawBytes", "BoundingBox", "RawValue", "RawBytes", });
+    internal_static_messages_Rect_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_messages_VideoCapture_fieldAccessorTable = new
+    internal_static_messages_Rect_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_VideoCapture_descriptor,
-        new java.lang.String[] { });
-    internal_static_messages_Camera_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_messages_Camera_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_Camera_descriptor,
-        new java.lang.String[] { "Id", });
+        internal_static_messages_Rect_descriptor,
+        new java.lang.String[] { "Left", "Top", "Right", "Bottom", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

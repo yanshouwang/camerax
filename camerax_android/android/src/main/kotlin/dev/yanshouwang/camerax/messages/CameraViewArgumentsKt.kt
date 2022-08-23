@@ -23,7 +23,24 @@ object CameraViewArgumentsKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.CameraViewArguments = _builder.build()
 
     /**
-     * <code>.messages.ScaleType scale_type = 1;</code>
+     * <code>string controller_id = 1;</code>
+     */
+    var controllerId: kotlin.String
+      @JvmName("getControllerId")
+      get() = _builder.getControllerId()
+      @JvmName("setControllerId")
+      set(value) {
+        _builder.setControllerId(value)
+      }
+    /**
+     * <code>string controller_id = 1;</code>
+     */
+    fun clearControllerId() {
+      _builder.clearControllerId()
+    }
+
+    /**
+     * <code>.messages.ScaleType scale_type = 2;</code>
      */
      var scaleType: dev.yanshouwang.camerax.messages.ScaleType
       @JvmName("getScaleType")
@@ -33,7 +50,7 @@ object CameraViewArgumentsKt {
         _builder.setScaleType(value)
       }
     /**
-     * <code>.messages.ScaleType scale_type = 1;</code>
+     * <code>.messages.ScaleType scale_type = 2;</code>
      */
     fun clearScaleType() {
       _builder.clearScaleType()

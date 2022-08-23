@@ -1,4 +1,4 @@
-$JAVA_OUT = "android/src/main/java/dev/yanshouwang/camerax"
+$JAVA_OUT = "android/src/main/java/dev/yanshouwang/camerax/pigeons"
 
 if (-NOT (Test-Path $JAVA_OUT)) {
     New-Item $JAVA_OUT -ItemType Directory
@@ -7,5 +7,5 @@ if (-NOT (Test-Path $JAVA_OUT)) {
 flutter pub run pigeon `
     --input pigeons.dart `
     --one_language true `
-    --java_out android/src/main/java/dev/yanshouwang/camerax/Pigeons.java `
-    --java_package dev.yanshouwang.camerax
+    --java_out "${JAVA_OUT}/Pigeons.java" `
+    --java_package dev.yanshouwang.camerax.pigeons

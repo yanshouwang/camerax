@@ -11,16 +11,16 @@ else {
     New-Item $DART_OUT -ItemType Directory
 }
 if (Test-Path $JAVA_OUT) {
-    if (Test-Path $JAVA_OUT/$PACKAGE) {
-        Get-Item $JAVA_OUT/$PACKAGE | Remove-Item -Recurse
+    if (Test-Path "${JAVA_OUT}/$PACKAGE") {
+        Get-Item "${JAVA_OUT}/$PACKAGE" | Remove-Item -Recurse
     }
 }
 else {
     New-Item $JAVA_OUT -ItemType Directory
 }
 if (Test-Path $KOTLIN_OUT) {
-    if (Test-Path $KOTLIN_OUT/$PACKAGE) {
-        Get-Item $KOTLIN_OUT/$PACKAGE | Remove-Item -Recurse
+    if (Test-Path "${KOTLIN_OUT}/$PACKAGE") {
+        Get-Item "${KOTLIN_OUT}/$PACKAGE" | Remove-Item -Recurse
     }
 }
 else {

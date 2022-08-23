@@ -5,13 +5,21 @@ abstract class CameraSelector {
 
   factory CameraSelector(CameraFacing facing) => _CameraSelector(facing);
 
-  static CameraSelector get back => CameraSelector(CameraFacing.back);
-  static CameraSelector get front => CameraSelector(CameraFacing.front);
+  static const CameraSelector back = _CameraSelector(CameraFacing.back);
+  static const CameraSelector front = _CameraSelector(CameraFacing.front);
 }
 
 class _CameraSelector implements CameraSelector {
   @override
   final CameraFacing facing;
 
-  _CameraSelector(this.facing);
+  const _CameraSelector(this.facing);
+
+  @override
+  operator ==(Object other) {
+    return other is CameraSelector && other.facing == facing;
+  }
+
+  @override
+  int get hashCode => facing.hashCode;
 }

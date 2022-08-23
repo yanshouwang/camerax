@@ -5,7 +5,8 @@ option java_package = "dev.yanshouwang.camerax.messages";
 option java_multiple_files = true;
 
 message CameraViewArguments {
-    ScaleType scale_type = 1;
+    string controller_id = 1;
+    ScaleType scale_type = 2;
 }
 
 enum ScaleType {
@@ -26,29 +27,29 @@ enum CameraFacing {
     CAMERA_FACING_FRONT = 1;
 }
 
-message UseCase {
+message TorchStateArguments {
     string id = 1;
-    oneof use_case {
-        Preview preview = 2;
-        ImageAnalysis image_analysis = 3;
-        ImageCapture Image_capture = 4;
-        VideoCapture video_capture = 5;
-    }
+    bool state = 2;
 }
 
-message Preview {
-    string viewId = 1;
-}
-
-message ImageAnalysis {
-}
-
-message ImageCapture {
-}
-
-message VideoCapture {
-}
-
-message Camera {
+message MLMetadataObjectArguments {
     string id = 1;
+    MLMetadataObject ml_object = 2;
+}
+
+message MLMetadataObject {
+    repeated Barcode barcodes = 1;
+}
+
+message Barcode {
+    optional Rect bounding_box = 1;
+    optional string raw_value = 2;
+    optional bytes raw_bytes = 3;
+}
+
+message Rect {
+    int32 left = 1;
+    int32 top = 2;
+    int32 right = 3;
+    int32 bottom = 4;
 }
