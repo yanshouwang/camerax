@@ -5,6 +5,7 @@ import dev.yanshouwang.camerax.id
 import dev.yanshouwang.camerax.messages.imageProxy
 import io.flutter.plugin.common.BinaryMessenger
 import androidx.camera.core.ImageAnalysis
+import dev.yanshouwang.camerax.messages.size
 
 class ImageAnalyzerPigeon : Pigeons.ImageAnalyzerHostPigeon {
     lateinit var binaryMessenger: BinaryMessenger
@@ -16,6 +17,10 @@ class ImageAnalyzerPigeon : Pigeons.ImageAnalyzerHostPigeon {
             InstanceManager.add(it.id, it)
             val imageProxyBuffer = imageProxy {
                 this.id = it.id
+                this.size = size {
+                    this.width = it.width
+                    this.height = it.height
+                }
             }.toByteArray()
             flutter.onAnalyzed(id, imageProxyBuffer) {}
         }

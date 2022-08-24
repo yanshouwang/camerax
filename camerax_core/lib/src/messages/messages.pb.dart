@@ -248,16 +248,21 @@ class ImageProxyArguments extends $pb.GeneratedMessage {
 class ImageProxy extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageProxy', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..aOM<Size>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: Size.create)
     ..hasRequiredFields = false
   ;
 
   ImageProxy._() : super();
   factory ImageProxy({
     $core.String? id,
+    Size? size,
   }) {
     final _result = create();
     if (id != null) {
       _result.id = id;
+    }
+    if (size != null) {
+      _result.size = size;
     }
     return _result;
   }
@@ -290,6 +295,17 @@ class ImageProxy extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  Size get size => $_getN(1);
+  @$pb.TagNumber(2)
+  set size(Size v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSize() => clearField(2);
+  @$pb.TagNumber(2)
+  Size ensureSize() => $_ensure(1);
 }
 
 class MLRecognitionArguments extends $pb.GeneratedMessage {

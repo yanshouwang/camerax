@@ -13,9 +13,9 @@ abstract class CameraController {
   CameraSelector get cameraSelector;
   set cameraSelector(CameraSelector value);
   set imageAnalyzer(ImageAnalyzer? value);
-  void bind();
-  void enableTorch(bool state);
-  void unbind();
+  Future<void> bind();
+  Future<void> enableTorch(bool state);
+  Future<void> unbind();
   void dispose();
 
   factory CameraController({
@@ -73,18 +73,18 @@ class _CameraController implements CameraController {
   }
 
   @override
-  void bind() {
-    core.CameraControllerPigeon.instance.bind(id);
+  Future<void> bind() {
+    return core.CameraControllerPigeon.instance.bind(id);
   }
 
   @override
-  void enableTorch(bool state) {
-    core.CameraControllerPigeon.instance.enableTorch(id, state);
+  Future<void> enableTorch(bool state) {
+    return core.CameraControllerPigeon.instance.enableTorch(id, state);
   }
 
   @override
-  void unbind() {
-    core.CameraControllerPigeon.instance.unbind(id);
+  Future<void> unbind() {
+    return core.CameraControllerPigeon.instance.unbind(id);
   }
 
   @override

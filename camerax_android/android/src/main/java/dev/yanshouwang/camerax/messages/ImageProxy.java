@@ -55,6 +55,19 @@ private static final long serialVersionUID = 0L;
             id_ = s;
             break;
           }
+          case 18: {
+            dev.yanshouwang.camerax.messages.Size.Builder subBuilder = null;
+            if (size_ != null) {
+              subBuilder = size_.toBuilder();
+            }
+            size_ = input.readMessage(dev.yanshouwang.camerax.messages.Size.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(size_);
+              size_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -127,6 +140,32 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int SIZE_FIELD_NUMBER = 2;
+  private dev.yanshouwang.camerax.messages.Size size_;
+  /**
+   * <code>.messages.Size size = 2;</code>
+   * @return Whether the size field is set.
+   */
+  @java.lang.Override
+  public boolean hasSize() {
+    return size_ != null;
+  }
+  /**
+   * <code>.messages.Size size = 2;</code>
+   * @return The size.
+   */
+  @java.lang.Override
+  public dev.yanshouwang.camerax.messages.Size getSize() {
+    return size_ == null ? dev.yanshouwang.camerax.messages.Size.getDefaultInstance() : size_;
+  }
+  /**
+   * <code>.messages.Size size = 2;</code>
+   */
+  @java.lang.Override
+  public dev.yanshouwang.camerax.messages.SizeOrBuilder getSizeOrBuilder() {
+    return getSize();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -144,6 +183,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
     }
+    if (size_ != null) {
+      output.writeMessage(2, getSize());
+    }
     unknownFields.writeTo(output);
   }
 
@@ -155,6 +197,10 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+    }
+    if (size_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getSize());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -173,6 +219,11 @@ private static final long serialVersionUID = 0L;
 
     if (!getId()
         .equals(other.getId())) return false;
+    if (hasSize() != other.hasSize()) return false;
+    if (hasSize()) {
+      if (!getSize()
+          .equals(other.getSize())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -186,6 +237,10 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
+    if (hasSize()) {
+      hash = (37 * hash) + SIZE_FIELD_NUMBER;
+      hash = (53 * hash) + getSize().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -321,6 +376,12 @@ private static final long serialVersionUID = 0L;
       super.clear();
       id_ = "";
 
+      if (sizeBuilder_ == null) {
+        size_ = null;
+      } else {
+        size_ = null;
+        sizeBuilder_ = null;
+      }
       return this;
     }
 
@@ -348,6 +409,11 @@ private static final long serialVersionUID = 0L;
     public dev.yanshouwang.camerax.messages.ImageProxy buildPartial() {
       dev.yanshouwang.camerax.messages.ImageProxy result = new dev.yanshouwang.camerax.messages.ImageProxy(this);
       result.id_ = id_;
+      if (sizeBuilder_ == null) {
+        result.size_ = size_;
+      } else {
+        result.size_ = sizeBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -399,6 +465,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getId().isEmpty()) {
         id_ = other.id_;
         onChanged();
+      }
+      if (other.hasSize()) {
+        mergeSize(other.getSize());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -503,6 +572,125 @@ private static final long serialVersionUID = 0L;
       id_ = value;
       onChanged();
       return this;
+    }
+
+    private dev.yanshouwang.camerax.messages.Size size_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        dev.yanshouwang.camerax.messages.Size, dev.yanshouwang.camerax.messages.Size.Builder, dev.yanshouwang.camerax.messages.SizeOrBuilder> sizeBuilder_;
+    /**
+     * <code>.messages.Size size = 2;</code>
+     * @return Whether the size field is set.
+     */
+    public boolean hasSize() {
+      return sizeBuilder_ != null || size_ != null;
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     * @return The size.
+     */
+    public dev.yanshouwang.camerax.messages.Size getSize() {
+      if (sizeBuilder_ == null) {
+        return size_ == null ? dev.yanshouwang.camerax.messages.Size.getDefaultInstance() : size_;
+      } else {
+        return sizeBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    public Builder setSize(dev.yanshouwang.camerax.messages.Size value) {
+      if (sizeBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        size_ = value;
+        onChanged();
+      } else {
+        sizeBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    public Builder setSize(
+        dev.yanshouwang.camerax.messages.Size.Builder builderForValue) {
+      if (sizeBuilder_ == null) {
+        size_ = builderForValue.build();
+        onChanged();
+      } else {
+        sizeBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    public Builder mergeSize(dev.yanshouwang.camerax.messages.Size value) {
+      if (sizeBuilder_ == null) {
+        if (size_ != null) {
+          size_ =
+            dev.yanshouwang.camerax.messages.Size.newBuilder(size_).mergeFrom(value).buildPartial();
+        } else {
+          size_ = value;
+        }
+        onChanged();
+      } else {
+        sizeBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    public Builder clearSize() {
+      if (sizeBuilder_ == null) {
+        size_ = null;
+        onChanged();
+      } else {
+        size_ = null;
+        sizeBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    public dev.yanshouwang.camerax.messages.Size.Builder getSizeBuilder() {
+      
+      onChanged();
+      return getSizeFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    public dev.yanshouwang.camerax.messages.SizeOrBuilder getSizeOrBuilder() {
+      if (sizeBuilder_ != null) {
+        return sizeBuilder_.getMessageOrBuilder();
+      } else {
+        return size_ == null ?
+            dev.yanshouwang.camerax.messages.Size.getDefaultInstance() : size_;
+      }
+    }
+    /**
+     * <code>.messages.Size size = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        dev.yanshouwang.camerax.messages.Size, dev.yanshouwang.camerax.messages.Size.Builder, dev.yanshouwang.camerax.messages.SizeOrBuilder> 
+        getSizeFieldBuilder() {
+      if (sizeBuilder_ == null) {
+        sizeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            dev.yanshouwang.camerax.messages.Size, dev.yanshouwang.camerax.messages.Size.Builder, dev.yanshouwang.camerax.messages.SizeOrBuilder>(
+                getSize(),
+                getParentForChildren(),
+                isClean());
+        size_ = null;
+      }
+      return sizeBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

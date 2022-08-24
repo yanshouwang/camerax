@@ -15,6 +15,7 @@ class CameraViewBuilder extends core.CameraViewBuilder {
         );
       },
       onCreatePlatformView: (params) {
+        // TODO: change the `hybridComposition` to false after `initSurfaceAndroidView` bug fixed.
         return _createViewController(
           hybridComposition: true,
           id: params.id,

@@ -82,11 +82,12 @@ const ImageProxy$json = const {
   '1': 'ImageProxy',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+    const {'1': 'size', '3': 2, '4': 1, '5': 11, '6': '.messages.Size', '10': 'size'},
   ],
 };
 
 /// Descriptor for `ImageProxy`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode('CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZA==');
+final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode('CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZBIiCgRzaXplGAIgASgLMg4ubWVzc2FnZXMuU2l6ZVIEc2l6ZQ==');
 @$core.Deprecated('Use mLRecognitionArgumentsDescriptor instead')
 const MLRecognitionArguments$json = const {
   '1': 'MLRecognitionArguments',

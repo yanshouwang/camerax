@@ -18,4 +18,19 @@ public interface ImageProxyOrBuilder extends
    */
   com.google.protobuf.ByteString
       getIdBytes();
+
+  /**
+   * <code>.messages.Size size = 2;</code>
+   * @return Whether the size field is set.
+   */
+  boolean hasSize();
+  /**
+   * <code>.messages.Size size = 2;</code>
+   * @return The size.
+   */
+  dev.yanshouwang.camerax.messages.Size getSize();
+  /**
+   * <code>.messages.Size size = 2;</code>
+   */
+  dev.yanshouwang.camerax.messages.SizeOrBuilder getSizeOrBuilder();
 }

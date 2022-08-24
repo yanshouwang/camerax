@@ -39,6 +39,7 @@ message ImageProxyArguments {
 
 message ImageProxy {
     string id = 1;
+    Size size = 2;
 }
 
 message MLRecognitionArguments {
