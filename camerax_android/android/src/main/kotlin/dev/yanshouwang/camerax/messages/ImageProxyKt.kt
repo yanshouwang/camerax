@@ -38,36 +38,9 @@ object ImageProxyKt {
     fun clearId() {
       _builder.clearId()
     }
-
-    /**
-     * <code>.messages.Size size = 2;</code>
-     */
-    var size: dev.yanshouwang.camerax.messages.Size
-      @JvmName("getSize")
-      get() = _builder.getSize()
-      @JvmName("setSize")
-      set(value) {
-        _builder.setSize(value)
-      }
-    /**
-     * <code>.messages.Size size = 2;</code>
-     */
-    fun clearSize() {
-      _builder.clearSize()
-    }
-    /**
-     * <code>.messages.Size size = 2;</code>
-     * @return Whether the size field is set.
-     */
-    fun hasSize(): kotlin.Boolean {
-      return _builder.hasSize()
-    }
   }
 }
 @kotlin.jvm.JvmSynthetic
 inline fun dev.yanshouwang.camerax.messages.ImageProxy.copy(block: dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.ImageProxy =
   dev.yanshouwang.camerax.messages.ImageProxyKt.Dsl._create(this.toBuilder()).apply { block() }._build()
-
-val dev.yanshouwang.camerax.messages.ImageProxyOrBuilder.sizeOrNull: dev.yanshouwang.camerax.messages.Size?
-  get() = if (hasSize()) getSize() else null
 

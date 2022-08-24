@@ -51,19 +51,6 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            dev.yanshouwang.camerax.messages.Size.Builder subBuilder = null;
-            if (size_ != null) {
-              subBuilder = size_.toBuilder();
-            }
-            size_ = input.readMessage(dev.yanshouwang.camerax.messages.Size.parser(), extensionRegistry);
-            if (subBuilder != null) {
-              subBuilder.mergeFrom(size_);
-              size_ = subBuilder.buildPartial();
-            }
-
-            break;
-          }
-          case 18: {
             if (!((mutable_bitField0_ & 0x00000001) != 0)) {
               objs_ = new java.util.ArrayList<dev.yanshouwang.camerax.messages.MLObject>();
               mutable_bitField0_ |= 0x00000001;
@@ -109,43 +96,17 @@ private static final long serialVersionUID = 0L;
             dev.yanshouwang.camerax.messages.MLRecognition.class, dev.yanshouwang.camerax.messages.MLRecognition.Builder.class);
   }
 
-  public static final int SIZE_FIELD_NUMBER = 1;
-  private dev.yanshouwang.camerax.messages.Size size_;
-  /**
-   * <code>.messages.Size size = 1;</code>
-   * @return Whether the size field is set.
-   */
-  @java.lang.Override
-  public boolean hasSize() {
-    return size_ != null;
-  }
-  /**
-   * <code>.messages.Size size = 1;</code>
-   * @return The size.
-   */
-  @java.lang.Override
-  public dev.yanshouwang.camerax.messages.Size getSize() {
-    return size_ == null ? dev.yanshouwang.camerax.messages.Size.getDefaultInstance() : size_;
-  }
-  /**
-   * <code>.messages.Size size = 1;</code>
-   */
-  @java.lang.Override
-  public dev.yanshouwang.camerax.messages.SizeOrBuilder getSizeOrBuilder() {
-    return getSize();
-  }
-
-  public static final int OBJS_FIELD_NUMBER = 2;
+  public static final int OBJS_FIELD_NUMBER = 1;
   private java.util.List<dev.yanshouwang.camerax.messages.MLObject> objs_;
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   @java.lang.Override
   public java.util.List<dev.yanshouwang.camerax.messages.MLObject> getObjsList() {
     return objs_;
   }
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   @java.lang.Override
   public java.util.List<? extends dev.yanshouwang.camerax.messages.MLObjectOrBuilder> 
@@ -153,21 +114,21 @@ private static final long serialVersionUID = 0L;
     return objs_;
   }
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   @java.lang.Override
   public int getObjsCount() {
     return objs_.size();
   }
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   @java.lang.Override
   public dev.yanshouwang.camerax.messages.MLObject getObjs(int index) {
     return objs_.get(index);
   }
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   @java.lang.Override
   public dev.yanshouwang.camerax.messages.MLObjectOrBuilder getObjsOrBuilder(
@@ -189,11 +150,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (size_ != null) {
-      output.writeMessage(1, getSize());
-    }
     for (int i = 0; i < objs_.size(); i++) {
-      output.writeMessage(2, objs_.get(i));
+      output.writeMessage(1, objs_.get(i));
     }
     unknownFields.writeTo(output);
   }
@@ -204,13 +162,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (size_ != null) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(1, getSize());
-    }
     for (int i = 0; i < objs_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, objs_.get(i));
+        .computeMessageSize(1, objs_.get(i));
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -227,11 +181,6 @@ private static final long serialVersionUID = 0L;
     }
     dev.yanshouwang.camerax.messages.MLRecognition other = (dev.yanshouwang.camerax.messages.MLRecognition) obj;
 
-    if (hasSize() != other.hasSize()) return false;
-    if (hasSize()) {
-      if (!getSize()
-          .equals(other.getSize())) return false;
-    }
     if (!getObjsList()
         .equals(other.getObjsList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
@@ -245,10 +194,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasSize()) {
-      hash = (37 * hash) + SIZE_FIELD_NUMBER;
-      hash = (53 * hash) + getSize().hashCode();
-    }
     if (getObjsCount() > 0) {
       hash = (37 * hash) + OBJS_FIELD_NUMBER;
       hash = (53 * hash) + getObjsList().hashCode();
@@ -387,12 +332,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      if (sizeBuilder_ == null) {
-        size_ = null;
-      } else {
-        size_ = null;
-        sizeBuilder_ = null;
-      }
       if (objsBuilder_ == null) {
         objs_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -426,11 +365,6 @@ private static final long serialVersionUID = 0L;
     public dev.yanshouwang.camerax.messages.MLRecognition buildPartial() {
       dev.yanshouwang.camerax.messages.MLRecognition result = new dev.yanshouwang.camerax.messages.MLRecognition(this);
       int from_bitField0_ = bitField0_;
-      if (sizeBuilder_ == null) {
-        result.size_ = size_;
-      } else {
-        result.size_ = sizeBuilder_.build();
-      }
       if (objsBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
           objs_ = java.util.Collections.unmodifiableList(objs_);
@@ -488,9 +422,6 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(dev.yanshouwang.camerax.messages.MLRecognition other) {
       if (other == dev.yanshouwang.camerax.messages.MLRecognition.getDefaultInstance()) return this;
-      if (other.hasSize()) {
-        mergeSize(other.getSize());
-      }
       if (objsBuilder_ == null) {
         if (!other.objs_.isEmpty()) {
           if (objs_.isEmpty()) {
@@ -547,125 +478,6 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private dev.yanshouwang.camerax.messages.Size size_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        dev.yanshouwang.camerax.messages.Size, dev.yanshouwang.camerax.messages.Size.Builder, dev.yanshouwang.camerax.messages.SizeOrBuilder> sizeBuilder_;
-    /**
-     * <code>.messages.Size size = 1;</code>
-     * @return Whether the size field is set.
-     */
-    public boolean hasSize() {
-      return sizeBuilder_ != null || size_ != null;
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     * @return The size.
-     */
-    public dev.yanshouwang.camerax.messages.Size getSize() {
-      if (sizeBuilder_ == null) {
-        return size_ == null ? dev.yanshouwang.camerax.messages.Size.getDefaultInstance() : size_;
-      } else {
-        return sizeBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    public Builder setSize(dev.yanshouwang.camerax.messages.Size value) {
-      if (sizeBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        size_ = value;
-        onChanged();
-      } else {
-        sizeBuilder_.setMessage(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    public Builder setSize(
-        dev.yanshouwang.camerax.messages.Size.Builder builderForValue) {
-      if (sizeBuilder_ == null) {
-        size_ = builderForValue.build();
-        onChanged();
-      } else {
-        sizeBuilder_.setMessage(builderForValue.build());
-      }
-
-      return this;
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    public Builder mergeSize(dev.yanshouwang.camerax.messages.Size value) {
-      if (sizeBuilder_ == null) {
-        if (size_ != null) {
-          size_ =
-            dev.yanshouwang.camerax.messages.Size.newBuilder(size_).mergeFrom(value).buildPartial();
-        } else {
-          size_ = value;
-        }
-        onChanged();
-      } else {
-        sizeBuilder_.mergeFrom(value);
-      }
-
-      return this;
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    public Builder clearSize() {
-      if (sizeBuilder_ == null) {
-        size_ = null;
-        onChanged();
-      } else {
-        size_ = null;
-        sizeBuilder_ = null;
-      }
-
-      return this;
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    public dev.yanshouwang.camerax.messages.Size.Builder getSizeBuilder() {
-      
-      onChanged();
-      return getSizeFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    public dev.yanshouwang.camerax.messages.SizeOrBuilder getSizeOrBuilder() {
-      if (sizeBuilder_ != null) {
-        return sizeBuilder_.getMessageOrBuilder();
-      } else {
-        return size_ == null ?
-            dev.yanshouwang.camerax.messages.Size.getDefaultInstance() : size_;
-      }
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        dev.yanshouwang.camerax.messages.Size, dev.yanshouwang.camerax.messages.Size.Builder, dev.yanshouwang.camerax.messages.SizeOrBuilder> 
-        getSizeFieldBuilder() {
-      if (sizeBuilder_ == null) {
-        sizeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            dev.yanshouwang.camerax.messages.Size, dev.yanshouwang.camerax.messages.Size.Builder, dev.yanshouwang.camerax.messages.SizeOrBuilder>(
-                getSize(),
-                getParentForChildren(),
-                isClean());
-        size_ = null;
-      }
-      return sizeBuilder_;
-    }
-
     private java.util.List<dev.yanshouwang.camerax.messages.MLObject> objs_ =
       java.util.Collections.emptyList();
     private void ensureObjsIsMutable() {
@@ -679,7 +491,7 @@ private static final long serialVersionUID = 0L;
         dev.yanshouwang.camerax.messages.MLObject, dev.yanshouwang.camerax.messages.MLObject.Builder, dev.yanshouwang.camerax.messages.MLObjectOrBuilder> objsBuilder_;
 
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public java.util.List<dev.yanshouwang.camerax.messages.MLObject> getObjsList() {
       if (objsBuilder_ == null) {
@@ -689,7 +501,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public int getObjsCount() {
       if (objsBuilder_ == null) {
@@ -699,7 +511,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public dev.yanshouwang.camerax.messages.MLObject getObjs(int index) {
       if (objsBuilder_ == null) {
@@ -709,7 +521,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder setObjs(
         int index, dev.yanshouwang.camerax.messages.MLObject value) {
@@ -726,7 +538,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder setObjs(
         int index, dev.yanshouwang.camerax.messages.MLObject.Builder builderForValue) {
@@ -740,7 +552,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder addObjs(dev.yanshouwang.camerax.messages.MLObject value) {
       if (objsBuilder_ == null) {
@@ -756,7 +568,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder addObjs(
         int index, dev.yanshouwang.camerax.messages.MLObject value) {
@@ -773,7 +585,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder addObjs(
         dev.yanshouwang.camerax.messages.MLObject.Builder builderForValue) {
@@ -787,7 +599,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder addObjs(
         int index, dev.yanshouwang.camerax.messages.MLObject.Builder builderForValue) {
@@ -801,7 +613,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder addAllObjs(
         java.lang.Iterable<? extends dev.yanshouwang.camerax.messages.MLObject> values) {
@@ -816,7 +628,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder clearObjs() {
       if (objsBuilder_ == null) {
@@ -829,7 +641,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public Builder removeObjs(int index) {
       if (objsBuilder_ == null) {
@@ -842,14 +654,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public dev.yanshouwang.camerax.messages.MLObject.Builder getObjsBuilder(
         int index) {
       return getObjsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public dev.yanshouwang.camerax.messages.MLObjectOrBuilder getObjsOrBuilder(
         int index) {
@@ -859,7 +671,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public java.util.List<? extends dev.yanshouwang.camerax.messages.MLObjectOrBuilder> 
          getObjsOrBuilderList() {
@@ -870,14 +682,14 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public dev.yanshouwang.camerax.messages.MLObject.Builder addObjsBuilder() {
       return getObjsFieldBuilder().addBuilder(
           dev.yanshouwang.camerax.messages.MLObject.getDefaultInstance());
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public dev.yanshouwang.camerax.messages.MLObject.Builder addObjsBuilder(
         int index) {
@@ -885,7 +697,7 @@ private static final long serialVersionUID = 0L;
           index, dev.yanshouwang.camerax.messages.MLObject.getDefaultInstance());
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     public java.util.List<dev.yanshouwang.camerax.messages.MLObject.Builder> 
          getObjsBuilderList() {

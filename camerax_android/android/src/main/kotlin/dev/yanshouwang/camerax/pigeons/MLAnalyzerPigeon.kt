@@ -6,6 +6,7 @@ import android.util.Size
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.mlkit.vision.MlKitAnalyzer
+import androidx.camera.view.CameraController
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -23,13 +24,15 @@ internal class MLAnalyzerPigeon() : Pigeons.MLAnalyzerHostPigeon {
 
     override fun create(id: String) {
         val executor = ContextCompat.getMainExecutor(context)
-        val analyzer = MLAnalyzer(executor) {
+        val barcodeScanner = BarcodeScanning.getClient()
+        val detectors = listOf(barcodeScanner)
+        val analyzer = MlKitAnalyzer(detectors, CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED, executor) {
+            val barcodes = it.getValue(barcodeScanner)
+            if (barcodes.isNullOrEmpty()) {
+                return@MlKitAnalyzer
+            }
             val recognitionBuffer = mLRecognition {
-                this.size = size {
-                    this.width = it.size.width
-                    this.height = it.size.height
-                }
-                val objs = it.barcodes.map {
+                val objs = barcodes.map {
                     mLObject {
                         val myBoundingBox = it.boundingBox
                         val myRawValue = it.rawValue
@@ -68,42 +71,8 @@ internal class MLAnalyzerPigeon() : Pigeons.MLAnalyzerHostPigeon {
     }
 
     override fun analyze(id: String, imageProxyId: String) {
-        val analyzer = InstanceManager.findInstance<MLAnalyzer>(id) ?: throw IllegalArgumentException()
+        val analyzer = InstanceManager.findInstance<MlKitAnalyzer>(id) ?: throw IllegalArgumentException()
         val imageProxy = InstanceManager.findInstance<ImageProxy>(imageProxyId) ?: throw IllegalArgumentException()
         analyzer.analyze(imageProxy)
     }
 }
-
-class MLAnalyzer(executor: Executor, consumer: Consumer<MLRecognition>) : ImageAnalysis.Analyzer {
-    private val barcodeScanner = BarcodeScanning.getClient()
-    private val detectors get() = listOf(barcodeScanner)
-    private val analyzer = MlKitAnalyzer(detectors, ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL, executor) {
-        val barcodes = it.getValue(barcodeScanner)
-        if (barcodes.isNullOrEmpty()) {
-            return@MlKitAnalyzer
-        }
-        val recognition = MLRecognition(size, barcodes)
-        consumer.accept(recognition)
-    }
-
-    lateinit var size: Size
-
-    override fun analyze(image: ImageProxy) {
-        size = Size(image.width, image.height)
-        analyzer.analyze(image)
-    }
-
-    override fun getDefaultTargetResolution(): Size {
-        return analyzer.defaultTargetResolution
-    }
-
-    override fun getTargetCoordinateSystem(): Int {
-        return analyzer.targetCoordinateSystem
-    }
-
-    override fun updateTransform(matrix: Matrix?) {
-        return analyzer.updateTransform(matrix)
-    }
-}
-
-data class MLRecognition(val size: Size, val barcodes: List<Barcode>)

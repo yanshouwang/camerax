@@ -50,11 +50,6 @@ public final class Messages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_MLRecognition_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_Size_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_Size_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_MLObject_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -85,24 +80,22 @@ public final class Messages {
       "ameraFacing\"0\n\023TorchStateArguments\022\n\n\002id" +
       "\030\001 \001(\t\022\r\n\005state\030\002 \001(\010\"L\n\023ImageProxyArgum" +
       "ents\022\n\n\002id\030\001 \001(\t\022)\n\013image_proxy\030\002 \001(\0132\024." +
-      "messages.ImageProxy\"6\n\nImageProxy\022\n\n\002id\030" +
-      "\001 \001(\t\022\034\n\004size\030\002 \001(\0132\016.messages.Size\"R\n\026M" +
-      "LRecognitionArguments\022\n\n\002id\030\001 \001(\t\022,\n\013rec" +
-      "ognition\030\002 \001(\0132\027.messages.MLRecognition\"" +
-      "O\n\rMLRecognition\022\034\n\004size\030\001 \001(\0132\016.message" +
-      "s.Size\022 \n\004objs\030\002 \003(\0132\022.messages.MLObject" +
-      "\"%\n\004Size\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\"" +
-      "[\n\010MLObject\022!\n\007corners\030\001 \003(\0132\020.messages." +
-      "Offset\022$\n\007barcode\030\002 \001(\0132\021.messages.Barco" +
-      "deH\000B\006\n\004type\" \n\006Offset\022\n\n\002dx\030\001 \001(\005\022\n\n\002dy" +
-      "\030\002 \001(\005\"\030\n\007Barcode\022\r\n\005value\030\001 \001(\t*\250\001\n\tSca" +
-      "leType\022\031\n\025SCALE_TYPE_FILL_START\020\000\022\032\n\026SCA" +
-      "LE_TYPE_FILL_CENTER\020\001\022\027\n\023SCALE_TYPE_FILL" +
-      "_END\020\002\022\030\n\024SCALE_TYPE_FIT_START\020\003\022\031\n\025SCAL" +
-      "E_TYPE_FIT_CENTER\020\004\022\026\n\022SCALE_TYPE_FIT_EN" +
-      "D\020\005*?\n\014CameraFacing\022\026\n\022CAMERA_FACING_BAC" +
-      "K\020\000\022\027\n\023CAMERA_FACING_FRONT\020\001B$\n dev.yans" +
-      "houwang.camerax.messagesP\001b\006proto3"
+      "messages.ImageProxy\"\030\n\nImageProxy\022\n\n\002id\030" +
+      "\001 \001(\t\"R\n\026MLRecognitionArguments\022\n\n\002id\030\001 " +
+      "\001(\t\022,\n\013recognition\030\002 \001(\0132\027.messages.MLRe" +
+      "cognition\"1\n\rMLRecognition\022 \n\004objs\030\001 \003(\013" +
+      "2\022.messages.MLObject\"[\n\010MLObject\022!\n\007corn" +
+      "ers\030\001 \003(\0132\020.messages.Offset\022$\n\007barcode\030\002" +
+      " \001(\0132\021.messages.BarcodeH\000B\006\n\004type\" \n\006Off" +
+      "set\022\n\n\002dx\030\001 \001(\005\022\n\n\002dy\030\002 \001(\005\"\030\n\007Barcode\022\r" +
+      "\n\005value\030\001 \001(\t*\250\001\n\tScaleType\022\031\n\025SCALE_TYP" +
+      "E_FILL_START\020\000\022\032\n\026SCALE_TYPE_FILL_CENTER" +
+      "\020\001\022\027\n\023SCALE_TYPE_FILL_END\020\002\022\030\n\024SCALE_TYP" +
+      "E_FIT_START\020\003\022\031\n\025SCALE_TYPE_FIT_CENTER\020\004" +
+      "\022\026\n\022SCALE_TYPE_FIT_END\020\005*?\n\014CameraFacing" +
+      "\022\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMERA_FACIN" +
+      "G_FRONT\020\001B$\n dev.yanshouwang.camerax.mes" +
+      "sagesP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -137,7 +130,7 @@ public final class Messages {
     internal_static_messages_ImageProxy_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxy_descriptor,
-        new java.lang.String[] { "Id", "Size", });
+        new java.lang.String[] { "Id", });
     internal_static_messages_MLRecognitionArguments_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_messages_MLRecognitionArguments_fieldAccessorTable = new
@@ -149,27 +142,21 @@ public final class Messages {
     internal_static_messages_MLRecognition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_MLRecognition_descriptor,
-        new java.lang.String[] { "Size", "Objs", });
-    internal_static_messages_Size_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_messages_Size_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_Size_descriptor,
-        new java.lang.String[] { "Width", "Height", });
+        new java.lang.String[] { "Objs", });
     internal_static_messages_MLObject_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_messages_MLObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_MLObject_descriptor,
         new java.lang.String[] { "Corners", "Barcode", "Type", });
     internal_static_messages_Offset_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_messages_Offset_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Offset_descriptor,
         new java.lang.String[] { "Dx", "Dy", });
     internal_static_messages_Barcode_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_messages_Barcode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Barcode_descriptor,

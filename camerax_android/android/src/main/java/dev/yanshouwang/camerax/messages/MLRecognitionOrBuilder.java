@@ -8,40 +8,25 @@ public interface MLRecognitionOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.messages.Size size = 1;</code>
-   * @return Whether the size field is set.
-   */
-  boolean hasSize();
-  /**
-   * <code>.messages.Size size = 1;</code>
-   * @return The size.
-   */
-  dev.yanshouwang.camerax.messages.Size getSize();
-  /**
-   * <code>.messages.Size size = 1;</code>
-   */
-  dev.yanshouwang.camerax.messages.SizeOrBuilder getSizeOrBuilder();
-
-  /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   java.util.List<dev.yanshouwang.camerax.messages.MLObject> 
       getObjsList();
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   dev.yanshouwang.camerax.messages.MLObject getObjs(int index);
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   int getObjsCount();
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   java.util.List<? extends dev.yanshouwang.camerax.messages.MLObjectOrBuilder> 
       getObjsOrBuilderList();
   /**
-   * <code>repeated .messages.MLObject objs = 2;</code>
+   * <code>repeated .messages.MLObject objs = 1;</code>
    */
   dev.yanshouwang.camerax.messages.MLObjectOrBuilder getObjsOrBuilder(
       int index);

@@ -49,7 +49,6 @@ class MLAnalyzer implements ImageAnalyzer {
 }
 
 abstract class MLRecognition {
-  Size get size;
   List<MLObject> get objs;
 }
 
@@ -72,16 +71,10 @@ class _ImageProxy implements ImageProxy {
 
 class _MLRecognition implements MLRecognition {
   @override
-  final Size size;
-  @override
   final List<MLObject> objs;
 
   _MLRecognition(core.MLRecognition recognition)
-      : size = Size(
-          recognition.size.width.toDouble(),
-          recognition.size.height.toDouble(),
-        ),
-        objs = recognition.objs.map((obj) {
+      : objs = recognition.objs.map((obj) {
           switch (obj.type) {
             case core.MLObject_Type.barcode:
               return _Barcode(obj);

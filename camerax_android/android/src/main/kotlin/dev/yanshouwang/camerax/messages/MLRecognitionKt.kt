@@ -23,37 +23,13 @@ object MLRecognitionKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.MLRecognition = _builder.build()
 
     /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    var size: dev.yanshouwang.camerax.messages.Size
-      @JvmName("getSize")
-      get() = _builder.getSize()
-      @JvmName("setSize")
-      set(value) {
-        _builder.setSize(value)
-      }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     */
-    fun clearSize() {
-      _builder.clearSize()
-    }
-    /**
-     * <code>.messages.Size size = 1;</code>
-     * @return Whether the size field is set.
-     */
-    fun hasSize(): kotlin.Boolean {
-      return _builder.hasSize()
-    }
-
-    /**
      * An uninstantiable, behaviorless type to represent the field in
      * generics.
      */
     @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
     class ObjsProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
      val objs: com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLObject, ObjsProxy>
       @kotlin.jvm.JvmSynthetic
@@ -61,7 +37,7 @@ object MLRecognitionKt {
         _builder.getObjsList()
       )
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      * @param value The objs to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -70,7 +46,7 @@ object MLRecognitionKt {
       _builder.addObjs(value)
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      * @param value The objs to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -80,7 +56,7 @@ object MLRecognitionKt {
       add(value)
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      * @param values The objs to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -89,7 +65,7 @@ object MLRecognitionKt {
       _builder.addAllObjs(values)
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      * @param values The objs to add.
      */
     @kotlin.jvm.JvmSynthetic
@@ -99,7 +75,7 @@ object MLRecognitionKt {
       addAll(values)
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      * @param index The index to set the value at.
      * @param value The objs to set.
      */
@@ -109,7 +85,7 @@ object MLRecognitionKt {
       _builder.setObjs(index, value)
     }
     /**
-     * <code>repeated .messages.MLObject objs = 2;</code>
+     * <code>repeated .messages.MLObject objs = 1;</code>
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("clearObjs")
@@ -122,7 +98,4 @@ object MLRecognitionKt {
 @kotlin.jvm.JvmSynthetic
 inline fun dev.yanshouwang.camerax.messages.MLRecognition.copy(block: dev.yanshouwang.camerax.messages.MLRecognitionKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.MLRecognition =
   dev.yanshouwang.camerax.messages.MLRecognitionKt.Dsl._create(this.toBuilder()).apply { block() }._build()
-
-val dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder.sizeOrNull: dev.yanshouwang.camerax.messages.Size?
-  get() = if (hasSize()) getSize() else null
 

@@ -26,32 +26,27 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    cameraController = CameraController();
+    cameraController = CameraController()
+      ..imageAnalyzer = MLAnalyzer(handleRecognition);
 
     bind();
-    scan();
   }
 
   void bind() async {
     await Permission.camera.request();
-    cameraController.bind();
-  }
-
-  void scan() async {
-    final mlAnalyzer = MLAnalyzer(handleRecognition);
-    cameraController.imageAnalyzer = mlAnalyzer;
+    await cameraController.bind();
   }
 
   void handleRecognition(MLRecognition recognition) {
-    final size = recognition.size;
     final barcodes = recognition.objs.whereType<Barcode>();
     if (barcodes.isEmpty) {
       return;
     }
     final messenger = messengerKey.currentState;
     if (messenger != null) {
+      final barcode = barcodes.first;
       final snackBar = SnackBar(
-        content: Text('$size - ${barcodes.first.value}'),
+        content: Text('${barcode.corners} - ${barcode.value}'),
       );
       messenger
         ..clearSnackBars()
@@ -68,7 +63,7 @@ class _MyAppState extends State<MyApp> {
           children: [
             CameraView(
               controller: cameraController,
-              scaleType: ScaleType.fitCenter,
+              scaleType: ScaleType.fillCenter,
             ),
             Container(
               alignment: Alignment.bottomCenter,

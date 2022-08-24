@@ -18,10 +18,7 @@ abstract class CameraController {
   Future<void> unbind();
   void dispose();
 
-  factory CameraController({
-    CameraSelector cameraSelector = CameraSelector.back,
-  }) =>
-      _CameraController(cameraSelector);
+  factory CameraController() => _CameraController();
 }
 
 class _CameraController implements CameraController {
@@ -32,7 +29,9 @@ class _CameraController implements CameraController {
 
   late StreamSubscription<bool> torchStateSubscription;
 
-  _CameraController(this._cameraSelector) : torchState = ValueNotifier(false) {
+  _CameraController()
+      : _cameraSelector = CameraSelector.back,
+        torchState = ValueNotifier(false) {
     core.CameraControllerPigeon.instance.create(
       id,
       core.CameraSelector(

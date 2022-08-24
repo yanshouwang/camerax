@@ -82,12 +82,11 @@ const ImageProxy$json = const {
   '1': 'ImageProxy',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-    const {'1': 'size', '3': 2, '4': 1, '5': 11, '6': '.messages.Size', '10': 'size'},
   ],
 };
 
 /// Descriptor for `ImageProxy`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode('CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZBIiCgRzaXplGAIgASgLMg4ubWVzc2FnZXMuU2l6ZVIEc2l6ZQ==');
+final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode('CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZA==');
 @$core.Deprecated('Use mLRecognitionArgumentsDescriptor instead')
 const MLRecognitionArguments$json = const {
   '1': 'MLRecognitionArguments',
@@ -103,24 +102,12 @@ final $typed_data.Uint8List mLRecognitionArgumentsDescriptor = $convert.base64De
 const MLRecognition$json = const {
   '1': 'MLRecognition',
   '2': const [
-    const {'1': 'size', '3': 1, '4': 1, '5': 11, '6': '.messages.Size', '10': 'size'},
-    const {'1': 'objs', '3': 2, '4': 3, '5': 11, '6': '.messages.MLObject', '10': 'objs'},
+    const {'1': 'objs', '3': 1, '4': 3, '5': 11, '6': '.messages.MLObject', '10': 'objs'},
   ],
 };
 
 /// Descriptor for `MLRecognition`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mLRecognitionDescriptor = $convert.base64Decode('Cg1NTFJlY29nbml0aW9uEiIKBHNpemUYASABKAsyDi5tZXNzYWdlcy5TaXplUgRzaXplEiYKBG9ianMYAiADKAsyEi5tZXNzYWdlcy5NTE9iamVjdFIEb2Jqcw==');
-@$core.Deprecated('Use sizeDescriptor instead')
-const Size$json = const {
-  '1': 'Size',
-  '2': const [
-    const {'1': 'width', '3': 1, '4': 1, '5': 5, '10': 'width'},
-    const {'1': 'height', '3': 2, '4': 1, '5': 5, '10': 'height'},
-  ],
-};
-
-/// Descriptor for `Size`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sizeDescriptor = $convert.base64Decode('CgRTaXplEhQKBXdpZHRoGAEgASgFUgV3aWR0aBIWCgZoZWlnaHQYAiABKAVSBmhlaWdodA==');
+final $typed_data.Uint8List mLRecognitionDescriptor = $convert.base64Decode('Cg1NTFJlY29nbml0aW9uEiYKBG9ianMYASADKAsyEi5tZXNzYWdlcy5NTE9iamVjdFIEb2Jqcw==');
 @$core.Deprecated('Use mLObjectDescriptor instead')
 const MLObject$json = const {
   '1': 'MLObject',

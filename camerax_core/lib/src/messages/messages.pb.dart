@@ -248,21 +248,16 @@ class ImageProxyArguments extends $pb.GeneratedMessage {
 class ImageProxy extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageProxy', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
-    ..aOM<Size>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: Size.create)
     ..hasRequiredFields = false
   ;
 
   ImageProxy._() : super();
   factory ImageProxy({
     $core.String? id,
-    Size? size,
   }) {
     final _result = create();
     if (id != null) {
       _result.id = id;
-    }
-    if (size != null) {
-      _result.size = size;
     }
     return _result;
   }
@@ -295,17 +290,6 @@ class ImageProxy extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  Size get size => $_getN(1);
-  @$pb.TagNumber(2)
-  set size(Size v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSize() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSize() => clearField(2);
-  @$pb.TagNumber(2)
-  Size ensureSize() => $_ensure(1);
 }
 
 class MLRecognitionArguments extends $pb.GeneratedMessage {
@@ -373,20 +357,15 @@ class MLRecognitionArguments extends $pb.GeneratedMessage {
 
 class MLRecognition extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLRecognition', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..aOM<Size>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: Size.create)
-    ..pc<MLObject>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'objs', $pb.PbFieldType.PM, subBuilder: MLObject.create)
+    ..pc<MLObject>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'objs', $pb.PbFieldType.PM, subBuilder: MLObject.create)
     ..hasRequiredFields = false
   ;
 
   MLRecognition._() : super();
   factory MLRecognition({
-    Size? size,
     $core.Iterable<MLObject>? objs,
   }) {
     final _result = create();
-    if (size != null) {
-      _result.size = size;
-    }
     if (objs != null) {
       _result.objs.addAll(objs);
     }
@@ -414,79 +393,7 @@ class MLRecognition extends $pb.GeneratedMessage {
   static MLRecognition? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Size get size => $_getN(0);
-  @$pb.TagNumber(1)
-  set size(Size v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasSize() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearSize() => clearField(1);
-  @$pb.TagNumber(1)
-  Size ensureSize() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $core.List<MLObject> get objs => $_getList(1);
-}
-
-class Size extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Size', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'height', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  Size._() : super();
-  factory Size({
-    $core.int? width,
-    $core.int? height,
-  }) {
-    final _result = create();
-    if (width != null) {
-      _result.width = width;
-    }
-    if (height != null) {
-      _result.height = height;
-    }
-    return _result;
-  }
-  factory Size.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Size.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Size clone() => Size()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Size copyWith(void Function(Size) updates) => super.copyWith((message) => updates(message as Size)) as Size; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static Size create() => Size._();
-  Size createEmptyInstance() => create();
-  static $pb.PbList<Size> createRepeated() => $pb.PbList<Size>();
-  @$core.pragma('dart2js:noInline')
-  static Size getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Size>(create);
-  static Size? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get width => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set width($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasWidth() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearWidth() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get height => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set height($core.int v) { $_setSignedInt32(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasHeight() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearHeight() => clearField(2);
+  $core.List<MLObject> get objs => $_getList(0);
 }
 
 enum MLObject_Type {
