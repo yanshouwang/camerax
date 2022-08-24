@@ -13,6 +13,67 @@ import 'messages.pbenum.dart';
 
 export 'messages.pbenum.dart';
 
+class CameraViewArguments extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraViewArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'controllerId')
+    ..e<ScaleType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'scaleType', $pb.PbFieldType.OE, defaultOrMaker: ScaleType.SCALE_TYPE_FILL_START, valueOf: ScaleType.valueOf, enumValues: ScaleType.values)
+    ..hasRequiredFields = false
+  ;
+
+  CameraViewArguments._() : super();
+  factory CameraViewArguments({
+    $core.String? controllerId,
+    ScaleType? scaleType,
+  }) {
+    final _result = create();
+    if (controllerId != null) {
+      _result.controllerId = controllerId;
+    }
+    if (scaleType != null) {
+      _result.scaleType = scaleType;
+    }
+    return _result;
+  }
+  factory CameraViewArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CameraViewArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CameraViewArguments clone() => CameraViewArguments()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CameraViewArguments copyWith(void Function(CameraViewArguments) updates) => super.copyWith((message) => updates(message as CameraViewArguments)) as CameraViewArguments; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CameraViewArguments create() => CameraViewArguments._();
+  CameraViewArguments createEmptyInstance() => create();
+  static $pb.PbList<CameraViewArguments> createRepeated() => $pb.PbList<CameraViewArguments>();
+  @$core.pragma('dart2js:noInline')
+  static CameraViewArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraViewArguments>(create);
+  static CameraViewArguments? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get controllerId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set controllerId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasControllerId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearControllerId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  ScaleType get scaleType => $_getN(1);
+  @$pb.TagNumber(2)
+  set scaleType(ScaleType v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasScaleType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearScaleType() => clearField(2);
+}
+
 class CameraSelector extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraSelector', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..e<CameraFacing>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'facing', $pb.PbFieldType.OE, defaultOrMaker: CameraFacing.CAMERA_FACING_BACK, valueOf: CameraFacing.valueOf, enumValues: CameraFacing.values)
@@ -234,21 +295,21 @@ class ImageProxy extends $pb.GeneratedMessage {
 class MLRecognitionArguments extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLRecognitionArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
-    ..pc<MLMetadata>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'recognition', $pb.PbFieldType.PM, subBuilder: MLMetadata.create)
+    ..aOM<MLRecognition>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'recognition', subBuilder: MLRecognition.create)
     ..hasRequiredFields = false
   ;
 
   MLRecognitionArguments._() : super();
   factory MLRecognitionArguments({
     $core.String? id,
-    $core.Iterable<MLMetadata>? recognition,
+    MLRecognition? recognition,
   }) {
     final _result = create();
     if (id != null) {
       _result.id = id;
     }
     if (recognition != null) {
-      _result.recognition.addAll(recognition);
+      _result.recognition = recognition;
     }
     return _result;
   }
@@ -283,28 +344,154 @@ class MLRecognitionArguments extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<MLMetadata> get recognition => $_getList(1);
+  MLRecognition get recognition => $_getN(1);
+  @$pb.TagNumber(2)
+  set recognition(MLRecognition v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasRecognition() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearRecognition() => clearField(2);
+  @$pb.TagNumber(2)
+  MLRecognition ensureRecognition() => $_ensure(1);
 }
 
-enum MLMetadata_Metadata {
+class MLRecognition extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLRecognition', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..aOM<Size>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'size', subBuilder: Size.create)
+    ..pc<MLObject>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'objs', $pb.PbFieldType.PM, subBuilder: MLObject.create)
+    ..hasRequiredFields = false
+  ;
+
+  MLRecognition._() : super();
+  factory MLRecognition({
+    Size? size,
+    $core.Iterable<MLObject>? objs,
+  }) {
+    final _result = create();
+    if (size != null) {
+      _result.size = size;
+    }
+    if (objs != null) {
+      _result.objs.addAll(objs);
+    }
+    return _result;
+  }
+  factory MLRecognition.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MLRecognition.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MLRecognition clone() => MLRecognition()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MLRecognition copyWith(void Function(MLRecognition) updates) => super.copyWith((message) => updates(message as MLRecognition)) as MLRecognition; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static MLRecognition create() => MLRecognition._();
+  MLRecognition createEmptyInstance() => create();
+  static $pb.PbList<MLRecognition> createRepeated() => $pb.PbList<MLRecognition>();
+  @$core.pragma('dart2js:noInline')
+  static MLRecognition getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLRecognition>(create);
+  static MLRecognition? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Size get size => $_getN(0);
+  @$pb.TagNumber(1)
+  set size(Size v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSize() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSize() => clearField(1);
+  @$pb.TagNumber(1)
+  Size ensureSize() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<MLObject> get objs => $_getList(1);
+}
+
+class Size extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Size', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'height', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  Size._() : super();
+  factory Size({
+    $core.int? width,
+    $core.int? height,
+  }) {
+    final _result = create();
+    if (width != null) {
+      _result.width = width;
+    }
+    if (height != null) {
+      _result.height = height;
+    }
+    return _result;
+  }
+  factory Size.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Size.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Size clone() => Size()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Size copyWith(void Function(Size) updates) => super.copyWith((message) => updates(message as Size)) as Size; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Size create() => Size._();
+  Size createEmptyInstance() => create();
+  static $pb.PbList<Size> createRepeated() => $pb.PbList<Size>();
+  @$core.pragma('dart2js:noInline')
+  static Size getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Size>(create);
+  static Size? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get width => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set width($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasWidth() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearWidth() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get height => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set height($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasHeight() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearHeight() => clearField(2);
+}
+
+enum MLObject_Type {
   barcode, 
   notSet
 }
 
-class MLMetadata extends $pb.GeneratedMessage {
-  static const $core.Map<$core.int, MLMetadata_Metadata> _MLMetadata_MetadataByTag = {
-    2 : MLMetadata_Metadata.barcode,
-    0 : MLMetadata_Metadata.notSet
+class MLObject extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, MLObject_Type> _MLObject_TypeByTag = {
+    2 : MLObject_Type.barcode,
+    0 : MLObject_Type.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLMetadata', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLObject', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..oo(0, [2])
     ..pc<Offset>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'corners', $pb.PbFieldType.PM, subBuilder: Offset.create)
     ..aOM<Barcode>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'barcode', subBuilder: Barcode.create)
     ..hasRequiredFields = false
   ;
 
-  MLMetadata._() : super();
-  factory MLMetadata({
+  MLObject._() : super();
+  factory MLObject({
     $core.Iterable<Offset>? corners,
     Barcode? barcode,
   }) {
@@ -317,29 +504,29 @@ class MLMetadata extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory MLMetadata.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MLMetadata.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory MLObject.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MLObject.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  MLMetadata clone() => MLMetadata()..mergeFromMessage(this);
+  MLObject clone() => MLObject()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  MLMetadata copyWith(void Function(MLMetadata) updates) => super.copyWith((message) => updates(message as MLMetadata)) as MLMetadata; // ignore: deprecated_member_use
+  MLObject copyWith(void Function(MLObject) updates) => super.copyWith((message) => updates(message as MLObject)) as MLObject; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static MLMetadata create() => MLMetadata._();
-  MLMetadata createEmptyInstance() => create();
-  static $pb.PbList<MLMetadata> createRepeated() => $pb.PbList<MLMetadata>();
+  static MLObject create() => MLObject._();
+  MLObject createEmptyInstance() => create();
+  static $pb.PbList<MLObject> createRepeated() => $pb.PbList<MLObject>();
   @$core.pragma('dart2js:noInline')
-  static MLMetadata getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLMetadata>(create);
-  static MLMetadata? _defaultInstance;
+  static MLObject getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MLObject>(create);
+  static MLObject? _defaultInstance;
 
-  MLMetadata_Metadata whichMetadata() => _MLMetadata_MetadataByTag[$_whichOneof(0)]!;
-  void clearMetadata() => clearField($_whichOneof(0));
+  MLObject_Type whichType() => _MLObject_TypeByTag[$_whichOneof(0)]!;
+  void clearType() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
   $core.List<Offset> get corners => $_getList(0);

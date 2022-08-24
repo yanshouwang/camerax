@@ -14,12 +14,4 @@ class _CameraSelector implements CameraSelector {
   final CameraFacing facing;
 
   const _CameraSelector(this.facing);
-
-  @override
-  operator ==(Object other) {
-    return other is CameraSelector && other.facing == facing;
-  }
-
-  @override
-  int get hashCode => facing.hashCode;
 }

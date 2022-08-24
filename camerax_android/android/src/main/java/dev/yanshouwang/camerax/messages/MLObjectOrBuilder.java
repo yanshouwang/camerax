@@ -3,8 +3,8 @@
 
 package dev.yanshouwang.camerax.messages;
 
-public interface MLMetadataOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:messages.MLMetadata)
+public interface MLObjectOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:messages.MLObject)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -46,5 +46,5 @@ public interface MLMetadataOrBuilder extends
    */
   dev.yanshouwang.camerax.messages.BarcodeOrBuilder getBarcodeOrBuilder();
 
-  public dev.yanshouwang.camerax.messages.MLMetadata.MetadataCase getMetadataCase();
+  public dev.yanshouwang.camerax.messages.MLObject.TypeCase getTypeCase();
 }

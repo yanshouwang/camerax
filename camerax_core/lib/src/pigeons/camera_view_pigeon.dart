@@ -26,8 +26,7 @@ abstract class CameraViewPigeon extends PlatformInterface {
 
   Future<void> createOrSetArguments(
     String id, {
-    required String controllerId,
-    required int scaleType,
+    required CameraViewArguments arguments,
   });
 }
 
@@ -39,9 +38,9 @@ class _CameraViewPigeon extends CameraViewPigeon {
   @override
   Future<void> createOrSetArguments(
     String id, {
-    required String controllerId,
-    required int scaleType,
+    required CameraViewArguments arguments,
   }) {
-    return hostPigeon.createOrSetArguments(id, controllerId, scaleType);
+    final argumentsBuffer = arguments.writeToBuffer();
+    return hostPigeon.createOrSetArguments(id, argumentsBuffer);
   }
 }

@@ -85,7 +85,7 @@ public enum CameraFacing
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return dev.yanshouwang.camerax.messages.Messages.getDescriptor().getEnumTypes().get(0);
+    return dev.yanshouwang.camerax.messages.Messages.getDescriptor().getEnumTypes().get(1);
   }
 
   private static final CameraFacing[] VALUES = values();

@@ -17,7 +17,6 @@ private static final long serialVersionUID = 0L;
   }
   private MLRecognitionArguments() {
     id_ = "";
-    recognition_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -40,7 +39,6 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -58,12 +56,16 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 18: {
-            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-              recognition_ = new java.util.ArrayList<dev.yanshouwang.camerax.messages.MLMetadata>();
-              mutable_bitField0_ |= 0x00000001;
+            dev.yanshouwang.camerax.messages.MLRecognition.Builder subBuilder = null;
+            if (recognition_ != null) {
+              subBuilder = recognition_.toBuilder();
             }
-            recognition_.add(
-                input.readMessage(dev.yanshouwang.camerax.messages.MLMetadata.parser(), extensionRegistry));
+            recognition_ = input.readMessage(dev.yanshouwang.camerax.messages.MLRecognition.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(recognition_);
+              recognition_ = subBuilder.buildPartial();
+            }
+
             break;
           }
           default: {
@@ -83,9 +85,6 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) != 0)) {
-        recognition_ = java.util.Collections.unmodifiableList(recognition_);
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -142,43 +141,29 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int RECOGNITION_FIELD_NUMBER = 2;
-  private java.util.List<dev.yanshouwang.camerax.messages.MLMetadata> recognition_;
+  private dev.yanshouwang.camerax.messages.MLRecognition recognition_;
   /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
+   * <code>.messages.MLRecognition recognition = 2;</code>
+   * @return Whether the recognition field is set.
    */
   @java.lang.Override
-  public java.util.List<dev.yanshouwang.camerax.messages.MLMetadata> getRecognitionList() {
-    return recognition_;
+  public boolean hasRecognition() {
+    return recognition_ != null;
   }
   /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
+   * <code>.messages.MLRecognition recognition = 2;</code>
+   * @return The recognition.
    */
   @java.lang.Override
-  public java.util.List<? extends dev.yanshouwang.camerax.messages.MLMetadataOrBuilder> 
-      getRecognitionOrBuilderList() {
-    return recognition_;
+  public dev.yanshouwang.camerax.messages.MLRecognition getRecognition() {
+    return recognition_ == null ? dev.yanshouwang.camerax.messages.MLRecognition.getDefaultInstance() : recognition_;
   }
   /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
+   * <code>.messages.MLRecognition recognition = 2;</code>
    */
   @java.lang.Override
-  public int getRecognitionCount() {
-    return recognition_.size();
-  }
-  /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
-   */
-  @java.lang.Override
-  public dev.yanshouwang.camerax.messages.MLMetadata getRecognition(int index) {
-    return recognition_.get(index);
-  }
-  /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
-   */
-  @java.lang.Override
-  public dev.yanshouwang.camerax.messages.MLMetadataOrBuilder getRecognitionOrBuilder(
-      int index) {
-    return recognition_.get(index);
+  public dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder getRecognitionOrBuilder() {
+    return getRecognition();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -198,8 +183,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
     }
-    for (int i = 0; i < recognition_.size(); i++) {
-      output.writeMessage(2, recognition_.get(i));
+    if (recognition_ != null) {
+      output.writeMessage(2, getRecognition());
     }
     unknownFields.writeTo(output);
   }
@@ -213,9 +198,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
     }
-    for (int i = 0; i < recognition_.size(); i++) {
+    if (recognition_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, recognition_.get(i));
+        .computeMessageSize(2, getRecognition());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -234,8 +219,11 @@ private static final long serialVersionUID = 0L;
 
     if (!getId()
         .equals(other.getId())) return false;
-    if (!getRecognitionList()
-        .equals(other.getRecognitionList())) return false;
+    if (hasRecognition() != other.hasRecognition()) return false;
+    if (hasRecognition()) {
+      if (!getRecognition()
+          .equals(other.getRecognition())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -249,9 +237,9 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + getId().hashCode();
-    if (getRecognitionCount() > 0) {
+    if (hasRecognition()) {
       hash = (37 * hash) + RECOGNITION_FIELD_NUMBER;
-      hash = (53 * hash) + getRecognitionList().hashCode();
+      hash = (53 * hash) + getRecognition().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -381,7 +369,6 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getRecognitionFieldBuilder();
       }
     }
     @java.lang.Override
@@ -390,10 +377,10 @@ private static final long serialVersionUID = 0L;
       id_ = "";
 
       if (recognitionBuilder_ == null) {
-        recognition_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        recognition_ = null;
       } else {
-        recognitionBuilder_.clear();
+        recognition_ = null;
+        recognitionBuilder_ = null;
       }
       return this;
     }
@@ -421,13 +408,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.MLRecognitionArguments buildPartial() {
       dev.yanshouwang.camerax.messages.MLRecognitionArguments result = new dev.yanshouwang.camerax.messages.MLRecognitionArguments(this);
-      int from_bitField0_ = bitField0_;
       result.id_ = id_;
       if (recognitionBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0)) {
-          recognition_ = java.util.Collections.unmodifiableList(recognition_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
         result.recognition_ = recognition_;
       } else {
         result.recognition_ = recognitionBuilder_.build();
@@ -484,31 +466,8 @@ private static final long serialVersionUID = 0L;
         id_ = other.id_;
         onChanged();
       }
-      if (recognitionBuilder_ == null) {
-        if (!other.recognition_.isEmpty()) {
-          if (recognition_.isEmpty()) {
-            recognition_ = other.recognition_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureRecognitionIsMutable();
-            recognition_.addAll(other.recognition_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.recognition_.isEmpty()) {
-          if (recognitionBuilder_.isEmpty()) {
-            recognitionBuilder_.dispose();
-            recognitionBuilder_ = null;
-            recognition_ = other.recognition_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            recognitionBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getRecognitionFieldBuilder() : null;
-          } else {
-            recognitionBuilder_.addAllMessages(other.recognition_);
-          }
-        }
+      if (other.hasRecognition()) {
+        mergeRecognition(other.getRecognition());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -538,7 +497,6 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
     private java.lang.Object id_ = "";
     /**
@@ -616,239 +574,118 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<dev.yanshouwang.camerax.messages.MLMetadata> recognition_ =
-      java.util.Collections.emptyList();
-    private void ensureRecognitionIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
-        recognition_ = new java.util.ArrayList<dev.yanshouwang.camerax.messages.MLMetadata>(recognition_);
-        bitField0_ |= 0x00000001;
-       }
+    private dev.yanshouwang.camerax.messages.MLRecognition recognition_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        dev.yanshouwang.camerax.messages.MLRecognition, dev.yanshouwang.camerax.messages.MLRecognition.Builder, dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder> recognitionBuilder_;
+    /**
+     * <code>.messages.MLRecognition recognition = 2;</code>
+     * @return Whether the recognition field is set.
+     */
+    public boolean hasRecognition() {
+      return recognitionBuilder_ != null || recognition_ != null;
     }
+    /**
+     * <code>.messages.MLRecognition recognition = 2;</code>
+     * @return The recognition.
+     */
+    public dev.yanshouwang.camerax.messages.MLRecognition getRecognition() {
+      if (recognitionBuilder_ == null) {
+        return recognition_ == null ? dev.yanshouwang.camerax.messages.MLRecognition.getDefaultInstance() : recognition_;
+      } else {
+        return recognitionBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.messages.MLRecognition recognition = 2;</code>
+     */
+    public Builder setRecognition(dev.yanshouwang.camerax.messages.MLRecognition value) {
+      if (recognitionBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        recognition_ = value;
+        onChanged();
+      } else {
+        recognitionBuilder_.setMessage(value);
+      }
 
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        dev.yanshouwang.camerax.messages.MLMetadata, dev.yanshouwang.camerax.messages.MLMetadata.Builder, dev.yanshouwang.camerax.messages.MLMetadataOrBuilder> recognitionBuilder_;
-
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public java.util.List<dev.yanshouwang.camerax.messages.MLMetadata> getRecognitionList() {
-      if (recognitionBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(recognition_);
-      } else {
-        return recognitionBuilder_.getMessageList();
-      }
+      return this;
     }
     /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public int getRecognitionCount() {
-      if (recognitionBuilder_ == null) {
-        return recognition_.size();
-      } else {
-        return recognitionBuilder_.getCount();
-      }
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public dev.yanshouwang.camerax.messages.MLMetadata getRecognition(int index) {
-      if (recognitionBuilder_ == null) {
-        return recognition_.get(index);
-      } else {
-        return recognitionBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
     public Builder setRecognition(
-        int index, dev.yanshouwang.camerax.messages.MLMetadata value) {
+        dev.yanshouwang.camerax.messages.MLRecognition.Builder builderForValue) {
       if (recognitionBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
+        recognition_ = builderForValue.build();
+        onChanged();
+      } else {
+        recognitionBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.messages.MLRecognition recognition = 2;</code>
+     */
+    public Builder mergeRecognition(dev.yanshouwang.camerax.messages.MLRecognition value) {
+      if (recognitionBuilder_ == null) {
+        if (recognition_ != null) {
+          recognition_ =
+            dev.yanshouwang.camerax.messages.MLRecognition.newBuilder(recognition_).mergeFrom(value).buildPartial();
+        } else {
+          recognition_ = value;
         }
-        ensureRecognitionIsMutable();
-        recognition_.set(index, value);
         onChanged();
       } else {
-        recognitionBuilder_.setMessage(index, value);
+        recognitionBuilder_.mergeFrom(value);
       }
+
       return this;
     }
     /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public Builder setRecognition(
-        int index, dev.yanshouwang.camerax.messages.MLMetadata.Builder builderForValue) {
-      if (recognitionBuilder_ == null) {
-        ensureRecognitionIsMutable();
-        recognition_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        recognitionBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public Builder addRecognition(dev.yanshouwang.camerax.messages.MLMetadata value) {
-      if (recognitionBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureRecognitionIsMutable();
-        recognition_.add(value);
-        onChanged();
-      } else {
-        recognitionBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public Builder addRecognition(
-        int index, dev.yanshouwang.camerax.messages.MLMetadata value) {
-      if (recognitionBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureRecognitionIsMutable();
-        recognition_.add(index, value);
-        onChanged();
-      } else {
-        recognitionBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public Builder addRecognition(
-        dev.yanshouwang.camerax.messages.MLMetadata.Builder builderForValue) {
-      if (recognitionBuilder_ == null) {
-        ensureRecognitionIsMutable();
-        recognition_.add(builderForValue.build());
-        onChanged();
-      } else {
-        recognitionBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public Builder addRecognition(
-        int index, dev.yanshouwang.camerax.messages.MLMetadata.Builder builderForValue) {
-      if (recognitionBuilder_ == null) {
-        ensureRecognitionIsMutable();
-        recognition_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        recognitionBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public Builder addAllRecognition(
-        java.lang.Iterable<? extends dev.yanshouwang.camerax.messages.MLMetadata> values) {
-      if (recognitionBuilder_ == null) {
-        ensureRecognitionIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, recognition_);
-        onChanged();
-      } else {
-        recognitionBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
     public Builder clearRecognition() {
       if (recognitionBuilder_ == null) {
-        recognition_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        recognition_ = null;
         onChanged();
       } else {
-        recognitionBuilder_.clear();
+        recognition_ = null;
+        recognitionBuilder_ = null;
       }
+
       return this;
     }
     /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
-    public Builder removeRecognition(int index) {
-      if (recognitionBuilder_ == null) {
-        ensureRecognitionIsMutable();
-        recognition_.remove(index);
-        onChanged();
-      } else {
-        recognitionBuilder_.remove(index);
-      }
-      return this;
+    public dev.yanshouwang.camerax.messages.MLRecognition.Builder getRecognitionBuilder() {
+      
+      onChanged();
+      return getRecognitionFieldBuilder().getBuilder();
     }
     /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
-    public dev.yanshouwang.camerax.messages.MLMetadata.Builder getRecognitionBuilder(
-        int index) {
-      return getRecognitionFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public dev.yanshouwang.camerax.messages.MLMetadataOrBuilder getRecognitionOrBuilder(
-        int index) {
-      if (recognitionBuilder_ == null) {
-        return recognition_.get(index);  } else {
-        return recognitionBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public java.util.List<? extends dev.yanshouwang.camerax.messages.MLMetadataOrBuilder> 
-         getRecognitionOrBuilderList() {
+    public dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder getRecognitionOrBuilder() {
       if (recognitionBuilder_ != null) {
-        return recognitionBuilder_.getMessageOrBuilderList();
+        return recognitionBuilder_.getMessageOrBuilder();
       } else {
-        return java.util.Collections.unmodifiableList(recognition_);
+        return recognition_ == null ?
+            dev.yanshouwang.camerax.messages.MLRecognition.getDefaultInstance() : recognition_;
       }
     }
     /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
-    public dev.yanshouwang.camerax.messages.MLMetadata.Builder addRecognitionBuilder() {
-      return getRecognitionFieldBuilder().addBuilder(
-          dev.yanshouwang.camerax.messages.MLMetadata.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public dev.yanshouwang.camerax.messages.MLMetadata.Builder addRecognitionBuilder(
-        int index) {
-      return getRecognitionFieldBuilder().addBuilder(
-          index, dev.yanshouwang.camerax.messages.MLMetadata.getDefaultInstance());
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    public java.util.List<dev.yanshouwang.camerax.messages.MLMetadata.Builder> 
-         getRecognitionBuilderList() {
-      return getRecognitionFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-        dev.yanshouwang.camerax.messages.MLMetadata, dev.yanshouwang.camerax.messages.MLMetadata.Builder, dev.yanshouwang.camerax.messages.MLMetadataOrBuilder> 
+    private com.google.protobuf.SingleFieldBuilderV3<
+        dev.yanshouwang.camerax.messages.MLRecognition, dev.yanshouwang.camerax.messages.MLRecognition.Builder, dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder> 
         getRecognitionFieldBuilder() {
       if (recognitionBuilder_ == null) {
-        recognitionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            dev.yanshouwang.camerax.messages.MLMetadata, dev.yanshouwang.camerax.messages.MLMetadata.Builder, dev.yanshouwang.camerax.messages.MLMetadataOrBuilder>(
-                recognition_,
-                ((bitField0_ & 0x00000001) != 0),
+        recognitionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            dev.yanshouwang.camerax.messages.MLRecognition, dev.yanshouwang.camerax.messages.MLRecognition.Builder, dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder>(
+                getRecognition(),
                 getParentForChildren(),
                 isClean());
         recognition_ = null;

@@ -5,32 +5,30 @@ import androidx.annotation.NonNull
 import dev.yanshouwang.camerax.pigeons.*
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformViewRegistry
-import java.util.concurrent.Executors
 
 /** CameraPlugin */
 class CameraPlugin : FlutterPlugin, ActivityAware {
-    private val executor by lazy { Executors.newSingleThreadExecutor() }
     private val finalizerPigeon by lazy { FinalizerPigeon() }
-    private val cameraControllerPigeon by lazy { CameraControllerPigeon(executor) }
-    private val imageAnalyzerPigeon by lazy { ImageAnalyzerPigeon() }
-    private val mlAnalyzerPigeon by lazy { MLAnalyzerPigeon(executor) }
     private val cameraViewPigeon by lazy { CameraViewPigeon() }
+    private val cameraControllerPigeon by lazy { CameraControllerPigeon() }
+    private val imageAnalyzerPigeon by lazy { ImageAnalyzerPigeon() }
+    private val mlAnalyzerPigeon by lazy { MLAnalyzerPigeon() }
 
-    override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        registerViews(binding.platformViewRegistry)
-        setupPigeons(binding.binaryMessenger)
+    override fun onAttachedToEngine(@NonNull binding: FlutterPluginBinding) {
+        registerViews(binding)
+        setupPigeons(binding)
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPluginBinding) {
+        teardownPigeons(binding)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        setActivity(binding.activity)
+        setActivity(binding)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
@@ -38,31 +36,42 @@ class CameraPlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        setActivity(binding.activity)
+        setActivity(binding)
     }
 
     override fun onDetachedFromActivity() {
         setActivity(null)
     }
 
-    private fun registerViews(registry: PlatformViewRegistry) {
-        registry.registerViewFactory(CameraViewFactory.viewType, CameraViewFactory)
+    private fun registerViews(binding: FlutterPluginBinding) {
+        binding.platformViewRegistry.registerViewFactory(CameraViewFactory.viewType, CameraViewFactory)
     }
 
-    private fun setupPigeons(binaryMessenger: BinaryMessenger) {
-        cameraControllerPigeon.binaryMessenger = binaryMessenger
-        imageAnalyzerPigeon.binaryMessenger = binaryMessenger
-        mlAnalyzerPigeon.binaryMessenger = binaryMessenger
+    private fun setupPigeons(binding: FlutterPluginBinding) {
+        cameraControllerPigeon.context = binding.applicationContext
+        mlAnalyzerPigeon.context = binding.applicationContext
 
-        Pigeons.FinalizerHostPigeon.setup(binaryMessenger, finalizerPigeon)
-        Pigeons.CameraControllerHostPigeon.setup(binaryMessenger, cameraControllerPigeon)
-        Pigeons.ImageAnalyzerHostPigeon.setup(binaryMessenger, imageAnalyzerPigeon)
-        Pigeons.MLAnalyzerHostPigeon.setup(binaryMessenger, mlAnalyzerPigeon)
-        Pigeons.CameraViewHostPigeon.setup(binaryMessenger, cameraViewPigeon)
+        cameraControllerPigeon.binaryMessenger = binding.binaryMessenger
+        imageAnalyzerPigeon.binaryMessenger = binding.binaryMessenger
+        mlAnalyzerPigeon.binaryMessenger = binding.binaryMessenger
+
+        Pigeons.FinalizerHostPigeon.setup(binding.binaryMessenger, finalizerPigeon)
+        Pigeons.CameraViewHostPigeon.setup(binding.binaryMessenger, cameraViewPigeon)
+        Pigeons.CameraControllerHostPigeon.setup(binding.binaryMessenger, cameraControllerPigeon)
+        Pigeons.ImageAnalyzerHostPigeon.setup(binding.binaryMessenger, imageAnalyzerPigeon)
+        Pigeons.MLAnalyzerHostPigeon.setup(binding.binaryMessenger, mlAnalyzerPigeon)
     }
 
-    private fun setActivity(activity: Activity?) {
-        cameraControllerPigeon.activity = activity
-        cameraViewPigeon.activity = activity
+    private fun teardownPigeons(binding: FlutterPluginBinding) {
+        Pigeons.FinalizerHostPigeon.setup(binding.binaryMessenger, null)
+        Pigeons.CameraViewHostPigeon.setup(binding.binaryMessenger, null)
+        Pigeons.CameraControllerHostPigeon.setup(binding.binaryMessenger, null)
+        Pigeons.ImageAnalyzerHostPigeon.setup(binding.binaryMessenger, null)
+        Pigeons.MLAnalyzerHostPigeon.setup(binding.binaryMessenger, null)
+    }
+
+    private fun setActivity(binding: ActivityPluginBinding?) {
+        cameraViewPigeon.activity = binding?.activity
+        cameraControllerPigeon.activity = binding?.activity
     }
 }

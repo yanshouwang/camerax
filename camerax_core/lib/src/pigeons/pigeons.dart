@@ -44,6 +44,43 @@ class FinalizerHostPigeon {
   }
 }
 
+class _CameraViewHostPigeonCodec extends StandardMessageCodec {
+  const _CameraViewHostPigeonCodec();
+}
+
+class CameraViewHostPigeon {
+  /// Constructor for [CameraViewHostPigeon].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  CameraViewHostPigeon({BinaryMessenger? binaryMessenger}) : _binaryMessenger = binaryMessenger;
+
+  final BinaryMessenger? _binaryMessenger;
+
+  static const MessageCodec<Object?> codec = _CameraViewHostPigeonCodec();
+
+  Future<void> createOrSetArguments(String arg_id, Uint8List arg_argumentsBuffer) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments', codec, binaryMessenger: _binaryMessenger);
+    final Map<Object?, Object?>? replyMap =
+        await channel.send(<Object?>[arg_id, arg_argumentsBuffer]) as Map<Object?, Object?>?;
+    if (replyMap == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyMap['error'] != null) {
+      final Map<Object?, Object?> error = (replyMap['error'] as Map<Object?, Object?>?)!;
+      throw PlatformException(
+        code: (error['code'] as String?)!,
+        message: error['message'] as String?,
+        details: error['details'],
+      );
+    } else {
+      return;
+    }
+  }
+}
+
 class _CameraControllerHostPigeonCodec extends StandardMessageCodec {
   const _CameraControllerHostPigeonCodec();
 }
@@ -365,56 +402,12 @@ class MLAnalyzerHostPigeon {
       return;
     }
   }
-}
 
-class _MLAnalyzerFlutterPigeonCodec extends StandardMessageCodec {
-  const _MLAnalyzerFlutterPigeonCodec();
-}
-abstract class MLAnalyzerFlutterPigeon {
-  static const MessageCodec<Object?> codec = _MLAnalyzerFlutterPigeonCodec();
-
-  void onAnalyzed(String id, List<Uint8List?> recognitionBuffer);
-  static void setup(MLAnalyzerFlutterPigeon? api, {BinaryMessenger? binaryMessenger}) {
-    {
-      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed', codec, binaryMessenger: binaryMessenger);
-      if (api == null) {
-        channel.setMessageHandler(null);
-      } else {
-        channel.setMessageHandler((Object? message) async {
-          assert(message != null, 'Argument for dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final String? arg_id = (args[0] as String?);
-          assert(arg_id != null, 'Argument for dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed was null, expected non-null String.');
-          final List<Uint8List?>? arg_recognitionBuffer = (args[1] as List<Object?>?)?.cast<Uint8List?>();
-          assert(arg_recognitionBuffer != null, 'Argument for dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed was null, expected non-null List<Uint8List?>.');
-          api.onAnalyzed(arg_id!, arg_recognitionBuffer!);
-          return;
-        });
-      }
-    }
-  }
-}
-
-class _CameraViewHostPigeonCodec extends StandardMessageCodec {
-  const _CameraViewHostPigeonCodec();
-}
-
-class CameraViewHostPigeon {
-  /// Constructor for [CameraViewHostPigeon].  The [binaryMessenger] named argument is
-  /// available for dependency injection.  If it is left null, the default
-  /// BinaryMessenger will be used which routes to the host platform.
-  CameraViewHostPigeon({BinaryMessenger? binaryMessenger}) : _binaryMessenger = binaryMessenger;
-
-  final BinaryMessenger? _binaryMessenger;
-
-  static const MessageCodec<Object?> codec = _CameraViewHostPigeonCodec();
-
-  Future<void> createOrSetArguments(String arg_id, String arg_controllerId, int arg_scaleType) async {
+  Future<void> analyze(String arg_id, String arg_imageProxyId) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments', codec, binaryMessenger: _binaryMessenger);
+        'dev.flutter.pigeon.MLAnalyzerHostPigeon.analyze', codec, binaryMessenger: _binaryMessenger);
     final Map<Object?, Object?>? replyMap =
-        await channel.send(<Object?>[arg_id, arg_controllerId, arg_scaleType]) as Map<Object?, Object?>?;
+        await channel.send(<Object?>[arg_id, arg_imageProxyId]) as Map<Object?, Object?>?;
     if (replyMap == null) {
       throw PlatformException(
         code: 'channel-error',
@@ -429,6 +422,35 @@ class CameraViewHostPigeon {
       );
     } else {
       return;
+    }
+  }
+}
+
+class _MLAnalyzerFlutterPigeonCodec extends StandardMessageCodec {
+  const _MLAnalyzerFlutterPigeonCodec();
+}
+abstract class MLAnalyzerFlutterPigeon {
+  static const MessageCodec<Object?> codec = _MLAnalyzerFlutterPigeonCodec();
+
+  void onAnalyzed(String id, Uint8List recognitionBuffer);
+  static void setup(MLAnalyzerFlutterPigeon? api, {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed', codec, binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null, 'Argument for dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final String? arg_id = (args[0] as String?);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed was null, expected non-null String.');
+          final Uint8List? arg_recognitionBuffer = (args[1] as Uint8List?);
+          assert(arg_recognitionBuffer != null, 'Argument for dev.flutter.pigeon.MLAnalyzerFlutterPigeon.onAnalyzed was null, expected non-null Uint8List.');
+          api.onAnalyzed(arg_id!, arg_recognitionBuffer!);
+          return;
+        });
+      }
     }
   }
 }

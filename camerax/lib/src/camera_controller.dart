@@ -4,6 +4,7 @@ import 'package:camerax_core/camerax_core.dart' as core;
 import 'package:flutter/foundation.dart';
 
 import 'camera_selector.dart';
+import 'extensions.dart';
 import 'image_analyzer.dart';
 
 abstract class CameraController {
@@ -11,10 +12,9 @@ abstract class CameraController {
 
   CameraSelector get cameraSelector;
   set cameraSelector(CameraSelector value);
+  set imageAnalyzer(ImageAnalyzer? value);
   void bind();
   void enableTorch(bool state);
-  void setImageAnalyzer(ImageAnalyzer imageAnalyzer);
-  void clearImageAnalyzer();
   void unbind();
   void dispose();
 
@@ -26,10 +26,11 @@ abstract class CameraController {
 
 class _CameraController implements CameraController {
   CameraSelector _cameraSelector;
+  ImageAnalyzer? _imageAnalyzer;
   @override
   final ValueNotifier<bool> torchState;
 
-  late StreamSubscription<core.TorchStateArguments> torchStateSubscription;
+  late StreamSubscription<bool> torchStateSubscription;
 
   _CameraController(this._cameraSelector) : torchState = ValueNotifier(false) {
     core.CameraControllerPigeon.instance.create(
@@ -40,14 +41,9 @@ class _CameraController implements CameraController {
     );
     torchStateSubscription = core
         .CameraControllerPigeon.instance.torchStateStream
-        .listen(onTorchStateChanged);
-  }
-
-  void onTorchStateChanged(core.TorchStateArguments torchStateArguments) {
-    if (torchStateArguments.id != id) {
-      return;
-    }
-    torchState.value = torchStateArguments.state;
+        .where((e) => e.id == id)
+        .map((e) => e.state)
+        .listen((e) => torchState.value = e);
   }
 
   @override
@@ -64,6 +60,19 @@ class _CameraController implements CameraController {
   }
 
   @override
+  set imageAnalyzer(ImageAnalyzer? value) {
+    if (_imageAnalyzer == value) {
+      return;
+    }
+    if (value == null) {
+      core.CameraControllerPigeon.instance.clearImageAnalyzer(id);
+    } else {
+      core.CameraControllerPigeon.instance.setImageAnalyzer(id, value.id);
+    }
+    _imageAnalyzer = value;
+  }
+
+  @override
   void bind() {
     core.CameraControllerPigeon.instance.bind(id);
   }
@@ -71,16 +80,6 @@ class _CameraController implements CameraController {
   @override
   void enableTorch(bool state) {
     core.CameraControllerPigeon.instance.enableTorch(id, state);
-  }
-
-  @override
-  void setImageAnalyzer(ImageAnalyzer imageAnalyzer) {
-    core.CameraControllerPigeon.instance.setImageAnalyzer(id, imageAnalyzer.id);
-  }
-
-  @override
-  void clearImageAnalyzer() {
-    core.CameraControllerPigeon.instance.clearImageAnalyzer(id);
   }
 
   @override
@@ -94,12 +93,4 @@ class _CameraController implements CameraController {
     torchState.dispose();
     core.CameraControllerPigeon.instance.dispose(id);
   }
-}
-
-extension on CameraController {
-  String get id => hashCode.toString();
-}
-
-extension on ImageAnalyzer {
-  String get id => hashCode.toString();
 }

@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:camerax/camerax.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+final messengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late CameraController cameraController;
+  late StreamSubscription<List<MLObject>> recognitionStreamSubscription;
 
   @override
   void initState() {
@@ -24,6 +29,7 @@ class _MyAppState extends State<MyApp> {
     cameraController = CameraController();
 
     bind();
+    scan();
   }
 
   void bind() async {
@@ -31,15 +37,38 @@ class _MyAppState extends State<MyApp> {
     cameraController.bind();
   }
 
+  void scan() async {
+    final mlAnalyzer = MLAnalyzer(handleRecognition);
+    cameraController.imageAnalyzer = mlAnalyzer;
+  }
+
+  void handleRecognition(MLRecognition recognition) {
+    final size = recognition.size;
+    final barcodes = recognition.objs.whereType<Barcode>();
+    if (barcodes.isEmpty) {
+      return;
+    }
+    final messenger = messengerKey.currentState;
+    if (messenger != null) {
+      final snackBar = SnackBar(
+        content: Text('$size - ${barcodes.first.value}'),
+      );
+      messenger
+        ..clearSnackBars()
+        ..showSnackBar(snackBar);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: messengerKey,
       home: Scaffold(
         body: Stack(
           children: [
             CameraView(
               controller: cameraController,
-              scaleType: ScaleType.fillCenter,
+              scaleType: ScaleType.fitCenter,
             ),
             Container(
               alignment: Alignment.bottomCenter,
@@ -69,6 +98,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
+    recognitionStreamSubscription.cancel();
     cameraController.dispose();
     super.dispose();
   }

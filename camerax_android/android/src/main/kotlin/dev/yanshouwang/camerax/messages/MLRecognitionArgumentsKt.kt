@@ -40,79 +40,34 @@ object MLRecognitionArgumentsKt {
     }
 
     /**
-     * An uninstantiable, behaviorless type to represent the field in
-     * generics.
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
-    @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
-    class RecognitionProxy private constructor() : com.google.protobuf.kotlin.DslProxy()
+    var recognition: dev.yanshouwang.camerax.messages.MLRecognition
+      @JvmName("getRecognition")
+      get() = _builder.getRecognition()
+      @JvmName("setRecognition")
+      set(value) {
+        _builder.setRecognition(value)
+      }
     /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
+     * <code>.messages.MLRecognition recognition = 2;</code>
      */
-     val recognition: com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>
-      @kotlin.jvm.JvmSynthetic
-      get() = com.google.protobuf.kotlin.DslList(
-        _builder.getRecognitionList()
-      )
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     * @param value The recognition to add.
-     */
-    @kotlin.jvm.JvmSynthetic
-    @kotlin.jvm.JvmName("addRecognition")
-    fun com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>.add(value: dev.yanshouwang.camerax.messages.MLMetadata) {
-      _builder.addRecognition(value)
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     * @param value The recognition to add.
-     */
-    @kotlin.jvm.JvmSynthetic
-    @kotlin.jvm.JvmName("plusAssignRecognition")
-    @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>.plusAssign(value: dev.yanshouwang.camerax.messages.MLMetadata) {
-      add(value)
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     * @param values The recognition to add.
-     */
-    @kotlin.jvm.JvmSynthetic
-    @kotlin.jvm.JvmName("addAllRecognition")
-    fun com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>.addAll(values: kotlin.collections.Iterable<dev.yanshouwang.camerax.messages.MLMetadata>) {
-      _builder.addAllRecognition(values)
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     * @param values The recognition to add.
-     */
-    @kotlin.jvm.JvmSynthetic
-    @kotlin.jvm.JvmName("plusAssignAllRecognition")
-    @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>.plusAssign(values: kotlin.collections.Iterable<dev.yanshouwang.camerax.messages.MLMetadata>) {
-      addAll(values)
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     * @param index The index to set the value at.
-     * @param value The recognition to set.
-     */
-    @kotlin.jvm.JvmSynthetic
-    @kotlin.jvm.JvmName("setRecognition")
-    operator fun com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>.set(index: kotlin.Int, value: dev.yanshouwang.camerax.messages.MLMetadata) {
-      _builder.setRecognition(index, value)
-    }
-    /**
-     * <code>repeated .messages.MLMetadata recognition = 2;</code>
-     */
-    @kotlin.jvm.JvmSynthetic
-    @kotlin.jvm.JvmName("clearRecognition")
-    fun com.google.protobuf.kotlin.DslList<dev.yanshouwang.camerax.messages.MLMetadata, RecognitionProxy>.clear() {
+    fun clearRecognition() {
       _builder.clearRecognition()
     }
-
+    /**
+     * <code>.messages.MLRecognition recognition = 2;</code>
+     * @return Whether the recognition field is set.
+     */
+    fun hasRecognition(): kotlin.Boolean {
+      return _builder.hasRecognition()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
 inline fun dev.yanshouwang.camerax.messages.MLRecognitionArguments.copy(block: dev.yanshouwang.camerax.messages.MLRecognitionArgumentsKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.MLRecognitionArguments =
   dev.yanshouwang.camerax.messages.MLRecognitionArgumentsKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+val dev.yanshouwang.camerax.messages.MLRecognitionArgumentsOrBuilder.recognitionOrNull: dev.yanshouwang.camerax.messages.MLRecognition?
+  get() = if (hasRecognition()) getRecognition() else null
 

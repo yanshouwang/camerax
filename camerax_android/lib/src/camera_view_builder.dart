@@ -5,10 +5,7 @@ import 'package:flutter/widgets.dart';
 
 class CameraViewBuilder extends core.CameraViewBuilder {
   @override
-  Widget build({
-    required String id,
-    required String viewType,
-  }) {
+  Widget build({required String id, required String viewType}) {
     return PlatformViewLink(
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(

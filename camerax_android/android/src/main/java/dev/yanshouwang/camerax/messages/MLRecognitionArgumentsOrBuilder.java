@@ -20,26 +20,17 @@ public interface MLRecognitionArgumentsOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
+   * <code>.messages.MLRecognition recognition = 2;</code>
+   * @return Whether the recognition field is set.
    */
-  java.util.List<dev.yanshouwang.camerax.messages.MLMetadata> 
-      getRecognitionList();
+  boolean hasRecognition();
   /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
+   * <code>.messages.MLRecognition recognition = 2;</code>
+   * @return The recognition.
    */
-  dev.yanshouwang.camerax.messages.MLMetadata getRecognition(int index);
+  dev.yanshouwang.camerax.messages.MLRecognition getRecognition();
   /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
+   * <code>.messages.MLRecognition recognition = 2;</code>
    */
-  int getRecognitionCount();
-  /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
-   */
-  java.util.List<? extends dev.yanshouwang.camerax.messages.MLMetadataOrBuilder> 
-      getRecognitionOrBuilderList();
-  /**
-   * <code>repeated .messages.MLMetadata recognition = 2;</code>
-   */
-  dev.yanshouwang.camerax.messages.MLMetadataOrBuilder getRecognitionOrBuilder(
-      int index);
+  dev.yanshouwang.camerax.messages.MLRecognitionOrBuilder getRecognitionOrBuilder();
 }

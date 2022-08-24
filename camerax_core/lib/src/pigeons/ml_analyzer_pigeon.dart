@@ -30,6 +30,7 @@ abstract class MLAnalyzerPigeon extends PlatformInterface {
   Stream<MLRecognitionArguments> get recognitionStream;
 
   Future<void> create(String id);
+  Future<void> analyze(String id, String imageProxyId);
 }
 
 class _MLAnalyzerPigeon extends MLAnalyzerPigeon
@@ -53,12 +54,15 @@ class _MLAnalyzerPigeon extends MLAnalyzerPigeon
   }
 
   @override
-  void onAnalyzed(String id, List<Uint8List?> recognitionBuffer) {
+  Future<void> analyze(String id, String imageProxyId) {
+    return host.analyze(id, imageProxyId);
+  }
+
+  @override
+  void onAnalyzed(String id, Uint8List recognitionBuffer) {
     final recognitionArguments = MLRecognitionArguments(
       id: id,
-      recognition: recognitionBuffer
-          .cast<Uint8List>()
-          .map((metadataBuffer) => MLMetadata.fromBuffer(metadataBuffer)),
+      recognition: MLRecognition.fromBuffer(recognitionBuffer),
     );
     recognitionStreamController.add(recognitionArguments);
   }

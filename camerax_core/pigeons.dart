@@ -5,6 +5,11 @@ abstract class FinalizerHostPigeon {
   void finalize(String id);
 }
 
+@HostApi(dartHostTestHandler: 'TestCameraViewHostPigeon')
+abstract class CameraViewHostPigeon {
+  void createOrSetArguments(String id, Uint8List argumentsBuffer);
+}
+
 @HostApi(dartHostTestHandler: 'TestCameraControllerHostPigeon')
 abstract class CameraControllerHostPigeon {
   void create(String id, Uint8List cameraSelectorBuffer);
@@ -35,14 +40,11 @@ abstract class ImageAnalyzerFutterPigeon {
 @HostApi(dartHostTestHandler: 'TestMLAnalyzerHostPigeon')
 abstract class MLAnalyzerHostPigeon {
   void create(String id);
+
+  void analyze(String id, String imageProxyId);
 }
 
 @FlutterApi()
 abstract class MLAnalyzerFlutterPigeon {
-  void onAnalyzed(String id, List<Uint8List> recognitionBuffer);
-}
-
-@HostApi(dartHostTestHandler: 'TestCameraViewHostPigeon')
-abstract class CameraViewHostPigeon {
-  void createOrSetArguments(String id, String controllerId, int scaleType);
+  void onAnalyzed(String id, Uint8List recognitionBuffer);
 }

@@ -2,6 +2,7 @@ import 'package:camerax_core/camerax_core.dart' as core;
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
+import 'extensions.dart';
 import 'scale_type.dart';
 
 class CameraView extends StatefulWidget {
@@ -27,17 +28,16 @@ class _CameraViewState extends State<CameraView> {
   @override
   Widget build(BuildContext context) {
     createOrSetArguments();
-    return core.CameraViewBuilder.instance.build(
-      id: id,
-      viewType: '${core.uri}/camera_view',
-    );
+    return core.CameraView(id: id);
   }
 
   void createOrSetArguments() async {
     await core.CameraViewPigeon.instance.createOrSetArguments(
       id,
-      controllerId: widget.controller.id,
-      scaleType: widget.scaleType.index,
+      arguments: core.CameraViewArguments(
+        controllerId: widget.controller.id,
+        scaleType: core.ScaleType.valueOf(widget.scaleType.index),
+      ),
     );
   }
 
@@ -46,12 +46,4 @@ class _CameraViewState extends State<CameraView> {
     core.FinalizerPigeon.instance.finalize(id);
     super.dispose();
   }
-}
-
-extension on CameraController {
-  String get id => hashCode.toString();
-}
-
-extension on _CameraViewState {
-  String get id => hashCode.toString();
 }

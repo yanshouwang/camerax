@@ -4,18 +4,18 @@
 package dev.yanshouwang.camerax.messages;
 
 /**
- * Protobuf type {@code messages.MLMetadata}
+ * Protobuf type {@code messages.MLObject}
  */
-public final class MLMetadata extends
+public final class MLObject extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:messages.MLMetadata)
-    MLMetadataOrBuilder {
+    // @@protoc_insertion_point(message_implements:messages.MLObject)
+    MLObjectOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use MLMetadata.newBuilder() to construct.
-  private MLMetadata(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use MLObject.newBuilder() to construct.
+  private MLObject(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private MLMetadata() {
+  private MLObject() {
     corners_ = java.util.Collections.emptyList();
   }
 
@@ -23,7 +23,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new MLMetadata();
+    return new MLObject();
   }
 
   @java.lang.Override
@@ -31,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private MLMetadata(
+  private MLObject(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -61,16 +61,16 @@ private static final long serialVersionUID = 0L;
           }
           case 18: {
             dev.yanshouwang.camerax.messages.Barcode.Builder subBuilder = null;
-            if (metadataCase_ == 2) {
-              subBuilder = ((dev.yanshouwang.camerax.messages.Barcode) metadata_).toBuilder();
+            if (typeCase_ == 2) {
+              subBuilder = ((dev.yanshouwang.camerax.messages.Barcode) type_).toBuilder();
             }
-            metadata_ =
+            type_ =
                 input.readMessage(dev.yanshouwang.camerax.messages.Barcode.parser(), extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Barcode) metadata_);
-              metadata_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom((dev.yanshouwang.camerax.messages.Barcode) type_);
+              type_ = subBuilder.buildPartial();
             }
-            metadataCase_ = 2;
+            typeCase_ = 2;
             break;
           }
           default: {
@@ -99,26 +99,26 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadata_descriptor;
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLObject_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadata_fieldAccessorTable
+    return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLObject_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            dev.yanshouwang.camerax.messages.MLMetadata.class, dev.yanshouwang.camerax.messages.MLMetadata.Builder.class);
+            dev.yanshouwang.camerax.messages.MLObject.class, dev.yanshouwang.camerax.messages.MLObject.Builder.class);
   }
 
-  private int metadataCase_ = 0;
-  private java.lang.Object metadata_;
-  public enum MetadataCase
+  private int typeCase_ = 0;
+  private java.lang.Object type_;
+  public enum TypeCase
       implements com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     BARCODE(2),
-    METADATA_NOT_SET(0);
+    TYPE_NOT_SET(0);
     private final int value;
-    private MetadataCase(int value) {
+    private TypeCase(int value) {
       this.value = value;
     }
     /**
@@ -127,14 +127,14 @@ private static final long serialVersionUID = 0L;
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
-    public static MetadataCase valueOf(int value) {
+    public static TypeCase valueOf(int value) {
       return forNumber(value);
     }
 
-    public static MetadataCase forNumber(int value) {
+    public static TypeCase forNumber(int value) {
       switch (value) {
         case 2: return BARCODE;
-        case 0: return METADATA_NOT_SET;
+        case 0: return TYPE_NOT_SET;
         default: return null;
       }
     }
@@ -143,10 +143,10 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public MetadataCase
-  getMetadataCase() {
-    return MetadataCase.forNumber(
-        metadataCase_);
+  public TypeCase
+  getTypeCase() {
+    return TypeCase.forNumber(
+        typeCase_);
   }
 
   public static final int CORNERS_FIELD_NUMBER = 1;
@@ -196,7 +196,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public boolean hasBarcode() {
-    return metadataCase_ == 2;
+    return typeCase_ == 2;
   }
   /**
    * <code>.messages.Barcode barcode = 2;</code>
@@ -204,8 +204,8 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public dev.yanshouwang.camerax.messages.Barcode getBarcode() {
-    if (metadataCase_ == 2) {
-       return (dev.yanshouwang.camerax.messages.Barcode) metadata_;
+    if (typeCase_ == 2) {
+       return (dev.yanshouwang.camerax.messages.Barcode) type_;
     }
     return dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
   }
@@ -214,8 +214,8 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override
   public dev.yanshouwang.camerax.messages.BarcodeOrBuilder getBarcodeOrBuilder() {
-    if (metadataCase_ == 2) {
-       return (dev.yanshouwang.camerax.messages.Barcode) metadata_;
+    if (typeCase_ == 2) {
+       return (dev.yanshouwang.camerax.messages.Barcode) type_;
     }
     return dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
   }
@@ -237,8 +237,8 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < corners_.size(); i++) {
       output.writeMessage(1, corners_.get(i));
     }
-    if (metadataCase_ == 2) {
-      output.writeMessage(2, (dev.yanshouwang.camerax.messages.Barcode) metadata_);
+    if (typeCase_ == 2) {
+      output.writeMessage(2, (dev.yanshouwang.camerax.messages.Barcode) type_);
     }
     unknownFields.writeTo(output);
   }
@@ -253,9 +253,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, corners_.get(i));
     }
-    if (metadataCase_ == 2) {
+    if (typeCase_ == 2) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, (dev.yanshouwang.camerax.messages.Barcode) metadata_);
+        .computeMessageSize(2, (dev.yanshouwang.camerax.messages.Barcode) type_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -267,15 +267,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof dev.yanshouwang.camerax.messages.MLMetadata)) {
+    if (!(obj instanceof dev.yanshouwang.camerax.messages.MLObject)) {
       return super.equals(obj);
     }
-    dev.yanshouwang.camerax.messages.MLMetadata other = (dev.yanshouwang.camerax.messages.MLMetadata) obj;
+    dev.yanshouwang.camerax.messages.MLObject other = (dev.yanshouwang.camerax.messages.MLObject) obj;
 
     if (!getCornersList()
         .equals(other.getCornersList())) return false;
-    if (!getMetadataCase().equals(other.getMetadataCase())) return false;
-    switch (metadataCase_) {
+    if (!getTypeCase().equals(other.getTypeCase())) return false;
+    switch (typeCase_) {
       case 2:
         if (!getBarcode()
             .equals(other.getBarcode())) return false;
@@ -298,7 +298,7 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + CORNERS_FIELD_NUMBER;
       hash = (53 * hash) + getCornersList().hashCode();
     }
-    switch (metadataCase_) {
+    switch (typeCase_) {
       case 2:
         hash = (37 * hash) + BARCODE_FIELD_NUMBER;
         hash = (53 * hash) + getBarcode().hashCode();
@@ -311,69 +311,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(byte[] data)
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseDelimitedFrom(java.io.InputStream input)
+  public static dev.yanshouwang.camerax.messages.MLObject parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseDelimitedFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static dev.yanshouwang.camerax.messages.MLMetadata parseFrom(
+  public static dev.yanshouwang.camerax.messages.MLObject parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -386,7 +386,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(dev.yanshouwang.camerax.messages.MLMetadata prototype) {
+  public static Builder newBuilder(dev.yanshouwang.camerax.messages.MLObject prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -402,26 +402,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code messages.MLMetadata}
+   * Protobuf type {@code messages.MLObject}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:messages.MLMetadata)
-      dev.yanshouwang.camerax.messages.MLMetadataOrBuilder {
+      // @@protoc_insertion_point(builder_implements:messages.MLObject)
+      dev.yanshouwang.camerax.messages.MLObjectOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadata_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLObject_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadata_fieldAccessorTable
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLObject_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              dev.yanshouwang.camerax.messages.MLMetadata.class, dev.yanshouwang.camerax.messages.MLMetadata.Builder.class);
+              dev.yanshouwang.camerax.messages.MLObject.class, dev.yanshouwang.camerax.messages.MLObject.Builder.class);
     }
 
-    // Construct using dev.yanshouwang.camerax.messages.MLMetadata.newBuilder()
+    // Construct using dev.yanshouwang.camerax.messages.MLObject.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -446,25 +446,25 @@ private static final long serialVersionUID = 0L;
       } else {
         cornersBuilder_.clear();
       }
-      metadataCase_ = 0;
-      metadata_ = null;
+      typeCase_ = 0;
+      type_ = null;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLMetadata_descriptor;
+      return dev.yanshouwang.camerax.messages.Messages.internal_static_messages_MLObject_descriptor;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.MLMetadata getDefaultInstanceForType() {
-      return dev.yanshouwang.camerax.messages.MLMetadata.getDefaultInstance();
+    public dev.yanshouwang.camerax.messages.MLObject getDefaultInstanceForType() {
+      return dev.yanshouwang.camerax.messages.MLObject.getDefaultInstance();
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.MLMetadata build() {
-      dev.yanshouwang.camerax.messages.MLMetadata result = buildPartial();
+    public dev.yanshouwang.camerax.messages.MLObject build() {
+      dev.yanshouwang.camerax.messages.MLObject result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -472,8 +472,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.MLMetadata buildPartial() {
-      dev.yanshouwang.camerax.messages.MLMetadata result = new dev.yanshouwang.camerax.messages.MLMetadata(this);
+    public dev.yanshouwang.camerax.messages.MLObject buildPartial() {
+      dev.yanshouwang.camerax.messages.MLObject result = new dev.yanshouwang.camerax.messages.MLObject(this);
       int from_bitField0_ = bitField0_;
       if (cornersBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
@@ -484,14 +484,14 @@ private static final long serialVersionUID = 0L;
       } else {
         result.corners_ = cornersBuilder_.build();
       }
-      if (metadataCase_ == 2) {
+      if (typeCase_ == 2) {
         if (barcodeBuilder_ == null) {
-          result.metadata_ = metadata_;
+          result.type_ = type_;
         } else {
-          result.metadata_ = barcodeBuilder_.build();
+          result.type_ = barcodeBuilder_.build();
         }
       }
-      result.metadataCase_ = metadataCase_;
+      result.typeCase_ = typeCase_;
       onBuilt();
       return result;
     }
@@ -530,16 +530,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof dev.yanshouwang.camerax.messages.MLMetadata) {
-        return mergeFrom((dev.yanshouwang.camerax.messages.MLMetadata)other);
+      if (other instanceof dev.yanshouwang.camerax.messages.MLObject) {
+        return mergeFrom((dev.yanshouwang.camerax.messages.MLObject)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(dev.yanshouwang.camerax.messages.MLMetadata other) {
-      if (other == dev.yanshouwang.camerax.messages.MLMetadata.getDefaultInstance()) return this;
+    public Builder mergeFrom(dev.yanshouwang.camerax.messages.MLObject other) {
+      if (other == dev.yanshouwang.camerax.messages.MLObject.getDefaultInstance()) return this;
       if (cornersBuilder_ == null) {
         if (!other.corners_.isEmpty()) {
           if (corners_.isEmpty()) {
@@ -566,12 +566,12 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
-      switch (other.getMetadataCase()) {
+      switch (other.getTypeCase()) {
         case BARCODE: {
           mergeBarcode(other.getBarcode());
           break;
         }
-        case METADATA_NOT_SET: {
+        case TYPE_NOT_SET: {
           break;
         }
       }
@@ -590,11 +590,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      dev.yanshouwang.camerax.messages.MLMetadata parsedMessage = null;
+      dev.yanshouwang.camerax.messages.MLObject parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (dev.yanshouwang.camerax.messages.MLMetadata) e.getUnfinishedMessage();
+        parsedMessage = (dev.yanshouwang.camerax.messages.MLObject) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -603,17 +603,17 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int metadataCase_ = 0;
-    private java.lang.Object metadata_;
-    public MetadataCase
-        getMetadataCase() {
-      return MetadataCase.forNumber(
-          metadataCase_);
+    private int typeCase_ = 0;
+    private java.lang.Object type_;
+    public TypeCase
+        getTypeCase() {
+      return TypeCase.forNumber(
+          typeCase_);
     }
 
-    public Builder clearMetadata() {
-      metadataCase_ = 0;
-      metadata_ = null;
+    public Builder clearType() {
+      typeCase_ = 0;
+      type_ = null;
       onChanged();
       return this;
     }
@@ -868,7 +868,7 @@ private static final long serialVersionUID = 0L;
      */
     @java.lang.Override
     public boolean hasBarcode() {
-      return metadataCase_ == 2;
+      return typeCase_ == 2;
     }
     /**
      * <code>.messages.Barcode barcode = 2;</code>
@@ -877,12 +877,12 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.Barcode getBarcode() {
       if (barcodeBuilder_ == null) {
-        if (metadataCase_ == 2) {
-          return (dev.yanshouwang.camerax.messages.Barcode) metadata_;
+        if (typeCase_ == 2) {
+          return (dev.yanshouwang.camerax.messages.Barcode) type_;
         }
         return dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
       } else {
-        if (metadataCase_ == 2) {
+        if (typeCase_ == 2) {
           return barcodeBuilder_.getMessage();
         }
         return dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
@@ -896,12 +896,12 @@ private static final long serialVersionUID = 0L;
         if (value == null) {
           throw new NullPointerException();
         }
-        metadata_ = value;
+        type_ = value;
         onChanged();
       } else {
         barcodeBuilder_.setMessage(value);
       }
-      metadataCase_ = 2;
+      typeCase_ = 2;
       return this;
     }
     /**
@@ -910,12 +910,12 @@ private static final long serialVersionUID = 0L;
     public Builder setBarcode(
         dev.yanshouwang.camerax.messages.Barcode.Builder builderForValue) {
       if (barcodeBuilder_ == null) {
-        metadata_ = builderForValue.build();
+        type_ = builderForValue.build();
         onChanged();
       } else {
         barcodeBuilder_.setMessage(builderForValue.build());
       }
-      metadataCase_ = 2;
+      typeCase_ = 2;
       return this;
     }
     /**
@@ -923,22 +923,22 @@ private static final long serialVersionUID = 0L;
      */
     public Builder mergeBarcode(dev.yanshouwang.camerax.messages.Barcode value) {
       if (barcodeBuilder_ == null) {
-        if (metadataCase_ == 2 &&
-            metadata_ != dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance()) {
-          metadata_ = dev.yanshouwang.camerax.messages.Barcode.newBuilder((dev.yanshouwang.camerax.messages.Barcode) metadata_)
+        if (typeCase_ == 2 &&
+            type_ != dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance()) {
+          type_ = dev.yanshouwang.camerax.messages.Barcode.newBuilder((dev.yanshouwang.camerax.messages.Barcode) type_)
               .mergeFrom(value).buildPartial();
         } else {
-          metadata_ = value;
+          type_ = value;
         }
         onChanged();
       } else {
-        if (metadataCase_ == 2) {
+        if (typeCase_ == 2) {
           barcodeBuilder_.mergeFrom(value);
         } else {
           barcodeBuilder_.setMessage(value);
         }
       }
-      metadataCase_ = 2;
+      typeCase_ = 2;
       return this;
     }
     /**
@@ -946,15 +946,15 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearBarcode() {
       if (barcodeBuilder_ == null) {
-        if (metadataCase_ == 2) {
-          metadataCase_ = 0;
-          metadata_ = null;
+        if (typeCase_ == 2) {
+          typeCase_ = 0;
+          type_ = null;
           onChanged();
         }
       } else {
-        if (metadataCase_ == 2) {
-          metadataCase_ = 0;
-          metadata_ = null;
+        if (typeCase_ == 2) {
+          typeCase_ = 0;
+          type_ = null;
         }
         barcodeBuilder_.clear();
       }
@@ -971,11 +971,11 @@ private static final long serialVersionUID = 0L;
      */
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.BarcodeOrBuilder getBarcodeOrBuilder() {
-      if ((metadataCase_ == 2) && (barcodeBuilder_ != null)) {
+      if ((typeCase_ == 2) && (barcodeBuilder_ != null)) {
         return barcodeBuilder_.getMessageOrBuilder();
       } else {
-        if (metadataCase_ == 2) {
-          return (dev.yanshouwang.camerax.messages.Barcode) metadata_;
+        if (typeCase_ == 2) {
+          return (dev.yanshouwang.camerax.messages.Barcode) type_;
         }
         return dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
       }
@@ -987,17 +987,17 @@ private static final long serialVersionUID = 0L;
         dev.yanshouwang.camerax.messages.Barcode, dev.yanshouwang.camerax.messages.Barcode.Builder, dev.yanshouwang.camerax.messages.BarcodeOrBuilder> 
         getBarcodeFieldBuilder() {
       if (barcodeBuilder_ == null) {
-        if (!(metadataCase_ == 2)) {
-          metadata_ = dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
+        if (!(typeCase_ == 2)) {
+          type_ = dev.yanshouwang.camerax.messages.Barcode.getDefaultInstance();
         }
         barcodeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             dev.yanshouwang.camerax.messages.Barcode, dev.yanshouwang.camerax.messages.Barcode.Builder, dev.yanshouwang.camerax.messages.BarcodeOrBuilder>(
-                (dev.yanshouwang.camerax.messages.Barcode) metadata_,
+                (dev.yanshouwang.camerax.messages.Barcode) type_,
                 getParentForChildren(),
                 isClean());
-        metadata_ = null;
+        type_ = null;
       }
-      metadataCase_ = 2;
+      typeCase_ = 2;
       onChanged();;
       return barcodeBuilder_;
     }
@@ -1014,41 +1014,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:messages.MLMetadata)
+    // @@protoc_insertion_point(builder_scope:messages.MLObject)
   }
 
-  // @@protoc_insertion_point(class_scope:messages.MLMetadata)
-  private static final dev.yanshouwang.camerax.messages.MLMetadata DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:messages.MLObject)
+  private static final dev.yanshouwang.camerax.messages.MLObject DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.MLMetadata();
+    DEFAULT_INSTANCE = new dev.yanshouwang.camerax.messages.MLObject();
   }
 
-  public static dev.yanshouwang.camerax.messages.MLMetadata getDefaultInstance() {
+  public static dev.yanshouwang.camerax.messages.MLObject getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<MLMetadata>
-      PARSER = new com.google.protobuf.AbstractParser<MLMetadata>() {
+  private static final com.google.protobuf.Parser<MLObject>
+      PARSER = new com.google.protobuf.AbstractParser<MLObject>() {
     @java.lang.Override
-    public MLMetadata parsePartialFrom(
+    public MLObject parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new MLMetadata(input, extensionRegistry);
+      return new MLObject(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<MLMetadata> parser() {
+  public static com.google.protobuf.Parser<MLObject> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<MLMetadata> getParserForType() {
+  public com.google.protobuf.Parser<MLObject> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public dev.yanshouwang.camerax.messages.MLMetadata getDefaultInstanceForType() {
+  public dev.yanshouwang.camerax.messages.MLObject getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

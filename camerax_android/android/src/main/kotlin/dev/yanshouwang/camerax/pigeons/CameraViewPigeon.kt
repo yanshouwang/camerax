@@ -1,8 +1,8 @@
 package dev.yanshouwang.camerax.pigeons
 
 import android.app.Activity
-import androidx.camera.view.LifecycleCameraController as MyCameraController
-import androidx.camera.view.PreviewView as MyCameraView
+import androidx.camera.view.LifecycleCameraController
+import androidx.camera.view.PreviewView
 import dev.yanshouwang.camerax.CameraView
 import dev.yanshouwang.camerax.InstanceManager
 import dev.yanshouwang.camerax.messages.CameraViewArguments
@@ -17,13 +17,10 @@ internal class CameraViewPigeon : Pigeons.CameraViewHostPigeon {
             InstanceManager.add(id, view)
         }
         val arguments = CameraViewArguments.parseFrom(argumentsBuffer)
-        val myController =
-            InstanceManager.findInstance<MyCameraController>(arguments.controllerId)
-                ?: throw IllegalArgumentException()
-        val myScaleType = MyCameraView.ScaleType.values().first { scaleType ->
-            scaleType.ordinal == arguments.scaleType.ordinal
-        }
-        view.controller = myController
-        view.scaleType = myScaleType
+        val controller = InstanceManager.findInstance<LifecycleCameraController>(arguments.controllerId)
+            ?: throw IllegalArgumentException()
+        val scaleType = PreviewView.ScaleType.values().first { it.ordinal == arguments.scaleType.ordinal }
+        view.controller = controller
+        view.scaleType = scaleType
     }
 }

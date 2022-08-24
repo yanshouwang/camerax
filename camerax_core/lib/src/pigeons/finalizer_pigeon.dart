@@ -26,12 +26,12 @@ abstract class FinalizerPigeon extends PlatformInterface {
 }
 
 class _FinalizerPigeon extends FinalizerPigeon {
-  final FinalizerHostPigeon hostPigeon;
+  final FinalizerHostPigeon host;
 
-  _FinalizerPigeon() : hostPigeon = FinalizerHostPigeon();
+  _FinalizerPigeon() : host = FinalizerHostPigeon();
 
   @override
   Future<void> finalize(String id) {
-    return hostPigeon.finalize(id);
+    return host.finalize(id);
   }
 }

@@ -3,24 +3,24 @@
 
 package dev.yanshouwang.camerax.messages;
 
-@kotlin.jvm.JvmName("-initializemLMetadata")
-inline fun mLMetadata(block: dev.yanshouwang.camerax.messages.MLMetadataKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.MLMetadata =
-  dev.yanshouwang.camerax.messages.MLMetadataKt.Dsl._create(dev.yanshouwang.camerax.messages.MLMetadata.newBuilder()).apply { block() }._build()
-object MLMetadataKt {
+@kotlin.jvm.JvmName("-initializemLObject")
+inline fun mLObject(block: dev.yanshouwang.camerax.messages.MLObjectKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.MLObject =
+  dev.yanshouwang.camerax.messages.MLObjectKt.Dsl._create(dev.yanshouwang.camerax.messages.MLObject.newBuilder()).apply { block() }._build()
+object MLObjectKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: dev.yanshouwang.camerax.messages.MLMetadata.Builder
+    private val _builder: dev.yanshouwang.camerax.messages.MLObject.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
       @kotlin.PublishedApi
-      internal fun _create(builder: dev.yanshouwang.camerax.messages.MLMetadata.Builder): Dsl = Dsl(builder)
+      internal fun _create(builder: dev.yanshouwang.camerax.messages.MLObject.Builder): Dsl = Dsl(builder)
     }
 
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
-    internal fun _build(): dev.yanshouwang.camerax.messages.MLMetadata = _builder.build()
+    internal fun _build(): dev.yanshouwang.camerax.messages.MLObject = _builder.build()
 
     /**
      * An uninstantiable, behaviorless type to represent the field in
@@ -117,19 +117,19 @@ object MLMetadataKt {
     fun hasBarcode(): kotlin.Boolean {
       return _builder.hasBarcode()
     }
-    val metadataCase: dev.yanshouwang.camerax.messages.MLMetadata.MetadataCase
-      @JvmName("getMetadataCase")
-      get() = _builder.getMetadataCase()
+    val typeCase: dev.yanshouwang.camerax.messages.MLObject.TypeCase
+      @JvmName("getTypeCase")
+      get() = _builder.getTypeCase()
 
-    fun clearMetadata() {
-      _builder.clearMetadata()
+    fun clearType() {
+      _builder.clearType()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
-inline fun dev.yanshouwang.camerax.messages.MLMetadata.copy(block: dev.yanshouwang.camerax.messages.MLMetadataKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.MLMetadata =
-  dev.yanshouwang.camerax.messages.MLMetadataKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+inline fun dev.yanshouwang.camerax.messages.MLObject.copy(block: dev.yanshouwang.camerax.messages.MLObjectKt.Dsl.() -> kotlin.Unit): dev.yanshouwang.camerax.messages.MLObject =
+  dev.yanshouwang.camerax.messages.MLObjectKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val dev.yanshouwang.camerax.messages.MLMetadataOrBuilder.barcodeOrNull: dev.yanshouwang.camerax.messages.Barcode?
+val dev.yanshouwang.camerax.messages.MLObjectOrBuilder.barcodeOrNull: dev.yanshouwang.camerax.messages.Barcode?
   get() = if (hasBarcode()) getBarcode() else null
 

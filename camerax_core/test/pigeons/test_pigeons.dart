@@ -37,6 +37,35 @@ abstract class TestFinalizerHostPigeon {
   }
 }
 
+class _TestCameraViewHostPigeonCodec extends StandardMessageCodec {
+  const _TestCameraViewHostPigeonCodec();
+}
+abstract class TestCameraViewHostPigeon {
+  static const MessageCodec<Object?> codec = _TestCameraViewHostPigeonCodec();
+
+  void createOrSetArguments(String id, Uint8List argumentsBuffer);
+  static void setup(TestCameraViewHostPigeon? api, {BinaryMessenger? binaryMessenger}) {
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments', codec, binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMockMessageHandler(null);
+      } else {
+        channel.setMockMessageHandler((Object? message) async {
+          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final String? arg_id = (args[0] as String?);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null String.');
+          final Uint8List? arg_argumentsBuffer = (args[1] as Uint8List?);
+          assert(arg_argumentsBuffer != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null Uint8List.');
+          api.createOrSetArguments(arg_id!, arg_argumentsBuffer!);
+          return <Object?, Object?>{};
+        });
+      }
+    }
+  }
+}
+
 class _TestCameraControllerHostPigeonCodec extends StandardMessageCodec {
   const _TestCameraControllerHostPigeonCodec();
 }
@@ -225,6 +254,7 @@ abstract class TestMLAnalyzerHostPigeon {
   static const MessageCodec<Object?> codec = _TestMLAnalyzerHostPigeonCodec();
 
   void create(String id);
+  void analyze(String id, String imageProxyId);
   static void setup(TestMLAnalyzerHostPigeon? api, {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
@@ -242,33 +272,20 @@ abstract class TestMLAnalyzerHostPigeon {
         });
       }
     }
-  }
-}
-
-class _TestCameraViewHostPigeonCodec extends StandardMessageCodec {
-  const _TestCameraViewHostPigeonCodec();
-}
-abstract class TestCameraViewHostPigeon {
-  static const MessageCodec<Object?> codec = _TestCameraViewHostPigeonCodec();
-
-  void createOrSetArguments(String id, String controllerId, int scaleType);
-  static void setup(TestCameraViewHostPigeon? api, {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments', codec, binaryMessenger: binaryMessenger);
+          'dev.flutter.pigeon.MLAnalyzerHostPigeon.analyze', codec, binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
-          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null.');
+          assert(message != null, 'Argument for dev.flutter.pigeon.MLAnalyzerHostPigeon.analyze was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final String? arg_id = (args[0] as String?);
-          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null String.');
-          final String? arg_controllerId = (args[1] as String?);
-          assert(arg_controllerId != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null String.');
-          final int? arg_scaleType = (args[2] as int?);
-          assert(arg_scaleType != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null int.');
-          api.createOrSetArguments(arg_id!, arg_controllerId!, arg_scaleType!);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.MLAnalyzerHostPigeon.analyze was null, expected non-null String.');
+          final String? arg_imageProxyId = (args[1] as String?);
+          assert(arg_imageProxyId != null, 'Argument for dev.flutter.pigeon.MLAnalyzerHostPigeon.analyze was null, expected non-null String.');
+          api.analyze(arg_id!, arg_imageProxyId!);
           return <Object?, Object?>{};
         });
       }
