@@ -8,53 +8,6 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
-@$core.Deprecated('Use scaleTypeDescriptor instead')
-const ScaleType$json = const {
-  '1': 'ScaleType',
-  '2': const [
-    const {'1': 'SCALE_TYPE_FILL_START', '2': 0},
-    const {'1': 'SCALE_TYPE_FILL_CENTER', '2': 1},
-    const {'1': 'SCALE_TYPE_FILL_END', '2': 2},
-    const {'1': 'SCALE_TYPE_FIT_START', '2': 3},
-    const {'1': 'SCALE_TYPE_FIT_CENTER', '2': 4},
-    const {'1': 'SCALE_TYPE_FIT_END', '2': 5},
-  ],
-};
-
-/// Descriptor for `ScaleType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List scaleTypeDescriptor = $convert.base64Decode('CglTY2FsZVR5cGUSGQoVU0NBTEVfVFlQRV9GSUxMX1NUQVJUEAASGgoWU0NBTEVfVFlQRV9GSUxMX0NFTlRFUhABEhcKE1NDQUxFX1RZUEVfRklMTF9FTkQQAhIYChRTQ0FMRV9UWVBFX0ZJVF9TVEFSVBADEhkKFVNDQUxFX1RZUEVfRklUX0NFTlRFUhAEEhYKElNDQUxFX1RZUEVfRklUX0VORBAF');
-@$core.Deprecated('Use cameraFacingDescriptor instead')
-const CameraFacing$json = const {
-  '1': 'CameraFacing',
-  '2': const [
-    const {'1': 'CAMERA_FACING_BACK', '2': 0},
-    const {'1': 'CAMERA_FACING_FRONT', '2': 1},
-  ],
-};
-
-/// Descriptor for `CameraFacing`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List cameraFacingDescriptor = $convert.base64Decode('CgxDYW1lcmFGYWNpbmcSFgoSQ0FNRVJBX0ZBQ0lOR19CQUNLEAASFwoTQ0FNRVJBX0ZBQ0lOR19GUk9OVBAB');
-@$core.Deprecated('Use cameraViewArgumentsDescriptor instead')
-const CameraViewArguments$json = const {
-  '1': 'CameraViewArguments',
-  '2': const [
-    const {'1': 'controller_id', '3': 1, '4': 1, '5': 9, '10': 'controllerId'},
-    const {'1': 'scale_type', '3': 2, '4': 1, '5': 14, '6': '.messages.ScaleType', '10': 'scaleType'},
-  ],
-};
-
-/// Descriptor for `CameraViewArguments`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cameraViewArgumentsDescriptor = $convert.base64Decode('ChNDYW1lcmFWaWV3QXJndW1lbnRzEiMKDWNvbnRyb2xsZXJfaWQYASABKAlSDGNvbnRyb2xsZXJJZBIyCgpzY2FsZV90eXBlGAIgASgOMhMubWVzc2FnZXMuU2NhbGVUeXBlUglzY2FsZVR5cGU=');
-@$core.Deprecated('Use cameraSelectorDescriptor instead')
-const CameraSelector$json = const {
-  '1': 'CameraSelector',
-  '2': const [
-    const {'1': 'facing', '3': 1, '4': 1, '5': 14, '6': '.messages.CameraFacing', '10': 'facing'},
-  ],
-};
-
-/// Descriptor for `CameraSelector`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cameraSelectorDescriptor = $convert.base64Decode('Cg5DYW1lcmFTZWxlY3RvchIuCgZmYWNpbmcYASABKA4yFi5tZXNzYWdlcy5DYW1lcmFGYWNpbmdSBmZhY2luZw==');
 @$core.Deprecated('Use torchStateArgumentsDescriptor instead')
 const TorchStateArguments$json = const {
   '1': 'TorchStateArguments',
@@ -77,16 +30,6 @@ const ImageProxyArguments$json = const {
 
 /// Descriptor for `ImageProxyArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List imageProxyArgumentsDescriptor = $convert.base64Decode('ChNJbWFnZVByb3h5QXJndW1lbnRzEg4KAmlkGAEgASgJUgJpZBI1CgtpbWFnZV9wcm94eRgCIAEoCzIULm1lc3NhZ2VzLkltYWdlUHJveHlSCmltYWdlUHJveHk=');
-@$core.Deprecated('Use imageProxyDescriptor instead')
-const ImageProxy$json = const {
-  '1': 'ImageProxy',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
-  ],
-};
-
-/// Descriptor for `ImageProxy`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode('CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZA==');
 @$core.Deprecated('Use mLRecognitionArgumentsDescriptor instead')
 const MLRecognitionArguments$json = const {
   '1': 'MLRecognitionArguments',
@@ -98,6 +41,26 @@ const MLRecognitionArguments$json = const {
 
 /// Descriptor for `MLRecognitionArguments`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mLRecognitionArgumentsDescriptor = $convert.base64Decode('ChZNTFJlY29nbml0aW9uQXJndW1lbnRzEg4KAmlkGAEgASgJUgJpZBI5CgtyZWNvZ25pdGlvbhgCIAEoCzIXLm1lc3NhZ2VzLk1MUmVjb2duaXRpb25SC3JlY29nbml0aW9u');
+@$core.Deprecated('Use cameraSelectorDescriptor instead')
+const CameraSelector$json = const {
+  '1': 'CameraSelector',
+  '2': const [
+    const {'1': 'facingNumber', '3': 1, '4': 1, '5': 5, '10': 'facingNumber'},
+  ],
+};
+
+/// Descriptor for `CameraSelector`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List cameraSelectorDescriptor = $convert.base64Decode('Cg5DYW1lcmFTZWxlY3RvchIiCgxmYWNpbmdOdW1iZXIYASABKAVSDGZhY2luZ051bWJlcg==');
+@$core.Deprecated('Use imageProxyDescriptor instead')
+const ImageProxy$json = const {
+  '1': 'ImageProxy',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `ImageProxy`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List imageProxyDescriptor = $convert.base64Decode('CgpJbWFnZVByb3h5Eg4KAmlkGAEgASgJUgJpZA==');
 @$core.Deprecated('Use mLRecognitionDescriptor instead')
 const MLRecognition$json = const {
   '1': 'MLRecognition',

@@ -23,21 +23,26 @@ class _CameraViewState extends State<CameraView> {
   @override
   void initState() {
     super.initState();
+    core.CameraViewPigeon.instance.create(
+      id,
+      widget.controller.id,
+      widget.scaleType.index,
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant CameraView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.scaleType != oldWidget.scaleType) {
+      core.CameraViewPigeon.instance.setScaleType(id, widget.scaleType.index);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    createOrSetArguments();
-    return core.CameraView(id: id);
-  }
-
-  void createOrSetArguments() async {
-    await core.CameraViewPigeon.instance.createOrSetArguments(
-      id,
-      arguments: core.CameraViewArguments(
-        controllerId: widget.controller.id,
-        scaleType: core.ScaleType.valueOf(widget.scaleType.index),
-      ),
+    return core.CameraViewBuilder.instance.build(
+      id: id,
+      viewType: '${core.uri}/camera_view',
     );
   }
 

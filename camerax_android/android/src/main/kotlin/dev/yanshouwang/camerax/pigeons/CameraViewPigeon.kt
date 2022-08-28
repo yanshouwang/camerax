@@ -5,22 +5,23 @@ import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import dev.yanshouwang.camerax.CameraView
 import dev.yanshouwang.camerax.InstanceManager
-import dev.yanshouwang.camerax.messages.CameraViewArguments
 
 internal class CameraViewPigeon : Pigeons.CameraViewHostPigeon {
     var activity: Activity? = null
 
-    override fun createOrSetArguments(id: String, argumentsBuffer: ByteArray) {
+    override fun create(id: String, controllerId: String, scaleTypeNumber: Long) {
         var view = InstanceManager.findInstance<CameraView>(id)
         if (view == null) {
             view = CameraView(activity!!)
             InstanceManager.add(id, view)
         }
-        val arguments = CameraViewArguments.parseFrom(argumentsBuffer)
-        val controller = InstanceManager.findInstance<LifecycleCameraController>(arguments.controllerId)
-            ?: throw IllegalArgumentException()
-        val scaleType = PreviewView.ScaleType.values().first { it.ordinal == arguments.scaleType.ordinal }
-        view.controller = controller
-        view.scaleType = scaleType
+        view.controller =
+            InstanceManager.findInstance<LifecycleCameraController>(controllerId) ?: throw IllegalArgumentException()
+        view.scaleType = PreviewView.ScaleType.values().first { it.ordinal == scaleTypeNumber.toInt() }
+    }
+
+    override fun setScaleType(id: String, number: Long) {
+        val view = InstanceManager.findInstance<CameraView>(id) ?: throw IllegalArgumentException()
+        view.scaleType = PreviewView.ScaleType.values().first { it.ordinal == number.toInt() }
     }
 }

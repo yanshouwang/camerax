@@ -70,7 +70,8 @@ public class Pigeons {
 
   /** Generated interface from Pigeon that represents a handler of messages from Flutter.*/
   public interface CameraViewHostPigeon {
-    void createOrSetArguments(@NonNull String id, @NonNull byte[] argumentsBuffer);
+    void create(@NonNull String id, @NonNull String controllerId, @NonNull Long scaleTypeNumber);
+    void setScaleType(@NonNull String id, @NonNull Long number);
 
     /** The codec used by CameraViewHostPigeon. */
     static MessageCodec<Object> getCodec() {
@@ -81,7 +82,7 @@ public class Pigeons {
     static void setup(BinaryMessenger binaryMessenger, CameraViewHostPigeon api) {
       {
         BasicMessageChannel<Object> channel =
-            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments", getCodec());
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.CameraViewHostPigeon.create", getCodec());
         if (api != null) {
           channel.setMessageHandler((message, reply) -> {
             Map<String, Object> wrapped = new HashMap<>();
@@ -91,11 +92,43 @@ public class Pigeons {
               if (idArg == null) {
                 throw new NullPointerException("idArg unexpectedly null.");
               }
-              byte[] argumentsBufferArg = (byte[])args.get(1);
-              if (argumentsBufferArg == null) {
-                throw new NullPointerException("argumentsBufferArg unexpectedly null.");
+              String controllerIdArg = (String)args.get(1);
+              if (controllerIdArg == null) {
+                throw new NullPointerException("controllerIdArg unexpectedly null.");
               }
-              api.createOrSetArguments(idArg, argumentsBufferArg);
+              Number scaleTypeNumberArg = (Number)args.get(2);
+              if (scaleTypeNumberArg == null) {
+                throw new NullPointerException("scaleTypeNumberArg unexpectedly null.");
+              }
+              api.create(idArg, controllerIdArg, (scaleTypeNumberArg == null) ? null : scaleTypeNumberArg.longValue());
+              wrapped.put("result", null);
+            }
+            catch (Error | RuntimeException exception) {
+              wrapped.put("error", wrapError(exception));
+            }
+            reply.reply(wrapped);
+          });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.CameraViewHostPigeon.setScaleType", getCodec());
+        if (api != null) {
+          channel.setMessageHandler((message, reply) -> {
+            Map<String, Object> wrapped = new HashMap<>();
+            try {
+              ArrayList<Object> args = (ArrayList<Object>)message;
+              String idArg = (String)args.get(0);
+              if (idArg == null) {
+                throw new NullPointerException("idArg unexpectedly null.");
+              }
+              Number numberArg = (Number)args.get(1);
+              if (numberArg == null) {
+                throw new NullPointerException("numberArg unexpectedly null.");
+              }
+              api.setScaleType(idArg, (numberArg == null) ? null : numberArg.longValue());
               wrapped.put("result", null);
             }
             catch (Error | RuntimeException exception) {

@@ -58,11 +58,33 @@ class CameraViewHostPigeon {
 
   static const MessageCodec<Object?> codec = _CameraViewHostPigeonCodec();
 
-  Future<void> createOrSetArguments(String arg_id, Uint8List arg_argumentsBuffer) async {
+  Future<void> create(String arg_id, String arg_controllerId, int arg_scaleTypeNumber) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments', codec, binaryMessenger: _binaryMessenger);
+        'dev.flutter.pigeon.CameraViewHostPigeon.create', codec, binaryMessenger: _binaryMessenger);
     final Map<Object?, Object?>? replyMap =
-        await channel.send(<Object?>[arg_id, arg_argumentsBuffer]) as Map<Object?, Object?>?;
+        await channel.send(<Object?>[arg_id, arg_controllerId, arg_scaleTypeNumber]) as Map<Object?, Object?>?;
+    if (replyMap == null) {
+      throw PlatformException(
+        code: 'channel-error',
+        message: 'Unable to establish connection on channel.',
+      );
+    } else if (replyMap['error'] != null) {
+      final Map<Object?, Object?> error = (replyMap['error'] as Map<Object?, Object?>?)!;
+      throw PlatformException(
+        code: (error['code'] as String?)!,
+        message: error['message'] as String?,
+        details: error['details'],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<void> setScaleType(String arg_id, int arg_number) async {
+    final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+        'dev.flutter.pigeon.CameraViewHostPigeon.setScaleType', codec, binaryMessenger: _binaryMessenger);
+    final Map<Object?, Object?>? replyMap =
+        await channel.send(<Object?>[arg_id, arg_number]) as Map<Object?, Object?>?;
     if (replyMap == null) {
       throw PlatformException(
         code: 'channel-error',

@@ -4,29 +4,6 @@ package messages;
 option java_package = "dev.yanshouwang.camerax.messages";
 option java_multiple_files = true;
 
-message CameraViewArguments {
-    string controller_id = 1;
-    ScaleType scale_type = 2;
-}
-
-enum ScaleType {
-    SCALE_TYPE_FILL_START = 0;
-    SCALE_TYPE_FILL_CENTER = 1;
-    SCALE_TYPE_FILL_END = 2;
-    SCALE_TYPE_FIT_START = 3;
-    SCALE_TYPE_FIT_CENTER = 4;
-    SCALE_TYPE_FIT_END = 5;
-}
-
-message CameraSelector {
-    CameraFacing facing = 1;
-}
-
-enum CameraFacing {
-    CAMERA_FACING_BACK = 0;
-    CAMERA_FACING_FRONT = 1;
-}
-
 message TorchStateArguments {
     string id = 1;
     bool state = 2;
@@ -37,13 +14,17 @@ message ImageProxyArguments {
     ImageProxy image_proxy = 2;
 }
 
-message ImageProxy {
-    string id = 1;
-}
-
 message MLRecognitionArguments {
     string id = 1;
     MLRecognition recognition = 2;
+}
+
+message CameraSelector {
+    int32 facingNumber = 1;
+}
+
+message ImageProxy {
+    string id = 1;
 }
 
 message MLRecognition {

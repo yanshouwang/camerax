@@ -1,4 +1,4 @@
 enum CameraFacing {
-  back,
   front,
+  back,
 }

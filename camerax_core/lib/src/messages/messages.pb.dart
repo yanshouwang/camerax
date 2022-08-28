@@ -9,118 +9,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'messages.pbenum.dart';
-
-export 'messages.pbenum.dart';
-
-class CameraViewArguments extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraViewArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'controllerId')
-    ..e<ScaleType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'scaleType', $pb.PbFieldType.OE, defaultOrMaker: ScaleType.SCALE_TYPE_FILL_START, valueOf: ScaleType.valueOf, enumValues: ScaleType.values)
-    ..hasRequiredFields = false
-  ;
-
-  CameraViewArguments._() : super();
-  factory CameraViewArguments({
-    $core.String? controllerId,
-    ScaleType? scaleType,
-  }) {
-    final _result = create();
-    if (controllerId != null) {
-      _result.controllerId = controllerId;
-    }
-    if (scaleType != null) {
-      _result.scaleType = scaleType;
-    }
-    return _result;
-  }
-  factory CameraViewArguments.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CameraViewArguments.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  CameraViewArguments clone() => CameraViewArguments()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  CameraViewArguments copyWith(void Function(CameraViewArguments) updates) => super.copyWith((message) => updates(message as CameraViewArguments)) as CameraViewArguments; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static CameraViewArguments create() => CameraViewArguments._();
-  CameraViewArguments createEmptyInstance() => create();
-  static $pb.PbList<CameraViewArguments> createRepeated() => $pb.PbList<CameraViewArguments>();
-  @$core.pragma('dart2js:noInline')
-  static CameraViewArguments getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraViewArguments>(create);
-  static CameraViewArguments? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get controllerId => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set controllerId($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasControllerId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearControllerId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  ScaleType get scaleType => $_getN(1);
-  @$pb.TagNumber(2)
-  set scaleType(ScaleType v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasScaleType() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearScaleType() => clearField(2);
-}
-
-class CameraSelector extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraSelector', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..e<CameraFacing>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'facing', $pb.PbFieldType.OE, defaultOrMaker: CameraFacing.CAMERA_FACING_BACK, valueOf: CameraFacing.valueOf, enumValues: CameraFacing.values)
-    ..hasRequiredFields = false
-  ;
-
-  CameraSelector._() : super();
-  factory CameraSelector({
-    CameraFacing? facing,
-  }) {
-    final _result = create();
-    if (facing != null) {
-      _result.facing = facing;
-    }
-    return _result;
-  }
-  factory CameraSelector.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CameraSelector.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  CameraSelector clone() => CameraSelector()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  CameraSelector copyWith(void Function(CameraSelector) updates) => super.copyWith((message) => updates(message as CameraSelector)) as CameraSelector; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static CameraSelector create() => CameraSelector._();
-  CameraSelector createEmptyInstance() => create();
-  static $pb.PbList<CameraSelector> createRepeated() => $pb.PbList<CameraSelector>();
-  @$core.pragma('dart2js:noInline')
-  static CameraSelector getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraSelector>(create);
-  static CameraSelector? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  CameraFacing get facing => $_getN(0);
-  @$pb.TagNumber(1)
-  set facing(CameraFacing v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasFacing() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFacing() => clearField(1);
-}
-
 class TorchStateArguments extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TorchStateArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
@@ -245,53 +133,6 @@ class ImageProxyArguments extends $pb.GeneratedMessage {
   ImageProxy ensureImageProxy() => $_ensure(1);
 }
 
-class ImageProxy extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageProxy', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
-    ..hasRequiredFields = false
-  ;
-
-  ImageProxy._() : super();
-  factory ImageProxy({
-    $core.String? id,
-  }) {
-    final _result = create();
-    if (id != null) {
-      _result.id = id;
-    }
-    return _result;
-  }
-  factory ImageProxy.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ImageProxy.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ImageProxy clone() => ImageProxy()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ImageProxy copyWith(void Function(ImageProxy) updates) => super.copyWith((message) => updates(message as ImageProxy)) as ImageProxy; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ImageProxy create() => ImageProxy._();
-  ImageProxy createEmptyInstance() => create();
-  static $pb.PbList<ImageProxy> createRepeated() => $pb.PbList<ImageProxy>();
-  @$core.pragma('dart2js:noInline')
-  static ImageProxy getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageProxy>(create);
-  static ImageProxy? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.String get id => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set id($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-}
-
 class MLRecognitionArguments extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MLRecognitionArguments', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
@@ -353,6 +194,100 @@ class MLRecognitionArguments extends $pb.GeneratedMessage {
   void clearRecognition() => clearField(2);
   @$pb.TagNumber(2)
   MLRecognition ensureRecognition() => $_ensure(1);
+}
+
+class CameraSelector extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CameraSelector', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'facingNumber', $pb.PbFieldType.O3, protoName: 'facingNumber')
+    ..hasRequiredFields = false
+  ;
+
+  CameraSelector._() : super();
+  factory CameraSelector({
+    $core.int? facingNumber,
+  }) {
+    final _result = create();
+    if (facingNumber != null) {
+      _result.facingNumber = facingNumber;
+    }
+    return _result;
+  }
+  factory CameraSelector.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CameraSelector.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  CameraSelector clone() => CameraSelector()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  CameraSelector copyWith(void Function(CameraSelector) updates) => super.copyWith((message) => updates(message as CameraSelector)) as CameraSelector; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CameraSelector create() => CameraSelector._();
+  CameraSelector createEmptyInstance() => create();
+  static $pb.PbList<CameraSelector> createRepeated() => $pb.PbList<CameraSelector>();
+  @$core.pragma('dart2js:noInline')
+  static CameraSelector getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CameraSelector>(create);
+  static CameraSelector? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get facingNumber => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set facingNumber($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFacingNumber() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFacingNumber() => clearField(1);
+}
+
+class ImageProxy extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageProxy', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'messages'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..hasRequiredFields = false
+  ;
+
+  ImageProxy._() : super();
+  factory ImageProxy({
+    $core.String? id,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    return _result;
+  }
+  factory ImageProxy.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageProxy.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ImageProxy clone() => ImageProxy()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ImageProxy copyWith(void Function(ImageProxy) updates) => super.copyWith((message) => updates(message as ImageProxy)) as ImageProxy; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ImageProxy create() => ImageProxy._();
+  ImageProxy createEmptyInstance() => create();
+  static $pb.PbList<ImageProxy> createRepeated() => $pb.PbList<ImageProxy>();
+  @$core.pragma('dart2js:noInline')
+  static ImageProxy getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageProxy>(create);
+  static ImageProxy? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
 }
 
 class MLRecognition extends $pb.GeneratedMessage {

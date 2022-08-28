@@ -23,20 +23,20 @@ object CameraSelectorKt {
     internal fun _build(): dev.yanshouwang.camerax.messages.CameraSelector = _builder.build()
 
     /**
-     * <code>.messages.CameraFacing facing = 1;</code>
+     * <code>int32 facingNumber = 1;</code>
      */
-     var facing: dev.yanshouwang.camerax.messages.CameraFacing
-      @JvmName("getFacing")
-      get() = _builder.getFacing()
-      @JvmName("setFacing")
+    var facingNumber: kotlin.Int
+      @JvmName("getFacingNumber")
+      get() = _builder.getFacingNumber()
+      @JvmName("setFacingNumber")
       set(value) {
-        _builder.setFacing(value)
+        _builder.setFacingNumber(value)
       }
     /**
-     * <code>.messages.CameraFacing facing = 1;</code>
+     * <code>int32 facingNumber = 1;</code>
      */
-    fun clearFacing() {
-      _builder.clearFacing()
+    fun clearFacingNumber() {
+      _builder.clearFacingNumber()
     }
   }
 }

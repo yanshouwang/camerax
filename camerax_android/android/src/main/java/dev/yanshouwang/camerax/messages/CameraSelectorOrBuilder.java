@@ -8,13 +8,8 @@ public interface CameraSelectorOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.messages.CameraFacing facing = 1;</code>
-   * @return The enum numeric value on the wire for facing.
+   * <code>int32 facingNumber = 1;</code>
+   * @return The facingNumber.
    */
-  int getFacingValue();
-  /**
-   * <code>.messages.CameraFacing facing = 1;</code>
-   * @return The facing.
-   */
-  dev.yanshouwang.camerax.messages.CameraFacing getFacing();
+  int getFacingNumber();
 }

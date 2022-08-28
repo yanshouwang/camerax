@@ -35,7 +35,7 @@ class _CameraController implements CameraController {
     core.CameraControllerPigeon.instance.create(
       id,
       core.CameraSelector(
-        facing: core.CameraFacing.valueOf(cameraSelector.facing.index),
+        facingNumber: cameraSelector.facing.index,
       ),
     );
     torchStateSubscription = core
@@ -53,7 +53,7 @@ class _CameraController implements CameraController {
     core.CameraControllerPigeon.instance.setCameraSelector(
       id,
       core.CameraSelector(
-        facing: core.CameraFacing.valueOf(cameraSelector.facing.index),
+        facingNumber: cameraSelector.facing.index,
       ),
     );
   }

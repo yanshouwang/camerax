@@ -7,7 +7,8 @@ abstract class FinalizerHostPigeon {
 
 @HostApi(dartHostTestHandler: 'TestCameraViewHostPigeon')
 abstract class CameraViewHostPigeon {
-  void createOrSetArguments(String id, Uint8List argumentsBuffer);
+  void create(String id, String controllerId, int scaleTypeNumber);
+  void setScaleType(String id, int number);
 }
 
 @HostApi(dartHostTestHandler: 'TestCameraControllerHostPigeon')

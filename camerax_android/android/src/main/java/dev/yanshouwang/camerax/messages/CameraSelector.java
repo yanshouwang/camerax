@@ -16,7 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private CameraSelector() {
-    facing_ = 0;
   }
 
   @java.lang.Override
@@ -50,9 +49,8 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 8: {
-            int rawValue = input.readEnum();
 
-            facing_ = rawValue;
+            facingNumber_ = input.readInt32();
             break;
           }
           default: {
@@ -89,23 +87,15 @@ private static final long serialVersionUID = 0L;
             dev.yanshouwang.camerax.messages.CameraSelector.class, dev.yanshouwang.camerax.messages.CameraSelector.Builder.class);
   }
 
-  public static final int FACING_FIELD_NUMBER = 1;
-  private int facing_;
+  public static final int FACINGNUMBER_FIELD_NUMBER = 1;
+  private int facingNumber_;
   /**
-   * <code>.messages.CameraFacing facing = 1;</code>
-   * @return The enum numeric value on the wire for facing.
+   * <code>int32 facingNumber = 1;</code>
+   * @return The facingNumber.
    */
-  @java.lang.Override public int getFacingValue() {
-    return facing_;
-  }
-  /**
-   * <code>.messages.CameraFacing facing = 1;</code>
-   * @return The facing.
-   */
-  @java.lang.Override public dev.yanshouwang.camerax.messages.CameraFacing getFacing() {
-    @SuppressWarnings("deprecation")
-    dev.yanshouwang.camerax.messages.CameraFacing result = dev.yanshouwang.camerax.messages.CameraFacing.valueOf(facing_);
-    return result == null ? dev.yanshouwang.camerax.messages.CameraFacing.UNRECOGNIZED : result;
+  @java.lang.Override
+  public int getFacingNumber() {
+    return facingNumber_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -122,8 +112,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (facing_ != dev.yanshouwang.camerax.messages.CameraFacing.CAMERA_FACING_BACK.getNumber()) {
-      output.writeEnum(1, facing_);
+    if (facingNumber_ != 0) {
+      output.writeInt32(1, facingNumber_);
     }
     unknownFields.writeTo(output);
   }
@@ -134,9 +124,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (facing_ != dev.yanshouwang.camerax.messages.CameraFacing.CAMERA_FACING_BACK.getNumber()) {
+    if (facingNumber_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(1, facing_);
+        .computeInt32Size(1, facingNumber_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -153,7 +143,8 @@ private static final long serialVersionUID = 0L;
     }
     dev.yanshouwang.camerax.messages.CameraSelector other = (dev.yanshouwang.camerax.messages.CameraSelector) obj;
 
-    if (facing_ != other.facing_) return false;
+    if (getFacingNumber()
+        != other.getFacingNumber()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -165,8 +156,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + FACING_FIELD_NUMBER;
-    hash = (53 * hash) + facing_;
+    hash = (37 * hash) + FACINGNUMBER_FIELD_NUMBER;
+    hash = (53 * hash) + getFacingNumber();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -300,7 +291,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      facing_ = 0;
+      facingNumber_ = 0;
 
       return this;
     }
@@ -328,7 +319,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public dev.yanshouwang.camerax.messages.CameraSelector buildPartial() {
       dev.yanshouwang.camerax.messages.CameraSelector result = new dev.yanshouwang.camerax.messages.CameraSelector(this);
-      result.facing_ = facing_;
+      result.facingNumber_ = facingNumber_;
       onBuilt();
       return result;
     }
@@ -377,8 +368,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(dev.yanshouwang.camerax.messages.CameraSelector other) {
       if (other == dev.yanshouwang.camerax.messages.CameraSelector.getDefaultInstance()) return this;
-      if (other.facing_ != 0) {
-        setFacingValue(other.getFacingValue());
+      if (other.getFacingNumber() != 0) {
+        setFacingNumber(other.getFacingNumber());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -409,56 +400,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int facing_ = 0;
+    private int facingNumber_ ;
     /**
-     * <code>.messages.CameraFacing facing = 1;</code>
-     * @return The enum numeric value on the wire for facing.
-     */
-    @java.lang.Override public int getFacingValue() {
-      return facing_;
-    }
-    /**
-     * <code>.messages.CameraFacing facing = 1;</code>
-     * @param value The enum numeric value on the wire for facing to set.
-     * @return This builder for chaining.
-     */
-    public Builder setFacingValue(int value) {
-      
-      facing_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.messages.CameraFacing facing = 1;</code>
-     * @return The facing.
+     * <code>int32 facingNumber = 1;</code>
+     * @return The facingNumber.
      */
     @java.lang.Override
-    public dev.yanshouwang.camerax.messages.CameraFacing getFacing() {
-      @SuppressWarnings("deprecation")
-      dev.yanshouwang.camerax.messages.CameraFacing result = dev.yanshouwang.camerax.messages.CameraFacing.valueOf(facing_);
-      return result == null ? dev.yanshouwang.camerax.messages.CameraFacing.UNRECOGNIZED : result;
+    public int getFacingNumber() {
+      return facingNumber_;
     }
     /**
-     * <code>.messages.CameraFacing facing = 1;</code>
-     * @param value The facing to set.
+     * <code>int32 facingNumber = 1;</code>
+     * @param value The facingNumber to set.
      * @return This builder for chaining.
      */
-    public Builder setFacing(dev.yanshouwang.camerax.messages.CameraFacing value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
+    public Builder setFacingNumber(int value) {
       
-      facing_ = value.getNumber();
+      facingNumber_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>.messages.CameraFacing facing = 1;</code>
+     * <code>int32 facingNumber = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearFacing() {
+    public Builder clearFacingNumber() {
       
-      facing_ = 0;
+      facingNumber_ = 0;
       onChanged();
       return this;
     }

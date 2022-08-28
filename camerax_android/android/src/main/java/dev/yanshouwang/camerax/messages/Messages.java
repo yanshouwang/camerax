@@ -15,16 +15,6 @@ public final class Messages {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_CameraViewArguments_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_CameraViewArguments_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_CameraSelector_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_CameraSelector_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_TorchStateArguments_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -35,15 +25,20 @@ public final class Messages {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_ImageProxyArguments_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_messages_ImageProxy_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_messages_ImageProxy_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_MLRecognitionArguments_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_messages_MLRecognitionArguments_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_messages_CameraSelector_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_messages_CameraSelector_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_messages_ImageProxy_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_messages_ImageProxy_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_messages_MLRecognition_descriptor;
   static final 
@@ -73,90 +68,75 @@ public final class Messages {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016messages.proto\022\010messages\"U\n\023CameraView" +
-      "Arguments\022\025\n\rcontroller_id\030\001 \001(\t\022\'\n\nscal" +
-      "e_type\030\002 \001(\0162\023.messages.ScaleType\"8\n\016Cam" +
-      "eraSelector\022&\n\006facing\030\001 \001(\0162\026.messages.C" +
-      "ameraFacing\"0\n\023TorchStateArguments\022\n\n\002id" +
-      "\030\001 \001(\t\022\r\n\005state\030\002 \001(\010\"L\n\023ImageProxyArgum" +
-      "ents\022\n\n\002id\030\001 \001(\t\022)\n\013image_proxy\030\002 \001(\0132\024." +
-      "messages.ImageProxy\"\030\n\nImageProxy\022\n\n\002id\030" +
-      "\001 \001(\t\"R\n\026MLRecognitionArguments\022\n\n\002id\030\001 " +
-      "\001(\t\022,\n\013recognition\030\002 \001(\0132\027.messages.MLRe" +
-      "cognition\"1\n\rMLRecognition\022 \n\004objs\030\001 \003(\013" +
-      "2\022.messages.MLObject\"[\n\010MLObject\022!\n\007corn" +
-      "ers\030\001 \003(\0132\020.messages.Offset\022$\n\007barcode\030\002" +
-      " \001(\0132\021.messages.BarcodeH\000B\006\n\004type\" \n\006Off" +
-      "set\022\n\n\002dx\030\001 \001(\005\022\n\n\002dy\030\002 \001(\005\"\030\n\007Barcode\022\r" +
-      "\n\005value\030\001 \001(\t*\250\001\n\tScaleType\022\031\n\025SCALE_TYP" +
-      "E_FILL_START\020\000\022\032\n\026SCALE_TYPE_FILL_CENTER" +
-      "\020\001\022\027\n\023SCALE_TYPE_FILL_END\020\002\022\030\n\024SCALE_TYP" +
-      "E_FIT_START\020\003\022\031\n\025SCALE_TYPE_FIT_CENTER\020\004" +
-      "\022\026\n\022SCALE_TYPE_FIT_END\020\005*?\n\014CameraFacing" +
-      "\022\026\n\022CAMERA_FACING_BACK\020\000\022\027\n\023CAMERA_FACIN" +
-      "G_FRONT\020\001B$\n dev.yanshouwang.camerax.mes" +
-      "sagesP\001b\006proto3"
+      "\n\016messages.proto\022\010messages\"0\n\023TorchState" +
+      "Arguments\022\n\n\002id\030\001 \001(\t\022\r\n\005state\030\002 \001(\010\"L\n\023" +
+      "ImageProxyArguments\022\n\n\002id\030\001 \001(\t\022)\n\013image" +
+      "_proxy\030\002 \001(\0132\024.messages.ImageProxy\"R\n\026ML" +
+      "RecognitionArguments\022\n\n\002id\030\001 \001(\t\022,\n\013reco" +
+      "gnition\030\002 \001(\0132\027.messages.MLRecognition\"&" +
+      "\n\016CameraSelector\022\024\n\014facingNumber\030\001 \001(\005\"\030" +
+      "\n\nImageProxy\022\n\n\002id\030\001 \001(\t\"1\n\rMLRecognitio" +
+      "n\022 \n\004objs\030\001 \003(\0132\022.messages.MLObject\"[\n\010M" +
+      "LObject\022!\n\007corners\030\001 \003(\0132\020.messages.Offs" +
+      "et\022$\n\007barcode\030\002 \001(\0132\021.messages.BarcodeH\000" +
+      "B\006\n\004type\" \n\006Offset\022\n\n\002dx\030\001 \001(\005\022\n\n\002dy\030\002 \001" +
+      "(\005\"\030\n\007Barcode\022\r\n\005value\030\001 \001(\tB$\n dev.yans" +
+      "houwang.camerax.messagesP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_messages_CameraViewArguments_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_messages_CameraViewArguments_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_CameraViewArguments_descriptor,
-        new java.lang.String[] { "ControllerId", "ScaleType", });
-    internal_static_messages_CameraSelector_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_messages_CameraSelector_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_CameraSelector_descriptor,
-        new java.lang.String[] { "Facing", });
     internal_static_messages_TorchStateArguments_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(0);
     internal_static_messages_TorchStateArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_TorchStateArguments_descriptor,
         new java.lang.String[] { "Id", "State", });
     internal_static_messages_ImageProxyArguments_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_messages_ImageProxyArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxyArguments_descriptor,
         new java.lang.String[] { "Id", "ImageProxy", });
+    internal_static_messages_MLRecognitionArguments_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_messages_MLRecognitionArguments_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_messages_MLRecognitionArguments_descriptor,
+        new java.lang.String[] { "Id", "Recognition", });
+    internal_static_messages_CameraSelector_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_messages_CameraSelector_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_messages_CameraSelector_descriptor,
+        new java.lang.String[] { "FacingNumber", });
     internal_static_messages_ImageProxy_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_messages_ImageProxy_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_ImageProxy_descriptor,
         new java.lang.String[] { "Id", });
-    internal_static_messages_MLRecognitionArguments_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_messages_MLRecognitionArguments_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_messages_MLRecognitionArguments_descriptor,
-        new java.lang.String[] { "Id", "Recognition", });
     internal_static_messages_MLRecognition_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_messages_MLRecognition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_MLRecognition_descriptor,
         new java.lang.String[] { "Objs", });
     internal_static_messages_MLObject_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_messages_MLObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_MLObject_descriptor,
         new java.lang.String[] { "Corners", "Barcode", "Type", });
     internal_static_messages_Offset_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_messages_Offset_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Offset_descriptor,
         new java.lang.String[] { "Dx", "Dy", });
     internal_static_messages_Barcode_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_messages_Barcode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_messages_Barcode_descriptor,

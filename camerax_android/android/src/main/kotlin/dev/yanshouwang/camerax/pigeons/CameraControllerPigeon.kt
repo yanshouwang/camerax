@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import dev.yanshouwang.camerax.InstanceManager
 import io.flutter.plugin.common.BinaryMessenger
 import java.util.concurrent.Executors
-import dev.yanshouwang.camerax.messages.CameraFacing as MyCameraFacing
 import dev.yanshouwang.camerax.messages.CameraSelector as MyCameraSelector
 
 internal class CameraControllerPigeon() : Pigeons.CameraControllerHostPigeon {
@@ -26,9 +25,9 @@ internal class CameraControllerPigeon() : Pigeons.CameraControllerHostPigeon {
     override fun create(id: String, cameraSelectorBuffer: ByteArray) {
         val controller = LifecycleCameraController(context).apply {
             val myCameraSelector = MyCameraSelector.parseFrom(cameraSelectorBuffer)
-            this.cameraSelector = when (myCameraSelector.facing) {
-                MyCameraFacing.CAMERA_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
-                MyCameraFacing.CAMERA_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+            this.cameraSelector = when (myCameraSelector.facingNumber) {
+                CameraSelector.LENS_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+                CameraSelector.LENS_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
                 else -> throw IllegalArgumentException()
             }
             val owner = activity as LifecycleOwner
@@ -56,9 +55,9 @@ internal class CameraControllerPigeon() : Pigeons.CameraControllerHostPigeon {
     override fun setCameraSelector(id: String, cameraSelectorBuffer: ByteArray) {
         val controller = InstanceManager.findInstance<LifecycleCameraController>(id) ?: throw IllegalArgumentException()
         val myCameraSelector = MyCameraSelector.parseFrom(cameraSelectorBuffer)
-        controller.cameraSelector = when (myCameraSelector.facing) {
-            MyCameraFacing.CAMERA_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
-            MyCameraFacing.CAMERA_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+        controller.cameraSelector = when (myCameraSelector.facingNumber) {
+            CameraSelector.LENS_FACING_FRONT -> CameraSelector.DEFAULT_FRONT_CAMERA
+            CameraSelector.LENS_FACING_BACK -> CameraSelector.DEFAULT_BACK_CAMERA
             else -> throw IllegalArgumentException()
         }
     }

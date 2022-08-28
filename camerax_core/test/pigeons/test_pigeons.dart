@@ -43,22 +43,43 @@ class _TestCameraViewHostPigeonCodec extends StandardMessageCodec {
 abstract class TestCameraViewHostPigeon {
   static const MessageCodec<Object?> codec = _TestCameraViewHostPigeonCodec();
 
-  void createOrSetArguments(String id, Uint8List argumentsBuffer);
+  void create(String id, String controllerId, int scaleTypeNumber);
+  void setScaleType(String id, int number);
   static void setup(TestCameraViewHostPigeon? api, {BinaryMessenger? binaryMessenger}) {
     {
       final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments', codec, binaryMessenger: binaryMessenger);
+          'dev.flutter.pigeon.CameraViewHostPigeon.create', codec, binaryMessenger: binaryMessenger);
       if (api == null) {
         channel.setMockMessageHandler(null);
       } else {
         channel.setMockMessageHandler((Object? message) async {
-          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null.');
+          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final String? arg_id = (args[0] as String?);
-          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null String.');
-          final Uint8List? arg_argumentsBuffer = (args[1] as Uint8List?);
-          assert(arg_argumentsBuffer != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.createOrSetArguments was null, expected non-null Uint8List.');
-          api.createOrSetArguments(arg_id!, arg_argumentsBuffer!);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null, expected non-null String.');
+          final String? arg_controllerId = (args[1] as String?);
+          assert(arg_controllerId != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null, expected non-null String.');
+          final int? arg_scaleTypeNumber = (args[2] as int?);
+          assert(arg_scaleTypeNumber != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.create was null, expected non-null int.');
+          api.create(arg_id!, arg_controllerId!, arg_scaleTypeNumber!);
+          return <Object?, Object?>{};
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.CameraViewHostPigeon.setScaleType', codec, binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMockMessageHandler(null);
+      } else {
+        channel.setMockMessageHandler((Object? message) async {
+          assert(message != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.setScaleType was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final String? arg_id = (args[0] as String?);
+          assert(arg_id != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.setScaleType was null, expected non-null String.');
+          final int? arg_number = (args[1] as int?);
+          assert(arg_number != null, 'Argument for dev.flutter.pigeon.CameraViewHostPigeon.setScaleType was null, expected non-null int.');
+          api.setScaleType(arg_id!, arg_number!);
           return <Object?, Object?>{};
         });
       }
