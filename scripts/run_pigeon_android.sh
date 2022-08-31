@@ -1,4 +1,4 @@
-PIGEONS_OUT=android/src/main/java/dev/yanshouwang/camerax
+PIGEONS_OUT=android/src/main/java/dev/yanshouwang/camerax_android
 
 if [ ! -d $PIGEONS_OUT ]
 then
@@ -9,4 +9,4 @@ flutter pub run pigeon \
     --input pigeons.dart \
     --one_language true \
     --java_out ${PIGEONS_OUT}/Pigeons.java \
-    --java_package dev.yanshouwang.camerax
+    --java_package dev.yanshouwang.camerax_android

@@ -2,7 +2,7 @@ $DART_OUT = "camerax/lib/src/models"
 $JAVA_OUT = "camerax_android/android/src/main/java"
 $KOTLIN_OUT = "camerax_android/android/src/main/kotlin"
 
-$PACKAGE = "dev/yanshouwang/camerax/models/proto"
+$PACKAGE = "dev/yanshouwang/camerax_android/models/proto"
 
 if (Test-Path $DART_OUT) {
     if (Test-Path "${DART_OUT}/proto") {

@@ -3,7 +3,7 @@ JAVA_OUT=camerax_android/android/src/main/java
 KOTLIN_OUT=camerax_android/android/src/main/kotlin
 SWIFT_OUT=camerax_ios/ios/Classes/Models
 
-PACKAGE=dev/yanshouwang/camerax/models/proto
+PACKAGE=dev/yanshouwang/camerax_android/models/proto
 
 if [ -d $DART_OUT ]
 then

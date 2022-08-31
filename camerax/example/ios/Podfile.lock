@@ -1,14 +1,20 @@
 PODS:
   - camerax_ios (0.0.1):
     - Flutter
+    - SwiftProtobuf (~> 1.20)
   - Flutter (1.0.0)
   - permission_handler_apple (9.0.4):
     - Flutter
+  - SwiftProtobuf (1.20.1)
 
 DEPENDENCIES:
   - camerax_ios (from `.symlinks/plugins/camerax_ios/ios`)
   - Flutter (from `Flutter`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+SPEC REPOS:
+  trunk:
+    - SwiftProtobuf
 
 EXTERNAL SOURCES:
   camerax_ios:
@@ -19,9 +25,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  camerax_ios: 168e6e7075ce64fff1a908c058354061c2f91a79
+  camerax_ios: 81baf487da66955d0442e81a49d1c37e0cbf6915
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  SwiftProtobuf: e40a7684079620e84ba522dbaeab0cddb0ec7ffd
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
