@@ -1,5 +1,5 @@
-PIGEONS_OUT=lib/src/pigeons
-TEST_OUT=test/pigeons
+PIGEONS_OUT=lib/src
+TEST_OUT=test
 
 if [ ! -d $PIGEONS_OUT ]
 then
@@ -13,5 +13,5 @@ fi
 
 flutter pub run pigeon \
     --input pigeons.dart \
-    --dart_out ${PIGEONS_OUT}/pigeons.dart \
-    --dart_test_out ${TEST_OUT}/test_pigeons.dart
+    --dart_out ${PIGEONS_OUT}/pigeons.g.dart \
+    --dart_test_out ${TEST_OUT}/test_pigeons.g.dart

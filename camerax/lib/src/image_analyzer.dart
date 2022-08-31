@@ -49,7 +49,7 @@ class MLAnalyzer implements ImageAnalyzer {
 }
 
 abstract class MLRecognition {
-  List<MLObject> get objs;
+  List<MLObject> get items;
 }
 
 abstract class MLObject {
@@ -71,10 +71,10 @@ class _ImageProxy implements ImageProxy {
 
 class _MLRecognition implements MLRecognition {
   @override
-  final List<MLObject> objs;
+  final List<MLObject> items;
 
   _MLRecognition(core.MLRecognition recognition)
-      : objs = recognition.objs.map((obj) {
+      : items = recognition.items.map((obj) {
           switch (obj.type) {
             case core.MLObject_Type.barcode:
               return _Barcode(obj);

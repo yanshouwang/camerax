@@ -1,14 +1,10 @@
-// You have generated a new plugin project without specifying the `--platforms`
-// flag. A plugin project with no platform support was generated. To add a
-// platform, run `flutter create -t plugin --platforms <platforms> .` under the
-// same directory. You can also find a detailed instruction on how to add
-// platforms in the `pubspec.yaml` at
-// https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+import 'package:camerax_core/camerax_core.dart' as core;
 
-import 'camerax_ios_platform_interface.dart';
+import 'src/camera_view_builder.dart';
 
-class CameraxIos {
-  Future<String?> getPlatformVersion() {
-    return CameraxIosPlatform.instance.getPlatformVersion();
+class CameraXIOS {
+  /// Registers this class as the default instance of [core.CameraViewBuilder].
+  static void registerWith() {
+    core.CameraViewBuilder.instance = CameraViewBuilder();
   }
 }

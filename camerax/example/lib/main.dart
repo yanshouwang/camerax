@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void handleRecognition(MLRecognition recognition) {
-    final barcodes = recognition.objs.whereType<Barcode>();
+    final barcodes = recognition.items.whereType<Barcode>();
     if (barcodes.isEmpty) {
       return;
     }

@@ -24,6 +24,6 @@ flutter:
     implements: camerax
     platforms:
       android:
-        dartPluginClass: CameraPlugin
+        dartPluginClass: CameraXAndroid
         package: dev.yanshouwang.camerax
         pluginClass: CameraPlugin

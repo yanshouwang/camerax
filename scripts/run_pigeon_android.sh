@@ -1,12 +1,12 @@
-JAVA_OUT=android/src/main/java/dev/yanshouwang/camerax/pigeons
+PIGEONS_OUT=android/src/main/java/dev/yanshouwang/camerax
 
-if [ ! -d $JAVA_OUT ]
+if [ ! -d $PIGEONS_OUT ]
 then
-    mkdir $JAVA_OUT
+    mkdir -p $PIGEONS_OUT
 fi
 
 flutter pub run pigeon \
     --input pigeons.dart \
     --one_language true \
-    --java_out ${JAVA_OUT}/Pigeons.java \
-    --java_package dev.yanshouwang.camerax.pigeons
+    --java_out ${PIGEONS_OUT}/Pigeons.java \
+    --java_package dev.yanshouwang.camerax

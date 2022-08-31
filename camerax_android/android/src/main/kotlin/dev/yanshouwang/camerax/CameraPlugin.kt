@@ -1,14 +1,11 @@
 package dev.yanshouwang.camerax
 
-import android.app.Activity
 import androidx.annotation.NonNull
-import dev.yanshouwang.camerax.pigeons.*
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.platform.PlatformViewRegistry
 
 /** CameraPlugin */
 class CameraPlugin : FlutterPlugin, ActivityAware {
