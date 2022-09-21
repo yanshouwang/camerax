@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Fix errors with flutter 3.x.
+
 ## 0.1.0
 
 - Migrate to NNBD.
