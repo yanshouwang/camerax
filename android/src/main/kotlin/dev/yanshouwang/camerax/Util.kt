@@ -3,7 +3,7 @@ package dev.yanshouwang.camerax
 import android.graphics.Point
 import androidx.camera.core.Camera
 import androidx.camera.core.ImageProxy
-import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.common.Barcode
 
 val Any.TAG: String
     get() = javaClass.simpleName
