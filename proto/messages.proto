@@ -1,0 +1,34 @@
+syntax = "proto3";
+package proto;
+
+option java_package = "dev.yanshouwang.camerax.proto";
+option java_multiple_files = true;
+
+message CameraSelector {
+    CameraFacing facing = 1;
+}
+
+enum CameraFacing {
+    CAMERA_FACING_BACK = 0;
+    CAMERA_FACING_FRONT = 1;
+}
+
+message ImageProxy {
+    int64 id = 1;
+}
+
+message MLObject {
+    repeated Offset corners = 1;
+    oneof type {
+        Barcode barcode = 2;
+    }
+}
+
+message Offset {
+    int32 dx = 1;
+    int32 dy = 2;
+}
+
+message Barcode {
+    string value = 1;
+}
