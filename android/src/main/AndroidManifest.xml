@@ -1,5 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.yanshouwang.camerax">
-
-    <uses-permission android:name="android.permission.CAMERA" />
+  package="dev.yanshouwang.camerax">
 </manifest>

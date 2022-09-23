@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface CameraXPlugin : NSObject<FlutterPlugin>
+@interface CameraxPlugin : NSObject<FlutterPlugin>
 @end

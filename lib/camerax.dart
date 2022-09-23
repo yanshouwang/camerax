@@ -1,8 +1,8 @@
-library camerax;
 
-export 'src/barcode.dart';
-export 'src/camera_args.dart';
-export 'src/camera_controller.dart';
-export 'src/camera_facing.dart';
-export 'src/camera_view.dart';
-export 'src/torch_state.dart';
+import 'camerax_platform_interface.dart';
+
+class Camerax {
+  Future<String?> getPlatformVersion() {
+    return CameraxPlatform.instance.getPlatformVersion();
+  }
+}
