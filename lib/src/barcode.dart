@@ -18,14 +18,14 @@ class Barcode {
   /// Returns raw bytes as it was encoded in the barcode.
   ///
   /// Returns null if the raw bytes can not be determined.
-  final Uint8List rawBytes;
+  final Uint8List? rawBytes;
 
   /// Returns barcode value as it was encoded in the barcode. Structured values are not parsed, for example: 'MEBKM:TITLE:Google;URL://www.google.com;;'.
   ///
   /// It's only available when the barcode is encoded in the UTF-8 format, and for non-UTF8 ones use [rawBytes] instead.
   ///
   /// Returns null if the raw value can not be determined.
-  final String rawValue;
+  final String? rawValue;
 
   /// Returns format type of the barcode value.
   ///
@@ -419,12 +419,12 @@ class UrlBookmark {
   /// Gets the title of the bookmark.
   ///
   /// Returns null if not available.
-  final String title;
+  final String? title;
 
   /// Gets the url of the bookmark.
   ///
   /// Returns null if not available.
-  final String url;
+  final String? url;
 
   /// Create a [UrlBookmark] from native data.
   UrlBookmark.fromNative(Map<dynamic, dynamic> data)
@@ -442,12 +442,12 @@ class WiFi {
   /// Gets the ssid of the WIFI.
   ///
   /// Returns null if not available.
-  final String ssid;
+  final String? ssid;
 
   /// Gets the password of the WIFI.
   ///
   /// Returns null if not available.
-  final String password;
+  final String? password;
 
   /// Create a [WiFi] from native data.
   WiFi.fromNative(Map<dynamic, dynamic> data)

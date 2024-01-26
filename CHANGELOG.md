@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Fix issues caused by NNBD.
+
 ## 0.1.1
 
 - Fix errors with flutter 3.x.
