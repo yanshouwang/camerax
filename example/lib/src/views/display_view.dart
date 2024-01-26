@@ -81,7 +81,7 @@ class DisplayView extends StatelessWidget {
                         ),
                         Container(height: 4.0),
                         Text(
-                          barcode.rawValue,
+                          barcode.rawValue ?? '',
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Color(0x99000000),

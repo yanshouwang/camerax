@@ -1,11 +1,11 @@
 name: camerax
 description: A camera plugin for flutter, which use CameraX on Android, native API on iOS, supports camera preview, capture and analyze.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/yanshouwang/camerax
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.20.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.11.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

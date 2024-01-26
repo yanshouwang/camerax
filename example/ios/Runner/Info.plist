@@ -45,5 +45,9 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>CameraX need to use your camera to show a preview.</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

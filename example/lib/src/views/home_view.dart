@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        // shape: CircularNotchedRectangle(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
