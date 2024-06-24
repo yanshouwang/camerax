@@ -4,6 +4,7 @@ class AnimatedTapWidget extends StatefulWidget {
   final Duration duration;
   final GestureTapCallback? onTap;
   final GestureLongPressCallback? onLongPress;
+  final GestureDragStartCallback? onHorizontalDragStart;
   final Widget? child;
 
   const AnimatedTapWidget({
@@ -11,6 +12,7 @@ class AnimatedTapWidget extends StatefulWidget {
     required this.duration,
     this.onTap,
     this.onLongPress,
+    this.onHorizontalDragStart,
     this.child,
   });
 
@@ -58,6 +60,7 @@ class _AnimatedTapWidgetState extends State<AnimatedTapWidget> {
         scale.value = 1.0;
       },
       onLongPress: widget.onLongPress,
+      onHorizontalDragStart: widget.onHorizontalDragStart,
       // onLongPressDown: (details) {
       //   debugPrint('ATW onLongPressDown');
       // },

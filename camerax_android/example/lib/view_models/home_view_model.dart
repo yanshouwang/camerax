@@ -44,9 +44,13 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> setZoomRatio(double zoomRatio) async {
-    await cameraController.setZoomRatio(zoomRatio);
-    _zoomRatio = zoomRatio;
-    notifyListeners();
+    try {
+      await cameraController.setZoomRatio(zoomRatio);
+      _zoomRatio = zoomRatio;
+      notifyListeners();
+    } catch (e) {
+      logger.fine(e);
+    }
   }
 
   @override
