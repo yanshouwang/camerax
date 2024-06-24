@@ -61,6 +61,42 @@ class CameraSelectorArgs {
   }
 }
 
+class ZoomStateArgs {
+  ZoomStateArgs({
+    required this.minZoomRatioArgs,
+    required this.maxZoomRatioArgs,
+    required this.linearZoomArgs,
+    required this.zoomRatioArgs,
+  });
+
+  double minZoomRatioArgs;
+
+  double maxZoomRatioArgs;
+
+  double linearZoomArgs;
+
+  double zoomRatioArgs;
+
+  Object encode() {
+    return <Object?>[
+      minZoomRatioArgs,
+      maxZoomRatioArgs,
+      linearZoomArgs,
+      zoomRatioArgs,
+    ];
+  }
+
+  static ZoomStateArgs decode(Object result) {
+    result as List<Object?>;
+    return ZoomStateArgs(
+      minZoomRatioArgs: result[0]! as double,
+      maxZoomRatioArgs: result[1]! as double,
+      linearZoomArgs: result[2]! as double,
+      zoomRatioArgs: result[3]! as double,
+    );
+  }
+}
+
 
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
@@ -69,11 +105,14 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is CameraSelectorArgs) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
-    } else     if (value is LensFacingArgs) {
+    } else     if (value is ZoomStateArgs) {
       buffer.putUint8(130);
+      writeValue(buffer, value.encode());
+    } else     if (value is LensFacingArgs) {
+      buffer.putUint8(131);
       writeValue(buffer, value.index);
     } else     if (value is ScaleTypeArgs) {
-      buffer.putUint8(131);
+      buffer.putUint8(132);
       writeValue(buffer, value.index);
     } else {
       super.writeValue(buffer, value);
@@ -86,9 +125,11 @@ class _PigeonCodec extends StandardMessageCodec {
       case 129: 
         return CameraSelectorArgs.decode(readValue(buffer)!);
       case 130: 
+        return ZoomStateArgs.decode(readValue(buffer)!);
+      case 131: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : LensFacingArgs.values[value];
-      case 131: 
+      case 132: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : ScaleTypeArgs.values[value];
       default:
@@ -336,8 +377,8 @@ class CameraControllerHostAPI {
     }
   }
 
-  Future<void> setCameraSelector(int identifier, CameraSelectorArgs cameraSelectorArgs) async {
-    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setCameraSelector$__pigeon_messageChannelSuffix';
+  Future<bool> hasCamera(int identifier, CameraSelectorArgs cameraSelectorArgs) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.hasCamera$__pigeon_messageChannelSuffix';
     final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
       __pigeon_channelName,
       pigeonChannelCodec,
@@ -345,28 +386,6 @@ class CameraControllerHostAPI {
     );
     final List<Object?>? __pigeon_replyList =
         await __pigeon_channel.send(<Object?>[identifier, cameraSelectorArgs]) as List<Object?>?;
-    if (__pigeon_replyList == null) {
-      throw _createConnectionError(__pigeon_channelName);
-    } else if (__pigeon_replyList.length > 1) {
-      throw PlatformException(
-        code: __pigeon_replyList[0]! as String,
-        message: __pigeon_replyList[1] as String?,
-        details: __pigeon_replyList[2],
-      );
-    } else {
-      return;
-    }
-  }
-
-  Future<bool> isPinchToZoomEnabled(int identifier) async {
-    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled$__pigeon_messageChannelSuffix';
-    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-      __pigeon_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: __pigeon_binaryMessenger,
-    );
-    final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(<Object?>[identifier]) as List<Object?>?;
     if (__pigeon_replyList == null) {
       throw _createConnectionError(__pigeon_channelName);
     } else if (__pigeon_replyList.length > 1) {
@@ -385,15 +404,15 @@ class CameraControllerHostAPI {
     }
   }
 
-  Future<void> setPinchToZoomEnabled(int identifier, bool enabledArgs) async {
-    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled$__pigeon_messageChannelSuffix';
+  Future<void> setCameraSelector(int identifier, CameraSelectorArgs cameraSelectorArgs) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setCameraSelector$__pigeon_messageChannelSuffix';
     final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
       __pigeon_channelName,
       pigeonChannelCodec,
       binaryMessenger: __pigeon_binaryMessenger,
     );
     final List<Object?>? __pigeon_replyList =
-        await __pigeon_channel.send(<Object?>[identifier, enabledArgs]) as List<Object?>?;
+        await __pigeon_channel.send(<Object?>[identifier, cameraSelectorArgs]) as List<Object?>?;
     if (__pigeon_replyList == null) {
       throw _createConnectionError(__pigeon_channelName);
     } else if (__pigeon_replyList.length > 1) {
@@ -456,6 +475,77 @@ class CameraControllerHostAPI {
     }
   }
 
+  Future<ZoomStateArgs?> getZoomState(int identifier) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.getZoomState$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else {
+      return (__pigeon_replyList[0] as ZoomStateArgs?);
+    }
+  }
+
+  Future<bool> isPinchToZoomEnabled(int identifier) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else if (__pigeon_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (__pigeon_replyList[0] as bool?)!;
+    }
+  }
+
+  Future<void> setPinchToZoomEnabled(int identifier, bool enabledArgs) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier, enabledArgs]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
   Future<void> setLinearZoom(int identifier, double linearZoomArgs) async {
     final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setLinearZoom$__pigeon_messageChannelSuffix';
     final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
@@ -497,6 +587,39 @@ class CameraControllerHostAPI {
       );
     } else {
       return;
+    }
+  }
+}
+
+abstract class CameraControllerFlutterAPI {
+  static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
+
+  void onZoomStateChanged(ZoomStateArgs? zoomStateArgs);
+
+  static void setUp(CameraControllerFlutterAPI? api, {BinaryMessenger? binaryMessenger, String messageChannelSuffix = '',}) {
+    messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerFlutterAPI.onZoomStateChanged$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        __pigeon_channel.setMessageHandler(null);
+      } else {
+        __pigeon_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerFlutterAPI.onZoomStateChanged was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final ZoomStateArgs? arg_zoomStateArgs = (args[0] as ZoomStateArgs?);
+          try {
+            api.onZoomStateChanged(arg_zoomStateArgs);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
     }
   }
 }

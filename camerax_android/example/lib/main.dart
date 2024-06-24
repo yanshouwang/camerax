@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:clover/clover.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
 import 'view_models.dart';
@@ -28,17 +30,18 @@ void onLogRecorded(LogRecord record) {
 
 void onStartUp() {
   final app = MaterialApp(
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.amber,
-      ),
-    ),
     home: ViewModelBinding(
       viewBuilder: (context) => const HomeView(),
       viewModelBuilder: (context) => HomeViewModel(),
     ),
   );
   runApp(app);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 }
 
-void onUncaughtError(Object error, StackTrace stackTrace) {}
+void onUncaughtError(Object error, StackTrace stackTrace) {
+  Logger.root.shout(error, stackTrace);
+}

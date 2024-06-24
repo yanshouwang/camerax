@@ -19,17 +19,25 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   void _initialize() async {
     await cameraController.requestPermissions();
-    await cameraController.bind();
+    await cameraController.setCameraSelector(CameraSelector.back);
+    final zoomState = await cameraController.getZoomState();
     final isPinchToZoomEnabled = await cameraController.isPinchToZoomEnabled();
     final isTapToFocusEnabled = await cameraController.isTapToFocusEnabled();
-    logger.info('''isPinchToZoomEnabled: $isPinchToZoomEnabled
+    logger.info(
+        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
+    await cameraController.bind();
   }
 
   Future<void> toggleLensFacing() async {
     final cameraSelector = lensFacing == LensFacing.back
         ? CameraSelector.front
         : CameraSelector.back;
+    final hasCamera = await cameraController.hasCamera(cameraSelector);
+    if (!hasCamera) {
+      return;
+    }
     await cameraController.setCameraSelector(cameraSelector);
     _lensFacing = cameraSelector.lensFacing;
     notifyListeners();

@@ -23,6 +23,17 @@ extension LensFacingX on LensFacing {
   }
 }
 
+extension ZoomStateArgsZ on ZoomStateArgs {
+  ZoomState toObject() {
+    return ZoomState(
+      minZoomRatio: minZoomRatioArgs,
+      maxZoomRatio: maxZoomRatioArgs,
+      linearZoom: linearZoomArgs,
+      zoomRatio: zoomRatioArgs,
+    );
+  }
+}
+
 extension ScaleTypeX on ScaleType {
   ScaleTypeArgs toArgs() {
     switch (this) {

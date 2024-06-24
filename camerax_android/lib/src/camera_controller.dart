@@ -12,6 +12,10 @@ class AndroidCameraController extends AndroidObject
   static final _api = CameraControllerHostAPI();
   static final _permissionsManager = PermissionsManager();
 
+  @override
+  // TODO: implement zoomStateChanged
+  Stream<ZoomState?> get zoomStateChanged => throw UnimplementedError();
+
   AndroidCameraController() : super.detached() {
     final identifier = InstanceManager.instance.addDartCreatedInstance(this);
     _api.create(identifier);
@@ -44,20 +48,16 @@ class AndroidCameraController extends AndroidObject
   }
 
   @override
+  Future<bool> hasCamera(CameraSelector cameraSelector) async {
+    final cameraSelectorArgs = cameraSelector.toArgs();
+    final hasCamera = await _api.hasCamera(identifier, cameraSelectorArgs);
+    return hasCamera;
+  }
+
+  @override
   Future<void> setCameraSelector(CameraSelector cameraSelector) async {
     final cameraSelectorArgs = cameraSelector.toArgs();
     await _api.setCameraSelector(identifier, cameraSelectorArgs);
-  }
-
-  @override
-  Future<bool> isPinchToZoomEnabled() async {
-    final enabledArgs = await _api.isPinchToZoomEnabled(identifier);
-    return enabledArgs;
-  }
-
-  @override
-  Future<void> setPinchToZoomEnabled(bool enabled) async {
-    await _api.setPinchToZoomEnabled(identifier, enabled);
   }
 
   @override
@@ -69,6 +69,24 @@ class AndroidCameraController extends AndroidObject
   @override
   Future<void> setTapToFocusEnabled(bool enabled) async {
     await _api.setTapToFocusEnabled(identifier, enabled);
+  }
+
+  @override
+  Future<ZoomState?> getZoomState() async {
+    final zoomStateArgs = await _api.getZoomState(identifier);
+    final zoomState = zoomStateArgs?.toObject();
+    return zoomState;
+  }
+
+  @override
+  Future<bool> isPinchToZoomEnabled() async {
+    final enabledArgs = await _api.isPinchToZoomEnabled(identifier);
+    return enabledArgs;
+  }
+
+  @override
+  Future<void> setPinchToZoomEnabled(bool enabled) async {
+    await _api.setPinchToZoomEnabled(identifier, enabled);
   }
 
   @override

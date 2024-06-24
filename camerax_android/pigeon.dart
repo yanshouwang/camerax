@@ -33,6 +33,20 @@ class CameraSelectorArgs {
   });
 }
 
+class ZoomStateArgs {
+  final double minZoomRatioArgs;
+  final double maxZoomRatioArgs;
+  final double linearZoomArgs;
+  final double zoomRatioArgs;
+
+  ZoomStateArgs({
+    required this.minZoomRatioArgs,
+    required this.maxZoomRatioArgs,
+    required this.linearZoomArgs,
+    required this.zoomRatioArgs,
+  });
+}
+
 /// Host API for managing the native `InstanceManager`.
 @HostApi(dartHostTestHandler: 'TestInstanceManagerHostAPI')
 abstract class InstanceManagerHostAPI {
@@ -71,15 +85,22 @@ abstract class CameraControllerHostAPI {
   void create(int identifier);
   void bindToLifecycle(int identifier);
   void unbind(int identifier);
+  bool hasCamera(int identifier, CameraSelectorArgs cameraSelectorArgs);
   void setCameraSelector(int identifier, CameraSelectorArgs cameraSelectorArgs);
-  bool isPinchToZoomEnabled(int identifier);
-  void setPinchToZoomEnabled(int identifier, bool enabledArgs);
   bool isTapToFocusEnabled(int identifier);
   void setTapToFocusEnabled(int identifier, bool enabledArgs);
+  ZoomStateArgs? getZoomState(int identifier);
+  bool isPinchToZoomEnabled(int identifier);
+  void setPinchToZoomEnabled(int identifier, bool enabledArgs);
   @async
   void setLinearZoom(int identifier, double linearZoomArgs);
   @async
   void setZoomRatio(int identifier, double zoomRatioArgs);
+}
+
+@FlutterApi()
+abstract class CameraControllerFlutterAPI {
+  void onZoomStateChanged(ZoomStateArgs? zoomStateArgs);
 }
 
 @HostApi(dartHostTestHandler: 'TestPreviewViewHostAPI')

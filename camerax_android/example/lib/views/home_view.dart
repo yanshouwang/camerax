@@ -47,38 +47,44 @@ class _HomeViewState extends State<HomeView> {
               valueListenable: _zoomSliderVisible,
               builder: (context, zoomSliderVisible, child) {
                 const duration = Duration(milliseconds: 100);
-                return Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    PreviewWidget(
-                      controller: viewModel.cameraController,
-                      scaleType: ScaleType.fillCenter,
-                    ),
-                    AnimatedScale(
-                      duration: duration,
-                      scale: zoomSliderVisible ? 0.0 : 1.0,
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          buildZoomRatioButton(context, 1),
-                          buildZoomRatioButton(context, 2),
-                          buildZoomRatioButton(context, 3),
-                        ],
+                return Listener(
+                  onPointerMove: (event) {
+                    debugPrint('HomeView onPointerMove ${event.localPosition}');
+                  },
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      PreviewWidget(
+                        controller: viewModel.cameraController,
+                        scaleType: ScaleType.fillCenter,
                       ),
-                    ),
-                    ClipRect(
-                      child: AnimatedSlide(
+                      AnimatedScale(
                         duration: duration,
-                        offset: Offset.zero.translate(
-                          0.0,
-                          zoomSliderVisible ? 0.0 : 1.0,
+                        scale: zoomSliderVisible ? 0.0 : 1.0,
+                        alignment: Alignment.bottomCenter,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            buildZoomRatioButton(context, 1),
+                            buildZoomRatioButton(context, 2),
+                            buildZoomRatioButton(context, 3),
+                          ],
                         ),
-                        curve: Curves.ease,
-                        child: const ZoomSlider(),
                       ),
-                    ),
-                  ],
+                      ClipRect(
+                        child: AnimatedSlide(
+                          duration: duration,
+                          offset: Offset.zero.translate(
+                            0.0,
+                            zoomSliderVisible ? 0.0 : 1.0,
+                            // 0.0,
+                          ),
+                          curve: Curves.easeInOut,
+                          child: const ZoomSlider(),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

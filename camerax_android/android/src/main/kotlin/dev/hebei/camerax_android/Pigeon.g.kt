@@ -92,6 +92,34 @@ data class CameraSelectorArgs (
     )
   }
 }
+
+/** Generated class from Pigeon that represents data sent in messages. */
+data class ZoomStateArgs (
+  val minZoomRatioArgs: Double,
+  val maxZoomRatioArgs: Double,
+  val linearZoomArgs: Double,
+  val zoomRatioArgs: Double
+
+) {
+  companion object {
+    @Suppress("LocalVariableName")
+    fun fromList(__pigeon_list: List<Any?>): ZoomStateArgs {
+      val minZoomRatioArgs = __pigeon_list[0] as Double
+      val maxZoomRatioArgs = __pigeon_list[1] as Double
+      val linearZoomArgs = __pigeon_list[2] as Double
+      val zoomRatioArgs = __pigeon_list[3] as Double
+      return ZoomStateArgs(minZoomRatioArgs, maxZoomRatioArgs, linearZoomArgs, zoomRatioArgs)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      minZoomRatioArgs,
+      maxZoomRatioArgs,
+      linearZoomArgs,
+      zoomRatioArgs,
+    )
+  }
+}
 private object PigeonPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
     return when (type) {
@@ -101,11 +129,16 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
         }
       }
       130.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          ZoomStateArgs.fromList(it)
+        }
+      }
+      131.toByte() -> {
         return (readValue(buffer) as Int?)?.let {
           LensFacingArgs.ofRaw(it)
         }
       }
-      131.toByte() -> {
+      132.toByte() -> {
         return (readValue(buffer) as Int?)?.let {
           ScaleTypeArgs.ofRaw(it)
         }
@@ -119,12 +152,16 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
         stream.write(129)
         writeValue(stream, value.toList())
       }
-      is LensFacingArgs -> {
+      is ZoomStateArgs -> {
         stream.write(130)
+        writeValue(stream, value.toList())
+      }
+      is LensFacingArgs -> {
+        stream.write(131)
         writeValue(stream, value.raw)
       }
       is ScaleTypeArgs -> {
-        stream.write(131)
+        stream.write(132)
         writeValue(stream, value.raw)
       }
       else -> super.writeValue(stream, value)
@@ -289,11 +326,13 @@ interface CameraControllerHostAPI {
   fun create(identifier: Long)
   fun bindToLifecycle(identifier: Long)
   fun unbind(identifier: Long)
+  fun hasCamera(identifier: Long, cameraSelectorArgs: CameraSelectorArgs): Boolean
   fun setCameraSelector(identifier: Long, cameraSelectorArgs: CameraSelectorArgs)
-  fun isPinchToZoomEnabled(identifier: Long): Boolean
-  fun setPinchToZoomEnabled(identifier: Long, enabledArgs: Boolean)
   fun isTapToFocusEnabled(identifier: Long): Boolean
   fun setTapToFocusEnabled(identifier: Long, enabledArgs: Boolean)
+  fun getZoomState(identifier: Long): ZoomStateArgs?
+  fun isPinchToZoomEnabled(identifier: Long): Boolean
+  fun setPinchToZoomEnabled(identifier: Long, enabledArgs: Boolean)
   fun setLinearZoom(identifier: Long, linearZoomArgs: Double, callback: (Result<Unit>) -> Unit)
   fun setZoomRatio(identifier: Long, zoomRatioArgs: Double, callback: (Result<Unit>) -> Unit)
 
@@ -361,6 +400,24 @@ interface CameraControllerHostAPI {
         }
       }
       run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.hasCamera$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
+            val cameraSelectorArgsArg = args[1] as CameraSelectorArgs
+            val wrapped: List<Any?> = try {
+              listOf(api.hasCamera(identifierArg, cameraSelectorArgsArg))
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
         val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setCameraSelector$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
@@ -369,42 +426,6 @@ interface CameraControllerHostAPI {
             val cameraSelectorArgsArg = args[1] as CameraSelectorArgs
             val wrapped: List<Any?> = try {
               api.setCameraSelector(identifierArg, cameraSelectorArgsArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
-            val wrapped: List<Any?> = try {
-              listOf(api.isPinchToZoomEnabled(identifierArg))
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
-            val enabledArgsArg = args[1] as Boolean
-            val wrapped: List<Any?> = try {
-              api.setPinchToZoomEnabled(identifierArg, enabledArgsArg)
               listOf(null)
             } catch (exception: Throwable) {
               wrapError(exception)
@@ -441,6 +462,59 @@ interface CameraControllerHostAPI {
             val enabledArgsArg = args[1] as Boolean
             val wrapped: List<Any?> = try {
               api.setTapToFocusEnabled(identifierArg, enabledArgsArg)
+              listOf(null)
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.getZoomState$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
+            val wrapped: List<Any?> = try {
+              listOf(api.getZoomState(identifierArg))
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
+            val wrapped: List<Any?> = try {
+              listOf(api.isPinchToZoomEnabled(identifierArg))
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
+            val enabledArgsArg = args[1] as Boolean
+            val wrapped: List<Any?> = try {
+              api.setPinchToZoomEnabled(identifierArg, enabledArgsArg)
               listOf(null)
             } catch (exception: Throwable) {
               wrapError(exception)
@@ -491,6 +565,32 @@ interface CameraControllerHostAPI {
           channel.setMessageHandler(null)
         }
       }
+    }
+  }
+}
+/** Generated class from Pigeon that represents Flutter messages that can be called from Kotlin. */
+class CameraControllerFlutterAPI(private val binaryMessenger: BinaryMessenger, private val messageChannelSuffix: String = "") {
+  companion object {
+    /** The codec used by CameraControllerFlutterAPI. */
+    val codec: MessageCodec<Any?> by lazy {
+      PigeonPigeonCodec
+    }
+  }
+  fun onZoomStateChanged(zoomStateArgsArg: ZoomStateArgs?, callback: (Result<Unit>) -> Unit)
+{
+    val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
+    val channelName = "dev.flutter.pigeon.camerax_android.CameraControllerFlutterAPI.onZoomStateChanged$separatedMessageChannelSuffix"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(zoomStateArgsArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
     }
   }
 }

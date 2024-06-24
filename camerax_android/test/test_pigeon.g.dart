@@ -18,11 +18,14 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is CameraSelectorArgs) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
-    } else     if (value is LensFacingArgs) {
+    } else     if (value is ZoomStateArgs) {
       buffer.putUint8(130);
+      writeValue(buffer, value.encode());
+    } else     if (value is LensFacingArgs) {
+      buffer.putUint8(131);
       writeValue(buffer, value.index);
     } else     if (value is ScaleTypeArgs) {
-      buffer.putUint8(131);
+      buffer.putUint8(132);
       writeValue(buffer, value.index);
     } else {
       super.writeValue(buffer, value);
@@ -35,9 +38,11 @@ class _PigeonCodec extends StandardMessageCodec {
       case 129: 
         return CameraSelectorArgs.decode(readValue(buffer)!);
       case 130: 
+        return ZoomStateArgs.decode(readValue(buffer)!);
+      case 131: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : LensFacingArgs.values[value];
-      case 131: 
+      case 132: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : ScaleTypeArgs.values[value];
       default:
@@ -167,15 +172,19 @@ abstract class TestCameraControllerHostAPI {
 
   void unbind(int identifier);
 
+  bool hasCamera(int identifier, CameraSelectorArgs cameraSelectorArgs);
+
   void setCameraSelector(int identifier, CameraSelectorArgs cameraSelectorArgs);
-
-  bool isPinchToZoomEnabled(int identifier);
-
-  void setPinchToZoomEnabled(int identifier, bool enabledArgs);
 
   bool isTapToFocusEnabled(int identifier);
 
   void setTapToFocusEnabled(int identifier, bool enabledArgs);
+
+  ZoomStateArgs? getZoomState(int identifier);
+
+  bool isPinchToZoomEnabled(int identifier);
+
+  void setPinchToZoomEnabled(int identifier, bool enabledArgs);
 
   Future<void> setLinearZoom(int identifier, double linearZoomArgs);
 
@@ -260,6 +269,34 @@ abstract class TestCameraControllerHostAPI {
     }
     {
       final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.hasCamera$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
+      } else {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.hasCamera was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.hasCamera was null, expected non-null int.');
+          final CameraSelectorArgs? arg_cameraSelectorArgs = (args[1] as CameraSelectorArgs?);
+          assert(arg_cameraSelectorArgs != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.hasCamera was null, expected non-null CameraSelectorArgs.');
+          try {
+            final bool output = api.hasCamera(arg_identifier!, arg_cameraSelectorArgs!);
+            return <Object?>[output];
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
           'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setCameraSelector$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
@@ -277,59 +314,6 @@ abstract class TestCameraControllerHostAPI {
               'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setCameraSelector was null, expected non-null CameraSelectorArgs.');
           try {
             api.setCameraSelector(arg_identifier!, arg_cameraSelectorArgs!);
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          }          catch (e) {
-            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-    {
-      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled$messageChannelSuffix', pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (api == null) {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
-      } else {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
-          assert(message != null,
-          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_identifier = (args[0] as int?);
-          assert(arg_identifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled was null, expected non-null int.');
-          try {
-            final bool output = api.isPinchToZoomEnabled(arg_identifier!);
-            return <Object?>[output];
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          }          catch (e) {
-            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-    {
-      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled$messageChannelSuffix', pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (api == null) {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
-      } else {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
-          assert(message != null,
-          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_identifier = (args[0] as int?);
-          assert(arg_identifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled was null, expected non-null int.');
-          final bool? arg_enabledArgs = (args[1] as bool?);
-          assert(arg_enabledArgs != null,
-              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled was null, expected non-null bool.');
-          try {
-            api.setPinchToZoomEnabled(arg_identifier!, arg_enabledArgs!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -383,6 +367,84 @@ abstract class TestCameraControllerHostAPI {
               'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setTapToFocusEnabled was null, expected non-null bool.');
           try {
             api.setTapToFocusEnabled(arg_identifier!, arg_enabledArgs!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.getZoomState$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
+      } else {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.getZoomState was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.getZoomState was null, expected non-null int.');
+          try {
+            final ZoomStateArgs? output = api.getZoomState(arg_identifier!);
+            return <Object?>[output];
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
+      } else {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.isPinchToZoomEnabled was null, expected non-null int.');
+          try {
+            final bool output = api.isPinchToZoomEnabled(arg_identifier!);
+            return <Object?>[output];
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
+      } else {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled was null, expected non-null int.');
+          final bool? arg_enabledArgs = (args[1] as bool?);
+          assert(arg_enabledArgs != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.setPinchToZoomEnabled was null, expected non-null bool.');
+          try {
+            api.setPinchToZoomEnabled(arg_identifier!, arg_enabledArgs!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

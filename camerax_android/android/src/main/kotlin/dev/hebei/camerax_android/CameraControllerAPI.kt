@@ -26,19 +26,15 @@ class CameraControllerAPI(private val context: Context, private val instanceMana
         controller.unbind()
     }
 
+    override fun hasCamera(identifier: Long, cameraSelectorArgs: CameraSelectorArgs): Boolean {
+        val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
+        val cameraSelector = cameraSelectorArgs.toObject()
+        return controller.hasCamera(cameraSelector)
+    }
+
     override fun setCameraSelector(identifier: Long, cameraSelectorArgs: CameraSelectorArgs) {
         val controller = instanceManager.getInstance<CameraController>(identifier) ?: throw IllegalArgumentException()
-        controller.cameraSelector = cameraSelectorArgs.toCameraSelector()
-    }
-
-    override fun isPinchToZoomEnabled(identifier: Long): Boolean {
-        val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
-        return controller.isPinchToZoomEnabled
-    }
-
-    override fun setPinchToZoomEnabled(identifier: Long, enabledArgs: Boolean) {
-        val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
-        controller.isPinchToZoomEnabled = enabledArgs
+        controller.cameraSelector = cameraSelectorArgs.toObject()
     }
 
     override fun isTapToFocusEnabled(identifier: Long): Boolean {
@@ -49,6 +45,22 @@ class CameraControllerAPI(private val context: Context, private val instanceMana
     override fun setTapToFocusEnabled(identifier: Long, enabledArgs: Boolean) {
         val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
         controller.isTapToFocusEnabled = enabledArgs
+    }
+
+    override fun getZoomState(identifier: Long): ZoomStateArgs? {
+        val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
+        val zoomState = controller.zoomState.value
+        return zoomState?.toArgs()
+    }
+
+    override fun isPinchToZoomEnabled(identifier: Long): Boolean {
+        val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
+        return controller.isPinchToZoomEnabled
+    }
+
+    override fun setPinchToZoomEnabled(identifier: Long, enabledArgs: Boolean) {
+        val controller = instanceManager.getInstance<LifecycleCameraController>(identifier) ?: throw IllegalArgumentException()
+        controller.isPinchToZoomEnabled = enabledArgs
     }
 
     override fun setLinearZoom(identifier: Long, linearZoomArgs: Double, callback: (Result<Unit>) -> Unit) {

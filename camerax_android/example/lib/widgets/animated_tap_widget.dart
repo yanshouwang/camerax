@@ -36,13 +36,13 @@ class _AnimatedTapWidgetState extends State<AnimatedTapWidget> {
       behavior: HitTestBehavior.translucent,
       onTap: widget.onTap,
       onTapDown: (details) {
-        // debugPrint('ATW onTapDown');
+        debugPrint('ATW onTapDown');
         scale.value = 0.9;
         tapping = true;
         animating = true;
       },
       onTapUp: (details) {
-        // debugPrint('ATW onTapUp');
+        debugPrint('ATW onTapUp');
         tapping = false;
         if (animating) {
           return;
@@ -50,7 +50,7 @@ class _AnimatedTapWidgetState extends State<AnimatedTapWidget> {
         scale.value = 1.0;
       },
       onTapCancel: () {
-        // debugPrint('ATW onTapCancel');
+        debugPrint('ATW onTapCancel');
         tapping = false;
         if (animating) {
           return;
@@ -72,6 +72,9 @@ class _AnimatedTapWidgetState extends State<AnimatedTapWidget> {
       // },
       // onLongPressCancel: () {
       //   debugPrint('ATW onLongPressCancel');
+      // },
+      // onLongPressMoveUpdate: (details) {
+      //   debugPrint('ATW onLongPressUpdate $details');
       // },
       child: ValueListenableBuilder(
         valueListenable: scale,

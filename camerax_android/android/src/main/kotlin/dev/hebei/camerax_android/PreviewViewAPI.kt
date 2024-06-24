@@ -18,6 +18,6 @@ class PreviewViewAPI(private val context: Context, private val instanceManager: 
 
     override fun setScaleType(identifier: Long, scaleTypeArgs: ScaleTypeArgs) {
         val view = instanceManager.getInstance<PreviewView>(identifier) ?: throw IllegalArgumentException()
-        view.scaleType = scaleTypeArgs.toScaleType()
+        view.scaleType = scaleTypeArgs.toObject()
     }
 }
