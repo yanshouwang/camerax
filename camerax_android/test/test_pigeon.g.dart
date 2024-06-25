@@ -27,9 +27,6 @@ class _PigeonCodec extends StandardMessageCodec {
     } else     if (value is ScaleTypeArgs) {
       buffer.putUint8(132);
       writeValue(buffer, value.index);
-    } else     if (value is LiveDataType) {
-      buffer.putUint8(133);
-      writeValue(buffer, value.index);
     } else {
       super.writeValue(buffer, value);
     }
@@ -48,9 +45,6 @@ class _PigeonCodec extends StandardMessageCodec {
       case 132: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : ScaleTypeArgs.values[value];
-      case 133: 
-        final int? value = readValue(buffer) as int?;
-        return value == null ? null : LiveDataType.values[value];
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -187,6 +181,10 @@ abstract class TestCameraControllerHostAPI {
   void setTapToFocusEnabled(int identifier, bool enabledArgs);
 
   ZoomStateArgs? getZoomState(int identifier);
+
+  void observerZoomState(int identifier, int observerIdentifier);
+
+  void removeZoomStateObserver(int identifier, int observerIdentifier);
 
   bool isPinchToZoomEnabled(int identifier);
 
@@ -399,6 +397,62 @@ abstract class TestCameraControllerHostAPI {
           try {
             final ZoomStateArgs? output = api.getZoomState(arg_identifier!);
             return <Object?>[output];
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.observerZoomState$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
+      } else {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.observerZoomState was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.observerZoomState was null, expected non-null int.');
+          final int? arg_observerIdentifier = (args[1] as int?);
+          assert(arg_observerIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.observerZoomState was null, expected non-null int.');
+          try {
+            api.observerZoomState(arg_identifier!, arg_observerIdentifier!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.removeZoomStateObserver$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
+      } else {
+        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.removeZoomStateObserver was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.removeZoomStateObserver was null, expected non-null int.');
+          final int? arg_observerIdentifier = (args[1] as int?);
+          assert(arg_observerIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.removeZoomStateObserver was null, expected non-null int.');
+          try {
+            api.removeZoomStateObserver(arg_identifier!, arg_observerIdentifier!);
+            return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
           }          catch (e) {
@@ -625,117 +679,21 @@ abstract class TestObserverHostAPI {
     messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
     {
       final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.camerax_android.ObserverHostAPI.create$messageChannelSuffix', pigeonChannelCodec,
+          'dev.flutter.pigeon.camerax_android.ZoomStateObserverHostAPI.create$messageChannelSuffix', pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (api == null) {
         _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
       } else {
         _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
           assert(message != null,
-          'Argument for dev.flutter.pigeon.camerax_android.ObserverHostAPI.create was null.');
+          'Argument for dev.flutter.pigeon.camerax_android.ZoomStateObserverHostAPI.create was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_identifier = (args[0] as int?);
           assert(arg_identifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.ObserverHostAPI.create was null, expected non-null int.');
+              'Argument for dev.flutter.pigeon.camerax_android.ZoomStateObserverHostAPI.create was null, expected non-null int.');
           try {
             api.create(arg_identifier!);
             return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          }          catch (e) {
-            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-}
-
-abstract class TestLiveDataHostAPI {
-  static TestDefaultBinaryMessengerBinding? get _testBinaryMessengerBinding => TestDefaultBinaryMessengerBinding.instance;
-  static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
-
-  void observe(int identifier, int observerIdentifier);
-
-  void removeObservers(int identifier);
-
-  int? getValue(int identifier, LiveDataType type);
-
-  static void setUp(TestLiveDataHostAPI? api, {BinaryMessenger? binaryMessenger, String messageChannelSuffix = '',}) {
-    messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
-    {
-      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.camerax_android.LiveDataHostAPI.observe$messageChannelSuffix', pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (api == null) {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
-      } else {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
-          assert(message != null,
-          'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.observe was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_identifier = (args[0] as int?);
-          assert(arg_identifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.observe was null, expected non-null int.');
-          final int? arg_observerIdentifier = (args[1] as int?);
-          assert(arg_observerIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.observe was null, expected non-null int.');
-          try {
-            api.observe(arg_identifier!, arg_observerIdentifier!);
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          }          catch (e) {
-            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-    {
-      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.camerax_android.LiveDataHostAPI.removeObservers$messageChannelSuffix', pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (api == null) {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
-      } else {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
-          assert(message != null,
-          'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.removeObservers was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_identifier = (args[0] as int?);
-          assert(arg_identifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.removeObservers was null, expected non-null int.');
-          try {
-            api.removeObservers(arg_identifier!);
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          }          catch (e) {
-            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-    {
-      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
-          'dev.flutter.pigeon.camerax_android.LiveDataHostAPI.getValue$messageChannelSuffix', pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (api == null) {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, null);
-      } else {
-        _testBinaryMessengerBinding!.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(__pigeon_channel, (Object? message) async {
-          assert(message != null,
-          'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.getValue was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_identifier = (args[0] as int?);
-          assert(arg_identifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.getValue was null, expected non-null int.');
-          final LiveDataType? arg_type = (args[1] as LiveDataType?);
-          assert(arg_type != null,
-              'Argument for dev.flutter.pigeon.camerax_android.LiveDataHostAPI.getValue was null, expected non-null LiveDataType.');
-          try {
-            final int? output = api.getValue(arg_identifier!, arg_type!);
-            return <Object?>[output];
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
           }          catch (e) {

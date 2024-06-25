@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -44,16 +46,30 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
         )
           ..addOnPlatformViewCreatedListener(
             (id) {
-              final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
-              view.setController(controller.jniValue);
-              view.setScaleType(scaleType.jniValue);
               params.onPlatformViewCreated(id);
+              _onPlatformViewCreated(
+                id,
+                controller.jniValue,
+                scaleType.jniValue,
+              );
             },
           )
           ..create();
       },
     );
   }
+}
+
+void _onPlatformViewCreated(
+  int id,
+  jni.CameraController controller,
+  jni.PreviewView_ScaleType scaleType,
+) async {
+  await runOnPlatformThread(() {
+    final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
+    view.setController(controller);
+    view.setScaleType(scaleType);
+  });
 }
 
 AndroidViewController _initAndroidView(

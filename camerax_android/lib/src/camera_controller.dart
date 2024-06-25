@@ -29,43 +29,84 @@ class AndroidCameraController implements CameraController {
   }
 
   @override
-  void bind() {
+  Future<void> bind() async {
     final liefcycleOwner = JNI.activity.castTo(jni.LifecycleOwner.type);
-    jniValue.bindToLifecycle(liefcycleOwner);
+    await runOnPlatformThread(() {
+      jniValue.bindToLifecycle(liefcycleOwner);
+    });
   }
 
   @override
-  void unbind() {
-    jniValue.unbind();
+  Future<void> unbind() async {
+    await runOnPlatformThread(() {
+      jniValue.unbind();
+    });
   }
 
   @override
-  bool hasCamera(CameraSelector cameraSelector) {
-    return jniValue.hasCamera(cameraSelector.jniValue);
+  Future<bool> hasCamera(CameraSelector cameraSelector) async {
+    final hasCamera = await runOnPlatformThread(() {
+      return jniValue.hasCamera(cameraSelector.jniValue);
+    });
+    return hasCamera;
   }
 
   @override
-  void setCameraSelector(CameraSelector cameraSelector) {
-    jniValue.setCameraSelector(cameraSelector.jniValue);
+  Future<void> setCameraSelector(CameraSelector cameraSelector) async {
+    await runOnPlatformThread(() {
+      jniValue.setCameraSelector(cameraSelector.jniValue);
+    });
   }
 
   @override
-  bool get isTapToFocusEnabled => jniValue.isTapToFocusEnabled();
-  @override
-  set isTapToFocusEnabled(bool value) => jniValue.setTapToFocusEnabled(value);
+  Future<bool> isTapToFocusEnabled() async {
+    final isTapToFocusEnabled = await runOnPlatformThread(() {
+      return jniValue.isTapToFocusEnabled();
+    });
+    return isTapToFocusEnabled;
+  }
 
   @override
-  bool get isPinchToZoomEnabled => jniValue.isPinchToZoomEnabled();
-  @override
-  set isPinchToZoomEnabled(bool value) => jniValue.setPinchToZoomEnabled(value);
+  Future<void> setTapToFocusEnabled(bool enabled) async {
+    await runOnPlatformThread(() {
+      jniValue.setTapToFocusEnabled(enabled);
+    });
+  }
 
   @override
-  ZoomState? get zoomState => jniValue.getZoomState().getValue().dartValue;
+  Future<bool> isPinchToZoomEnabled() async {
+    final isPinchToZoomEnabled = await runOnPlatformThread(() {
+      return jniValue.isPinchToZoomEnabled();
+    });
+    return isPinchToZoomEnabled;
+  }
+
+  @override
+  Future<void> setPinchToZoomEnabled(bool enabled) async {
+    await runOnPlatformThread(() {
+      jniValue.setPinchToZoomEnabled(enabled);
+    });
+  }
+
+  @override
+  Future<ZoomState?> getZoomState() async {
+    final zoomStateData = await runOnPlatformThread(() {
+      return jniValue.getZoomState();
+    });
+    final zoomState = zoomStateData.getValue();
+    if (zoomState.isNull) {
+      return null;
+    } else {
+      return zoomState.dartValue;
+    }
+  }
 
   @override
   Future<void> setLinearZoom(double linearZoom) async {
+    final lisentalbeFuture = await runOnPlatformThread(() {
+      return jniValue.setLinearZoom(linearZoom);
+    });
     final completer = Completer<void>();
-    final lisentalbeFuture = jniValue.setLinearZoom(linearZoom);
     final executor = jni.ContextCompat.getMainExecutor(JNI.activity);
     lisentalbeFuture.addListener(
       jni.Runnable.implement(jni.$RunnableImpl(
@@ -82,12 +123,15 @@ class AndroidCameraController implements CameraController {
       )),
       executor,
     );
+    await completer.future;
   }
 
   @override
   Future<void> setZoomRatio(double zoomRatio) async {
+    final lisentalbeFuture = await runOnPlatformThread(() {
+      return jniValue.setZoomRatio(zoomRatio);
+    });
     final completer = Completer<void>();
-    final lisentalbeFuture = jniValue.setZoomRatio(zoomRatio);
     final executor = jni.ContextCompat.getMainExecutor(JNI.activity);
     lisentalbeFuture.addListener(
       jni.Runnable.implement(jni.$RunnableImpl(
@@ -104,5 +148,6 @@ class AndroidCameraController implements CameraController {
       )),
       executor,
     );
+    await completer.future;
   }
 }

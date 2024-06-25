@@ -74,16 +74,6 @@ enum class ScaleTypeArgs(val raw: Int) {
   }
 }
 
-enum class LiveDataType(val raw: Int) {
-  ZOOM_STATE(0);
-
-  companion object {
-    fun ofRaw(raw: Int): LiveDataType? {
-      return values().firstOrNull { it.raw == raw }
-    }
-  }
-}
-
 /** Generated class from Pigeon that represents data sent in messages. */
 data class CameraSelectorArgs (
   val lensFacingArgs: LensFacingArgs
@@ -153,11 +143,6 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
           ScaleTypeArgs.ofRaw(it)
         }
       }
-      133.toByte() -> {
-        return (readValue(buffer) as Int?)?.let {
-          LiveDataType.ofRaw(it)
-        }
-      }
       else -> super.readValueOfType(type, buffer)
     }
   }
@@ -177,10 +162,6 @@ private object PigeonPigeonCodec : StandardMessageCodec() {
       }
       is ScaleTypeArgs -> {
         stream.write(132)
-        writeValue(stream, value.raw)
-      }
-      is LiveDataType -> {
-        stream.write(133)
         writeValue(stream, value.raw)
       }
       else -> super.writeValue(stream, value)
@@ -350,6 +331,8 @@ interface CameraControllerHostAPI {
   fun isTapToFocusEnabled(identifier: Long): Boolean
   fun setTapToFocusEnabled(identifier: Long, enabledArgs: Boolean)
   fun getZoomState(identifier: Long): ZoomStateArgs?
+  fun observerZoomState(identifier: Long, observerIdentifier: Long)
+  fun removeZoomStateObserver(identifier: Long, observerIdentifier: Long)
   fun isPinchToZoomEnabled(identifier: Long): Boolean
   fun setPinchToZoomEnabled(identifier: Long, enabledArgs: Boolean)
   fun setLinearZoom(identifier: Long, linearZoomArgs: Double, callback: (Result<Unit>) -> Unit)
@@ -499,6 +482,44 @@ interface CameraControllerHostAPI {
             val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
             val wrapped: List<Any?> = try {
               listOf(api.getZoomState(identifierArg))
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.observerZoomState$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
+            val observerIdentifierArg = args[1].let { num -> if (num is Int) num.toLong() else num as Long }
+            val wrapped: List<Any?> = try {
+              api.observerZoomState(identifierArg, observerIdentifierArg)
+              listOf(null)
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerHostAPI.removeZoomStateObserver$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
+            val observerIdentifierArg = args[1].let { num -> if (num is Int) num.toLong() else num as Long }
+            val wrapped: List<Any?> = try {
+              api.removeZoomStateObserver(identifierArg, observerIdentifierArg)
+              listOf(null)
             } catch (exception: Throwable) {
               wrapError(exception)
             }
@@ -688,20 +709,20 @@ interface PreviewViewHostAPI {
   }
 }
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
-interface ObserverHostAPI {
+interface ZoomStateObserverHostAPI {
   fun create(identifier: Long)
 
   companion object {
-    /** The codec used by ObserverHostAPI. */
+    /** The codec used by ZoomStateObserverHostAPI. */
     val codec: MessageCodec<Any?> by lazy {
       PigeonPigeonCodec
     }
-    /** Sets up an instance of `ObserverHostAPI` to handle messages through the `binaryMessenger`. */
+    /** Sets up an instance of `ZoomStateObserverHostAPI` to handle messages through the `binaryMessenger`. */
     @JvmOverloads
-    fun setUp(binaryMessenger: BinaryMessenger, api: ObserverHostAPI?, messageChannelSuffix: String = "") {
+    fun setUp(binaryMessenger: BinaryMessenger, api: ZoomStateObserverHostAPI?, messageChannelSuffix: String = "") {
       val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.ObserverHostAPI.create$separatedMessageChannelSuffix", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.ZoomStateObserverHostAPI.create$separatedMessageChannelSuffix", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -721,93 +742,20 @@ interface ObserverHostAPI {
     }
   }
 }
-/** Generated interface from Pigeon that represents a handler of messages from Flutter. */
-interface LiveDataHostAPI {
-  fun observe(identifier: Long, observerIdentifier: Long)
-  fun removeObservers(identifier: Long)
-  fun getValue(identifier: Long, type: LiveDataType): Long?
-
-  companion object {
-    /** The codec used by LiveDataHostAPI. */
-    val codec: MessageCodec<Any?> by lazy {
-      PigeonPigeonCodec
-    }
-    /** Sets up an instance of `LiveDataHostAPI` to handle messages through the `binaryMessenger`. */
-    @JvmOverloads
-    fun setUp(binaryMessenger: BinaryMessenger, api: LiveDataHostAPI?, messageChannelSuffix: String = "") {
-      val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.LiveDataHostAPI.observe$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
-            val observerIdentifierArg = args[1].let { num -> if (num is Int) num.toLong() else num as Long }
-            val wrapped: List<Any?> = try {
-              api.observe(identifierArg, observerIdentifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.LiveDataHostAPI.removeObservers$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
-            val wrapped: List<Any?> = try {
-              api.removeObservers(identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.LiveDataHostAPI.getValue$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val identifierArg = args[0].let { num -> if (num is Int) num.toLong() else num as Long }
-            val typeArg = args[1] as LiveDataType
-            val wrapped: List<Any?> = try {
-              listOf(api.getValue(identifierArg, typeArg))
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-}
 /** Generated class from Pigeon that represents Flutter messages that can be called from Kotlin. */
-class LiveDataFlutterAPI(private val binaryMessenger: BinaryMessenger, private val messageChannelSuffix: String = "") {
+class ZoomStateObserverFlutterAPI(private val binaryMessenger: BinaryMessenger, private val messageChannelSuffix: String = "") {
   companion object {
-    /** The codec used by LiveDataFlutterAPI. */
+    /** The codec used by ZoomStateObserverFlutterAPI. */
     val codec: MessageCodec<Any?> by lazy {
       PigeonPigeonCodec
     }
   }
-  fun create(identifierArg: Long, typeArg: LiveDataType, callback: (Result<Unit>) -> Unit)
+  fun onChanged(identifierArg: Long, zoomStateArgsArg: ZoomStateArgs, callback: (Result<Unit>) -> Unit)
 {
     val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
-    val channelName = "dev.flutter.pigeon.camerax_android.LiveDataFlutterAPI.create$separatedMessageChannelSuffix"
+    val channelName = "dev.flutter.pigeon.camerax_android.ZoomStateObserverFlutterAPI.onChanged$separatedMessageChannelSuffix"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(identifierArg, typeArg)) {
+    channel.send(listOf(identifierArg, zoomStateArgsArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))

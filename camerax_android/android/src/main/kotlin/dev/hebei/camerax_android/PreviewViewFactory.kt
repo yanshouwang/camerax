@@ -2,6 +2,7 @@ package dev.hebei.camerax_android
 
 import android.content.Context
 import android.view.View
+import androidx.annotation.Keep
 import androidx.camera.view.PreviewView
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.StandardMessageCodec
@@ -16,9 +17,9 @@ object PreviewViewFactory : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
         return object : PlatformView {
             override fun getView(): View {
-                val view = PreviewView(activity)
-                views[viewId] = view
-                return view
+                return views.getOrPut(viewId) {
+                    PreviewView(activity)
+                }
             }
 
             override fun dispose() {
@@ -31,7 +32,8 @@ object PreviewViewFactory : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
         this.binding = binding
     }
 
-    fun retrieveView(id: Int): PreviewView? {
-        return views[id]
+    @Keep
+    fun retrieveView(viewId: Int): PreviewView? {
+        return views[viewId]
     }
 }

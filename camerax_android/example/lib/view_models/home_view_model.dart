@@ -28,27 +28,27 @@ class HomeViewModel extends ViewModel with TypeLogger {
     //   notifyListeners();
     // });
     await cameraController.requestPermissions();
-    cameraController.setCameraSelector(CameraSelector.back);
-    _zoomState = cameraController.zoomState;
-    final isPinchToZoomEnabled = cameraController.isPinchToZoomEnabled;
-    final isTapToFocusEnabled = cameraController.isTapToFocusEnabled;
+    await cameraController.setCameraSelector(CameraSelector.back);
+    await cameraController.bind();
+    _zoomState = await cameraController.getZoomState();
+    final isPinchToZoomEnabled = await cameraController.isPinchToZoomEnabled();
+    final isTapToFocusEnabled = await cameraController.isTapToFocusEnabled();
     logger.info(
         '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
-    cameraController.bind();
   }
 
   Future<void> toggleLensFacing() async {
     final cameraSelector = lensFacing == LensFacing.back
         ? CameraSelector.front
         : CameraSelector.back;
-    final hasCamera = cameraController.hasCamera(cameraSelector);
+    final hasCamera = await cameraController.hasCamera(cameraSelector);
     if (!hasCamera) {
       return;
     }
-    cameraController.setCameraSelector(cameraSelector);
+    await cameraController.setCameraSelector(cameraSelector);
     _lensFacing = cameraSelector.lensFacing;
     notifyListeners();
   }
@@ -57,7 +57,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     try {
       await cameraController.setZoomRatio(zoomRatio);
     } catch (e) {
-      logger.fine(e);
+      logger.warning(e);
     }
   }
 
