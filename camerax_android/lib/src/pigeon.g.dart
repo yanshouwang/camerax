@@ -40,6 +40,10 @@ enum ScaleTypeArgs {
   fitStart,
 }
 
+enum LiveDataType {
+  zoomState,
+}
+
 class CameraSelectorArgs {
   CameraSelectorArgs({
     required this.lensFacingArgs,
@@ -114,6 +118,9 @@ class _PigeonCodec extends StandardMessageCodec {
     } else     if (value is ScaleTypeArgs) {
       buffer.putUint8(132);
       writeValue(buffer, value.index);
+    } else     if (value is LiveDataType) {
+      buffer.putUint8(133);
+      writeValue(buffer, value.index);
     } else {
       super.writeValue(buffer, value);
     }
@@ -132,6 +139,9 @@ class _PigeonCodec extends StandardMessageCodec {
       case 132: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : ScaleTypeArgs.values[value];
+      case 133: 
+        final int? value = readValue(buffer) as int?;
+        return value == null ? null : LiveDataType.values[value];
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -700,6 +710,160 @@ class PreviewViewHostAPI {
       );
     } else {
       return;
+    }
+  }
+}
+
+class ObserverHostAPI {
+  /// Constructor for [ObserverHostAPI].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  ObserverHostAPI({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
+      : __pigeon_binaryMessenger = binaryMessenger,
+        __pigeon_messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+  final BinaryMessenger? __pigeon_binaryMessenger;
+
+  static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
+
+  final String __pigeon_messageChannelSuffix;
+
+  Future<void> create(int identifier) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.ObserverHostAPI.create$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+}
+
+class LiveDataHostAPI {
+  /// Constructor for [LiveDataHostAPI].  The [binaryMessenger] named argument is
+  /// available for dependency injection.  If it is left null, the default
+  /// BinaryMessenger will be used which routes to the host platform.
+  LiveDataHostAPI({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
+      : __pigeon_binaryMessenger = binaryMessenger,
+        __pigeon_messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+  final BinaryMessenger? __pigeon_binaryMessenger;
+
+  static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
+
+  final String __pigeon_messageChannelSuffix;
+
+  Future<void> observe(int identifier, int observerIdentifier) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.LiveDataHostAPI.observe$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier, observerIdentifier]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<void> removeObservers(int identifier) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.LiveDataHostAPI.removeObservers$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<int?> getValue(int identifier, LiveDataType type) async {
+    final String __pigeon_channelName = 'dev.flutter.pigeon.camerax_android.LiveDataHostAPI.getValue$__pigeon_messageChannelSuffix';
+    final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+      __pigeon_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: __pigeon_binaryMessenger,
+    );
+    final List<Object?>? __pigeon_replyList =
+        await __pigeon_channel.send(<Object?>[identifier, type]) as List<Object?>?;
+    if (__pigeon_replyList == null) {
+      throw _createConnectionError(__pigeon_channelName);
+    } else if (__pigeon_replyList.length > 1) {
+      throw PlatformException(
+        code: __pigeon_replyList[0]! as String,
+        message: __pigeon_replyList[1] as String?,
+        details: __pigeon_replyList[2],
+      );
+    } else {
+      return (__pigeon_replyList[0] as int?);
+    }
+  }
+}
+
+abstract class LiveDataFlutterAPI {
+  static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
+
+  void create(int identifier, LiveDataType type);
+
+  static void setUp(LiveDataFlutterAPI? api, {BinaryMessenger? binaryMessenger, String messageChannelSuffix = '',}) {
+    messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+    {
+      final BasicMessageChannel<Object?> __pigeon_channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.camerax_android.LiveDataFlutterAPI.create$messageChannelSuffix', pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        __pigeon_channel.setMessageHandler(null);
+      } else {
+        __pigeon_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.camerax_android.LiveDataFlutterAPI.create was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_identifier = (args[0] as int?);
+          assert(arg_identifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.LiveDataFlutterAPI.create was null, expected non-null int.');
+          final LiveDataType? arg_type = (args[1] as LiveDataType?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_android.LiveDataFlutterAPI.create was null, expected non-null LiveDataType.');
+          try {
+            api.create(arg_identifier!, arg_type!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          }          catch (e) {
+            return wrapResponse(error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
     }
   }
 }

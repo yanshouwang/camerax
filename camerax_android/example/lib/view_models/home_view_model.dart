@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
@@ -5,40 +7,48 @@ import 'package:hybrid_logging/hybrid_logging.dart';
 class HomeViewModel extends ViewModel with TypeLogger {
   final CameraController cameraController;
   LensFacing _lensFacing;
-  double _zoomRatio;
+  ZoomState? _zoomState;
+
+  late final StreamSubscription _zoomStateSubscription;
 
   HomeViewModel()
       : cameraController = CameraController(),
         _lensFacing = LensFacing.back,
-        _zoomRatio = 1.0 {
+        _zoomState = null {
     _initialize();
   }
 
   LensFacing get lensFacing => _lensFacing;
-  double get zoomRatio => _zoomRatio;
+  ZoomState? get zoomState => _zoomState;
 
   void _initialize() async {
+    // _zoomStateSubscription =
+    //     cameraController.zoomStateChanged.listen((zoomState) {
+    //   _zoomState = zoomState;
+    //   notifyListeners();
+    // });
     await cameraController.requestPermissions();
-    await cameraController.setCameraSelector(CameraSelector.back);
-    final zoomState = await cameraController.getZoomState();
-    final isPinchToZoomEnabled = await cameraController.isPinchToZoomEnabled();
-    final isTapToFocusEnabled = await cameraController.isTapToFocusEnabled();
+    cameraController.setCameraSelector(CameraSelector.back);
+    _zoomState = cameraController.zoomState;
+    final isPinchToZoomEnabled = cameraController.isPinchToZoomEnabled;
+    final isTapToFocusEnabled = cameraController.isTapToFocusEnabled;
     logger.info(
         '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
-    await cameraController.bind();
+    notifyListeners();
+    cameraController.bind();
   }
 
   Future<void> toggleLensFacing() async {
     final cameraSelector = lensFacing == LensFacing.back
         ? CameraSelector.front
         : CameraSelector.back;
-    final hasCamera = await cameraController.hasCamera(cameraSelector);
+    final hasCamera = cameraController.hasCamera(cameraSelector);
     if (!hasCamera) {
       return;
     }
-    await cameraController.setCameraSelector(cameraSelector);
+    cameraController.setCameraSelector(cameraSelector);
     _lensFacing = cameraSelector.lensFacing;
     notifyListeners();
   }
@@ -46,8 +56,6 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   Future<void> setZoomRatio(double zoomRatio) async {
     try {
       await cameraController.setZoomRatio(zoomRatio);
-      _zoomRatio = zoomRatio;
-      notifyListeners();
     } catch (e) {
       logger.fine(e);
     }
@@ -56,6 +64,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   @override
   void dispose() {
     cameraController.unbind();
+    _zoomStateSubscription.cancel();
     super.dispose();
   }
 }

@@ -8,15 +8,15 @@ abstract interface class CameraController {
   Future<bool> requestPermissions({
     bool enableAudio = false,
   });
-  Future<void> bind();
-  Future<void> unbind();
-  Future<bool> hasCamera(CameraSelector cameraSelector);
-  Future<void> setCameraSelector(CameraSelector cameraSelector);
-  Future<bool> isPinchToZoomEnabled();
-  Future<void> setPinchToZoomEnabled(bool enabled);
-  Future<bool> isTapToFocusEnabled();
-  Future<void> setTapToFocusEnabled(bool enabled);
-  Future<ZoomState?> getZoomState();
+  void bind();
+  void unbind();
+  bool hasCamera(CameraSelector cameraSelector);
+  void setCameraSelector(CameraSelector cameraSelector);
+  bool get isTapToFocusEnabled;
+  set isTapToFocusEnabled(bool value);
+  ZoomState? get zoomState;
+  bool get isPinchToZoomEnabled;
+  set isPinchToZoomEnabled(bool value);
   Future<void> setLinearZoom(double linearZoom);
   Future<void> setZoomRatio(double zoomRatio);
 

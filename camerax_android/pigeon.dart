@@ -90,6 +90,8 @@ abstract class CameraControllerHostAPI {
   bool isTapToFocusEnabled(int identifier);
   void setTapToFocusEnabled(int identifier, bool enabledArgs);
   ZoomStateArgs? getZoomState(int identifier);
+  void observerZoomState(int identifier, int observerIdentifier);
+  void removeZoomStateObserver(int identifier, int observerIdentifier);
   bool isPinchToZoomEnabled(int identifier);
   void setPinchToZoomEnabled(int identifier, bool enabledArgs);
   @async
@@ -108,4 +110,14 @@ abstract class PreviewViewHostAPI {
   void create(int identifier);
   void setController(int identifier, int controllerIdentifier);
   void setScaleType(int identifier, ScaleTypeArgs scaleTypeArgs);
+}
+
+@HostApi(dartHostTestHandler: 'TestObserverHostAPI')
+abstract class ZoomStateObserverHostAPI {
+  void create(int identifier);
+}
+
+@FlutterApi()
+abstract class ZoomStateObserverFlutterAPI {
+  void onChanged(int identifier, ZoomStateArgs zoomStateArgs);
 }

@@ -1,7 +1,7 @@
 package dev.hebei.camerax_android
 
-class InstanceManagerAPI(private val instanceManager: InstanceManager) : InstanceManagerHostAPI {
+object InstanceManagerAPI : InstanceManagerHostAPI {
     override fun clear() {
-        instanceManager.clear()
+        InstanceManager.clear()
     }
 }

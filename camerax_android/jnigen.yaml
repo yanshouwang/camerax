@@ -1,0 +1,28 @@
+# Run with `dart run jnigen --config jnigen.yaml`.
+android_sdk_config:
+  add_gradle_deps: true
+  android_example: example/
+suspend_fun_to_async: true
+enable_experiment:
+  - interface_implementation
+output:
+  dart:
+    path: lib/src/jni.g.dart
+    structure: single_file
+log_level: all
+class_path:
+  - /Users/yanshouwang/.gradle/caches/transforms-3/1662533b3d1f1a8316413ccb699738f1/transformed/jetified-listenablefuture-1.0.jar
+classes:
+  - androidx.core.content.ContextCompat
+  - androidx.camera.core.CameraSelector
+  - androidx.camera.core.ZoomState
+  - androidx.camera.view.CameraController
+  - androidx.camera.view.LifecycleCameraController
+  - androidx.camera.view.PreviewView
+  - androidx.lifecycle.LifecycleOwner
+  - androidx.lifecycle.LiveData
+  - androidx.lifecycle.Observer
+  - com.google.common.util.concurrent.ListenableFuture
+  - java.lang.Runnable
+  - java.util.concurrent.Future
+  - dev.hebei.camerax_android.PreviewViewFactory

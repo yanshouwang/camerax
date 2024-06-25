@@ -1,0 +1,4 @@
+-keep class androidx.camera.core.** { *; }
+-keep class androidx.camera.view.** { *; }
+-keep class androidx.lifecycle.** { *; }
+-keep class com.google.common.util.concurrent.** { *; }

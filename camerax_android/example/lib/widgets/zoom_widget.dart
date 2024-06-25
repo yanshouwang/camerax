@@ -115,7 +115,6 @@ class _ZoomWidgetState extends State<ZoomWidget> {
                       if (newValue == oldValue) {
                         return;
                       }
-                      HapticFeedback.selectionClick();
                       widget.onChanged?.call(newValue);
                     },
                     onPointerUp: (event) {

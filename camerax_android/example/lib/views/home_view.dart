@@ -18,6 +18,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final viewModel = ViewModel.of<HomeViewModel>(context);
+    final zoomState = viewModel.zoomState;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -28,14 +29,23 @@ class _HomeViewState extends State<HomeView> {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                PreviewWidget(
+                PreviewView(
                   controller: viewModel.cameraController,
                   scaleType: ScaleType.fillCenter,
                 ),
+                if (zoomState != null)
+                  ZoomWidget(
+                    minimum: zoomState.minZoomRatio,
+                    maximum: zoomState.maxZoomRatio,
+                    value: zoomState.zoomRatio,
+                    onChanged: (value) {
+                      viewModel.setZoomRatio(value);
+                    },
+                  ),
                 ZoomWidget(
                   minimum: 1.0,
                   maximum: 10.0,
-                  value: viewModel.zoomRatio,
+                  value: 1.0,
                   onChanged: (value) {
                     viewModel.setZoomRatio(value);
                   },

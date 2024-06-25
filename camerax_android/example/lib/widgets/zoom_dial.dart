@@ -61,8 +61,8 @@ class _ZoomDialPainter extends CustomPainter {
     canvas.translate(width / 2.0, radius);
     canvas.save();
     final angle = -math.pi / 180.0 * (value - minimum) * 20.0;
+    debugPrint('ZoomDial angle $angle');
     canvas.rotate(angle);
-    // debugPrint('ZSP center $center');
     final paint = Paint()
       ..style = PaintingStyle.fill
       ..color = Colors.black.withOpacity(0.5);
@@ -81,13 +81,16 @@ class _ZoomDialPainter extends CustomPainter {
     final count = (maximum - minimum) * 10 + 1;
     canvas.save();
     for (var i = 0; i < count; i++) {
-      final large = i % 10 == 0;
-      paint.color = large ? Colors.white : Colors.white.withOpacity(0.1);
-      const scaleAngle = math.pi / 180.0 * 2.0;
-      canvas.rotate(scaleAngle);
+      // Rotate when draw next scale.
+      if (i > 0) {
+        const scaleAngle = math.pi / 180.0 * 2.0;
+        debugPrint('ZoomDial scaleAngle $scaleAngle');
+        canvas.rotate(scaleAngle);
+      }
       final topCenter = Offset(0.0, y1);
       final bottomCenter = Offset(0.0, y2);
-      // debugPrint('ZSP $topCenter, $bottomCenter');
+      final large = i % 10 == 0;
+      paint.color = large ? Colors.white : Colors.white.withOpacity(0.1);
       canvas.drawLine(topCenter, bottomCenter, paint);
       // Draw large number.
       if (!large) {
