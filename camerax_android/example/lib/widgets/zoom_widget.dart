@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:camerax_android_example/util.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'animated_tap_widget.dart';
@@ -175,22 +175,23 @@ class _ZoomWidgetState extends State<ZoomWidget> {
       },
       child: AnimatedScale(
         duration: duration,
-        scale: selected ? 1.0 : 0.9,
+        scale: selected ? 1.0 : 0.8,
         child: Container(
           margin: const EdgeInsets.all(8.0),
-          width: 32.0,
-          height: 32.0,
+          width: 40.0,
+          height: 40.0,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.black.withOpacity(0.5),
+            color: CupertinoColors.systemBackground
+                .resolveFrom(context)
+                .withOpacity(0.5),
           ),
           child: Text(
             text,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: selected
-                      ? Theme.of(context).colorScheme.primary
-                      : Colors.white,
+            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                  color:
+                      selected ? CupertinoTheme.of(context).primaryColor : null,
                 ),
           ),
         ),

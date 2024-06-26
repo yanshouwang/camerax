@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:camerax_android_example/util.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class ZoomDial extends StatelessWidget {
   final Size size;
@@ -28,8 +28,12 @@ class ZoomDial extends StatelessWidget {
         minimum: minimum.floor(),
         maximum: maximum.ceil(),
         value: value,
-        color: Theme.of(context).colorScheme.primary,
-        textStyle: Theme.of(context).textTheme.titleSmall,
+        backgroundColor: CupertinoColors.systemBackground
+            .resolveFrom(context)
+            .withOpacity(0.5),
+        scalesColor: CupertinoColors.label.resolveFrom(context),
+        indicatorColor: CupertinoTheme.of(context).primaryColor,
+        textStyle: CupertinoTheme.of(context).textTheme.textStyle,
       ),
     );
   }
@@ -39,14 +43,18 @@ class _ZoomDialPainter extends CustomPainter {
   final int minimum;
   final int maximum;
   final double value;
-  final Color color;
-  final TextStyle? textStyle;
+  final Color backgroundColor;
+  final Color scalesColor;
+  final Color indicatorColor;
+  final TextStyle textStyle;
 
   _ZoomDialPainter({
     required this.minimum,
     required this.maximum,
     required this.value,
-    required this.color,
+    required this.backgroundColor,
+    required this.scalesColor,
+    required this.indicatorColor,
     required this.textStyle,
   });
 
@@ -66,7 +74,7 @@ class _ZoomDialPainter extends CustomPainter {
     // Draw background.
     final paint = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.black.withOpacity(0.5);
+      ..color = backgroundColor;
     canvas.drawCircle(
       Offset.zero,
       r0,
@@ -108,8 +116,7 @@ class _ZoomDialPainter extends CustomPainter {
     // Draw scales.
     paint
       ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..color = Colors.white;
+      ..strokeWidth = strokeWidth;
     final scaleTop = Offset(0.0, -r1);
     final scaleBottom = Offset(0.0, clipBottomY - 1.0);
     const scaleDistance = 16.0; // Distance between scale bottom and numbers.
@@ -120,7 +127,7 @@ class _ZoomDialPainter extends CustomPainter {
         canvas.rotate(scaleAngle);
       }
       final isMajor = i % 10 == 0;
-      paint.color = isMajor ? Colors.white : Colors.white.withOpacity(0.1);
+      paint.color = isMajor ? scalesColor : scalesColor.withOpacity(0.1);
       canvas.drawLine(scaleTop, scaleBottom, paint);
       // Draw major numbers.
       if (!isMajor) {
@@ -131,8 +138,8 @@ class _ZoomDialPainter extends CustomPainter {
       final numberFactor = numberClamp * 10.0;
       final text = TextSpan(
         text: '$number',
-        style: textStyle?.copyWith(
-          color: Colors.white.withOpacity(numberFactor),
+        style: textStyle.copyWith(
+          color: scalesColor.withOpacity(numberFactor),
         ),
       );
       final numberPainter = TextPainter(
@@ -168,14 +175,14 @@ class _ZoomDialPainter extends CustomPainter {
       ..close();
     paint
       ..style = PaintingStyle.fill
-      ..color = color;
+      ..color = indicatorColor;
     canvas.drawPath(indicatorPath, paint);
     // Draw value.
     final valuePainter = TextPainter(
       text: TextSpan(
         text: '${value.trancateStringAsFixed(1).replaceAll('.0', '')}x',
-        style: textStyle?.copyWith(
-          color: color,
+        style: textStyle.copyWith(
+          color: indicatorColor,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -193,7 +200,9 @@ class _ZoomDialPainter extends CustomPainter {
         oldDelegate.minimum != minimum ||
         oldDelegate.maximum != maximum ||
         oldDelegate.value != value ||
-        oldDelegate.color != color ||
+        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.scalesColor != scalesColor ||
+        oldDelegate.indicatorColor != indicatorColor ||
         oldDelegate.textStyle != textStyle;
   }
 }

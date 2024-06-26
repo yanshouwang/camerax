@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class AnimatedTapWidget extends StatefulWidget {
   final Duration duration;

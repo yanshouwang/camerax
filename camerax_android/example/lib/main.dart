@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:clover/clover.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
@@ -28,10 +28,19 @@ void onLogRecorded(LogRecord record) {
 }
 
 void onStartUp() {
-  final app = MaterialApp(
+  final app = CupertinoApp(
+    theme: const CupertinoThemeData(
+      brightness: Brightness.dark,
+      primaryColor: CupertinoColors.systemYellow,
+      textTheme: CupertinoTextThemeData(
+        textStyle: TextStyle(
+          fontSize: 12.0,
+        ),
+      ),
+    ),
     home: ViewModelBinding(
-      viewBuilder: (context) => const HomeView(),
-      viewModelBuilder: (context) => HomeViewModel(),
+      viewBuilder: (context) => const CameraView(),
+      viewModelBuilder: (context) => CameraViewModel(),
     ),
   );
   runApp(app);
@@ -39,7 +48,7 @@ void onStartUp() {
     DeviceOrientation.portraitUp,
   ]);
   const style = SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
+    statusBarColor: Color(0x00000000),
   );
   SystemChrome.setSystemUIOverlayStyle(style);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);

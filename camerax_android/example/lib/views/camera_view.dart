@@ -1,27 +1,19 @@
-import 'dart:ui';
-
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class CameraView extends StatelessWidget {
+  const CameraView({super.key});
 
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    final viewModel = ViewModel.of<HomeViewModel>(context);
+    final viewModel = ViewModel.of<CameraViewModel>(context);
     final zoomState = viewModel.zoomState;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
+    return CupertinoPageScaffold(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -30,7 +22,7 @@ class _HomeViewState extends State<HomeView> {
               alignment: Alignment.bottomCenter,
               children: [
                 PreviewView(
-                  controller: viewModel.cameraController,
+                  controller: viewModel.controller,
                   scaleType: ScaleType.fillCenter,
                 ),
                 if (zoomState != null)
@@ -52,24 +44,17 @@ class _HomeViewState extends State<HomeView> {
               AnimatedTapWidget(
                 duration: const Duration(milliseconds: 100),
                 onTap: () {},
-                child: Material(
-                  type: MaterialType.button,
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.antiAlias,
-                  color: Theme.of(context).colorScheme.primary,
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 24.0,
-                      sigmaY: 24.0,
-                    ),
-                    child: SizedBox(
-                      width: 48.0,
-                      height: 48.0,
-                      child: Icon(
-                        Symbols.image,
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ),
+                child: Container(
+                  width: 48.0,
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: CupertinoColors.quaternarySystemFill
+                        .resolveFrom(context),
+                  ),
+                  child: Icon(
+                    Symbols.image,
+                    color: CupertinoColors.label.resolveFrom(context),
                   ),
                 ),
               ),
@@ -79,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 2.0,
-                    color: Colors.white,
+                    color: CupertinoColors.label.resolveFrom(context),
                   ),
                   shape: BoxShape.circle,
                 ),
@@ -89,7 +74,7 @@ class _HomeViewState extends State<HomeView> {
                     margin: const EdgeInsets.all(2.0),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: CupertinoColors.label.resolveFrom(context),
                     ),
                   ),
                 ),
@@ -99,26 +84,28 @@ class _HomeViewState extends State<HomeView> {
                 onTap: () {
                   viewModel.toggleLensFacing();
                 },
-                child: Material(
-                  type: MaterialType.button,
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.antiAlias,
-                  color: Theme.of(context).colorScheme.primary,
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 24.0,
-                      sigmaY: 24.0,
+                child: Container(
+                  width: 48.0,
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: CupertinoColors.quaternarySystemFill
+                        .resolveFrom(context),
+                  ),
+                  child: FlipWidget(
+                    duration: const Duration(milliseconds: 100),
+                    front: Icon(
+                      Symbols.camera_front,
+                      color: CupertinoColors.label.resolveFrom(context),
                     ),
-                    child: SizedBox(
-                      width: 48.0,
-                      height: 48.0,
+                    back: Transform.flip(
+                      flipX: true,
                       child: Icon(
-                        viewModel.lensFacing == LensFacing.back
-                            ? Symbols.camera_rear
-                            : Symbols.camera_front,
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        Symbols.camera_rear,
+                        color: CupertinoColors.label.resolveFrom(context),
                       ),
                     ),
+                    flip: viewModel.lensFacing == LensFacing.back,
                   ),
                 ),
               ),

@@ -8,7 +8,7 @@ abstract interface class CameraController {
   Future<bool> requestPermissions({
     bool enableAudio = false,
   });
-  Future<void> bind();
+  Future<void> bindToLifecycle();
   Future<void> unbind();
   Future<bool> hasCamera(CameraSelector cameraSelector);
   Future<void> setCameraSelector(CameraSelector cameraSelector);

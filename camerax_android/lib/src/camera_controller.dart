@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:jni/jni.dart';
@@ -35,7 +34,7 @@ class JNICameraController implements CameraController {
   }
 
   @override
-  Future<void> bind() async {
+  Future<void> bindToLifecycle() async {
     final lifecycleOwner = JNI.activity.castTo(jni.LifecycleOwner.type);
     await jniValue.bindToLifecycleOnMainThread(lifecycleOwner);
   }
