@@ -35,10 +35,14 @@ void onStartUp() {
     ),
   );
   runApp(app);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  const style = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  );
+  SystemChrome.setSystemUIOverlayStyle(style);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 }
 
 void onUncaughtError(Object error, StackTrace stackTrace) {

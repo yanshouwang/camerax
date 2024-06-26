@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:camerax_android_example/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -156,7 +157,7 @@ class _ZoomWidgetState extends State<ZoomWidget> {
     const duration = Duration(milliseconds: 100);
     final selected = widget.value >= minimum && widget.value < maximum;
     final text = selected
-        ? '${widget.value.toStringAsFixed(1).replaceAll('.0', '')}x'
+        ? '${widget.value.trancateStringAsFixed(1).replaceAll('.0', '')}x'
         : minimum.toInt().toString();
     return AnimatedTapWidget(
       duration: duration,

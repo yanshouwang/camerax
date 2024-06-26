@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:camerax_android_example/util.dart';
 import 'package:flutter/material.dart';
 
 class ZoomDial extends StatelessWidget {
@@ -172,7 +173,7 @@ class _ZoomDialPainter extends CustomPainter {
     // Draw value.
     final valuePainter = TextPainter(
       text: TextSpan(
-        text: '${value.toStringAsFixed(1).replaceAll('.0', '')}x',
+        text: '${value.trancateStringAsFixed(1).replaceAll('.0', '')}x',
         style: textStyle?.copyWith(
           color: color,
         ),
