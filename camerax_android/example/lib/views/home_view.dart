@@ -39,17 +39,9 @@ class _HomeViewState extends State<HomeView> {
                     maximum: zoomState.maxZoomRatio,
                     value: zoomState.zoomRatio,
                     onChanged: (value) {
-                      viewModel.setZoomRatio(value);
+                      viewModel.setZoomRatio(value).ignore();
                     },
                   ),
-                ZoomWidget(
-                  minimum: 1.0,
-                  maximum: 10.0,
-                  value: 1.0,
-                  onChanged: (value) {
-                    viewModel.setZoomRatio(value);
-                  },
-                ),
               ],
             ),
           ),

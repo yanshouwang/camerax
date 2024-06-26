@@ -27,8 +27,9 @@ class ZoomWidget extends StatefulWidget {
 
 class _ZoomWidgetState extends State<ZoomWidget> {
   late final ValueNotifier<bool> _dialVisible;
-  late final ValueNotifier<double> _dialValue;
   late Offset _beginPosition;
+
+  late double _value;
 
   Timer? _hideZoomSliderTimer;
 
@@ -36,13 +37,18 @@ class _ZoomWidgetState extends State<ZoomWidget> {
   void initState() {
     super.initState();
     _dialVisible = ValueNotifier(false);
-    _dialValue = ValueNotifier(1.0);
+    _value = widget.value;
+  }
+
+  @override
+  void didUpdateWidget(covariant ZoomWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _value = widget.value;
   }
 
   @override
   void dispose() {
     _dialVisible.dispose();
-    _dialValue.dispose();
     super.dispose();
   }
 
@@ -55,11 +61,11 @@ class _ZoomWidgetState extends State<ZoomWidget> {
       builder: (context, constraints) {
         final width = constraints.maxWidth;
         final height = width * 0.3;
-        final a = math.atan2(width / 2.0, height);
-        final b = math.atan2(height, width / 2.0);
-        final c = a - b;
-        final radius = width / 2.0 / math.cos(c);
-        final center = Offset(width / 2.0, radius);
+        final angle0 = math.atan2(width / 2.0, height);
+        final angle1 = math.atan2(height, width / 2.0);
+        final angle2 = angle0 - angle1;
+        final r0 = width / 2.0 / math.cos(angle2);
+        final center = Offset(width / 2.0, r0);
         return ValueListenableBuilder(
           valueListenable: _dialVisible,
           builder: (context, dialVisible, child) {
@@ -73,9 +79,10 @@ class _ZoomWidgetState extends State<ZoomWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildZoomButton(context, 1.0),
-                      buildZoomButton(context, 2.0),
-                      buildZoomButton(context, 3.0),
+                      buildZoomButton(context, 1.0, 2.0),
+                      if (maximum >= 2.0) buildZoomButton(context, 2.0, 3.0),
+                      if (maximum >= 3.0)
+                        buildZoomButton(context, 3.0, maximum + 1),
                     ],
                   ),
                 ),
@@ -101,20 +108,21 @@ class _ZoomWidgetState extends State<ZoomWidget> {
                       final endAngle = math.atan2(endPoint.dy, endPoint.dx);
                       final sweepAngle = endAngle - beginAngle;
                       // debugPrint('ZoomWidget sweepAngle $sweepAngle');
-                      final oldValue = (_dialValue.value * 10).toInt() / 10.0;
+                      final oldValue = _value;
                       final value =
-                          _dialValue.value - sweepAngle * 90.0 / math.pi * 0.1;
+                          oldValue - sweepAngle * 90.0 / math.pi * 0.1;
                       if (value < minimum) {
-                        _dialValue.value = minimum;
+                        _value = minimum;
                       } else if (value > maximum) {
-                        _dialValue.value = maximum;
+                        _value = maximum;
                       } else {
-                        _dialValue.value = value;
+                        _value = value;
                       }
-                      final newValue = (_dialValue.value * 10).toInt() / 10.0;
+                      final newValue = _value;
                       if (newValue == oldValue) {
                         return;
                       }
+                      debugPrint('ZoomWidget value changed $newValue');
                       widget.onChanged?.call(newValue);
                     },
                     onPointerUp: (event) {
@@ -127,16 +135,11 @@ class _ZoomWidgetState extends State<ZoomWidget> {
                         dialVisible ? 0.0 : 1.0,
                       ),
                       curve: Curves.easeInOut,
-                      child: ValueListenableBuilder(
-                        valueListenable: _dialValue,
-                        builder: (context, dialValue, child) {
-                          return ZoomDial(
-                            size: Size(width, height),
-                            minimum: minimum,
-                            maximum: maximum,
-                            value: dialValue,
-                          );
-                        },
+                      child: ZoomDial(
+                        size: Size(width, height),
+                        minimum: minimum,
+                        maximum: maximum,
+                        value: widget.value,
                       ),
                     ),
                   ),
@@ -149,12 +152,16 @@ class _ZoomWidgetState extends State<ZoomWidget> {
     );
   }
 
-  Widget buildZoomButton(BuildContext context, double value) {
+  Widget buildZoomButton(BuildContext context, double minimum, double maximum) {
     const duration = Duration(milliseconds: 100);
+    final selected = widget.value >= minimum && widget.value < maximum;
+    final text = selected
+        ? '${widget.value.toStringAsFixed(1).replaceAll('.0', '')}x'
+        : minimum.toInt().toString();
     return AnimatedTapWidget(
       duration: duration,
       onTap: () {
-        widget.onChanged?.call(value);
+        widget.onChanged?.call(minimum);
         HapticFeedback.selectionClick();
       },
       onLongPress: () {
@@ -167,7 +174,7 @@ class _ZoomWidgetState extends State<ZoomWidget> {
       },
       child: AnimatedScale(
         duration: duration,
-        scale: value == widget.value ? 1.0 : 0.9,
+        scale: selected ? 1.0 : 0.9,
         child: Container(
           margin: const EdgeInsets.all(8.0),
           width: 32.0,
@@ -178,10 +185,10 @@ class _ZoomWidgetState extends State<ZoomWidget> {
             color: Colors.black.withOpacity(0.5),
           ),
           child: Text(
-            value == widget.value ? '${value.toInt()}x' : '${value.toInt()}',
+            text,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: value == widget.value
-                      ? Theme.of(context).colorScheme.primaryFixed
+                  color: selected
+                      ? Theme.of(context).colorScheme.primary
                       : Colors.white,
                 ),
           ),

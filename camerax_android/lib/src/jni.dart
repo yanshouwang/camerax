@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:jni/jni.dart';
 
@@ -57,16 +59,106 @@ extension ScaleTypeX on ScaleType {
 }
 
 extension JNIZoomStateX on jni.ZoomState {
-  ZoomState get dartValue {
-    final minZoomRatio = getMinZoomRatio();
-    final maxZoomRatio = getMaxZoomRatio();
-    final linearZoom = getLinearZoom();
-    final zoomRatio = getZoomRatio();
-    return ZoomState(
-      minZoomRatio: minZoomRatio,
-      maxZoomRatio: maxZoomRatio,
-      linearZoom: linearZoom,
-      zoomRatio: zoomRatio,
-    );
+  ZoomState? get dartValue {
+    if (isNull) {
+      return null;
+    } else {
+      final minZoomRatio = getMinZoomRatio();
+      final maxZoomRatio = getMaxZoomRatio();
+      final linearZoom = getLinearZoom();
+      final zoomRatio = getZoomRatio();
+      return ZoomState(
+        minZoomRatio: minZoomRatio,
+        maxZoomRatio: maxZoomRatio,
+        linearZoom: linearZoom,
+        zoomRatio: zoomRatio,
+      );
+    }
+  }
+}
+
+extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
+  Future<void> bindToLifecycleOnMainThread(jni.LifecycleOwner lifecycleOwner) {
+    return runOnPlatformThread(() => bindToLifecycle(lifecycleOwner));
+  }
+
+  Future<void> unbindOnMainThread() {
+    return runOnPlatformThread(() => unbind());
+  }
+
+  Future<bool> hasCameraOnMainThread(jni.CameraSelector cameraSelector) {
+    return runOnPlatformThread(() => hasCamera(cameraSelector));
+  }
+
+  Future<void> setCameraSelectorOnMainThread(
+      jni.CameraSelector cameraSelector) {
+    return runOnPlatformThread(() => setCameraSelector(cameraSelector));
+  }
+
+  Future<bool> isTapToFocusEnabledOnMainThread() {
+    return runOnPlatformThread(() => isTapToFocusEnabled());
+  }
+
+  Future<void> setTapToFocusEnabledOnMainThread(bool enabled) {
+    return runOnPlatformThread(() => setTapToFocusEnabled(enabled));
+  }
+
+  Future<bool> isPinchToZoomEnabledOnMainThread() {
+    return runOnPlatformThread(() => isPinchToZoomEnabled());
+  }
+
+  Future<void> setPinchToZoomEnabledOnMainThread(bool enabled) {
+    return runOnPlatformThread(() => setPinchToZoomEnabled(enabled));
+  }
+
+  Future<jni.LiveData<jni.ZoomState>> getZoomStateOnMainThread() {
+    return runOnPlatformThread(() => getZoomState());
+  }
+
+  Future<jni.ListenableFuture<JObject>> setLinearZoomOnMainThread(
+    double linearZoom,
+  ) {
+    return runOnPlatformThread(() => setLinearZoom(linearZoom));
+  }
+
+  Future<jni.ListenableFuture<JObject>> setZoomRatioOnMainThread(
+    double zoomRatio,
+  ) {
+    return runOnPlatformThread(() => setZoomRatio(zoomRatio));
+  }
+}
+
+extension JNILiveDataX<T extends JObject> on jni.LiveData<T> {
+  Future<void> observeOnMainThread(
+    jni.LifecycleOwner lifecycleOwner,
+    JObjType<T> observerT,
+    JReference observerReference,
+  ) {
+    return runOnPlatformThread(() {
+      final observer = jni.Observer.fromReference(observerT, observerReference);
+      observe(lifecycleOwner, observer);
+    });
+  }
+
+  Future<void> removeObserverOnMainThread(
+    JObjType<T> observerT,
+    JReference observerReference,
+  ) {
+    return runOnPlatformThread(() {
+      final observer = jni.Observer.fromReference(observerT, observerReference);
+      removeObserver(observer);
+    });
+  }
+}
+
+extension JNIPreviewViewX on jni.PreviewView {
+  Future<void> setControllerOnMainThread(
+    jni.CameraController cameraController,
+  ) {
+    return runOnPlatformThread(() => setController(cameraController));
+  }
+
+  Future<void> setScaleTypeOnMainThread(jni.PreviewView_ScaleType scaleType) {
+    return runOnPlatformThread(() => setScaleType(scaleType));
   }
 }

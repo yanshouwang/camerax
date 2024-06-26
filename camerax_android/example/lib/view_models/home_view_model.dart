@@ -22,14 +22,15 @@ class HomeViewModel extends ViewModel with TypeLogger {
   ZoomState? get zoomState => _zoomState;
 
   void _initialize() async {
-    // _zoomStateSubscription =
-    //     cameraController.zoomStateChanged.listen((zoomState) {
-    //   _zoomState = zoomState;
-    //   notifyListeners();
-    // });
+    _zoomStateSubscription =
+        cameraController.zoomStateChanged.listen((zoomState) {
+      logger.info(
+          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
+      _zoomState = zoomState;
+      notifyListeners();
+    });
     await cameraController.requestPermissions();
     await cameraController.setCameraSelector(CameraSelector.back);
-    await cameraController.bind();
     _zoomState = await cameraController.getZoomState();
     final isPinchToZoomEnabled = await cameraController.isPinchToZoomEnabled();
     final isTapToFocusEnabled = await cameraController.isTapToFocusEnabled();
@@ -38,6 +39,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
+    await cameraController.bind();
   }
 
   Future<void> toggleLensFacing() async {
@@ -54,11 +56,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> setZoomRatio(double zoomRatio) async {
-    try {
-      await cameraController.setZoomRatio(zoomRatio);
-    } catch (e) {
-      logger.warning(e);
-    }
+    await cameraController.setZoomRatio(zoomRatio);
   }
 
   @override

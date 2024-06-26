@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:ui';
+import 'dart:isolate';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:jni/jni.dart';
@@ -8,17 +8,23 @@ import 'jni.dart';
 import 'jni.g.dart' as jni;
 import 'permissions_manager.dart';
 
-class AndroidCameraController implements CameraController {
+class JNICameraController implements CameraController {
   static final _permissionsManager = PermissionsManager();
 
   final jni.LifecycleCameraController jniValue;
+  late final StreamController<ZoomState?> _zoomStateChagnedController;
+  late jni.Observer<jni.ZoomState> _zoomStateObserver;
 
   @override
-  // TODO: implement zoomStateChanged
-  Stream<ZoomState?> get zoomStateChanged => throw UnimplementedError();
+  Stream<ZoomState?> get zoomStateChanged => _zoomStateChagnedController.stream;
 
-  AndroidCameraController()
-      : jniValue = jni.LifecycleCameraController(JNI.activity);
+  JNICameraController()
+      : jniValue = jni.LifecycleCameraController(JNI.activity) {
+    _zoomStateChagnedController = StreamController.broadcast(
+      onListen: _observeZoomState,
+      onCancel: _removeZoomStateObserver,
+    );
+  }
 
   @override
   Future<bool> requestPermissions({
@@ -30,82 +36,62 @@ class AndroidCameraController implements CameraController {
 
   @override
   Future<void> bind() async {
-    final liefcycleOwner = JNI.activity.castTo(jni.LifecycleOwner.type);
-    await runOnPlatformThread(() {
-      jniValue.bindToLifecycle(liefcycleOwner);
-    });
+    final lifecycleOwner = JNI.activity.castTo(jni.LifecycleOwner.type);
+    await jniValue.bindToLifecycleOnMainThread(lifecycleOwner);
   }
 
   @override
   Future<void> unbind() async {
-    await runOnPlatformThread(() {
-      jniValue.unbind();
-    });
+    await jniValue.unbindOnMainThread();
   }
 
   @override
   Future<bool> hasCamera(CameraSelector cameraSelector) async {
-    final hasCamera = await runOnPlatformThread(() {
-      return jniValue.hasCamera(cameraSelector.jniValue);
-    });
+    final hasCamera =
+        await jniValue.hasCameraOnMainThread(cameraSelector.jniValue);
     return hasCamera;
   }
 
   @override
   Future<void> setCameraSelector(CameraSelector cameraSelector) async {
-    await runOnPlatformThread(() {
-      jniValue.setCameraSelector(cameraSelector.jniValue);
-    });
+    await jniValue.setCameraSelectorOnMainThread(cameraSelector.jniValue);
   }
 
   @override
   Future<bool> isTapToFocusEnabled() async {
-    final isTapToFocusEnabled = await runOnPlatformThread(() {
-      return jniValue.isTapToFocusEnabled();
-    });
+    final isTapToFocusEnabled =
+        await jniValue.isTapToFocusEnabledOnMainThread();
     return isTapToFocusEnabled;
   }
 
   @override
   Future<void> setTapToFocusEnabled(bool enabled) async {
-    await runOnPlatformThread(() {
-      jniValue.setTapToFocusEnabled(enabled);
-    });
+    await jniValue.setTapToFocusEnabledOnMainThread(enabled);
   }
 
   @override
   Future<bool> isPinchToZoomEnabled() async {
-    final isPinchToZoomEnabled = await runOnPlatformThread(() {
-      return jniValue.isPinchToZoomEnabled();
-    });
+    final isPinchToZoomEnabled =
+        await jniValue.isPinchToZoomEnabledOnMainThread();
     return isPinchToZoomEnabled;
   }
 
   @override
   Future<void> setPinchToZoomEnabled(bool enabled) async {
-    await runOnPlatformThread(() {
-      jniValue.setPinchToZoomEnabled(enabled);
-    });
+    await jniValue.setPinchToZoomEnabledOnMainThread(enabled);
   }
 
   @override
   Future<ZoomState?> getZoomState() async {
-    final zoomStateData = await runOnPlatformThread(() {
-      return jniValue.getZoomState();
-    });
+    final zoomStateData = await jniValue.getZoomStateOnMainThread();
     final zoomState = zoomStateData.getValue();
-    if (zoomState.isNull) {
-      return null;
-    } else {
-      return zoomState.dartValue;
-    }
+    return zoomState.dartValue;
   }
 
   @override
   Future<void> setLinearZoom(double linearZoom) async {
-    final lisentalbeFuture = await runOnPlatformThread(() {
-      return jniValue.setLinearZoom(linearZoom);
-    });
+    final lisentalbeFuture =
+        await jniValue.setLinearZoomOnMainThread(linearZoom);
     final completer = Completer<void>();
     final executor = jni.ContextCompat.getMainExecutor(JNI.activity);
     lisentalbeFuture.addListener(
@@ -128,9 +114,7 @@ class AndroidCameraController implements CameraController {
 
   @override
   Future<void> setZoomRatio(double zoomRatio) async {
-    final lisentalbeFuture = await runOnPlatformThread(() {
-      return jniValue.setZoomRatio(zoomRatio);
-    });
+    final lisentalbeFuture = await jniValue.setZoomRatioOnMainThread(zoomRatio);
     final completer = Completer<void>();
     final executor = jni.ContextCompat.getMainExecutor(JNI.activity);
     lisentalbeFuture.addListener(
@@ -149,5 +133,31 @@ class AndroidCameraController implements CameraController {
       executor,
     );
     await completer.future;
+  }
+
+  void _observeZoomState() async {
+    final zoomStateData = await jniValue.getZoomStateOnMainThread();
+    final lifecycleOwner = JNI.activity.castTo(jni.LifecycleOwner.type);
+    final observer = jni.Observer.implement(jni.$ObserverImpl(
+      T: jni.ZoomState.type,
+      onChanged: (zoomState) {
+        _zoomStateChagnedController.add(zoomState.dartValue);
+      },
+    ));
+    zoomStateData.observeOnMainThread(
+      lifecycleOwner,
+      observer.T,
+      observer.reference,
+    );
+    _zoomStateObserver = observer;
+  }
+
+  void _removeZoomStateObserver() async {
+    final zoomStateData = await jniValue.getZoomStateOnMainThread();
+    final observer = _zoomStateObserver;
+    zoomStateData.removeObserverOnMainThread(
+      observer.T,
+      observer.reference,
+    );
   }
 }

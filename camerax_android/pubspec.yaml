@@ -17,14 +17,14 @@ dependencies:
     sdk: flutter
   camerax_platform_interface:
     path: ../camerax_platform_interface
-  jni: ^0.9.2
+  jni: ^0.9.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
   pigeon: ^20.0.1
-  jnigen: ^0.9.2
+  jnigen: ^0.9.3
 
 flutter:
   plugin:

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +14,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
 
   @override
   CameraController createCameraController() {
-    return AndroidCameraController();
+    return JNICameraController();
   }
 
   @override
@@ -25,7 +23,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     required CameraController controller,
     required ScaleType scaleType,
   }) {
-    if (controller is! AndroidCameraController) {
+    if (controller is! JNICameraController) {
       throw TypeError();
     }
     return PlatformViewLink(
@@ -47,29 +45,15 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
           ..addOnPlatformViewCreatedListener(
             (id) {
               params.onPlatformViewCreated(id);
-              _onPlatformViewCreated(
-                id,
-                controller.jniValue,
-                scaleType.jniValue,
-              );
+              final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
+              view.setControllerOnMainThread(controller.jniValue);
+              view.setScaleTypeOnMainThread(scaleType.jniValue);
             },
           )
           ..create();
       },
     );
   }
-}
-
-void _onPlatformViewCreated(
-  int id,
-  jni.CameraController controller,
-  jni.PreviewView_ScaleType scaleType,
-) async {
-  await runOnPlatformThread(() {
-    final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
-    view.setController(controller);
-    view.setScaleType(scaleType);
-  });
 }
 
 AndroidViewController _initAndroidView(

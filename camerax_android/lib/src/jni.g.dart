@@ -322,7 +322,7 @@ class ContextCompat extends jni.JObject {
                   jni.JniResult Function(
                       ffi.Pointer<ffi.Void>,
                       jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int32)>)>>(
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
           "globalEnv_CallStaticObjectMethod")
       .asFunction<
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
@@ -349,7 +349,7 @@ class ContextCompat extends jni.JObject {
                   jni.JniResult Function(
                       ffi.Pointer<ffi.Void>,
                       jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int32)>)>>(
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
           "globalEnv_CallStaticObjectMethod")
       .asFunction<
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
@@ -379,7 +379,7 @@ class ContextCompat extends jni.JObject {
                   jni.JniResult Function(
                       ffi.Pointer<ffi.Void>,
                       jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int32)>)>>(
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
           "globalEnv_CallStaticIntMethod")
       .asFunction<
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
@@ -735,7 +735,7 @@ class CameraSelector_Builder extends jni.JObject {
   static final _requireLensFacing = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallObjectMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallObjectMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -906,7 +906,7 @@ class CameraSelector_LensFacing extends jni.JObject {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -1333,7 +1333,7 @@ class ZoomState extends jni.JObject {
         return jni.JFloat($r).reference.toPointer();
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -1487,7 +1487,7 @@ class CameraController_OutputSize_OutputAspectRatio extends jni.JObject {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -1584,7 +1584,7 @@ class CameraController_OutputSize extends jni.JObject {
   static final _new0 = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_NewObject")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_NewObject")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -1775,7 +1775,7 @@ class CameraController_UseCases extends jni.JObject {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -1919,7 +1919,7 @@ class CameraController extends jni.JObject {
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>,
                   jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallVoidMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
       .asFunction<
           jni.JThrowablePtr Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -2043,7 +2043,7 @@ class CameraController extends jni.JObject {
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>,
                   jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallVoidMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
       .asFunction<
           jni.JThrowablePtr Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -2138,7 +2138,7 @@ class CameraController extends jni.JObject {
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>,
                   jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallVoidMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
       .asFunction<
           jni.JThrowablePtr Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -2398,7 +2398,7 @@ class CameraController extends jni.JObject {
                   jni.JThrowablePtr Function(
                       ffi.Pointer<ffi.Void>,
                       jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallVoidMethod")
+                      ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
           .asFunction<
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -2422,7 +2422,7 @@ class CameraController extends jni.JObject {
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>,
                   jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallVoidMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
       .asFunction<
           jni.JThrowablePtr Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -2908,7 +2908,7 @@ class CameraController extends jni.JObject {
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>,
                   jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Uint8,)>)>>("globalEnv_CallVoidMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
       .asFunction<
           jni.JThrowablePtr Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -2956,7 +2956,7 @@ class CameraController extends jni.JObject {
               jni.JThrowablePtr Function(
                   ffi.Pointer<ffi.Void>,
                   jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Uint8,)>)>>("globalEnv_CallVoidMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallVoidMethod")
       .asFunction<
           jni.JThrowablePtr Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -3078,7 +3078,7 @@ class CameraController extends jni.JObject {
   static final _setZoomRatio = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Float,)>)>>("globalEnv_CallObjectMethod")
+                  ffi.VarArgs<(ffi.Double,)>)>>("globalEnv_CallObjectMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, double)>();
@@ -3101,7 +3101,7 @@ class CameraController extends jni.JObject {
   static final _setLinearZoom = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Float,)>)>>("globalEnv_CallObjectMethod")
+                  ffi.VarArgs<(ffi.Double,)>)>>("globalEnv_CallObjectMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, double)>();
@@ -3149,7 +3149,7 @@ class CameraController extends jni.JObject {
   static final _enableTorch = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Uint8,)>)>>("globalEnv_CallObjectMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallObjectMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -3571,7 +3571,7 @@ class PreviewView_OnFrameUpdateListener extends jni.JObject {
         return jni.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -3999,7 +3999,7 @@ class PreviewView extends jni.JObject {
                       (
                         ffi.Pointer<ffi.Void>,
                         ffi.Pointer<ffi.Void>,
-                        ffi.Int32
+                        $Int32
                       )>)>>("globalEnv_NewObject")
       .asFunction<
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
@@ -4034,8 +4034,8 @@ class PreviewView extends jni.JObject {
                       (
                         ffi.Pointer<ffi.Void>,
                         ffi.Pointer<ffi.Void>,
-                        ffi.Int32,
-                        ffi.Int32
+                        $Int32,
+                        $Int32
                       )>)>>("globalEnv_NewObject")
       .asFunction<
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
@@ -4389,7 +4389,7 @@ class PreviewView extends jni.JObject {
   static final _getViewPort1 = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallObjectMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallObjectMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -4641,7 +4641,7 @@ class LifecycleOwner extends jni.JObject {
             .toPointer();
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -5190,7 +5190,7 @@ class Observer<$T extends jni.JObject> extends jni.JObject {
         return jni.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -5376,7 +5376,7 @@ class ListenableFuture<$V extends jni.JObject> extends jni.JObject {
         return jni.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -5542,7 +5542,7 @@ class Runnable extends jni.JObject {
         return jni.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -5650,7 +5650,7 @@ class Future<$V extends jni.JObject> extends jni.JObject {
   static final _cancel = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Uint8,)>)>>("globalEnv_CallBooleanMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallBooleanMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
@@ -5826,7 +5826,7 @@ class Future<$V extends jni.JObject> extends jni.JObject {
             .toPointer();
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e.toString());
+      return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
@@ -5991,7 +5991,7 @@ class PreviewViewFactory extends jni.JObject {
                   ffi.VarArgs<
                       (
                         ffi.Pointer<ffi.Void>,
-                        ffi.Int32,
+                        $Int32,
                         ffi.Pointer<ffi.Void>
                       )>)>>("globalEnv_CallObjectMethod")
       .asFunction<
@@ -6018,7 +6018,7 @@ class PreviewViewFactory extends jni.JObject {
   static final _retrieveView = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int32,)>)>>("globalEnv_CallObjectMethod")
+                  ffi.VarArgs<($Int32,)>)>>("globalEnv_CallObjectMethod")
       .asFunction<
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
