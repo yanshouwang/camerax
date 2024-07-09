@@ -14,7 +14,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
 
   @override
   CameraController createCameraController() {
-    return JNICameraController();
+    return CameraControllerImpl();
   }
 
   @override
@@ -23,7 +23,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     required CameraController controller,
     required ScaleType scaleType,
   }) {
-    if (controller is! JNICameraController) {
+    if (controller is! CameraControllerImpl) {
       throw TypeError();
     }
     return PlatformViewLink(

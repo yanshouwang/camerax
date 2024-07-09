@@ -5,3 +5,6 @@ export 'src/lens_facing.dart';
 export 'src/zoom_state.dart';
 export 'src/preview_view.dart';
 export 'src/scale_type.dart';
+export 'src/image_analyzer.dart';
+export 'src/image_proxy.dart';
+export 'src/flash_mode.dart';

@@ -9,14 +9,12 @@ class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         val binaryMessenger = binding.binaryMessenger
         val viewRegistry = binding.platformViewRegistry
-        InstanceManagerHostAPI.setUp(binaryMessenger, InstanceManagerAPI)
         PermissionsManagerHostAPI.setUp(binaryMessenger, PermissionsManagerAPI)
         viewRegistry.registerViewFactory("hebei.dev/PreviewView", PreviewViewFactory)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         val binaryMessenger = binding.binaryMessenger
-        InstanceManagerHostAPI.setUp(binaryMessenger, null)
         PermissionsManagerHostAPI.setUp(binaryMessenger, null)
     }
 

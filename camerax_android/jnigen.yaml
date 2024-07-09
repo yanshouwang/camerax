@@ -11,10 +11,21 @@ output:
     structure: single_file
 log_level: all
 class_path:
-  - /Users/yanshouwang/.gradle/caches/transforms-3/1662533b3d1f1a8316413ccb699738f1/transformed/jetified-listenablefuture-1.0.jar
+  - classes/jetified-listenablefuture-1.0.jar
 classes:
+  - android.app.Activity
+  - android.content.Context
+  - android.content.ContentResolver
+  - android.content.ContentValues
+  - android.database.Cursor
+  - android.net.Uri
+  - android.provider.MediaStore
   - androidx.core.content.ContextCompat
   - androidx.camera.core.CameraSelector
+  - androidx.camera.core.ImageAnalysis
+  - androidx.camera.core.ImageCapture
+  - androidx.camera.core.ImageProxy
+  - androidx.camera.core.TorchState
   - androidx.camera.core.ZoomState
   - androidx.camera.view.CameraController
   - androidx.camera.view.LifecycleCameraController
@@ -24,5 +35,9 @@ classes:
   - androidx.lifecycle.Observer
   - com.google.common.util.concurrent.ListenableFuture
   - java.lang.Runnable
+  - java.util.concurrent.Executor
+  - java.util.concurrent.Executors
   - java.util.concurrent.Future
+  - dev.hebei.camerax_android.OnImageCapturedCallback
+  - dev.hebei.camerax_android.OnImageCapturedCallbackImpl
   - dev.hebei.camerax_android.PreviewViewFactory
