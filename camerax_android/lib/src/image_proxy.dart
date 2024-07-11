@@ -3,7 +3,7 @@ import 'package:jni/jni.dart';
 
 import 'jni.g.dart' as jni;
 
-class ImageProxyImpl extends ImageProxy {
+final class ImageProxyImpl extends ImageProxy {
   final jni.ImageProxy jniValue;
 
   ImageProxyImpl({
