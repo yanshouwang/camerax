@@ -16,7 +16,7 @@ class PreviewView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CameraXPlugin.instance.buildPreview(
+    return CameraXPlugin.instance.buildPreviewView(
       context,
       controller: controller,
       scaleType: scaleType,

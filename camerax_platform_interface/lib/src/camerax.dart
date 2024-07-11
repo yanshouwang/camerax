@@ -33,7 +33,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
   }
 
   CameraController createCameraController();
-  Widget buildPreview(
+
+  Widget buildPreviewView(
     BuildContext context, {
     required CameraController controller,
     required ScaleType scaleType,

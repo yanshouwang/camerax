@@ -16,7 +16,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }
 
   @override
-  Widget buildPreview(
+  Widget buildPreviewView(
     BuildContext context, {
     required CameraController controller,
     required ScaleType scaleType,
