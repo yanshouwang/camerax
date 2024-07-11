@@ -1,63 +1,59 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:clover/clover.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:camerax_ios/camerax_ios.dart';
+import 'package:logging/logging.dart';
+
+import 'view_models.dart';
+import 'views.dart';
 
 void main() {
-  runApp(const MyApp());
+  Logger.root.onRecord.listen(onLogRecorded);
+  runZonedGuarded(onStartUp, onUncaughtError);
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
+void onLogRecorded(LogRecord record) {
+  log(
+    record.message,
+    time: record.time,
+    sequenceNumber: record.sequenceNumber,
+    level: record.level.value,
+    name: record.loggerName,
+    zone: record.zone,
+    error: record.error,
+    stackTrace: record.stackTrace,
+  );
 }
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _cameraxIosPlugin = CameraxIos();
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _cameraxIosPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+void onStartUp() {
+  final app = CupertinoApp(
+    theme: const CupertinoThemeData(
+      brightness: Brightness.dark,
+      primaryColor: CupertinoColors.systemYellow,
+      textTheme: CupertinoTextThemeData(
+        textStyle: TextStyle(
+          fontSize: 12.0,
         ),
       ),
-    );
-  }
+    ),
+    home: ViewModelBinding(
+      viewBuilder: (context) => const CameraView(),
+      viewModelBuilder: (context) => CameraViewModel(),
+    ),
+  );
+  runApp(app);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  const style = SystemUiOverlayStyle(
+    statusBarColor: Color(0x00000000),
+  );
+  SystemChrome.setSystemUIOverlayStyle(style);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+}
+
+void onUncaughtError(Object error, StackTrace stackTrace) {
+  Logger.root.shout(error, stackTrace);
 }

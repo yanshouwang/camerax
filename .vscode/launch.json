@@ -1,0 +1,68 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "camerax",
+            "cwd": "camerax/example",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "camerax (profile mode)",
+            "cwd": "camerax/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "camerax (release mode)",
+            "cwd": "camerax/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "camerax_android",
+            "cwd": "camerax_android/example",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "camerax_android (profile mode)",
+            "cwd": "camerax_android/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "camerax_android (release mode)",
+            "cwd": "camerax_android/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "camerax_ios",
+            "cwd": "camerax_ios/example",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "camerax_ios (profile mode)",
+            "cwd": "camerax_ios/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "camerax_ios (release mode)",
+            "cwd": "camerax_ios/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

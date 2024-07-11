@@ -1,0 +1,42 @@
+# Run with `dart run ffigen --config ffigen.yaml`.
+name: CameraXiOSLibrary
+description: iOS Library for CameraX.
+language: objc
+output: "lib/src/ffi.g.dart"
+compiler-opts:
+  - '-F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks'
+  - '-F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/iOSSupport/System/Library/Frameworks'
+  # - '-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks'
+  # - '-mios-version-min=12.0'
+  # - '-isysroot'
+  # - '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk'
+headers:
+  entry-points:
+    - '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVFoundation.h'
+    # - '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVFoundation.h'
+    - 'example/build/ios/Debug-iphonesimulator/camerax_ios/camerax_ios.framework/Headers/camerax_ios-Swift.h'
+exclude-all-by-default: true
+objc-interfaces:
+  include:
+    - AVCaptureSession
+    - AVCaptureDevice
+    - AVCaptureInput
+    - AVCaptureDeviceInput
+    - PreviewView
+    - PreviewViewFactory
+  module:
+    PreviewView: camerax_ios
+    PreviewViewFactory: camerax_ios
+typedefs:
+  include:
+    - AVMediaType
+    - AVCaptureDeviceType
+    - AVLayerVideoGravity
+globals:
+  include:
+    - AVMediaType.*
+    - AVCaptureDeviceType.*
+    - AVLayerVideoGravity.*
+enums:
+  include:
+    - AVCaptureDevicePosition
