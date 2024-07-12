@@ -2,13 +2,16 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
+import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:jni/jni.dart';
 
 import 'jni.dart';
 import 'jni.g.dart' as jni;
 import 'permissions_manager.dart';
 
-class CameraControllerImpl implements CameraController {
+final class CameraControllerImpl
+    with TypeLogger, LoggerController
+    implements CameraController {
   static final _permissionsManager = PermissionsManager();
 
   final jni.LifecycleCameraController jniValue;

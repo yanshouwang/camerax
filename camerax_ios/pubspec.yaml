@@ -17,6 +17,8 @@ dependencies:
     sdk: flutter
   camerax_platform_interface:
     path: ../camerax_platform_interface
+  logging: ^1.2.0
+  hybrid_logging: ^1.0.0
   ffi: ^2.1.2
   objective_c: ^1.0.1
 

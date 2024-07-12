@@ -1,12 +1,14 @@
 import 'dart:typed_data';
 
+import 'package:hybrid_logging/hybrid_logging.dart';
+
 import 'camera_selector.dart';
 import 'camerax.dart';
 import 'flash_mode.dart';
 import 'image_analyzer.dart';
 import 'zoom_state.dart';
 
-abstract interface class CameraController {
+abstract interface class CameraController implements LogController {
   Stream<ZoomState?> get zoomStateChanged;
   Stream<bool?> get torchStateChanged;
 

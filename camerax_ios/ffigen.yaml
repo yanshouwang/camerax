@@ -2,7 +2,7 @@
 name: CameraXiOSLibrary
 description: iOS Library for CameraX.
 language: objc
-output: "lib/src/ffi.g.dart"
+output: "lib/src/ffi1.g.dart"
 compiler-opts:
   - '-F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks'
   - '-F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/iOSSupport/System/Library/Frameworks'

@@ -18,15 +18,13 @@ import Flutter
         layer as! AVCaptureVideoPreviewLayer
     }
     
-    // Connect the layer to a capture session.
-    @objc public var session: AVCaptureSession? {
-        get { previewLayer.session }
-        set { previewLayer.session = newValue }
+    @objc public var controller: CameraController {
+        didSet { previewLayer.session = controller.session }
     }
     
-    @objc public var videoGravity: AVLayerVideoGravity {
-        get { previewLayer.videoGravity }
-        set { previewLayer.videoGravity = newValue }
+    @objc public var scalType: ScaleType {
+        get { previewLayer.videoGravity.scaleType }
+        set { previewLayer.videoGravity = newValue.avGravity }
     }
     
     public override func removeFromSuperview() {

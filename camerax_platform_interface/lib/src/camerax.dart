@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -38,5 +39,9 @@ abstract base class CameraXPlugin extends PlatformInterface {
     BuildContext context, {
     required CameraController controller,
     required ScaleType scaleType,
+    required PlatformViewCreatedCallback onPreviewViewCreated,
   });
+
+  Future<void> setPreviewViewController(int id, CameraController controller);
+  Future<void> setPreviewViewScaleType(int id, ScaleType scaleType);
 }

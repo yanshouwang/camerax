@@ -22,10 +22,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     BuildContext context, {
     required CameraController controller,
     required ScaleType scaleType,
+    required PlatformViewCreatedCallback onPreviewViewCreated,
   }) {
-    if (controller is! CameraControllerImpl) {
-      throw TypeError();
-    }
     return PlatformViewLink(
       viewType: 'hebei.dev/PreviewView',
       surfaceFactory: (context, controller) {
@@ -45,14 +43,36 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
           ..addOnPlatformViewCreatedListener(
             (id) {
               params.onPlatformViewCreated(id);
-              final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
-              view.setControllerOnMainThread(controller.jniValue);
-              view.setScaleTypeOnMainThread(scaleType.jniValue);
+              onPreviewViewCreated(id);
             },
           )
           ..create();
       },
     );
+  }
+
+  @override
+  Future<void> setPreviewViewController(
+    int id,
+    CameraController controller,
+  ) async {
+    if (controller is! CameraControllerImpl) {
+      throw TypeError();
+    }
+    final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
+    if (view.isNull) {
+      throw ArgumentError.notNull();
+    }
+    await view.setControllerOnMainThread(controller.jniValue);
+  }
+
+  @override
+  Future<void> setPreviewViewScaleType(int id, ScaleType scaleType) async {
+    final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
+    if (view.isNull) {
+      throw ArgumentError.notNull();
+    }
+    await view.setScaleTypeOnMainThread(scaleType.jniValue);
   }
 }
 

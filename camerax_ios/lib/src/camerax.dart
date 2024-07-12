@@ -1,4 +1,5 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
@@ -20,21 +21,38 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     BuildContext context, {
     required CameraController controller,
     required ScaleType scaleType,
+    required PlatformViewCreatedCallback onPreviewViewCreated,
   }) {
-    if (controller is! CameraControllerImpl) {
-      throw TypeError();
-    }
     return UiKitView(
       viewType: 'hebei.dev/PreviewView',
       layoutDirection: TextDirection.ltr,
       onPlatformViewCreated: (id) {
-        final view = PreviewViewFactory.getShared().retrieveView_(id);
-        if (view == null) {
-          throw ArgumentError.notNull();
-        }
-        view.setSessionOnMainThread(controller.session);
-        view.setVideoGravityOnMainThread(scaleType.ffiValue);
+        onPreviewViewCreated(id);
       },
     );
+  }
+
+  @override
+  Future<void> setPreviewViewController(
+    int id,
+    CameraController controller,
+  ) async {
+    if (controller is! CameraControllerImpl) {
+      throw TypeError();
+    }
+    final view = PreviewViewFactory.getShared().retrieveView_(id);
+    if (view == null) {
+      throw ArgumentError.notNull();
+    }
+    await view.setSessionOnMainThread(controller.session);
+  }
+
+  @override
+  Future<void> setPreviewViewScaleType(int id, ScaleType scaleType) async {
+    final view = PreviewViewFactory.getShared().retrieveView_(id);
+    if (view == null) {
+      throw ArgumentError.notNull();
+    }
+    await view.setVideoGravityOnMainThread(scaleType.ffiValue);
   }
 }

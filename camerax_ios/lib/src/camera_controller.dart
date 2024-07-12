@@ -4,22 +4,26 @@ import 'dart:typed_data';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:ffi/ffi.dart';
+import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:objective_c/objective_c.dart';
 
 import 'ffi.dart';
 import 'ffi.g.dart';
 
-final class CameraControllerImpl implements CameraController {
+final class CameraControllerImpl
+    with TypeLogger, LoggerController
+    implements CameraController {
   final AVCaptureSession session;
   late final StreamController<ZoomState?> _zoomStateChagnedController;
   late final StreamController<bool?> _torchStateChagnedController;
-  late AVCaptureInput _activeVideoInput;
+  late AVCaptureDevice _videoDevice;
+  late AVCaptureInput _videoInput;
 
   CameraControllerImpl() : session = AVCaptureSession.alloc().init() {
     _zoomStateChagnedController = StreamController.broadcast(
-        // onListen: _observeZoomState,
-        // onCancel: _removeZoomStateObserver,
-        );
+      onListen: _observeZoomState,
+      onCancel: _removeZoomStateObserver,
+    );
     _torchStateChagnedController = StreamController.broadcast(
         // onListen: _observeTorchState,
         // onCancel: _removeTorchStateObserver,
@@ -71,7 +75,7 @@ final class CameraControllerImpl implements CameraController {
   Future<void> setCameraSelector(CameraSelector cameraSelector) async {
     session.beginConfiguration();
     try {
-      session.removeInput_(_activeVideoInput);
+      session.removeInput_(_videoInput);
       _addVideoInput(cameraSelector);
     } finally {
       session.commitConfiguration();
@@ -115,7 +119,8 @@ final class CameraControllerImpl implements CameraController {
       throw ArgumentError.notNull();
     }
     session.addInput_(input);
-    _activeVideoInput = input;
+    _videoDevice = device;
+    _videoInput = input;
   }
 
   @override
@@ -207,4 +212,8 @@ final class CameraControllerImpl implements CameraController {
     // TODO: implement takePictureToAlbum
     throw UnimplementedError();
   }
+
+  void _observeZoomState() {}
+
+  void _removeZoomStateObserver() {}
 }
