@@ -104,9 +104,8 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<void> setLinearZoom(double linearZoom) async {
-    final lisentalbeFuture =
-        await jniValue.setLinearZoomOnMainThread(linearZoom);
+  Future<void> setZoomRatio(double zoomRatio) async {
+    final lisentalbeFuture = await jniValue.setZoomRatioOnMainThread(zoomRatio);
     final completer = Completer<void>();
     final executor = jni.ContextCompat.getMainExecutor(JNI.context);
     lisentalbeFuture.addListener(
@@ -128,8 +127,9 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<void> setZoomRatio(double zoomRatio) async {
-    final lisentalbeFuture = await jniValue.setZoomRatioOnMainThread(zoomRatio);
+  Future<void> setLinearZoom(double linearZoom) async {
+    final lisentalbeFuture =
+        await jniValue.setLinearZoomOnMainThread(linearZoom);
     final completer = Completer<void>();
     final executor = jni.ContextCompat.getMainExecutor(JNI.context);
     lisentalbeFuture.addListener(

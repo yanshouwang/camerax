@@ -11,7 +11,7 @@ import UIKit
 @objc public class PreviewViewFactory: NSObject, FlutterPlatformViewFactory {
     @objc public static let shared = PreviewViewFactory()
     
-    var views = [Int64: PreviewView]()
+    private var views = [Int64: PreviewView]()
     
     private override init() {}
     
@@ -26,5 +26,12 @@ import UIKit
     
     @objc public func retrieveView(_ viewId: Int64) -> PreviewView? {
         return views[viewId]
+    }
+    
+    func removeView(_ view: PreviewView) {
+        guard let element = views.first(where: { $0.value == view }) else {
+            return
+        }
+        views.removeValue(forKey: element.key)
     }
 }

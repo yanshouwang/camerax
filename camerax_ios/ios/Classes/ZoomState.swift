@@ -7,10 +7,10 @@
 
 import Foundation
 
-class ZoomState: NSObject {
-    let minZoomRatio: Double
-    let maxZoomRatio: Double
-    let zoomRatio: Double
+@objc public class ZoomState: NSObject {
+    @objc public let minZoomRatio: Double
+    @objc public let maxZoomRatio: Double
+    @objc public let zoomRatio: Double
     
     init(minZoomRatio: Double, maxZoomRatio: Double, zoomRatio: Double) {
         self.minZoomRatio = minZoomRatio
@@ -18,7 +18,7 @@ class ZoomState: NSObject {
         self.zoomRatio = zoomRatio
     }
     
-    var linearZoom: Double {
+    @objc public var linearZoom: Double {
         (zoomRatio - minZoomRatio) / (maxZoomRatio - minZoomRatio)
     }
 }

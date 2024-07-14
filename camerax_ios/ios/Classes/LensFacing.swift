@@ -8,14 +8,14 @@
 import Foundation
 import AVFoundation
 
-enum LensFacing {
+@objc public enum LensFacing: Int {
     case front
     case back
     case external
 }
 
 extension LensFacing {
-    var avPosition: AVCaptureDevice.Position {
+    var avfValue: AVCaptureDevice.Position {
         switch self {
         case .front:
             return .front

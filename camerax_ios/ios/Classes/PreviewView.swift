@@ -18,20 +18,17 @@ import Flutter
         layer as! AVCaptureVideoPreviewLayer
     }
     
-    @objc public var controller: CameraController {
-        didSet { previewLayer.session = controller.session }
+    @objc public var controller: CameraController? {
+        didSet { previewLayer.session = controller?.session }
     }
     
-    @objc public var scalType: ScaleType {
-        get { previewLayer.videoGravity.scaleType }
-        set { previewLayer.videoGravity = newValue.avGravity }
+    @objc public var scaleType: ScaleType {
+        get { previewLayer.videoGravity.xValue }
+        set { previewLayer.videoGravity = newValue.avfValue }
     }
     
     public override func removeFromSuperview() {
-        guard let view = PreviewViewFactory.shared.views.first(where: { $0.value == self }) else {
-            return
-        }
-        PreviewViewFactory.shared.views.removeValue(forKey: view.key)
+        PreviewViewFactory.shared.removeView(self)
     }
     
     public func view() -> UIView {

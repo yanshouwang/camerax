@@ -8,32 +8,24 @@ import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:objective_c/objective_c.dart';
 
 import 'ffi.dart';
-import 'ffi.g.dart';
+import 'ffi.g.dart' as ffi;
 
 final class CameraControllerImpl
     with TypeLogger, LoggerController
     implements CameraController {
-  final AVCaptureSession session;
+  final ffi.CameraController ffiValue;
   late final StreamController<ZoomState?> _zoomStateChagnedController;
   late final StreamController<bool?> _torchStateChagnedController;
-  late AVCaptureDevice _videoDevice;
-  late AVCaptureInput _videoInput;
 
-  CameraControllerImpl() : session = AVCaptureSession.alloc().init() {
+  CameraControllerImpl() : ffiValue = ffi.CameraController.alloc().init() {
     _zoomStateChagnedController = StreamController.broadcast(
-      onListen: _observeZoomState,
+      onListen: _addZoomStateObserver,
       onCancel: _removeZoomStateObserver,
     );
     _torchStateChagnedController = StreamController.broadcast(
-        // onListen: _observeTorchState,
-        // onCancel: _removeTorchStateObserver,
-        );
-    session.beginConfiguration();
-    try {
-      _addVideoInput(CameraSelector.back);
-    } finally {
-      session.commitConfiguration();
-    }
+      onListen: _addTorchStateObserver,
+      onCancel: _removeTorchStateObserver,
+    );
   }
 
   @override
@@ -44,137 +36,124 @@ final class CameraControllerImpl
   @override
   Future<bool> requestPermissions({bool enableAudio = false}) async {
     final completer = Completer<bool>();
-    final mediaType =
-        DartAVMediaType.castFromPointer(avFoundationLib.AVMediaTypeVideo);
-    final handler = ObjCBlock_ffiVoid_bool.listener((granted) {
+    final handler = ffi.ObjCBlock_ffiVoid_bool.listener((granted) {
       completer.complete(granted);
     });
-    AVCaptureDevice.requestAccessForMediaType_completionHandler_(
-        mediaType, handler);
+    ffiValue.requestPermissionsWithEnableAudio_completionHandler_(
+      enableAudio,
+      handler,
+    );
     final granted = await completer.future;
     return granted;
   }
 
   @override
   Future<void> bindToLifecycle() async {
-    session.startRunning();
+    ffiValue.bindToLifecycle();
   }
 
   @override
   Future<void> unbind() async {
-    session.stopRunning();
+    ffiValue.unbind();
   }
 
   @override
   Future<bool> hasCamera(CameraSelector cameraSelector) async {
-    final device = _getVideoDevice(cameraSelector);
-    return device != null;
+    final hasCamera =
+        ffiValue.hasCameraWithCameraSelector_(cameraSelector.ffiValue);
+    return hasCamera;
   }
 
   @override
   Future<void> setCameraSelector(CameraSelector cameraSelector) async {
-    session.beginConfiguration();
-    try {
-      session.removeInput_(_videoInput);
-      _addVideoInput(cameraSelector);
-    } finally {
-      session.commitConfiguration();
-    }
-  }
-
-  AVCaptureDevice? _getVideoDevice(CameraSelector cameraSelector) {
-    final deviceType = cameraSelector.lensFacing == LensFacing.external
-        ? DartAVCaptureDeviceType.castFromPointer(
-            avFoundationLib.AVCaptureDeviceTypeExternal)
-        : DartAVCaptureDeviceType.castFromPointer(
-            avFoundationLib.AVCaptureDeviceTypeBuiltInWideAngleCamera);
-    final mediaType =
-        DartAVMediaType.castFromPointer(avFoundationLib.AVMediaTypeVideo);
-    final position = cameraSelector.lensFacing == LensFacing.back
-        ? AVCaptureDevicePosition.AVCaptureDevicePositionBack
-        : cameraSelector.lensFacing == LensFacing.front
-            ? AVCaptureDevicePosition.AVCaptureDevicePositionFront
-            : AVCaptureDevicePosition.AVCaptureDevicePositionUnspecified;
-    final device =
-        AVCaptureDevice.defaultDeviceWithDeviceType_mediaType_position_(
-      deviceType,
-      mediaType,
-      position,
-    );
-    return device;
-  }
-
-  void _addVideoInput(CameraSelector cameraSelector) {
-    final device = _getVideoDevice(cameraSelector);
-    if (device == null) {
-      throw ArgumentError.notNull();
-    }
-    final input = using((arena) {
-      final error = arena<Pointer<ObjCObject>>();
-      final input =
-          AVCaptureDeviceInput.deviceInputWithDevice_error_(device, error);
-      return input;
+    logger.info('setCameraController $cameraSelector');
+    final error = using((arena) {
+      final errorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.setCameraSelector_error_(
+              cameraSelector.ffiValue, errorPtr)
+          ? null
+          : NSError.castFromPointer(errorPtr.value);
     });
-    if (input == null) {
-      throw ArgumentError.notNull();
+    if (error == null) {
+      return;
     }
-    session.addInput_(input);
-    _videoDevice = device;
-    _videoInput = input;
+    throw error;
   }
 
   @override
-  Future<bool> isTapToFocusEnabled() {
-    // TODO: implement isTapToFocusEnabled
-    throw UnimplementedError();
+  Future<bool> isTapToFocusEnabled() async {
+    final enabled = ffiValue.isTapToFocusEnabled();
+    return enabled;
   }
 
   @override
-  Future<void> setTapToFocusEnabled(bool enabled) {
-    // TODO: implement setTapToFocusEnabled
-    throw UnimplementedError();
+  Future<void> setTapToFocusEnabled(bool enabled) async {
+    ffiValue.setTapToFocusEnabled_(enabled);
   }
 
   @override
-  Future<ZoomState?> getZoomState() {
-    // TODO: implement getZoomState
-    throw UnimplementedError();
+  Future<bool> isPinchToZoomEnabled() async {
+    final enabled = ffiValue.isPinchToZoomEnabled();
+    return enabled;
   }
 
   @override
-  Future<bool> isPinchToZoomEnabled() {
-    // TODO: implement isPinchToZoomEnabled
-    throw UnimplementedError();
+  Future<void> setPinchToZoomEnabled(bool enabled) async {
+    ffiValue.setPinchToZoomEnabled_(enabled);
   }
 
   @override
-  Future<void> setPinchToZoomEnabled(bool enabled) {
-    // TODO: implement setPinchToZoomEnabled
-    throw UnimplementedError();
+  Future<ZoomState?> getZoomState() async {
+    final zoomState = ffiValue.getZoomState()?.dartValue;
+    return zoomState;
   }
 
   @override
-  Future<void> setLinearZoom(double linearZoom) {
-    // TODO: implement setLinearZoom
-    throw UnimplementedError();
+  Future<void> setZoomRatio(double zoomRatio) async {
+    final error = using((arena) {
+      final errorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.setZoomRatio_error_(zoomRatio, errorPtr)
+          ? null
+          : NSError.castFromPointer(errorPtr.value);
+    });
+    if (error == null) {
+      return;
+    }
+    throw error;
   }
 
   @override
-  Future<void> setZoomRatio(double zoomRatio) {
-    // TODO: implement setZoomRatio
-    throw UnimplementedError();
+  Future<void> setLinearZoom(double linearZoom) async {
+    final error = using((arena) {
+      final errorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.setLinearZoom_error_(linearZoom, errorPtr)
+          ? null
+          : NSError.castFromPointer(errorPtr.value);
+    });
+    if (error == null) {
+      return;
+    }
+    throw error;
   }
 
   @override
-  Future<bool?> getTorchState() {
-    // TODO: implement getTorchState
-    throw UnimplementedError();
+  Future<bool?> getTorchState() async {
+    final torchState = ffiValue.getTorchState();
+    return torchState?.value;
   }
 
   @override
-  Future<void> enableTorch(bool torchEnabled) {
-    // TODO: implement enableTorch
-    throw UnimplementedError();
+  Future<void> enableTorch(bool torchEnabled) async {
+    final error = using((arena) {
+      final errorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.enableTorch_error_(torchEnabled, errorPtr)
+          ? null
+          : NSError.castFromPointer(errorPtr.value);
+    });
+    if (error == null) {
+      return;
+    }
+    throw error;
   }
 
   @override
@@ -190,15 +169,23 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<FlashMode> getImageCaptureFlashMode() {
-    // TODO: implement getImageCaptureFlashMode
-    throw UnimplementedError();
+  Future<FlashMode> getImageCaptureFlashMode() async {
+    final flashMode = ffiValue.imageCaptureFlashMode;
+    switch (flashMode) {
+      case ffi.FlashMode.FlashModeAuto:
+        return FlashMode.auto;
+      case ffi.FlashMode.FlashModeOn:
+        return FlashMode.on;
+      case ffi.FlashMode.FlashModeOff:
+        return FlashMode.off;
+      default:
+        throw ArgumentError.value(flashMode);
+    }
   }
 
   @override
-  Future<void> setImageCaptureFlashMode(FlashMode flashMode) {
-    // TODO: implement setImageCaptureFlashMode
-    throw UnimplementedError();
+  Future<void> setImageCaptureFlashMode(FlashMode flashMode) async {
+    ffiValue.imageCaptureFlashMode = flashMode.ffiValue;
   }
 
   @override
@@ -213,7 +200,43 @@ final class CameraControllerImpl
     throw UnimplementedError();
   }
 
-  void _observeZoomState() {}
+  void _addZoomStateObserver() {
+    final callback = ffi.ObjCBlock_ffiVoid_ZoomState.listener((zoomState) {
+      _zoomStateChagnedController.add(zoomState?.dartValue);
+    });
+    ffiValue.addZoomStateObserverWithCallback_(callback);
+  }
 
-  void _removeZoomStateObserver() {}
+  void _removeZoomStateObserver() {
+    final error = using((arena) {
+      final errorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.removeZoomStateObserverAndReturnError_(errorPtr)
+          ? null
+          : NSError.castFromPointer(errorPtr.value);
+    });
+    if (error == null) {
+      return;
+    }
+    throw error;
+  }
+
+  void _addTorchStateObserver() {
+    final callback = ffi.ObjCBlock_ffiVoid_TorchState.listener((torchState) {
+      _torchStateChagnedController.add(torchState?.value);
+    });
+    ffiValue.addTorchStateObserverWithCallback_(callback);
+  }
+
+  void _removeTorchStateObserver() {
+    final error = using((arena) {
+      final errorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.removeTorchStateObserverAndReturnError_(errorPtr)
+          ? null
+          : NSError.castFromPointer(errorPtr.value);
+    });
+    if (error == null) {
+      return;
+    }
+    throw error;
+  }
 }

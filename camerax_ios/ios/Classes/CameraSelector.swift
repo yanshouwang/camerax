@@ -7,24 +7,14 @@
 
 import Foundation
 
-class CameraSelector: NSObject {
-    let lensFacing: LensFacing
+@objc public class CameraSelector: NSObject {
+    @objc public let lensFacing: LensFacing
     
-    init(lensFacing: LensFacing) {
+    @objc public init(lensFacing: LensFacing) {
         self.lensFacing = lensFacing
     }
     
-    static var front: CameraSelector {
-        CameraSelector(lensFacing: .front)
-    }
-    
-//    static var back: CameraSelector {
-//        CameraSelector(lensFacing: .back)
-//    }
-    
-    static let back = CameraSelector(lensFacing: .back)
-    
-    static var external: CameraSelector {
-        CameraSelector(lensFacing: .external)
-    }
+    @objc public static let front = CameraSelector(lensFacing: .front)
+    @objc public static let back = CameraSelector(lensFacing: .back)
+    @objc public static let external = CameraSelector(lensFacing: .external)
 }

@@ -33,7 +33,7 @@ class CameraViewModel extends ViewModel with TypeLogger {
   void _initialize() async {
     _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
       logger.info(
-          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
+          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.zoomRatio}, ${zoomState?.linearZoom}');
       _zoomState = zoomState;
       notifyListeners();
     });
@@ -44,18 +44,18 @@ class CameraViewModel extends ViewModel with TypeLogger {
     });
     await controller.requestPermissions();
     await controller.setCameraSelector(CameraSelector.back);
-//     _zoomState = await controller.getZoomState();
-//     _torchState = await controller.getTorchState();
-//     _flashMode = await controller.getImageCaptureFlashMode();
-//     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
-//     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-//     logger.info(
-//         '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
-// torchState: $torchState
-// flashMode: $flashMode
-// isPinchToZoomEnabled: $isPinchToZoomEnabled
-// isTapToFocusEnabled: $isTapToFocusEnabled''');
-//     notifyListeners();
+    _zoomState = await controller.getZoomState();
+    _torchState = await controller.getTorchState();
+    _flashMode = await controller.getImageCaptureFlashMode();
+    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
+    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
+    logger.info(
+        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+torchState: $torchState
+flashMode: $flashMode
+isPinchToZoomEnabled: $isPinchToZoomEnabled
+isTapToFocusEnabled: $isTapToFocusEnabled''');
+    notifyListeners();
     await controller.bindToLifecycle();
   }
 
@@ -77,11 +77,11 @@ class CameraViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> toggleTorchState() async {
-    final enableTorch = torchState;
-    if (enableTorch == null) {
+    final enabled = torchState;
+    if (enabled == null) {
       throw ArgumentError.notNull();
     }
-    await controller.enableTorch(!enableTorch);
+    await controller.enableTorch(!enabled);
   }
 
   Future<void> setFlashMode(FlashMode flashMode) async {

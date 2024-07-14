@@ -105,8 +105,8 @@ extension JNIZoomStateX on jni.ZoomState {
       return ZoomState(
         minZoomRatio: minZoomRatio,
         maxZoomRatio: maxZoomRatio,
-        linearZoom: linearZoom,
         zoomRatio: zoomRatio,
+        linearZoom: linearZoom,
       );
     }
   }

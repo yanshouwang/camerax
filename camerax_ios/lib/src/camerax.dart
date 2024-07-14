@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
-import 'ffi.dart' as ffi;
-import 'ffi.g.dart';
+import 'ffi.dart';
+import 'ffi.g.dart' as ffi;
 
 final class CameraXiOSPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -40,19 +40,19 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     if (controller is! CameraControllerImpl) {
       throw TypeError();
     }
-    final view = PreviewViewFactory.getShared().retrieveView_(id);
+    final view = ffi.PreviewViewFactory.getShared().retrieveView_(id);
     if (view == null) {
       throw ArgumentError.notNull();
     }
-    await view.setSessionOnMainThread(controller.session);
+    await view.setControllerOnMainThread(controller.ffiValue);
   }
 
   @override
   Future<void> setPreviewViewScaleType(int id, ScaleType scaleType) async {
-    final view = PreviewViewFactory.getShared().retrieveView_(id);
+    final view = ffi.PreviewViewFactory.getShared().retrieveView_(id);
     if (view == null) {
       throw ArgumentError.notNull();
     }
-    await view.setVideoGravityOnMainThread(scaleType.ffiValue);
+    await view.setScaleTypeOnMainThread(scaleType.ffiValue);
   }
 }

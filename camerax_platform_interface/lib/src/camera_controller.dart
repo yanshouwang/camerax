@@ -21,11 +21,11 @@ abstract interface class CameraController implements LogController {
   Future<void> setCameraSelector(CameraSelector cameraSelector);
   Future<bool> isTapToFocusEnabled();
   Future<void> setTapToFocusEnabled(bool enabled);
-  Future<ZoomState?> getZoomState();
   Future<bool> isPinchToZoomEnabled();
   Future<void> setPinchToZoomEnabled(bool enabled);
-  Future<void> setLinearZoom(double linearZoom);
+  Future<ZoomState?> getZoomState();
   Future<void> setZoomRatio(double zoomRatio);
+  Future<void> setLinearZoom(double linearZoom);
   Future<bool?> getTorchState();
   Future<void> enableTorch(bool torchEnabled);
   Future<void> setImageAnalyzer(ImageAnalyzer analyzer);

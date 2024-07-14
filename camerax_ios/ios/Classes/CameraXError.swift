@@ -8,6 +8,14 @@
 import Foundation
 
 enum CameraXError: Error {
+    case unsupported
+    case unimplemented
+    case unauthorized
     case videoDeviceInputNil
+    case cannotAddInput
+    case cannotAddOutput
     case observationNil
+    case savePhotoNil
+    case saveLocalIdentifierNil
+    case saveAssetNil
 }
