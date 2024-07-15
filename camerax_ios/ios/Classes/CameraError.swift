@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CameraXError: Error {
+enum CameraError: Error {
     case unsupported
     case unimplemented
     case unauthorized

@@ -1211,7 +1211,7 @@ class NSAttributedString extends objc.NSObject {
       NSAttributedString format,
       int options,
       objc.NSLocale? locale,
-      ffi.Pointer<__va_list_tag> arguments) {
+      ffi.Pointer<ffi.Char> arguments) {
     final _ret = _objc_msgSend_57(
         this.pointer,
         _sel_initWithFormat_options_locale_arguments_,
@@ -1263,7 +1263,7 @@ class NSAttributedString extends objc.NSObject {
       int options,
       objc.NSLocale? locale,
       objc.NSDictionary context,
-      ffi.Pointer<__va_list_tag> arguments) {
+      ffi.Pointer<ffi.Char> arguments) {
     final _ret = _objc_msgSend_60(
         this.pointer,
         _sel_initWithFormat_options_locale_context_arguments_,
@@ -2298,19 +2298,6 @@ final _objc_msgSend_56 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             int,
             ffi.Pointer<objc.ObjCObject>)>();
-
-final class __va_list_tag extends ffi.Struct {
-  @ffi.UnsignedInt()
-  external int gp_offset;
-
-  @ffi.UnsignedInt()
-  external int fp_offset;
-
-  external ffi.Pointer<ffi.Void> overflow_arg_area;
-
-  external ffi.Pointer<ffi.Void> reg_save_area;
-}
-
 late final _sel_initWithFormat_options_locale_arguments_ =
     objc.registerName("initWithFormat:options:locale:arguments:");
 final _objc_msgSend_57 = objc.msgSendPointer
@@ -2322,7 +2309,7 @@ final _objc_msgSend_57 = objc.msgSendPointer
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Int32,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<__va_list_tag>)>>()
+                ffi.Pointer<ffi.Char>)>>()
     .asFunction<
         instancetype Function(
             ffi.Pointer<objc.ObjCObject>,
@@ -2330,7 +2317,7 @@ final _objc_msgSend_57 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             int,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<__va_list_tag>)>();
+            ffi.Pointer<ffi.Char>)>();
 late final _sel_localizedAttributedStringWithFormat_ =
     objc.registerName("localizedAttributedStringWithFormat:");
 late final _sel_localizedAttributedStringWithFormat_options_ =
@@ -2381,7 +2368,7 @@ final _objc_msgSend_60 = objc.msgSendPointer
                 ffi.Int32,
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<__va_list_tag>)>>()
+                ffi.Pointer<ffi.Char>)>>()
     .asFunction<
         instancetype Function(
             ffi.Pointer<objc.ObjCObject>,
@@ -2390,7 +2377,7 @@ final _objc_msgSend_60 = objc.msgSendPointer
             int,
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<__va_list_tag>)>();
+            ffi.Pointer<ffi.Char>)>();
 late final _sel_localizedAttributedStringWithFormat_context_ =
     objc.registerName("localizedAttributedStringWithFormat:context:");
 final _objc_msgSend_61 = objc.msgSendPointer
@@ -2753,7 +2740,7 @@ class NSMutableAttributedString extends NSAttributedString {
       NSAttributedString format,
       int options,
       objc.NSLocale? locale,
-      ffi.Pointer<__va_list_tag> arguments) {
+      ffi.Pointer<ffi.Char> arguments) {
     final _ret = _objc_msgSend_57(
         this.pointer,
         _sel_initWithFormat_options_locale_arguments_,
@@ -2807,7 +2794,7 @@ class NSMutableAttributedString extends NSAttributedString {
       int options,
       objc.NSLocale? locale,
       objc.NSDictionary context,
-      ffi.Pointer<__va_list_tag> arguments) {
+      ffi.Pointer<ffi.Char> arguments) {
     final _ret = _objc_msgSend_60(
         this.pointer,
         _sel_initWithFormat_options_locale_context_arguments_,
@@ -8461,8 +8448,8 @@ class NSException extends objc.NSObject {
         _class_NSException, _sel_raise_format_, name.pointer, format.pointer);
   }
 
-  static void raise_format_arguments_(objc.NSString name, objc.NSString format,
-      ffi.Pointer<__va_list_tag> argList) {
+  static void raise_format_arguments_(
+      objc.NSString name, objc.NSString format, ffi.Pointer<ffi.Char> argList) {
     _objc_msgSend_202(_class_NSException, _sel_raise_format_arguments_,
         name.pointer, format.pointer, argList);
   }
@@ -8616,14 +8603,14 @@ final _objc_msgSend_202 = objc.msgSendPointer
                 ffi.Pointer<objc.ObjCSelector>,
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<__va_list_tag>)>>()
+                ffi.Pointer<ffi.Char>)>>()
     .asFunction<
         void Function(
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>,
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<__va_list_tag>)>();
+            ffi.Pointer<ffi.Char>)>();
 
 class NSRunLoop extends objc.NSObject {
   NSRunLoop._(ffi.Pointer<objc.ObjCObject> pointer,
@@ -18047,7 +18034,7 @@ class NSPredicate extends objc.NSObject {
   }
 
   static NSPredicate predicateWithFormat_arguments_(
-      objc.NSString predicateFormat, ffi.Pointer<__va_list_tag> argList) {
+      objc.NSString predicateFormat, ffi.Pointer<ffi.Char> argList) {
     final _ret = _objc_msgSend_405(_class_NSPredicate,
         _sel_predicateWithFormat_arguments_, predicateFormat.pointer, argList);
     return NSPredicate.castFromPointer(_ret, retain: true, release: true);
@@ -18223,13 +18210,13 @@ final _objc_msgSend_405 = objc.msgSendPointer
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCSelector>,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<__va_list_tag>)>>()
+                ffi.Pointer<ffi.Char>)>>()
     .asFunction<
         ffi.Pointer<objc.ObjCObject> Function(
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<__va_list_tag>)>();
+            ffi.Pointer<ffi.Char>)>();
 late final _sel_predicateFromMetadataQueryString_ =
     objc.registerName("predicateFromMetadataQueryString:");
 final _objc_msgSend_406 = objc.msgSendPointer
@@ -36639,18 +36626,19 @@ class CameraController extends objc.NSObject {
     _objc_msgSend_82(this.pointer, _sel_clearImageAnalyzer);
   }
 
-  objc.NSData? takePictureToMemoryAndReturnError_(
-      ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error) {
-    final _ret = _objc_msgSend_253(
-        this.pointer, _sel_takePictureToMemoryAndReturnError_, error);
-    return _ret.address == 0
-        ? null
-        : objc.NSData.castFromPointer(_ret, retain: true, release: true);
+  void takePictureToMemoryWithCompletionHandler_(
+      ObjCBlock_ffiVoid_NSData_NSError handler) {
+    _objc_msgSend_766(this.pointer,
+        _sel_takePictureToMemoryWithCompletionHandler_, handler.pointer);
   }
 
-  void takePictureToAlbumWithName_(objc.NSString name) {
-    _objc_msgSend_98(
-        this.pointer, _sel_takePictureToAlbumWithName_, name.pointer);
+  void takePictureToAlbumWithName_completionHandler_(
+      objc.NSString? name, ObjCBlock_ffiVoid_NSString_NSError handler) {
+    _objc_msgSend_767(
+        this.pointer,
+        _sel_takePictureToAlbumWithName_completionHandler_,
+        name?.pointer ?? ffi.nullptr,
+        handler.pointer);
   }
 
   static CameraController new1() {
@@ -37685,10 +37673,276 @@ final _objc_msgSend_765 = objc.msgSendPointer
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>();
 late final _sel_clearImageAnalyzer = objc.registerName("clearImageAnalyzer");
-late final _sel_takePictureToMemoryAndReturnError_ =
-    objc.registerName("takePictureToMemoryAndReturnError:");
-late final _sel_takePictureToAlbumWithName_ =
-    objc.registerName("takePictureToAlbumWithName:");
+void _ObjCBlock_ffiVoid_NSData_NSError_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+void _ObjCBlock_ffiVoid_NSData_NSError_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+
+class ObjCBlock_ffiVoid_NSData_NSError extends objc.ObjCBlockBase {
+  ObjCBlock_ffiVoid_NSData_NSError._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_ffiVoid_NSData_NSError castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_ffiVoid_NSData_NSError._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_NSData_NSError.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_ffiVoid_NSData_NSError_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_NSData_NSError.fromFunction(
+      void Function(objc.NSData?, objc.NSError?) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_ffiVoid_NSData_NSError_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0.address == 0
+                    ? null
+                    : objc.NSData.castFromPointer(arg0, retain: true, release: true),
+                arg1.address == 0 ? null : objc.NSError.castFromPointer(arg1, retain: true, release: true))));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  ObjCBlock_ffiVoid_NSData_NSError.listener(
+      void Function(objc.NSData?, objc.NSError?) fn)
+      : this._(objc.newClosureBlock(
+            (_dartFuncListenerTrampoline ??= ffi.NativeCallable<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>.listener(
+                    _ObjCBlock_ffiVoid_NSData_NSError_closureTrampoline)
+                  ..keepIsolateAlive = false)
+                .nativeFunction
+                .cast(),
+            (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0.address == 0 ? null : objc.NSData.castFromPointer(arg0, retain: true, release: true),
+                arg1.address == 0 ? null : objc.NSError.castFromPointer(arg1, retain: true, release: true))));
+  static ffi.NativeCallable<
+      ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlock>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>)>? _dartFuncListenerTrampoline;
+
+  void call(objc.NSData? arg0, objc.NSError? arg1) => pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<objc.ObjCBlock> block,
+                      ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              void Function(
+                  ffi.Pointer<objc.ObjCBlock>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>)>()(
+      pointer, arg0?.pointer ?? ffi.nullptr, arg1?.pointer ?? ffi.nullptr);
+}
+
+late final _sel_takePictureToMemoryWithCompletionHandler_ =
+    objc.registerName("takePictureToMemoryWithCompletionHandler:");
+final _objc_msgSend_766 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>();
+void _ObjCBlock_ffiVoid_NSString_NSError_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+void _ObjCBlock_ffiVoid_NSString_NSError_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<objc.ObjCObject> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject>,
+        ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+
+class ObjCBlock_ffiVoid_NSString_NSError extends objc.ObjCBlockBase {
+  ObjCBlock_ffiVoid_NSString_NSError._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_ffiVoid_NSString_NSError castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_ffiVoid_NSString_NSError._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_NSString_NSError.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_ffiVoid_NSString_NSError_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_NSString_NSError.fromFunction(
+      void Function(objc.NSString?, objc.NSError?) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_ffiVoid_NSString_NSError_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0.address == 0
+                    ? null
+                    : objc.NSString.castFromPointer(arg0, retain: true, release: true),
+                arg1.address == 0 ? null : objc.NSError.castFromPointer(arg1, retain: true, release: true))));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  ObjCBlock_ffiVoid_NSString_NSError.listener(
+      void Function(objc.NSString?, objc.NSError?) fn)
+      : this._(objc.newClosureBlock(
+            (_dartFuncListenerTrampoline ??= ffi.NativeCallable<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>.listener(
+                    _ObjCBlock_ffiVoid_NSString_NSError_closureTrampoline)
+                  ..keepIsolateAlive = false)
+                .nativeFunction
+                .cast(),
+            (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0.address == 0 ? null : objc.NSString.castFromPointer(arg0, retain: true, release: true),
+                arg1.address == 0 ? null : objc.NSError.castFromPointer(arg1, retain: true, release: true))));
+  static ffi.NativeCallable<
+      ffi.Void Function(
+          ffi.Pointer<objc.ObjCBlock>,
+          ffi.Pointer<objc.ObjCObject>,
+          ffi.Pointer<objc.ObjCObject>)>? _dartFuncListenerTrampoline;
+
+  void call(objc.NSString? arg0, objc.NSError? arg1) => pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<objc.ObjCBlock> block,
+                      ffi.Pointer<objc.ObjCObject> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              void Function(
+                  ffi.Pointer<objc.ObjCBlock>,
+                  ffi.Pointer<objc.ObjCObject>,
+                  ffi.Pointer<objc.ObjCObject>)>()(
+      pointer, arg0?.pointer ?? ffi.nullptr, arg1?.pointer ?? ffi.nullptr);
+}
+
+late final _sel_takePictureToAlbumWithName_completionHandler_ =
+    objc.registerName("takePictureToAlbumWithName:completionHandler:");
+final _objc_msgSend_767 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCBlock>)>>()
+    .asFunction<
+        void Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCBlock>)>();
 
 abstract class ScaleType {
   static const int ScaleTypeFill = 0;
@@ -37722,23 +37976,23 @@ class PreviewView extends objc.ObjCObjectBase {
   }
 
   CameraController? get controller {
-    final _ret = _objc_msgSend_766(this.pointer, _sel_controller);
+    final _ret = _objc_msgSend_768(this.pointer, _sel_controller);
     return _ret.address == 0
         ? null
         : CameraController.castFromPointer(_ret, retain: true, release: true);
   }
 
   set controller(CameraController? value) {
-    return _objc_msgSend_767(
+    return _objc_msgSend_769(
         this.pointer, _sel_setController_, value?.pointer ?? ffi.nullptr);
   }
 
   int get scaleType {
-    return _objc_msgSend_768(this.pointer, _sel_scaleType);
+    return _objc_msgSend_770(this.pointer, _sel_scaleType);
   }
 
   set scaleType(int value) {
-    return _objc_msgSend_769(this.pointer, _sel_setScaleType_, value);
+    return _objc_msgSend_771(this.pointer, _sel_setScaleType_, value);
   }
 
   void removeFromSuperview() {
@@ -37751,7 +38005,7 @@ class PreviewView extends objc.ObjCObjectBase {
   }
 
   PreviewView initWithFrame_(CGRect frame) {
-    final _ret = _objc_msgSend_770(this.pointer, _sel_initWithFrame_, frame);
+    final _ret = _objc_msgSend_772(this.pointer, _sel_initWithFrame_, frame);
     return PreviewView.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -37767,7 +38021,7 @@ class PreviewView extends objc.ObjCObjectBase {
 late final _class_PreviewView = objc.getClass("camerax_ios.PreviewView");
 late final _sel_layerClass = objc.registerName("layerClass");
 late final _sel_controller = objc.registerName("controller");
-final _objc_msgSend_766 = objc.msgSendPointer
+final _objc_msgSend_768 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
@@ -37776,7 +38030,7 @@ final _objc_msgSend_766 = objc.msgSendPointer
         ffi.Pointer<objc.ObjCObject> Function(
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_setController_ = objc.registerName("setController:");
-final _objc_msgSend_767 = objc.msgSendPointer
+final _objc_msgSend_769 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(
@@ -37787,7 +38041,7 @@ final _objc_msgSend_767 = objc.msgSendPointer
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
 late final _sel_scaleType = objc.registerName("scaleType");
-final _objc_msgSend_768 = objc.msgSendPointer
+final _objc_msgSend_770 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Int32 Function(ffi.Pointer<objc.ObjCObject>,
@@ -37796,7 +38050,7 @@ final _objc_msgSend_768 = objc.msgSendPointer
         int Function(
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_setScaleType_ = objc.registerName("setScaleType:");
-final _objc_msgSend_769 = objc.msgSendPointer
+final _objc_msgSend_771 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
@@ -37830,7 +38084,7 @@ final class CGSize extends ffi.Struct {
 }
 
 late final _sel_initWithFrame_ = objc.registerName("initWithFrame:");
-final _objc_msgSend_770 = objc.msgSendPointer
+final _objc_msgSend_772 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             instancetype Function(ffi.Pointer<objc.ObjCObject>,
@@ -37860,7 +38114,7 @@ class PreviewViewFactory extends objc.NSObject {
   }
 
   static PreviewViewFactory getShared() {
-    final _ret = _objc_msgSend_771(_class_PreviewViewFactory, _sel_shared);
+    final _ret = _objc_msgSend_773(_class_PreviewViewFactory, _sel_shared);
     return PreviewViewFactory.castFromPointer(_ret,
         retain: true, release: true);
   }
@@ -37880,7 +38134,7 @@ class PreviewViewFactory extends objc.NSObject {
 
   objc.NSObject createWithFrame_viewIdentifier_arguments_(
       CGRect frame, int viewId, objc.NSObject? args) {
-    final _ret = _objc_msgSend_772(
+    final _ret = _objc_msgSend_774(
         this.pointer,
         _sel_createWithFrame_viewIdentifier_arguments_,
         frame,
@@ -37890,7 +38144,7 @@ class PreviewViewFactory extends objc.NSObject {
   }
 
   PreviewView? retrieveView_(int viewId) {
-    final _ret = _objc_msgSend_773(this.pointer, _sel_retrieveView_, viewId);
+    final _ret = _objc_msgSend_775(this.pointer, _sel_retrieveView_, viewId);
     return _ret.address == 0
         ? null
         : PreviewView.castFromPointer(_ret, retain: true, release: true);
@@ -37971,7 +38225,7 @@ class PreviewViewFactory extends objc.NSObject {
 late final _class_PreviewViewFactory =
     objc.getClass("camerax_ios.PreviewViewFactory");
 late final _sel_shared = objc.registerName("shared");
-final _objc_msgSend_771 = objc.msgSendPointer
+final _objc_msgSend_773 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
@@ -37981,7 +38235,7 @@ final _objc_msgSend_771 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_createWithFrame_viewIdentifier_arguments_ =
     objc.registerName("createWithFrame:viewIdentifier:arguments:");
-final _objc_msgSend_772 = objc.msgSendPointer
+final _objc_msgSend_774 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(
@@ -37998,7 +38252,7 @@ final _objc_msgSend_772 = objc.msgSendPointer
             int,
             ffi.Pointer<objc.ObjCObject>)>();
 late final _sel_retrieveView_ = objc.registerName("retrieveView:");
-final _objc_msgSend_773 = objc.msgSendPointer
+final _objc_msgSend_775 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,

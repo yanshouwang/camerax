@@ -189,15 +189,40 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<Uint8List> takePictureToMemory() {
-    // TODO: implement takePictureToMemory
-    throw UnimplementedError();
+  Future<Uint8List> takePictureToMemory() async {
+    final completer = Completer<Uint8List>();
+    final handler =
+        ffi.ObjCBlock_ffiVoid_NSData_NSError.listener((data, error) {
+      if (error == null) {
+        final memory = data!.toList();
+        completer.complete(memory);
+      } else {
+        completer.completeError(error);
+      }
+    });
+    ffiValue.takePictureToMemoryWithCompletionHandler_(handler);
+    final memory = await completer.future;
+    return memory;
   }
 
   @override
-  Future<Uri> takePictureToAlbum({String? name}) {
-    // TODO: implement takePictureToAlbum
-    throw UnimplementedError();
+  Future<Uri> takePictureToAlbum({String? name}) async {
+    final completer = Completer<Uri>();
+    final handler =
+        ffi.ObjCBlock_ffiVoid_NSString_NSError.listener((savedPath, error) {
+      if (error == null) {
+        final savedUri = Uri.file('$savedPath');
+        completer.complete(savedUri);
+      } else {
+        completer.completeError(error);
+      }
+    });
+    ffiValue.takePictureToAlbumWithName_completionHandler_(
+      name?.toNSString(),
+      handler,
+    );
+    final savedUri = await completer.future;
+    return savedUri;
   }
 
   void _addZoomStateObserver() {

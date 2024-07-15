@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import Photos
 
 @objc public class CameraController: NSObject {
     let session: AVCaptureSession
@@ -23,6 +24,7 @@ import AVFoundation
     private var torchStateObservation: NSKeyValueObservation?
     private let capturePhotoOutput: AVCapturePhotoOutput
     private let capturePhotoSettings: AVCapturePhotoSettings
+    private var capturePhotoDelegates: [AVCapturePhotoCaptureDelegate]
     @objc public var imageCaptureFlashMode: FlashMode {
         get { capturePhotoSettings.flashMode.xValue }
         set { capturePhotoSettings.flashMode = newValue.avfValue }
@@ -34,7 +36,9 @@ import AVFoundation
         pinchToZoomEnabled = false
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoSettings = AVCapturePhotoSettings()
+        capturePhotoDelegates = []
         super.init()
+        session.sessionPreset = .photo
         try? addVideoDeviceInput(cameraSelector: .back)
         try? addCapturePhotoOutput()
     }
@@ -105,14 +109,14 @@ import AVFoundation
     
     @objc public func removeZoomStateObserver() throws {
         guard let observation = zoomStateObservation else {
-            throw CameraXError.observationNil
+            throw CameraError.observationNil
         }
         observation.invalidate()
     }
     
     @objc public func setZoomRatio(_ zoomRatio: Double) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
-            throw CameraXError.videoDeviceInputNil
+            throw CameraError.videoDeviceInputNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
@@ -122,7 +126,7 @@ import AVFoundation
     
     @objc public func setLinearZoom(_ linearZoom: Double) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
-            throw CameraXError.videoDeviceInputNil
+            throw CameraError.videoDeviceInputNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
@@ -145,21 +149,21 @@ import AVFoundation
     
     @objc public func removeTorchStateObserver() throws {
         guard let observation = torchStateObservation else {
-            throw CameraXError.observationNil
+            throw CameraError.observationNil
         }
         observation.invalidate()
     }
     
     @objc public func enableTorch(_ torchEnabled: Bool) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
-            throw CameraXError.videoDeviceInputNil
+            throw CameraError.videoDeviceInputNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
         defer { videoDevice.unlockForConfiguration() }
         let torchMode = torchEnabled ? AVCaptureDevice.TorchMode.on : .off
         guard videoDevice.isTorchModeSupported(torchMode) else {
-            throw CameraXError.unsupported
+            throw CameraError.unsupported
         }
         videoDevice.torchMode = torchMode
     }
@@ -174,14 +178,46 @@ import AVFoundation
     
     @objc public func takePictureToMemory(completionHandler handler: @escaping (Data?, (any Error)?) -> Void) {
         let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-        let delegate = CapturePhotoToMemoryDelegate(completionHandler: handler)
+        let delegate = CameraCapturePhotoCaptureDelegate() { photo, error in
+            if let error {
+                handler(nil, error)
+            } else if let data = photo.fileDataRepresentation() {
+                handler(data, nil)
+            } else {
+                handler(nil, CameraError.savePhotoNil)
+            }
+        }
         capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
     }
     
     @objc public func takePictureToAlbum(name: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
-        let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-        let delegate = CapturePhotoToAlbumDelegate(name: name, completionHandler: handler)
-        capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
+        requestPhotoLibraryAuthorization() { [self] status in
+            if status == .authorized {
+                let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
+                //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
+                //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
+                //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
+                //        }
+                //        if #available(iOS 16.0, *) {
+                //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
+                //        }
+                //        settings.flashMode = capturePhotoSettings.flashMode
+                //        if #available(iOS 13.0, *) {
+                //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
+                //        }
+                let delegate = CameraCapturePhotoCaptureDelegate() { [self] photo, error in
+                    if let error {
+                        handler(nil, error)
+                    } else {
+                        savePhoto(photo, name: name, completionHandler: handler)
+                    }
+                }
+                capturePhotoDelegates.append(delegate)
+                capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
+            } else {
+                handler(nil, CameraError.unauthorized)
+            }
+        }
     }
     
     private func removeVideoDeviceInput() {
@@ -196,10 +232,10 @@ import AVFoundation
         guard let deviceType = getVideoDeviceType(cameraSelector: cameraSelector),
               let videoDevice = AVCaptureDevice.default(deviceType, for: .video, position: cameraSelector.lensFacing.avfValue),
               let videoDeviceInput = try? AVCaptureDeviceInput.init(device: videoDevice) else {
-            throw CameraXError.videoDeviceInputNil
+            throw CameraError.videoDeviceInputNil
         }
         guard session.canAddInput(videoDeviceInput) else {
-            throw CameraXError.cannotAddInput
+            throw CameraError.cannotAddInput
         }
         session.addInput(videoDeviceInput)
         self.videoDeviceInput = videoDeviceInput
@@ -224,7 +260,7 @@ import AVFoundation
     
     private func addCapturePhotoOutput() throws {
         guard session.canAddOutput(capturePhotoOutput) else {
-            throw CameraXError.cannotAddOutput
+            throw CameraError.cannotAddOutput
         }
         session.addOutput(capturePhotoOutput)
     }
@@ -238,12 +274,72 @@ import AVFoundation
         zoomState = ZoomState(minZoomRatio: videoDevice.minAvailableVideoZoomFactor, maxZoomRatio: videoDevice.maxAvailableVideoZoomFactor, zoomRatio: videoDevice.videoZoomFactor)
     }
     
-    func onTorchStateChanged() {
+    private func onTorchStateChanged() {
         guard let videoDeviceInput = self.videoDeviceInput else {
             torchState = nil
             return
         }
         let videoDevice = videoDeviceInput.device
         torchState = TorchState(value: videoDevice.isTorchActive)
+    }
+    
+    private func requestPhotoLibraryAuthorization(handler: @escaping (PHAuthorizationStatus) -> Void) {
+        if #available(iOS 14, *) {
+            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+            if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in handler(status) }
+            } else {
+                handler(status)
+            }
+        } else {
+            let status = PHPhotoLibrary.authorizationStatus()
+            if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization() { status in handler(status) }
+            } else {
+                handler(status)
+            }
+        }
+    }
+    
+    private func savePhoto(_ photo: AVCapturePhoto, name: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
+        if let data = photo.fileDataRepresentation() {
+            var localIdentifiers = [String]()
+            PHPhotoLibrary.shared().performChanges() {
+                let creationRequest = PHAssetCreationRequest.forAsset()
+                let options = PHAssetResourceCreationOptions()
+                options.originalFilename = name
+                creationRequest.addResource(with: .photo, data: data, options: options)
+                guard let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
+                    return
+                }
+                url.appendingPathComponent("DCIM")
+                url.appendingPathComponent("IMG_0421", conformingTo: .jpeg)
+                guard let _ = try? data.write(to: url) else {
+                    return
+                }
+                creationRequest.addResource(with: .photo, fileURL: url, options: options)
+                guard let localIdentifier = creationRequest.placeholderForCreatedAsset?.localIdentifier else {
+                    return
+                }
+                localIdentifiers.append(localIdentifier)
+            } completionHandler: { success, error in
+                if let error {
+                    handler(nil, error)
+                } else if let savedAsset = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: nil).firstObject {
+                    savedAsset.requestContentEditingInput(with: nil) { input,_ in
+                        if let input, let url = input.fullSizeImageURL {
+                            debugPrint("saved url \(url.absoluteString)")
+                            handler(url.absoluteString, nil)
+                        } else {
+                            handler(nil, CameraError.saveAssetNil)
+                        }
+                    }
+                } else {
+                    handler(nil, CameraError.saveAssetNil)
+                }
+            }
+        } else {
+            handler(nil, CameraError.savePhotoNil)
+        }
     }
 }
