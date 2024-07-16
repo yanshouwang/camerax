@@ -8,7 +8,7 @@
 import AVFoundation
 import Flutter
 
-@objc public class PreviewView: UIView, FlutterPlatformView {
+@objc public class PreviewView: UIView {
     // Use a capture video preview layer as the view's backing layer.
     public override class var layerClass: AnyClass {
         AVCaptureVideoPreviewLayer.self
@@ -27,11 +27,28 @@ import Flutter
         set { previewLayer.videoGravity = newValue.avfValue }
     }
     
-    public override func removeFromSuperview() {
-        PreviewViewFactory.shared.removeView(self)
+    public override func didMoveToSuperview() {
+        debugPrint("Preview didMoveToSuperview")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
+        addGestureRecognizer(tapGestureRecognizer)
+        addGestureRecognizer(pinchGestureRecognizer)
     }
     
-    public func view() -> UIView {
-        return self
+    public override func removeFromSuperview() {
+        debugPrint("Preview removeFromSuperview")
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        guard let controller = self.controller, controller.isTapToFocusEnabled() else {
+            return
+        }
+        let layerPoint = sender.location(in: self)
+        let devicePoint = previewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
+        try? controller.focusAndExposure(devicePoint: devicePoint)
+    }
+    
+    @objc func handlePinch(sender: UIPinchGestureRecognizer) {
+        
     }
 }

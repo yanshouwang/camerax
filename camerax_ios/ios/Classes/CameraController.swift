@@ -32,8 +32,8 @@ import Photos
     
     @objc public override init() {
         session = AVCaptureSession()
-        tapToFocusEnabled = false
-        pinchToZoomEnabled = false
+        tapToFocusEnabled = true                            
+        pinchToZoomEnabled = true
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoSettings = AVCapturePhotoSettings()
         capturePhotoDelegates = []
@@ -84,6 +84,31 @@ import Photos
     
     @objc public func setTapToFocusEnabled(_ enabled: Bool) {
         tapToFocusEnabled = enabled
+    }
+    
+    func focusAndExposure(devicePoint: CGPoint) throws {
+        guard let videoDeviceInput = self.videoDeviceInput else {
+            return
+        }
+        let videoDevice = videoDeviceInput.device
+        try videoDevice.lockForConfiguration()
+        defer { videoDevice.unlockForConfiguration() }
+        if videoDevice.isFocusPointOfInterestSupported {
+            videoDevice.focusPointOfInterest = devicePoint
+            if videoDevice.isFocusModeSupported(.continuousAutoFocus) {
+                videoDevice.focusMode = .continuousAutoFocus
+            } else if videoDevice.isFocusModeSupported(.autoFocus) {
+                videoDevice.focusMode = .autoFocus
+            }
+        }
+        if videoDevice.isExposurePointOfInterestSupported {
+            videoDevice.exposurePointOfInterest = devicePoint
+            if videoDevice.isExposureModeSupported(.continuousAutoExposure) {
+                videoDevice.exposureMode = .continuousAutoExposure
+            } else if videoDevice.isExposureModeSupported(.autoExpose) {
+                videoDevice.exposureMode = .autoExpose
+            }
+        }
     }
     
     @objc public func isPinchToZoomEnabled() -> Bool {
@@ -184,7 +209,7 @@ import Photos
             } else if let data = photo.fileDataRepresentation() {
                 handler(data, nil)
             } else {
-                handler(nil, CameraError.savePhotoNil)
+                handler(nil, CameraError.saveDataNil)
             }
         }
         capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
@@ -285,9 +310,9 @@ import Photos
     
     private func requestPhotoLibraryAuthorization(handler: @escaping (PHAuthorizationStatus) -> Void) {
         if #available(iOS 14, *) {
-            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+            let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
             if status == .notDetermined {
-                PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in handler(status) }
+                PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in handler(status) }
             } else {
                 handler(status)
             }
@@ -309,15 +334,6 @@ import Photos
                 let options = PHAssetResourceCreationOptions()
                 options.originalFilename = name
                 creationRequest.addResource(with: .photo, data: data, options: options)
-                guard let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-                    return
-                }
-                url.appendingPathComponent("DCIM")
-                url.appendingPathComponent("IMG_0421", conformingTo: .jpeg)
-                guard let _ = try? data.write(to: url) else {
-                    return
-                }
-                creationRequest.addResource(with: .photo, fileURL: url, options: options)
                 guard let localIdentifier = creationRequest.placeholderForCreatedAsset?.localIdentifier else {
                     return
                 }
@@ -328,10 +344,10 @@ import Photos
                 } else if let savedAsset = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: nil).firstObject {
                     savedAsset.requestContentEditingInput(with: nil) { input,_ in
                         if let input, let url = input.fullSizeImageURL {
-                            debugPrint("saved url \(url.absoluteString)")
-                            handler(url.absoluteString, nil)
+                            debugPrint("saved url \(url.path)")
+                            handler(url.path, nil)
                         } else {
-                            handler(nil, CameraError.saveAssetNil)
+                            handler(nil, CameraError.saveUrlNil)
                         }
                     }
                 } else {
@@ -339,7 +355,7 @@ import Photos
                 }
             }
         } else {
-            handler(nil, CameraError.savePhotoNil)
+            handler(nil, CameraError.saveDataNil)
         }
     }
 }

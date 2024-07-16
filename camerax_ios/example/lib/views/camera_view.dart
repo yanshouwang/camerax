@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:camerax_ios_example/view_models.dart';
 import 'package:camerax_ios_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -14,11 +12,13 @@ class CameraView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = ViewModel.of<CameraViewModel>(context);
+    final controller = viewModel.controller;
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final torchState = viewModel.torchState;
-    final savedUri = viewModel.savedUri;
-    final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
+    // final savedUri = viewModel.savedUri;
+    // final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
+    final thumbnail = viewModel.thumbnail;
     return CupertinoPageScaffold(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -94,7 +94,7 @@ class CameraView extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               children: [
                 PreviewView(
-                  controller: viewModel.controller,
+                  controller: controller,
                   scaleType: ScaleType.fillCenter,
                 ),
                 if (zoomState != null)
@@ -122,12 +122,12 @@ class CameraView extends StatelessWidget {
                     height: 48.0,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      // color: CupertinoColors.quaternarySystemFill
-                      //     .resolveFrom(context),
+                      color: CupertinoColors.quaternarySystemFill
+                          .resolveFrom(context),
                       image: thumbnail == null
                           ? null
                           : DecorationImage(
-                              image: FileImage(thumbnail),
+                              image: MemoryImage(thumbnail),
                               fit: BoxFit.cover,
                               onError: (exception, stackTrace) {
                                 Logger.root.shout(

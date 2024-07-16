@@ -1,9 +1,7 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'camera_controller.dart';
-import 'scale_type.dart';
+import 'preview_view_controller.dart';
 
 /// Platform-specific implementations should implement this class to support
 /// camerax.
@@ -35,13 +33,5 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   CameraController createCameraController();
 
-  Widget buildPreviewView(
-    BuildContext context, {
-    required CameraController controller,
-    required ScaleType scaleType,
-    required PlatformViewCreatedCallback onPreviewViewCreated,
-  });
-
-  Future<void> setPreviewViewController(int id, CameraController controller);
-  Future<void> setPreviewViewScaleType(int id, ScaleType scaleType);
+  PreviewViewController createPreviewViewController();
 }

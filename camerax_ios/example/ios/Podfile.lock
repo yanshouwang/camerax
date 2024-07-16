@@ -6,12 +6,15 @@ PODS:
     - Flutter
   - objective_c (0.0.1):
     - Flutter
+  - photo_gallery (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - camerax_ios (from `.symlinks/plugins/camerax_ios/ios`)
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - objective_c (from `.symlinks/plugins/objective_c/ios`)
+  - photo_gallery (from `.symlinks/plugins/photo_gallery/ios`)
 
 EXTERNAL SOURCES:
   camerax_ios:
@@ -22,12 +25,15 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
   objective_c:
     :path: ".symlinks/plugins/objective_c/ios"
+  photo_gallery:
+    :path: ".symlinks/plugins/photo_gallery/ios"
 
 SPEC CHECKSUMS:
   camerax_ios: 9213e2809365aa5f11ae8363c86e8e04c8f5c472
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
   objective_c: 77e887b5ba1827970907e10e832eec1683f3431d
+  photo_gallery: 9f95e57747cd22c10676ece3660d1ffe6c603ee5
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

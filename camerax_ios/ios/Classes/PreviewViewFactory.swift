@@ -16,22 +16,36 @@ import UIKit
     private override init() {}
     
     public func create(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?) -> any FlutterPlatformView {
-        guard let view = views[viewId] else {
-            let newView = PreviewView()
-            views[viewId] = newView
-            return newView
-        }
-        return view
+        return PreviewViewImpl(frame: frame, viewId: viewId, args: args)
     }
     
     @objc public func retrieveView(_ viewId: Int64) -> PreviewView? {
         return views[viewId]
     }
     
-    func removeView(_ view: PreviewView) {
-        guard let element = views.first(where: { $0.value == view }) else {
-            return
+    class PreviewViewImpl: NSObject, FlutterPlatformView {
+        let frame: CGRect
+        let viewId: Int64
+        let args: Any?
+        
+        init(frame: CGRect, viewId: Int64, args: Any?) {
+            self.frame = frame
+            self.viewId = viewId
+            self.args = args
         }
-        views.removeValue(forKey: element.key)
+        
+        func view() -> UIView {
+            if let view = PreviewViewFactory.shared.views[viewId] {
+                return view
+            } else {
+                let view = PreviewView(frame: frame)
+                PreviewViewFactory.shared.views[viewId] = view
+                return view
+            }
+        }
+        
+        deinit {
+            PreviewViewFactory.shared.views.removeValue(forKey: viewId)
+        }
     }
 }

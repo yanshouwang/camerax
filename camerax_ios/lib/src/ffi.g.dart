@@ -1211,7 +1211,7 @@ class NSAttributedString extends objc.NSObject {
       NSAttributedString format,
       int options,
       objc.NSLocale? locale,
-      ffi.Pointer<ffi.Char> arguments) {
+      ffi.Pointer<__va_list_tag> arguments) {
     final _ret = _objc_msgSend_57(
         this.pointer,
         _sel_initWithFormat_options_locale_arguments_,
@@ -1263,7 +1263,7 @@ class NSAttributedString extends objc.NSObject {
       int options,
       objc.NSLocale? locale,
       objc.NSDictionary context,
-      ffi.Pointer<ffi.Char> arguments) {
+      ffi.Pointer<__va_list_tag> arguments) {
     final _ret = _objc_msgSend_60(
         this.pointer,
         _sel_initWithFormat_options_locale_context_arguments_,
@@ -2298,6 +2298,19 @@ final _objc_msgSend_56 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             int,
             ffi.Pointer<objc.ObjCObject>)>();
+
+final class __va_list_tag extends ffi.Struct {
+  @ffi.UnsignedInt()
+  external int gp_offset;
+
+  @ffi.UnsignedInt()
+  external int fp_offset;
+
+  external ffi.Pointer<ffi.Void> overflow_arg_area;
+
+  external ffi.Pointer<ffi.Void> reg_save_area;
+}
+
 late final _sel_initWithFormat_options_locale_arguments_ =
     objc.registerName("initWithFormat:options:locale:arguments:");
 final _objc_msgSend_57 = objc.msgSendPointer
@@ -2309,7 +2322,7 @@ final _objc_msgSend_57 = objc.msgSendPointer
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Int32,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<ffi.Char>)>>()
+                ffi.Pointer<__va_list_tag>)>>()
     .asFunction<
         instancetype Function(
             ffi.Pointer<objc.ObjCObject>,
@@ -2317,7 +2330,7 @@ final _objc_msgSend_57 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             int,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Char>)>();
+            ffi.Pointer<__va_list_tag>)>();
 late final _sel_localizedAttributedStringWithFormat_ =
     objc.registerName("localizedAttributedStringWithFormat:");
 late final _sel_localizedAttributedStringWithFormat_options_ =
@@ -2368,7 +2381,7 @@ final _objc_msgSend_60 = objc.msgSendPointer
                 ffi.Int32,
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<ffi.Char>)>>()
+                ffi.Pointer<__va_list_tag>)>>()
     .asFunction<
         instancetype Function(
             ffi.Pointer<objc.ObjCObject>,
@@ -2377,7 +2390,7 @@ final _objc_msgSend_60 = objc.msgSendPointer
             int,
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Char>)>();
+            ffi.Pointer<__va_list_tag>)>();
 late final _sel_localizedAttributedStringWithFormat_context_ =
     objc.registerName("localizedAttributedStringWithFormat:context:");
 final _objc_msgSend_61 = objc.msgSendPointer
@@ -2740,7 +2753,7 @@ class NSMutableAttributedString extends NSAttributedString {
       NSAttributedString format,
       int options,
       objc.NSLocale? locale,
-      ffi.Pointer<ffi.Char> arguments) {
+      ffi.Pointer<__va_list_tag> arguments) {
     final _ret = _objc_msgSend_57(
         this.pointer,
         _sel_initWithFormat_options_locale_arguments_,
@@ -2794,7 +2807,7 @@ class NSMutableAttributedString extends NSAttributedString {
       int options,
       objc.NSLocale? locale,
       objc.NSDictionary context,
-      ffi.Pointer<ffi.Char> arguments) {
+      ffi.Pointer<__va_list_tag> arguments) {
     final _ret = _objc_msgSend_60(
         this.pointer,
         _sel_initWithFormat_options_locale_context_arguments_,
@@ -8448,8 +8461,8 @@ class NSException extends objc.NSObject {
         _class_NSException, _sel_raise_format_, name.pointer, format.pointer);
   }
 
-  static void raise_format_arguments_(
-      objc.NSString name, objc.NSString format, ffi.Pointer<ffi.Char> argList) {
+  static void raise_format_arguments_(objc.NSString name, objc.NSString format,
+      ffi.Pointer<__va_list_tag> argList) {
     _objc_msgSend_202(_class_NSException, _sel_raise_format_arguments_,
         name.pointer, format.pointer, argList);
   }
@@ -8603,14 +8616,14 @@ final _objc_msgSend_202 = objc.msgSendPointer
                 ffi.Pointer<objc.ObjCSelector>,
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<ffi.Char>)>>()
+                ffi.Pointer<__va_list_tag>)>>()
     .asFunction<
         void Function(
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>,
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Char>)>();
+            ffi.Pointer<__va_list_tag>)>();
 
 class NSRunLoop extends objc.NSObject {
   NSRunLoop._(ffi.Pointer<objc.ObjCObject> pointer,
@@ -18034,7 +18047,7 @@ class NSPredicate extends objc.NSObject {
   }
 
   static NSPredicate predicateWithFormat_arguments_(
-      objc.NSString predicateFormat, ffi.Pointer<ffi.Char> argList) {
+      objc.NSString predicateFormat, ffi.Pointer<__va_list_tag> argList) {
     final _ret = _objc_msgSend_405(_class_NSPredicate,
         _sel_predicateWithFormat_arguments_, predicateFormat.pointer, argList);
     return NSPredicate.castFromPointer(_ret, retain: true, release: true);
@@ -18210,13 +18223,13 @@ final _objc_msgSend_405 = objc.msgSendPointer
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCSelector>,
                 ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<ffi.Char>)>>()
+                ffi.Pointer<__va_list_tag>)>>()
     .asFunction<
         ffi.Pointer<objc.ObjCObject> Function(
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>,
             ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<ffi.Char>)>();
+            ffi.Pointer<__va_list_tag>)>();
 late final _sel_predicateFromMetadataQueryString_ =
     objc.registerName("predicateFromMetadataQueryString:");
 final _objc_msgSend_406 = objc.msgSendPointer
@@ -37995,13 +38008,12 @@ class PreviewView extends objc.ObjCObjectBase {
     return _objc_msgSend_771(this.pointer, _sel_setScaleType_, value);
   }
 
-  void removeFromSuperview() {
-    _objc_msgSend_82(this.pointer, _sel_removeFromSuperview);
+  void didMoveToSuperview() {
+    _objc_msgSend_82(this.pointer, _sel_didMoveToSuperview);
   }
 
-  objc.NSObject view() {
-    final _ret = _objc_msgSend_40(this.pointer, _sel_view);
-    return objc.NSObject.castFromPointer(_ret, retain: true, release: true);
+  void removeFromSuperview() {
+    _objc_msgSend_82(this.pointer, _sel_removeFromSuperview);
   }
 
   PreviewView initWithFrame_(CGRect frame) {
@@ -38058,8 +38070,8 @@ final _objc_msgSend_771 = objc.msgSendPointer
     .asFunction<
         void Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_didMoveToSuperview = objc.registerName("didMoveToSuperview");
 late final _sel_removeFromSuperview = objc.registerName("removeFromSuperview");
-late final _sel_view = objc.registerName("view");
 
 final class CGRect extends ffi.Struct {
   external CGPoint origin;

@@ -3,7 +3,7 @@ import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:logging/logging.dart';
 
 import 'camera_controller.dart';
-import 'camerax.dart';
+import 'preview_view_controller.dart';
 import 'scale_type.dart';
 
 class PreviewView extends StatefulWidget {
@@ -24,11 +24,12 @@ class PreviewView extends StatefulWidget {
 
 class _PreviewViewState extends State<PreviewView>
     with TypeLogger, LoggerController {
-  int? _id;
+  late final PreviewViewController _controller;
 
   @override
   void initState() {
     super.initState();
+    _controller = PreviewViewController();
     if (widget.logLevel == null) {
       return;
     }
@@ -37,16 +38,12 @@ class _PreviewViewState extends State<PreviewView>
 
   @override
   Widget build(BuildContext context) {
-    logger.info('build.');
-    return CameraXPlugin.instance.buildPreviewView(
+    return _controller.build(
       context,
-      controller: widget.controller,
-      scaleType: widget.scaleType,
-      onPreviewViewCreated: (id) {
-        logger.info('onPreviewViewCreated.');
-        _id = id;
-        CameraXPlugin.instance.setPreviewViewController(id, widget.controller);
-        CameraXPlugin.instance.setPreviewViewScaleType(id, widget.scaleType);
+      onCreated: (id) {
+        logger.info('onCreated.');
+        _controller.setController(widget.controller);
+        _controller.setScaleType(widget.scaleType);
       },
     );
   }
@@ -57,17 +54,13 @@ class _PreviewViewState extends State<PreviewView>
     if (widget.logLevel != oldWidget.logLevel) {
       logLevel = widget.logLevel;
     }
-    final id = _id;
-    if (id == null) {
-      return;
-    }
     if (widget.controller != oldWidget.controller) {
       logger.info('didUpdate ${widget.controller}.');
-      CameraXPlugin.instance.setPreviewViewController(id, widget.controller);
+      _controller.setController(widget.controller);
     }
     if (widget.scaleType != oldWidget.scaleType) {
       logger.info('didUpdate ${widget.scaleType}.');
-      CameraXPlugin.instance.setPreviewViewScaleType(id, widget.scaleType);
+      _controller.setScaleType(widget.scaleType);
     }
   }
 }

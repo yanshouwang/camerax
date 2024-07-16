@@ -15,7 +15,7 @@ enum CameraError: Error {
     case cannotAddInput
     case cannotAddOutput
     case observationNil
-    case savePhotoNil
-    case saveLocalIdentifierNil
+    case saveDataNil
+    case saveUrlNil
     case saveAssetNil
 }
