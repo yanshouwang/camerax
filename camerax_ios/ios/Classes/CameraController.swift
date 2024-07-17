@@ -22,6 +22,7 @@ import Photos
     @objc private dynamic var torchState: TorchState?
     private var isTorchActiveObservation: NSKeyValueObservation?
     private var torchStateObservation: NSKeyValueObservation?
+    private var subjectAreaDidChangeObserver: Any?
     private let capturePhotoOutput: AVCapturePhotoOutput
     private let capturePhotoSettings: AVCapturePhotoSettings
     private var capturePhotoDelegates: [AVCapturePhotoCaptureDelegate]
@@ -32,7 +33,7 @@ import Photos
     
     @objc public override init() {
         session = AVCaptureSession()
-        tapToFocusEnabled = true                            
+        tapToFocusEnabled = true
         pinchToZoomEnabled = true
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoSettings = AVCapturePhotoSettings()
@@ -86,31 +87,6 @@ import Photos
         tapToFocusEnabled = enabled
     }
     
-    func focusAndExposure(devicePoint: CGPoint) throws {
-        guard let videoDeviceInput = self.videoDeviceInput else {
-            return
-        }
-        let videoDevice = videoDeviceInput.device
-        try videoDevice.lockForConfiguration()
-        defer { videoDevice.unlockForConfiguration() }
-        if videoDevice.isFocusPointOfInterestSupported {
-            videoDevice.focusPointOfInterest = devicePoint
-            if videoDevice.isFocusModeSupported(.continuousAutoFocus) {
-                videoDevice.focusMode = .continuousAutoFocus
-            } else if videoDevice.isFocusModeSupported(.autoFocus) {
-                videoDevice.focusMode = .autoFocus
-            }
-        }
-        if videoDevice.isExposurePointOfInterestSupported {
-            videoDevice.exposurePointOfInterest = devicePoint
-            if videoDevice.isExposureModeSupported(.continuousAutoExposure) {
-                videoDevice.exposureMode = .continuousAutoExposure
-            } else if videoDevice.isExposureModeSupported(.autoExpose) {
-                videoDevice.exposureMode = .autoExpose
-            }
-        }
-    }
-    
     @objc public func isPinchToZoomEnabled() -> Bool {
         return pinchToZoomEnabled
     }
@@ -146,7 +122,7 @@ import Photos
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
         defer { videoDevice.unlockForConfiguration() }
-        videoDevice.videoZoomFactor = zoomRatio
+        videoDevice.zoomRatio = zoomRatio
     }
     
     @objc public func setLinearZoom(_ linearZoom: Double) throws {
@@ -156,7 +132,7 @@ import Photos
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
         defer { videoDevice.unlockForConfiguration() }
-        videoDevice.videoZoomFactor = videoDevice.minAvailableVideoZoomFactor + linearZoom * (videoDevice.maxAvailableVideoZoomFactor - videoDevice.minAvailableVideoZoomFactor)
+        videoDevice.zoomRatio = videoDevice.minZoomRatio + linearZoom * (videoDevice.maxZoomRatio - videoDevice.minZoomRatio)
     }
     
     @objc public func getTorchState() -> TorchState? {
@@ -264,10 +240,18 @@ import Photos
         }
         session.addInput(videoDeviceInput)
         self.videoDeviceInput = videoDeviceInput
+//        try? setZoomRatio(1.0)
         minAvailableVideoZoomFactorObservation = videoDevice.observe(\.minAvailableVideoZoomFactor, options: .new) { [self] _,_ in onZoomStateChanged() }
         maxAvailableVideoZoomFactorObservation = videoDevice.observe(\.maxAvailableVideoZoomFactor, options: .new) { [self] _,_ in onZoomStateChanged() }
         videoZoomFactorObservation = videoDevice.observe(\.videoZoomFactor, options: [.initial, .new]) { [self] _,_ in onZoomStateChanged() }
         isTorchActiveObservation = videoDevice.observe(\.isTorchActive, options: [.initial, .new]) { [self] _,_ in onTorchStateChanged() }
+        if let subjectAreaDidChangeObserver {
+            NotificationCenter.default.removeObserver(subjectAreaDidChangeObserver)
+        }
+        subjectAreaDidChangeObserver = NotificationCenter.default.addObserver(forName: .AVCaptureDeviceSubjectAreaDidChange, object: videoDevice, queue: .current) { [self] _ in
+            let devicePoint = CGPoint(x: 0.5, y: 0.5)
+            try? focusAndExpose(devicePoint: devicePoint, continuous: true)
+        }
     }
     
     private func getVideoDeviceType(cameraSelector: CameraSelector) -> AVCaptureDevice.DeviceType? {
@@ -283,6 +267,26 @@ import Photos
         }
     }
     
+    func focusAndExpose(devicePoint: CGPoint, continuous: Bool) throws {
+        guard let videoDeviceInput = self.videoDeviceInput else {
+            return
+        }
+        let videoDevice = videoDeviceInput.device
+        try videoDevice.lockForConfiguration()
+        defer { videoDevice.unlockForConfiguration() }
+        let focusMode = continuous ? AVCaptureDevice.FocusMode.continuousAutoFocus : .autoFocus
+        if videoDevice.isFocusPointOfInterestSupported && videoDevice.isFocusModeSupported(focusMode) {
+            videoDevice.focusPointOfInterest = devicePoint
+            videoDevice.focusMode = focusMode
+        }
+        let exposureMode = continuous ? AVCaptureDevice.ExposureMode.continuousAutoExposure : .autoExpose
+        if videoDevice.isExposurePointOfInterestSupported && videoDevice.isExposureModeSupported(exposureMode) {
+            videoDevice.exposurePointOfInterest = devicePoint
+            videoDevice.exposureMode = exposureMode
+        }
+        videoDevice.isSubjectAreaChangeMonitoringEnabled = !continuous
+    }
+    
     private func addCapturePhotoOutput() throws {
         guard session.canAddOutput(capturePhotoOutput) else {
             throw CameraError.cannotAddOutput
@@ -296,7 +300,7 @@ import Photos
             return
         }
         let videoDevice = videoDeviceInput.device
-        zoomState = ZoomState(minZoomRatio: videoDevice.minAvailableVideoZoomFactor, maxZoomRatio: videoDevice.maxAvailableVideoZoomFactor, zoomRatio: videoDevice.videoZoomFactor)
+        zoomState = videoDevice.zoomState
     }
     
     private func onTorchStateChanged() {
@@ -357,5 +361,50 @@ import Photos
         } else {
             handler(nil, CameraError.saveDataNil)
         }
+    }
+}
+
+extension AVCaptureDevice {
+    var minZoomRatio: Double {
+        if #available(iOS 13.0, *), let factor = virtualDeviceSwitchOverVideoZoomFactors.first {
+            return minAvailableVideoZoomFactor / factor.doubleValue
+        } else {
+            return minAvailableVideoZoomFactor
+        }
+    }
+    
+    var maxZoomRatio: Double {
+        if #available(iOS 13.0, *),
+           let minX = virtualDeviceSwitchOverVideoZoomFactors.first,
+           let maxX = virtualDeviceSwitchOverVideoZoomFactors.last {
+            // 5x digital zoom factor
+            return min(maxAvailableVideoZoomFactor / minX.doubleValue, maxX.doubleValue / minX.doubleValue * 5.0)
+        } else {
+            return min(maxAvailableVideoZoomFactor, 10.0)
+        }
+    }
+    
+    var zoomRatio: Double {
+        get {
+            if #available(iOS 13.0, *), let factor = virtualDeviceSwitchOverVideoZoomFactors.first {
+                return videoZoomFactor / factor.doubleValue
+            } else {
+                return videoZoomFactor
+            }
+        }
+        set {
+            if newValue < minZoomRatio || newValue > maxZoomRatio {
+                return
+            }
+            if #available(iOS 13.0, *), let factor = virtualDeviceSwitchOverVideoZoomFactors.first {
+                videoZoomFactor = newValue * factor.doubleValue
+            } else {
+                videoZoomFactor = newValue
+            }
+        }
+    }
+    
+    var zoomState: ZoomState {
+        return ZoomState(minZoomRatio: minZoomRatio, maxZoomRatio: maxZoomRatio, zoomRatio: zoomRatio)
     }
 }

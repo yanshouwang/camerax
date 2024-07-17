@@ -60,7 +60,7 @@ extension FFIZoomStateX on ffi.ZoomState {
   ZoomState get dartValue {
     return ZoomState(
       minZoomRatio: minZoomRatio,
-      maxZoomRatio: maxZoomRatio.clamp(minZoomRatio, 15.0),
+      maxZoomRatio: maxZoomRatio,
       zoomRatio: zoomRatio,
       linearZoom: linearZoom,
     );

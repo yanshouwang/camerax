@@ -95,7 +95,7 @@ class CameraView extends StatelessWidget {
               children: [
                 PreviewView(
                   controller: controller,
-                  scaleType: ScaleType.fillCenter,
+                  scaleType: ScaleType.fitCenter,
                 ),
                 if (zoomState != null)
                   ZoomWidget(

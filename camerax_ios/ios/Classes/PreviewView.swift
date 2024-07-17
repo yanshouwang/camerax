@@ -40,15 +40,28 @@ import Flutter
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        guard let controller = self.controller, controller.isTapToFocusEnabled() else {
+        guard let controller, controller.isTapToFocusEnabled() else {
             return
         }
         let layerPoint = sender.location(in: self)
         let devicePoint = previewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
-        try? controller.focusAndExposure(devicePoint: devicePoint)
+        try? controller.focusAndExpose(devicePoint: devicePoint, continuous: false)
     }
     
     @objc func handlePinch(sender: UIPinchGestureRecognizer) {
-        
+        guard let controller, controller.isPinchToZoomEnabled(), let zoomState = controller.getZoomState() else {
+            return
+        }
+        switch sender.state {
+        case .began:
+            sender.scale = zoomState.zoomRatio
+        case .changed:
+            let minZoomRatio = zoomState.minZoomRatio
+            let maxZoomRatio = zoomState.maxZoomRatio
+            let zoomRatio = min(max(sender.scale, minZoomRatio), maxZoomRatio)
+            try? controller.setZoomRatio(zoomRatio)
+        default:
+            break
+        }
     }
 }
