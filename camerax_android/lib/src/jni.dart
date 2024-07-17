@@ -213,6 +213,13 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     return runOnPlatformThread(() => enableTorch(torchEnabled));
   }
 
+  // Future<void> setImageAnalysisOutputImageFormatOnMainThread(
+  //   int imageAnalysisOutputImageFormat,
+  // ) {
+  //   return runOnPlatformThread(() =>
+  //       setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat));
+  // }
+
   Future<void> setImageAnalysisBackpressureStrategyOnMainThread(int strategy) {
     return runOnPlatformThread(() => setImageAnalysisBackpressureStrategy(
           strategy,

@@ -19,14 +19,14 @@ dependencies:
     path: ../camerax_platform_interface
   logging: ^1.2.0
   hybrid_logging: ^1.0.0
-  jni: ^0.9.3
+  jni: ^0.10.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  pigeon: ^20.0.1
-  jnigen: ^0.9.3
+  pigeon: ^21.0.0
+  jnigen: ^0.10.0
 
 flutter:
   plugin:

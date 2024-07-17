@@ -148,10 +148,10 @@ packages:
     dependency: transitive
     description:
       name: jni
-      sha256: "85cf3fbc8ce837e09b4cfe59d688c0249a5b9f4cc9a9a5be38e2823f218988a8"
+      sha256: f377c585ea9c08d48b427dc2e03780af2889d1bb094440da853c6883c1acba4b
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.3"
+    version: "0.10.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -212,10 +212,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_symbols_icons
-      sha256: a2c78726048c755f0f90fd2b7c8799cd94338e2e9b7ab6498ae56503262c14bc
+      sha256: "6102193e0c451426e9bb5e6cbc8533609e464bb2afa7fce42d9d79790e012beb"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2762.0"
+    version: "4.2768.0"
   meta:
     dependency: transitive
     description:
