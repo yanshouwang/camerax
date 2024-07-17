@@ -202,7 +202,10 @@ final class CameraControllerImpl
         updateTransform: (matrix) {},
       ),
     );
-    await jniValue.setImageAnalysisAnalyzerOnMainThread(executor, jniAanlyzer);
+    await jniValue.setImageAnalysisAnalyzerOnMainThread(
+      executor,
+      jniAanlyzer.reference,
+    );
   }
 
   @override

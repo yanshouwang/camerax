@@ -1,5 +1,5 @@
 import 'image_proxy.dart';
 
-abstract class ImageAnalyzer {
+abstract interface class ImageAnalyzer {
   void analyze(ImageProxy image);
 }

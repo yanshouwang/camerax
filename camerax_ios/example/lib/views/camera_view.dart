@@ -60,31 +60,6 @@ class CameraView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (torchState != null)
-                    Container(
-                      margin: const EdgeInsets.only(left: 20.0),
-                      child: AnimatedTapWidget(
-                        duration: const Duration(milliseconds: 100),
-                        onTap: () {
-                          viewModel.toggleTorchState();
-                        },
-                        child: Container(
-                          width: 48.0,
-                          height: 48.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: CupertinoColors.quaternarySystemFill
-                                .resolveFrom(context),
-                          ),
-                          child: Icon(
-                            torchState
-                                ? Symbols.flashlight_on
-                                : Symbols.flashlight_off,
-                            color: CupertinoColors.label.resolveFrom(context),
-                          ),
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ),

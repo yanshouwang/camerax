@@ -221,12 +221,17 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
 
   Future<void> setImageAnalysisAnalyzerOnMainThread(
     jni.Executor executor,
-    jni.ImageAnalysis_Analyzer analyzer,
+    JReference analyzerReference,
   ) {
-    return runOnPlatformThread(() => setImageAnalysisAnalyzer(
-          executor,
-          analyzer,
-        ));
+    return runOnPlatformThread(() {
+      final analyzer = jni.ImageAnalysis_Analyzer.fromReference(
+        analyzerReference,
+      );
+      setImageAnalysisAnalyzer(
+        executor,
+        analyzer,
+      );
+    });
   }
 
   Future<void> clearImageAnalysisAnalyzerOnMainThread() {

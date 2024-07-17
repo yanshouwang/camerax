@@ -4,7 +4,9 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 
-class CameraViewModel extends ViewModel with TypeLogger {
+class CameraViewModel extends ViewModel
+    with TypeLogger
+    implements ImageAnalyzer {
   final CameraController controller;
   LensFacing _lensFacing;
   ZoomState? _zoomState;
@@ -56,7 +58,14 @@ flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
+    await controller.setImageAnalyzer(this);
     await controller.bindToLifecycle();
+  }
+
+  @override
+  void analyze(ImageProxy image) {
+    logger.info(image);
+    image.close();
   }
 
   Future<void> toggleLensFacing() async {
@@ -97,6 +106,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
 
   @override
   void dispose() {
+    controller.clearImageAnalyzer();
     controller.unbind();
     _zoomStateSubscription.cancel();
     _torchStateSubscription.cancel();
