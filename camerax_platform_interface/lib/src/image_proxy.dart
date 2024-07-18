@@ -1,15 +1,9 @@
 import 'dart:typed_data';
 
-abstract class ImageProxy {
-  final int width;
-  final int height;
-  final Uint8List data;
+abstract interface class ImageProxy {
+  int get width;
+  int get height;
+  Uint8List get data;
 
-  ImageProxy({
-    required this.width,
-    required this.height,
-    required this.data,
-  });
-
-  void close();
+  Future<void> close();
 }

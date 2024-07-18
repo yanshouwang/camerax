@@ -3,11 +3,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'camera_controller.dart';
+import 'jni_camera_controller.dart';
 import 'jni.dart';
 import 'jni.g.dart' as jni;
 
-final class PreviewViewControllerImpl implements PreviewViewController {
+final class JNIPreviewViewController implements PreviewViewController {
   int? _id;
 
   @override
@@ -45,7 +45,7 @@ final class PreviewViewControllerImpl implements PreviewViewController {
 
   @override
   Future<void> setController(CameraController? controller) async {
-    if (controller is! CameraControllerImpl) {
+    if (controller is! JNICameraController) {
       throw TypeError();
     }
     final id = _id;

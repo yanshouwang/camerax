@@ -1,7 +1,7 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'camera_controller.dart';
-import 'preview_view_controller.dart';
+import 'jni_camera_controller.dart';
+import 'jni_preview_view_controller.dart';
 
 final class CameraXAndroidPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -10,11 +10,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
 
   @override
   CameraController createCameraController() {
-    return CameraControllerImpl();
+    return JNICameraController();
   }
 
   @override
   PreviewViewController createPreviewViewController() {
-    return PreviewViewControllerImpl();
+    return JNIPreviewViewController();
   }
 }

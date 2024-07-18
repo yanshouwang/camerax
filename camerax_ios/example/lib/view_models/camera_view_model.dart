@@ -68,7 +68,7 @@ flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
-    await _controller.bindToLifecycle();
+    await _controller.bind();
   }
 
   Future<void> _updateThumbnail() async {

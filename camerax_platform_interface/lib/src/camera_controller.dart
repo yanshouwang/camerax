@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:hybrid_logging/hybrid_logging.dart';
 
+import 'authorization_type.dart';
 import 'camera_selector.dart';
 import 'camerax.dart';
 import 'flash_mode.dart';
@@ -12,10 +13,13 @@ abstract interface class CameraController implements LogController {
   Stream<ZoomState?> get zoomStateChanged;
   Stream<bool?> get torchStateChanged;
 
-  Future<bool> requestPermissions({
-    bool enableAudio = false,
+  Future<bool> checkAuthorization({
+    required AuthorizationType type,
   });
-  Future<void> bindToLifecycle();
+  Future<bool> requestAuthorization({
+    required AuthorizationType type,
+  });
+  Future<void> bind();
   Future<void> unbind();
   Future<bool> hasCamera(CameraSelector cameraSelector);
   Future<void> setCameraSelector(CameraSelector cameraSelector);

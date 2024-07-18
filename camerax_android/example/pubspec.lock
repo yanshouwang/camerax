@@ -139,6 +139,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  hybrid_os:
+    dependency: transitive
+    description:
+      name: hybrid_os
+      sha256: a786ca0a3a98660621b54a3382254cbd3ed2bb39cd67adec65e0ed821c3f7b6b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
+  hybrid_os_android:
+    dependency: transitive
+    description:
+      name: hybrid_os_android
+      sha256: "21544efca3c21fff0187d729ad7491c932fbacb80d87b02ee17a65f287570b52"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  hybrid_os_darwin:
+    dependency: transitive
+    description:
+      name: hybrid_os_darwin
+      sha256: "60f18ce784837e8b1b216c9281603adcd3cd28daadbc78371f050e51627fa5ed"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  hybrid_os_linux:
+    dependency: transitive
+    description:
+      name: hybrid_os_linux
+      sha256: c3f2232e04b10c2b746fc89a6e15793601fb2b11eb9d160bd5e4ceae75d12451
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  hybrid_os_platform_interface:
+    dependency: transitive
+    description:
+      name: hybrid_os_platform_interface
+      sha256: "8a58b32b02019278746b76ec9f4fc07fadb7ba5659be6b576e595f2dd13a7a60"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
+  hybrid_os_windows:
+    dependency: transitive
+    description:
+      name: hybrid_os_windows
+      sha256: "6fb88b61f77ea3576591ce8cf382882e753939828b2ac036aafa7e183bea61f4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   integration_test:
     dependency: "direct dev"
     description: flutter
@@ -224,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.0"
+  objective_c:
+    dependency: transitive
+    description:
+      name: objective_c
+      sha256: "77c341fce45bb3865a7bc3ddee4201605799e3de2f7af200e8dae26369d210ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   package_config:
     dependency: transitive
     description:
@@ -349,6 +405,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
 sdks:
   dart: ">=3.3.0 <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"

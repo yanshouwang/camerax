@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
@@ -13,6 +14,7 @@ class CameraViewModel extends ViewModel
   bool? _torchState;
   FlashMode? _flashMode;
   Uri? _savedUri;
+  Image? _image;
 
   late final StreamSubscription _zoomStateSubscription;
   late final StreamSubscription _torchStateSubscription;
@@ -31,6 +33,7 @@ class CameraViewModel extends ViewModel
   bool? get torchState => _torchState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
+  Image? get image => _image;
 
   void _initialize() async {
     _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
@@ -44,7 +47,18 @@ class CameraViewModel extends ViewModel
       _torchState = torchState;
       notifyListeners();
     });
-    await controller.requestPermissions();
+    final videoAuthorized = await controller.requestAuthorization(
+      type: AuthorizationType.video,
+    );
+    final audioAuthorized = await controller.requestAuthorization(
+      type: AuthorizationType.audio,
+    );
+    if (!videoAuthorized || !audioAuthorized) {
+      throw StateError('Unauthorized.');
+    }
+    await controller.requestAuthorization(
+      type: AuthorizationType.audio,
+    );
     await controller.setCameraSelector(CameraSelector.back);
     _zoomState = await controller.getZoomState();
     _torchState = await controller.getTorchState();
@@ -59,13 +73,23 @@ isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
     await controller.setImageAnalyzer(this);
-    await controller.bindToLifecycle();
+    await controller.bind();
   }
 
   @override
   void analyze(ImageProxy image) {
     logger.info(image);
-    image.close();
+    decodeImageFromPixels(
+      image.data,
+      image.width,
+      image.height,
+      PixelFormat.rgba8888,
+      (value) async {
+        _image = value;
+        notifyListeners();
+        await image.close();
+      },
+    );
   }
 
   Future<void> toggleLensFacing() async {

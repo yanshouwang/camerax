@@ -13,6 +13,7 @@ log_level: all
 class_path:
   - classes/jetified-listenablefuture-1.0.jar
 classes:
+  - android.Manifest
   - android.app.Activity
   - android.content.Context
   - android.content.ContentResolver
@@ -30,7 +31,7 @@ classes:
   - androidx.camera.view.CameraController
   - androidx.camera.view.LifecycleCameraController
   - androidx.camera.view.PreviewView
-  - androidx.camera.mlkit.vision.MlKitAnalyzer
+  # - androidx.camera.mlkit.vision.MlKitAnalyzer
   - androidx.lifecycle.LifecycleOwner
   - androidx.lifecycle.LiveData
   - androidx.lifecycle.Observer
@@ -41,4 +42,6 @@ classes:
   - java.util.concurrent.Future
   - dev.hebei.camerax_android.OnImageCapturedCallback
   - dev.hebei.camerax_android.OnImageCapturedCallbackImpl
+  - dev.hebei.camerax_android.PermissionsManager
+  - dev.hebei.camerax_android.PermissionsResultCallback
   - dev.hebei.camerax_android.PreviewViewFactory

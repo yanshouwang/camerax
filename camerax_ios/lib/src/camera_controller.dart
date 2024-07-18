@@ -48,7 +48,7 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<void> bindToLifecycle() async {
+  Future<void> bind() async {
     ffiValue.bindToLifecycle();
   }
 

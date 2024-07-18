@@ -18,6 +18,7 @@ class CameraView extends StatelessWidget {
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
+    final image = viewModel.image;
     return CupertinoPageScaffold(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -71,6 +72,10 @@ class CameraView extends StatelessWidget {
                   controller: viewModel.controller,
                   scaleType: ScaleType.fillCenter,
                 ),
+                if (image != null)
+                  RawImage(
+                    image: image,
+                  ),
                 if (zoomState != null)
                   ZoomWidget(
                     minimum: zoomState.minZoomRatio,

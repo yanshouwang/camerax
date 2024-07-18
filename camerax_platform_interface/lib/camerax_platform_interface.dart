@@ -1,5 +1,6 @@
 export 'src/camerax.dart';
 export 'src/camera_controller.dart';
+export 'src/authorization_type.dart';
 export 'src/camera_selector.dart';
 export 'src/lens_facing.dart';
 export 'src/zoom_state.dart';

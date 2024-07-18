@@ -7,13 +7,10 @@ import 'package:jni/jni.dart';
 
 import 'jni.dart';
 import 'jni.g.dart' as jni;
-import 'permissions_manager.dart';
 
-final class CameraControllerImpl
+final class JNICameraController
     with TypeLogger, LoggerController
     implements CameraController {
-  static final _permissionsManager = PermissionsManager();
-
   final jni.LifecycleCameraController jniValue;
   late final StreamController<ZoomState?> _zoomStateChagnedController;
   late final StreamController<bool?> _torchStateChagnedController;
@@ -25,7 +22,7 @@ final class CameraControllerImpl
   @override
   Stream<bool?> get torchStateChanged => _torchStateChagnedController.stream;
 
-  CameraControllerImpl()
+  JNICameraController()
       : jniValue = jni.LifecycleCameraController(JNI.context)
           ..setImageAnalysisBackpressureStrategyOnMainThread(
               jni.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -42,15 +39,42 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<bool> requestPermissions({
-    bool enableAudio = false,
+  Future<bool> checkAuthorization({
+    required AuthorizationType type,
   }) async {
-    final granted = await _permissionsManager.requestPermissions(enableAudio);
+    final permissions = type.jniValue;
+    if (permissions.length == 0) {
+      return true;
+    }
+    final granted =
+        jni.PermissionsManager.INSTANCE.checkPermissions(permissions);
     return granted;
   }
 
   @override
-  Future<void> bindToLifecycle() async {
+  Future<bool> requestAuthorization({
+    required AuthorizationType type,
+  }) async {
+    final permissions = type.jniValue;
+    if (permissions.length == 0) {
+      return true;
+    }
+    final completer = Completer<bool>();
+    final callback = jni.PermissionsResultCallback.implement(
+      jni.$PermissionsResultCallbackImpl(
+        onPermissionsResult: (granted) => completer.complete(granted),
+      ),
+    );
+    jni.PermissionsManager.INSTANCE.requestPermissions(
+      permissions,
+      callback,
+    );
+    final granted = await completer.future;
+    return granted;
+  }
+
+  @override
+  Future<void> bind() async {
     final lifecycleOwner = JNI.activity.castTo(jni.LifecycleOwner.type);
     await jniValue.bindToLifecycleOnMainThread(lifecycleOwner);
   }

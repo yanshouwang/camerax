@@ -3,9 +3,10 @@
 import 'dart:ui';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
+import 'package:hybrid_os/hybrid_os.dart';
 import 'package:jni/jni.dart';
 
-import 'image_proxy.dart';
+import 'jni_image_proxy.dart';
 import 'jni.g.dart' as jni;
 
 abstract class JNI {
@@ -16,6 +17,31 @@ abstract class JNI {
 
   static jni.Context get context {
     return activity.castTo(jni.Context.type);
+  }
+}
+
+extension AuthorizationTypeX on AuthorizationType {
+  JArray<JString> get jniValue {
+    switch (this) {
+      case AuthorizationType.video:
+        final permissions = JArray(JString.type, 1);
+        permissions[0] = jni.Manifest_permission.CAMERA;
+        return permissions;
+      case AuthorizationType.audio:
+        final permissions = JArray(JString.type, 1);
+        permissions[0] = jni.Manifest_permission.RECORD_AUDIO;
+        return permissions;
+      case AuthorizationType.album:
+        final os = OS();
+        if (os is Android && os.sdkVersion < AndroidSDKVersions.q) {
+          final permissions = JArray(JString.type, 2);
+          permissions[0] = jni.Manifest_permission.READ_EXTERNAL_STORAGE;
+          permissions[0] = jni.Manifest_permission.WRITE_EXTERNAL_STORAGE;
+          return permissions;
+        } else {
+          return JArray(JString.type, 0);
+        }
+    }
   }
 }
 
@@ -124,7 +150,7 @@ extension JIntegerX on JInteger {
 
 extension JNIImageProxyX on jni.ImageProxy {
   ImageProxy get dartValue {
-    return ImageProxyImpl(
+    return JNIImageProxy(
       jniValue: this,
     );
   }
