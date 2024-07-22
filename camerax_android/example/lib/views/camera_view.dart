@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';

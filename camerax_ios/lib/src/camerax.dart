@@ -17,4 +17,13 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PreviewViewController createPreviewViewController() {
     return PreviewViewControllerImpl();
   }
+
+  @override
+  MLAnalyzer createMLAnalyzer({
+    required List<MLObjectType> types,
+    required MLAnalyzedCallback onAnalyzed,
+  }) {
+    // TODO: implement createMLAnalyzer
+    throw UnimplementedError();
+  }
 }
