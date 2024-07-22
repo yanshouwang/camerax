@@ -15,7 +15,6 @@ class CameraView extends StatelessWidget {
     final controller = viewModel.controller;
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
-    final torchState = viewModel.torchState;
     // final savedUri = viewModel.savedUri;
     // final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
     final thumbnail = viewModel.thumbnail;
@@ -70,7 +69,7 @@ class CameraView extends StatelessWidget {
               children: [
                 PreviewView(
                   controller: controller,
-                  scaleType: ScaleType.fitCenter,
+                  scaleType: ScaleType.fillCenter,
                 ),
                 if (zoomState != null)
                   ZoomWidget(

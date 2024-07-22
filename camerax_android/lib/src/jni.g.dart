@@ -22834,6 +22834,1935 @@ final class $CursorType extends jni.JObjType<Cursor> {
   }
 }
 
+/// from: android.graphics.Point
+class Point extends jni.JObject {
+  @override
+  late final jni.JObjType<Point> $type = type;
+
+  Point.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'android/graphics/Point');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $PointType();
+  static final _id_CREATOR = _class.staticFieldId(
+    r'CREATOR',
+    r'Landroid/os/Parcelable$Creator;',
+  );
+
+  /// from: static public final android.os.Parcelable$Creator CREATOR
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JObject get CREATOR =>
+      _id_CREATOR.get(_class, const jni.JObjectType());
+
+  static final _id_x = _class.instanceFieldId(
+    r'x',
+    r'I',
+  );
+
+  /// from: public int x
+  int get x => _id_x.get(this, const jni.jintType());
+
+  /// from: public int x
+  set x(int value) => _id_x.set(this, const jni.jintType(), value);
+
+  static final _id_y = _class.instanceFieldId(
+    r'y',
+    r'I',
+  );
+
+  /// from: public int y
+  int get y => _id_y.get(this, const jni.jintType());
+
+  /// from: public int y
+  set y(int value) => _id_y.set(this, const jni.jintType(), value);
+
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Point() {
+    return Point.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+
+  static final _id_new1 = _class.constructorId(
+    r'(II)V',
+  );
+
+  static final _new1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void <init>(int i, int i1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Point.new1(
+    int i,
+    int i1,
+  ) {
+    return Point.fromReference(
+        _new1(_class.reference.pointer, _id_new1 as jni.JMethodIDPtr, i, i1)
+            .reference);
+  }
+
+  static final _id_new2 = _class.constructorId(
+    r'(Landroid/graphics/Point;)V',
+  );
+
+  static final _new2 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(android.graphics.Point point)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Point.new2(
+    Point point,
+  ) {
+    return Point.fromReference(_new2(_class.reference.pointer,
+            _id_new2 as jni.JMethodIDPtr, point.reference.pointer)
+        .reference);
+  }
+
+  static final _id_set0 = _class.instanceMethodId(
+    r'set',
+    r'(II)V',
+  );
+
+  static final _set0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void set(int i, int i1)
+  void set0(
+    int i,
+    int i1,
+  ) {
+    _set0(reference.pointer, _id_set0 as jni.JMethodIDPtr, i, i1).check();
+  }
+
+  static final _id_negate = _class.instanceMethodId(
+    r'negate',
+    r'()V',
+  );
+
+  static final _negate = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final void negate()
+  void negate() {
+    _negate(reference.pointer, _id_negate as jni.JMethodIDPtr).check();
+  }
+
+  static final _id_offset = _class.instanceMethodId(
+    r'offset',
+    r'(II)V',
+  );
+
+  static final _offset = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public final void offset(int i, int i1)
+  void offset(
+    int i,
+    int i1,
+  ) {
+    _offset(reference.pointer, _id_offset as jni.JMethodIDPtr, i, i1).check();
+  }
+
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(II)Z',
+  );
+
+  static final _equals = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr, ffi.VarArgs<($Int32, $Int32)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public final boolean equals(int i, int i1)
+  bool equals(
+    int i,
+    int i1,
+  ) {
+    return _equals(reference.pointer, _id_equals as jni.JMethodIDPtr, i, i1)
+        .boolean;
+  }
+
+  static final _id_equals1 = _class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean equals(java.lang.Object object)
+  bool equals1(
+    jni.JObject object,
+  ) {
+    return _equals1(reference.pointer, _id_equals1 as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_hashCode1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int hashCode()
+  int hashCode1() {
+    return _hashCode1(reference.pointer, _id_hashCode1 as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_describeContents = _class.instanceMethodId(
+    r'describeContents',
+    r'()I',
+  );
+
+  static final _describeContents = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int describeContents()
+  int describeContents() {
+    return _describeContents(
+            reference.pointer, _id_describeContents as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_writeToParcel = _class.instanceMethodId(
+    r'writeToParcel',
+    r'(Landroid/os/Parcel;I)V',
+  );
+
+  static final _writeToParcel = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public void writeToParcel(android.os.Parcel parcel, int i)
+  void writeToParcel(
+    jni.JObject parcel,
+    int i,
+  ) {
+    _writeToParcel(reference.pointer, _id_writeToParcel as jni.JMethodIDPtr,
+            parcel.reference.pointer, i)
+        .check();
+  }
+
+  static final _id_readFromParcel = _class.instanceMethodId(
+    r'readFromParcel',
+    r'(Landroid/os/Parcel;)V',
+  );
+
+  static final _readFromParcel = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void readFromParcel(android.os.Parcel parcel)
+  void readFromParcel(
+    jni.JObject parcel,
+  ) {
+    _readFromParcel(reference.pointer, _id_readFromParcel as jni.JMethodIDPtr,
+            parcel.reference.pointer)
+        .check();
+  }
+}
+
+final class $PointType extends jni.JObjType<Point> {
+  const $PointType();
+
+  @override
+  String get signature => r'Landroid/graphics/Point;';
+
+  @override
+  Point fromReference(jni.JReference reference) =>
+      Point.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($PointType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($PointType) && other is $PointType;
+  }
+}
+
+/// from: android.graphics.Rect
+class Rect extends jni.JObject {
+  @override
+  late final jni.JObjType<Rect> $type = type;
+
+  Rect.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'android/graphics/Rect');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $RectType();
+  static final _id_CREATOR = _class.staticFieldId(
+    r'CREATOR',
+    r'Landroid/os/Parcelable$Creator;',
+  );
+
+  /// from: static public final android.os.Parcelable$Creator CREATOR
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JObject get CREATOR =>
+      _id_CREATOR.get(_class, const jni.JObjectType());
+
+  static final _id_bottom = _class.instanceFieldId(
+    r'bottom',
+    r'I',
+  );
+
+  /// from: public int bottom
+  int get bottom => _id_bottom.get(this, const jni.jintType());
+
+  /// from: public int bottom
+  set bottom(int value) => _id_bottom.set(this, const jni.jintType(), value);
+
+  static final _id_left = _class.instanceFieldId(
+    r'left',
+    r'I',
+  );
+
+  /// from: public int left
+  int get left => _id_left.get(this, const jni.jintType());
+
+  /// from: public int left
+  set left(int value) => _id_left.set(this, const jni.jintType(), value);
+
+  static final _id_right = _class.instanceFieldId(
+    r'right',
+    r'I',
+  );
+
+  /// from: public int right
+  int get right => _id_right.get(this, const jni.jintType());
+
+  /// from: public int right
+  set right(int value) => _id_right.set(this, const jni.jintType(), value);
+
+  static final _id_top = _class.instanceFieldId(
+    r'top',
+    r'I',
+  );
+
+  /// from: public int top
+  int get top => _id_top.get(this, const jni.jintType());
+
+  /// from: public int top
+  set top(int value) => _id_top.set(this, const jni.jintType(), value);
+
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Rect() {
+    return Rect.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+
+  static final _id_new1 = _class.constructorId(
+    r'(IIII)V',
+  );
+
+  static final _new1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public void <init>(int i, int i1, int i2, int i3)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Rect.new1(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return Rect.fromReference(_new1(_class.reference.pointer,
+            _id_new1 as jni.JMethodIDPtr, i, i1, i2, i3)
+        .reference);
+  }
+
+  static final _id_new2 = _class.constructorId(
+    r'(Landroid/graphics/Rect;)V',
+  );
+
+  static final _new2 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(android.graphics.Rect rect)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Rect.new2(
+    Rect rect,
+  ) {
+    return Rect.fromReference(_new2(_class.reference.pointer,
+            _id_new2 as jni.JMethodIDPtr, rect.reference.pointer)
+        .reference);
+  }
+
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean equals(java.lang.Object object)
+  bool equals(
+    jni.JObject object,
+  ) {
+    return _equals(reference.pointer, _id_equals as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_hashCode1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int hashCode()
+  int hashCode1() {
+    return _hashCode1(reference.pointer, _id_hashCode1 as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_toShortString = _class.instanceMethodId(
+    r'toShortString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toShortString = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toShortString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toShortString() {
+    return _toShortString(
+            reference.pointer, _id_toShortString as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_flattenToString = _class.instanceMethodId(
+    r'flattenToString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _flattenToString = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String flattenToString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString flattenToString() {
+    return _flattenToString(
+            reference.pointer, _id_flattenToString as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_unflattenFromString = _class.staticMethodId(
+    r'unflattenFromString',
+    r'(Ljava/lang/String;)Landroid/graphics/Rect;',
+  );
+
+  static final _unflattenFromString = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public android.graphics.Rect unflattenFromString(java.lang.String string)
+  /// The returned object must be released after use, by calling the [release] method.
+  static Rect unflattenFromString(
+    jni.JString string,
+  ) {
+    return _unflattenFromString(
+            _class.reference.pointer,
+            _id_unflattenFromString as jni.JMethodIDPtr,
+            string.reference.pointer)
+        .object(const $RectType());
+  }
+
+  static final _id_isEmpty = _class.instanceMethodId(
+    r'isEmpty',
+    r'()Z',
+  );
+
+  static final _isEmpty = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public boolean isEmpty()
+  bool isEmpty() {
+    return _isEmpty(reference.pointer, _id_isEmpty as jni.JMethodIDPtr).boolean;
+  }
+
+  static final _id_width = _class.instanceMethodId(
+    r'width',
+    r'()I',
+  );
+
+  static final _width = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int width()
+  int width() {
+    return _width(reference.pointer, _id_width as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_height = _class.instanceMethodId(
+    r'height',
+    r'()I',
+  );
+
+  static final _height = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int height()
+  int height() {
+    return _height(reference.pointer, _id_height as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_centerX = _class.instanceMethodId(
+    r'centerX',
+    r'()I',
+  );
+
+  static final _centerX = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int centerX()
+  int centerX() {
+    return _centerX(reference.pointer, _id_centerX as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_centerY = _class.instanceMethodId(
+    r'centerY',
+    r'()I',
+  );
+
+  static final _centerY = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int centerY()
+  int centerY() {
+    return _centerY(reference.pointer, _id_centerY as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_exactCenterX = _class.instanceMethodId(
+    r'exactCenterX',
+    r'()F',
+  );
+
+  static final _exactCenterX = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public float exactCenterX()
+  double exactCenterX() {
+    return _exactCenterX(
+            reference.pointer, _id_exactCenterX as jni.JMethodIDPtr)
+        .float;
+  }
+
+  static final _id_exactCenterY = _class.instanceMethodId(
+    r'exactCenterY',
+    r'()F',
+  );
+
+  static final _exactCenterY = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public float exactCenterY()
+  double exactCenterY() {
+    return _exactCenterY(
+            reference.pointer, _id_exactCenterY as jni.JMethodIDPtr)
+        .float;
+  }
+
+  static final _id_setEmpty = _class.instanceMethodId(
+    r'setEmpty',
+    r'()V',
+  );
+
+  static final _setEmpty = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void setEmpty()
+  void setEmpty() {
+    _setEmpty(reference.pointer, _id_setEmpty as jni.JMethodIDPtr).check();
+  }
+
+  static final _id_set0 = _class.instanceMethodId(
+    r'set',
+    r'(IIII)V',
+  );
+
+  static final _set0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public void set(int i, int i1, int i2, int i3)
+  void set0(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    _set0(reference.pointer, _id_set0 as jni.JMethodIDPtr, i, i1, i2, i3)
+        .check();
+  }
+
+  static final _id_set1 = _class.instanceMethodId(
+    r'set',
+    r'(Landroid/graphics/Rect;)V',
+  );
+
+  static final _set1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void set(android.graphics.Rect rect)
+  void set1(
+    Rect rect,
+  ) {
+    _set1(reference.pointer, _id_set1 as jni.JMethodIDPtr,
+            rect.reference.pointer)
+        .check();
+  }
+
+  static final _id_offset = _class.instanceMethodId(
+    r'offset',
+    r'(II)V',
+  );
+
+  static final _offset = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void offset(int i, int i1)
+  void offset(
+    int i,
+    int i1,
+  ) {
+    _offset(reference.pointer, _id_offset as jni.JMethodIDPtr, i, i1).check();
+  }
+
+  static final _id_offsetTo = _class.instanceMethodId(
+    r'offsetTo',
+    r'(II)V',
+  );
+
+  static final _offsetTo = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void offsetTo(int i, int i1)
+  void offsetTo(
+    int i,
+    int i1,
+  ) {
+    _offsetTo(reference.pointer, _id_offsetTo as jni.JMethodIDPtr, i, i1)
+        .check();
+  }
+
+  static final _id_inset = _class.instanceMethodId(
+    r'inset',
+    r'(II)V',
+  );
+
+  static final _inset = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void inset(int i, int i1)
+  void inset(
+    int i,
+    int i1,
+  ) {
+    _inset(reference.pointer, _id_inset as jni.JMethodIDPtr, i, i1).check();
+  }
+
+  static final _id_inset1 = _class.instanceMethodId(
+    r'inset',
+    r'(Landroid/graphics/Insets;)V',
+  );
+
+  static final _inset1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void inset(android.graphics.Insets insets)
+  void inset1(
+    jni.JObject insets,
+  ) {
+    _inset1(reference.pointer, _id_inset1 as jni.JMethodIDPtr,
+            insets.reference.pointer)
+        .check();
+  }
+
+  static final _id_inset2 = _class.instanceMethodId(
+    r'inset',
+    r'(IIII)V',
+  );
+
+  static final _inset2 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public void inset(int i, int i1, int i2, int i3)
+  void inset2(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    _inset2(reference.pointer, _id_inset2 as jni.JMethodIDPtr, i, i1, i2, i3)
+        .check();
+  }
+
+  static final _id_contains = _class.instanceMethodId(
+    r'contains',
+    r'(II)Z',
+  );
+
+  static final _contains = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr, ffi.VarArgs<($Int32, $Int32)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public boolean contains(int i, int i1)
+  bool contains(
+    int i,
+    int i1,
+  ) {
+    return _contains(reference.pointer, _id_contains as jni.JMethodIDPtr, i, i1)
+        .boolean;
+  }
+
+  static final _id_contains1 = _class.instanceMethodId(
+    r'contains',
+    r'(IIII)Z',
+  );
+
+  static final _contains1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public boolean contains(int i, int i1, int i2, int i3)
+  bool contains1(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return _contains1(
+            reference.pointer, _id_contains1 as jni.JMethodIDPtr, i, i1, i2, i3)
+        .boolean;
+  }
+
+  static final _id_contains2 = _class.instanceMethodId(
+    r'contains',
+    r'(Landroid/graphics/Rect;)Z',
+  );
+
+  static final _contains2 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean contains(android.graphics.Rect rect)
+  bool contains2(
+    Rect rect,
+  ) {
+    return _contains2(reference.pointer, _id_contains2 as jni.JMethodIDPtr,
+            rect.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_intersect = _class.instanceMethodId(
+    r'intersect',
+    r'(IIII)Z',
+  );
+
+  static final _intersect = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public boolean intersect(int i, int i1, int i2, int i3)
+  bool intersect(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return _intersect(
+            reference.pointer, _id_intersect as jni.JMethodIDPtr, i, i1, i2, i3)
+        .boolean;
+  }
+
+  static final _id_intersect1 = _class.instanceMethodId(
+    r'intersect',
+    r'(Landroid/graphics/Rect;)Z',
+  );
+
+  static final _intersect1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean intersect(android.graphics.Rect rect)
+  bool intersect1(
+    Rect rect,
+  ) {
+    return _intersect1(reference.pointer, _id_intersect1 as jni.JMethodIDPtr,
+            rect.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_setIntersect = _class.instanceMethodId(
+    r'setIntersect',
+    r'(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z',
+  );
+
+  static final _setIntersect = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean setIntersect(android.graphics.Rect rect, android.graphics.Rect rect1)
+  bool setIntersect(
+    Rect rect,
+    Rect rect1,
+  ) {
+    return _setIntersect(
+            reference.pointer,
+            _id_setIntersect as jni.JMethodIDPtr,
+            rect.reference.pointer,
+            rect1.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_intersects = _class.instanceMethodId(
+    r'intersects',
+    r'(IIII)Z',
+  );
+
+  static final _intersects = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public boolean intersects(int i, int i1, int i2, int i3)
+  bool intersects(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return _intersects(reference.pointer, _id_intersects as jni.JMethodIDPtr, i,
+            i1, i2, i3)
+        .boolean;
+  }
+
+  static final _id_intersects1 = _class.staticMethodId(
+    r'intersects',
+    r'(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z',
+  );
+
+  static final _intersects1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallStaticBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public boolean intersects(android.graphics.Rect rect, android.graphics.Rect rect1)
+  static bool intersects1(
+    Rect rect,
+    Rect rect1,
+  ) {
+    return _intersects1(
+            _class.reference.pointer,
+            _id_intersects1 as jni.JMethodIDPtr,
+            rect.reference.pointer,
+            rect1.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_union = _class.instanceMethodId(
+    r'union',
+    r'(IIII)V',
+  );
+
+  static final _union = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, $Int32, $Int32, $Int32)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int, int, int)>();
+
+  /// from: public void union(int i, int i1, int i2, int i3)
+  void union(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    _union(reference.pointer, _id_union as jni.JMethodIDPtr, i, i1, i2, i3)
+        .check();
+  }
+
+  static final _id_union1 = _class.instanceMethodId(
+    r'union',
+    r'(Landroid/graphics/Rect;)V',
+  );
+
+  static final _union1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void union(android.graphics.Rect rect)
+  void union1(
+    Rect rect,
+  ) {
+    _union1(reference.pointer, _id_union1 as jni.JMethodIDPtr,
+            rect.reference.pointer)
+        .check();
+  }
+
+  static final _id_union2 = _class.instanceMethodId(
+    r'union',
+    r'(II)V',
+  );
+
+  static final _union2 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void union(int i, int i1)
+  void union2(
+    int i,
+    int i1,
+  ) {
+    _union2(reference.pointer, _id_union2 as jni.JMethodIDPtr, i, i1).check();
+  }
+
+  static final _id_sort = _class.instanceMethodId(
+    r'sort',
+    r'()V',
+  );
+
+  static final _sort = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void sort()
+  void sort() {
+    _sort(reference.pointer, _id_sort as jni.JMethodIDPtr).check();
+  }
+
+  static final _id_describeContents = _class.instanceMethodId(
+    r'describeContents',
+    r'()I',
+  );
+
+  static final _describeContents = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int describeContents()
+  int describeContents() {
+    return _describeContents(
+            reference.pointer, _id_describeContents as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_writeToParcel = _class.instanceMethodId(
+    r'writeToParcel',
+    r'(Landroid/os/Parcel;I)V',
+  );
+
+  static final _writeToParcel = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public void writeToParcel(android.os.Parcel parcel, int i)
+  void writeToParcel(
+    jni.JObject parcel,
+    int i,
+  ) {
+    _writeToParcel(reference.pointer, _id_writeToParcel as jni.JMethodIDPtr,
+            parcel.reference.pointer, i)
+        .check();
+  }
+
+  static final _id_readFromParcel = _class.instanceMethodId(
+    r'readFromParcel',
+    r'(Landroid/os/Parcel;)V',
+  );
+
+  static final _readFromParcel = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void readFromParcel(android.os.Parcel parcel)
+  void readFromParcel(
+    jni.JObject parcel,
+  ) {
+    _readFromParcel(reference.pointer, _id_readFromParcel as jni.JMethodIDPtr,
+            parcel.reference.pointer)
+        .check();
+  }
+}
+
+final class $RectType extends jni.JObjType<Rect> {
+  const $RectType();
+
+  @override
+  String get signature => r'Landroid/graphics/Rect;';
+
+  @override
+  Rect fromReference(jni.JReference reference) => Rect.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($RectType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RectType) && other is $RectType;
+  }
+}
+
+/// from: android.media.Image$Plane
+class Image_Plane extends jni.JObject {
+  @override
+  late final jni.JObjType<Image_Plane> $type = type;
+
+  Image_Plane.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'android/media/Image$Plane');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Image_PlaneType();
+  static final _id_getRowStride = _class.instanceMethodId(
+    r'getRowStride',
+    r'()I',
+  );
+
+  static final _getRowStride = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getRowStride()
+  int getRowStride() {
+    return _getRowStride(
+            reference.pointer, _id_getRowStride as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getPixelStride = _class.instanceMethodId(
+    r'getPixelStride',
+    r'()I',
+  );
+
+  static final _getPixelStride = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getPixelStride()
+  int getPixelStride() {
+    return _getPixelStride(
+            reference.pointer, _id_getPixelStride as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getBuffer = _class.instanceMethodId(
+    r'getBuffer',
+    r'()Ljava/nio/ByteBuffer;',
+  );
+
+  static final _getBuffer = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract java.nio.ByteBuffer getBuffer()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JByteBuffer getBuffer() {
+    return _getBuffer(reference.pointer, _id_getBuffer as jni.JMethodIDPtr)
+        .object(const jni.JByteBufferType());
+  }
+}
+
+final class $Image_PlaneType extends jni.JObjType<Image_Plane> {
+  const $Image_PlaneType();
+
+  @override
+  String get signature => r'Landroid/media/Image$Plane;';
+
+  @override
+  Image_Plane fromReference(jni.JReference reference) =>
+      Image_Plane.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Image_PlaneType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Image_PlaneType) && other is $Image_PlaneType;
+  }
+}
+
+/// from: android.media.Image
+class Image extends jni.JObject {
+  @override
+  late final jni.JObjType<Image> $type = type;
+
+  Image.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'android/media/Image');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ImageType();
+  static final _id_getFormat = _class.instanceMethodId(
+    r'getFormat',
+    r'()I',
+  );
+
+  static final _getFormat = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getFormat()
+  int getFormat() {
+    return _getFormat(reference.pointer, _id_getFormat as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getWidth = _class.instanceMethodId(
+    r'getWidth',
+    r'()I',
+  );
+
+  static final _getWidth = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getWidth()
+  int getWidth() {
+    return _getWidth(reference.pointer, _id_getWidth as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getHeight = _class.instanceMethodId(
+    r'getHeight',
+    r'()I',
+  );
+
+  static final _getHeight = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getHeight()
+  int getHeight() {
+    return _getHeight(reference.pointer, _id_getHeight as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getTimestamp = _class.instanceMethodId(
+    r'getTimestamp',
+    r'()J',
+  );
+
+  static final _getTimestamp = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallLongMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract long getTimestamp()
+  int getTimestamp() {
+    return _getTimestamp(
+            reference.pointer, _id_getTimestamp as jni.JMethodIDPtr)
+        .long;
+  }
+
+  static final _id_getFence = _class.instanceMethodId(
+    r'getFence',
+    r'()Landroid/hardware/SyncFence;',
+  );
+
+  static final _getFence = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.hardware.SyncFence getFence()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getFence() {
+    return _getFence(reference.pointer, _id_getFence as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getHardwareBuffer = _class.instanceMethodId(
+    r'getHardwareBuffer',
+    r'()Landroid/hardware/HardwareBuffer;',
+  );
+
+  static final _getHardwareBuffer = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.hardware.HardwareBuffer getHardwareBuffer()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getHardwareBuffer() {
+    return _getHardwareBuffer(
+            reference.pointer, _id_getHardwareBuffer as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_setTimestamp = _class.instanceMethodId(
+    r'setTimestamp',
+    r'(J)V',
+  );
+
+  static final _setTimestamp = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<(ffi.Int64,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public void setTimestamp(long j)
+  void setTimestamp(
+    int j,
+  ) {
+    _setTimestamp(reference.pointer, _id_setTimestamp as jni.JMethodIDPtr, j)
+        .check();
+  }
+
+  static final _id_setFence = _class.instanceMethodId(
+    r'setFence',
+    r'(Landroid/hardware/SyncFence;)V',
+  );
+
+  static final _setFence = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setFence(android.hardware.SyncFence syncFence)
+  void setFence(
+    jni.JObject syncFence,
+  ) {
+    _setFence(reference.pointer, _id_setFence as jni.JMethodIDPtr,
+            syncFence.reference.pointer)
+        .check();
+  }
+
+  static final _id_getDataSpace = _class.instanceMethodId(
+    r'getDataSpace',
+    r'()I',
+  );
+
+  static final _getDataSpace = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getDataSpace()
+  int getDataSpace() {
+    return _getDataSpace(
+            reference.pointer, _id_getDataSpace as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_setDataSpace = _class.instanceMethodId(
+    r'setDataSpace',
+    r'(I)V',
+  );
+
+  static final _setDataSpace = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public void setDataSpace(int i)
+  void setDataSpace(
+    int i,
+  ) {
+    _setDataSpace(reference.pointer, _id_setDataSpace as jni.JMethodIDPtr, i)
+        .check();
+  }
+
+  static final _id_getCropRect = _class.instanceMethodId(
+    r'getCropRect',
+    r'()Landroid/graphics/Rect;',
+  );
+
+  static final _getCropRect = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.Rect getCropRect()
+  /// The returned object must be released after use, by calling the [release] method.
+  Rect getCropRect() {
+    return _getCropRect(reference.pointer, _id_getCropRect as jni.JMethodIDPtr)
+        .object(const $RectType());
+  }
+
+  static final _id_setCropRect = _class.instanceMethodId(
+    r'setCropRect',
+    r'(Landroid/graphics/Rect;)V',
+  );
+
+  static final _setCropRect = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setCropRect(android.graphics.Rect rect)
+  void setCropRect(
+    Rect rect,
+  ) {
+    _setCropRect(reference.pointer, _id_setCropRect as jni.JMethodIDPtr,
+            rect.reference.pointer)
+        .check();
+  }
+
+  static final _id_getPlanes = _class.instanceMethodId(
+    r'getPlanes',
+    r'()[Landroid/media/Image$Plane;',
+  );
+
+  static final _getPlanes = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract android.media.Image$Plane[] getPlanes()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JArray<Image_Plane> getPlanes() {
+    return _getPlanes(reference.pointer, _id_getPlanes as jni.JMethodIDPtr)
+        .object(const jni.JArrayType($Image_PlaneType()));
+  }
+
+  static final _id_close = _class.instanceMethodId(
+    r'close',
+    r'()V',
+  );
+
+  static final _close = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract void close()
+  void close() {
+    _close(reference.pointer, _id_close as jni.JMethodIDPtr).check();
+  }
+}
+
+final class $ImageType extends jni.JObjType<Image> {
+  const $ImageType();
+
+  @override
+  String get signature => r'Landroid/media/Image;';
+
+  @override
+  Image fromReference(jni.JReference reference) =>
+      Image.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ImageType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ImageType) && other is $ImageType;
+  }
+}
+
 /// from: android.net.Uri$Builder
 class Uri_Builder extends jni.JObject {
   @override
@@ -31363,6 +33292,124 @@ final class $MediaStoreType extends jni.JObjType<MediaStore> {
   }
 }
 
+/// from: androidx.core.content.ContextCompat$RegisterReceiverFlags
+class ContextCompat_RegisterReceiverFlags extends jni.JObject {
+  @override
+  late final jni.JObjType<ContextCompat_RegisterReceiverFlags> $type = type;
+
+  ContextCompat_RegisterReceiverFlags.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/core/content/ContextCompat$RegisterReceiverFlags');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ContextCompat_RegisterReceiverFlagsType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $ContextCompat_RegisterReceiverFlagsImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory ContextCompat_RegisterReceiverFlags.implement(
+    $ContextCompat_RegisterReceiverFlagsImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = ContextCompat_RegisterReceiverFlags.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.core.content.ContextCompat$RegisterReceiverFlags',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $ContextCompat_RegisterReceiverFlagsImpl {
+  factory $ContextCompat_RegisterReceiverFlagsImpl() =
+      _$ContextCompat_RegisterReceiverFlagsImpl;
+}
+
+class _$ContextCompat_RegisterReceiverFlagsImpl
+    implements $ContextCompat_RegisterReceiverFlagsImpl {
+  _$ContextCompat_RegisterReceiverFlagsImpl();
+}
+
+final class $ContextCompat_RegisterReceiverFlagsType
+    extends jni.JObjType<ContextCompat_RegisterReceiverFlags> {
+  const $ContextCompat_RegisterReceiverFlagsType();
+
+  @override
+  String get signature =>
+      r'Landroidx/core/content/ContextCompat$RegisterReceiverFlags;';
+
+  @override
+  ContextCompat_RegisterReceiverFlags fromReference(jni.JReference reference) =>
+      ContextCompat_RegisterReceiverFlags.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ContextCompat_RegisterReceiverFlagsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ContextCompat_RegisterReceiverFlagsType) &&
+        other is $ContextCompat_RegisterReceiverFlagsType;
+  }
+}
+
 /// from: androidx.core.content.ContextCompat
 class ContextCompat extends jni.JObject {
   @override
@@ -31377,6 +33424,15 @@ class ContextCompat extends jni.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const type = $ContextCompatType();
+
+  /// from: static public final int RECEIVER_VISIBLE_TO_INSTANT_APPS
+  static const RECEIVER_VISIBLE_TO_INSTANT_APPS = 1;
+
+  /// from: static public final int RECEIVER_EXPORTED
+  static const RECEIVER_EXPORTED = 2;
+
+  /// from: static public final int RECEIVER_NOT_EXPORTED
+  static const RECEIVER_NOT_EXPORTED = 4;
   static final _id_new0 = _class.constructorId(
     r'()V',
   );
@@ -31485,18 +33541,18 @@ class ContextCompat extends jni.JObject {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// from: static public boolean startActivities(android.content.Context context, android.content.Intent[] intents, android.os.Bundle options)
+  /// from: static public boolean startActivities(android.content.Context context, android.content.Intent[] intents, android.os.Bundle bundle)
   static bool startActivities1(
     Context context,
     jni.JArray<jni.JObject> intents,
-    jni.JObject options,
+    jni.JObject bundle,
   ) {
     return _startActivities1(
             _class.reference.pointer,
             _id_startActivities1 as jni.JMethodIDPtr,
             context.reference.pointer,
             intents.reference.pointer,
-            options.reference.pointer)
+            bundle.reference.pointer)
         .boolean;
   }
 
@@ -31524,18 +33580,18 @@ class ContextCompat extends jni.JObject {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// from: static public void startActivity(android.content.Context context, android.content.Intent intent, android.os.Bundle options)
+  /// from: static public void startActivity(android.content.Context context, android.content.Intent intent, android.os.Bundle bundle)
   static void startActivity(
     Context context,
     jni.JObject intent,
-    jni.JObject options,
+    jni.JObject bundle,
   ) {
     _startActivity(
             _class.reference.pointer,
             _id_startActivity as jni.JMethodIDPtr,
             context.reference.pointer,
             intent.reference.pointer,
-            options.reference.pointer)
+            bundle.reference.pointer)
         .check();
   }
 
@@ -31610,17 +33666,17 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
 
-  /// from: static public java.io.File[] getExternalFilesDirs(android.content.Context context, java.lang.String type)
+  /// from: static public java.io.File[] getExternalFilesDirs(android.content.Context context, java.lang.String string)
   /// The returned object must be released after use, by calling the [release] method.
   static jni.JArray<jni.JObject> getExternalFilesDirs(
     Context context,
-    jni.JString type0,
+    jni.JString string,
   ) {
     return _getExternalFilesDirs(
             _class.reference.pointer,
             _id_getExternalFilesDirs as jni.JMethodIDPtr,
             context.reference.pointer,
-            type0.reference.pointer)
+            string.reference.pointer)
         .object(const jni.JArrayType(jni.JObjectType()));
   }
 
@@ -31668,14 +33724,14 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, int)>();
 
-  /// from: static public android.graphics.drawable.Drawable getDrawable(android.content.Context context, int id)
+  /// from: static public android.graphics.drawable.Drawable getDrawable(android.content.Context context, int i)
   /// The returned object must be released after use, by calling the [release] method.
   static jni.JObject getDrawable(
     Context context,
-    int id,
+    int i,
   ) {
     return _getDrawable(_class.reference.pointer,
-            _id_getDrawable as jni.JMethodIDPtr, context.reference.pointer, id)
+            _id_getDrawable as jni.JMethodIDPtr, context.reference.pointer, i)
         .object(const jni.JObjectType());
   }
 
@@ -31695,17 +33751,17 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, int)>();
 
-  /// from: static public android.content.res.ColorStateList getColorStateList(android.content.Context context, int id)
+  /// from: static public android.content.res.ColorStateList getColorStateList(android.content.Context context, int i)
   /// The returned object must be released after use, by calling the [release] method.
   static jni.JObject getColorStateList(
     Context context,
-    int id,
+    int i,
   ) {
     return _getColorStateList(
             _class.reference.pointer,
             _id_getColorStateList as jni.JMethodIDPtr,
             context.reference.pointer,
-            id)
+            i)
         .object(const jni.JObjectType());
   }
 
@@ -31725,13 +33781,13 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, int)>();
 
-  /// from: static public int getColor(android.content.Context context, int id)
+  /// from: static public int getColor(android.content.Context context, int i)
   static int getColor(
     Context context,
-    int id,
+    int i,
   ) {
     return _getColor(_class.reference.pointer, _id_getColor as jni.JMethodIDPtr,
-            context.reference.pointer, id)
+            context.reference.pointer, i)
         .integer;
   }
 
@@ -31754,16 +33810,16 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
 
-  /// from: static public int checkSelfPermission(android.content.Context context, java.lang.String permission)
+  /// from: static public int checkSelfPermission(android.content.Context context, java.lang.String string)
   static int checkSelfPermission(
     Context context,
-    jni.JString permission,
+    jni.JString string,
   ) {
     return _checkSelfPermission(
             _class.reference.pointer,
             _id_checkSelfPermission as jni.JMethodIDPtr,
             context.reference.pointer,
-            permission.reference.pointer)
+            string.reference.pointer)
         .integer;
   }
 
@@ -31954,19 +34010,115 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
 
-  /// from: static public T getSystemService(android.content.Context context, java.lang.Class serviceClass)
+  /// from: static public T getSystemService(android.content.Context context, java.lang.Class class)
   /// The returned object must be released after use, by calling the [release] method.
   static $T getSystemService<$T extends jni.JObject>(
     Context context,
-    jni.JObject serviceClass, {
+    jni.JObject class0, {
     required jni.JObjType<$T> T,
   }) {
     return _getSystemService(
             _class.reference.pointer,
             _id_getSystemService as jni.JMethodIDPtr,
             context.reference.pointer,
-            serviceClass.reference.pointer)
+            class0.reference.pointer)
         .object(T);
+  }
+
+  static final _id_registerReceiver = _class.staticMethodId(
+    r'registerReceiver',
+    r'(Landroid/content/Context;Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;I)Landroid/content/Intent;',
+  );
+
+  static final _registerReceiver = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        $Int32
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              int)>();
+
+  /// from: static public android.content.Intent registerReceiver(android.content.Context context, android.content.BroadcastReceiver broadcastReceiver, android.content.IntentFilter intentFilter, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JObject registerReceiver(
+    Context context,
+    jni.JObject broadcastReceiver,
+    jni.JObject intentFilter,
+    int i,
+  ) {
+    return _registerReceiver(
+            _class.reference.pointer,
+            _id_registerReceiver as jni.JMethodIDPtr,
+            context.reference.pointer,
+            broadcastReceiver.reference.pointer,
+            intentFilter.reference.pointer,
+            i)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_registerReceiver1 = _class.staticMethodId(
+    r'registerReceiver',
+    r'(Landroid/content/Context;Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;Ljava/lang/String;Landroid/os/Handler;I)Landroid/content/Intent;',
+  );
+
+  static final _registerReceiver1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        $Int32
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              int)>();
+
+  /// from: static public android.content.Intent registerReceiver(android.content.Context context, android.content.BroadcastReceiver broadcastReceiver, android.content.IntentFilter intentFilter, java.lang.String string, android.os.Handler handler, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JObject registerReceiver1(
+    Context context,
+    jni.JObject broadcastReceiver,
+    jni.JObject intentFilter,
+    jni.JString string,
+    jni.JObject handler,
+    int i,
+  ) {
+    return _registerReceiver1(
+            _class.reference.pointer,
+            _id_registerReceiver1 as jni.JMethodIDPtr,
+            context.reference.pointer,
+            broadcastReceiver.reference.pointer,
+            intentFilter.reference.pointer,
+            string.reference.pointer,
+            handler.reference.pointer,
+            i)
+        .object(const jni.JObjectType());
   }
 
   static final _id_getSystemServiceName = _class.staticMethodId(
@@ -31988,17 +34140,17 @@ class ContextCompat extends jni.JObject {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
 
-  /// from: static public java.lang.String getSystemServiceName(android.content.Context context, java.lang.Class serviceClass)
+  /// from: static public java.lang.String getSystemServiceName(android.content.Context context, java.lang.Class class)
   /// The returned object must be released after use, by calling the [release] method.
   static jni.JString getSystemServiceName(
     Context context,
-    jni.JObject serviceClass,
+    jni.JObject class0,
   ) {
     return _getSystemServiceName(
             _class.reference.pointer,
             _id_getSystemServiceName as jni.JMethodIDPtr,
             context.reference.pointer,
-            serviceClass.reference.pointer)
+            class0.reference.pointer)
         .object(const jni.JStringType());
   }
 }
@@ -32026,6 +34178,185 @@ final class $ContextCompatType extends jni.JObjType<ContextCompat> {
   bool operator ==(Object other) {
     return other.runtimeType == ($ContextCompatType) &&
         other is $ContextCompatType;
+  }
+}
+
+/// from: androidx.core.util.Consumer
+class Consumer<$T extends jni.JObject> extends jni.JObject {
+  @override
+  late final jni.JObjType<Consumer<$T>> $type = type(T);
+
+  final jni.JObjType<$T> T;
+
+  Consumer.fromReference(
+    this.T,
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'androidx/core/util/Consumer');
+
+  /// The type which includes information such as the signature of this class.
+  static $ConsumerType<$T> type<$T extends jni.JObject>(
+    jni.JObjType<$T> T,
+  ) {
+    return $ConsumerType(
+      T,
+    );
+  }
+
+  static final _id_accept = _class.instanceMethodId(
+    r'accept',
+    r'(Ljava/lang/Object;)V',
+  );
+
+  static final _accept = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void accept(T object)
+  void accept(
+    $T object,
+  ) {
+    _accept(reference.pointer, _id_accept as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $ConsumerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'accept(Ljava/lang/Object;)V') {
+        _$impls[$p]!.accept(
+          $a[0].castTo(_$impls[$p]!.T, releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Consumer.implement(
+    $ConsumerImpl<$T> $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Consumer.fromReference(
+      $impl.T,
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.core.util.Consumer',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $ConsumerImpl<$T extends jni.JObject> {
+  factory $ConsumerImpl({
+    required jni.JObjType<$T> T,
+    required void Function($T object) accept,
+  }) = _$ConsumerImpl;
+
+  jni.JObjType<$T> get T;
+
+  void accept($T object);
+}
+
+class _$ConsumerImpl<$T extends jni.JObject> implements $ConsumerImpl<$T> {
+  _$ConsumerImpl({
+    required this.T,
+    required void Function($T object) accept,
+  }) : _accept = accept;
+
+  @override
+  final jni.JObjType<$T> T;
+
+  final void Function($T object) _accept;
+
+  void accept($T object) {
+    return _accept(object);
+  }
+}
+
+final class $ConsumerType<$T extends jni.JObject>
+    extends jni.JObjType<Consumer<$T>> {
+  final jni.JObjType<$T> T;
+
+  const $ConsumerType(
+    this.T,
+  );
+
+  @override
+  String get signature => r'Landroidx/core/util/Consumer;';
+
+  @override
+  Consumer<$T> fromReference(jni.JReference reference) =>
+      Consumer.fromReference(T, reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => Object.hash($ConsumerType, T);
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ConsumerType<$T>) &&
+        other is $ConsumerType<$T> &&
+        T == other.T;
   }
 }
 
@@ -34903,7 +37234,7 @@ class ImageAnalysis extends jni.JObject {
 
   /// from: public void setViewPortCropRect(android.graphics.Rect rect)
   void setViewPortCropRect(
-    jni.JObject rect,
+    Rect rect,
   ) {
     _setViewPortCropRect(reference.pointer,
             _id_setViewPortCropRect as jni.JMethodIDPtr, rect.reference.pointer)
@@ -39315,6 +41646,319 @@ final class $ImageCaptureType extends jni.JObjType<ImageCapture> {
   }
 }
 
+/// from: androidx.camera.core.ImageInfo
+class ImageInfo extends jni.JObject {
+  @override
+  late final jni.JObjType<ImageInfo> $type = type;
+
+  ImageInfo.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'androidx/camera/core/ImageInfo');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ImageInfoType();
+  static final _id_getTagBundle = _class.instanceMethodId(
+    r'getTagBundle',
+    r'()Landroidx/camera/core/impl/TagBundle;',
+  );
+
+  static final _getTagBundle = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract androidx.camera.core.impl.TagBundle getTagBundle()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getTagBundle() {
+    return _getTagBundle(
+            reference.pointer, _id_getTagBundle as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getTimestamp = _class.instanceMethodId(
+    r'getTimestamp',
+    r'()J',
+  );
+
+  static final _getTimestamp = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallLongMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract long getTimestamp()
+  int getTimestamp() {
+    return _getTimestamp(
+            reference.pointer, _id_getTimestamp as jni.JMethodIDPtr)
+        .long;
+  }
+
+  static final _id_getRotationDegrees = _class.instanceMethodId(
+    r'getRotationDegrees',
+    r'()I',
+  );
+
+  static final _getRotationDegrees = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getRotationDegrees()
+  int getRotationDegrees() {
+    return _getRotationDegrees(
+            reference.pointer, _id_getRotationDegrees as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getSensorToBufferTransformMatrix = _class.instanceMethodId(
+    r'getSensorToBufferTransformMatrix',
+    r'()Landroid/graphics/Matrix;',
+  );
+
+  static final _getSensorToBufferTransformMatrix =
+      ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                    ffi.Pointer<ffi.Void>,
+                    jni.JMethodIDPtr,
+                  )>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>();
+
+  /// from: public android.graphics.Matrix getSensorToBufferTransformMatrix()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getSensorToBufferTransformMatrix() {
+    return _getSensorToBufferTransformMatrix(reference.pointer,
+            _id_getSensorToBufferTransformMatrix as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_populateExifData = _class.instanceMethodId(
+    r'populateExifData',
+    r'(Landroidx/camera/core/impl/utils/ExifData$Builder;)V',
+  );
+
+  static final _populateExifData = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void populateExifData(androidx.camera.core.impl.utils.ExifData$Builder builder)
+  void populateExifData(
+    jni.JObject builder,
+  ) {
+    _populateExifData(reference.pointer,
+            _id_populateExifData as jni.JMethodIDPtr, builder.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $ImageInfoImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'getTagBundle()Landroidx/camera/core/impl/TagBundle;') {
+        final $r = _$impls[$p]!.getTagBundle();
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d == r'getTimestamp()J') {
+        final $r = _$impls[$p]!.getTimestamp();
+        return jni.JLong($r).reference.toPointer();
+      }
+      if ($d == r'getRotationDegrees()I') {
+        final $r = _$impls[$p]!.getRotationDegrees();
+        return jni.JInteger($r).reference.toPointer();
+      }
+      if ($d ==
+          r'getSensorToBufferTransformMatrix()Landroid/graphics/Matrix;') {
+        final $r = _$impls[$p]!.getSensorToBufferTransformMatrix();
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'populateExifData(Landroidx/camera/core/impl/utils/ExifData$Builder;)V') {
+        _$impls[$p]!.populateExifData(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory ImageInfo.implement(
+    $ImageInfoImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = ImageInfo.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.camera.core.ImageInfo',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $ImageInfoImpl {
+  factory $ImageInfoImpl({
+    required jni.JObject Function() getTagBundle,
+    required int Function() getTimestamp,
+    required int Function() getRotationDegrees,
+    required jni.JObject Function() getSensorToBufferTransformMatrix,
+    required void Function(jni.JObject builder) populateExifData,
+  }) = _$ImageInfoImpl;
+
+  jni.JObject getTagBundle();
+  int getTimestamp();
+  int getRotationDegrees();
+  jni.JObject getSensorToBufferTransformMatrix();
+  void populateExifData(jni.JObject builder);
+}
+
+class _$ImageInfoImpl implements $ImageInfoImpl {
+  _$ImageInfoImpl({
+    required jni.JObject Function() getTagBundle,
+    required int Function() getTimestamp,
+    required int Function() getRotationDegrees,
+    required jni.JObject Function() getSensorToBufferTransformMatrix,
+    required void Function(jni.JObject builder) populateExifData,
+  })  : _getTagBundle = getTagBundle,
+        _getTimestamp = getTimestamp,
+        _getRotationDegrees = getRotationDegrees,
+        _getSensorToBufferTransformMatrix = getSensorToBufferTransformMatrix,
+        _populateExifData = populateExifData;
+
+  final jni.JObject Function() _getTagBundle;
+  final int Function() _getTimestamp;
+  final int Function() _getRotationDegrees;
+  final jni.JObject Function() _getSensorToBufferTransformMatrix;
+  final void Function(jni.JObject builder) _populateExifData;
+
+  jni.JObject getTagBundle() {
+    return _getTagBundle();
+  }
+
+  int getTimestamp() {
+    return _getTimestamp();
+  }
+
+  int getRotationDegrees() {
+    return _getRotationDegrees();
+  }
+
+  jni.JObject getSensorToBufferTransformMatrix() {
+    return _getSensorToBufferTransformMatrix();
+  }
+
+  void populateExifData(jni.JObject builder) {
+    return _populateExifData(builder);
+  }
+}
+
+final class $ImageInfoType extends jni.JObjType<ImageInfo> {
+  const $ImageInfoType();
+
+  @override
+  String get signature => r'Landroidx/camera/core/ImageInfo;';
+
+  @override
+  ImageInfo fromReference(jni.JReference reference) =>
+      ImageInfo.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ImageInfoType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ImageInfoType) && other is $ImageInfoType;
+  }
+}
+
 /// from: androidx.camera.core.ImageProxy$PlaneProxy
 class ImageProxy_PlaneProxy extends jni.JObject {
   @override
@@ -39600,9 +42244,9 @@ class ImageProxy extends jni.JObject {
 
   /// from: public abstract android.graphics.Rect getCropRect()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getCropRect() {
+  Rect getCropRect() {
     return _getCropRect(reference.pointer, _id_getCropRect as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $RectType());
   }
 
   static final _id_setCropRect = _class.instanceMethodId(
@@ -39623,7 +42267,7 @@ class ImageProxy extends jni.JObject {
 
   /// from: public abstract void setCropRect(android.graphics.Rect rect)
   void setCropRect(
-    jni.JObject rect,
+    Rect rect,
   ) {
     _setCropRect(reference.pointer, _id_setCropRect as jni.JMethodIDPtr,
             rect.reference.pointer)
@@ -39742,10 +42386,10 @@ class ImageProxy extends jni.JObject {
 
   /// from: public abstract androidx.camera.core.ImageInfo getImageInfo()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getImageInfo() {
+  ImageInfo getImageInfo() {
     return _getImageInfo(
             reference.pointer, _id_getImageInfo as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $ImageInfoType());
   }
 
   static final _id_getImage = _class.instanceMethodId(
@@ -39767,9 +42411,9 @@ class ImageProxy extends jni.JObject {
 
   /// from: public abstract android.media.Image getImage()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getImage() {
+  Image getImage() {
     return _getImage(reference.pointer, _id_getImage as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $ImageType());
   }
 
   static final _id_toBitmap = _class.instanceMethodId(
@@ -39841,7 +42485,7 @@ class ImageProxy extends jni.JObject {
       }
       if ($d == r'setCropRect(Landroid/graphics/Rect;)V') {
         _$impls[$p]!.setCropRect(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a[0].castTo(const $RectType(), releaseOriginal: true),
         );
         return jni.nullptr;
       }
@@ -39921,40 +42565,40 @@ class ImageProxy extends jni.JObject {
 abstract interface class $ImageProxyImpl {
   factory $ImageProxyImpl({
     required void Function() close,
-    required jni.JObject Function() getCropRect,
-    required void Function(jni.JObject rect) setCropRect,
+    required Rect Function() getCropRect,
+    required void Function(Rect rect) setCropRect,
     required int Function() getFormat,
     required int Function() getHeight,
     required int Function() getWidth,
     required jni.JArray<ImageProxy_PlaneProxy> Function() getPlanes,
-    required jni.JObject Function() getImageInfo,
-    required jni.JObject Function() getImage,
+    required ImageInfo Function() getImageInfo,
+    required Image Function() getImage,
     required jni.JObject Function() toBitmap,
   }) = _$ImageProxyImpl;
 
   void close();
-  jni.JObject getCropRect();
-  void setCropRect(jni.JObject rect);
+  Rect getCropRect();
+  void setCropRect(Rect rect);
   int getFormat();
   int getHeight();
   int getWidth();
   jni.JArray<ImageProxy_PlaneProxy> getPlanes();
-  jni.JObject getImageInfo();
-  jni.JObject getImage();
+  ImageInfo getImageInfo();
+  Image getImage();
   jni.JObject toBitmap();
 }
 
 class _$ImageProxyImpl implements $ImageProxyImpl {
   _$ImageProxyImpl({
     required void Function() close,
-    required jni.JObject Function() getCropRect,
-    required void Function(jni.JObject rect) setCropRect,
+    required Rect Function() getCropRect,
+    required void Function(Rect rect) setCropRect,
     required int Function() getFormat,
     required int Function() getHeight,
     required int Function() getWidth,
     required jni.JArray<ImageProxy_PlaneProxy> Function() getPlanes,
-    required jni.JObject Function() getImageInfo,
-    required jni.JObject Function() getImage,
+    required ImageInfo Function() getImageInfo,
+    required Image Function() getImage,
     required jni.JObject Function() toBitmap,
   })  : _close = close,
         _getCropRect = getCropRect,
@@ -39968,25 +42612,25 @@ class _$ImageProxyImpl implements $ImageProxyImpl {
         _toBitmap = toBitmap;
 
   final void Function() _close;
-  final jni.JObject Function() _getCropRect;
-  final void Function(jni.JObject rect) _setCropRect;
+  final Rect Function() _getCropRect;
+  final void Function(Rect rect) _setCropRect;
   final int Function() _getFormat;
   final int Function() _getHeight;
   final int Function() _getWidth;
   final jni.JArray<ImageProxy_PlaneProxy> Function() _getPlanes;
-  final jni.JObject Function() _getImageInfo;
-  final jni.JObject Function() _getImage;
+  final ImageInfo Function() _getImageInfo;
+  final Image Function() _getImage;
   final jni.JObject Function() _toBitmap;
 
   void close() {
     return _close();
   }
 
-  jni.JObject getCropRect() {
+  Rect getCropRect() {
     return _getCropRect();
   }
 
-  void setCropRect(jni.JObject rect) {
+  void setCropRect(Rect rect) {
     return _setCropRect(rect);
   }
 
@@ -40006,11 +42650,11 @@ class _$ImageProxyImpl implements $ImageProxyImpl {
     return _getPlanes();
   }
 
-  jni.JObject getImageInfo() {
+  ImageInfo getImageInfo() {
     return _getImageInfo();
   }
 
-  jni.JObject getImage() {
+  Image getImage() {
     return _getImage();
   }
 
@@ -41651,7 +44295,7 @@ class CameraController extends jni.JObject {
     jni.JObject fileOutputOptions,
     jni.JObject audioConfig,
     Executor executor,
-    jni.JObject consumer,
+    Consumer<jni.JObject> consumer,
   ) {
     return _startRecording(
             reference.pointer,
@@ -41695,7 +44339,7 @@ class CameraController extends jni.JObject {
     jni.JObject fileDescriptorOutputOptions,
     jni.JObject audioConfig,
     Executor executor,
-    jni.JObject consumer,
+    Consumer<jni.JObject> consumer,
   ) {
     return _startRecording1(
             reference.pointer,
@@ -41739,7 +44383,7 @@ class CameraController extends jni.JObject {
     jni.JObject mediaStoreOutputOptions,
     jni.JObject audioConfig,
     Executor executor,
-    jni.JObject consumer,
+    Consumer<jni.JObject> consumer,
   ) {
     return _startRecording2(
             reference.pointer,
@@ -43591,6 +46235,347 @@ final class $PreviewViewType extends jni.JObjType<PreviewView> {
   }
 }
 
+/// from: androidx.camera.mlkit.vision.MlKitAnalyzer$Result
+class MlKitAnalyzer_Result extends jni.JObject {
+  @override
+  late final jni.JObjType<MlKitAnalyzer_Result> $type = type;
+
+  MlKitAnalyzer_Result.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'androidx/camera/mlkit/vision/MlKitAnalyzer$Result');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MlKitAnalyzer_ResultType();
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/util/Map;JLjava/util/Map;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Int64,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.util.Map map, long j, java.util.Map map1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MlKitAnalyzer_Result(
+    jni.JMap<Detector<jni.JObject>, jni.JObject> map,
+    int j,
+    jni.JMap<Detector<jni.JObject>, jni.JObject> map1,
+  ) {
+    return MlKitAnalyzer_Result.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            map.reference.pointer,
+            j,
+            map1.reference.pointer)
+        .reference);
+  }
+
+  static final _id_getValue = _class.instanceMethodId(
+    r'getValue',
+    r'(Lcom/google/mlkit/vision/interfaces/Detector;)Ljava/lang/Object;',
+  );
+
+  static final _getValue = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public T getValue(com.google.mlkit.vision.interfaces.Detector detector)
+  /// The returned object must be released after use, by calling the [release] method.
+  $T getValue<$T extends jni.JObject>(
+    Detector<$T> detector, {
+    jni.JObjType<$T>? T,
+  }) {
+    T ??= jni.lowestCommonSuperType([
+      (detector.$type as $DetectorType).DetectionResultT,
+    ]) as jni.JObjType<$T>;
+    return _getValue(reference.pointer, _id_getValue as jni.JMethodIDPtr,
+            detector.reference.pointer)
+        .object(T);
+  }
+
+  static final _id_getThrowable = _class.instanceMethodId(
+    r'getThrowable',
+    r'(Lcom/google/mlkit/vision/interfaces/Detector;)Ljava/lang/Throwable;',
+  );
+
+  static final _getThrowable = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public java.lang.Throwable getThrowable(com.google.mlkit.vision.interfaces.Detector detector)
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getThrowable(
+    Detector<jni.JObject> detector,
+  ) {
+    return _getThrowable(reference.pointer,
+            _id_getThrowable as jni.JMethodIDPtr, detector.reference.pointer)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getTimestamp = _class.instanceMethodId(
+    r'getTimestamp',
+    r'()J',
+  );
+
+  static final _getTimestamp = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallLongMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public long getTimestamp()
+  int getTimestamp() {
+    return _getTimestamp(
+            reference.pointer, _id_getTimestamp as jni.JMethodIDPtr)
+        .long;
+  }
+}
+
+final class $MlKitAnalyzer_ResultType
+    extends jni.JObjType<MlKitAnalyzer_Result> {
+  const $MlKitAnalyzer_ResultType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/mlkit/vision/MlKitAnalyzer$Result;';
+
+  @override
+  MlKitAnalyzer_Result fromReference(jni.JReference reference) =>
+      MlKitAnalyzer_Result.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MlKitAnalyzer_ResultType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MlKitAnalyzer_ResultType) &&
+        other is $MlKitAnalyzer_ResultType;
+  }
+}
+
+/// from: androidx.camera.mlkit.vision.MlKitAnalyzer
+class MlKitAnalyzer extends jni.JObject {
+  @override
+  late final jni.JObjType<MlKitAnalyzer> $type = type;
+
+  MlKitAnalyzer.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'androidx/camera/mlkit/vision/MlKitAnalyzer');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MlKitAnalyzerType();
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/util/List;ILjava/util/concurrent/Executor;Landroidx/core/util/Consumer;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              int,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.util.List list, int i, java.util.concurrent.Executor executor, androidx.core.util.Consumer consumer)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MlKitAnalyzer(
+    jni.JList<Detector<jni.JObject>> list,
+    int i,
+    Executor executor,
+    Consumer<MlKitAnalyzer_Result> consumer,
+  ) {
+    return MlKitAnalyzer.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            list.reference.pointer,
+            i,
+            executor.reference.pointer,
+            consumer.reference.pointer)
+        .reference);
+  }
+
+  static final _id_analyze = _class.instanceMethodId(
+    r'analyze',
+    r'(Landroidx/camera/core/ImageProxy;)V',
+  );
+
+  static final _analyze = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void analyze(androidx.camera.core.ImageProxy imageProxy)
+  void analyze(
+    ImageProxy imageProxy,
+  ) {
+    _analyze(reference.pointer, _id_analyze as jni.JMethodIDPtr,
+            imageProxy.reference.pointer)
+        .check();
+  }
+
+  static final _id_getDefaultTargetResolution = _class.instanceMethodId(
+    r'getDefaultTargetResolution',
+    r'()Landroid/util/Size;',
+  );
+
+  static final _getDefaultTargetResolution = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final android.util.Size getDefaultTargetResolution()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getDefaultTargetResolution() {
+    return _getDefaultTargetResolution(reference.pointer,
+            _id_getDefaultTargetResolution as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getTargetCoordinateSystem = _class.instanceMethodId(
+    r'getTargetCoordinateSystem',
+    r'()I',
+  );
+
+  static final _getTargetCoordinateSystem = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final int getTargetCoordinateSystem()
+  int getTargetCoordinateSystem() {
+    return _getTargetCoordinateSystem(reference.pointer,
+            _id_getTargetCoordinateSystem as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_updateTransform = _class.instanceMethodId(
+    r'updateTransform',
+    r'(Landroid/graphics/Matrix;)V',
+  );
+
+  static final _updateTransform = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void updateTransform(android.graphics.Matrix matrix)
+  void updateTransform(
+    jni.JObject matrix,
+  ) {
+    _updateTransform(reference.pointer, _id_updateTransform as jni.JMethodIDPtr,
+            matrix.reference.pointer)
+        .check();
+  }
+}
+
+final class $MlKitAnalyzerType extends jni.JObjType<MlKitAnalyzer> {
+  const $MlKitAnalyzerType();
+
+  @override
+  String get signature => r'Landroidx/camera/mlkit/vision/MlKitAnalyzer;';
+
+  @override
+  MlKitAnalyzer fromReference(jni.JReference reference) =>
+      MlKitAnalyzer.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MlKitAnalyzerType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MlKitAnalyzerType) &&
+        other is $MlKitAnalyzerType;
+  }
+}
+
 /// from: androidx.lifecycle.LifecycleOwner
 class LifecycleOwner extends jni.JObject {
   @override
@@ -44311,6 +47296,1476 @@ final class $ObserverType<$T extends jni.JObject>
   }
 }
 
+/// from: com.google.android.gms.tasks.OnCompleteListener
+class OnCompleteListener<$TResult extends jni.JObject> extends jni.JObject {
+  @override
+  late final jni.JObjType<OnCompleteListener<$TResult>> $type = type(TResult);
+
+  final jni.JObjType<$TResult> TResult;
+
+  OnCompleteListener.fromReference(
+    this.TResult,
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/android/gms/tasks/OnCompleteListener');
+
+  /// The type which includes information such as the signature of this class.
+  static $OnCompleteListenerType<$TResult> type<$TResult extends jni.JObject>(
+    jni.JObjType<$TResult> TResult,
+  ) {
+    return $OnCompleteListenerType(
+      TResult,
+    );
+  }
+
+  static final _id_onComplete = _class.instanceMethodId(
+    r'onComplete',
+    r'(Lcom/google/android/gms/tasks/Task;)V',
+  );
+
+  static final _onComplete = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onComplete(com.google.android.gms.tasks.Task task)
+  void onComplete(
+    Task<$TResult> task,
+  ) {
+    _onComplete(reference.pointer, _id_onComplete as jni.JMethodIDPtr,
+            task.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnCompleteListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onComplete(Lcom/google/android/gms/tasks/Task;)V') {
+        _$impls[$p]!.onComplete(
+          $a[0].castTo($TaskType(_$impls[$p]!.TResult), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnCompleteListener.implement(
+    $OnCompleteListenerImpl<$TResult> $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnCompleteListener.fromReference(
+      $impl.TResult,
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.android.gms.tasks.OnCompleteListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnCompleteListenerImpl<$TResult extends jni.JObject> {
+  factory $OnCompleteListenerImpl({
+    required jni.JObjType<$TResult> TResult,
+    required void Function(Task<$TResult> task) onComplete,
+  }) = _$OnCompleteListenerImpl;
+
+  jni.JObjType<$TResult> get TResult;
+
+  void onComplete(Task<$TResult> task);
+}
+
+class _$OnCompleteListenerImpl<$TResult extends jni.JObject>
+    implements $OnCompleteListenerImpl<$TResult> {
+  _$OnCompleteListenerImpl({
+    required this.TResult,
+    required void Function(Task<$TResult> task) onComplete,
+  }) : _onComplete = onComplete;
+
+  @override
+  final jni.JObjType<$TResult> TResult;
+
+  final void Function(Task<$TResult> task) _onComplete;
+
+  void onComplete(Task<$TResult> task) {
+    return _onComplete(task);
+  }
+}
+
+final class $OnCompleteListenerType<$TResult extends jni.JObject>
+    extends jni.JObjType<OnCompleteListener<$TResult>> {
+  final jni.JObjType<$TResult> TResult;
+
+  const $OnCompleteListenerType(
+    this.TResult,
+  );
+
+  @override
+  String get signature => r'Lcom/google/android/gms/tasks/OnCompleteListener;';
+
+  @override
+  OnCompleteListener<$TResult> fromReference(jni.JReference reference) =>
+      OnCompleteListener.fromReference(TResult, reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => Object.hash($OnCompleteListenerType, TResult);
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($OnCompleteListenerType<$TResult>) &&
+        other is $OnCompleteListenerType<$TResult> &&
+        TResult == other.TResult;
+  }
+}
+
+/// from: com.google.android.gms.tasks.OnSuccessListener
+class OnSuccessListener<$TResult extends jni.JObject> extends jni.JObject {
+  @override
+  late final jni.JObjType<OnSuccessListener<$TResult>> $type = type(TResult);
+
+  final jni.JObjType<$TResult> TResult;
+
+  OnSuccessListener.fromReference(
+    this.TResult,
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/android/gms/tasks/OnSuccessListener');
+
+  /// The type which includes information such as the signature of this class.
+  static $OnSuccessListenerType<$TResult> type<$TResult extends jni.JObject>(
+    jni.JObjType<$TResult> TResult,
+  ) {
+    return $OnSuccessListenerType(
+      TResult,
+    );
+  }
+
+  static final _id_onSuccess = _class.instanceMethodId(
+    r'onSuccess',
+    r'(Ljava/lang/Object;)V',
+  );
+
+  static final _onSuccess = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onSuccess(TResult object)
+  void onSuccess(
+    $TResult object,
+  ) {
+    _onSuccess(reference.pointer, _id_onSuccess as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnSuccessListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onSuccess(Ljava/lang/Object;)V') {
+        _$impls[$p]!.onSuccess(
+          $a[0].castTo(_$impls[$p]!.TResult, releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnSuccessListener.implement(
+    $OnSuccessListenerImpl<$TResult> $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnSuccessListener.fromReference(
+      $impl.TResult,
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.android.gms.tasks.OnSuccessListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnSuccessListenerImpl<$TResult extends jni.JObject> {
+  factory $OnSuccessListenerImpl({
+    required jni.JObjType<$TResult> TResult,
+    required void Function($TResult object) onSuccess,
+  }) = _$OnSuccessListenerImpl;
+
+  jni.JObjType<$TResult> get TResult;
+
+  void onSuccess($TResult object);
+}
+
+class _$OnSuccessListenerImpl<$TResult extends jni.JObject>
+    implements $OnSuccessListenerImpl<$TResult> {
+  _$OnSuccessListenerImpl({
+    required this.TResult,
+    required void Function($TResult object) onSuccess,
+  }) : _onSuccess = onSuccess;
+
+  @override
+  final jni.JObjType<$TResult> TResult;
+
+  final void Function($TResult object) _onSuccess;
+
+  void onSuccess($TResult object) {
+    return _onSuccess(object);
+  }
+}
+
+final class $OnSuccessListenerType<$TResult extends jni.JObject>
+    extends jni.JObjType<OnSuccessListener<$TResult>> {
+  final jni.JObjType<$TResult> TResult;
+
+  const $OnSuccessListenerType(
+    this.TResult,
+  );
+
+  @override
+  String get signature => r'Lcom/google/android/gms/tasks/OnSuccessListener;';
+
+  @override
+  OnSuccessListener<$TResult> fromReference(jni.JReference reference) =>
+      OnSuccessListener.fromReference(TResult, reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => Object.hash($OnSuccessListenerType, TResult);
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($OnSuccessListenerType<$TResult>) &&
+        other is $OnSuccessListenerType<$TResult> &&
+        TResult == other.TResult;
+  }
+}
+
+/// from: com.google.android.gms.tasks.OnFailureListener
+class OnFailureListener extends jni.JObject {
+  @override
+  late final jni.JObjType<OnFailureListener> $type = type;
+
+  OnFailureListener.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/android/gms/tasks/OnFailureListener');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $OnFailureListenerType();
+  static final _id_onFailure = _class.instanceMethodId(
+    r'onFailure',
+    r'(Ljava/lang/Exception;)V',
+  );
+
+  static final _onFailure = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onFailure(java.lang.Exception exception)
+  void onFailure(
+    jni.JObject exception,
+  ) {
+    _onFailure(reference.pointer, _id_onFailure as jni.JMethodIDPtr,
+            exception.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnFailureListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onFailure(Ljava/lang/Exception;)V') {
+        _$impls[$p]!.onFailure(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnFailureListener.implement(
+    $OnFailureListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnFailureListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.android.gms.tasks.OnFailureListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnFailureListenerImpl {
+  factory $OnFailureListenerImpl({
+    required void Function(jni.JObject exception) onFailure,
+  }) = _$OnFailureListenerImpl;
+
+  void onFailure(jni.JObject exception);
+}
+
+class _$OnFailureListenerImpl implements $OnFailureListenerImpl {
+  _$OnFailureListenerImpl({
+    required void Function(jni.JObject exception) onFailure,
+  }) : _onFailure = onFailure;
+
+  final void Function(jni.JObject exception) _onFailure;
+
+  void onFailure(jni.JObject exception) {
+    return _onFailure(exception);
+  }
+}
+
+final class $OnFailureListenerType extends jni.JObjType<OnFailureListener> {
+  const $OnFailureListenerType();
+
+  @override
+  String get signature => r'Lcom/google/android/gms/tasks/OnFailureListener;';
+
+  @override
+  OnFailureListener fromReference(jni.JReference reference) =>
+      OnFailureListener.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($OnFailureListenerType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($OnFailureListenerType) &&
+        other is $OnFailureListenerType;
+  }
+}
+
+/// from: com.google.android.gms.tasks.OnCanceledListener
+class OnCanceledListener extends jni.JObject {
+  @override
+  late final jni.JObjType<OnCanceledListener> $type = type;
+
+  OnCanceledListener.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/android/gms/tasks/OnCanceledListener');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $OnCanceledListenerType();
+  static final _id_onCanceled = _class.instanceMethodId(
+    r'onCanceled',
+    r'()V',
+  );
+
+  static final _onCanceled = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract void onCanceled()
+  void onCanceled() {
+    _onCanceled(reference.pointer, _id_onCanceled as jni.JMethodIDPtr).check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $OnCanceledListenerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCanceled()V') {
+        _$impls[$p]!.onCanceled();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory OnCanceledListener.implement(
+    $OnCanceledListenerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = OnCanceledListener.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.android.gms.tasks.OnCanceledListener',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $OnCanceledListenerImpl {
+  factory $OnCanceledListenerImpl({
+    required void Function() onCanceled,
+  }) = _$OnCanceledListenerImpl;
+
+  void onCanceled();
+}
+
+class _$OnCanceledListenerImpl implements $OnCanceledListenerImpl {
+  _$OnCanceledListenerImpl({
+    required void Function() onCanceled,
+  }) : _onCanceled = onCanceled;
+
+  final void Function() _onCanceled;
+
+  void onCanceled() {
+    return _onCanceled();
+  }
+}
+
+final class $OnCanceledListenerType extends jni.JObjType<OnCanceledListener> {
+  const $OnCanceledListenerType();
+
+  @override
+  String get signature => r'Lcom/google/android/gms/tasks/OnCanceledListener;';
+
+  @override
+  OnCanceledListener fromReference(jni.JReference reference) =>
+      OnCanceledListener.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($OnCanceledListenerType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($OnCanceledListenerType) &&
+        other is $OnCanceledListenerType;
+  }
+}
+
+/// from: com.google.android.gms.tasks.Task
+class Task<$TResult extends jni.JObject> extends jni.JObject {
+  @override
+  late final jni.JObjType<Task<$TResult>> $type = type(TResult);
+
+  final jni.JObjType<$TResult> TResult;
+
+  Task.fromReference(
+    this.TResult,
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/android/gms/tasks/Task');
+
+  /// The type which includes information such as the signature of this class.
+  static $TaskType<$TResult> type<$TResult extends jni.JObject>(
+    jni.JObjType<$TResult> TResult,
+  ) {
+    return $TaskType(
+      TResult,
+    );
+  }
+
+  static final _id_addOnCanceledListener = _class.instanceMethodId(
+    r'addOnCanceledListener',
+    r'(Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCanceledListener = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task addOnCanceledListener(com.google.android.gms.tasks.OnCanceledListener onCanceledListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnCanceledListener(
+    OnCanceledListener onCanceledListener,
+  ) {
+    return _addOnCanceledListener(
+            reference.pointer,
+            _id_addOnCanceledListener as jni.JMethodIDPtr,
+            onCanceledListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnCanceledListener1 = _class.instanceMethodId(
+    r'addOnCanceledListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCanceledListener1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task addOnCanceledListener(android.app.Activity activity, com.google.android.gms.tasks.OnCanceledListener onCanceledListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnCanceledListener1(
+    Activity activity,
+    OnCanceledListener onCanceledListener,
+  ) {
+    return _addOnCanceledListener1(
+            reference.pointer,
+            _id_addOnCanceledListener1 as jni.JMethodIDPtr,
+            activity.reference.pointer,
+            onCanceledListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnCanceledListener2 = _class.instanceMethodId(
+    r'addOnCanceledListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCanceledListener2 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task addOnCanceledListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnCanceledListener onCanceledListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnCanceledListener2(
+    Executor executor,
+    OnCanceledListener onCanceledListener,
+  ) {
+    return _addOnCanceledListener2(
+            reference.pointer,
+            _id_addOnCanceledListener2 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            onCanceledListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnCompleteListener = _class.instanceMethodId(
+    r'addOnCompleteListener',
+    r'(Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCompleteListener = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task addOnCompleteListener(com.google.android.gms.tasks.OnCompleteListener onCompleteListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnCompleteListener(
+    OnCompleteListener<$TResult> onCompleteListener,
+  ) {
+    return _addOnCompleteListener(
+            reference.pointer,
+            _id_addOnCompleteListener as jni.JMethodIDPtr,
+            onCompleteListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnCompleteListener1 = _class.instanceMethodId(
+    r'addOnCompleteListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCompleteListener1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task addOnCompleteListener(android.app.Activity activity, com.google.android.gms.tasks.OnCompleteListener onCompleteListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnCompleteListener1(
+    Activity activity,
+    OnCompleteListener<$TResult> onCompleteListener,
+  ) {
+    return _addOnCompleteListener1(
+            reference.pointer,
+            _id_addOnCompleteListener1 as jni.JMethodIDPtr,
+            activity.reference.pointer,
+            onCompleteListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnCompleteListener2 = _class.instanceMethodId(
+    r'addOnCompleteListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCompleteListener2 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task addOnCompleteListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnCompleteListener onCompleteListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnCompleteListener2(
+    Executor executor,
+    OnCompleteListener<$TResult> onCompleteListener,
+  ) {
+    return _addOnCompleteListener2(
+            reference.pointer,
+            _id_addOnCompleteListener2 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            onCompleteListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnFailureListener = _class.instanceMethodId(
+    r'addOnFailureListener',
+    r'(Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnFailureListener = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task addOnFailureListener(com.google.android.gms.tasks.OnFailureListener onFailureListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnFailureListener(
+    OnFailureListener onFailureListener,
+  ) {
+    return _addOnFailureListener(
+            reference.pointer,
+            _id_addOnFailureListener as jni.JMethodIDPtr,
+            onFailureListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnFailureListener1 = _class.instanceMethodId(
+    r'addOnFailureListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnFailureListener1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task addOnFailureListener(android.app.Activity activity, com.google.android.gms.tasks.OnFailureListener onFailureListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnFailureListener1(
+    Activity activity,
+    OnFailureListener onFailureListener,
+  ) {
+    return _addOnFailureListener1(
+            reference.pointer,
+            _id_addOnFailureListener1 as jni.JMethodIDPtr,
+            activity.reference.pointer,
+            onFailureListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnFailureListener2 = _class.instanceMethodId(
+    r'addOnFailureListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnFailureListener2 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task addOnFailureListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnFailureListener onFailureListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnFailureListener2(
+    Executor executor,
+    OnFailureListener onFailureListener,
+  ) {
+    return _addOnFailureListener2(
+            reference.pointer,
+            _id_addOnFailureListener2 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            onFailureListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnSuccessListener = _class.instanceMethodId(
+    r'addOnSuccessListener',
+    r'(Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnSuccessListener = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task addOnSuccessListener(com.google.android.gms.tasks.OnSuccessListener onSuccessListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnSuccessListener(
+    OnSuccessListener<$TResult> onSuccessListener,
+  ) {
+    return _addOnSuccessListener(
+            reference.pointer,
+            _id_addOnSuccessListener as jni.JMethodIDPtr,
+            onSuccessListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnSuccessListener1 = _class.instanceMethodId(
+    r'addOnSuccessListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnSuccessListener1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task addOnSuccessListener(android.app.Activity activity, com.google.android.gms.tasks.OnSuccessListener onSuccessListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnSuccessListener1(
+    Activity activity,
+    OnSuccessListener<$TResult> onSuccessListener,
+  ) {
+    return _addOnSuccessListener1(
+            reference.pointer,
+            _id_addOnSuccessListener1 as jni.JMethodIDPtr,
+            activity.reference.pointer,
+            onSuccessListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_addOnSuccessListener2 = _class.instanceMethodId(
+    r'addOnSuccessListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnSuccessListener2 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task addOnSuccessListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnSuccessListener onSuccessListener)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult> addOnSuccessListener2(
+    Executor executor,
+    OnSuccessListener<$TResult> onSuccessListener,
+  ) {
+    return _addOnSuccessListener2(
+            reference.pointer,
+            _id_addOnSuccessListener2 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            onSuccessListener.reference.pointer)
+        .object($TaskType(TResult));
+  }
+
+  static final _id_continueWith = _class.instanceMethodId(
+    r'continueWith',
+    r'(Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _continueWith = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task continueWith(com.google.android.gms.tasks.Continuation continuation)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TContinuationResult>
+      continueWith<$TContinuationResult extends jni.JObject>(
+    jni.JObject continuation, {
+    required jni.JObjType<$TContinuationResult> TContinuationResult,
+  }) {
+    return _continueWith(
+            reference.pointer,
+            _id_continueWith as jni.JMethodIDPtr,
+            continuation.reference.pointer)
+        .object($TaskType(TContinuationResult));
+  }
+
+  static final _id_continueWith1 = _class.instanceMethodId(
+    r'continueWith',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _continueWith1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task continueWith(java.util.concurrent.Executor executor, com.google.android.gms.tasks.Continuation continuation)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TContinuationResult>
+      continueWith1<$TContinuationResult extends jni.JObject>(
+    Executor executor,
+    jni.JObject continuation, {
+    required jni.JObjType<$TContinuationResult> TContinuationResult,
+  }) {
+    return _continueWith1(
+            reference.pointer,
+            _id_continueWith1 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            continuation.reference.pointer)
+        .object($TaskType(TContinuationResult));
+  }
+
+  static final _id_continueWithTask = _class.instanceMethodId(
+    r'continueWithTask',
+    r'(Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _continueWithTask = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task continueWithTask(com.google.android.gms.tasks.Continuation continuation)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TContinuationResult>
+      continueWithTask<$TContinuationResult extends jni.JObject>(
+    jni.JObject continuation, {
+    required jni.JObjType<$TContinuationResult> TContinuationResult,
+  }) {
+    return _continueWithTask(
+            reference.pointer,
+            _id_continueWithTask as jni.JMethodIDPtr,
+            continuation.reference.pointer)
+        .object($TaskType(TContinuationResult));
+  }
+
+  static final _id_continueWithTask1 = _class.instanceMethodId(
+    r'continueWithTask',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _continueWithTask1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task continueWithTask(java.util.concurrent.Executor executor, com.google.android.gms.tasks.Continuation continuation)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TContinuationResult>
+      continueWithTask1<$TContinuationResult extends jni.JObject>(
+    Executor executor,
+    jni.JObject continuation, {
+    required jni.JObjType<$TContinuationResult> TContinuationResult,
+  }) {
+    return _continueWithTask1(
+            reference.pointer,
+            _id_continueWithTask1 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            continuation.reference.pointer)
+        .object($TaskType(TContinuationResult));
+  }
+
+  static final _id_onSuccessTask = _class.instanceMethodId(
+    r'onSuccessTask',
+    r'(Lcom/google/android/gms/tasks/SuccessContinuation;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _onSuccessTask = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task onSuccessTask(com.google.android.gms.tasks.SuccessContinuation successContinuation)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TContinuationResult>
+      onSuccessTask<$TContinuationResult extends jni.JObject>(
+    jni.JObject successContinuation, {
+    required jni.JObjType<$TContinuationResult> TContinuationResult,
+  }) {
+    return _onSuccessTask(
+            reference.pointer,
+            _id_onSuccessTask as jni.JMethodIDPtr,
+            successContinuation.reference.pointer)
+        .object($TaskType(TContinuationResult));
+  }
+
+  static final _id_onSuccessTask1 = _class.instanceMethodId(
+    r'onSuccessTask',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/SuccessContinuation;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _onSuccessTask1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.android.gms.tasks.Task onSuccessTask(java.util.concurrent.Executor executor, com.google.android.gms.tasks.SuccessContinuation successContinuation)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TContinuationResult>
+      onSuccessTask1<$TContinuationResult extends jni.JObject>(
+    Executor executor,
+    jni.JObject successContinuation, {
+    required jni.JObjType<$TContinuationResult> TContinuationResult,
+  }) {
+    return _onSuccessTask1(
+            reference.pointer,
+            _id_onSuccessTask1 as jni.JMethodIDPtr,
+            executor.reference.pointer,
+            successContinuation.reference.pointer)
+        .object($TaskType(TContinuationResult));
+  }
+
+  static final _id_getException = _class.instanceMethodId(
+    r'getException',
+    r'()Ljava/lang/Exception;',
+  );
+
+  static final _getException = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract java.lang.Exception getException()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getException() {
+    return _getException(
+            reference.pointer, _id_getException as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getResult = _class.instanceMethodId(
+    r'getResult',
+    r'()Ljava/lang/Object;',
+  );
+
+  static final _getResult = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract TResult getResult()
+  /// The returned object must be released after use, by calling the [release] method.
+  $TResult getResult() {
+    return _getResult(reference.pointer, _id_getResult as jni.JMethodIDPtr)
+        .object(TResult);
+  }
+
+  static final _id_getResult1 = _class.instanceMethodId(
+    r'getResult',
+    r'(Ljava/lang/Class;)Ljava/lang/Object;',
+  );
+
+  static final _getResult1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract TResult getResult(java.lang.Class class)
+  /// The returned object must be released after use, by calling the [release] method.
+  $TResult getResult1<$X extends jni.JObject>(
+    jni.JObject class0, {
+    required jni.JObjType<$X> X,
+  }) {
+    return _getResult1(reference.pointer, _id_getResult1 as jni.JMethodIDPtr,
+            class0.reference.pointer)
+        .object(TResult);
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Task({
+    required jni.JObjType<$TResult> TResult,
+  }) {
+    return Task.fromReference(
+        TResult,
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+
+  static final _id_isCanceled = _class.instanceMethodId(
+    r'isCanceled',
+    r'()Z',
+  );
+
+  static final _isCanceled = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract boolean isCanceled()
+  bool isCanceled() {
+    return _isCanceled(reference.pointer, _id_isCanceled as jni.JMethodIDPtr)
+        .boolean;
+  }
+
+  static final _id_isComplete = _class.instanceMethodId(
+    r'isComplete',
+    r'()Z',
+  );
+
+  static final _isComplete = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract boolean isComplete()
+  bool isComplete() {
+    return _isComplete(reference.pointer, _id_isComplete as jni.JMethodIDPtr)
+        .boolean;
+  }
+
+  static final _id_isSuccessful = _class.instanceMethodId(
+    r'isSuccessful',
+    r'()Z',
+  );
+
+  static final _isSuccessful = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract boolean isSuccessful()
+  bool isSuccessful() {
+    return _isSuccessful(
+            reference.pointer, _id_isSuccessful as jni.JMethodIDPtr)
+        .boolean;
+  }
+}
+
+final class $TaskType<$TResult extends jni.JObject>
+    extends jni.JObjType<Task<$TResult>> {
+  final jni.JObjType<$TResult> TResult;
+
+  const $TaskType(
+    this.TResult,
+  );
+
+  @override
+  String get signature => r'Lcom/google/android/gms/tasks/Task;';
+
+  @override
+  Task<$TResult> fromReference(jni.JReference reference) =>
+      Task.fromReference(TResult, reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => Object.hash($TaskType, TResult);
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($TaskType<$TResult>) &&
+        other is $TaskType<$TResult> &&
+        TResult == other.TResult;
+  }
+}
+
 /// from: com.google.common.util.concurrent.ListenableFuture
 class ListenableFuture<$V extends jni.JObject> extends jni.JObject {
   @override
@@ -44496,6 +48951,8538 @@ final class $ListenableFutureType<$V extends jni.JObject>
     return other.runtimeType == ($ListenableFutureType<$V>) &&
         other is $ListenableFutureType<$V> &&
         V == other.V;
+  }
+}
+
+/// from: com.google.mlkit.vision.common.InputImage$ImageFormat
+class InputImage_ImageFormat extends jni.JObject {
+  @override
+  late final jni.JObjType<InputImage_ImageFormat> $type = type;
+
+  InputImage_ImageFormat.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/common/InputImage$ImageFormat');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $InputImage_ImageFormatType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $InputImage_ImageFormatImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory InputImage_ImageFormat.implement(
+    $InputImage_ImageFormatImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = InputImage_ImageFormat.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.common.InputImage$ImageFormat',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $InputImage_ImageFormatImpl {
+  factory $InputImage_ImageFormatImpl() = _$InputImage_ImageFormatImpl;
+}
+
+class _$InputImage_ImageFormatImpl implements $InputImage_ImageFormatImpl {
+  _$InputImage_ImageFormatImpl();
+}
+
+final class $InputImage_ImageFormatType
+    extends jni.JObjType<InputImage_ImageFormat> {
+  const $InputImage_ImageFormatType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/common/InputImage$ImageFormat;';
+
+  @override
+  InputImage_ImageFormat fromReference(jni.JReference reference) =>
+      InputImage_ImageFormat.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($InputImage_ImageFormatType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($InputImage_ImageFormatType) &&
+        other is $InputImage_ImageFormatType;
+  }
+}
+
+/// from: com.google.mlkit.vision.common.InputImage
+class InputImage extends jni.JObject {
+  @override
+  late final jni.JObjType<InputImage> $type = type;
+
+  InputImage.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/common/InputImage');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $InputImageType();
+
+  /// from: static public final int IMAGE_FORMAT_NV21
+  static const IMAGE_FORMAT_NV21 = 17;
+
+  /// from: static public final int IMAGE_FORMAT_YV12
+  static const IMAGE_FORMAT_YV12 = 842094169;
+
+  /// from: static public final int IMAGE_FORMAT_BITMAP
+  static const IMAGE_FORMAT_BITMAP = -1;
+
+  /// from: static public final int IMAGE_FORMAT_YUV_420_888
+  static const IMAGE_FORMAT_YUV_420_888 = 35;
+  static final _id_getFormat = _class.instanceMethodId(
+    r'getFormat',
+    r'()I',
+  );
+
+  static final _getFormat = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getFormat()
+  int getFormat() {
+    return _getFormat(reference.pointer, _id_getFormat as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getHeight = _class.instanceMethodId(
+    r'getHeight',
+    r'()I',
+  );
+
+  static final _getHeight = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getHeight()
+  int getHeight() {
+    return _getHeight(reference.pointer, _id_getHeight as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getRotationDegrees = _class.instanceMethodId(
+    r'getRotationDegrees',
+    r'()I',
+  );
+
+  static final _getRotationDegrees = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getRotationDegrees()
+  int getRotationDegrees() {
+    return _getRotationDegrees(
+            reference.pointer, _id_getRotationDegrees as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getWidth = _class.instanceMethodId(
+    r'getWidth',
+    r'()I',
+  );
+
+  static final _getWidth = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getWidth()
+  int getWidth() {
+    return _getWidth(reference.pointer, _id_getWidth as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getBitmapInternal = _class.instanceMethodId(
+    r'getBitmapInternal',
+    r'()Landroid/graphics/Bitmap;',
+  );
+
+  static final _getBitmapInternal = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.Bitmap getBitmapInternal()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getBitmapInternal() {
+    return _getBitmapInternal(
+            reference.pointer, _id_getBitmapInternal as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getCoordinatesMatrix = _class.instanceMethodId(
+    r'getCoordinatesMatrix',
+    r'()Landroid/graphics/Matrix;',
+  );
+
+  static final _getCoordinatesMatrix = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.Matrix getCoordinatesMatrix()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getCoordinatesMatrix() {
+    return _getCoordinatesMatrix(
+            reference.pointer, _id_getCoordinatesMatrix as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_getMediaImage = _class.instanceMethodId(
+    r'getMediaImage',
+    r'()Landroid/media/Image;',
+  );
+
+  static final _getMediaImage = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.media.Image getMediaImage()
+  /// The returned object must be released after use, by calling the [release] method.
+  Image getMediaImage() {
+    return _getMediaImage(
+            reference.pointer, _id_getMediaImage as jni.JMethodIDPtr)
+        .object(const $ImageType());
+  }
+
+  static final _id_fromBitmap = _class.staticMethodId(
+    r'fromBitmap',
+    r'(Landroid/graphics/Bitmap;I)Lcom/google/mlkit/vision/common/InputImage;',
+  );
+
+  static final _fromBitmap = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: static public com.google.mlkit.vision.common.InputImage fromBitmap(android.graphics.Bitmap bitmap, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  static InputImage fromBitmap(
+    jni.JObject bitmap,
+    int i,
+  ) {
+    return _fromBitmap(_class.reference.pointer,
+            _id_fromBitmap as jni.JMethodIDPtr, bitmap.reference.pointer, i)
+        .object(const $InputImageType());
+  }
+
+  static final _id_fromByteArray = _class.staticMethodId(
+    r'fromByteArray',
+    r'([BIIII)Lcom/google/mlkit/vision/common/InputImage;',
+  );
+
+  static final _fromByteArray = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, int, int, int)>();
+
+  /// from: static public com.google.mlkit.vision.common.InputImage fromByteArray(byte[] bs, int i, int i1, int i2, int i3)
+  /// The returned object must be released after use, by calling the [release] method.
+  static InputImage fromByteArray(
+    jni.JArray<jni.jbyte> bs,
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return _fromByteArray(
+            _class.reference.pointer,
+            _id_fromByteArray as jni.JMethodIDPtr,
+            bs.reference.pointer,
+            i,
+            i1,
+            i2,
+            i3)
+        .object(const $InputImageType());
+  }
+
+  static final _id_fromByteBuffer = _class.staticMethodId(
+    r'fromByteBuffer',
+    r'(Ljava/nio/ByteBuffer;IIII)Lcom/google/mlkit/vision/common/InputImage;',
+  );
+
+  static final _fromByteBuffer = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, int, int, int)>();
+
+  /// from: static public com.google.mlkit.vision.common.InputImage fromByteBuffer(java.nio.ByteBuffer byteBuffer, int i, int i1, int i2, int i3)
+  /// The returned object must be released after use, by calling the [release] method.
+  static InputImage fromByteBuffer(
+    jni.JByteBuffer byteBuffer,
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return _fromByteBuffer(
+            _class.reference.pointer,
+            _id_fromByteBuffer as jni.JMethodIDPtr,
+            byteBuffer.reference.pointer,
+            i,
+            i1,
+            i2,
+            i3)
+        .object(const $InputImageType());
+  }
+
+  static final _id_fromFilePath = _class.staticMethodId(
+    r'fromFilePath',
+    r'(Landroid/content/Context;Landroid/net/Uri;)Lcom/google/mlkit/vision/common/InputImage;',
+  );
+
+  static final _fromFilePath = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public com.google.mlkit.vision.common.InputImage fromFilePath(android.content.Context context, android.net.Uri uri)
+  /// The returned object must be released after use, by calling the [release] method.
+  static InputImage fromFilePath(
+    Context context,
+    Uri uri,
+  ) {
+    return _fromFilePath(
+            _class.reference.pointer,
+            _id_fromFilePath as jni.JMethodIDPtr,
+            context.reference.pointer,
+            uri.reference.pointer)
+        .object(const $InputImageType());
+  }
+
+  static final _id_fromMediaImage = _class.staticMethodId(
+    r'fromMediaImage',
+    r'(Landroid/media/Image;I)Lcom/google/mlkit/vision/common/InputImage;',
+  );
+
+  static final _fromMediaImage = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: static public com.google.mlkit.vision.common.InputImage fromMediaImage(android.media.Image image, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  static InputImage fromMediaImage(
+    Image image,
+    int i,
+  ) {
+    return _fromMediaImage(_class.reference.pointer,
+            _id_fromMediaImage as jni.JMethodIDPtr, image.reference.pointer, i)
+        .object(const $InputImageType());
+  }
+
+  static final _id_fromMediaImage1 = _class.staticMethodId(
+    r'fromMediaImage',
+    r'(Landroid/media/Image;ILandroid/graphics/Matrix;)Lcom/google/mlkit/vision/common/InputImage;',
+  );
+
+  static final _fromMediaImage1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public com.google.mlkit.vision.common.InputImage fromMediaImage(android.media.Image image, int i, android.graphics.Matrix matrix)
+  /// The returned object must be released after use, by calling the [release] method.
+  static InputImage fromMediaImage1(
+    Image image,
+    int i,
+    jni.JObject matrix,
+  ) {
+    return _fromMediaImage1(
+            _class.reference.pointer,
+            _id_fromMediaImage1 as jni.JMethodIDPtr,
+            image.reference.pointer,
+            i,
+            matrix.reference.pointer)
+        .object(const $InputImageType());
+  }
+
+  static final _id_getByteBuffer = _class.instanceMethodId(
+    r'getByteBuffer',
+    r'()Ljava/nio/ByteBuffer;',
+  );
+
+  static final _getByteBuffer = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.nio.ByteBuffer getByteBuffer()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JByteBuffer getByteBuffer() {
+    return _getByteBuffer(
+            reference.pointer, _id_getByteBuffer as jni.JMethodIDPtr)
+        .object(const jni.JByteBufferType());
+  }
+
+  static final _id_getPlanes = _class.instanceMethodId(
+    r'getPlanes',
+    r'()[Landroid/media/Image$Plane;',
+  );
+
+  static final _getPlanes = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.media.Image$Plane[] getPlanes()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JArray<Image_Plane> getPlanes() {
+    return _getPlanes(reference.pointer, _id_getPlanes as jni.JMethodIDPtr)
+        .object(const jni.JArrayType($Image_PlaneType()));
+  }
+}
+
+final class $InputImageType extends jni.JObjType<InputImage> {
+  const $InputImageType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/common/InputImage;';
+
+  @override
+  InputImage fromReference(jni.JReference reference) =>
+      InputImage.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($InputImageType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($InputImageType) && other is $InputImageType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.BarcodeScanning
+class BarcodeScanning extends jni.JObject {
+  @override
+  late final jni.JObjType<BarcodeScanning> $type = type;
+
+  BarcodeScanning.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/barcode/BarcodeScanning');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $BarcodeScanningType();
+  static final _id_getClient = _class.staticMethodId(
+    r'getClient',
+    r'()Lcom/google/mlkit/vision/barcode/BarcodeScanner;',
+  );
+
+  static final _getClient = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: static public com.google.mlkit.vision.barcode.BarcodeScanner getClient()
+  /// The returned object must be released after use, by calling the [release] method.
+  static BarcodeScanner getClient() {
+    return _getClient(
+            _class.reference.pointer, _id_getClient as jni.JMethodIDPtr)
+        .object(const $BarcodeScannerType());
+  }
+
+  static final _id_getClient1 = _class.staticMethodId(
+    r'getClient',
+    r'(Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions;)Lcom/google/mlkit/vision/barcode/BarcodeScanner;',
+  );
+
+  static final _getClient1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public com.google.mlkit.vision.barcode.BarcodeScanner getClient(com.google.mlkit.vision.barcode.BarcodeScannerOptions barcodeScannerOptions)
+  /// The returned object must be released after use, by calling the [release] method.
+  static BarcodeScanner getClient1(
+    BarcodeScannerOptions barcodeScannerOptions,
+  ) {
+    return _getClient1(
+            _class.reference.pointer,
+            _id_getClient1 as jni.JMethodIDPtr,
+            barcodeScannerOptions.reference.pointer)
+        .object(const $BarcodeScannerType());
+  }
+}
+
+final class $BarcodeScanningType extends jni.JObjType<BarcodeScanning> {
+  const $BarcodeScanningType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/barcode/BarcodeScanning;';
+
+  @override
+  BarcodeScanning fromReference(jni.JReference reference) =>
+      BarcodeScanning.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($BarcodeScanningType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BarcodeScanningType) &&
+        other is $BarcodeScanningType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.BarcodeScanner
+class BarcodeScanner extends jni.JObject {
+  @override
+  late final jni.JObjType<BarcodeScanner> $type = type;
+
+  BarcodeScanner.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/barcode/BarcodeScanner');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $BarcodeScannerType();
+  static final _id_process = _class.instanceMethodId(
+    r'process',
+    r'(Lcom/google/android/odml/image/MlImage;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(com.google.android.odml.image.MlImage mlImage)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<jni.JList<Barcode>> process(
+    jni.JObject mlImage,
+  ) {
+    return _process(reference.pointer, _id_process as jni.JMethodIDPtr,
+            mlImage.reference.pointer)
+        .object(const $TaskType(jni.JListType($BarcodeType())));
+  }
+
+  static final _id_process1 = _class.instanceMethodId(
+    r'process',
+    r'(Lcom/google/mlkit/vision/common/InputImage;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(com.google.mlkit.vision.common.InputImage inputImage)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<jni.JList<Barcode>> process1(
+    InputImage inputImage,
+  ) {
+    return _process1(reference.pointer, _id_process1 as jni.JMethodIDPtr,
+            inputImage.reference.pointer)
+        .object(const $TaskType(jni.JListType($BarcodeType())));
+  }
+
+  static final _id_close = _class.instanceMethodId(
+    r'close',
+    r'()V',
+  );
+
+  static final _close = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract void close()
+  void close() {
+    _close(reference.pointer, _id_close as jni.JMethodIDPtr).check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $BarcodeScannerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'process(Lcom/google/android/odml/image/MlImage;)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'process(Lcom/google/mlkit/vision/common/InputImage;)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process1(
+          $a[0].castTo(const $InputImageType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d == r'close()V') {
+        _$impls[$p]!.close();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory BarcodeScanner.implement(
+    $BarcodeScannerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = BarcodeScanner.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.BarcodeScanner',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $BarcodeScannerImpl {
+  factory $BarcodeScannerImpl({
+    required Task<jni.JList<Barcode>> Function(jni.JObject mlImage) process,
+    required Task<jni.JList<Barcode>> Function(InputImage inputImage) process1,
+    required void Function() close,
+  }) = _$BarcodeScannerImpl;
+
+  Task<jni.JList<Barcode>> process(jni.JObject mlImage);
+  Task<jni.JList<Barcode>> process1(InputImage inputImage);
+  void close();
+}
+
+class _$BarcodeScannerImpl implements $BarcodeScannerImpl {
+  _$BarcodeScannerImpl({
+    required Task<jni.JList<Barcode>> Function(jni.JObject mlImage) process,
+    required Task<jni.JList<Barcode>> Function(InputImage inputImage) process1,
+    required void Function() close,
+  })  : _process = process,
+        _process1 = process1,
+        _close = close;
+
+  final Task<jni.JList<Barcode>> Function(jni.JObject mlImage) _process;
+  final Task<jni.JList<Barcode>> Function(InputImage inputImage) _process1;
+  final void Function() _close;
+
+  Task<jni.JList<Barcode>> process(jni.JObject mlImage) {
+    return _process(mlImage);
+  }
+
+  Task<jni.JList<Barcode>> process1(InputImage inputImage) {
+    return _process1(inputImage);
+  }
+
+  void close() {
+    return _close();
+  }
+}
+
+final class $BarcodeScannerType extends jni.JObjType<BarcodeScanner> {
+  const $BarcodeScannerType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/barcode/BarcodeScanner;';
+
+  @override
+  BarcodeScanner fromReference(jni.JReference reference) =>
+      BarcodeScanner.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($BarcodeScannerType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BarcodeScannerType) &&
+        other is $BarcodeScannerType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.BarcodeScannerOptions$Builder
+class BarcodeScannerOptions_Builder extends jni.JObject {
+  @override
+  late final jni.JObjType<BarcodeScannerOptions_Builder> $type = type;
+
+  BarcodeScannerOptions_Builder.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/BarcodeScannerOptions$Builder');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $BarcodeScannerOptions_BuilderType();
+  static final _id_enableAllPotentialBarcodes = _class.instanceMethodId(
+    r'enableAllPotentialBarcodes',
+    r'()Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions$Builder;',
+  );
+
+  static final _enableAllPotentialBarcodes = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.BarcodeScannerOptions$Builder enableAllPotentialBarcodes()
+  /// The returned object must be released after use, by calling the [release] method.
+  BarcodeScannerOptions_Builder enableAllPotentialBarcodes() {
+    return _enableAllPotentialBarcodes(reference.pointer,
+            _id_enableAllPotentialBarcodes as jni.JMethodIDPtr)
+        .object(const $BarcodeScannerOptions_BuilderType());
+  }
+
+  static final _id_setBarcodeFormats = _class.instanceMethodId(
+    r'setBarcodeFormats',
+    r'(I[I)Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions$Builder;',
+  );
+
+  static final _setBarcodeFormats = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.mlkit.vision.barcode.BarcodeScannerOptions$Builder setBarcodeFormats(int i, int[] is)
+  /// The returned object must be released after use, by calling the [release] method.
+  BarcodeScannerOptions_Builder setBarcodeFormats(
+    int i,
+    jni.JArray<jni.jint> is0,
+  ) {
+    return _setBarcodeFormats(reference.pointer,
+            _id_setBarcodeFormats as jni.JMethodIDPtr, i, is0.reference.pointer)
+        .object(const $BarcodeScannerOptions_BuilderType());
+  }
+
+  static final _id_setExecutor = _class.instanceMethodId(
+    r'setExecutor',
+    r'(Ljava/util/concurrent/Executor;)Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions$Builder;',
+  );
+
+  static final _setExecutor = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.mlkit.vision.barcode.BarcodeScannerOptions$Builder setExecutor(java.util.concurrent.Executor executor)
+  /// The returned object must be released after use, by calling the [release] method.
+  BarcodeScannerOptions_Builder setExecutor(
+    Executor executor,
+  ) {
+    return _setExecutor(reference.pointer, _id_setExecutor as jni.JMethodIDPtr,
+            executor.reference.pointer)
+        .object(const $BarcodeScannerOptions_BuilderType());
+  }
+
+  static final _id_setZoomSuggestionOptions = _class.instanceMethodId(
+    r'setZoomSuggestionOptions',
+    r'(Lcom/google/mlkit/vision/barcode/ZoomSuggestionOptions;)Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions$Builder;',
+  );
+
+  static final _setZoomSuggestionOptions = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.mlkit.vision.barcode.BarcodeScannerOptions$Builder setZoomSuggestionOptions(com.google.mlkit.vision.barcode.ZoomSuggestionOptions zoomSuggestionOptions)
+  /// The returned object must be released after use, by calling the [release] method.
+  BarcodeScannerOptions_Builder setZoomSuggestionOptions(
+    jni.JObject zoomSuggestionOptions,
+  ) {
+    return _setZoomSuggestionOptions(
+            reference.pointer,
+            _id_setZoomSuggestionOptions as jni.JMethodIDPtr,
+            zoomSuggestionOptions.reference.pointer)
+        .object(const $BarcodeScannerOptions_BuilderType());
+  }
+
+  static final _id_build = _class.instanceMethodId(
+    r'build',
+    r'()Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions;',
+  );
+
+  static final _build = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.BarcodeScannerOptions build()
+  /// The returned object must be released after use, by calling the [release] method.
+  BarcodeScannerOptions build() {
+    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
+        .object(const $BarcodeScannerOptionsType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory BarcodeScannerOptions_Builder() {
+    return BarcodeScannerOptions_Builder.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+}
+
+final class $BarcodeScannerOptions_BuilderType
+    extends jni.JObjType<BarcodeScannerOptions_Builder> {
+  const $BarcodeScannerOptions_BuilderType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions$Builder;';
+
+  @override
+  BarcodeScannerOptions_Builder fromReference(jni.JReference reference) =>
+      BarcodeScannerOptions_Builder.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($BarcodeScannerOptions_BuilderType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BarcodeScannerOptions_BuilderType) &&
+        other is $BarcodeScannerOptions_BuilderType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.BarcodeScannerOptions
+class BarcodeScannerOptions extends jni.JObject {
+  @override
+  late final jni.JObjType<BarcodeScannerOptions> $type = type;
+
+  BarcodeScannerOptions.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/BarcodeScannerOptions');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $BarcodeScannerOptionsType();
+  static final _id_hashCode1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int hashCode()
+  int hashCode1() {
+    return _hashCode1(reference.pointer, _id_hashCode1 as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean equals(java.lang.Object object)
+  bool equals(
+    jni.JObject object,
+  ) {
+    return _equals(reference.pointer, _id_equals as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_zza = _class.instanceMethodId(
+    r'zza',
+    r'()I',
+  );
+
+  static final _zza = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final int zza()
+  int zza() {
+    return _zza(reference.pointer, _id_zza as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_zzb = _class.instanceMethodId(
+    r'zzb',
+    r'()Lcom/google/mlkit/vision/barcode/ZoomSuggestionOptions;',
+  );
+
+  static final _zzb = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final com.google.mlkit.vision.barcode.ZoomSuggestionOptions zzb()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject zzb() {
+    return _zzb(reference.pointer, _id_zzb as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_zzc = _class.instanceMethodId(
+    r'zzc',
+    r'()Ljava/util/concurrent/Executor;',
+  );
+
+  static final _zzc = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final java.util.concurrent.Executor zzc()
+  /// The returned object must be released after use, by calling the [release] method.
+  Executor zzc() {
+    return _zzc(reference.pointer, _id_zzc as jni.JMethodIDPtr)
+        .object(const $ExecutorType());
+  }
+
+  static final _id_zzd = _class.instanceMethodId(
+    r'zzd',
+    r'()Z',
+  );
+
+  static final _zzd = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final boolean zzd()
+  bool zzd() {
+    return _zzd(reference.pointer, _id_zzd as jni.JMethodIDPtr).boolean;
+  }
+}
+
+final class $BarcodeScannerOptionsType
+    extends jni.JObjType<BarcodeScannerOptions> {
+  const $BarcodeScannerOptionsType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/BarcodeScannerOptions;';
+
+  @override
+  BarcodeScannerOptions fromReference(jni.JReference reference) =>
+      BarcodeScannerOptions.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($BarcodeScannerOptionsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BarcodeScannerOptionsType) &&
+        other is $BarcodeScannerOptionsType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Address$AddressType
+class Barcode_Address_AddressType extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Address_AddressType> $type = type;
+
+  Barcode_Address_AddressType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$Address$AddressType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_Address_AddressTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Barcode_Address_AddressTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Barcode_Address_AddressType.implement(
+    $Barcode_Address_AddressTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Barcode_Address_AddressType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.common.Barcode$Address$AddressType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Barcode_Address_AddressTypeImpl {
+  factory $Barcode_Address_AddressTypeImpl() =
+      _$Barcode_Address_AddressTypeImpl;
+}
+
+class _$Barcode_Address_AddressTypeImpl
+    implements $Barcode_Address_AddressTypeImpl {
+  _$Barcode_Address_AddressTypeImpl();
+}
+
+final class $Barcode_Address_AddressTypeType
+    extends jni.JObjType<Barcode_Address_AddressType> {
+  const $Barcode_Address_AddressTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Address$AddressType;';
+
+  @override
+  Barcode_Address_AddressType fromReference(jni.JReference reference) =>
+      Barcode_Address_AddressType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_Address_AddressTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_Address_AddressTypeType) &&
+        other is $Barcode_Address_AddressTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Address
+class Barcode_Address extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Address> $type = type;
+
+  Barcode_Address.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$Address');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_AddressType();
+
+  /// from: static public final int TYPE_UNKNOWN
+  static const TYPE_UNKNOWN = 0;
+
+  /// from: static public final int TYPE_WORK
+  static const TYPE_WORK = 1;
+
+  /// from: static public final int TYPE_HOME
+  static const TYPE_HOME = 2;
+  static final _id_getType = _class.instanceMethodId(
+    r'getType',
+    r'()I',
+  );
+
+  static final _getType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getType()
+  int getType() {
+    return _getType(reference.pointer, _id_getType as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(I[Ljava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(int i, java.lang.String[] strings)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_Address(
+    int i,
+    jni.JArray<jni.JString> strings,
+  ) {
+    return Barcode_Address.fromReference(_new0(_class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr, i, strings.reference.pointer)
+        .reference);
+  }
+
+  static final _id_getAddressLines = _class.instanceMethodId(
+    r'getAddressLines',
+    r'()[Ljava/lang/String;',
+  );
+
+  static final _getAddressLines = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String[] getAddressLines()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JArray<jni.JString> getAddressLines() {
+    return _getAddressLines(
+            reference.pointer, _id_getAddressLines as jni.JMethodIDPtr)
+        .object(const jni.JArrayType(jni.JStringType()));
+  }
+}
+
+final class $Barcode_AddressType extends jni.JObjType<Barcode_Address> {
+  const $Barcode_AddressType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Address;';
+
+  @override
+  Barcode_Address fromReference(jni.JReference reference) =>
+      Barcode_Address.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_AddressType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_AddressType) &&
+        other is $Barcode_AddressType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$BarcodeFormat
+class Barcode_BarcodeFormat extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_BarcodeFormat> $type = type;
+
+  Barcode_BarcodeFormat.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$BarcodeFormat');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_BarcodeFormatType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Barcode_BarcodeFormatImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Barcode_BarcodeFormat.implement(
+    $Barcode_BarcodeFormatImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Barcode_BarcodeFormat.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.common.Barcode$BarcodeFormat',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Barcode_BarcodeFormatImpl {
+  factory $Barcode_BarcodeFormatImpl() = _$Barcode_BarcodeFormatImpl;
+}
+
+class _$Barcode_BarcodeFormatImpl implements $Barcode_BarcodeFormatImpl {
+  _$Barcode_BarcodeFormatImpl();
+}
+
+final class $Barcode_BarcodeFormatType
+    extends jni.JObjType<Barcode_BarcodeFormat> {
+  const $Barcode_BarcodeFormatType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$BarcodeFormat;';
+
+  @override
+  Barcode_BarcodeFormat fromReference(jni.JReference reference) =>
+      Barcode_BarcodeFormat.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_BarcodeFormatType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_BarcodeFormatType) &&
+        other is $Barcode_BarcodeFormatType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$BarcodeValueType
+class Barcode_BarcodeValueType extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_BarcodeValueType> $type = type;
+
+  Barcode_BarcodeValueType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$BarcodeValueType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_BarcodeValueTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Barcode_BarcodeValueTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Barcode_BarcodeValueType.implement(
+    $Barcode_BarcodeValueTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Barcode_BarcodeValueType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.common.Barcode$BarcodeValueType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Barcode_BarcodeValueTypeImpl {
+  factory $Barcode_BarcodeValueTypeImpl() = _$Barcode_BarcodeValueTypeImpl;
+}
+
+class _$Barcode_BarcodeValueTypeImpl implements $Barcode_BarcodeValueTypeImpl {
+  _$Barcode_BarcodeValueTypeImpl();
+}
+
+final class $Barcode_BarcodeValueTypeType
+    extends jni.JObjType<Barcode_BarcodeValueType> {
+  const $Barcode_BarcodeValueTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$BarcodeValueType;';
+
+  @override
+  Barcode_BarcodeValueType fromReference(jni.JReference reference) =>
+      Barcode_BarcodeValueType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_BarcodeValueTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_BarcodeValueTypeType) &&
+        other is $Barcode_BarcodeValueTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$CalendarDateTime
+class Barcode_CalendarDateTime extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_CalendarDateTime> $type = type;
+
+  Barcode_CalendarDateTime.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$CalendarDateTime');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_CalendarDateTimeType();
+  static final _id_getDay = _class.instanceMethodId(
+    r'getDay',
+    r'()I',
+  );
+
+  static final _getDay = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getDay()
+  int getDay() {
+    return _getDay(reference.pointer, _id_getDay as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_getHours = _class.instanceMethodId(
+    r'getHours',
+    r'()I',
+  );
+
+  static final _getHours = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getHours()
+  int getHours() {
+    return _getHours(reference.pointer, _id_getHours as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getMinutes = _class.instanceMethodId(
+    r'getMinutes',
+    r'()I',
+  );
+
+  static final _getMinutes = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getMinutes()
+  int getMinutes() {
+    return _getMinutes(reference.pointer, _id_getMinutes as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getMonth = _class.instanceMethodId(
+    r'getMonth',
+    r'()I',
+  );
+
+  static final _getMonth = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getMonth()
+  int getMonth() {
+    return _getMonth(reference.pointer, _id_getMonth as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getSeconds = _class.instanceMethodId(
+    r'getSeconds',
+    r'()I',
+  );
+
+  static final _getSeconds = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getSeconds()
+  int getSeconds() {
+    return _getSeconds(reference.pointer, _id_getSeconds as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getYear = _class.instanceMethodId(
+    r'getYear',
+    r'()I',
+  );
+
+  static final _getYear = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getYear()
+  int getYear() {
+    return _getYear(reference.pointer, _id_getYear as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_getRawValue = _class.instanceMethodId(
+    r'getRawValue',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getRawValue = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getRawValue()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getRawValue() {
+    return _getRawValue(reference.pointer, _id_getRawValue as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(IIIIIIZLjava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
+              int, int, int, int, int, int, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(int i, int i1, int i2, int i3, int i4, int i5, boolean z, java.lang.String string)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_CalendarDateTime(
+    int i,
+    int i1,
+    int i2,
+    int i3,
+    int i4,
+    int i5,
+    bool z,
+    jni.JString string,
+  ) {
+    return Barcode_CalendarDateTime.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            i,
+            i1,
+            i2,
+            i3,
+            i4,
+            i5,
+            z ? 1 : 0,
+            string.reference.pointer)
+        .reference);
+  }
+
+  static final _id_isUtc = _class.instanceMethodId(
+    r'isUtc',
+    r'()Z',
+  );
+
+  static final _isUtc = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public boolean isUtc()
+  bool isUtc() {
+    return _isUtc(reference.pointer, _id_isUtc as jni.JMethodIDPtr).boolean;
+  }
+}
+
+final class $Barcode_CalendarDateTimeType
+    extends jni.JObjType<Barcode_CalendarDateTime> {
+  const $Barcode_CalendarDateTimeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarDateTime;';
+
+  @override
+  Barcode_CalendarDateTime fromReference(jni.JReference reference) =>
+      Barcode_CalendarDateTime.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_CalendarDateTimeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_CalendarDateTimeType) &&
+        other is $Barcode_CalendarDateTimeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$CalendarEvent
+class Barcode_CalendarEvent extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_CalendarEvent> $type = type;
+
+  Barcode_CalendarEvent.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$CalendarEvent');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_CalendarEventType();
+  static final _id_getEnd = _class.instanceMethodId(
+    r'getEnd',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarDateTime;',
+  );
+
+  static final _getEnd = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$CalendarDateTime getEnd()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_CalendarDateTime getEnd() {
+    return _getEnd(reference.pointer, _id_getEnd as jni.JMethodIDPtr)
+        .object(const $Barcode_CalendarDateTimeType());
+  }
+
+  static final _id_getStart = _class.instanceMethodId(
+    r'getStart',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarDateTime;',
+  );
+
+  static final _getStart = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$CalendarDateTime getStart()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_CalendarDateTime getStart() {
+    return _getStart(reference.pointer, _id_getStart as jni.JMethodIDPtr)
+        .object(const $Barcode_CalendarDateTimeType());
+  }
+
+  static final _id_getDescription = _class.instanceMethodId(
+    r'getDescription',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getDescription = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getDescription()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getDescription() {
+    return _getDescription(
+            reference.pointer, _id_getDescription as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getLocation = _class.instanceMethodId(
+    r'getLocation',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getLocation = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getLocation()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getLocation() {
+    return _getLocation(reference.pointer, _id_getLocation as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getOrganizer = _class.instanceMethodId(
+    r'getOrganizer',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getOrganizer = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getOrganizer()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getOrganizer() {
+    return _getOrganizer(
+            reference.pointer, _id_getOrganizer as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getStatus = _class.instanceMethodId(
+    r'getStatus',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getStatus = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getStatus()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getStatus() {
+    return _getStatus(reference.pointer, _id_getStatus as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getSummary = _class.instanceMethodId(
+    r'getSummary',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getSummary = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getSummary()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getSummary() {
+    return _getSummary(reference.pointer, _id_getSummary as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarDateTime;Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarDateTime;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, com.google.mlkit.vision.barcode.common.Barcode$CalendarDateTime calendarDateTime, com.google.mlkit.vision.barcode.common.Barcode$CalendarDateTime calendarDateTime1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_CalendarEvent(
+    jni.JString string,
+    jni.JString string1,
+    jni.JString string2,
+    jni.JString string3,
+    jni.JString string4,
+    Barcode_CalendarDateTime calendarDateTime,
+    Barcode_CalendarDateTime calendarDateTime1,
+  ) {
+    return Barcode_CalendarEvent.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            string.reference.pointer,
+            string1.reference.pointer,
+            string2.reference.pointer,
+            string3.reference.pointer,
+            string4.reference.pointer,
+            calendarDateTime.reference.pointer,
+            calendarDateTime1.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_CalendarEventType
+    extends jni.JObjType<Barcode_CalendarEvent> {
+  const $Barcode_CalendarEventType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarEvent;';
+
+  @override
+  Barcode_CalendarEvent fromReference(jni.JReference reference) =>
+      Barcode_CalendarEvent.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_CalendarEventType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_CalendarEventType) &&
+        other is $Barcode_CalendarEventType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$ContactInfo
+class Barcode_ContactInfo extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_ContactInfo> $type = type;
+
+  Barcode_ContactInfo.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$ContactInfo');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_ContactInfoType();
+  static final _id_getName = _class.instanceMethodId(
+    r'getName',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$PersonName;',
+  );
+
+  static final _getName = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$PersonName getName()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_PersonName getName() {
+    return _getName(reference.pointer, _id_getName as jni.JMethodIDPtr)
+        .object(const $Barcode_PersonNameType());
+  }
+
+  static final _id_getOrganization = _class.instanceMethodId(
+    r'getOrganization',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getOrganization = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getOrganization()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getOrganization() {
+    return _getOrganization(
+            reference.pointer, _id_getOrganization as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getTitle = _class.instanceMethodId(
+    r'getTitle',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getTitle = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getTitle()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getTitle() {
+    return _getTitle(reference.pointer, _id_getTitle as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getAddresses = _class.instanceMethodId(
+    r'getAddresses',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getAddresses = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getAddresses()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<Barcode_Address> getAddresses() {
+    return _getAddresses(
+            reference.pointer, _id_getAddresses as jni.JMethodIDPtr)
+        .object(const jni.JListType($Barcode_AddressType()));
+  }
+
+  static final _id_getEmails = _class.instanceMethodId(
+    r'getEmails',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getEmails = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getEmails()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<Barcode_Email> getEmails() {
+    return _getEmails(reference.pointer, _id_getEmails as jni.JMethodIDPtr)
+        .object(const jni.JListType($Barcode_EmailType()));
+  }
+
+  static final _id_getPhones = _class.instanceMethodId(
+    r'getPhones',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getPhones = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getPhones()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<Barcode_Phone> getPhones() {
+    return _getPhones(reference.pointer, _id_getPhones as jni.JMethodIDPtr)
+        .object(const jni.JListType($Barcode_PhoneType()));
+  }
+
+  static final _id_getUrls = _class.instanceMethodId(
+    r'getUrls',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getUrls = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getUrls()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<jni.JString> getUrls() {
+    return _getUrls(reference.pointer, _id_getUrls as jni.JMethodIDPtr)
+        .object(const jni.JListType(jni.JStringType()));
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Lcom/google/mlkit/vision/barcode/common/Barcode$PersonName;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(com.google.mlkit.vision.barcode.common.Barcode$PersonName personName, java.lang.String string, java.lang.String string1, java.util.List list, java.util.List list1, java.util.List list2, java.util.List list3)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_ContactInfo(
+    Barcode_PersonName personName,
+    jni.JString string,
+    jni.JString string1,
+    jni.JList<Barcode_Phone> list,
+    jni.JList<Barcode_Email> list1,
+    jni.JList<jni.JString> list2,
+    jni.JList<Barcode_Address> list3,
+  ) {
+    return Barcode_ContactInfo.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            personName.reference.pointer,
+            string.reference.pointer,
+            string1.reference.pointer,
+            list.reference.pointer,
+            list1.reference.pointer,
+            list2.reference.pointer,
+            list3.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_ContactInfoType extends jni.JObjType<Barcode_ContactInfo> {
+  const $Barcode_ContactInfoType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$ContactInfo;';
+
+  @override
+  Barcode_ContactInfo fromReference(jni.JReference reference) =>
+      Barcode_ContactInfo.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_ContactInfoType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_ContactInfoType) &&
+        other is $Barcode_ContactInfoType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$DriverLicense
+class Barcode_DriverLicense extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_DriverLicense> $type = type;
+
+  Barcode_DriverLicense.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$DriverLicense');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_DriverLicenseType();
+  static final _id_getAddressCity = _class.instanceMethodId(
+    r'getAddressCity',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getAddressCity = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getAddressCity()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getAddressCity() {
+    return _getAddressCity(
+            reference.pointer, _id_getAddressCity as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getAddressState = _class.instanceMethodId(
+    r'getAddressState',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getAddressState = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getAddressState()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getAddressState() {
+    return _getAddressState(
+            reference.pointer, _id_getAddressState as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getAddressStreet = _class.instanceMethodId(
+    r'getAddressStreet',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getAddressStreet = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getAddressStreet()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getAddressStreet() {
+    return _getAddressStreet(
+            reference.pointer, _id_getAddressStreet as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getAddressZip = _class.instanceMethodId(
+    r'getAddressZip',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getAddressZip = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getAddressZip()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getAddressZip() {
+    return _getAddressZip(
+            reference.pointer, _id_getAddressZip as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getBirthDate = _class.instanceMethodId(
+    r'getBirthDate',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getBirthDate = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getBirthDate()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getBirthDate() {
+    return _getBirthDate(
+            reference.pointer, _id_getBirthDate as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getDocumentType = _class.instanceMethodId(
+    r'getDocumentType',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getDocumentType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getDocumentType()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getDocumentType() {
+    return _getDocumentType(
+            reference.pointer, _id_getDocumentType as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getExpiryDate = _class.instanceMethodId(
+    r'getExpiryDate',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getExpiryDate = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getExpiryDate()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getExpiryDate() {
+    return _getExpiryDate(
+            reference.pointer, _id_getExpiryDate as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getFirstName = _class.instanceMethodId(
+    r'getFirstName',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getFirstName = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getFirstName()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getFirstName() {
+    return _getFirstName(
+            reference.pointer, _id_getFirstName as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getGender = _class.instanceMethodId(
+    r'getGender',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getGender = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getGender()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getGender() {
+    return _getGender(reference.pointer, _id_getGender as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getIssueDate = _class.instanceMethodId(
+    r'getIssueDate',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getIssueDate = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getIssueDate()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getIssueDate() {
+    return _getIssueDate(
+            reference.pointer, _id_getIssueDate as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getIssuingCountry = _class.instanceMethodId(
+    r'getIssuingCountry',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getIssuingCountry = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getIssuingCountry()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getIssuingCountry() {
+    return _getIssuingCountry(
+            reference.pointer, _id_getIssuingCountry as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getLastName = _class.instanceMethodId(
+    r'getLastName',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getLastName = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getLastName()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getLastName() {
+    return _getLastName(reference.pointer, _id_getLastName as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getLicenseNumber = _class.instanceMethodId(
+    r'getLicenseNumber',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getLicenseNumber = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getLicenseNumber()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getLicenseNumber() {
+    return _getLicenseNumber(
+            reference.pointer, _id_getLicenseNumber as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getMiddleName = _class.instanceMethodId(
+    r'getMiddleName',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getMiddleName = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getMiddleName()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getMiddleName() {
+    return _getMiddleName(
+            reference.pointer, _id_getMiddleName as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, java.lang.String string5, java.lang.String string6, java.lang.String string7, java.lang.String string8, java.lang.String string9, java.lang.String string10, java.lang.String string11, java.lang.String string12, java.lang.String string13)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_DriverLicense(
+    jni.JString string,
+    jni.JString string1,
+    jni.JString string2,
+    jni.JString string3,
+    jni.JString string4,
+    jni.JString string5,
+    jni.JString string6,
+    jni.JString string7,
+    jni.JString string8,
+    jni.JString string9,
+    jni.JString string10,
+    jni.JString string11,
+    jni.JString string12,
+    jni.JString string13,
+  ) {
+    return Barcode_DriverLicense.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            string.reference.pointer,
+            string1.reference.pointer,
+            string2.reference.pointer,
+            string3.reference.pointer,
+            string4.reference.pointer,
+            string5.reference.pointer,
+            string6.reference.pointer,
+            string7.reference.pointer,
+            string8.reference.pointer,
+            string9.reference.pointer,
+            string10.reference.pointer,
+            string11.reference.pointer,
+            string12.reference.pointer,
+            string13.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_DriverLicenseType
+    extends jni.JObjType<Barcode_DriverLicense> {
+  const $Barcode_DriverLicenseType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$DriverLicense;';
+
+  @override
+  Barcode_DriverLicense fromReference(jni.JReference reference) =>
+      Barcode_DriverLicense.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_DriverLicenseType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_DriverLicenseType) &&
+        other is $Barcode_DriverLicenseType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Email$FormatType
+class Barcode_Email_FormatType extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Email_FormatType> $type = type;
+
+  Barcode_Email_FormatType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$Email$FormatType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_Email_FormatTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Barcode_Email_FormatTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Barcode_Email_FormatType.implement(
+    $Barcode_Email_FormatTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Barcode_Email_FormatType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.common.Barcode$Email$FormatType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Barcode_Email_FormatTypeImpl {
+  factory $Barcode_Email_FormatTypeImpl() = _$Barcode_Email_FormatTypeImpl;
+}
+
+class _$Barcode_Email_FormatTypeImpl implements $Barcode_Email_FormatTypeImpl {
+  _$Barcode_Email_FormatTypeImpl();
+}
+
+final class $Barcode_Email_FormatTypeType
+    extends jni.JObjType<Barcode_Email_FormatType> {
+  const $Barcode_Email_FormatTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Email$FormatType;';
+
+  @override
+  Barcode_Email_FormatType fromReference(jni.JReference reference) =>
+      Barcode_Email_FormatType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_Email_FormatTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_Email_FormatTypeType) &&
+        other is $Barcode_Email_FormatTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Email
+class Barcode_Email extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Email> $type = type;
+
+  Barcode_Email.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$Email');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_EmailType();
+
+  /// from: static public final int TYPE_UNKNOWN
+  static const TYPE_UNKNOWN = 0;
+
+  /// from: static public final int TYPE_WORK
+  static const TYPE_WORK = 1;
+
+  /// from: static public final int TYPE_HOME
+  static const TYPE_HOME = 2;
+  static final _id_getType = _class.instanceMethodId(
+    r'getType',
+    r'()I',
+  );
+
+  static final _getType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getType()
+  int getType() {
+    return _getType(reference.pointer, _id_getType as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_getAddress = _class.instanceMethodId(
+    r'getAddress',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getAddress = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getAddress()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getAddress() {
+    return _getAddress(reference.pointer, _id_getAddress as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getBody = _class.instanceMethodId(
+    r'getBody',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getBody = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getBody()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getBody() {
+    return _getBody(reference.pointer, _id_getBody as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getSubject = _class.instanceMethodId(
+    r'getSubject',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getSubject = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getSubject()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getSubject() {
+    return _getSubject(reference.pointer, _id_getSubject as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        $Int32,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              int,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(int i, java.lang.String string, java.lang.String string1, java.lang.String string2)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_Email(
+    int i,
+    jni.JString string,
+    jni.JString string1,
+    jni.JString string2,
+  ) {
+    return Barcode_Email.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            i,
+            string.reference.pointer,
+            string1.reference.pointer,
+            string2.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_EmailType extends jni.JObjType<Barcode_Email> {
+  const $Barcode_EmailType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Email;';
+
+  @override
+  Barcode_Email fromReference(jni.JReference reference) =>
+      Barcode_Email.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_EmailType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_EmailType) &&
+        other is $Barcode_EmailType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$GeoPoint
+class Barcode_GeoPoint extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_GeoPoint> $type = type;
+
+  Barcode_GeoPoint.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$GeoPoint');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_GeoPointType();
+  static final _id_getLat = _class.instanceMethodId(
+    r'getLat',
+    r'()D',
+  );
+
+  static final _getLat = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallDoubleMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public double getLat()
+  double getLat() {
+    return _getLat(reference.pointer, _id_getLat as jni.JMethodIDPtr)
+        .doubleFloat;
+  }
+
+  static final _id_getLng = _class.instanceMethodId(
+    r'getLng',
+    r'()D',
+  );
+
+  static final _getLng = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallDoubleMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public double getLng()
+  double getLng() {
+    return _getLng(reference.pointer, _id_getLng as jni.JMethodIDPtr)
+        .doubleFloat;
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(DD)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Double, ffi.Double)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, double, double)>();
+
+  /// from: public void <init>(double d, double d1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_GeoPoint(
+    double d,
+    double d1,
+  ) {
+    return Barcode_GeoPoint.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr, d, d1)
+            .reference);
+  }
+}
+
+final class $Barcode_GeoPointType extends jni.JObjType<Barcode_GeoPoint> {
+  const $Barcode_GeoPointType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$GeoPoint;';
+
+  @override
+  Barcode_GeoPoint fromReference(jni.JReference reference) =>
+      Barcode_GeoPoint.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_GeoPointType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_GeoPointType) &&
+        other is $Barcode_GeoPointType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$PersonName
+class Barcode_PersonName extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_PersonName> $type = type;
+
+  Barcode_PersonName.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$PersonName');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_PersonNameType();
+  static final _id_getFirst = _class.instanceMethodId(
+    r'getFirst',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getFirst = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getFirst()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getFirst() {
+    return _getFirst(reference.pointer, _id_getFirst as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getFormattedName = _class.instanceMethodId(
+    r'getFormattedName',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getFormattedName = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getFormattedName()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getFormattedName() {
+    return _getFormattedName(
+            reference.pointer, _id_getFormattedName as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getLast = _class.instanceMethodId(
+    r'getLast',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getLast = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getLast()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getLast() {
+    return _getLast(reference.pointer, _id_getLast as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getMiddle = _class.instanceMethodId(
+    r'getMiddle',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getMiddle = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getMiddle()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getMiddle() {
+    return _getMiddle(reference.pointer, _id_getMiddle as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getPrefix = _class.instanceMethodId(
+    r'getPrefix',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getPrefix = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getPrefix()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getPrefix() {
+    return _getPrefix(reference.pointer, _id_getPrefix as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getPronunciation = _class.instanceMethodId(
+    r'getPronunciation',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getPronunciation = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getPronunciation()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getPronunciation() {
+    return _getPronunciation(
+            reference.pointer, _id_getPronunciation as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getSuffix = _class.instanceMethodId(
+    r'getSuffix',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getSuffix = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getSuffix()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getSuffix() {
+    return _getSuffix(reference.pointer, _id_getSuffix as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.lang.String string, java.lang.String string1, java.lang.String string2, java.lang.String string3, java.lang.String string4, java.lang.String string5, java.lang.String string6)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_PersonName(
+    jni.JString string,
+    jni.JString string1,
+    jni.JString string2,
+    jni.JString string3,
+    jni.JString string4,
+    jni.JString string5,
+    jni.JString string6,
+  ) {
+    return Barcode_PersonName.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            string.reference.pointer,
+            string1.reference.pointer,
+            string2.reference.pointer,
+            string3.reference.pointer,
+            string4.reference.pointer,
+            string5.reference.pointer,
+            string6.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_PersonNameType extends jni.JObjType<Barcode_PersonName> {
+  const $Barcode_PersonNameType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$PersonName;';
+
+  @override
+  Barcode_PersonName fromReference(jni.JReference reference) =>
+      Barcode_PersonName.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_PersonNameType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_PersonNameType) &&
+        other is $Barcode_PersonNameType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Phone$FormatType
+class Barcode_Phone_FormatType extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Phone_FormatType> $type = type;
+
+  Barcode_Phone_FormatType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$Phone$FormatType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_Phone_FormatTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Barcode_Phone_FormatTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Barcode_Phone_FormatType.implement(
+    $Barcode_Phone_FormatTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Barcode_Phone_FormatType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.common.Barcode$Phone$FormatType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Barcode_Phone_FormatTypeImpl {
+  factory $Barcode_Phone_FormatTypeImpl() = _$Barcode_Phone_FormatTypeImpl;
+}
+
+class _$Barcode_Phone_FormatTypeImpl implements $Barcode_Phone_FormatTypeImpl {
+  _$Barcode_Phone_FormatTypeImpl();
+}
+
+final class $Barcode_Phone_FormatTypeType
+    extends jni.JObjType<Barcode_Phone_FormatType> {
+  const $Barcode_Phone_FormatTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Phone$FormatType;';
+
+  @override
+  Barcode_Phone_FormatType fromReference(jni.JReference reference) =>
+      Barcode_Phone_FormatType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_Phone_FormatTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_Phone_FormatTypeType) &&
+        other is $Barcode_Phone_FormatTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Phone
+class Barcode_Phone extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Phone> $type = type;
+
+  Barcode_Phone.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$Phone');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_PhoneType();
+
+  /// from: static public final int TYPE_UNKNOWN
+  static const TYPE_UNKNOWN = 0;
+
+  /// from: static public final int TYPE_WORK
+  static const TYPE_WORK = 1;
+
+  /// from: static public final int TYPE_HOME
+  static const TYPE_HOME = 2;
+
+  /// from: static public final int TYPE_FAX
+  static const TYPE_FAX = 3;
+
+  /// from: static public final int TYPE_MOBILE
+  static const TYPE_MOBILE = 4;
+  static final _id_getType = _class.instanceMethodId(
+    r'getType',
+    r'()I',
+  );
+
+  static final _getType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getType()
+  int getType() {
+    return _getType(reference.pointer, _id_getType as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_getNumber = _class.instanceMethodId(
+    r'getNumber',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getNumber = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getNumber()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getNumber() {
+    return _getNumber(reference.pointer, _id_getNumber as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;I)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public void <init>(java.lang.String string, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_Phone(
+    jni.JString string,
+    int i,
+  ) {
+    return Barcode_Phone.fromReference(_new0(_class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr, string.reference.pointer, i)
+        .reference);
+  }
+}
+
+final class $Barcode_PhoneType extends jni.JObjType<Barcode_Phone> {
+  const $Barcode_PhoneType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Phone;';
+
+  @override
+  Barcode_Phone fromReference(jni.JReference reference) =>
+      Barcode_Phone.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_PhoneType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_PhoneType) &&
+        other is $Barcode_PhoneType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$Sms
+class Barcode_Sms extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_Sms> $type = type;
+
+  Barcode_Sms.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/barcode/common/Barcode$Sms');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_SmsType();
+  static final _id_getMessage = _class.instanceMethodId(
+    r'getMessage',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getMessage = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getMessage()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getMessage() {
+    return _getMessage(reference.pointer, _id_getMessage as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getPhoneNumber = _class.instanceMethodId(
+    r'getPhoneNumber',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getPhoneNumber = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getPhoneNumber()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getPhoneNumber() {
+    return _getPhoneNumber(
+            reference.pointer, _id_getPhoneNumber as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.lang.String string, java.lang.String string1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_Sms(
+    jni.JString string,
+    jni.JString string1,
+  ) {
+    return Barcode_Sms.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            string.reference.pointer,
+            string1.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_SmsType extends jni.JObjType<Barcode_Sms> {
+  const $Barcode_SmsType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$Sms;';
+
+  @override
+  Barcode_Sms fromReference(jni.JReference reference) =>
+      Barcode_Sms.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_SmsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_SmsType) && other is $Barcode_SmsType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$UrlBookmark
+class Barcode_UrlBookmark extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_UrlBookmark> $type = type;
+
+  Barcode_UrlBookmark.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$UrlBookmark');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_UrlBookmarkType();
+  static final _id_getTitle = _class.instanceMethodId(
+    r'getTitle',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getTitle = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getTitle()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getTitle() {
+    return _getTitle(reference.pointer, _id_getTitle as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getUrl = _class.instanceMethodId(
+    r'getUrl',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getUrl = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getUrl()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getUrl() {
+    return _getUrl(reference.pointer, _id_getUrl as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.lang.String string, java.lang.String string1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_UrlBookmark(
+    jni.JString string,
+    jni.JString string1,
+  ) {
+    return Barcode_UrlBookmark.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            string.reference.pointer,
+            string1.reference.pointer)
+        .reference);
+  }
+}
+
+final class $Barcode_UrlBookmarkType extends jni.JObjType<Barcode_UrlBookmark> {
+  const $Barcode_UrlBookmarkType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$UrlBookmark;';
+
+  @override
+  Barcode_UrlBookmark fromReference(jni.JReference reference) =>
+      Barcode_UrlBookmark.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_UrlBookmarkType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_UrlBookmarkType) &&
+        other is $Barcode_UrlBookmarkType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$WiFi$EncryptionType
+class Barcode_WiFi_EncryptionType extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_WiFi_EncryptionType> $type = type;
+
+  Barcode_WiFi_EncryptionType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$WiFi$EncryptionType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_WiFi_EncryptionTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Barcode_WiFi_EncryptionTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Barcode_WiFi_EncryptionType.implement(
+    $Barcode_WiFi_EncryptionTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Barcode_WiFi_EncryptionType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.barcode.common.Barcode$WiFi$EncryptionType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Barcode_WiFi_EncryptionTypeImpl {
+  factory $Barcode_WiFi_EncryptionTypeImpl() =
+      _$Barcode_WiFi_EncryptionTypeImpl;
+}
+
+class _$Barcode_WiFi_EncryptionTypeImpl
+    implements $Barcode_WiFi_EncryptionTypeImpl {
+  _$Barcode_WiFi_EncryptionTypeImpl();
+}
+
+final class $Barcode_WiFi_EncryptionTypeType
+    extends jni.JObjType<Barcode_WiFi_EncryptionType> {
+  const $Barcode_WiFi_EncryptionTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$WiFi$EncryptionType;';
+
+  @override
+  Barcode_WiFi_EncryptionType fromReference(jni.JReference reference) =>
+      Barcode_WiFi_EncryptionType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_WiFi_EncryptionTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_WiFi_EncryptionTypeType) &&
+        other is $Barcode_WiFi_EncryptionTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode$WiFi
+class Barcode_WiFi extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode_WiFi> $type = type;
+
+  Barcode_WiFi.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/barcode/common/Barcode$WiFi');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Barcode_WiFiType();
+
+  /// from: static public final int TYPE_OPEN
+  static const TYPE_OPEN = 1;
+
+  /// from: static public final int TYPE_WPA
+  static const TYPE_WPA = 2;
+
+  /// from: static public final int TYPE_WEP
+  static const TYPE_WEP = 3;
+  static final _id_getEncryptionType = _class.instanceMethodId(
+    r'getEncryptionType',
+    r'()I',
+  );
+
+  static final _getEncryptionType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getEncryptionType()
+  int getEncryptionType() {
+    return _getEncryptionType(
+            reference.pointer, _id_getEncryptionType as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getPassword = _class.instanceMethodId(
+    r'getPassword',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getPassword = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getPassword()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getPassword() {
+    return _getPassword(reference.pointer, _id_getPassword as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getSsid = _class.instanceMethodId(
+    r'getSsid',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getSsid = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getSsid()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getSsid() {
+    return _getSsid(reference.pointer, _id_getSsid as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Ljava/lang/String;Ljava/lang/String;I)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        $Int32
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public void <init>(java.lang.String string, java.lang.String string1, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode_WiFi(
+    jni.JString string,
+    jni.JString string1,
+    int i,
+  ) {
+    return Barcode_WiFi.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            string.reference.pointer,
+            string1.reference.pointer,
+            i)
+        .reference);
+  }
+}
+
+final class $Barcode_WiFiType extends jni.JObjType<Barcode_WiFi> {
+  const $Barcode_WiFiType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/barcode/common/Barcode$WiFi;';
+
+  @override
+  Barcode_WiFi fromReference(jni.JReference reference) =>
+      Barcode_WiFi.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Barcode_WiFiType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Barcode_WiFiType) &&
+        other is $Barcode_WiFiType;
+  }
+}
+
+/// from: com.google.mlkit.vision.barcode.common.Barcode
+class Barcode extends jni.JObject {
+  @override
+  late final jni.JObjType<Barcode> $type = type;
+
+  Barcode.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/barcode/common/Barcode');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $BarcodeType();
+
+  /// from: static public final int FORMAT_UNKNOWN
+  static const FORMAT_UNKNOWN = -1;
+
+  /// from: static public final int FORMAT_ALL_FORMATS
+  static const FORMAT_ALL_FORMATS = 0;
+
+  /// from: static public final int FORMAT_CODE_128
+  static const FORMAT_CODE_128 = 1;
+
+  /// from: static public final int FORMAT_CODE_39
+  static const FORMAT_CODE_39 = 2;
+
+  /// from: static public final int FORMAT_CODE_93
+  static const FORMAT_CODE_93 = 4;
+
+  /// from: static public final int FORMAT_CODABAR
+  static const FORMAT_CODABAR = 8;
+
+  /// from: static public final int FORMAT_DATA_MATRIX
+  static const FORMAT_DATA_MATRIX = 16;
+
+  /// from: static public final int FORMAT_EAN_13
+  static const FORMAT_EAN_13 = 32;
+
+  /// from: static public final int FORMAT_EAN_8
+  static const FORMAT_EAN_8 = 64;
+
+  /// from: static public final int FORMAT_ITF
+  static const FORMAT_ITF = 128;
+
+  /// from: static public final int FORMAT_QR_CODE
+  static const FORMAT_QR_CODE = 256;
+
+  /// from: static public final int FORMAT_UPC_A
+  static const FORMAT_UPC_A = 512;
+
+  /// from: static public final int FORMAT_UPC_E
+  static const FORMAT_UPC_E = 1024;
+
+  /// from: static public final int FORMAT_PDF417
+  static const FORMAT_PDF417 = 2048;
+
+  /// from: static public final int FORMAT_AZTEC
+  static const FORMAT_AZTEC = 4096;
+
+  /// from: static public final int TYPE_UNKNOWN
+  static const TYPE_UNKNOWN = 0;
+
+  /// from: static public final int TYPE_CONTACT_INFO
+  static const TYPE_CONTACT_INFO = 1;
+
+  /// from: static public final int TYPE_EMAIL
+  static const TYPE_EMAIL = 2;
+
+  /// from: static public final int TYPE_ISBN
+  static const TYPE_ISBN = 3;
+
+  /// from: static public final int TYPE_PHONE
+  static const TYPE_PHONE = 4;
+
+  /// from: static public final int TYPE_PRODUCT
+  static const TYPE_PRODUCT = 5;
+
+  /// from: static public final int TYPE_SMS
+  static const TYPE_SMS = 6;
+
+  /// from: static public final int TYPE_TEXT
+  static const TYPE_TEXT = 7;
+
+  /// from: static public final int TYPE_URL
+  static const TYPE_URL = 8;
+
+  /// from: static public final int TYPE_WIFI
+  static const TYPE_WIFI = 9;
+
+  /// from: static public final int TYPE_GEO
+  static const TYPE_GEO = 10;
+
+  /// from: static public final int TYPE_CALENDAR_EVENT
+  static const TYPE_CALENDAR_EVENT = 11;
+
+  /// from: static public final int TYPE_DRIVER_LICENSE
+  static const TYPE_DRIVER_LICENSE = 12;
+  static final _id_getFormat = _class.instanceMethodId(
+    r'getFormat',
+    r'()I',
+  );
+
+  static final _getFormat = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getFormat()
+  int getFormat() {
+    return _getFormat(reference.pointer, _id_getFormat as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getValueType = _class.instanceMethodId(
+    r'getValueType',
+    r'()I',
+  );
+
+  static final _getValueType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getValueType()
+  int getValueType() {
+    return _getValueType(
+            reference.pointer, _id_getValueType as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getBoundingBox = _class.instanceMethodId(
+    r'getBoundingBox',
+    r'()Landroid/graphics/Rect;',
+  );
+
+  static final _getBoundingBox = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.Rect getBoundingBox()
+  /// The returned object must be released after use, by calling the [release] method.
+  Rect getBoundingBox() {
+    return _getBoundingBox(
+            reference.pointer, _id_getBoundingBox as jni.JMethodIDPtr)
+        .object(const $RectType());
+  }
+
+  static final _id_getCalendarEvent = _class.instanceMethodId(
+    r'getCalendarEvent',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$CalendarEvent;',
+  );
+
+  static final _getCalendarEvent = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$CalendarEvent getCalendarEvent()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_CalendarEvent getCalendarEvent() {
+    return _getCalendarEvent(
+            reference.pointer, _id_getCalendarEvent as jni.JMethodIDPtr)
+        .object(const $Barcode_CalendarEventType());
+  }
+
+  static final _id_getContactInfo = _class.instanceMethodId(
+    r'getContactInfo',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$ContactInfo;',
+  );
+
+  static final _getContactInfo = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$ContactInfo getContactInfo()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_ContactInfo getContactInfo() {
+    return _getContactInfo(
+            reference.pointer, _id_getContactInfo as jni.JMethodIDPtr)
+        .object(const $Barcode_ContactInfoType());
+  }
+
+  static final _id_getDriverLicense = _class.instanceMethodId(
+    r'getDriverLicense',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$DriverLicense;',
+  );
+
+  static final _getDriverLicense = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$DriverLicense getDriverLicense()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_DriverLicense getDriverLicense() {
+    return _getDriverLicense(
+            reference.pointer, _id_getDriverLicense as jni.JMethodIDPtr)
+        .object(const $Barcode_DriverLicenseType());
+  }
+
+  static final _id_getEmail = _class.instanceMethodId(
+    r'getEmail',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$Email;',
+  );
+
+  static final _getEmail = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$Email getEmail()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_Email getEmail() {
+    return _getEmail(reference.pointer, _id_getEmail as jni.JMethodIDPtr)
+        .object(const $Barcode_EmailType());
+  }
+
+  static final _id_getGeoPoint = _class.instanceMethodId(
+    r'getGeoPoint',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$GeoPoint;',
+  );
+
+  static final _getGeoPoint = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$GeoPoint getGeoPoint()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_GeoPoint getGeoPoint() {
+    return _getGeoPoint(reference.pointer, _id_getGeoPoint as jni.JMethodIDPtr)
+        .object(const $Barcode_GeoPointType());
+  }
+
+  static final _id_getPhone = _class.instanceMethodId(
+    r'getPhone',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$Phone;',
+  );
+
+  static final _getPhone = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$Phone getPhone()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_Phone getPhone() {
+    return _getPhone(reference.pointer, _id_getPhone as jni.JMethodIDPtr)
+        .object(const $Barcode_PhoneType());
+  }
+
+  static final _id_getSms = _class.instanceMethodId(
+    r'getSms',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$Sms;',
+  );
+
+  static final _getSms = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$Sms getSms()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_Sms getSms() {
+    return _getSms(reference.pointer, _id_getSms as jni.JMethodIDPtr)
+        .object(const $Barcode_SmsType());
+  }
+
+  static final _id_getUrl = _class.instanceMethodId(
+    r'getUrl',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$UrlBookmark;',
+  );
+
+  static final _getUrl = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$UrlBookmark getUrl()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_UrlBookmark getUrl() {
+    return _getUrl(reference.pointer, _id_getUrl as jni.JMethodIDPtr)
+        .object(const $Barcode_UrlBookmarkType());
+  }
+
+  static final _id_getWifi = _class.instanceMethodId(
+    r'getWifi',
+    r'()Lcom/google/mlkit/vision/barcode/common/Barcode$WiFi;',
+  );
+
+  static final _getWifi = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.barcode.common.Barcode$WiFi getWifi()
+  /// The returned object must be released after use, by calling the [release] method.
+  Barcode_WiFi getWifi() {
+    return _getWifi(reference.pointer, _id_getWifi as jni.JMethodIDPtr)
+        .object(const $Barcode_WiFiType());
+  }
+
+  static final _id_getDisplayValue = _class.instanceMethodId(
+    r'getDisplayValue',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getDisplayValue = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getDisplayValue()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getDisplayValue() {
+    return _getDisplayValue(
+            reference.pointer, _id_getDisplayValue as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getRawValue = _class.instanceMethodId(
+    r'getRawValue',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getRawValue = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getRawValue()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getRawValue() {
+    return _getRawValue(reference.pointer, _id_getRawValue as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Lcom/google/mlkit/vision/barcode/common/internal/BarcodeSource;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(com.google.mlkit.vision.barcode.common.internal.BarcodeSource barcodeSource)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode(
+    jni.JObject barcodeSource,
+  ) {
+    return Barcode.fromReference(_new0(_class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr, barcodeSource.reference.pointer)
+        .reference);
+  }
+
+  static final _id_new1 = _class.constructorId(
+    r'(Lcom/google/mlkit/vision/barcode/common/internal/BarcodeSource;Landroid/graphics/Matrix;)V',
+  );
+
+  static final _new1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(com.google.mlkit.vision.barcode.common.internal.BarcodeSource barcodeSource, android.graphics.Matrix matrix)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Barcode.new1(
+    jni.JObject barcodeSource,
+    jni.JObject matrix,
+  ) {
+    return Barcode.fromReference(_new1(
+            _class.reference.pointer,
+            _id_new1 as jni.JMethodIDPtr,
+            barcodeSource.reference.pointer,
+            matrix.reference.pointer)
+        .reference);
+  }
+
+  static final _id_getRawBytes = _class.instanceMethodId(
+    r'getRawBytes',
+    r'()[B',
+  );
+
+  static final _getRawBytes = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public byte[] getRawBytes()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JArray<jni.jbyte> getRawBytes() {
+    return _getRawBytes(reference.pointer, _id_getRawBytes as jni.JMethodIDPtr)
+        .object(const jni.JArrayType(jni.jbyteType()));
+  }
+
+  static final _id_getCornerPoints = _class.instanceMethodId(
+    r'getCornerPoints',
+    r'()[Landroid/graphics/Point;',
+  );
+
+  static final _getCornerPoints = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.Point[] getCornerPoints()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JArray<Point> getCornerPoints() {
+    return _getCornerPoints(
+            reference.pointer, _id_getCornerPoints as jni.JMethodIDPtr)
+        .object(const jni.JArrayType($PointType()));
+  }
+}
+
+final class $BarcodeType extends jni.JObjType<Barcode> {
+  const $BarcodeType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/barcode/common/Barcode;';
+
+  @override
+  Barcode fromReference(jni.JReference reference) =>
+      Barcode.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($BarcodeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($BarcodeType) && other is $BarcodeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.Face
+class Face extends jni.JObject {
+  @override
+  late final jni.JObjType<Face> $type = type;
+
+  Face.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/face/Face');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceType();
+  static final _id_getHeadEulerAngleX = _class.instanceMethodId(
+    r'getHeadEulerAngleX',
+    r'()F',
+  );
+
+  static final _getHeadEulerAngleX = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public float getHeadEulerAngleX()
+  double getHeadEulerAngleX() {
+    return _getHeadEulerAngleX(
+            reference.pointer, _id_getHeadEulerAngleX as jni.JMethodIDPtr)
+        .float;
+  }
+
+  static final _id_getHeadEulerAngleY = _class.instanceMethodId(
+    r'getHeadEulerAngleY',
+    r'()F',
+  );
+
+  static final _getHeadEulerAngleY = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public float getHeadEulerAngleY()
+  double getHeadEulerAngleY() {
+    return _getHeadEulerAngleY(
+            reference.pointer, _id_getHeadEulerAngleY as jni.JMethodIDPtr)
+        .float;
+  }
+
+  static final _id_getHeadEulerAngleZ = _class.instanceMethodId(
+    r'getHeadEulerAngleZ',
+    r'()F',
+  );
+
+  static final _getHeadEulerAngleZ = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public float getHeadEulerAngleZ()
+  double getHeadEulerAngleZ() {
+    return _getHeadEulerAngleZ(
+            reference.pointer, _id_getHeadEulerAngleZ as jni.JMethodIDPtr)
+        .float;
+  }
+
+  static final _id_getBoundingBox = _class.instanceMethodId(
+    r'getBoundingBox',
+    r'()Landroid/graphics/Rect;',
+  );
+
+  static final _getBoundingBox = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.Rect getBoundingBox()
+  /// The returned object must be released after use, by calling the [release] method.
+  Rect getBoundingBox() {
+    return _getBoundingBox(
+            reference.pointer, _id_getBoundingBox as jni.JMethodIDPtr)
+        .object(const $RectType());
+  }
+
+  static final _id_getContour = _class.instanceMethodId(
+    r'getContour',
+    r'(I)Lcom/google/mlkit/vision/face/FaceContour;',
+  );
+
+  static final _getContour = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceContour getContour(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceContour getContour(
+    int i,
+  ) {
+    return _getContour(reference.pointer, _id_getContour as jni.JMethodIDPtr, i)
+        .object(const $FaceContourType());
+  }
+
+  static final _id_getLandmark = _class.instanceMethodId(
+    r'getLandmark',
+    r'(I)Lcom/google/mlkit/vision/face/FaceLandmark;',
+  );
+
+  static final _getLandmark = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceLandmark getLandmark(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceLandmark getLandmark(
+    int i,
+  ) {
+    return _getLandmark(
+            reference.pointer, _id_getLandmark as jni.JMethodIDPtr, i)
+        .object(const $FaceLandmarkType());
+  }
+
+  static final _id_getLeftEyeOpenProbability = _class.instanceMethodId(
+    r'getLeftEyeOpenProbability',
+    r'()Ljava/lang/Float;',
+  );
+
+  static final _getLeftEyeOpenProbability = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.Float getLeftEyeOpenProbability()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JFloat getLeftEyeOpenProbability() {
+    return _getLeftEyeOpenProbability(reference.pointer,
+            _id_getLeftEyeOpenProbability as jni.JMethodIDPtr)
+        .object(const jni.JFloatType());
+  }
+
+  static final _id_getRightEyeOpenProbability = _class.instanceMethodId(
+    r'getRightEyeOpenProbability',
+    r'()Ljava/lang/Float;',
+  );
+
+  static final _getRightEyeOpenProbability = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.Float getRightEyeOpenProbability()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JFloat getRightEyeOpenProbability() {
+    return _getRightEyeOpenProbability(reference.pointer,
+            _id_getRightEyeOpenProbability as jni.JMethodIDPtr)
+        .object(const jni.JFloatType());
+  }
+
+  static final _id_getSmilingProbability = _class.instanceMethodId(
+    r'getSmilingProbability',
+    r'()Ljava/lang/Float;',
+  );
+
+  static final _getSmilingProbability = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.Float getSmilingProbability()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JFloat getSmilingProbability() {
+    return _getSmilingProbability(
+            reference.pointer, _id_getSmilingProbability as jni.JMethodIDPtr)
+        .object(const jni.JFloatType());
+  }
+
+  static final _id_getTrackingId = _class.instanceMethodId(
+    r'getTrackingId',
+    r'()Ljava/lang/Integer;',
+  );
+
+  static final _getTrackingId = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.Integer getTrackingId()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JInteger getTrackingId() {
+    return _getTrackingId(
+            reference.pointer, _id_getTrackingId as jni.JMethodIDPtr)
+        .object(const jni.JIntegerType());
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getAllContours = _class.instanceMethodId(
+    r'getAllContours',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getAllContours = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getAllContours()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<FaceContour> getAllContours() {
+    return _getAllContours(
+            reference.pointer, _id_getAllContours as jni.JMethodIDPtr)
+        .object(const jni.JListType($FaceContourType()));
+  }
+
+  static final _id_getAllLandmarks = _class.instanceMethodId(
+    r'getAllLandmarks',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getAllLandmarks = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getAllLandmarks()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<FaceLandmark> getAllLandmarks() {
+    return _getAllLandmarks(
+            reference.pointer, _id_getAllLandmarks as jni.JMethodIDPtr)
+        .object(const jni.JListType($FaceLandmarkType()));
+  }
+
+  static final _id_zza = _class.instanceMethodId(
+    r'zza',
+    r'()Landroid/util/SparseArray;',
+  );
+
+  static final _zza = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final android.util.SparseArray zza()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject zza() {
+    return _zza(reference.pointer, _id_zza as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(Lcom/google/android/gms/internal/mlkit_vision_face/zzf;Landroid/graphics/Matrix;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(com.google.android.gms.internal.mlkit_vision_face.zzf zzf, android.graphics.Matrix matrix)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Face(
+    jni.JObject zzf,
+    jni.JObject matrix,
+  ) {
+    return Face.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            zzf.reference.pointer,
+            matrix.reference.pointer)
+        .reference);
+  }
+
+  static final _id_new1 = _class.constructorId(
+    r'(Lcom/google/android/gms/internal/mlkit_vision_face/zzow;Landroid/graphics/Matrix;)V',
+  );
+
+  static final _new1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(com.google.android.gms.internal.mlkit_vision_face.zzow zzow, android.graphics.Matrix matrix)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Face.new1(
+    jni.JObject zzow,
+    jni.JObject matrix,
+  ) {
+    return Face.fromReference(_new1(
+            _class.reference.pointer,
+            _id_new1 as jni.JMethodIDPtr,
+            zzow.reference.pointer,
+            matrix.reference.pointer)
+        .reference);
+  }
+
+  static final _id_zzb = _class.instanceMethodId(
+    r'zzb',
+    r'(Landroid/util/SparseArray;)V',
+  );
+
+  static final _zzb = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void zzb(android.util.SparseArray sparseArray)
+  void zzb(
+    jni.JObject sparseArray,
+  ) {
+    _zzb(reference.pointer, _id_zzb as jni.JMethodIDPtr,
+            sparseArray.reference.pointer)
+        .check();
+  }
+
+  static final _id_zzc = _class.instanceMethodId(
+    r'zzc',
+    r'(I)V',
+  );
+
+  static final _zzc = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public final void zzc(int i)
+  void zzc(
+    int i,
+  ) {
+    _zzc(reference.pointer, _id_zzc as jni.JMethodIDPtr, i).check();
+  }
+}
+
+final class $FaceType extends jni.JObjType<Face> {
+  const $FaceType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/face/Face;';
+
+  @override
+  Face fromReference(jni.JReference reference) => Face.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceType) && other is $FaceType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceContour$ContourType
+class FaceContour_ContourType extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceContour_ContourType> $type = type;
+
+  FaceContour_ContourType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceContour$ContourType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceContour_ContourTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceContour_ContourTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceContour_ContourType.implement(
+    $FaceContour_ContourTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceContour_ContourType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceContour$ContourType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceContour_ContourTypeImpl {
+  factory $FaceContour_ContourTypeImpl() = _$FaceContour_ContourTypeImpl;
+}
+
+class _$FaceContour_ContourTypeImpl implements $FaceContour_ContourTypeImpl {
+  _$FaceContour_ContourTypeImpl();
+}
+
+final class $FaceContour_ContourTypeType
+    extends jni.JObjType<FaceContour_ContourType> {
+  const $FaceContour_ContourTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceContour$ContourType;';
+
+  @override
+  FaceContour_ContourType fromReference(jni.JReference reference) =>
+      FaceContour_ContourType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceContour_ContourTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceContour_ContourTypeType) &&
+        other is $FaceContour_ContourTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceContour
+class FaceContour extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceContour> $type = type;
+
+  FaceContour.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/face/FaceContour');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceContourType();
+
+  /// from: static public final int FACE
+  static const FACE = 1;
+
+  /// from: static public final int LEFT_EYEBROW_TOP
+  static const LEFT_EYEBROW_TOP = 2;
+
+  /// from: static public final int LEFT_EYEBROW_BOTTOM
+  static const LEFT_EYEBROW_BOTTOM = 3;
+
+  /// from: static public final int RIGHT_EYEBROW_TOP
+  static const RIGHT_EYEBROW_TOP = 4;
+
+  /// from: static public final int RIGHT_EYEBROW_BOTTOM
+  static const RIGHT_EYEBROW_BOTTOM = 5;
+
+  /// from: static public final int LEFT_EYE
+  static const LEFT_EYE = 6;
+
+  /// from: static public final int RIGHT_EYE
+  static const RIGHT_EYE = 7;
+
+  /// from: static public final int UPPER_LIP_TOP
+  static const UPPER_LIP_TOP = 8;
+
+  /// from: static public final int UPPER_LIP_BOTTOM
+  static const UPPER_LIP_BOTTOM = 9;
+
+  /// from: static public final int LOWER_LIP_TOP
+  static const LOWER_LIP_TOP = 10;
+
+  /// from: static public final int LOWER_LIP_BOTTOM
+  static const LOWER_LIP_BOTTOM = 11;
+
+  /// from: static public final int NOSE_BRIDGE
+  static const NOSE_BRIDGE = 12;
+
+  /// from: static public final int NOSE_BOTTOM
+  static const NOSE_BOTTOM = 13;
+
+  /// from: static public final int LEFT_CHEEK
+  static const LEFT_CHEEK = 14;
+
+  /// from: static public final int RIGHT_CHEEK
+  static const RIGHT_CHEEK = 15;
+  static final _id_getFaceContourType = _class.instanceMethodId(
+    r'getFaceContourType',
+    r'()I',
+  );
+
+  static final _getFaceContourType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getFaceContourType()
+  int getFaceContourType() {
+    return _getFaceContourType(
+            reference.pointer, _id_getFaceContourType as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getPoints = _class.instanceMethodId(
+    r'getPoints',
+    r'()Ljava/util/List;',
+  );
+
+  static final _getPoints = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.util.List getPoints()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<jni.JObject> getPoints() {
+    return _getPoints(reference.pointer, _id_getPoints as jni.JMethodIDPtr)
+        .object(const jni.JListType(jni.JObjectType()));
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'(ILjava/util/List;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(int i, java.util.List list)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FaceContour(
+    int i,
+    jni.JList<jni.JObject> list,
+  ) {
+    return FaceContour.fromReference(_new0(_class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr, i, list.reference.pointer)
+        .reference);
+  }
+}
+
+final class $FaceContourType extends jni.JObjType<FaceContour> {
+  const $FaceContourType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/face/FaceContour;';
+
+  @override
+  FaceContour fromReference(jni.JReference reference) =>
+      FaceContour.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceContourType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceContourType) && other is $FaceContourType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetection
+class FaceDetection extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetection> $type = type;
+
+  FaceDetection.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/face/FaceDetection');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectionType();
+  static final _id_getClient = _class.staticMethodId(
+    r'getClient',
+    r'()Lcom/google/mlkit/vision/face/FaceDetector;',
+  );
+
+  static final _getClient = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: static public com.google.mlkit.vision.face.FaceDetector getClient()
+  /// The returned object must be released after use, by calling the [release] method.
+  static FaceDetector getClient() {
+    return _getClient(
+            _class.reference.pointer, _id_getClient as jni.JMethodIDPtr)
+        .object(const $FaceDetectorType());
+  }
+
+  static final _id_getClient1 = _class.staticMethodId(
+    r'getClient',
+    r'(Lcom/google/mlkit/vision/face/FaceDetectorOptions;)Lcom/google/mlkit/vision/face/FaceDetector;',
+  );
+
+  static final _getClient1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public com.google.mlkit.vision.face.FaceDetector getClient(com.google.mlkit.vision.face.FaceDetectorOptions faceDetectorOptions)
+  /// The returned object must be released after use, by calling the [release] method.
+  static FaceDetector getClient1(
+    FaceDetectorOptions faceDetectorOptions,
+  ) {
+    return _getClient1(
+            _class.reference.pointer,
+            _id_getClient1 as jni.JMethodIDPtr,
+            faceDetectorOptions.reference.pointer)
+        .object(const $FaceDetectorType());
+  }
+}
+
+final class $FaceDetectionType extends jni.JObjType<FaceDetection> {
+  const $FaceDetectionType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/face/FaceDetection;';
+
+  @override
+  FaceDetection fromReference(jni.JReference reference) =>
+      FaceDetection.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectionType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectionType) &&
+        other is $FaceDetectionType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetector
+class FaceDetector extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetector> $type = type;
+
+  FaceDetector.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/face/FaceDetector');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorType();
+  static final _id_process = _class.instanceMethodId(
+    r'process',
+    r'(Lcom/google/android/odml/image/MlImage;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(com.google.android.odml.image.MlImage mlImage)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<jni.JList<Face>> process(
+    jni.JObject mlImage,
+  ) {
+    return _process(reference.pointer, _id_process as jni.JMethodIDPtr,
+            mlImage.reference.pointer)
+        .object(const $TaskType(jni.JListType($FaceType())));
+  }
+
+  static final _id_process1 = _class.instanceMethodId(
+    r'process',
+    r'(Lcom/google/mlkit/vision/common/InputImage;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(com.google.mlkit.vision.common.InputImage inputImage)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<jni.JList<Face>> process1(
+    InputImage inputImage,
+  ) {
+    return _process1(reference.pointer, _id_process1 as jni.JMethodIDPtr,
+            inputImage.reference.pointer)
+        .object(const $TaskType(jni.JListType($FaceType())));
+  }
+
+  static final _id_close = _class.instanceMethodId(
+    r'close',
+    r'()V',
+  );
+
+  static final _close = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract void close()
+  void close() {
+    _close(reference.pointer, _id_close as jni.JMethodIDPtr).check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceDetectorImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d ==
+          r'process(Lcom/google/android/odml/image/MlImage;)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'process(Lcom/google/mlkit/vision/common/InputImage;)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process1(
+          $a[0].castTo(const $InputImageType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d == r'close()V') {
+        _$impls[$p]!.close();
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceDetector.implement(
+    $FaceDetectorImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceDetector.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceDetector',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceDetectorImpl {
+  factory $FaceDetectorImpl({
+    required Task<jni.JList<Face>> Function(jni.JObject mlImage) process,
+    required Task<jni.JList<Face>> Function(InputImage inputImage) process1,
+    required void Function() close,
+  }) = _$FaceDetectorImpl;
+
+  Task<jni.JList<Face>> process(jni.JObject mlImage);
+  Task<jni.JList<Face>> process1(InputImage inputImage);
+  void close();
+}
+
+class _$FaceDetectorImpl implements $FaceDetectorImpl {
+  _$FaceDetectorImpl({
+    required Task<jni.JList<Face>> Function(jni.JObject mlImage) process,
+    required Task<jni.JList<Face>> Function(InputImage inputImage) process1,
+    required void Function() close,
+  })  : _process = process,
+        _process1 = process1,
+        _close = close;
+
+  final Task<jni.JList<Face>> Function(jni.JObject mlImage) _process;
+  final Task<jni.JList<Face>> Function(InputImage inputImage) _process1;
+  final void Function() _close;
+
+  Task<jni.JList<Face>> process(jni.JObject mlImage) {
+    return _process(mlImage);
+  }
+
+  Task<jni.JList<Face>> process1(InputImage inputImage) {
+    return _process1(inputImage);
+  }
+
+  void close() {
+    return _close();
+  }
+}
+
+final class $FaceDetectorType extends jni.JObjType<FaceDetector> {
+  const $FaceDetectorType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/face/FaceDetector;';
+
+  @override
+  FaceDetector fromReference(jni.JReference reference) =>
+      FaceDetector.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorType) &&
+        other is $FaceDetectorType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetectorOptions$Builder
+class FaceDetectorOptions_Builder extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetectorOptions_Builder> $type = type;
+
+  FaceDetectorOptions_Builder.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceDetectorOptions$Builder');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorOptions_BuilderType();
+  static final _id_enableTracking = _class.instanceMethodId(
+    r'enableTracking',
+    r'()Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _enableTracking = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder enableTracking()
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder enableTracking() {
+    return _enableTracking(
+            reference.pointer, _id_enableTracking as jni.JMethodIDPtr)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_setClassificationMode = _class.instanceMethodId(
+    r'setClassificationMode',
+    r'(I)Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _setClassificationMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder setClassificationMode(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder setClassificationMode(
+    int i,
+  ) {
+    return _setClassificationMode(
+            reference.pointer, _id_setClassificationMode as jni.JMethodIDPtr, i)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_setContourMode = _class.instanceMethodId(
+    r'setContourMode',
+    r'(I)Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _setContourMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder setContourMode(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder setContourMode(
+    int i,
+  ) {
+    return _setContourMode(
+            reference.pointer, _id_setContourMode as jni.JMethodIDPtr, i)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_setExecutor = _class.instanceMethodId(
+    r'setExecutor',
+    r'(Ljava/util/concurrent/Executor;)Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _setExecutor = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder setExecutor(java.util.concurrent.Executor executor)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder setExecutor(
+    Executor executor,
+  ) {
+    return _setExecutor(reference.pointer, _id_setExecutor as jni.JMethodIDPtr,
+            executor.reference.pointer)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_setLandmarkMode = _class.instanceMethodId(
+    r'setLandmarkMode',
+    r'(I)Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _setLandmarkMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder setLandmarkMode(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder setLandmarkMode(
+    int i,
+  ) {
+    return _setLandmarkMode(
+            reference.pointer, _id_setLandmarkMode as jni.JMethodIDPtr, i)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_setMinFaceSize = _class.instanceMethodId(
+    r'setMinFaceSize',
+    r'(F)Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _setMinFaceSize = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<(ffi.Double,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, double)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder setMinFaceSize(float f)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder setMinFaceSize(
+    double f,
+  ) {
+    return _setMinFaceSize(
+            reference.pointer, _id_setMinFaceSize as jni.JMethodIDPtr, f)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_setPerformanceMode = _class.instanceMethodId(
+    r'setPerformanceMode',
+    r'(I)Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;',
+  );
+
+  static final _setPerformanceMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions$Builder setPerformanceMode(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions_Builder setPerformanceMode(
+    int i,
+  ) {
+    return _setPerformanceMode(
+            reference.pointer, _id_setPerformanceMode as jni.JMethodIDPtr, i)
+        .object(const $FaceDetectorOptions_BuilderType());
+  }
+
+  static final _id_build = _class.instanceMethodId(
+    r'build',
+    r'()Lcom/google/mlkit/vision/face/FaceDetectorOptions;',
+  );
+
+  static final _build = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public com.google.mlkit.vision.face.FaceDetectorOptions build()
+  /// The returned object must be released after use, by calling the [release] method.
+  FaceDetectorOptions build() {
+    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
+        .object(const $FaceDetectorOptionsType());
+  }
+
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory FaceDetectorOptions_Builder() {
+    return FaceDetectorOptions_Builder.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+}
+
+final class $FaceDetectorOptions_BuilderType
+    extends jni.JObjType<FaceDetectorOptions_Builder> {
+  const $FaceDetectorOptions_BuilderType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceDetectorOptions$Builder;';
+
+  @override
+  FaceDetectorOptions_Builder fromReference(jni.JReference reference) =>
+      FaceDetectorOptions_Builder.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorOptions_BuilderType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorOptions_BuilderType) &&
+        other is $FaceDetectorOptions_BuilderType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetectorOptions$ClassificationMode
+class FaceDetectorOptions_ClassificationMode extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetectorOptions_ClassificationMode> $type = type;
+
+  FaceDetectorOptions_ClassificationMode.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceDetectorOptions$ClassificationMode');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorOptions_ClassificationModeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceDetectorOptions_ClassificationModeImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceDetectorOptions_ClassificationMode.implement(
+    $FaceDetectorOptions_ClassificationModeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceDetectorOptions_ClassificationMode.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceDetectorOptions$ClassificationMode',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceDetectorOptions_ClassificationModeImpl {
+  factory $FaceDetectorOptions_ClassificationModeImpl() =
+      _$FaceDetectorOptions_ClassificationModeImpl;
+}
+
+class _$FaceDetectorOptions_ClassificationModeImpl
+    implements $FaceDetectorOptions_ClassificationModeImpl {
+  _$FaceDetectorOptions_ClassificationModeImpl();
+}
+
+final class $FaceDetectorOptions_ClassificationModeType
+    extends jni.JObjType<FaceDetectorOptions_ClassificationMode> {
+  const $FaceDetectorOptions_ClassificationModeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceDetectorOptions$ClassificationMode;';
+
+  @override
+  FaceDetectorOptions_ClassificationMode fromReference(
+          jni.JReference reference) =>
+      FaceDetectorOptions_ClassificationMode.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorOptions_ClassificationModeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorOptions_ClassificationModeType) &&
+        other is $FaceDetectorOptions_ClassificationModeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetectorOptions$ContourMode
+class FaceDetectorOptions_ContourMode extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetectorOptions_ContourMode> $type = type;
+
+  FaceDetectorOptions_ContourMode.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceDetectorOptions$ContourMode');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorOptions_ContourModeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceDetectorOptions_ContourModeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceDetectorOptions_ContourMode.implement(
+    $FaceDetectorOptions_ContourModeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceDetectorOptions_ContourMode.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceDetectorOptions$ContourMode',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceDetectorOptions_ContourModeImpl {
+  factory $FaceDetectorOptions_ContourModeImpl() =
+      _$FaceDetectorOptions_ContourModeImpl;
+}
+
+class _$FaceDetectorOptions_ContourModeImpl
+    implements $FaceDetectorOptions_ContourModeImpl {
+  _$FaceDetectorOptions_ContourModeImpl();
+}
+
+final class $FaceDetectorOptions_ContourModeType
+    extends jni.JObjType<FaceDetectorOptions_ContourMode> {
+  const $FaceDetectorOptions_ContourModeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceDetectorOptions$ContourMode;';
+
+  @override
+  FaceDetectorOptions_ContourMode fromReference(jni.JReference reference) =>
+      FaceDetectorOptions_ContourMode.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorOptions_ContourModeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorOptions_ContourModeType) &&
+        other is $FaceDetectorOptions_ContourModeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetectorOptions$LandmarkMode
+class FaceDetectorOptions_LandmarkMode extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetectorOptions_LandmarkMode> $type = type;
+
+  FaceDetectorOptions_LandmarkMode.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceDetectorOptions$LandmarkMode');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorOptions_LandmarkModeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceDetectorOptions_LandmarkModeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceDetectorOptions_LandmarkMode.implement(
+    $FaceDetectorOptions_LandmarkModeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceDetectorOptions_LandmarkMode.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceDetectorOptions$LandmarkMode',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceDetectorOptions_LandmarkModeImpl {
+  factory $FaceDetectorOptions_LandmarkModeImpl() =
+      _$FaceDetectorOptions_LandmarkModeImpl;
+}
+
+class _$FaceDetectorOptions_LandmarkModeImpl
+    implements $FaceDetectorOptions_LandmarkModeImpl {
+  _$FaceDetectorOptions_LandmarkModeImpl();
+}
+
+final class $FaceDetectorOptions_LandmarkModeType
+    extends jni.JObjType<FaceDetectorOptions_LandmarkMode> {
+  const $FaceDetectorOptions_LandmarkModeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceDetectorOptions$LandmarkMode;';
+
+  @override
+  FaceDetectorOptions_LandmarkMode fromReference(jni.JReference reference) =>
+      FaceDetectorOptions_LandmarkMode.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorOptions_LandmarkModeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorOptions_LandmarkModeType) &&
+        other is $FaceDetectorOptions_LandmarkModeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetectorOptions$PerformanceMode
+class FaceDetectorOptions_PerformanceMode extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetectorOptions_PerformanceMode> $type = type;
+
+  FaceDetectorOptions_PerformanceMode.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceDetectorOptions$PerformanceMode');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorOptions_PerformanceModeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceDetectorOptions_PerformanceModeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceDetectorOptions_PerformanceMode.implement(
+    $FaceDetectorOptions_PerformanceModeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceDetectorOptions_PerformanceMode.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceDetectorOptions$PerformanceMode',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceDetectorOptions_PerformanceModeImpl {
+  factory $FaceDetectorOptions_PerformanceModeImpl() =
+      _$FaceDetectorOptions_PerformanceModeImpl;
+}
+
+class _$FaceDetectorOptions_PerformanceModeImpl
+    implements $FaceDetectorOptions_PerformanceModeImpl {
+  _$FaceDetectorOptions_PerformanceModeImpl();
+}
+
+final class $FaceDetectorOptions_PerformanceModeType
+    extends jni.JObjType<FaceDetectorOptions_PerformanceMode> {
+  const $FaceDetectorOptions_PerformanceModeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceDetectorOptions$PerformanceMode;';
+
+  @override
+  FaceDetectorOptions_PerformanceMode fromReference(jni.JReference reference) =>
+      FaceDetectorOptions_PerformanceMode.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorOptions_PerformanceModeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorOptions_PerformanceModeType) &&
+        other is $FaceDetectorOptions_PerformanceModeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceDetectorOptions
+class FaceDetectorOptions extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceDetectorOptions> $type = type;
+
+  FaceDetectorOptions.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/face/FaceDetectorOptions');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceDetectorOptionsType();
+
+  /// from: static public final int LANDMARK_MODE_NONE
+  static const LANDMARK_MODE_NONE = 1;
+
+  /// from: static public final int LANDMARK_MODE_ALL
+  static const LANDMARK_MODE_ALL = 2;
+
+  /// from: static public final int CONTOUR_MODE_NONE
+  static const CONTOUR_MODE_NONE = 1;
+
+  /// from: static public final int CONTOUR_MODE_ALL
+  static const CONTOUR_MODE_ALL = 2;
+
+  /// from: static public final int CLASSIFICATION_MODE_NONE
+  static const CLASSIFICATION_MODE_NONE = 1;
+
+  /// from: static public final int CLASSIFICATION_MODE_ALL
+  static const CLASSIFICATION_MODE_ALL = 2;
+
+  /// from: static public final int PERFORMANCE_MODE_FAST
+  static const PERFORMANCE_MODE_FAST = 1;
+
+  /// from: static public final int PERFORMANCE_MODE_ACCURATE
+  static const PERFORMANCE_MODE_ACCURATE = 2;
+  static final _id_hashCode1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int hashCode()
+  int hashCode1() {
+    return _hashCode1(reference.pointer, _id_hashCode1 as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean equals(java.lang.Object object)
+  bool equals(
+    jni.JObject object,
+  ) {
+    return _equals(reference.pointer, _id_equals as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_zza = _class.instanceMethodId(
+    r'zza',
+    r'()F',
+  );
+
+  static final _zza = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallFloatMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final float zza()
+  double zza() {
+    return _zza(reference.pointer, _id_zza as jni.JMethodIDPtr).float;
+  }
+
+  static final _id_zzb = _class.instanceMethodId(
+    r'zzb',
+    r'()I',
+  );
+
+  static final _zzb = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final int zzb()
+  int zzb() {
+    return _zzb(reference.pointer, _id_zzb as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_zzc = _class.instanceMethodId(
+    r'zzc',
+    r'()I',
+  );
+
+  static final _zzc = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final int zzc()
+  int zzc() {
+    return _zzc(reference.pointer, _id_zzc as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_zzd = _class.instanceMethodId(
+    r'zzd',
+    r'()I',
+  );
+
+  static final _zzd = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final int zzd()
+  int zzd() {
+    return _zzd(reference.pointer, _id_zzd as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_zze = _class.instanceMethodId(
+    r'zze',
+    r'()I',
+  );
+
+  static final _zze = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final int zze()
+  int zze() {
+    return _zze(reference.pointer, _id_zze as jni.JMethodIDPtr).integer;
+  }
+
+  static final _id_zzf = _class.instanceMethodId(
+    r'zzf',
+    r'()Ljava/util/concurrent/Executor;',
+  );
+
+  static final _zzf = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final java.util.concurrent.Executor zzf()
+  /// The returned object must be released after use, by calling the [release] method.
+  Executor zzf() {
+    return _zzf(reference.pointer, _id_zzf as jni.JMethodIDPtr)
+        .object(const $ExecutorType());
+  }
+
+  static final _id_zzg = _class.instanceMethodId(
+    r'zzg',
+    r'()Z',
+  );
+
+  static final _zzg = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final boolean zzg()
+  bool zzg() {
+    return _zzg(reference.pointer, _id_zzg as jni.JMethodIDPtr).boolean;
+  }
+}
+
+final class $FaceDetectorOptionsType extends jni.JObjType<FaceDetectorOptions> {
+  const $FaceDetectorOptionsType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/face/FaceDetectorOptions;';
+
+  @override
+  FaceDetectorOptions fromReference(jni.JReference reference) =>
+      FaceDetectorOptions.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceDetectorOptionsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceDetectorOptionsType) &&
+        other is $FaceDetectorOptionsType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceLandmark$LandmarkType
+class FaceLandmark_LandmarkType extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceLandmark_LandmarkType> $type = type;
+
+  FaceLandmark_LandmarkType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/face/FaceLandmark$LandmarkType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceLandmark_LandmarkTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $FaceLandmark_LandmarkTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory FaceLandmark_LandmarkType.implement(
+    $FaceLandmark_LandmarkTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = FaceLandmark_LandmarkType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.face.FaceLandmark$LandmarkType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $FaceLandmark_LandmarkTypeImpl {
+  factory $FaceLandmark_LandmarkTypeImpl() = _$FaceLandmark_LandmarkTypeImpl;
+}
+
+class _$FaceLandmark_LandmarkTypeImpl
+    implements $FaceLandmark_LandmarkTypeImpl {
+  _$FaceLandmark_LandmarkTypeImpl();
+}
+
+final class $FaceLandmark_LandmarkTypeType
+    extends jni.JObjType<FaceLandmark_LandmarkType> {
+  const $FaceLandmark_LandmarkTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/face/FaceLandmark$LandmarkType;';
+
+  @override
+  FaceLandmark_LandmarkType fromReference(jni.JReference reference) =>
+      FaceLandmark_LandmarkType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceLandmark_LandmarkTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceLandmark_LandmarkTypeType) &&
+        other is $FaceLandmark_LandmarkTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.face.FaceLandmark
+class FaceLandmark extends jni.JObject {
+  @override
+  late final jni.JObjType<FaceLandmark> $type = type;
+
+  FaceLandmark.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/face/FaceLandmark');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $FaceLandmarkType();
+
+  /// from: static public final int MOUTH_BOTTOM
+  static const MOUTH_BOTTOM = 0;
+
+  /// from: static public final int MOUTH_RIGHT
+  static const MOUTH_RIGHT = 11;
+
+  /// from: static public final int MOUTH_LEFT
+  static const MOUTH_LEFT = 5;
+
+  /// from: static public final int RIGHT_EYE
+  static const RIGHT_EYE = 10;
+
+  /// from: static public final int LEFT_EYE
+  static const LEFT_EYE = 4;
+
+  /// from: static public final int RIGHT_EAR
+  static const RIGHT_EAR = 9;
+
+  /// from: static public final int LEFT_EAR
+  static const LEFT_EAR = 3;
+
+  /// from: static public final int RIGHT_CHEEK
+  static const RIGHT_CHEEK = 7;
+
+  /// from: static public final int LEFT_CHEEK
+  static const LEFT_CHEEK = 1;
+
+  /// from: static public final int NOSE_BASE
+  static const NOSE_BASE = 6;
+  static final _id_getLandmarkType = _class.instanceMethodId(
+    r'getLandmarkType',
+    r'()I',
+  );
+
+  static final _getLandmarkType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getLandmarkType()
+  int getLandmarkType() {
+    return _getLandmarkType(
+            reference.pointer, _id_getLandmarkType as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getPosition = _class.instanceMethodId(
+    r'getPosition',
+    r'()Landroid/graphics/PointF;',
+  );
+
+  static final _getPosition = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.graphics.PointF getPosition()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getPosition() {
+    return _getPosition(reference.pointer, _id_getPosition as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+}
+
+final class $FaceLandmarkType extends jni.JObjType<FaceLandmark> {
+  const $FaceLandmarkType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/face/FaceLandmark;';
+
+  @override
+  FaceLandmark fromReference(jni.JReference reference) =>
+      FaceLandmark.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($FaceLandmarkType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($FaceLandmarkType) &&
+        other is $FaceLandmarkType;
+  }
+}
+
+/// from: com.google.mlkit.vision.interfaces.Detector$DetectorType
+class Detector_DetectorType extends jni.JObject {
+  @override
+  late final jni.JObjType<Detector_DetectorType> $type = type;
+
+  Detector_DetectorType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'com/google/mlkit/vision/interfaces/Detector$DetectorType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $Detector_DetectorTypeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $Detector_DetectorTypeImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Detector_DetectorType.implement(
+    $Detector_DetectorTypeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Detector_DetectorType.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.interfaces.Detector$DetectorType',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $Detector_DetectorTypeImpl {
+  factory $Detector_DetectorTypeImpl() = _$Detector_DetectorTypeImpl;
+}
+
+class _$Detector_DetectorTypeImpl implements $Detector_DetectorTypeImpl {
+  _$Detector_DetectorTypeImpl();
+}
+
+final class $Detector_DetectorTypeType
+    extends jni.JObjType<Detector_DetectorType> {
+  const $Detector_DetectorTypeType();
+
+  @override
+  String get signature =>
+      r'Lcom/google/mlkit/vision/interfaces/Detector$DetectorType;';
+
+  @override
+  Detector_DetectorType fromReference(jni.JReference reference) =>
+      Detector_DetectorType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($Detector_DetectorTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Detector_DetectorTypeType) &&
+        other is $Detector_DetectorTypeType;
+  }
+}
+
+/// from: com.google.mlkit.vision.interfaces.Detector
+class Detector<$DetectionResultT extends jni.JObject> extends jni.JObject {
+  @override
+  late final jni.JObjType<Detector<$DetectionResultT>> $type =
+      type(DetectionResultT);
+
+  final jni.JObjType<$DetectionResultT> DetectionResultT;
+
+  Detector.fromReference(
+    this.DetectionResultT,
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/interfaces/Detector');
+
+  /// The type which includes information such as the signature of this class.
+  static $DetectorType<$DetectionResultT>
+      type<$DetectionResultT extends jni.JObject>(
+    jni.JObjType<$DetectionResultT> DetectionResultT,
+  ) {
+    return $DetectorType(
+      DetectionResultT,
+    );
+  }
+
+  /// from: static public final int TYPE_BARCODE_SCANNING
+  static const TYPE_BARCODE_SCANNING = 1;
+
+  /// from: static public final int TYPE_FACE_DETECTION
+  static const TYPE_FACE_DETECTION = 2;
+
+  /// from: static public final int TYPE_IMAGE_LABELING
+  static const TYPE_IMAGE_LABELING = 3;
+
+  /// from: static public final int TYPE_TEXT_RECOGNITION
+  static const TYPE_TEXT_RECOGNITION = 4;
+
+  /// from: static public final int TYPE_OBJECT_DETECTION
+  static const TYPE_OBJECT_DETECTION = 5;
+
+  /// from: static public final int TYPE_POSE_DETECTION
+  static const TYPE_POSE_DETECTION = 6;
+
+  /// from: static public final int TYPE_SEGMENTATION
+  static const TYPE_SEGMENTATION = 7;
+
+  /// from: static public final int TYPE_SELFIE_FACE_DETECTION
+  static const TYPE_SELFIE_FACE_DETECTION = 8;
+
+  /// from: static public final int TYPE_IMAGE_CAPTIONING
+  static const TYPE_IMAGE_CAPTIONING = 9;
+
+  /// from: static public final int TYPE_DOCUMENT_DETECTION
+  static const TYPE_DOCUMENT_DETECTION = 10;
+
+  /// from: static public final int TYPE_SUBJECT_SEGMENTATION
+  static const TYPE_SUBJECT_SEGMENTATION = 11;
+  static final _id_getDetectorType = _class.instanceMethodId(
+    r'getDetectorType',
+    r'()I',
+  );
+
+  static final _getDetectorType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract int getDetectorType()
+  int getDetectorType() {
+    return _getDetectorType(
+            reference.pointer, _id_getDetectorType as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_process = _class.instanceMethodId(
+    r'process',
+    r'(Landroid/graphics/Bitmap;I)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(android.graphics.Bitmap bitmap, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$DetectionResultT> process(
+    jni.JObject bitmap,
+    int i,
+  ) {
+    return _process(reference.pointer, _id_process as jni.JMethodIDPtr,
+            bitmap.reference.pointer, i)
+        .object($TaskType(DetectionResultT));
+  }
+
+  static final _id_process1 = _class.instanceMethodId(
+    r'process',
+    r'(Landroid/media/Image;I)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process1 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(android.media.Image image, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$DetectionResultT> process1(
+    Image image,
+    int i,
+  ) {
+    return _process1(reference.pointer, _id_process1 as jni.JMethodIDPtr,
+            image.reference.pointer, i)
+        .object($TaskType(DetectionResultT));
+  }
+
+  static final _id_process2 = _class.instanceMethodId(
+    r'process',
+    r'(Landroid/media/Image;ILandroid/graphics/Matrix;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process2 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(android.media.Image image, int i, android.graphics.Matrix matrix)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$DetectionResultT> process2(
+    Image image,
+    int i,
+    jni.JObject matrix,
+  ) {
+    return _process2(reference.pointer, _id_process2 as jni.JMethodIDPtr,
+            image.reference.pointer, i, matrix.reference.pointer)
+        .object($TaskType(DetectionResultT));
+  }
+
+  static final _id_process3 = _class.instanceMethodId(
+    r'process',
+    r'(Ljava/nio/ByteBuffer;IIII)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _process3 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        $Int32,
+                        $Int32,
+                        $Int32
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, int, int, int)>();
+
+  /// from: public abstract com.google.android.gms.tasks.Task process(java.nio.ByteBuffer byteBuffer, int i, int i1, int i2, int i3)
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$DetectionResultT> process3(
+    jni.JByteBuffer byteBuffer,
+    int i,
+    int i1,
+    int i2,
+    int i3,
+  ) {
+    return _process3(reference.pointer, _id_process3 as jni.JMethodIDPtr,
+            byteBuffer.reference.pointer, i, i1, i2, i3)
+        .object($TaskType(DetectionResultT));
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $DetectorImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'getDetectorType()I') {
+        final $r = _$impls[$p]!.getDetectorType();
+        return jni.JInteger($r).reference.toPointer();
+      }
+      if ($d ==
+          r'process(Landroid/graphics/Bitmap;I)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'process(Landroid/media/Image;I)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process1(
+          $a[0].castTo(const $ImageType(), releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'process(Landroid/media/Image;ILandroid/graphics/Matrix;)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process2(
+          $a[0].castTo(const $ImageType(), releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+      if ($d ==
+          r'process(Ljava/nio/ByteBuffer;IIII)Lcom/google/android/gms/tasks/Task;') {
+        final $r = _$impls[$p]!.process3(
+          $a[0].castTo(const jni.JByteBufferType(), releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[2]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[3]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+          $a[4]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory Detector.implement(
+    $DetectorImpl<$DetectionResultT> $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = Detector.fromReference(
+      $impl.DetectionResultT,
+      ProtectedJniExtensions.newPortProxy(
+        r'com.google.mlkit.vision.interfaces.Detector',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $DetectorImpl<$DetectionResultT extends jni.JObject> {
+  factory $DetectorImpl({
+    required jni.JObjType<$DetectionResultT> DetectionResultT,
+    required int Function() getDetectorType,
+    required Task<$DetectionResultT> Function(jni.JObject bitmap, int i)
+        process,
+    required Task<$DetectionResultT> Function(Image image, int i) process1,
+    required Task<$DetectionResultT> Function(
+            Image image, int i, jni.JObject matrix)
+        process2,
+    required Task<$DetectionResultT> Function(
+            jni.JByteBuffer byteBuffer, int i, int i1, int i2, int i3)
+        process3,
+  }) = _$DetectorImpl;
+
+  jni.JObjType<$DetectionResultT> get DetectionResultT;
+
+  int getDetectorType();
+  Task<$DetectionResultT> process(jni.JObject bitmap, int i);
+  Task<$DetectionResultT> process1(Image image, int i);
+  Task<$DetectionResultT> process2(Image image, int i, jni.JObject matrix);
+  Task<$DetectionResultT> process3(
+      jni.JByteBuffer byteBuffer, int i, int i1, int i2, int i3);
+}
+
+class _$DetectorImpl<$DetectionResultT extends jni.JObject>
+    implements $DetectorImpl<$DetectionResultT> {
+  _$DetectorImpl({
+    required this.DetectionResultT,
+    required int Function() getDetectorType,
+    required Task<$DetectionResultT> Function(jni.JObject bitmap, int i)
+        process,
+    required Task<$DetectionResultT> Function(Image image, int i) process1,
+    required Task<$DetectionResultT> Function(
+            Image image, int i, jni.JObject matrix)
+        process2,
+    required Task<$DetectionResultT> Function(
+            jni.JByteBuffer byteBuffer, int i, int i1, int i2, int i3)
+        process3,
+  })  : _getDetectorType = getDetectorType,
+        _process = process,
+        _process1 = process1,
+        _process2 = process2,
+        _process3 = process3;
+
+  @override
+  final jni.JObjType<$DetectionResultT> DetectionResultT;
+
+  final int Function() _getDetectorType;
+  final Task<$DetectionResultT> Function(jni.JObject bitmap, int i) _process;
+  final Task<$DetectionResultT> Function(Image image, int i) _process1;
+  final Task<$DetectionResultT> Function(Image image, int i, jni.JObject matrix)
+      _process2;
+  final Task<$DetectionResultT> Function(
+      jni.JByteBuffer byteBuffer, int i, int i1, int i2, int i3) _process3;
+
+  int getDetectorType() {
+    return _getDetectorType();
+  }
+
+  Task<$DetectionResultT> process(jni.JObject bitmap, int i) {
+    return _process(bitmap, i);
+  }
+
+  Task<$DetectionResultT> process1(Image image, int i) {
+    return _process1(image, i);
+  }
+
+  Task<$DetectionResultT> process2(Image image, int i, jni.JObject matrix) {
+    return _process2(image, i, matrix);
+  }
+
+  Task<$DetectionResultT> process3(
+      jni.JByteBuffer byteBuffer, int i, int i1, int i2, int i3) {
+    return _process3(byteBuffer, i, i1, i2, i3);
+  }
+}
+
+final class $DetectorType<$DetectionResultT extends jni.JObject>
+    extends jni.JObjType<Detector<$DetectionResultT>> {
+  final jni.JObjType<$DetectionResultT> DetectionResultT;
+
+  const $DetectorType(
+    this.DetectionResultT,
+  );
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/interfaces/Detector;';
+
+  @override
+  Detector<$DetectionResultT> fromReference(jni.JReference reference) =>
+      Detector.fromReference(DetectionResultT, reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => Object.hash($DetectorType, DetectionResultT);
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($DetectorType<$DetectionResultT>) &&
+        other is $DetectorType<$DetectionResultT> &&
+        DetectionResultT == other.DetectionResultT;
+  }
+}
+
+/// from: com.google.mlkit.vision.label.R
+class R extends jni.JObject {
+  @override
+  late final jni.JObjType<R> $type = type;
+
+  R.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'com/google/mlkit/vision/label/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $RType();
+}
+
+final class $RType extends jni.JObjType<R> {
+  const $RType();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/label/R;';
+
+  @override
+  R fromReference(jni.JReference reference) => R.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($RType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RType) && other is $RType;
+  }
+}
+
+/// from: com.google.mlkit.vision.label.defaults.bundled.R
+class R1 extends jni.JObject {
+  @override
+  late final jni.JObjType<R1> $type = type;
+
+  R1.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/label/defaults/bundled/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R1Type();
+}
+
+final class $R1Type extends jni.JObjType<R1> {
+  const $R1Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/label/defaults/bundled/R;';
+
+  @override
+  R1 fromReference(jni.JReference reference) => R1.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R1Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R1Type) && other is $R1Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.label.defaults.common.R
+class R2 extends jni.JObject {
+  @override
+  late final jni.JObjType<R2> $type = type;
+
+  R2.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/label/defaults/common/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R2Type();
+}
+
+final class $R2Type extends jni.JObjType<R2> {
+  const $R2Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/label/defaults/common/R;';
+
+  @override
+  R2 fromReference(jni.JReference reference) => R2.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R2Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R2Type) && other is $R2Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.objects.R
+class R3 extends jni.JObject {
+  @override
+  late final jni.JObjType<R3> $type = type;
+
+  R3.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/objects/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R3Type();
+}
+
+final class $R3Type extends jni.JObjType<R3> {
+  const $R3Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/objects/R;';
+
+  @override
+  R3 fromReference(jni.JReference reference) => R3.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R3Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R3Type) && other is $R3Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.objects.defaults.R
+class R4 extends jni.JObject {
+  @override
+  late final jni.JObjType<R4> $type = type;
+
+  R4.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/objects/defaults/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R4Type();
+}
+
+final class $R4Type extends jni.JObjType<R4> {
+  const $R4Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/objects/defaults/R;';
+
+  @override
+  R4 fromReference(jni.JReference reference) => R4.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R4Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R4Type) && other is $R4Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.pose.R
+class R5 extends jni.JObject {
+  @override
+  late final jni.JObjType<R5> $type = type;
+
+  R5.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'com/google/mlkit/vision/pose/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R5Type();
+}
+
+final class $R5Type extends jni.JObjType<R5> {
+  const $R5Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/pose/R;';
+
+  @override
+  R5 fromReference(jni.JReference reference) => R5.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R5Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R5Type) && other is $R5Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.pose.defaults.R
+class R6 extends jni.JObject {
+  @override
+  late final jni.JObjType<R6> $type = type;
+
+  R6.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/pose/defaults/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R6Type();
+}
+
+final class $R6Type extends jni.JObjType<R6> {
+  const $R6Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/pose/defaults/R;';
+
+  @override
+  R6 fromReference(jni.JReference reference) => R6.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R6Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R6Type) && other is $R6Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.segmentation.R
+class R7 extends jni.JObject {
+  @override
+  late final jni.JObjType<R7> $type = type;
+
+  R7.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/segmentation/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R7Type();
+}
+
+final class $R7Type extends jni.JObjType<R7> {
+  const $R7Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/segmentation/R;';
+
+  @override
+  R7 fromReference(jni.JReference reference) => R7.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R7Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R7Type) && other is $R7Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.text.R
+class R8 extends jni.JObject {
+  @override
+  late final jni.JObjType<R8> $type = type;
+
+  R8.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'com/google/mlkit/vision/text/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R8Type();
+}
+
+final class $R8Type extends jni.JObjType<R8> {
+  const $R8Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/text/R;';
+
+  @override
+  R8 fromReference(jni.JReference reference) => R8.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R8Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R8Type) && other is $R8Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.text.bundled.common.R
+class R9 extends jni.JObject {
+  @override
+  late final jni.JObjType<R9> $type = type;
+
+  R9.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/text/bundled/common/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R9Type();
+}
+
+final class $R9Type extends jni.JObjType<R9> {
+  const $R9Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/text/bundled/common/R;';
+
+  @override
+  R9 fromReference(jni.JReference reference) => R9.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R9Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R9Type) && other is $R9Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.text.bundled.latin.R
+class R10 extends jni.JObject {
+  @override
+  late final jni.JObjType<R10> $type = type;
+
+  R10.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/text/bundled/latin/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R10Type();
+}
+
+final class $R10Type extends jni.JObjType<R10> {
+  const $R10Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/text/bundled/latin/R;';
+
+  @override
+  R10 fromReference(jni.JReference reference) => R10.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R10Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R10Type) && other is $R10Type;
+  }
+}
+
+/// from: com.google.mlkit.vision.text.latin.R
+class R11 extends jni.JObject {
+  @override
+  late final jni.JObjType<R11> $type = type;
+
+  R11.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'com/google/mlkit/vision/text/latin/R');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $R11Type();
+}
+
+final class $R11Type extends jni.JObjType<R11> {
+  const $R11Type();
+
+  @override
+  String get signature => r'Lcom/google/mlkit/vision/text/latin/R;';
+
+  @override
+  R11 fromReference(jni.JReference reference) => R11.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($R11Type).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($R11Type) && other is $R11Type;
   }
 }
 

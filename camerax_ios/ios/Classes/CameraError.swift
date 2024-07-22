@@ -10,11 +10,11 @@ import Foundation
 enum CameraError: Error {
     case unsupported
     case unimplemented
-    case unauthorized
-    case videoDeviceInputNil
+    case deviceNil
     case cannotAddInput
     case cannotAddOutput
     case observationNil
+    case capturePhotoDelegateNotNil
     case saveDataNil
     case saveUrlNil
     case saveAssetNil

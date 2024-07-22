@@ -8,7 +8,7 @@ import 'package:jni/jni.dart';
 import 'jni.dart';
 import 'jni.g.dart' as jni;
 
-final class JNICameraController
+final class JCameraController
     with TypeLogger, LoggerController
     implements CameraController {
   final jni.LifecycleCameraController jniValue;
@@ -22,7 +22,7 @@ final class JNICameraController
   @override
   Stream<bool?> get torchStateChanged => _torchStateChagnedController.stream;
 
-  JNICameraController()
+  JCameraController()
       : jniValue = jni.LifecycleCameraController(JNI.context)
           ..setImageAnalysisBackpressureStrategyOnMainThread(
               jni.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -209,13 +209,13 @@ final class JNICameraController
   }
 
   @override
-  Future<void> setImageAnalyzer(ImageAnalyzer analyzer) async {
+  Future<void> setImageAnalysisAnalyzer(ImageAnalyzer analyzer) async {
     final executor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
     final jniAanlyzer = jni.ImageAnalysis_Analyzer.implement(
       jni.$ImageAnalysis_AnalyzerImpl(
-        analyze: (image) {
-          analyzer.analyze(image.dartValue);
+        analyze: (imageProxy) {
+          analyzer.analyze(imageProxy.dartValue);
         },
         getDefaultTargetResolution: () {
           return JObject.fromReference(jNullReference);
@@ -233,14 +233,14 @@ final class JNICameraController
   }
 
   @override
-  Future<void> clearImageAnalyzer() async {
+  Future<void> clearImageAnalysisAnalyzer() async {
     await jniValue.clearImageAnalysisAnalyzerOnMainThread();
   }
 
   @override
   Future<FlashMode> getImageCaptureFlashMode() async {
     final flashMode = await jniValue.getImageCaptureFlashModeOnMainThread();
-    return flashMode.dartFlashMode;
+    return flashMode.flashMode;
   }
 
   @override

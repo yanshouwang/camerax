@@ -2,11 +2,18 @@
 name: CameraXiOSLibrary
 description: iOS Library for CameraX.
 language: objc
-output: "lib/src/ffi.g.dart"
+output:
+  bindings: 'lib/src/ffi.g.dart'
+  objc-bindings: 'ios/Classes/ffi.g.m'
+exclude-all-by-default: true
+compiler-opts:
+  - '-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks'
+  - '-mios-version-min=12.0'
+  - '-isysroot'
+  - '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk'
 headers:
   entry-points:
-    - 'example/build/ios/Debug-iphonesimulator/camerax_ios/camerax_ios.framework/Headers/camerax_ios-Swift.h'
-exclude-all-by-default: true
+    - 'src/camerax_ios.h'
 objc-interfaces:
   include:
     - PreviewView
@@ -26,6 +33,7 @@ objc-interfaces:
     ImageProxy: camerax_ios
 enums:
   include:
+    - AuthorizationType
     - ScaleType
     - LensFacing
     - FlashMode

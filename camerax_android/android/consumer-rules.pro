@@ -2,4 +2,6 @@
 -keep class androidx.camera.view.** { *; }
 -keep class androidx.camera.mlkit.vision.** { *; }
 -keep class androidx.lifecycle.** { *; }
--keep class com.google.common.util.concurrent.** { *; }
+-keep class com.google.android.gms.** { *; }
+-keep class com.google.common.** { *; }
+-keep class com.google.mlkit.vision.** { *; }

@@ -19,23 +19,50 @@ classes:
   - android.content.ContentResolver
   - android.content.ContentValues
   - android.database.Cursor
+  - android.graphics.Point
+  - android.graphics.Rect
+  - android.media.Image
   - android.net.Uri
   - android.provider.MediaStore
   - androidx.core.content.ContextCompat
+  - androidx.core.util.Consumer
   - androidx.camera.core.CameraSelector
   - androidx.camera.core.ImageAnalysis
   - androidx.camera.core.ImageCapture
+  - androidx.camera.core.ImageInfo
   - androidx.camera.core.ImageProxy
   - androidx.camera.core.TorchState
   - androidx.camera.core.ZoomState
   - androidx.camera.view.CameraController
   - androidx.camera.view.LifecycleCameraController
   - androidx.camera.view.PreviewView
-  # - androidx.camera.mlkit.vision.MlKitAnalyzer
+  - androidx.camera.mlkit.vision.MlKitAnalyzer
   - androidx.lifecycle.LifecycleOwner
   - androidx.lifecycle.LiveData
   - androidx.lifecycle.Observer
+  - com.google.android.gms.tasks.OnCompleteListener
+  - com.google.android.gms.tasks.OnSuccessListener
+  - com.google.android.gms.tasks.OnFailureListener
+  - com.google.android.gms.tasks.OnCanceledListener
+  - com.google.android.gms.tasks.Task
   - com.google.common.util.concurrent.ListenableFuture
+  - com.google.mlkit.vision.common.InputImage
+  - com.google.mlkit.vision.barcode.BarcodeScanning
+  - com.google.mlkit.vision.barcode.BarcodeScanner
+  - com.google.mlkit.vision.barcode.BarcodeScannerOptions
+  - com.google.mlkit.vision.barcode.common.Barcode
+  - com.google.mlkit.vision.face.Face
+  - com.google.mlkit.vision.face.FaceContour
+  - com.google.mlkit.vision.face.FaceDetection
+  - com.google.mlkit.vision.face.FaceDetector
+  - com.google.mlkit.vision.face.FaceDetectorOptions
+  - com.google.mlkit.vision.face.FaceLandmark
+  - com.google.mlkit.vision.interfaces.Detector
+  - com.google.mlkit.vision.label
+  - com.google.mlkit.vision.objects
+  - com.google.mlkit.vision.pose
+  - com.google.mlkit.vision.segmentation
+  - com.google.mlkit.vision.text
   - java.lang.Runnable
   - java.util.concurrent.Executor
   - java.util.concurrent.Executors

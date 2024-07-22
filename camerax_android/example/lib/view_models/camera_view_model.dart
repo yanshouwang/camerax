@@ -1,20 +1,18 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 
-class CameraViewModel extends ViewModel
-    with TypeLogger
-    implements ImageAnalyzer {
+class CameraViewModel extends ViewModel with TypeLogger {
   final CameraController controller;
   LensFacing _lensFacing;
   ZoomState? _zoomState;
   bool? _torchState;
   FlashMode? _flashMode;
   Uri? _savedUri;
-  Image? _image;
+  ImageProxy? _imageProxy;
+  List<MLObject> _items;
 
   late final StreamSubscription _zoomStateSubscription;
   late final StreamSubscription _torchStateSubscription;
@@ -24,7 +22,8 @@ class CameraViewModel extends ViewModel
         _lensFacing = LensFacing.back,
         _zoomState = null,
         _flashMode = null,
-        _savedUri = null {
+        _savedUri = null,
+        _items = [] {
     _initialize();
   }
 
@@ -33,7 +32,8 @@ class CameraViewModel extends ViewModel
   bool? get torchState => _torchState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
-  Image? get image => _image;
+  ImageProxy? get imageProxy => _imageProxy;
+  List<MLObject> get items => _items;
 
   void _initialize() async {
     _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
@@ -54,11 +54,8 @@ class CameraViewModel extends ViewModel
       type: AuthorizationType.audio,
     );
     if (!videoAuthorized || !audioAuthorized) {
-      throw StateError('Unauthorized.');
+      throw StateError('requestAuthorization failed.');
     }
-    await controller.requestAuthorization(
-      type: AuthorizationType.audio,
-    );
     await controller.setCameraSelector(CameraSelector.back);
     _zoomState = await controller.getZoomState();
     _torchState = await controller.getTorchState();
@@ -72,24 +69,39 @@ flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
-    await controller.setImageAnalyzer(this);
+    final analyzer = MLAnalyzer(
+      types: MLObjectType.values,
+      onAnalyzed: _onAnalyzed,
+    );
+    await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }
 
-  @override
-  void analyze(ImageProxy image) {
-    logger.info(image);
-    decodeImageFromPixels(
-      image.data,
-      image.width,
-      image.height,
-      PixelFormat.rgba8888,
-      (value) async {
-        _image = value;
-        notifyListeners();
-        await image.close();
-      },
-    );
+  // @override
+  // void analyze(ImageProxy image) async {
+  //   logger.info(image);
+  //   try {
+  //     decodeImageFromPixels(
+  //       image.data,
+  //       image.width,
+  //       image.height,
+  //       PixelFormat.rgba8888,
+  //       (value) async {
+  //         _image = value;
+  //         notifyListeners();
+  //         await image.close();
+  //       },
+  //     );
+  //   } catch (e) {
+  //     logger.severe('decodeImageFromPixels failed $e');
+  //     await image.close();
+  //   }
+  // }
+
+  void _onAnalyzed(ImageProxy imageProxy, List<MLObject> items) {
+    _imageProxy = imageProxy;
+    _items = items;
+    notifyListeners();
   }
 
   Future<void> toggleLensFacing() async {
@@ -124,13 +136,19 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> takePicture() async {
+    final authorized = await controller.requestAuthorization(
+      type: AuthorizationType.album,
+    );
+    if (!authorized) {
+      throw StateError('requestAuthorization failed.');
+    }
     _savedUri = await controller.takePictureToAlbum();
     notifyListeners();
   }
 
   @override
   void dispose() {
-    controller.clearImageAnalyzer();
+    controller.clearImageAnalysisAnalyzer();
     controller.unbind();
     _zoomStateSubscription.cancel();
     _torchStateSubscription.cancel();

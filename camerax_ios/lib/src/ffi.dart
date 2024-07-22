@@ -4,8 +4,21 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'ffi.g.dart' as ffi;
 
+extension AuthorizationTypeX on AuthorizationType {
+  ffi.AuthorizationType get ffiValue {
+    switch (this) {
+      case AuthorizationType.video:
+        return ffi.AuthorizationType.AuthorizationTypeVideo;
+      case AuthorizationType.audio:
+        return ffi.AuthorizationType.AuthorizationTypeAudio;
+      case AuthorizationType.album:
+        return ffi.AuthorizationType.AuthorizationTypeAlbum;
+    }
+  }
+}
+
 extension ScaleTypeX on ScaleType {
-  int get ffiValue {
+  ffi.ScaleType get ffiValue {
     switch (this) {
       case ScaleType.fillCenter:
         return ffi.ScaleType.ScaleTypeFillCenter;
@@ -18,7 +31,7 @@ extension ScaleTypeX on ScaleType {
 }
 
 extension LensFacingX on LensFacing {
-  int get ffiValue {
+  ffi.LensFacing get ffiValue {
     switch (this) {
       case LensFacing.back:
         return ffi.LensFacing.LensFacingBack;
@@ -44,7 +57,7 @@ extension CameraSelectorX on CameraSelector {
 }
 
 extension FlashModeX on FlashMode {
-  int get ffiValue {
+  ffi.FlashMode get ffiValue {
     switch (this) {
       case FlashMode.auto:
         return ffi.FlashMode.FlashModeAuto;
@@ -83,7 +96,7 @@ extension FFIPreviewViewX on ffi.PreviewView {
     });
   }
 
-  Future<void> setScaleTypeOnMainThread(int scaleType) async {
+  Future<void> setScaleTypeOnMainThread(ffi.ScaleType scaleType) async {
     final viewPtr = pointer;
     await runOnPlatformThread(() {
       final view = ffi.PreviewView.castFromPointer(viewPtr);

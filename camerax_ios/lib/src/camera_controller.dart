@@ -34,13 +34,23 @@ final class CameraControllerImpl
   Stream<bool?> get torchStateChanged => _torchStateChagnedController.stream;
 
   @override
-  Future<bool> requestPermissions({bool enableAudio = false}) async {
+  Future<bool> checkAuthorization({
+    required AuthorizationType type,
+  }) async {
+    final granted = ffiValue.checkAuthorizationWithType_(type.ffiValue);
+    return granted;
+  }
+
+  @override
+  Future<bool> requestAuthorization({
+    required AuthorizationType type,
+  }) async {
     final completer = Completer<bool>();
     final handler = ffi.ObjCBlock_ffiVoid_bool.listener((granted) {
       completer.complete(granted);
     });
-    ffiValue.requestPermissionsWithEnableAudio_completionHandler_(
-      enableAudio,
+    ffiValue.requestAuthorizationWithType_completionHandler_(
+      type.ffiValue,
       handler,
     );
     final granted = await completer.future;
@@ -49,7 +59,7 @@ final class CameraControllerImpl
 
   @override
   Future<void> bind() async {
-    ffiValue.bindToLifecycle();
+    ffiValue.bind();
   }
 
   @override
@@ -157,13 +167,13 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<void> setImageAnalyzer(ImageAnalyzer analyzer) {
+  Future<void> setImageAnalysisAnalyzer(ImageAnalyzer analyzer) {
     // TODO: implement setImageAnalyzer
     throw UnimplementedError();
   }
 
   @override
-  Future<void> clearImageAnalyzer() {
+  Future<void> clearImageAnalysisAnalyzer() {
     // TODO: implement clearImageAnalyzer
     throw UnimplementedError();
   }

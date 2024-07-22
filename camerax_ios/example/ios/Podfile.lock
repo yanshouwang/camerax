@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   camerax_ios: 9213e2809365aa5f11ae8363c86e8e04c8f5c472
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
-  objective_c: 77e887b5ba1827970907e10e832eec1683f3431d
+  objective_c: aedd8e7e00e2d8940f8ff085155bb7727fa88e93
   photo_gallery: 9f95e57747cd22c10676ece3660d1ffe6c603ee5
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796

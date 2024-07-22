@@ -53,8 +53,17 @@ class CameraViewModel extends ViewModel
       _torchState = torchState;
       notifyListeners();
     });
-    await _updateThumbnail();
-    await _controller.requestPermissions();
+    for (var type in AuthorizationType.values) {
+      var authorized = await controller.checkAuthorization(type: type);
+      if (authorized) {
+        continue;
+      }
+      authorized = await controller.requestAuthorization(type: type);
+      if (authorized) {
+        continue;
+      }
+      logger.warning('$type is unahthorized.');
+    }
     await _controller.setCameraSelector(CameraSelector.back);
     _zoomState = await _controller.getZoomState();
     _torchState = await _controller.getTorchState();
@@ -69,6 +78,7 @@ isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
     await _controller.bind();
+    await _updateThumbnail();
   }
 
   Future<void> _updateThumbnail() async {

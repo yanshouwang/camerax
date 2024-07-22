@@ -7,8 +7,8 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 /** CameraXAndroidPlugin */
 class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        val viewRegistry = binding.platformViewRegistry
-        viewRegistry.registerViewFactory("hebei.dev/PreviewView", PreviewViewFactory)
+        val registry = binding.platformViewRegistry
+        registry.registerViewFactory("hebei.dev/PreviewView", PreviewViewFactory)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {

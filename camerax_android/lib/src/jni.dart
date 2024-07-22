@@ -1,12 +1,14 @@
 // ignore_for_file: camel_case_extensions
 
+import 'dart:math';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:hybrid_os/hybrid_os.dart';
 import 'package:jni/jni.dart';
 
-import 'jni_image_proxy.dart';
+import 'image_proxy.dart';
 import 'jni.g.dart' as jni;
 
 abstract class JNI {
@@ -104,8 +106,83 @@ extension FlashModeX on FlashMode {
   }
 }
 
+extension MLObjectTypeX on MLObjectType {
+  int get jniValue {
+    switch (this) {
+      case MLObjectType.codabar:
+        return jni.Barcode.FORMAT_CODABAR;
+      case MLObjectType.code39:
+        return jni.Barcode.FORMAT_CODE_39;
+      case MLObjectType.code93:
+        return jni.Barcode.FORMAT_CODE_93;
+      case MLObjectType.code128:
+        return jni.Barcode.FORMAT_CODE_128;
+      case MLObjectType.ean8:
+        return jni.Barcode.FORMAT_EAN_8;
+      case MLObjectType.ean13:
+        return jni.Barcode.FORMAT_EAN_13;
+      case MLObjectType.itf14:
+        return jni.Barcode.FORMAT_ITF;
+      case MLObjectType.upcE:
+        return jni.Barcode.FORMAT_UPC_E;
+      case MLObjectType.aztec:
+        return jni.Barcode.FORMAT_AZTEC;
+      case MLObjectType.dataMatrix:
+        return jni.Barcode.FORMAT_DATA_MATRIX;
+      case MLObjectType.pdf417:
+        return jni.Barcode.FORMAT_PDF417;
+      case MLObjectType.qr:
+        return jni.Barcode.FORMAT_QR_CODE;
+      default:
+        return jni.Barcode.FORMAT_UNKNOWN;
+    }
+  }
+}
+
+extension MLObjectTypeListX on List<MLObjectType> {
+  JList<jni.Detector> get jniValue {
+    final detectors = <jni.Detector>[];
+    final formats = map((type) => type.jniValue)
+        .where((format) => format != jni.Barcode.FORMAT_UNKNOWN)
+        .toList();
+    if (formats.isNotEmpty) {
+      final format = formats.first;
+      final moreFormats = JArray(jint.type, formats.length - 1);
+      moreFormats.setRange(0, formats.length - 1, formats, 1);
+      final options = jni.BarcodeScannerOptions_Builder()
+          .setBarcodeFormats(format, moreFormats)
+          .build();
+      final detector = jni.BarcodeScanning.getClient1(options).castTo(
+        jni.Detector.type(
+          JList.type(jni.Barcode.type),
+        ),
+      );
+      detectors.add(detector);
+    }
+    for (var type in this) {
+      switch (type) {
+        case MLObjectType.face:
+          final options = jni.FaceDetectorOptions_Builder()
+              .setPerformanceMode(
+                  jni.FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
+              .enableTracking()
+              .build();
+          final detector = jni.FaceDetection.getClient1(options).castTo(
+            jni.Detector.type(
+              JList.type(jni.Face.type),
+            ),
+          );
+          detectors.add(detector);
+        default:
+          break;
+      }
+    }
+    return detectors.toJList(jni.Detector.type(JObject.type));
+  }
+}
+
 extension intX on int {
-  FlashMode get dartFlashMode {
+  FlashMode get flashMode {
     switch (this) {
       case jni.ImageCapture.FLASH_MODE_AUTO:
         return FlashMode.auto;
@@ -117,9 +194,42 @@ extension intX on int {
         throw ArgumentError.value(this);
     }
   }
+
+  MLObjectType get mlObjectType {
+    switch (this) {
+      case jni.Barcode.FORMAT_CODABAR:
+        return MLObjectType.codabar;
+      case jni.Barcode.FORMAT_CODE_39:
+        return MLObjectType.code39;
+      case jni.Barcode.FORMAT_CODE_93:
+        return MLObjectType.code93;
+      case jni.Barcode.FORMAT_CODE_128:
+        return MLObjectType.code128;
+      case jni.Barcode.FORMAT_EAN_8:
+        return MLObjectType.ean8;
+      case jni.Barcode.FORMAT_EAN_13:
+        return MLObjectType.ean13;
+      case jni.Barcode.FORMAT_ITF:
+        return MLObjectType.itf14;
+      case jni.Barcode.FORMAT_UPC_A:
+        return MLObjectType.upcA;
+      case jni.Barcode.FORMAT_UPC_E:
+        return MLObjectType.upcE;
+      case jni.Barcode.FORMAT_AZTEC:
+        return MLObjectType.aztec;
+      case jni.Barcode.FORMAT_DATA_MATRIX:
+        return MLObjectType.dataMatrix;
+      case jni.Barcode.FORMAT_PDF417:
+        return MLObjectType.pdf417;
+      case jni.Barcode.FORMAT_QR_CODE:
+        return MLObjectType.qr;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
 }
 
-extension JNIZoomStateX on jni.ZoomState {
+extension JZoomStateX on jni.ZoomState {
   ZoomState? get dartValue {
     if (isNull) {
       return null;
@@ -148,15 +258,15 @@ extension JIntegerX on JInteger {
   }
 }
 
-extension JNIImageProxyX on jni.ImageProxy {
+extension JImageProxyX on jni.ImageProxy {
   ImageProxy get dartValue {
-    return JNIImageProxy(
+    return JImageProxy(
       jniValue: this,
     );
   }
 }
 
-extension JNIUriX on jni.Uri {
+extension JUriX on jni.Uri {
   Uri get dartValue {
     final contentResolver = JNI.context.getContentResolver();
     final projection = JArray(JString.type, 1);
@@ -179,7 +289,7 @@ extension JNIUriX on jni.Uri {
   }
 }
 
-extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
+extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
   Future<void> bindToLifecycleOnMainThread(jni.LifecycleOwner lifecycleOwner) {
     return runOnPlatformThread(() => bindToLifecycle(lifecycleOwner));
   }
@@ -314,7 +424,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
   }
 }
 
-extension JNILiveDataX<T extends JObject> on jni.LiveData<T> {
+extension JLiveDataX<T extends JObject> on jni.LiveData<T> {
   Future<void> observeOnMainThread(
     jni.LifecycleOwner lifecycleOwner,
     JObjType<T> observerT,
@@ -337,7 +447,7 @@ extension JNILiveDataX<T extends JObject> on jni.LiveData<T> {
   }
 }
 
-extension JNIPreviewViewX on jni.PreviewView {
+extension JPreviewViewX on jni.PreviewView {
   Future<void> setControllerOnMainThread(
     jni.CameraController cameraController,
   ) {
@@ -346,5 +456,80 @@ extension JNIPreviewViewX on jni.PreviewView {
 
   Future<void> setScaleTypeOnMainThread(jni.PreviewView_ScaleType scaleType) {
     return runOnPlatformThread(() => setScaleType(scaleType));
+  }
+}
+
+extension JBarcodeX on jni.Barcode {
+  MLCodeObject toDartValue({
+    required DateTime time,
+    required Duration duration,
+  }) {
+    final type = getFormat().mlObjectType;
+    final bounds = getBoundingBox().dartValue;
+    final corners = <Point<int>>[];
+    final cornerPoints = getCornerPoints();
+    for (var i = 0; i < cornerPoints.length; i++) {
+      final cornerPoint = cornerPoints[i];
+      final corner = cornerPoint.dartValue;
+      corners.add(corner);
+    }
+    final rawBytes = getRawBytes();
+    final value = rawBytes.isNull ? null : rawBytes.dartValue;
+    final stringValue = getDisplayValue().toDartString();
+    return MLCodeObject(
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      corners: corners,
+      value: value,
+      stringValue: stringValue,
+    );
+  }
+}
+
+extension JFaceX on jni.Face {
+  MLFaceObject toDartValue({
+    required DateTime time,
+    required Duration duration,
+  }) {
+    final bounds = getBoundingBox().dartValue;
+    final id = getTrackingId().intValue();
+    final rollAngle = getHeadEulerAngleZ();
+    final yawAngle = getHeadEulerAngleY();
+    final pitchAngle = getHeadEulerAngleX();
+    return MLFaceObject(
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      id: id,
+      rollAngle: rollAngle,
+      yawAngle: yawAngle,
+      pitchAngle: pitchAngle,
+    );
+  }
+}
+
+extension JByteArrayX on JArray<jbyte> {
+  Uint8List get dartValue {
+    final elements = getRange(0, length);
+    return Uint8List.fromList(elements);
+  }
+}
+
+extension JRectX on jni.Rect {
+  Rectangle<int> get dartValue {
+    return Rectangle(
+      left,
+      top,
+      width(),
+      height(),
+    );
+  }
+}
+
+extension JPointX on jni.Point {
+  Point<int> get dartValue {
+    return Point(x, y);
   }
 }

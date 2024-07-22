@@ -4,7 +4,7 @@ import 'package:hybrid_logging/hybrid_logging.dart';
 
 import 'authorization_type.dart';
 import 'camera_selector.dart';
-import 'camerax.dart';
+import 'camerax_plugin.dart';
 import 'flash_mode.dart';
 import 'image_analyzer.dart';
 import 'zoom_state.dart';
@@ -32,8 +32,8 @@ abstract interface class CameraController implements LogController {
   Future<void> setLinearZoom(double linearZoom);
   Future<bool?> getTorchState();
   Future<void> enableTorch(bool torchEnabled);
-  Future<void> setImageAnalyzer(ImageAnalyzer analyzer);
-  Future<void> clearImageAnalyzer();
+  Future<void> setImageAnalysisAnalyzer(ImageAnalyzer analyzer);
+  Future<void> clearImageAnalysisAnalyzer();
   Future<FlashMode> getImageCaptureFlashMode();
   Future<void> setImageCaptureFlashMode(FlashMode flashMode);
   Future<Uint8List> takePictureToMemory();

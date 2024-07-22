@@ -5,7 +5,7 @@ import 'package:jni/jni.dart';
 
 import 'jni.g.dart' as jni;
 
-final class JNIImageProxy implements ImageProxy {
+final class JImageProxy implements ImageProxy {
   final jni.ImageProxy jniValue;
   @override
   final int width;
@@ -14,7 +14,7 @@ final class JNIImageProxy implements ImageProxy {
   @override
   final Uint8List data;
 
-  JNIImageProxy({
+  JImageProxy({
     required this.jniValue,
   })  : width = jniValue.getWidth(),
         height = jniValue.getHeight(),

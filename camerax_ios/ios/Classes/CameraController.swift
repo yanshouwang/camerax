@@ -12,6 +12,7 @@ import Photos
 @objc public class CameraController: NSObject {
     let session: AVCaptureSession
     private var videoDeviceInput: AVCaptureDeviceInput?
+    private var audioDeviceInput: AVCaptureDeviceInput?
     private var tapToFocusEnabled: Bool
     private var pinchToZoomEnabled: Bool
     @objc private dynamic var zoomState: ZoomState?
@@ -25,7 +26,7 @@ import Photos
     private var subjectAreaDidChangeObserver: Any?
     private let capturePhotoOutput: AVCapturePhotoOutput
     private let capturePhotoSettings: AVCapturePhotoSettings
-    private var capturePhotoDelegates: [AVCapturePhotoCaptureDelegate]
+    private var capturePhotoDelegate: AVCapturePhotoCaptureDelegate?
     @objc public var imageCaptureFlashMode: FlashMode {
         get { capturePhotoSettings.flashMode.xValue }
         set { capturePhotoSettings.flashMode = newValue.avfValue }
@@ -37,26 +38,44 @@ import Photos
         pinchToZoomEnabled = true
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoSettings = AVCapturePhotoSettings()
-        capturePhotoDelegates = []
         super.init()
         session.sessionPreset = .photo
         try? addVideoDeviceInput(cameraSelector: .back)
+        try? addAudioDeviceInput()
         try? addCapturePhotoOutput()
     }
     
-    @objc public func requestPermissions(enableAudio: Bool, completionHandler handler: @escaping (Bool) -> Void) {
-        AVCaptureDevice.requestAccess(for: .video) { videoGranted in
-            if enableAudio {
-                AVCaptureDevice.requestAccess(for: .audio) { audioGranted in
-                    handler(videoGranted && audioGranted)
-                }
+    @objc public func checkAuthorization(type: AuthorizationType) -> Bool {
+        switch type {
+        case .video:
+            return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
+        case .audio:
+            return AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
+        case .album:
+            if #available(iOS 14, *) {
+                return PHPhotoLibrary.authorizationStatus(for: .readWrite) == .authorized
             } else {
-                handler(videoGranted)
+                return PHPhotoLibrary.authorizationStatus() == .authorized
             }
         }
     }
     
-    @objc public func bindToLifecycle() {
+    @objc public func requestAuthorization(type: AuthorizationType, completionHandler handler: @escaping (Bool) -> Void) {
+        switch type {
+        case .video:
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: handler)
+        case .audio:
+            AVCaptureDevice.requestAccess(for: .audio, completionHandler: handler)
+        case .album:
+            if #available(iOS 14, *) {
+                PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in handler(status == .authorized || status == .limited) }
+            } else {
+                PHPhotoLibrary.requestAuthorization() { status in handler(status == .authorized) }
+            }
+        }
+    }
+    
+    @objc public func bind() {
         session.startRunning()
     }
     
@@ -65,11 +84,12 @@ import Photos
     }
     
     @objc public func hasCamera(cameraSelector: CameraSelector) -> Bool {
-        guard let deviceType = getVideoDeviceType(cameraSelector: cameraSelector) else {
+        if let videoDeviceType = getVideoDeviceType(cameraSelector: cameraSelector),
+           let videoDevice = AVCaptureDevice.default(videoDeviceType, for: .video, position: cameraSelector.lensFacing.avfValue) {
+            return true
+        } else {
             return false
         }
-        let position = cameraSelector.lensFacing.avfValue
-        return AVCaptureDevice.default(deviceType, for: .video, position: position) != nil
     }
     
     @objc public func setCameraSelector(_ cameraSelector: CameraSelector) throws {
@@ -117,7 +137,7 @@ import Photos
     
     @objc public func setZoomRatio(_ zoomRatio: Double) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
-            throw CameraError.videoDeviceInputNil
+            throw CameraError.deviceNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
@@ -127,7 +147,7 @@ import Photos
     
     @objc public func setLinearZoom(_ linearZoom: Double) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
-            throw CameraError.videoDeviceInputNil
+            throw CameraError.deviceNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
@@ -157,7 +177,7 @@ import Photos
     
     @objc public func enableTorch(_ torchEnabled: Bool) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
-            throw CameraError.videoDeviceInputNil
+            throw CameraError.deviceNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
@@ -192,32 +212,31 @@ import Photos
     }
     
     @objc public func takePictureToAlbum(name: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
-        requestPhotoLibraryAuthorization() { [self] status in
-            if status == .authorized {
-                let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-                //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
-                //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
-                //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
-                //        }
-                //        if #available(iOS 16.0, *) {
-                //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
-                //        }
-                //        settings.flashMode = capturePhotoSettings.flashMode
-                //        if #available(iOS 13.0, *) {
-                //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-                //        }
-                let delegate = CameraCapturePhotoCaptureDelegate() { [self] photo, error in
-                    if let error {
-                        handler(nil, error)
-                    } else {
-                        savePhoto(photo, name: name, completionHandler: handler)
-                    }
+        if capturePhotoDelegate == nil {
+            let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
+            //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
+            //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
+            //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
+            //        }
+            //        if #available(iOS 16.0, *) {
+            //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
+            //        }
+            //        settings.flashMode = capturePhotoSettings.flashMode
+            //        if #available(iOS 13.0, *) {
+            //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
+            //        }
+            let delegate = CameraCapturePhotoCaptureDelegate() { [self] photo, error in
+                capturePhotoDelegate = nil
+                if let error {
+                    handler(nil, error)
+                } else {
+                    savePhoto(photo, name: name, completionHandler: handler)
                 }
-                capturePhotoDelegates.append(delegate)
-                capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
-            } else {
-                handler(nil, CameraError.unauthorized)
             }
+            capturePhotoDelegate = delegate
+            capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
+        } else {
+            handler(nil, CameraError.capturePhotoDelegateNotNil)
         }
     }
     
@@ -230,17 +249,18 @@ import Photos
     }
     
     private func addVideoDeviceInput(cameraSelector: CameraSelector) throws {
-        guard let deviceType = getVideoDeviceType(cameraSelector: cameraSelector),
-              let videoDevice = AVCaptureDevice.default(deviceType, for: .video, position: cameraSelector.lensFacing.avfValue),
-              let videoDeviceInput = try? AVCaptureDeviceInput.init(device: videoDevice) else {
-            throw CameraError.videoDeviceInputNil
+        guard let videoDeviceType = getVideoDeviceType(cameraSelector: cameraSelector),
+              let videoDevice = AVCaptureDevice.default(videoDeviceType, for: .video, position: cameraSelector.lensFacing.avfValue),
+              let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
+              session.canAddInput(videoDeviceInput) else {
+            throw CameraError.deviceNil
         }
         guard session.canAddInput(videoDeviceInput) else {
             throw CameraError.cannotAddInput
         }
         session.addInput(videoDeviceInput)
         self.videoDeviceInput = videoDeviceInput
-//        try? setZoomRatio(1.0)
+        try? setZoomRatio(1.0)
         minAvailableVideoZoomFactorObservation = videoDevice.observe(\.minAvailableVideoZoomFactor, options: .new) { [self] _,_ in onZoomStateChanged() }
         maxAvailableVideoZoomFactorObservation = videoDevice.observe(\.maxAvailableVideoZoomFactor, options: .new) { [self] _,_ in onZoomStateChanged() }
         videoZoomFactorObservation = videoDevice.observe(\.videoZoomFactor, options: [.initial, .new]) { [self] _,_ in onZoomStateChanged() }
@@ -265,6 +285,18 @@ import Photos
             if #available(iOS 17.0, *) { return .external }
             else { return nil }
         }
+    }
+    
+    func addAudioDeviceInput() throws {
+        guard let audioDevice = AVCaptureDevice.default(for: .audio),
+              let audioDeviceInput = try? AVCaptureDeviceInput(device: audioDevice) else {
+            throw CameraError.deviceNil
+        }
+        guard session.canAddInput(audioDeviceInput) else {
+            throw CameraError.cannotAddInput
+        }
+        session.addInput(audioDeviceInput)
+        self.audioDeviceInput = audioDeviceInput
     }
     
     func focusAndExpose(devicePoint: CGPoint, continuous: Bool) throws {
@@ -310,24 +342,6 @@ import Photos
         }
         let videoDevice = videoDeviceInput.device
         torchState = TorchState(value: videoDevice.isTorchActive)
-    }
-    
-    private func requestPhotoLibraryAuthorization(handler: @escaping (PHAuthorizationStatus) -> Void) {
-        if #available(iOS 14, *) {
-            let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
-            if status == .notDetermined {
-                PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in handler(status) }
-            } else {
-                handler(status)
-            }
-        } else {
-            let status = PHPhotoLibrary.authorizationStatus()
-            if status == .notDetermined {
-                PHPhotoLibrary.requestAuthorization() { status in handler(status) }
-            } else {
-                handler(status)
-            }
-        }
     }
     
     private func savePhoto(_ photo: AVCapturePhoto, name: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {

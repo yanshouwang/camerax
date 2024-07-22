@@ -20,13 +20,13 @@ dependencies:
   logging: ^1.2.0
   hybrid_logging: ^1.0.0
   ffi: ^2.1.2
-  objective_c: ^1.0.1
+  objective_c: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
-  ffigen: ^12.0.0
+  flutter_lints: ^4.0.0
+  ffigen: ^13.0.0
 
 flutter:
   plugin:
