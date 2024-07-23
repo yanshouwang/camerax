@@ -97,6 +97,29 @@ class CameraView extends StatelessWidget {
                     viewModel.setZoomRatio(value).ignore();
                   },
                 ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CupertinoButton(
+                    child: Text('Photo'),
+                    onPressed: () {
+                      viewModel.togglePhotoMode();
+                    },
+                  ),
+                  CupertinoButton(
+                    child: Text('Code'),
+                    onPressed: () {
+                      viewModel.toggleCodeMode();
+                    },
+                  ),
+                  CupertinoButton(
+                    child: Text('Face'),
+                    onPressed: () {
+                      viewModel.toggleFaceMode();
+                    },
+                  ),
+                ],
+              ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 40.0),
                 child: Row(

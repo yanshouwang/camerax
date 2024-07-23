@@ -69,34 +69,8 @@ flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
-    final analyzer = MLAnalyzer(
-      types: MLObjectType.values,
-      onAnalyzed: _onAnalyzed,
-    );
-    await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }
-
-  // @override
-  // void analyze(ImageProxy image) async {
-  //   logger.info(image);
-  //   try {
-  //     decodeImageFromPixels(
-  //       image.data,
-  //       image.width,
-  //       image.height,
-  //       PixelFormat.rgba8888,
-  //       (value) async {
-  //         _image = value;
-  //         notifyListeners();
-  //         await image.close();
-  //       },
-  //     );
-  //   } catch (e) {
-  //     logger.severe('decodeImageFromPixels failed $e');
-  //     await image.close();
-  //   }
-  // }
 
   void _onAnalyzed(ImageProxy imageProxy, List<MLObject> items) {
     _imageProxy = imageProxy;
@@ -143,6 +117,61 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
       throw StateError('requestAuthorization failed.');
     }
     _savedUri = await controller.takePictureToAlbum();
+    notifyListeners();
+  }
+
+  Future<void> togglePhotoMode() async {
+    await _clearImageAnalysisAnalyzer();
+  }
+
+  Future<void> toggleCodeMode() async {
+    await _clearImageAnalysisAnalyzer();
+    final analyzer = MLAnalyzer(
+      types: [
+        // Barcodes
+        MLObjectType.codabar,
+        MLObjectType.code39,
+        MLObjectType.code39Mode43,
+        MLObjectType.code93,
+        MLObjectType.code128,
+        MLObjectType.ean8,
+        MLObjectType.ean13,
+        MLObjectType.gs1DataBar,
+        MLObjectType.gs1DataBarExpanded,
+        MLObjectType.gs1DataBarLimited,
+        MLObjectType.interleave2of5,
+        MLObjectType.itf14,
+        MLObjectType.upcA,
+        MLObjectType.upcE,
+        // 2D Codes
+        MLObjectType.aztec,
+        MLObjectType.dataMatrix,
+        MLObjectType.microPDF417,
+        MLObjectType.microQR,
+        MLObjectType.pdf417,
+        MLObjectType.qr,
+      ],
+      onAnalyzed: _onAnalyzed,
+    );
+    await controller.setImageAnalysisAnalyzer(analyzer);
+  }
+
+  Future<void> toggleFaceMode() async {
+    await _clearImageAnalysisAnalyzer();
+    final analyzer = MLAnalyzer(
+      types: [
+        // Faces
+        MLObjectType.face,
+      ],
+      onAnalyzed: _onAnalyzed,
+    );
+    await controller.setImageAnalysisAnalyzer(analyzer);
+  }
+
+  Future<void> _clearImageAnalysisAnalyzer() async {
+    await controller.clearImageAnalysisAnalyzer();
+    _imageProxy = null;
+    _items = [];
     notifyListeners();
   }
 
