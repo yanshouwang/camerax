@@ -1,26 +1,48 @@
 import 'dart:io';
 
+import 'package:camerax_android_example/models.dart';
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-class CameraView extends StatelessWidget {
+class CameraView extends StatefulWidget {
   const CameraView({super.key});
+
+  @override
+  State<CameraView> createState() => _CameraViewState();
+}
+
+class _CameraViewState extends State<CameraView> {
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(
+      initialPage: 0,
+      viewportFraction: 1 / 5,
+    );
+  }
+
+  Offset? _onPanStartPosition;
+  double? _onPanUpdateDx;
 
   @override
   Widget build(BuildContext context) {
     final viewModel = ViewModel.of<CameraViewModel>(context);
+    final mode = viewModel.mode;
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
     final imageProxy = viewModel.imageProxy;
     final items = viewModel.items;
+    const pageDuration = Duration(milliseconds: 300);
+    const pageCurve = Curves.ease;
     return CupertinoPageScaffold(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -76,7 +98,7 @@ class CameraView extends StatelessWidget {
                 ),
                 if (imageProxy != null && items.isNotEmpty)
                   FittedBox(
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.cover,
                     child: CustomPaint(
                       size: Size(
                         imageProxy.height.toDouble(),
@@ -105,28 +127,162 @@ class CameraView extends StatelessWidget {
           ),
           Column(
             children: [
-              const SizedBox(
-                height: 48.0,
-                // child: DefaultTabController(
-                //   length: 3,
-                //   child: TabBarView(
-                //     viewportFraction: 1 / 5,
-                //     // physics: BouncingScrollPhysics(),
-                //     children: [
-                //       Center(child: Text('Photo')),
-                //       Center(child: Text('Code')),
-                //       Center(child: Text('Face')),
-                //     ],
-                //   ),
-                // ),
-                child: WheelView(
-                  scrollDirection: Axis.horizontal,
-                  itemExtent: 100.0,
-                  children: [
-                    Text('Photo'),
-                    Text('Code'),
-                    Text('Face'),
-                  ],
+              GestureDetector(
+                onPanStart: (details) {
+                  debugPrint('onPanStart: ${details.localPosition}');
+                  _onPanStartPosition = details.localPosition;
+                },
+                onPanDown: (details) {
+                  debugPrint('onPanDown ${details.localPosition}');
+                },
+                onPanUpdate: (details) {
+                  debugPrint('onPanUpdate: ${details.delta.dx}');
+                  final startPosition = _onPanStartPosition;
+                  if (startPosition == null) {
+                    return;
+                  }
+                  final previousDx = _onPanUpdateDx;
+                  final dx = details.delta.dx;
+                  if (previousDx != null &&
+                      previousDx != 0.0 &&
+                      dx != 0.0 &&
+                      dx.sign != previousDx.sign) {
+                    debugPrint(
+                        'onPanUpdate null ${dx.sign}, ${previousDx.sign}');
+                    _onPanStartPosition = null;
+                    _onPanUpdateDx = null;
+                  } else {
+                    _onPanUpdateDx = dx;
+                    final updatePosition = details.localPosition;
+                    final distance =
+                        (updatePosition.dx - startPosition.dx).abs();
+                    debugPrint('onPanUpdate distance $distance');
+                    if (distance > 20.0) {
+                      final page = _pageController.page;
+                      if (page == null) {
+                        return;
+                      }
+                      if (dx > 0 && page > 0) {
+                        _pageController.previousPage(
+                          duration: pageDuration,
+                          curve: pageCurve,
+                        );
+                      } else if (dx < 0 && page < 2) {
+                        _pageController.nextPage(
+                          duration: pageDuration,
+                          curve: pageCurve,
+                        );
+                      }
+                      _onPanStartPosition = null;
+                      _onPanUpdateDx = null;
+                    }
+                  }
+                },
+                onPanEnd: (details) {
+                  debugPrint('onPanEnd: ${details.velocity}');
+                  _onPanStartPosition = null;
+                  _onPanUpdateDx = null;
+                },
+                onPanCancel: () {
+                  debugPrint('onPanCancel');
+                  _onPanStartPosition = null;
+                  _onPanUpdateDx = null;
+                },
+                behavior: HitTestBehavior.opaque,
+                child: SizedBox(
+                  height: 48.0,
+                  child: PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) {
+                      switch (index) {
+                        case 0:
+                          viewModel.setMode(CameraMode.takePicture);
+                          break;
+                        case 1:
+                          viewModel.setMode(CameraMode.scanCode);
+                          break;
+                        case 2:
+                          viewModel.setMode(CameraMode.scanFace);
+                          break;
+                        default:
+                      }
+                    },
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _pageController.animateToPage(
+                            0,
+                            duration: pageDuration,
+                            curve: pageCurve,
+                          );
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Photo',
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.takePicture
+                                      ? CupertinoTheme.of(context).primaryColor
+                                      : null,
+                                ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _pageController.animateToPage(
+                            1,
+                            duration: pageDuration,
+                            curve: pageCurve,
+                          );
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Code',
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.scanCode
+                                      ? CupertinoTheme.of(context).primaryColor
+                                      : null,
+                                ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _pageController.animateToPage(
+                            2,
+                            duration: pageDuration,
+                            curve: pageCurve,
+                          );
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Face',
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.scanFace
+                                      ? CupertinoTheme.of(context).primaryColor
+                                      : null,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Row(
@@ -227,6 +383,12 @@ class CameraView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 }
 
 class ItemsPainter extends CustomPainter {
@@ -249,6 +411,7 @@ class ItemsPainter extends CustomPainter {
       ..color = color;
     for (var item in items) {
       if (item is MLCodeObject) {
+        debugPrint('MLCode ${item.corners}');
         final points = item.corners
             .map((point) => Offset(
                   point.x.toDouble(),

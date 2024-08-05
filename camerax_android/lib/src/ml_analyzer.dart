@@ -71,8 +71,9 @@ final class JMLAnalyzer with TypeLogger implements MLAnalyzer {
 extension JDetectorX on jni.Detector {
   Future<JObject> detect(jni.ImageProxy imageProxy) async {
     final image = imageProxy.getImage();
-    final imageInfo = imageProxy.getImageInfo();
-    final rotationDegrees = imageInfo.getRotationDegrees();
+    // final imageInfo = imageProxy.getImageInfo();
+    // final rotationDegrees = imageInfo.getRotationDegrees();
+    const rotationDegrees = 90;
     final completer = Completer<JObject>();
     final task = process1(image, rotationDegrees);
     final onSuccessListener = jni.OnSuccessListener.implement(

@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:camerax_android_example/models.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 
 class CameraViewModel extends ViewModel with TypeLogger {
   final CameraController controller;
+  CameraMode _mode;
   LensFacing _lensFacing;
   ZoomState? _zoomState;
   bool? _torchState;
@@ -19,6 +21,7 @@ class CameraViewModel extends ViewModel with TypeLogger {
 
   CameraViewModel()
       : controller = CameraController(),
+        _mode = CameraMode.takePicture,
         _lensFacing = LensFacing.back,
         _zoomState = null,
         _flashMode = null,
@@ -27,6 +30,7 @@ class CameraViewModel extends ViewModel with TypeLogger {
     _initialize();
   }
 
+  CameraMode get mode => _mode;
   LensFacing get lensFacing => _lensFacing;
   ZoomState? get zoomState => _zoomState;
   bool? get torchState => _torchState;
@@ -120,11 +124,29 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
   }
 
-  Future<void> togglePhotoMode() async {
+  Future<void> setMode(CameraMode mode) async {
+    switch (mode) {
+      case CameraMode.takePicture:
+        await _setTakePictureMode();
+        break;
+      case CameraMode.scanCode:
+        await _setScanCodeMode();
+        break;
+      case CameraMode.scanFace:
+        await _setScanFaceMode();
+        break;
+      default:
+        break;
+    }
+    _mode = mode;
+    notifyListeners();
+  }
+
+  Future<void> _setTakePictureMode() async {
     await _clearImageAnalysisAnalyzer();
   }
 
-  Future<void> toggleCodeMode() async {
+  Future<void> _setScanCodeMode() async {
     await _clearImageAnalysisAnalyzer();
     final analyzer = MLAnalyzer(
       types: [
@@ -156,7 +178,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.setImageAnalysisAnalyzer(analyzer);
   }
 
-  Future<void> toggleFaceMode() async {
+  Future<void> _setScanFaceMode() async {
     await _clearImageAnalysisAnalyzer();
     final analyzer = MLAnalyzer(
       types: [

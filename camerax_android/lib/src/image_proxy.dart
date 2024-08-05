@@ -23,5 +23,6 @@ final class JImageProxy implements ImageProxy {
   @override
   Future<void> close() async {
     jniValue.close();
+    jniValue.release();
   }
 }
