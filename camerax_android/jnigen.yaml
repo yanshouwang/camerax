@@ -27,15 +27,15 @@ classes:
   - androidx.core.content.ContextCompat
   - androidx.core.util.Consumer
   - androidx.camera.core.CameraSelector
-  - androidx.camera.core.ImageAnalysis
-  - androidx.camera.core.ImageCapture
+  # - androidx.camera.core.ImageAnalysis
+  # - androidx.camera.core.ImageCapture
   - androidx.camera.core.ImageInfo
   - androidx.camera.core.ImageProxy
   - androidx.camera.core.TorchState
   - androidx.camera.core.ZoomState
   - androidx.camera.view.CameraController
   - androidx.camera.view.LifecycleCameraController
-  - androidx.camera.view.PreviewView
+  # - androidx.camera.view.PreviewView
   - androidx.camera.mlkit.vision.MlKitAnalyzer
   - androidx.lifecycle.LifecycleOwner
   - androidx.lifecycle.LiveData
@@ -58,17 +58,11 @@ classes:
   - com.google.mlkit.vision.face.FaceDetectorOptions
   - com.google.mlkit.vision.face.FaceLandmark
   - com.google.mlkit.vision.interfaces.Detector
-  - com.google.mlkit.vision.label
-  - com.google.mlkit.vision.objects
-  - com.google.mlkit.vision.pose
-  - com.google.mlkit.vision.segmentation
-  - com.google.mlkit.vision.text
   - java.lang.Runnable
   - java.util.concurrent.Executor
   - java.util.concurrent.Executors
   - java.util.concurrent.Future
-  - dev.hebei.camerax_android.OnImageCapturedCallback
-  - dev.hebei.camerax_android.OnImageCapturedCallbackImpl
-  - dev.hebei.camerax_android.PermissionsManager
-  - dev.hebei.camerax_android.PermissionsResultCallback
-  - dev.hebei.camerax_android.PreviewViewFactory
+  - dev.hebei.camerax_android.MyImageAnalysis
+  - dev.hebei.camerax_android.MyImageCapture
+  - dev.hebei.camerax_android.MyPermissionsManager
+  - dev.hebei.camerax_android.MyPreviewView

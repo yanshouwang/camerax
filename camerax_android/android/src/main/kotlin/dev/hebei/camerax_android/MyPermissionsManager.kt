@@ -1,13 +1,12 @@
 package dev.hebei.camerax_android
 
 import android.content.pm.PackageManager
-import androidx.annotation.Keep
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener
 
-object PermissionsManager {
+object MyPermissionsManager {
     private const val REQUEST_CODE = 1949
     private val listener: RequestPermissionsResultListener = RequestPermissionsResultListener { requestCode, _, grantResults ->
         if (requestCode != REQUEST_CODE) {
@@ -23,9 +22,8 @@ object PermissionsManager {
 
     }
     private var binding: ActivityPluginBinding? = null
-    private var callback: PermissionsResultCallback? = null
+    private var callback: MyPermissionsResultCallback? = null
 
-    @Keep
     fun checkPermissions(permissions: Array<String>): Boolean {
         val binding = this.binding ?: throw IllegalStateException("Activity binding is null.")
         val activity = binding.activity
@@ -34,8 +32,7 @@ object PermissionsManager {
         }
     }
 
-    @Keep
-    fun requestPermissions(permissions: Array<String>, callback: PermissionsResultCallback) {
+    fun requestPermissions(permissions: Array<String>, callback: MyPermissionsResultCallback) {
         if (this.callback != null) {
             throw IllegalStateException("Another request is ongoing and multiple requests cannot be handled at once.")
         }
@@ -45,9 +42,17 @@ object PermissionsManager {
         ActivityCompat.requestPermissions(activity, permissions, REQUEST_CODE)
     }
 
-    internal fun updateActivity(binding: ActivityPluginBinding?) {
-        this.binding?.removeRequestPermissionsResultListener(listener)
-        binding?.addRequestPermissionsResultListener(listener)
+    internal fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        binding.addRequestPermissionsResultListener(listener)
         this.binding = binding
+    }
+
+    internal fun onDetachedFromActivity() {
+        this.binding?.removeRequestPermissionsResultListener(listener)
+        this.binding = null
+    }
+
+    interface MyPermissionsResultCallback {
+        fun onPermissionsResult(granted: Boolean)
     }
 }

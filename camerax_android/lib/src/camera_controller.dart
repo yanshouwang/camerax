@@ -7,6 +7,7 @@ import 'package:jni/jni.dart';
 
 import 'jni.dart';
 import 'jni.g.dart' as jni;
+import 'ml_analyzer.dart';
 
 final class JCameraController
     with TypeLogger, LoggerController
@@ -24,10 +25,12 @@ final class JCameraController
 
   JCameraController()
       : jniValue = jni.LifecycleCameraController(JNI.context)
+          // ..setImageAnalysisOutputImageFormatOnMainThread(
+          //     jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
           ..setImageAnalysisBackpressureStrategyOnMainThread(
-              jni.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+              jni.MyImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
           ..setImageCaptureModeOnMainThread(
-              jni.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY) {
+              jni.MyImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY) {
     _zoomStateChagnedController = StreamController.broadcast(
       onListen: _observeZoomState,
       onCancel: _removeZoomStateObserver,
@@ -47,7 +50,7 @@ final class JCameraController
       return true;
     }
     final granted =
-        jni.PermissionsManager.INSTANCE.checkPermissions(permissions);
+        jni.MyPermissionsManager.INSTANCE.checkPermissions(permissions);
     return granted;
   }
 
@@ -60,12 +63,13 @@ final class JCameraController
       return true;
     }
     final completer = Completer<bool>();
-    final callback = jni.PermissionsResultCallback.implement(
-      jni.$PermissionsResultCallbackImpl(
+    final callback =
+        jni.MyPermissionsManager_MyPermissionsResultCallback.implement(
+      jni.$MyPermissionsManager_MyPermissionsResultCallbackImpl(
         onPermissionsResult: (granted) => completer.complete(granted),
       ),
     );
-    jni.PermissionsManager.INSTANCE.requestPermissions(
+    jni.MyPermissionsManager.INSTANCE.requestPermissions(
       permissions,
       callback,
     );
@@ -212,23 +216,18 @@ final class JCameraController
   Future<void> setImageAnalysisAnalyzer(ImageAnalyzer analyzer) async {
     final executor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
-    final jniAanlyzer = jni.ImageAnalysis_Analyzer.implement(
-      jni.$ImageAnalysis_AnalyzerImpl(
-        analyze: (imageProxy) {
-          analyzer.analyze(imageProxy.dartValue);
-        },
-        getDefaultTargetResolution: () {
-          return JObject.fromReference(jNullReference);
-        },
-        getTargetCoordinateSystem: () {
-          return jni.ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL;
-        },
-        updateTransform: (matrix) {},
-      ),
-    );
+    final jniAanlyzer = analyzer is JMLAnalyzer
+        ? analyzer.jniValue
+        : jni.MyImageAnalysis_MyAnalyzer.implement(
+            jni.$MyImageAnalysis_MyAnalyzerImpl(
+              analyze: (imageProxy) {
+                analyzer.analyze(imageProxy.dartValue);
+              },
+            ),
+          );
     await jniValue.setImageAnalysisAnalyzerOnMainThread(
       executor,
-      jniAanlyzer.reference,
+      jniAanlyzer,
     );
   }
 
@@ -253,8 +252,13 @@ final class JCameraController
     final completer = Completer<Uint8List>();
     final executor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
-    final callback = jni.OnImageCapturedCallbackImpl.new1(
-        jni.OnImageCapturedCallback.implement(jni.$OnImageCapturedCallbackImpl(
+    final callback = jni.MyImageCapture_MyOnImageCapturedCallbackImpl(
+        jni.MyImageCapture_MyOnImageCapturedCallback.implement(
+            jni.$MyImageCapture_MyOnImageCapturedCallbackImpl(
+      onCaptureStarted: () {},
+      onCaptureProcessProgressed: (progress) {
+        logger.info('onCaptureProcessProgressed $progress.');
+      },
       onCaptureSuccess: (image) {
         final memory = image.getPlanes()[0].getBuffer().asUint8List();
         image.close();
@@ -263,6 +267,7 @@ final class JCameraController
       onError: (exception) {
         completer.completeError(exception);
       },
+      onPostviewBitmapAvailable: (bitmap) {},
     )));
     await jniValue.takePictureToMemoryOnMainThread(
       executor,
@@ -284,7 +289,7 @@ final class JCameraController
     final contentValues = jni.ContentValues()
       ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, displayName)
       ..put(jni.MediaStore_MediaColumns.MIME_TYPE, mimeType);
-    final outputFileOptions = jni.ImageCapture_OutputFileOptions_Builder.new1(
+    final outputFileOptions = jni.MyImageCapture_MyOutputFileOptions_MyBuilder(
       contentResolver,
       savedCollection,
       contentValues,
@@ -292,8 +297,13 @@ final class JCameraController
     final executor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
     final completer = Completer<Uri>();
-    final imageSavedCallback = jni.ImageCapture_OnImageSavedCallback.implement(
-        jni.$ImageCapture_OnImageSavedCallbackImpl(
+    final imageSavedCallback =
+        jni.MyImageCapture_MyOnImageSavedCallback.implement(
+            jni.$MyImageCapture_MyOnImageSavedCallbackImpl(
+      onCaptureStarted: () {},
+      onCaptureProcessProgressed: (progress) {
+        logger.info('onCaptureProcessProgressed $progress.');
+      },
       onImageSaved: (outputFileResults) {
         final savedUri = outputFileResults.getSavedUri().dartValue;
         completer.complete(savedUri);
@@ -301,6 +311,7 @@ final class JCameraController
       onError: (exception) {
         completer.completeError(exception);
       },
+      onPostviewBitmapAvailable: (bitmap) {},
     ));
     await jniValue.takePictureToAlbumOnMainThread(
       outputFileOptions,

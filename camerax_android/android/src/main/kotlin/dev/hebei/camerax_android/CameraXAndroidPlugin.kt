@@ -8,14 +8,14 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         val registry = binding.platformViewRegistry
-        registry.registerViewFactory("hebei.dev/PreviewView", PreviewViewFactory)
+        registry.registerViewFactory("hebei.dev/PreviewView", MyPreviewView.MyFactory)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        PermissionsManager.updateActivity(binding)
+        MyPermissionsManager.onAttachedToActivity(binding)
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -23,7 +23,7 @@ class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
     }
 
     override fun onDetachedFromActivity() {
-        PermissionsManager.updateActivity(null)
+        MyPermissionsManager.onDetachedFromActivity()
     }
 
     override fun onDetachedFromActivityForConfigChanges() {

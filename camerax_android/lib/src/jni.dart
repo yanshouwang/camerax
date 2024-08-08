@@ -75,20 +75,20 @@ extension CameraSelectorX on CameraSelector {
 }
 
 extension ScaleTypeX on ScaleType {
-  jni.PreviewView_ScaleType get jniValue {
+  jni.MyPreviewView_MyScaleType get jniValue {
     switch (this) {
       case ScaleType.fillCenter:
-        return jni.PreviewView_ScaleType.FILL_CENTER;
+        return jni.MyPreviewView_MyScaleType.FILL_CENTER;
       case ScaleType.fillStart:
-        return jni.PreviewView_ScaleType.FILL_START;
+        return jni.MyPreviewView_MyScaleType.FILL_START;
       case ScaleType.fillEnd:
-        return jni.PreviewView_ScaleType.FILL_END;
+        return jni.MyPreviewView_MyScaleType.FILL_END;
       case ScaleType.fitCenter:
-        return jni.PreviewView_ScaleType.FIT_CENTER;
+        return jni.MyPreviewView_MyScaleType.FIT_CENTER;
       case ScaleType.fitStart:
-        return jni.PreviewView_ScaleType.FIT_START;
+        return jni.MyPreviewView_MyScaleType.FIT_START;
       case ScaleType.fitEnd:
-        return jni.PreviewView_ScaleType.FIT_END;
+        return jni.MyPreviewView_MyScaleType.FIT_END;
     }
   }
 }
@@ -97,11 +97,11 @@ extension FlashModeX on FlashMode {
   int get jniValue {
     switch (this) {
       case FlashMode.auto:
-        return jni.ImageCapture.FLASH_MODE_AUTO;
+        return jni.MyImageCapture.FLASH_MODE_AUTO;
       case FlashMode.on:
-        return jni.ImageCapture.FLASH_MODE_ON;
+        return jni.MyImageCapture.FLASH_MODE_ON;
       case FlashMode.off:
-        return jni.ImageCapture.FLASH_MODE_OFF;
+        return jni.MyImageCapture.FLASH_MODE_OFF;
     }
   }
 }
@@ -184,11 +184,11 @@ extension MLObjectTypeListX on List<MLObjectType> {
 extension intX on int {
   FlashMode get flashMode {
     switch (this) {
-      case jni.ImageCapture.FLASH_MODE_AUTO:
+      case jni.MyImageCapture.FLASH_MODE_AUTO:
         return FlashMode.auto;
-      case jni.ImageCapture.FLASH_MODE_ON:
+      case jni.MyImageCapture.FLASH_MODE_ON:
         return FlashMode.on;
-      case jni.ImageCapture.FLASH_MODE_OFF:
+      case jni.MyImageCapture.FLASH_MODE_OFF:
         return FlashMode.off;
       default:
         throw ArgumentError.value(this);
@@ -349,12 +349,12 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
     return runOnPlatformThread(() => enableTorch(torchEnabled));
   }
 
-  // Future<void> setImageAnalysisOutputImageFormatOnMainThread(
-  //   int imageAnalysisOutputImageFormat,
-  // ) {
-  //   return runOnPlatformThread(() =>
-  //       setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat));
-  // }
+  Future<void> setImageAnalysisOutputImageFormatOnMainThread(
+    int imageAnalysisOutputImageFormat,
+  ) {
+    return runOnPlatformThread(() =>
+        setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat));
+  }
 
   Future<void> setImageAnalysisBackpressureStrategyOnMainThread(int strategy) {
     return runOnPlatformThread(() => setImageAnalysisBackpressureStrategy(
@@ -364,10 +364,11 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
 
   Future<void> setImageAnalysisAnalyzerOnMainThread(
     jni.Executor executor,
-    JReference analyzerReference,
+    JObject analyzer,
   ) {
+    final analyzerReference = analyzer.reference;
     return runOnPlatformThread(() {
-      final analyzer = jni.ImageAnalysis_Analyzer.fromReference(
+      final analyzer = JObject.fromReference(
         analyzerReference,
       );
       setImageAnalysisAnalyzer(
@@ -398,7 +399,8 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
     JReference callbackReference,
   ) {
     return runOnPlatformThread(() {
-      final callback = jni.ImageCapture_OnImageCapturedCallback.fromReference(
+      final callback =
+          jni.MyImageCapture_MyOnImageCapturedCallbackImpl.fromReference(
         callbackReference,
       );
       takePicture1(executor, callback);
@@ -406,13 +408,13 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
   }
 
   Future<void> takePictureToAlbumOnMainThread(
-    jni.ImageCapture_OutputFileOptions outputFileOptions,
+    JObject outputFileOptions,
     jni.Executor executor,
     JReference imageSavedCallbackReference,
   ) {
     return runOnPlatformThread(() {
       final imageSavedCallback =
-          jni.ImageCapture_OnImageSavedCallback.fromReference(
+          jni.MyImageCapture_MyOnImageSavedCallback.fromReference(
         imageSavedCallbackReference,
       );
       takePicture(
@@ -447,14 +449,15 @@ extension JLiveDataX<T extends JObject> on jni.LiveData<T> {
   }
 }
 
-extension JPreviewViewX on jni.PreviewView {
+extension JPreviewViewX on jni.MyPreviewView {
   Future<void> setControllerOnMainThread(
     jni.CameraController cameraController,
   ) {
     return runOnPlatformThread(() => setController(cameraController));
   }
 
-  Future<void> setScaleTypeOnMainThread(jni.PreviewView_ScaleType scaleType) {
+  Future<void> setScaleTypeOnMainThread(
+      jni.MyPreviewView_MyScaleType scaleType) {
     return runOnPlatformThread(() => setScaleType(scaleType));
   }
 }

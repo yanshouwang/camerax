@@ -52,7 +52,7 @@ final class JPreviewViewController implements PreviewViewController {
     if (id == null) {
       return;
     }
-    final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
+    final view = jni.MyPreviewView_MyFactory.INSTANCE.retrieveView(id);
     if (view.isNull) {
       throw ArgumentError.notNull();
     }
@@ -65,7 +65,7 @@ final class JPreviewViewController implements PreviewViewController {
     if (id == null) {
       return;
     }
-    final view = jni.PreviewViewFactory.INSTANCE.retrieveView(id);
+    final view = jni.MyPreviewView_MyFactory.INSTANCE.retrieveView(id);
     if (view.isNull) {
       throw ArgumentError.notNull();
     }

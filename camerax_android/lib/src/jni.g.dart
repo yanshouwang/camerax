@@ -33457,34 +33457,6 @@ class ContextCompat extends jni.JObject {
             .reference);
   }
 
-  static final _id_getAttributionTag = _class.staticMethodId(
-    r'getAttributionTag',
-    r'(Landroid/content/Context;)Ljava/lang/String;',
-  );
-
-  static final _getAttributionTag = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: static public java.lang.String getAttributionTag(android.content.Context context)
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString getAttributionTag(
-    Context context,
-  ) {
-    return _getAttributionTag(
-            _class.reference.pointer,
-            _id_getAttributionTag as jni.JMethodIDPtr,
-            context.reference.pointer)
-        .object(const jni.JStringType());
-  }
-
   static final _id_startActivities = _class.staticMethodId(
     r'startActivities',
     r'(Landroid/content/Context;[Landroid/content/Intent;)Z',
@@ -33991,6 +33963,34 @@ class ContextCompat extends jni.JObject {
         .check();
   }
 
+  static final _id_getDisplayOrDefault = _class.staticMethodId(
+    r'getDisplayOrDefault',
+    r'(Landroid/content/Context;)Landroid/view/Display;',
+  );
+
+  static final _getDisplayOrDefault = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public android.view.Display getDisplayOrDefault(android.content.Context context)
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JObject getDisplayOrDefault(
+    Context context,
+  ) {
+    return _getDisplayOrDefault(
+            _class.reference.pointer,
+            _id_getDisplayOrDefault as jni.JMethodIDPtr,
+            context.reference.pointer)
+        .object(const jni.JObjectType());
+  }
+
   static final _id_getSystemService = _class.staticMethodId(
     r'getSystemService',
     r'(Landroid/content/Context;Ljava/lang/Class;)Ljava/lang/Object;',
@@ -34152,6 +34152,122 @@ class ContextCompat extends jni.JObject {
             context.reference.pointer,
             class0.reference.pointer)
         .object(const jni.JStringType());
+  }
+
+  static final _id_getString = _class.staticMethodId(
+    r'getString',
+    r'(Landroid/content/Context;I)Ljava/lang/String;',
+  );
+
+  static final _getString = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: static public java.lang.String getString(android.content.Context context, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JString getString(
+    Context context,
+    int i,
+  ) {
+    return _getString(_class.reference.pointer,
+            _id_getString as jni.JMethodIDPtr, context.reference.pointer, i)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_getContextForLanguage = _class.staticMethodId(
+    r'getContextForLanguage',
+    r'(Landroid/content/Context;)Landroid/content/Context;',
+  );
+
+  static final _getContextForLanguage = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public android.content.Context getContextForLanguage(android.content.Context context)
+  /// The returned object must be released after use, by calling the [release] method.
+  static Context getContextForLanguage(
+    Context context,
+  ) {
+    return _getContextForLanguage(
+            _class.reference.pointer,
+            _id_getContextForLanguage as jni.JMethodIDPtr,
+            context.reference.pointer)
+        .object(const $ContextType());
+  }
+
+  static final _id_getAttributionTag = _class.staticMethodId(
+    r'getAttributionTag',
+    r'(Landroid/content/Context;)Ljava/lang/String;',
+  );
+
+  static final _getAttributionTag = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public java.lang.String getAttributionTag(android.content.Context context)
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JString getAttributionTag(
+    Context context,
+  ) {
+    return _getAttributionTag(
+            _class.reference.pointer,
+            _id_getAttributionTag as jni.JMethodIDPtr,
+            context.reference.pointer)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_createAttributionContext = _class.staticMethodId(
+    r'createAttributionContext',
+    r'(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Context;',
+  );
+
+  static final _createAttributionContext = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public android.content.Context createAttributionContext(android.content.Context context, java.lang.String string)
+  /// The returned object must be released after use, by calling the [release] method.
+  static Context createAttributionContext(
+    Context context,
+    jni.JString string,
+  ) {
+    return _createAttributionContext(
+            _class.reference.pointer,
+            _id_createAttributionContext as jni.JMethodIDPtr,
+            context.reference.pointer,
+            string.reference.pointer)
+        .object(const $ContextType());
   }
 }
 
@@ -34474,6 +34590,34 @@ class CameraSelector_Builder extends jni.JObject {
             _class.reference.pointer,
             _id_fromSelector as jni.JMethodIDPtr,
             cameraSelector.reference.pointer)
+        .object(const $CameraSelector_BuilderType());
+  }
+
+  static final _id_setPhysicalCameraId = _class.instanceMethodId(
+    r'setPhysicalCameraId',
+    r'(Ljava/lang/String;)Landroidx/camera/core/CameraSelector$Builder;',
+  );
+
+  static final _setPhysicalCameraId = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public androidx.camera.core.CameraSelector$Builder setPhysicalCameraId(java.lang.String string)
+  /// The returned object must be released after use, by calling the [release] method.
+  CameraSelector_Builder setPhysicalCameraId(
+    jni.JString string,
+  ) {
+    return _setPhysicalCameraId(
+            reference.pointer,
+            _id_setPhysicalCameraId as jni.JMethodIDPtr,
+            string.reference.pointer)
         .object(const $CameraSelector_BuilderType());
   }
 
@@ -34818,6 +34962,31 @@ class CameraSelector extends jni.JObject {
             reference.pointer, _id_getLensFacing as jni.JMethodIDPtr)
         .object(const jni.JIntegerType());
   }
+
+  static final _id_getPhysicalCameraId = _class.instanceMethodId(
+    r'getPhysicalCameraId',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getPhysicalCameraId = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String getPhysicalCameraId()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString getPhysicalCameraId() {
+    return _getPhysicalCameraId(
+            reference.pointer, _id_getPhysicalCameraId as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
 }
 
 final class $CameraSelectorType extends jni.JObjType<CameraSelector> {
@@ -34843,6806 +35012,6 @@ final class $CameraSelectorType extends jni.JObjType<CameraSelector> {
   bool operator ==(Object other) {
     return other.runtimeType == ($CameraSelectorType) &&
         other is $CameraSelectorType;
-  }
-}
-
-/// from: androidx.camera.core.ImageAnalysis$Analyzer
-class ImageAnalysis_Analyzer extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageAnalysis_Analyzer> $type = type;
-
-  ImageAnalysis_Analyzer.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageAnalysis$Analyzer');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageAnalysis_AnalyzerType();
-  static final _id_analyze = _class.instanceMethodId(
-    r'analyze',
-    r'(Landroidx/camera/core/ImageProxy;)V',
-  );
-
-  static final _analyze = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public abstract void analyze(androidx.camera.core.ImageProxy imageProxy)
-  void analyze(
-    ImageProxy imageProxy,
-  ) {
-    _analyze(reference.pointer, _id_analyze as jni.JMethodIDPtr,
-            imageProxy.reference.pointer)
-        .check();
-  }
-
-  static final _id_getDefaultTargetResolution = _class.instanceMethodId(
-    r'getDefaultTargetResolution',
-    r'()Landroid/util/Size;',
-  );
-
-  static final _getDefaultTargetResolution = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.util.Size getDefaultTargetResolution()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getDefaultTargetResolution() {
-    return _getDefaultTargetResolution(reference.pointer,
-            _id_getDefaultTargetResolution as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getTargetCoordinateSystem = _class.instanceMethodId(
-    r'getTargetCoordinateSystem',
-    r'()I',
-  );
-
-  static final _getTargetCoordinateSystem = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getTargetCoordinateSystem()
-  int getTargetCoordinateSystem() {
-    return _getTargetCoordinateSystem(reference.pointer,
-            _id_getTargetCoordinateSystem as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_updateTransform = _class.instanceMethodId(
-    r'updateTransform',
-    r'(Landroid/graphics/Matrix;)V',
-  );
-
-  static final _updateTransform = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void updateTransform(android.graphics.Matrix matrix)
-  void updateTransform(
-    jni.JObject matrix,
-  ) {
-    _updateTransform(reference.pointer, _id_updateTransform as jni.JMethodIDPtr,
-            matrix.reference.pointer)
-        .check();
-  }
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageAnalysis_AnalyzerImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-      if ($d == r'analyze(Landroidx/camera/core/ImageProxy;)V') {
-        _$impls[$p]!.analyze(
-          $a[0].castTo(const $ImageProxyType(), releaseOriginal: true),
-        );
-        return jni.nullptr;
-      }
-      if ($d == r'getDefaultTargetResolution()Landroid/util/Size;') {
-        final $r = _$impls[$p]!.getDefaultTargetResolution();
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
-      }
-      if ($d == r'getTargetCoordinateSystem()I') {
-        final $r = _$impls[$p]!.getTargetCoordinateSystem();
-        return jni.JInteger($r).reference.toPointer();
-      }
-      if ($d == r'updateTransform(Landroid/graphics/Matrix;)V') {
-        _$impls[$p]!.updateTransform(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
-        );
-        return jni.nullptr;
-      }
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageAnalysis_Analyzer.implement(
-    $ImageAnalysis_AnalyzerImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageAnalysis_Analyzer.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageAnalysis$Analyzer',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageAnalysis_AnalyzerImpl {
-  factory $ImageAnalysis_AnalyzerImpl({
-    required void Function(ImageProxy imageProxy) analyze,
-    required jni.JObject Function() getDefaultTargetResolution,
-    required int Function() getTargetCoordinateSystem,
-    required void Function(jni.JObject matrix) updateTransform,
-  }) = _$ImageAnalysis_AnalyzerImpl;
-
-  void analyze(ImageProxy imageProxy);
-  jni.JObject getDefaultTargetResolution();
-  int getTargetCoordinateSystem();
-  void updateTransform(jni.JObject matrix);
-}
-
-class _$ImageAnalysis_AnalyzerImpl implements $ImageAnalysis_AnalyzerImpl {
-  _$ImageAnalysis_AnalyzerImpl({
-    required void Function(ImageProxy imageProxy) analyze,
-    required jni.JObject Function() getDefaultTargetResolution,
-    required int Function() getTargetCoordinateSystem,
-    required void Function(jni.JObject matrix) updateTransform,
-  })  : _analyze = analyze,
-        _getDefaultTargetResolution = getDefaultTargetResolution,
-        _getTargetCoordinateSystem = getTargetCoordinateSystem,
-        _updateTransform = updateTransform;
-
-  final void Function(ImageProxy imageProxy) _analyze;
-  final jni.JObject Function() _getDefaultTargetResolution;
-  final int Function() _getTargetCoordinateSystem;
-  final void Function(jni.JObject matrix) _updateTransform;
-
-  void analyze(ImageProxy imageProxy) {
-    return _analyze(imageProxy);
-  }
-
-  jni.JObject getDefaultTargetResolution() {
-    return _getDefaultTargetResolution();
-  }
-
-  int getTargetCoordinateSystem() {
-    return _getTargetCoordinateSystem();
-  }
-
-  void updateTransform(jni.JObject matrix) {
-    return _updateTransform(matrix);
-  }
-}
-
-final class $ImageAnalysis_AnalyzerType
-    extends jni.JObjType<ImageAnalysis_Analyzer> {
-  const $ImageAnalysis_AnalyzerType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageAnalysis$Analyzer;';
-
-  @override
-  ImageAnalysis_Analyzer fromReference(jni.JReference reference) =>
-      ImageAnalysis_Analyzer.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageAnalysis_AnalyzerType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageAnalysis_AnalyzerType) &&
-        other is $ImageAnalysis_AnalyzerType;
-  }
-}
-
-/// from: androidx.camera.core.ImageAnalysis$BackpressureStrategy
-class ImageAnalysis_BackpressureStrategy extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageAnalysis_BackpressureStrategy> $type = type;
-
-  ImageAnalysis_BackpressureStrategy.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageAnalysis$BackpressureStrategy');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageAnalysis_BackpressureStrategyType();
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageAnalysis_BackpressureStrategyImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageAnalysis_BackpressureStrategy.implement(
-    $ImageAnalysis_BackpressureStrategyImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageAnalysis_BackpressureStrategy.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageAnalysis$BackpressureStrategy',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageAnalysis_BackpressureStrategyImpl {
-  factory $ImageAnalysis_BackpressureStrategyImpl() =
-      _$ImageAnalysis_BackpressureStrategyImpl;
-}
-
-class _$ImageAnalysis_BackpressureStrategyImpl
-    implements $ImageAnalysis_BackpressureStrategyImpl {
-  _$ImageAnalysis_BackpressureStrategyImpl();
-}
-
-final class $ImageAnalysis_BackpressureStrategyType
-    extends jni.JObjType<ImageAnalysis_BackpressureStrategy> {
-  const $ImageAnalysis_BackpressureStrategyType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageAnalysis$BackpressureStrategy;';
-
-  @override
-  ImageAnalysis_BackpressureStrategy fromReference(jni.JReference reference) =>
-      ImageAnalysis_BackpressureStrategy.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageAnalysis_BackpressureStrategyType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageAnalysis_BackpressureStrategyType) &&
-        other is $ImageAnalysis_BackpressureStrategyType;
-  }
-}
-
-/// from: androidx.camera.core.ImageAnalysis$Builder
-class ImageAnalysis_Builder extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageAnalysis_Builder> $type = type;
-
-  ImageAnalysis_Builder.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageAnalysis$Builder');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageAnalysis_BuilderType();
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageAnalysis_Builder() {
-    return ImageAnalysis_Builder.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
-  }
-
-  static final _id_fromConfig = _class.staticMethodId(
-    r'fromConfig',
-    r'(Landroidx/camera/core/impl/ImageAnalysisConfig;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _fromConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: static public androidx.camera.core.ImageAnalysis$Builder fromConfig(androidx.camera.core.impl.ImageAnalysisConfig imageAnalysisConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  static ImageAnalysis_Builder fromConfig(
-    jni.JObject imageAnalysisConfig,
-  ) {
-    return _fromConfig(
-            _class.reference.pointer,
-            _id_fromConfig as jni.JMethodIDPtr,
-            imageAnalysisConfig.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setBackpressureStrategy = _class.instanceMethodId(
-    r'setBackpressureStrategy',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setBackpressureStrategy = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setBackpressureStrategy(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setBackpressureStrategy(
-    int i,
-  ) {
-    return _setBackpressureStrategy(reference.pointer,
-            _id_setBackpressureStrategy as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setImageQueueDepth = _class.instanceMethodId(
-    r'setImageQueueDepth',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setImageQueueDepth = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setImageQueueDepth(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setImageQueueDepth(
-    int i,
-  ) {
-    return _setImageQueueDepth(
-            reference.pointer, _id_setImageQueueDepth as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setOutputImageFormat = _class.instanceMethodId(
-    r'setOutputImageFormat',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setOutputImageFormat = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setOutputImageFormat(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setOutputImageFormat(
-    int i,
-  ) {
-    return _setOutputImageFormat(
-            reference.pointer, _id_setOutputImageFormat as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setOutputImageRotationEnabled = _class.instanceMethodId(
-    r'setOutputImageRotationEnabled',
-    r'(Z)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setOutputImageRotationEnabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setOutputImageRotationEnabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setOutputImageRotationEnabled(
-    bool z,
-  ) {
-    return _setOutputImageRotationEnabled(reference.pointer,
-            _id_setOutputImageRotationEnabled as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setOnePixelShiftEnabled = _class.instanceMethodId(
-    r'setOnePixelShiftEnabled',
-    r'(Z)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setOnePixelShiftEnabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setOnePixelShiftEnabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setOnePixelShiftEnabled(
-    bool z,
-  ) {
-    return _setOnePixelShiftEnabled(reference.pointer,
-            _id_setOnePixelShiftEnabled as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_getMutableConfig = _class.instanceMethodId(
-    r'getMutableConfig',
-    r'()Landroidx/camera/core/impl/MutableConfig;',
-  );
-
-  static final _getMutableConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.MutableConfig getMutableConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getMutableConfig() {
-    return _getMutableConfig(
-            reference.pointer, _id_getMutableConfig as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getUseCaseConfig = _class.instanceMethodId(
-    r'getUseCaseConfig',
-    r'()Landroidx/camera/core/impl/ImageAnalysisConfig;',
-  );
-
-  static final _getUseCaseConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.ImageAnalysisConfig getUseCaseConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUseCaseConfig() {
-    return _getUseCaseConfig(
-            reference.pointer, _id_getUseCaseConfig as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_build = _class.instanceMethodId(
-    r'build',
-    r'()Landroidx/camera/core/ImageAnalysis;',
-  );
-
-  static final _build = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ImageAnalysis build()
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis build() {
-    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
-        .object(const $ImageAnalysisType());
-  }
-
-  static final _id_setTargetClass = _class.instanceMethodId(
-    r'setTargetClass',
-    r'(Ljava/lang/Class;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setTargetClass = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setTargetClass(java.lang.Class class)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setTargetClass(
-    jni.JObject class0,
-  ) {
-    return _setTargetClass(reference.pointer,
-            _id_setTargetClass as jni.JMethodIDPtr, class0.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setTargetName = _class.instanceMethodId(
-    r'setTargetName',
-    r'(Ljava/lang/String;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setTargetName = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setTargetName(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setTargetName(
-    jni.JString string,
-  ) {
-    return _setTargetName(reference.pointer,
-            _id_setTargetName as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setTargetAspectRatio = _class.instanceMethodId(
-    r'setTargetAspectRatio',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setTargetAspectRatio = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setTargetAspectRatio(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setTargetAspectRatio(
-    int i,
-  ) {
-    return _setTargetAspectRatio(
-            reference.pointer, _id_setTargetAspectRatio as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setTargetRotation = _class.instanceMethodId(
-    r'setTargetRotation',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setTargetRotation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setTargetRotation(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setTargetRotation(
-    int i,
-  ) {
-    return _setTargetRotation(
-            reference.pointer, _id_setTargetRotation as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setMirrorMode = _class.instanceMethodId(
-    r'setMirrorMode',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setMirrorMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setMirrorMode(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setMirrorMode(
-    int i,
-  ) {
-    return _setMirrorMode(
-            reference.pointer, _id_setMirrorMode as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setTargetResolution = _class.instanceMethodId(
-    r'setTargetResolution',
-    r'(Landroid/util/Size;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setTargetResolution = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setTargetResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setTargetResolution(
-    jni.JObject size,
-  ) {
-    return _setTargetResolution(reference.pointer,
-            _id_setTargetResolution as jni.JMethodIDPtr, size.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setDefaultResolution = _class.instanceMethodId(
-    r'setDefaultResolution',
-    r'(Landroid/util/Size;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setDefaultResolution = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setDefaultResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setDefaultResolution(
-    jni.JObject size,
-  ) {
-    return _setDefaultResolution(
-            reference.pointer,
-            _id_setDefaultResolution as jni.JMethodIDPtr,
-            size.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setMaxResolution = _class.instanceMethodId(
-    r'setMaxResolution',
-    r'(Landroid/util/Size;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setMaxResolution = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setMaxResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setMaxResolution(
-    jni.JObject size,
-  ) {
-    return _setMaxResolution(reference.pointer,
-            _id_setMaxResolution as jni.JMethodIDPtr, size.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setSupportedResolutions = _class.instanceMethodId(
-    r'setSupportedResolutions',
-    r'(Ljava/util/List;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setSupportedResolutions = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setSupportedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setSupportedResolutions(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setSupportedResolutions(
-            reference.pointer,
-            _id_setSupportedResolutions as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setCustomOrderedResolutions = _class.instanceMethodId(
-    r'setCustomOrderedResolutions',
-    r'(Ljava/util/List;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setCustomOrderedResolutions = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setCustomOrderedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setCustomOrderedResolutions(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setCustomOrderedResolutions(
-            reference.pointer,
-            _id_setCustomOrderedResolutions as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setResolutionSelector = _class.instanceMethodId(
-    r'setResolutionSelector',
-    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setResolutionSelector = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setResolutionSelector(
-    jni.JObject resolutionSelector,
-  ) {
-    return _setResolutionSelector(
-            reference.pointer,
-            _id_setResolutionSelector as jni.JMethodIDPtr,
-            resolutionSelector.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setBackgroundExecutor = _class.instanceMethodId(
-    r'setBackgroundExecutor',
-    r'(Ljava/util/concurrent/Executor;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setBackgroundExecutor = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setBackgroundExecutor(java.util.concurrent.Executor executor)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setBackgroundExecutor(
-    Executor executor,
-  ) {
-    return _setBackgroundExecutor(
-            reference.pointer,
-            _id_setBackgroundExecutor as jni.JMethodIDPtr,
-            executor.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setDefaultSessionConfig = _class.instanceMethodId(
-    r'setDefaultSessionConfig',
-    r'(Landroidx/camera/core/impl/SessionConfig;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setDefaultSessionConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setDefaultSessionConfig(androidx.camera.core.impl.SessionConfig sessionConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setDefaultSessionConfig(
-    jni.JObject sessionConfig,
-  ) {
-    return _setDefaultSessionConfig(
-            reference.pointer,
-            _id_setDefaultSessionConfig as jni.JMethodIDPtr,
-            sessionConfig.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setDefaultCaptureConfig = _class.instanceMethodId(
-    r'setDefaultCaptureConfig',
-    r'(Landroidx/camera/core/impl/CaptureConfig;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setDefaultCaptureConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setDefaultCaptureConfig(androidx.camera.core.impl.CaptureConfig captureConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setDefaultCaptureConfig(
-    jni.JObject captureConfig,
-  ) {
-    return _setDefaultCaptureConfig(
-            reference.pointer,
-            _id_setDefaultCaptureConfig as jni.JMethodIDPtr,
-            captureConfig.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setSessionOptionUnpacker = _class.instanceMethodId(
-    r'setSessionOptionUnpacker',
-    r'(Landroidx/camera/core/impl/SessionConfig$OptionUnpacker;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setSessionOptionUnpacker = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setSessionOptionUnpacker(androidx.camera.core.impl.SessionConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setSessionOptionUnpacker(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setSessionOptionUnpacker(
-            reference.pointer,
-            _id_setSessionOptionUnpacker as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setCaptureOptionUnpacker = _class.instanceMethodId(
-    r'setCaptureOptionUnpacker',
-    r'(Landroidx/camera/core/impl/CaptureConfig$OptionUnpacker;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setCaptureOptionUnpacker = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setCaptureOptionUnpacker(androidx.camera.core.impl.CaptureConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setCaptureOptionUnpacker(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setCaptureOptionUnpacker(
-            reference.pointer,
-            _id_setCaptureOptionUnpacker as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setSurfaceOccupancyPriority = _class.instanceMethodId(
-    r'setSurfaceOccupancyPriority',
-    r'(I)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setSurfaceOccupancyPriority = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setSurfaceOccupancyPriority(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setSurfaceOccupancyPriority(
-    int i,
-  ) {
-    return _setSurfaceOccupancyPriority(reference.pointer,
-            _id_setSurfaceOccupancyPriority as jni.JMethodIDPtr, i)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setCameraSelector = _class.instanceMethodId(
-    r'setCameraSelector',
-    r'(Landroidx/camera/core/CameraSelector;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setCameraSelector = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setCameraSelector(androidx.camera.core.CameraSelector cameraSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setCameraSelector(
-    CameraSelector cameraSelector,
-  ) {
-    return _setCameraSelector(
-            reference.pointer,
-            _id_setCameraSelector as jni.JMethodIDPtr,
-            cameraSelector.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setUseCaseEventCallback = _class.instanceMethodId(
-    r'setUseCaseEventCallback',
-    r'(Landroidx/camera/core/UseCase$EventCallback;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setUseCaseEventCallback = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setUseCaseEventCallback(androidx.camera.core.UseCase$EventCallback eventCallback)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setUseCaseEventCallback(
-    jni.JObject eventCallback,
-  ) {
-    return _setUseCaseEventCallback(
-            reference.pointer,
-            _id_setUseCaseEventCallback as jni.JMethodIDPtr,
-            eventCallback.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setImageReaderProxyProvider = _class.instanceMethodId(
-    r'setImageReaderProxyProvider',
-    r'(Landroidx/camera/core/ImageReaderProxyProvider;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setImageReaderProxyProvider = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setImageReaderProxyProvider(androidx.camera.core.ImageReaderProxyProvider imageReaderProxyProvider)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setImageReaderProxyProvider(
-    jni.JObject imageReaderProxyProvider,
-  ) {
-    return _setImageReaderProxyProvider(
-            reference.pointer,
-            _id_setImageReaderProxyProvider as jni.JMethodIDPtr,
-            imageReaderProxyProvider.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setZslDisabled = _class.instanceMethodId(
-    r'setZslDisabled',
-    r'(Z)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setZslDisabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setZslDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setZslDisabled(
-    bool z,
-  ) {
-    return _setZslDisabled(reference.pointer,
-            _id_setZslDisabled as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setHighResolutionDisabled = _class.instanceMethodId(
-    r'setHighResolutionDisabled',
-    r'(Z)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setHighResolutionDisabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setHighResolutionDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setHighResolutionDisabled(
-    bool z,
-  ) {
-    return _setHighResolutionDisabled(reference.pointer,
-            _id_setHighResolutionDisabled as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setCaptureType = _class.instanceMethodId(
-    r'setCaptureType',
-    r'(Landroidx/camera/core/impl/UseCaseConfigFactory$CaptureType;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setCaptureType = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setCaptureType(androidx.camera.core.impl.UseCaseConfigFactory$CaptureType captureType)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setCaptureType(
-    jni.JObject captureType,
-  ) {
-    return _setCaptureType(
-            reference.pointer,
-            _id_setCaptureType as jni.JMethodIDPtr,
-            captureType.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setDynamicRange = _class.instanceMethodId(
-    r'setDynamicRange',
-    r'(Landroidx/camera/core/DynamicRange;)Landroidx/camera/core/ImageAnalysis$Builder;',
-  );
-
-  static final _setDynamicRange = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageAnalysis$Builder setDynamicRange(androidx.camera.core.DynamicRange dynamicRange)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageAnalysis_Builder setDynamicRange(
-    jni.JObject dynamicRange,
-  ) {
-    return _setDynamicRange(
-            reference.pointer,
-            _id_setDynamicRange as jni.JMethodIDPtr,
-            dynamicRange.reference.pointer)
-        .object(const $ImageAnalysis_BuilderType());
-  }
-
-  static final _id_setResolutionSelector1 = _class.instanceMethodId(
-    r'setResolutionSelector',
-    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)Ljava/lang/Object;',
-  );
-
-  static final _setResolutionSelector1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setResolutionSelector1(
-    jni.JObject resolutionSelector,
-  ) {
-    return _setResolutionSelector1(
-            reference.pointer,
-            _id_setResolutionSelector1 as jni.JMethodIDPtr,
-            resolutionSelector.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCustomOrderedResolutions1 = _class.instanceMethodId(
-    r'setCustomOrderedResolutions',
-    r'(Ljava/util/List;)Ljava/lang/Object;',
-  );
-
-  static final _setCustomOrderedResolutions1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCustomOrderedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCustomOrderedResolutions1(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setCustomOrderedResolutions1(
-            reference.pointer,
-            _id_setCustomOrderedResolutions1 as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setSupportedResolutions1 = _class.instanceMethodId(
-    r'setSupportedResolutions',
-    r'(Ljava/util/List;)Ljava/lang/Object;',
-  );
-
-  static final _setSupportedResolutions1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setSupportedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setSupportedResolutions1(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setSupportedResolutions1(
-            reference.pointer,
-            _id_setSupportedResolutions1 as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setMaxResolution1 = _class.instanceMethodId(
-    r'setMaxResolution',
-    r'(Landroid/util/Size;)Ljava/lang/Object;',
-  );
-
-  static final _setMaxResolution1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setMaxResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setMaxResolution1(
-    jni.JObject size,
-  ) {
-    return _setMaxResolution1(reference.pointer,
-            _id_setMaxResolution1 as jni.JMethodIDPtr, size.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDefaultResolution1 = _class.instanceMethodId(
-    r'setDefaultResolution',
-    r'(Landroid/util/Size;)Ljava/lang/Object;',
-  );
-
-  static final _setDefaultResolution1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDefaultResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDefaultResolution1(
-    jni.JObject size,
-  ) {
-    return _setDefaultResolution1(
-            reference.pointer,
-            _id_setDefaultResolution1 as jni.JMethodIDPtr,
-            size.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetResolution1 = _class.instanceMethodId(
-    r'setTargetResolution',
-    r'(Landroid/util/Size;)Ljava/lang/Object;',
-  );
-
-  static final _setTargetResolution1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setTargetResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetResolution1(
-    jni.JObject size,
-  ) {
-    return _setTargetResolution1(
-            reference.pointer,
-            _id_setTargetResolution1 as jni.JMethodIDPtr,
-            size.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setMirrorMode1 = _class.instanceMethodId(
-    r'setMirrorMode',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setMirrorMode1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setMirrorMode(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setMirrorMode1(
-    int i,
-  ) {
-    return _setMirrorMode1(
-            reference.pointer, _id_setMirrorMode1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetRotation1 = _class.instanceMethodId(
-    r'setTargetRotation',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setTargetRotation1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setTargetRotation(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetRotation1(
-    int i,
-  ) {
-    return _setTargetRotation1(
-            reference.pointer, _id_setTargetRotation1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetAspectRatio1 = _class.instanceMethodId(
-    r'setTargetAspectRatio',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setTargetAspectRatio1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setTargetAspectRatio(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetAspectRatio1(
-    int i,
-  ) {
-    return _setTargetAspectRatio1(
-            reference.pointer, _id_setTargetAspectRatio1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setBackgroundExecutor1 = _class.instanceMethodId(
-    r'setBackgroundExecutor',
-    r'(Ljava/util/concurrent/Executor;)Ljava/lang/Object;',
-  );
-
-  static final _setBackgroundExecutor1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setBackgroundExecutor(java.util.concurrent.Executor executor)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setBackgroundExecutor1(
-    Executor executor,
-  ) {
-    return _setBackgroundExecutor1(
-            reference.pointer,
-            _id_setBackgroundExecutor1 as jni.JMethodIDPtr,
-            executor.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getUseCaseConfig1 = _class.instanceMethodId(
-    r'getUseCaseConfig',
-    r'()Landroidx/camera/core/impl/UseCaseConfig;',
-  );
-
-  static final _getUseCaseConfig1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.UseCaseConfig getUseCaseConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUseCaseConfig1() {
-    return _getUseCaseConfig1(
-            reference.pointer, _id_getUseCaseConfig1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCaptureType1 = _class.instanceMethodId(
-    r'setCaptureType',
-    r'(Landroidx/camera/core/impl/UseCaseConfigFactory$CaptureType;)Ljava/lang/Object;',
-  );
-
-  static final _setCaptureType1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCaptureType(androidx.camera.core.impl.UseCaseConfigFactory$CaptureType captureType)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCaptureType1(
-    jni.JObject captureType,
-  ) {
-    return _setCaptureType1(
-            reference.pointer,
-            _id_setCaptureType1 as jni.JMethodIDPtr,
-            captureType.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setHighResolutionDisabled1 = _class.instanceMethodId(
-    r'setHighResolutionDisabled',
-    r'(Z)Ljava/lang/Object;',
-  );
-
-  static final _setHighResolutionDisabled1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setHighResolutionDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setHighResolutionDisabled1(
-    bool z,
-  ) {
-    return _setHighResolutionDisabled1(reference.pointer,
-            _id_setHighResolutionDisabled1 as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setZslDisabled1 = _class.instanceMethodId(
-    r'setZslDisabled',
-    r'(Z)Ljava/lang/Object;',
-  );
-
-  static final _setZslDisabled1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setZslDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setZslDisabled1(
-    bool z,
-  ) {
-    return _setZslDisabled1(reference.pointer,
-            _id_setZslDisabled1 as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCameraSelector1 = _class.instanceMethodId(
-    r'setCameraSelector',
-    r'(Landroidx/camera/core/CameraSelector;)Ljava/lang/Object;',
-  );
-
-  static final _setCameraSelector1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCameraSelector(androidx.camera.core.CameraSelector cameraSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCameraSelector1(
-    CameraSelector cameraSelector,
-  ) {
-    return _setCameraSelector1(
-            reference.pointer,
-            _id_setCameraSelector1 as jni.JMethodIDPtr,
-            cameraSelector.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setSurfaceOccupancyPriority1 = _class.instanceMethodId(
-    r'setSurfaceOccupancyPriority',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setSurfaceOccupancyPriority1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setSurfaceOccupancyPriority(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setSurfaceOccupancyPriority1(
-    int i,
-  ) {
-    return _setSurfaceOccupancyPriority1(reference.pointer,
-            _id_setSurfaceOccupancyPriority1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCaptureOptionUnpacker1 = _class.instanceMethodId(
-    r'setCaptureOptionUnpacker',
-    r'(Landroidx/camera/core/impl/CaptureConfig$OptionUnpacker;)Ljava/lang/Object;',
-  );
-
-  static final _setCaptureOptionUnpacker1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCaptureOptionUnpacker(androidx.camera.core.impl.CaptureConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCaptureOptionUnpacker1(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setCaptureOptionUnpacker1(
-            reference.pointer,
-            _id_setCaptureOptionUnpacker1 as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setSessionOptionUnpacker1 = _class.instanceMethodId(
-    r'setSessionOptionUnpacker',
-    r'(Landroidx/camera/core/impl/SessionConfig$OptionUnpacker;)Ljava/lang/Object;',
-  );
-
-  static final _setSessionOptionUnpacker1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setSessionOptionUnpacker(androidx.camera.core.impl.SessionConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setSessionOptionUnpacker1(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setSessionOptionUnpacker1(
-            reference.pointer,
-            _id_setSessionOptionUnpacker1 as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDefaultCaptureConfig1 = _class.instanceMethodId(
-    r'setDefaultCaptureConfig',
-    r'(Landroidx/camera/core/impl/CaptureConfig;)Ljava/lang/Object;',
-  );
-
-  static final _setDefaultCaptureConfig1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDefaultCaptureConfig(androidx.camera.core.impl.CaptureConfig captureConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDefaultCaptureConfig1(
-    jni.JObject captureConfig,
-  ) {
-    return _setDefaultCaptureConfig1(
-            reference.pointer,
-            _id_setDefaultCaptureConfig1 as jni.JMethodIDPtr,
-            captureConfig.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDefaultSessionConfig1 = _class.instanceMethodId(
-    r'setDefaultSessionConfig',
-    r'(Landroidx/camera/core/impl/SessionConfig;)Ljava/lang/Object;',
-  );
-
-  static final _setDefaultSessionConfig1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDefaultSessionConfig(androidx.camera.core.impl.SessionConfig sessionConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDefaultSessionConfig1(
-    jni.JObject sessionConfig,
-  ) {
-    return _setDefaultSessionConfig1(
-            reference.pointer,
-            _id_setDefaultSessionConfig1 as jni.JMethodIDPtr,
-            sessionConfig.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetName1 = _class.instanceMethodId(
-    r'setTargetName',
-    r'(Ljava/lang/String;)Ljava/lang/Object;',
-  );
-
-  static final _setTargetName1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setTargetName(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetName1(
-    jni.JString string,
-  ) {
-    return _setTargetName1(reference.pointer,
-            _id_setTargetName1 as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetClass1 = _class.instanceMethodId(
-    r'setTargetClass',
-    r'(Ljava/lang/Class;)Ljava/lang/Object;',
-  );
-
-  static final _setTargetClass1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setTargetClass(java.lang.Class class)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetClass1(
-    jni.JObject class0,
-  ) {
-    return _setTargetClass1(reference.pointer,
-            _id_setTargetClass1 as jni.JMethodIDPtr, class0.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_build1 = _class.instanceMethodId(
-    r'build',
-    r'()Ljava/lang/Object;',
-  );
-
-  static final _build1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.Object build()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject build1() {
-    return _build1(reference.pointer, _id_build1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setUseCaseEventCallback1 = _class.instanceMethodId(
-    r'setUseCaseEventCallback',
-    r'(Landroidx/camera/core/UseCase$EventCallback;)Ljava/lang/Object;',
-  );
-
-  static final _setUseCaseEventCallback1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setUseCaseEventCallback(androidx.camera.core.UseCase$EventCallback eventCallback)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setUseCaseEventCallback1(
-    jni.JObject eventCallback,
-  ) {
-    return _setUseCaseEventCallback1(
-            reference.pointer,
-            _id_setUseCaseEventCallback1 as jni.JMethodIDPtr,
-            eventCallback.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDynamicRange1 = _class.instanceMethodId(
-    r'setDynamicRange',
-    r'(Landroidx/camera/core/DynamicRange;)Ljava/lang/Object;',
-  );
-
-  static final _setDynamicRange1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDynamicRange(androidx.camera.core.DynamicRange dynamicRange)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDynamicRange1(
-    jni.JObject dynamicRange,
-  ) {
-    return _setDynamicRange1(
-            reference.pointer,
-            _id_setDynamicRange1 as jni.JMethodIDPtr,
-            dynamicRange.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $ImageAnalysis_BuilderType
-    extends jni.JObjType<ImageAnalysis_Builder> {
-  const $ImageAnalysis_BuilderType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageAnalysis$Builder;';
-
-  @override
-  ImageAnalysis_Builder fromReference(jni.JReference reference) =>
-      ImageAnalysis_Builder.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageAnalysis_BuilderType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageAnalysis_BuilderType) &&
-        other is $ImageAnalysis_BuilderType;
-  }
-}
-
-/// from: androidx.camera.core.ImageAnalysis$Defaults
-class ImageAnalysis_Defaults extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageAnalysis_Defaults> $type = type;
-
-  ImageAnalysis_Defaults.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageAnalysis$Defaults');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageAnalysis_DefaultsType();
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageAnalysis_Defaults() {
-    return ImageAnalysis_Defaults.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
-  }
-
-  static final _id_getConfig = _class.instanceMethodId(
-    r'getConfig',
-    r'()Landroidx/camera/core/impl/ImageAnalysisConfig;',
-  );
-
-  static final _getConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.ImageAnalysisConfig getConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getConfig() {
-    return _getConfig(reference.pointer, _id_getConfig as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getConfig1 = _class.instanceMethodId(
-    r'getConfig',
-    r'()Landroidx/camera/core/impl/Config;',
-  );
-
-  static final _getConfig1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.Config getConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getConfig1() {
-    return _getConfig1(reference.pointer, _id_getConfig1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $ImageAnalysis_DefaultsType
-    extends jni.JObjType<ImageAnalysis_Defaults> {
-  const $ImageAnalysis_DefaultsType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageAnalysis$Defaults;';
-
-  @override
-  ImageAnalysis_Defaults fromReference(jni.JReference reference) =>
-      ImageAnalysis_Defaults.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageAnalysis_DefaultsType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageAnalysis_DefaultsType) &&
-        other is $ImageAnalysis_DefaultsType;
-  }
-}
-
-/// from: androidx.camera.core.ImageAnalysis$OutputImageFormat
-class ImageAnalysis_OutputImageFormat extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageAnalysis_OutputImageFormat> $type = type;
-
-  ImageAnalysis_OutputImageFormat.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageAnalysis$OutputImageFormat');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageAnalysis_OutputImageFormatType();
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageAnalysis_OutputImageFormatImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageAnalysis_OutputImageFormat.implement(
-    $ImageAnalysis_OutputImageFormatImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageAnalysis_OutputImageFormat.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageAnalysis$OutputImageFormat',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageAnalysis_OutputImageFormatImpl {
-  factory $ImageAnalysis_OutputImageFormatImpl() =
-      _$ImageAnalysis_OutputImageFormatImpl;
-}
-
-class _$ImageAnalysis_OutputImageFormatImpl
-    implements $ImageAnalysis_OutputImageFormatImpl {
-  _$ImageAnalysis_OutputImageFormatImpl();
-}
-
-final class $ImageAnalysis_OutputImageFormatType
-    extends jni.JObjType<ImageAnalysis_OutputImageFormat> {
-  const $ImageAnalysis_OutputImageFormatType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageAnalysis$OutputImageFormat;';
-
-  @override
-  ImageAnalysis_OutputImageFormat fromReference(jni.JReference reference) =>
-      ImageAnalysis_OutputImageFormat.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageAnalysis_OutputImageFormatType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageAnalysis_OutputImageFormatType) &&
-        other is $ImageAnalysis_OutputImageFormatType;
-  }
-}
-
-/// from: androidx.camera.core.ImageAnalysis
-class ImageAnalysis extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageAnalysis> $type = type;
-
-  ImageAnalysis.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageAnalysis');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageAnalysisType();
-
-  /// from: static public final int STRATEGY_KEEP_ONLY_LATEST
-  static const STRATEGY_KEEP_ONLY_LATEST = 0;
-
-  /// from: static public final int STRATEGY_BLOCK_PRODUCER
-  static const STRATEGY_BLOCK_PRODUCER = 1;
-
-  /// from: static public final int OUTPUT_IMAGE_FORMAT_YUV_420_888
-  static const OUTPUT_IMAGE_FORMAT_YUV_420_888 = 1;
-
-  /// from: static public final int OUTPUT_IMAGE_FORMAT_RGBA_8888
-  static const OUTPUT_IMAGE_FORMAT_RGBA_8888 = 2;
-  static final _id_DEFAULT_CONFIG = _class.staticFieldId(
-    r'DEFAULT_CONFIG',
-    r'Landroidx/camera/core/ImageAnalysis$Defaults;',
-  );
-
-  /// from: static public final androidx.camera.core.ImageAnalysis$Defaults DEFAULT_CONFIG
-  /// The returned object must be released after use, by calling the [release] method.
-  static ImageAnalysis_Defaults get DEFAULT_CONFIG =>
-      _id_DEFAULT_CONFIG.get(_class, const $ImageAnalysis_DefaultsType());
-
-  /// from: static public final int COORDINATE_SYSTEM_ORIGINAL
-  static const COORDINATE_SYSTEM_ORIGINAL = 0;
-  static final _id_onMergeConfig = _class.instanceMethodId(
-    r'onMergeConfig',
-    r'(Landroidx/camera/core/impl/CameraInfoInternal;Landroidx/camera/core/impl/UseCaseConfig$Builder;)Landroidx/camera/core/impl/UseCaseConfig;',
-  );
-
-  static final _onMergeConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected androidx.camera.core.impl.UseCaseConfig onMergeConfig(androidx.camera.core.impl.CameraInfoInternal cameraInfoInternal, androidx.camera.core.impl.UseCaseConfig$Builder builder)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject onMergeConfig(
-    jni.JObject cameraInfoInternal,
-    jni.JObject builder,
-  ) {
-    return _onMergeConfig(
-            reference.pointer,
-            _id_onMergeConfig as jni.JMethodIDPtr,
-            cameraInfoInternal.reference.pointer,
-            builder.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_clearAnalyzer = _class.instanceMethodId(
-    r'clearAnalyzer',
-    r'()V',
-  );
-
-  static final _clearAnalyzer = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void clearAnalyzer()
-  void clearAnalyzer() {
-    _clearAnalyzer(reference.pointer, _id_clearAnalyzer as jni.JMethodIDPtr)
-        .check();
-  }
-
-  static final _id_getTargetRotation = _class.instanceMethodId(
-    r'getTargetRotation',
-    r'()I',
-  );
-
-  static final _getTargetRotation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getTargetRotation()
-  int getTargetRotation() {
-    return _getTargetRotation(
-            reference.pointer, _id_getTargetRotation as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_setTargetRotation = _class.instanceMethodId(
-    r'setTargetRotation',
-    r'(I)V',
-  );
-
-  static final _setTargetRotation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public void setTargetRotation(int i)
-  void setTargetRotation(
-    int i,
-  ) {
-    _setTargetRotation(
-            reference.pointer, _id_setTargetRotation as jni.JMethodIDPtr, i)
-        .check();
-  }
-
-  static final _id_setAnalyzer = _class.instanceMethodId(
-    r'setAnalyzer',
-    r'(Ljava/util/concurrent/Executor;Landroidx/camera/core/ImageAnalysis$Analyzer;)V',
-  );
-
-  static final _setAnalyzer = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setAnalyzer(java.util.concurrent.Executor executor, androidx.camera.core.ImageAnalysis$Analyzer analyzer)
-  void setAnalyzer(
-    Executor executor,
-    ImageAnalysis_Analyzer analyzer,
-  ) {
-    _setAnalyzer(reference.pointer, _id_setAnalyzer as jni.JMethodIDPtr,
-            executor.reference.pointer, analyzer.reference.pointer)
-        .check();
-  }
-
-  static final _id_setViewPortCropRect = _class.instanceMethodId(
-    r'setViewPortCropRect',
-    r'(Landroid/graphics/Rect;)V',
-  );
-
-  static final _setViewPortCropRect = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setViewPortCropRect(android.graphics.Rect rect)
-  void setViewPortCropRect(
-    Rect rect,
-  ) {
-    _setViewPortCropRect(reference.pointer,
-            _id_setViewPortCropRect as jni.JMethodIDPtr, rect.reference.pointer)
-        .check();
-  }
-
-  static final _id_setSensorToBufferTransformMatrix = _class.instanceMethodId(
-    r'setSensorToBufferTransformMatrix',
-    r'(Landroid/graphics/Matrix;)V',
-  );
-
-  static final _setSensorToBufferTransformMatrix =
-      ProtectedJniExtensions.lookup<
-                  ffi.NativeFunction<
-                      jni.JThrowablePtr Function(
-                          ffi.Pointer<ffi.Void>,
-                          jni.JMethodIDPtr,
-                          ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-              'globalEnv_CallVoidMethod')
-          .asFunction<
-              jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr, ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setSensorToBufferTransformMatrix(android.graphics.Matrix matrix)
-  void setSensorToBufferTransformMatrix(
-    jni.JObject matrix,
-  ) {
-    _setSensorToBufferTransformMatrix(
-            reference.pointer,
-            _id_setSensorToBufferTransformMatrix as jni.JMethodIDPtr,
-            matrix.reference.pointer)
-        .check();
-  }
-
-  static final _id_getBackpressureStrategy = _class.instanceMethodId(
-    r'getBackpressureStrategy',
-    r'()I',
-  );
-
-  static final _getBackpressureStrategy = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getBackpressureStrategy()
-  int getBackpressureStrategy() {
-    return _getBackpressureStrategy(
-            reference.pointer, _id_getBackpressureStrategy as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_getBackgroundExecutor = _class.instanceMethodId(
-    r'getBackgroundExecutor',
-    r'()Ljava/util/concurrent/Executor;',
-  );
-
-  static final _getBackgroundExecutor = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.util.concurrent.Executor getBackgroundExecutor()
-  /// The returned object must be released after use, by calling the [release] method.
-  Executor getBackgroundExecutor() {
-    return _getBackgroundExecutor(
-            reference.pointer, _id_getBackgroundExecutor as jni.JMethodIDPtr)
-        .object(const $ExecutorType());
-  }
-
-  static final _id_getImageQueueDepth = _class.instanceMethodId(
-    r'getImageQueueDepth',
-    r'()I',
-  );
-
-  static final _getImageQueueDepth = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getImageQueueDepth()
-  int getImageQueueDepth() {
-    return _getImageQueueDepth(
-            reference.pointer, _id_getImageQueueDepth as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_getOutputImageFormat = _class.instanceMethodId(
-    r'getOutputImageFormat',
-    r'()I',
-  );
-
-  static final _getOutputImageFormat = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getOutputImageFormat()
-  int getOutputImageFormat() {
-    return _getOutputImageFormat(
-            reference.pointer, _id_getOutputImageFormat as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_isOutputImageRotationEnabled = _class.instanceMethodId(
-    r'isOutputImageRotationEnabled',
-    r'()Z',
-  );
-
-  static final _isOutputImageRotationEnabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public boolean isOutputImageRotationEnabled()
-  bool isOutputImageRotationEnabled() {
-    return _isOutputImageRotationEnabled(reference.pointer,
-            _id_isOutputImageRotationEnabled as jni.JMethodIDPtr)
-        .boolean;
-  }
-
-  static final _id_getOnePixelShiftEnabled = _class.instanceMethodId(
-    r'getOnePixelShiftEnabled',
-    r'()Ljava/lang/Boolean;',
-  );
-
-  static final _getOnePixelShiftEnabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.Boolean getOnePixelShiftEnabled()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JBoolean getOnePixelShiftEnabled() {
-    return _getOnePixelShiftEnabled(
-            reference.pointer, _id_getOnePixelShiftEnabled as jni.JMethodIDPtr)
-        .object(const jni.JBooleanType());
-  }
-
-  static final _id_getResolutionInfo = _class.instanceMethodId(
-    r'getResolutionInfo',
-    r'()Landroidx/camera/core/ResolutionInfo;',
-  );
-
-  static final _getResolutionInfo = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ResolutionInfo getResolutionInfo()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getResolutionInfo() {
-    return _getResolutionInfo(
-            reference.pointer, _id_getResolutionInfo as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getResolutionSelector = _class.instanceMethodId(
-    r'getResolutionSelector',
-    r'()Landroidx/camera/core/resolutionselector/ResolutionSelector;',
-  );
-
-  static final _getResolutionSelector = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getResolutionSelector()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getResolutionSelector() {
-    return _getResolutionSelector(
-            reference.pointer, _id_getResolutionSelector as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_toString1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.String toString()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JString toString1() {
-    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
-  }
-
-  static final _id_onUnbind = _class.instanceMethodId(
-    r'onUnbind',
-    r'()V',
-  );
-
-  static final _onUnbind = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void onUnbind()
-  void onUnbind() {
-    _onUnbind(reference.pointer, _id_onUnbind as jni.JMethodIDPtr).check();
-  }
-
-  static final _id_getDefaultConfig = _class.instanceMethodId(
-    r'getDefaultConfig',
-    r'(ZLandroidx/camera/core/impl/UseCaseConfigFactory;)Landroidx/camera/core/impl/UseCaseConfig;',
-  );
-
-  static final _getDefaultConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.impl.UseCaseConfig getDefaultConfig(boolean z, androidx.camera.core.impl.UseCaseConfigFactory useCaseConfigFactory)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getDefaultConfig(
-    bool z,
-    jni.JObject useCaseConfigFactory,
-  ) {
-    return _getDefaultConfig(
-            reference.pointer,
-            _id_getDefaultConfig as jni.JMethodIDPtr,
-            z ? 1 : 0,
-            useCaseConfigFactory.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_onBind = _class.instanceMethodId(
-    r'onBind',
-    r'()V',
-  );
-
-  static final _onBind = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void onBind()
-  void onBind() {
-    _onBind(reference.pointer, _id_onBind as jni.JMethodIDPtr).check();
-  }
-
-  static final _id_getUseCaseConfigBuilder = _class.instanceMethodId(
-    r'getUseCaseConfigBuilder',
-    r'(Landroidx/camera/core/impl/Config;)Landroidx/camera/core/impl/UseCaseConfig$Builder;',
-  );
-
-  static final _getUseCaseConfigBuilder = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.impl.UseCaseConfig$Builder getUseCaseConfigBuilder(androidx.camera.core.impl.Config config)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUseCaseConfigBuilder(
-    jni.JObject config,
-  ) {
-    return _getUseCaseConfigBuilder(
-            reference.pointer,
-            _id_getUseCaseConfigBuilder as jni.JMethodIDPtr,
-            config.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_onSuggestedStreamSpecUpdated = _class.instanceMethodId(
-    r'onSuggestedStreamSpecUpdated',
-    r'(Landroidx/camera/core/impl/StreamSpec;)Landroidx/camera/core/impl/StreamSpec;',
-  );
-
-  static final _onSuggestedStreamSpecUpdated = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected androidx.camera.core.impl.StreamSpec onSuggestedStreamSpecUpdated(androidx.camera.core.impl.StreamSpec streamSpec)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject onSuggestedStreamSpecUpdated(
-    jni.JObject streamSpec,
-  ) {
-    return _onSuggestedStreamSpecUpdated(
-            reference.pointer,
-            _id_onSuggestedStreamSpecUpdated as jni.JMethodIDPtr,
-            streamSpec.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_onSuggestedStreamSpecImplementationOptionsUpdated =
-      _class.instanceMethodId(
-    r'onSuggestedStreamSpecImplementationOptionsUpdated',
-    r'(Landroidx/camera/core/impl/Config;)Landroidx/camera/core/impl/StreamSpec;',
-  );
-
-  static final _onSuggestedStreamSpecImplementationOptionsUpdated =
-      ProtectedJniExtensions.lookup<
-                  ffi.NativeFunction<
-                      jni.JniResult Function(
-                          ffi.Pointer<ffi.Void>,
-                          jni.JMethodIDPtr,
-                          ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-              'globalEnv_CallObjectMethod')
-          .asFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected androidx.camera.core.impl.StreamSpec onSuggestedStreamSpecImplementationOptionsUpdated(androidx.camera.core.impl.Config config)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject onSuggestedStreamSpecImplementationOptionsUpdated(
-    jni.JObject config,
-  ) {
-    return _onSuggestedStreamSpecImplementationOptionsUpdated(
-            reference.pointer,
-            _id_onSuggestedStreamSpecImplementationOptionsUpdated
-                as jni.JMethodIDPtr,
-            config.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $ImageAnalysisType extends jni.JObjType<ImageAnalysis> {
-  const $ImageAnalysisType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageAnalysis;';
-
-  @override
-  ImageAnalysis fromReference(jni.JReference reference) =>
-      ImageAnalysis.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageAnalysisType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageAnalysisType) &&
-        other is $ImageAnalysisType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$Builder
-class ImageCapture_Builder extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_Builder> $type = type;
-
-  ImageCapture_Builder.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture$Builder');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_BuilderType();
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_Builder() {
-    return ImageCapture_Builder.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
-  }
-
-  static final _id_fromConfig = _class.staticMethodId(
-    r'fromConfig',
-    r'(Landroidx/camera/core/impl/Config;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _fromConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: static public androidx.camera.core.ImageCapture$Builder fromConfig(androidx.camera.core.impl.Config config)
-  /// The returned object must be released after use, by calling the [release] method.
-  static ImageCapture_Builder fromConfig(
-    jni.JObject config,
-  ) {
-    return _fromConfig(_class.reference.pointer,
-            _id_fromConfig as jni.JMethodIDPtr, config.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_getMutableConfig = _class.instanceMethodId(
-    r'getMutableConfig',
-    r'()Landroidx/camera/core/impl/MutableConfig;',
-  );
-
-  static final _getMutableConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.MutableConfig getMutableConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getMutableConfig() {
-    return _getMutableConfig(
-            reference.pointer, _id_getMutableConfig as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getUseCaseConfig = _class.instanceMethodId(
-    r'getUseCaseConfig',
-    r'()Landroidx/camera/core/impl/ImageCaptureConfig;',
-  );
-
-  static final _getUseCaseConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.ImageCaptureConfig getUseCaseConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUseCaseConfig() {
-    return _getUseCaseConfig(
-            reference.pointer, _id_getUseCaseConfig as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_build = _class.instanceMethodId(
-    r'build',
-    r'()Landroidx/camera/core/ImageCapture;',
-  );
-
-  static final _build = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ImageCapture build()
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture build() {
-    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
-        .object(const $ImageCaptureType());
-  }
-
-  static final _id_setCaptureMode = _class.instanceMethodId(
-    r'setCaptureMode',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setCaptureMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setCaptureMode(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setCaptureMode(
-    int i,
-  ) {
-    return _setCaptureMode(
-            reference.pointer, _id_setCaptureMode as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setFlashMode = _class.instanceMethodId(
-    r'setFlashMode',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setFlashMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setFlashMode(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setFlashMode(
-    int i,
-  ) {
-    return _setFlashMode(
-            reference.pointer, _id_setFlashMode as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setBufferFormat = _class.instanceMethodId(
-    r'setBufferFormat',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setBufferFormat = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setBufferFormat(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setBufferFormat(
-    int i,
-  ) {
-    return _setBufferFormat(
-            reference.pointer, _id_setBufferFormat as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setSupportedResolutions = _class.instanceMethodId(
-    r'setSupportedResolutions',
-    r'(Ljava/util/List;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setSupportedResolutions = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setSupportedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setSupportedResolutions(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setSupportedResolutions(
-            reference.pointer,
-            _id_setSupportedResolutions as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setCustomOrderedResolutions = _class.instanceMethodId(
-    r'setCustomOrderedResolutions',
-    r'(Ljava/util/List;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setCustomOrderedResolutions = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setCustomOrderedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setCustomOrderedResolutions(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setCustomOrderedResolutions(
-            reference.pointer,
-            _id_setCustomOrderedResolutions as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setTargetClass = _class.instanceMethodId(
-    r'setTargetClass',
-    r'(Ljava/lang/Class;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setTargetClass = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setTargetClass(java.lang.Class class)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setTargetClass(
-    jni.JObject class0,
-  ) {
-    return _setTargetClass(reference.pointer,
-            _id_setTargetClass as jni.JMethodIDPtr, class0.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setTargetName = _class.instanceMethodId(
-    r'setTargetName',
-    r'(Ljava/lang/String;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setTargetName = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setTargetName(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setTargetName(
-    jni.JString string,
-  ) {
-    return _setTargetName(reference.pointer,
-            _id_setTargetName as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setTargetAspectRatio = _class.instanceMethodId(
-    r'setTargetAspectRatio',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setTargetAspectRatio = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setTargetAspectRatio(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setTargetAspectRatio(
-    int i,
-  ) {
-    return _setTargetAspectRatio(
-            reference.pointer, _id_setTargetAspectRatio as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setTargetRotation = _class.instanceMethodId(
-    r'setTargetRotation',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setTargetRotation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setTargetRotation(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setTargetRotation(
-    int i,
-  ) {
-    return _setTargetRotation(
-            reference.pointer, _id_setTargetRotation as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setMirrorMode = _class.instanceMethodId(
-    r'setMirrorMode',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setMirrorMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setMirrorMode(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setMirrorMode(
-    int i,
-  ) {
-    return _setMirrorMode(
-            reference.pointer, _id_setMirrorMode as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setTargetResolution = _class.instanceMethodId(
-    r'setTargetResolution',
-    r'(Landroid/util/Size;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setTargetResolution = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setTargetResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setTargetResolution(
-    jni.JObject size,
-  ) {
-    return _setTargetResolution(reference.pointer,
-            _id_setTargetResolution as jni.JMethodIDPtr, size.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setDefaultResolution = _class.instanceMethodId(
-    r'setDefaultResolution',
-    r'(Landroid/util/Size;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setDefaultResolution = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setDefaultResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setDefaultResolution(
-    jni.JObject size,
-  ) {
-    return _setDefaultResolution(
-            reference.pointer,
-            _id_setDefaultResolution as jni.JMethodIDPtr,
-            size.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setMaxResolution = _class.instanceMethodId(
-    r'setMaxResolution',
-    r'(Landroid/util/Size;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setMaxResolution = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setMaxResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setMaxResolution(
-    jni.JObject size,
-  ) {
-    return _setMaxResolution(reference.pointer,
-            _id_setMaxResolution as jni.JMethodIDPtr, size.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setResolutionSelector = _class.instanceMethodId(
-    r'setResolutionSelector',
-    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setResolutionSelector = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setResolutionSelector(
-    jni.JObject resolutionSelector,
-  ) {
-    return _setResolutionSelector(
-            reference.pointer,
-            _id_setResolutionSelector as jni.JMethodIDPtr,
-            resolutionSelector.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setImageReaderProxyProvider = _class.instanceMethodId(
-    r'setImageReaderProxyProvider',
-    r'(Landroidx/camera/core/ImageReaderProxyProvider;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setImageReaderProxyProvider = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setImageReaderProxyProvider(androidx.camera.core.ImageReaderProxyProvider imageReaderProxyProvider)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setImageReaderProxyProvider(
-    jni.JObject imageReaderProxyProvider,
-  ) {
-    return _setImageReaderProxyProvider(
-            reference.pointer,
-            _id_setImageReaderProxyProvider as jni.JMethodIDPtr,
-            imageReaderProxyProvider.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setSoftwareJpegEncoderRequested = _class.instanceMethodId(
-    r'setSoftwareJpegEncoderRequested',
-    r'(Z)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setSoftwareJpegEncoderRequested = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setSoftwareJpegEncoderRequested(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setSoftwareJpegEncoderRequested(
-    bool z,
-  ) {
-    return _setSoftwareJpegEncoderRequested(reference.pointer,
-            _id_setSoftwareJpegEncoderRequested as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setFlashType = _class.instanceMethodId(
-    r'setFlashType',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setFlashType = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setFlashType(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setFlashType(
-    int i,
-  ) {
-    return _setFlashType(
-            reference.pointer, _id_setFlashType as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setJpegQuality = _class.instanceMethodId(
-    r'setJpegQuality',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setJpegQuality = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setJpegQuality(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setJpegQuality(
-    int i,
-  ) {
-    return _setJpegQuality(
-            reference.pointer, _id_setJpegQuality as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setIoExecutor = _class.instanceMethodId(
-    r'setIoExecutor',
-    r'(Ljava/util/concurrent/Executor;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setIoExecutor = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setIoExecutor(java.util.concurrent.Executor executor)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setIoExecutor(
-    Executor executor,
-  ) {
-    return _setIoExecutor(reference.pointer,
-            _id_setIoExecutor as jni.JMethodIDPtr, executor.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setDefaultSessionConfig = _class.instanceMethodId(
-    r'setDefaultSessionConfig',
-    r'(Landroidx/camera/core/impl/SessionConfig;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setDefaultSessionConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setDefaultSessionConfig(androidx.camera.core.impl.SessionConfig sessionConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setDefaultSessionConfig(
-    jni.JObject sessionConfig,
-  ) {
-    return _setDefaultSessionConfig(
-            reference.pointer,
-            _id_setDefaultSessionConfig as jni.JMethodIDPtr,
-            sessionConfig.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setDefaultCaptureConfig = _class.instanceMethodId(
-    r'setDefaultCaptureConfig',
-    r'(Landroidx/camera/core/impl/CaptureConfig;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setDefaultCaptureConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setDefaultCaptureConfig(androidx.camera.core.impl.CaptureConfig captureConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setDefaultCaptureConfig(
-    jni.JObject captureConfig,
-  ) {
-    return _setDefaultCaptureConfig(
-            reference.pointer,
-            _id_setDefaultCaptureConfig as jni.JMethodIDPtr,
-            captureConfig.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setSessionOptionUnpacker = _class.instanceMethodId(
-    r'setSessionOptionUnpacker',
-    r'(Landroidx/camera/core/impl/SessionConfig$OptionUnpacker;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setSessionOptionUnpacker = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setSessionOptionUnpacker(androidx.camera.core.impl.SessionConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setSessionOptionUnpacker(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setSessionOptionUnpacker(
-            reference.pointer,
-            _id_setSessionOptionUnpacker as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setCaptureOptionUnpacker = _class.instanceMethodId(
-    r'setCaptureOptionUnpacker',
-    r'(Landroidx/camera/core/impl/CaptureConfig$OptionUnpacker;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setCaptureOptionUnpacker = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setCaptureOptionUnpacker(androidx.camera.core.impl.CaptureConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setCaptureOptionUnpacker(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setCaptureOptionUnpacker(
-            reference.pointer,
-            _id_setCaptureOptionUnpacker as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setCameraSelector = _class.instanceMethodId(
-    r'setCameraSelector',
-    r'(Landroidx/camera/core/CameraSelector;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setCameraSelector = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setCameraSelector(androidx.camera.core.CameraSelector cameraSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setCameraSelector(
-    CameraSelector cameraSelector,
-  ) {
-    return _setCameraSelector(
-            reference.pointer,
-            _id_setCameraSelector as jni.JMethodIDPtr,
-            cameraSelector.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setSurfaceOccupancyPriority = _class.instanceMethodId(
-    r'setSurfaceOccupancyPriority',
-    r'(I)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setSurfaceOccupancyPriority = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setSurfaceOccupancyPriority(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setSurfaceOccupancyPriority(
-    int i,
-  ) {
-    return _setSurfaceOccupancyPriority(reference.pointer,
-            _id_setSurfaceOccupancyPriority as jni.JMethodIDPtr, i)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setUseCaseEventCallback = _class.instanceMethodId(
-    r'setUseCaseEventCallback',
-    r'(Landroidx/camera/core/UseCase$EventCallback;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setUseCaseEventCallback = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setUseCaseEventCallback(androidx.camera.core.UseCase$EventCallback eventCallback)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setUseCaseEventCallback(
-    jni.JObject eventCallback,
-  ) {
-    return _setUseCaseEventCallback(
-            reference.pointer,
-            _id_setUseCaseEventCallback as jni.JMethodIDPtr,
-            eventCallback.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setZslDisabled = _class.instanceMethodId(
-    r'setZslDisabled',
-    r'(Z)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setZslDisabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setZslDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setZslDisabled(
-    bool z,
-  ) {
-    return _setZslDisabled(reference.pointer,
-            _id_setZslDisabled as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setHighResolutionDisabled = _class.instanceMethodId(
-    r'setHighResolutionDisabled',
-    r'(Z)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setHighResolutionDisabled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setHighResolutionDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setHighResolutionDisabled(
-    bool z,
-  ) {
-    return _setHighResolutionDisabled(reference.pointer,
-            _id_setHighResolutionDisabled as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setCaptureType = _class.instanceMethodId(
-    r'setCaptureType',
-    r'(Landroidx/camera/core/impl/UseCaseConfigFactory$CaptureType;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setCaptureType = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setCaptureType(androidx.camera.core.impl.UseCaseConfigFactory$CaptureType captureType)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setCaptureType(
-    jni.JObject captureType,
-  ) {
-    return _setCaptureType(
-            reference.pointer,
-            _id_setCaptureType as jni.JMethodIDPtr,
-            captureType.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_setDynamicRange = _class.instanceMethodId(
-    r'setDynamicRange',
-    r'(Landroidx/camera/core/DynamicRange;)Landroidx/camera/core/ImageCapture$Builder;',
-  );
-
-  static final _setDynamicRange = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$Builder setDynamicRange(androidx.camera.core.DynamicRange dynamicRange)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Builder setDynamicRange(
-    jni.JObject dynamicRange,
-  ) {
-    return _setDynamicRange(
-            reference.pointer,
-            _id_setDynamicRange as jni.JMethodIDPtr,
-            dynamicRange.reference.pointer)
-        .object(const $ImageCapture_BuilderType());
-  }
-
-  static final _id_getUseCaseConfig1 = _class.instanceMethodId(
-    r'getUseCaseConfig',
-    r'()Landroidx/camera/core/impl/UseCaseConfig;',
-  );
-
-  static final _getUseCaseConfig1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.UseCaseConfig getUseCaseConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUseCaseConfig1() {
-    return _getUseCaseConfig1(
-            reference.pointer, _id_getUseCaseConfig1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCaptureType1 = _class.instanceMethodId(
-    r'setCaptureType',
-    r'(Landroidx/camera/core/impl/UseCaseConfigFactory$CaptureType;)Ljava/lang/Object;',
-  );
-
-  static final _setCaptureType1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCaptureType(androidx.camera.core.impl.UseCaseConfigFactory$CaptureType captureType)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCaptureType1(
-    jni.JObject captureType,
-  ) {
-    return _setCaptureType1(
-            reference.pointer,
-            _id_setCaptureType1 as jni.JMethodIDPtr,
-            captureType.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setHighResolutionDisabled1 = _class.instanceMethodId(
-    r'setHighResolutionDisabled',
-    r'(Z)Ljava/lang/Object;',
-  );
-
-  static final _setHighResolutionDisabled1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setHighResolutionDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setHighResolutionDisabled1(
-    bool z,
-  ) {
-    return _setHighResolutionDisabled1(reference.pointer,
-            _id_setHighResolutionDisabled1 as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setZslDisabled1 = _class.instanceMethodId(
-    r'setZslDisabled',
-    r'(Z)Ljava/lang/Object;',
-  );
-
-  static final _setZslDisabled1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setZslDisabled(boolean z)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setZslDisabled1(
-    bool z,
-  ) {
-    return _setZslDisabled1(reference.pointer,
-            _id_setZslDisabled1 as jni.JMethodIDPtr, z ? 1 : 0)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCameraSelector1 = _class.instanceMethodId(
-    r'setCameraSelector',
-    r'(Landroidx/camera/core/CameraSelector;)Ljava/lang/Object;',
-  );
-
-  static final _setCameraSelector1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCameraSelector(androidx.camera.core.CameraSelector cameraSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCameraSelector1(
-    CameraSelector cameraSelector,
-  ) {
-    return _setCameraSelector1(
-            reference.pointer,
-            _id_setCameraSelector1 as jni.JMethodIDPtr,
-            cameraSelector.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setSurfaceOccupancyPriority1 = _class.instanceMethodId(
-    r'setSurfaceOccupancyPriority',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setSurfaceOccupancyPriority1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setSurfaceOccupancyPriority(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setSurfaceOccupancyPriority1(
-    int i,
-  ) {
-    return _setSurfaceOccupancyPriority1(reference.pointer,
-            _id_setSurfaceOccupancyPriority1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCaptureOptionUnpacker1 = _class.instanceMethodId(
-    r'setCaptureOptionUnpacker',
-    r'(Landroidx/camera/core/impl/CaptureConfig$OptionUnpacker;)Ljava/lang/Object;',
-  );
-
-  static final _setCaptureOptionUnpacker1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCaptureOptionUnpacker(androidx.camera.core.impl.CaptureConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCaptureOptionUnpacker1(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setCaptureOptionUnpacker1(
-            reference.pointer,
-            _id_setCaptureOptionUnpacker1 as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setSessionOptionUnpacker1 = _class.instanceMethodId(
-    r'setSessionOptionUnpacker',
-    r'(Landroidx/camera/core/impl/SessionConfig$OptionUnpacker;)Ljava/lang/Object;',
-  );
-
-  static final _setSessionOptionUnpacker1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setSessionOptionUnpacker(androidx.camera.core.impl.SessionConfig$OptionUnpacker optionUnpacker)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setSessionOptionUnpacker1(
-    jni.JObject optionUnpacker,
-  ) {
-    return _setSessionOptionUnpacker1(
-            reference.pointer,
-            _id_setSessionOptionUnpacker1 as jni.JMethodIDPtr,
-            optionUnpacker.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDefaultCaptureConfig1 = _class.instanceMethodId(
-    r'setDefaultCaptureConfig',
-    r'(Landroidx/camera/core/impl/CaptureConfig;)Ljava/lang/Object;',
-  );
-
-  static final _setDefaultCaptureConfig1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDefaultCaptureConfig(androidx.camera.core.impl.CaptureConfig captureConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDefaultCaptureConfig1(
-    jni.JObject captureConfig,
-  ) {
-    return _setDefaultCaptureConfig1(
-            reference.pointer,
-            _id_setDefaultCaptureConfig1 as jni.JMethodIDPtr,
-            captureConfig.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDefaultSessionConfig1 = _class.instanceMethodId(
-    r'setDefaultSessionConfig',
-    r'(Landroidx/camera/core/impl/SessionConfig;)Ljava/lang/Object;',
-  );
-
-  static final _setDefaultSessionConfig1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDefaultSessionConfig(androidx.camera.core.impl.SessionConfig sessionConfig)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDefaultSessionConfig1(
-    jni.JObject sessionConfig,
-  ) {
-    return _setDefaultSessionConfig1(
-            reference.pointer,
-            _id_setDefaultSessionConfig1 as jni.JMethodIDPtr,
-            sessionConfig.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetName1 = _class.instanceMethodId(
-    r'setTargetName',
-    r'(Ljava/lang/String;)Ljava/lang/Object;',
-  );
-
-  static final _setTargetName1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setTargetName(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetName1(
-    jni.JString string,
-  ) {
-    return _setTargetName1(reference.pointer,
-            _id_setTargetName1 as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetClass1 = _class.instanceMethodId(
-    r'setTargetClass',
-    r'(Ljava/lang/Class;)Ljava/lang/Object;',
-  );
-
-  static final _setTargetClass1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setTargetClass(java.lang.Class class)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetClass1(
-    jni.JObject class0,
-  ) {
-    return _setTargetClass1(reference.pointer,
-            _id_setTargetClass1 as jni.JMethodIDPtr, class0.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_build1 = _class.instanceMethodId(
-    r'build',
-    r'()Ljava/lang/Object;',
-  );
-
-  static final _build1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.Object build()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject build1() {
-    return _build1(reference.pointer, _id_build1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setUseCaseEventCallback1 = _class.instanceMethodId(
-    r'setUseCaseEventCallback',
-    r'(Landroidx/camera/core/UseCase$EventCallback;)Ljava/lang/Object;',
-  );
-
-  static final _setUseCaseEventCallback1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setUseCaseEventCallback(androidx.camera.core.UseCase$EventCallback eventCallback)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setUseCaseEventCallback1(
-    jni.JObject eventCallback,
-  ) {
-    return _setUseCaseEventCallback1(
-            reference.pointer,
-            _id_setUseCaseEventCallback1 as jni.JMethodIDPtr,
-            eventCallback.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setResolutionSelector1 = _class.instanceMethodId(
-    r'setResolutionSelector',
-    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)Ljava/lang/Object;',
-  );
-
-  static final _setResolutionSelector1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setResolutionSelector1(
-    jni.JObject resolutionSelector,
-  ) {
-    return _setResolutionSelector1(
-            reference.pointer,
-            _id_setResolutionSelector1 as jni.JMethodIDPtr,
-            resolutionSelector.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setCustomOrderedResolutions1 = _class.instanceMethodId(
-    r'setCustomOrderedResolutions',
-    r'(Ljava/util/List;)Ljava/lang/Object;',
-  );
-
-  static final _setCustomOrderedResolutions1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setCustomOrderedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setCustomOrderedResolutions1(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setCustomOrderedResolutions1(
-            reference.pointer,
-            _id_setCustomOrderedResolutions1 as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setSupportedResolutions1 = _class.instanceMethodId(
-    r'setSupportedResolutions',
-    r'(Ljava/util/List;)Ljava/lang/Object;',
-  );
-
-  static final _setSupportedResolutions1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setSupportedResolutions(java.util.List list)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setSupportedResolutions1(
-    jni.JList<jni.JObject> list,
-  ) {
-    return _setSupportedResolutions1(
-            reference.pointer,
-            _id_setSupportedResolutions1 as jni.JMethodIDPtr,
-            list.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setMaxResolution1 = _class.instanceMethodId(
-    r'setMaxResolution',
-    r'(Landroid/util/Size;)Ljava/lang/Object;',
-  );
-
-  static final _setMaxResolution1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setMaxResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setMaxResolution1(
-    jni.JObject size,
-  ) {
-    return _setMaxResolution1(reference.pointer,
-            _id_setMaxResolution1 as jni.JMethodIDPtr, size.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDefaultResolution1 = _class.instanceMethodId(
-    r'setDefaultResolution',
-    r'(Landroid/util/Size;)Ljava/lang/Object;',
-  );
-
-  static final _setDefaultResolution1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDefaultResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDefaultResolution1(
-    jni.JObject size,
-  ) {
-    return _setDefaultResolution1(
-            reference.pointer,
-            _id_setDefaultResolution1 as jni.JMethodIDPtr,
-            size.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetResolution1 = _class.instanceMethodId(
-    r'setTargetResolution',
-    r'(Landroid/util/Size;)Ljava/lang/Object;',
-  );
-
-  static final _setTargetResolution1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setTargetResolution(android.util.Size size)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetResolution1(
-    jni.JObject size,
-  ) {
-    return _setTargetResolution1(
-            reference.pointer,
-            _id_setTargetResolution1 as jni.JMethodIDPtr,
-            size.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setMirrorMode1 = _class.instanceMethodId(
-    r'setMirrorMode',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setMirrorMode1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setMirrorMode(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setMirrorMode1(
-    int i,
-  ) {
-    return _setMirrorMode1(
-            reference.pointer, _id_setMirrorMode1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetRotation1 = _class.instanceMethodId(
-    r'setTargetRotation',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setTargetRotation1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setTargetRotation(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetRotation1(
-    int i,
-  ) {
-    return _setTargetRotation1(
-            reference.pointer, _id_setTargetRotation1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setTargetAspectRatio1 = _class.instanceMethodId(
-    r'setTargetAspectRatio',
-    r'(I)Ljava/lang/Object;',
-  );
-
-  static final _setTargetAspectRatio1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public java.lang.Object setTargetAspectRatio(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setTargetAspectRatio1(
-    int i,
-  ) {
-    return _setTargetAspectRatio1(
-            reference.pointer, _id_setTargetAspectRatio1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setIoExecutor1 = _class.instanceMethodId(
-    r'setIoExecutor',
-    r'(Ljava/util/concurrent/Executor;)Ljava/lang/Object;',
-  );
-
-  static final _setIoExecutor1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setIoExecutor(java.util.concurrent.Executor executor)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setIoExecutor1(
-    Executor executor,
-  ) {
-    return _setIoExecutor1(reference.pointer,
-            _id_setIoExecutor1 as jni.JMethodIDPtr, executor.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setDynamicRange1 = _class.instanceMethodId(
-    r'setDynamicRange',
-    r'(Landroidx/camera/core/DynamicRange;)Ljava/lang/Object;',
-  );
-
-  static final _setDynamicRange1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public java.lang.Object setDynamicRange(androidx.camera.core.DynamicRange dynamicRange)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject setDynamicRange1(
-    jni.JObject dynamicRange,
-  ) {
-    return _setDynamicRange1(
-            reference.pointer,
-            _id_setDynamicRange1 as jni.JMethodIDPtr,
-            dynamicRange.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $ImageCapture_BuilderType
-    extends jni.JObjType<ImageCapture_Builder> {
-  const $ImageCapture_BuilderType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture$Builder;';
-
-  @override
-  ImageCapture_Builder fromReference(jni.JReference reference) =>
-      ImageCapture_Builder.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_BuilderType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_BuilderType) &&
-        other is $ImageCapture_BuilderType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$CaptureMode
-class ImageCapture_CaptureMode extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_CaptureMode> $type = type;
-
-  ImageCapture_CaptureMode.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture$CaptureMode');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_CaptureModeType();
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageCapture_CaptureModeImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageCapture_CaptureMode.implement(
-    $ImageCapture_CaptureModeImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageCapture_CaptureMode.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageCapture$CaptureMode',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageCapture_CaptureModeImpl {
-  factory $ImageCapture_CaptureModeImpl() = _$ImageCapture_CaptureModeImpl;
-}
-
-class _$ImageCapture_CaptureModeImpl implements $ImageCapture_CaptureModeImpl {
-  _$ImageCapture_CaptureModeImpl();
-}
-
-final class $ImageCapture_CaptureModeType
-    extends jni.JObjType<ImageCapture_CaptureMode> {
-  const $ImageCapture_CaptureModeType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture$CaptureMode;';
-
-  @override
-  ImageCapture_CaptureMode fromReference(jni.JReference reference) =>
-      ImageCapture_CaptureMode.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_CaptureModeType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_CaptureModeType) &&
-        other is $ImageCapture_CaptureModeType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$Defaults
-class ImageCapture_Defaults extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_Defaults> $type = type;
-
-  ImageCapture_Defaults.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture$Defaults');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_DefaultsType();
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_Defaults() {
-    return ImageCapture_Defaults.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
-  }
-
-  static final _id_getConfig = _class.instanceMethodId(
-    r'getConfig',
-    r'()Landroidx/camera/core/impl/ImageCaptureConfig;',
-  );
-
-  static final _getConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.ImageCaptureConfig getConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getConfig() {
-    return _getConfig(reference.pointer, _id_getConfig as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getConfig1 = _class.instanceMethodId(
-    r'getConfig',
-    r'()Landroidx/camera/core/impl/Config;',
-  );
-
-  static final _getConfig1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.impl.Config getConfig()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getConfig1() {
-    return _getConfig1(reference.pointer, _id_getConfig1 as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $ImageCapture_DefaultsType
-    extends jni.JObjType<ImageCapture_Defaults> {
-  const $ImageCapture_DefaultsType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture$Defaults;';
-
-  @override
-  ImageCapture_Defaults fromReference(jni.JReference reference) =>
-      ImageCapture_Defaults.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_DefaultsType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_DefaultsType) &&
-        other is $ImageCapture_DefaultsType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$FlashMode
-class ImageCapture_FlashMode extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_FlashMode> $type = type;
-
-  ImageCapture_FlashMode.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture$FlashMode');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_FlashModeType();
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageCapture_FlashModeImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageCapture_FlashMode.implement(
-    $ImageCapture_FlashModeImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageCapture_FlashMode.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageCapture$FlashMode',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageCapture_FlashModeImpl {
-  factory $ImageCapture_FlashModeImpl() = _$ImageCapture_FlashModeImpl;
-}
-
-class _$ImageCapture_FlashModeImpl implements $ImageCapture_FlashModeImpl {
-  _$ImageCapture_FlashModeImpl();
-}
-
-final class $ImageCapture_FlashModeType
-    extends jni.JObjType<ImageCapture_FlashMode> {
-  const $ImageCapture_FlashModeType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture$FlashMode;';
-
-  @override
-  ImageCapture_FlashMode fromReference(jni.JReference reference) =>
-      ImageCapture_FlashMode.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_FlashModeType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_FlashModeType) &&
-        other is $ImageCapture_FlashModeType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$FlashType
-class ImageCapture_FlashType extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_FlashType> $type = type;
-
-  ImageCapture_FlashType.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture$FlashType');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_FlashTypeType();
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageCapture_FlashTypeImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageCapture_FlashType.implement(
-    $ImageCapture_FlashTypeImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageCapture_FlashType.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageCapture$FlashType',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageCapture_FlashTypeImpl {
-  factory $ImageCapture_FlashTypeImpl() = _$ImageCapture_FlashTypeImpl;
-}
-
-class _$ImageCapture_FlashTypeImpl implements $ImageCapture_FlashTypeImpl {
-  _$ImageCapture_FlashTypeImpl();
-}
-
-final class $ImageCapture_FlashTypeType
-    extends jni.JObjType<ImageCapture_FlashType> {
-  const $ImageCapture_FlashTypeType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture$FlashType;';
-
-  @override
-  ImageCapture_FlashType fromReference(jni.JReference reference) =>
-      ImageCapture_FlashType.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_FlashTypeType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_FlashTypeType) &&
-        other is $ImageCapture_FlashTypeType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$ImageCaptureError
-class ImageCapture_ImageCaptureError extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_ImageCaptureError> $type = type;
-
-  ImageCapture_ImageCaptureError.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageCapture$ImageCaptureError');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_ImageCaptureErrorType();
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageCapture_ImageCaptureErrorImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageCapture_ImageCaptureError.implement(
-    $ImageCapture_ImageCaptureErrorImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageCapture_ImageCaptureError.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageCapture$ImageCaptureError',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageCapture_ImageCaptureErrorImpl {
-  factory $ImageCapture_ImageCaptureErrorImpl() =
-      _$ImageCapture_ImageCaptureErrorImpl;
-}
-
-class _$ImageCapture_ImageCaptureErrorImpl
-    implements $ImageCapture_ImageCaptureErrorImpl {
-  _$ImageCapture_ImageCaptureErrorImpl();
-}
-
-final class $ImageCapture_ImageCaptureErrorType
-    extends jni.JObjType<ImageCapture_ImageCaptureError> {
-  const $ImageCapture_ImageCaptureErrorType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageCapture$ImageCaptureError;';
-
-  @override
-  ImageCapture_ImageCaptureError fromReference(jni.JReference reference) =>
-      ImageCapture_ImageCaptureError.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_ImageCaptureErrorType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_ImageCaptureErrorType) &&
-        other is $ImageCapture_ImageCaptureErrorType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$Metadata
-class ImageCapture_Metadata extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_Metadata> $type = type;
-
-  ImageCapture_Metadata.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture$Metadata');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_MetadataType();
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_Metadata() {
-    return ImageCapture_Metadata.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
-  }
-
-  static final _id_isReversedHorizontal = _class.instanceMethodId(
-    r'isReversedHorizontal',
-    r'()Z',
-  );
-
-  static final _isReversedHorizontal = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public boolean isReversedHorizontal()
-  bool isReversedHorizontal() {
-    return _isReversedHorizontal(
-            reference.pointer, _id_isReversedHorizontal as jni.JMethodIDPtr)
-        .boolean;
-  }
-
-  static final _id_isReversedHorizontalSet = _class.instanceMethodId(
-    r'isReversedHorizontalSet',
-    r'()Z',
-  );
-
-  static final _isReversedHorizontalSet = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public boolean isReversedHorizontalSet()
-  bool isReversedHorizontalSet() {
-    return _isReversedHorizontalSet(
-            reference.pointer, _id_isReversedHorizontalSet as jni.JMethodIDPtr)
-        .boolean;
-  }
-
-  static final _id_setReversedHorizontal = _class.instanceMethodId(
-    r'setReversedHorizontal',
-    r'(Z)V',
-  );
-
-  static final _setReversedHorizontal = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public void setReversedHorizontal(boolean z)
-  void setReversedHorizontal(
-    bool z,
-  ) {
-    _setReversedHorizontal(reference.pointer,
-            _id_setReversedHorizontal as jni.JMethodIDPtr, z ? 1 : 0)
-        .check();
-  }
-
-  static final _id_isReversedVertical = _class.instanceMethodId(
-    r'isReversedVertical',
-    r'()Z',
-  );
-
-  static final _isReversedVertical = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public boolean isReversedVertical()
-  bool isReversedVertical() {
-    return _isReversedVertical(
-            reference.pointer, _id_isReversedVertical as jni.JMethodIDPtr)
-        .boolean;
-  }
-
-  static final _id_setReversedVertical = _class.instanceMethodId(
-    r'setReversedVertical',
-    r'(Z)V',
-  );
-
-  static final _setReversedVertical = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public void setReversedVertical(boolean z)
-  void setReversedVertical(
-    bool z,
-  ) {
-    _setReversedVertical(reference.pointer,
-            _id_setReversedVertical as jni.JMethodIDPtr, z ? 1 : 0)
-        .check();
-  }
-
-  static final _id_getLocation = _class.instanceMethodId(
-    r'getLocation',
-    r'()Landroid/location/Location;',
-  );
-
-  static final _getLocation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.location.Location getLocation()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getLocation() {
-    return _getLocation(reference.pointer, _id_getLocation as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setLocation = _class.instanceMethodId(
-    r'setLocation',
-    r'(Landroid/location/Location;)V',
-  );
-
-  static final _setLocation = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setLocation(android.location.Location location)
-  void setLocation(
-    jni.JObject location,
-  ) {
-    _setLocation(reference.pointer, _id_setLocation as jni.JMethodIDPtr,
-            location.reference.pointer)
-        .check();
-  }
-
-  static final _id_toString1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.String toString()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JString toString1() {
-    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
-  }
-}
-
-final class $ImageCapture_MetadataType
-    extends jni.JObjType<ImageCapture_Metadata> {
-  const $ImageCapture_MetadataType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture$Metadata;';
-
-  @override
-  ImageCapture_Metadata fromReference(jni.JReference reference) =>
-      ImageCapture_Metadata.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_MetadataType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_MetadataType) &&
-        other is $ImageCapture_MetadataType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$OnImageCapturedCallback
-class ImageCapture_OnImageCapturedCallback extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_OnImageCapturedCallback> $type = type;
-
-  ImageCapture_OnImageCapturedCallback.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageCapture$OnImageCapturedCallback');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_OnImageCapturedCallbackType();
-  static final _id_new0 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_OnImageCapturedCallback() {
-    return ImageCapture_OnImageCapturedCallback.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
-            .reference);
-  }
-
-  static final _id_onCaptureSuccess = _class.instanceMethodId(
-    r'onCaptureSuccess',
-    r'(Landroidx/camera/core/ImageProxy;)V',
-  );
-
-  static final _onCaptureSuccess = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void onCaptureSuccess(androidx.camera.core.ImageProxy imageProxy)
-  void onCaptureSuccess(
-    ImageProxy imageProxy,
-  ) {
-    _onCaptureSuccess(
-            reference.pointer,
-            _id_onCaptureSuccess as jni.JMethodIDPtr,
-            imageProxy.reference.pointer)
-        .check();
-  }
-
-  static final _id_onError = _class.instanceMethodId(
-    r'onError',
-    r'(Landroidx/camera/core/ImageCaptureException;)V',
-  );
-
-  static final _onError = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void onError(androidx.camera.core.ImageCaptureException imageCaptureException)
-  void onError(
-    jni.JObject imageCaptureException,
-  ) {
-    _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
-            imageCaptureException.reference.pointer)
-        .check();
-  }
-}
-
-final class $ImageCapture_OnImageCapturedCallbackType
-    extends jni.JObjType<ImageCapture_OnImageCapturedCallback> {
-  const $ImageCapture_OnImageCapturedCallbackType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageCapture$OnImageCapturedCallback;';
-
-  @override
-  ImageCapture_OnImageCapturedCallback fromReference(
-          jni.JReference reference) =>
-      ImageCapture_OnImageCapturedCallback.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_OnImageCapturedCallbackType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_OnImageCapturedCallbackType) &&
-        other is $ImageCapture_OnImageCapturedCallbackType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$OnImageSavedCallback
-class ImageCapture_OnImageSavedCallback extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_OnImageSavedCallback> $type = type;
-
-  ImageCapture_OnImageSavedCallback.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageCapture$OnImageSavedCallback');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_OnImageSavedCallbackType();
-  static final _id_onImageSaved = _class.instanceMethodId(
-    r'onImageSaved',
-    r'(Landroidx/camera/core/ImageCapture$OutputFileResults;)V',
-  );
-
-  static final _onImageSaved = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public abstract void onImageSaved(androidx.camera.core.ImageCapture$OutputFileResults outputFileResults)
-  void onImageSaved(
-    ImageCapture_OutputFileResults outputFileResults,
-  ) {
-    _onImageSaved(reference.pointer, _id_onImageSaved as jni.JMethodIDPtr,
-            outputFileResults.reference.pointer)
-        .check();
-  }
-
-  static final _id_onError = _class.instanceMethodId(
-    r'onError',
-    r'(Landroidx/camera/core/ImageCaptureException;)V',
-  );
-
-  static final _onError = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public abstract void onError(androidx.camera.core.ImageCaptureException imageCaptureException)
-  void onError(
-    jni.JObject imageCaptureException,
-  ) {
-    _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
-            imageCaptureException.reference.pointer)
-        .check();
-  }
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $ImageCapture_OnImageSavedCallbackImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-      if ($d ==
-          r'onImageSaved(Landroidx/camera/core/ImageCapture$OutputFileResults;)V') {
-        _$impls[$p]!.onImageSaved(
-          $a[0].castTo(const $ImageCapture_OutputFileResultsType(),
-              releaseOriginal: true),
-        );
-        return jni.nullptr;
-      }
-      if ($d == r'onError(Landroidx/camera/core/ImageCaptureException;)V') {
-        _$impls[$p]!.onError(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
-        );
-        return jni.nullptr;
-      }
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory ImageCapture_OnImageSavedCallback.implement(
-    $ImageCapture_OnImageSavedCallbackImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = ImageCapture_OnImageSavedCallback.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.core.ImageCapture$OnImageSavedCallback',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $ImageCapture_OnImageSavedCallbackImpl {
-  factory $ImageCapture_OnImageSavedCallbackImpl({
-    required void Function(ImageCapture_OutputFileResults outputFileResults)
-        onImageSaved,
-    required void Function(jni.JObject imageCaptureException) onError,
-  }) = _$ImageCapture_OnImageSavedCallbackImpl;
-
-  void onImageSaved(ImageCapture_OutputFileResults outputFileResults);
-  void onError(jni.JObject imageCaptureException);
-}
-
-class _$ImageCapture_OnImageSavedCallbackImpl
-    implements $ImageCapture_OnImageSavedCallbackImpl {
-  _$ImageCapture_OnImageSavedCallbackImpl({
-    required void Function(ImageCapture_OutputFileResults outputFileResults)
-        onImageSaved,
-    required void Function(jni.JObject imageCaptureException) onError,
-  })  : _onImageSaved = onImageSaved,
-        _onError = onError;
-
-  final void Function(ImageCapture_OutputFileResults outputFileResults)
-      _onImageSaved;
-  final void Function(jni.JObject imageCaptureException) _onError;
-
-  void onImageSaved(ImageCapture_OutputFileResults outputFileResults) {
-    return _onImageSaved(outputFileResults);
-  }
-
-  void onError(jni.JObject imageCaptureException) {
-    return _onError(imageCaptureException);
-  }
-}
-
-final class $ImageCapture_OnImageSavedCallbackType
-    extends jni.JObjType<ImageCapture_OnImageSavedCallback> {
-  const $ImageCapture_OnImageSavedCallbackType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageCapture$OnImageSavedCallback;';
-
-  @override
-  ImageCapture_OnImageSavedCallback fromReference(jni.JReference reference) =>
-      ImageCapture_OnImageSavedCallback.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_OnImageSavedCallbackType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_OnImageSavedCallbackType) &&
-        other is $ImageCapture_OnImageSavedCallbackType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$OutputFileOptions$Builder
-class ImageCapture_OutputFileOptions_Builder extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_OutputFileOptions_Builder> $type = type;
-
-  ImageCapture_OutputFileOptions_Builder.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageCapture$OutputFileOptions$Builder');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_OutputFileOptions_BuilderType();
-  static final _id_new0 = _class.constructorId(
-    r'(Ljava/io/File;)V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(java.io.File file)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_OutputFileOptions_Builder(
-    jni.JObject file,
-  ) {
-    return ImageCapture_OutputFileOptions_Builder.fromReference(_new0(
-            _class.reference.pointer,
-            _id_new0 as jni.JMethodIDPtr,
-            file.reference.pointer)
-        .reference);
-  }
-
-  static final _id_new1 = _class.constructorId(
-    r'(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/content/ContentValues;)V',
-  );
-
-  static final _new1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(android.content.ContentResolver contentResolver, android.net.Uri uri, android.content.ContentValues contentValues)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_OutputFileOptions_Builder.new1(
-    ContentResolver contentResolver,
-    Uri uri,
-    ContentValues contentValues,
-  ) {
-    return ImageCapture_OutputFileOptions_Builder.fromReference(_new1(
-            _class.reference.pointer,
-            _id_new1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
-            contentValues.reference.pointer)
-        .reference);
-  }
-
-  static final _id_new2 = _class.constructorId(
-    r'(Ljava/io/OutputStream;)V',
-  );
-
-  static final _new2 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(java.io.OutputStream outputStream)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_OutputFileOptions_Builder.new2(
-    jni.JObject outputStream,
-  ) {
-    return ImageCapture_OutputFileOptions_Builder.fromReference(_new2(
-            _class.reference.pointer,
-            _id_new2 as jni.JMethodIDPtr,
-            outputStream.reference.pointer)
-        .reference);
-  }
-
-  static final _id_setMetadata = _class.instanceMethodId(
-    r'setMetadata',
-    r'(Landroidx/camera/core/ImageCapture$Metadata;)Landroidx/camera/core/ImageCapture$OutputFileOptions$Builder;',
-  );
-
-  static final _setMetadata = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.ImageCapture$OutputFileOptions$Builder setMetadata(androidx.camera.core.ImageCapture$Metadata metadata)
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_OutputFileOptions_Builder setMetadata(
-    ImageCapture_Metadata metadata,
-  ) {
-    return _setMetadata(reference.pointer, _id_setMetadata as jni.JMethodIDPtr,
-            metadata.reference.pointer)
-        .object(const $ImageCapture_OutputFileOptions_BuilderType());
-  }
-
-  static final _id_build = _class.instanceMethodId(
-    r'build',
-    r'()Landroidx/camera/core/ImageCapture$OutputFileOptions;',
-  );
-
-  static final _build = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ImageCapture$OutputFileOptions build()
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_OutputFileOptions build() {
-    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
-        .object(const $ImageCapture_OutputFileOptionsType());
-  }
-}
-
-final class $ImageCapture_OutputFileOptions_BuilderType
-    extends jni.JObjType<ImageCapture_OutputFileOptions_Builder> {
-  const $ImageCapture_OutputFileOptions_BuilderType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageCapture$OutputFileOptions$Builder;';
-
-  @override
-  ImageCapture_OutputFileOptions_Builder fromReference(
-          jni.JReference reference) =>
-      ImageCapture_OutputFileOptions_Builder.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_OutputFileOptions_BuilderType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_OutputFileOptions_BuilderType) &&
-        other is $ImageCapture_OutputFileOptions_BuilderType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$OutputFileOptions
-class ImageCapture_OutputFileOptions extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_OutputFileOptions> $type = type;
-
-  ImageCapture_OutputFileOptions.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageCapture$OutputFileOptions');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_OutputFileOptionsType();
-  static final _id_getFile = _class.instanceMethodId(
-    r'getFile',
-    r'()Ljava/io/File;',
-  );
-
-  static final _getFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.io.File getFile()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getFile() {
-    return _getFile(reference.pointer, _id_getFile as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getContentResolver = _class.instanceMethodId(
-    r'getContentResolver',
-    r'()Landroid/content/ContentResolver;',
-  );
-
-  static final _getContentResolver = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.content.ContentResolver getContentResolver()
-  /// The returned object must be released after use, by calling the [release] method.
-  ContentResolver getContentResolver() {
-    return _getContentResolver(
-            reference.pointer, _id_getContentResolver as jni.JMethodIDPtr)
-        .object(const $ContentResolverType());
-  }
-
-  static final _id_getSaveCollection = _class.instanceMethodId(
-    r'getSaveCollection',
-    r'()Landroid/net/Uri;',
-  );
-
-  static final _getSaveCollection = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.net.Uri getSaveCollection()
-  /// The returned object must be released after use, by calling the [release] method.
-  Uri getSaveCollection() {
-    return _getSaveCollection(
-            reference.pointer, _id_getSaveCollection as jni.JMethodIDPtr)
-        .object(const $UriType());
-  }
-
-  static final _id_getContentValues = _class.instanceMethodId(
-    r'getContentValues',
-    r'()Landroid/content/ContentValues;',
-  );
-
-  static final _getContentValues = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.content.ContentValues getContentValues()
-  /// The returned object must be released after use, by calling the [release] method.
-  ContentValues getContentValues() {
-    return _getContentValues(
-            reference.pointer, _id_getContentValues as jni.JMethodIDPtr)
-        .object(const $ContentValuesType());
-  }
-
-  static final _id_getOutputStream = _class.instanceMethodId(
-    r'getOutputStream',
-    r'()Ljava/io/OutputStream;',
-  );
-
-  static final _getOutputStream = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.io.OutputStream getOutputStream()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getOutputStream() {
-    return _getOutputStream(
-            reference.pointer, _id_getOutputStream as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getMetadata = _class.instanceMethodId(
-    r'getMetadata',
-    r'()Landroidx/camera/core/ImageCapture$Metadata;',
-  );
-
-  static final _getMetadata = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ImageCapture$Metadata getMetadata()
-  /// The returned object must be released after use, by calling the [release] method.
-  ImageCapture_Metadata getMetadata() {
-    return _getMetadata(reference.pointer, _id_getMetadata as jni.JMethodIDPtr)
-        .object(const $ImageCapture_MetadataType());
-  }
-
-  static final _id_toString1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.String toString()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JString toString1() {
-    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
-  }
-}
-
-final class $ImageCapture_OutputFileOptionsType
-    extends jni.JObjType<ImageCapture_OutputFileOptions> {
-  const $ImageCapture_OutputFileOptionsType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageCapture$OutputFileOptions;';
-
-  @override
-  ImageCapture_OutputFileOptions fromReference(jni.JReference reference) =>
-      ImageCapture_OutputFileOptions.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_OutputFileOptionsType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_OutputFileOptionsType) &&
-        other is $ImageCapture_OutputFileOptionsType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture$OutputFileResults
-class ImageCapture_OutputFileResults extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture_OutputFileResults> $type = type;
-
-  ImageCapture_OutputFileResults.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/core/ImageCapture$OutputFileResults');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCapture_OutputFileResultsType();
-  static final _id_new0 = _class.constructorId(
-    r'(Landroid/net/Uri;)V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(android.net.Uri uri)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory ImageCapture_OutputFileResults(
-    Uri uri,
-  ) {
-    return ImageCapture_OutputFileResults.fromReference(_new0(
-            _class.reference.pointer,
-            _id_new0 as jni.JMethodIDPtr,
-            uri.reference.pointer)
-        .reference);
-  }
-
-  static final _id_getSavedUri = _class.instanceMethodId(
-    r'getSavedUri',
-    r'()Landroid/net/Uri;',
-  );
-
-  static final _getSavedUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.net.Uri getSavedUri()
-  /// The returned object must be released after use, by calling the [release] method.
-  Uri getSavedUri() {
-    return _getSavedUri(reference.pointer, _id_getSavedUri as jni.JMethodIDPtr)
-        .object(const $UriType());
-  }
-}
-
-final class $ImageCapture_OutputFileResultsType
-    extends jni.JObjType<ImageCapture_OutputFileResults> {
-  const $ImageCapture_OutputFileResultsType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/core/ImageCapture$OutputFileResults;';
-
-  @override
-  ImageCapture_OutputFileResults fromReference(jni.JReference reference) =>
-      ImageCapture_OutputFileResults.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCapture_OutputFileResultsType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCapture_OutputFileResultsType) &&
-        other is $ImageCapture_OutputFileResultsType;
-  }
-}
-
-/// from: androidx.camera.core.ImageCapture
-class ImageCapture extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageCapture> $type = type;
-
-  ImageCapture.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/core/ImageCapture');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $ImageCaptureType();
-
-  /// from: static public final int ERROR_UNKNOWN
-  static const ERROR_UNKNOWN = 0;
-
-  /// from: static public final int ERROR_FILE_IO
-  static const ERROR_FILE_IO = 1;
-
-  /// from: static public final int ERROR_CAPTURE_FAILED
-  static const ERROR_CAPTURE_FAILED = 2;
-
-  /// from: static public final int ERROR_CAMERA_CLOSED
-  static const ERROR_CAMERA_CLOSED = 3;
-
-  /// from: static public final int ERROR_INVALID_CAMERA
-  static const ERROR_INVALID_CAMERA = 4;
-
-  /// from: static public final int CAPTURE_MODE_MAXIMIZE_QUALITY
-  static const CAPTURE_MODE_MAXIMIZE_QUALITY = 0;
-
-  /// from: static public final int CAPTURE_MODE_MINIMIZE_LATENCY
-  static const CAPTURE_MODE_MINIMIZE_LATENCY = 1;
-
-  /// from: static public final int CAPTURE_MODE_ZERO_SHUTTER_LAG
-  static const CAPTURE_MODE_ZERO_SHUTTER_LAG = 2;
-
-  /// from: static public final int FLASH_MODE_AUTO
-  static const FLASH_MODE_AUTO = 0;
-
-  /// from: static public final int FLASH_MODE_ON
-  static const FLASH_MODE_ON = 1;
-
-  /// from: static public final int FLASH_MODE_OFF
-  static const FLASH_MODE_OFF = 2;
-
-  /// from: static public final int FLASH_TYPE_ONE_SHOT_FLASH
-  static const FLASH_TYPE_ONE_SHOT_FLASH = 0;
-
-  /// from: static public final int FLASH_TYPE_USE_TORCH_AS_FLASH
-  static const FLASH_TYPE_USE_TORCH_AS_FLASH = 1;
-  static final _id_DEFAULT_CONFIG = _class.staticFieldId(
-    r'DEFAULT_CONFIG',
-    r'Landroidx/camera/core/ImageCapture$Defaults;',
-  );
-
-  /// from: static public final androidx.camera.core.ImageCapture$Defaults DEFAULT_CONFIG
-  /// The returned object must be released after use, by calling the [release] method.
-  static ImageCapture_Defaults get DEFAULT_CONFIG =>
-      _id_DEFAULT_CONFIG.get(_class, const $ImageCapture_DefaultsType());
-
-  static final _id_getDefaultConfig = _class.instanceMethodId(
-    r'getDefaultConfig',
-    r'(ZLandroidx/camera/core/impl/UseCaseConfigFactory;)Landroidx/camera/core/impl/UseCaseConfig;',
-  );
-
-  static final _getDefaultConfig = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.impl.UseCaseConfig getDefaultConfig(boolean z, androidx.camera.core.impl.UseCaseConfigFactory useCaseConfigFactory)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getDefaultConfig(
-    bool z,
-    jni.JObject useCaseConfigFactory,
-  ) {
-    return _getDefaultConfig(
-            reference.pointer,
-            _id_getDefaultConfig as jni.JMethodIDPtr,
-            z ? 1 : 0,
-            useCaseConfigFactory.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getUseCaseConfigBuilder = _class.instanceMethodId(
-    r'getUseCaseConfigBuilder',
-    r'(Landroidx/camera/core/impl/Config;)Landroidx/camera/core/impl/UseCaseConfig$Builder;',
-  );
-
-  static final _getUseCaseConfigBuilder = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public androidx.camera.core.impl.UseCaseConfig$Builder getUseCaseConfigBuilder(androidx.camera.core.impl.Config config)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getUseCaseConfigBuilder(
-    jni.JObject config,
-  ) {
-    return _getUseCaseConfigBuilder(
-            reference.pointer,
-            _id_getUseCaseConfigBuilder as jni.JMethodIDPtr,
-            config.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_onMergeConfig = _class.instanceMethodId(
-    r'onMergeConfig',
-    r'(Landroidx/camera/core/impl/CameraInfoInternal;Landroidx/camera/core/impl/UseCaseConfig$Builder;)Landroidx/camera/core/impl/UseCaseConfig;',
-  );
-
-  static final _onMergeConfig = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected androidx.camera.core.impl.UseCaseConfig onMergeConfig(androidx.camera.core.impl.CameraInfoInternal cameraInfoInternal, androidx.camera.core.impl.UseCaseConfig$Builder builder)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject onMergeConfig(
-    jni.JObject cameraInfoInternal,
-    jni.JObject builder,
-  ) {
-    return _onMergeConfig(
-            reference.pointer,
-            _id_onMergeConfig as jni.JMethodIDPtr,
-            cameraInfoInternal.reference.pointer,
-            builder.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_onCameraControlReady = _class.instanceMethodId(
-    r'onCameraControlReady',
-    r'()V',
-  );
-
-  static final _onCameraControlReady = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void onCameraControlReady()
-  void onCameraControlReady() {
-    _onCameraControlReady(
-            reference.pointer, _id_onCameraControlReady as jni.JMethodIDPtr)
-        .check();
-  }
-
-  static final _id_getFlashMode = _class.instanceMethodId(
-    r'getFlashMode',
-    r'()I',
-  );
-
-  static final _getFlashMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getFlashMode()
-  int getFlashMode() {
-    return _getFlashMode(
-            reference.pointer, _id_getFlashMode as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_setFlashMode = _class.instanceMethodId(
-    r'setFlashMode',
-    r'(I)V',
-  );
-
-  static final _setFlashMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public void setFlashMode(int i)
-  void setFlashMode(
-    int i,
-  ) {
-    _setFlashMode(reference.pointer, _id_setFlashMode as jni.JMethodIDPtr, i)
-        .check();
-  }
-
-  static final _id_setCropAspectRatio = _class.instanceMethodId(
-    r'setCropAspectRatio',
-    r'(Landroid/util/Rational;)V',
-  );
-
-  static final _setCropAspectRatio = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setCropAspectRatio(android.util.Rational rational)
-  void setCropAspectRatio(
-    jni.JObject rational,
-  ) {
-    _setCropAspectRatio(
-            reference.pointer,
-            _id_setCropAspectRatio as jni.JMethodIDPtr,
-            rational.reference.pointer)
-        .check();
-  }
-
-  static final _id_getTargetRotation = _class.instanceMethodId(
-    r'getTargetRotation',
-    r'()I',
-  );
-
-  static final _getTargetRotation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getTargetRotation()
-  int getTargetRotation() {
-    return _getTargetRotation(
-            reference.pointer, _id_getTargetRotation as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_setTargetRotation = _class.instanceMethodId(
-    r'setTargetRotation',
-    r'(I)V',
-  );
-
-  static final _setTargetRotation = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public void setTargetRotation(int i)
-  void setTargetRotation(
-    int i,
-  ) {
-    _setTargetRotation(
-            reference.pointer, _id_setTargetRotation as jni.JMethodIDPtr, i)
-        .check();
-  }
-
-  static final _id_getCaptureMode = _class.instanceMethodId(
-    r'getCaptureMode',
-    r'()I',
-  );
-
-  static final _getCaptureMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getCaptureMode()
-  int getCaptureMode() {
-    return _getCaptureMode(
-            reference.pointer, _id_getCaptureMode as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_getJpegQuality = _class.instanceMethodId(
-    r'getJpegQuality',
-    r'()I',
-  );
-
-  static final _getJpegQuality = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public int getJpegQuality()
-  int getJpegQuality() {
-    return _getJpegQuality(
-            reference.pointer, _id_getJpegQuality as jni.JMethodIDPtr)
-        .integer;
-  }
-
-  static final _id_getResolutionInfo = _class.instanceMethodId(
-    r'getResolutionInfo',
-    r'()Landroidx/camera/core/ResolutionInfo;',
-  );
-
-  static final _getResolutionInfo = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ResolutionInfo getResolutionInfo()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getResolutionInfo() {
-    return _getResolutionInfo(
-            reference.pointer, _id_getResolutionInfo as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getResolutionInfoInternal = _class.instanceMethodId(
-    r'getResolutionInfoInternal',
-    r'()Landroidx/camera/core/ResolutionInfo;',
-  );
-
-  static final _getResolutionInfoInternal = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: protected androidx.camera.core.ResolutionInfo getResolutionInfoInternal()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getResolutionInfoInternal() {
-    return _getResolutionInfoInternal(reference.pointer,
-            _id_getResolutionInfoInternal as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getResolutionSelector = _class.instanceMethodId(
-    r'getResolutionSelector',
-    r'()Landroidx/camera/core/resolutionselector/ResolutionSelector;',
-  );
-
-  static final _getResolutionSelector = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getResolutionSelector()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getResolutionSelector() {
-    return _getResolutionSelector(
-            reference.pointer, _id_getResolutionSelector as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_takePicture = _class.instanceMethodId(
-    r'takePicture',
-    r'(Ljava/util/concurrent/Executor;Landroidx/camera/core/ImageCapture$OnImageCapturedCallback;)V',
-  );
-
-  static final _takePicture = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void takePicture(java.util.concurrent.Executor executor, androidx.camera.core.ImageCapture$OnImageCapturedCallback onImageCapturedCallback)
-  void takePicture(
-    Executor executor,
-    ImageCapture_OnImageCapturedCallback onImageCapturedCallback,
-  ) {
-    _takePicture(
-            reference.pointer,
-            _id_takePicture as jni.JMethodIDPtr,
-            executor.reference.pointer,
-            onImageCapturedCallback.reference.pointer)
-        .check();
-  }
-
-  static final _id_takePicture1 = _class.instanceMethodId(
-    r'takePicture',
-    r'(Landroidx/camera/core/ImageCapture$OutputFileOptions;Ljava/util/concurrent/Executor;Landroidx/camera/core/ImageCapture$OnImageSavedCallback;)V',
-  );
-
-  static final _takePicture1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void takePicture(androidx.camera.core.ImageCapture$OutputFileOptions outputFileOptions, java.util.concurrent.Executor executor, androidx.camera.core.ImageCapture$OnImageSavedCallback onImageSavedCallback)
-  void takePicture1(
-    ImageCapture_OutputFileOptions outputFileOptions,
-    Executor executor,
-    ImageCapture_OnImageSavedCallback onImageSavedCallback,
-  ) {
-    _takePicture1(
-            reference.pointer,
-            _id_takePicture1 as jni.JMethodIDPtr,
-            outputFileOptions.reference.pointer,
-            executor.reference.pointer,
-            onImageSavedCallback.reference.pointer)
-        .check();
-  }
-
-  static final _id_onStateDetached = _class.instanceMethodId(
-    r'onStateDetached',
-    r'()V',
-  );
-
-  static final _onStateDetached = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void onStateDetached()
-  void onStateDetached() {
-    _onStateDetached(reference.pointer, _id_onStateDetached as jni.JMethodIDPtr)
-        .check();
-  }
-
-  static final _id_toString1 = _class.instanceMethodId(
-    r'toString',
-    r'()Ljava/lang/String;',
-  );
-
-  static final _toString1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.lang.String toString()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JString toString1() {
-    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
-  }
-
-  static final _id_onUnbind = _class.instanceMethodId(
-    r'onUnbind',
-    r'()V',
-  );
-
-  static final _onUnbind = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void onUnbind()
-  void onUnbind() {
-    _onUnbind(reference.pointer, _id_onUnbind as jni.JMethodIDPtr).check();
-  }
-
-  static final _id_onBind = _class.instanceMethodId(
-    r'onBind',
-    r'()V',
-  );
-
-  static final _onBind = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void onBind()
-  void onBind() {
-    _onBind(reference.pointer, _id_onBind as jni.JMethodIDPtr).check();
-  }
-
-  static final _id_onSuggestedStreamSpecUpdated = _class.instanceMethodId(
-    r'onSuggestedStreamSpecUpdated',
-    r'(Landroidx/camera/core/impl/StreamSpec;)Landroidx/camera/core/impl/StreamSpec;',
-  );
-
-  static final _onSuggestedStreamSpecUpdated = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected androidx.camera.core.impl.StreamSpec onSuggestedStreamSpecUpdated(androidx.camera.core.impl.StreamSpec streamSpec)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject onSuggestedStreamSpecUpdated(
-    jni.JObject streamSpec,
-  ) {
-    return _onSuggestedStreamSpecUpdated(
-            reference.pointer,
-            _id_onSuggestedStreamSpecUpdated as jni.JMethodIDPtr,
-            streamSpec.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_onSuggestedStreamSpecImplementationOptionsUpdated =
-      _class.instanceMethodId(
-    r'onSuggestedStreamSpecImplementationOptionsUpdated',
-    r'(Landroidx/camera/core/impl/Config;)Landroidx/camera/core/impl/StreamSpec;',
-  );
-
-  static final _onSuggestedStreamSpecImplementationOptionsUpdated =
-      ProtectedJniExtensions.lookup<
-                  ffi.NativeFunction<
-                      jni.JniResult Function(
-                          ffi.Pointer<ffi.Void>,
-                          jni.JMethodIDPtr,
-                          ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-              'globalEnv_CallObjectMethod')
-          .asFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected androidx.camera.core.impl.StreamSpec onSuggestedStreamSpecImplementationOptionsUpdated(androidx.camera.core.impl.Config config)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject onSuggestedStreamSpecImplementationOptionsUpdated(
-    jni.JObject config,
-  ) {
-    return _onSuggestedStreamSpecImplementationOptionsUpdated(
-            reference.pointer,
-            _id_onSuggestedStreamSpecImplementationOptionsUpdated
-                as jni.JMethodIDPtr,
-            config.reference.pointer)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getSupportedEffectTargets = _class.instanceMethodId(
-    r'getSupportedEffectTargets',
-    r'()Ljava/util/Set;',
-  );
-
-  static final _getSupportedEffectTargets = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public java.util.Set getSupportedEffectTargets()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JSet<jni.JInteger> getSupportedEffectTargets() {
-    return _getSupportedEffectTargets(reference.pointer,
-            _id_getSupportedEffectTargets as jni.JMethodIDPtr)
-        .object(const jni.JSetType(jni.JIntegerType()));
-  }
-
-  static final _id_getRealtimeCaptureLatencyEstimate = _class.instanceMethodId(
-    r'getRealtimeCaptureLatencyEstimate',
-    r'()Landroidx/camera/core/ImageCaptureLatencyEstimate;',
-  );
-
-  static final _getRealtimeCaptureLatencyEstimate =
-      ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                    ffi.Pointer<ffi.Void>,
-                    jni.JMethodIDPtr,
-                  )>>('globalEnv_CallObjectMethod')
-          .asFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>();
-
-  /// from: public androidx.camera.core.ImageCaptureLatencyEstimate getRealtimeCaptureLatencyEstimate()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getRealtimeCaptureLatencyEstimate() {
-    return _getRealtimeCaptureLatencyEstimate(reference.pointer,
-            _id_getRealtimeCaptureLatencyEstimate as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $ImageCaptureType extends jni.JObjType<ImageCapture> {
-  const $ImageCaptureType();
-
-  @override
-  String get signature => r'Landroidx/camera/core/ImageCapture;';
-
-  @override
-  ImageCapture fromReference(jni.JReference reference) =>
-      ImageCapture.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($ImageCaptureType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($ImageCaptureType) &&
-        other is $ImageCaptureType;
   }
 }
 
@@ -43658,6 +37027,58 @@ class CameraController extends jni.JObject {
         .object(const $CameraController_OutputSizeType());
   }
 
+  static final _id_setPreviewResolutionSelector = _class.instanceMethodId(
+    r'setPreviewResolutionSelector',
+    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)V',
+  );
+
+  static final _setPreviewResolutionSelector = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setPreviewResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
+  void setPreviewResolutionSelector(
+    jni.JObject resolutionSelector,
+  ) {
+    _setPreviewResolutionSelector(
+            reference.pointer,
+            _id_setPreviewResolutionSelector as jni.JMethodIDPtr,
+            resolutionSelector.reference.pointer)
+        .check();
+  }
+
+  static final _id_getPreviewResolutionSelector = _class.instanceMethodId(
+    r'getPreviewResolutionSelector',
+    r'()Landroidx/camera/core/resolutionselector/ResolutionSelector;',
+  );
+
+  static final _getPreviewResolutionSelector = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getPreviewResolutionSelector()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getPreviewResolutionSelector() {
+    return _getPreviewResolutionSelector(reference.pointer,
+            _id_getPreviewResolutionSelector as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
   static final _id_isImageCaptureEnabled = _class.instanceMethodId(
     r'isImageCaptureEnabled',
     r'()Z',
@@ -43730,6 +37151,82 @@ class CameraController extends jni.JObject {
         .check();
   }
 
+  static final _id_setScreenFlashUiInfo = _class.instanceMethodId(
+    r'setScreenFlashUiInfo',
+    r'(Landroidx/camera/view/internal/ScreenFlashUiInfo;)V',
+  );
+
+  static final _setScreenFlashUiInfo = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setScreenFlashUiInfo(androidx.camera.view.internal.ScreenFlashUiInfo screenFlashUiInfo)
+  void setScreenFlashUiInfo(
+    jni.JObject screenFlashUiInfo,
+  ) {
+    _setScreenFlashUiInfo(
+            reference.pointer,
+            _id_setScreenFlashUiInfo as jni.JMethodIDPtr,
+            screenFlashUiInfo.reference.pointer)
+        .check();
+  }
+
+  static final _id_updateScreenFlashToImageCapture = _class.instanceMethodId(
+    r'updateScreenFlashToImageCapture',
+    r'()V',
+  );
+
+  static final _updateScreenFlashToImageCapture = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void updateScreenFlashToImageCapture()
+  void updateScreenFlashToImageCapture() {
+    _updateScreenFlashToImageCapture(reference.pointer,
+            _id_updateScreenFlashToImageCapture as jni.JMethodIDPtr)
+        .check();
+  }
+
+  static final _id_getScreenFlashUiInfoByPriority = _class.instanceMethodId(
+    r'getScreenFlashUiInfoByPriority',
+    r'()Landroidx/camera/view/internal/ScreenFlashUiInfo;',
+  );
+
+  static final _getScreenFlashUiInfoByPriority = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.view.internal.ScreenFlashUiInfo getScreenFlashUiInfoByPriority()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getScreenFlashUiInfoByPriority() {
+    return _getScreenFlashUiInfoByPriority(reference.pointer,
+            _id_getScreenFlashUiInfoByPriority as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
   static final _id_takePicture = _class.instanceMethodId(
     r'takePicture',
     r'(Landroidx/camera/core/ImageCapture$OutputFileOptions;Ljava/util/concurrent/Executor;Landroidx/camera/core/ImageCapture$OnImageSavedCallback;)V',
@@ -43756,9 +37253,9 @@ class CameraController extends jni.JObject {
 
   /// from: public void takePicture(androidx.camera.core.ImageCapture$OutputFileOptions outputFileOptions, java.util.concurrent.Executor executor, androidx.camera.core.ImageCapture$OnImageSavedCallback onImageSavedCallback)
   void takePicture(
-    ImageCapture_OutputFileOptions outputFileOptions,
+    jni.JObject outputFileOptions,
     Executor executor,
-    ImageCapture_OnImageSavedCallback onImageSavedCallback,
+    jni.JObject onImageSavedCallback,
   ) {
     _takePicture(
             reference.pointer,
@@ -43791,7 +37288,7 @@ class CameraController extends jni.JObject {
   /// from: public void takePicture(java.util.concurrent.Executor executor, androidx.camera.core.ImageCapture$OnImageCapturedCallback onImageCapturedCallback)
   void takePicture1(
     Executor executor,
-    ImageCapture_OnImageCapturedCallback onImageCapturedCallback,
+    jni.JObject onImageCapturedCallback,
   ) {
     _takePicture1(
             reference.pointer,
@@ -43901,6 +37398,60 @@ class CameraController extends jni.JObject {
         .object(const $CameraController_OutputSizeType());
   }
 
+  static final _id_setImageCaptureResolutionSelector = _class.instanceMethodId(
+    r'setImageCaptureResolutionSelector',
+    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)V',
+  );
+
+  static final _setImageCaptureResolutionSelector =
+      ProtectedJniExtensions.lookup<
+                  ffi.NativeFunction<
+                      jni.JThrowablePtr Function(
+                          ffi.Pointer<ffi.Void>,
+                          jni.JMethodIDPtr,
+                          ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+              'globalEnv_CallVoidMethod')
+          .asFunction<
+              jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setImageCaptureResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
+  void setImageCaptureResolutionSelector(
+    jni.JObject resolutionSelector,
+  ) {
+    _setImageCaptureResolutionSelector(
+            reference.pointer,
+            _id_setImageCaptureResolutionSelector as jni.JMethodIDPtr,
+            resolutionSelector.reference.pointer)
+        .check();
+  }
+
+  static final _id_getImageCaptureResolutionSelector = _class.instanceMethodId(
+    r'getImageCaptureResolutionSelector',
+    r'()Landroidx/camera/core/resolutionselector/ResolutionSelector;',
+  );
+
+  static final _getImageCaptureResolutionSelector =
+      ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                    ffi.Pointer<ffi.Void>,
+                    jni.JMethodIDPtr,
+                  )>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getImageCaptureResolutionSelector()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getImageCaptureResolutionSelector() {
+    return _getImageCaptureResolutionSelector(reference.pointer,
+            _id_getImageCaptureResolutionSelector as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
   static final _id_setImageCaptureIoExecutor = _class.instanceMethodId(
     r'setImageCaptureIoExecutor',
     r'(Ljava/util/concurrent/Executor;)V',
@@ -43999,7 +37550,7 @@ class CameraController extends jni.JObject {
   /// from: public void setImageAnalysisAnalyzer(java.util.concurrent.Executor executor, androidx.camera.core.ImageAnalysis$Analyzer analyzer)
   void setImageAnalysisAnalyzer(
     Executor executor,
-    ImageAnalysis_Analyzer analyzer,
+    jni.JObject analyzer,
   ) {
     _setImageAnalysisAnalyzer(
             reference.pointer,
@@ -44185,6 +37736,60 @@ class CameraController extends jni.JObject {
         .object(const $CameraController_OutputSizeType());
   }
 
+  static final _id_setImageAnalysisResolutionSelector = _class.instanceMethodId(
+    r'setImageAnalysisResolutionSelector',
+    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)V',
+  );
+
+  static final _setImageAnalysisResolutionSelector =
+      ProtectedJniExtensions.lookup<
+                  ffi.NativeFunction<
+                      jni.JThrowablePtr Function(
+                          ffi.Pointer<ffi.Void>,
+                          jni.JMethodIDPtr,
+                          ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+              'globalEnv_CallVoidMethod')
+          .asFunction<
+              jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setImageAnalysisResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
+  void setImageAnalysisResolutionSelector(
+    jni.JObject resolutionSelector,
+  ) {
+    _setImageAnalysisResolutionSelector(
+            reference.pointer,
+            _id_setImageAnalysisResolutionSelector as jni.JMethodIDPtr,
+            resolutionSelector.reference.pointer)
+        .check();
+  }
+
+  static final _id_getImageAnalysisResolutionSelector = _class.instanceMethodId(
+    r'getImageAnalysisResolutionSelector',
+    r'()Landroidx/camera/core/resolutionselector/ResolutionSelector;',
+  );
+
+  static final _getImageAnalysisResolutionSelector =
+      ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                    ffi.Pointer<ffi.Void>,
+                    jni.JMethodIDPtr,
+                  )>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getImageAnalysisResolutionSelector()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getImageAnalysisResolutionSelector() {
+    return _getImageAnalysisResolutionSelector(reference.pointer,
+            _id_getImageAnalysisResolutionSelector as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
   static final _id_setImageAnalysisBackgroundExecutor = _class.instanceMethodId(
     r'setImageAnalysisBackgroundExecutor',
     r'(Ljava/util/concurrent/Executor;)V',
@@ -44237,6 +37842,56 @@ class CameraController extends jni.JObject {
     return _getImageAnalysisBackgroundExecutor(reference.pointer,
             _id_getImageAnalysisBackgroundExecutor as jni.JMethodIDPtr)
         .object(const $ExecutorType());
+  }
+
+  static final _id_setImageAnalysisOutputImageFormat = _class.instanceMethodId(
+    r'setImageAnalysisOutputImageFormat',
+    r'(I)V',
+  );
+
+  static final _setImageAnalysisOutputImageFormat =
+      ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+          .asFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public void setImageAnalysisOutputImageFormat(int i)
+  void setImageAnalysisOutputImageFormat(
+    int i,
+  ) {
+    _setImageAnalysisOutputImageFormat(reference.pointer,
+            _id_setImageAnalysisOutputImageFormat as jni.JMethodIDPtr, i)
+        .check();
+  }
+
+  static final _id_getImageAnalysisOutputImageFormat = _class.instanceMethodId(
+    r'getImageAnalysisOutputImageFormat',
+    r'()I',
+  );
+
+  static final _getImageAnalysisOutputImageFormat =
+      ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                    ffi.Pointer<ffi.Void>,
+                    jni.JMethodIDPtr,
+                  )>>('globalEnv_CallIntMethod')
+          .asFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>();
+
+  /// from: public int getImageAnalysisOutputImageFormat()
+  int getImageAnalysisOutputImageFormat() {
+    return _getImageAnalysisOutputImageFormat(reference.pointer,
+            _id_getImageAnalysisOutputImageFormat as jni.JMethodIDPtr)
+        .integer;
   }
 
   static final _id_isVideoCaptureEnabled = _class.instanceMethodId(
@@ -44467,6 +38122,158 @@ class CameraController extends jni.JObject {
   jni.JObject getVideoCaptureQualitySelector() {
     return _getVideoCaptureQualitySelector(reference.pointer,
             _id_getVideoCaptureQualitySelector as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_setVideoCaptureMirrorMode = _class.instanceMethodId(
+    r'setVideoCaptureMirrorMode',
+    r'(I)V',
+  );
+
+  static final _setVideoCaptureMirrorMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public void setVideoCaptureMirrorMode(int i)
+  void setVideoCaptureMirrorMode(
+    int i,
+  ) {
+    _setVideoCaptureMirrorMode(reference.pointer,
+            _id_setVideoCaptureMirrorMode as jni.JMethodIDPtr, i)
+        .check();
+  }
+
+  static final _id_getVideoCaptureMirrorMode = _class.instanceMethodId(
+    r'getVideoCaptureMirrorMode',
+    r'()I',
+  );
+
+  static final _getVideoCaptureMirrorMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getVideoCaptureMirrorMode()
+  int getVideoCaptureMirrorMode() {
+    return _getVideoCaptureMirrorMode(reference.pointer,
+            _id_getVideoCaptureMirrorMode as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_setVideoCaptureDynamicRange = _class.instanceMethodId(
+    r'setVideoCaptureDynamicRange',
+    r'(Landroidx/camera/core/DynamicRange;)V',
+  );
+
+  static final _setVideoCaptureDynamicRange = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setVideoCaptureDynamicRange(androidx.camera.core.DynamicRange dynamicRange)
+  void setVideoCaptureDynamicRange(
+    jni.JObject dynamicRange,
+  ) {
+    _setVideoCaptureDynamicRange(
+            reference.pointer,
+            _id_setVideoCaptureDynamicRange as jni.JMethodIDPtr,
+            dynamicRange.reference.pointer)
+        .check();
+  }
+
+  static final _id_getVideoCaptureDynamicRange = _class.instanceMethodId(
+    r'getVideoCaptureDynamicRange',
+    r'()Landroidx/camera/core/DynamicRange;',
+  );
+
+  static final _getVideoCaptureDynamicRange = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.core.DynamicRange getVideoCaptureDynamicRange()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getVideoCaptureDynamicRange() {
+    return _getVideoCaptureDynamicRange(reference.pointer,
+            _id_getVideoCaptureDynamicRange as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_setVideoCaptureTargetFrameRate = _class.instanceMethodId(
+    r'setVideoCaptureTargetFrameRate',
+    r'(Landroid/util/Range;)V',
+  );
+
+  static final _setVideoCaptureTargetFrameRate = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void setVideoCaptureTargetFrameRate(android.util.Range range)
+  void setVideoCaptureTargetFrameRate(
+    jni.JObject range,
+  ) {
+    _setVideoCaptureTargetFrameRate(
+            reference.pointer,
+            _id_setVideoCaptureTargetFrameRate as jni.JMethodIDPtr,
+            range.reference.pointer)
+        .check();
+  }
+
+  static final _id_getVideoCaptureTargetFrameRate = _class.instanceMethodId(
+    r'getVideoCaptureTargetFrameRate',
+    r'()Landroid/util/Range;',
+  );
+
+  static final _getVideoCaptureTargetFrameRate = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.util.Range getVideoCaptureTargetFrameRate()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getVideoCaptureTargetFrameRate() {
+    return _getVideoCaptureTargetFrameRate(reference.pointer,
+            _id_getVideoCaptureTargetFrameRate as jni.JMethodIDPtr)
         .object(const jni.JObjectType());
   }
 
@@ -45050,1188 +38857,6 @@ final class $LifecycleCameraControllerType
   bool operator ==(Object other) {
     return other.runtimeType == ($LifecycleCameraControllerType) &&
         other is $LifecycleCameraControllerType;
-  }
-}
-
-/// from: androidx.camera.view.PreviewView$ImplementationMode
-class PreviewView_ImplementationMode extends jni.JObject {
-  @override
-  late final jni.JObjType<PreviewView_ImplementationMode> $type = type;
-
-  PreviewView_ImplementationMode.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/view/PreviewView$ImplementationMode');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $PreviewView_ImplementationModeType();
-  static final _id_PERFORMANCE = _class.staticFieldId(
-    r'PERFORMANCE',
-    r'Landroidx/camera/view/PreviewView$ImplementationMode;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ImplementationMode PERFORMANCE
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ImplementationMode get PERFORMANCE =>
-      _id_PERFORMANCE.get(_class, const $PreviewView_ImplementationModeType());
-
-  static final _id_COMPATIBLE = _class.staticFieldId(
-    r'COMPATIBLE',
-    r'Landroidx/camera/view/PreviewView$ImplementationMode;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ImplementationMode COMPATIBLE
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ImplementationMode get COMPATIBLE =>
-      _id_COMPATIBLE.get(_class, const $PreviewView_ImplementationModeType());
-
-  static final _id_values = _class.staticMethodId(
-    r'values',
-    r'()[Landroidx/camera/view/PreviewView$ImplementationMode;',
-  );
-
-  static final _values = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: static public androidx.camera.view.PreviewView$ImplementationMode[] values()
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<PreviewView_ImplementationMode> values() {
-    return _values(_class.reference.pointer, _id_values as jni.JMethodIDPtr)
-        .object(const jni.JArrayType($PreviewView_ImplementationModeType()));
-  }
-
-  static final _id_valueOf = _class.staticMethodId(
-    r'valueOf',
-    r'(Ljava/lang/String;)Landroidx/camera/view/PreviewView$ImplementationMode;',
-  );
-
-  static final _valueOf = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: static public androidx.camera.view.PreviewView$ImplementationMode valueOf(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ImplementationMode valueOf(
-    jni.JString string,
-  ) {
-    return _valueOf(_class.reference.pointer, _id_valueOf as jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $PreviewView_ImplementationModeType());
-  }
-}
-
-final class $PreviewView_ImplementationModeType
-    extends jni.JObjType<PreviewView_ImplementationMode> {
-  const $PreviewView_ImplementationModeType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/view/PreviewView$ImplementationMode;';
-
-  @override
-  PreviewView_ImplementationMode fromReference(jni.JReference reference) =>
-      PreviewView_ImplementationMode.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($PreviewView_ImplementationModeType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewView_ImplementationModeType) &&
-        other is $PreviewView_ImplementationModeType;
-  }
-}
-
-/// from: androidx.camera.view.PreviewView$OnFrameUpdateListener
-class PreviewView_OnFrameUpdateListener extends jni.JObject {
-  @override
-  late final jni.JObjType<PreviewView_OnFrameUpdateListener> $type = type;
-
-  PreviewView_OnFrameUpdateListener.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(
-      r'androidx/camera/view/PreviewView$OnFrameUpdateListener');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $PreviewView_OnFrameUpdateListenerType();
-  static final _id_onFrameUpdate = _class.instanceMethodId(
-    r'onFrameUpdate',
-    r'(J)V',
-  );
-
-  static final _onFrameUpdate = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int64,)>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public abstract void onFrameUpdate(long j)
-  void onFrameUpdate(
-    int j,
-  ) {
-    _onFrameUpdate(reference.pointer, _id_onFrameUpdate as jni.JMethodIDPtr, j)
-        .check();
-  }
-
-  /// Maps a specific port to the implemented interface.
-  static final Map<int, $PreviewView_OnFrameUpdateListenerImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
-    int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
-  ) {
-    return _$invokeMethod(
-      port,
-      $MethodInvocation.fromAddresses(
-        0,
-        descriptor.address,
-        args.address,
-      ),
-    );
-  }
-
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
-
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
-    int $p,
-    $MethodInvocation $i,
-  ) {
-    try {
-      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
-      final $a = $i.args;
-      if ($d == r'onFrameUpdate(J)V') {
-        _$impls[$p]!.onFrameUpdate(
-          $a[0]
-              .castTo(const jni.JLongType(), releaseOriginal: true)
-              .longValue(releaseOriginal: true),
-        );
-        return jni.nullptr;
-      }
-    } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
-    }
-    return jni.nullptr;
-  }
-
-  factory PreviewView_OnFrameUpdateListener.implement(
-    $PreviewView_OnFrameUpdateListenerImpl $impl,
-  ) {
-    final $p = ReceivePort();
-    final $x = PreviewView_OnFrameUpdateListener.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.camera.view.PreviewView$OnFrameUpdateListener',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
-      if ($m == null) {
-        _$impls.remove($p.sendPort.nativePort);
-        $p.close();
-        return;
-      }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
-      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
-    });
-    return $x;
-  }
-}
-
-abstract interface class $PreviewView_OnFrameUpdateListenerImpl {
-  factory $PreviewView_OnFrameUpdateListenerImpl({
-    required void Function(int j) onFrameUpdate,
-  }) = _$PreviewView_OnFrameUpdateListenerImpl;
-
-  void onFrameUpdate(int j);
-}
-
-class _$PreviewView_OnFrameUpdateListenerImpl
-    implements $PreviewView_OnFrameUpdateListenerImpl {
-  _$PreviewView_OnFrameUpdateListenerImpl({
-    required void Function(int j) onFrameUpdate,
-  }) : _onFrameUpdate = onFrameUpdate;
-
-  final void Function(int j) _onFrameUpdate;
-
-  void onFrameUpdate(int j) {
-    return _onFrameUpdate(j);
-  }
-}
-
-final class $PreviewView_OnFrameUpdateListenerType
-    extends jni.JObjType<PreviewView_OnFrameUpdateListener> {
-  const $PreviewView_OnFrameUpdateListenerType();
-
-  @override
-  String get signature =>
-      r'Landroidx/camera/view/PreviewView$OnFrameUpdateListener;';
-
-  @override
-  PreviewView_OnFrameUpdateListener fromReference(jni.JReference reference) =>
-      PreviewView_OnFrameUpdateListener.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($PreviewView_OnFrameUpdateListenerType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewView_OnFrameUpdateListenerType) &&
-        other is $PreviewView_OnFrameUpdateListenerType;
-  }
-}
-
-/// from: androidx.camera.view.PreviewView$ScaleType
-class PreviewView_ScaleType extends jni.JObject {
-  @override
-  late final jni.JObjType<PreviewView_ScaleType> $type = type;
-
-  PreviewView_ScaleType.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/view/PreviewView$ScaleType');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $PreviewView_ScaleTypeType();
-  static final _id_FILL_START = _class.staticFieldId(
-    r'FILL_START',
-    r'Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ScaleType FILL_START
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType get FILL_START =>
-      _id_FILL_START.get(_class, const $PreviewView_ScaleTypeType());
-
-  static final _id_FILL_CENTER = _class.staticFieldId(
-    r'FILL_CENTER',
-    r'Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ScaleType FILL_CENTER
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType get FILL_CENTER =>
-      _id_FILL_CENTER.get(_class, const $PreviewView_ScaleTypeType());
-
-  static final _id_FILL_END = _class.staticFieldId(
-    r'FILL_END',
-    r'Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ScaleType FILL_END
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType get FILL_END =>
-      _id_FILL_END.get(_class, const $PreviewView_ScaleTypeType());
-
-  static final _id_FIT_START = _class.staticFieldId(
-    r'FIT_START',
-    r'Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ScaleType FIT_START
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType get FIT_START =>
-      _id_FIT_START.get(_class, const $PreviewView_ScaleTypeType());
-
-  static final _id_FIT_CENTER = _class.staticFieldId(
-    r'FIT_CENTER',
-    r'Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ScaleType FIT_CENTER
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType get FIT_CENTER =>
-      _id_FIT_CENTER.get(_class, const $PreviewView_ScaleTypeType());
-
-  static final _id_FIT_END = _class.staticFieldId(
-    r'FIT_END',
-    r'Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$ScaleType FIT_END
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType get FIT_END =>
-      _id_FIT_END.get(_class, const $PreviewView_ScaleTypeType());
-
-  static final _id_values = _class.staticMethodId(
-    r'values',
-    r'()[Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  static final _values = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: static public androidx.camera.view.PreviewView$ScaleType[] values()
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<PreviewView_ScaleType> values() {
-    return _values(_class.reference.pointer, _id_values as jni.JMethodIDPtr)
-        .object(const jni.JArrayType($PreviewView_ScaleTypeType()));
-  }
-
-  static final _id_valueOf = _class.staticMethodId(
-    r'valueOf',
-    r'(Ljava/lang/String;)Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  static final _valueOf = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: static public androidx.camera.view.PreviewView$ScaleType valueOf(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_ScaleType valueOf(
-    jni.JString string,
-  ) {
-    return _valueOf(_class.reference.pointer, _id_valueOf as jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $PreviewView_ScaleTypeType());
-  }
-}
-
-final class $PreviewView_ScaleTypeType
-    extends jni.JObjType<PreviewView_ScaleType> {
-  const $PreviewView_ScaleTypeType();
-
-  @override
-  String get signature => r'Landroidx/camera/view/PreviewView$ScaleType;';
-
-  @override
-  PreviewView_ScaleType fromReference(jni.JReference reference) =>
-      PreviewView_ScaleType.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($PreviewView_ScaleTypeType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewView_ScaleTypeType) &&
-        other is $PreviewView_ScaleTypeType;
-  }
-}
-
-/// from: androidx.camera.view.PreviewView$StreamState
-class PreviewView_StreamState extends jni.JObject {
-  @override
-  late final jni.JObjType<PreviewView_StreamState> $type = type;
-
-  PreviewView_StreamState.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'androidx/camera/view/PreviewView$StreamState');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $PreviewView_StreamStateType();
-  static final _id_IDLE = _class.staticFieldId(
-    r'IDLE',
-    r'Landroidx/camera/view/PreviewView$StreamState;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$StreamState IDLE
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_StreamState get IDLE =>
-      _id_IDLE.get(_class, const $PreviewView_StreamStateType());
-
-  static final _id_STREAMING = _class.staticFieldId(
-    r'STREAMING',
-    r'Landroidx/camera/view/PreviewView$StreamState;',
-  );
-
-  /// from: static public final androidx.camera.view.PreviewView$StreamState STREAMING
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_StreamState get STREAMING =>
-      _id_STREAMING.get(_class, const $PreviewView_StreamStateType());
-
-  static final _id_values = _class.staticMethodId(
-    r'values',
-    r'()[Landroidx/camera/view/PreviewView$StreamState;',
-  );
-
-  static final _values = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: static public androidx.camera.view.PreviewView$StreamState[] values()
-  /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<PreviewView_StreamState> values() {
-    return _values(_class.reference.pointer, _id_values as jni.JMethodIDPtr)
-        .object(const jni.JArrayType($PreviewView_StreamStateType()));
-  }
-
-  static final _id_valueOf = _class.staticMethodId(
-    r'valueOf',
-    r'(Ljava/lang/String;)Landroidx/camera/view/PreviewView$StreamState;',
-  );
-
-  static final _valueOf = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: static public androidx.camera.view.PreviewView$StreamState valueOf(java.lang.String string)
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView_StreamState valueOf(
-    jni.JString string,
-  ) {
-    return _valueOf(_class.reference.pointer, _id_valueOf as jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const $PreviewView_StreamStateType());
-  }
-}
-
-final class $PreviewView_StreamStateType
-    extends jni.JObjType<PreviewView_StreamState> {
-  const $PreviewView_StreamStateType();
-
-  @override
-  String get signature => r'Landroidx/camera/view/PreviewView$StreamState;';
-
-  @override
-  PreviewView_StreamState fromReference(jni.JReference reference) =>
-      PreviewView_StreamState.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($PreviewView_StreamStateType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewView_StreamStateType) &&
-        other is $PreviewView_StreamStateType;
-  }
-}
-
-/// from: androidx.camera.view.PreviewView
-class PreviewView extends jni.JObject {
-  @override
-  late final jni.JObjType<PreviewView> $type = type;
-
-  PreviewView.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(r'androidx/camera/view/PreviewView');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $PreviewViewType();
-  static final _id_new0 = _class.constructorId(
-    r'(Landroid/content/Context;)V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(android.content.Context context)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory PreviewView(
-    Context context,
-  ) {
-    return PreviewView.fromReference(_new0(_class.reference.pointer,
-            _id_new0 as jni.JMethodIDPtr, context.reference.pointer)
-        .reference);
-  }
-
-  static final _id_new1 = _class.constructorId(
-    r'(Landroid/content/Context;Landroid/util/AttributeSet;)V',
-  );
-
-  static final _new1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(android.content.Context context, android.util.AttributeSet attributeSet)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory PreviewView.new1(
-    Context context,
-    jni.JObject attributeSet,
-  ) {
-    return PreviewView.fromReference(_new1(
-            _class.reference.pointer,
-            _id_new1 as jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer)
-        .reference);
-  }
-
-  static final _id_new2 = _class.constructorId(
-    r'(Landroid/content/Context;Landroid/util/AttributeSet;I)V',
-  );
-
-  static final _new2 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        $Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
-
-  /// from: public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory PreviewView.new2(
-    Context context,
-    jni.JObject attributeSet,
-    int i,
-  ) {
-    return PreviewView.fromReference(_new2(
-            _class.reference.pointer,
-            _id_new2 as jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer,
-            i)
-        .reference);
-  }
-
-  static final _id_new3 = _class.constructorId(
-    r'(Landroid/content/Context;Landroid/util/AttributeSet;II)V',
-  );
-
-  static final _new3 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        $Int32,
-                        $Int32
-                      )>)>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int, int)>();
-
-  /// from: public void <init>(android.content.Context context, android.util.AttributeSet attributeSet, int i, int i1)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory PreviewView.new3(
-    Context context,
-    jni.JObject attributeSet,
-    int i,
-    int i1,
-  ) {
-    return PreviewView.fromReference(_new3(
-            _class.reference.pointer,
-            _id_new3 as jni.JMethodIDPtr,
-            context.reference.pointer,
-            attributeSet.reference.pointer,
-            i,
-            i1)
-        .reference);
-  }
-
-  static final _id_onAttachedToWindow = _class.instanceMethodId(
-    r'onAttachedToWindow',
-    r'()V',
-  );
-
-  static final _onAttachedToWindow = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: protected void onAttachedToWindow()
-  void onAttachedToWindow() {
-    _onAttachedToWindow(
-            reference.pointer, _id_onAttachedToWindow as jni.JMethodIDPtr)
-        .check();
-  }
-
-  static final _id_onDetachedFromWindow = _class.instanceMethodId(
-    r'onDetachedFromWindow',
-    r'()V',
-  );
-
-  static final _onDetachedFromWindow = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: protected void onDetachedFromWindow()
-  void onDetachedFromWindow() {
-    _onDetachedFromWindow(
-            reference.pointer, _id_onDetachedFromWindow as jni.JMethodIDPtr)
-        .check();
-  }
-
-  static final _id_onTouchEvent = _class.instanceMethodId(
-    r'onTouchEvent',
-    r'(Landroid/view/MotionEvent;)Z',
-  );
-
-  static final _onTouchEvent = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public boolean onTouchEvent(android.view.MotionEvent motionEvent)
-  bool onTouchEvent(
-    jni.JObject motionEvent,
-  ) {
-    return _onTouchEvent(reference.pointer,
-            _id_onTouchEvent as jni.JMethodIDPtr, motionEvent.reference.pointer)
-        .boolean;
-  }
-
-  static final _id_performClick = _class.instanceMethodId(
-    r'performClick',
-    r'()Z',
-  );
-
-  static final _performClick = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public boolean performClick()
-  bool performClick() {
-    return _performClick(
-            reference.pointer, _id_performClick as jni.JMethodIDPtr)
-        .boolean;
-  }
-
-  static final _id_setImplementationMode = _class.instanceMethodId(
-    r'setImplementationMode',
-    r'(Landroidx/camera/view/PreviewView$ImplementationMode;)V',
-  );
-
-  static final _setImplementationMode = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setImplementationMode(androidx.camera.view.PreviewView$ImplementationMode implementationMode)
-  void setImplementationMode(
-    PreviewView_ImplementationMode implementationMode,
-  ) {
-    _setImplementationMode(
-            reference.pointer,
-            _id_setImplementationMode as jni.JMethodIDPtr,
-            implementationMode.reference.pointer)
-        .check();
-  }
-
-  static final _id_getImplementationMode = _class.instanceMethodId(
-    r'getImplementationMode',
-    r'()Landroidx/camera/view/PreviewView$ImplementationMode;',
-  );
-
-  static final _getImplementationMode = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.view.PreviewView$ImplementationMode getImplementationMode()
-  /// The returned object must be released after use, by calling the [release] method.
-  PreviewView_ImplementationMode getImplementationMode() {
-    return _getImplementationMode(
-            reference.pointer, _id_getImplementationMode as jni.JMethodIDPtr)
-        .object(const $PreviewView_ImplementationModeType());
-  }
-
-  static final _id_getSurfaceProvider = _class.instanceMethodId(
-    r'getSurfaceProvider',
-    r'()Landroidx/camera/core/Preview$SurfaceProvider;',
-  );
-
-  static final _getSurfaceProvider = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.Preview$SurfaceProvider getSurfaceProvider()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getSurfaceProvider() {
-    return _getSurfaceProvider(
-            reference.pointer, _id_getSurfaceProvider as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setScaleType = _class.instanceMethodId(
-    r'setScaleType',
-    r'(Landroidx/camera/view/PreviewView$ScaleType;)V',
-  );
-
-  static final _setScaleType = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setScaleType(androidx.camera.view.PreviewView$ScaleType scaleType)
-  void setScaleType(
-    PreviewView_ScaleType scaleType,
-  ) {
-    _setScaleType(reference.pointer, _id_setScaleType as jni.JMethodIDPtr,
-            scaleType.reference.pointer)
-        .check();
-  }
-
-  static final _id_getScaleType = _class.instanceMethodId(
-    r'getScaleType',
-    r'()Landroidx/camera/view/PreviewView$ScaleType;',
-  );
-
-  static final _getScaleType = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.view.PreviewView$ScaleType getScaleType()
-  /// The returned object must be released after use, by calling the [release] method.
-  PreviewView_ScaleType getScaleType() {
-    return _getScaleType(
-            reference.pointer, _id_getScaleType as jni.JMethodIDPtr)
-        .object(const $PreviewView_ScaleTypeType());
-  }
-
-  static final _id_getMeteringPointFactory = _class.instanceMethodId(
-    r'getMeteringPointFactory',
-    r'()Landroidx/camera/core/MeteringPointFactory;',
-  );
-
-  static final _getMeteringPointFactory = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.MeteringPointFactory getMeteringPointFactory()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getMeteringPointFactory() {
-    return _getMeteringPointFactory(
-            reference.pointer, _id_getMeteringPointFactory as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getPreviewStreamState = _class.instanceMethodId(
-    r'getPreviewStreamState',
-    r'()Landroidx/lifecycle/LiveData;',
-  );
-
-  static final _getPreviewStreamState = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.lifecycle.LiveData getPreviewStreamState()
-  /// The returned object must be released after use, by calling the [release] method.
-  LiveData<PreviewView_StreamState> getPreviewStreamState() {
-    return _getPreviewStreamState(
-            reference.pointer, _id_getPreviewStreamState as jni.JMethodIDPtr)
-        .object(const $LiveDataType($PreviewView_StreamStateType()));
-  }
-
-  static final _id_getBitmap = _class.instanceMethodId(
-    r'getBitmap',
-    r'()Landroid/graphics/Bitmap;',
-  );
-
-  static final _getBitmap = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.graphics.Bitmap getBitmap()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getBitmap() {
-    return _getBitmap(reference.pointer, _id_getBitmap as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getViewPort = _class.instanceMethodId(
-    r'getViewPort',
-    r'()Landroidx/camera/core/ViewPort;',
-  );
-
-  static final _getViewPort = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.core.ViewPort getViewPort()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getViewPort() {
-    return _getViewPort(reference.pointer, _id_getViewPort as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getViewPort1 = _class.instanceMethodId(
-    r'getViewPort',
-    r'(I)Landroidx/camera/core/ViewPort;',
-  );
-
-  static final _getViewPort1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
-
-  /// from: public androidx.camera.core.ViewPort getViewPort(int i)
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getViewPort1(
-    int i,
-  ) {
-    return _getViewPort1(
-            reference.pointer, _id_getViewPort1 as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_setFrameUpdateListener = _class.instanceMethodId(
-    r'setFrameUpdateListener',
-    r'(Ljava/util/concurrent/Executor;Landroidx/camera/view/PreviewView$OnFrameUpdateListener;)V',
-  );
-
-  static final _setFrameUpdateListener = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setFrameUpdateListener(java.util.concurrent.Executor executor, androidx.camera.view.PreviewView$OnFrameUpdateListener onFrameUpdateListener)
-  void setFrameUpdateListener(
-    Executor executor,
-    PreviewView_OnFrameUpdateListener onFrameUpdateListener,
-  ) {
-    _setFrameUpdateListener(
-            reference.pointer,
-            _id_setFrameUpdateListener as jni.JMethodIDPtr,
-            executor.reference.pointer,
-            onFrameUpdateListener.reference.pointer)
-        .check();
-  }
-
-  static final _id_setController = _class.instanceMethodId(
-    r'setController',
-    r'(Landroidx/camera/view/CameraController;)V',
-  );
-
-  static final _setController = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void setController(androidx.camera.view.CameraController cameraController)
-  void setController(
-    CameraController cameraController,
-  ) {
-    _setController(reference.pointer, _id_setController as jni.JMethodIDPtr,
-            cameraController.reference.pointer)
-        .check();
-  }
-
-  static final _id_getController = _class.instanceMethodId(
-    r'getController',
-    r'()Landroidx/camera/view/CameraController;',
-  );
-
-  static final _getController = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.view.CameraController getController()
-  /// The returned object must be released after use, by calling the [release] method.
-  CameraController getController() {
-    return _getController(
-            reference.pointer, _id_getController as jni.JMethodIDPtr)
-        .object(const $CameraControllerType());
-  }
-
-  static final _id_getOutputTransform = _class.instanceMethodId(
-    r'getOutputTransform',
-    r'()Landroidx/camera/view/transform/OutputTransform;',
-  );
-
-  static final _getOutputTransform = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public androidx.camera.view.transform.OutputTransform getOutputTransform()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getOutputTransform() {
-    return _getOutputTransform(
-            reference.pointer, _id_getOutputTransform as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_getSensorToViewTransform = _class.instanceMethodId(
-    r'getSensorToViewTransform',
-    r'()Landroid/graphics/Matrix;',
-  );
-
-  static final _getSensorToViewTransform = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public android.graphics.Matrix getSensorToViewTransform()
-  /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getSensorToViewTransform() {
-    return _getSensorToViewTransform(
-            reference.pointer, _id_getSensorToViewTransform as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-}
-
-final class $PreviewViewType extends jni.JObjType<PreviewView> {
-  const $PreviewViewType();
-
-  @override
-  String get signature => r'Landroidx/camera/view/PreviewView;';
-
-  @override
-  PreviewView fromReference(jni.JReference reference) =>
-      PreviewView.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($PreviewViewType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewViewType) && other is $PreviewViewType;
   }
 }
 
@@ -46990,6 +39615,30 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
   $T getValue() {
     return _getValue(reference.pointer, _id_getValue as jni.JMethodIDPtr)
         .object(T);
+  }
+
+  static final _id_isInitialized = _class.instanceMethodId(
+    r'isInitialized',
+    r'()Z',
+  );
+
+  static final _isInitialized = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public boolean isInitialized()
+  bool isInitialized() {
+    return _isInitialized(
+            reference.pointer, _id_isInitialized as jni.JMethodIDPtr)
+        .boolean;
   }
 
   static final _id_onActive = _class.instanceMethodId(
@@ -56618,9 +49267,6 @@ class Detector<$DetectionResultT extends jni.JObject> extends jni.JObject {
 
   /// from: static public final int TYPE_DOCUMENT_DETECTION
   static const TYPE_DOCUMENT_DETECTION = 10;
-
-  /// from: static public final int TYPE_SUBJECT_SEGMENTATION
-  static const TYPE_SUBJECT_SEGMENTATION = 11;
   static final _id_getDetectorType = _class.instanceMethodId(
     r'getDetectorType',
     r'()I',
@@ -57006,483 +49652,6 @@ final class $DetectorType<$DetectionResultT extends jni.JObject>
     return other.runtimeType == ($DetectorType<$DetectionResultT>) &&
         other is $DetectorType<$DetectionResultT> &&
         DetectionResultT == other.DetectionResultT;
-  }
-}
-
-/// from: com.google.mlkit.vision.label.R
-class R extends jni.JObject {
-  @override
-  late final jni.JObjType<R> $type = type;
-
-  R.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(r'com/google/mlkit/vision/label/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $RType();
-}
-
-final class $RType extends jni.JObjType<R> {
-  const $RType();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/label/R;';
-
-  @override
-  R fromReference(jni.JReference reference) => R.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($RType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($RType) && other is $RType;
-  }
-}
-
-/// from: com.google.mlkit.vision.label.defaults.bundled.R
-class R1 extends jni.JObject {
-  @override
-  late final jni.JObjType<R1> $type = type;
-
-  R1.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/label/defaults/bundled/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R1Type();
-}
-
-final class $R1Type extends jni.JObjType<R1> {
-  const $R1Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/label/defaults/bundled/R;';
-
-  @override
-  R1 fromReference(jni.JReference reference) => R1.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R1Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R1Type) && other is $R1Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.label.defaults.common.R
-class R2 extends jni.JObject {
-  @override
-  late final jni.JObjType<R2> $type = type;
-
-  R2.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/label/defaults/common/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R2Type();
-}
-
-final class $R2Type extends jni.JObjType<R2> {
-  const $R2Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/label/defaults/common/R;';
-
-  @override
-  R2 fromReference(jni.JReference reference) => R2.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R2Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R2Type) && other is $R2Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.objects.R
-class R3 extends jni.JObject {
-  @override
-  late final jni.JObjType<R3> $type = type;
-
-  R3.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/objects/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R3Type();
-}
-
-final class $R3Type extends jni.JObjType<R3> {
-  const $R3Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/objects/R;';
-
-  @override
-  R3 fromReference(jni.JReference reference) => R3.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R3Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R3Type) && other is $R3Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.objects.defaults.R
-class R4 extends jni.JObject {
-  @override
-  late final jni.JObjType<R4> $type = type;
-
-  R4.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/objects/defaults/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R4Type();
-}
-
-final class $R4Type extends jni.JObjType<R4> {
-  const $R4Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/objects/defaults/R;';
-
-  @override
-  R4 fromReference(jni.JReference reference) => R4.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R4Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R4Type) && other is $R4Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.pose.R
-class R5 extends jni.JObject {
-  @override
-  late final jni.JObjType<R5> $type = type;
-
-  R5.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(r'com/google/mlkit/vision/pose/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R5Type();
-}
-
-final class $R5Type extends jni.JObjType<R5> {
-  const $R5Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/pose/R;';
-
-  @override
-  R5 fromReference(jni.JReference reference) => R5.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R5Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R5Type) && other is $R5Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.pose.defaults.R
-class R6 extends jni.JObject {
-  @override
-  late final jni.JObjType<R6> $type = type;
-
-  R6.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/pose/defaults/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R6Type();
-}
-
-final class $R6Type extends jni.JObjType<R6> {
-  const $R6Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/pose/defaults/R;';
-
-  @override
-  R6 fromReference(jni.JReference reference) => R6.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R6Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R6Type) && other is $R6Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.segmentation.R
-class R7 extends jni.JObject {
-  @override
-  late final jni.JObjType<R7> $type = type;
-
-  R7.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/segmentation/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R7Type();
-}
-
-final class $R7Type extends jni.JObjType<R7> {
-  const $R7Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/segmentation/R;';
-
-  @override
-  R7 fromReference(jni.JReference reference) => R7.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R7Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R7Type) && other is $R7Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.text.R
-class R8 extends jni.JObject {
-  @override
-  late final jni.JObjType<R8> $type = type;
-
-  R8.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class = jni.JClass.forName(r'com/google/mlkit/vision/text/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R8Type();
-}
-
-final class $R8Type extends jni.JObjType<R8> {
-  const $R8Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/text/R;';
-
-  @override
-  R8 fromReference(jni.JReference reference) => R8.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R8Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R8Type) && other is $R8Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.text.bundled.common.R
-class R9 extends jni.JObject {
-  @override
-  late final jni.JObjType<R9> $type = type;
-
-  R9.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/text/bundled/common/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R9Type();
-}
-
-final class $R9Type extends jni.JObjType<R9> {
-  const $R9Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/text/bundled/common/R;';
-
-  @override
-  R9 fromReference(jni.JReference reference) => R9.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R9Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R9Type) && other is $R9Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.text.bundled.latin.R
-class R10 extends jni.JObject {
-  @override
-  late final jni.JObjType<R10> $type = type;
-
-  R10.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/text/bundled/latin/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R10Type();
-}
-
-final class $R10Type extends jni.JObjType<R10> {
-  const $R10Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/text/bundled/latin/R;';
-
-  @override
-  R10 fromReference(jni.JReference reference) => R10.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R10Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R10Type) && other is $R10Type;
-  }
-}
-
-/// from: com.google.mlkit.vision.text.latin.R
-class R11 extends jni.JObject {
-  @override
-  late final jni.JObjType<R11> $type = type;
-
-  R11.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'com/google/mlkit/vision/text/latin/R');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $R11Type();
-}
-
-final class $R11Type extends jni.JObjType<R11> {
-  const $R11Type();
-
-  @override
-  String get signature => r'Lcom/google/mlkit/vision/text/latin/R;';
-
-  @override
-  R11 fromReference(jni.JReference reference) => R11.fromReference(reference);
-
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
-
-  @override
-  final superCount = 1;
-
-  @override
-  int get hashCode => ($R11Type).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($R11Type) && other is $R11Type;
   }
 }
 
@@ -58763,20 +50932,463 @@ final class $FutureType<$V extends jni.JObject>
   }
 }
 
-/// from: dev.hebei.camerax_android.OnImageCapturedCallback
-class OnImageCapturedCallback extends jni.JObject {
+/// from: dev.hebei.camerax_android.MyImageAnalysis$Companion
+class MyImageAnalysis_Companion extends jni.JObject {
   @override
-  late final jni.JObjType<OnImageCapturedCallback> $type = type;
+  late final jni.JObjType<MyImageAnalysis_Companion> $type = type;
 
-  OnImageCapturedCallback.fromReference(
+  MyImageAnalysis_Companion.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageAnalysis$Companion');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageAnalysis_CompanionType();
+  static final _id_new0 = _class.constructorId(
+    r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageAnalysis_Companion(
+    jni.JObject defaultConstructorMarker,
+  ) {
+    return MyImageAnalysis_Companion.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            defaultConstructorMarker.reference.pointer)
+        .reference);
+  }
+}
+
+final class $MyImageAnalysis_CompanionType
+    extends jni.JObjType<MyImageAnalysis_Companion> {
+  const $MyImageAnalysis_CompanionType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageAnalysis$Companion;';
+
+  @override
+  MyImageAnalysis_Companion fromReference(jni.JReference reference) =>
+      MyImageAnalysis_Companion.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageAnalysis_CompanionType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageAnalysis_CompanionType) &&
+        other is $MyImageAnalysis_CompanionType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageAnalysis$MyAnalyzer
+class MyImageAnalysis_MyAnalyzer extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageAnalysis_MyAnalyzer> $type = type;
+
+  MyImageAnalysis_MyAnalyzer.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageAnalysis$MyAnalyzer');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageAnalysis_MyAnalyzerType();
+  static final _id_analyze = _class.instanceMethodId(
+    r'analyze',
+    r'(Landroidx/camera/core/ImageProxy;)V',
+  );
+
+  static final _analyze = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void analyze(androidx.camera.core.ImageProxy imageProxy)
+  void analyze(
+    ImageProxy imageProxy,
+  ) {
+    _analyze(reference.pointer, _id_analyze as jni.JMethodIDPtr,
+            imageProxy.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MyImageAnalysis_MyAnalyzerImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'analyze(Landroidx/camera/core/ImageProxy;)V') {
+        _$impls[$p]!.analyze(
+          $a[0].castTo(const $ImageProxyType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MyImageAnalysis_MyAnalyzer.implement(
+    $MyImageAnalysis_MyAnalyzerImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MyImageAnalysis_MyAnalyzer.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'dev.hebei.camerax_android.MyImageAnalysis$MyAnalyzer',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MyImageAnalysis_MyAnalyzerImpl {
+  factory $MyImageAnalysis_MyAnalyzerImpl({
+    required void Function(ImageProxy imageProxy) analyze,
+  }) = _$MyImageAnalysis_MyAnalyzerImpl;
+
+  void analyze(ImageProxy imageProxy);
+}
+
+class _$MyImageAnalysis_MyAnalyzerImpl
+    implements $MyImageAnalysis_MyAnalyzerImpl {
+  _$MyImageAnalysis_MyAnalyzerImpl({
+    required void Function(ImageProxy imageProxy) analyze,
+  }) : _analyze = analyze;
+
+  final void Function(ImageProxy imageProxy) _analyze;
+
+  void analyze(ImageProxy imageProxy) {
+    return _analyze(imageProxy);
+  }
+}
+
+final class $MyImageAnalysis_MyAnalyzerType
+    extends jni.JObjType<MyImageAnalysis_MyAnalyzer> {
+  const $MyImageAnalysis_MyAnalyzerType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageAnalysis$MyAnalyzer;';
+
+  @override
+  MyImageAnalysis_MyAnalyzer fromReference(jni.JReference reference) =>
+      MyImageAnalysis_MyAnalyzer.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageAnalysis_MyAnalyzerType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageAnalysis_MyAnalyzerType) &&
+        other is $MyImageAnalysis_MyAnalyzerType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageAnalysis
+class MyImageAnalysis extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageAnalysis> $type = type;
+
+  MyImageAnalysis.fromReference(
     jni.JReference reference,
   ) : super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'dev/hebei/camerax_android/OnImageCapturedCallback');
+      jni.JClass.forName(r'dev/hebei/camerax_android/MyImageAnalysis');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $OnImageCapturedCallbackType();
+  static const type = $MyImageAnalysisType();
+  static final _id_Companion = _class.staticFieldId(
+    r'Companion',
+    r'Ldev/hebei/camerax_android/MyImageAnalysis$Companion;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyImageAnalysis$Companion Companion
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyImageAnalysis_Companion get Companion =>
+      _id_Companion.get(_class, const $MyImageAnalysis_CompanionType());
+
+  /// from: static public final int STRATEGY_KEEP_ONLY_LATEST
+  static const STRATEGY_KEEP_ONLY_LATEST = 0;
+
+  /// from: static public final int STRATEGY_BLOCK_PRODUCER
+  static const STRATEGY_BLOCK_PRODUCER = 1;
+
+  /// from: static public final int COORDINATE_SYSTEM_ORIGINAL
+  static const COORDINATE_SYSTEM_ORIGINAL = 0;
+
+  /// from: static public final int COORDINATE_SYSTEM_SENSOR
+  static const COORDINATE_SYSTEM_SENSOR = 2;
+
+  /// from: static public final int COORDINATE_SYSTEM_VIEW_REFERENCED
+  static const COORDINATE_SYSTEM_VIEW_REFERENCED = 1;
+
+  /// from: static public final int OUTPUT_IMAGE_FORMAT_YUV_420_888
+  static const OUTPUT_IMAGE_FORMAT_YUV_420_888 = 1;
+
+  /// from: static public final int OUTPUT_IMAGE_FORMAT_RGBA_8888
+  static const OUTPUT_IMAGE_FORMAT_RGBA_8888 = 2;
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageAnalysis() {
+    return MyImageAnalysis.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+}
+
+final class $MyImageAnalysisType extends jni.JObjType<MyImageAnalysis> {
+  const $MyImageAnalysisType();
+
+  @override
+  String get signature => r'Ldev/hebei/camerax_android/MyImageAnalysis;';
+
+  @override
+  MyImageAnalysis fromReference(jni.JReference reference) =>
+      MyImageAnalysis.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageAnalysisType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageAnalysisType) &&
+        other is $MyImageAnalysisType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture$Companion
+class MyImageCapture_Companion extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture_Companion> $type = type;
+
+  MyImageCapture_Companion.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'dev/hebei/camerax_android/MyImageCapture$Companion');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCapture_CompanionType();
+  static final _id_new0 = _class.constructorId(
+    r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_Companion(
+    jni.JObject defaultConstructorMarker,
+  ) {
+    return MyImageCapture_Companion.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            defaultConstructorMarker.reference.pointer)
+        .reference);
+  }
+}
+
+final class $MyImageCapture_CompanionType
+    extends jni.JObjType<MyImageCapture_Companion> {
+  const $MyImageCapture_CompanionType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$Companion;';
+
+  @override
+  MyImageCapture_Companion fromReference(jni.JReference reference) =>
+      MyImageCapture_Companion.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageCapture_CompanionType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageCapture_CompanionType) &&
+        other is $MyImageCapture_CompanionType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOnImageCapturedCallback
+class MyImageCapture_MyOnImageCapturedCallback extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture_MyOnImageCapturedCallback> $type =
+      type;
+
+  MyImageCapture_MyOnImageCapturedCallback.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageCapture$MyOnImageCapturedCallback');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCapture_MyOnImageCapturedCallbackType();
+  static final _id_onCaptureStarted = _class.instanceMethodId(
+    r'onCaptureStarted',
+    r'()V',
+  );
+
+  static final _onCaptureStarted = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract void onCaptureStarted()
+  void onCaptureStarted() {
+    _onCaptureStarted(
+            reference.pointer, _id_onCaptureStarted as jni.JMethodIDPtr)
+        .check();
+  }
+
+  static final _id_onCaptureProcessProgressed = _class.instanceMethodId(
+    r'onCaptureProcessProgressed',
+    r'(I)V',
+  );
+
+  static final _onCaptureProcessProgressed = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public abstract void onCaptureProcessProgressed(int i)
+  void onCaptureProcessProgressed(
+    int i,
+  ) {
+    _onCaptureProcessProgressed(reference.pointer,
+            _id_onCaptureProcessProgressed as jni.JMethodIDPtr, i)
+        .check();
+  }
+
   static final _id_onCaptureSuccess = _class.instanceMethodId(
     r'onCaptureSuccess',
     r'(Landroidx/camera/core/ImageProxy;)V',
@@ -58829,8 +51441,36 @@ class OnImageCapturedCallback extends jni.JObject {
         .check();
   }
 
+  static final _id_onPostviewBitmapAvailable = _class.instanceMethodId(
+    r'onPostviewBitmapAvailable',
+    r'(Landroid/graphics/Bitmap;)V',
+  );
+
+  static final _onPostviewBitmapAvailable = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onPostviewBitmapAvailable(android.graphics.Bitmap bitmap)
+  void onPostviewBitmapAvailable(
+    jni.JObject bitmap,
+  ) {
+    _onPostviewBitmapAvailable(
+            reference.pointer,
+            _id_onPostviewBitmapAvailable as jni.JMethodIDPtr,
+            bitmap.reference.pointer)
+        .check();
+  }
+
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $OnImageCapturedCallbackImpl> _$impls = {};
+  static final Map<int, $MyImageCapture_MyOnImageCapturedCallbackImpl> _$impls =
+      {};
   ReceivePort? _$p;
 
   static jni.JObjectPtr _$invoke(
@@ -58861,6 +51501,18 @@ class OnImageCapturedCallback extends jni.JObject {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
+      if ($d == r'onCaptureStarted()V') {
+        _$impls[$p]!.onCaptureStarted();
+        return jni.nullptr;
+      }
+      if ($d == r'onCaptureProcessProgressed(I)V') {
+        _$impls[$p]!.onCaptureProcessProgressed(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
       if ($d == r'onCaptureSuccess(Landroidx/camera/core/ImageProxy;)V') {
         _$impls[$p]!.onCaptureSuccess(
           $a[0].castTo(const $ImageProxyType(), releaseOriginal: true),
@@ -58873,19 +51525,25 @@ class OnImageCapturedCallback extends jni.JObject {
         );
         return jni.nullptr;
       }
+      if ($d == r'onPostviewBitmapAvailable(Landroid/graphics/Bitmap;)V') {
+        _$impls[$p]!.onPostviewBitmapAvailable(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
     } catch (e) {
       return ProtectedJniExtensions.newDartException(e);
     }
     return jni.nullptr;
   }
 
-  factory OnImageCapturedCallback.implement(
-    $OnImageCapturedCallbackImpl $impl,
+  factory MyImageCapture_MyOnImageCapturedCallback.implement(
+    $MyImageCapture_MyOnImageCapturedCallbackImpl $impl,
   ) {
     final $p = ReceivePort();
-    final $x = OnImageCapturedCallback.fromReference(
+    final $x = MyImageCapture_MyOnImageCapturedCallback.fromReference(
       ProtectedJniExtensions.newPortProxy(
-        r'dev.hebei.camerax_android.OnImageCapturedCallback',
+        r'dev.hebei.camerax_android.MyImageCapture$MyOnImageCapturedCallback',
         $p,
         _$invokePointer,
       ),
@@ -58906,25 +51564,49 @@ class OnImageCapturedCallback extends jni.JObject {
   }
 }
 
-abstract interface class $OnImageCapturedCallbackImpl {
-  factory $OnImageCapturedCallbackImpl({
+abstract interface class $MyImageCapture_MyOnImageCapturedCallbackImpl {
+  factory $MyImageCapture_MyOnImageCapturedCallbackImpl({
+    required void Function() onCaptureStarted,
+    required void Function(int i) onCaptureProcessProgressed,
     required void Function(ImageProxy imageProxy) onCaptureSuccess,
     required void Function(jni.JObject imageCaptureException) onError,
-  }) = _$OnImageCapturedCallbackImpl;
+    required void Function(jni.JObject bitmap) onPostviewBitmapAvailable,
+  }) = _$MyImageCapture_MyOnImageCapturedCallbackImpl;
 
+  void onCaptureStarted();
+  void onCaptureProcessProgressed(int i);
   void onCaptureSuccess(ImageProxy imageProxy);
   void onError(jni.JObject imageCaptureException);
+  void onPostviewBitmapAvailable(jni.JObject bitmap);
 }
 
-class _$OnImageCapturedCallbackImpl implements $OnImageCapturedCallbackImpl {
-  _$OnImageCapturedCallbackImpl({
+class _$MyImageCapture_MyOnImageCapturedCallbackImpl
+    implements $MyImageCapture_MyOnImageCapturedCallbackImpl {
+  _$MyImageCapture_MyOnImageCapturedCallbackImpl({
+    required void Function() onCaptureStarted,
+    required void Function(int i) onCaptureProcessProgressed,
     required void Function(ImageProxy imageProxy) onCaptureSuccess,
     required void Function(jni.JObject imageCaptureException) onError,
-  })  : _onCaptureSuccess = onCaptureSuccess,
-        _onError = onError;
+    required void Function(jni.JObject bitmap) onPostviewBitmapAvailable,
+  })  : _onCaptureStarted = onCaptureStarted,
+        _onCaptureProcessProgressed = onCaptureProcessProgressed,
+        _onCaptureSuccess = onCaptureSuccess,
+        _onError = onError,
+        _onPostviewBitmapAvailable = onPostviewBitmapAvailable;
 
+  final void Function() _onCaptureStarted;
+  final void Function(int i) _onCaptureProcessProgressed;
   final void Function(ImageProxy imageProxy) _onCaptureSuccess;
   final void Function(jni.JObject imageCaptureException) _onError;
+  final void Function(jni.JObject bitmap) _onPostviewBitmapAvailable;
+
+  void onCaptureStarted() {
+    return _onCaptureStarted();
+  }
+
+  void onCaptureProcessProgressed(int i) {
+    return _onCaptureProcessProgressed(i);
+  }
 
   void onCaptureSuccess(ImageProxy imageProxy) {
     return _onCaptureSuccess(imageProxy);
@@ -58933,19 +51615,24 @@ class _$OnImageCapturedCallbackImpl implements $OnImageCapturedCallbackImpl {
   void onError(jni.JObject imageCaptureException) {
     return _onError(imageCaptureException);
   }
+
+  void onPostviewBitmapAvailable(jni.JObject bitmap) {
+    return _onPostviewBitmapAvailable(bitmap);
+  }
 }
 
-final class $OnImageCapturedCallbackType
-    extends jni.JObjType<OnImageCapturedCallback> {
-  const $OnImageCapturedCallbackType();
+final class $MyImageCapture_MyOnImageCapturedCallbackType
+    extends jni.JObjType<MyImageCapture_MyOnImageCapturedCallback> {
+  const $MyImageCapture_MyOnImageCapturedCallbackType();
 
   @override
   String get signature =>
-      r'Ldev/hebei/camerax_android/OnImageCapturedCallback;';
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOnImageCapturedCallback;';
 
   @override
-  OnImageCapturedCallback fromReference(jni.JReference reference) =>
-      OnImageCapturedCallback.fromReference(reference);
+  MyImageCapture_MyOnImageCapturedCallback fromReference(
+          jni.JReference reference) =>
+      MyImageCapture_MyOnImageCapturedCallback.fromReference(reference);
 
   @override
   jni.JObjType get superType => const jni.JObjectType();
@@ -58954,34 +51641,36 @@ final class $OnImageCapturedCallbackType
   final superCount = 1;
 
   @override
-  int get hashCode => ($OnImageCapturedCallbackType).hashCode;
+  int get hashCode => ($MyImageCapture_MyOnImageCapturedCallbackType).hashCode;
 
   @override
   bool operator ==(Object other) {
-    return other.runtimeType == ($OnImageCapturedCallbackType) &&
-        other is $OnImageCapturedCallbackType;
+    return other.runtimeType ==
+            ($MyImageCapture_MyOnImageCapturedCallbackType) &&
+        other is $MyImageCapture_MyOnImageCapturedCallbackType;
   }
 }
 
-/// from: dev.hebei.camerax_android.OnImageCapturedCallbackImpl
-class OnImageCapturedCallbackImpl extends ImageCapture_OnImageCapturedCallback {
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOnImageCapturedCallbackImpl
+class MyImageCapture_MyOnImageCapturedCallbackImpl extends jni.JObject {
   @override
-  late final jni.JObjType<OnImageCapturedCallbackImpl> $type = type;
+  late final jni.JObjType<MyImageCapture_MyOnImageCapturedCallbackImpl> $type =
+      type;
 
-  OnImageCapturedCallbackImpl.fromReference(
+  MyImageCapture_MyOnImageCapturedCallbackImpl.fromReference(
     jni.JReference reference,
   ) : super.fromReference(reference);
 
   static final _class = jni.JClass.forName(
-      r'dev/hebei/camerax_android/OnImageCapturedCallbackImpl');
+      r'dev/hebei/camerax_android/MyImageCapture$MyOnImageCapturedCallbackImpl');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $OnImageCapturedCallbackImplType();
-  static final _id_new1 = _class.constructorId(
-    r'(Ldev/hebei/camerax_android/OnImageCapturedCallback;)V',
+  static const type = $MyImageCapture_MyOnImageCapturedCallbackImplType();
+  static final _id_new0 = _class.constructorId(
+    r'(Ldev/hebei/camerax_android/MyImageCapture$MyOnImageCapturedCallback;)V',
   );
 
-  static final _new1 = ProtectedJniExtensions.lookup<
+  static final _new0 = ProtectedJniExtensions.lookup<
               ffi.NativeFunction<
                   jni.JniResult Function(
                       ffi.Pointer<ffi.Void>,
@@ -58992,16 +51681,64 @@ class OnImageCapturedCallbackImpl extends ImageCapture_OnImageCapturedCallback {
           jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
               ffi.Pointer<ffi.Void>)>();
 
-  /// from: public void <init>(dev.hebei.camerax_android.OnImageCapturedCallback onImageCapturedCallback)
+  /// from: public void <init>(dev.hebei.camerax_android.MyImageCapture$MyOnImageCapturedCallback myOnImageCapturedCallback)
   /// The returned object must be released after use, by calling the [release] method.
-  factory OnImageCapturedCallbackImpl.new1(
-    OnImageCapturedCallback onImageCapturedCallback,
+  factory MyImageCapture_MyOnImageCapturedCallbackImpl(
+    MyImageCapture_MyOnImageCapturedCallback myOnImageCapturedCallback,
   ) {
-    return OnImageCapturedCallbackImpl.fromReference(_new1(
+    return MyImageCapture_MyOnImageCapturedCallbackImpl.fromReference(_new0(
             _class.reference.pointer,
-            _id_new1 as jni.JMethodIDPtr,
-            onImageCapturedCallback.reference.pointer)
+            _id_new0 as jni.JMethodIDPtr,
+            myOnImageCapturedCallback.reference.pointer)
         .reference);
+  }
+
+  static final _id_onCaptureStarted = _class.instanceMethodId(
+    r'onCaptureStarted',
+    r'()V',
+  );
+
+  static final _onCaptureStarted = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void onCaptureStarted()
+  void onCaptureStarted() {
+    _onCaptureStarted(
+            reference.pointer, _id_onCaptureStarted as jni.JMethodIDPtr)
+        .check();
+  }
+
+  static final _id_onCaptureProcessProgressed = _class.instanceMethodId(
+    r'onCaptureProcessProgressed',
+    r'(I)V',
+  );
+
+  static final _onCaptureProcessProgressed = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public void onCaptureProcessProgressed(int i)
+  void onCaptureProcessProgressed(
+    int i,
+  ) {
+    _onCaptureProcessProgressed(reference.pointer,
+            _id_onCaptureProcessProgressed as jni.JMethodIDPtr, i)
+        .check();
   }
 
   static final _id_onCaptureSuccess = _class.instanceMethodId(
@@ -59055,128 +51792,47 @@ class OnImageCapturedCallbackImpl extends ImageCapture_OnImageCapturedCallback {
             imageCaptureException.reference.pointer)
         .check();
   }
-}
 
-final class $OnImageCapturedCallbackImplType
-    extends jni.JObjType<OnImageCapturedCallbackImpl> {
-  const $OnImageCapturedCallbackImplType();
-
-  @override
-  String get signature =>
-      r'Ldev/hebei/camerax_android/OnImageCapturedCallbackImpl;';
-
-  @override
-  OnImageCapturedCallbackImpl fromReference(jni.JReference reference) =>
-      OnImageCapturedCallbackImpl.fromReference(reference);
-
-  @override
-  jni.JObjType get superType =>
-      const $ImageCapture_OnImageCapturedCallbackType();
-
-  @override
-  final superCount = 2;
-
-  @override
-  int get hashCode => ($OnImageCapturedCallbackImplType).hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($OnImageCapturedCallbackImplType) &&
-        other is $OnImageCapturedCallbackImplType;
-  }
-}
-
-/// from: dev.hebei.camerax_android.PermissionsManager
-class PermissionsManager extends jni.JObject {
-  @override
-  late final jni.JObjType<PermissionsManager> $type = type;
-
-  PermissionsManager.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
-
-  static final _class =
-      jni.JClass.forName(r'dev/hebei/camerax_android/PermissionsManager');
-
-  /// The type which includes information such as the signature of this class.
-  static const type = $PermissionsManagerType();
-  static final _id_INSTANCE = _class.staticFieldId(
-    r'INSTANCE',
-    r'Ldev/hebei/camerax_android/PermissionsManager;',
+  static final _id_onPostviewBitmapAvailable = _class.instanceMethodId(
+    r'onPostviewBitmapAvailable',
+    r'(Landroid/graphics/Bitmap;)V',
   );
 
-  /// from: static public final dev.hebei.camerax_android.PermissionsManager INSTANCE
-  /// The returned object must be released after use, by calling the [release] method.
-  static PermissionsManager get INSTANCE =>
-      _id_INSTANCE.get(_class, const $PermissionsManagerType());
-
-  static final _id_checkPermissions = _class.instanceMethodId(
-    r'checkPermissions',
-    r'([Ljava/lang/String;)Z',
-  );
-
-  static final _checkPermissions = ProtectedJniExtensions.lookup<
+  static final _onPostviewBitmapAvailable = ProtectedJniExtensions.lookup<
               ffi.NativeFunction<
-                  jni.JniResult Function(
+                  jni.JThrowablePtr Function(
                       ffi.Pointer<ffi.Void>,
                       jni.JMethodIDPtr,
                       ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallBooleanMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public final boolean checkPermissions(java.lang.String[] strings)
-  bool checkPermissions(
-    jni.JArray<jni.JString> strings,
-  ) {
-    return _checkPermissions(reference.pointer,
-            _id_checkPermissions as jni.JMethodIDPtr, strings.reference.pointer)
-        .boolean;
-  }
-
-  static final _id_requestPermissions = _class.instanceMethodId(
-    r'requestPermissions',
-    r'([Ljava/lang/String;Ldev/hebei/camerax_android/PermissionsResultCallback;)V',
-  );
-
-  static final _requestPermissions = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallVoidMethod')
+          'globalEnv_CallVoidMethod')
       .asFunction<
           jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              ffi.Pointer<ffi.Void>)>();
 
-  /// from: public final void requestPermissions(java.lang.String[] strings, dev.hebei.camerax_android.PermissionsResultCallback permissionsResultCallback)
-  void requestPermissions(
-    jni.JArray<jni.JString> strings,
-    PermissionsResultCallback permissionsResultCallback,
+  /// from: public void onPostviewBitmapAvailable(android.graphics.Bitmap bitmap)
+  void onPostviewBitmapAvailable(
+    jni.JObject bitmap,
   ) {
-    _requestPermissions(
+    _onPostviewBitmapAvailable(
             reference.pointer,
-            _id_requestPermissions as jni.JMethodIDPtr,
-            strings.reference.pointer,
-            permissionsResultCallback.reference.pointer)
+            _id_onPostviewBitmapAvailable as jni.JMethodIDPtr,
+            bitmap.reference.pointer)
         .check();
   }
 }
 
-final class $PermissionsManagerType extends jni.JObjType<PermissionsManager> {
-  const $PermissionsManagerType();
+final class $MyImageCapture_MyOnImageCapturedCallbackImplType
+    extends jni.JObjType<MyImageCapture_MyOnImageCapturedCallbackImpl> {
+  const $MyImageCapture_MyOnImageCapturedCallbackImplType();
 
   @override
-  String get signature => r'Ldev/hebei/camerax_android/PermissionsManager;';
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOnImageCapturedCallbackImpl;';
 
   @override
-  PermissionsManager fromReference(jni.JReference reference) =>
-      PermissionsManager.fromReference(reference);
+  MyImageCapture_MyOnImageCapturedCallbackImpl fromReference(
+          jni.JReference reference) =>
+      MyImageCapture_MyOnImageCapturedCallbackImpl.fromReference(reference);
 
   @override
   jni.JObjType get superType => const jni.JObjectType();
@@ -59185,29 +51841,921 @@ final class $PermissionsManagerType extends jni.JObjType<PermissionsManager> {
   final superCount = 1;
 
   @override
-  int get hashCode => ($PermissionsManagerType).hashCode;
+  int get hashCode =>
+      ($MyImageCapture_MyOnImageCapturedCallbackImplType).hashCode;
 
   @override
   bool operator ==(Object other) {
-    return other.runtimeType == ($PermissionsManagerType) &&
-        other is $PermissionsManagerType;
+    return other.runtimeType ==
+            ($MyImageCapture_MyOnImageCapturedCallbackImplType) &&
+        other is $MyImageCapture_MyOnImageCapturedCallbackImplType;
   }
 }
 
-/// from: dev.hebei.camerax_android.PermissionsResultCallback
-class PermissionsResultCallback extends jni.JObject {
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOnImageSavedCallback
+class MyImageCapture_MyOnImageSavedCallback extends jni.JObject {
   @override
-  late final jni.JObjType<PermissionsResultCallback> $type = type;
+  late final jni.JObjType<MyImageCapture_MyOnImageSavedCallback> $type = type;
 
-  PermissionsResultCallback.fromReference(
+  MyImageCapture_MyOnImageSavedCallback.fromReference(
     jni.JReference reference,
   ) : super.fromReference(reference);
 
   static final _class = jni.JClass.forName(
-      r'dev/hebei/camerax_android/PermissionsResultCallback');
+      r'dev/hebei/camerax_android/MyImageCapture$MyOnImageSavedCallback');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $PermissionsResultCallbackType();
+  static const type = $MyImageCapture_MyOnImageSavedCallbackType();
+  static final _id_onCaptureStarted = _class.instanceMethodId(
+    r'onCaptureStarted',
+    r'()V',
+  );
+
+  static final _onCaptureStarted = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public abstract void onCaptureStarted()
+  void onCaptureStarted() {
+    _onCaptureStarted(
+            reference.pointer, _id_onCaptureStarted as jni.JMethodIDPtr)
+        .check();
+  }
+
+  static final _id_onCaptureProcessProgressed = _class.instanceMethodId(
+    r'onCaptureProcessProgressed',
+    r'(I)V',
+  );
+
+  static final _onCaptureProcessProgressed = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public abstract void onCaptureProcessProgressed(int i)
+  void onCaptureProcessProgressed(
+    int i,
+  ) {
+    _onCaptureProcessProgressed(reference.pointer,
+            _id_onCaptureProcessProgressed as jni.JMethodIDPtr, i)
+        .check();
+  }
+
+  static final _id_onImageSaved = _class.instanceMethodId(
+    r'onImageSaved',
+    r'(Ldev/hebei/camerax_android/MyImageCapture$MyOutputFileResults;)V',
+  );
+
+  static final _onImageSaved = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onImageSaved(dev.hebei.camerax_android.MyImageCapture$MyOutputFileResults myOutputFileResults)
+  void onImageSaved(
+    MyImageCapture_MyOutputFileResults myOutputFileResults,
+  ) {
+    _onImageSaved(reference.pointer, _id_onImageSaved as jni.JMethodIDPtr,
+            myOutputFileResults.reference.pointer)
+        .check();
+  }
+
+  static final _id_onError = _class.instanceMethodId(
+    r'onError',
+    r'(Landroidx/camera/core/ImageCaptureException;)V',
+  );
+
+  static final _onError = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onError(androidx.camera.core.ImageCaptureException imageCaptureException)
+  void onError(
+    jni.JObject imageCaptureException,
+  ) {
+    _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
+            imageCaptureException.reference.pointer)
+        .check();
+  }
+
+  static final _id_onPostviewBitmapAvailable = _class.instanceMethodId(
+    r'onPostviewBitmapAvailable',
+    r'(Landroid/graphics/Bitmap;)V',
+  );
+
+  static final _onPostviewBitmapAvailable = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public abstract void onPostviewBitmapAvailable(android.graphics.Bitmap bitmap)
+  void onPostviewBitmapAvailable(
+    jni.JObject bitmap,
+  ) {
+    _onPostviewBitmapAvailable(
+            reference.pointer,
+            _id_onPostviewBitmapAvailable as jni.JMethodIDPtr,
+            bitmap.reference.pointer)
+        .check();
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $MyImageCapture_MyOnImageSavedCallbackImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'onCaptureStarted()V') {
+        _$impls[$p]!.onCaptureStarted();
+        return jni.nullptr;
+      }
+      if ($d == r'onCaptureProcessProgressed(I)V') {
+        _$impls[$p]!.onCaptureProcessProgressed(
+          $a[0]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d ==
+          r'onImageSaved(Ldev/hebei/camerax_android/MyImageCapture$MyOutputFileResults;)V') {
+        _$impls[$p]!.onImageSaved(
+          $a[0].castTo(const $MyImageCapture_MyOutputFileResultsType(),
+              releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onError(Landroidx/camera/core/ImageCaptureException;)V') {
+        _$impls[$p]!.onError(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+      if ($d == r'onPostviewBitmapAvailable(Landroid/graphics/Bitmap;)V') {
+        _$impls[$p]!.onPostviewBitmapAvailable(
+          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+        );
+        return jni.nullptr;
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory MyImageCapture_MyOnImageSavedCallback.implement(
+    $MyImageCapture_MyOnImageSavedCallbackImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = MyImageCapture_MyOnImageSavedCallback.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'dev.hebei.camerax_android.MyImageCapture$MyOnImageSavedCallback',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $MyImageCapture_MyOnImageSavedCallbackImpl {
+  factory $MyImageCapture_MyOnImageSavedCallbackImpl({
+    required void Function() onCaptureStarted,
+    required void Function(int i) onCaptureProcessProgressed,
+    required void Function(
+            MyImageCapture_MyOutputFileResults myOutputFileResults)
+        onImageSaved,
+    required void Function(jni.JObject imageCaptureException) onError,
+    required void Function(jni.JObject bitmap) onPostviewBitmapAvailable,
+  }) = _$MyImageCapture_MyOnImageSavedCallbackImpl;
+
+  void onCaptureStarted();
+  void onCaptureProcessProgressed(int i);
+  void onImageSaved(MyImageCapture_MyOutputFileResults myOutputFileResults);
+  void onError(jni.JObject imageCaptureException);
+  void onPostviewBitmapAvailable(jni.JObject bitmap);
+}
+
+class _$MyImageCapture_MyOnImageSavedCallbackImpl
+    implements $MyImageCapture_MyOnImageSavedCallbackImpl {
+  _$MyImageCapture_MyOnImageSavedCallbackImpl({
+    required void Function() onCaptureStarted,
+    required void Function(int i) onCaptureProcessProgressed,
+    required void Function(
+            MyImageCapture_MyOutputFileResults myOutputFileResults)
+        onImageSaved,
+    required void Function(jni.JObject imageCaptureException) onError,
+    required void Function(jni.JObject bitmap) onPostviewBitmapAvailable,
+  })  : _onCaptureStarted = onCaptureStarted,
+        _onCaptureProcessProgressed = onCaptureProcessProgressed,
+        _onImageSaved = onImageSaved,
+        _onError = onError,
+        _onPostviewBitmapAvailable = onPostviewBitmapAvailable;
+
+  final void Function() _onCaptureStarted;
+  final void Function(int i) _onCaptureProcessProgressed;
+  final void Function(MyImageCapture_MyOutputFileResults myOutputFileResults)
+      _onImageSaved;
+  final void Function(jni.JObject imageCaptureException) _onError;
+  final void Function(jni.JObject bitmap) _onPostviewBitmapAvailable;
+
+  void onCaptureStarted() {
+    return _onCaptureStarted();
+  }
+
+  void onCaptureProcessProgressed(int i) {
+    return _onCaptureProcessProgressed(i);
+  }
+
+  void onImageSaved(MyImageCapture_MyOutputFileResults myOutputFileResults) {
+    return _onImageSaved(myOutputFileResults);
+  }
+
+  void onError(jni.JObject imageCaptureException) {
+    return _onError(imageCaptureException);
+  }
+
+  void onPostviewBitmapAvailable(jni.JObject bitmap) {
+    return _onPostviewBitmapAvailable(bitmap);
+  }
+}
+
+final class $MyImageCapture_MyOnImageSavedCallbackType
+    extends jni.JObjType<MyImageCapture_MyOnImageSavedCallback> {
+  const $MyImageCapture_MyOnImageSavedCallbackType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOnImageSavedCallback;';
+
+  @override
+  MyImageCapture_MyOnImageSavedCallback fromReference(
+          jni.JReference reference) =>
+      MyImageCapture_MyOnImageSavedCallback.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageCapture_MyOnImageSavedCallbackType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageCapture_MyOnImageSavedCallbackType) &&
+        other is $MyImageCapture_MyOnImageSavedCallbackType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOnImageSavedCallbackImpl
+class MyImageCapture_MyOnImageSavedCallbackImpl extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture_MyOnImageSavedCallbackImpl> $type =
+      type;
+
+  MyImageCapture_MyOnImageSavedCallbackImpl.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageCapture$MyOnImageSavedCallbackImpl');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCapture_MyOnImageSavedCallbackImplType();
+  static final _id_new0 = _class.constructorId(
+    r'(Ldev/hebei/camerax_android/MyImageCapture$MyOnImageSavedCallback;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(dev.hebei.camerax_android.MyImageCapture$MyOnImageSavedCallback myOnImageSavedCallback)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_MyOnImageSavedCallbackImpl(
+    MyImageCapture_MyOnImageSavedCallback myOnImageSavedCallback,
+  ) {
+    return MyImageCapture_MyOnImageSavedCallbackImpl.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            myOnImageSavedCallback.reference.pointer)
+        .reference);
+  }
+
+  static final _id_onCaptureStarted = _class.instanceMethodId(
+    r'onCaptureStarted',
+    r'()V',
+  );
+
+  static final _onCaptureStarted = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void onCaptureStarted()
+  void onCaptureStarted() {
+    _onCaptureStarted(
+            reference.pointer, _id_onCaptureStarted as jni.JMethodIDPtr)
+        .check();
+  }
+
+  static final _id_onCaptureProcessProgressed = _class.instanceMethodId(
+    r'onCaptureProcessProgressed',
+    r'(I)V',
+  );
+
+  static final _onCaptureProcessProgressed = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public void onCaptureProcessProgressed(int i)
+  void onCaptureProcessProgressed(
+    int i,
+  ) {
+    _onCaptureProcessProgressed(reference.pointer,
+            _id_onCaptureProcessProgressed as jni.JMethodIDPtr, i)
+        .check();
+  }
+
+  static final _id_onImageSaved = _class.instanceMethodId(
+    r'onImageSaved',
+    r'(Landroidx/camera/core/ImageCapture$OutputFileResults;)V',
+  );
+
+  static final _onImageSaved = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void onImageSaved(androidx.camera.core.ImageCapture$OutputFileResults outputFileResults)
+  void onImageSaved(
+    jni.JObject outputFileResults,
+  ) {
+    _onImageSaved(reference.pointer, _id_onImageSaved as jni.JMethodIDPtr,
+            outputFileResults.reference.pointer)
+        .check();
+  }
+
+  static final _id_onError = _class.instanceMethodId(
+    r'onError',
+    r'(Landroidx/camera/core/ImageCaptureException;)V',
+  );
+
+  static final _onError = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void onError(androidx.camera.core.ImageCaptureException imageCaptureException)
+  void onError(
+    jni.JObject imageCaptureException,
+  ) {
+    _onError(reference.pointer, _id_onError as jni.JMethodIDPtr,
+            imageCaptureException.reference.pointer)
+        .check();
+  }
+
+  static final _id_onPostviewBitmapAvailable = _class.instanceMethodId(
+    r'onPostviewBitmapAvailable',
+    r'(Landroid/graphics/Bitmap;)V',
+  );
+
+  static final _onPostviewBitmapAvailable = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void onPostviewBitmapAvailable(android.graphics.Bitmap bitmap)
+  void onPostviewBitmapAvailable(
+    jni.JObject bitmap,
+  ) {
+    _onPostviewBitmapAvailable(
+            reference.pointer,
+            _id_onPostviewBitmapAvailable as jni.JMethodIDPtr,
+            bitmap.reference.pointer)
+        .check();
+  }
+}
+
+final class $MyImageCapture_MyOnImageSavedCallbackImplType
+    extends jni.JObjType<MyImageCapture_MyOnImageSavedCallbackImpl> {
+  const $MyImageCapture_MyOnImageSavedCallbackImplType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOnImageSavedCallbackImpl;';
+
+  @override
+  MyImageCapture_MyOnImageSavedCallbackImpl fromReference(
+          jni.JReference reference) =>
+      MyImageCapture_MyOnImageSavedCallbackImpl.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageCapture_MyOnImageSavedCallbackImplType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MyImageCapture_MyOnImageSavedCallbackImplType) &&
+        other is $MyImageCapture_MyOnImageSavedCallbackImplType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOutputFileOptions$MyBuilder
+class MyImageCapture_MyOutputFileOptions_MyBuilder extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture_MyOutputFileOptions_MyBuilder> $type =
+      type;
+
+  MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageCapture$MyOutputFileOptions$MyBuilder');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCapture_MyOutputFileOptions_MyBuilderType();
+  static final _id_new0 = _class.constructorId(
+    r'(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/content/ContentValues;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>,
+              jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(android.content.ContentResolver contentResolver, android.net.Uri uri, android.content.ContentValues contentValues)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_MyOutputFileOptions_MyBuilder(
+    ContentResolver contentResolver,
+    Uri uri,
+    ContentValues contentValues,
+  ) {
+    return MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            contentResolver.reference.pointer,
+            uri.reference.pointer,
+            contentValues.reference.pointer)
+        .reference);
+  }
+
+  static final _id_build = _class.instanceMethodId(
+    r'build',
+    r'()Landroidx/camera/core/ImageCapture$OutputFileOptions;',
+  );
+
+  static final _build = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final androidx.camera.core.ImageCapture$OutputFileOptions build()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject build() {
+    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+}
+
+final class $MyImageCapture_MyOutputFileOptions_MyBuilderType
+    extends jni.JObjType<MyImageCapture_MyOutputFileOptions_MyBuilder> {
+  const $MyImageCapture_MyOutputFileOptions_MyBuilderType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOutputFileOptions$MyBuilder;';
+
+  @override
+  MyImageCapture_MyOutputFileOptions_MyBuilder fromReference(
+          jni.JReference reference) =>
+      MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode =>
+      ($MyImageCapture_MyOutputFileOptions_MyBuilderType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($MyImageCapture_MyOutputFileOptions_MyBuilderType) &&
+        other is $MyImageCapture_MyOutputFileOptions_MyBuilderType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOutputFileOptions
+class MyImageCapture_MyOutputFileOptions extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture_MyOutputFileOptions> $type = type;
+
+  MyImageCapture_MyOutputFileOptions.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageCapture$MyOutputFileOptions');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCapture_MyOutputFileOptionsType();
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_MyOutputFileOptions() {
+    return MyImageCapture_MyOutputFileOptions.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+}
+
+final class $MyImageCapture_MyOutputFileOptionsType
+    extends jni.JObjType<MyImageCapture_MyOutputFileOptions> {
+  const $MyImageCapture_MyOutputFileOptionsType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOutputFileOptions;';
+
+  @override
+  MyImageCapture_MyOutputFileOptions fromReference(jni.JReference reference) =>
+      MyImageCapture_MyOutputFileOptions.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageCapture_MyOutputFileOptionsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageCapture_MyOutputFileOptionsType) &&
+        other is $MyImageCapture_MyOutputFileOptionsType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture$MyOutputFileResults
+class MyImageCapture_MyOutputFileResults extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture_MyOutputFileResults> $type = type;
+
+  MyImageCapture_MyOutputFileResults.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyImageCapture$MyOutputFileResults');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCapture_MyOutputFileResultsType();
+  static final _id_new0 = _class.constructorId(
+    r'(Landroidx/camera/core/ImageCapture$OutputFileResults;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(androidx.camera.core.ImageCapture$OutputFileResults outputFileResults)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_MyOutputFileResults(
+    jni.JObject outputFileResults,
+  ) {
+    return MyImageCapture_MyOutputFileResults.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            outputFileResults.reference.pointer)
+        .reference);
+  }
+
+  static final _id_getSavedUri = _class.instanceMethodId(
+    r'getSavedUri',
+    r'()Landroid/net/Uri;',
+  );
+
+  static final _getSavedUri = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final android.net.Uri getSavedUri()
+  /// The returned object must be released after use, by calling the [release] method.
+  Uri getSavedUri() {
+    return _getSavedUri(reference.pointer, _id_getSavedUri as jni.JMethodIDPtr)
+        .object(const $UriType());
+  }
+}
+
+final class $MyImageCapture_MyOutputFileResultsType
+    extends jni.JObjType<MyImageCapture_MyOutputFileResults> {
+  const $MyImageCapture_MyOutputFileResultsType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyImageCapture$MyOutputFileResults;';
+
+  @override
+  MyImageCapture_MyOutputFileResults fromReference(jni.JReference reference) =>
+      MyImageCapture_MyOutputFileResults.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageCapture_MyOutputFileResultsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageCapture_MyOutputFileResultsType) &&
+        other is $MyImageCapture_MyOutputFileResultsType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyImageCapture
+class MyImageCapture extends jni.JObject {
+  @override
+  late final jni.JObjType<MyImageCapture> $type = type;
+
+  MyImageCapture.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'dev/hebei/camerax_android/MyImageCapture');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyImageCaptureType();
+  static final _id_Companion = _class.staticFieldId(
+    r'Companion',
+    r'Ldev/hebei/camerax_android/MyImageCapture$Companion;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyImageCapture$Companion Companion
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyImageCapture_Companion get Companion =>
+      _id_Companion.get(_class, const $MyImageCapture_CompanionType());
+
+  /// from: static public final int CAPTURE_MODE_MINIMIZE_LATENCY
+  static const CAPTURE_MODE_MINIMIZE_LATENCY = 1;
+
+  /// from: static public final int CAPTURE_MODE_MAXIMIZE_QUALITY
+  static const CAPTURE_MODE_MAXIMIZE_QUALITY = 0;
+
+  /// from: static public final int FLASH_MODE_AUTO
+  static const FLASH_MODE_AUTO = 0;
+
+  /// from: static public final int FLASH_MODE_OFF
+  static const FLASH_MODE_OFF = 2;
+
+  /// from: static public final int FLASH_MODE_ON
+  static const FLASH_MODE_ON = 1;
+
+  /// from: static public final int FLASH_MODE_SCREEN
+  static const FLASH_MODE_SCREEN = 3;
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture() {
+    return MyImageCapture.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+}
+
+final class $MyImageCaptureType extends jni.JObjType<MyImageCapture> {
+  const $MyImageCaptureType();
+
+  @override
+  String get signature => r'Ldev/hebei/camerax_android/MyImageCapture;';
+
+  @override
+  MyImageCapture fromReference(jni.JReference reference) =>
+      MyImageCapture.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyImageCaptureType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyImageCaptureType) &&
+        other is $MyImageCaptureType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyPermissionsManager$MyPermissionsResultCallback
+class MyPermissionsManager_MyPermissionsResultCallback extends jni.JObject {
+  @override
+  late final jni.JObjType<MyPermissionsManager_MyPermissionsResultCallback>
+      $type = type;
+
+  MyPermissionsManager_MyPermissionsResultCallback.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyPermissionsManager$MyPermissionsResultCallback');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyPermissionsManager_MyPermissionsResultCallbackType();
   static final _id_onPermissionsResult = _class.instanceMethodId(
     r'onPermissionsResult',
     r'(Z)V',
@@ -59233,7 +52781,8 @@ class PermissionsResultCallback extends jni.JObject {
   }
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $PermissionsResultCallbackImpl> _$impls = {};
+  static final Map<int, $MyPermissionsManager_MyPermissionsResultCallbackImpl>
+      _$impls = {};
   ReceivePort? _$p;
 
   static jni.JObjectPtr _$invoke(
@@ -59278,13 +52827,13 @@ class PermissionsResultCallback extends jni.JObject {
     return jni.nullptr;
   }
 
-  factory PermissionsResultCallback.implement(
-    $PermissionsResultCallbackImpl $impl,
+  factory MyPermissionsManager_MyPermissionsResultCallback.implement(
+    $MyPermissionsManager_MyPermissionsResultCallbackImpl $impl,
   ) {
     final $p = ReceivePort();
-    final $x = PermissionsResultCallback.fromReference(
+    final $x = MyPermissionsManager_MyPermissionsResultCallback.fromReference(
       ProtectedJniExtensions.newPortProxy(
-        r'dev.hebei.camerax_android.PermissionsResultCallback',
+        r'dev.hebei.camerax_android.MyPermissionsManager$MyPermissionsResultCallback',
         $p,
         _$invokePointer,
       ),
@@ -59305,17 +52854,17 @@ class PermissionsResultCallback extends jni.JObject {
   }
 }
 
-abstract interface class $PermissionsResultCallbackImpl {
-  factory $PermissionsResultCallbackImpl({
+abstract interface class $MyPermissionsManager_MyPermissionsResultCallbackImpl {
+  factory $MyPermissionsManager_MyPermissionsResultCallbackImpl({
     required void Function(bool z) onPermissionsResult,
-  }) = _$PermissionsResultCallbackImpl;
+  }) = _$MyPermissionsManager_MyPermissionsResultCallbackImpl;
 
   void onPermissionsResult(bool z);
 }
 
-class _$PermissionsResultCallbackImpl
-    implements $PermissionsResultCallbackImpl {
-  _$PermissionsResultCallbackImpl({
+class _$MyPermissionsManager_MyPermissionsResultCallbackImpl
+    implements $MyPermissionsManager_MyPermissionsResultCallbackImpl {
+  _$MyPermissionsManager_MyPermissionsResultCallbackImpl({
     required void Function(bool z) onPermissionsResult,
   }) : _onPermissionsResult = onPermissionsResult;
 
@@ -59326,17 +52875,18 @@ class _$PermissionsResultCallbackImpl
   }
 }
 
-final class $PermissionsResultCallbackType
-    extends jni.JObjType<PermissionsResultCallback> {
-  const $PermissionsResultCallbackType();
+final class $MyPermissionsManager_MyPermissionsResultCallbackType
+    extends jni.JObjType<MyPermissionsManager_MyPermissionsResultCallback> {
+  const $MyPermissionsManager_MyPermissionsResultCallbackType();
 
   @override
   String get signature =>
-      r'Ldev/hebei/camerax_android/PermissionsResultCallback;';
+      r'Ldev/hebei/camerax_android/MyPermissionsManager$MyPermissionsResultCallback;';
 
   @override
-  PermissionsResultCallback fromReference(jni.JReference reference) =>
-      PermissionsResultCallback.fromReference(reference);
+  MyPermissionsManager_MyPermissionsResultCallback fromReference(
+          jni.JReference reference) =>
+      MyPermissionsManager_MyPermissionsResultCallback.fromReference(reference);
 
   @override
   jni.JObjType get superType => const jni.JObjectType();
@@ -59345,38 +52895,150 @@ final class $PermissionsResultCallbackType
   final superCount = 1;
 
   @override
-  int get hashCode => ($PermissionsResultCallbackType).hashCode;
+  int get hashCode =>
+      ($MyPermissionsManager_MyPermissionsResultCallbackType).hashCode;
 
   @override
   bool operator ==(Object other) {
-    return other.runtimeType == ($PermissionsResultCallbackType) &&
-        other is $PermissionsResultCallbackType;
+    return other.runtimeType ==
+            ($MyPermissionsManager_MyPermissionsResultCallbackType) &&
+        other is $MyPermissionsManager_MyPermissionsResultCallbackType;
   }
 }
 
-/// from: dev.hebei.camerax_android.PreviewViewFactory
-class PreviewViewFactory extends jni.JObject {
+/// from: dev.hebei.camerax_android.MyPermissionsManager
+class MyPermissionsManager extends jni.JObject {
   @override
-  late final jni.JObjType<PreviewViewFactory> $type = type;
+  late final jni.JObjType<MyPermissionsManager> $type = type;
 
-  PreviewViewFactory.fromReference(
+  MyPermissionsManager.fromReference(
     jni.JReference reference,
   ) : super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'dev/hebei/camerax_android/PreviewViewFactory');
+      jni.JClass.forName(r'dev/hebei/camerax_android/MyPermissionsManager');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $PreviewViewFactoryType();
+  static const type = $MyPermissionsManagerType();
   static final _id_INSTANCE = _class.staticFieldId(
     r'INSTANCE',
-    r'Ldev/hebei/camerax_android/PreviewViewFactory;',
+    r'Ldev/hebei/camerax_android/MyPermissionsManager;',
   );
 
-  /// from: static public final dev.hebei.camerax_android.PreviewViewFactory INSTANCE
+  /// from: static public final dev.hebei.camerax_android.MyPermissionsManager INSTANCE
   /// The returned object must be released after use, by calling the [release] method.
-  static PreviewViewFactory get INSTANCE =>
-      _id_INSTANCE.get(_class, const $PreviewViewFactoryType());
+  static MyPermissionsManager get INSTANCE =>
+      _id_INSTANCE.get(_class, const $MyPermissionsManagerType());
+
+  static final _id_checkPermissions = _class.instanceMethodId(
+    r'checkPermissions',
+    r'([Ljava/lang/String;)Z',
+  );
+
+  static final _checkPermissions = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final boolean checkPermissions(java.lang.String[] strings)
+  bool checkPermissions(
+    jni.JArray<jni.JString> strings,
+  ) {
+    return _checkPermissions(reference.pointer,
+            _id_checkPermissions as jni.JMethodIDPtr, strings.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_requestPermissions = _class.instanceMethodId(
+    r'requestPermissions',
+    r'([Ljava/lang/String;Ldev/hebei/camerax_android/MyPermissionsManager$MyPermissionsResultCallback;)V',
+  );
+
+  static final _requestPermissions = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void requestPermissions(java.lang.String[] strings, dev.hebei.camerax_android.MyPermissionsManager$MyPermissionsResultCallback myPermissionsResultCallback)
+  void requestPermissions(
+    jni.JArray<jni.JString> strings,
+    MyPermissionsManager_MyPermissionsResultCallback
+        myPermissionsResultCallback,
+  ) {
+    _requestPermissions(
+            reference.pointer,
+            _id_requestPermissions as jni.JMethodIDPtr,
+            strings.reference.pointer,
+            myPermissionsResultCallback.reference.pointer)
+        .check();
+  }
+}
+
+final class $MyPermissionsManagerType
+    extends jni.JObjType<MyPermissionsManager> {
+  const $MyPermissionsManagerType();
+
+  @override
+  String get signature => r'Ldev/hebei/camerax_android/MyPermissionsManager;';
+
+  @override
+  MyPermissionsManager fromReference(jni.JReference reference) =>
+      MyPermissionsManager.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyPermissionsManagerType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyPermissionsManagerType) &&
+        other is $MyPermissionsManagerType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyPreviewView$MyFactory
+class MyPreviewView_MyFactory extends jni.JObject {
+  @override
+  late final jni.JObjType<MyPreviewView_MyFactory> $type = type;
+
+  MyPreviewView_MyFactory.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'dev/hebei/camerax_android/MyPreviewView$MyFactory');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyPreviewView_MyFactoryType();
+  static final _id_INSTANCE = _class.staticFieldId(
+    r'INSTANCE',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyFactory;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyFactory INSTANCE
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyFactory get INSTANCE =>
+      _id_INSTANCE.get(_class, const $MyPreviewView_MyFactoryType());
 
   static final _id_create = _class.instanceMethodId(
     r'create',
@@ -59410,9 +53072,35 @@ class PreviewViewFactory extends jni.JObject {
         .object(const jni.JObjectType());
   }
 
+  static final _id_addView = _class.instanceMethodId(
+    r'addView',
+    r'(ILdev/hebei/camerax_android/MyPreviewView;)V',
+  );
+
+  static final _addView = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              int, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void addView(int i, dev.hebei.camerax_android.MyPreviewView myPreviewView)
+  void addView(
+    int i,
+    MyPreviewView myPreviewView,
+  ) {
+    _addView(reference.pointer, _id_addView as jni.JMethodIDPtr, i,
+            myPreviewView.reference.pointer)
+        .check();
+  }
+
   static final _id_retrieveView = _class.instanceMethodId(
     r'retrieveView',
-    r'(I)Landroidx/camera/view/PreviewView;',
+    r'(I)Ldev/hebei/camerax_android/MyPreviewView;',
   );
 
   static final _retrieveView = ProtectedJniExtensions.lookup<
@@ -59423,26 +53111,50 @@ class PreviewViewFactory extends jni.JObject {
           jni.JniResult Function(
               ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
 
-  /// from: public final androidx.camera.view.PreviewView retrieveView(int i)
+  /// from: public final dev.hebei.camerax_android.MyPreviewView retrieveView(int i)
   /// The returned object must be released after use, by calling the [release] method.
-  PreviewView retrieveView(
+  MyPreviewView retrieveView(
     int i,
   ) {
     return _retrieveView(
             reference.pointer, _id_retrieveView as jni.JMethodIDPtr, i)
-        .object(const $PreviewViewType());
+        .object(const $MyPreviewViewType());
+  }
+
+  static final _id_removeView = _class.instanceMethodId(
+    r'removeView',
+    r'(I)Ldev/hebei/camerax_android/MyPreviewView;',
+  );
+
+  static final _removeView = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public final dev.hebei.camerax_android.MyPreviewView removeView(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  MyPreviewView removeView(
+    int i,
+  ) {
+    return _removeView(reference.pointer, _id_removeView as jni.JMethodIDPtr, i)
+        .object(const $MyPreviewViewType());
   }
 }
 
-final class $PreviewViewFactoryType extends jni.JObjType<PreviewViewFactory> {
-  const $PreviewViewFactoryType();
+final class $MyPreviewView_MyFactoryType
+    extends jni.JObjType<MyPreviewView_MyFactory> {
+  const $MyPreviewView_MyFactoryType();
 
   @override
-  String get signature => r'Ldev/hebei/camerax_android/PreviewViewFactory;';
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyPreviewView$MyFactory;';
 
   @override
-  PreviewViewFactory fromReference(jni.JReference reference) =>
-      PreviewViewFactory.fromReference(reference);
+  MyPreviewView_MyFactory fromReference(jni.JReference reference) =>
+      MyPreviewView_MyFactory.fromReference(reference);
 
   @override
   jni.JObjType get superType => const jni.JObjectType();
@@ -59451,11 +53163,430 @@ final class $PreviewViewFactoryType extends jni.JObjType<PreviewViewFactory> {
   final superCount = 1;
 
   @override
-  int get hashCode => ($PreviewViewFactoryType).hashCode;
+  int get hashCode => ($MyPreviewView_MyFactoryType).hashCode;
 
   @override
   bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewViewFactoryType) &&
-        other is $PreviewViewFactoryType;
+    return other.runtimeType == ($MyPreviewView_MyFactoryType) &&
+        other is $MyPreviewView_MyFactoryType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyPreviewView$MyScaleType
+class MyPreviewView_MyScaleType extends jni.JObject {
+  @override
+  late final jni.JObjType<MyPreviewView_MyScaleType> $type = type;
+
+  MyPreviewView_MyScaleType.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyPreviewView$MyScaleType');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyPreviewView_MyScaleTypeType();
+  static final _id_FILL_START = _class.staticFieldId(
+    r'FILL_START',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyScaleType FILL_START
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType get FILL_START =>
+      _id_FILL_START.get(_class, const $MyPreviewView_MyScaleTypeType());
+
+  static final _id_FILL_CENTER = _class.staticFieldId(
+    r'FILL_CENTER',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyScaleType FILL_CENTER
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType get FILL_CENTER =>
+      _id_FILL_CENTER.get(_class, const $MyPreviewView_MyScaleTypeType());
+
+  static final _id_FILL_END = _class.staticFieldId(
+    r'FILL_END',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyScaleType FILL_END
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType get FILL_END =>
+      _id_FILL_END.get(_class, const $MyPreviewView_MyScaleTypeType());
+
+  static final _id_FIT_START = _class.staticFieldId(
+    r'FIT_START',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyScaleType FIT_START
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType get FIT_START =>
+      _id_FIT_START.get(_class, const $MyPreviewView_MyScaleTypeType());
+
+  static final _id_FIT_CENTER = _class.staticFieldId(
+    r'FIT_CENTER',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyScaleType FIT_CENTER
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType get FIT_CENTER =>
+      _id_FIT_CENTER.get(_class, const $MyPreviewView_MyScaleTypeType());
+
+  static final _id_FIT_END = _class.staticFieldId(
+    r'FIT_END',
+    r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  /// from: static public final dev.hebei.camerax_android.MyPreviewView$MyScaleType FIT_END
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType get FIT_END =>
+      _id_FIT_END.get(_class, const $MyPreviewView_MyScaleTypeType());
+
+  static final _id_values = _class.staticMethodId(
+    r'values',
+    r'()[Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  static final _values = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: static public dev.hebei.camerax_android.MyPreviewView$MyScaleType[] values()
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni.JArray<MyPreviewView_MyScaleType> values() {
+    return _values(_class.reference.pointer, _id_values as jni.JMethodIDPtr)
+        .object(const jni.JArrayType($MyPreviewView_MyScaleTypeType()));
+  }
+
+  static final _id_valueOf = _class.staticMethodId(
+    r'valueOf',
+    r'(Ljava/lang/String;)Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  static final _valueOf = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public dev.hebei.camerax_android.MyPreviewView$MyScaleType valueOf(java.lang.String string)
+  /// The returned object must be released after use, by calling the [release] method.
+  static MyPreviewView_MyScaleType valueOf(
+    jni.JString string,
+  ) {
+    return _valueOf(_class.reference.pointer, _id_valueOf as jni.JMethodIDPtr,
+            string.reference.pointer)
+        .object(const $MyPreviewView_MyScaleTypeType());
+  }
+}
+
+final class $MyPreviewView_MyScaleTypeType
+    extends jni.JObjType<MyPreviewView_MyScaleType> {
+  const $MyPreviewView_MyScaleTypeType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;';
+
+  @override
+  MyPreviewView_MyScaleType fromReference(jni.JReference reference) =>
+      MyPreviewView_MyScaleType.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyPreviewView_MyScaleTypeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyPreviewView_MyScaleTypeType) &&
+        other is $MyPreviewView_MyScaleTypeType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyPreviewView$WhenMappings
+class MyPreviewView_WhenMappings extends jni.JObject {
+  @override
+  late final jni.JObjType<MyPreviewView_WhenMappings> $type = type;
+
+  MyPreviewView_WhenMappings.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'dev/hebei/camerax_android/MyPreviewView$WhenMappings');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyPreviewView_WhenMappingsType();
+}
+
+final class $MyPreviewView_WhenMappingsType
+    extends jni.JObjType<MyPreviewView_WhenMappings> {
+  const $MyPreviewView_WhenMappingsType();
+
+  @override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/MyPreviewView$WhenMappings;';
+
+  @override
+  MyPreviewView_WhenMappings fromReference(jni.JReference reference) =>
+      MyPreviewView_WhenMappings.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyPreviewView_WhenMappingsType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyPreviewView_WhenMappingsType) &&
+        other is $MyPreviewView_WhenMappingsType;
+  }
+}
+
+/// from: dev.hebei.camerax_android.MyPreviewView
+class MyPreviewView extends jni.JObject {
+  @override
+  late final jni.JObjType<MyPreviewView> $type = type;
+
+  MyPreviewView.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class =
+      jni.JClass.forName(r'dev/hebei/camerax_android/MyPreviewView');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $MyPreviewViewType();
+  static final _id_new0 = _class.constructorId(
+    r'(Landroid/content/Context;ILjava/lang/Object;)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                  ffi.Pointer<ffi.Void>,
+                  jni.JMethodIDPtr,
+                  ffi.VarArgs<
+                      (
+                        ffi.Pointer<ffi.Void>,
+                        $Int32,
+                        ffi.Pointer<ffi.Void>
+                      )>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(android.content.Context context, int i, java.lang.Object object)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyPreviewView(
+    Context context,
+    int i,
+    jni.JObject object,
+  ) {
+    return MyPreviewView.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            context.reference.pointer,
+            i,
+            object.reference.pointer)
+        .reference);
+  }
+
+  static final _id_getView = _class.instanceMethodId(
+    r'getView',
+    r'()Landroid/view/View;',
+  );
+
+  static final _getView = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.view.View getView()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject getView() {
+    return _getView(reference.pointer, _id_getView as jni.JMethodIDPtr)
+        .object(const jni.JObjectType());
+  }
+
+  static final _id_dispose = _class.instanceMethodId(
+    r'dispose',
+    r'()V',
+  );
+
+  static final _dispose = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JThrowablePtr Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void dispose()
+  void dispose() {
+    _dispose(reference.pointer, _id_dispose as jni.JMethodIDPtr).check();
+  }
+
+  static final _id_getController = _class.instanceMethodId(
+    r'getController',
+    r'()Landroidx/camera/view/CameraController;',
+  );
+
+  static final _getController = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final androidx.camera.view.CameraController getController()
+  /// The returned object must be released after use, by calling the [release] method.
+  CameraController getController() {
+    return _getController(
+            reference.pointer, _id_getController as jni.JMethodIDPtr)
+        .object(const $CameraControllerType());
+  }
+
+  static final _id_setController = _class.instanceMethodId(
+    r'setController',
+    r'(Landroidx/camera/view/CameraController;)V',
+  );
+
+  static final _setController = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void setController(androidx.camera.view.CameraController cameraController)
+  void setController(
+    CameraController cameraController,
+  ) {
+    _setController(reference.pointer, _id_setController as jni.JMethodIDPtr,
+            cameraController.reference.pointer)
+        .check();
+  }
+
+  static final _id_getScaleType = _class.instanceMethodId(
+    r'getScaleType',
+    r'()Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;',
+  );
+
+  static final _getScaleType = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public final dev.hebei.camerax_android.MyPreviewView$MyScaleType getScaleType()
+  /// The returned object must be released after use, by calling the [release] method.
+  MyPreviewView_MyScaleType getScaleType() {
+    return _getScaleType(
+            reference.pointer, _id_getScaleType as jni.JMethodIDPtr)
+        .object(const $MyPreviewView_MyScaleTypeType());
+  }
+
+  static final _id_setScaleType = _class.instanceMethodId(
+    r'setScaleType',
+    r'(Ldev/hebei/camerax_android/MyPreviewView$MyScaleType;)V',
+  );
+
+  static final _setScaleType = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JThrowablePtr Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallVoidMethod')
+      .asFunction<
+          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final void setScaleType(dev.hebei.camerax_android.MyPreviewView$MyScaleType myScaleType)
+  void setScaleType(
+    MyPreviewView_MyScaleType myScaleType,
+  ) {
+    _setScaleType(reference.pointer, _id_setScaleType as jni.JMethodIDPtr,
+            myScaleType.reference.pointer)
+        .check();
+  }
+}
+
+final class $MyPreviewViewType extends jni.JObjType<MyPreviewView> {
+  const $MyPreviewViewType();
+
+  @override
+  String get signature => r'Ldev/hebei/camerax_android/MyPreviewView;';
+
+  @override
+  MyPreviewView fromReference(jni.JReference reference) =>
+      MyPreviewView.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($MyPreviewViewType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MyPreviewViewType) &&
+        other is $MyPreviewViewType;
   }
 }

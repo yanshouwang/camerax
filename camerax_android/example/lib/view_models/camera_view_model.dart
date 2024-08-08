@@ -76,8 +76,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.bind();
   }
 
-  void _onAnalyzed(ImageProxy imageProxy, List<MLObject> items) {
-    _imageProxy = imageProxy;
+  void _onAnalyzed(List<MLObject> items) {
     _items = items;
     notifyListeners();
   }

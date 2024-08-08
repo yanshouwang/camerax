@@ -39,7 +39,6 @@ class _CameraViewState extends State<CameraView> {
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
-    final imageProxy = viewModel.imageProxy;
     final items = viewModel.items;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
@@ -90,27 +89,20 @@ class _CameraViewState extends State<CameraView> {
           ),
           Expanded(
             child: Stack(
-              alignment: Alignment.bottomCenter,
+              // alignment: Alignment.bottomCenter,
+              fit: StackFit.expand,
               children: [
                 PreviewView(
                   controller: viewModel.controller,
                   scaleType: ScaleType.fillCenter,
                 ),
-                if (imageProxy != null && items.isNotEmpty)
-                  FittedBox(
-                    fit: BoxFit.cover,
-                    child: CustomPaint(
-                      size: Size(
-                        imageProxy.height.toDouble(),
-                        imageProxy.width.toDouble(),
-                      ),
-                      painter: ItemsPainter(
-                        items: items,
-                        borderWidth:
-                            2.0 * MediaQuery.devicePixelRatioOf(context),
-                        color:
-                            CupertinoColors.systemOrange.resolveFrom(context),
-                      ),
+                if (items.isNotEmpty)
+                  CustomPaint(
+                    painter: ItemsPainter(
+                      context: context,
+                      items: items,
+                      borderWidth: 2.0,
+                      color: CupertinoColors.systemOrange.resolveFrom(context),
                     ),
                   ),
                 if (zoomState != null)
@@ -392,11 +384,13 @@ class _CameraViewState extends State<CameraView> {
 }
 
 class ItemsPainter extends CustomPainter {
+  final BuildContext context;
   final List<MLObject> items;
   final double borderWidth;
   final Color color;
 
   ItemsPainter({
+    required this.context,
     required this.items,
     required this.borderWidth,
     required this.color,
@@ -404,6 +398,8 @@ class ItemsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    debugPrint('DRAW ON $size');
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0
@@ -414,18 +410,18 @@ class ItemsPainter extends CustomPainter {
         debugPrint('MLCode ${item.corners}');
         final points = item.corners
             .map((point) => Offset(
-                  point.x.toDouble(),
-                  point.y.toDouble(),
+                  point.x / devicePixelRatio,
+                  point.y / devicePixelRatio,
                 ))
             .toList();
         final path = Path()..addPolygon(points, true);
         canvas.drawPath(path, paint);
       } else {
         final rect = Rect.fromLTRB(
-          item.bounds.left.toDouble(),
-          item.bounds.top.toDouble(),
-          item.bounds.right.toDouble(),
-          item.bounds.bottom.toDouble(),
+          item.bounds.left / devicePixelRatio,
+          item.bounds.top / devicePixelRatio,
+          item.bounds.right / devicePixelRatio,
+          item.bounds.bottom / devicePixelRatio,
         );
         if (item is MLFaceObject) {
           canvas.drawRect(rect, paint);
@@ -438,11 +434,7 @@ class ItemsPainter extends CustomPainter {
             ),
             textDirection: TextDirection.ltr,
           )..layout();
-          final offset = Offset(
-            item.bounds.topLeft.x.toDouble(),
-            item.bounds.topLeft.y.toDouble(),
-          );
-          idPainter.paint(canvas, offset);
+          idPainter.paint(canvas, rect.topLeft);
         }
       }
     }
