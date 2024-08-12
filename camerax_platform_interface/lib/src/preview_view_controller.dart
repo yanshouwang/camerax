@@ -5,7 +5,7 @@ import 'camera_controller.dart';
 import 'camerax_plugin.dart';
 import 'scale_type.dart';
 
-abstract class PreviewViewController {
+abstract interface class PreviewViewController {
   Widget build(
     BuildContext context, {
     required PlatformViewCreatedCallback onCreated,

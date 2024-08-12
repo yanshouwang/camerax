@@ -1,13 +1,15 @@
-import 'dart:io';
-
 import 'package:camerax_android_example/models.dart';
+import 'package:camerax_android_example/router.dart';
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:logging/logging.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
+
+import 'ml_items_view.dart';
+import 'thumbnail.dart';
 
 class CameraView extends StatefulWidget {
   const CameraView({super.key});
@@ -16,7 +18,7 @@ class CameraView extends StatefulWidget {
   State<CameraView> createState() => _CameraViewState();
 }
 
-class _CameraViewState extends State<CameraView> {
+class _CameraViewState extends State<CameraView> with RouteAware {
   late final PageController _pageController;
 
   @override
@@ -33,13 +35,13 @@ class _CameraViewState extends State<CameraView> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = ViewModel.of<CameraViewModel>(context);
+    final viewModel = ViewModel.of<HomeViewModel>(context);
     final mode = viewModel.mode;
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
-    final thumbnail = savedUri == null ? null : File.fromUri(savedUri);
     final items = viewModel.items;
+    final recording = viewModel.recording;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
     return CupertinoPageScaffold(
@@ -88,33 +90,29 @@ class _CameraViewState extends State<CameraView> {
             ),
           ),
           Expanded(
-            child: Stack(
-              // alignment: Alignment.bottomCenter,
-              fit: StackFit.expand,
-              children: [
-                PreviewView(
-                  controller: viewModel.controller,
-                  scaleType: ScaleType.fillCenter,
-                ),
-                if (items.isNotEmpty)
-                  CustomPaint(
-                    painter: ItemsPainter(
-                      context: context,
+            child: ClipRect(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  PreviewView(
+                    controller: viewModel.controller,
+                    scaleType: ScaleType.fillCenter,
+                  ),
+                  if (items.isNotEmpty)
+                    MLItemsView(
                       items: items,
-                      borderWidth: 2.0,
-                      color: CupertinoColors.systemOrange.resolveFrom(context),
                     ),
-                  ),
-                if (zoomState != null)
-                  ZoomWidget(
-                    minimum: zoomState.minZoomRatio,
-                    maximum: zoomState.maxZoomRatio,
-                    value: zoomState.zoomRatio,
-                    onChanged: (value) {
-                      viewModel.setZoomRatio(value).ignore();
-                    },
-                  ),
-              ],
+                  if (zoomState != null)
+                    ZoomWidget(
+                      minimum: zoomState.minZoomRatio,
+                      maximum: zoomState.maxZoomRatio,
+                      value: zoomState.zoomRatio,
+                      onChanged: (value) {
+                        viewModel.setZoomRatio(value).ignore();
+                      },
+                    ),
+                ],
+              ),
             ),
           ),
           Column(
@@ -186,25 +184,15 @@ class _CameraViewState extends State<CameraView> {
                   child: PageView(
                     controller: _pageController,
                     onPageChanged: (index) {
-                      switch (index) {
-                        case 0:
-                          viewModel.setMode(CameraMode.takePicture);
-                          break;
-                        case 1:
-                          viewModel.setMode(CameraMode.scanCode);
-                          break;
-                        case 2:
-                          viewModel.setMode(CameraMode.scanFace);
-                          break;
-                        default:
-                      }
+                      final mode = CameraMode.values[index];
+                      viewModel.setMode(mode);
                     },
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(
-                            0,
+                            CameraMode.takePicture.index,
                             duration: pageDuration,
                             curve: pageCurve,
                           );
@@ -213,7 +201,7 @@ class _CameraViewState extends State<CameraView> {
                         child: Container(
                           alignment: Alignment.center,
                           child: Text(
-                            'Photo',
+                            'Picture',
                             style: CupertinoTheme.of(context)
                                 .textTheme
                                 .textStyle
@@ -228,7 +216,31 @@ class _CameraViewState extends State<CameraView> {
                       GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(
-                            1,
+                            CameraMode.recordVideo.index,
+                            duration: pageDuration,
+                            curve: pageCurve,
+                          );
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Video',
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.recordVideo
+                                      ? CupertinoTheme.of(context).primaryColor
+                                      : null,
+                                ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _pageController.animateToPage(
+                            CameraMode.scanCode.index,
                             duration: pageDuration,
                             curve: pageCurve,
                           );
@@ -252,7 +264,7 @@ class _CameraViewState extends State<CameraView> {
                       GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(
-                            2,
+                            CameraMode.scanFace.index,
                             duration: pageDuration,
                             curve: pageCurve,
                           );
@@ -282,34 +294,39 @@ class _CameraViewState extends State<CameraView> {
                 children: [
                   AnimatedTapWidget(
                     duration: const Duration(milliseconds: 100),
-                    onTap: () {},
+                    onTap: savedUri == null
+                        ? null
+                        : () {
+                            context.go('/viewer?uri=${savedUri.toFilePath()}');
+                          },
                     child: Container(
                       width: 48.0,
                       height: 48.0,
-                      decoration: BoxDecoration(
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        // color: CupertinoColors.quaternarySystemFill
-                        //     .resolveFrom(context),
-                        image: thumbnail == null
-                            ? null
-                            : DecorationImage(
-                                image: FileImage(thumbnail),
-                                fit: BoxFit.cover,
-                                onError: (exception, stackTrace) {
-                                  Logger.root.shout(
-                                    exception,
-                                    exception,
-                                    stackTrace,
-                                  );
-                                },
-                              ),
+                        // image: savedUri == null
+                        //     ? null
+                        //     : DecorationImage(
+                        //         image: FileImage(File.fromUri(savedUri)),
+                        //         fit: BoxFit.cover,
+                        //         onError: (exception, stackTrace) {
+                        //           Logger.root.shout(
+                        //             exception,
+                        //             exception,
+                        //             stackTrace,
+                        //           );
+                        //         },
+                        //       ),
                       ),
-                      child: thumbnail == null
+                      child: savedUri == null
                           ? Icon(
                               Symbols.image,
                               color: CupertinoColors.label.resolveFrom(context),
                             )
-                          : null,
+                          : Thumbnail(
+                              uri: savedUri,
+                            ),
                     ),
                   ),
                   Container(
@@ -324,14 +341,25 @@ class _CameraViewState extends State<CameraView> {
                     ),
                     child: AnimatedTapWidget(
                       duration: const Duration(milliseconds: 100),
-                      onTap: () {
-                        viewModel.takePicture();
-                      },
+                      onTap: mode == CameraMode.takePicture ||
+                              mode == CameraMode.recordVideo
+                          ? () {
+                              if (mode == CameraMode.takePicture) {
+                                viewModel.takePicture();
+                              } else if (recording) {
+                                viewModel.stopRecording();
+                              } else {
+                                viewModel.startRecording();
+                              }
+                            }
+                          : null,
                       child: Container(
                         margin: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: CupertinoColors.label.resolveFrom(context),
+                          color: recording
+                              ? CupertinoColors.systemRed.resolveFrom(context)
+                              : CupertinoColors.label.resolveFrom(context),
                         ),
                       ),
                     ),
@@ -377,79 +405,33 @@ class _CameraViewState extends State<CameraView> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route == null) {
+      return;
+    }
+    routeObserver.subscribe(this, route);
+  }
+
+  @override
+  void didPushNext() {
+    super.didPushNext();
+    final viewModel = ViewModel.of<HomeViewModel>(context);
+    viewModel.unbind();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    final viewModel = ViewModel.of<HomeViewModel>(context);
+    viewModel.bind();
+  }
+
+  @override
   void dispose() {
+    routeObserver.unsubscribe(this);
     _pageController.dispose();
     super.dispose();
-  }
-}
-
-class ItemsPainter extends CustomPainter {
-  final BuildContext context;
-  final List<MLObject> items;
-  final double borderWidth;
-  final Color color;
-
-  ItemsPainter({
-    required this.context,
-    required this.items,
-    required this.borderWidth,
-    required this.color,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    debugPrint('DRAW ON $size');
-    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
-    final paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
-      ..strokeJoin = StrokeJoin.bevel
-      ..color = color;
-    for (var item in items) {
-      if (item is MLCodeObject) {
-        debugPrint('MLCode ${item.corners}');
-        final points = item.corners
-            .map((point) => Offset(
-                  point.x / devicePixelRatio,
-                  point.y / devicePixelRatio,
-                ))
-            .toList();
-        final path = Path()..addPolygon(points, true);
-        canvas.drawPath(path, paint);
-      } else {
-        final rect = Rect.fromLTRB(
-          item.bounds.left / devicePixelRatio,
-          item.bounds.top / devicePixelRatio,
-          item.bounds.right / devicePixelRatio,
-          item.bounds.bottom / devicePixelRatio,
-        );
-        if (item is MLFaceObject) {
-          canvas.drawRect(rect, paint);
-          final idPainter = TextPainter(
-            text: TextSpan(
-              text: '${item.id}',
-              style: TextStyle(
-                color: color,
-              ),
-            ),
-            textDirection: TextDirection.ltr,
-          )..layout();
-          idPainter.paint(canvas, rect.topLeft);
-        }
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return oldDelegate is! ItemsPainter ||
-        oldDelegate.items != items ||
-        oldDelegate.borderWidth != borderWidth ||
-        oldDelegate.color != color;
-  }
-
-  @override
-  bool? hitTest(Offset position) {
-    return false;
   }
 }

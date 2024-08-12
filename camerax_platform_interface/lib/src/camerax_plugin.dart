@@ -38,6 +38,6 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   MLAnalyzer createMLAnalyzer({
     required List<MLObjectType> types,
-    required MLAnalyzedCallback onAnalyzed,
+    required MLObjectsCallback onAnalyzed,
   });
 }

@@ -7,7 +7,11 @@ import 'camera_selector.dart';
 import 'camerax_plugin.dart';
 import 'flash_mode.dart';
 import 'image_analyzer.dart';
+import 'recording.dart';
+import 'video_record_event.dart';
 import 'zoom_state.dart';
+
+typedef VideoRecordEventCallback = void Function(VideoRecordEvent event);
 
 abstract interface class CameraController implements LogController {
   Stream<ZoomState?> get zoomStateChanged;
@@ -22,6 +26,7 @@ abstract interface class CameraController implements LogController {
   Future<void> bind();
   Future<void> unbind();
   Future<bool> hasCamera(CameraSelector cameraSelector);
+  Future<CameraSelector> getCameraSelector();
   Future<void> setCameraSelector(CameraSelector cameraSelector);
   Future<bool> isTapToFocusEnabled();
   Future<void> setTapToFocusEnabled(bool enabled);
@@ -39,6 +44,11 @@ abstract interface class CameraController implements LogController {
   Future<Uint8List> takePictureToMemory();
   Future<Uri> takePictureToAlbum({
     String? name,
+  });
+  Future<Recording> startRecording({
+    String? name,
+    required bool enableAudio,
+    required VideoRecordEventCallback listener,
   });
 
   factory CameraController() {

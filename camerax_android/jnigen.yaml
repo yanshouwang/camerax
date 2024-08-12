@@ -23,9 +23,8 @@ classes:
   - android.graphics.Rect
   - android.media.Image
   - android.net.Uri
+  - android.os.Environment
   - android.provider.MediaStore
-  - androidx.core.content.ContextCompat
-  - androidx.core.util.Consumer
   - androidx.camera.core.CameraSelector
   # - androidx.camera.core.ImageAnalysis
   # - androidx.camera.core.ImageCapture
@@ -33,10 +32,17 @@ classes:
   - androidx.camera.core.ImageProxy
   - androidx.camera.core.TorchState
   - androidx.camera.core.ZoomState
+  - androidx.camera.mlkit.vision.MlKitAnalyzer
+  # - androidx.camera.video.MediaStoreOutputOptions
+  - androidx.camera.video.OutputResults
+  - androidx.camera.video.Recording
+  - androidx.camera.video.VideoRecordEvent
   - androidx.camera.view.CameraController
   - androidx.camera.view.LifecycleCameraController
   # - androidx.camera.view.PreviewView
-  - androidx.camera.mlkit.vision.MlKitAnalyzer
+  - androidx.camera.view.video.AudioConfig
+  - androidx.core.content.ContextCompat
+  - androidx.core.util.Consumer
   - androidx.lifecycle.LifecycleOwner
   - androidx.lifecycle.LiveData
   - androidx.lifecycle.Observer
@@ -64,5 +70,6 @@ classes:
   - java.util.concurrent.Future
   - dev.hebei.camerax_android.MyImageAnalysis
   - dev.hebei.camerax_android.MyImageCapture
+  - dev.hebei.camerax_android.MyMediaStoreOutputOptions
   - dev.hebei.camerax_android.MyPermissionsManager
   - dev.hebei.camerax_android.MyPreviewView

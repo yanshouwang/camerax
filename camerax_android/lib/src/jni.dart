@@ -10,8 +10,9 @@ import 'package:jni/jni.dart';
 
 import 'image_proxy.dart';
 import 'jni.g.dart' as jni;
+import 'ml_analyzer.dart';
 
-abstract class JNI {
+abstract class MyJNI {
   static jni.Activity get activity {
     final reference = Jni.getCurrentActivity();
     return jni.Activity.fromReference(reference);
@@ -106,6 +107,25 @@ extension FlashModeX on FlashMode {
   }
 }
 
+extension ImageAnalyzerX on ImageAnalyzer {
+  JObject get jniValue {
+    final analyzer = this;
+    if (analyzer is MyMLAnalyzer) {
+      return analyzer.jniValue;
+    } else {
+      return jni.MyImageAnalysis_MyAnalyzerImpl(
+        jni.MyImageAnalysis_MyAnalyzer.implement(
+          jni.$MyImageAnalysis_MyAnalyzerImpl(
+            analyze: (imageProxy) {
+              analyzer.analyze(imageProxy.dartValue);
+            },
+          ),
+        ),
+      );
+    }
+  }
+}
+
 extension MLObjectTypeX on MLObjectType {
   int get jniValue {
     switch (this) {
@@ -182,7 +202,7 @@ extension MLObjectTypeListX on List<MLObjectType> {
 }
 
 extension intX on int {
-  FlashMode get flashMode {
+  FlashMode get dartFlashMode {
     switch (this) {
       case jni.MyImageCapture.FLASH_MODE_AUTO:
         return FlashMode.auto;
@@ -195,7 +215,36 @@ extension intX on int {
     }
   }
 
-  MLObjectType get mlObjectType {
+  VideoRecordError? get dartVideoRecordError {
+    switch (this) {
+      case jni.VideoRecordEvent_Finalize.ERROR_NONE:
+        return null;
+      case jni.VideoRecordEvent_Finalize.ERROR_UNKNOWN:
+        return VideoRecordError.unknown;
+      case jni.VideoRecordEvent_Finalize.ERROR_FILE_SIZE_LIMIT_REACHED:
+        return VideoRecordError.fileSizeLimitReached;
+      case jni.VideoRecordEvent_Finalize.ERROR_INSUFFICIENT_STORAGE:
+        return VideoRecordError.insufficientStorage;
+      case jni.VideoRecordEvent_Finalize.ERROR_SOURCE_INACTIVE:
+        return VideoRecordError.sourceInactive;
+      case jni.VideoRecordEvent_Finalize.ERROR_INVALID_OUTPUT_OPTIONS:
+        return VideoRecordError.invalidOutputOptions;
+      case jni.VideoRecordEvent_Finalize.ERROR_ENCODING_FAILED:
+        return VideoRecordError.encodingFailed;
+      case jni.VideoRecordEvent_Finalize.ERROR_RECORDER_ERROR:
+        return VideoRecordError.recorderError;
+      case jni.VideoRecordEvent_Finalize.ERROR_NO_VALID_DATA:
+        return VideoRecordError.noValidData;
+      case jni.VideoRecordEvent_Finalize.ERROR_DURATION_LIMIT_REACHED:
+        return VideoRecordError.durationLimitReached;
+      case jni.VideoRecordEvent_Finalize.ERROR_RECORDING_GARBAGE_COLLECTED:
+        return VideoRecordError.recordingGarbageCollected;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
+  MLObjectType get jniMLCodeType {
     switch (this) {
       case jni.Barcode.FORMAT_CODABAR:
         return MLObjectType.codabar;
@@ -229,7 +278,15 @@ extension intX on int {
   }
 }
 
-extension JZoomStateX on jni.ZoomState {
+extension JNICameraSelectorX on jni.CameraSelector {
+  CameraSelector get dartValue {
+    return CameraSelector(
+      lensFacing: getLensFacing().dartLensFacing,
+    );
+  }
+}
+
+extension JNIZoomStateX on jni.ZoomState {
   ZoomState? get dartValue {
     if (isNull) {
       return null;
@@ -248,7 +305,7 @@ extension JZoomStateX on jni.ZoomState {
   }
 }
 
-extension JIntegerX on JInteger {
+extension JNIIntegerX on JInteger {
   int? get dartValue {
     if (isNull) {
       return null;
@@ -256,19 +313,33 @@ extension JIntegerX on JInteger {
       return intValue();
     }
   }
+
+  LensFacing get dartLensFacing {
+    final dartValue = this.dartValue;
+    switch (dartValue) {
+      case jni.CameraSelector.LENS_FACING_BACK:
+        return LensFacing.back;
+      case jni.CameraSelector.LENS_FACING_FRONT:
+        return LensFacing.front;
+      case jni.CameraSelector.LENS_FACING_EXTERNAL:
+        return LensFacing.external;
+      default:
+        throw ArgumentError.value(dartValue);
+    }
+  }
 }
 
-extension JImageProxyX on jni.ImageProxy {
+extension JNIImageProxyX on jni.ImageProxy {
   ImageProxy get dartValue {
-    return JImageProxy(
+    return MyImageProxy(
       jniValue: this,
     );
   }
 }
 
-extension JUriX on jni.Uri {
+extension JNIUriX on jni.Uri {
   Uri get dartValue {
-    final contentResolver = JNI.context.getContentResolver();
+    final contentResolver = MyJNI.context.getContentResolver();
     final projection = JArray(JString.type, 1);
     projection[0] = jni.MediaStore_MediaColumns.DATA;
     final selection = JString.fromReference(jNullReference);
@@ -289,7 +360,11 @@ extension JUriX on jni.Uri {
   }
 }
 
-extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
+extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
+  Future<void> setEnabledUseCasesOnMainThread(int enabledUseCases) {
+    return runOnPlatformThread(() => setEnabledUseCases(enabledUseCases));
+  }
+
   Future<void> bindToLifecycleOnMainThread(jni.LifecycleOwner lifecycleOwner) {
     return runOnPlatformThread(() => bindToLifecycle(lifecycleOwner));
   }
@@ -300,6 +375,10 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
 
   Future<bool> hasCameraOnMainThread(jni.CameraSelector cameraSelector) {
     return runOnPlatformThread(() => hasCamera(cameraSelector));
+  }
+
+  Future<jni.CameraSelector> getCameraSelectorOnMainThread() {
+    return runOnPlatformThread(() => getCameraSelector());
   }
 
   Future<void> setCameraSelectorOnMainThread(
@@ -357,9 +436,8 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
   }
 
   Future<void> setImageAnalysisBackpressureStrategyOnMainThread(int strategy) {
-    return runOnPlatformThread(() => setImageAnalysisBackpressureStrategy(
-          strategy,
-        ));
+    return runOnPlatformThread(
+        () => setImageAnalysisBackpressureStrategy(strategy));
   }
 
   Future<void> setImageAnalysisAnalyzerOnMainThread(
@@ -396,11 +474,11 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
 
   Future<void> takePictureToMemoryOnMainThread(
     jni.Executor executor,
-    JReference callbackReference,
+    JObject callback,
   ) {
+    final callbackReference = callback.reference;
     return runOnPlatformThread(() {
-      final callback =
-          jni.MyImageCapture_MyOnImageCapturedCallbackImpl.fromReference(
+      final callback = JObject.fromReference(
         callbackReference,
       );
       takePicture1(executor, callback);
@@ -410,11 +488,11 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
   Future<void> takePictureToAlbumOnMainThread(
     JObject outputFileOptions,
     jni.Executor executor,
-    JReference imageSavedCallbackReference,
+    JObject imageSavedCallback,
   ) {
+    final imageSavedCallbackReference = imageSavedCallback.reference;
     return runOnPlatformThread(() {
-      final imageSavedCallback =
-          jni.MyImageCapture_MyOnImageSavedCallback.fromReference(
+      final imageSavedCallback = JObject.fromReference(
         imageSavedCallbackReference,
       );
       takePicture(
@@ -424,9 +502,31 @@ extension JLifecycleCameraControllerX on jni.LifecycleCameraController {
       );
     });
   }
+
+  Future<jni.Recording> startRecordingOnMainThread(
+    JObject outputOptions,
+    jni.AudioConfig audioConfig,
+    jni.Executor executor,
+    jni.Consumer<jni.VideoRecordEvent> listener,
+  ) {
+    final listenerT = listener.T;
+    final listenerReference = listener.reference;
+    return runOnPlatformThread(() {
+      final listener = jni.Consumer<jni.VideoRecordEvent>.fromReference(
+        listenerT,
+        listenerReference,
+      );
+      return startRecording2(
+        outputOptions,
+        audioConfig,
+        executor,
+        listener,
+      );
+    });
+  }
 }
 
-extension JLiveDataX<T extends JObject> on jni.LiveData<T> {
+extension JNILiveDataX<T extends JObject> on jni.LiveData<T> {
   Future<void> observeOnMainThread(
     jni.LifecycleOwner lifecycleOwner,
     JObjType<T> observerT,
@@ -449,7 +549,7 @@ extension JLiveDataX<T extends JObject> on jni.LiveData<T> {
   }
 }
 
-extension JPreviewViewX on jni.MyPreviewView {
+extension JNIPreviewViewX on jni.MyPreviewView {
   Future<void> setControllerOnMainThread(
     jni.CameraController cameraController,
   ) {
@@ -462,12 +562,12 @@ extension JPreviewViewX on jni.MyPreviewView {
   }
 }
 
-extension JBarcodeX on jni.Barcode {
+extension JNIBarcodeX on jni.Barcode {
   MLCodeObject toDartValue({
     required DateTime time,
     required Duration duration,
   }) {
-    final type = getFormat().mlObjectType;
+    final type = getFormat().jniMLCodeType;
     final bounds = getBoundingBox().dartValue;
     final corners = <Point<int>>[];
     final cornerPoints = getCornerPoints();
@@ -491,7 +591,7 @@ extension JBarcodeX on jni.Barcode {
   }
 }
 
-extension JFaceX on jni.Face {
+extension JNIFaceX on jni.Face {
   MLFaceObject toDartValue({
     required DateTime time,
     required Duration duration,
@@ -513,14 +613,14 @@ extension JFaceX on jni.Face {
   }
 }
 
-extension JByteArrayX on JArray<jbyte> {
+extension JNIByteArrayX on JArray<jbyte> {
   Uint8List get dartValue {
     final elements = getRange(0, length);
     return Uint8List.fromList(elements);
   }
 }
 
-extension JRectX on jni.Rect {
+extension JNIRectX on jni.Rect {
   Rectangle<int> get dartValue {
     return Rectangle(
       left,
@@ -531,8 +631,46 @@ extension JRectX on jni.Rect {
   }
 }
 
-extension JPointX on jni.Point {
+extension JNIPointX on jni.Point {
   Point<int> get dartValue {
     return Point(x, y);
+  }
+}
+
+extension JNIVideoRecordEventX on jni.VideoRecordEvent {
+  VideoRecordEvent get dartValue {
+    final isInstanceOfStart = Jni.env.IsInstanceOf(
+      reference.pointer,
+      jni.VideoRecordEvent_Start.type.jClass.reference.pointer,
+    );
+    if (isInstanceOfStart) {
+      return VideoRecordStartEvent();
+    }
+    final isInstanceOfPause = Jni.env.IsInstanceOf(
+      reference.pointer,
+      jni.VideoRecordEvent_Pause.type.jClass.reference.pointer,
+    );
+    if (isInstanceOfPause) {
+      return VideoRecordPauseEvent();
+    }
+    final isInstanceOfResume = Jni.env.IsInstanceOf(
+      reference.pointer,
+      jni.VideoRecordEvent_Resume.type.jClass.reference.pointer,
+    );
+    if (isInstanceOfResume) {
+      return VideoRecordResumeEvent();
+    }
+    final isInstanceOfFinalize = Jni.env.IsInstanceOf(
+      reference.pointer,
+      jni.VideoRecordEvent_Finalize.type.jClass.reference.pointer,
+    );
+    if (isInstanceOfFinalize) {
+      final event = castTo(jni.VideoRecordEvent_Finalize.type);
+      return VideoRecordFinalizeEvent(
+        error: event.getError().dartVideoRecordError,
+        uri: event.getOutputResults().getOutputUri().dartValue,
+      );
+    }
+    throw ArgumentError.value(this);
   }
 }

@@ -7,7 +7,7 @@ import 'camera_controller.dart';
 import 'jni.dart';
 import 'jni.g.dart' as jni;
 
-final class JPreviewViewController implements PreviewViewController {
+final class MyPreviewViewController implements PreviewViewController {
   int? _id;
 
   @override
@@ -45,7 +45,7 @@ final class JPreviewViewController implements PreviewViewController {
 
   @override
   Future<void> setController(CameraController? controller) async {
-    if (controller is! JCameraController) {
+    if (controller is! MyCameraController) {
       throw TypeError();
     }
     final id = _id;

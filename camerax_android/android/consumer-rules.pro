@@ -1,4 +1,5 @@
 -keep class androidx.camera.core.** { *; }
+-keep class androidx.camera.video.** { *; }
 -keep class androidx.camera.view.** { *; }
 -keep class androidx.camera.mlkit.vision.** { *; }
 -keep class androidx.lifecycle.** { *; }

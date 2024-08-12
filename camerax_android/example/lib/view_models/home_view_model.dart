@@ -5,7 +5,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 
-class CameraViewModel extends ViewModel with TypeLogger {
+class HomeViewModel extends ViewModel with TypeLogger {
   final CameraController controller;
   CameraMode _mode;
   LensFacing _lensFacing;
@@ -13,19 +13,21 @@ class CameraViewModel extends ViewModel with TypeLogger {
   bool? _torchState;
   FlashMode? _flashMode;
   Uri? _savedUri;
+  Recording? _recording;
   ImageProxy? _imageProxy;
   List<MLObject> _items;
 
   late final StreamSubscription _zoomStateSubscription;
   late final StreamSubscription _torchStateSubscription;
 
-  CameraViewModel()
+  HomeViewModel()
       : controller = CameraController(),
         _mode = CameraMode.takePicture,
         _lensFacing = LensFacing.back,
         _zoomState = null,
         _flashMode = null,
         _savedUri = null,
+        _recording = null,
         _items = [] {
     _initialize();
   }
@@ -36,6 +38,7 @@ class CameraViewModel extends ViewModel with TypeLogger {
   bool? get torchState => _torchState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
+  bool get recording => _recording != null;
   ImageProxy? get imageProxy => _imageProxy;
   List<MLObject> get items => _items;
 
@@ -73,12 +76,23 @@ flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
-    await controller.bind();
+    await bind();
   }
 
   void _onAnalyzed(List<MLObject> items) {
+    if (mode == CameraMode.takePicture || mode == CameraMode.recordVideo) {
+      return;
+    }
     _items = items;
     notifyListeners();
+  }
+
+  Future<void> bind() async {
+    await controller.bind();
+  }
+
+  Future<void> unbind() async {
+    await controller.unbind();
   }
 
   Future<void> toggleLensFacing() async {
@@ -123,16 +137,93 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
   }
 
+  Future<void> startRecording() async {
+    final recording = _recording;
+    if (recording != null) {
+      throw StateError('Recording.');
+    }
+    final authorized = await controller.requestAuthorization(
+      type: AuthorizationType.album,
+    );
+    if (!authorized) {
+      throw StateError('requestAuthorization failed.');
+    }
+    _recording = await controller.startRecording(
+      enableAudio: true,
+      listener: (event) {
+        if (event is! VideoRecordFinalizeEvent) {
+          logger.info('${event.runtimeType}');
+          return;
+        }
+        final error = event.error;
+        if (error == null) {
+          _savedUri = event.uri;
+          notifyListeners();
+        } else {
+          logger.info('Record Video failed $error.');
+        }
+      },
+    );
+    notifyListeners();
+  }
+
+  void stopRecording() {
+    final recording = _recording;
+    if (recording == null) {
+      throw StateError('Not recording.');
+    }
+    recording.stop();
+    _recording = null;
+    notifyListeners();
+  }
+
   Future<void> setMode(CameraMode mode) async {
     switch (mode) {
       case CameraMode.takePicture:
-        await _setTakePictureMode();
+        await _clearImageAnalysisAnalyzer();
+        break;
+      case CameraMode.recordVideo:
+        await _clearImageAnalysisAnalyzer();
         break;
       case CameraMode.scanCode:
-        await _setScanCodeMode();
+        final analyzer = MLAnalyzer(
+          types: [
+            // Barcodes
+            MLObjectType.codabar,
+            MLObjectType.code39,
+            MLObjectType.code39Mode43,
+            MLObjectType.code93,
+            MLObjectType.code128,
+            MLObjectType.ean8,
+            MLObjectType.ean13,
+            MLObjectType.gs1DataBar,
+            MLObjectType.gs1DataBarExpanded,
+            MLObjectType.gs1DataBarLimited,
+            MLObjectType.interleave2of5,
+            MLObjectType.itf14,
+            MLObjectType.upcA,
+            MLObjectType.upcE,
+            // 2D Codes
+            MLObjectType.aztec,
+            MLObjectType.dataMatrix,
+            MLObjectType.microPDF417,
+            MLObjectType.microQR,
+            MLObjectType.pdf417,
+            MLObjectType.qr,
+          ],
+          onAnalyzed: _onAnalyzed,
+        );
+        await _setImageAnalysisAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
-        await _setScanFaceMode();
+        final analyzer = MLAnalyzer(
+          types: [
+            // Faces
+            MLObjectType.face,
+          ],
+          onAnalyzed: _onAnalyzed,
+        );
+        await _setImageAnalysisAnalyzer(analyzer);
         break;
       default:
         break;
@@ -141,59 +232,17 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
   }
 
-  Future<void> _setTakePictureMode() async {
-    await _clearImageAnalysisAnalyzer();
-  }
-
-  Future<void> _setScanCodeMode() async {
-    await _clearImageAnalysisAnalyzer();
-    final analyzer = MLAnalyzer(
-      types: [
-        // Barcodes
-        MLObjectType.codabar,
-        MLObjectType.code39,
-        MLObjectType.code39Mode43,
-        MLObjectType.code93,
-        MLObjectType.code128,
-        MLObjectType.ean8,
-        MLObjectType.ean13,
-        MLObjectType.gs1DataBar,
-        MLObjectType.gs1DataBarExpanded,
-        MLObjectType.gs1DataBarLimited,
-        MLObjectType.interleave2of5,
-        MLObjectType.itf14,
-        MLObjectType.upcA,
-        MLObjectType.upcE,
-        // 2D Codes
-        MLObjectType.aztec,
-        MLObjectType.dataMatrix,
-        MLObjectType.microPDF417,
-        MLObjectType.microQR,
-        MLObjectType.pdf417,
-        MLObjectType.qr,
-      ],
-      onAnalyzed: _onAnalyzed,
-    );
-    await controller.setImageAnalysisAnalyzer(analyzer);
-  }
-
-  Future<void> _setScanFaceMode() async {
-    await _clearImageAnalysisAnalyzer();
-    final analyzer = MLAnalyzer(
-      types: [
-        // Faces
-        MLObjectType.face,
-      ],
-      onAnalyzed: _onAnalyzed,
-    );
-    await controller.setImageAnalysisAnalyzer(analyzer);
-  }
-
   Future<void> _clearImageAnalysisAnalyzer() async {
     await controller.clearImageAnalysisAnalyzer();
     _imageProxy = null;
     _items = [];
     notifyListeners();
+  }
+
+  Future<void> _setImageAnalysisAnalyzer(ImageAnalyzer analyzer) async {
+    await controller.unbind();
+    await controller.setImageAnalysisAnalyzer(analyzer);
+    await controller.bind();
   }
 
   @override

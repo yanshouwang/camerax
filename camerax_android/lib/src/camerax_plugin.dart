@@ -11,20 +11,20 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
 
   @override
   CameraController createCameraController() {
-    return JCameraController();
+    return MyCameraController();
   }
 
   @override
   PreviewViewController createPreviewViewController() {
-    return JPreviewViewController();
+    return MyPreviewViewController();
   }
 
   @override
   MLAnalyzer createMLAnalyzer({
     required List<MLObjectType> types,
-    required MLAnalyzedCallback onAnalyzed,
+    required MLObjectsCallback onAnalyzed,
   }) {
-    return JMLAnalyzer(
+    return MyMLAnalyzer(
       types: types,
       onAnalyzed: onAnalyzed,
     );

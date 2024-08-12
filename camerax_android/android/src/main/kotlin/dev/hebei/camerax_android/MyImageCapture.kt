@@ -28,6 +28,14 @@ class MyImageCapture {
         fun onPostviewBitmapAvailable(bitmap: Bitmap)
     }
 
+    interface MyOnImageSavedCallback {
+        fun onCaptureStarted()
+        fun onCaptureProcessProgressed(progress: Int)
+        fun onImageSaved(outputFileResults: MyOutputFileResults)
+        fun onError(exception: ImageCaptureException)
+        fun onPostviewBitmapAvailable(bitmap: Bitmap)
+    }
+
     class MyOnImageCapturedCallbackImpl(private val callback: MyOnImageCapturedCallback) : ImageCapture.OnImageCapturedCallback() {
         override fun onCaptureStarted() {
             super.onCaptureStarted()
@@ -67,14 +75,6 @@ class MyImageCapture {
 
     class MyOutputFileResults(private val outputFileResults: ImageCapture.OutputFileResults) {
         val savedUri get() = outputFileResults.savedUri
-    }
-
-    interface MyOnImageSavedCallback {
-        fun onCaptureStarted()
-        fun onCaptureProcessProgressed(progress: Int)
-        fun onImageSaved(outputFileResults: MyOutputFileResults)
-        fun onError(exception: ImageCaptureException)
-        fun onPostviewBitmapAvailable(bitmap: Bitmap)
     }
 
     class MyOnImageSavedCallbackImpl(private val callback: MyOnImageSavedCallback) : ImageCapture.OnImageSavedCallback {

@@ -16,4 +16,12 @@ final class CameraSelector {
   static const CameraSelector external = CameraSelector(
     lensFacing: LensFacing.external,
   );
+
+  @override
+  bool operator ==(Object other) {
+    return other is CameraSelector && other.lensFacing == lensFacing;
+  }
+
+  @override
+  int get hashCode => lensFacing.hashCode;
 }

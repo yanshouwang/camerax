@@ -21,7 +21,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   @override
   MLAnalyzer createMLAnalyzer({
     required List<MLObjectType> types,
-    required MLAnalyzedCallback onAnalyzed,
+    required MLObjectsCallback onAnalyzed,
   }) {
     // TODO: implement createMLAnalyzer
     throw UnimplementedError();

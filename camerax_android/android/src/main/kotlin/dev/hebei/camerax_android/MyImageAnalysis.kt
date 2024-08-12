@@ -16,7 +16,13 @@ class MyImageAnalysis {
         const val OUTPUT_IMAGE_FORMAT_RGBA_8888 = ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
     }
 
-    interface MyAnalyzer : ImageAnalysis.Analyzer {
-        override fun analyze(image: ImageProxy)
+    interface MyAnalyzer {
+        fun analyze(image: ImageProxy)
+    }
+
+    class MyAnalyzerImpl(private val analyzer: MyAnalyzer) : ImageAnalysis.Analyzer {
+        override fun analyze(image: ImageProxy) {
+            analyzer.analyze(image)
+        }
     }
 }

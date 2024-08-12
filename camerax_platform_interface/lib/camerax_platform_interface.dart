@@ -12,3 +12,6 @@ export 'src/image_analyzer.dart';
 export 'src/image_proxy.dart';
 export 'src/ml.dart';
 export 'src/ml_analyzer.dart';
+export 'src/recording.dart';
+export 'src/video_record_error.dart';
+export 'src/video_record_event.dart';

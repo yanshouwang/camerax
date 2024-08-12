@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
+import 'router.dart';
 import 'view_models.dart';
 import 'views.dart';
 
@@ -28,22 +29,7 @@ void onLogRecorded(LogRecord record) {
 }
 
 void onStartUp() {
-  final app = CupertinoApp(
-    theme: const CupertinoThemeData(
-      brightness: Brightness.dark,
-      primaryColor: CupertinoColors.systemYellow,
-      textTheme: CupertinoTextThemeData(
-        textStyle: TextStyle(
-          fontSize: 12.0,
-        ),
-      ),
-    ),
-    home: ViewModelBinding(
-      viewBuilder: (context) => const CameraView(),
-      viewModelBuilder: (context) => CameraViewModel(),
-    ),
-  );
-  runApp(app);
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -52,8 +38,30 @@ void onStartUp() {
   );
   SystemChrome.setSystemUIOverlayStyle(style);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  const app = MyApp();
+  runApp(app);
 }
 
 void onUncaughtError(Object error, StackTrace stackTrace) {
   Logger.root.shout(error, stackTrace);
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoApp.router(
+      routerConfig: routerConfig,
+      theme: const CupertinoThemeData(
+        brightness: Brightness.dark,
+        primaryColor: CupertinoColors.systemYellow,
+        textTheme: CupertinoTextThemeData(
+          textStyle: TextStyle(
+            fontSize: 12.0,
+          ),
+        ),
+      ),
+    );
+  }
 }
