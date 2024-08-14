@@ -19976,7 +19976,7 @@ class ContentResolver extends jni.JObject {
   /// The returned object must be released after use, by calling the [release] method.
   jni.JObject loadThumbnail(
     Uri uri,
-    jni.JObject size,
+    Size size,
     jni.JObject cancellationSignal,
   ) {
     return _loadThumbnail(
@@ -31107,12 +31107,12 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
 
   /// from: static public android.util.Size getKindSize(int i)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getKindSize(
+  static Size getKindSize(
     int i,
   ) {
     return _getKindSize(
             _class.reference.pointer, _id_getKindSize as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
+        .object(const $SizeType());
   }
 }
 
@@ -32356,12 +32356,12 @@ class MediaStore_Video_Thumbnails extends jni.JObject {
 
   /// from: static public android.util.Size getKindSize(int i)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getKindSize(
+  static Size getKindSize(
     int i,
   ) {
     return _getKindSize(
             _class.reference.pointer, _id_getKindSize as jni.JMethodIDPtr, i)
-        .object(const jni.JObjectType());
+        .object(const $SizeType());
   }
 }
 
@@ -34094,6 +34094,211 @@ final class $MediaStoreType extends jni.JObjType<MediaStore> {
   @override
   bool operator ==(Object other) {
     return other.runtimeType == ($MediaStoreType) && other is $MediaStoreType;
+  }
+}
+
+/// from: android.util.Size
+class Size extends jni.JObject {
+  @override
+  late final jni.JObjType<Size> $type = type;
+
+  Size.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(r'android/util/Size');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $SizeType();
+  static final _id_new0 = _class.constructorId(
+    r'(II)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void <init>(int i, int i1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory Size(
+    int i,
+    int i1,
+  ) {
+    return Size.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr, i, i1)
+            .reference);
+  }
+
+  static final _id_getWidth = _class.instanceMethodId(
+    r'getWidth',
+    r'()I',
+  );
+
+  static final _getWidth = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getWidth()
+  int getWidth() {
+    return _getWidth(reference.pointer, _id_getWidth as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getHeight = _class.instanceMethodId(
+    r'getHeight',
+    r'()I',
+  );
+
+  static final _getHeight = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getHeight()
+  int getHeight() {
+    return _getHeight(reference.pointer, _id_getHeight as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_equals = _class.instanceMethodId(
+    r'equals',
+    r'(Ljava/lang/Object;)Z',
+  );
+
+  static final _equals = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallBooleanMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public boolean equals(java.lang.Object object)
+  bool equals(
+    jni.JObject object,
+  ) {
+    return _equals(reference.pointer, _id_equals as jni.JMethodIDPtr,
+            object.reference.pointer)
+        .boolean;
+  }
+
+  static final _id_toString1 = _class.instanceMethodId(
+    r'toString',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _toString1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public java.lang.String toString()
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JString toString1() {
+    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
+        .object(const jni.JStringType());
+  }
+
+  static final _id_parseSize = _class.staticMethodId(
+    r'parseSize',
+    r'(Ljava/lang/String;)Landroid/util/Size;',
+  );
+
+  static final _parseSize = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public android.util.Size parseSize(java.lang.String string)
+  /// The returned object must be released after use, by calling the [release] method.
+  static Size parseSize(
+    jni.JString string,
+  ) {
+    return _parseSize(_class.reference.pointer,
+            _id_parseSize as jni.JMethodIDPtr, string.reference.pointer)
+        .object(const $SizeType());
+  }
+
+  static final _id_hashCode1 = _class.instanceMethodId(
+    r'hashCode',
+    r'()I',
+  );
+
+  static final _hashCode1 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int hashCode()
+  int hashCode1() {
+    return _hashCode1(reference.pointer, _id_hashCode1 as jni.JMethodIDPtr)
+        .integer;
+  }
+}
+
+final class $SizeType extends jni.JObjType<Size> {
+  const $SizeType();
+
+  @override
+  String get signature => r'Landroid/util/Size;';
+
+  @override
+  Size fromReference(jni.JReference reference) => Size.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($SizeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($SizeType) && other is $SizeType;
   }
 }
 
@@ -36100,6 +36305,1194 @@ final class $ZoomStateType extends jni.JObjType<ZoomState> {
   }
 }
 
+/// from: androidx.camera.core.resolutionselector.AspectRatioStrategy$AspectRatioFallbackRule
+class AspectRatioStrategy_AspectRatioFallbackRule extends jni.JObject {
+  @override
+  late final jni.JObjType<AspectRatioStrategy_AspectRatioFallbackRule> $type =
+      type;
+
+  AspectRatioStrategy_AspectRatioFallbackRule.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/AspectRatioStrategy$AspectRatioFallbackRule');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $AspectRatioStrategy_AspectRatioFallbackRuleType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $AspectRatioStrategy_AspectRatioFallbackRuleImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory AspectRatioStrategy_AspectRatioFallbackRule.implement(
+    $AspectRatioStrategy_AspectRatioFallbackRuleImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = AspectRatioStrategy_AspectRatioFallbackRule.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.camera.core.resolutionselector.AspectRatioStrategy$AspectRatioFallbackRule',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $AspectRatioStrategy_AspectRatioFallbackRuleImpl {
+  factory $AspectRatioStrategy_AspectRatioFallbackRuleImpl() =
+      _$AspectRatioStrategy_AspectRatioFallbackRuleImpl;
+}
+
+class _$AspectRatioStrategy_AspectRatioFallbackRuleImpl
+    implements $AspectRatioStrategy_AspectRatioFallbackRuleImpl {
+  _$AspectRatioStrategy_AspectRatioFallbackRuleImpl();
+}
+
+final class $AspectRatioStrategy_AspectRatioFallbackRuleType
+    extends jni.JObjType<AspectRatioStrategy_AspectRatioFallbackRule> {
+  const $AspectRatioStrategy_AspectRatioFallbackRuleType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/AspectRatioStrategy$AspectRatioFallbackRule;';
+
+  @override
+  AspectRatioStrategy_AspectRatioFallbackRule fromReference(
+          jni.JReference reference) =>
+      AspectRatioStrategy_AspectRatioFallbackRule.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode =>
+      ($AspectRatioStrategy_AspectRatioFallbackRuleType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($AspectRatioStrategy_AspectRatioFallbackRuleType) &&
+        other is $AspectRatioStrategy_AspectRatioFallbackRuleType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.AspectRatioStrategy
+class AspectRatioStrategy extends jni.JObject {
+  @override
+  late final jni.JObjType<AspectRatioStrategy> $type = type;
+
+  AspectRatioStrategy.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/AspectRatioStrategy');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $AspectRatioStrategyType();
+
+  /// from: static public final int FALLBACK_RULE_NONE
+  static const FALLBACK_RULE_NONE = 0;
+
+  /// from: static public final int FALLBACK_RULE_AUTO
+  static const FALLBACK_RULE_AUTO = 1;
+  static final _id_RATIO_4_3_FALLBACK_AUTO_STRATEGY = _class.staticFieldId(
+    r'RATIO_4_3_FALLBACK_AUTO_STRATEGY',
+    r'Landroidx/camera/core/resolutionselector/AspectRatioStrategy;',
+  );
+
+  /// from: static public final androidx.camera.core.resolutionselector.AspectRatioStrategy RATIO_4_3_FALLBACK_AUTO_STRATEGY
+  /// The returned object must be released after use, by calling the [release] method.
+  static AspectRatioStrategy get RATIO_4_3_FALLBACK_AUTO_STRATEGY =>
+      _id_RATIO_4_3_FALLBACK_AUTO_STRATEGY.get(
+          _class, const $AspectRatioStrategyType());
+
+  static final _id_RATIO_16_9_FALLBACK_AUTO_STRATEGY = _class.staticFieldId(
+    r'RATIO_16_9_FALLBACK_AUTO_STRATEGY',
+    r'Landroidx/camera/core/resolutionselector/AspectRatioStrategy;',
+  );
+
+  /// from: static public final androidx.camera.core.resolutionselector.AspectRatioStrategy RATIO_16_9_FALLBACK_AUTO_STRATEGY
+  /// The returned object must be released after use, by calling the [release] method.
+  static AspectRatioStrategy get RATIO_16_9_FALLBACK_AUTO_STRATEGY =>
+      _id_RATIO_16_9_FALLBACK_AUTO_STRATEGY.get(
+          _class, const $AspectRatioStrategyType());
+
+  static final _id_new0 = _class.constructorId(
+    r'(II)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32, $Int32)>)>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+
+  /// from: public void <init>(int i, int i1)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory AspectRatioStrategy(
+    int i,
+    int i1,
+  ) {
+    return AspectRatioStrategy.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr, i, i1)
+            .reference);
+  }
+
+  static final _id_getPreferredAspectRatio = _class.instanceMethodId(
+    r'getPreferredAspectRatio',
+    r'()I',
+  );
+
+  static final _getPreferredAspectRatio = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getPreferredAspectRatio()
+  int getPreferredAspectRatio() {
+    return _getPreferredAspectRatio(
+            reference.pointer, _id_getPreferredAspectRatio as jni.JMethodIDPtr)
+        .integer;
+  }
+
+  static final _id_getFallbackRule = _class.instanceMethodId(
+    r'getFallbackRule',
+    r'()I',
+  );
+
+  static final _getFallbackRule = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getFallbackRule()
+  int getFallbackRule() {
+    return _getFallbackRule(
+            reference.pointer, _id_getFallbackRule as jni.JMethodIDPtr)
+        .integer;
+  }
+}
+
+final class $AspectRatioStrategyType extends jni.JObjType<AspectRatioStrategy> {
+  const $AspectRatioStrategyType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/AspectRatioStrategy;';
+
+  @override
+  AspectRatioStrategy fromReference(jni.JReference reference) =>
+      AspectRatioStrategy.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($AspectRatioStrategyType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($AspectRatioStrategyType) &&
+        other is $AspectRatioStrategyType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.ResolutionFilter
+class ResolutionFilter extends jni.JObject {
+  @override
+  late final jni.JObjType<ResolutionFilter> $type = type;
+
+  ResolutionFilter.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/ResolutionFilter');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ResolutionFilterType();
+  static final _id_filter = _class.instanceMethodId(
+    r'filter',
+    r'(Ljava/util/List;I)Ljava/util/List;',
+  );
+
+  static final _filter = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public abstract java.util.List filter(java.util.List list, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JList<Size> filter(
+    jni.JList<Size> list,
+    int i,
+  ) {
+    return _filter(reference.pointer, _id_filter as jni.JMethodIDPtr,
+            list.reference.pointer, i)
+        .object(const jni.JListType($SizeType()));
+  }
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $ResolutionFilterImpl> _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+      if ($d == r'filter(Ljava/util/List;I)Ljava/util/List;') {
+        final $r = _$impls[$p]!.filter(
+          $a[0].castTo(const jni.JListType($SizeType()), releaseOriginal: true),
+          $a[1]
+              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+              .intValue(releaseOriginal: true),
+        );
+        return ($r as jni.JObject)
+            .castTo(const jni.JObjectType())
+            .reference
+            .toPointer();
+      }
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory ResolutionFilter.implement(
+    $ResolutionFilterImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = ResolutionFilter.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.camera.core.resolutionselector.ResolutionFilter',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $ResolutionFilterImpl {
+  factory $ResolutionFilterImpl({
+    required jni.JList<Size> Function(jni.JList<Size> list, int i) filter,
+  }) = _$ResolutionFilterImpl;
+
+  jni.JList<Size> filter(jni.JList<Size> list, int i);
+}
+
+class _$ResolutionFilterImpl implements $ResolutionFilterImpl {
+  _$ResolutionFilterImpl({
+    required jni.JList<Size> Function(jni.JList<Size> list, int i) filter,
+  }) : _filter = filter;
+
+  final jni.JList<Size> Function(jni.JList<Size> list, int i) _filter;
+
+  jni.JList<Size> filter(jni.JList<Size> list, int i) {
+    return _filter(list, i);
+  }
+}
+
+final class $ResolutionFilterType extends jni.JObjType<ResolutionFilter> {
+  const $ResolutionFilterType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/ResolutionFilter;';
+
+  @override
+  ResolutionFilter fromReference(jni.JReference reference) =>
+      ResolutionFilter.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ResolutionFilterType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ResolutionFilterType) &&
+        other is $ResolutionFilterType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.ResolutionSelector$AllowedResolutionMode
+class ResolutionSelector_AllowedResolutionMode extends jni.JObject {
+  @override
+  late final jni.JObjType<ResolutionSelector_AllowedResolutionMode> $type =
+      type;
+
+  ResolutionSelector_AllowedResolutionMode.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/ResolutionSelector$AllowedResolutionMode');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ResolutionSelector_AllowedResolutionModeType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $ResolutionSelector_AllowedResolutionModeImpl> _$impls =
+      {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory ResolutionSelector_AllowedResolutionMode.implement(
+    $ResolutionSelector_AllowedResolutionModeImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = ResolutionSelector_AllowedResolutionMode.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.camera.core.resolutionselector.ResolutionSelector$AllowedResolutionMode',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $ResolutionSelector_AllowedResolutionModeImpl {
+  factory $ResolutionSelector_AllowedResolutionModeImpl() =
+      _$ResolutionSelector_AllowedResolutionModeImpl;
+}
+
+class _$ResolutionSelector_AllowedResolutionModeImpl
+    implements $ResolutionSelector_AllowedResolutionModeImpl {
+  _$ResolutionSelector_AllowedResolutionModeImpl();
+}
+
+final class $ResolutionSelector_AllowedResolutionModeType
+    extends jni.JObjType<ResolutionSelector_AllowedResolutionMode> {
+  const $ResolutionSelector_AllowedResolutionModeType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/ResolutionSelector$AllowedResolutionMode;';
+
+  @override
+  ResolutionSelector_AllowedResolutionMode fromReference(
+          jni.JReference reference) =>
+      ResolutionSelector_AllowedResolutionMode.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ResolutionSelector_AllowedResolutionModeType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($ResolutionSelector_AllowedResolutionModeType) &&
+        other is $ResolutionSelector_AllowedResolutionModeType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.ResolutionSelector$Builder
+class ResolutionSelector_Builder extends jni.JObject {
+  @override
+  late final jni.JObjType<ResolutionSelector_Builder> $type = type;
+
+  ResolutionSelector_Builder.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/ResolutionSelector$Builder');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ResolutionSelector_BuilderType();
+  static final _id_new0 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public void <init>()
+  /// The returned object must be released after use, by calling the [release] method.
+  factory ResolutionSelector_Builder() {
+    return ResolutionSelector_Builder.fromReference(
+        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+            .reference);
+  }
+
+  static final _id_fromResolutionSelector = _class.staticMethodId(
+    r'fromResolutionSelector',
+    r'(Landroidx/camera/core/resolutionselector/ResolutionSelector;)Landroidx/camera/core/resolutionselector/ResolutionSelector$Builder;',
+  );
+
+  static final _fromResolutionSelector = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: static public androidx.camera.core.resolutionselector.ResolutionSelector$Builder fromResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
+  /// The returned object must be released after use, by calling the [release] method.
+  static ResolutionSelector_Builder fromResolutionSelector(
+    ResolutionSelector resolutionSelector,
+  ) {
+    return _fromResolutionSelector(
+            _class.reference.pointer,
+            _id_fromResolutionSelector as jni.JMethodIDPtr,
+            resolutionSelector.reference.pointer)
+        .object(const $ResolutionSelector_BuilderType());
+  }
+
+  static final _id_setAspectRatioStrategy = _class.instanceMethodId(
+    r'setAspectRatioStrategy',
+    r'(Landroidx/camera/core/resolutionselector/AspectRatioStrategy;)Landroidx/camera/core/resolutionselector/ResolutionSelector$Builder;',
+  );
+
+  static final _setAspectRatioStrategy = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector$Builder setAspectRatioStrategy(androidx.camera.core.resolutionselector.AspectRatioStrategy aspectRatioStrategy)
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionSelector_Builder setAspectRatioStrategy(
+    AspectRatioStrategy aspectRatioStrategy,
+  ) {
+    return _setAspectRatioStrategy(
+            reference.pointer,
+            _id_setAspectRatioStrategy as jni.JMethodIDPtr,
+            aspectRatioStrategy.reference.pointer)
+        .object(const $ResolutionSelector_BuilderType());
+  }
+
+  static final _id_setResolutionStrategy = _class.instanceMethodId(
+    r'setResolutionStrategy',
+    r'(Landroidx/camera/core/resolutionselector/ResolutionStrategy;)Landroidx/camera/core/resolutionselector/ResolutionSelector$Builder;',
+  );
+
+  static final _setResolutionStrategy = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector$Builder setResolutionStrategy(androidx.camera.core.resolutionselector.ResolutionStrategy resolutionStrategy)
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionSelector_Builder setResolutionStrategy(
+    ResolutionStrategy resolutionStrategy,
+  ) {
+    return _setResolutionStrategy(
+            reference.pointer,
+            _id_setResolutionStrategy as jni.JMethodIDPtr,
+            resolutionStrategy.reference.pointer)
+        .object(const $ResolutionSelector_BuilderType());
+  }
+
+  static final _id_setResolutionFilter = _class.instanceMethodId(
+    r'setResolutionFilter',
+    r'(Landroidx/camera/core/resolutionselector/ResolutionFilter;)Landroidx/camera/core/resolutionselector/ResolutionSelector$Builder;',
+  );
+
+  static final _setResolutionFilter = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector$Builder setResolutionFilter(androidx.camera.core.resolutionselector.ResolutionFilter resolutionFilter)
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionSelector_Builder setResolutionFilter(
+    ResolutionFilter resolutionFilter,
+  ) {
+    return _setResolutionFilter(
+            reference.pointer,
+            _id_setResolutionFilter as jni.JMethodIDPtr,
+            resolutionFilter.reference.pointer)
+        .object(const $ResolutionSelector_BuilderType());
+  }
+
+  static final _id_setAllowedResolutionMode = _class.instanceMethodId(
+    r'setAllowedResolutionMode',
+    r'(I)Landroidx/camera/core/resolutionselector/ResolutionSelector$Builder;',
+  );
+
+  static final _setAllowedResolutionMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector$Builder setAllowedResolutionMode(int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionSelector_Builder setAllowedResolutionMode(
+    int i,
+  ) {
+    return _setAllowedResolutionMode(reference.pointer,
+            _id_setAllowedResolutionMode as jni.JMethodIDPtr, i)
+        .object(const $ResolutionSelector_BuilderType());
+  }
+
+  static final _id_build = _class.instanceMethodId(
+    r'build',
+    r'()Landroidx/camera/core/resolutionselector/ResolutionSelector;',
+  );
+
+  static final _build = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionSelector build()
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionSelector build() {
+    return _build(reference.pointer, _id_build as jni.JMethodIDPtr)
+        .object(const $ResolutionSelectorType());
+  }
+}
+
+final class $ResolutionSelector_BuilderType
+    extends jni.JObjType<ResolutionSelector_Builder> {
+  const $ResolutionSelector_BuilderType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/ResolutionSelector$Builder;';
+
+  @override
+  ResolutionSelector_Builder fromReference(jni.JReference reference) =>
+      ResolutionSelector_Builder.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ResolutionSelector_BuilderType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ResolutionSelector_BuilderType) &&
+        other is $ResolutionSelector_BuilderType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.ResolutionSelector
+class ResolutionSelector extends jni.JObject {
+  @override
+  late final jni.JObjType<ResolutionSelector> $type = type;
+
+  ResolutionSelector.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/ResolutionSelector');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ResolutionSelectorType();
+
+  /// from: static public final int PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+  static const PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION = 0;
+
+  /// from: static public final int PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+  static const PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE = 1;
+  static final _id_getAspectRatioStrategy = _class.instanceMethodId(
+    r'getAspectRatioStrategy',
+    r'()Landroidx/camera/core/resolutionselector/AspectRatioStrategy;',
+  );
+
+  static final _getAspectRatioStrategy = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.core.resolutionselector.AspectRatioStrategy getAspectRatioStrategy()
+  /// The returned object must be released after use, by calling the [release] method.
+  AspectRatioStrategy getAspectRatioStrategy() {
+    return _getAspectRatioStrategy(
+            reference.pointer, _id_getAspectRatioStrategy as jni.JMethodIDPtr)
+        .object(const $AspectRatioStrategyType());
+  }
+
+  static final _id_getResolutionStrategy = _class.instanceMethodId(
+    r'getResolutionStrategy',
+    r'()Landroidx/camera/core/resolutionselector/ResolutionStrategy;',
+  );
+
+  static final _getResolutionStrategy = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionStrategy getResolutionStrategy()
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionStrategy getResolutionStrategy() {
+    return _getResolutionStrategy(
+            reference.pointer, _id_getResolutionStrategy as jni.JMethodIDPtr)
+        .object(const $ResolutionStrategyType());
+  }
+
+  static final _id_getResolutionFilter = _class.instanceMethodId(
+    r'getResolutionFilter',
+    r'()Landroidx/camera/core/resolutionselector/ResolutionFilter;',
+  );
+
+  static final _getResolutionFilter = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public androidx.camera.core.resolutionselector.ResolutionFilter getResolutionFilter()
+  /// The returned object must be released after use, by calling the [release] method.
+  ResolutionFilter getResolutionFilter() {
+    return _getResolutionFilter(
+            reference.pointer, _id_getResolutionFilter as jni.JMethodIDPtr)
+        .object(const $ResolutionFilterType());
+  }
+
+  static final _id_getAllowedResolutionMode = _class.instanceMethodId(
+    r'getAllowedResolutionMode',
+    r'()I',
+  );
+
+  static final _getAllowedResolutionMode = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getAllowedResolutionMode()
+  int getAllowedResolutionMode() {
+    return _getAllowedResolutionMode(
+            reference.pointer, _id_getAllowedResolutionMode as jni.JMethodIDPtr)
+        .integer;
+  }
+}
+
+final class $ResolutionSelectorType extends jni.JObjType<ResolutionSelector> {
+  const $ResolutionSelectorType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/ResolutionSelector;';
+
+  @override
+  ResolutionSelector fromReference(jni.JReference reference) =>
+      ResolutionSelector.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ResolutionSelectorType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ResolutionSelectorType) &&
+        other is $ResolutionSelectorType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.ResolutionStrategy$ResolutionFallbackRule
+class ResolutionStrategy_ResolutionFallbackRule extends jni.JObject {
+  @override
+  late final jni.JObjType<ResolutionStrategy_ResolutionFallbackRule> $type =
+      type;
+
+  ResolutionStrategy_ResolutionFallbackRule.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/ResolutionStrategy$ResolutionFallbackRule');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ResolutionStrategy_ResolutionFallbackRuleType();
+
+  /// Maps a specific port to the implemented interface.
+  static final Map<int, $ResolutionStrategy_ResolutionFallbackRuleImpl>
+      _$impls = {};
+  ReceivePort? _$p;
+
+  static jni.JObjectPtr _$invoke(
+    int port,
+    jni.JObjectPtr descriptor,
+    jni.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      $MethodInvocation.fromAddresses(
+        0,
+        descriptor.address,
+        args.address,
+      ),
+    );
+  }
+
+  static final ffi.Pointer<
+          ffi.NativeFunction<
+              jni.JObjectPtr Function(
+                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
+      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+
+  static ffi.Pointer<ffi.Void> _$invokeMethod(
+    int $p,
+    $MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return ProtectedJniExtensions.newDartException(e);
+    }
+    return jni.nullptr;
+  }
+
+  factory ResolutionStrategy_ResolutionFallbackRule.implement(
+    $ResolutionStrategy_ResolutionFallbackRuleImpl $impl,
+  ) {
+    final $p = ReceivePort();
+    final $x = ResolutionStrategy_ResolutionFallbackRule.fromReference(
+      ProtectedJniExtensions.newPortProxy(
+        r'androidx.camera.core.resolutionselector.ResolutionStrategy$ResolutionFallbackRule',
+        $p,
+        _$invokePointer,
+      ),
+    ).._$p = $p;
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+    $p.listen(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    return $x;
+  }
+}
+
+abstract interface class $ResolutionStrategy_ResolutionFallbackRuleImpl {
+  factory $ResolutionStrategy_ResolutionFallbackRuleImpl() =
+      _$ResolutionStrategy_ResolutionFallbackRuleImpl;
+}
+
+class _$ResolutionStrategy_ResolutionFallbackRuleImpl
+    implements $ResolutionStrategy_ResolutionFallbackRuleImpl {
+  _$ResolutionStrategy_ResolutionFallbackRuleImpl();
+}
+
+final class $ResolutionStrategy_ResolutionFallbackRuleType
+    extends jni.JObjType<ResolutionStrategy_ResolutionFallbackRule> {
+  const $ResolutionStrategy_ResolutionFallbackRuleType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/ResolutionStrategy$ResolutionFallbackRule;';
+
+  @override
+  ResolutionStrategy_ResolutionFallbackRule fromReference(
+          jni.JReference reference) =>
+      ResolutionStrategy_ResolutionFallbackRule.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ResolutionStrategy_ResolutionFallbackRuleType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType ==
+            ($ResolutionStrategy_ResolutionFallbackRuleType) &&
+        other is $ResolutionStrategy_ResolutionFallbackRuleType;
+  }
+}
+
+/// from: androidx.camera.core.resolutionselector.ResolutionStrategy
+class ResolutionStrategy extends jni.JObject {
+  @override
+  late final jni.JObjType<ResolutionStrategy> $type = type;
+
+  ResolutionStrategy.fromReference(
+    jni.JReference reference,
+  ) : super.fromReference(reference);
+
+  static final _class = jni.JClass.forName(
+      r'androidx/camera/core/resolutionselector/ResolutionStrategy');
+
+  /// The type which includes information such as the signature of this class.
+  static const type = $ResolutionStrategyType();
+  static final _id_HIGHEST_AVAILABLE_STRATEGY = _class.staticFieldId(
+    r'HIGHEST_AVAILABLE_STRATEGY',
+    r'Landroidx/camera/core/resolutionselector/ResolutionStrategy;',
+  );
+
+  /// from: static public final androidx.camera.core.resolutionselector.ResolutionStrategy HIGHEST_AVAILABLE_STRATEGY
+  /// The returned object must be released after use, by calling the [release] method.
+  static ResolutionStrategy get HIGHEST_AVAILABLE_STRATEGY =>
+      _id_HIGHEST_AVAILABLE_STRATEGY.get(
+          _class, const $ResolutionStrategyType());
+
+  /// from: static public final int FALLBACK_RULE_NONE
+  static const FALLBACK_RULE_NONE = 0;
+
+  /// from: static public final int FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
+  static const FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER = 1;
+
+  /// from: static public final int FALLBACK_RULE_CLOSEST_HIGHER
+  static const FALLBACK_RULE_CLOSEST_HIGHER = 2;
+
+  /// from: static public final int FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER
+  static const FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER = 3;
+
+  /// from: static public final int FALLBACK_RULE_CLOSEST_LOWER
+  static const FALLBACK_RULE_CLOSEST_LOWER = 4;
+  static final _id_new0 = _class.constructorId(
+    r'(Landroid/util/Size;I)V',
+  );
+
+  static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>, int)>();
+
+  /// from: public void <init>(android.util.Size size, int i)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory ResolutionStrategy(
+    Size size,
+    int i,
+  ) {
+    return ResolutionStrategy.fromReference(_new0(_class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr, size.reference.pointer, i)
+        .reference);
+  }
+
+  static final _id_getBoundSize = _class.instanceMethodId(
+    r'getBoundSize',
+    r'()Landroid/util/Size;',
+  );
+
+  static final _getBoundSize = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public android.util.Size getBoundSize()
+  /// The returned object must be released after use, by calling the [release] method.
+  Size getBoundSize() {
+    return _getBoundSize(
+            reference.pointer, _id_getBoundSize as jni.JMethodIDPtr)
+        .object(const $SizeType());
+  }
+
+  static final _id_getFallbackRule = _class.instanceMethodId(
+    r'getFallbackRule',
+    r'()I',
+  );
+
+  static final _getFallbackRule = ProtectedJniExtensions.lookup<
+          ffi.NativeFunction<
+              jni.JniResult Function(
+                ffi.Pointer<ffi.Void>,
+                jni.JMethodIDPtr,
+              )>>('globalEnv_CallIntMethod')
+      .asFunction<
+          jni.JniResult Function(
+            ffi.Pointer<ffi.Void>,
+            jni.JMethodIDPtr,
+          )>();
+
+  /// from: public int getFallbackRule()
+  int getFallbackRule() {
+    return _getFallbackRule(
+            reference.pointer, _id_getFallbackRule as jni.JMethodIDPtr)
+        .integer;
+  }
+}
+
+final class $ResolutionStrategyType extends jni.JObjType<ResolutionStrategy> {
+  const $ResolutionStrategyType();
+
+  @override
+  String get signature =>
+      r'Landroidx/camera/core/resolutionselector/ResolutionStrategy;';
+
+  @override
+  ResolutionStrategy fromReference(jni.JReference reference) =>
+      ResolutionStrategy.fromReference(reference);
+
+  @override
+  jni.JObjType get superType => const jni.JObjectType();
+
+  @override
+  final superCount = 1;
+
+  @override
+  int get hashCode => ($ResolutionStrategyType).hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ResolutionStrategyType) &&
+        other is $ResolutionStrategyType;
+  }
+}
+
 /// from: androidx.camera.mlkit.vision.MlKitAnalyzer$Result
 class MlKitAnalyzer_Result extends jni.JObject {
   @override
@@ -36359,10 +37752,10 @@ class MlKitAnalyzer extends jni.JObject {
 
   /// from: public final android.util.Size getDefaultTargetResolution()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getDefaultTargetResolution() {
+  Size getDefaultTargetResolution() {
     return _getDefaultTargetResolution(reference.pointer,
             _id_getDefaultTargetResolution as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $SizeType());
   }
 
   static final _id_getTargetCoordinateSystem = _class.instanceMethodId(
@@ -37485,7 +38878,7 @@ class CameraController_OutputSize extends jni.JObject {
   /// from: public void <init>(android.util.Size size)
   /// The returned object must be released after use, by calling the [release] method.
   factory CameraController_OutputSize.new1(
-    jni.JObject size,
+    Size size,
   ) {
     return CameraController_OutputSize.fromReference(_new1(
             _class.reference.pointer,
@@ -37537,10 +38930,10 @@ class CameraController_OutputSize extends jni.JObject {
 
   /// from: public android.util.Size getResolution()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getResolution() {
+  Size getResolution() {
     return _getResolution(
             reference.pointer, _id_getResolution as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $SizeType());
   }
 
   static final _id_toString1 = _class.instanceMethodId(
@@ -37871,7 +39264,7 @@ class CameraController extends jni.JObject {
 
   /// from: public void setPreviewResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
   void setPreviewResolutionSelector(
-    jni.JObject resolutionSelector,
+    ResolutionSelector resolutionSelector,
   ) {
     _setPreviewResolutionSelector(
             reference.pointer,
@@ -37899,10 +39292,10 @@ class CameraController extends jni.JObject {
 
   /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getPreviewResolutionSelector()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getPreviewResolutionSelector() {
+  ResolutionSelector getPreviewResolutionSelector() {
     return _getPreviewResolutionSelector(reference.pointer,
             _id_getPreviewResolutionSelector as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $ResolutionSelectorType());
   }
 
   static final _id_isImageCaptureEnabled = _class.instanceMethodId(
@@ -38243,7 +39636,7 @@ class CameraController extends jni.JObject {
 
   /// from: public void setImageCaptureResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
   void setImageCaptureResolutionSelector(
-    jni.JObject resolutionSelector,
+    ResolutionSelector resolutionSelector,
   ) {
     _setImageCaptureResolutionSelector(
             reference.pointer,
@@ -38272,10 +39665,10 @@ class CameraController extends jni.JObject {
 
   /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getImageCaptureResolutionSelector()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getImageCaptureResolutionSelector() {
+  ResolutionSelector getImageCaptureResolutionSelector() {
     return _getImageCaptureResolutionSelector(reference.pointer,
             _id_getImageCaptureResolutionSelector as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $ResolutionSelectorType());
   }
 
   static final _id_setImageCaptureIoExecutor = _class.instanceMethodId(
@@ -38581,7 +39974,7 @@ class CameraController extends jni.JObject {
 
   /// from: public void setImageAnalysisResolutionSelector(androidx.camera.core.resolutionselector.ResolutionSelector resolutionSelector)
   void setImageAnalysisResolutionSelector(
-    jni.JObject resolutionSelector,
+    ResolutionSelector resolutionSelector,
   ) {
     _setImageAnalysisResolutionSelector(
             reference.pointer,
@@ -38610,10 +40003,10 @@ class CameraController extends jni.JObject {
 
   /// from: public androidx.camera.core.resolutionselector.ResolutionSelector getImageAnalysisResolutionSelector()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getImageAnalysisResolutionSelector() {
+  ResolutionSelector getImageAnalysisResolutionSelector() {
     return _getImageAnalysisResolutionSelector(reference.pointer,
             _id_getImageAnalysisResolutionSelector as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const $ResolutionSelectorType());
   }
 
   static final _id_setImageAnalysisBackgroundExecutor = _class.instanceMethodId(

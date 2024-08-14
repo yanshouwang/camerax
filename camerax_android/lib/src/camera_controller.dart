@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
+import 'package:collection/collection.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:jni/jni.dart';
 
@@ -24,12 +26,7 @@ final class MyCameraController
   @override
   Stream<bool?> get torchStateChanged => _torchStateChagnedController.stream;
 
-  MyCameraController()
-      : jniValue = jni.LifecycleCameraController(MyJNI.context)
-          ..setImageAnalysisBackpressureStrategyOnMainThread(
-              jni.MyImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-          ..setImageCaptureModeOnMainThread(
-              jni.MyImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY) {
+  MyCameraController() : jniValue = _createLifecycleCameraController() {
     _zoomStateChagnedController = StreamController.broadcast(
       onListen: _observeZoomState,
       onCancel: _removeZoomStateObserver,
@@ -233,6 +230,14 @@ final class MyCameraController
       await jniValue.setImageAnalysisOutputImageFormatOnMainThread(
           jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888);
     }
+    final resolutionSelector = jni.ResolutionSelector_Builder()
+        .setAspectRatioStrategy(
+            jni.AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
+        .setResolutionStrategy(
+            jni.ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY)
+        .build();
+    await jniValue
+        .setImageAnalysisResolutionSelectorOnMainThread(resolutionSelector);
     final executor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
     await jniValue.setImageAnalysisAnalyzerOnMainThread(
@@ -258,8 +263,8 @@ final class MyCameraController
   }
 
   @override
-  Future<Uint8List> takePictureToMemory() async {
-    final completer = Completer<Uint8List>();
+  Future<ImageProxy> takePictureToMemory() async {
+    final completer = Completer<ImageProxy>();
     final executor = jni.ContextCompat.getMainExecutor(MyJNI.context);
     final callback = jni.MyImageCapture_MyOnImageCapturedCallbackImpl(
       jni.MyImageCapture_MyOnImageCapturedCallback.implement(
@@ -270,11 +275,9 @@ final class MyCameraController
           onCaptureProcessProgressed: (progress) {
             logger.info('onCaptureProcessProgressed $progress.');
           },
-          onCaptureSuccess: (image) {
+          onCaptureSuccess: (imageProxy) {
             logger.info('onCaptureSuccess.');
-            final memory = image.getPlanes()[0].getBuffer().asUint8List();
-            image.close();
-            completer.complete(memory);
+            completer.complete(imageProxy.dartValue);
           },
           onError: (exception) {
             logger.info('onError $exception.');
@@ -290,8 +293,8 @@ final class MyCameraController
       executor,
       callback,
     );
-    final memory = await completer.future;
-    return memory;
+    final imageProxy = await completer.future;
+    return imageProxy;
   }
 
   @override
@@ -464,4 +467,12 @@ final class MyCameraController
       observer.reference,
     );
   }
+}
+
+jni.LifecycleCameraController _createLifecycleCameraController() {
+  return jni.LifecycleCameraController(MyJNI.context)
+    ..setImageAnalysisBackpressureStrategyOnMainThread(
+        jni.MyImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+    ..setImageCaptureModeOnMainThread(
+        jni.MyImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY);
 }

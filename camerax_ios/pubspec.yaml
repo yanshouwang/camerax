@@ -1,7 +1,6 @@
 name: camerax_ios
 description: "iOS implementation of the camerax plugin."
 version: 0.0.1
-homepage: https://github.com/yanshouwang/camerax
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
 topics:

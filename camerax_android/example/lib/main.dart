@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 
 import 'router.dart';
-import 'view_models.dart';
-import 'views.dart';
 
 void main() {
   Logger.root.onRecord.listen(onLogRecorded);

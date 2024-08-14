@@ -75,6 +75,12 @@ final class CameraControllerImpl
   }
 
   @override
+  Future<CameraSelector> getCameraSelector() {
+    // TODO: implement getCameraSelector
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> setCameraSelector(CameraSelector cameraSelector) async {
     logger.info('setCameraController $cameraSelector');
     final error = using((arena) {
@@ -199,8 +205,8 @@ final class CameraControllerImpl
   }
 
   @override
-  Future<Uint8List> takePictureToMemory() async {
-    final completer = Completer<Uint8List>();
+  Future<ImageProxy> takePictureToMemory() async {
+    final completer = Completer<ImageProxy>();
     final handler =
         ffi.ObjCBlock_ffiVoid_NSData_NSError.listener((data, error) {
       if (error == null) {
@@ -211,8 +217,8 @@ final class CameraControllerImpl
       }
     });
     ffiValue.takePictureToMemoryWithCompletionHandler_(handler);
-    final memory = await completer.future;
-    return memory;
+    final imageProxy = await completer.future;
+    return imageProxy;
   }
 
   @override
@@ -233,6 +239,16 @@ final class CameraControllerImpl
     );
     final savedUri = await completer.future;
     return savedUri;
+  }
+
+  @override
+  Future<Recording> startRecording({
+    String? name,
+    required bool enableAudio,
+    required VideoRecordEventCallback listener,
+  }) {
+    // TODO: implement startRecording
+    throw UnimplementedError();
   }
 
   void _addZoomStateObserver() {

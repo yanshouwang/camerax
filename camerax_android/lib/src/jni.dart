@@ -1,8 +1,8 @@
 // ignore_for_file: camel_case_extensions
 
-import 'dart:math';
+import 'dart:math' as math;
 import 'dart:typed_data';
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:hybrid_os/hybrid_os.dart';
@@ -337,6 +337,15 @@ extension JNIImageProxyX on jni.ImageProxy {
   }
 }
 
+extension JNIImageInfoX on jni.ImageInfo {
+  ImageInfo get dartValue {
+    return ImageInfo(
+      timestamp: getTimestamp(),
+      rotationDegrees: getRotationDegrees(),
+    );
+  }
+}
+
 extension JNIUriX on jni.Uri {
   Uri get dartValue {
     final contentResolver = MyJNI.context.getContentResolver();
@@ -362,82 +371,102 @@ extension JNIUriX on jni.Uri {
 
 extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
   Future<void> setEnabledUseCasesOnMainThread(int enabledUseCases) {
-    return runOnPlatformThread(() => setEnabledUseCases(enabledUseCases));
+    return ui.runOnPlatformThread(() => setEnabledUseCases(enabledUseCases));
   }
 
   Future<void> bindToLifecycleOnMainThread(jni.LifecycleOwner lifecycleOwner) {
-    return runOnPlatformThread(() => bindToLifecycle(lifecycleOwner));
+    return ui.runOnPlatformThread(() => bindToLifecycle(lifecycleOwner));
   }
 
   Future<void> unbindOnMainThread() {
-    return runOnPlatformThread(() => unbind());
+    return ui.runOnPlatformThread(() => unbind());
   }
 
   Future<bool> hasCameraOnMainThread(jni.CameraSelector cameraSelector) {
-    return runOnPlatformThread(() => hasCamera(cameraSelector));
+    return ui.runOnPlatformThread(() => hasCamera(cameraSelector));
   }
 
   Future<jni.CameraSelector> getCameraSelectorOnMainThread() {
-    return runOnPlatformThread(() => getCameraSelector());
+    return ui.runOnPlatformThread(() => getCameraSelector());
   }
 
   Future<void> setCameraSelectorOnMainThread(
       jni.CameraSelector cameraSelector) {
-    return runOnPlatformThread(() => setCameraSelector(cameraSelector));
+    return ui.runOnPlatformThread(() => setCameraSelector(cameraSelector));
   }
 
   Future<bool> isTapToFocusEnabledOnMainThread() {
-    return runOnPlatformThread(() => isTapToFocusEnabled());
+    return ui.runOnPlatformThread(() => isTapToFocusEnabled());
   }
 
   Future<void> setTapToFocusEnabledOnMainThread(bool enabled) {
-    return runOnPlatformThread(() => setTapToFocusEnabled(enabled));
+    return ui.runOnPlatformThread(() => setTapToFocusEnabled(enabled));
   }
 
   Future<bool> isPinchToZoomEnabledOnMainThread() {
-    return runOnPlatformThread(() => isPinchToZoomEnabled());
+    return ui.runOnPlatformThread(() => isPinchToZoomEnabled());
   }
 
   Future<void> setPinchToZoomEnabledOnMainThread(bool enabled) {
-    return runOnPlatformThread(() => setPinchToZoomEnabled(enabled));
+    return ui.runOnPlatformThread(() => setPinchToZoomEnabled(enabled));
   }
 
   Future<jni.LiveData<jni.ZoomState>> getZoomStateOnMainThread() {
-    return runOnPlatformThread(() => getZoomState());
+    return ui.runOnPlatformThread(() => getZoomState());
   }
 
   Future<jni.ListenableFuture<JObject>> setLinearZoomOnMainThread(
     double linearZoom,
   ) {
-    return runOnPlatformThread(() => setLinearZoom(linearZoom));
+    return ui.runOnPlatformThread(() => setLinearZoom(linearZoom));
   }
 
   Future<jni.ListenableFuture<JObject>> setZoomRatioOnMainThread(
     double zoomRatio,
   ) {
-    return runOnPlatformThread(() => setZoomRatio(zoomRatio));
+    return ui.runOnPlatformThread(() => setZoomRatio(zoomRatio));
   }
 
   Future<jni.LiveData<JInteger>> getTorchStateOnMainThread() {
-    return runOnPlatformThread(() => getTorchState());
+    return ui.runOnPlatformThread(() => getTorchState());
   }
 
   Future<jni.ListenableFuture<JObject>> enableTorchOnMainThread(
     bool torchEnabled,
   ) {
-    return runOnPlatformThread(() => enableTorch(torchEnabled));
+    return ui.runOnPlatformThread(() => enableTorch(torchEnabled));
+  }
+
+  Future<void> setPreviewResolutionSelectorOnMainThread(
+      jni.ResolutionSelector resolutionSelector) {
+    final resolutionSelectorReference = resolutionSelector.reference;
+    return ui.runOnPlatformThread(() {
+      final resolutionSelector =
+          jni.ResolutionSelector.fromReference(resolutionSelectorReference);
+      setPreviewResolutionSelector(resolutionSelector);
+    });
   }
 
   Future<void> setImageAnalysisOutputImageFormatOnMainThread(
     int imageAnalysisOutputImageFormat,
   ) {
-    return runOnPlatformThread(() =>
+    return ui.runOnPlatformThread(() =>
         setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat));
   }
 
   Future<void> setImageAnalysisBackpressureStrategyOnMainThread(int strategy) {
-    return runOnPlatformThread(
+    return ui.runOnPlatformThread(
         () => setImageAnalysisBackpressureStrategy(strategy));
+  }
+
+  Future<void> setImageAnalysisResolutionSelectorOnMainThread(
+      jni.ResolutionSelector resolutionSelector) {
+    final resolutionSelectorReference = resolutionSelector.reference;
+    return ui.runOnPlatformThread(() {
+      final resolutionSelector =
+          jni.ResolutionSelector.fromReference(resolutionSelectorReference);
+      setImageAnalysisResolutionSelector(resolutionSelector);
+    });
   }
 
   Future<void> setImageAnalysisAnalyzerOnMainThread(
@@ -445,7 +474,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     JObject analyzer,
   ) {
     final analyzerReference = analyzer.reference;
-    return runOnPlatformThread(() {
+    return ui.runOnPlatformThread(() {
       final analyzer = JObject.fromReference(
         analyzerReference,
       );
@@ -457,19 +486,19 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
   }
 
   Future<void> clearImageAnalysisAnalyzerOnMainThread() {
-    return runOnPlatformThread(() => clearImageAnalysisAnalyzer());
+    return ui.runOnPlatformThread(() => clearImageAnalysisAnalyzer());
   }
 
   Future<int> getImageCaptureFlashModeOnMainThread() {
-    return runOnPlatformThread(() => getImageCaptureFlashMode());
+    return ui.runOnPlatformThread(() => getImageCaptureFlashMode());
   }
 
   Future<void> setImageCaptureFlashModeOnMainThread(int flashMode) {
-    return runOnPlatformThread(() => setImageCaptureFlashMode(flashMode));
+    return ui.runOnPlatformThread(() => setImageCaptureFlashMode(flashMode));
   }
 
   Future<void> setImageCaptureModeOnMainThread(int captureMode) {
-    return runOnPlatformThread(() => setImageCaptureMode(captureMode));
+    return ui.runOnPlatformThread(() => setImageCaptureMode(captureMode));
   }
 
   Future<void> takePictureToMemoryOnMainThread(
@@ -477,7 +506,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     JObject callback,
   ) {
     final callbackReference = callback.reference;
-    return runOnPlatformThread(() {
+    return ui.runOnPlatformThread(() {
       final callback = JObject.fromReference(
         callbackReference,
       );
@@ -491,7 +520,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     JObject imageSavedCallback,
   ) {
     final imageSavedCallbackReference = imageSavedCallback.reference;
-    return runOnPlatformThread(() {
+    return ui.runOnPlatformThread(() {
       final imageSavedCallback = JObject.fromReference(
         imageSavedCallbackReference,
       );
@@ -511,7 +540,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
   ) {
     final listenerT = listener.T;
     final listenerReference = listener.reference;
-    return runOnPlatformThread(() {
+    return ui.runOnPlatformThread(() {
       final listener = jni.Consumer<jni.VideoRecordEvent>.fromReference(
         listenerT,
         listenerReference,
@@ -532,7 +561,7 @@ extension JNILiveDataX<T extends JObject> on jni.LiveData<T> {
     JObjType<T> observerT,
     JReference observerReference,
   ) {
-    return runOnPlatformThread(() {
+    return ui.runOnPlatformThread(() {
       final observer = jni.Observer.fromReference(observerT, observerReference);
       observe(lifecycleOwner, observer);
     });
@@ -542,7 +571,7 @@ extension JNILiveDataX<T extends JObject> on jni.LiveData<T> {
     JObjType<T> observerT,
     JReference observerReference,
   ) {
-    return runOnPlatformThread(() {
+    return ui.runOnPlatformThread(() {
       final observer = jni.Observer.fromReference(observerT, observerReference);
       removeObserver(observer);
     });
@@ -553,12 +582,12 @@ extension JNIPreviewViewX on jni.MyPreviewView {
   Future<void> setControllerOnMainThread(
     jni.CameraController cameraController,
   ) {
-    return runOnPlatformThread(() => setController(cameraController));
+    return ui.runOnPlatformThread(() => setController(cameraController));
   }
 
   Future<void> setScaleTypeOnMainThread(
       jni.MyPreviewView_MyScaleType scaleType) {
-    return runOnPlatformThread(() => setScaleType(scaleType));
+    return ui.runOnPlatformThread(() => setScaleType(scaleType));
   }
 }
 
@@ -569,7 +598,7 @@ extension JNIBarcodeX on jni.Barcode {
   }) {
     final type = getFormat().jniMLCodeType;
     final bounds = getBoundingBox().dartValue;
-    final corners = <Point<int>>[];
+    final corners = <math.Point<int>>[];
     final cornerPoints = getCornerPoints();
     for (var i = 0; i < cornerPoints.length; i++) {
       final cornerPoint = cornerPoints[i];
@@ -621,8 +650,8 @@ extension JNIByteArrayX on JArray<jbyte> {
 }
 
 extension JNIRectX on jni.Rect {
-  Rectangle<int> get dartValue {
-    return Rectangle(
+  math.Rectangle<int> get dartValue {
+    return math.Rectangle(
       left,
       top,
       width(),
@@ -632,8 +661,16 @@ extension JNIRectX on jni.Rect {
 }
 
 extension JNIPointX on jni.Point {
-  Point<int> get dartValue {
-    return Point(x, y);
+  math.Point<int> get dartValue {
+    return math.Point(x, y);
+  }
+}
+
+extension JNISize on jni.Size {
+  ui.Size get dartValue {
+    final width = getWidth().toDouble();
+    final height = getHeight().toDouble();
+    return ui.Size(width, height);
   }
 }
 

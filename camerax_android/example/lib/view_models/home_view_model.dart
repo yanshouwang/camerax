@@ -5,6 +5,8 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 
+import 'raw_pixels_analyzer.dart';
+
 class HomeViewModel extends ViewModel with TypeLogger {
   final CameraController controller;
   CameraMode _mode;
@@ -14,7 +16,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? _flashMode;
   Uri? _savedUri;
   Recording? _recording;
-  ImageProxy? _imageProxy;
+  ImageWrapper? _imageWrapper;
   List<MLObject> _items;
 
   late final StreamSubscription _zoomStateSubscription;
@@ -39,7 +41,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
-  ImageProxy? get imageProxy => _imageProxy;
+  ImageWrapper? get imageWrapper => _imageWrapper;
   List<MLObject> get items => _items;
 
   void _initialize() async {
@@ -77,14 +79,6 @@ isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
     await bind();
-  }
-
-  void _onAnalyzed(List<MLObject> items) {
-    if (mode == CameraMode.takePicture || mode == CameraMode.recordVideo) {
-      return;
-    }
-    _items = items;
-    notifyListeners();
   }
 
   Future<void> bind() async {
@@ -185,6 +179,10 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
       case CameraMode.recordVideo:
         await _clearImageAnalysisAnalyzer();
         break;
+      case CameraMode.rawValue:
+        final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
+        await _setImageAnalysisAnalyzer(analyzer);
+        break;
       case CameraMode.scanCode:
         final analyzer = MLAnalyzer(
           types: [
@@ -211,7 +209,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
             MLObjectType.pdf417,
             MLObjectType.qr,
           ],
-          onAnalyzed: _onAnalyzed,
+          onAnalyzed: _onMLAnalyzed,
         );
         await _setImageAnalysisAnalyzer(analyzer);
         break;
@@ -221,7 +219,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
             // Faces
             MLObjectType.face,
           ],
-          onAnalyzed: _onAnalyzed,
+          onAnalyzed: _onMLAnalyzed,
         );
         await _setImageAnalysisAnalyzer(analyzer);
         break;
@@ -229,14 +227,29 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
         break;
     }
     _mode = mode;
+    _imageWrapper = null;
+    _items = [];
+    notifyListeners();
+  }
+
+  void _onRawPixelsAnalyzed(ImageWrapper imageWrapper) {
+    if (mode != CameraMode.rawValue) {
+      return;
+    }
+    _imageWrapper = imageWrapper;
+    notifyListeners();
+  }
+
+  void _onMLAnalyzed(List<MLObject> items) {
+    if (mode != CameraMode.scanCode && mode != CameraMode.scanFace) {
+      return;
+    }
+    _items = items;
     notifyListeners();
   }
 
   Future<void> _clearImageAnalysisAnalyzer() async {
     await controller.clearImageAnalysisAnalyzer();
-    _imageProxy = null;
-    _items = [];
-    notifyListeners();
   }
 
   Future<void> _setImageAnalysisAnalyzer(ImageAnalyzer analyzer) async {

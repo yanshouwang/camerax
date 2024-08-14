@@ -25,6 +25,7 @@ classes:
   - android.net.Uri
   - android.os.Environment
   - android.provider.MediaStore
+  - android.util.Size
   - androidx.camera.core.CameraSelector
   # - androidx.camera.core.ImageAnalysis
   # - androidx.camera.core.ImageCapture
@@ -32,6 +33,10 @@ classes:
   - androidx.camera.core.ImageProxy
   - androidx.camera.core.TorchState
   - androidx.camera.core.ZoomState
+  - androidx.camera.core.resolutionselector.AspectRatioStrategy
+  - androidx.camera.core.resolutionselector.ResolutionFilter
+  - androidx.camera.core.resolutionselector.ResolutionSelector
+  - androidx.camera.core.resolutionselector.ResolutionStrategy
   - androidx.camera.mlkit.vision.MlKitAnalyzer
   # - androidx.camera.video.MediaStoreOutputOptions
   - androidx.camera.video.OutputResults

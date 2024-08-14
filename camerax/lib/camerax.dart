@@ -1,8 +1,4 @@
+library camerax;
 
-import 'camerax_platform_interface.dart';
-
-class Camerax {
-  Future<String?> getPlatformVersion() {
-    return CameraxPlatform.instance.getPlatformVersion();
-  }
-}
+export 'package:camerax_platform_interface/camerax_platform_interface.dart'
+    hide CameraXPlugin;

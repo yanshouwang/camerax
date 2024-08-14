@@ -9,6 +9,7 @@ export 'src/zoom_state.dart';
 export 'src/scale_type.dart';
 export 'src/flash_mode.dart';
 export 'src/image_analyzer.dart';
+export 'src/image_info.dart';
 export 'src/image_proxy.dart';
 export 'src/ml.dart';
 export 'src/ml_analyzer.dart';

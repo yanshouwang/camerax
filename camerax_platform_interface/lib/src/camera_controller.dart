@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:hybrid_logging/hybrid_logging.dart';
 
 import 'authorization_type.dart';
@@ -7,6 +5,7 @@ import 'camera_selector.dart';
 import 'camerax_plugin.dart';
 import 'flash_mode.dart';
 import 'image_analyzer.dart';
+import 'image_proxy.dart';
 import 'recording.dart';
 import 'video_record_event.dart';
 import 'zoom_state.dart';
@@ -41,7 +40,7 @@ abstract interface class CameraController implements LogController {
   Future<void> clearImageAnalysisAnalyzer();
   Future<FlashMode> getImageCaptureFlashMode();
   Future<void> setImageCaptureFlashMode(FlashMode flashMode);
-  Future<Uint8List> takePictureToMemory();
+  Future<ImageProxy> takePictureToMemory();
   Future<Uri> takePictureToAlbum({
     String? name,
   });

@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 import 'ml_items_view.dart';
+import 'rgba_8888_view.dart';
 import 'thumbnail.dart';
 
 class CameraView extends StatefulWidget {
@@ -40,6 +41,7 @@ class _CameraViewState extends State<CameraView> with RouteAware {
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
+    final imageWrapper = viewModel.imageWrapper;
     final items = viewModel.items;
     final recording = viewModel.recording;
     const pageDuration = Duration(milliseconds: 300);
@@ -92,24 +94,38 @@ class _CameraViewState extends State<CameraView> with RouteAware {
           Expanded(
             child: ClipRect(
               child: Stack(
-                fit: StackFit.expand,
                 children: [
                   PreviewView(
                     controller: viewModel.controller,
                     scaleType: ScaleType.fillCenter,
                   ),
+                  if (imageWrapper != null)
+                    Container(
+                      alignment: Alignment.topRight,
+                      margin: const EdgeInsets.all(20.0),
+                      child: SizedBox(
+                        width: 100.0,
+                        child: RGBA8888View(
+                          image: imageWrapper.image,
+                          rotationDegrees: imageWrapper.rotationDegrees,
+                        ),
+                      ),
+                    ),
                   if (items.isNotEmpty)
                     MLItemsView(
                       items: items,
                     ),
                   if (zoomState != null)
-                    ZoomWidget(
-                      minimum: zoomState.minZoomRatio,
-                      maximum: zoomState.maxZoomRatio,
-                      value: zoomState.zoomRatio,
-                      onChanged: (value) {
-                        viewModel.setZoomRatio(value).ignore();
-                      },
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      child: ZoomWidget(
+                        minimum: zoomState.minZoomRatio,
+                        maximum: zoomState.maxZoomRatio,
+                        value: zoomState.zoomRatio,
+                        onChanged: (value) {
+                          viewModel.setZoomRatio(value).ignore();
+                        },
+                      ),
                     ),
                 ],
               ),
@@ -119,14 +135,9 @@ class _CameraViewState extends State<CameraView> with RouteAware {
             children: [
               GestureDetector(
                 onPanStart: (details) {
-                  debugPrint('onPanStart: ${details.localPosition}');
                   _onPanStartPosition = details.localPosition;
                 },
-                onPanDown: (details) {
-                  debugPrint('onPanDown ${details.localPosition}');
-                },
                 onPanUpdate: (details) {
-                  debugPrint('onPanUpdate: ${details.delta.dx}');
                   final startPosition = _onPanStartPosition;
                   if (startPosition == null) {
                     return;
@@ -137,8 +148,6 @@ class _CameraViewState extends State<CameraView> with RouteAware {
                       previousDx != 0.0 &&
                       dx != 0.0 &&
                       dx.sign != previousDx.sign) {
-                    debugPrint(
-                        'onPanUpdate null ${dx.sign}, ${previousDx.sign}');
                     _onPanStartPosition = null;
                     _onPanUpdateDx = null;
                   } else {
@@ -146,7 +155,6 @@ class _CameraViewState extends State<CameraView> with RouteAware {
                     final updatePosition = details.localPosition;
                     final distance =
                         (updatePosition.dx - startPosition.dx).abs();
-                    debugPrint('onPanUpdate distance $distance');
                     if (distance > 20.0) {
                       final page = _pageController.page;
                       if (page == null) {
@@ -169,12 +177,10 @@ class _CameraViewState extends State<CameraView> with RouteAware {
                   }
                 },
                 onPanEnd: (details) {
-                  debugPrint('onPanEnd: ${details.velocity}');
                   _onPanStartPosition = null;
                   _onPanUpdateDx = null;
                 },
                 onPanCancel: () {
-                  debugPrint('onPanCancel');
                   _onPanStartPosition = null;
                   _onPanUpdateDx = null;
                 },
@@ -231,6 +237,30 @@ class _CameraViewState extends State<CameraView> with RouteAware {
                                 .textStyle
                                 .copyWith(
                                   color: mode == CameraMode.recordVideo
+                                      ? CupertinoTheme.of(context).primaryColor
+                                      : null,
+                                ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _pageController.animateToPage(
+                            CameraMode.rawValue.index,
+                            duration: pageDuration,
+                            curve: pageCurve,
+                          );
+                        },
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Raw',
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.rawValue
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
                                 ),
