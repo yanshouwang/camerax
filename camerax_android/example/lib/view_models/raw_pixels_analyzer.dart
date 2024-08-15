@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 
 typedef ImageWrapperCallback = void Function(ImageWrapper imageWrapper);
 
-class RawPixelsAnalyzer implements ImageAnalyzer {
+class RawPixelsAnalyzer implements Analyzer {
   final ImageWrapperCallback onAnalyzed;
 
   RawPixelsAnalyzer(this.onAnalyzed);

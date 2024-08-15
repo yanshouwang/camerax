@@ -1,8 +1,9 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'camera_controller.dart';
+import 'core.dart';
 import 'ml.dart';
-import 'preview_view_controller.dart';
+import 'video.dart';
+import 'view.dart';
 
 /// Platform-specific implementations should implement this class to support
 /// camerax.
@@ -32,12 +33,44 @@ abstract base class CameraXPlugin extends PlatformInterface {
     _instance = instance;
   }
 
+  CameraSelector createCameraSelector({
+    LensFacing? lensFacing,
+  });
+
   CameraController createCameraController();
 
   PreviewViewController createPreviewViewController();
 
+  ResolutionSelector createResolutionSelector({
+    AspectRatioStrategy? aspectRatioStrategy,
+    ResolutionMode? allowedResolutionMode,
+    ResolutionFilter? resolutionFilter,
+    ResolutionStrategy? resolutionStrategy,
+  });
+
+  FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
+      Quality quality);
+
+  FallbackStrategy createFallbackStrategyHigherQualityThan(Quality quality);
+
+  FallbackStrategy createFallbackStrategyLowerQualityOrHigherThan(
+      Quality quality);
+
+  FallbackStrategy createFallbackStrategyLowerQualityThan(Quality quality);
+
+  QualitySelector createQualitySelectorFrom(
+    Quality quality, {
+    FallbackStrategy? fallbackStrategy,
+  });
+
+  QualitySelector createQualitySelectorFromOrderedList(
+    List<Quality> qualities, {
+    FallbackStrategy? fallbackStrategy,
+  });
+
   MLAnalyzer createMLAnalyzer({
     required List<MLObjectType> types,
+    required CoordinateSystem targetCoordinateSystem,
     required MLObjectsCallback onAnalyzed,
   });
 }

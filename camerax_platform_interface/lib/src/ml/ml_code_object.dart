@@ -1,5 +1,5 @@
-import 'dart:math';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'ml_object.dart';
 import 'ml_object_type.dart';
@@ -7,7 +7,7 @@ import 'ml_object_type.dart';
 final class MLCodeObject extends MLObject {
   @override
   final MLObjectType type;
-  final List<Point<int>> corners;
+  final List<ui.Offset> corners;
   final Uint8List? value;
   final String? stringValue;
 

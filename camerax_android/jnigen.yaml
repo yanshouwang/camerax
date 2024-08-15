@@ -7,8 +7,7 @@ enable_experiment:
   - interface_implementation
 output:
   dart:
-    path: lib/src/jni.g.dart
-    structure: single_file
+    path: lib/src/jni/
 log_level: all
 class_path:
   - classes/jetified-listenablefuture-1.0.jar
@@ -29,6 +28,7 @@ classes:
   - androidx.camera.core.CameraSelector
   # - androidx.camera.core.ImageAnalysis
   # - androidx.camera.core.ImageCapture
+  - androidx.camera.core.AspectRatio
   - androidx.camera.core.ImageInfo
   - androidx.camera.core.ImageProxy
   - androidx.camera.core.TorchState

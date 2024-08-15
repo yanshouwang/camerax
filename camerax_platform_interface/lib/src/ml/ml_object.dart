@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'ml_object_type.dart';
 
@@ -7,7 +7,7 @@ abstract base class MLObject {
 
   final DateTime time;
   final Duration duration;
-  final Rectangle<int> bounds;
+  final ui.Rect bounds;
 
   MLObject({
     required this.time,

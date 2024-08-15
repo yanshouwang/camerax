@@ -47,8 +47,8 @@ class MLItemsPainter extends CustomPainter {
       if (item is MLCodeObject) {
         final points = item.corners
             .map((point) => Offset(
-                  point.x / devicePixelRatio,
-                  point.y / devicePixelRatio,
+                  point.dx / devicePixelRatio,
+                  point.dy / devicePixelRatio,
                 ))
             .toList();
         final path = Path()..addPolygon(points, true);

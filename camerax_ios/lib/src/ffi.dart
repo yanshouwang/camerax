@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
@@ -43,19 +43,6 @@ extension LensFacingX on LensFacing {
   }
 }
 
-extension CameraSelectorX on CameraSelector {
-  ffi.CameraSelector get ffiValue {
-    if (this == CameraSelector.back) {
-      return ffi.CameraSelector.getBack();
-    } else if (this == CameraSelector.front) {
-      return ffi.CameraSelector.getFront();
-    } else {
-      return ffi.CameraSelector.alloc()
-          .initWithLensFacing_(lensFacing.ffiValue);
-    }
-  }
-}
-
 extension FlashModeX on FlashMode {
   ffi.FlashMode get ffiValue {
     switch (this) {
@@ -86,7 +73,7 @@ extension FFIPreviewViewX on ffi.PreviewView {
   ) async {
     final viewPtr = pointer;
     final controllerPtr = controller?.pointer;
-    await runOnPlatformThread(() {
+    await ui.runOnPlatformThread(() {
       final view = ffi.PreviewView.castFromPointer(viewPtr);
       if (controllerPtr == null) {
         view.controller = null;
@@ -98,7 +85,7 @@ extension FFIPreviewViewX on ffi.PreviewView {
 
   Future<void> setScaleTypeOnMainThread(ffi.ScaleType scaleType) async {
     final viewPtr = pointer;
-    await runOnPlatformThread(() {
+    await ui.runOnPlatformThread(() {
       final view = ffi.PreviewView.castFromPointer(viewPtr);
       view.scaleType = scaleType;
     });

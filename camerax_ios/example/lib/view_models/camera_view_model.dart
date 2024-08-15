@@ -97,15 +97,20 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> toggleLensFacing() async {
-    final cameraSelector = lensFacing == LensFacing.back
-        ? CameraSelector.front
-        : CameraSelector.back;
-    final hasCamera = await _controller.hasCamera(cameraSelector);
+    if (lensFacing == LensFacing.back) {
+      await _setCameraSelector(CameraSelector.front);
+    } else {
+      await _setCameraSelector(CameraSelector.back);
+    }
+  }
+
+  Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
+    final hasCamera = await controller.hasCamera(cameraSelector);
     if (!hasCamera) {
       return;
     }
-    await _controller.setCameraSelector(cameraSelector);
-    _lensFacing = cameraSelector.lensFacing;
+    await controller.setCameraSelector(cameraSelector);
+    _lensFacing = lensFacing;
     notifyListeners();
   }
 

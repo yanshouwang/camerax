@@ -66,6 +66,11 @@ class HomeViewModel extends ViewModel with TypeLogger {
       throw StateError('requestAuthorization failed.');
     }
     await controller.setCameraSelector(CameraSelector.back);
+    final resolutionSelector = ResolutionSelector(
+      aspectRatioStrategy: AspectRatioStrategy.ratio16_9FallbackAutoStrategy,
+      // resolutionStrategy: ResolutionStrategy.highestAvailableStrategy,
+    );
+    await controller.setImageAnalysisResolutionSelector(resolutionSelector);
     _zoomState = await controller.getZoomState();
     _torchState = await controller.getTorchState();
     _flashMode = await controller.getImageCaptureFlashMode();
@@ -90,15 +95,20 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> toggleLensFacing() async {
-    final cameraSelector = lensFacing == LensFacing.back
-        ? CameraSelector.front
-        : CameraSelector.back;
+    if (lensFacing == LensFacing.back) {
+      await _setCameraSelector(CameraSelector.front);
+    } else {
+      await _setCameraSelector(CameraSelector.back);
+    }
+  }
+
+  Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
     final hasCamera = await controller.hasCamera(cameraSelector);
     if (!hasCamera) {
       return;
     }
     await controller.setCameraSelector(cameraSelector);
-    _lensFacing = cameraSelector.lensFacing;
+    _lensFacing = lensFacing;
     notifyListeners();
   }
 
@@ -180,10 +190,14 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
         await _clearImageAnalysisAnalyzer();
         break;
       case CameraMode.rawValue:
+        await controller
+            .setImageAnalysisOutputImageFormat(OutputImageFormat.rgba_8888);
         final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
         await _setImageAnalysisAnalyzer(analyzer);
         break;
       case CameraMode.scanCode:
+        await controller
+            .setImageAnalysisOutputImageFormat(OutputImageFormat.yuv_420_888);
         final analyzer = MLAnalyzer(
           types: [
             // Barcodes
@@ -209,16 +223,20 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
             MLObjectType.pdf417,
             MLObjectType.qr,
           ],
+          targetCoordinateSystem: CoordinateSystem.viewReferenced,
           onAnalyzed: _onMLAnalyzed,
         );
         await _setImageAnalysisAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
+        await controller
+            .setImageAnalysisOutputImageFormat(OutputImageFormat.yuv_420_888);
         final analyzer = MLAnalyzer(
           types: [
             // Faces
             MLObjectType.face,
           ],
+          targetCoordinateSystem: CoordinateSystem.viewReferenced,
           onAnalyzed: _onMLAnalyzed,
         );
         await _setImageAnalysisAnalyzer(analyzer);
@@ -252,7 +270,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.clearImageAnalysisAnalyzer();
   }
 
-  Future<void> _setImageAnalysisAnalyzer(ImageAnalyzer analyzer) async {
+  Future<void> _setImageAnalysisAnalyzer(Analyzer analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
