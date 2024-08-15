@@ -97,9 +97,12 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   Future<void> toggleLensFacing() async {
     if (lensFacing == LensFacing.back) {
       await _setCameraSelector(CameraSelector.front);
+      _lensFacing = LensFacing.front;
     } else {
       await _setCameraSelector(CameraSelector.back);
+      _lensFacing = LensFacing.back;
     }
+    notifyListeners();
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
@@ -108,8 +111,6 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
       return;
     }
     await controller.setCameraSelector(cameraSelector);
-    _lensFacing = lensFacing;
-    notifyListeners();
   }
 
   Future<void> setZoomRatio(double zoomRatio) async {
