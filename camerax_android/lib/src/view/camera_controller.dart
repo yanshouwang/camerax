@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/jni.dart' as jni;
-import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
@@ -225,16 +224,27 @@ final class MyCameraController
   }
 
   @override
-  Future<ResolutionSelector?> getPreviewResolutionSelector() {
-    // TODO: implement getPreviewResolutionSelector
-    throw UnimplementedError();
+  Future<ResolutionSelector?> getPreviewResolutionSelector() async {
+    final resolutionSelector =
+        await jniValue.getPreviewResolutionSelectorOnMainThread();
+    return MyResolutionSelector.jni(resolutionSelector);
   }
 
   @override
   Future<void> setPreviewResolutionSelector(
-      ResolutionSelector? resolutionSelector) {
-    // TODO: implement setPreviewResolutionSelector
-    throw UnimplementedError();
+      ResolutionSelector? resolutionSelector) async {
+    if (resolutionSelector == null) {
+      final resolutionSelector =
+          jni.ResolutionSelector.fromReference(jNullReference);
+      await jniValue
+          .setPreviewResolutionSelectorOnMainThread(resolutionSelector);
+    } else {
+      if (resolutionSelector is! MyResolutionSelector) {
+        throw TypeError();
+      }
+      await jniValue.setPreviewResolutionSelectorOnMainThread(
+          resolutionSelector.jniValue);
+    }
   }
 
   @override
@@ -261,16 +271,27 @@ final class MyCameraController
   }
 
   @override
-  Future<ResolutionSelector?> getImageCaptureResolutionSelector() {
-    // TODO: implement getImageCaptureResolutionSelector
-    throw UnimplementedError();
+  Future<ResolutionSelector?> getImageCaptureResolutionSelector() async {
+    final resolutionSelector =
+        await jniValue.getImageCaptureResolutionSelectorOnMainThread();
+    return MyResolutionSelector.jni(resolutionSelector);
   }
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-      ResolutionSelector? resolutionSelector) {
-    // TODO: implement setImageCaptureResolutionSelector
-    throw UnimplementedError();
+      ResolutionSelector? resolutionSelector) async {
+    if (resolutionSelector == null) {
+      final resolutionSelector =
+          jni.ResolutionSelector.fromReference(jNullReference);
+      await jniValue
+          .setImageCaptureResolutionSelectorOnMainThread(resolutionSelector);
+    } else {
+      if (resolutionSelector is! MyResolutionSelector) {
+        throw TypeError();
+      }
+      await jniValue.setImageCaptureResolutionSelectorOnMainThread(
+          resolutionSelector.jniValue);
+    }
   }
 
   @override
@@ -540,22 +561,6 @@ final class MyCameraController
 
   @override
   Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) async {
-    if (analyzer is MyMLAnalyzer) {
-      // The MLKit only support YUV_420_888
-      await jniValue.setImageAnalysisOutputImageFormatOnMainThread(
-          jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888);
-    } else {
-      await jniValue.setImageAnalysisOutputImageFormatOnMainThread(
-          jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888);
-    }
-    final resolutionSelector = jni.ResolutionSelector_Builder()
-        .setAspectRatioStrategy(
-            jni.AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
-        .setResolutionStrategy(
-            jni.ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY)
-        .build();
-    await jniValue
-        .setImageAnalysisResolutionSelectorOnMainThread(resolutionSelector);
     final executor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
     await jniValue.setImageAnalysisAnalyzerOnMainThread(

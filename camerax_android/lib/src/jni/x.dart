@@ -687,6 +687,21 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     return ui.runOnPlatformThread(() => setImageCaptureMode(captureMode));
   }
 
+  Future<jni.ResolutionSelector>
+      getImageCaptureResolutionSelectorOnMainThread() {
+    return ui.runOnPlatformThread(() => getImageCaptureResolutionSelector());
+  }
+
+  Future<void> setImageCaptureResolutionSelectorOnMainThread(
+      jni.ResolutionSelector resolutionSelector) {
+    final resolutionSelectorReference = resolutionSelector.reference;
+    return ui.runOnPlatformThread(() {
+      final resolutionSelector =
+          jni.ResolutionSelector.fromReference(resolutionSelectorReference);
+      setImageCaptureResolutionSelector(resolutionSelector);
+    });
+  }
+
   Future<void> takePictureToMemoryOnMainThread(
     jni.Executor executor,
     JObject callback,

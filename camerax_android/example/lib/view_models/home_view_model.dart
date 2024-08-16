@@ -66,14 +66,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
       throw StateError('requestAuthorization failed.');
     }
     await controller.setCameraSelector(CameraSelector.back);
-    final resolutionSelector = ResolutionSelector(
-      aspectRatioStrategy: AspectRatioStrategy.ratio16_9FallbackAutoStrategy,
-      // resolutionStrategy: ResolutionStrategy.highestAvailableStrategy,
-    );
-    await controller.setImageAnalysisResolutionSelector(resolutionSelector);
     _zoomState = await controller.getZoomState();
     _torchState = await controller.getTorchState();
     _flashMode = await controller.getImageCaptureFlashMode();
+    notifyListeners();
     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
     logger.info(
@@ -82,7 +78,6 @@ torchState: $torchState
 flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
-    notifyListeners();
     await bind();
   }
 
