@@ -259,15 +259,14 @@ final class MyCameraController
   }
 
   @override
-  Future<CaptureMode> getImageCaptureMode() {
-    // TODO: implement getImageCaptureMode
-    throw UnimplementedError();
+  Future<CaptureMode> getImageCaptureMode() async {
+    final captureMode = await jniValue.getImageCaptureModeOnMainThread();
+    return captureMode.dartCaptureMode;
   }
 
   @override
-  Future<void> setImageCaptureMode(CaptureMode captureMode) {
-    // TODO: implement setImageCaptureMode
-    throw UnimplementedError();
+  Future<void> setImageCaptureMode(CaptureMode captureMode) async {
+    await jniValue.setImageCaptureModeOnMainThread(captureMode.jniValue);
   }
 
   @override

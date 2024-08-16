@@ -110,6 +110,17 @@ extension FlashModeX on FlashMode {
   }
 }
 
+extension CaptureModeX on CaptureMode {
+  int get jniValue {
+    switch (this) {
+      case CaptureMode.maximizeQuality:
+        return jni.MyImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY;
+      case CaptureMode.minimizeLatency:
+        return jni.MyImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY;
+    }
+  }
+}
+
 extension AspectRatioX on AspectRatio {
   int get jniValue {
     switch (this) {
@@ -358,6 +369,17 @@ extension intX on int {
         return FlashMode.on;
       case jni.MyImageCapture.FLASH_MODE_OFF:
         return FlashMode.off;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
+  CaptureMode get dartCaptureMode {
+    switch (this) {
+      case jni.MyImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY:
+        return CaptureMode.maximizeQuality;
+      case jni.MyImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY:
+        return CaptureMode.minimizeLatency;
       default:
         throw ArgumentError.value(this);
     }
@@ -681,6 +703,10 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
 
   Future<void> setImageCaptureFlashModeOnMainThread(int flashMode) {
     return ui.runOnPlatformThread(() => setImageCaptureFlashMode(flashMode));
+  }
+
+  Future<int> getImageCaptureModeOnMainThread() {
+    return ui.runOnPlatformThread(() => getImageCaptureMode());
   }
 
   Future<void> setImageCaptureModeOnMainThread(int captureMode) {
