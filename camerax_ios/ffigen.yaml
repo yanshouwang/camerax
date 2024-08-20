@@ -3,7 +3,7 @@ name: CameraXiOSLibrary
 description: iOS Library for CameraX.
 language: objc
 output:
-  bindings: 'lib/src/ffi.g.dart'
+  bindings: 'lib/src/ffi/ffi.g.dart'
   objc-bindings: 'ios/Classes/ffi.g.m'
 exclude-all-by-default: true
 compiler-opts:
@@ -23,6 +23,10 @@ objc-interfaces:
     - ZoomState
     - TorchState
     - ImageProxy
+    - Recording
+    - VideoRecordEvent
+    - VideoRecordStartEvent
+    - VideoRecordFinalizeEvent
   module:
     PreviewView: camerax_ios
     PreviewViewFactory: camerax_ios
@@ -31,6 +35,10 @@ objc-interfaces:
     ZoomState: camerax_ios
     TorchState: camerax_ios
     ImageProxy: camerax_ios
+    Recording: camerax_ios
+    VideoRecordEvent: camerax_ios
+    VideoRecordStartEvent: camerax_ios
+    VideoRecordFinalizeEvent: camerax_ios
 enums:
   include:
     - AuthorizationType

@@ -15,7 +15,7 @@ import AVFoundation
 }
 
 extension LensFacing {
-    var avfValue: AVCaptureDevice.Position {
+    var swiftValue: AVCaptureDevice.Position {
         switch self {
         case .front:
             return .front

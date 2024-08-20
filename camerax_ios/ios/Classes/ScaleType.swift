@@ -15,7 +15,7 @@ import AVFoundation
 }
 
 extension ScaleType {
-    var avfValue: AVLayerVideoGravity {
+    var swiftValue: AVLayerVideoGravity {
         switch self {
         case .fill:
             return .resize
@@ -28,7 +28,7 @@ extension ScaleType {
 }
 
 extension AVLayerVideoGravity {
-    var xValue: ScaleType {
+    var ffiValue: ScaleType {
         switch self {
         case .resizeAspectFill:
             return .fillCenter

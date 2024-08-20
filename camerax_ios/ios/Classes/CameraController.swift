@@ -26,11 +26,13 @@ import Photos
     private var subjectAreaDidChangeObserver: Any?
     private let capturePhotoOutput: AVCapturePhotoOutput
     private let capturePhotoSettings: AVCapturePhotoSettings
-    private var capturePhotoDelegate: AVCapturePhotoCaptureDelegate?
+    private var capturePhotoCaptureDelegate: AVCapturePhotoCaptureDelegate?
     @objc public var imageCaptureFlashMode: FlashMode {
-        get { capturePhotoSettings.flashMode.xValue }
-        set { capturePhotoSettings.flashMode = newValue.avfValue }
+        get { capturePhotoSettings.flashMode.ffiValue }
+        set { capturePhotoSettings.flashMode = newValue.swiftValue }
     }
+    private let captureMovieFileOutput: AVCaptureMovieFileOutput
+    private var captureFileOutputRecordingDelegate: AVCaptureFileOutputRecordingDelegate?
     
     @objc public override init() {
         session = AVCaptureSession()
@@ -38,11 +40,13 @@ import Photos
         pinchToZoomEnabled = true
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoSettings = AVCapturePhotoSettings()
+        captureMovieFileOutput = AVCaptureMovieFileOutput()
         super.init()
         session.sessionPreset = .photo
         try? addVideoDeviceInput(cameraSelector: .back)
         try? addAudioDeviceInput()
         try? addCapturePhotoOutput()
+        try? addCaptureMovieFileOutput()
     }
     
     @objc public func checkAuthorization(type: AuthorizationType) -> Bool {
@@ -85,7 +89,7 @@ import Photos
     
     @objc public func hasCamera(cameraSelector: CameraSelector) -> Bool {
         if let videoDeviceType = getVideoDeviceType(cameraSelector: cameraSelector),
-           let videoDevice = AVCaptureDevice.default(videoDeviceType, for: .video, position: cameraSelector.lensFacing.avfValue) {
+           let _ = AVCaptureDevice.default(videoDeviceType, for: .video, position: cameraSelector.lensFacing.swiftValue) {
             return true
         } else {
             return false
@@ -189,30 +193,8 @@ import Photos
         videoDevice.torchMode = torchMode
     }
     
-    @objc public func setImageAnalyzer(_ analyzer: @escaping (ImageProxy) -> Void) {
-        
-    }
-    
-    @objc public func clearImageAnalyzer() {
-        
-    }
-    
-    @objc public func takePictureToMemory(completionHandler handler: @escaping (Data?, (any Error)?) -> Void) {
-        let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-        let delegate = CameraCapturePhotoCaptureDelegate() { photo, error in
-            if let error {
-                handler(nil, error)
-            } else if let data = photo.fileDataRepresentation() {
-                handler(data, nil)
-            } else {
-                handler(nil, CameraError.saveDataNil)
-            }
-        }
-        capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
-    }
-    
-    @objc public func takePictureToAlbum(name: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
-        if capturePhotoDelegate == nil {
+    @objc public func takePicture(fileName: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
+        if capturePhotoCaptureDelegate == nil {
             let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
             //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
             //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
@@ -225,19 +207,42 @@ import Photos
             //        if #available(iOS 13.0, *) {
             //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
             //        }
-            let delegate = CameraCapturePhotoCaptureDelegate() { [self] photo, error in
-                capturePhotoDelegate = nil
+            let delegate = CapturePhotoCaptureDelegate() { [self] photo, error in
+                capturePhotoCaptureDelegate = nil
                 if let error {
                     handler(nil, error)
                 } else {
-                    savePhoto(photo, name: name, completionHandler: handler)
+                    savePhoto(photo, name: fileName, completionHandler: handler)
                 }
             }
-            capturePhotoDelegate = delegate
+            capturePhotoCaptureDelegate = delegate
             capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
         } else {
             handler(nil, CameraError.capturePhotoDelegateNotNil)
         }
+    }
+    
+    @objc public func isRecording() -> Bool {
+        return captureMovieFileOutput.isRecording
+    }
+    
+    @objc public func startRecording(fileName: String?, enableAudio: Bool, listener: @escaping (VideoRecordEvent) -> Void) -> Recording {
+        let moviesUrl = try! FileManager.default.url(for: .moviesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let name = fileName ?? "\(Date().timeIntervalSince1970)"
+        let url = moviesUrl.appendingPathComponent("\(name).mov")
+//        let url = moviesUrl.appendingPathComponent(name, conformingTo: .jpeg)
+        let delegate = CaptureFileOutputRecordingDelegate(listener: listener)
+        captureFileOutputRecordingDelegate = delegate
+        captureMovieFileOutput.startRecording(to: url, recordingDelegate: delegate)
+        return Recording(output: captureMovieFileOutput)
+    }
+    
+    @objc public func setImageAnalyzer(_ analyzer: @escaping (ImageProxy) -> Void) {
+        
+    }
+    
+    @objc public func clearImageAnalyzer() {
+        
     }
     
     private func removeVideoDeviceInput() {
@@ -250,7 +255,7 @@ import Photos
     
     private func addVideoDeviceInput(cameraSelector: CameraSelector) throws {
         guard let videoDeviceType = getVideoDeviceType(cameraSelector: cameraSelector),
-              let videoDevice = AVCaptureDevice.default(videoDeviceType, for: .video, position: cameraSelector.lensFacing.avfValue),
+              let videoDevice = AVCaptureDevice.default(videoDeviceType, for: .video, position: cameraSelector.lensFacing.swiftValue),
               let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
               session.canAddInput(videoDeviceInput) else {
             throw CameraError.deviceNil
@@ -324,6 +329,13 @@ import Photos
             throw CameraError.cannotAddOutput
         }
         session.addOutput(capturePhotoOutput)
+    }
+    
+    private func addCaptureMovieFileOutput() throws {
+        guard session.canAddOutput(captureMovieFileOutput) else {
+            throw CameraError.cannotAddOutput
+        }
+        session.addOutput(captureMovieFileOutput)
     }
     
     private func onZoomStateChanged() {

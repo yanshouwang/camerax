@@ -4,11 +4,13 @@ set -e
 THIS_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 FLUTTER_DIR="$( which flutter )/.."
 
-swiftc -c "$THIS_DIR/../ios/Classes/AuthorizationType.swift" \
-    "$THIS_DIR/../ios/Classes/CameraCapturePhotoCaptureDelegate.swift" \
+swiftc -c \
+    "$THIS_DIR/../ios/Classes/AuthorizationType.swift" \
     "$THIS_DIR/../ios/Classes/CameraController.swift" \
     "$THIS_DIR/../ios/Classes/CameraError.swift" \
     "$THIS_DIR/../ios/Classes/CameraSelector.swift" \
+    "$THIS_DIR/../ios/Classes/CaptureFileOutputRecordingDelegate.swift" \
+    "$THIS_DIR/../ios/Classes/CapturePhotoCaptureDelegate.swift" \
     "$THIS_DIR/../ios/Classes/FlashMode.swift" \
     "$THIS_DIR/../ios/Classes/ImageProxy.swift" \
     "$THIS_DIR/../ios/Classes/LensFacing.swift" \
@@ -17,6 +19,8 @@ swiftc -c "$THIS_DIR/../ios/Classes/AuthorizationType.swift" \
     "$THIS_DIR/../ios/Classes/ScaleType.swift" \
     "$THIS_DIR/../ios/Classes/TorchState.swift" \
     "$THIS_DIR/../ios/Classes/ZoomState.swift" \
+    "$THIS_DIR/../ios/Classes/Recording.swift" \
+    "$THIS_DIR/../ios/Classes/VideoRecordEvent.swift" \
     -module-name camerax_ios \
     -target x86_64-apple-ios12.0-simulator \
     -sdk "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk" \

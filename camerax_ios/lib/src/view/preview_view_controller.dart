@@ -1,10 +1,9 @@
+import 'package:camerax_ios/src/ffi.dart' as ffi;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
-import '../ffi.dart';
-import '../ffi.g.dart' as ffi;
 
 class PreviewViewControllerImpl implements PreviewViewController {
   int? _id;

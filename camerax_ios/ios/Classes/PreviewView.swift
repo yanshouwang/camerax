@@ -23,8 +23,8 @@ import Flutter
     }
     
     @objc public var scaleType: ScaleType {
-        get { previewLayer.videoGravity.xValue }
-        set { previewLayer.videoGravity = newValue.avfValue }
+        get { previewLayer.videoGravity.ffiValue }
+        set { previewLayer.videoGravity = newValue.swiftValue }
     }
     
     public override func didMoveToSuperview() {

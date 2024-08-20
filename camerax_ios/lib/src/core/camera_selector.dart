@@ -1,5 +1,4 @@
-import 'package:camerax_ios/src/ffi.dart';
-import 'package:camerax_ios/src/ffi.g.dart' as ffi;
+import 'package:camerax_ios/src/ffi.dart' as ffi;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class MyCameraSelector implements CameraSelector {
@@ -13,8 +12,8 @@ final class MyCameraSelector implements CameraSelector {
     if (lensFacing == null) {
       throw UnimplementedError();
     }
-    final cameraSelector =
+    final ffiCameraSelector =
         ffi.CameraSelector.alloc().initWithLensFacing_(lensFacing.ffiValue);
-    return MyCameraSelector.ffi(cameraSelector);
+    return MyCameraSelector.ffi(ffiCameraSelector);
   }
 }

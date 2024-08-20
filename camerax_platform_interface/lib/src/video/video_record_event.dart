@@ -9,11 +9,11 @@ final class VideoRecordPauseEvent extends VideoRecordEvent {}
 final class VideoRecordResumeEvent extends VideoRecordEvent {}
 
 final class VideoRecordFinalizeEvent extends VideoRecordEvent {
-  final VideoRecordError? error;
   final Uri uri;
+  final VideoRecordError? error;
 
   VideoRecordFinalizeEvent({
-    required this.error,
     required this.uri,
+    required this.error,
   });
 }

@@ -587,32 +587,11 @@ extension intX on int {
   }
 
   VideoRecordError? get dartVideoRecordError {
-    switch (this) {
-      case jni.VideoRecordEvent_Finalize.ERROR_NONE:
-        return null;
-      case jni.VideoRecordEvent_Finalize.ERROR_UNKNOWN:
-        return VideoRecordError.unknown;
-      case jni.VideoRecordEvent_Finalize.ERROR_FILE_SIZE_LIMIT_REACHED:
-        return VideoRecordError.fileSizeLimitReached;
-      case jni.VideoRecordEvent_Finalize.ERROR_INSUFFICIENT_STORAGE:
-        return VideoRecordError.insufficientStorage;
-      case jni.VideoRecordEvent_Finalize.ERROR_SOURCE_INACTIVE:
-        return VideoRecordError.sourceInactive;
-      case jni.VideoRecordEvent_Finalize.ERROR_INVALID_OUTPUT_OPTIONS:
-        return VideoRecordError.invalidOutputOptions;
-      case jni.VideoRecordEvent_Finalize.ERROR_ENCODING_FAILED:
-        return VideoRecordError.encodingFailed;
-      case jni.VideoRecordEvent_Finalize.ERROR_RECORDER_ERROR:
-        return VideoRecordError.recorderError;
-      case jni.VideoRecordEvent_Finalize.ERROR_NO_VALID_DATA:
-        return VideoRecordError.noValidData;
-      case jni.VideoRecordEvent_Finalize.ERROR_DURATION_LIMIT_REACHED:
-        return VideoRecordError.durationLimitReached;
-      case jni.VideoRecordEvent_Finalize.ERROR_RECORDING_GARBAGE_COLLECTED:
-        return VideoRecordError.recordingGarbageCollected;
-      default:
-        throw ArgumentError.value(this);
+    if (this == jni.VideoRecordEvent_Finalize.ERROR_NONE) {
+      return null;
     }
+    final message = '$this'.split('.').last;
+    return VideoRecordError(message);
   }
 
   ImageFormat get dartImageFormat {
@@ -1206,8 +1185,8 @@ extension JNIVideoRecordEventX on jni.VideoRecordEvent {
     if (isInstanceOfFinalize) {
       final event = castTo(jni.VideoRecordEvent_Finalize.type);
       return VideoRecordFinalizeEvent(
-        error: event.getError().dartVideoRecordError,
         uri: event.getOutputResults().getOutputUri().dartValue,
+        error: event.getError().dartVideoRecordError,
       );
     }
     throw ArgumentError.value(this);

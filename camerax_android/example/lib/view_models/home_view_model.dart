@@ -133,7 +133,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     if (!authorized) {
       throw StateError('requestAuthorization failed.');
     }
-    _savedUri = await controller.takePictureToAlbum();
+    _savedUri = await controller.takePicture();
     notifyListeners();
   }
 

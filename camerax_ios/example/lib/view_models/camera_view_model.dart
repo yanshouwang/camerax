@@ -133,7 +133,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> takePicture() async {
-    _savedUri = await _controller.takePictureToAlbum();
+    _savedUri = await _controller.takePicture();
     await _updateThumbnail();
     notifyListeners();
   }

@@ -2,13 +2,12 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'package:camerax_ios/src/core.dart';
+import 'package:camerax_ios/src/ffi.dart' as ffi;
+import 'package:camerax_ios/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:ffi/ffi.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:objective_c/objective_c.dart';
-
-import '../ffi.dart';
-import '../ffi.g.dart' as ffi;
 
 final class MyCameraController
     with TypeLogger, LoggerController
@@ -46,12 +45,12 @@ final class MyCameraController
     required AuthorizationType type,
   }) async {
     final completer = Completer<bool>();
-    final handler = ffi.ObjCBlock_ffiVoid_bool.listener((granted) {
+    final ffiHandler = ffi.ObjCBlock_ffiVoid_bool.listener((granted) {
       completer.complete(granted);
     });
     ffiValue.requestAuthorizationWithType_completionHandler_(
       type.ffiValue,
-      handler,
+      ffiHandler,
     );
     final granted = await completer.future;
     return granted;
@@ -89,17 +88,17 @@ final class MyCameraController
     if (cameraSelector is! MyCameraSelector) {
       throw TypeError();
     }
-    final error = using((arena) {
-      final errorPtr = arena<Pointer<ObjCObject>>();
+    final ffiError = using((arena) {
+      final ffiErrorPtr = arena<Pointer<ObjCObject>>();
       return ffiValue.setCameraSelector_error_(
-              cameraSelector.ffiValue, errorPtr)
+              cameraSelector.ffiValue, ffiErrorPtr)
           ? null
-          : NSError.castFromPointer(errorPtr.value);
+          : NSError.castFromPointer(ffiErrorPtr.value);
     });
-    if (error == null) {
+    if (ffiError == null) {
       return;
     }
-    throw error;
+    throw ffiError;
   }
 
   @override
@@ -126,56 +125,58 @@ final class MyCameraController
 
   @override
   Future<ZoomState?> getZoomState() async {
-    final zoomState = ffiValue.getZoomState()?.dartValue;
+    final ffiZoomState = ffiValue.getZoomState();
+    final zoomState = ffiZoomState?.dartValue;
     return zoomState;
   }
 
   @override
   Future<void> setZoomRatio(double zoomRatio) async {
-    final error = using((arena) {
-      final errorPtr = arena<Pointer<ObjCObject>>();
-      return ffiValue.setZoomRatio_error_(zoomRatio, errorPtr)
+    final ffiError = using((arena) {
+      final ffiErrorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.setZoomRatio_error_(zoomRatio, ffiErrorPtr)
           ? null
-          : NSError.castFromPointer(errorPtr.value);
+          : NSError.castFromPointer(ffiErrorPtr.value);
     });
-    if (error == null) {
+    if (ffiError == null) {
       return;
     }
-    throw error;
+    throw ffiError;
   }
 
   @override
   Future<void> setLinearZoom(double linearZoom) async {
-    final error = using((arena) {
-      final errorPtr = arena<Pointer<ObjCObject>>();
-      return ffiValue.setLinearZoom_error_(linearZoom, errorPtr)
+    final ffiError = using((arena) {
+      final ffiErrorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.setLinearZoom_error_(linearZoom, ffiErrorPtr)
           ? null
-          : NSError.castFromPointer(errorPtr.value);
+          : NSError.castFromPointer(ffiErrorPtr.value);
     });
-    if (error == null) {
+    if (ffiError == null) {
       return;
     }
-    throw error;
+    throw ffiError;
   }
 
   @override
   Future<bool?> getTorchState() async {
-    final torchState = ffiValue.getTorchState();
-    return torchState?.value;
+    final ffiTorchState = ffiValue.getTorchState();
+    final torchState = ffiTorchState?.value;
+    return torchState;
   }
 
   @override
-  Future<void> enableTorch(bool torchEnabled) async {
-    final error = using((arena) {
-      final errorPtr = arena<Pointer<ObjCObject>>();
-      return ffiValue.enableTorch_error_(torchEnabled, errorPtr)
+  Future<void> enableTorch(bool enabled) async {
+    final ffiError = using((arena) {
+      final ffiErrorPtr = arena<Pointer<ObjCObject>>();
+      return ffiValue.enableTorch_error_(enabled, ffiErrorPtr)
           ? null
-          : NSError.castFromPointer(errorPtr.value);
+          : NSError.castFromPointer(ffiErrorPtr.value);
     });
-    if (error == null) {
+    if (ffiError == null) {
       return;
     }
-    throw error;
+    throw ffiError;
   }
 
   @override
@@ -193,17 +194,9 @@ final class MyCameraController
 
   @override
   Future<FlashMode> getImageCaptureFlashMode() async {
-    final flashMode = ffiValue.imageCaptureFlashMode;
-    switch (flashMode) {
-      case ffi.FlashMode.FlashModeAuto:
-        return FlashMode.auto;
-      case ffi.FlashMode.FlashModeOn:
-        return FlashMode.on;
-      case ffi.FlashMode.FlashModeOff:
-        return FlashMode.off;
-      default:
-        throw ArgumentError.value(flashMode);
-    }
+    final ffiFlashMode = ffiValue.imageCaptureFlashMode;
+    final flashMode = ffiFlashMode.dartValue;
+    return flashMode;
   }
 
   @override
@@ -237,39 +230,22 @@ final class MyCameraController
   }
 
   @override
-  Future<ImageProxy> takePictureToMemory() async {
-    // TODO: implement takePictureToMemory
-    throw UnimplementedError();
-    // final completer = Completer<ImageProxy>();
-    // final handler =
-    //     ffi.ObjCBlock_ffiVoid_NSData_NSError.listener((data, error) {
-    //   if (error == null) {
-    //     final memory = data!.toList();
-    //     completer.complete(memory);
-    //   } else {
-    //     completer.completeError(error);
-    //   }
-    // });
-    // ffiValue.takePictureToMemoryWithCompletionHandler_(handler);
-    // final imageProxy = await completer.future;
-    // return imageProxy;
-  }
-
-  @override
-  Future<Uri> takePictureToAlbum({String? name}) async {
+  Future<Uri> takePicture({
+    String? fileName,
+  }) async {
     final completer = Completer<Uri>();
-    final handler =
-        ffi.ObjCBlock_ffiVoid_NSString_NSError.listener((savedPath, error) {
-      if (error == null) {
-        final savedUri = Uri.file('$savedPath');
+    final ffiHandler = ffi.ObjCBlock_ffiVoid_NSString_NSError.listener(
+        (ffiSavedUri, ffiError) {
+      if (ffiError == null) {
+        final savedUri = Uri.file('$ffiSavedUri');
         completer.complete(savedUri);
       } else {
-        completer.completeError(error);
+        completer.completeError(ffiError);
       }
     });
-    ffiValue.takePictureToAlbumWithName_completionHandler_(
-      name?.toNSString(),
-      handler,
+    ffiValue.takePictureWithFileName_completionHandler_(
+      fileName?.toNSString(),
+      ffiHandler,
     );
     final savedUri = await completer.future;
     return savedUri;
@@ -312,19 +288,30 @@ final class MyCameraController
   }
 
   @override
-  Future<bool> isRecording() {
-    // TODO: implement isRecording
-    throw UnimplementedError();
+  Future<bool> isRecording() async {
+    final isRecording = ffiValue.isRecording();
+    return isRecording;
   }
 
   @override
   Future<Recording> startRecording({
-    String? name,
+    String? fileName,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
-  }) {
-    // TODO: implement startRecording
-    throw UnimplementedError();
+  }) async {
+    final ffiListener =
+        ffi.ObjCBlock_ffiVoid_VideoRecordEvent.listener((ffiEvent) {
+      final event = ffiEvent.dartValue;
+      listener(event);
+    });
+    final ffiRecording =
+        ffiValue.startRecordingWithFileName_enableAudio_listener_(
+      fileName?.toNSString(),
+      enableAudio,
+      ffiListener,
+    );
+    final recording = MyRecording.ffi(ffiRecording);
+    return recording;
   }
 
   @override

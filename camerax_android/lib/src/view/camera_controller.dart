@@ -301,44 +301,8 @@ final class MyCameraController
   }
 
   @override
-  Future<ImageProxy> takePictureToMemory() async {
-    final completer = Completer<ImageProxy>();
-    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    final jniCallback = jni.MyImageCapture_MyOnImageCapturedCallbackImpl(
-      jni.MyImageCapture_MyOnImageCapturedCallback.implement(
-        jni.$MyImageCapture_MyOnImageCapturedCallbackImpl(
-          onCaptureStarted: () {
-            logger.info('onCaptureStarted.');
-          },
-          onCaptureProcessProgressed: (progress) {
-            logger.info('onCaptureProcessProgressed $progress.');
-          },
-          onCaptureSuccess: (jniImageProxy) {
-            logger.info('onCaptureSuccess.');
-            final imageProxy = MyImageProxy.jni(jniImageProxy);
-            completer.complete(imageProxy);
-          },
-          onError: (jniException) {
-            logger.info('onError $jniException.');
-            completer.completeError(jniException);
-          },
-          onPostviewBitmapAvailable: (jniBitmap) {
-            logger.info('onPostviewBitmapAvailable.');
-          },
-        ),
-      ),
-    );
-    await jniValue.takePictureToMemoryOnMainThread(
-      jniExecutor,
-      jniCallback,
-    );
-    final imageProxy = await completer.future;
-    return imageProxy;
-  }
-
-  @override
-  Future<Uri> takePictureToAlbum({
-    String? name,
+  Future<Uri> takePicture({
+    String? fileName,
   }) async {
     final completer = Completer<Uri>();
     final jniContentResolver = jni.MyJNI.context.getContentResolver();
@@ -346,7 +310,7 @@ final class MyCameraController
     final jniRelativePath = JString.fromString(
         '${jni.Environment.DIRECTORY_DCIM}/${jni.MyJNI.context.getPackageName()}');
     final jniDisplayName = JString.fromString(
-        name ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
+        fileName ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
     final jniMIMEType = JString.fromString('image/jpeg');
     final jniContentValues = jni.ContentValues()
       ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, jniRelativePath)
@@ -442,7 +406,7 @@ final class MyCameraController
 
   @override
   Future<Recording> startRecording({
-    String? name,
+    String? fileName,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
   }) async {
@@ -453,7 +417,7 @@ final class MyCameraController
     final jniRelativePath = JString.fromString(
         '${jni.Environment.DIRECTORY_DCIM}/${jni.MyJNI.context.getPackageName()}');
     final jniDisplayName = JString.fromString(
-        name ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
+        fileName ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
     final jniMIMEType = JString.fromString('video/mp4');
     final jniContentValues = jni.ContentValues()
       ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, jniRelativePath)

@@ -15,7 +15,7 @@ import AVFoundation
 }
 
 extension FlashMode {
-    var avfValue: AVCaptureDevice.FlashMode {
+    var swiftValue: AVCaptureDevice.FlashMode {
         switch self {
         case .auto:
             return .auto
@@ -28,7 +28,7 @@ extension FlashMode {
 }
 
 extension AVCaptureDevice.FlashMode {
-    var xValue: FlashMode {
+    var ffiValue: FlashMode {
         switch self {
         case .auto:
             return .auto

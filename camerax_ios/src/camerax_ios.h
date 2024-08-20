@@ -310,9 +310,10 @@ enum FlashMode : NSInteger;
 @class CameraSelector;
 @class ZoomState;
 @class TorchState;
-@class ImageProxy;
-@class NSData;
 @class NSString;
+@class VideoRecordEvent;
+@class Recording;
+@class ImageProxy;
 
 SWIFT_CLASS("_TtC11camerax_ios16CameraController")
 @interface CameraController : NSObject
@@ -337,10 +338,11 @@ SWIFT_CLASS("_TtC11camerax_ios16CameraController")
 - (void)addTorchStateObserverWithCallback:(void (^ _Nonnull)(TorchState * _Nullable))callback;
 - (BOOL)removeTorchStateObserverAndReturnError:(NSError * _Nullable * _Nullable)error;
 - (BOOL)enableTorch:(BOOL)torchEnabled error:(NSError * _Nullable * _Nullable)error;
+- (void)takePictureWithFileName:(NSString * _Nullable)fileName completionHandler:(void (^ _Nonnull)(NSString * _Nullable, NSError * _Nullable))handler;
+- (BOOL)isRecording SWIFT_WARN_UNUSED_RESULT;
+- (Recording * _Nonnull)startRecordingWithFileName:(NSString * _Nullable)fileName enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(VideoRecordEvent * _Nonnull))listener SWIFT_WARN_UNUSED_RESULT;
 - (void)setImageAnalyzer:(void (^ _Nonnull)(ImageProxy * _Nonnull))analyzer;
 - (void)clearImageAnalyzer;
-- (void)takePictureToMemoryWithCompletionHandler:(void (^ _Nonnull)(NSData * _Nullable, NSError * _Nullable))handler;
-- (void)takePictureToAlbumWithName:(NSString * _Nullable)name completionHandler:(void (^ _Nonnull)(NSString * _Nullable, NSError * _Nullable))handler;
 @end
 
 enum LensFacing : NSInteger;
@@ -405,6 +407,14 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PreviewViewF
 - (PreviewView * _Nullable)retrieveView:(int64_t)viewId SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
+SWIFT_CLASS("_TtC11camerax_ios9Recording")
+@interface Recording : NSObject
+- (void)stop;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 typedef SWIFT_ENUM(NSInteger, ScaleType, closed) {
   ScaleTypeFill = 0,
   ScaleTypeFillCenter = 1,
@@ -417,6 +427,27 @@ SWIFT_CLASS("_TtC11camerax_ios10TorchState")
 @property (nonatomic, readonly) BOOL value;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC11camerax_ios16VideoRecordEvent")
+@interface VideoRecordEvent : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC11camerax_ios24VideoRecordFinalizeEvent")
+@interface VideoRecordFinalizeEvent : VideoRecordEvent
+@property (nonatomic, readonly, copy) NSString * _Nonnull uri;
+@property (nonatomic, readonly) NSError * _Nullable error;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC11camerax_ios21VideoRecordStartEvent")
+@interface VideoRecordStartEvent : VideoRecordEvent
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 

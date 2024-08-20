@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-class CameraCapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
+class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     let handler: (AVCapturePhoto, (any Error)?) -> Void
     
     init(completionHandler handler: @escaping (AVCapturePhoto, (any Error)?) -> Void) {
