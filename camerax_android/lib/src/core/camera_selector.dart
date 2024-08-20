@@ -9,11 +9,11 @@ final class MyCameraSelector implements CameraSelector {
   factory MyCameraSelector({
     LensFacing? lensFacing,
   }) {
-    final builder = jni.CameraSelector_Builder();
+    final jniBuilder = jni.CameraSelector_Builder();
     if (lensFacing != null) {
-      builder.requireLensFacing(lensFacing.jniValue);
+      jniBuilder.requireLensFacing(lensFacing.jniValue);
     }
-    final cameraSelector = builder.build();
-    return MyCameraSelector.jni(cameraSelector);
+    final jniCameraSelector = jniBuilder.build();
+    return MyCameraSelector.jni(jniCameraSelector);
   }
 }

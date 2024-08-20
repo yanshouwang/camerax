@@ -12,21 +12,21 @@ final class MyResolutionSelector implements ResolutionSelector {
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
   }) {
-    final builder = jni.ResolutionSelector_Builder();
+    final jniBuilder = jni.ResolutionSelector_Builder();
     if (aspectRatioStrategy != null) {
-      builder.setAspectRatioStrategy(aspectRatioStrategy.jniValue);
+      jniBuilder.setAspectRatioStrategy(aspectRatioStrategy.jniValue);
     }
     if (allowedResolutionMode != null) {
-      builder.setAllowedResolutionMode(allowedResolutionMode.jniValue);
+      jniBuilder.setAllowedResolutionMode(allowedResolutionMode.jniValue);
     }
     if (resolutionFilter != null) {
-      builder.setResolutionFilter(resolutionFilter.jniValue);
+      jniBuilder.setResolutionFilter(resolutionFilter.jniValue);
     }
     if (resolutionStrategy != null) {
-      builder.setResolutionStrategy(resolutionStrategy.jniValue);
+      jniBuilder.setResolutionStrategy(resolutionStrategy.jniValue);
     }
-    final resolutionSelector = builder.build();
-    return MyResolutionSelector.jni(resolutionSelector);
+    final jniResolutionSelector = jniBuilder.build();
+    return MyResolutionSelector.jni(jniResolutionSelector);
   }
 
   @override

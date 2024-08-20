@@ -18,6 +18,8 @@ classes:
   - android.content.ContentResolver
   - android.content.ContentValues
   - android.database.Cursor
+  - android.graphics.ImageFormat
+  - android.graphics.PixelFormat
   - android.graphics.Point
   - android.graphics.Rect
   - android.media.Image
@@ -29,8 +31,10 @@ classes:
   # - androidx.camera.core.ImageAnalysis
   # - androidx.camera.core.ImageCapture
   - androidx.camera.core.AspectRatio
+  - androidx.camera.core.DynamicRange
   - androidx.camera.core.ImageInfo
   - androidx.camera.core.ImageProxy
+  - androidx.camera.core.MirrorMode
   - androidx.camera.core.TorchState
   - androidx.camera.core.ZoomState
   - androidx.camera.core.resolutionselector.AspectRatioStrategy
@@ -38,8 +42,11 @@ classes:
   - androidx.camera.core.resolutionselector.ResolutionSelector
   - androidx.camera.core.resolutionselector.ResolutionStrategy
   - androidx.camera.mlkit.vision.MlKitAnalyzer
+  - androidx.camera.video.FallbackStrategy
   # - androidx.camera.video.MediaStoreOutputOptions
   - androidx.camera.video.OutputResults
+  - androidx.camera.video.Quality
+  - androidx.camera.video.QualitySelector
   - androidx.camera.video.Recording
   - androidx.camera.video.VideoRecordEvent
   - androidx.camera.view.CameraController

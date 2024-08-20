@@ -1,12 +1,13 @@
-import 'dart:typed_data';
-
-import 'image_info.dart';
+import 'image_format.dart';
+import 'plane_proxy.dart';
 
 abstract interface class ImageProxy {
-  Uint8List get rawPixels;
+  ImageFormat get format;
   int get width;
   int get height;
-  ImageInfo get imageInfo;
+  int get rotationDegrees;
+  List<PlaneProxy> get planeProxies;
+  int get timestamp;
 
-  Future<void> close();
+  void close();
 }

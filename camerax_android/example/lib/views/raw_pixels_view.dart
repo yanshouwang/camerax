@@ -2,11 +2,11 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 
-class RGBA8888View extends StatelessWidget {
+class RawPixelsView extends StatelessWidget {
   final ui.Image image;
   final int rotationDegrees;
 
-  const RGBA8888View({
+  const RawPixelsView({
     super.key,
     required this.image,
     required this.rotationDegrees,

@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 import 'ml_items_view.dart';
-import 'rgba_8888_view.dart';
+import 'raw_pixels_view.dart';
 import 'thumbnail.dart';
 
 class CameraView extends StatefulWidget {
@@ -41,7 +41,7 @@ class _CameraViewState extends State<CameraView> with RouteAware {
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
-    final imageWrapper = viewModel.imageWrapper;
+    final imageModel = viewModel.imageModel;
     final items = viewModel.items;
     final recording = viewModel.recording;
     const pageDuration = Duration(milliseconds: 300);
@@ -99,15 +99,15 @@ class _CameraViewState extends State<CameraView> with RouteAware {
                     controller: viewModel.controller,
                     scaleType: ScaleType.fillCenter,
                   ),
-                  if (imageWrapper != null)
+                  if (imageModel != null)
                     Container(
                       alignment: Alignment.topRight,
                       margin: const EdgeInsets.all(20.0),
                       child: SizedBox(
                         width: 100.0,
-                        child: RGBA8888View(
-                          image: imageWrapper.image,
-                          rotationDegrees: imageWrapper.rotationDegrees,
+                        child: RawPixelsView(
+                          image: imageModel.image,
+                          rotationDegrees: imageModel.rotationDegrees,
                         ),
                       ),
                     ),

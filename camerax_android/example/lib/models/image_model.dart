@@ -1,10 +1,10 @@
 import 'dart:ui' as ui;
 
-class ImageWrapper {
+class ImageModel {
   final ui.Image image;
   final int rotationDegrees;
 
-  ImageWrapper({
+  ImageModel({
     required this.image,
     required this.rotationDegrees,
   });

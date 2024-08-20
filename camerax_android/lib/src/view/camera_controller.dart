@@ -11,10 +11,12 @@ final class MyCameraController
     with TypeLogger, LoggerController
     implements CameraController {
   final jni.LifecycleCameraController jniValue;
+
   late final StreamController<ZoomState?> _zoomStateChagnedController;
   late final StreamController<bool?> _torchStateChagnedController;
-  late jni.Observer<jni.ZoomState> _zoomStateObserver;
-  late jni.Observer<JInteger> _torchStateObserver;
+
+  late jni.Observer<jni.ZoomState> _jniZoomStateObserver;
+  late jni.Observer<JInteger> _jniTorchStateObserver;
 
   @override
   Stream<ZoomState?> get zoomStateChanged => _zoomStateChagnedController.stream;
@@ -37,12 +39,12 @@ final class MyCameraController
   Future<bool> checkAuthorization({
     required AuthorizationType type,
   }) async {
-    final permissions = type.jniValue;
-    if (permissions.length == 0) {
+    final jniPermissions = type.jniValue;
+    if (jniPermissions.length == 0) {
       return true;
     }
     final granted =
-        jni.MyPermissionsManager.INSTANCE.checkPermissions(permissions);
+        jni.MyPermissionsManager.INSTANCE.checkPermissions(jniPermissions);
     return granted;
   }
 
@@ -50,8 +52,8 @@ final class MyCameraController
   Future<bool> requestAuthorization({
     required AuthorizationType type,
   }) async {
-    final permissions = type.jniValue;
-    if (permissions.length == 0) {
+    final jniPermissions = type.jniValue;
+    if (jniPermissions.length == 0) {
       return true;
     }
     final completer = Completer<bool>();
@@ -62,7 +64,7 @@ final class MyCameraController
       ),
     );
     jni.MyPermissionsManager.INSTANCE.requestPermissions(
-      permissions,
+      jniPermissions,
       callback,
     );
     final granted = await completer.future;
@@ -71,8 +73,9 @@ final class MyCameraController
 
   @override
   Future<void> bind() async {
-    final lifecycleOwner = jni.MyJNI.activity.castTo(jni.LifecycleOwner.type);
-    await jniValue.bindToLifecycleOnMainThread(lifecycleOwner);
+    final jniLifecycleOwner =
+        jni.MyJNI.activity.castTo(jni.LifecycleOwner.type);
+    await jniValue.bindToLifecycleOnMainThread(jniLifecycleOwner);
   }
 
   @override
@@ -92,8 +95,8 @@ final class MyCameraController
 
   @override
   Future<CameraSelector> getCameraSelector() async {
-    final cameraSelector = await jniValue.getCameraSelectorOnMainThread();
-    return MyCameraSelector.jni(cameraSelector);
+    final jniCameraSelector = await jniValue.getCameraSelectorOnMainThread();
+    return MyCameraSelector.jni(jniCameraSelector);
   }
 
   @override
@@ -130,25 +133,25 @@ final class MyCameraController
 
   @override
   Future<ZoomState?> getZoomState() async {
-    final zoomStateData = await jniValue.getZoomStateOnMainThread();
-    final zoomState = zoomStateData.getValue();
-    final dartValue = zoomState.isNull ? null : zoomState.dartValue;
-    return dartValue;
+    final jniZoomStateData = await jniValue.getZoomStateOnMainThread();
+    final jniZoomState = jniZoomStateData.getValue();
+    final zoomState = jniZoomState.isNull ? null : jniZoomState.dartValue;
+    return zoomState;
   }
 
   @override
   Future<void> setZoomRatio(double zoomRatio) async {
-    final listenableFuture = await jniValue.setZoomRatioOnMainThread(zoomRatio);
+    final jniFuture = await jniValue.setZoomRatioOnMainThread(zoomRatio);
     final completer = Completer<void>();
-    final executor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    listenableFuture.addListener(
+    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
+    jniFuture.addListener(
       jni.Runnable.implement(
         jni.$RunnableImpl(
           run: () {
             try {
-              final futureType = jni.Future.type(listenableFuture.V);
-              final future = listenableFuture.castTo(futureType);
-              future.get0();
+              final jniType = jni.Future.type(jniFuture.V);
+              final jniTypedFuture = jniFuture.castTo(jniType);
+              jniTypedFuture.get0();
               completer.complete();
             } catch (e) {
               completer.completeError(e);
@@ -156,25 +159,24 @@ final class MyCameraController
           },
         ),
       ),
-      executor,
+      jniExecutor,
     );
     await completer.future;
   }
 
   @override
   Future<void> setLinearZoom(double linearZoom) async {
-    final listenableFuture =
-        await jniValue.setLinearZoomOnMainThread(linearZoom);
+    final jniFuture = await jniValue.setLinearZoomOnMainThread(linearZoom);
     final completer = Completer<void>();
-    final executor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    listenableFuture.addListener(
+    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
+    jniFuture.addListener(
       jni.Runnable.implement(
         jni.$RunnableImpl(
           run: () {
             try {
-              final futureType = jni.Future.type(listenableFuture.V);
-              final future = listenableFuture.castTo(futureType);
-              future.get0();
+              final jniType = jni.Future.type(jniFuture.V);
+              final jniTypedFuture = jniFuture.castTo(jniType);
+              jniTypedFuture.get0();
               completer.complete();
             } catch (e) {
               completer.completeError(e);
@@ -182,35 +184,34 @@ final class MyCameraController
           },
         ),
       ),
-      executor,
+      jniExecutor,
     );
     await completer.future;
   }
 
   @override
   Future<bool?> getTorchState() async {
-    final torchStateData = await jniValue.getTorchStateOnMainThread();
-    final torchStateValue = torchStateData.getValue();
-    final torchState = torchStateValue.isNull
+    final jniTorchStateData = await jniValue.getTorchStateOnMainThread();
+    final jniTorchState = jniTorchStateData.getValue();
+    final torchState = jniTorchState.isNull
         ? null
-        : torchStateValue.intValue() == jni.TorchState.ON;
+        : jniTorchState.intValue() == jni.TorchState.ON;
     return torchState;
   }
 
   @override
-  Future<void> enableTorch(bool torchEnabled) async {
-    final listenableFuture =
-        await jniValue.enableTorchOnMainThread(torchEnabled);
+  Future<void> enableTorch(bool enabled) async {
+    final jniFuture = await jniValue.enableTorchOnMainThread(enabled);
     final completer = Completer<void>();
-    final executor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    listenableFuture.addListener(
+    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
+    jniFuture.addListener(
       jni.Runnable.implement(
         jni.$RunnableImpl(
           run: () {
             try {
-              final futureType = jni.Future.type(listenableFuture.V);
-              final future = listenableFuture.castTo(futureType);
-              future.get0();
+              final jniType = jni.Future.type(jniFuture.V);
+              final jniTypedFuture = jniFuture.castTo(jniType);
+              jniTypedFuture.get0();
               completer.complete();
             } catch (e) {
               completer.completeError(e);
@@ -218,26 +219,29 @@ final class MyCameraController
           },
         ),
       ),
-      executor,
+      jniExecutor,
     );
     await completer.future;
   }
 
   @override
   Future<ResolutionSelector?> getPreviewResolutionSelector() async {
-    final resolutionSelector =
+    final jniResolutionSelector =
         await jniValue.getPreviewResolutionSelectorOnMainThread();
-    return MyResolutionSelector.jni(resolutionSelector);
+    if (jniResolutionSelector.isNull) {
+      return null;
+    }
+    return MyResolutionSelector.jni(jniResolutionSelector);
   }
 
   @override
   Future<void> setPreviewResolutionSelector(
       ResolutionSelector? resolutionSelector) async {
     if (resolutionSelector == null) {
-      final resolutionSelector =
+      final jniResolutionSelector =
           jni.ResolutionSelector.fromReference(jNullReference);
       await jniValue
-          .setPreviewResolutionSelectorOnMainThread(resolutionSelector);
+          .setPreviewResolutionSelectorOnMainThread(jniResolutionSelector);
     } else {
       if (resolutionSelector is! MyResolutionSelector) {
         throw TypeError();
@@ -249,8 +253,8 @@ final class MyCameraController
 
   @override
   Future<FlashMode> getImageCaptureFlashMode() async {
-    final flashMode = await jniValue.getImageCaptureFlashModeOnMainThread();
-    return flashMode.dartFlashMode;
+    final jniFlashMode = await jniValue.getImageCaptureFlashModeOnMainThread();
+    return jniFlashMode.dartFlashMode;
   }
 
   @override
@@ -260,8 +264,8 @@ final class MyCameraController
 
   @override
   Future<CaptureMode> getImageCaptureMode() async {
-    final captureMode = await jniValue.getImageCaptureModeOnMainThread();
-    return captureMode.dartCaptureMode;
+    final jniCaptureMode = await jniValue.getImageCaptureModeOnMainThread();
+    return jniCaptureMode.dartCaptureMode;
   }
 
   @override
@@ -271,19 +275,22 @@ final class MyCameraController
 
   @override
   Future<ResolutionSelector?> getImageCaptureResolutionSelector() async {
-    final resolutionSelector =
+    final jniResolutionSelector =
         await jniValue.getImageCaptureResolutionSelectorOnMainThread();
-    return MyResolutionSelector.jni(resolutionSelector);
+    if (jniResolutionSelector.isNull) {
+      return null;
+    }
+    return MyResolutionSelector.jni(jniResolutionSelector);
   }
 
   @override
   Future<void> setImageCaptureResolutionSelector(
       ResolutionSelector? resolutionSelector) async {
     if (resolutionSelector == null) {
-      final resolutionSelector =
+      final jniResolutionSelector =
           jni.ResolutionSelector.fromReference(jNullReference);
       await jniValue
-          .setImageCaptureResolutionSelectorOnMainThread(resolutionSelector);
+          .setImageCaptureResolutionSelectorOnMainThread(jniResolutionSelector);
     } else {
       if (resolutionSelector is! MyResolutionSelector) {
         throw TypeError();
@@ -296,8 +303,8 @@ final class MyCameraController
   @override
   Future<ImageProxy> takePictureToMemory() async {
     final completer = Completer<ImageProxy>();
-    final executor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    final callback = jni.MyImageCapture_MyOnImageCapturedCallbackImpl(
+    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
+    final jniCallback = jni.MyImageCapture_MyOnImageCapturedCallbackImpl(
       jni.MyImageCapture_MyOnImageCapturedCallback.implement(
         jni.$MyImageCapture_MyOnImageCapturedCallbackImpl(
           onCaptureStarted: () {
@@ -306,24 +313,24 @@ final class MyCameraController
           onCaptureProcessProgressed: (progress) {
             logger.info('onCaptureProcessProgressed $progress.');
           },
-          onCaptureSuccess: (imageProxy) {
+          onCaptureSuccess: (jniImageProxy) {
             logger.info('onCaptureSuccess.');
-            final dartValue = MyImageProxy.jni(imageProxy);
-            completer.complete(dartValue);
+            final imageProxy = MyImageProxy.jni(jniImageProxy);
+            completer.complete(imageProxy);
           },
-          onError: (exception) {
-            logger.info('onError $exception.');
-            completer.completeError(exception);
+          onError: (jniException) {
+            logger.info('onError $jniException.');
+            completer.completeError(jniException);
           },
-          onPostviewBitmapAvailable: (bitmap) {
+          onPostviewBitmapAvailable: (jniBitmap) {
             logger.info('onPostviewBitmapAvailable.');
           },
         ),
       ),
     );
     await jniValue.takePictureToMemoryOnMainThread(
-      executor,
-      callback,
+      jniExecutor,
+      jniCallback,
     );
     final imageProxy = await completer.future;
     return imageProxy;
@@ -334,24 +341,25 @@ final class MyCameraController
     String? name,
   }) async {
     final completer = Completer<Uri>();
-    final contentResolver = jni.MyJNI.context.getContentResolver();
-    final savedCollection = jni.MediaStore_Images_Media.EXTERNAL_CONTENT_URI;
-    final relativePath = JString.fromString(
+    final jniContentResolver = jni.MyJNI.context.getContentResolver();
+    final jniSavedCollection = jni.MediaStore_Images_Media.EXTERNAL_CONTENT_URI;
+    final jniRelativePath = JString.fromString(
         '${jni.Environment.DIRECTORY_DCIM}/${jni.MyJNI.context.getPackageName()}');
-    final displayName = JString.fromString(
+    final jniDisplayName = JString.fromString(
         name ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
-    final mimeType = JString.fromString('image/jpeg');
-    final contentValues = jni.ContentValues()
-      ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, relativePath)
-      ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, displayName)
-      ..put(jni.MediaStore_MediaColumns.MIME_TYPE, mimeType);
-    final outputFileOptions = jni.MyImageCapture_MyOutputFileOptions_MyBuilder(
-      contentResolver,
-      savedCollection,
-      contentValues,
+    final jniMIMEType = JString.fromString('image/jpeg');
+    final jniContentValues = jni.ContentValues()
+      ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, jniRelativePath)
+      ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, jniDisplayName)
+      ..put(jni.MediaStore_MediaColumns.MIME_TYPE, jniMIMEType);
+    final jniOutputFileOptions =
+        jni.MyImageCapture_MyOutputFileOptions_MyBuilder(
+      jniContentResolver,
+      jniSavedCollection,
+      jniContentValues,
     ).build();
-    final executor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    final imageSavedCallback = jni.MyImageCapture_MyOnImageSavedCallbackImpl(
+    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
+    final jniImageSavedCallback = jni.MyImageCapture_MyOnImageSavedCallbackImpl(
       jni.MyImageCapture_MyOnImageSavedCallback.implement(
         jni.$MyImageCapture_MyOnImageSavedCallbackImpl(
           onCaptureStarted: () {
@@ -360,76 +368,70 @@ final class MyCameraController
           onCaptureProcessProgressed: (progress) {
             logger.info('onCaptureProcessProgressed $progress.');
           },
-          onImageSaved: (outputFileResults) {
+          onImageSaved: (jniOutputFileResults) {
             logger.info('onImageSaved.');
-            final savedUri = outputFileResults.getSavedUri().dartValue;
+            final savedUri = jniOutputFileResults.getSavedUri().dartValue;
             completer.complete(savedUri);
           },
-          onError: (exception) {
-            logger.info('onError $exception.');
-            completer.completeError(exception);
+          onError: (jniException) {
+            logger.info('onError $jniException.');
+            completer.completeError(jniException);
           },
-          onPostviewBitmapAvailable: (bitmap) {
+          onPostviewBitmapAvailable: (jniBitmap) {
             logger.info('onPostviewBitmapAvailable.');
           },
         ),
       ),
     );
     await jniValue.takePictureToAlbumOnMainThread(
-      outputFileOptions,
-      executor,
-      imageSavedCallback,
+      jniOutputFileOptions,
+      jniExecutor,
+      jniImageSavedCallback,
     );
     final savedUri = await completer.future;
     return savedUri;
   }
 
   @override
-  Future<DynamicRange> getVideoCaptureDynamicRange() {
-    // TODO: implement getVideoCaptureDynamicRange
-    throw UnimplementedError();
+  Future<DynamicRange> getVideoCaptureDynamicRange() async {
+    final jniDynamicRange =
+        await jniValue.getVideoCaptureDynamicRangeOnMainThread();
+    return jniDynamicRange.dartValue;
   }
 
   @override
-  Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange) {
-    // TODO: implement setVideoCaptureDynamicRange
-    throw UnimplementedError();
+  Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange) async {
+    await jniValue
+        .setVideoCaptureDynamicRangeOnMainThread(dynamicRange.jniValue);
   }
 
   @override
-  Future<MirrorMode> getVideoCaptureMirrorMode() {
-    // TODO: implement getVideoCaptureMirrorMode
-    throw UnimplementedError();
+  Future<MirrorMode> getVideoCaptureMirrorMode() async {
+    final jniMirrorMode =
+        await jniValue.getVideoCaptureMirrorModeOnMainThread();
+    return jniMirrorMode.dartMirrorMode;
   }
 
   @override
-  Future<void> setVideoCaptureMirrorMode(MirrorMode mirrorMode) {
-    // TODO: implement setVideoCaptureMirrorMode
-    throw UnimplementedError();
+  Future<void> setVideoCaptureMirrorMode(MirrorMode mirrorMode) async {
+    await jniValue.setVideoCaptureMirrorModeOnMainThread(mirrorMode.jniValue);
   }
 
   @override
-  Future<QualitySelector> getVideoCaptureQualitySelector() {
-    // TODO: implement getVideoCaptureQualitySelector
-    throw UnimplementedError();
+  Future<QualitySelector> getVideoCaptureQualitySelector() async {
+    final jniQualitySelector =
+        await jniValue.getVideoCaptureQualitySelectorOnMainThread();
+    return MyQualitySelector.jni(jniQualitySelector);
   }
 
   @override
-  Future<void> setVideoCaptureQualitySelector(QualitySelector qualitySelector) {
-    // TODO: implement setVideoCaptureQualitySelector
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Range<int>> getVideoCaptureTargetFrameRate() {
-    // TODO: implement getVideoCaptureTargetFrameRate
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) {
-    // TODO: implement setVideoCaptureTargetFrameRate
-    throw UnimplementedError();
+  Future<void> setVideoCaptureQualitySelector(
+      QualitySelector qualitySelector) async {
+    if (qualitySelector is! MyQualitySelector) {
+      throw TypeError();
+    }
+    await jniValue
+        .setVideoCaptureQualitySelectorOnMainThread(qualitySelector.jniValue);
   }
 
   @override
@@ -446,40 +448,40 @@ final class MyCameraController
   }) async {
     await jniValue
         .setEnabledUseCasesOnMainThread(jni.CameraController.VIDEO_CAPTURE);
-    final contentResolver = jni.MyJNI.context.getContentResolver();
-    final collectionUri = jni.MediaStore_Video_Media.EXTERNAL_CONTENT_URI;
-    final relativePath = JString.fromString(
+    final jniContentResolver = jni.MyJNI.context.getContentResolver();
+    final jniCollectionUri = jni.MediaStore_Video_Media.EXTERNAL_CONTENT_URI;
+    final jniRelativePath = JString.fromString(
         '${jni.Environment.DIRECTORY_DCIM}/${jni.MyJNI.context.getPackageName()}');
-    final displayName = JString.fromString(
+    final jniDisplayName = JString.fromString(
         name ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
-    final mimeType = JString.fromString('video/mp4');
-    final contentValues = jni.ContentValues()
-      ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, relativePath)
-      ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, displayName)
-      ..put(jni.MediaStore_MediaColumns.MIME_TYPE, mimeType);
-    final outputOptions =
-        jni.MyMediaStoreOutputOptions_MyBuilder(contentResolver, collectionUri)
-            .setContentValues(contentValues)
-            .build();
-    final audioConfig = jni.AudioConfig.create(enableAudio);
-    final executor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
-    final recording = await jniValue.startRecordingOnMainThread(
-      outputOptions,
-      audioConfig,
-      executor,
+    final jniMIMEType = JString.fromString('video/mp4');
+    final jniContentValues = jni.ContentValues()
+      ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, jniRelativePath)
+      ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, jniDisplayName)
+      ..put(jni.MediaStore_MediaColumns.MIME_TYPE, jniMIMEType);
+    final jniOutputOptions = jni.MyMediaStoreOutputOptions_MyBuilder(
+            jniContentResolver, jniCollectionUri)
+        .setContentValues(jniContentValues)
+        .build();
+    final jniAudioConfig = jni.AudioConfig.create(enableAudio);
+    final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
+    final jniRecording = await jniValue.startRecordingOnMainThread(
+      jniOutputOptions,
+      jniAudioConfig,
+      jniExecutor,
       jni.Consumer.implement(
         jni.$ConsumerImpl(
           T: jni.VideoRecordEvent.type,
-          accept: (event) {
+          accept: (jniEvent) {
             final isInstanceOfStatus = Jni.env.IsInstanceOf(
-              event.reference.pointer,
+              jniEvent.reference.pointer,
               jni.VideoRecordEvent_Status.type.jClass.reference.pointer,
             );
             if (isInstanceOfStatus) {
               return;
             }
             final isInstanceOfFinalize = Jni.env.IsInstanceOf(
-              event.reference.pointer,
+              jniEvent.reference.pointer,
               jni.VideoRecordEvent_Finalize.type.jClass.reference.pointer,
             );
             if (isInstanceOfFinalize) {
@@ -487,19 +489,19 @@ final class MyCameraController
                   jni.CameraController.IMAGE_CAPTURE |
                       jni.CameraController.IMAGE_ANALYSIS);
             }
-            listener(event.dartValue);
+            listener(jniEvent.dartValue);
           },
         ),
       ),
     );
-    return MyRecording.jni(recording);
+    return MyRecording.jni(jniRecording);
   }
 
   @override
   Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy() async {
-    final strategy =
+    final jniBackpressureStrategy =
         await jniValue.getImageAnalysisBackpressureStrategyOnMainThread();
-    return strategy.dartBackpressureStrategy;
+    return jniBackpressureStrategy.dartBackpressureStrategy;
   }
 
   @override
@@ -511,44 +513,48 @@ final class MyCameraController
 
   @override
   Future<int> getImageAnalysisImageQueueDepth() async {
-    final depth = await jniValue.getImageAnalysisImageQueueDepthOnMainThread();
-    return depth;
+    final imageQueueDepth =
+        await jniValue.getImageAnalysisImageQueueDepthOnMainThread();
+    return imageQueueDepth;
   }
 
   @override
-  Future<void> setImageAnalysisImageQueueDepth(int depth) async {
-    await jniValue.setImageAnalysisImageQueueDepthOnMainThread(depth);
+  Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth) async {
+    await jniValue.setImageAnalysisImageQueueDepthOnMainThread(imageQueueDepth);
   }
 
   @override
-  Future<OutputImageFormat> getImageAnalysisOutputImageFormat() async {
-    final imageAnalysisOutputImageFormat =
+  Future<ImageFormat> getImageAnalysisOutputImageFormat() async {
+    final jniOutputImageFormat =
         await jniValue.getImageAnalysisOutputImageFormatOnMainThread();
-    return imageAnalysisOutputImageFormat.dartOutputImageFormat;
+    return jniOutputImageFormat.dartOutputImageFormat;
   }
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      OutputImageFormat imageAnalysisOutputImageFormat) async {
+      ImageFormat outputImageFormat) async {
     await jniValue.setImageAnalysisOutputImageFormatOnMainThread(
-        imageAnalysisOutputImageFormat.jniValue);
+        outputImageFormat.jniValue);
   }
 
   @override
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector() async {
-    final resolutionSelector =
+    final jniResolutionSelector =
         await jniValue.getImageAnalysisResolutionSelectorOnMainThread();
-    return MyResolutionSelector.jni(resolutionSelector);
+    if (jniResolutionSelector.isNull) {
+      return null;
+    }
+    return MyResolutionSelector.jni(jniResolutionSelector);
   }
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
       ResolutionSelector? resolutionSelector) async {
     if (resolutionSelector == null) {
-      final resolutionSelector =
+      final jniResolutionSelector =
           jni.ResolutionSelector.fromReference(jNullReference);
-      await jniValue
-          .setImageAnalysisResolutionSelectorOnMainThread(resolutionSelector);
+      await jniValue.setImageAnalysisResolutionSelectorOnMainThread(
+          jniResolutionSelector);
     } else {
       if (resolutionSelector is! MyResolutionSelector) {
         throw TypeError();
@@ -560,10 +566,10 @@ final class MyCameraController
 
   @override
   Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) async {
-    final executor =
+    final jniExecutor =
         jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
     await jniValue.setImageAnalysisAnalyzerOnMainThread(
-      executor,
+      jniExecutor,
       analyzer.jniValue,
     );
   }
@@ -574,62 +580,64 @@ final class MyCameraController
   }
 
   void _observeZoomState() async {
-    final zoomStateData = await jniValue.getZoomStateOnMainThread();
-    final lifecycleOwner = jni.MyJNI.activity.castTo(jni.LifecycleOwner.type);
-    final observer = jni.Observer.implement(
+    final jniZoomStateData = await jniValue.getZoomStateOnMainThread();
+    final jniLifecycleOwner =
+        jni.MyJNI.activity.castTo(jni.LifecycleOwner.type);
+    final jniObserver = jni.Observer.implement(
       jni.$ObserverImpl(
         T: jni.ZoomState.type,
-        onChanged: (zoomState) {
-          final dartValue = zoomState.isNull ? null : zoomState.dartValue;
-          _zoomStateChagnedController.add(dartValue);
+        onChanged: (jniZoomState) {
+          final zoomState = jniZoomState.isNull ? null : jniZoomState.dartValue;
+          _zoomStateChagnedController.add(zoomState);
         },
       ),
     );
-    zoomStateData.observeOnMainThread(
-      lifecycleOwner,
-      observer.T,
-      observer.reference,
+    jniZoomStateData.observeOnMainThread(
+      jniLifecycleOwner,
+      jniObserver.T,
+      jniObserver.reference,
     );
-    _zoomStateObserver = observer;
+    _jniZoomStateObserver = jniObserver;
   }
 
   void _removeZoomStateObserver() async {
-    final zoomStateData = await jniValue.getZoomStateOnMainThread();
-    final observer = _zoomStateObserver;
-    zoomStateData.removeObserverOnMainThread(
-      observer.T,
-      observer.reference,
+    final jniZoomStateData = await jniValue.getZoomStateOnMainThread();
+    final jniObserver = _jniZoomStateObserver;
+    jniZoomStateData.removeObserverOnMainThread(
+      jniObserver.T,
+      jniObserver.reference,
     );
   }
 
   void _observeTorchState() async {
-    final trochStateData = await jniValue.getTorchStateOnMainThread();
-    final lifecycleOwner = jni.MyJNI.activity.castTo(jni.LifecycleOwner.type);
-    final observer = jni.Observer.implement(
+    final jniTrochStateData = await jniValue.getTorchStateOnMainThread();
+    final jniLifecycleOwner =
+        jni.MyJNI.activity.castTo(jni.LifecycleOwner.type);
+    final jniObserver = jni.Observer.implement(
       jni.$ObserverImpl(
         T: JInteger.type,
-        onChanged: (torchState) {
-          final dartValue = torchState.isNull
+        onChanged: (jniTorchState) {
+          final torchState = jniTorchState.isNull
               ? null
-              : torchState.intValue() == jni.TorchState.ON;
-          _torchStateChagnedController.add(dartValue);
+              : jniTorchState.intValue() == jni.TorchState.ON;
+          _torchStateChagnedController.add(torchState);
         },
       ),
     );
-    trochStateData.observeOnMainThread(
-      lifecycleOwner,
-      observer.T,
-      observer.reference,
+    jniTrochStateData.observeOnMainThread(
+      jniLifecycleOwner,
+      jniObserver.T,
+      jniObserver.reference,
     );
-    _torchStateObserver = observer;
+    _jniTorchStateObserver = jniObserver;
   }
 
   void _removeTorchStateObserver() async {
-    final torchStateData = await jniValue.getTorchStateOnMainThread();
-    final observer = _torchStateObserver;
-    torchStateData.removeObserverOnMainThread(
-      observer.T,
-      observer.reference,
+    final jniTorchStateData = await jniValue.getTorchStateOnMainThread();
+    final jniObserver = _jniTorchStateObserver;
+    jniTorchStateData.removeObserverOnMainThread(
+      jniObserver.T,
+      jniObserver.reference,
     );
   }
 }

@@ -4,19 +4,23 @@ import 'package:camerax_android_example/models.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/cupertino.dart';
 
-typedef ImageWrapperCallback = void Function(ImageWrapper imageWrapper);
+typedef ImageModelCallback = void Function(ImageModel imageModel);
 
 class RawPixelsAnalyzer implements Analyzer {
-  final ImageWrapperCallback onAnalyzed;
+  final ImageModelCallback onAnalyzed;
 
   RawPixelsAnalyzer(this.onAnalyzed);
 
   @override
   void analyze(ImageProxy imageProxy) async {
     try {
-      debugPrint('imageProxy ${imageProxy.width} * ${imageProxy.height}');
-      final buffer =
-          await ui.ImmutableBuffer.fromUint8List(imageProxy.rawPixels);
+      debugPrint('image size ${imageProxy.width} * ${imageProxy.height}');
+      final format = imageProxy.format;
+      if (format != ImageFormat.rgba_8888) {
+        throw ArgumentError.value(format);
+      }
+      final rawPixels = imageProxy.planeProxies.first.value;
+      final buffer = await ui.ImmutableBuffer.fromUint8List(rawPixels);
       final descriptor = ui.ImageDescriptor.raw(
         buffer,
         width: imageProxy.width,
@@ -25,13 +29,13 @@ class RawPixelsAnalyzer implements Analyzer {
       );
       final codec = await descriptor.instantiateCodec();
       final frame = await codec.getNextFrame();
-      final imageWrapper = ImageWrapper(
+      final imageModel = ImageModel(
         image: frame.image,
-        rotationDegrees: imageProxy.imageInfo.rotationDegrees,
+        rotationDegrees: imageProxy.rotationDegrees,
       );
-      onAnalyzed(imageWrapper);
+      onAnalyzed(imageModel);
     } finally {
-      await imageProxy.close();
+      imageProxy.close();
     }
   }
 }

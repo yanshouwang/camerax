@@ -1,8 +1,8 @@
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
-import '../camerax_plugin.dart';
 import 'scale_type.dart';
 
 abstract interface class PreviewViewController {

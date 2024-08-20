@@ -2,6 +2,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'core.dart';
 import 'ml.dart';
+import 'video.dart';
 import 'view.dart';
 
 final class CameraXAndroidPlugin extends CameraXPlugin {
@@ -44,27 +45,23 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   @override
   FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
       Quality quality) {
-    // TODO: implement createFallbackStrategyHigherQualityOrLowerThan
-    throw UnimplementedError();
+    return MyFallbackStrategy.higherQualityOrLowerThan(quality);
   }
 
   @override
   FallbackStrategy createFallbackStrategyHigherQualityThan(Quality quality) {
-    // TODO: implement createFallbackStrategyHigherQualityThan
-    throw UnimplementedError();
+    return MyFallbackStrategy.higherQualityThan(quality);
   }
 
   @override
   FallbackStrategy createFallbackStrategyLowerQualityOrHigherThan(
       Quality quality) {
-    // TODO: implement createFallbackStrategyLowerQualityOrHigherThan
-    throw UnimplementedError();
+    return MyFallbackStrategy.lowerQualityOrHigherThan(quality);
   }
 
   @override
   FallbackStrategy createFallbackStrategyLowerQualityThan(Quality quality) {
-    // TODO: implement createFallbackStrategyLowerQualityThan
-    throw UnimplementedError();
+    return MyFallbackStrategy.lowerQualityThan(quality);
   }
 
   @override
@@ -72,8 +69,10 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
   }) {
-    // TODO: implement createQualitySelectorFrom
-    throw UnimplementedError();
+    return MyQualitySelector.from(
+      quality,
+      fallbackStrategy: fallbackStrategy,
+    );
   }
 
   @override
@@ -81,8 +80,10 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     List<Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
   }) {
-    // TODO: implement createQualitySelectorFromOrderedList
-    throw UnimplementedError();
+    return MyQualitySelector.fromOrderedList(
+      qualities,
+      fallbackStrategy: fallbackStrategy,
+    );
   }
 
   @override

@@ -28,7 +28,7 @@ abstract interface class CameraController implements LogController {
   Future<void> setZoomRatio(double zoomRatio);
   Future<void> setLinearZoom(double linearZoom);
   Future<bool?> getTorchState();
-  Future<void> enableTorch(bool torchEnabled);
+  Future<void> enableTorch(bool enabled);
   Future<ResolutionSelector?> getPreviewResolutionSelector();
   Future<void> setPreviewResolutionSelector(
       ResolutionSelector? resolutionSelector);
@@ -49,8 +49,6 @@ abstract interface class CameraController implements LogController {
   Future<void> setVideoCaptureMirrorMode(MirrorMode mirrorMode);
   Future<QualitySelector> getVideoCaptureQualitySelector();
   Future<void> setVideoCaptureQualitySelector(QualitySelector qualitySelector);
-  Future<Range<int>> getVideoCaptureTargetFrameRate();
-  Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate);
   Future<bool> isRecording();
   Future<Recording> startRecording({
     String? name,
@@ -59,12 +57,11 @@ abstract interface class CameraController implements LogController {
   });
   Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy();
   Future<void> setImageAnalysisBackpressureStrategy(
-      BackpressureStrategy strategy);
+      BackpressureStrategy backpressureStrategy);
   Future<int> getImageAnalysisImageQueueDepth();
-  Future<void> setImageAnalysisImageQueueDepth(int depth);
-  Future<OutputImageFormat> getImageAnalysisOutputImageFormat();
-  Future<void> setImageAnalysisOutputImageFormat(
-      OutputImageFormat imageAnalysisOutputImageFormat);
+  Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth);
+  Future<ImageFormat> getImageAnalysisOutputImageFormat();
+  Future<void> setImageAnalysisOutputImageFormat(ImageFormat outputImageFormat);
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector();
   Future<void> setImageAnalysisResolutionSelector(
       ResolutionSelector? resolutionSelector);

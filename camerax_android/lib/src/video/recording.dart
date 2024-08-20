@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/jni.dart' as jni;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-class MyRecording implements Recording {
+final class MyRecording implements Recording {
   final jni.Recording jniValue;
 
   MyRecording.jni(this.jniValue);

@@ -240,13 +240,106 @@ extension BackpressureStrategyX on BackpressureStrategy {
   }
 }
 
-extension OutputImageFormatX on OutputImageFormat {
+extension CoordinateSystemX on CoordinateSystem {
   int get jniValue {
     switch (this) {
-      case OutputImageFormat.yuv_420_888:
-        return jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888;
-      case OutputImageFormat.rgba_8888:
-        return jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888;
+      case CoordinateSystem.original:
+        return jni.MyImageAnalysis.COORDINATE_SYSTEM_ORIGINAL;
+      case CoordinateSystem.viewReferenced:
+        return jni.MyImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED;
+      case CoordinateSystem.sensor:
+        return jni.MyImageAnalysis.COORDINATE_SYSTEM_SENSOR;
+    }
+  }
+}
+
+extension DynamicRangeX on DynamicRange {
+  jni.DynamicRange get jniValue {
+    switch (this) {
+      case DynamicRange.unspecifid:
+        return jni.DynamicRange.UNSPECIFIED;
+      case DynamicRange.sdr:
+        return jni.DynamicRange.SDR;
+      case DynamicRange.hdrUnspecified_10Bit:
+        return jni.DynamicRange.HDR_UNSPECIFIED_10_BIT;
+      case DynamicRange.hlg_10Bit:
+        return jni.DynamicRange.HLG_10_BIT;
+      case DynamicRange.hdr10_10Bit:
+        return jni.DynamicRange.HDR10_10_BIT;
+      case DynamicRange.dolbyVision_8Bit:
+        return jni.DynamicRange.HDR10_PLUS_10_BIT;
+      case DynamicRange.hdr10Plus_10Bit:
+        return jni.DynamicRange.DOLBY_VISION_8_BIT;
+      case DynamicRange.dolbyVision_10Bit:
+        return jni.DynamicRange.DOLBY_VISION_10_BIT;
+      default:
+        return jni.DynamicRange(encoding.jniValue, bitDepth.jniValue);
+    }
+  }
+}
+
+extension EncodingX on Encoding {
+  int get jniValue {
+    switch (this) {
+      case Encoding.unspecified:
+        return jni.DynamicRange.ENCODING_UNSPECIFIED;
+      case Encoding.sdr:
+        return jni.DynamicRange.ENCODING_SDR;
+      case Encoding.hdrUnspecified:
+        return jni.DynamicRange.ENCODING_HDR_UNSPECIFIED;
+      case Encoding.hlg:
+        return jni.DynamicRange.ENCODING_HLG;
+      case Encoding.hdr10:
+        return jni.DynamicRange.ENCODING_HDR10;
+      case Encoding.hdr10Plus:
+        return jni.DynamicRange.ENCODING_HDR10_PLUS;
+      case Encoding.dolbyVision:
+        return jni.DynamicRange.ENCODING_DOLBY_VISION;
+    }
+  }
+}
+
+extension BitDepthX on BitDepth {
+  int get jniValue {
+    switch (this) {
+      case BitDepth.unspecified:
+        return jni.DynamicRange.BIT_DEPTH_UNSPECIFIED;
+      case BitDepth.with_8Bit:
+        return jni.DynamicRange.BIT_DEPTH_8_BIT;
+      case BitDepth.with_10Bit:
+        return jni.DynamicRange.BIT_DEPTH_10_BIT;
+    }
+  }
+}
+
+extension MirrorModeX on MirrorMode {
+  int get jniValue {
+    switch (this) {
+      case MirrorMode.off:
+        return jni.MirrorMode.MIRROR_MODE_OFF;
+      case MirrorMode.on:
+        return jni.MirrorMode.MIRROR_MODE_ON;
+      case MirrorMode.onFrontOnly:
+        return jni.MirrorMode.MIRROR_MODE_ON_FRONT_ONLY;
+    }
+  }
+}
+
+extension QualityX on Quality {
+  jni.Quality get jniValue {
+    switch (this) {
+      case Quality.sd:
+        return jni.Quality.SD;
+      case Quality.hd:
+        return jni.Quality.HD;
+      case Quality.fhd:
+        return jni.Quality.FHD;
+      case Quality.uhd:
+        return jni.Quality.UHD;
+      case Quality.lowest:
+        return jni.Quality.LOWEST;
+      case Quality.highest:
+        return jni.Quality.HIGHEST;
     }
   }
 }
@@ -260,9 +353,9 @@ extension AnalyzerX on Analyzer {
       return jni.MyImageAnalysis_MyAnalyzerImpl(
         jni.MyImageAnalysis_MyAnalyzer.implement(
           jni.$MyImageAnalysis_MyAnalyzerImpl(
-            analyze: (imageProxy) {
-              final dartValue = MyImageProxy.jni(imageProxy);
-              analyzer.analyze(dartValue);
+            analyze: (jniImageProxy) {
+              final imageProxy = MyImageProxy.jni(jniImageProxy);
+              analyzer.analyze(imageProxy);
             },
           ),
         ),
@@ -271,15 +364,13 @@ extension AnalyzerX on Analyzer {
   }
 }
 
-extension CoordinateSystemX on CoordinateSystem {
+extension ImageFormatX on ImageFormat {
   int get jniValue {
     switch (this) {
-      case CoordinateSystem.original:
-        return jni.MyImageAnalysis.COORDINATE_SYSTEM_ORIGINAL;
-      case CoordinateSystem.viewReferenced:
-        return jni.MyImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED;
-      case CoordinateSystem.sensor:
-        return jni.MyImageAnalysis.COORDINATE_SYSTEM_SENSOR;
+      case ImageFormat.yuv_420_888:
+        return jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888;
+      case ImageFormat.rgba_8888:
+        return jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888;
     }
   }
 }
@@ -448,6 +539,53 @@ extension intX on int {
     }
   }
 
+  Encoding get dartEncoding {
+    switch (this) {
+      case jni.DynamicRange.ENCODING_UNSPECIFIED:
+        return Encoding.unspecified;
+      case jni.DynamicRange.ENCODING_SDR:
+        return Encoding.sdr;
+      case jni.DynamicRange.ENCODING_HDR_UNSPECIFIED:
+        return Encoding.hdrUnspecified;
+      case jni.DynamicRange.ENCODING_HLG:
+        return Encoding.hlg;
+      case jni.DynamicRange.ENCODING_HDR10:
+        return Encoding.hdr10;
+      case jni.DynamicRange.ENCODING_HDR10_PLUS:
+        return Encoding.hdr10Plus;
+      case jni.DynamicRange.ENCODING_DOLBY_VISION:
+        return Encoding.dolbyVision;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
+  BitDepth get dartBitDepth {
+    switch (this) {
+      case jni.DynamicRange.BIT_DEPTH_UNSPECIFIED:
+        return BitDepth.unspecified;
+      case jni.DynamicRange.BIT_DEPTH_8_BIT:
+        return BitDepth.with_8Bit;
+      case jni.DynamicRange.BIT_DEPTH_10_BIT:
+        return BitDepth.with_10Bit;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
+  MirrorMode get dartMirrorMode {
+    switch (this) {
+      case jni.MirrorMode.MIRROR_MODE_OFF:
+        return MirrorMode.off;
+      case jni.MirrorMode.MIRROR_MODE_ON:
+        return MirrorMode.on;
+      case jni.MirrorMode.MIRROR_MODE_ON_FRONT_ONLY:
+        return MirrorMode.onFrontOnly;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
   VideoRecordError? get dartVideoRecordError {
     switch (this) {
       case jni.VideoRecordEvent_Finalize.ERROR_NONE:
@@ -477,12 +615,23 @@ extension intX on int {
     }
   }
 
-  OutputImageFormat get dartOutputImageFormat {
+  ImageFormat get dartImageFormat {
+    switch (this) {
+      case jni.ImageFormat.YUV_420_888:
+        return ImageFormat.yuv_420_888;
+      case jni.PixelFormat.RGBA_8888:
+        return ImageFormat.rgba_8888;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
+  ImageFormat get dartOutputImageFormat {
     switch (this) {
       case jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888:
-        return OutputImageFormat.yuv_420_888;
+        return ImageFormat.yuv_420_888;
       case jni.MyImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888:
-        return OutputImageFormat.rgba_8888;
+        return ImageFormat.rgba_8888;
       default:
         throw ArgumentError.value(this);
     }
@@ -583,12 +732,37 @@ extension JNIResolutionStrategyX on jni.ResolutionStrategy {
   }
 }
 
-extension JNIImageInfoX on jni.ImageInfo {
-  ImageInfo get dartValue {
-    return ImageInfo(
-      timestamp: getTimestamp(),
-      rotationDegrees: getRotationDegrees(),
-    );
+extension JNIDynamicRangeX on jni.DynamicRange {
+  DynamicRange get dartValue {
+    if (this == jni.DynamicRange.UNSPECIFIED) {
+      return DynamicRange.unspecifid;
+    }
+    if (this == jni.DynamicRange.SDR) {
+      return DynamicRange.sdr;
+    }
+    if (this == jni.DynamicRange.HDR_UNSPECIFIED_10_BIT) {
+      return DynamicRange.hdrUnspecified_10Bit;
+    }
+    if (this == jni.DynamicRange.HLG_10_BIT) {
+      return DynamicRange.hlg_10Bit;
+    }
+    if (this == jni.DynamicRange.HDR10_10_BIT) {
+      return DynamicRange.hdr10_10Bit;
+    }
+    if (this == jni.DynamicRange.HDR10_PLUS_10_BIT) {
+      return DynamicRange.hdr10Plus_10Bit;
+    }
+    if (this == jni.DynamicRange.DOLBY_VISION_8_BIT) {
+      return DynamicRange.dolbyVision_8Bit;
+    }
+    if (this == jni.DynamicRange.DOLBY_VISION_10_BIT) {
+      return DynamicRange.dolbyVision_10Bit;
+    } else {
+      return DynamicRange(
+        encoding: getEncoding().dartEncoding,
+        bitDepth: getBitDepth().dartBitDepth,
+      );
+    }
   }
 }
 
@@ -759,6 +933,34 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     });
   }
 
+  Future<jni.DynamicRange> getVideoCaptureDynamicRangeOnMainThread() {
+    return ui.runOnPlatformThread(() => getVideoCaptureDynamicRange());
+  }
+
+  Future<void> setVideoCaptureDynamicRangeOnMainThread(
+      jni.DynamicRange dynamicRange) {
+    return ui
+        .runOnPlatformThread(() => setVideoCaptureDynamicRange(dynamicRange));
+  }
+
+  Future<int> getVideoCaptureMirrorModeOnMainThread() {
+    return ui.runOnPlatformThread(() => getVideoCaptureMirrorMode());
+  }
+
+  Future<void> setVideoCaptureMirrorModeOnMainThread(int mirrorMode) {
+    return ui.runOnPlatformThread(() => setVideoCaptureMirrorMode(mirrorMode));
+  }
+
+  Future<jni.QualitySelector> getVideoCaptureQualitySelectorOnMainThread() {
+    return ui.runOnPlatformThread(() => getVideoCaptureQualitySelector());
+  }
+
+  Future<void> setVideoCaptureQualitySelectorOnMainThread(
+      jni.QualitySelector qualitySelector) {
+    return ui.runOnPlatformThread(
+        () => setVideoCaptureQualitySelector(qualitySelector));
+  }
+
   Future<bool> isRecordingOnMainThread() {
     return ui.runOnPlatformThread(() => isRecording());
   }
@@ -789,17 +991,20 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     return ui.runOnPlatformThread(() => getImageAnalysisBackpressureStrategy());
   }
 
-  Future<void> setImageAnalysisBackpressureStrategyOnMainThread(int strategy) {
+  Future<void> setImageAnalysisBackpressureStrategyOnMainThread(
+      int backpressureStrategy) {
     return ui.runOnPlatformThread(
-        () => setImageAnalysisBackpressureStrategy(strategy));
+        () => setImageAnalysisBackpressureStrategy(backpressureStrategy));
   }
 
   Future<int> getImageAnalysisImageQueueDepthOnMainThread() {
     return ui.runOnPlatformThread(() => getImageAnalysisImageQueueDepth());
   }
 
-  Future<void> setImageAnalysisImageQueueDepthOnMainThread(int depth) {
-    return ui.runOnPlatformThread(() => setImageAnalysisImageQueueDepth(depth));
+  Future<void> setImageAnalysisImageQueueDepthOnMainThread(
+      int imageQueueDepth) {
+    return ui.runOnPlatformThread(
+        () => setImageAnalysisImageQueueDepth(imageQueueDepth));
   }
 
   Future<int> getImageAnalysisOutputImageFormatOnMainThread() {
@@ -807,10 +1012,10 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
   }
 
   Future<void> setImageAnalysisOutputImageFormatOnMainThread(
-    int imageAnalysisOutputImageFormat,
+    int outputImageFormat,
   ) {
-    return ui.runOnPlatformThread(() =>
-        setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat));
+    return ui.runOnPlatformThread(
+        () => setImageAnalysisOutputImageFormat(outputImageFormat));
   }
 
   Future<jni.ResolutionSelector>

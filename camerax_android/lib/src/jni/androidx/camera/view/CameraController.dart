@@ -41,10 +41,14 @@ import '../../lifecycle/LiveData.dart' as livedata_;
 
 import '../core/CameraSelector.dart' as cameraselector_;
 
+import '../core/DynamicRange.dart' as dynamicrange_;
+
 import '../core/ZoomState.dart' as zoomstate_;
 
 import '../core/resolutionselector/ResolutionSelector.dart'
     as resolutionselector_;
+
+import '../video/QualitySelector.dart' as qualityselector_;
 
 import '../video/Recording.dart' as recording_;
 
@@ -1665,7 +1669,7 @@ class CameraController extends jni.JObject {
 
   /// from: public void setVideoCaptureQualitySelector(androidx.camera.video.QualitySelector qualitySelector)
   void setVideoCaptureQualitySelector(
-    jni.JObject qualitySelector,
+    qualityselector_.QualitySelector qualitySelector,
   ) {
     _setVideoCaptureQualitySelector(
             reference.pointer,
@@ -1693,10 +1697,10 @@ class CameraController extends jni.JObject {
 
   /// from: public androidx.camera.video.QualitySelector getVideoCaptureQualitySelector()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getVideoCaptureQualitySelector() {
+  qualityselector_.QualitySelector getVideoCaptureQualitySelector() {
     return _getVideoCaptureQualitySelector(reference.pointer,
             _id_getVideoCaptureQualitySelector as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const qualityselector_.$QualitySelectorType());
   }
 
   static final _id_setVideoCaptureMirrorMode = _class.instanceMethodId(
@@ -1765,7 +1769,7 @@ class CameraController extends jni.JObject {
 
   /// from: public void setVideoCaptureDynamicRange(androidx.camera.core.DynamicRange dynamicRange)
   void setVideoCaptureDynamicRange(
-    jni.JObject dynamicRange,
+    dynamicrange_.DynamicRange dynamicRange,
   ) {
     _setVideoCaptureDynamicRange(
             reference.pointer,
@@ -1793,10 +1797,10 @@ class CameraController extends jni.JObject {
 
   /// from: public androidx.camera.core.DynamicRange getVideoCaptureDynamicRange()
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getVideoCaptureDynamicRange() {
+  dynamicrange_.DynamicRange getVideoCaptureDynamicRange() {
     return _getVideoCaptureDynamicRange(reference.pointer,
             _id_getVideoCaptureDynamicRange as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const dynamicrange_.$DynamicRangeType());
   }
 
   static final _id_setVideoCaptureTargetFrameRate = _class.instanceMethodId(

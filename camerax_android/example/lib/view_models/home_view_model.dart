@@ -16,7 +16,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? _flashMode;
   Uri? _savedUri;
   Recording? _recording;
-  ImageWrapper? _imageWrapper;
+  ImageModel? _imageModel;
   List<MLObject> _items;
 
   late final StreamSubscription _zoomStateSubscription;
@@ -41,7 +41,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
-  ImageWrapper? get imageWrapper => _imageWrapper;
+  ImageModel? get imageModel => _imageModel;
   List<MLObject> get items => _items;
 
   void _initialize() async {
@@ -180,20 +180,13 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   Future<void> setMode(CameraMode mode) async {
     switch (mode) {
       case CameraMode.takePicture:
-        await _clearImageAnalysisAnalyzer();
-        break;
       case CameraMode.recordVideo:
         await _clearImageAnalysisAnalyzer();
         break;
       case CameraMode.rawValue:
-        await controller
-            .setImageAnalysisOutputImageFormat(OutputImageFormat.rgba_8888);
-        final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
-        await _setImageAnalysisAnalyzer(analyzer);
+        await _setRawAnalyzer();
         break;
       case CameraMode.scanCode:
-        await controller
-            .setImageAnalysisOutputImageFormat(OutputImageFormat.yuv_420_888);
         final analyzer = MLAnalyzer(
           types: [
             // Barcodes
@@ -222,11 +215,9 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
           onAnalyzed: _onMLAnalyzed,
         );
-        await _setImageAnalysisAnalyzer(analyzer);
+        await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
-        await controller
-            .setImageAnalysisOutputImageFormat(OutputImageFormat.yuv_420_888);
         final analyzer = MLAnalyzer(
           types: [
             // Faces
@@ -235,23 +226,38 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
           onAnalyzed: _onMLAnalyzed,
         );
-        await _setImageAnalysisAnalyzer(analyzer);
+        await _setMLAnalyzer(analyzer);
         break;
       default:
         break;
     }
     _mode = mode;
-    _imageWrapper = null;
+    _imageModel = null;
     _items = [];
     notifyListeners();
   }
 
-  void _onRawPixelsAnalyzed(ImageWrapper imageWrapper) {
+  Future<void> _setRawAnalyzer() async {
+    await controller.unbind();
+    await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba_8888);
+    final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
+    await controller.setImageAnalysisAnalyzer(analyzer);
+    await controller.bind();
+  }
+
+  void _onRawPixelsAnalyzed(ImageModel imageModel) {
     if (mode != CameraMode.rawValue) {
       return;
     }
-    _imageWrapper = imageWrapper;
+    _imageModel = imageModel;
     notifyListeners();
+  }
+
+  Future<void> _setMLAnalyzer(MLAnalyzer analyzer) async {
+    await controller.unbind();
+    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv_420_888);
+    await controller.setImageAnalysisAnalyzer(analyzer);
+    await controller.bind();
   }
 
   void _onMLAnalyzed(List<MLObject> items) {
@@ -264,12 +270,6 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
 
   Future<void> _clearImageAnalysisAnalyzer() async {
     await controller.clearImageAnalysisAnalyzer();
-  }
-
-  Future<void> _setImageAnalysisAnalyzer(Analyzer analyzer) async {
-    await controller.unbind();
-    await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bind();
   }
 
   @override

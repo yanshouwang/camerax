@@ -312,18 +312,6 @@ final class MyCameraController
   }
 
   @override
-  Future<Range<int>> getVideoCaptureTargetFrameRate() {
-    // TODO: implement getVideoCaptureTargetFrameRate
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) {
-    // TODO: implement setVideoCaptureTargetFrameRate
-    throw UnimplementedError();
-  }
-
-  @override
   Future<bool> isRecording() {
     // TODO: implement isRecording
     throw UnimplementedError();
@@ -365,14 +353,14 @@ final class MyCameraController
   }
 
   @override
-  Future<OutputImageFormat> getImageAnalysisOutputImageFormat() {
+  Future<ImageFormat> getImageAnalysisOutputImageFormat() {
     // TODO: implement getImageAnalysisOutputImageFormat
     throw UnimplementedError();
   }
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      OutputImageFormat imageAnalysisOutputImageFormat) {
+      ImageFormat outputImageFormat) {
     // TODO: implement setImageAnalysisOutputImageFormat
     throw UnimplementedError();
   }
