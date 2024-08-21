@@ -14,11 +14,11 @@ import Foundation
 }
 
 @objc public class VideoRecordFinalizeEvent: VideoRecordEvent {
-    @objc public let uri: String
-    @objc public let error: Error?
+    @objc public let savedUri: URL
+    @objc public let error: (any Error)?
     
-    init(uri: String, error: Error?) {
-        self.uri = uri
+    init(savedUri: URL, error: (any Error)?) {
+        self.savedUri = savedUri
         self.error = error
     }
 }

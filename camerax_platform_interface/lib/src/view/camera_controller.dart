@@ -40,7 +40,7 @@ abstract interface class CameraController implements LogController {
   Future<void> setImageCaptureResolutionSelector(
       ResolutionSelector? resolutionSelector);
   Future<Uri> takePicture({
-    String? fileName,
+    required Uri uri,
   });
   Future<DynamicRange> getVideoCaptureDynamicRange();
   Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange);
@@ -50,7 +50,7 @@ abstract interface class CameraController implements LogController {
   Future<void> setVideoCaptureQualitySelector(QualitySelector qualitySelector);
   Future<bool> isRecording();
   Future<Recording> startRecording({
-    String? fileName,
+    required Uri uri,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
   });

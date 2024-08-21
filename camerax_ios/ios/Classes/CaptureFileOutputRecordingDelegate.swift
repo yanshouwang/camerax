@@ -23,7 +23,7 @@ class CaptureFileOutputRecordingDelegate: NSObject, AVCaptureFileOutputRecording
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: (any Error)?) {
         debugPrint("did finish recording to \(outputFileURL)")
-        let event = VideoRecordFinalizeEvent(uri: outputFileURL.path, error: error)
+        let event = VideoRecordFinalizeEvent(savedUri: outputFileURL, error: error)
         listener(event)
     }
 }

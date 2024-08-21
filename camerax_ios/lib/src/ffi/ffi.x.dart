@@ -107,18 +107,20 @@ extension FFIFlashModeX on ffi.FlashMode {
 
 extension FFIVideoRecordEventX on ffi.VideoRecordEvent {
   VideoRecordEvent get dartValue {
-    final ffiEvent = this;
-    if (ffiEvent is ffi.VideoRecordStartEvent) {
+    final isInstanceOfStart = ffi.VideoRecordStartEvent.isInstance(this);
+    if (isInstanceOfStart) {
       return VideoRecordStartEvent();
     }
-    if (ffiEvent is ffi.VideoRecordFinalizeEvent) {
-      final uri = Uri.file('${ffiEvent.uri}');
+    final isInstanceOfFinalize = ffi.VideoRecordFinalizeEvent.isInstance(this);
+    if (isInstanceOfFinalize) {
+      final ffiEvent = ffi.VideoRecordFinalizeEvent.castFrom(this);
+      final savedUri = Uri.file('${ffiEvent.savedUri.path}');
       final ffiError = ffiEvent.error;
       final error = ffiError == null
           ? null
           : VideoRecordError('${ffiError.localizedDescription}');
       return VideoRecordFinalizeEvent(
-        uri: uri,
+        savedUri: savedUri,
         error: error,
       );
     }

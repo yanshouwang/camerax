@@ -29,7 +29,8 @@ export 'jni/com/google/mlkit/vision/interfaces/_package.dart';
 
 export 'jni/dev/hebei/camerax_android/_package.dart';
 
+export 'jni/java/io/_package.dart';
 export 'jni/java/lang/_package.dart';
 export 'jni/java/util/concurrent/_package.dart';
 
-export 'jni/x.dart';
+export 'jni/jni.x.dart';

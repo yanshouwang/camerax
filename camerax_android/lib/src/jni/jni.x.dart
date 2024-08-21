@@ -747,23 +747,9 @@ extension JNIDynamicRangeX on jni.DynamicRange {
 
 extension JNIUriX on jni.Uri {
   Uri get dartValue {
-    final contentResolver = MyJNI.context.getContentResolver();
-    final projection = JArray(JString.type, 1);
-    projection[0] = jni.MediaStore_MediaColumns.DATA;
-    final selection = JString.fromReference(jNullReference);
-    final selectionArgs = JArray.fromReference(JString.type, jNullReference);
-    final sortOrder = JString.fromReference(jNullReference);
-    final cursor = contentResolver.query(
-      this,
-      projection,
-      selection,
-      selectionArgs,
-      sortOrder,
+    final path = getPath().toDartString(
+      releaseOriginal: true,
     );
-    cursor.moveToFirst();
-    final columnIndex = cursor.getColumnIndex(jni.MediaStore_MediaColumns.DATA);
-    final path = cursor.getString(columnIndex).toDartString();
-    cursor.close();
     return Uri.file(path);
   }
 }
@@ -881,20 +867,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
     });
   }
 
-  Future<void> takePictureToMemoryOnMainThread(
-    jni.Executor executor,
-    JObject callback,
-  ) {
-    final callbackReference = callback.reference;
-    return ui.runOnPlatformThread(() {
-      final callback = JObject.fromReference(
-        callbackReference,
-      );
-      takePicture1(executor, callback);
-    });
-  }
-
-  Future<void> takePictureToAlbumOnMainThread(
+  Future<void> takePictureOnMainThread(
     JObject outputFileOptions,
     jni.Executor executor,
     JObject imageSavedCallback,
@@ -957,7 +930,7 @@ extension JNILifecycleCameraControllerX on jni.LifecycleCameraController {
         listenerT,
         listenerReference,
       );
-      return startRecording2(
+      return startRecording(
         outputOptions,
         audioConfig,
         executor,
@@ -1185,7 +1158,7 @@ extension JNIVideoRecordEventX on jni.VideoRecordEvent {
     if (isInstanceOfFinalize) {
       final event = castTo(jni.VideoRecordEvent_Finalize.type);
       return VideoRecordFinalizeEvent(
-        uri: event.getOutputResults().getOutputUri().dartValue,
+        savedUri: event.getOutputResults().getOutputUri().dartValue,
         error: event.getError().dartVideoRecordError,
       );
     }

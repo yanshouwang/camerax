@@ -36,6 +36,8 @@ import '../../../android/net/Uri.dart' as uri_;
 
 import '../../../androidx/camera/core/ImageProxy.dart' as imageproxy_;
 
+import '../../../java/io/File.dart' as file_;
+
 /// from: dev.hebei.camerax_android.MyImageCapture$Companion
 class MyImageCapture_Companion extends jni.JObject {
   @override
@@ -1175,10 +1177,37 @@ class MyImageCapture_MyOutputFileOptions_MyBuilder extends jni.JObject {
   /// The type which includes information such as the signature of this class.
   static const type = $MyImageCapture_MyOutputFileOptions_MyBuilderType();
   static final _id_new0 = _class.constructorId(
-    r'(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/content/ContentValues;)V',
+    r'(Ljava/io/File;)V',
   );
 
   static final _new0 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.io.File file)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_MyOutputFileOptions_MyBuilder(
+    file_.File file,
+  ) {
+    return MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(_new0(
+            _class.reference.pointer,
+            _id_new0 as jni.JMethodIDPtr,
+            file.reference.pointer)
+        .reference);
+  }
+
+  static final _id_new1 = _class.constructorId(
+    r'(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/content/ContentValues;)V',
+  );
+
+  static final _new1 = ProtectedJniExtensions.lookup<
           ffi.NativeFunction<
               jni.JniResult Function(
                   ffi.Pointer<ffi.Void>,
@@ -1199,18 +1228,71 @@ class MyImageCapture_MyOutputFileOptions_MyBuilder extends jni.JObject {
 
   /// from: public void <init>(android.content.ContentResolver contentResolver, android.net.Uri uri, android.content.ContentValues contentValues)
   /// The returned object must be released after use, by calling the [release] method.
-  factory MyImageCapture_MyOutputFileOptions_MyBuilder(
+  factory MyImageCapture_MyOutputFileOptions_MyBuilder.new1(
     contentresolver_.ContentResolver contentResolver,
     uri_.Uri uri,
     contentvalues_.ContentValues contentValues,
   ) {
-    return MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(_new0(
+    return MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(_new1(
             _class.reference.pointer,
-            _id_new0 as jni.JMethodIDPtr,
+            _id_new1 as jni.JMethodIDPtr,
             contentResolver.reference.pointer,
             uri.reference.pointer,
             contentValues.reference.pointer)
         .reference);
+  }
+
+  static final _id_new2 = _class.constructorId(
+    r'(Ljava/io/OutputStream;)V',
+  );
+
+  static final _new2 = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public void <init>(java.io.OutputStream outputStream)
+  /// The returned object must be released after use, by calling the [release] method.
+  factory MyImageCapture_MyOutputFileOptions_MyBuilder.new2(
+    jni.JObject outputStream,
+  ) {
+    return MyImageCapture_MyOutputFileOptions_MyBuilder.fromReference(_new2(
+            _class.reference.pointer,
+            _id_new2 as jni.JMethodIDPtr,
+            outputStream.reference.pointer)
+        .reference);
+  }
+
+  static final _id_setMetadata = _class.instanceMethodId(
+    r'setMetadata',
+    r'(Landroidx/camera/core/ImageCapture$Metadata;)Landroidx/camera/core/ImageCapture$OutputFileOptions$Builder;',
+  );
+
+  static final _setMetadata = ProtectedJniExtensions.lookup<
+              ffi.NativeFunction<
+                  jni.JniResult Function(
+                      ffi.Pointer<ffi.Void>,
+                      jni.JMethodIDPtr,
+                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// from: public final androidx.camera.core.ImageCapture$OutputFileOptions$Builder setMetadata(androidx.camera.core.ImageCapture$Metadata metadata)
+  /// The returned object must be released after use, by calling the [release] method.
+  jni.JObject setMetadata(
+    jni.JObject metadata,
+  ) {
+    return _setMetadata(reference.pointer, _id_setMetadata as jni.JMethodIDPtr,
+            metadata.reference.pointer)
+        .object(const jni.JObjectType());
   }
 
   static final _id_build = _class.instanceMethodId(

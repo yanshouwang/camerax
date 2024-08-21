@@ -28,6 +28,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../java/io/File.dart' as file_;
+
 /// from: android.os.Environment
 class Environment extends jni.JObject {
   @override
@@ -389,10 +391,10 @@ class Environment extends jni.JObject {
 
   /// from: static public java.io.File getRootDirectory()
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getRootDirectory() {
+  static file_.File getRootDirectory() {
     return _getRootDirectory(
             _class.reference.pointer, _id_getRootDirectory as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getStorageDirectory = _class.staticMethodId(
@@ -414,10 +416,10 @@ class Environment extends jni.JObject {
 
   /// from: static public java.io.File getStorageDirectory()
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getStorageDirectory() {
+  static file_.File getStorageDirectory() {
     return _getStorageDirectory(_class.reference.pointer,
             _id_getStorageDirectory as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getDataDirectory = _class.staticMethodId(
@@ -439,10 +441,10 @@ class Environment extends jni.JObject {
 
   /// from: static public java.io.File getDataDirectory()
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getDataDirectory() {
+  static file_.File getDataDirectory() {
     return _getDataDirectory(
             _class.reference.pointer, _id_getDataDirectory as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getExternalStorageDirectory = _class.staticMethodId(
@@ -464,10 +466,10 @@ class Environment extends jni.JObject {
 
   /// from: static public java.io.File getExternalStorageDirectory()
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getExternalStorageDirectory() {
+  static file_.File getExternalStorageDirectory() {
     return _getExternalStorageDirectory(_class.reference.pointer,
             _id_getExternalStorageDirectory as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getExternalStoragePublicDirectory = _class.staticMethodId(
@@ -489,14 +491,14 @@ class Environment extends jni.JObject {
 
   /// from: static public java.io.File getExternalStoragePublicDirectory(java.lang.String string)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getExternalStoragePublicDirectory(
+  static file_.File getExternalStoragePublicDirectory(
     jni.JString string,
   ) {
     return _getExternalStoragePublicDirectory(
             _class.reference.pointer,
             _id_getExternalStoragePublicDirectory as jni.JMethodIDPtr,
             string.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getDownloadCacheDirectory = _class.staticMethodId(
@@ -518,10 +520,10 @@ class Environment extends jni.JObject {
 
   /// from: static public java.io.File getDownloadCacheDirectory()
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getDownloadCacheDirectory() {
+  static file_.File getDownloadCacheDirectory() {
     return _getDownloadCacheDirectory(_class.reference.pointer,
             _id_getDownloadCacheDirectory as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getExternalStorageState = _class.staticMethodId(
@@ -568,7 +570,7 @@ class Environment extends jni.JObject {
   /// from: static public java.lang.String getStorageState(java.io.File file)
   /// The returned object must be released after use, by calling the [release] method.
   static jni.JString getStorageState(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _getStorageState(_class.reference.pointer,
             _id_getStorageState as jni.JMethodIDPtr, file.reference.pointer)
@@ -594,7 +596,7 @@ class Environment extends jni.JObject {
   /// from: static public java.lang.String getExternalStorageState(java.io.File file)
   /// The returned object must be released after use, by calling the [release] method.
   static jni.JString getExternalStorageState1(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _getExternalStorageState1(
             _class.reference.pointer,
@@ -645,7 +647,7 @@ class Environment extends jni.JObject {
 
   /// from: static public boolean isExternalStorageRemovable(java.io.File file)
   static bool isExternalStorageRemovable1(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _isExternalStorageRemovable1(
             _class.reference.pointer,
@@ -696,7 +698,7 @@ class Environment extends jni.JObject {
 
   /// from: static public boolean isExternalStorageEmulated(java.io.File file)
   static bool isExternalStorageEmulated1(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _isExternalStorageEmulated1(
             _class.reference.pointer,
@@ -747,7 +749,7 @@ class Environment extends jni.JObject {
 
   /// from: static public boolean isExternalStorageLegacy(java.io.File file)
   static bool isExternalStorageLegacy1(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _isExternalStorageLegacy1(
             _class.reference.pointer,
@@ -798,7 +800,7 @@ class Environment extends jni.JObject {
 
   /// from: static public boolean isExternalStorageManager(java.io.File file)
   static bool isExternalStorageManager1(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _isExternalStorageManager1(
             _class.reference.pointer,

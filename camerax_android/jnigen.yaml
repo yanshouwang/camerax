@@ -43,6 +43,7 @@ classes:
   - androidx.camera.core.resolutionselector.ResolutionStrategy
   - androidx.camera.mlkit.vision.MlKitAnalyzer
   - androidx.camera.video.FallbackStrategy
+  # - androidx.camera.video.FileOutputOptions
   # - androidx.camera.video.MediaStoreOutputOptions
   - androidx.camera.video.OutputResults
   - androidx.camera.video.Quality
@@ -76,10 +77,12 @@ classes:
   - com.google.mlkit.vision.face.FaceDetectorOptions
   - com.google.mlkit.vision.face.FaceLandmark
   - com.google.mlkit.vision.interfaces.Detector
+  - java.io.File
   - java.lang.Runnable
   - java.util.concurrent.Executor
   - java.util.concurrent.Executors
   - java.util.concurrent.Future
+  - dev.hebei.camerax_android.MyFileOutputOptions
   - dev.hebei.camerax_android.MyImageAnalysis
   - dev.hebei.camerax_android.MyImageCapture
   - dev.hebei.camerax_android.MyMediaStoreOutputOptions

@@ -9,9 +9,11 @@ import Foundation
 import AVFoundation
 
 class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
-    let handler: (AVCapturePhoto, (any Error)?) -> Void
+    let url: URL
+    let handler: ((any Error)?) -> Void
     
-    init(completionHandler handler: @escaping (AVCapturePhoto, (any Error)?) -> Void) {
+    init(url: URL, completionHandler handler: @escaping ((any Error)?) -> Void) {
+        self.url = url
         self.handler = handler
     }
     
@@ -38,7 +40,15 @@ class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
         debugPrint("did finish processing photo.")
-        handler(photo, error)
+        do {
+            guard let data = photo.fileDataRepresentation() else {
+                throw CameraError.saveDataNil
+            }
+            try data.write(to: url, options: .atomic)
+            handler(nil)
+        } catch {
+            handler(error)
+        }
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: (any Error)?) {

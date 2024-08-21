@@ -310,7 +310,7 @@ enum FlashMode : NSInteger;
 @class CameraSelector;
 @class ZoomState;
 @class TorchState;
-@class NSString;
+@class NSURL;
 @class VideoRecordEvent;
 @class Recording;
 @class ImageProxy;
@@ -338,9 +338,9 @@ SWIFT_CLASS("_TtC11camerax_ios16CameraController")
 - (void)addTorchStateObserverWithCallback:(void (^ _Nonnull)(TorchState * _Nullable))callback;
 - (BOOL)removeTorchStateObserverAndReturnError:(NSError * _Nullable * _Nullable)error;
 - (BOOL)enableTorch:(BOOL)torchEnabled error:(NSError * _Nullable * _Nullable)error;
-- (void)takePictureWithFileName:(NSString * _Nullable)fileName completionHandler:(void (^ _Nonnull)(NSString * _Nullable, NSError * _Nullable))handler;
+- (void)takePictureWithUrl:(NSURL * _Nonnull)url completionHandler:(void (^ _Nonnull)(NSError * _Nullable))handler;
 - (BOOL)isRecording SWIFT_WARN_UNUSED_RESULT;
-- (Recording * _Nonnull)startRecordingWithFileName:(NSString * _Nullable)fileName enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(VideoRecordEvent * _Nonnull))listener SWIFT_WARN_UNUSED_RESULT;
+- (Recording * _Nonnull)startRecordingWithUrl:(NSURL * _Nonnull)url enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(VideoRecordEvent * _Nonnull))listener SWIFT_WARN_UNUSED_RESULT;
 - (void)setImageAnalyzer:(void (^ _Nonnull)(ImageProxy * _Nonnull))analyzer;
 - (void)clearImageAnalyzer;
 @end
@@ -438,7 +438,7 @@ SWIFT_CLASS("_TtC11camerax_ios16VideoRecordEvent")
 
 SWIFT_CLASS("_TtC11camerax_ios24VideoRecordFinalizeEvent")
 @interface VideoRecordFinalizeEvent : VideoRecordEvent
-@property (nonatomic, readonly, copy) NSString * _Nonnull uri;
+@property (nonatomic, readonly, copy) NSURL * _Nonnull savedUri;
 @property (nonatomic, readonly) NSError * _Nullable error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");

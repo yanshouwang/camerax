@@ -302,26 +302,13 @@ final class MyCameraController
 
   @override
   Future<Uri> takePicture({
-    String? fileName,
+    required Uri uri,
   }) async {
     final completer = Completer<Uri>();
-    final jniContentResolver = jni.MyJNI.context.getContentResolver();
-    final jniSavedCollection = jni.MediaStore_Images_Media.EXTERNAL_CONTENT_URI;
-    final jniRelativePath = JString.fromString(
-        '${jni.Environment.DIRECTORY_DCIM}/${jni.MyJNI.context.getPackageName()}');
-    final jniDisplayName = JString.fromString(
-        fileName ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
-    final jniMIMEType = JString.fromString('image/jpeg');
-    final jniContentValues = jni.ContentValues()
-      ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, jniRelativePath)
-      ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, jniDisplayName)
-      ..put(jni.MediaStore_MediaColumns.MIME_TYPE, jniMIMEType);
+    final jniPath = uri.toFilePath().toJString();
+    final jniFile = jni.File(jniPath);
     final jniOutputFileOptions =
-        jni.MyImageCapture_MyOutputFileOptions_MyBuilder(
-      jniContentResolver,
-      jniSavedCollection,
-      jniContentValues,
-    ).build();
+        jni.MyImageCapture_MyOutputFileOptions_MyBuilder(jniFile).build();
     final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
     final jniImageSavedCallback = jni.MyImageCapture_MyOnImageSavedCallbackImpl(
       jni.MyImageCapture_MyOnImageSavedCallback.implement(
@@ -347,7 +334,7 @@ final class MyCameraController
         ),
       ),
     );
-    await jniValue.takePictureToAlbumOnMainThread(
+    await jniValue.takePictureOnMainThread(
       jniOutputFileOptions,
       jniExecutor,
       jniImageSavedCallback,
@@ -406,27 +393,15 @@ final class MyCameraController
 
   @override
   Future<Recording> startRecording({
-    String? fileName,
+    required Uri uri,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
   }) async {
     await jniValue
         .setEnabledUseCasesOnMainThread(jni.CameraController.VIDEO_CAPTURE);
-    final jniContentResolver = jni.MyJNI.context.getContentResolver();
-    final jniCollectionUri = jni.MediaStore_Video_Media.EXTERNAL_CONTENT_URI;
-    final jniRelativePath = JString.fromString(
-        '${jni.Environment.DIRECTORY_DCIM}/${jni.MyJNI.context.getPackageName()}');
-    final jniDisplayName = JString.fromString(
-        fileName ?? '${DateTime.timestamp().millisecondsSinceEpoch}');
-    final jniMIMEType = JString.fromString('video/mp4');
-    final jniContentValues = jni.ContentValues()
-      ..put(jni.MediaStore_MediaColumns.RELATIVE_PATH, jniRelativePath)
-      ..put(jni.MediaStore_MediaColumns.DISPLAY_NAME, jniDisplayName)
-      ..put(jni.MediaStore_MediaColumns.MIME_TYPE, jniMIMEType);
-    final jniOutputOptions = jni.MyMediaStoreOutputOptions_MyBuilder(
-            jniContentResolver, jniCollectionUri)
-        .setContentValues(jniContentValues)
-        .build();
+    final jniPath = uri.toFilePath().toJString();
+    final jniFile = jni.File(jniPath);
+    final jniOutputOptions = jni.MyFileOutputOptions_MyBuilder(jniFile).build();
     final jniAudioConfig = jni.AudioConfig.create(enableAudio);
     final jniExecutor = jni.ContextCompat.getMainExecutor(jni.MyJNI.context);
     final jniRecording = await jniValue.startRecordingOnMainThread(

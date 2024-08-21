@@ -200,27 +200,18 @@ ListenerBlock21 wrapListenerBlock_ObjCBlock_ffiVoid_TorchState(ListenerBlock21 b
   return wrapper;
 }
 
-typedef void  (^ListenerBlock22)(NSString* , NSError* );
-ListenerBlock22 wrapListenerBlock_ObjCBlock_ffiVoid_NSString_NSError(ListenerBlock22 block) {
-  ListenerBlock22 wrapper = [^void(NSString* arg0, NSError* arg1) {
-    block([arg0 retain], [arg1 retain]);
-  } copy];
-  [block release];
-  return wrapper;
-}
-
-typedef void  (^ListenerBlock23)(VideoRecordEvent* );
-ListenerBlock23 wrapListenerBlock_ObjCBlock_ffiVoid_VideoRecordEvent(ListenerBlock23 block) {
-  ListenerBlock23 wrapper = [^void(VideoRecordEvent* arg0) {
+typedef void  (^ListenerBlock22)(VideoRecordEvent* );
+ListenerBlock22 wrapListenerBlock_ObjCBlock_ffiVoid_VideoRecordEvent(ListenerBlock22 block) {
+  ListenerBlock22 wrapper = [^void(VideoRecordEvent* arg0) {
     block([arg0 retain]);
   } copy];
   [block release];
   return wrapper;
 }
 
-typedef void  (^ListenerBlock24)(ImageProxy* );
-ListenerBlock24 wrapListenerBlock_ObjCBlock_ffiVoid_ImageProxy(ListenerBlock24 block) {
-  ListenerBlock24 wrapper = [^void(ImageProxy* arg0) {
+typedef void  (^ListenerBlock23)(ImageProxy* );
+ListenerBlock23 wrapListenerBlock_ObjCBlock_ffiVoid_ImageProxy(ListenerBlock23 block) {
+  ListenerBlock23 wrapper = [^void(ImageProxy* arg0) {
     block([arg0 retain]);
   } copy];
   [block release];

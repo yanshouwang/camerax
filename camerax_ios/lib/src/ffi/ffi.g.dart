@@ -161,13 +161,6 @@ external ffi.Pointer<objc.ObjCBlock>
 @ffi.Native<ffi.Pointer<objc.ObjCBlock> Function(ffi.Pointer<objc.ObjCBlock>)>(
     isLeaf: true)
 external ffi.Pointer<objc.ObjCBlock>
-    wrapListenerBlock_ObjCBlock_ffiVoid_NSString_NSError(
-  ffi.Pointer<objc.ObjCBlock> block,
-);
-
-@ffi.Native<ffi.Pointer<objc.ObjCBlock> Function(ffi.Pointer<objc.ObjCBlock>)>(
-    isLeaf: true)
-external ffi.Pointer<objc.ObjCBlock>
     wrapListenerBlock_ObjCBlock_ffiVoid_VideoRecordEvent(
   ffi.Pointer<objc.ObjCBlock> block,
 );
@@ -31091,14 +31084,11 @@ class CameraController extends objc.NSObject {
         this.pointer, _sel_enableTorch_error_, torchEnabled, error);
   }
 
-  /// takePictureWithFileName:completionHandler:
-  void takePictureWithFileName_completionHandler_(
-      objc.NSString? fileName, ObjCBlock_ffiVoid_NSString_NSError handler) {
-    _objc_msgSend_587(
-        this.pointer,
-        _sel_takePictureWithFileName_completionHandler_,
-        fileName?.pointer ?? ffi.nullptr,
-        handler.pointer);
+  /// takePictureWithUrl:completionHandler:
+  void takePictureWithUrl_completionHandler_(
+      objc.NSURL url, ObjCBlock_ffiVoid_NSError handler) {
+    _objc_msgSend_587(this.pointer, _sel_takePictureWithUrl_completionHandler_,
+        url.pointer, handler.pointer);
   }
 
   /// isRecording
@@ -31106,15 +31096,13 @@ class CameraController extends objc.NSObject {
     return _objc_msgSend_13(this.pointer, _sel_isRecording);
   }
 
-  /// startRecordingWithFileName:enableAudio:listener:
-  Recording startRecordingWithFileName_enableAudio_listener_(
-      objc.NSString? fileName,
-      bool enableAudio,
-      ObjCBlock_ffiVoid_VideoRecordEvent listener) {
+  /// startRecordingWithUrl:enableAudio:listener:
+  Recording startRecordingWithUrl_enableAudio_listener_(objc.NSURL url,
+      bool enableAudio, ObjCBlock_ffiVoid_VideoRecordEvent listener) {
     final _ret = _objc_msgSend_588(
         this.pointer,
-        _sel_startRecordingWithFileName_enableAudio_listener_,
-        fileName?.pointer ?? ffi.nullptr,
+        _sel_startRecordingWithUrl_enableAudio_listener_,
+        url.pointer,
         enableAudio,
         listener.pointer);
     return Recording.castFromPointer(_ret, retain: true, release: true);
@@ -32050,132 +32038,8 @@ final _objc_msgSend_586 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCSelector>,
             bool,
             ffi.Pointer<ffi.Pointer<objc.ObjCObject>>)>();
-void _ObjCBlock_ffiVoid_NSString_NSError_fnPtrTrampoline(
-        ffi.Pointer<objc.ObjCBlock> block,
-        ffi.Pointer<objc.ObjCObject> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1) =>
-    block.ref.target
-        .cast<
-            ffi.NativeFunction<
-                ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
-                    ffi.Pointer<objc.ObjCObject> arg1)>>()
-        .asFunction<
-            void Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
-void _ObjCBlock_ffiVoid_NSString_NSError_closureTrampoline(
-        ffi.Pointer<objc.ObjCBlock> block,
-        ffi.Pointer<objc.ObjCObject> arg0,
-        ffi.Pointer<objc.ObjCObject> arg1) =>
-    (objc.getBlockClosure(block) as void Function(ffi.Pointer<objc.ObjCObject>,
-        ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
-
-class ObjCBlock_ffiVoid_NSString_NSError extends objc.ObjCBlockBase {
-  ObjCBlock_ffiVoid_NSString_NSError._(ffi.Pointer<objc.ObjCBlock> pointer,
-      {bool retain = false, bool release = true})
-      : super(pointer, retain: retain, release: release);
-
-  /// Returns a block that wraps the given raw block pointer.
-  static ObjCBlock_ffiVoid_NSString_NSError castFromPointer(
-      ffi.Pointer<objc.ObjCBlock> pointer,
-      {bool retain = false,
-      bool release = false}) {
-    return ObjCBlock_ffiVoid_NSString_NSError._(pointer,
-        retain: retain, release: release);
-  }
-
-  /// Creates a block from a C function pointer.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ObjCBlock_ffiVoid_NSString_NSError.fromFunctionPointer(
-      ffi.Pointer<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1)>>
-          ptr)
-      : this._(objc.newPointerBlock(
-            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
-                        ffi.Void Function(
-                            ffi.Pointer<objc.ObjCBlock>,
-                            ffi.Pointer<objc.ObjCObject>,
-                            ffi.Pointer<objc.ObjCObject>)>(
-                    _ObjCBlock_ffiVoid_NSString_NSError_fnPtrTrampoline)
-                .cast(),
-            ptr.cast()));
-  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
-
-  /// Creates a block from a Dart function.
-  ///
-  /// This block must be invoked by native code running on the same thread as
-  /// the isolate that registered it. Invoking the block on the wrong thread
-  /// will result in a crash.
-  ObjCBlock_ffiVoid_NSString_NSError.fromFunction(
-      void Function(objc.NSString?, objc.NSError?) fn)
-      : this._(objc.newClosureBlock(
-            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
-                        ffi.Void Function(
-                            ffi.Pointer<objc.ObjCBlock>,
-                            ffi.Pointer<objc.ObjCObject>,
-                            ffi.Pointer<objc.ObjCObject>)>(
-                    _ObjCBlock_ffiVoid_NSString_NSError_closureTrampoline)
-                .cast(),
-            (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
-                arg0.address == 0
-                    ? null
-                    : objc.NSString.castFromPointer(arg0, retain: true, release: true),
-                arg1.address == 0 ? null : objc.NSError.castFromPointer(arg1, retain: true, release: true))));
-  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
-
-  /// Creates a listener block from a Dart function.
-  ///
-  /// This is based on FFI's NativeCallable.listener, and has the same
-  /// capabilities and limitations. This block can be invoked from any thread,
-  /// but only supports void functions, and is not run synchronously. See
-  /// NativeCallable.listener for more details.
-  ///
-  /// Note that unlike the default behavior of NativeCallable.listener, listener
-  /// blocks do not keep the isolate alive.
-  ObjCBlock_ffiVoid_NSString_NSError.listener(
-      void Function(objc.NSString?, objc.NSError?) fn)
-      : this._(wrapListenerBlock_ObjCBlock_ffiVoid_NSString_NSError(objc.newClosureBlock(
-            (_dartFuncListenerTrampoline ??=
-                    ffi.NativeCallable<ffi.Void Function(ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCObject>)>.listener(
-                        _ObjCBlock_ffiVoid_NSString_NSError_closureTrampoline)
-                      ..keepIsolateAlive = false)
-                .nativeFunction
-                .cast(),
-            (ffi.Pointer<objc.ObjCObject> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
-                arg0.address == 0
-                    ? null
-                    : objc.NSString.castFromPointer(arg0,
-                        retain: false, release: true),
-                arg1.address == 0
-                    ? null
-                    : objc.NSError.castFromPointer(arg1, retain: false, release: true)))));
-  static ffi.NativeCallable<
-      ffi.Void Function(
-          ffi.Pointer<objc.ObjCBlock>,
-          ffi.Pointer<objc.ObjCObject>,
-          ffi.Pointer<objc.ObjCObject>)>? _dartFuncListenerTrampoline;
-
-  void call(objc.NSString? arg0, objc.NSError? arg1) => pointer.ref.invoke
-          .cast<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Pointer<objc.ObjCBlock> block,
-                      ffi.Pointer<objc.ObjCObject> arg0,
-                      ffi.Pointer<objc.ObjCObject> arg1)>>()
-          .asFunction<
-              void Function(
-                  ffi.Pointer<objc.ObjCBlock>,
-                  ffi.Pointer<objc.ObjCObject>,
-                  ffi.Pointer<objc.ObjCObject>)>()(
-      pointer, arg0?.pointer ?? ffi.nullptr, arg1?.pointer ?? ffi.nullptr);
-}
-
-late final _sel_takePictureWithFileName_completionHandler_ =
-    objc.registerName("takePictureWithFileName:completionHandler:");
+late final _sel_takePictureWithUrl_completionHandler_ =
+    objc.registerName("takePictureWithUrl:completionHandler:");
 final _objc_msgSend_587 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
@@ -32529,8 +32393,8 @@ class VideoRecordEvent extends objc.NSObject {
 
 late final _class_VideoRecordEvent =
     objc.getClass("camerax_ios.VideoRecordEvent");
-late final _sel_startRecordingWithFileName_enableAudio_listener_ =
-    objc.registerName("startRecordingWithFileName:enableAudio:listener:");
+late final _sel_startRecordingWithUrl_enableAudio_listener_ =
+    objc.registerName("startRecordingWithUrl:enableAudio:listener:");
 final _objc_msgSend_588 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
@@ -33146,10 +33010,10 @@ class VideoRecordFinalizeEvent extends VideoRecordEvent {
         obj.pointer, _sel_isKindOfClass_, _class_VideoRecordFinalizeEvent);
   }
 
-  /// uri
-  objc.NSString get uri {
-    final _ret = _objc_msgSend_11(this.pointer, _sel_uri);
-    return objc.NSString.castFromPointer(_ret, retain: true, release: true);
+  /// savedUri
+  objc.NSURL get savedUri {
+    final _ret = _objc_msgSend_40(this.pointer, _sel_savedUri);
+    return objc.NSURL.castFromPointer(_ret, retain: true, release: true);
   }
 
   /// error
@@ -33261,7 +33125,7 @@ class VideoRecordFinalizeEvent extends VideoRecordEvent {
 
 late final _class_VideoRecordFinalizeEvent =
     objc.getClass("camerax_ios.VideoRecordFinalizeEvent");
-late final _sel_uri = objc.registerName("uri");
+late final _sel_savedUri = objc.registerName("savedUri");
 
 /// VideoRecordStartEvent
 class VideoRecordStartEvent extends VideoRecordEvent {

@@ -1,15 +1,12 @@
-import 'package:camerax_android_example/models.dart';
-import 'package:camerax_android_example/router.dart';
-import 'package:camerax_android_example/view_models.dart';
-import 'package:camerax_android_example/widgets.dart';
+import 'package:camerax_ios_example/models.dart';
+import 'package:camerax_ios_example/view_models.dart';
+import 'package:camerax_ios_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-import 'ml_items_view.dart';
-import 'raw_pixels_view.dart';
 import 'thumbnail.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,7 +16,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with RouteAware {
+class _HomeViewState extends State<HomeView> {
   late final PageController _pageController;
 
   Offset? _onPanStartPosition;
@@ -42,8 +39,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
-    final imageModel = viewModel.imageModel;
-    final items = viewModel.items;
     final recording = viewModel.recording;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
@@ -93,43 +88,23 @@ class _HomeViewState extends State<HomeView> with RouteAware {
             ),
           ),
           Expanded(
-            child: ClipRect(
-              child: Stack(
-                children: [
-                  PreviewView(
-                    controller: controller,
-                    scaleType: ScaleType.fillCenter,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                PreviewView(
+                  controller: controller,
+                  scaleType: ScaleType.fillCenter,
+                ),
+                if (zoomState != null)
+                  ZoomWidget(
+                    minimum: zoomState.minZoomRatio,
+                    maximum: zoomState.maxZoomRatio,
+                    value: zoomState.zoomRatio,
+                    onChanged: (value) {
+                      viewModel.setZoomRatio(value).ignore();
+                    },
                   ),
-                  if (imageModel != null)
-                    Container(
-                      alignment: Alignment.topRight,
-                      margin: const EdgeInsets.all(20.0),
-                      child: SizedBox(
-                        width: 100.0,
-                        child: RawPixelsView(
-                          image: imageModel.image,
-                          rotationDegrees: imageModel.rotationDegrees,
-                        ),
-                      ),
-                    ),
-                  if (items.isNotEmpty)
-                    MLItemsView(
-                      items: items,
-                    ),
-                  if (zoomState != null)
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: ZoomWidget(
-                        minimum: zoomState.minZoomRatio,
-                        maximum: zoomState.maxZoomRatio,
-                        value: zoomState.zoomRatio,
-                        onChanged: (value) {
-                          viewModel.setZoomRatio(value).ignore();
-                        },
-                      ),
-                    ),
-                ],
-              ),
+              ],
             ),
           ),
           Column(
@@ -420,36 +395,5 @@ class _HomeViewState extends State<HomeView> with RouteAware {
         ],
       ),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final route = ModalRoute.of(context);
-    if (route == null) {
-      return;
-    }
-    routeObserver.subscribe(this, route);
-  }
-
-  @override
-  void didPushNext() {
-    super.didPushNext();
-    final viewModel = ViewModel.of<HomeViewModel>(context);
-    viewModel.unbind();
-  }
-
-  @override
-  void didPopNext() {
-    super.didPopNext();
-    final viewModel = ViewModel.of<HomeViewModel>(context);
-    viewModel.bind();
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    _pageController.dispose();
-    super.dispose();
   }
 }

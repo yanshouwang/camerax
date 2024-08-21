@@ -193,44 +193,29 @@ import Photos
         videoDevice.torchMode = torchMode
     }
     
-    @objc public func takePicture(fileName: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
-        if capturePhotoCaptureDelegate == nil {
-            let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-            //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
-            //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
-            //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
-            //        }
-            //        if #available(iOS 16.0, *) {
-            //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
-            //        }
-            //        settings.flashMode = capturePhotoSettings.flashMode
-            //        if #available(iOS 13.0, *) {
-            //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-            //        }
-            let delegate = CapturePhotoCaptureDelegate() { [self] photo, error in
-                capturePhotoCaptureDelegate = nil
-                if let error {
-                    handler(nil, error)
-                } else {
-                    savePhoto(photo, name: fileName, completionHandler: handler)
-                }
-            }
-            capturePhotoCaptureDelegate = delegate
-            capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
-        } else {
-            handler(nil, CameraError.capturePhotoDelegateNotNil)
-        }
+    @objc public func takePicture(url: URL, completionHandler handler: @escaping ((any Error)?) -> Void) {
+        let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
+        //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
+        //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
+        //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
+        //        }
+        //        if #available(iOS 16.0, *) {
+        //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
+        //        }
+        //        settings.flashMode = capturePhotoSettings.flashMode
+        //        if #available(iOS 13.0, *) {
+        //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
+        //        }
+        let delegate = CapturePhotoCaptureDelegate(url: url, completionHandler: handler)
+        capturePhotoCaptureDelegate = delegate
+        capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
     }
     
     @objc public func isRecording() -> Bool {
         return captureMovieFileOutput.isRecording
     }
     
-    @objc public func startRecording(fileName: String?, enableAudio: Bool, listener: @escaping (VideoRecordEvent) -> Void) -> Recording {
-        let moviesUrl = try! FileManager.default.url(for: .moviesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let name = fileName ?? "\(Date().timeIntervalSince1970)"
-        let url = moviesUrl.appendingPathComponent("\(name).mov")
-//        let url = moviesUrl.appendingPathComponent(name, conformingTo: .jpeg)
+    @objc public func startRecording(url: URL, enableAudio: Bool, listener: @escaping (VideoRecordEvent) -> Void) -> Recording {
         let delegate = CaptureFileOutputRecordingDelegate(listener: listener)
         captureFileOutputRecordingDelegate = delegate
         captureMovieFileOutput.startRecording(to: url, recordingDelegate: delegate)
@@ -354,39 +339,6 @@ import Photos
         }
         let videoDevice = videoDeviceInput.device
         torchState = TorchState(value: videoDevice.isTorchActive)
-    }
-    
-    private func savePhoto(_ photo: AVCapturePhoto, name: String?, completionHandler handler: @escaping (String?, (any Error)?) -> Void) {
-        if let data = photo.fileDataRepresentation() {
-            var localIdentifiers = [String]()
-            PHPhotoLibrary.shared().performChanges() {
-                let creationRequest = PHAssetCreationRequest.forAsset()
-                let options = PHAssetResourceCreationOptions()
-                options.originalFilename = name
-                creationRequest.addResource(with: .photo, data: data, options: options)
-                guard let localIdentifier = creationRequest.placeholderForCreatedAsset?.localIdentifier else {
-                    return
-                }
-                localIdentifiers.append(localIdentifier)
-            } completionHandler: { success, error in
-                if let error {
-                    handler(nil, error)
-                } else if let savedAsset = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: nil).firstObject {
-                    savedAsset.requestContentEditingInput(with: nil) { input,_ in
-                        if let input, let url = input.fullSizeImageURL {
-                            debugPrint("saved url \(url.path)")
-                            handler(url.path, nil)
-                        } else {
-                            handler(nil, CameraError.saveUrlNil)
-                        }
-                    }
-                } else {
-                    handler(nil, CameraError.saveAssetNil)
-                }
-            }
-        } else {
-            handler(nil, CameraError.saveDataNil)
-        }
     }
 }
 

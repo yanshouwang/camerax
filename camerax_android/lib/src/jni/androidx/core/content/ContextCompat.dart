@@ -30,6 +30,8 @@ import 'package:jni/jni.dart' as jni;
 
 import '../../../android/content/Context.dart' as context_;
 
+import '../../../java/io/File.dart' as file_;
+
 import '../../../java/util/concurrent/Executor.dart' as executor_;
 
 /// from: androidx.core.content.ContextCompat$RegisterReceiverFlags
@@ -325,12 +327,12 @@ class ContextCompat extends jni.JObject {
 
   /// from: static public java.io.File getDataDir(android.content.Context context)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getDataDir(
+  static file_.File getDataDir(
     context_.Context context,
   ) {
     return _getDataDir(_class.reference.pointer,
             _id_getDataDir as jni.JMethodIDPtr, context.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getObbDirs = _class.staticMethodId(
@@ -351,12 +353,12 @@ class ContextCompat extends jni.JObject {
 
   /// from: static public java.io.File[] getObbDirs(android.content.Context context)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<jni.JObject> getObbDirs(
+  static jni.JArray<file_.File> getObbDirs(
     context_.Context context,
   ) {
     return _getObbDirs(_class.reference.pointer,
             _id_getObbDirs as jni.JMethodIDPtr, context.reference.pointer)
-        .object(const jni.JArrayType(jni.JObjectType()));
+        .object(const jni.JArrayType(file_.$FileType()));
   }
 
   static final _id_getExternalFilesDirs = _class.staticMethodId(
@@ -380,7 +382,7 @@ class ContextCompat extends jni.JObject {
 
   /// from: static public java.io.File[] getExternalFilesDirs(android.content.Context context, java.lang.String string)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<jni.JObject> getExternalFilesDirs(
+  static jni.JArray<file_.File> getExternalFilesDirs(
     context_.Context context,
     jni.JString string,
   ) {
@@ -389,7 +391,7 @@ class ContextCompat extends jni.JObject {
             _id_getExternalFilesDirs as jni.JMethodIDPtr,
             context.reference.pointer,
             string.reference.pointer)
-        .object(const jni.JArrayType(jni.JObjectType()));
+        .object(const jni.JArrayType(file_.$FileType()));
   }
 
   static final _id_getExternalCacheDirs = _class.staticMethodId(
@@ -410,14 +412,14 @@ class ContextCompat extends jni.JObject {
 
   /// from: static public java.io.File[] getExternalCacheDirs(android.content.Context context)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<jni.JObject> getExternalCacheDirs(
+  static jni.JArray<file_.File> getExternalCacheDirs(
     context_.Context context,
   ) {
     return _getExternalCacheDirs(
             _class.reference.pointer,
             _id_getExternalCacheDirs as jni.JMethodIDPtr,
             context.reference.pointer)
-        .object(const jni.JArrayType(jni.JObjectType()));
+        .object(const jni.JArrayType(file_.$FileType()));
   }
 
   static final _id_getDrawable = _class.staticMethodId(
@@ -553,14 +555,14 @@ class ContextCompat extends jni.JObject {
 
   /// from: static public java.io.File getNoBackupFilesDir(android.content.Context context)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getNoBackupFilesDir(
+  static file_.File getNoBackupFilesDir(
     context_.Context context,
   ) {
     return _getNoBackupFilesDir(
             _class.reference.pointer,
             _id_getNoBackupFilesDir as jni.JMethodIDPtr,
             context.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_getCodeCacheDir = _class.staticMethodId(
@@ -581,12 +583,12 @@ class ContextCompat extends jni.JObject {
 
   /// from: static public java.io.File getCodeCacheDir(android.content.Context context)
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getCodeCacheDir(
+  static file_.File getCodeCacheDir(
     context_.Context context,
   ) {
     return _getCodeCacheDir(_class.reference.pointer,
             _id_getCodeCacheDir as jni.JMethodIDPtr, context.reference.pointer)
-        .object(const jni.JObjectType());
+        .object(const file_.$FileType());
   }
 
   static final _id_createDeviceProtectedStorageContext = _class.staticMethodId(

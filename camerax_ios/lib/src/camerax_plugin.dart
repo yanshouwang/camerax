@@ -1,5 +1,6 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'core.dart';
 import 'view.dart';
 
 final class CameraXiOSPlugin extends CameraXPlugin {
@@ -11,8 +12,9 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   CameraSelector createCameraSelector({
     LensFacing? lensFacing,
   }) {
-    // TODO: implement createCameraSelector
-    throw UnimplementedError();
+    return MyCameraSelector(
+      lensFacing: lensFacing,
+    );
   }
 
   @override

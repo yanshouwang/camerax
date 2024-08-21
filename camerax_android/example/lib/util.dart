@@ -13,6 +13,8 @@ extension doubleX on double {
 
 extension FileX on File {
   bool get isVideo {
-    return path.toUpperCase().endsWith('.MP4');
+    return path.toUpperCase().endsWith('.MOV') ||
+        path.toUpperCase().endsWith('.MP4') ||
+        path.toUpperCase().endsWith('.HEVC');
   }
 }

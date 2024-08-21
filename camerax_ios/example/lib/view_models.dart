@@ -1,1 +1,1 @@
-export 'view_models/camera_view_model.dart';
+export 'view_models/home_view_model.dart';

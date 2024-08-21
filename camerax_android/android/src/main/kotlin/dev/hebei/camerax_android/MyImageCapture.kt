@@ -8,6 +8,8 @@ import androidx.annotation.Keep
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
+import java.io.File
+import java.io.OutputStream
 
 @Keep
 class MyImageCapture {
@@ -64,8 +66,24 @@ class MyImageCapture {
     }
 
     class MyOutputFileOptions {
-        class MyBuilder(contentResolver: ContentResolver, savedCollection: Uri, contentValues: ContentValues) {
-            private val builder = ImageCapture.OutputFileOptions.Builder(contentResolver, savedCollection, contentValues)
+        class MyBuilder {
+            constructor(file: File) {
+                builder = ImageCapture.OutputFileOptions.Builder(file)
+            }
+
+            constructor(contentResolver: ContentResolver, savedCollection: Uri, contentValues: ContentValues) {
+                builder = ImageCapture.OutputFileOptions.Builder(contentResolver, savedCollection, contentValues)
+            }
+
+            constructor(outputStream: OutputStream) {
+                builder = ImageCapture.OutputFileOptions.Builder(outputStream)
+            }
+
+            private val builder: ImageCapture.OutputFileOptions.Builder
+
+            fun setMetadata(metadata: ImageCapture.Metadata): ImageCapture.OutputFileOptions.Builder {
+                return builder.setMetadata(metadata)
+            }
 
             fun build(): ImageCapture.OutputFileOptions {
                 return builder.build()

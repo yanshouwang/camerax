@@ -231,20 +231,20 @@ final class MyCameraController
 
   @override
   Future<Uri> takePicture({
-    String? fileName,
+    required Uri uri,
   }) async {
     final completer = Completer<Uri>();
-    final ffiHandler = ffi.ObjCBlock_ffiVoid_NSString_NSError.listener(
-        (ffiSavedUri, ffiError) {
+    final ffiPath = uri.toFilePath().toNSString();
+    final ffiURL = NSURL.alloc().initFileURLWithPath_(ffiPath);
+    final ffiHandler = ffi.ObjCBlock_ffiVoid_NSError.listener((ffiError) {
       if (ffiError == null) {
-        final savedUri = Uri.file('$ffiSavedUri');
-        completer.complete(savedUri);
+        completer.complete(uri);
       } else {
         completer.completeError(ffiError);
       }
     });
-    ffiValue.takePictureWithFileName_completionHandler_(
-      fileName?.toNSString(),
+    ffiValue.takePictureWithUrl_completionHandler_(
+      ffiURL,
       ffiHandler,
     );
     final savedUri = await completer.future;
@@ -295,18 +295,19 @@ final class MyCameraController
 
   @override
   Future<Recording> startRecording({
-    String? fileName,
+    required Uri uri,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
   }) async {
+    final ffiPath = uri.toFilePath().toNSString();
+    final ffiURL = NSURL.alloc().initFileURLWithPath_(ffiPath);
     final ffiListener =
         ffi.ObjCBlock_ffiVoid_VideoRecordEvent.listener((ffiEvent) {
       final event = ffiEvent.dartValue;
       listener(event);
     });
-    final ffiRecording =
-        ffiValue.startRecordingWithFileName_enableAudio_listener_(
-      fileName?.toNSString(),
+    final ffiRecording = ffiValue.startRecordingWithUrl_enableAudio_listener_(
+      ffiURL,
       enableAudio,
       ffiListener,
     );

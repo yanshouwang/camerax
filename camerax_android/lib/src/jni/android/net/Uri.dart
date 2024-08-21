@@ -28,6 +28,8 @@ import 'dart:isolate' show ReceivePort;
 import 'package:jni/internal_helpers_for_jnigen.dart';
 import 'package:jni/jni.dart' as jni;
 
+import '../../java/io/File.dart' as file_;
+
 /// from: android.net.Uri$Builder
 class Uri_Builder extends jni.JObject {
   @override
@@ -1241,7 +1243,7 @@ class Uri extends jni.JObject {
   /// from: static public android.net.Uri fromFile(java.io.File file)
   /// The returned object must be released after use, by calling the [release] method.
   static Uri fromFile(
-    jni.JObject file,
+    file_.File file,
   ) {
     return _fromFile(_class.reference.pointer, _id_fromFile as jni.JMethodIDPtr,
             file.reference.pointer)

@@ -1,3 +1,4 @@
+export 'MyFileOutputOptions.dart';
 export 'MyImageAnalysis.dart';
 export 'MyImageCapture.dart';
 export 'MyMediaStoreOutputOptions.dart';

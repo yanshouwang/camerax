@@ -9,9 +9,7 @@ final class MyCameraSelector implements CameraSelector {
   factory MyCameraSelector({
     LensFacing? lensFacing,
   }) {
-    if (lensFacing == null) {
-      throw UnimplementedError();
-    }
+    lensFacing ??= LensFacing.back;
     final ffiCameraSelector =
         ffi.CameraSelector.alloc().initWithLensFacing_(lensFacing.ffiValue);
     return MyCameraSelector.ffi(ffiCameraSelector);
