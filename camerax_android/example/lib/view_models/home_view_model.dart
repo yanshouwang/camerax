@@ -183,7 +183,10 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> takePicture() async {
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getExternalStorageDirectory();
+    if (directory == null) {
+      throw ArgumentError.notNull('directory');
+    }
     final filePath = path.join(directory.path,
         'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG');
     final uri = Uri.file(filePath);
@@ -198,7 +201,10 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     if (recording != null) {
       throw StateError('Recording.');
     }
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getExternalStorageDirectory();
+    if (directory == null) {
+      throw ArgumentError.notNull('directory');
+    }
     final filePath = path.join(directory.path,
         'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
     final uri = Uri.file(filePath);

@@ -19,6 +19,7 @@ class Thumbnail extends StatelessWidget {
       return Video.file(
         key: ValueKey(uri),
         file: file,
+        fit: BoxFit.cover,
       );
     } else {
       return Image.file(
@@ -31,10 +32,12 @@ class Thumbnail extends StatelessWidget {
 
 class Video extends StatefulWidget {
   final File file;
+  final BoxFit? fit;
 
   const Video.file({
     super.key,
     required this.file,
+    this.fit,
   });
 
   @override
@@ -58,7 +61,13 @@ class _VideoState extends State<Video> {
       valueListenable: _controller,
       builder: (context, videoPlayerValue, child) {
         if (videoPlayerValue.isInitialized) {
-          return VideoPlayer(_controller);
+          return FittedBox(
+            fit: widget.fit ?? BoxFit.scaleDown,
+            child: SizedBox.fromSize(
+              size: videoPlayerValue.size,
+              child: VideoPlayer(_controller),
+            ),
+          );
         } else {
           return const Offstage();
         }
