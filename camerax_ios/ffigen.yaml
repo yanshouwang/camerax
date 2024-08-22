@@ -14,34 +14,46 @@ compiler-opts:
 headers:
   entry-points:
     - 'src/camerax_ios.h'
+objc-protocols:
+  include:
+    - Analyzer
+    - VideoRecordEvent
+  module:
+    Analyzer: camerax_ios
+    VideoRecordEvent: camerax_ios
 objc-interfaces:
   include:
-    - PreviewView
-    - PreviewViewFactory
+    - RawAnalyzer
+    - MLAnalyzer
     - CameraController
     - CameraSelector
-    - ZoomState
-    - TorchState
     - ImageProxy
+    - PlaneProxy
+    - PreviewView
+    - PreviewViewFactory
     - Recording
-    - VideoRecordEvent
+    - TorchState
     - VideoRecordStartEvent
     - VideoRecordFinalizeEvent
+    - ZoomState
   module:
-    PreviewView: camerax_ios
-    PreviewViewFactory: camerax_ios
+    RawAnalyzer: camerax_ios
+    MLAnalyzer: camerax_ios
     CameraController: camerax_ios
     CameraSelector: camerax_ios
-    ZoomState: camerax_ios
-    TorchState: camerax_ios
     ImageProxy: camerax_ios
+    PlaneProxy: camerax_ios
+    PreviewView: camerax_ios
+    PreviewViewFactory: camerax_ios
     Recording: camerax_ios
-    VideoRecordEvent: camerax_ios
+    TorchState: camerax_ios
     VideoRecordStartEvent: camerax_ios
     VideoRecordFinalizeEvent: camerax_ios
+    ZoomState: camerax_ios
 enums:
   include:
     - AuthorizationType
-    - ScaleType
-    - LensFacing
     - FlashMode
+    - ImageFormat
+    - LensFacing
+    - ScaleType

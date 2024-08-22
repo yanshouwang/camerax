@@ -302,8 +302,8 @@ final class MyCameraController
     final ffiPath = uri.toFilePath().toNSString();
     final ffiURL = NSURL.alloc().initFileURLWithPath_(ffiPath);
     final ffiListener =
-        ffi.ObjCBlock_ffiVoid_VideoRecordEvent.listener((ffiEvent) {
-      final event = ffiEvent.dartValue;
+        ffi.ObjCBlock_ffiVoid_objcObjCObject.listener((ffiEvent) {
+      final event = ffiEvent.dartVideoRecordEvent;
       listener(event);
     });
     final ffiRecording = ffiValue.startRecordingWithUrl_enableAudio_listener_(
@@ -341,16 +341,16 @@ final class MyCameraController
   }
 
   @override
-  Future<ImageFormat> getImageAnalysisOutputImageFormat() {
-    // TODO: implement getImageAnalysisOutputImageFormat
-    throw UnimplementedError();
+  Future<ImageFormat> getImageAnalysisOutputImageFormat() async {
+    final ffiOutputImageFormat = ffiValue.getImageAnalysisOutputImageFormat();
+    final outputImageFormat = ffiOutputImageFormat.dartValue;
+    return outputImageFormat;
   }
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      ImageFormat outputImageFormat) {
-    // TODO: implement setImageAnalysisOutputImageFormat
-    throw UnimplementedError();
+      ImageFormat outputImageFormat) async {
+    ffiValue.setImageAnalysisOutputImageFormat_(outputImageFormat.ffiValue);
   }
 
   @override
@@ -367,15 +367,13 @@ final class MyCameraController
   }
 
   @override
-  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) {
-    // TODO: implement setImageAnalyzer
-    throw UnimplementedError();
+  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) async {
+    ffiValue.setImageAnalysisAnalyzer_(analyzer.ffiValue);
   }
 
   @override
-  Future<void> clearImageAnalysisAnalyzer() {
-    // TODO: implement clearImageAnalyzer
-    throw UnimplementedError();
+  Future<void> clearImageAnalysisAnalyzer() async {
+    ffiValue.clearImageAnalysisAnalyzer();
   }
 
   void _addZoomStateObserver() {

@@ -6,15 +6,29 @@
 //
 
 import Foundation
+import AVFoundation
 
 @objc public class ImageProxy: NSObject {
-    let width: Int
-    let height: Int
-    let data: Data
+    let imageBuffer: CVImageBuffer
     
-    init(width: Int, height: Int, data: Data) {
+    @objc public let format: ImageFormat
+    @objc public let width: Int
+    @objc public let height: Int
+    @objc public let rotationDegrees: Int
+    @objc public let planeProxies: [PlaneProxy]
+    @objc public let timestamp: Int
+    
+    init(imageBuffer: CVImageBuffer, format: ImageFormat, width: Int, height: Int, rotationDegrees: Int, planeProxies: [PlaneProxy], timestamp: Int) {
+        self.imageBuffer = imageBuffer
+        self.format = format
         self.width = width
         self.height = height
-        self.data = data
+        self.rotationDegrees = rotationDegrees
+        self.planeProxies = planeProxies
+        self.timestamp = timestamp
+    }
+    
+    @objc public func close() {
+        CVPixelBufferUnlockBaseAddress(imageBuffer, .readOnly)
     }
 }

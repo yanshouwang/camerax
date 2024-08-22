@@ -13,29 +13,3 @@ import AVFoundation
     case fillCenter
     case fitCenter
 }
-
-extension ScaleType {
-    var swiftValue: AVLayerVideoGravity {
-        switch self {
-        case .fill:
-            return .resize
-        case .fillCenter:
-            return .resizeAspectFill
-        case .fitCenter:
-            return .resizeAspect
-        }
-    }
-}
-
-extension AVLayerVideoGravity {
-    var ffiValue: ScaleType {
-        switch self {
-        case .resizeAspectFill:
-            return .fillCenter
-        case .resizeAspect:
-            return .fitCenter
-        default:
-            return .fill
-        }
-    }
-}

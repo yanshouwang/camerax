@@ -33,6 +33,9 @@ import Photos
     }
     private let captureMovieFileOutput: AVCaptureMovieFileOutput
     private var captureFileOutputRecordingDelegate: AVCaptureFileOutputRecordingDelegate?
+    private let captureVideoDataOutput: AVCaptureVideoDataOutput
+    private var captureVideoDataOutputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
+    private let captureVideoDataOutputQueue: DispatchQueue
     
     @objc public override init() {
         session = AVCaptureSession()
@@ -41,12 +44,19 @@ import Photos
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoSettings = AVCapturePhotoSettings()
         captureMovieFileOutput = AVCaptureMovieFileOutput()
+        captureVideoDataOutput = AVCaptureVideoDataOutput()
+        captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
         super.init()
-        session.sessionPreset = .photo
         try? addVideoDeviceInput(cameraSelector: .back)
         try? addAudioDeviceInput()
         try? addCapturePhotoOutput()
         try? addCaptureMovieFileOutput()
+        try? addCaptureVideoDataOutput()
+        session.sessionPreset = .high
+        captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
+        let videoDataOutputFormatKey = kCVPixelBufferPixelFormatTypeKey as String
+        let videoDataOutputFormatValue = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+        captureVideoDataOutput.videoSettings = [videoDataOutputFormatKey: videoDataOutputFormatValue]
     }
     
     @objc public func checkAuthorization(type: AuthorizationType) -> Bool {
@@ -179,14 +189,14 @@ import Photos
         observation.invalidate()
     }
     
-    @objc public func enableTorch(_ torchEnabled: Bool) throws {
+    @objc public func enableTorch(_ enabled: Bool) throws {
         guard let videoDeviceInput = self.videoDeviceInput else {
             throw CameraError.deviceNil
         }
         let videoDevice = videoDeviceInput.device
         try videoDevice.lockForConfiguration()
         defer { videoDevice.unlockForConfiguration() }
-        let torchMode = torchEnabled ? AVCaptureDevice.TorchMode.on : .off
+        let torchMode = enabled ? AVCaptureDevice.TorchMode.on : .off
         guard videoDevice.isTorchModeSupported(torchMode) else {
             throw CameraError.unsupported
         }
@@ -216,18 +226,36 @@ import Photos
     }
     
     @objc public func startRecording(url: URL, enableAudio: Bool, listener: @escaping (VideoRecordEvent) -> Void) -> Recording {
+        if let audioConnection = captureMovieFileOutput.connection(with: .audio) {
+            audioConnection.isEnabled = enableAudio
+        }
         let delegate = CaptureFileOutputRecordingDelegate(listener: listener)
         captureFileOutputRecordingDelegate = delegate
         captureMovieFileOutput.startRecording(to: url, recordingDelegate: delegate)
         return Recording(output: captureMovieFileOutput)
     }
     
-    @objc public func setImageAnalyzer(_ analyzer: @escaping (ImageProxy) -> Void) {
-        
+    @objc public func getImageAnalysisOutputImageFormat() -> ImageFormat {
+        let key = kCVPixelBufferPixelFormatTypeKey as String
+        guard let outputImageFormat = captureVideoDataOutput.videoSettings[key] as? Int else {
+            return .yuv_420_888
+        }
+        return outputImageFormat.ffiImageFormat
     }
     
-    @objc public func clearImageAnalyzer() {
-        
+    @objc public func setImageAnalysisOutputImageFormat(_ outputImageFormat: ImageFormat) {
+        let key = kCVPixelBufferPixelFormatTypeKey as String
+        captureVideoDataOutput.videoSettings = [key: outputImageFormat.swiftValue]
+    }
+    
+    @objc public func setImageAnalysisAnalyzer(_ analyzer: Analyzer) {
+        let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer)
+        captureVideoDataOutputSampleBufferDelegate = delegate
+        captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: captureVideoDataOutputQueue)
+    }
+    
+    @objc public func clearImageAnalysisAnalyzer() {
+        captureVideoDataOutput.setSampleBufferDelegate(nil, queue: captureVideoDataOutputQueue)
     }
     
     private func removeVideoDeviceInput() {
@@ -321,6 +349,13 @@ import Photos
             throw CameraError.cannotAddOutput
         }
         session.addOutput(captureMovieFileOutput)
+    }
+    
+    func addCaptureVideoDataOutput() throws {
+        guard session.canAddOutput(captureVideoDataOutput) else {
+            throw CameraError.cannotAddOutput
+        }
+        session.addOutput(captureVideoDataOutput)
     }
     
     private func onZoomStateChanged() {

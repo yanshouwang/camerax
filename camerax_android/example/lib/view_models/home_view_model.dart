@@ -42,43 +42,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   ImageModel? get imageModel => _imageModel;
   List<MLObject> get items => _items;
 
-  void _initialize() async {
-    _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
-      logger.info(
-          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
-      _zoomState = zoomState;
-      notifyListeners();
-    });
-    _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
-      logger.info('torchStateChanged $torchState');
-      _torchState = torchState;
-      notifyListeners();
-    });
-    final videoAuthorized = await controller.requestAuthorization(
-      type: AuthorizationType.video,
-    );
-    final audioAuthorized = await controller.requestAuthorization(
-      type: AuthorizationType.audio,
-    );
-    if (!videoAuthorized || !audioAuthorized) {
-      throw StateError('requestAuthorization failed.');
-    }
-    await controller.setCameraSelector(CameraSelector.back);
-    _zoomState = await controller.getZoomState();
-    _torchState = await controller.getTorchState();
-    _flashMode = await controller.getImageCaptureFlashMode();
-    notifyListeners();
-    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
-    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-    logger.info(
-        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
-torchState: $torchState
-flashMode: $flashMode
-isPinchToZoomEnabled: $isPinchToZoomEnabled
-isTapToFocusEnabled: $isTapToFocusEnabled''');
-    await bind();
-  }
-
   Future<void> bind() async {
     await controller.bind();
   }
@@ -156,14 +119,6 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
   }
 
-  Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
-    final hasCamera = await controller.hasCamera(cameraSelector);
-    if (!hasCamera) {
-      return;
-    }
-    await controller.setCameraSelector(cameraSelector);
-  }
-
   Future<void> setZoomRatio(double zoomRatio) async {
     await controller.setZoomRatio(zoomRatio);
   }
@@ -236,6 +191,51 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     recording.stop();
     _recording = null;
     notifyListeners();
+  }
+
+  void _initialize() async {
+    _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
+      logger.info(
+          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
+      _zoomState = zoomState;
+      notifyListeners();
+    });
+    _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
+      logger.info('torchStateChanged $torchState');
+      _torchState = torchState;
+      notifyListeners();
+    });
+    final videoAuthorized = await controller.requestAuthorization(
+      type: AuthorizationType.video,
+    );
+    final audioAuthorized = await controller.requestAuthorization(
+      type: AuthorizationType.audio,
+    );
+    if (!videoAuthorized || !audioAuthorized) {
+      throw StateError('requestAuthorization failed.');
+    }
+    await controller.setCameraSelector(CameraSelector.back);
+    _zoomState = await controller.getZoomState();
+    _torchState = await controller.getTorchState();
+    _flashMode = await controller.getImageCaptureFlashMode();
+    notifyListeners();
+    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
+    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
+    logger.info(
+        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+torchState: $torchState
+flashMode: $flashMode
+isPinchToZoomEnabled: $isPinchToZoomEnabled
+isTapToFocusEnabled: $isTapToFocusEnabled''');
+    await bind();
+  }
+
+  Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
+    final hasCamera = await controller.hasCamera(cameraSelector);
+    if (!hasCamera) {
+      return;
+    }
+    await controller.setCameraSelector(cameraSelector);
   }
 
   Future<void> _setRawAnalyzer() async {

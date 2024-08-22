@@ -13,31 +13,3 @@ import AVFoundation
     case on
     case off
 }
-
-extension FlashMode {
-    var swiftValue: AVCaptureDevice.FlashMode {
-        switch self {
-        case .auto:
-            return .auto
-        case .on:
-            return .on
-        case .off:
-            return .off
-        }
-    }
-}
-
-extension AVCaptureDevice.FlashMode {
-    var ffiValue: FlashMode {
-        switch self {
-        case .auto:
-            return .auto
-        case .on:
-            return .on
-        case .off:
-            return .off
-        @unknown default:
-            return .off
-        }
-    }
-}

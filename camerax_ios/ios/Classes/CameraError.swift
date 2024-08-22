@@ -18,4 +18,5 @@ enum CameraError: Error {
     case saveDataNil
     case saveUrlNil
     case saveAssetNil
+    case imageFormatNil
 }

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
+import 'raw_pixels_view.dart';
 import 'thumbnail.dart';
 
 class HomeView extends StatefulWidget {
@@ -40,6 +41,7 @@ class _HomeViewState extends State<HomeView> {
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final recording = viewModel.recording;
+    final imageModel = viewModel.imageModel;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
     return CupertinoPageScaffold(
@@ -95,6 +97,18 @@ class _HomeViewState extends State<HomeView> {
                   controller: controller,
                   scaleType: ScaleType.fillCenter,
                 ),
+                if (imageModel != null)
+                  Container(
+                    alignment: Alignment.topRight,
+                    margin: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      width: 100.0,
+                      child: RawPixelsView(
+                        image: imageModel.image,
+                        rotationDegrees: imageModel.rotationDegrees,
+                      ),
+                    ),
+                  ),
                 if (zoomState != null)
                   ZoomWidget(
                     minimum: zoomState.minZoomRatio,

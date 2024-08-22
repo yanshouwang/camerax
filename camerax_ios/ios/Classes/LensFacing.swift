@@ -13,16 +13,3 @@ import AVFoundation
     case back
     case external
 }
-
-extension LensFacing {
-    var swiftValue: AVCaptureDevice.Position {
-        switch self {
-        case .front:
-            return .front
-        case .back:
-            return .back
-        default:
-            return .unspecified
-        }
-    }
-}

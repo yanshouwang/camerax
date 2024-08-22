@@ -7,6 +7,8 @@ import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
+import 'raw_pixels_analyzer.dart';
+
 class HomeViewModel extends ViewModel with TypeLogger {
   final CameraController controller;
   CameraMode _mode;
@@ -16,6 +18,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? _flashMode;
   Uri? _savedUri;
   Recording? _recording;
+  ImageModel? _imageModel;
 
   late final StreamSubscription _zoomStateSubscription;
   late final StreamSubscription _torchStateSubscription;
@@ -34,45 +37,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
-
-  void _initialize() async {
-    _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
-      logger.info(
-          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.zoomRatio}, ${zoomState?.linearZoom}');
-      _zoomState = zoomState;
-      notifyListeners();
-    });
-    _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
-      logger.info('torchStateChanged $torchState');
-      _torchState = torchState;
-      notifyListeners();
-    });
-    for (var type in AuthorizationType.values) {
-      var authorized = await controller.checkAuthorization(type: type);
-      if (authorized) {
-        continue;
-      }
-      authorized = await controller.requestAuthorization(type: type);
-      if (authorized) {
-        continue;
-      }
-      logger.warning('$type is unahthorized.');
-    }
-    await controller.setCameraSelector(CameraSelector.back);
-    _zoomState = await controller.getZoomState();
-    _torchState = await controller.getTorchState();
-    _flashMode = await controller.getImageCaptureFlashMode();
-    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
-    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-    logger.info(
-        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
-torchState: $torchState
-flashMode: $flashMode
-isPinchToZoomEnabled: $isPinchToZoomEnabled
-isTapToFocusEnabled: $isTapToFocusEnabled''');
-    notifyListeners();
-    await bind();
-  }
+  ImageModel? get imageModel => _imageModel;
 
   Future<void> bind() async {
     await controller.bind();
@@ -86,10 +51,10 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     switch (mode) {
       case CameraMode.takePicture:
       case CameraMode.recordVideo:
-        // await _clearImageAnalysisAnalyzer();
+        await _clearImageAnalysisAnalyzer();
         break;
       case CameraMode.rawValue:
-        // await _setRawAnalyzer();
+        await _setRawAnalyzer();
         break;
       case CameraMode.scanCode:
         // final analyzer = MLAnalyzer(
@@ -135,7 +100,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
         break;
     }
     _mode = mode;
-    // _imageModel = null;
+    _imageModel = null;
     // _items = [];
     notifyListeners();
   }
@@ -218,12 +183,43 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     recording.stop();
   }
 
-  @override
-  void dispose() {
-    controller.unbind();
-    _zoomStateSubscription.cancel();
-    _torchStateSubscription.cancel();
-    super.dispose();
+  void _initialize() async {
+    _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
+      logger.info(
+          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.zoomRatio}, ${zoomState?.linearZoom}');
+      _zoomState = zoomState;
+      notifyListeners();
+    });
+    _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
+      logger.info('torchStateChanged $torchState');
+      _torchState = torchState;
+      notifyListeners();
+    });
+    for (var type in AuthorizationType.values) {
+      var authorized = await controller.checkAuthorization(type: type);
+      if (authorized) {
+        continue;
+      }
+      authorized = await controller.requestAuthorization(type: type);
+      if (authorized) {
+        continue;
+      }
+      logger.warning('$type is unahthorized.');
+    }
+    await controller.setCameraSelector(CameraSelector.back);
+    _zoomState = await controller.getZoomState();
+    _torchState = await controller.getTorchState();
+    _flashMode = await controller.getImageCaptureFlashMode();
+    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
+    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
+    logger.info(
+        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+torchState: $torchState
+flashMode: $flashMode
+isPinchToZoomEnabled: $isPinchToZoomEnabled
+isTapToFocusEnabled: $isTapToFocusEnabled''');
+    notifyListeners();
+    await bind();
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
@@ -234,5 +230,33 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.setCameraSelector(cameraSelector);
     _lensFacing = lensFacing;
     notifyListeners();
+  }
+
+  Future<void> _setRawAnalyzer() async {
+    await controller.unbind();
+    await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba_8888);
+    final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
+    await controller.setImageAnalysisAnalyzer(analyzer);
+    await controller.bind();
+  }
+
+  void _onRawPixelsAnalyzed(ImageModel imageModel) {
+    if (mode != CameraMode.rawValue) {
+      return;
+    }
+    _imageModel = imageModel;
+    notifyListeners();
+  }
+
+  Future<void> _clearImageAnalysisAnalyzer() async {
+    await controller.clearImageAnalysisAnalyzer();
+  }
+
+  @override
+  void dispose() {
+    controller.unbind();
+    _zoomStateSubscription.cancel();
+    _torchStateSubscription.cancel();
+    super.dispose();
   }
 }

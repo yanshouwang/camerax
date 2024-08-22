@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
 
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
+import 'package:objective_c/objective_c.dart';
 
 import 'ffi.g.dart' as ffi;
 
@@ -56,6 +58,28 @@ extension FlashModeX on FlashMode {
   }
 }
 
+extension ImageFormatX on ImageFormat {
+  ffi.ImageFormat get ffiValue {
+    switch (this) {
+      case ImageFormat.yuv_420_888:
+        return ffi.ImageFormat.ImageFormatYuv_420_888;
+      case ImageFormat.rgba_8888:
+        return ffi.ImageFormat.ImageFormatRgba_8888;
+    }
+  }
+}
+
+extension AnalyzerX on Analyzer {
+  ObjCObjectBase get ffiValue {
+    final ffiOnAnalyzed =
+        ffi.ObjCBlock_ffiVoid_ImageProxy.listener((ffiImageProxy) {
+      final imageProxy = MyImageProxy.ffi(ffiImageProxy);
+      analyze(imageProxy);
+    });
+    return ffi.RawAnalyzer.alloc().initOnAnalyzed_(ffiOnAnalyzed);
+  }
+}
+
 extension FFIZoomStateX on ffi.ZoomState {
   ZoomState get dartValue {
     return ZoomState(
@@ -105,8 +129,8 @@ extension FFIFlashModeX on ffi.FlashMode {
   }
 }
 
-extension FFIVideoRecordEventX on ffi.VideoRecordEvent {
-  VideoRecordEvent get dartValue {
+extension FFIVideoRecordEventX on ObjCObjectBase {
+  VideoRecordEvent get dartVideoRecordEvent {
     final isInstanceOfStart = ffi.VideoRecordStartEvent.isInstance(this);
     if (isInstanceOfStart) {
       return VideoRecordStartEvent();
@@ -125,5 +149,16 @@ extension FFIVideoRecordEventX on ffi.VideoRecordEvent {
       );
     }
     throw ArgumentError.value(this);
+  }
+}
+
+extension FFIImageFormatX on ffi.ImageFormat {
+  ImageFormat get dartValue {
+    switch (this) {
+      case ffi.ImageFormat.ImageFormatYuv_420_888:
+        return ImageFormat.yuv_420_888;
+      case ffi.ImageFormat.ImageFormatRgba_8888:
+        return ImageFormat.rgba_8888;
+    }
   }
 }

@@ -182,36 +182,45 @@ ListenerBlock19 wrapListenerBlock_ObjCBlock_ffiVoid_NSURL_NSURLResponse_NSError(
   return wrapper;
 }
 
-typedef void  (^ListenerBlock20)(ZoomState* );
-ListenerBlock20 wrapListenerBlock_ObjCBlock_ffiVoid_ZoomState(ListenerBlock20 block) {
-  ListenerBlock20 wrapper = [^void(ZoomState* arg0) {
+typedef void  (^ListenerBlock20)(void * , ImageProxy* );
+ListenerBlock20 wrapListenerBlock_ObjCBlock_ffiVoid_ffiVoid_ImageProxy(ListenerBlock20 block) {
+  ListenerBlock20 wrapper = [^void(void * arg0, ImageProxy* arg1) {
+    block(arg0, [arg1 retain]);
+  } copy];
+  [block release];
+  return wrapper;
+}
+
+typedef void  (^ListenerBlock21)(ZoomState* );
+ListenerBlock21 wrapListenerBlock_ObjCBlock_ffiVoid_ZoomState(ListenerBlock21 block) {
+  ListenerBlock21 wrapper = [^void(ZoomState* arg0) {
     block([arg0 retain]);
   } copy];
   [block release];
   return wrapper;
 }
 
-typedef void  (^ListenerBlock21)(TorchState* );
-ListenerBlock21 wrapListenerBlock_ObjCBlock_ffiVoid_TorchState(ListenerBlock21 block) {
-  ListenerBlock21 wrapper = [^void(TorchState* arg0) {
+typedef void  (^ListenerBlock22)(TorchState* );
+ListenerBlock22 wrapListenerBlock_ObjCBlock_ffiVoid_TorchState(ListenerBlock22 block) {
+  ListenerBlock22 wrapper = [^void(TorchState* arg0) {
     block([arg0 retain]);
   } copy];
   [block release];
   return wrapper;
 }
 
-typedef void  (^ListenerBlock22)(VideoRecordEvent* );
-ListenerBlock22 wrapListenerBlock_ObjCBlock_ffiVoid_VideoRecordEvent(ListenerBlock22 block) {
-  ListenerBlock22 wrapper = [^void(VideoRecordEvent* arg0) {
+typedef void  (^ListenerBlock23)(id );
+ListenerBlock23 wrapListenerBlock_ObjCBlock_ffiVoid_objcObjCObject(ListenerBlock23 block) {
+  ListenerBlock23 wrapper = [^void(id arg0) {
     block([arg0 retain]);
   } copy];
   [block release];
   return wrapper;
 }
 
-typedef void  (^ListenerBlock23)(ImageProxy* );
-ListenerBlock23 wrapListenerBlock_ObjCBlock_ffiVoid_ImageProxy(ListenerBlock23 block) {
-  ListenerBlock23 wrapper = [^void(ImageProxy* arg0) {
+typedef void  (^ListenerBlock24)(ImageProxy* );
+ListenerBlock24 wrapListenerBlock_ObjCBlock_ffiVoid_ImageProxy(ListenerBlock24 block) {
+  ListenerBlock24 wrapper = [^void(ImageProxy* arg0) {
     block([arg0 retain]);
   } copy];
   [block release];

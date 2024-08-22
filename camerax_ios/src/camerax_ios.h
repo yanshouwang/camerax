@@ -277,6 +277,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import CoreFoundation;
 @import Flutter;
+@import Foundation;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -300,6 +301,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+@class ImageProxy;
+
+SWIFT_PROTOCOL("_TtP11camerax_ios8Analyzer_")
+@protocol Analyzer <NSObject>
+- (void)analyzeWithImageProxy:(ImageProxy * _Nonnull)imageProxy;
+@end
+
 typedef SWIFT_ENUM(NSInteger, AuthorizationType, closed) {
   AuthorizationTypeVideo = 0,
   AuthorizationTypeAudio = 1,
@@ -311,9 +319,9 @@ enum FlashMode : NSInteger;
 @class ZoomState;
 @class TorchState;
 @class NSURL;
-@class VideoRecordEvent;
+@protocol VideoRecordEvent;
 @class Recording;
-@class ImageProxy;
+enum ImageFormat : NSInteger;
 
 SWIFT_CLASS("_TtC11camerax_ios16CameraController")
 @interface CameraController : NSObject
@@ -337,12 +345,14 @@ SWIFT_CLASS("_TtC11camerax_ios16CameraController")
 - (TorchState * _Nullable)getTorchState SWIFT_WARN_UNUSED_RESULT;
 - (void)addTorchStateObserverWithCallback:(void (^ _Nonnull)(TorchState * _Nullable))callback;
 - (BOOL)removeTorchStateObserverAndReturnError:(NSError * _Nullable * _Nullable)error;
-- (BOOL)enableTorch:(BOOL)torchEnabled error:(NSError * _Nullable * _Nullable)error;
+- (BOOL)enableTorch:(BOOL)enabled error:(NSError * _Nullable * _Nullable)error;
 - (void)takePictureWithUrl:(NSURL * _Nonnull)url completionHandler:(void (^ _Nonnull)(NSError * _Nullable))handler;
 - (BOOL)isRecording SWIFT_WARN_UNUSED_RESULT;
-- (Recording * _Nonnull)startRecordingWithUrl:(NSURL * _Nonnull)url enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(VideoRecordEvent * _Nonnull))listener SWIFT_WARN_UNUSED_RESULT;
-- (void)setImageAnalyzer:(void (^ _Nonnull)(ImageProxy * _Nonnull))analyzer;
-- (void)clearImageAnalyzer;
+- (Recording * _Nonnull)startRecordingWithUrl:(NSURL * _Nonnull)url enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(id <VideoRecordEvent> _Nonnull))listener SWIFT_WARN_UNUSED_RESULT;
+- (enum ImageFormat)getImageAnalysisOutputImageFormat SWIFT_WARN_UNUSED_RESULT;
+- (void)setImageAnalysisOutputImageFormat:(enum ImageFormat)outputImageFormat;
+- (void)setImageAnalysisAnalyzer:(id <Analyzer> _Nonnull)analyzer;
+- (void)clearImageAnalysisAnalyzer;
 @end
 
 enum LensFacing : NSInteger;
@@ -367,9 +377,22 @@ typedef SWIFT_ENUM(NSInteger, FlashMode, closed) {
   FlashModeOff = 2,
 };
 
+typedef SWIFT_ENUM(NSInteger, ImageFormat, closed) {
+  ImageFormatYuv_420_888 = 0,
+  ImageFormatRgba_8888 = 1,
+};
+
+@class PlaneProxy;
 
 SWIFT_CLASS("_TtC11camerax_ios10ImageProxy")
 @interface ImageProxy : NSObject
+@property (nonatomic, readonly) enum ImageFormat format;
+@property (nonatomic, readonly) NSInteger width;
+@property (nonatomic, readonly) NSInteger height;
+@property (nonatomic, readonly) NSInteger rotationDegrees;
+@property (nonatomic, readonly, copy) NSArray<PlaneProxy *> * _Nonnull planeProxies;
+@property (nonatomic, readonly) NSInteger timestamp;
+- (void)close;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -379,6 +402,24 @@ typedef SWIFT_ENUM(NSInteger, LensFacing, closed) {
   LensFacingBack = 1,
   LensFacingExternal = 2,
 };
+
+
+SWIFT_CLASS("_TtC11camerax_ios10MLAnalyzer")
+@interface MLAnalyzer : NSObject <Analyzer>
+- (void)analyzeWithImageProxy:(ImageProxy * _Nonnull)imageProxy;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class NSData;
+
+SWIFT_CLASS("_TtC11camerax_ios10PlaneProxy")
+@interface PlaneProxy : NSObject
+@property (nonatomic, readonly) NSInteger rowStride;
+@property (nonatomic, readonly) NSInteger pixelStride;
+@property (nonatomic, readonly, copy) NSData * _Nonnull value;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 enum ScaleType : NSInteger;
 @class NSCoder;
@@ -408,6 +449,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PreviewViewF
 @end
 
 
+SWIFT_CLASS("_TtC11camerax_ios11RawAnalyzer")
+@interface RawAnalyzer : NSObject <Analyzer>
+- (nonnull instancetype)initOnAnalyzed:(void (^ _Nonnull)(ImageProxy * _Nonnull))onAnalyzed OBJC_DESIGNATED_INITIALIZER;
+- (void)analyzeWithImageProxy:(ImageProxy * _Nonnull)imageProxy;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS("_TtC11camerax_ios9Recording")
 @interface Recording : NSObject
 - (void)stop;
@@ -430,14 +480,13 @@ SWIFT_CLASS("_TtC11camerax_ios10TorchState")
 @end
 
 
-SWIFT_CLASS("_TtC11camerax_ios16VideoRecordEvent")
-@interface VideoRecordEvent : NSObject
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_PROTOCOL("_TtP11camerax_ios16VideoRecordEvent_")
+@protocol VideoRecordEvent <NSObject>
 @end
 
 
 SWIFT_CLASS("_TtC11camerax_ios24VideoRecordFinalizeEvent")
-@interface VideoRecordFinalizeEvent : VideoRecordEvent
+@interface VideoRecordFinalizeEvent : NSObject <VideoRecordEvent>
 @property (nonatomic, readonly, copy) NSURL * _Nonnull savedUri;
 @property (nonatomic, readonly) NSError * _Nullable error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -446,7 +495,7 @@ SWIFT_CLASS("_TtC11camerax_ios24VideoRecordFinalizeEvent")
 
 
 SWIFT_CLASS("_TtC11camerax_ios21VideoRecordStartEvent")
-@interface VideoRecordStartEvent : VideoRecordEvent
+@interface VideoRecordStartEvent : NSObject <VideoRecordEvent>
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

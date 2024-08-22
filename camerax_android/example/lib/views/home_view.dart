@@ -42,9 +42,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final zoomState = viewModel.zoomState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
+    final recording = viewModel.recording;
     final imageModel = viewModel.imageModel;
     final items = viewModel.items;
-    final recording = viewModel.recording;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
     return CupertinoPageScaffold(

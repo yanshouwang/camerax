@@ -147,6 +147,13 @@ external ffi.Pointer<objc.ObjCBlock>
 @ffi.Native<ffi.Pointer<objc.ObjCBlock> Function(ffi.Pointer<objc.ObjCBlock>)>(
     isLeaf: true)
 external ffi.Pointer<objc.ObjCBlock>
+    wrapListenerBlock_ObjCBlock_ffiVoid_ffiVoid_ImageProxy(
+  ffi.Pointer<objc.ObjCBlock> block,
+);
+
+@ffi.Native<ffi.Pointer<objc.ObjCBlock> Function(ffi.Pointer<objc.ObjCBlock>)>(
+    isLeaf: true)
+external ffi.Pointer<objc.ObjCBlock>
     wrapListenerBlock_ObjCBlock_ffiVoid_ZoomState(
   ffi.Pointer<objc.ObjCBlock> block,
 );
@@ -161,7 +168,7 @@ external ffi.Pointer<objc.ObjCBlock>
 @ffi.Native<ffi.Pointer<objc.ObjCBlock> Function(ffi.Pointer<objc.ObjCBlock>)>(
     isLeaf: true)
 external ffi.Pointer<objc.ObjCBlock>
-    wrapListenerBlock_ObjCBlock_ffiVoid_VideoRecordEvent(
+    wrapListenerBlock_ObjCBlock_ffiVoid_objcObjCObject(
   ffi.Pointer<objc.ObjCBlock> block,
 );
 
@@ -30890,6 +30897,2018 @@ final _objc_msgSend_570 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCBlock>)>();
 
+/// Analyzer
+abstract final class Analyzer {
+  /// Builds an object that implements the Analyzer protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  static objc.ObjCObjectBase implement(
+      {required void Function(ImageProxy) analyzeWithImageProxy_}) {
+    final builder = objc.ObjCProtocolBuilder();
+    Analyzer.analyzeWithImageProxy_.implement(builder, analyzeWithImageProxy_);
+    return builder.build();
+  }
+
+  /// Adds the implementation of the Analyzer protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  static void addToBuilder(objc.ObjCProtocolBuilder builder,
+      {required void Function(ImageProxy) analyzeWithImageProxy_}) {
+    Analyzer.analyzeWithImageProxy_.implement(builder, analyzeWithImageProxy_);
+  }
+
+  /// Builds an object that implements the Analyzer protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
+  /// methods that can be implemented as listeners will be.
+  static objc.ObjCObjectBase implementAsListener(
+      {required void Function(ImageProxy) analyzeWithImageProxy_}) {
+    final builder = objc.ObjCProtocolBuilder();
+    Analyzer.analyzeWithImageProxy_
+        .implementAsListener(builder, analyzeWithImageProxy_);
+    return builder.build();
+  }
+
+  /// Adds the implementation of the Analyzer protocol to an existing
+  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as listeners will
+  /// be.
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder,
+      {required void Function(ImageProxy) analyzeWithImageProxy_}) {
+    Analyzer.analyzeWithImageProxy_
+        .implementAsListener(builder, analyzeWithImageProxy_);
+  }
+
+  /// analyzeWithImageProxy:
+  static final analyzeWithImageProxy_ =
+      objc.ObjCProtocolListenableMethod<void Function(ImageProxy)>(
+    _sel_analyzeWithImageProxy_,
+    objc.getProtocolMethodSignature(
+      _protocol_Analyzer,
+      _sel_analyzeWithImageProxy_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (void Function(ImageProxy) func) =>
+        ObjCBlock_ffiVoid_ffiVoid_ImageProxy.fromFunction(
+            (ffi.Pointer<ffi.Void> _, ImageProxy arg1) => func(arg1)),
+    (void Function(ImageProxy) func) =>
+        ObjCBlock_ffiVoid_ffiVoid_ImageProxy.listener(
+            (ffi.Pointer<ffi.Void> _, ImageProxy arg1) => func(arg1)),
+  );
+}
+
+late final _protocol_Analyzer = objc.getProtocol("camerax_ios.Analyzer");
+
+/// NSObject
+abstract final class NSObject {
+  /// Builds an object that implements the NSObject protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  static objc.ObjCObjectBase implement(
+      {required bool Function(objc.ObjCObjectBase) isEqual_,
+      required objc.ObjCObjectBase Function() class1,
+      required objc.ObjCObjectBase Function() self,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>)
+          performSelector_,
+      required objc.ObjCObjectBase Function(
+              ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)
+          performSelector_withObject_,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>,
+              objc.ObjCObjectBase, objc.ObjCObjectBase)
+          performSelector_withObject_withObject_,
+      required bool Function() isProxy,
+      required bool Function(objc.ObjCObjectBase) isKindOfClass_,
+      required bool Function(objc.ObjCObjectBase) isMemberOfClass_,
+      required bool Function(objc.Protocol) conformsToProtocol_,
+      required bool Function(ffi.Pointer<objc.ObjCSelector>)
+          respondsToSelector_,
+      required objc.ObjCObjectBase Function() retain,
+      required void Function() release,
+      required objc.ObjCObjectBase Function() autorelease,
+      required int Function() retainCount,
+      required ffi.Pointer<_NSZone> Function() zone,
+      required int Function() hash,
+      required objc.ObjCObjectBase Function() superclass,
+      required objc.NSString Function() description,
+      objc.NSString Function()? debugDescription}) {
+    final builder = objc.ObjCProtocolBuilder();
+    NSObject.isEqual_.implement(builder, isEqual_);
+    NSObject.class1.implement(builder, class1);
+    NSObject.self.implement(builder, self);
+    NSObject.performSelector_.implement(builder, performSelector_);
+    NSObject.performSelector_withObject_
+        .implement(builder, performSelector_withObject_);
+    NSObject.performSelector_withObject_withObject_
+        .implement(builder, performSelector_withObject_withObject_);
+    NSObject.isProxy.implement(builder, isProxy);
+    NSObject.isKindOfClass_.implement(builder, isKindOfClass_);
+    NSObject.isMemberOfClass_.implement(builder, isMemberOfClass_);
+    NSObject.conformsToProtocol_.implement(builder, conformsToProtocol_);
+    NSObject.respondsToSelector_.implement(builder, respondsToSelector_);
+    NSObject.retain.implement(builder, retain);
+    NSObject.release.implement(builder, release);
+    NSObject.autorelease.implement(builder, autorelease);
+    NSObject.retainCount.implement(builder, retainCount);
+    NSObject.zone.implement(builder, zone);
+    NSObject.hash.implement(builder, hash);
+    NSObject.superclass.implement(builder, superclass);
+    NSObject.description.implement(builder, description);
+    NSObject.debugDescription.implement(builder, debugDescription);
+    return builder.build();
+  }
+
+  /// Adds the implementation of the NSObject protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  static void addToBuilder(objc.ObjCProtocolBuilder builder,
+      {required bool Function(objc.ObjCObjectBase) isEqual_,
+      required objc.ObjCObjectBase Function() class1,
+      required objc.ObjCObjectBase Function() self,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>)
+          performSelector_,
+      required objc.ObjCObjectBase Function(
+              ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)
+          performSelector_withObject_,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>,
+              objc.ObjCObjectBase, objc.ObjCObjectBase)
+          performSelector_withObject_withObject_,
+      required bool Function() isProxy,
+      required bool Function(objc.ObjCObjectBase) isKindOfClass_,
+      required bool Function(objc.ObjCObjectBase) isMemberOfClass_,
+      required bool Function(objc.Protocol) conformsToProtocol_,
+      required bool Function(ffi.Pointer<objc.ObjCSelector>)
+          respondsToSelector_,
+      required objc.ObjCObjectBase Function() retain,
+      required void Function() release,
+      required objc.ObjCObjectBase Function() autorelease,
+      required int Function() retainCount,
+      required ffi.Pointer<_NSZone> Function() zone,
+      required int Function() hash,
+      required objc.ObjCObjectBase Function() superclass,
+      required objc.NSString Function() description,
+      objc.NSString Function()? debugDescription}) {
+    NSObject.isEqual_.implement(builder, isEqual_);
+    NSObject.class1.implement(builder, class1);
+    NSObject.self.implement(builder, self);
+    NSObject.performSelector_.implement(builder, performSelector_);
+    NSObject.performSelector_withObject_
+        .implement(builder, performSelector_withObject_);
+    NSObject.performSelector_withObject_withObject_
+        .implement(builder, performSelector_withObject_withObject_);
+    NSObject.isProxy.implement(builder, isProxy);
+    NSObject.isKindOfClass_.implement(builder, isKindOfClass_);
+    NSObject.isMemberOfClass_.implement(builder, isMemberOfClass_);
+    NSObject.conformsToProtocol_.implement(builder, conformsToProtocol_);
+    NSObject.respondsToSelector_.implement(builder, respondsToSelector_);
+    NSObject.retain.implement(builder, retain);
+    NSObject.release.implement(builder, release);
+    NSObject.autorelease.implement(builder, autorelease);
+    NSObject.retainCount.implement(builder, retainCount);
+    NSObject.zone.implement(builder, zone);
+    NSObject.hash.implement(builder, hash);
+    NSObject.superclass.implement(builder, superclass);
+    NSObject.description.implement(builder, description);
+    NSObject.debugDescription.implement(builder, debugDescription);
+  }
+
+  /// Builds an object that implements the NSObject protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly. All
+  /// methods that can be implemented as listeners will be.
+  static objc.ObjCObjectBase implementAsListener(
+      {required bool Function(objc.ObjCObjectBase) isEqual_,
+      required objc.ObjCObjectBase Function() class1,
+      required objc.ObjCObjectBase Function() self,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>)
+          performSelector_,
+      required objc.ObjCObjectBase Function(
+              ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)
+          performSelector_withObject_,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>,
+              objc.ObjCObjectBase, objc.ObjCObjectBase)
+          performSelector_withObject_withObject_,
+      required bool Function() isProxy,
+      required bool Function(objc.ObjCObjectBase) isKindOfClass_,
+      required bool Function(objc.ObjCObjectBase) isMemberOfClass_,
+      required bool Function(objc.Protocol) conformsToProtocol_,
+      required bool Function(ffi.Pointer<objc.ObjCSelector>)
+          respondsToSelector_,
+      required objc.ObjCObjectBase Function() retain,
+      required void Function() release,
+      required objc.ObjCObjectBase Function() autorelease,
+      required int Function() retainCount,
+      required ffi.Pointer<_NSZone> Function() zone,
+      required int Function() hash,
+      required objc.ObjCObjectBase Function() superclass,
+      required objc.NSString Function() description,
+      objc.NSString Function()? debugDescription}) {
+    final builder = objc.ObjCProtocolBuilder();
+    NSObject.isEqual_.implement(builder, isEqual_);
+    NSObject.class1.implement(builder, class1);
+    NSObject.self.implement(builder, self);
+    NSObject.performSelector_.implement(builder, performSelector_);
+    NSObject.performSelector_withObject_
+        .implement(builder, performSelector_withObject_);
+    NSObject.performSelector_withObject_withObject_
+        .implement(builder, performSelector_withObject_withObject_);
+    NSObject.isProxy.implement(builder, isProxy);
+    NSObject.isKindOfClass_.implement(builder, isKindOfClass_);
+    NSObject.isMemberOfClass_.implement(builder, isMemberOfClass_);
+    NSObject.conformsToProtocol_.implement(builder, conformsToProtocol_);
+    NSObject.respondsToSelector_.implement(builder, respondsToSelector_);
+    NSObject.retain.implement(builder, retain);
+    NSObject.release.implementAsListener(builder, release);
+    NSObject.autorelease.implement(builder, autorelease);
+    NSObject.retainCount.implement(builder, retainCount);
+    NSObject.zone.implement(builder, zone);
+    NSObject.hash.implement(builder, hash);
+    NSObject.superclass.implement(builder, superclass);
+    NSObject.description.implement(builder, description);
+    NSObject.debugDescription.implement(builder, debugDescription);
+    return builder.build();
+  }
+
+  /// Adds the implementation of the NSObject protocol to an existing
+  /// [objc.ObjCProtocolBuilder]. All methods that can be implemented as listeners will
+  /// be.
+  static void addToBuilderAsListener(objc.ObjCProtocolBuilder builder,
+      {required bool Function(objc.ObjCObjectBase) isEqual_,
+      required objc.ObjCObjectBase Function() class1,
+      required objc.ObjCObjectBase Function() self,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>)
+          performSelector_,
+      required objc.ObjCObjectBase Function(
+              ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)
+          performSelector_withObject_,
+      required objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>,
+              objc.ObjCObjectBase, objc.ObjCObjectBase)
+          performSelector_withObject_withObject_,
+      required bool Function() isProxy,
+      required bool Function(objc.ObjCObjectBase) isKindOfClass_,
+      required bool Function(objc.ObjCObjectBase) isMemberOfClass_,
+      required bool Function(objc.Protocol) conformsToProtocol_,
+      required bool Function(ffi.Pointer<objc.ObjCSelector>)
+          respondsToSelector_,
+      required objc.ObjCObjectBase Function() retain,
+      required void Function() release,
+      required objc.ObjCObjectBase Function() autorelease,
+      required int Function() retainCount,
+      required ffi.Pointer<_NSZone> Function() zone,
+      required int Function() hash,
+      required objc.ObjCObjectBase Function() superclass,
+      required objc.NSString Function() description,
+      objc.NSString Function()? debugDescription}) {
+    NSObject.isEqual_.implement(builder, isEqual_);
+    NSObject.class1.implement(builder, class1);
+    NSObject.self.implement(builder, self);
+    NSObject.performSelector_.implement(builder, performSelector_);
+    NSObject.performSelector_withObject_
+        .implement(builder, performSelector_withObject_);
+    NSObject.performSelector_withObject_withObject_
+        .implement(builder, performSelector_withObject_withObject_);
+    NSObject.isProxy.implement(builder, isProxy);
+    NSObject.isKindOfClass_.implement(builder, isKindOfClass_);
+    NSObject.isMemberOfClass_.implement(builder, isMemberOfClass_);
+    NSObject.conformsToProtocol_.implement(builder, conformsToProtocol_);
+    NSObject.respondsToSelector_.implement(builder, respondsToSelector_);
+    NSObject.retain.implement(builder, retain);
+    NSObject.release.implementAsListener(builder, release);
+    NSObject.autorelease.implement(builder, autorelease);
+    NSObject.retainCount.implement(builder, retainCount);
+    NSObject.zone.implement(builder, zone);
+    NSObject.hash.implement(builder, hash);
+    NSObject.superclass.implement(builder, superclass);
+    NSObject.description.implement(builder, description);
+    NSObject.debugDescription.implement(builder, debugDescription);
+  }
+
+  /// isEqual:
+  static final isEqual_ =
+      objc.ObjCProtocolMethod<bool Function(objc.ObjCObjectBase)>(
+    _sel_isEqual_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_isEqual_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (bool Function(objc.ObjCObjectBase) func) =>
+        ObjCBlock_bool_ffiVoid_objcObjCObject.fromFunction(
+            (ffi.Pointer<ffi.Void> _, objc.ObjCObjectBase arg1) => func(arg1)),
+  );
+
+  /// class
+  static final class1 = objc.ObjCProtocolMethod<objc.ObjCObjectBase Function()>(
+    _sel_class,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_class,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function() func) =>
+        ObjCBlock_objcObjCObject_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+            func()),
+  );
+
+  /// self
+  static final self = objc.ObjCProtocolMethod<objc.ObjCObjectBase Function()>(
+    _sel_self,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_self,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function() func) =>
+        ObjCBlock_objcObjCObject_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+            func()),
+  );
+
+  /// performSelector:
+  static final performSelector_ = objc.ObjCProtocolMethod<
+      objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>)>(
+    _sel_performSelector_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_performSelector_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>) func) =>
+        ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector.fromFunction(
+            (ffi.Pointer<ffi.Void> _, ffi.Pointer<objc.ObjCSelector> arg1) =>
+                func(arg1)),
+  );
+
+  /// performSelector:withObject:
+  static final performSelector_withObject_ = objc.ObjCProtocolMethod<
+      objc.ObjCObjectBase Function(
+          ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)>(
+    _sel_performSelector_withObject_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_performSelector_withObject_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function(
+                ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)
+            func) =>
+        ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject
+            .fromFunction((ffi.Pointer<ffi.Void> _,
+                    ffi.Pointer<objc.ObjCSelector> arg1,
+                    objc.ObjCObjectBase arg2) =>
+                func(arg1, arg2)),
+  );
+
+  /// performSelector:withObject:withObject:
+  static final performSelector_withObject_withObject_ = objc.ObjCProtocolMethod<
+      objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>,
+          objc.ObjCObjectBase, objc.ObjCObjectBase)>(
+    _sel_performSelector_withObject_withObject_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_performSelector_withObject_withObject_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function(ffi.Pointer<objc.ObjCSelector>,
+                objc.ObjCObjectBase, objc.ObjCObjectBase)
+            func) =>
+        ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject
+            .fromFunction((ffi.Pointer<ffi.Void> _,
+                    ffi.Pointer<objc.ObjCSelector> arg1,
+                    objc.ObjCObjectBase arg2,
+                    objc.ObjCObjectBase arg3) =>
+                func(arg1, arg2, arg3)),
+  );
+
+  /// isProxy
+  static final isProxy = objc.ObjCProtocolMethod<bool Function()>(
+    _sel_isProxy,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_isProxy,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (bool Function() func) => ObjCBlock_bool_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+  );
+
+  /// isKindOfClass:
+  static final isKindOfClass_ =
+      objc.ObjCProtocolMethod<bool Function(objc.ObjCObjectBase)>(
+    _sel_isKindOfClass_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_isKindOfClass_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (bool Function(objc.ObjCObjectBase) func) =>
+        ObjCBlock_bool_ffiVoid_objcObjCObject.fromFunction(
+            (ffi.Pointer<ffi.Void> _, objc.ObjCObjectBase arg1) => func(arg1)),
+  );
+
+  /// isMemberOfClass:
+  static final isMemberOfClass_ =
+      objc.ObjCProtocolMethod<bool Function(objc.ObjCObjectBase)>(
+    _sel_isMemberOfClass_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_isMemberOfClass_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (bool Function(objc.ObjCObjectBase) func) =>
+        ObjCBlock_bool_ffiVoid_objcObjCObject.fromFunction(
+            (ffi.Pointer<ffi.Void> _, objc.ObjCObjectBase arg1) => func(arg1)),
+  );
+
+  /// conformsToProtocol:
+  static final conformsToProtocol_ =
+      objc.ObjCProtocolMethod<bool Function(objc.Protocol)>(
+    _sel_conformsToProtocol_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_conformsToProtocol_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (bool Function(objc.Protocol) func) =>
+        ObjCBlock_bool_ffiVoid_Protocol.fromFunction(
+            (ffi.Pointer<ffi.Void> _, objc.Protocol arg1) => func(arg1)),
+  );
+
+  /// respondsToSelector:
+  static final respondsToSelector_ =
+      objc.ObjCProtocolMethod<bool Function(ffi.Pointer<objc.ObjCSelector>)>(
+    _sel_respondsToSelector_,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_respondsToSelector_,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (bool Function(ffi.Pointer<objc.ObjCSelector>) func) =>
+        ObjCBlock_bool_ffiVoid_objcObjCSelector.fromFunction(
+            (ffi.Pointer<ffi.Void> _, ffi.Pointer<objc.ObjCSelector> arg1) =>
+                func(arg1)),
+  );
+
+  /// retain
+  static final retain = objc.ObjCProtocolMethod<objc.ObjCObjectBase Function()>(
+    _sel_retain,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_retain,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function() func) =>
+        ObjCBlock_objcObjCObject_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+            func()),
+  );
+
+  /// release
+  static final release = objc.ObjCProtocolListenableMethod<void Function()>(
+    _sel_release,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_release,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+    (void Function() func) => ObjCBlock_ffiVoid_ffiVoid.listener((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+  );
+
+  /// autorelease
+  static final autorelease =
+      objc.ObjCProtocolMethod<objc.ObjCObjectBase Function()>(
+    _sel_autorelease,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_autorelease,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function() func) =>
+        ObjCBlock_objcObjCObject_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+            func()),
+  );
+
+  /// retainCount
+  static final retainCount = objc.ObjCProtocolMethod<int Function()>(
+    _sel_retainCount,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_retainCount,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (int Function() func) => ObjCBlock_ffiUnsignedLong_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+  );
+
+  /// zone
+  static final zone = objc.ObjCProtocolMethod<ffi.Pointer<_NSZone> Function()>(
+    _sel_zone,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_zone,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (ffi.Pointer<_NSZone> Function() func) =>
+        ObjCBlock_NSZone_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+            func()),
+  );
+
+  /// hash
+  static final hash = objc.ObjCProtocolMethod<int Function()>(
+    _sel_hash,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_hash,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (int Function() func) => ObjCBlock_ffiUnsignedLong_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+  );
+
+  /// superclass
+  static final superclass =
+      objc.ObjCProtocolMethod<objc.ObjCObjectBase Function()>(
+    _sel_superclass,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_superclass,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.ObjCObjectBase Function() func) =>
+        ObjCBlock_objcObjCObject_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+            func()),
+  );
+
+  /// description
+  static final description = objc.ObjCProtocolMethod<objc.NSString Function()>(
+    _sel_description,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_description,
+      isRequired: true,
+      isInstanceMethod: true,
+    ),
+    (objc.NSString Function() func) => ObjCBlock_NSString_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+  );
+
+  /// debugDescription
+  static final debugDescription =
+      objc.ObjCProtocolMethod<objc.NSString Function()>(
+    _sel_debugDescription,
+    objc.getProtocolMethodSignature(
+      _protocol_NSObject,
+      _sel_debugDescription,
+      isRequired: false,
+      isInstanceMethod: true,
+    ),
+    (objc.NSString Function() func) => ObjCBlock_NSString_ffiVoid.fromFunction((
+      ffi.Pointer<ffi.Void> _,
+    ) =>
+        func()),
+  );
+}
+
+late final _protocol_NSObject = objc.getProtocol("NSObject");
+late final _sel_isEqual_ = objc.registerName("isEqual:");
+bool _ObjCBlock_bool_ffiVoid_objcObjCObject_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Bool Function(ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            bool Function(ffi.Pointer<ffi.Void>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+bool _ObjCBlock_bool_ffiVoid_objcObjCObject_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as bool Function(
+        ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+
+class ObjCBlock_bool_ffiVoid_objcObjCObject extends objc.ObjCBlockBase {
+  ObjCBlock_bool_ffiVoid_objcObjCObject._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_bool_ffiVoid_objcObjCObject castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_bool_ffiVoid_objcObjCObject._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid_objcObjCObject.fromFunctionPointer(
+      ffi
+          .Pointer<
+              ffi
+              .NativeFunction<
+                  ffi.Bool Function(ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>
+          ptr)
+      : this._(objc
+            .newPointerBlock(
+                _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                            ffi.Bool Function(
+                                ffi.Pointer<objc.ObjCBlock>,
+                                ffi.Pointer<ffi.Void>,
+                                ffi.Pointer<objc.ObjCObject>)>(
+                        _ObjCBlock_bool_ffiVoid_objcObjCObject_fnPtrTrampoline,
+                        false)
+                    .cast(),
+                ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid_objcObjCObject.fromFunction(
+      bool Function(ffi.Pointer<ffi.Void>, objc.ObjCObjectBase) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Bool Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_bool_ffiVoid_objcObjCObject_closureTrampoline,
+                    false)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0, objc.ObjCObjectBase(arg1, retain: true, release: true))));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  bool call(ffi.Pointer<ffi.Void> arg0, objc.ObjCObjectBase arg1) =>
+      pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<objc.ObjCBlock> block,
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              bool Function(ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>)>()(pointer, arg0, arg1.pointer);
+}
+
+late final _sel_class = objc.registerName("class");
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_objcObjCObject_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_closureTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+        (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<ffi.Void>))(arg0);
+
+class ObjCBlock_objcObjCObject_ffiVoid extends objc.ObjCBlockBase {
+  ObjCBlock_objcObjCObject_ffiVoid._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_objcObjCObject_ffiVoid castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_objcObjCObject_ffiVoid._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<ffi.Void> arg0)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid.fromFunction(
+      objc.ObjCObjectBase Function(ffi.Pointer<ffi.Void>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0).retainAndReturnPointer()));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  objc.ObjCObjectBase call(ffi.Pointer<ffi.Void> arg0) => objc.ObjCObjectBase(
+      pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<objc.ObjCBlock> block,
+                      ffi.Pointer<ffi.Void> arg0)>>()
+          .asFunction<
+              ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCBlock>,
+                  ffi.Pointer<ffi.Void>)>()(pointer, arg0),
+      retain: false,
+      release: true);
+}
+
+late final _sel_self = objc.registerName("self");
+late final _sel_performSelector_ = objc.registerName("performSelector:");
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_fnPtrTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block,
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCSelector> arg1) =>
+        block.ref.target
+            .cast<
+                ffi.NativeFunction<
+                    ffi.Pointer<objc.ObjCObject> Function(
+                        ffi.Pointer<ffi.Void> arg0,
+                        ffi.Pointer<objc.ObjCSelector> arg1)>>()
+            .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<ffi.Void>,
+                    ffi.Pointer<objc.ObjCSelector>)>()(arg0, arg1);
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_closureTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block,
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCSelector> arg1) =>
+        (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCSelector>))(arg0, arg1);
+
+class ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector
+    extends objc.ObjCBlockBase {
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector._(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCSelector> arg1)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector.fromFunction(
+      objc.ObjCObjectBase Function(
+              ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCSelector>)
+          fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCSelector> arg1) =>
+                fn(arg0, arg1).retainAndReturnPointer()));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  objc.ObjCObjectBase call(
+          ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCSelector> arg1) =>
+      objc.ObjCObjectBase(
+          pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCObject> Function(
+                          ffi.Pointer<objc.ObjCBlock> block,
+                          ffi.Pointer<ffi.Void> arg0,
+                          ffi.Pointer<objc.ObjCSelector> arg1)>>()
+              .asFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<objc.ObjCBlock>,
+                      ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<objc.ObjCSelector>)>()(pointer, arg0, arg1),
+          retain: false,
+          release: true);
+}
+
+late final _sel_performSelector_withObject_ =
+    objc.registerName("performSelector:withObject:");
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_fnPtrTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block,
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCSelector> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2) =>
+        block.ref.target
+            .cast<
+                ffi.NativeFunction<
+                    ffi.Pointer<objc.ObjCObject> Function(
+                        ffi.Pointer<ffi.Void> arg0,
+                        ffi.Pointer<objc.ObjCSelector> arg1,
+                        ffi.Pointer<objc.ObjCObject> arg2)>>()
+            .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<ffi.Void>,
+                    ffi.Pointer<objc.ObjCSelector>,
+                    ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1, arg2);
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_closureTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block,
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCSelector> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2) =>
+        (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>))(arg0, arg1, arg2);
+
+class ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject
+    extends objc.ObjCBlockBase {
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject._(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject
+      castFromPointer(ffi.Pointer<objc.ObjCBlock> pointer,
+          {bool retain = false, bool release = false}) {
+    return ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject._(
+        pointer,
+        retain: retain,
+        release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCSelector> arg1,
+                      ffi.Pointer<objc.ObjCObject> arg2)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject.fromFunction(
+      objc.ObjCObjectBase Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase)
+          fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCSelector> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2) =>
+                fn(arg0, arg1, objc.ObjCObjectBase(arg2, retain: true, release: true)).retainAndReturnPointer()));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  objc.ObjCObjectBase call(ffi.Pointer<ffi.Void> arg0,
+          ffi.Pointer<objc.ObjCSelector> arg1, objc.ObjCObjectBase arg2) =>
+      objc.ObjCObjectBase(
+          pointer.ref.invoke
+                  .cast<
+                      ffi.NativeFunction<
+                          ffi.Pointer<objc.ObjCObject> Function(
+                              ffi.Pointer<objc.ObjCBlock> block,
+                              ffi.Pointer<ffi.Void> arg0,
+                              ffi.Pointer<objc.ObjCSelector> arg1,
+                              ffi.Pointer<objc.ObjCObject> arg2)>>()
+                  .asFunction<
+                      ffi.Pointer<objc.ObjCObject> Function(
+                          ffi.Pointer<objc.ObjCBlock>,
+                          ffi.Pointer<ffi.Void>,
+                          ffi.Pointer<objc.ObjCSelector>,
+                          ffi.Pointer<objc.ObjCObject>)>()(
+              pointer, arg0, arg1, arg2.pointer),
+          retain: false,
+          release: true);
+}
+
+late final _sel_performSelector_withObject_withObject_ =
+    objc.registerName("performSelector:withObject:withObject:");
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject_fnPtrTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block,
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCSelector> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+            ffi.Pointer<objc.ObjCObject> arg3) =>
+        block.ref.target
+            .cast<
+                ffi.NativeFunction<
+                    ffi.Pointer<objc.ObjCObject> Function(
+                        ffi.Pointer<ffi.Void> arg0,
+                        ffi.Pointer<objc.ObjCSelector> arg1,
+                        ffi.Pointer<objc.ObjCObject> arg2,
+                        ffi.Pointer<objc.ObjCObject> arg3)>>()
+            .asFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<ffi.Void>,
+                    ffi.Pointer<objc.ObjCSelector>,
+                    ffi.Pointer<objc.ObjCObject>,
+                    ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1, arg2, arg3);
+ffi.Pointer<objc.ObjCObject>
+    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject_closureTrampoline(
+            ffi.Pointer<objc.ObjCBlock> block,
+            ffi.Pointer<ffi.Void> arg0,
+            ffi.Pointer<objc.ObjCSelector> arg1,
+            ffi.Pointer<objc.ObjCObject> arg2,
+            ffi.Pointer<objc.ObjCObject> arg3) =>
+        (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<objc.ObjCSelector>,
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCObject>))(arg0, arg1, arg2, arg3);
+
+class ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject
+    extends objc.ObjCBlockBase {
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject._(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject
+      castFromPointer(ffi.Pointer<objc.ObjCBlock> pointer,
+          {bool retain = false, bool release = false}) {
+    return ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject
+        ._(pointer, retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCSelector> arg1,
+                      ffi.Pointer<objc.ObjCObject> arg2,
+                      ffi.Pointer<objc.ObjCObject> arg3)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject.fromFunction(
+      objc.ObjCObjectBase Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCSelector>, objc.ObjCObjectBase, objc.ObjCObjectBase)
+          fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>,
+                            ffi.Pointer<objc.ObjCObject>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_objcObjCObject_ffiVoid_objcObjCSelector_objcObjCObject_objcObjCObject_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCSelector> arg1,
+                    ffi.Pointer<objc.ObjCObject> arg2,
+                    ffi.Pointer<objc.ObjCObject> arg3) =>
+                fn(arg0, arg1, objc.ObjCObjectBase(arg2, retain: true, release: true), objc.ObjCObjectBase(arg3, retain: true, release: true)).retainAndReturnPointer()));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  objc.ObjCObjectBase call(
+          ffi.Pointer<ffi.Void> arg0,
+          ffi.Pointer<objc.ObjCSelector> arg1,
+          objc.ObjCObjectBase arg2,
+          objc.ObjCObjectBase arg3) =>
+      objc.ObjCObjectBase(
+          pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCObject> Function(
+                          ffi.Pointer<objc.ObjCBlock> block,
+                          ffi.Pointer<ffi.Void> arg0,
+                          ffi.Pointer<objc.ObjCSelector> arg1,
+                          ffi.Pointer<objc.ObjCObject> arg2,
+                          ffi.Pointer<objc.ObjCObject> arg3)>>()
+              .asFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<objc.ObjCBlock>,
+                      ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<objc.ObjCSelector>,
+                      ffi.Pointer<objc.ObjCObject>,
+                      ffi.Pointer<objc.ObjCObject>)>()(pointer, arg0, arg1, arg2.pointer, arg3.pointer),
+          retain: false,
+          release: true);
+}
+
+bool _ObjCBlock_bool_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<bool Function(ffi.Pointer<ffi.Void>)>()(arg0);
+bool _ObjCBlock_bool_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as bool Function(ffi.Pointer<ffi.Void>))(arg0);
+
+class ObjCBlock_bool_ffiVoid extends objc.ObjCBlockBase {
+  ObjCBlock_bool_ffiVoid._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_bool_ffiVoid castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_bool_ffiVoid._(pointer, retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<ffi.Bool Function(ffi.Pointer<ffi.Void> arg0)>>
+          ptr)
+      : this._(objc
+            .newPointerBlock(
+                _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                            ffi.Bool Function(ffi.Pointer<objc.ObjCBlock>,
+                                ffi.Pointer<ffi.Void>)>(
+                        _ObjCBlock_bool_ffiVoid_fnPtrTrampoline, false)
+                    .cast(),
+                ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid.fromFunction(bool Function(ffi.Pointer<ffi.Void>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Bool Function(ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_bool_ffiVoid_closureTrampoline, false)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0)));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  bool call(ffi.Pointer<ffi.Void> arg0) => pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<objc.ObjCBlock> block,
+                  ffi.Pointer<ffi.Void> arg0)>>()
+      .asFunction<
+          bool Function(ffi.Pointer<objc.ObjCBlock>,
+              ffi.Pointer<ffi.Void>)>()(pointer, arg0);
+}
+
+late final _sel_isMemberOfClass_ = objc.registerName("isMemberOfClass:");
+late final _sel_conformsToProtocol_ = objc.registerName("conformsToProtocol:");
+bool _ObjCBlock_bool_ffiVoid_Protocol_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Bool Function(ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            bool Function(ffi.Pointer<ffi.Void>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+bool _ObjCBlock_bool_ffiVoid_Protocol_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as bool Function(
+        ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+
+class ObjCBlock_bool_ffiVoid_Protocol extends objc.ObjCBlockBase {
+  ObjCBlock_bool_ffiVoid_Protocol._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_bool_ffiVoid_Protocol castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_bool_ffiVoid_Protocol._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid_Protocol.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Bool Function(ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Bool Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_bool_ffiVoid_Protocol_fnPtrTrampoline, false)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid_Protocol.fromFunction(
+      bool Function(ffi.Pointer<ffi.Void>, objc.Protocol) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Bool Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_bool_ffiVoid_Protocol_closureTrampoline, false)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0,
+                objc.Protocol.castFromPointer(arg1, retain: true, release: true))));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  bool call(ffi.Pointer<ffi.Void> arg0, objc.Protocol arg1) =>
+      pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<objc.ObjCBlock> block,
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>()
+          .asFunction<
+              bool Function(ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCObject>)>()(pointer, arg0, arg1.pointer);
+}
+
+late final _sel_respondsToSelector_ = objc.registerName("respondsToSelector:");
+bool _ObjCBlock_bool_ffiVoid_objcObjCSelector_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCSelector> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Bool Function(ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCSelector> arg1)>>()
+        .asFunction<
+            bool Function(ffi.Pointer<ffi.Void>,
+                ffi.Pointer<objc.ObjCSelector>)>()(arg0, arg1);
+bool _ObjCBlock_bool_ffiVoid_objcObjCSelector_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCSelector> arg1) =>
+    (objc.getBlockClosure(block) as bool Function(
+        ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCSelector>))(arg0, arg1);
+
+class ObjCBlock_bool_ffiVoid_objcObjCSelector extends objc.ObjCBlockBase {
+  ObjCBlock_bool_ffiVoid_objcObjCSelector._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_bool_ffiVoid_objcObjCSelector castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_bool_ffiVoid_objcObjCSelector._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid_objcObjCSelector.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Bool Function(ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCSelector> arg1)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Bool Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>)>(
+                    _ObjCBlock_bool_ffiVoid_objcObjCSelector_fnPtrTrampoline,
+                    false)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_bool_ffiVoid_objcObjCSelector.fromFunction(
+      bool Function(ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCSelector>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Bool Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCSelector>)>(
+                    _ObjCBlock_bool_ffiVoid_objcObjCSelector_closureTrampoline,
+                    false)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCSelector> arg1) =>
+                fn(arg0, arg1)));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  bool call(ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCSelector> arg1) =>
+      pointer.ref.invoke
+          .cast<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<objc.ObjCBlock> block,
+                      ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCSelector> arg1)>>()
+          .asFunction<
+              bool Function(ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<objc.ObjCSelector>)>()(pointer, arg0, arg1);
+}
+
+late final _sel_retain = objc.registerName("retain");
+late final _sel_release = objc.registerName("release");
+void _ObjCBlock_ffiVoid_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<void Function(ffi.Pointer<ffi.Void>)>()(arg0);
+void _ObjCBlock_ffiVoid_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as void Function(ffi.Pointer<ffi.Void>))(arg0);
+
+class ObjCBlock_ffiVoid_ffiVoid extends objc.ObjCBlockBase {
+  ObjCBlock_ffiVoid_ffiVoid._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_ffiVoid_ffiVoid castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_ffiVoid_ffiVoid._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_ffiVoid.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void> arg0)>>
+          ptr)
+      : this._(objc
+            .newPointerBlock(
+                _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                            ffi.Void Function(ffi.Pointer<objc.ObjCBlock>,
+                                ffi.Pointer<ffi.Void>)>(
+                        _ObjCBlock_ffiVoid_ffiVoid_fnPtrTrampoline)
+                    .cast(),
+                ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_ffiVoid.fromFunction(
+      void Function(ffi.Pointer<ffi.Void>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Void Function(ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_ffiVoid_ffiVoid_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0)));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  ObjCBlock_ffiVoid_ffiVoid.listener(void Function(ffi.Pointer<ffi.Void>) fn)
+      : this._((objc.newClosureBlock(
+            (_dartFuncListenerTrampoline ??= ffi.NativeCallable<
+                        ffi.Void Function(ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>.listener(
+                    _ObjCBlock_ffiVoid_ffiVoid_closureTrampoline)
+                  ..keepIsolateAlive = false)
+                .nativeFunction
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0))));
+  static ffi.NativeCallable<
+          ffi.Void Function(
+              ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<ffi.Void>)>?
+      _dartFuncListenerTrampoline;
+
+  void call(ffi.Pointer<ffi.Void> arg0) => pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<objc.ObjCBlock> block,
+                  ffi.Pointer<ffi.Void> arg0)>>()
+      .asFunction<
+          void Function(ffi.Pointer<objc.ObjCBlock>,
+              ffi.Pointer<ffi.Void>)>()(pointer, arg0);
+}
+
+late final _sel_autorelease = objc.registerName("autorelease");
+late final _sel_retainCount = objc.registerName("retainCount");
+int _ObjCBlock_ffiUnsignedLong_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.UnsignedLong Function(ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<int Function(ffi.Pointer<ffi.Void>)>()(arg0);
+int _ObjCBlock_ffiUnsignedLong_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as int Function(ffi.Pointer<ffi.Void>))(arg0);
+
+class ObjCBlock_ffiUnsignedLong_ffiVoid extends objc.ObjCBlockBase {
+  ObjCBlock_ffiUnsignedLong_ffiVoid._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_ffiUnsignedLong_ffiVoid castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_ffiUnsignedLong_ffiVoid._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiUnsignedLong_ffiVoid.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.UnsignedLong Function(ffi.Pointer<ffi.Void> arg0)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_ffiUnsignedLong_ffiVoid_fnPtrTrampoline, 0)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiUnsignedLong_ffiVoid.fromFunction(
+      int Function(ffi.Pointer<ffi.Void>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_ffiUnsignedLong_ffiVoid_closureTrampoline, 0)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0)));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  int call(ffi.Pointer<ffi.Void> arg0) => pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCBlock> block,
+                  ffi.Pointer<ffi.Void> arg0)>>()
+      .asFunction<
+          int Function(ffi.Pointer<objc.ObjCBlock>,
+              ffi.Pointer<ffi.Void>)>()(pointer, arg0);
+}
+
+late final _sel_zone = objc.registerName("zone");
+ffi.Pointer<_NSZone> _ObjCBlock_NSZone_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Pointer<_NSZone> Function(ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<
+            ffi.Pointer<_NSZone> Function(ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<_NSZone> _ObjCBlock_NSZone_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as ffi.Pointer<_NSZone> Function(
+        ffi.Pointer<ffi.Void>))(arg0);
+
+class ObjCBlock_NSZone_ffiVoid extends objc.ObjCBlockBase {
+  ObjCBlock_NSZone_ffiVoid._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_NSZone_ffiVoid castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_NSZone_ffiVoid._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_NSZone_ffiVoid.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Pointer<_NSZone> Function(ffi.Pointer<ffi.Void> arg0)>>
+          ptr)
+      : this._(
+            objc.newPointerBlock(
+                _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                            ffi.Pointer<_NSZone> Function(
+                                ffi.Pointer<objc.ObjCBlock>,
+                                ffi.Pointer<ffi.Void>)>(
+                        _ObjCBlock_NSZone_ffiVoid_fnPtrTrampoline)
+                    .cast(),
+                ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_NSZone_ffiVoid.fromFunction(
+      ffi.Pointer<_NSZone> Function(ffi.Pointer<ffi.Void>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<_NSZone> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_NSZone_ffiVoid_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0)));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  ffi.Pointer<_NSZone> call(ffi.Pointer<ffi.Void> arg0) => pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.Pointer<_NSZone> Function(ffi.Pointer<objc.ObjCBlock> block,
+                  ffi.Pointer<ffi.Void> arg0)>>()
+      .asFunction<
+          ffi.Pointer<_NSZone> Function(ffi.Pointer<objc.ObjCBlock>,
+              ffi.Pointer<ffi.Void>)>()(pointer, arg0);
+}
+
+late final _sel_hash = objc.registerName("hash");
+late final _sel_superclass = objc.registerName("superclass");
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSString_ffiVoid_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Pointer<objc.ObjCObject> Function(
+                    ffi.Pointer<ffi.Void> arg0)>>()
+        .asFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<ffi.Void>)>()(arg0);
+ffi.Pointer<objc.ObjCObject> _ObjCBlock_NSString_ffiVoid_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<ffi.Void> arg0) =>
+    (objc.getBlockClosure(block) as ffi.Pointer<objc.ObjCObject> Function(
+        ffi.Pointer<ffi.Void>))(arg0);
+
+class ObjCBlock_NSString_ffiVoid extends objc.ObjCBlockBase {
+  ObjCBlock_NSString_ffiVoid._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_NSString_ffiVoid castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_NSString_ffiVoid._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_NSString_ffiVoid.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<ffi.Void> arg0)>>
+          ptr)
+      : this._(objc.newPointerBlock(
+            _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_NSString_ffiVoid_fnPtrTrampoline)
+                .cast(),
+            ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_NSString_ffiVoid.fromFunction(
+      objc.NSString Function(ffi.Pointer<ffi.Void>) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Pointer<objc.ObjCObject> Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>)>(
+                    _ObjCBlock_NSString_ffiVoid_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0) => fn(arg0).retainAndReturnPointer()));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  objc.NSString call(ffi.Pointer<ffi.Void> arg0) =>
+      objc.NSString.castFromPointer(
+          pointer.ref.invoke
+              .cast<
+                  ffi.NativeFunction<
+                      ffi.Pointer<objc.ObjCObject> Function(
+                          ffi.Pointer<objc.ObjCBlock> block,
+                          ffi.Pointer<ffi.Void> arg0)>>()
+              .asFunction<
+                  ffi.Pointer<objc.ObjCObject> Function(
+                      ffi.Pointer<objc.ObjCBlock>,
+                      ffi.Pointer<ffi.Void>)>()(pointer, arg0),
+          retain: false,
+          release: true);
+}
+
+late final _sel_debugDescription = objc.registerName("debugDescription");
+
+/// ImageProxy
+class ImageProxy extends objc.NSObject {
+  ImageProxy._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [ImageProxy] that points to the same underlying object as [other].
+  ImageProxy.castFrom(objc.ObjCObjectBase other)
+      : this._(other.pointer, retain: true, release: true);
+
+  /// Constructs a [ImageProxy] that wraps the given raw object pointer.
+  ImageProxy.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [ImageProxy].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_0(obj.pointer, _sel_isKindOfClass_, _class_ImageProxy);
+  }
+
+  /// format
+  ImageFormat get format {
+    final _ret = _objc_msgSend_571(this.pointer, _sel_format);
+    return ImageFormat.fromValue(_ret);
+  }
+
+  /// width
+  int get width {
+    return _objc_msgSend_125(this.pointer, _sel_width);
+  }
+
+  /// height
+  int get height {
+    return _objc_msgSend_125(this.pointer, _sel_height);
+  }
+
+  /// rotationDegrees
+  int get rotationDegrees {
+    return _objc_msgSend_125(this.pointer, _sel_rotationDegrees);
+  }
+
+  /// planeProxies
+  objc.NSArray get planeProxies {
+    final _ret = _objc_msgSend_33(this.pointer, _sel_planeProxies);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// timestamp
+  int get timestamp {
+    return _objc_msgSend_125(this.pointer, _sel_timestamp);
+  }
+
+  /// close
+  void close() {
+    _objc_msgSend_7(this.pointer, _sel_close);
+  }
+
+  /// init
+  ImageProxy init() {
+    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
+    return ImageProxy.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// new
+  static ImageProxy new1() {
+    final _ret = _objc_msgSend_19(_class_ImageProxy, _sel_new);
+    return ImageProxy.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static ImageProxy allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_28(_class_ImageProxy, _sel_allocWithZone_, zone);
+    return ImageProxy.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static ImageProxy alloc() {
+    final _ret = _objc_msgSend_19(_class_ImageProxy, _sel_alloc);
+    return ImageProxy.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:selector:object:
+  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
+      objc.ObjCObjectBase aTarget,
+      ffi.Pointer<objc.ObjCSelector> aSelector,
+      objc.ObjCObjectBase? anArgument) {
+    _objc_msgSend_29(
+        _class_ImageProxy,
+        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
+        aTarget.pointer,
+        aSelector,
+        anArgument?.pointer ?? ffi.nullptr);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:
+  static void cancelPreviousPerformRequestsWithTarget_(
+      objc.ObjCObjectBase aTarget) {
+    _objc_msgSend_27(_class_ImageProxy,
+        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
+  }
+
+  /// accessInstanceVariablesDirectly
+  static bool getAccessInstanceVariablesDirectly() {
+    return _objc_msgSend_13(
+        _class_ImageProxy, _sel_accessInstanceVariablesDirectly);
+  }
+
+  /// useStoredAccessor
+  static bool useStoredAccessor() {
+    return _objc_msgSend_13(_class_ImageProxy, _sel_useStoredAccessor);
+  }
+
+  /// keyPathsForValuesAffectingValueForKey:
+  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
+    final _ret = _objc_msgSend_30(_class_ImageProxy,
+        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
+    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// automaticallyNotifiesObserversForKey:
+  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
+    return _objc_msgSend_31(_class_ImageProxy,
+        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
+  }
+
+  /// setKeys:triggerChangeNotificationsForDependentKey:
+  static void setKeys_triggerChangeNotificationsForDependentKey_(
+      objc.NSArray keys, objc.NSString dependentKey) {
+    _objc_msgSend_32(
+        _class_ImageProxy,
+        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
+        keys.pointer,
+        dependentKey.pointer);
+  }
+
+  /// classFallbacksForKeyedArchiver
+  static objc.NSArray classFallbacksForKeyedArchiver() {
+    final _ret = _objc_msgSend_33(
+        _class_ImageProxy, _sel_classFallbacksForKeyedArchiver);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// classForKeyedUnarchiver
+  static objc.ObjCObjectBase classForKeyedUnarchiver() {
+    final _ret =
+        _objc_msgSend_19(_class_ImageProxy, _sel_classForKeyedUnarchiver);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_ImageProxy = objc.getClass("camerax_ios.ImageProxy");
+
+enum ImageFormat {
+  ImageFormatYuv_420_888(0),
+  ImageFormatRgba_8888(1);
+
+  final int value;
+  const ImageFormat(this.value);
+
+  static ImageFormat fromValue(int value) => switch (value) {
+        0 => ImageFormatYuv_420_888,
+        1 => ImageFormatRgba_8888,
+        _ => throw ArgumentError("Unknown value for ImageFormat: $value"),
+      };
+}
+
+final _objc_msgSend_571 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_width = objc.registerName("width");
+late final _sel_height = objc.registerName("height");
+late final _sel_rotationDegrees = objc.registerName("rotationDegrees");
+late final _sel_planeProxies = objc.registerName("planeProxies");
+late final _sel_timestamp = objc.registerName("timestamp");
+late final _sel_analyzeWithImageProxy_ =
+    objc.registerName("analyzeWithImageProxy:");
+void _ObjCBlock_ffiVoid_ffiVoid_ImageProxy_fnPtrTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    block.ref.target
+        .cast<
+            ffi.NativeFunction<
+                ffi.Void Function(ffi.Pointer<ffi.Void> arg0,
+                    ffi.Pointer<objc.ObjCObject> arg1)>>()
+        .asFunction<
+            void Function(ffi.Pointer<ffi.Void>,
+                ffi.Pointer<objc.ObjCObject>)>()(arg0, arg1);
+void _ObjCBlock_ffiVoid_ffiVoid_ImageProxy_closureTrampoline(
+        ffi.Pointer<objc.ObjCBlock> block,
+        ffi.Pointer<ffi.Void> arg0,
+        ffi.Pointer<objc.ObjCObject> arg1) =>
+    (objc.getBlockClosure(block) as void Function(
+        ffi.Pointer<ffi.Void>, ffi.Pointer<objc.ObjCObject>))(arg0, arg1);
+
+class ObjCBlock_ffiVoid_ffiVoid_ImageProxy extends objc.ObjCBlockBase {
+  ObjCBlock_ffiVoid_ffiVoid_ImageProxy._(ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false, bool release = true})
+      : super(pointer, retain: retain, release: release);
+
+  /// Returns a block that wraps the given raw block pointer.
+  static ObjCBlock_ffiVoid_ffiVoid_ImageProxy castFromPointer(
+      ffi.Pointer<objc.ObjCBlock> pointer,
+      {bool retain = false,
+      bool release = false}) {
+    return ObjCBlock_ffiVoid_ffiVoid_ImageProxy._(pointer,
+        retain: retain, release: release);
+  }
+
+  /// Creates a block from a C function pointer.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_ffiVoid_ImageProxy.fromFunctionPointer(
+      ffi.Pointer<
+              ffi.NativeFunction<
+                  ffi.Void Function(ffi.Pointer<ffi.Void> arg0,
+                      ffi.Pointer<objc.ObjCObject> arg1)>>
+          ptr)
+      : this._(
+            objc.newPointerBlock(
+                _cFuncTrampoline ??= ffi.Pointer.fromFunction<
+                            ffi.Void Function(
+                                ffi.Pointer<objc.ObjCBlock>,
+                                ffi.Pointer<ffi.Void>,
+                                ffi.Pointer<objc.ObjCObject>)>(
+                        _ObjCBlock_ffiVoid_ffiVoid_ImageProxy_fnPtrTrampoline)
+                    .cast(),
+                ptr.cast()));
+  static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
+
+  /// Creates a block from a Dart function.
+  ///
+  /// This block must be invoked by native code running on the same thread as
+  /// the isolate that registered it. Invoking the block on the wrong thread
+  /// will result in a crash.
+  ObjCBlock_ffiVoid_ffiVoid_ImageProxy.fromFunction(
+      void Function(ffi.Pointer<ffi.Void>, ImageProxy) fn)
+      : this._(objc.newClosureBlock(
+            _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
+                        ffi.Void Function(
+                            ffi.Pointer<objc.ObjCBlock>,
+                            ffi.Pointer<ffi.Void>,
+                            ffi.Pointer<objc.ObjCObject>)>(
+                    _ObjCBlock_ffiVoid_ffiVoid_ImageProxy_closureTrampoline)
+                .cast(),
+            (ffi.Pointer<ffi.Void> arg0, ffi.Pointer<objc.ObjCObject> arg1) => fn(
+                arg0,
+                ImageProxy.castFromPointer(arg1, retain: true, release: true))));
+  static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
+
+  /// Creates a listener block from a Dart function.
+  ///
+  /// This is based on FFI's NativeCallable.listener, and has the same
+  /// capabilities and limitations. This block can be invoked from any thread,
+  /// but only supports void functions, and is not run synchronously. See
+  /// NativeCallable.listener for more details.
+  ///
+  /// Note that unlike the default behavior of NativeCallable.listener, listener
+  /// blocks do not keep the isolate alive.
+  ObjCBlock_ffiVoid_ffiVoid_ImageProxy.listener(
+      void Function(ffi.Pointer<ffi.Void>, ImageProxy) fn)
+      : this._(wrapListenerBlock_ObjCBlock_ffiVoid_ffiVoid_ImageProxy(objc
+            .newClosureBlock(
+                (_dartFuncListenerTrampoline ??= ffi.NativeCallable<
+                            ffi.Void Function(
+                                ffi.Pointer<objc.ObjCBlock>,
+                                ffi.Pointer<ffi.Void>,
+                                ffi.Pointer<objc.ObjCObject>)>.listener(
+                        _ObjCBlock_ffiVoid_ffiVoid_ImageProxy_closureTrampoline)
+                      ..keepIsolateAlive = false)
+                    .nativeFunction
+                    .cast(),
+                (ffi.Pointer<ffi.Void> arg0,
+                        ffi.Pointer<objc.ObjCObject> arg1) =>
+                    fn(arg0, ImageProxy.castFromPointer(arg1, retain: false, release: true)))));
+  static ffi.NativeCallable<
+      ffi.Void Function(ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<ffi.Void>,
+          ffi.Pointer<objc.ObjCObject>)>? _dartFuncListenerTrampoline;
+
+  void call(ffi.Pointer<ffi.Void> arg0, ImageProxy arg1) => pointer.ref.invoke
+      .cast<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<objc.ObjCBlock> block,
+                  ffi.Pointer<ffi.Void> arg0,
+                  ffi.Pointer<objc.ObjCObject> arg1)>>()
+      .asFunction<
+          void Function(ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<ffi.Void>,
+              ffi.Pointer<objc.ObjCObject>)>()(pointer, arg0, arg1.pointer);
+}
+
 enum AuthorizationType {
   AuthorizationTypeVideo(0),
   AuthorizationTypeAudio(1),
@@ -30945,13 +32964,13 @@ class CameraController extends objc.NSObject {
 
   /// imageCaptureFlashMode
   FlashMode get imageCaptureFlashMode {
-    final _ret = _objc_msgSend_571(this.pointer, _sel_imageCaptureFlashMode);
+    final _ret = _objc_msgSend_572(this.pointer, _sel_imageCaptureFlashMode);
     return FlashMode.fromValue(_ret);
   }
 
   /// setImageCaptureFlashMode:
   set imageCaptureFlashMode(FlashMode value) {
-    return _objc_msgSend_572(
+    return _objc_msgSend_573(
         this.pointer, _sel_setImageCaptureFlashMode_, value.value);
   }
 
@@ -30963,14 +32982,14 @@ class CameraController extends objc.NSObject {
 
   /// checkAuthorizationWithType:
   bool checkAuthorizationWithType_(AuthorizationType type) {
-    return _objc_msgSend_573(
+    return _objc_msgSend_574(
         this.pointer, _sel_checkAuthorizationWithType_, type.value);
   }
 
   /// requestAuthorizationWithType:completionHandler:
   void requestAuthorizationWithType_completionHandler_(
       AuthorizationType type, ObjCBlock_ffiVoid_bool handler) {
-    _objc_msgSend_574(
+    _objc_msgSend_575(
         this.pointer,
         _sel_requestAuthorizationWithType_completionHandler_,
         type.value,
@@ -30989,14 +33008,14 @@ class CameraController extends objc.NSObject {
 
   /// hasCameraWithCameraSelector:
   bool hasCameraWithCameraSelector_(CameraSelector cameraSelector) {
-    return _objc_msgSend_578(this.pointer, _sel_hasCameraWithCameraSelector_,
+    return _objc_msgSend_579(this.pointer, _sel_hasCameraWithCameraSelector_,
         cameraSelector.pointer);
   }
 
   /// setCameraSelector:error:
   bool setCameraSelector_error_(CameraSelector cameraSelector,
       ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error) {
-    return _objc_msgSend_579(this.pointer, _sel_setCameraSelector_error_,
+    return _objc_msgSend_580(this.pointer, _sel_setCameraSelector_error_,
         cameraSelector.pointer, error);
   }
 
@@ -31007,7 +33026,7 @@ class CameraController extends objc.NSObject {
 
   /// setTapToFocusEnabled:
   void setTapToFocusEnabled_(bool enabled) {
-    _objc_msgSend_580(this.pointer, _sel_setTapToFocusEnabled_, enabled);
+    _objc_msgSend_581(this.pointer, _sel_setTapToFocusEnabled_, enabled);
   }
 
   /// isPinchToZoomEnabled
@@ -31017,12 +33036,12 @@ class CameraController extends objc.NSObject {
 
   /// setPinchToZoomEnabled:
   void setPinchToZoomEnabled_(bool enabled) {
-    _objc_msgSend_580(this.pointer, _sel_setPinchToZoomEnabled_, enabled);
+    _objc_msgSend_581(this.pointer, _sel_setPinchToZoomEnabled_, enabled);
   }
 
   /// getZoomState
   ZoomState? getZoomState() {
-    final _ret = _objc_msgSend_581(this.pointer, _sel_getZoomState);
+    final _ret = _objc_msgSend_582(this.pointer, _sel_getZoomState);
     return _ret.address == 0
         ? null
         : ZoomState.castFromPointer(_ret, retain: true, release: true);
@@ -31030,7 +33049,7 @@ class CameraController extends objc.NSObject {
 
   /// addZoomStateObserverWithCallback:
   void addZoomStateObserverWithCallback_(ObjCBlock_ffiVoid_ZoomState callback) {
-    _objc_msgSend_582(
+    _objc_msgSend_583(
         this.pointer, _sel_addZoomStateObserverWithCallback_, callback.pointer);
   }
 
@@ -31044,20 +33063,20 @@ class CameraController extends objc.NSObject {
   /// setZoomRatio:error:
   bool setZoomRatio_error_(
       double zoomRatio, ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error) {
-    return _objc_msgSend_583(
+    return _objc_msgSend_584(
         this.pointer, _sel_setZoomRatio_error_, zoomRatio, error);
   }
 
   /// setLinearZoom:error:
   bool setLinearZoom_error_(
       double linearZoom, ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error) {
-    return _objc_msgSend_583(
+    return _objc_msgSend_584(
         this.pointer, _sel_setLinearZoom_error_, linearZoom, error);
   }
 
   /// getTorchState
   TorchState? getTorchState() {
-    final _ret = _objc_msgSend_584(this.pointer, _sel_getTorchState);
+    final _ret = _objc_msgSend_585(this.pointer, _sel_getTorchState);
     return _ret.address == 0
         ? null
         : TorchState.castFromPointer(_ret, retain: true, release: true);
@@ -31066,7 +33085,7 @@ class CameraController extends objc.NSObject {
   /// addTorchStateObserverWithCallback:
   void addTorchStateObserverWithCallback_(
       ObjCBlock_ffiVoid_TorchState callback) {
-    _objc_msgSend_585(this.pointer, _sel_addTorchStateObserverWithCallback_,
+    _objc_msgSend_586(this.pointer, _sel_addTorchStateObserverWithCallback_,
         callback.pointer);
   }
 
@@ -31079,15 +33098,15 @@ class CameraController extends objc.NSObject {
 
   /// enableTorch:error:
   bool enableTorch_error_(
-      bool torchEnabled, ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error) {
-    return _objc_msgSend_586(
-        this.pointer, _sel_enableTorch_error_, torchEnabled, error);
+      bool enabled, ffi.Pointer<ffi.Pointer<objc.ObjCObject>> error) {
+    return _objc_msgSend_587(
+        this.pointer, _sel_enableTorch_error_, enabled, error);
   }
 
   /// takePictureWithUrl:completionHandler:
   void takePictureWithUrl_completionHandler_(
       objc.NSURL url, ObjCBlock_ffiVoid_NSError handler) {
-    _objc_msgSend_587(this.pointer, _sel_takePictureWithUrl_completionHandler_,
+    _objc_msgSend_588(this.pointer, _sel_takePictureWithUrl_completionHandler_,
         url.pointer, handler.pointer);
   }
 
@@ -31098,8 +33117,8 @@ class CameraController extends objc.NSObject {
 
   /// startRecordingWithUrl:enableAudio:listener:
   Recording startRecordingWithUrl_enableAudio_listener_(objc.NSURL url,
-      bool enableAudio, ObjCBlock_ffiVoid_VideoRecordEvent listener) {
-    final _ret = _objc_msgSend_588(
+      bool enableAudio, ObjCBlock_ffiVoid_objcObjCObject listener) {
+    final _ret = _objc_msgSend_589(
         this.pointer,
         _sel_startRecordingWithUrl_enableAudio_listener_,
         url.pointer,
@@ -31108,14 +33127,28 @@ class CameraController extends objc.NSObject {
     return Recording.castFromPointer(_ret, retain: true, release: true);
   }
 
-  /// setImageAnalyzer:
-  void setImageAnalyzer_(ObjCBlock_ffiVoid_ImageProxy analyzer) {
-    _objc_msgSend_589(this.pointer, _sel_setImageAnalyzer_, analyzer.pointer);
+  /// getImageAnalysisOutputImageFormat
+  ImageFormat getImageAnalysisOutputImageFormat() {
+    final _ret =
+        _objc_msgSend_571(this.pointer, _sel_getImageAnalysisOutputImageFormat);
+    return ImageFormat.fromValue(_ret);
   }
 
-  /// clearImageAnalyzer
-  void clearImageAnalyzer() {
-    _objc_msgSend_7(this.pointer, _sel_clearImageAnalyzer);
+  /// setImageAnalysisOutputImageFormat:
+  void setImageAnalysisOutputImageFormat_(ImageFormat outputImageFormat) {
+    _objc_msgSend_590(this.pointer, _sel_setImageAnalysisOutputImageFormat_,
+        outputImageFormat.value);
+  }
+
+  /// setImageAnalysisAnalyzer:
+  void setImageAnalysisAnalyzer_(objc.ObjCObjectBase analyzer) {
+    _objc_msgSend_27(
+        this.pointer, _sel_setImageAnalysisAnalyzer_, analyzer.pointer);
+  }
+
+  /// clearImageAnalysisAnalyzer
+  void clearImageAnalysisAnalyzer() {
+    _objc_msgSend_7(this.pointer, _sel_clearImageAnalysisAnalyzer);
   }
 
   /// new
@@ -31210,7 +33243,7 @@ late final _class_CameraController =
     objc.getClass("camerax_ios.CameraController");
 late final _sel_imageCaptureFlashMode =
     objc.registerName("imageCaptureFlashMode");
-final _objc_msgSend_571 = objc.msgSendPointer
+final _objc_msgSend_572 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
@@ -31220,7 +33253,7 @@ final _objc_msgSend_571 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_setImageCaptureFlashMode_ =
     objc.registerName("setImageCaptureFlashMode:");
-final _objc_msgSend_572 = objc.msgSendPointer
+final _objc_msgSend_573 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
@@ -31230,7 +33263,7 @@ final _objc_msgSend_572 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCSelector>, int)>();
 late final _sel_checkAuthorizationWithType_ =
     objc.registerName("checkAuthorizationWithType:");
-final _objc_msgSend_573 = objc.msgSendPointer
+final _objc_msgSend_574 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Bool Function(ffi.Pointer<objc.ObjCObject>,
@@ -31240,7 +33273,7 @@ final _objc_msgSend_573 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCSelector>, int)>();
 late final _sel_requestAuthorizationWithType_completionHandler_ =
     objc.registerName("requestAuthorizationWithType:completionHandler:");
-final _objc_msgSend_574 = objc.msgSendPointer
+final _objc_msgSend_575 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(
@@ -31280,32 +33313,32 @@ class CameraSelector extends objc.NSObject {
 
   /// lensFacing
   LensFacing get lensFacing {
-    final _ret = _objc_msgSend_575(this.pointer, _sel_lensFacing);
+    final _ret = _objc_msgSend_576(this.pointer, _sel_lensFacing);
     return LensFacing.fromValue(_ret);
   }
 
   /// initWithLensFacing:
   CameraSelector initWithLensFacing_(LensFacing lensFacing) {
-    final _ret = _objc_msgSend_576(
+    final _ret = _objc_msgSend_577(
         this.pointer, _sel_initWithLensFacing_, lensFacing.value);
     return CameraSelector.castFromPointer(_ret, retain: true, release: true);
   }
 
   /// front
   static CameraSelector getFront() {
-    final _ret = _objc_msgSend_577(_class_CameraSelector, _sel_front);
+    final _ret = _objc_msgSend_578(_class_CameraSelector, _sel_front);
     return CameraSelector.castFromPointer(_ret, retain: true, release: true);
   }
 
   /// back
   static CameraSelector getBack() {
-    final _ret = _objc_msgSend_577(_class_CameraSelector, _sel_back);
+    final _ret = _objc_msgSend_578(_class_CameraSelector, _sel_back);
     return CameraSelector.castFromPointer(_ret, retain: true, release: true);
   }
 
   /// external
   static CameraSelector getExternal1() {
-    final _ret = _objc_msgSend_577(_class_CameraSelector, _sel_external);
+    final _ret = _objc_msgSend_578(_class_CameraSelector, _sel_external);
     return CameraSelector.castFromPointer(_ret, retain: true, release: true);
   }
 
@@ -31422,7 +33455,7 @@ enum LensFacing {
 }
 
 late final _sel_lensFacing = objc.registerName("lensFacing");
-final _objc_msgSend_575 = objc.msgSendPointer
+final _objc_msgSend_576 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
@@ -31431,7 +33464,7 @@ final _objc_msgSend_575 = objc.msgSendPointer
         int Function(
             ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
 late final _sel_initWithLensFacing_ = objc.registerName("initWithLensFacing:");
-final _objc_msgSend_576 = objc.msgSendPointer
+final _objc_msgSend_577 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             instancetype Function(ffi.Pointer<objc.ObjCObject>,
@@ -31440,7 +33473,7 @@ final _objc_msgSend_576 = objc.msgSendPointer
         instancetype Function(ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>, int)>();
 late final _sel_front = objc.registerName("front");
-final _objc_msgSend_577 = objc.msgSendPointer
+final _objc_msgSend_578 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
@@ -31452,7 +33485,7 @@ late final _sel_back = objc.registerName("back");
 late final _sel_external = objc.registerName("external");
 late final _sel_hasCameraWithCameraSelector_ =
     objc.registerName("hasCameraWithCameraSelector:");
-final _objc_msgSend_578 = objc.msgSendPointer
+final _objc_msgSend_579 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Bool Function(
@@ -31464,7 +33497,7 @@ final _objc_msgSend_578 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
 late final _sel_setCameraSelector_error_ =
     objc.registerName("setCameraSelector:error:");
-final _objc_msgSend_579 = objc.msgSendPointer
+final _objc_msgSend_580 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Bool Function(
@@ -31481,7 +33514,7 @@ final _objc_msgSend_579 = objc.msgSendPointer
 late final _sel_isTapToFocusEnabled = objc.registerName("isTapToFocusEnabled");
 late final _sel_setTapToFocusEnabled_ =
     objc.registerName("setTapToFocusEnabled:");
-final _objc_msgSend_580 = objc.msgSendPointer
+final _objc_msgSend_581 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
@@ -31641,7 +33674,7 @@ late final _sel_maxZoomRatio = objc.registerName("maxZoomRatio");
 late final _sel_zoomRatio = objc.registerName("zoomRatio");
 late final _sel_linearZoom = objc.registerName("linearZoom");
 late final _sel_getZoomState = objc.registerName("getZoomState");
-final _objc_msgSend_581 = objc.msgSendPointer
+final _objc_msgSend_582 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
@@ -31753,7 +33786,7 @@ class ObjCBlock_ffiVoid_ZoomState extends objc.ObjCBlockBase {
 
 late final _sel_addZoomStateObserverWithCallback_ =
     objc.registerName("addZoomStateObserverWithCallback:");
-final _objc_msgSend_582 = objc.msgSendPointer
+final _objc_msgSend_583 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
@@ -31764,7 +33797,7 @@ final _objc_msgSend_582 = objc.msgSendPointer
 late final _sel_removeZoomStateObserverAndReturnError_ =
     objc.registerName("removeZoomStateObserverAndReturnError:");
 late final _sel_setZoomRatio_error_ = objc.registerName("setZoomRatio:error:");
-final _objc_msgSend_583 = objc.msgSendPointer
+final _objc_msgSend_584 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Bool Function(
@@ -31901,7 +33934,7 @@ class TorchState extends objc.NSObject {
 
 late final _class_TorchState = objc.getClass("camerax_ios.TorchState");
 late final _sel_getTorchState = objc.registerName("getTorchState");
-final _objc_msgSend_584 = objc.msgSendPointer
+final _objc_msgSend_585 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
@@ -32013,7 +34046,7 @@ class ObjCBlock_ffiVoid_TorchState extends objc.ObjCBlockBase {
 
 late final _sel_addTorchStateObserverWithCallback_ =
     objc.registerName("addTorchStateObserverWithCallback:");
-final _objc_msgSend_585 = objc.msgSendPointer
+final _objc_msgSend_586 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
@@ -32024,7 +34057,7 @@ final _objc_msgSend_585 = objc.msgSendPointer
 late final _sel_removeTorchStateObserverAndReturnError_ =
     objc.registerName("removeTorchStateObserverAndReturnError:");
 late final _sel_enableTorch_error_ = objc.registerName("enableTorch:error:");
-final _objc_msgSend_586 = objc.msgSendPointer
+final _objc_msgSend_587 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Bool Function(
@@ -32040,7 +34073,7 @@ final _objc_msgSend_586 = objc.msgSendPointer
             ffi.Pointer<ffi.Pointer<objc.ObjCObject>>)>();
 late final _sel_takePictureWithUrl_completionHandler_ =
     objc.registerName("takePictureWithUrl:completionHandler:");
-final _objc_msgSend_587 = objc.msgSendPointer
+final _objc_msgSend_588 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Void Function(
@@ -32175,29 +34208,29 @@ class Recording extends objc.NSObject {
 }
 
 late final _class_Recording = objc.getClass("camerax_ios.Recording");
-void _ObjCBlock_ffiVoid_VideoRecordEvent_fnPtrTrampoline(
+void _ObjCBlock_ffiVoid_objcObjCObject_fnPtrTrampoline(
         ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<objc.ObjCObject> arg0) =>
     block.ref.target
         .cast<
             ffi.NativeFunction<
                 ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0)>>()
         .asFunction<void Function(ffi.Pointer<objc.ObjCObject>)>()(arg0);
-void _ObjCBlock_ffiVoid_VideoRecordEvent_closureTrampoline(
+void _ObjCBlock_ffiVoid_objcObjCObject_closureTrampoline(
         ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<objc.ObjCObject> arg0) =>
     (objc.getBlockClosure(block) as void Function(
         ffi.Pointer<objc.ObjCObject>))(arg0);
 
-class ObjCBlock_ffiVoid_VideoRecordEvent extends objc.ObjCBlockBase {
-  ObjCBlock_ffiVoid_VideoRecordEvent._(ffi.Pointer<objc.ObjCBlock> pointer,
+class ObjCBlock_ffiVoid_objcObjCObject extends objc.ObjCBlockBase {
+  ObjCBlock_ffiVoid_objcObjCObject._(ffi.Pointer<objc.ObjCBlock> pointer,
       {bool retain = false, bool release = true})
       : super(pointer, retain: retain, release: release);
 
   /// Returns a block that wraps the given raw block pointer.
-  static ObjCBlock_ffiVoid_VideoRecordEvent castFromPointer(
+  static ObjCBlock_ffiVoid_objcObjCObject castFromPointer(
       ffi.Pointer<objc.ObjCBlock> pointer,
       {bool retain = false,
       bool release = false}) {
-    return ObjCBlock_ffiVoid_VideoRecordEvent._(pointer,
+    return ObjCBlock_ffiVoid_objcObjCObject._(pointer,
         retain: retain, release: release);
   }
 
@@ -32206,7 +34239,7 @@ class ObjCBlock_ffiVoid_VideoRecordEvent extends objc.ObjCBlockBase {
   /// This block must be invoked by native code running on the same thread as
   /// the isolate that registered it. Invoking the block on the wrong thread
   /// will result in a crash.
-  ObjCBlock_ffiVoid_VideoRecordEvent.fromFunctionPointer(
+  ObjCBlock_ffiVoid_objcObjCObject.fromFunctionPointer(
       ffi.Pointer<
               ffi.NativeFunction<
                   ffi.Void Function(ffi.Pointer<objc.ObjCObject> arg0)>>
@@ -32215,7 +34248,7 @@ class ObjCBlock_ffiVoid_VideoRecordEvent extends objc.ObjCBlockBase {
             _cFuncTrampoline ??= ffi.Pointer.fromFunction<
                         ffi.Void Function(ffi.Pointer<objc.ObjCBlock>,
                             ffi.Pointer<objc.ObjCObject>)>(
-                    _ObjCBlock_ffiVoid_VideoRecordEvent_fnPtrTrampoline)
+                    _ObjCBlock_ffiVoid_objcObjCObject_fnPtrTrampoline)
                 .cast(),
             ptr.cast()));
   static ffi.Pointer<ffi.Void>? _cFuncTrampoline;
@@ -32225,17 +34258,16 @@ class ObjCBlock_ffiVoid_VideoRecordEvent extends objc.ObjCBlockBase {
   /// This block must be invoked by native code running on the same thread as
   /// the isolate that registered it. Invoking the block on the wrong thread
   /// will result in a crash.
-  ObjCBlock_ffiVoid_VideoRecordEvent.fromFunction(
-      void Function(VideoRecordEvent) fn)
+  ObjCBlock_ffiVoid_objcObjCObject.fromFunction(
+      void Function(objc.ObjCObjectBase) fn)
       : this._(objc.newClosureBlock(
             _dartFuncTrampoline ??= ffi.Pointer.fromFunction<
                         ffi.Void Function(ffi.Pointer<objc.ObjCBlock>,
                             ffi.Pointer<objc.ObjCObject>)>(
-                    _ObjCBlock_ffiVoid_VideoRecordEvent_closureTrampoline)
+                    _ObjCBlock_ffiVoid_objcObjCObject_closureTrampoline)
                 .cast(),
-            (ffi.Pointer<objc.ObjCObject> arg0) => fn(
-                VideoRecordEvent.castFromPointer(arg0,
-                    retain: true, release: true))));
+            (ffi.Pointer<objc.ObjCObject> arg0) =>
+                fn(objc.ObjCObjectBase(arg0, retain: true, release: true))));
   static ffi.Pointer<ffi.Void>? _dartFuncTrampoline;
 
   /// Creates a listener block from a Dart function.
@@ -32247,26 +34279,25 @@ class ObjCBlock_ffiVoid_VideoRecordEvent extends objc.ObjCBlockBase {
   ///
   /// Note that unlike the default behavior of NativeCallable.listener, listener
   /// blocks do not keep the isolate alive.
-  ObjCBlock_ffiVoid_VideoRecordEvent.listener(
-      void Function(VideoRecordEvent) fn)
-      : this._(wrapListenerBlock_ObjCBlock_ffiVoid_VideoRecordEvent(
+  ObjCBlock_ffiVoid_objcObjCObject.listener(
+      void Function(objc.ObjCObjectBase) fn)
+      : this._(wrapListenerBlock_ObjCBlock_ffiVoid_objcObjCObject(
             objc.newClosureBlock(
                 (_dartFuncListenerTrampoline ??= ffi.NativeCallable<
                             ffi.Void Function(ffi.Pointer<objc.ObjCBlock>,
                                 ffi.Pointer<objc.ObjCObject>)>.listener(
-                        _ObjCBlock_ffiVoid_VideoRecordEvent_closureTrampoline)
+                        _ObjCBlock_ffiVoid_objcObjCObject_closureTrampoline)
                       ..keepIsolateAlive = false)
                     .nativeFunction
                     .cast(),
                 (ffi.Pointer<objc.ObjCObject> arg0) => fn(
-                    VideoRecordEvent.castFromPointer(arg0,
-                        retain: false, release: true)))));
+                    objc.ObjCObjectBase(arg0, retain: false, release: true)))));
   static ffi.NativeCallable<
           ffi.Void Function(
               ffi.Pointer<objc.ObjCBlock>, ffi.Pointer<objc.ObjCObject>)>?
       _dartFuncListenerTrampoline;
 
-  void call(VideoRecordEvent arg0) => pointer.ref.invoke
+  void call(objc.ObjCObjectBase arg0) => pointer.ref.invoke
       .cast<
           ffi.NativeFunction<
               ffi.Void Function(ffi.Pointer<objc.ObjCBlock> block,
@@ -32276,126 +34307,9 @@ class ObjCBlock_ffiVoid_VideoRecordEvent extends objc.ObjCBlockBase {
               ffi.Pointer<objc.ObjCObject>)>()(pointer, arg0.pointer);
 }
 
-/// VideoRecordEvent
-class VideoRecordEvent extends objc.NSObject {
-  VideoRecordEvent._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super.castFromPointer(pointer, retain: retain, release: release);
-
-  /// Constructs a [VideoRecordEvent] that points to the same underlying object as [other].
-  VideoRecordEvent.castFrom(objc.ObjCObjectBase other)
-      : this._(other.pointer, retain: true, release: true);
-
-  /// Constructs a [VideoRecordEvent] that wraps the given raw object pointer.
-  VideoRecordEvent.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [VideoRecordEvent].
-  static bool isInstance(objc.ObjCObjectBase obj) {
-    return _objc_msgSend_0(
-        obj.pointer, _sel_isKindOfClass_, _class_VideoRecordEvent);
-  }
-
-  /// init
-  VideoRecordEvent init() {
-    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
-    return VideoRecordEvent.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// new
-  static VideoRecordEvent new1() {
-    final _ret = _objc_msgSend_19(_class_VideoRecordEvent, _sel_new);
-    return VideoRecordEvent.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// allocWithZone:
-  static VideoRecordEvent allocWithZone_(ffi.Pointer<_NSZone> zone) {
-    final _ret =
-        _objc_msgSend_28(_class_VideoRecordEvent, _sel_allocWithZone_, zone);
-    return VideoRecordEvent.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// alloc
-  static VideoRecordEvent alloc() {
-    final _ret = _objc_msgSend_19(_class_VideoRecordEvent, _sel_alloc);
-    return VideoRecordEvent.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:selector:object:
-  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
-      objc.ObjCObjectBase aTarget,
-      ffi.Pointer<objc.ObjCSelector> aSelector,
-      objc.ObjCObjectBase? anArgument) {
-    _objc_msgSend_29(
-        _class_VideoRecordEvent,
-        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
-        aTarget.pointer,
-        aSelector,
-        anArgument?.pointer ?? ffi.nullptr);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:
-  static void cancelPreviousPerformRequestsWithTarget_(
-      objc.ObjCObjectBase aTarget) {
-    _objc_msgSend_27(_class_VideoRecordEvent,
-        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
-  }
-
-  /// accessInstanceVariablesDirectly
-  static bool getAccessInstanceVariablesDirectly() {
-    return _objc_msgSend_13(
-        _class_VideoRecordEvent, _sel_accessInstanceVariablesDirectly);
-  }
-
-  /// useStoredAccessor
-  static bool useStoredAccessor() {
-    return _objc_msgSend_13(_class_VideoRecordEvent, _sel_useStoredAccessor);
-  }
-
-  /// keyPathsForValuesAffectingValueForKey:
-  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
-    final _ret = _objc_msgSend_30(_class_VideoRecordEvent,
-        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
-    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// automaticallyNotifiesObserversForKey:
-  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
-    return _objc_msgSend_31(_class_VideoRecordEvent,
-        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
-  }
-
-  /// setKeys:triggerChangeNotificationsForDependentKey:
-  static void setKeys_triggerChangeNotificationsForDependentKey_(
-      objc.NSArray keys, objc.NSString dependentKey) {
-    _objc_msgSend_32(
-        _class_VideoRecordEvent,
-        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
-        keys.pointer,
-        dependentKey.pointer);
-  }
-
-  /// classFallbacksForKeyedArchiver
-  static objc.NSArray classFallbacksForKeyedArchiver() {
-    final _ret = _objc_msgSend_33(
-        _class_VideoRecordEvent, _sel_classFallbacksForKeyedArchiver);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// classForKeyedUnarchiver
-  static objc.ObjCObjectBase classForKeyedUnarchiver() {
-    final _ret =
-        _objc_msgSend_19(_class_VideoRecordEvent, _sel_classForKeyedUnarchiver);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-}
-
-late final _class_VideoRecordEvent =
-    objc.getClass("camerax_ios.VideoRecordEvent");
 late final _sel_startRecordingWithUrl_enableAudio_listener_ =
     objc.registerName("startRecordingWithUrl:enableAudio:listener:");
-final _objc_msgSend_588 = objc.msgSendPointer
+final _objc_msgSend_589 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             ffi.Pointer<objc.ObjCObject> Function(
@@ -32411,6 +34325,770 @@ final _objc_msgSend_588 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             bool,
             ffi.Pointer<objc.ObjCBlock>)>();
+late final _sel_getImageAnalysisOutputImageFormat =
+    objc.registerName("getImageAnalysisOutputImageFormat");
+late final _sel_setImageAnalysisOutputImageFormat_ =
+    objc.registerName("setImageAnalysisOutputImageFormat:");
+final _objc_msgSend_590 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_setImageAnalysisAnalyzer_ =
+    objc.registerName("setImageAnalysisAnalyzer:");
+late final _sel_clearImageAnalysisAnalyzer =
+    objc.registerName("clearImageAnalysisAnalyzer");
+
+/// MLAnalyzer
+class MLAnalyzer extends objc.NSObject {
+  MLAnalyzer._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [MLAnalyzer] that points to the same underlying object as [other].
+  MLAnalyzer.castFrom(objc.ObjCObjectBase other)
+      : this._(other.pointer, retain: true, release: true);
+
+  /// Constructs a [MLAnalyzer] that wraps the given raw object pointer.
+  MLAnalyzer.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [MLAnalyzer].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_0(obj.pointer, _sel_isKindOfClass_, _class_MLAnalyzer);
+  }
+
+  /// analyzeWithImageProxy:
+  void analyzeWithImageProxy_(ImageProxy imageProxy) {
+    _objc_msgSend_591(
+        this.pointer, _sel_analyzeWithImageProxy_, imageProxy.pointer);
+  }
+
+  /// init
+  MLAnalyzer init() {
+    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
+    return MLAnalyzer.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// new
+  static MLAnalyzer new1() {
+    final _ret = _objc_msgSend_19(_class_MLAnalyzer, _sel_new);
+    return MLAnalyzer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static MLAnalyzer allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_28(_class_MLAnalyzer, _sel_allocWithZone_, zone);
+    return MLAnalyzer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static MLAnalyzer alloc() {
+    final _ret = _objc_msgSend_19(_class_MLAnalyzer, _sel_alloc);
+    return MLAnalyzer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:selector:object:
+  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
+      objc.ObjCObjectBase aTarget,
+      ffi.Pointer<objc.ObjCSelector> aSelector,
+      objc.ObjCObjectBase? anArgument) {
+    _objc_msgSend_29(
+        _class_MLAnalyzer,
+        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
+        aTarget.pointer,
+        aSelector,
+        anArgument?.pointer ?? ffi.nullptr);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:
+  static void cancelPreviousPerformRequestsWithTarget_(
+      objc.ObjCObjectBase aTarget) {
+    _objc_msgSend_27(_class_MLAnalyzer,
+        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
+  }
+
+  /// accessInstanceVariablesDirectly
+  static bool getAccessInstanceVariablesDirectly() {
+    return _objc_msgSend_13(
+        _class_MLAnalyzer, _sel_accessInstanceVariablesDirectly);
+  }
+
+  /// useStoredAccessor
+  static bool useStoredAccessor() {
+    return _objc_msgSend_13(_class_MLAnalyzer, _sel_useStoredAccessor);
+  }
+
+  /// keyPathsForValuesAffectingValueForKey:
+  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
+    final _ret = _objc_msgSend_30(_class_MLAnalyzer,
+        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
+    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// automaticallyNotifiesObserversForKey:
+  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
+    return _objc_msgSend_31(_class_MLAnalyzer,
+        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
+  }
+
+  /// setKeys:triggerChangeNotificationsForDependentKey:
+  static void setKeys_triggerChangeNotificationsForDependentKey_(
+      objc.NSArray keys, objc.NSString dependentKey) {
+    _objc_msgSend_32(
+        _class_MLAnalyzer,
+        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
+        keys.pointer,
+        dependentKey.pointer);
+  }
+
+  /// classFallbacksForKeyedArchiver
+  static objc.NSArray classFallbacksForKeyedArchiver() {
+    final _ret = _objc_msgSend_33(
+        _class_MLAnalyzer, _sel_classFallbacksForKeyedArchiver);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// classForKeyedUnarchiver
+  static objc.ObjCObjectBase classForKeyedUnarchiver() {
+    final _ret =
+        _objc_msgSend_19(_class_MLAnalyzer, _sel_classForKeyedUnarchiver);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_MLAnalyzer = objc.getClass("camerax_ios.MLAnalyzer");
+final _objc_msgSend_591 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+
+/// PlaneProxy
+class PlaneProxy extends objc.NSObject {
+  PlaneProxy._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [PlaneProxy] that points to the same underlying object as [other].
+  PlaneProxy.castFrom(objc.ObjCObjectBase other)
+      : this._(other.pointer, retain: true, release: true);
+
+  /// Constructs a [PlaneProxy] that wraps the given raw object pointer.
+  PlaneProxy.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [PlaneProxy].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_0(obj.pointer, _sel_isKindOfClass_, _class_PlaneProxy);
+  }
+
+  /// rowStride
+  int get rowStride {
+    return _objc_msgSend_125(this.pointer, _sel_rowStride);
+  }
+
+  /// pixelStride
+  int get pixelStride {
+    return _objc_msgSend_125(this.pointer, _sel_pixelStride);
+  }
+
+  /// value
+  objc.NSData get value {
+    final _ret = _objc_msgSend_115(this.pointer, _sel_value);
+    return objc.NSData.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// init
+  PlaneProxy init() {
+    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
+    return PlaneProxy.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// new
+  static PlaneProxy new1() {
+    final _ret = _objc_msgSend_19(_class_PlaneProxy, _sel_new);
+    return PlaneProxy.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static PlaneProxy allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret = _objc_msgSend_28(_class_PlaneProxy, _sel_allocWithZone_, zone);
+    return PlaneProxy.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static PlaneProxy alloc() {
+    final _ret = _objc_msgSend_19(_class_PlaneProxy, _sel_alloc);
+    return PlaneProxy.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:selector:object:
+  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
+      objc.ObjCObjectBase aTarget,
+      ffi.Pointer<objc.ObjCSelector> aSelector,
+      objc.ObjCObjectBase? anArgument) {
+    _objc_msgSend_29(
+        _class_PlaneProxy,
+        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
+        aTarget.pointer,
+        aSelector,
+        anArgument?.pointer ?? ffi.nullptr);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:
+  static void cancelPreviousPerformRequestsWithTarget_(
+      objc.ObjCObjectBase aTarget) {
+    _objc_msgSend_27(_class_PlaneProxy,
+        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
+  }
+
+  /// accessInstanceVariablesDirectly
+  static bool getAccessInstanceVariablesDirectly() {
+    return _objc_msgSend_13(
+        _class_PlaneProxy, _sel_accessInstanceVariablesDirectly);
+  }
+
+  /// useStoredAccessor
+  static bool useStoredAccessor() {
+    return _objc_msgSend_13(_class_PlaneProxy, _sel_useStoredAccessor);
+  }
+
+  /// keyPathsForValuesAffectingValueForKey:
+  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
+    final _ret = _objc_msgSend_30(_class_PlaneProxy,
+        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
+    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// automaticallyNotifiesObserversForKey:
+  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
+    return _objc_msgSend_31(_class_PlaneProxy,
+        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
+  }
+
+  /// setKeys:triggerChangeNotificationsForDependentKey:
+  static void setKeys_triggerChangeNotificationsForDependentKey_(
+      objc.NSArray keys, objc.NSString dependentKey) {
+    _objc_msgSend_32(
+        _class_PlaneProxy,
+        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
+        keys.pointer,
+        dependentKey.pointer);
+  }
+
+  /// classFallbacksForKeyedArchiver
+  static objc.NSArray classFallbacksForKeyedArchiver() {
+    final _ret = _objc_msgSend_33(
+        _class_PlaneProxy, _sel_classFallbacksForKeyedArchiver);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// classForKeyedUnarchiver
+  static objc.ObjCObjectBase classForKeyedUnarchiver() {
+    final _ret =
+        _objc_msgSend_19(_class_PlaneProxy, _sel_classForKeyedUnarchiver);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_PlaneProxy = objc.getClass("camerax_ios.PlaneProxy");
+late final _sel_rowStride = objc.registerName("rowStride");
+late final _sel_pixelStride = objc.registerName("pixelStride");
+
+enum ScaleType {
+  ScaleTypeFill(0),
+  ScaleTypeFillCenter(1),
+  ScaleTypeFitCenter(2);
+
+  final int value;
+  const ScaleType(this.value);
+
+  static ScaleType fromValue(int value) => switch (value) {
+        0 => ScaleTypeFill,
+        1 => ScaleTypeFillCenter,
+        2 => ScaleTypeFitCenter,
+        _ => throw ArgumentError("Unknown value for ScaleType: $value"),
+      };
+}
+
+/// PreviewView
+class PreviewView extends objc.ObjCObjectBase {
+  PreviewView._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super(pointer, retain: retain, release: release);
+
+  /// Constructs a [PreviewView] that points to the same underlying object as [other].
+  PreviewView.castFrom(objc.ObjCObjectBase other)
+      : this._(other.pointer, retain: true, release: true);
+
+  /// Constructs a [PreviewView] that wraps the given raw object pointer.
+  PreviewView.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [PreviewView].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_0(
+        obj.pointer, _sel_isKindOfClass_, _class_PreviewView);
+  }
+
+  /// layerClass
+  static objc.ObjCObjectBase getLayerClass() {
+    final _ret = _objc_msgSend_19(_class_PreviewView, _sel_layerClass);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// controller
+  CameraController? get controller {
+    final _ret = _objc_msgSend_592(this.pointer, _sel_controller);
+    return _ret.address == 0
+        ? null
+        : CameraController.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// setController:
+  set controller(CameraController? value) {
+    return _objc_msgSend_593(
+        this.pointer, _sel_setController_, value?.pointer ?? ffi.nullptr);
+  }
+
+  /// scaleType
+  ScaleType get scaleType {
+    final _ret = _objc_msgSend_594(this.pointer, _sel_scaleType);
+    return ScaleType.fromValue(_ret);
+  }
+
+  /// setScaleType:
+  set scaleType(ScaleType value) {
+    return _objc_msgSend_595(this.pointer, _sel_setScaleType_, value.value);
+  }
+
+  /// didMoveToSuperview
+  void didMoveToSuperview() {
+    _objc_msgSend_7(this.pointer, _sel_didMoveToSuperview);
+  }
+
+  /// removeFromSuperview
+  void removeFromSuperview() {
+    _objc_msgSend_7(this.pointer, _sel_removeFromSuperview);
+  }
+
+  /// initWithFrame:
+  PreviewView initWithFrame_(CGRect frame) {
+    final _ret = _objc_msgSend_596(this.pointer, _sel_initWithFrame_, frame);
+    return PreviewView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// initWithCoder:
+  PreviewView? initWithCoder_(objc.NSCoder coder) {
+    final _ret =
+        _objc_msgSend_243(this.pointer, _sel_initWithCoder_, coder.pointer);
+    return _ret.address == 0
+        ? null
+        : PreviewView.castFromPointer(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_PreviewView = objc.getClass("camerax_ios.PreviewView");
+late final _sel_layerClass = objc.registerName("layerClass");
+late final _sel_controller = objc.registerName("controller");
+final _objc_msgSend_592 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setController_ = objc.registerName("setController:");
+final _objc_msgSend_593 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_scaleType = objc.registerName("scaleType");
+final _objc_msgSend_594 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        int Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_setScaleType_ = objc.registerName("setScaleType:");
+final _objc_msgSend_595 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
+    .asFunction<
+        void Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _sel_didMoveToSuperview = objc.registerName("didMoveToSuperview");
+late final _sel_removeFromSuperview = objc.registerName("removeFromSuperview");
+
+final class CGRect extends ffi.Struct {
+  external CGPoint origin;
+
+  external CGSize size;
+}
+
+final class CGPoint extends ffi.Struct {
+  @ffi.Double()
+  external double x;
+
+  @ffi.Double()
+  external double y;
+}
+
+final class CGSize extends ffi.Struct {
+  @ffi.Double()
+  external double width;
+
+  @ffi.Double()
+  external double height;
+}
+
+late final _sel_initWithFrame_ = objc.registerName("initWithFrame:");
+final _objc_msgSend_596 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            instancetype Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, CGRect)>>()
+    .asFunction<
+        instancetype Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, CGRect)>();
+
+/// PreviewViewFactory
+class PreviewViewFactory extends objc.NSObject {
+  PreviewViewFactory._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [PreviewViewFactory] that points to the same underlying object as [other].
+  PreviewViewFactory.castFrom(objc.ObjCObjectBase other)
+      : this._(other.pointer, retain: true, release: true);
+
+  /// Constructs a [PreviewViewFactory] that wraps the given raw object pointer.
+  PreviewViewFactory.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [PreviewViewFactory].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_0(
+        obj.pointer, _sel_isKindOfClass_, _class_PreviewViewFactory);
+  }
+
+  /// shared
+  static PreviewViewFactory getShared() {
+    final _ret = _objc_msgSend_597(_class_PreviewViewFactory, _sel_shared);
+    return PreviewViewFactory.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// init
+  PreviewViewFactory init() {
+    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
+    return PreviewViewFactory.castFromPointer(_ret,
+        retain: true, release: true);
+  }
+
+  /// new
+  static PreviewViewFactory new1() {
+    final _ret = _objc_msgSend_19(_class_PreviewViewFactory, _sel_new);
+    return PreviewViewFactory.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// createWithFrame:viewIdentifier:arguments:
+  objc.ObjCObjectBase createWithFrame_viewIdentifier_arguments_(
+      CGRect frame, int viewId, objc.ObjCObjectBase? args) {
+    final _ret = _objc_msgSend_598(
+        this.pointer,
+        _sel_createWithFrame_viewIdentifier_arguments_,
+        frame,
+        viewId,
+        args?.pointer ?? ffi.nullptr);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+
+  /// retrieveView:
+  PreviewView? retrieveView_(int viewId) {
+    final _ret = _objc_msgSend_599(this.pointer, _sel_retrieveView_, viewId);
+    return _ret.address == 0
+        ? null
+        : PreviewView.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// allocWithZone:
+  static PreviewViewFactory allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_28(_class_PreviewViewFactory, _sel_allocWithZone_, zone);
+    return PreviewViewFactory.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// alloc
+  static PreviewViewFactory alloc() {
+    final _ret = _objc_msgSend_19(_class_PreviewViewFactory, _sel_alloc);
+    return PreviewViewFactory.castFromPointer(_ret,
+        retain: false, release: true);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:selector:object:
+  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
+      objc.ObjCObjectBase aTarget,
+      ffi.Pointer<objc.ObjCSelector> aSelector,
+      objc.ObjCObjectBase? anArgument) {
+    _objc_msgSend_29(
+        _class_PreviewViewFactory,
+        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
+        aTarget.pointer,
+        aSelector,
+        anArgument?.pointer ?? ffi.nullptr);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:
+  static void cancelPreviousPerformRequestsWithTarget_(
+      objc.ObjCObjectBase aTarget) {
+    _objc_msgSend_27(_class_PreviewViewFactory,
+        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
+  }
+
+  /// accessInstanceVariablesDirectly
+  static bool getAccessInstanceVariablesDirectly() {
+    return _objc_msgSend_13(
+        _class_PreviewViewFactory, _sel_accessInstanceVariablesDirectly);
+  }
+
+  /// useStoredAccessor
+  static bool useStoredAccessor() {
+    return _objc_msgSend_13(_class_PreviewViewFactory, _sel_useStoredAccessor);
+  }
+
+  /// keyPathsForValuesAffectingValueForKey:
+  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
+    final _ret = _objc_msgSend_30(_class_PreviewViewFactory,
+        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
+    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// automaticallyNotifiesObserversForKey:
+  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
+    return _objc_msgSend_31(_class_PreviewViewFactory,
+        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
+  }
+
+  /// setKeys:triggerChangeNotificationsForDependentKey:
+  static void setKeys_triggerChangeNotificationsForDependentKey_(
+      objc.NSArray keys, objc.NSString dependentKey) {
+    _objc_msgSend_32(
+        _class_PreviewViewFactory,
+        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
+        keys.pointer,
+        dependentKey.pointer);
+  }
+
+  /// classFallbacksForKeyedArchiver
+  static objc.NSArray classFallbacksForKeyedArchiver() {
+    final _ret = _objc_msgSend_33(
+        _class_PreviewViewFactory, _sel_classFallbacksForKeyedArchiver);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// classForKeyedUnarchiver
+  static objc.ObjCObjectBase classForKeyedUnarchiver() {
+    final _ret = _objc_msgSend_19(
+        _class_PreviewViewFactory, _sel_classForKeyedUnarchiver);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_PreviewViewFactory =
+    objc.getClass("camerax_ios.PreviewViewFactory");
+late final _sel_shared = objc.registerName("shared");
+final _objc_msgSend_597 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
+late final _sel_createWithFrame_viewIdentifier_arguments_ =
+    objc.registerName("createWithFrame:viewIdentifier:arguments:");
+final _objc_msgSend_598 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(
+                ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>,
+                CGRect,
+                ffi.Int64,
+                ffi.Pointer<objc.ObjCObject>)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>,
+            CGRect,
+            int,
+            ffi.Pointer<objc.ObjCObject>)>();
+late final _sel_retrieveView_ = objc.registerName("retrieveView:");
+final _objc_msgSend_599 = objc.msgSendPointer
+    .cast<
+        ffi.NativeFunction<
+            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+                ffi.Pointer<objc.ObjCSelector>, ffi.Int64)>>()
+    .asFunction<
+        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
+            ffi.Pointer<objc.ObjCSelector>, int)>();
+
+/// RawAnalyzer
+class RawAnalyzer extends objc.NSObject {
+  RawAnalyzer._(ffi.Pointer<objc.ObjCObject> pointer,
+      {bool retain = false, bool release = false})
+      : super.castFromPointer(pointer, retain: retain, release: release);
+
+  /// Constructs a [RawAnalyzer] that points to the same underlying object as [other].
+  RawAnalyzer.castFrom(objc.ObjCObjectBase other)
+      : this._(other.pointer, retain: true, release: true);
+
+  /// Constructs a [RawAnalyzer] that wraps the given raw object pointer.
+  RawAnalyzer.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
+      {bool retain = false, bool release = false})
+      : this._(other, retain: retain, release: release);
+
+  /// Returns whether [obj] is an instance of [RawAnalyzer].
+  static bool isInstance(objc.ObjCObjectBase obj) {
+    return _objc_msgSend_0(
+        obj.pointer, _sel_isKindOfClass_, _class_RawAnalyzer);
+  }
+
+  /// initOnAnalyzed:
+  RawAnalyzer initOnAnalyzed_(ObjCBlock_ffiVoid_ImageProxy onAnalyzed) {
+    final _ret = _objc_msgSend_600(
+        this.pointer, _sel_initOnAnalyzed_, onAnalyzed.pointer);
+    return RawAnalyzer.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// analyzeWithImageProxy:
+  void analyzeWithImageProxy_(ImageProxy imageProxy) {
+    _objc_msgSend_591(
+        this.pointer, _sel_analyzeWithImageProxy_, imageProxy.pointer);
+  }
+
+  /// init
+  RawAnalyzer init() {
+    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
+    return RawAnalyzer.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// new
+  static RawAnalyzer new1() {
+    final _ret = _objc_msgSend_19(_class_RawAnalyzer, _sel_new);
+    return RawAnalyzer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// allocWithZone:
+  static RawAnalyzer allocWithZone_(ffi.Pointer<_NSZone> zone) {
+    final _ret =
+        _objc_msgSend_28(_class_RawAnalyzer, _sel_allocWithZone_, zone);
+    return RawAnalyzer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// alloc
+  static RawAnalyzer alloc() {
+    final _ret = _objc_msgSend_19(_class_RawAnalyzer, _sel_alloc);
+    return RawAnalyzer.castFromPointer(_ret, retain: false, release: true);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:selector:object:
+  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
+      objc.ObjCObjectBase aTarget,
+      ffi.Pointer<objc.ObjCSelector> aSelector,
+      objc.ObjCObjectBase? anArgument) {
+    _objc_msgSend_29(
+        _class_RawAnalyzer,
+        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
+        aTarget.pointer,
+        aSelector,
+        anArgument?.pointer ?? ffi.nullptr);
+  }
+
+  /// cancelPreviousPerformRequestsWithTarget:
+  static void cancelPreviousPerformRequestsWithTarget_(
+      objc.ObjCObjectBase aTarget) {
+    _objc_msgSend_27(_class_RawAnalyzer,
+        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
+  }
+
+  /// accessInstanceVariablesDirectly
+  static bool getAccessInstanceVariablesDirectly() {
+    return _objc_msgSend_13(
+        _class_RawAnalyzer, _sel_accessInstanceVariablesDirectly);
+  }
+
+  /// useStoredAccessor
+  static bool useStoredAccessor() {
+    return _objc_msgSend_13(_class_RawAnalyzer, _sel_useStoredAccessor);
+  }
+
+  /// keyPathsForValuesAffectingValueForKey:
+  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
+    final _ret = _objc_msgSend_30(_class_RawAnalyzer,
+        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
+    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// automaticallyNotifiesObserversForKey:
+  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
+    return _objc_msgSend_31(_class_RawAnalyzer,
+        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
+  }
+
+  /// setKeys:triggerChangeNotificationsForDependentKey:
+  static void setKeys_triggerChangeNotificationsForDependentKey_(
+      objc.NSArray keys, objc.NSString dependentKey) {
+    _objc_msgSend_32(
+        _class_RawAnalyzer,
+        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
+        keys.pointer,
+        dependentKey.pointer);
+  }
+
+  /// classFallbacksForKeyedArchiver
+  static objc.NSArray classFallbacksForKeyedArchiver() {
+    final _ret = _objc_msgSend_33(
+        _class_RawAnalyzer, _sel_classFallbacksForKeyedArchiver);
+    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// classForKeyedUnarchiver
+  static objc.ObjCObjectBase classForKeyedUnarchiver() {
+    final _ret =
+        _objc_msgSend_19(_class_RawAnalyzer, _sel_classForKeyedUnarchiver);
+    return objc.ObjCObjectBase(_ret, retain: true, release: true);
+  }
+}
+
+late final _class_RawAnalyzer = objc.getClass("camerax_ios.RawAnalyzer");
 void _ObjCBlock_ffiVoid_ImageProxy_fnPtrTrampoline(
         ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<objc.ObjCObject> arg0) =>
     block.ref.target
@@ -32510,487 +35188,38 @@ class ObjCBlock_ffiVoid_ImageProxy extends objc.ObjCBlockBase {
               ffi.Pointer<objc.ObjCObject>)>()(pointer, arg0.pointer);
 }
 
-/// ImageProxy
-class ImageProxy extends objc.NSObject {
-  ImageProxy._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super.castFromPointer(pointer, retain: retain, release: release);
-
-  /// Constructs a [ImageProxy] that points to the same underlying object as [other].
-  ImageProxy.castFrom(objc.ObjCObjectBase other)
-      : this._(other.pointer, retain: true, release: true);
-
-  /// Constructs a [ImageProxy] that wraps the given raw object pointer.
-  ImageProxy.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [ImageProxy].
-  static bool isInstance(objc.ObjCObjectBase obj) {
-    return _objc_msgSend_0(obj.pointer, _sel_isKindOfClass_, _class_ImageProxy);
-  }
-
-  /// init
-  ImageProxy init() {
-    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
-    return ImageProxy.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// new
-  static ImageProxy new1() {
-    final _ret = _objc_msgSend_19(_class_ImageProxy, _sel_new);
-    return ImageProxy.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// allocWithZone:
-  static ImageProxy allocWithZone_(ffi.Pointer<_NSZone> zone) {
-    final _ret = _objc_msgSend_28(_class_ImageProxy, _sel_allocWithZone_, zone);
-    return ImageProxy.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// alloc
-  static ImageProxy alloc() {
-    final _ret = _objc_msgSend_19(_class_ImageProxy, _sel_alloc);
-    return ImageProxy.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:selector:object:
-  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
-      objc.ObjCObjectBase aTarget,
-      ffi.Pointer<objc.ObjCSelector> aSelector,
-      objc.ObjCObjectBase? anArgument) {
-    _objc_msgSend_29(
-        _class_ImageProxy,
-        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
-        aTarget.pointer,
-        aSelector,
-        anArgument?.pointer ?? ffi.nullptr);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:
-  static void cancelPreviousPerformRequestsWithTarget_(
-      objc.ObjCObjectBase aTarget) {
-    _objc_msgSend_27(_class_ImageProxy,
-        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
-  }
-
-  /// accessInstanceVariablesDirectly
-  static bool getAccessInstanceVariablesDirectly() {
-    return _objc_msgSend_13(
-        _class_ImageProxy, _sel_accessInstanceVariablesDirectly);
-  }
-
-  /// useStoredAccessor
-  static bool useStoredAccessor() {
-    return _objc_msgSend_13(_class_ImageProxy, _sel_useStoredAccessor);
-  }
-
-  /// keyPathsForValuesAffectingValueForKey:
-  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
-    final _ret = _objc_msgSend_30(_class_ImageProxy,
-        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
-    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// automaticallyNotifiesObserversForKey:
-  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
-    return _objc_msgSend_31(_class_ImageProxy,
-        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
-  }
-
-  /// setKeys:triggerChangeNotificationsForDependentKey:
-  static void setKeys_triggerChangeNotificationsForDependentKey_(
-      objc.NSArray keys, objc.NSString dependentKey) {
-    _objc_msgSend_32(
-        _class_ImageProxy,
-        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
-        keys.pointer,
-        dependentKey.pointer);
-  }
-
-  /// classFallbacksForKeyedArchiver
-  static objc.NSArray classFallbacksForKeyedArchiver() {
-    final _ret = _objc_msgSend_33(
-        _class_ImageProxy, _sel_classFallbacksForKeyedArchiver);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// classForKeyedUnarchiver
-  static objc.ObjCObjectBase classForKeyedUnarchiver() {
-    final _ret =
-        _objc_msgSend_19(_class_ImageProxy, _sel_classForKeyedUnarchiver);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-}
-
-late final _class_ImageProxy = objc.getClass("camerax_ios.ImageProxy");
-late final _sel_setImageAnalyzer_ = objc.registerName("setImageAnalyzer:");
-final _objc_msgSend_589 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>>()
-    .asFunction<
-        void Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>();
-late final _sel_clearImageAnalyzer = objc.registerName("clearImageAnalyzer");
-
-enum ScaleType {
-  ScaleTypeFill(0),
-  ScaleTypeFillCenter(1),
-  ScaleTypeFitCenter(2);
-
-  final int value;
-  const ScaleType(this.value);
-
-  static ScaleType fromValue(int value) => switch (value) {
-        0 => ScaleTypeFill,
-        1 => ScaleTypeFillCenter,
-        2 => ScaleTypeFitCenter,
-        _ => throw ArgumentError("Unknown value for ScaleType: $value"),
-      };
-}
-
-/// PreviewView
-class PreviewView extends objc.ObjCObjectBase {
-  PreviewView._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super(pointer, retain: retain, release: release);
-
-  /// Constructs a [PreviewView] that points to the same underlying object as [other].
-  PreviewView.castFrom(objc.ObjCObjectBase other)
-      : this._(other.pointer, retain: true, release: true);
-
-  /// Constructs a [PreviewView] that wraps the given raw object pointer.
-  PreviewView.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [PreviewView].
-  static bool isInstance(objc.ObjCObjectBase obj) {
-    return _objc_msgSend_0(
-        obj.pointer, _sel_isKindOfClass_, _class_PreviewView);
-  }
-
-  /// layerClass
-  static objc.ObjCObjectBase getLayerClass() {
-    final _ret = _objc_msgSend_19(_class_PreviewView, _sel_layerClass);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-  /// controller
-  CameraController? get controller {
-    final _ret = _objc_msgSend_590(this.pointer, _sel_controller);
-    return _ret.address == 0
-        ? null
-        : CameraController.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// setController:
-  set controller(CameraController? value) {
-    return _objc_msgSend_591(
-        this.pointer, _sel_setController_, value?.pointer ?? ffi.nullptr);
-  }
-
-  /// scaleType
-  ScaleType get scaleType {
-    final _ret = _objc_msgSend_592(this.pointer, _sel_scaleType);
-    return ScaleType.fromValue(_ret);
-  }
-
-  /// setScaleType:
-  set scaleType(ScaleType value) {
-    return _objc_msgSend_593(this.pointer, _sel_setScaleType_, value.value);
-  }
-
-  /// didMoveToSuperview
-  void didMoveToSuperview() {
-    _objc_msgSend_7(this.pointer, _sel_didMoveToSuperview);
-  }
-
-  /// removeFromSuperview
-  void removeFromSuperview() {
-    _objc_msgSend_7(this.pointer, _sel_removeFromSuperview);
-  }
-
-  /// initWithFrame:
-  PreviewView initWithFrame_(CGRect frame) {
-    final _ret = _objc_msgSend_594(this.pointer, _sel_initWithFrame_, frame);
-    return PreviewView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// initWithCoder:
-  PreviewView? initWithCoder_(objc.NSCoder coder) {
-    final _ret =
-        _objc_msgSend_243(this.pointer, _sel_initWithCoder_, coder.pointer);
-    return _ret.address == 0
-        ? null
-        : PreviewView.castFromPointer(_ret, retain: true, release: true);
-  }
-}
-
-late final _class_PreviewView = objc.getClass("camerax_ios.PreviewView");
-late final _sel_layerClass = objc.registerName("layerClass");
-late final _sel_controller = objc.registerName("controller");
-final _objc_msgSend_590 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
-late final _sel_setController_ = objc.registerName("setController:");
-final _objc_msgSend_591 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>,
-                ffi.Pointer<objc.ObjCObject>)>>()
-    .asFunction<
-        void Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCObject>)>();
-late final _sel_scaleType = objc.registerName("scaleType");
-final _objc_msgSend_592 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.UnsignedLong Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        int Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
-late final _sel_setScaleType_ = objc.registerName("setScaleType:");
-final _objc_msgSend_593 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Void Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>, ffi.UnsignedLong)>>()
-    .asFunction<
-        void Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, int)>();
-late final _sel_didMoveToSuperview = objc.registerName("didMoveToSuperview");
-late final _sel_removeFromSuperview = objc.registerName("removeFromSuperview");
-
-final class CGRect extends ffi.Struct {
-  external CGPoint origin;
-
-  external CGSize size;
-}
-
-final class CGPoint extends ffi.Struct {
-  @ffi.Double()
-  external double x;
-
-  @ffi.Double()
-  external double y;
-}
-
-final class CGSize extends ffi.Struct {
-  @ffi.Double()
-  external double width;
-
-  @ffi.Double()
-  external double height;
-}
-
-late final _sel_initWithFrame_ = objc.registerName("initWithFrame:");
-final _objc_msgSend_594 = objc.msgSendPointer
+late final _sel_initOnAnalyzed_ = objc.registerName("initOnAnalyzed:");
+final _objc_msgSend_600 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
             instancetype Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>, CGRect)>>()
+                ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>>()
     .asFunction<
         instancetype Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, CGRect)>();
+            ffi.Pointer<objc.ObjCSelector>, ffi.Pointer<objc.ObjCBlock>)>();
 
-/// PreviewViewFactory
-class PreviewViewFactory extends objc.NSObject {
-  PreviewViewFactory._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super.castFromPointer(pointer, retain: retain, release: release);
+/// VideoRecordEvent
+abstract final class VideoRecordEvent {
+  /// Builds an object that implements the VideoRecordEvent protocol. To implement
+  /// multiple protocols, use [addToBuilder] or [objc.ObjCProtocolBuilder] directly.
+  static objc.ObjCObjectBase implement() {
+    final builder = objc.ObjCProtocolBuilder();
 
-  /// Constructs a [PreviewViewFactory] that points to the same underlying object as [other].
-  PreviewViewFactory.castFrom(objc.ObjCObjectBase other)
-      : this._(other.pointer, retain: true, release: true);
-
-  /// Constructs a [PreviewViewFactory] that wraps the given raw object pointer.
-  PreviewViewFactory.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [PreviewViewFactory].
-  static bool isInstance(objc.ObjCObjectBase obj) {
-    return _objc_msgSend_0(
-        obj.pointer, _sel_isKindOfClass_, _class_PreviewViewFactory);
+    return builder.build();
   }
 
-  /// shared
-  static PreviewViewFactory getShared() {
-    final _ret = _objc_msgSend_595(_class_PreviewViewFactory, _sel_shared);
-    return PreviewViewFactory.castFromPointer(_ret,
-        retain: true, release: true);
-  }
-
-  /// init
-  PreviewViewFactory init() {
-    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
-    return PreviewViewFactory.castFromPointer(_ret,
-        retain: true, release: true);
-  }
-
-  /// new
-  static PreviewViewFactory new1() {
-    final _ret = _objc_msgSend_19(_class_PreviewViewFactory, _sel_new);
-    return PreviewViewFactory.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// createWithFrame:viewIdentifier:arguments:
-  objc.ObjCObjectBase createWithFrame_viewIdentifier_arguments_(
-      CGRect frame, int viewId, objc.ObjCObjectBase? args) {
-    final _ret = _objc_msgSend_596(
-        this.pointer,
-        _sel_createWithFrame_viewIdentifier_arguments_,
-        frame,
-        viewId,
-        args?.pointer ?? ffi.nullptr);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-
-  /// retrieveView:
-  PreviewView? retrieveView_(int viewId) {
-    final _ret = _objc_msgSend_597(this.pointer, _sel_retrieveView_, viewId);
-    return _ret.address == 0
-        ? null
-        : PreviewView.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// allocWithZone:
-  static PreviewViewFactory allocWithZone_(ffi.Pointer<_NSZone> zone) {
-    final _ret =
-        _objc_msgSend_28(_class_PreviewViewFactory, _sel_allocWithZone_, zone);
-    return PreviewViewFactory.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// alloc
-  static PreviewViewFactory alloc() {
-    final _ret = _objc_msgSend_19(_class_PreviewViewFactory, _sel_alloc);
-    return PreviewViewFactory.castFromPointer(_ret,
-        retain: false, release: true);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:selector:object:
-  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
-      objc.ObjCObjectBase aTarget,
-      ffi.Pointer<objc.ObjCSelector> aSelector,
-      objc.ObjCObjectBase? anArgument) {
-    _objc_msgSend_29(
-        _class_PreviewViewFactory,
-        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
-        aTarget.pointer,
-        aSelector,
-        anArgument?.pointer ?? ffi.nullptr);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:
-  static void cancelPreviousPerformRequestsWithTarget_(
-      objc.ObjCObjectBase aTarget) {
-    _objc_msgSend_27(_class_PreviewViewFactory,
-        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
-  }
-
-  /// accessInstanceVariablesDirectly
-  static bool getAccessInstanceVariablesDirectly() {
-    return _objc_msgSend_13(
-        _class_PreviewViewFactory, _sel_accessInstanceVariablesDirectly);
-  }
-
-  /// useStoredAccessor
-  static bool useStoredAccessor() {
-    return _objc_msgSend_13(_class_PreviewViewFactory, _sel_useStoredAccessor);
-  }
-
-  /// keyPathsForValuesAffectingValueForKey:
-  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
-    final _ret = _objc_msgSend_30(_class_PreviewViewFactory,
-        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
-    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// automaticallyNotifiesObserversForKey:
-  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
-    return _objc_msgSend_31(_class_PreviewViewFactory,
-        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
-  }
-
-  /// setKeys:triggerChangeNotificationsForDependentKey:
-  static void setKeys_triggerChangeNotificationsForDependentKey_(
-      objc.NSArray keys, objc.NSString dependentKey) {
-    _objc_msgSend_32(
-        _class_PreviewViewFactory,
-        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
-        keys.pointer,
-        dependentKey.pointer);
-  }
-
-  /// classFallbacksForKeyedArchiver
-  static objc.NSArray classFallbacksForKeyedArchiver() {
-    final _ret = _objc_msgSend_33(
-        _class_PreviewViewFactory, _sel_classFallbacksForKeyedArchiver);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// classForKeyedUnarchiver
-  static objc.ObjCObjectBase classForKeyedUnarchiver() {
-    final _ret = _objc_msgSend_19(
-        _class_PreviewViewFactory, _sel_classForKeyedUnarchiver);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
+  /// Adds the implementation of the VideoRecordEvent protocol to an existing
+  /// [objc.ObjCProtocolBuilder].
+  static void addToBuilder(
+    objc.ObjCProtocolBuilder builder,
+  ) {}
 }
 
-late final _class_PreviewViewFactory =
-    objc.getClass("camerax_ios.PreviewViewFactory");
-late final _sel_shared = objc.registerName("shared");
-final _objc_msgSend_595 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>)>>()
-    .asFunction<
-        ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>, ffi.Pointer<objc.ObjCSelector>)>();
-late final _sel_createWithFrame_viewIdentifier_arguments_ =
-    objc.registerName("createWithFrame:viewIdentifier:arguments:");
-final _objc_msgSend_596 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
-                ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>,
-                CGRect,
-                ffi.Int64,
-                ffi.Pointer<objc.ObjCObject>)>>()
-    .asFunction<
-        ffi.Pointer<objc.ObjCObject> Function(
-            ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>,
-            CGRect,
-            int,
-            ffi.Pointer<objc.ObjCObject>)>();
-late final _sel_retrieveView_ = objc.registerName("retrieveView:");
-final _objc_msgSend_597 = objc.msgSendPointer
-    .cast<
-        ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
-                ffi.Pointer<objc.ObjCSelector>, ffi.Int64)>>()
-    .asFunction<
-        ffi.Pointer<objc.ObjCObject> Function(ffi.Pointer<objc.ObjCObject>,
-            ffi.Pointer<objc.ObjCSelector>, int)>();
+late final _protocol_VideoRecordEvent =
+    objc.getProtocol("camerax_ios.VideoRecordEvent");
 
 /// VideoRecordFinalizeEvent
-class VideoRecordFinalizeEvent extends VideoRecordEvent {
+class VideoRecordFinalizeEvent extends objc.NSObject {
   VideoRecordFinalizeEvent._(ffi.Pointer<objc.ObjCObject> pointer,
       {bool retain = false, bool release = false})
       : super.castFromPointer(pointer, retain: retain, release: release);
@@ -33128,7 +35357,7 @@ late final _class_VideoRecordFinalizeEvent =
 late final _sel_savedUri = objc.registerName("savedUri");
 
 /// VideoRecordStartEvent
-class VideoRecordStartEvent extends VideoRecordEvent {
+class VideoRecordStartEvent extends objc.NSObject {
   VideoRecordStartEvent._(ffi.Pointer<objc.ObjCObject> pointer,
       {bool retain = false, bool release = false})
       : super.castFromPointer(pointer, retain: retain, release: release);

@@ -7,13 +7,13 @@
 
 import Foundation
 
-@objc public class VideoRecordEvent: NSObject {
+@objc public protocol VideoRecordEvent: NSObjectProtocol {
 }
 
-@objc public class VideoRecordStartEvent: VideoRecordEvent {
+@objc public class VideoRecordStartEvent: NSObject, VideoRecordEvent {
 }
 
-@objc public class VideoRecordFinalizeEvent: VideoRecordEvent {
+@objc public class VideoRecordFinalizeEvent: NSObject, VideoRecordEvent {
     @objc public let savedUri: URL
     @objc public let error: (any Error)?
     
