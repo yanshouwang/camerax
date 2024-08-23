@@ -7,12 +7,15 @@
 
 import Foundation
 import AVFoundation
+import CoreMotion
 
 class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
-    let analyzer: Analyzer
+    private let analyzer: Analyzer
+    private let rotationProvider: () -> Int
     
-    init(analyzer: Analyzer) {
+    init(analyzer: Analyzer, rotationProvider: @escaping () -> Int) {
         self.analyzer = analyzer
+        self.rotationProvider = rotationProvider
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -22,10 +25,10 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
             return
         }
         CVPixelBufferLockBaseAddress(imageBuffer, .readOnly)
-        let format = CVPixelBufferGetPixelFormatType(imageBuffer).ffiImageFormat
+        let format = CVPixelBufferGetPixelFormatType(imageBuffer)
         let width = CVPixelBufferGetWidth(imageBuffer)
         let height = CVPixelBufferGetHeight(imageBuffer)
-        let rotationDegrees = getRotationDegrees()
+        let rotationDegrees = 90 - rotationProvider()
         var planeProxies = [PlaneProxy]()
         let isPlanar = CVPixelBufferIsPlanar(imageBuffer)
         if isPlanar {
@@ -50,12 +53,13 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
             let rowStride = CVPixelBufferGetBytesPerRow(imageBuffer)
             let pixelStride = rowStride / width
             let count = rowStride * height
-            let value = Data(bytes: baseAddress, count: count)
+            var value = Data(bytes: baseAddress, count: count)
+            repairValue(value: &value)
             let planeProxy = PlaneProxy(rowStride: rowStride, pixelStride: pixelStride, value: value)
             planeProxies.append(planeProxy)
         }
         let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer).milliseconds
-        let imageProxy = ImageProxy(imageBuffer: imageBuffer, format: format, width: width, height: height, rotationDegrees: rotationDegrees, planeProxies: planeProxies, timestamp: timestamp)
+        let imageProxy = ImageProxy(imageBuffer: imageBuffer, format: format.ffiImageFormat, width: width, height: height, rotationDegrees: rotationDegrees, planeProxies: planeProxies, timestamp: timestamp)
         analyzer.analyze(imageProxy: imageProxy)
     }
     
@@ -63,19 +67,20 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
         debugPrint("Did drop sample buffer.")
     }
     
-    func getRotationDegrees() -> Int {
-        let orientation = UIDevice.current.orientation
-        switch orientation {
-        case .landscapeLeft:
-            return 0
-        case .portrait:
-            return 90
-        case .landscapeRight:
-            return 180
-        case .portraitUpsideDown:
-            return 270
-        default:
-            return 0
+    private func repairValue(value: inout Data) {
+        let bytesPerPixel = 4
+        let count = value.count / bytesPerPixel
+        value.withUnsafeMutableBytes { bytes in
+            guard let baseAddress = bytes.baseAddress else {
+                return
+            }
+            for i in 0 ..< count {
+                let address = baseAddress.advanced(by: i * bytesPerPixel)
+                let blue = address.load(as: UInt8.self)
+                let red = address.advanced(by: 2).load(as: UInt8.self)
+                address.storeBytes(of: red, as: UInt8.self)
+                address.advanced(by: 2).storeBytes(of: blue, as: UInt8.self)
+            }
         }
     }
 }

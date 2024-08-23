@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import CoreMotion
 
 extension FlashMode {
     var swiftValue: AVCaptureDevice.FlashMode {
@@ -107,6 +108,6 @@ extension AVLayerVideoGravity {
 
 extension CMTime {
     var milliseconds: Int {
-       return Int(self.seconds * 1000)
+        return Int(self.seconds * 1000)
     }
 }

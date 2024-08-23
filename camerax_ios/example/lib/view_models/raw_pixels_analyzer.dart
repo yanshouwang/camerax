@@ -14,7 +14,8 @@ class RawPixelsAnalyzer implements Analyzer {
   @override
   void analyze(ImageProxy imageProxy) async {
     try {
-      debugPrint('image size ${imageProxy.width} * ${imageProxy.height}');
+      debugPrint(
+          'image ${imageProxy.format}, ${imageProxy.width} * ${imageProxy.height}, ${imageProxy.rotationDegrees}');
       final format = imageProxy.format;
       if (format != ImageFormat.rgba_8888) {
         throw ArgumentError.value(format);

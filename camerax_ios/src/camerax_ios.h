@@ -314,6 +314,7 @@ typedef SWIFT_ENUM(NSInteger, AuthorizationType, closed) {
   AuthorizationTypeAlbum = 2,
 };
 
+
 enum FlashMode : NSInteger;
 @class CameraSelector;
 @class ZoomState;

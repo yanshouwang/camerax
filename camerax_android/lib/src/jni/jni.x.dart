@@ -12,7 +12,6 @@ import 'android/app/_package.dart' as jni;
 import 'android/content/_package.dart' as jni;
 import 'android/graphics/_package.dart' as jni;
 import 'android/net/_package.dart' as jni;
-import 'android/provider/_package.dart' as jni;
 import 'android/util/_package.dart' as jni;
 import 'androidx/camera/core/_package.dart' as jni;
 import 'androidx/camera/core/resolutionselector/_package.dart' as jni;

@@ -36,6 +36,15 @@ import Photos
     private let captureVideoDataOutput: AVCaptureVideoDataOutput
     private var captureVideoDataOutputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
     private let captureVideoDataOutputQueue: DispatchQueue
+    private let rotationProvider: RotationProvider
+    private var rotation: Int
+    
+    lazy var rotationListener = RotationListener() { rotation in
+        if rotation == self.rotation {
+            return
+        }
+        self.rotation = rotation
+    }
     
     @objc public override init() {
         session = AVCaptureSession()
@@ -46,6 +55,8 @@ import Photos
         captureMovieFileOutput = AVCaptureMovieFileOutput()
         captureVideoDataOutput = AVCaptureVideoDataOutput()
         captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
+        rotationProvider = RotationProvider()
+        rotation = 0
         super.init()
         try? addVideoDeviceInput(cameraSelector: .back)
         try? addAudioDeviceInput()
@@ -91,10 +102,12 @@ import Photos
     
     @objc public func bind() {
         session.startRunning()
+        rotationProvider.addListener(rotationListener)
     }
     
     @objc public func unbind() {
         session.stopRunning()
+        rotationProvider.removeListener(rotationListener)
     }
     
     @objc public func hasCamera(cameraSelector: CameraSelector) -> Bool {
@@ -249,7 +262,7 @@ import Photos
     }
     
     @objc public func setImageAnalysisAnalyzer(_ analyzer: Analyzer) {
-        let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer)
+        let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer) { return self.rotation }
         captureVideoDataOutputSampleBufferDelegate = delegate
         captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: captureVideoDataOutputQueue)
     }

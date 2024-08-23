@@ -17,9 +17,12 @@ swiftc -c \
     "$THIS_DIR/../ios/Classes/FlashMode.swift" \
     "$THIS_DIR/../ios/Classes/ImageProxy.swift" \
     "$THIS_DIR/../ios/Classes/LensFacing.swift" \
+    "$THIS_DIR/../ios/Classes/OrientationEventListener.swift" \
     "$THIS_DIR/../ios/Classes/PreviewView.swift" \
     "$THIS_DIR/../ios/Classes/PreviewViewFactory.swift" \
     "$THIS_DIR/../ios/Classes/Recording.swift" \
+    "$THIS_DIR/../ios/Classes/RotationListener.swift" \
+    "$THIS_DIR/../ios/Classes/RotationProvider.swift" \
     "$THIS_DIR/../ios/Classes/ScaleType.swift" \
     "$THIS_DIR/../ios/Classes/TorchState.swift" \
     "$THIS_DIR/../ios/Classes/VideoRecordEvent.swift" \

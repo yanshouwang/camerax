@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import Vision
 
 @objc public protocol Analyzer: NSObjectProtocol {
