@@ -3,7 +3,6 @@ import 'dart:ffi';
 
 import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_ios/src/ffi.dart' as ffi;
-import 'package:camerax_ios/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:ffi/ffi.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
@@ -294,7 +293,7 @@ final class MyCameraController
   }
 
   @override
-  Future<Recording> startRecording({
+  Future<void> startRecording({
     required Uri uri,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
@@ -306,13 +305,26 @@ final class MyCameraController
       final event = ffiEvent.dartVideoRecordEvent;
       listener(event);
     });
-    final ffiRecording = ffiValue.startRecordingWithUrl_enableAudio_listener_(
+    ffiValue.startRecordingWithUrl_enableAudio_listener_(
       ffiURL,
       enableAudio,
       ffiListener,
     );
-    final recording = MyRecording.ffi(ffiRecording);
-    return recording;
+  }
+
+  @override
+  Future<void> pauseRecording() {
+    throw UnsupportedError('`pauseRecording` is not supported on iOS.');
+  }
+
+  @override
+  Future<void> resumeRecording() {
+    throw UnsupportedError('`resumeRecording` is not supported on iOS.');
+  }
+
+  @override
+  Future<void> stopRecording() async {
+    ffiValue.stopRecording();
   }
 
   @override

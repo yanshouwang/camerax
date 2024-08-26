@@ -49,11 +49,14 @@ abstract interface class CameraController implements LogController {
   Future<QualitySelector> getVideoCaptureQualitySelector();
   Future<void> setVideoCaptureQualitySelector(QualitySelector qualitySelector);
   Future<bool> isRecording();
-  Future<Recording> startRecording({
+  Future<void> startRecording({
     required Uri uri,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
   });
+  Future<void> pauseRecording();
+  Future<void> resumeRecording();
+  Future<void> stopRecording();
   Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy();
   Future<void> setImageAnalysisBackpressureStrategy(
       BackpressureStrategy backpressureStrategy);

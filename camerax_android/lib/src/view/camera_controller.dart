@@ -18,6 +18,8 @@ final class MyCameraController
   late jni.Observer<jni.ZoomState> _jniZoomStateObserver;
   late jni.Observer<JInteger> _jniTorchStateObserver;
 
+  jni.Recording? _jniRecording;
+
   @override
   Stream<ZoomState?> get zoomStateChanged => _zoomStateChagnedController.stream;
   @override
@@ -392,7 +394,7 @@ final class MyCameraController
   }
 
   @override
-  Future<Recording> startRecording({
+  Future<void> startRecording({
     required Uri uri,
     required bool enableAudio,
     required VideoRecordEventCallback listener,
@@ -433,7 +435,35 @@ final class MyCameraController
         ),
       ),
     );
-    return MyRecording.jni(jniRecording);
+    _jniRecording = jniRecording;
+  }
+
+  @override
+  Future<void> pauseRecording() async {
+    final jniRecording = _jniRecording;
+    if (jniRecording == null) {
+      return;
+    }
+    jniRecording.pause();
+  }
+
+  @override
+  Future<void> resumeRecording() async {
+    final jniRecording = _jniRecording;
+    if (jniRecording == null) {
+      return;
+    }
+    jniRecording.resume();
+  }
+
+  @override
+  Future<void> stopRecording() async {
+    final jniRecording = _jniRecording;
+    if (jniRecording == null) {
+      return;
+    }
+    jniRecording.stop();
+    _jniRecording = null;
   }
 
   @override

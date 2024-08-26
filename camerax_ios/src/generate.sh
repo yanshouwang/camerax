@@ -20,7 +20,6 @@ swiftc -c \
     "$THIS_DIR/../ios/Classes/OrientationEventListener.swift" \
     "$THIS_DIR/../ios/Classes/PreviewView.swift" \
     "$THIS_DIR/../ios/Classes/PreviewViewFactory.swift" \
-    "$THIS_DIR/../ios/Classes/Recording.swift" \
     "$THIS_DIR/../ios/Classes/RotationListener.swift" \
     "$THIS_DIR/../ios/Classes/RotationProvider.swift" \
     "$THIS_DIR/../ios/Classes/ScaleType.swift" \

@@ -314,14 +314,12 @@ typedef SWIFT_ENUM(NSInteger, AuthorizationType, closed) {
   AuthorizationTypeAlbum = 2,
 };
 
-
 enum FlashMode : NSInteger;
 @class CameraSelector;
 @class ZoomState;
 @class TorchState;
 @class NSURL;
 @protocol VideoRecordEvent;
-@class Recording;
 enum ImageFormat : NSInteger;
 
 SWIFT_CLASS("_TtC11camerax_ios16CameraController")
@@ -349,7 +347,8 @@ SWIFT_CLASS("_TtC11camerax_ios16CameraController")
 - (BOOL)enableTorch:(BOOL)enabled error:(NSError * _Nullable * _Nullable)error;
 - (void)takePictureWithUrl:(NSURL * _Nonnull)url completionHandler:(void (^ _Nonnull)(NSError * _Nullable))handler;
 - (BOOL)isRecording SWIFT_WARN_UNUSED_RESULT;
-- (Recording * _Nonnull)startRecordingWithUrl:(NSURL * _Nonnull)url enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(id <VideoRecordEvent> _Nonnull))listener SWIFT_WARN_UNUSED_RESULT;
+- (void)startRecordingWithUrl:(NSURL * _Nonnull)url enableAudio:(BOOL)enableAudio listener:(void (^ _Nonnull)(id <VideoRecordEvent> _Nonnull))listener;
+- (void)stopRecording;
 - (enum ImageFormat)getImageAnalysisOutputImageFormat SWIFT_WARN_UNUSED_RESULT;
 - (void)setImageAnalysisOutputImageFormat:(enum ImageFormat)outputImageFormat;
 - (void)setImageAnalysisAnalyzer:(id <Analyzer> _Nonnull)analyzer;
@@ -454,14 +453,6 @@ SWIFT_CLASS("_TtC11camerax_ios11RawAnalyzer")
 @interface RawAnalyzer : NSObject <Analyzer>
 - (nonnull instancetype)initOnAnalyzed:(void (^ _Nonnull)(ImageProxy * _Nonnull))onAnalyzed OBJC_DESIGNATED_INITIALIZER;
 - (void)analyzeWithImageProxy:(ImageProxy * _Nonnull)imageProxy;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-SWIFT_CLASS("_TtC11camerax_ios9Recording")
-@interface Recording : NSObject
-- (void)stop;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

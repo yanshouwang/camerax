@@ -33116,15 +33116,19 @@ class CameraController extends objc.NSObject {
   }
 
   /// startRecordingWithUrl:enableAudio:listener:
-  Recording startRecordingWithUrl_enableAudio_listener_(objc.NSURL url,
+  void startRecordingWithUrl_enableAudio_listener_(objc.NSURL url,
       bool enableAudio, ObjCBlock_ffiVoid_objcObjCObject listener) {
-    final _ret = _objc_msgSend_589(
+    _objc_msgSend_589(
         this.pointer,
         _sel_startRecordingWithUrl_enableAudio_listener_,
         url.pointer,
         enableAudio,
         listener.pointer);
-    return Recording.castFromPointer(_ret, retain: true, release: true);
+  }
+
+  /// stopRecording
+  void stopRecording() {
+    _objc_msgSend_7(this.pointer, _sel_stopRecording);
   }
 
   /// getImageAnalysisOutputImageFormat
@@ -34088,126 +34092,6 @@ final _objc_msgSend_588 = objc.msgSendPointer
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCBlock>)>();
 late final _sel_isRecording = objc.registerName("isRecording");
-
-/// Recording
-class Recording extends objc.NSObject {
-  Recording._(ffi.Pointer<objc.ObjCObject> pointer,
-      {bool retain = false, bool release = false})
-      : super.castFromPointer(pointer, retain: retain, release: release);
-
-  /// Constructs a [Recording] that points to the same underlying object as [other].
-  Recording.castFrom(objc.ObjCObjectBase other)
-      : this._(other.pointer, retain: true, release: true);
-
-  /// Constructs a [Recording] that wraps the given raw object pointer.
-  Recording.castFromPointer(ffi.Pointer<objc.ObjCObject> other,
-      {bool retain = false, bool release = false})
-      : this._(other, retain: retain, release: release);
-
-  /// Returns whether [obj] is an instance of [Recording].
-  static bool isInstance(objc.ObjCObjectBase obj) {
-    return _objc_msgSend_0(obj.pointer, _sel_isKindOfClass_, _class_Recording);
-  }
-
-  /// stop
-  void stop() {
-    _objc_msgSend_7(this.pointer, _sel_stop);
-  }
-
-  /// init
-  Recording init() {
-    final _ret = _objc_msgSend_19(this.pointer, _sel_init);
-    return Recording.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// new
-  static Recording new1() {
-    final _ret = _objc_msgSend_19(_class_Recording, _sel_new);
-    return Recording.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// allocWithZone:
-  static Recording allocWithZone_(ffi.Pointer<_NSZone> zone) {
-    final _ret = _objc_msgSend_28(_class_Recording, _sel_allocWithZone_, zone);
-    return Recording.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// alloc
-  static Recording alloc() {
-    final _ret = _objc_msgSend_19(_class_Recording, _sel_alloc);
-    return Recording.castFromPointer(_ret, retain: false, release: true);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:selector:object:
-  static void cancelPreviousPerformRequestsWithTarget_selector_object_(
-      objc.ObjCObjectBase aTarget,
-      ffi.Pointer<objc.ObjCSelector> aSelector,
-      objc.ObjCObjectBase? anArgument) {
-    _objc_msgSend_29(
-        _class_Recording,
-        _sel_cancelPreviousPerformRequestsWithTarget_selector_object_,
-        aTarget.pointer,
-        aSelector,
-        anArgument?.pointer ?? ffi.nullptr);
-  }
-
-  /// cancelPreviousPerformRequestsWithTarget:
-  static void cancelPreviousPerformRequestsWithTarget_(
-      objc.ObjCObjectBase aTarget) {
-    _objc_msgSend_27(_class_Recording,
-        _sel_cancelPreviousPerformRequestsWithTarget_, aTarget.pointer);
-  }
-
-  /// accessInstanceVariablesDirectly
-  static bool getAccessInstanceVariablesDirectly() {
-    return _objc_msgSend_13(
-        _class_Recording, _sel_accessInstanceVariablesDirectly);
-  }
-
-  /// useStoredAccessor
-  static bool useStoredAccessor() {
-    return _objc_msgSend_13(_class_Recording, _sel_useStoredAccessor);
-  }
-
-  /// keyPathsForValuesAffectingValueForKey:
-  static objc.NSSet keyPathsForValuesAffectingValueForKey_(objc.NSString key) {
-    final _ret = _objc_msgSend_30(_class_Recording,
-        _sel_keyPathsForValuesAffectingValueForKey_, key.pointer);
-    return objc.NSSet.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// automaticallyNotifiesObserversForKey:
-  static bool automaticallyNotifiesObserversForKey_(objc.NSString key) {
-    return _objc_msgSend_31(_class_Recording,
-        _sel_automaticallyNotifiesObserversForKey_, key.pointer);
-  }
-
-  /// setKeys:triggerChangeNotificationsForDependentKey:
-  static void setKeys_triggerChangeNotificationsForDependentKey_(
-      objc.NSArray keys, objc.NSString dependentKey) {
-    _objc_msgSend_32(
-        _class_Recording,
-        _sel_setKeys_triggerChangeNotificationsForDependentKey_,
-        keys.pointer,
-        dependentKey.pointer);
-  }
-
-  /// classFallbacksForKeyedArchiver
-  static objc.NSArray classFallbacksForKeyedArchiver() {
-    final _ret =
-        _objc_msgSend_33(_class_Recording, _sel_classFallbacksForKeyedArchiver);
-    return objc.NSArray.castFromPointer(_ret, retain: true, release: true);
-  }
-
-  /// classForKeyedUnarchiver
-  static objc.ObjCObjectBase classForKeyedUnarchiver() {
-    final _ret =
-        _objc_msgSend_19(_class_Recording, _sel_classForKeyedUnarchiver);
-    return objc.ObjCObjectBase(_ret, retain: true, release: true);
-  }
-}
-
-late final _class_Recording = objc.getClass("camerax_ios.Recording");
 void _ObjCBlock_ffiVoid_objcObjCObject_fnPtrTrampoline(
         ffi.Pointer<objc.ObjCBlock> block, ffi.Pointer<objc.ObjCObject> arg0) =>
     block.ref.target
@@ -34312,19 +34196,20 @@ late final _sel_startRecordingWithUrl_enableAudio_listener_ =
 final _objc_msgSend_589 = objc.msgSendPointer
     .cast<
         ffi.NativeFunction<
-            ffi.Pointer<objc.ObjCObject> Function(
+            ffi.Void Function(
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Pointer<objc.ObjCSelector>,
                 ffi.Pointer<objc.ObjCObject>,
                 ffi.Bool,
                 ffi.Pointer<objc.ObjCBlock>)>>()
     .asFunction<
-        ffi.Pointer<objc.ObjCObject> Function(
+        void Function(
             ffi.Pointer<objc.ObjCObject>,
             ffi.Pointer<objc.ObjCSelector>,
             ffi.Pointer<objc.ObjCObject>,
             bool,
             ffi.Pointer<objc.ObjCBlock>)>();
+late final _sel_stopRecording = objc.registerName("stopRecording");
 late final _sel_getImageAnalysisOutputImageFormat =
     objc.registerName("getImageAnalysisOutputImageFormat");
 late final _sel_setImageAnalysisOutputImageFormat_ =

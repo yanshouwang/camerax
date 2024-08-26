@@ -238,14 +238,17 @@ import Photos
         return captureMovieFileOutput.isRecording
     }
     
-    @objc public func startRecording(url: URL, enableAudio: Bool, listener: @escaping (VideoRecordEvent) -> Void) -> Recording {
+    @objc public func startRecording(url: URL, enableAudio: Bool, listener: @escaping (VideoRecordEvent) -> Void) {
         if let audioConnection = captureMovieFileOutput.connection(with: .audio) {
             audioConnection.isEnabled = enableAudio
         }
         let delegate = CaptureFileOutputRecordingDelegate(listener: listener)
         captureFileOutputRecordingDelegate = delegate
         captureMovieFileOutput.startRecording(to: url, recordingDelegate: delegate)
-        return Recording(output: captureMovieFileOutput)
+    }
+    
+    @objc public func stopRecording() {
+        captureMovieFileOutput.stopRecording()
     }
     
     @objc public func getImageAnalysisOutputImageFormat() -> ImageFormat {

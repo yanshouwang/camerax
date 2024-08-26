@@ -139,13 +139,9 @@ extension FFIVideoRecordEventX on ObjCObjectBase {
     if (isInstanceOfFinalize) {
       final ffiEvent = ffi.VideoRecordFinalizeEvent.castFrom(this);
       final savedUri = Uri.file('${ffiEvent.savedUri.path}');
-      final ffiError = ffiEvent.error;
-      final error = ffiError == null
-          ? null
-          : VideoRecordError('${ffiError.localizedDescription}');
       return VideoRecordFinalizeEvent(
         savedUri: savedUri,
-        error: error,
+        error: ffiEvent.error,
       );
     }
     throw ArgumentError.value(this);

@@ -17,7 +17,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   bool? _torchState;
   FlashMode? _flashMode;
   Uri? _savedUri;
-  Recording? _recording;
+  bool _recording;
   ImageModel? _imageModel;
 
   late final StreamSubscription _zoomStateSubscription;
@@ -26,7 +26,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
   HomeViewModel()
       : controller = CameraController(),
         _mode = CameraMode.takePicture,
-        _lensFacing = LensFacing.back {
+        _lensFacing = LensFacing.back,
+        _recording = false {
     _initialize();
   }
 
@@ -36,7 +37,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   bool? get torchState => _torchState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
-  bool get recording => _recording != null;
+  bool get recording => _recording;
   ImageModel? get imageModel => _imageModel;
 
   Future<void> bind() async {
@@ -146,20 +147,16 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> startRecording() async {
-    final recording = _recording;
-    if (recording != null) {
-      throw StateError('Recording.');
-    }
     final directory = await getApplicationDocumentsDirectory();
     final filePath = path.join(directory.path,
         'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
     final uri = Uri.file(filePath);
-    _recording = await controller.startRecording(
+    await controller.startRecording(
       uri: uri,
       enableAudio: true,
       listener: (event) {
+        logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
-          logger.info('${event.runtimeType}');
           return;
         }
         final error = event.error;
@@ -168,19 +165,18 @@ class HomeViewModel extends ViewModel with TypeLogger {
         } else {
           logger.info('Record Video failed $error.');
         }
-        _recording = null;
+        _recording = false;
         notifyListeners();
       },
     );
+    _recording = true;
     notifyListeners();
   }
 
-  void stopRecording() {
-    final recording = _recording;
-    if (recording == null) {
-      throw StateError('Not recording.');
-    }
-    recording.stop();
+  Future<void> stopRecording() async {
+    await controller.stopRecording();
+    _recording = false;
+    notifyListeners();
   }
 
   void _initialize() async {

@@ -585,14 +585,6 @@ extension intX on int {
     }
   }
 
-  VideoRecordError? get dartVideoRecordError {
-    if (this == jni.VideoRecordEvent_Finalize.ERROR_NONE) {
-      return null;
-    }
-    final message = '$this'.split('.').last;
-    return VideoRecordError(message);
-  }
-
   ImageFormat get dartImageFormat {
     switch (this) {
       case jni.ImageFormat.YUV_420_888:
@@ -1155,10 +1147,13 @@ extension JNIVideoRecordEventX on jni.VideoRecordEvent {
       jni.VideoRecordEvent_Finalize.type.jClass.reference.pointer,
     );
     if (isInstanceOfFinalize) {
-      final event = castTo(jni.VideoRecordEvent_Finalize.type);
+      final jniEvent = castTo(jni.VideoRecordEvent_Finalize.type);
+      final jniError = jniEvent.getError();
       return VideoRecordFinalizeEvent(
-        savedUri: event.getOutputResults().getOutputUri().dartValue,
-        error: event.getError().dartVideoRecordError,
+        savedUri: jniEvent.getOutputResults().getOutputUri().dartValue,
+        error: jniError == jni.VideoRecordEvent_Finalize.ERROR_NONE
+            ? null
+            : jniError,
       );
     }
     throw ArgumentError.value(this);
