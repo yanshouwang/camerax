@@ -16,8 +16,12 @@ dependencies:
     sdk: flutter
   camerax_platform_interface:
     path: ../camerax_platform_interface
+  hybrid_v4l2:
+    path: ../../hybrid_sdk/hybrid_v4l2
+  hybrid_yuv:
+    path: ../../hybrid_sdk/hybrid_yuv
   ffi: ^2.1.3
-  logging: ^1.2.0
+  logging: ^1.3.0
   hybrid_logging: ^1.0.0
 
 dev_dependencies:
@@ -30,5 +34,8 @@ flutter:
   plugin:
     platforms:
       linux:
+        pluginClass: CameraXLinuxPlugin
+        dartPluginClass: CameraXLinuxPlugin
+      elinux:
         pluginClass: CameraXLinuxPlugin
         dartPluginClass: CameraXLinuxPlugin

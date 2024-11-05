@@ -451,6 +451,19 @@ extension MLObjectTypeListX on List<MLObjectType> {
 
 // ignore: camel_case_extensions
 extension intX on int {
+  LensFacing get dartLensFacing {
+    switch (this) {
+      case jni.CameraSelector.LENS_FACING_BACK:
+        return LensFacing.back;
+      case jni.CameraSelector.LENS_FACING_FRONT:
+        return LensFacing.front;
+      case jni.CameraSelector.LENS_FACING_EXTERNAL:
+        return LensFacing.external;
+      default:
+        throw ArgumentError.value(this);
+    }
+  }
+
   FlashMode get dartFlashMode {
     switch (this) {
       case jni.MyImageCapture.FLASH_MODE_AUTO:

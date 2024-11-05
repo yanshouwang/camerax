@@ -23,8 +23,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }
 
   @override
-  PreviewViewController createPreviewViewController() {
-    return MyPreviewViewController();
+  PreviewViewBuilder createPreviewViewBuilder() {
+    return MyPreviewViewBuilder();
   }
 
   @override

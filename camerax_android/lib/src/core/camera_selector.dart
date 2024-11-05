@@ -16,4 +16,12 @@ final class MyCameraSelector implements CameraSelector {
     final jniCameraSelector = jniBuilder.build();
     return MyCameraSelector.jni(jniCameraSelector);
   }
+
+  @override
+  LensFacing get lensFacing => jniValue
+      .getLensFacing()
+      .intValue(
+        releaseOriginal: true,
+      )
+      .dartLensFacing;
 }

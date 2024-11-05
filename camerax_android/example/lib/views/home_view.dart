@@ -98,7 +98,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                 children: [
                   PreviewView(
                     controller: controller,
-                    scaleType: ScaleType.fillCenter,
+                    fit: BoxFit.cover,
                   ),
                   if (imageModel != null)
                     Container(

@@ -39,7 +39,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   CameraController createCameraController();
 
-  PreviewViewController createPreviewViewController();
+  PreviewViewBuilder createPreviewViewBuilder();
 
   ResolutionSelector createResolutionSelector({
     AspectRatioStrategy? aspectRatioStrategy,

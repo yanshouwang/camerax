@@ -6,14 +6,9 @@ import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
 
-final class MyPreviewViewController implements PreviewViewController {
-  int? _id;
-
+final class MyPreviewViewBuilder implements PreviewViewBuilder {
   @override
-  Widget build(
-    BuildContext context, {
-    required PlatformViewCreatedCallback onCreated,
-  }) {
+  Widget build(CameraController controller) {
     return PlatformViewLink(
       viewType: 'hebei.dev/PreviewView',
       surfaceFactory: (context, controller) {
@@ -31,44 +26,22 @@ final class MyPreviewViewController implements PreviewViewController {
           creationParamsCodec: const StandardMessageCodec(),
         )
           ..addOnPlatformViewCreatedListener(
-            (id) {
+            (id) async {
               params.onPlatformViewCreated(id);
-              _id = id;
-              onCreated(id);
+              if (controller is! MyCameraController) {
+                throw TypeError();
+              }
+              final view =
+                  jni.MyPreviewView_MyFactory.INSTANCE.retrieveView(id);
+              if (view.isNull) {
+                throw ArgumentError.notNull();
+              }
+              await view.setControllerOnMainThread(controller.jniValue);
             },
           )
           ..create();
       },
     );
-  }
-
-  @override
-  Future<void> setController(CameraController? controller) async {
-    if (controller is! MyCameraController) {
-      throw TypeError();
-    }
-    final id = _id;
-    if (id == null) {
-      return;
-    }
-    final view = jni.MyPreviewView_MyFactory.INSTANCE.retrieveView(id);
-    if (view.isNull) {
-      throw ArgumentError.notNull();
-    }
-    await view.setControllerOnMainThread(controller.jniValue);
-  }
-
-  @override
-  Future<void> setScaleType(ScaleType scaleType) async {
-    final id = _id;
-    if (id == null) {
-      return;
-    }
-    final view = jni.MyPreviewView_MyFactory.INSTANCE.retrieveView(id);
-    if (view.isNull) {
-      throw ArgumentError.notNull();
-    }
-    await view.setScaleTypeOnMainThread(scaleType.jniValue);
   }
 }
 

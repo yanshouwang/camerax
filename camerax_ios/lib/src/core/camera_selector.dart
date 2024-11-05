@@ -14,4 +14,7 @@ final class MyCameraSelector implements CameraSelector {
         ffi.CameraSelector.alloc().initWithLensFacing_(lensFacing.ffiValue);
     return MyCameraSelector.ffi(ffiCameraSelector);
   }
+
+  @override
+  LensFacing get lensFacing => ffiValue.lensFacing.dartValue;
 }

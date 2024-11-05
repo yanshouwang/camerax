@@ -20,6 +20,8 @@ dependencies:
     path: ../camerax_android
   camerax_ios:
     path: ../camerax_ios
+  camerax_linux:
+    path: ../camerax_linux
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,8 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'core.dart';
+import 'view.dart';
+
 final class CameraXLinuxPlugin extends CameraXPlugin {
   static void registerWith() {
     CameraXPlugin.instance = CameraXLinuxPlugin();
@@ -7,14 +10,14 @@ final class CameraXLinuxPlugin extends CameraXPlugin {
 
   @override
   CameraController createCameraController() {
-    // TODO: implement createCameraController
-    throw UnimplementedError();
+    return CameraControllerImpl();
   }
 
   @override
   CameraSelector createCameraSelector({LensFacing? lensFacing}) {
-    // TODO: implement createCameraSelector
-    throw UnimplementedError();
+    return CameraSelectorImpl(
+      lensFacing: lensFacing,
+    );
   }
 
   @override
@@ -53,9 +56,8 @@ final class CameraXLinuxPlugin extends CameraXPlugin {
   }
 
   @override
-  PreviewViewController createPreviewViewController() {
-    // TODO: implement createPreviewViewController
-    throw UnimplementedError();
+  PreviewViewBuilder createPreviewViewBuilder() {
+    return PreviewViewBuilderImpl();
   }
 
   @override

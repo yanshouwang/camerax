@@ -80,6 +80,19 @@ extension AnalyzerX on Analyzer {
   }
 }
 
+extension FFILensFacingX on ffi.LensFacing {
+  LensFacing get dartValue {
+    switch (this) {
+      case ffi.LensFacing.LensFacingBack:
+        return LensFacing.back;
+      case ffi.LensFacing.LensFacingFront:
+        return LensFacing.front;
+      case ffi.LensFacing.LensFacingExternal:
+        return LensFacing.external;
+    }
+  }
+}
+
 extension FFIZoomStateX on ffi.ZoomState {
   ZoomState get dartValue {
     return ZoomState(

@@ -95,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 PreviewView(
                   controller: controller,
-                  scaleType: ScaleType.fillCenter,
+                  fit: BoxFit.cover,
                 ),
                 if (imageModel != null)
                   Container(

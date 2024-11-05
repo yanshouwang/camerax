@@ -10,6 +10,8 @@ abstract interface class CameraSelector {
         lensFacing: lensFacing,
       );
 
+  LensFacing get lensFacing;
+
   static CameraSelector get back => CameraSelector(
         lensFacing: LensFacing.back,
       );

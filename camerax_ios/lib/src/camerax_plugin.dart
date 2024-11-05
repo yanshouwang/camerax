@@ -23,8 +23,8 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }
 
   @override
-  PreviewViewController createPreviewViewController() {
-    return PreviewViewControllerImpl();
+  PreviewViewBuilder createPreviewViewBuilder() {
+    return PreviewViewBuilderImpl();
   }
 
   @override
