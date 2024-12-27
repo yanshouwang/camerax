@@ -9,13 +9,13 @@ class CameraView extends StatelessWidget {
   final CameraController controller;
 
   /// Create a [CameraView] with a [controller], the [controller] must has been initialized.
-  CameraView(this.controller);
+  const CameraView(this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: controller.args,
-      builder: (context, value, child) => _build(context, value as CameraArgs?),
+      builder: (context, value, child) => _build(context, value),
     );
   }
 
