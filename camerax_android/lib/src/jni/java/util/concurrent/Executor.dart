@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,64 +29,67 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../../lang/Runnable.dart' as runnable_;
+import '../../lang/Runnable.dart' as runnable$_;
 
-/// from: java.util.concurrent.Executor
-class Executor extends jni.JObject {
-  @override
-  late final jni.JObjType<Executor> $type = type;
+/// from: `java.util.concurrent.Executor`
+class Executor extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Executor> $type;
 
+  @jni$_.internal
   Executor.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'java/util/concurrent/Executor');
+  static final _class = jni$_.JClass.forName(r'java/util/concurrent/Executor');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $ExecutorType();
+  static const nullableType = $Executor$NullableType();
+  static const type = $Executor$Type();
   static final _id_execute = _class.instanceMethodId(
     r'execute',
     r'(Ljava/lang/Runnable;)V',
   );
 
-  static final _execute = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _execute = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void execute(java.lang.Runnable runnable)
+  /// from: `public abstract void execute(java.lang.Runnable runnable)`
   void execute(
-    runnable_.Runnable runnable,
+    runnable$_.Runnable? runnable,
   ) {
-    _execute(reference.pointer, _id_execute as jni.JMethodIDPtr,
-            runnable.reference.pointer)
+    final _$runnable = runnable?.reference ?? jni$_.jNullReference;
+    _execute(reference.pointer, _id_execute as jni$_.JMethodIDPtr,
+            _$runnable.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $ExecutorImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Executor> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -87,99 +97,160 @@ class Executor extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'execute(Ljava/lang/Runnable;)V') {
         _$impls[$p]!.execute(
-          $a[0].castTo(const runnable_.$RunnableType(), releaseOriginal: true),
+          $a![0]?.as(const runnable$_.$Runnable$Type(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory Executor.implement(
-    $ExecutorImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $Executor $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = Executor.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'java.util.concurrent.Executor',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'java.util.concurrent.Executor',
+      $p,
+      _$invokePointer,
+      [
+        if ($impl.execute$async) r'execute(Ljava/lang/Runnable;)V',
+      ],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory Executor.implement(
+    $Executor $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return Executor.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $ExecutorImpl {
-  factory $ExecutorImpl({
-    required void Function(runnable_.Runnable runnable) execute,
-  }) = _$ExecutorImpl;
+abstract base mixin class $Executor {
+  factory $Executor({
+    required void Function(runnable$_.Runnable? runnable) execute,
+    bool execute$async,
+  }) = _$Executor;
 
-  void execute(runnable_.Runnable runnable);
+  void execute(runnable$_.Runnable? runnable);
+  bool get execute$async => false;
 }
 
-class _$ExecutorImpl implements $ExecutorImpl {
-  _$ExecutorImpl({
-    required void Function(runnable_.Runnable runnable) execute,
+final class _$Executor with $Executor {
+  _$Executor({
+    required void Function(runnable$_.Runnable? runnable) execute,
+    this.execute$async = false,
   }) : _execute = execute;
 
-  final void Function(runnable_.Runnable runnable) _execute;
+  final void Function(runnable$_.Runnable? runnable) _execute;
+  final bool execute$async;
 
-  void execute(runnable_.Runnable runnable) {
+  void execute(runnable$_.Runnable? runnable) {
     return _execute(runnable);
   }
 }
 
-final class $ExecutorType extends jni.JObjType<Executor> {
-  const $ExecutorType();
+final class $Executor$NullableType extends jni$_.JObjType<Executor?> {
+  @jni$_.internal
+  const $Executor$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Ljava/util/concurrent/Executor;';
 
-  @override
-  Executor fromReference(jni.JReference reference) =>
-      Executor.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Executor? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Executor.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Executor?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($ExecutorType).hashCode;
+  @core$_.override
+  int get hashCode => ($Executor$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($ExecutorType) && other is $ExecutorType;
+    return other.runtimeType == ($Executor$NullableType) &&
+        other is $Executor$NullableType;
+  }
+}
+
+final class $Executor$Type extends jni$_.JObjType<Executor> {
+  @jni$_.internal
+  const $Executor$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Ljava/util/concurrent/Executor;';
+
+  @jni$_.internal
+  @core$_.override
+  Executor fromReference(jni$_.JReference reference) => Executor.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Executor?> get nullableType => const $Executor$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Executor$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Executor$Type) && other is $Executor$Type;
   }
 }

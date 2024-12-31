@@ -6,14 +6,14 @@ import 'package:objective_c/objective_c.dart';
 
 import 'ffi.g.dart' as ffi;
 
-extension AuthorizationTypeX on AuthorizationType {
+extension AuthorizationTypeX on Permission {
   ffi.AuthorizationType get ffiValue {
     switch (this) {
-      case AuthorizationType.video:
+      case Permission.video:
         return ffi.AuthorizationType.AuthorizationTypeVideo;
-      case AuthorizationType.audio:
+      case Permission.audio:
         return ffi.AuthorizationType.AuthorizationTypeAudio;
-      case AuthorizationType.album:
+      case Permission.album:
         return ffi.AuthorizationType.AuthorizationTypeAlbum;
     }
   }

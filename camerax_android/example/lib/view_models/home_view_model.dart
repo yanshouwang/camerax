@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'raw_pixels_analyzer.dart';
 
 class HomeViewModel extends ViewModel with TypeLogger {
+  final PermissionManager _permissionManager;
   final CameraController controller;
   CameraMode _mode;
   LensFacing _lensFacing;
@@ -17,7 +18,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   bool? _torchState;
   FlashMode? _flashMode;
   Uri? _savedUri;
-  bool _recording;
   ImageModel? _imageModel;
   List<MLObject> _items;
 
@@ -25,10 +25,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
   late final StreamSubscription _torchStateSubscription;
 
   HomeViewModel()
-      : controller = CameraController(),
+      : _permissionManager = PermissionManager(),
+        controller = CameraController(),
         _mode = CameraMode.takePicture,
         _lensFacing = LensFacing.back,
-        _recording = false,
         _items = [] {
     _initialize();
   }
@@ -39,12 +39,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
   bool? get torchState => _torchState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
-  bool get recording => _recording;
+  bool get recording => _recording != null;
   ImageModel? get imageModel => _imageModel;
   List<MLObject> get items => _items;
 
   Future<void> bind() async {
-    await controller.bind();
+    await controller.bindToLifecycle();
   }
 
   Future<void> unbind() async {
@@ -152,6 +152,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
+  Recording? _recording;
+
   Future<void> startRecording() async {
     final directory = await getExternalStorageDirectory();
     if (directory == null) {
@@ -160,7 +162,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     final filePath = path.join(directory.path,
         'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
     final uri = Uri.file(filePath);
-    await controller.startRecording(
+    _recording = await controller.startRecording(
       uri: uri,
       enableAudio: true,
       listener: (event) {
@@ -174,18 +176,15 @@ class HomeViewModel extends ViewModel with TypeLogger {
         } else {
           logger.info('Record Video failed $error.');
         }
-        _recording = false;
+        _recording = null;
         notifyListeners();
       },
     );
-    _recording = true;
     notifyListeners();
   }
 
-  Future<void> stopRecording() async {
-    await controller.stopRecording();
-    _recording = false;
-    notifyListeners();
+  void stopRecording() {
+    _recording?.stop();
   }
 
   void _initialize() async {
@@ -200,29 +199,42 @@ class HomeViewModel extends ViewModel with TypeLogger {
       _torchState = torchState;
       notifyListeners();
     });
-    final videoAuthorized = await controller.requestAuthorization(
-      type: AuthorizationType.video,
-    );
-    final audioAuthorized = await controller.requestAuthorization(
-      type: AuthorizationType.audio,
-    );
-    if (!videoAuthorized || !audioAuthorized) {
-      throw StateError('requestAuthorization failed.');
+    var isGranted = _permissionManager.checkPermission(Permission.album) &&
+        _permissionManager.checkPermission(Permission.audio) &&
+        _permissionManager.checkPermission(Permission.video);
+    if (!isGranted) {
+      isGranted = await _permissionManager.requestPermissions([
+        Permission.album,
+        Permission.audio,
+        Permission.video,
+      ]);
     }
-    await controller.setCameraSelector(CameraSelector.back);
-    _zoomState = await controller.getZoomState();
-    _torchState = await controller.getTorchState();
-    _flashMode = await controller.getImageCaptureFlashMode();
-    notifyListeners();
-    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
-    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-    logger.info(
-        '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
-torchState: $torchState
-flashMode: $flashMode
-isPinchToZoomEnabled: $isPinchToZoomEnabled
-isTapToFocusEnabled: $isTapToFocusEnabled''');
-    await bind();
+    if (!isGranted) {
+      throw StateError('requestPermissions failed.');
+    }
+    try {
+      // logger.info('initialize');
+      // await controller.initialize();
+      // logger.info('setCameraSelector');
+      // await controller.setCameraSelector(CameraSelector.back);
+      logger.info('bind');
+      await bind();
+      logger.info('complete');
+    } catch (e, stack) {
+      logger.severe(e, stack);
+    }
+//     _zoomState = await controller.getZoomState();
+//     _torchState = await controller.getTorchState();
+//     _flashMode = await controller.getImageCaptureFlashMode();
+//     notifyListeners();
+//     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
+//     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
+//     logger.info(
+//         '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+// torchState: $torchState
+// flashMode: $flashMode
+// isPinchToZoomEnabled: $isPinchToZoomEnabled
+// isTapToFocusEnabled: $isTapToFocusEnabled''');
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
@@ -238,7 +250,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba_8888);
     final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
     await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bind();
+    await controller.bindToLifecycle();
   }
 
   void _onRawPixelsAnalyzed(ImageModel imageModel) {
@@ -253,7 +265,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv_420_888);
     await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bind();
+    await controller.bindToLifecycle();
   }
 
   void _onMLAnalyzed(List<MLObject> items) {

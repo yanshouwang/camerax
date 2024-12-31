@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,59 +29,61 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: java.lang.Runnable
-class Runnable extends jni.JObject {
-  @override
-  late final jni.JObjType<Runnable> $type = type;
+/// from: `java.lang.Runnable`
+class Runnable extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Runnable> $type;
 
+  @jni$_.internal
   Runnable.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'java/lang/Runnable');
+  static final _class = jni$_.JClass.forName(r'java/lang/Runnable');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $RunnableType();
+  static const nullableType = $Runnable$NullableType();
+  static const type = $Runnable$Type();
   static final _id_run = _class.instanceMethodId(
     r'run',
     r'()V',
   );
 
-  static final _run = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _run = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract void run()
+  /// from: `public abstract void run()`
   void run() {
-    _run(reference.pointer, _id_run as jni.JMethodIDPtr).check();
+    _run(reference.pointer, _id_run as jni$_.JMethodIDPtr).check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $RunnableImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Runnable> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -82,97 +91,158 @@ class Runnable extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'run()V') {
         _$impls[$p]!.run();
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory Runnable.implement(
-    $RunnableImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $Runnable $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = Runnable.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'java.lang.Runnable',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'java.lang.Runnable',
+      $p,
+      _$invokePointer,
+      [
+        if ($impl.run$async) r'run()V',
+      ],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory Runnable.implement(
+    $Runnable $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return Runnable.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $RunnableImpl {
-  factory $RunnableImpl({
+abstract base mixin class $Runnable {
+  factory $Runnable({
     required void Function() run,
-  }) = _$RunnableImpl;
+    bool run$async,
+  }) = _$Runnable;
 
   void run();
+  bool get run$async => false;
 }
 
-class _$RunnableImpl implements $RunnableImpl {
-  _$RunnableImpl({
+final class _$Runnable with $Runnable {
+  _$Runnable({
     required void Function() run,
+    this.run$async = false,
   }) : _run = run;
 
   final void Function() _run;
+  final bool run$async;
 
   void run() {
     return _run();
   }
 }
 
-final class $RunnableType extends jni.JObjType<Runnable> {
-  const $RunnableType();
+final class $Runnable$NullableType extends jni$_.JObjType<Runnable?> {
+  @jni$_.internal
+  const $Runnable$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Ljava/lang/Runnable;';
 
-  @override
-  Runnable fromReference(jni.JReference reference) =>
-      Runnable.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Runnable? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Runnable.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Runnable?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($RunnableType).hashCode;
+  @core$_.override
+  int get hashCode => ($Runnable$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($RunnableType) && other is $RunnableType;
+    return other.runtimeType == ($Runnable$NullableType) &&
+        other is $Runnable$NullableType;
+  }
+}
+
+final class $Runnable$Type extends jni$_.JObjType<Runnable> {
+  @jni$_.internal
+  const $Runnable$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Ljava/lang/Runnable;';
+
+  @jni$_.internal
+  @core$_.override
+  Runnable fromReference(jni$_.JReference reference) => Runnable.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Runnable?> get nullableType => const $Runnable$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Runnable$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Runnable$Type) && other is $Runnable$Type;
   }
 }

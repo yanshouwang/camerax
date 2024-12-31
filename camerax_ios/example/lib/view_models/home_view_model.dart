@@ -191,12 +191,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
       _torchState = torchState;
       notifyListeners();
     });
-    for (var type in AuthorizationType.values) {
-      var authorized = await controller.checkAuthorization(type: type);
+    for (var type in Permission.values) {
+      var authorized = await controller.checkPermissions(type: type);
       if (authorized) {
         continue;
       }
-      authorized = await controller.requestAuthorization(type: type);
+      authorized = await controller.requestPermissions(type: type);
       if (authorized) {
         continue;
       }

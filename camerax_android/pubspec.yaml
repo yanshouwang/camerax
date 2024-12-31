@@ -8,24 +8,26 @@ topics:
   - camerax
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.0.0'
+  sdk: ^3.6.0
+  flutter: '>=3.3.0'
+resolution: workspace
 
 dependencies:
   flutter:
     sdk: flutter
   camerax_platform_interface:
     path: ../camerax_platform_interface
-  jni: ^0.10.1
+  jni: ^0.13.0
   logging: ^1.2.0
   hybrid_logging: ^1.0.0
-  hybrid_os: ^0.0.1
+  # hybrid_os: ^0.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
-  jnigen: ^0.10.0
+  flutter_lints: ^5.0.0
+  jnigen: ^0.13.0
+  pigeon: ^22.7.1
 
 flutter:
   plugin:

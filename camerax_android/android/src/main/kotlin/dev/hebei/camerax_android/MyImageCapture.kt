@@ -4,14 +4,12 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.annotation.Keep
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import java.io.File
 import java.io.OutputStream
 
-@Keep
 class MyImageCapture {
     companion object {
         const val CAPTURE_MODE_MINIMIZE_LATENCY = ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
@@ -22,23 +20,39 @@ class MyImageCapture {
         const val FLASH_MODE_SCREEN = ImageCapture.FLASH_MODE_SCREEN
     }
 
-    interface MyOnImageCapturedCallback {
-        fun onCaptureStarted()
-        fun onCaptureProcessProgressed(progress: Int)
-        fun onCaptureSuccess(image: ImageProxy)
-        fun onError(exception: ImageCaptureException)
-        fun onPostviewBitmapAvailable(bitmap: Bitmap)
+    class OutputFileOptions {
+        class Builder {
+            constructor(file: File) {
+                builder = ImageCapture.OutputFileOptions.Builder(file)
+            }
+
+            constructor(
+                contentResolver: ContentResolver, savedCollection: Uri, contentValues: ContentValues
+            ) {
+                builder = ImageCapture.OutputFileOptions.Builder(
+                    contentResolver, savedCollection, contentValues
+                )
+            }
+
+            constructor(outputStream: OutputStream) {
+                builder = ImageCapture.OutputFileOptions.Builder(outputStream)
+            }
+
+            private val builder: ImageCapture.OutputFileOptions.Builder
+
+            fun setMetadata(metadata: ImageCapture.Metadata): Builder {
+                builder.setMetadata(metadata)
+                return this
+            }
+
+            fun build(): ImageCapture.OutputFileOptions {
+                return builder.build()
+            }
+        }
     }
 
-    interface MyOnImageSavedCallback {
-        fun onCaptureStarted()
-        fun onCaptureProcessProgressed(progress: Int)
-        fun onImageSaved(outputFileResults: MyOutputFileResults)
-        fun onError(exception: ImageCaptureException)
-        fun onPostviewBitmapAvailable(bitmap: Bitmap)
-    }
-
-    class MyOnImageCapturedCallbackImpl(private val callback: MyOnImageCapturedCallback) : ImageCapture.OnImageCapturedCallback() {
+    class OnImageCapturedCallbackImpl(private val callback: OnImageCapturedCallback) :
+        ImageCapture.OnImageCapturedCallback() {
         override fun onCaptureStarted() {
             super.onCaptureStarted()
             callback.onCaptureStarted()
@@ -65,37 +79,8 @@ class MyImageCapture {
         }
     }
 
-    class MyOutputFileOptions {
-        class MyBuilder {
-            constructor(file: File) {
-                builder = ImageCapture.OutputFileOptions.Builder(file)
-            }
-
-            constructor(contentResolver: ContentResolver, savedCollection: Uri, contentValues: ContentValues) {
-                builder = ImageCapture.OutputFileOptions.Builder(contentResolver, savedCollection, contentValues)
-            }
-
-            constructor(outputStream: OutputStream) {
-                builder = ImageCapture.OutputFileOptions.Builder(outputStream)
-            }
-
-            private val builder: ImageCapture.OutputFileOptions.Builder
-
-            fun setMetadata(metadata: ImageCapture.Metadata): ImageCapture.OutputFileOptions.Builder {
-                return builder.setMetadata(metadata)
-            }
-
-            fun build(): ImageCapture.OutputFileOptions {
-                return builder.build()
-            }
-        }
-    }
-
-    class MyOutputFileResults(private val outputFileResults: ImageCapture.OutputFileResults) {
-        val savedUri get() = outputFileResults.savedUri
-    }
-
-    class MyOnImageSavedCallbackImpl(private val callback: MyOnImageSavedCallback) : ImageCapture.OnImageSavedCallback {
+    class OnImageSavedCallbackImpl(private val callback: OnImageSavedCallback) :
+        ImageCapture.OnImageSavedCallback {
         override fun onCaptureStarted() {
             super.onCaptureStarted()
             callback.onCaptureStarted()
@@ -107,8 +92,7 @@ class MyImageCapture {
         }
 
         override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-            val myOutputFileResults = MyOutputFileResults(outputFileResults)
-            callback.onImageSaved(myOutputFileResults)
+            callback.onImageSaved(outputFileResults)
         }
 
         override fun onError(exception: ImageCaptureException) {
@@ -119,5 +103,21 @@ class MyImageCapture {
             super.onPostviewBitmapAvailable(bitmap)
             callback.onPostviewBitmapAvailable(bitmap)
         }
+    }
+
+    interface OnImageCapturedCallback {
+        fun onCaptureStarted()
+        fun onCaptureProcessProgressed(progress: Int)
+        fun onCaptureSuccess(image: ImageProxy)
+        fun onError(exception: ImageCaptureException)
+        fun onPostviewBitmapAvailable(bitmap: Bitmap)
+    }
+
+    interface OnImageSavedCallback {
+        fun onCaptureStarted()
+        fun onCaptureProcessProgressed(progress: Int)
+        fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults)
+        fun onError(exception: ImageCaptureException)
+        fun onPostviewBitmapAvailable(bitmap: Bitmap)
     }
 }

@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,64 +29,68 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../content/ContentResolver.dart' as contentresolver_;
+import '../content/ContentResolver.dart' as contentresolver$_;
 
-import '../net/Uri.dart' as uri_;
+import '../net/Uri.dart' as uri$_;
 
-/// from: android.database.Cursor
-class Cursor extends jni.JObject {
-  @override
-  late final jni.JObjType<Cursor> $type = type;
+/// from: `android.database.Cursor`
+class Cursor extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Cursor> $type;
 
+  @jni$_.internal
   Cursor.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/database/Cursor');
+  static final _class = jni$_.JClass.forName(r'android/database/Cursor');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $CursorType();
+  static const nullableType = $Cursor$NullableType();
+  static const type = $Cursor$Type();
 
-  /// from: static public final int FIELD_TYPE_BLOB
+  /// from: `static public final int FIELD_TYPE_BLOB`
   static const FIELD_TYPE_BLOB = 4;
 
-  /// from: static public final int FIELD_TYPE_FLOAT
+  /// from: `static public final int FIELD_TYPE_FLOAT`
   static const FIELD_TYPE_FLOAT = 2;
 
-  /// from: static public final int FIELD_TYPE_INTEGER
+  /// from: `static public final int FIELD_TYPE_INTEGER`
   static const FIELD_TYPE_INTEGER = 1;
 
-  /// from: static public final int FIELD_TYPE_NULL
+  /// from: `static public final int FIELD_TYPE_NULL`
   static const FIELD_TYPE_NULL = 0;
 
-  /// from: static public final int FIELD_TYPE_STRING
+  /// from: `static public final int FIELD_TYPE_STRING`
   static const FIELD_TYPE_STRING = 3;
   static final _id_getCount = _class.instanceMethodId(
     r'getCount',
     r'()I',
   );
 
-  static final _getCount = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getCount = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getCount()
+  /// from: `public abstract int getCount()`
   int getCount() {
-    return _getCount(reference.pointer, _id_getCount as jni.JMethodIDPtr)
+    return _getCount(reference.pointer, _id_getCount as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -88,21 +99,22 @@ class Cursor extends jni.JObject {
     r'()I',
   );
 
-  static final _getPosition = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getPosition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getPosition()
+  /// from: `public abstract int getPosition()`
   int getPosition() {
-    return _getPosition(reference.pointer, _id_getPosition as jni.JMethodIDPtr)
+    return _getPosition(
+            reference.pointer, _id_getPosition as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -111,19 +123,22 @@ class Cursor extends jni.JObject {
     r'(I)Z',
   );
 
-  static final _move = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _move = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract boolean move(int i)
+  /// from: `public abstract boolean move(int i)`
   bool move(
     int i,
   ) {
-    return _move(reference.pointer, _id_move as jni.JMethodIDPtr, i).boolean;
+    return _move(reference.pointer, _id_move as jni$_.JMethodIDPtr, i).boolean;
   }
 
   static final _id_moveToPosition = _class.instanceMethodId(
@@ -131,20 +146,23 @@ class Cursor extends jni.JObject {
     r'(I)Z',
   );
 
-  static final _moveToPosition = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _moveToPosition = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract boolean moveToPosition(int i)
+  /// from: `public abstract boolean moveToPosition(int i)`
   bool moveToPosition(
     int i,
   ) {
     return _moveToPosition(
-            reference.pointer, _id_moveToPosition as jni.JMethodIDPtr, i)
+            reference.pointer, _id_moveToPosition as jni$_.JMethodIDPtr, i)
         .boolean;
   }
 
@@ -153,21 +171,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _moveToFirst = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _moveToFirst = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean moveToFirst()
+  /// from: `public abstract boolean moveToFirst()`
   bool moveToFirst() {
-    return _moveToFirst(reference.pointer, _id_moveToFirst as jni.JMethodIDPtr)
+    return _moveToFirst(
+            reference.pointer, _id_moveToFirst as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -176,21 +195,21 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _moveToLast = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _moveToLast = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean moveToLast()
+  /// from: `public abstract boolean moveToLast()`
   bool moveToLast() {
-    return _moveToLast(reference.pointer, _id_moveToLast as jni.JMethodIDPtr)
+    return _moveToLast(reference.pointer, _id_moveToLast as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -199,21 +218,21 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _moveToNext = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _moveToNext = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean moveToNext()
+  /// from: `public abstract boolean moveToNext()`
   bool moveToNext() {
-    return _moveToNext(reference.pointer, _id_moveToNext as jni.JMethodIDPtr)
+    return _moveToNext(reference.pointer, _id_moveToNext as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -222,22 +241,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _moveToPrevious = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _moveToPrevious = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean moveToPrevious()
+  /// from: `public abstract boolean moveToPrevious()`
   bool moveToPrevious() {
     return _moveToPrevious(
-            reference.pointer, _id_moveToPrevious as jni.JMethodIDPtr)
+            reference.pointer, _id_moveToPrevious as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -246,21 +265,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _isFirst = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isFirst = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isFirst()
+  /// from: `public abstract boolean isFirst()`
   bool isFirst() {
-    return _isFirst(reference.pointer, _id_isFirst as jni.JMethodIDPtr).boolean;
+    return _isFirst(reference.pointer, _id_isFirst as jni$_.JMethodIDPtr)
+        .boolean;
   }
 
   static final _id_isLast = _class.instanceMethodId(
@@ -268,21 +288,21 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _isLast = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isLast = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isLast()
+  /// from: `public abstract boolean isLast()`
   bool isLast() {
-    return _isLast(reference.pointer, _id_isLast as jni.JMethodIDPtr).boolean;
+    return _isLast(reference.pointer, _id_isLast as jni$_.JMethodIDPtr).boolean;
   }
 
   static final _id_isBeforeFirst = _class.instanceMethodId(
@@ -290,22 +310,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _isBeforeFirst = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isBeforeFirst = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isBeforeFirst()
+  /// from: `public abstract boolean isBeforeFirst()`
   bool isBeforeFirst() {
     return _isBeforeFirst(
-            reference.pointer, _id_isBeforeFirst as jni.JMethodIDPtr)
+            reference.pointer, _id_isBeforeFirst as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -314,21 +334,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _isAfterLast = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isAfterLast = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isAfterLast()
+  /// from: `public abstract boolean isAfterLast()`
   bool isAfterLast() {
-    return _isAfterLast(reference.pointer, _id_isAfterLast as jni.JMethodIDPtr)
+    return _isAfterLast(
+            reference.pointer, _id_isAfterLast as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -337,23 +358,24 @@ class Cursor extends jni.JObject {
     r'(Ljava/lang/String;)I',
   );
 
-  static final _getColumnIndex = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getColumnIndex = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract int getColumnIndex(java.lang.String string)
+  /// from: `public abstract int getColumnIndex(java.lang.String string)`
   int getColumnIndex(
-    jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getColumnIndex(reference.pointer,
-            _id_getColumnIndex as jni.JMethodIDPtr, string.reference.pointer)
+            _id_getColumnIndex as jni$_.JMethodIDPtr, _$string.pointer)
         .integer;
   }
 
@@ -362,25 +384,24 @@ class Cursor extends jni.JObject {
     r'(Ljava/lang/String;)I',
   );
 
-  static final _getColumnIndexOrThrow = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getColumnIndexOrThrow = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract int getColumnIndexOrThrow(java.lang.String string)
+  /// from: `public abstract int getColumnIndexOrThrow(java.lang.String string)`
   int getColumnIndexOrThrow(
-    jni.JString string,
+    jni$_.JString? string,
   ) {
-    return _getColumnIndexOrThrow(
-            reference.pointer,
-            _id_getColumnIndexOrThrow as jni.JMethodIDPtr,
-            string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getColumnIndexOrThrow(reference.pointer,
+            _id_getColumnIndexOrThrow as jni$_.JMethodIDPtr, _$string.pointer)
         .integer;
   }
 
@@ -389,22 +410,24 @@ class Cursor extends jni.JObject {
     r'(I)Ljava/lang/String;',
   );
 
-  static final _getColumnName = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _getColumnName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract java.lang.String getColumnName(int i)
+  /// from: `public abstract java.lang.String getColumnName(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getColumnName(
+  jni$_.JString? getColumnName(
     int i,
   ) {
     return _getColumnName(
-            reference.pointer, _id_getColumnName as jni.JMethodIDPtr, i)
-        .object(const jni.JStringType());
+            reference.pointer, _id_getColumnName as jni$_.JMethodIDPtr, i)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getColumnNames = _class.instanceMethodId(
@@ -412,24 +435,26 @@ class Cursor extends jni.JObject {
     r'()[Ljava/lang/String;',
   );
 
-  static final _getColumnNames = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getColumnNames = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract java.lang.String[] getColumnNames()
+  /// from: `public abstract java.lang.String[] getColumnNames()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<jni.JString> getColumnNames() {
+  jni$_.JArray<jni$_.JString?>? getColumnNames() {
     return _getColumnNames(
-            reference.pointer, _id_getColumnNames as jni.JMethodIDPtr)
-        .object(const jni.JArrayType(jni.JStringType()));
+            reference.pointer, _id_getColumnNames as jni$_.JMethodIDPtr)
+        .object<jni$_.JArray<jni$_.JString?>?>(
+            const jni$_.JArrayNullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getColumnCount = _class.instanceMethodId(
@@ -437,22 +462,22 @@ class Cursor extends jni.JObject {
     r'()I',
   );
 
-  static final _getColumnCount = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getColumnCount = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getColumnCount()
+  /// from: `public abstract int getColumnCount()`
   int getColumnCount() {
     return _getColumnCount(
-            reference.pointer, _id_getColumnCount as jni.JMethodIDPtr)
+            reference.pointer, _id_getColumnCount as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -461,21 +486,23 @@ class Cursor extends jni.JObject {
     r'(I)[B',
   );
 
-  static final _getBlob = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _getBlob = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract byte[] getBlob(int i)
+  /// from: `public abstract byte[] getBlob(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<jni.jbyte> getBlob(
+  jni$_.JByteArray? getBlob(
     int i,
   ) {
-    return _getBlob(reference.pointer, _id_getBlob as jni.JMethodIDPtr, i)
-        .object(const jni.JArrayType(jni.jbyteType()));
+    return _getBlob(reference.pointer, _id_getBlob as jni$_.JMethodIDPtr, i)
+        .object<jni$_.JByteArray?>(const jni$_.JByteArrayNullableType());
   }
 
   static final _id_getString = _class.instanceMethodId(
@@ -483,21 +510,23 @@ class Cursor extends jni.JObject {
     r'(I)Ljava/lang/String;',
   );
 
-  static final _getString = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallObjectMethod')
+  static final _getString = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract java.lang.String getString(int i)
+  /// from: `public abstract java.lang.String getString(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getString(
+  jni$_.JString? getString(
     int i,
   ) {
-    return _getString(reference.pointer, _id_getString as jni.JMethodIDPtr, i)
-        .object(const jni.JStringType());
+    return _getString(reference.pointer, _id_getString as jni$_.JMethodIDPtr, i)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_copyStringToBuffer = _class.instanceMethodId(
@@ -505,27 +534,30 @@ class Cursor extends jni.JObject {
     r'(ILandroid/database/CharArrayBuffer;)V',
   );
 
-  static final _copyStringToBuffer = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
+  static final _copyStringToBuffer = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void copyStringToBuffer(int i, android.database.CharArrayBuffer charArrayBuffer)
+  /// from: `public abstract void copyStringToBuffer(int i, android.database.CharArrayBuffer charArrayBuffer)`
   void copyStringToBuffer(
     int i,
-    jni.JObject charArrayBuffer,
+    jni$_.JObject? charArrayBuffer,
   ) {
+    final _$charArrayBuffer =
+        charArrayBuffer?.reference ?? jni$_.jNullReference;
     _copyStringToBuffer(
             reference.pointer,
-            _id_copyStringToBuffer as jni.JMethodIDPtr,
+            _id_copyStringToBuffer as jni$_.JMethodIDPtr,
             i,
-            charArrayBuffer.reference.pointer)
+            _$charArrayBuffer.pointer)
         .check();
   }
 
@@ -534,19 +566,21 @@ class Cursor extends jni.JObject {
     r'(I)S',
   );
 
-  static final _getShort = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallShortMethod')
+  static final _getShort = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallShortMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract short getShort(int i)
+  /// from: `public abstract short getShort(int i)`
   int getShort(
     int i,
   ) {
-    return _getShort(reference.pointer, _id_getShort as jni.JMethodIDPtr, i)
+    return _getShort(reference.pointer, _id_getShort as jni$_.JMethodIDPtr, i)
         .short;
   }
 
@@ -555,19 +589,21 @@ class Cursor extends jni.JObject {
     r'(I)I',
   );
 
-  static final _getInt = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallIntMethod')
+  static final _getInt = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract int getInt(int i)
+  /// from: `public abstract int getInt(int i)`
   int getInt(
     int i,
   ) {
-    return _getInt(reference.pointer, _id_getInt as jni.JMethodIDPtr, i)
+    return _getInt(reference.pointer, _id_getInt as jni$_.JMethodIDPtr, i)
         .integer;
   }
 
@@ -576,19 +612,22 @@ class Cursor extends jni.JObject {
     r'(I)J',
   );
 
-  static final _getLong = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallLongMethod')
+  static final _getLong = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract long getLong(int i)
+  /// from: `public abstract long getLong(int i)`
   int getLong(
     int i,
   ) {
-    return _getLong(reference.pointer, _id_getLong as jni.JMethodIDPtr, i).long;
+    return _getLong(reference.pointer, _id_getLong as jni$_.JMethodIDPtr, i)
+        .long;
   }
 
   static final _id_getFloat = _class.instanceMethodId(
@@ -596,19 +635,21 @@ class Cursor extends jni.JObject {
     r'(I)F',
   );
 
-  static final _getFloat = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallFloatMethod')
+  static final _getFloat = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallFloatMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract float getFloat(int i)
+  /// from: `public abstract float getFloat(int i)`
   double getFloat(
     int i,
   ) {
-    return _getFloat(reference.pointer, _id_getFloat as jni.JMethodIDPtr, i)
+    return _getFloat(reference.pointer, _id_getFloat as jni$_.JMethodIDPtr, i)
         .float;
   }
 
@@ -617,19 +658,21 @@ class Cursor extends jni.JObject {
     r'(I)D',
   );
 
-  static final _getDouble = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallDoubleMethod')
+  static final _getDouble = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallDoubleMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract double getDouble(int i)
+  /// from: `public abstract double getDouble(int i)`
   double getDouble(
     int i,
   ) {
-    return _getDouble(reference.pointer, _id_getDouble as jni.JMethodIDPtr, i)
+    return _getDouble(reference.pointer, _id_getDouble as jni$_.JMethodIDPtr, i)
         .doubleFloat;
   }
 
@@ -638,40 +681,45 @@ class Cursor extends jni.JObject {
     r'(I)I',
   );
 
-  static final _getType = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallIntMethod')
+  static final _getType = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract int getType(int i)
+  /// from: `public abstract int getType(int i)`
   int getType(
     int i,
   ) {
-    return _getType(reference.pointer, _id_getType as jni.JMethodIDPtr, i)
+    return _getType(reference.pointer, _id_getType as jni$_.JMethodIDPtr, i)
         .integer;
   }
 
-  static final _id_isNull1 = _class.instanceMethodId(
+  static final _id_isNull$1 = _class.instanceMethodId(
     r'isNull',
     r'(I)Z',
   );
 
-  static final _isNull1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _isNull$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract boolean isNull(int i)
-  bool isNull1(
+  /// from: `public abstract boolean isNull(int i)`
+  bool isNull$1(
     int i,
   ) {
-    return _isNull1(reference.pointer, _id_isNull1 as jni.JMethodIDPtr, i)
+    return _isNull$1(reference.pointer, _id_isNull$1 as jni$_.JMethodIDPtr, i)
         .boolean;
   }
 
@@ -680,21 +728,22 @@ class Cursor extends jni.JObject {
     r'()V',
   );
 
-  static final _deactivate = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _deactivate = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract void deactivate()
+  /// from: `public abstract void deactivate()`
   void deactivate() {
-    _deactivate(reference.pointer, _id_deactivate as jni.JMethodIDPtr).check();
+    _deactivate(reference.pointer, _id_deactivate as jni$_.JMethodIDPtr)
+        .check();
   }
 
   static final _id_requery = _class.instanceMethodId(
@@ -702,21 +751,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _requery = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _requery = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean requery()
+  /// from: `public abstract boolean requery()`
   bool requery() {
-    return _requery(reference.pointer, _id_requery as jni.JMethodIDPtr).boolean;
+    return _requery(reference.pointer, _id_requery as jni$_.JMethodIDPtr)
+        .boolean;
   }
 
   static final _id_close = _class.instanceMethodId(
@@ -724,21 +774,21 @@ class Cursor extends jni.JObject {
     r'()V',
   );
 
-  static final _close = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _close = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract void close()
+  /// from: `public abstract void close()`
   void close() {
-    _close(reference.pointer, _id_close as jni.JMethodIDPtr).check();
+    _close(reference.pointer, _id_close as jni$_.JMethodIDPtr).check();
   }
 
   static final _id_isClosed = _class.instanceMethodId(
@@ -746,21 +796,21 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _isClosed = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isClosed = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isClosed()
+  /// from: `public abstract boolean isClosed()`
   bool isClosed() {
-    return _isClosed(reference.pointer, _id_isClosed as jni.JMethodIDPtr)
+    return _isClosed(reference.pointer, _id_isClosed as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -769,25 +819,27 @@ class Cursor extends jni.JObject {
     r'(Landroid/database/ContentObserver;)V',
   );
 
-  static final _registerContentObserver = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _registerContentObserver = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void registerContentObserver(android.database.ContentObserver contentObserver)
+  /// from: `public abstract void registerContentObserver(android.database.ContentObserver contentObserver)`
   void registerContentObserver(
-    jni.JObject contentObserver,
+    jni$_.JObject? contentObserver,
   ) {
+    final _$contentObserver =
+        contentObserver?.reference ?? jni$_.jNullReference;
     _registerContentObserver(
             reference.pointer,
-            _id_registerContentObserver as jni.JMethodIDPtr,
-            contentObserver.reference.pointer)
+            _id_registerContentObserver as jni$_.JMethodIDPtr,
+            _$contentObserver.pointer)
         .check();
   }
 
@@ -796,25 +848,27 @@ class Cursor extends jni.JObject {
     r'(Landroid/database/ContentObserver;)V',
   );
 
-  static final _unregisterContentObserver = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _unregisterContentObserver = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void unregisterContentObserver(android.database.ContentObserver contentObserver)
+  /// from: `public abstract void unregisterContentObserver(android.database.ContentObserver contentObserver)`
   void unregisterContentObserver(
-    jni.JObject contentObserver,
+    jni$_.JObject? contentObserver,
   ) {
+    final _$contentObserver =
+        contentObserver?.reference ?? jni$_.jNullReference;
     _unregisterContentObserver(
             reference.pointer,
-            _id_unregisterContentObserver as jni.JMethodIDPtr,
-            contentObserver.reference.pointer)
+            _id_unregisterContentObserver as jni$_.JMethodIDPtr,
+            _$contentObserver.pointer)
         .check();
   }
 
@@ -823,25 +877,27 @@ class Cursor extends jni.JObject {
     r'(Landroid/database/DataSetObserver;)V',
   );
 
-  static final _registerDataSetObserver = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _registerDataSetObserver = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void registerDataSetObserver(android.database.DataSetObserver dataSetObserver)
+  /// from: `public abstract void registerDataSetObserver(android.database.DataSetObserver dataSetObserver)`
   void registerDataSetObserver(
-    jni.JObject dataSetObserver,
+    jni$_.JObject? dataSetObserver,
   ) {
+    final _$dataSetObserver =
+        dataSetObserver?.reference ?? jni$_.jNullReference;
     _registerDataSetObserver(
             reference.pointer,
-            _id_registerDataSetObserver as jni.JMethodIDPtr,
-            dataSetObserver.reference.pointer)
+            _id_registerDataSetObserver as jni$_.JMethodIDPtr,
+            _$dataSetObserver.pointer)
         .check();
   }
 
@@ -850,25 +906,27 @@ class Cursor extends jni.JObject {
     r'(Landroid/database/DataSetObserver;)V',
   );
 
-  static final _unregisterDataSetObserver = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _unregisterDataSetObserver = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void unregisterDataSetObserver(android.database.DataSetObserver dataSetObserver)
+  /// from: `public abstract void unregisterDataSetObserver(android.database.DataSetObserver dataSetObserver)`
   void unregisterDataSetObserver(
-    jni.JObject dataSetObserver,
+    jni$_.JObject? dataSetObserver,
   ) {
+    final _$dataSetObserver =
+        dataSetObserver?.reference ?? jni$_.jNullReference;
     _unregisterDataSetObserver(
             reference.pointer,
-            _id_unregisterDataSetObserver as jni.JMethodIDPtr,
-            dataSetObserver.reference.pointer)
+            _id_unregisterDataSetObserver as jni$_.JMethodIDPtr,
+            _$dataSetObserver.pointer)
         .check();
   }
 
@@ -877,30 +935,36 @@ class Cursor extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;)V',
   );
 
-  static final _setNotificationUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _setNotificationUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void setNotificationUri(android.content.ContentResolver contentResolver, android.net.Uri uri)
+  /// from: `public abstract void setNotificationUri(android.content.ContentResolver contentResolver, android.net.Uri uri)`
   void setNotificationUri(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     _setNotificationUri(
             reference.pointer,
-            _id_setNotificationUri as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer)
+            _id_setNotificationUri as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$uri.pointer)
         .check();
   }
 
@@ -909,30 +973,36 @@ class Cursor extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/util/List;)V',
   );
 
-  static final _setNotificationUris = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _setNotificationUris = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void setNotificationUris(android.content.ContentResolver contentResolver, java.util.List list)
+  /// from: `public void setNotificationUris(android.content.ContentResolver contentResolver, java.util.List list)`
   void setNotificationUris(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JList<uri_.Uri> list,
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JList<uri$_.Uri?>? list,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$list = list?.reference ?? jni$_.jNullReference;
     _setNotificationUris(
             reference.pointer,
-            _id_setNotificationUris as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            list.reference.pointer)
+            _id_setNotificationUris as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$list.pointer)
         .check();
   }
 
@@ -941,24 +1011,24 @@ class Cursor extends jni.JObject {
     r'()Landroid/net/Uri;',
   );
 
-  static final _getNotificationUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getNotificationUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract android.net.Uri getNotificationUri()
+  /// from: `public abstract android.net.Uri getNotificationUri()`
   /// The returned object must be released after use, by calling the [release] method.
-  uri_.Uri getNotificationUri() {
+  uri$_.Uri? getNotificationUri() {
     return _getNotificationUri(
-            reference.pointer, _id_getNotificationUri as jni.JMethodIDPtr)
-        .object(const uri_.$UriType());
+            reference.pointer, _id_getNotificationUri as jni$_.JMethodIDPtr)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getNotificationUris = _class.instanceMethodId(
@@ -966,24 +1036,26 @@ class Cursor extends jni.JObject {
     r'()Ljava/util/List;',
   );
 
-  static final _getNotificationUris = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getNotificationUris = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.util.List getNotificationUris()
+  /// from: `public java.util.List getNotificationUris()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JList<uri_.Uri> getNotificationUris() {
+  jni$_.JList<uri$_.Uri?>? getNotificationUris() {
     return _getNotificationUris(
-            reference.pointer, _id_getNotificationUris as jni.JMethodIDPtr)
-        .object(const jni.JListType(uri_.$UriType()));
+            reference.pointer, _id_getNotificationUris as jni$_.JMethodIDPtr)
+        .object<jni$_.JList<uri$_.Uri?>?>(
+            const jni$_.JListNullableType<uri$_.Uri?>(
+                uri$_.$Uri$NullableType()));
   }
 
   static final _id_getWantsAllOnMoveCalls = _class.instanceMethodId(
@@ -991,22 +1063,22 @@ class Cursor extends jni.JObject {
     r'()Z',
   );
 
-  static final _getWantsAllOnMoveCalls = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getWantsAllOnMoveCalls = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean getWantsAllOnMoveCalls()
+  /// from: `public abstract boolean getWantsAllOnMoveCalls()`
   bool getWantsAllOnMoveCalls() {
     return _getWantsAllOnMoveCalls(
-            reference.pointer, _id_getWantsAllOnMoveCalls as jni.JMethodIDPtr)
+            reference.pointer, _id_getWantsAllOnMoveCalls as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -1015,23 +1087,24 @@ class Cursor extends jni.JObject {
     r'(Landroid/os/Bundle;)V',
   );
 
-  static final _setExtras = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _setExtras = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void setExtras(android.os.Bundle bundle)
+  /// from: `public abstract void setExtras(android.os.Bundle bundle)`
   void setExtras(
-    jni.JObject bundle,
+    jni$_.JObject? bundle,
   ) {
-    _setExtras(reference.pointer, _id_setExtras as jni.JMethodIDPtr,
-            bundle.reference.pointer)
+    final _$bundle = bundle?.reference ?? jni$_.jNullReference;
+    _setExtras(reference.pointer, _id_setExtras as jni$_.JMethodIDPtr,
+            _$bundle.pointer)
         .check();
   }
 
@@ -1040,23 +1113,23 @@ class Cursor extends jni.JObject {
     r'()Landroid/os/Bundle;',
   );
 
-  static final _getExtras = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getExtras = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract android.os.Bundle getExtras()
+  /// from: `public abstract android.os.Bundle getExtras()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getExtras() {
-    return _getExtras(reference.pointer, _id_getExtras as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+  jni$_.JObject? getExtras() {
+    return _getExtras(reference.pointer, _id_getExtras as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_respond = _class.instanceMethodId(
@@ -1064,39 +1137,38 @@ class Cursor extends jni.JObject {
     r'(Landroid/os/Bundle;)Landroid/os/Bundle;',
   );
 
-  static final _respond = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _respond = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract android.os.Bundle respond(android.os.Bundle bundle)
+  /// from: `public abstract android.os.Bundle respond(android.os.Bundle bundle)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject respond(
-    jni.JObject bundle,
+  jni$_.JObject? respond(
+    jni$_.JObject? bundle,
   ) {
-    return _respond(reference.pointer, _id_respond as jni.JMethodIDPtr,
-            bundle.reference.pointer)
-        .object(const jni.JObjectType());
+    final _$bundle = bundle?.reference ?? jni$_.jNullReference;
+    return _respond(reference.pointer, _id_respond as jni$_.JMethodIDPtr,
+            _$bundle.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $CursorImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Cursor> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1104,334 +1176,370 @@ class Cursor extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'getCount()I') {
         final $r = _$impls[$p]!.getCount();
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'getPosition()I') {
         final $r = _$impls[$p]!.getPosition();
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'move(I)Z') {
         final $r = _$impls[$p]!.move(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'moveToPosition(I)Z') {
         final $r = _$impls[$p]!.moveToPosition(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'moveToFirst()Z') {
         final $r = _$impls[$p]!.moveToFirst();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'moveToLast()Z') {
         final $r = _$impls[$p]!.moveToLast();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'moveToNext()Z') {
         final $r = _$impls[$p]!.moveToNext();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'moveToPrevious()Z') {
         final $r = _$impls[$p]!.moveToPrevious();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'isFirst()Z') {
         final $r = _$impls[$p]!.isFirst();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'isLast()Z') {
         final $r = _$impls[$p]!.isLast();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'isBeforeFirst()Z') {
         final $r = _$impls[$p]!.isBeforeFirst();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'isAfterLast()Z') {
         final $r = _$impls[$p]!.isAfterLast();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'getColumnIndex(Ljava/lang/String;)I') {
         final $r = _$impls[$p]!.getColumnIndex(
-          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'getColumnIndexOrThrow(Ljava/lang/String;)I') {
         final $r = _$impls[$p]!.getColumnIndexOrThrow(
-          $a[0].castTo(const jni.JStringType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JStringType(), releaseOriginal: true),
         );
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'getColumnName(I)Ljava/lang/String;') {
         final $r = _$impls[$p]!.getColumnName(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'getColumnNames()[Ljava/lang/String;') {
         final $r = _$impls[$p]!.getColumnNames();
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'getColumnCount()I') {
         final $r = _$impls[$p]!.getColumnCount();
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'getBlob(I)[B') {
         final $r = _$impls[$p]!.getBlob(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'getString(I)Ljava/lang/String;') {
         final $r = _$impls[$p]!.getString(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'copyStringToBuffer(ILandroid/database/CharArrayBuffer;)V') {
         _$impls[$p]!.copyStringToBuffer(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
-          $a[1].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![1]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'getShort(I)S') {
         final $r = _$impls[$p]!.getShort(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JShort($r).reference.toPointer();
+        return jni$_.JShort($r).reference.toPointer();
       }
       if ($d == r'getInt(I)I') {
         final $r = _$impls[$p]!.getInt(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'getLong(I)J') {
         final $r = _$impls[$p]!.getLong(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JLong($r).reference.toPointer();
+        return jni$_.JLong($r).reference.toPointer();
       }
       if ($d == r'getFloat(I)F') {
         final $r = _$impls[$p]!.getFloat(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JFloat($r).reference.toPointer();
+        return jni$_.JFloat($r).reference.toPointer();
       }
       if ($d == r'getDouble(I)D') {
         final $r = _$impls[$p]!.getDouble(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JDouble($r).reference.toPointer();
+        return jni$_.JDouble($r).reference.toPointer();
       }
       if ($d == r'getType(I)I') {
         final $r = _$impls[$p]!.getType(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JInteger($r).reference.toPointer();
+        return jni$_.JInteger($r).reference.toPointer();
       }
       if ($d == r'isNull(I)Z') {
-        final $r = _$impls[$p]!.isNull1(
-          $a[0]
-              .castTo(const jni.JIntegerType(), releaseOriginal: true)
+        final $r = _$impls[$p]!.isNull$1(
+          $a![0]!
+              .as(const jni$_.JIntegerType(), releaseOriginal: true)
               .intValue(releaseOriginal: true),
         );
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'deactivate()V') {
         _$impls[$p]!.deactivate();
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'requery()Z') {
         final $r = _$impls[$p]!.requery();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'close()V') {
         _$impls[$p]!.close();
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'isClosed()Z') {
         final $r = _$impls[$p]!.isClosed();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d ==
           r'registerContentObserver(Landroid/database/ContentObserver;)V') {
         _$impls[$p]!.registerContentObserver(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d ==
           r'unregisterContentObserver(Landroid/database/ContentObserver;)V') {
         _$impls[$p]!.unregisterContentObserver(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d ==
           r'registerDataSetObserver(Landroid/database/DataSetObserver;)V') {
         _$impls[$p]!.registerDataSetObserver(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d ==
           r'unregisterDataSetObserver(Landroid/database/DataSetObserver;)V') {
         _$impls[$p]!.unregisterDataSetObserver(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d ==
           r'setNotificationUri(Landroid/content/ContentResolver;Landroid/net/Uri;)V') {
         _$impls[$p]!.setNotificationUri(
-          $a[0].castTo(const contentresolver_.$ContentResolverType(),
+          $a![0]?.as(const contentresolver$_.$ContentResolver$Type(),
               releaseOriginal: true),
-          $a[1].castTo(const uri_.$UriType(), releaseOriginal: true),
+          $a![1]?.as(const uri$_.$Uri$Type(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d ==
           r'setNotificationUris(Landroid/content/ContentResolver;Ljava/util/List;)V') {
         _$impls[$p]!.setNotificationUris(
-          $a[0].castTo(const contentresolver_.$ContentResolverType(),
+          $a![0]?.as(const contentresolver$_.$ContentResolver$Type(),
               releaseOriginal: true),
-          $a[1].castTo(const jni.JListType(uri_.$UriType()),
+          $a![1]?.as(
+              const jni$_.JListType<uri$_.Uri?>(uri$_.$Uri$NullableType()),
               releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'getNotificationUri()Landroid/net/Uri;') {
         final $r = _$impls[$p]!.getNotificationUri();
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'getNotificationUris()Ljava/util/List;') {
         final $r = _$impls[$p]!.getNotificationUris();
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'getWantsAllOnMoveCalls()Z') {
         final $r = _$impls[$p]!.getWantsAllOnMoveCalls();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'setExtras(Landroid/os/Bundle;)V') {
         _$impls[$p]!.setExtras(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
       if ($d == r'getExtras()Landroid/os/Bundle;') {
         final $r = _$impls[$p]!.getExtras();
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'respond(Landroid/os/Bundle;)Landroid/os/Bundle;') {
         final $r = _$impls[$p]!.respond(
-          $a[0].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![0]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory Cursor.implement(
-    $CursorImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $Cursor $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = Cursor.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.database.Cursor',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.database.Cursor',
+      $p,
+      _$invokePointer,
+      [
+        if ($impl.copyStringToBuffer$async)
+          r'copyStringToBuffer(ILandroid/database/CharArrayBuffer;)V',
+        if ($impl.deactivate$async) r'deactivate()V',
+        if ($impl.close$async) r'close()V',
+        if ($impl.registerContentObserver$async)
+          r'registerContentObserver(Landroid/database/ContentObserver;)V',
+        if ($impl.unregisterContentObserver$async)
+          r'unregisterContentObserver(Landroid/database/ContentObserver;)V',
+        if ($impl.registerDataSetObserver$async)
+          r'registerDataSetObserver(Landroid/database/DataSetObserver;)V',
+        if ($impl.unregisterDataSetObserver$async)
+          r'unregisterDataSetObserver(Landroid/database/DataSetObserver;)V',
+        if ($impl.setNotificationUri$async)
+          r'setNotificationUri(Landroid/content/ContentResolver;Landroid/net/Uri;)V',
+        if ($impl.setNotificationUris$async)
+          r'setNotificationUris(Landroid/content/ContentResolver;Ljava/util/List;)V',
+        if ($impl.setExtras$async) r'setExtras(Landroid/os/Bundle;)V',
+      ],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory Cursor.implement(
+    $Cursor $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return Cursor.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $CursorImpl {
-  factory $CursorImpl({
+abstract base mixin class $Cursor {
+  factory $Cursor({
     required int Function() getCount,
     required int Function() getPosition,
     required bool Function(int i) move,
@@ -1444,45 +1552,57 @@ abstract interface class $CursorImpl {
     required bool Function() isLast,
     required bool Function() isBeforeFirst,
     required bool Function() isAfterLast,
-    required int Function(jni.JString string) getColumnIndex,
-    required int Function(jni.JString string) getColumnIndexOrThrow,
-    required jni.JString Function(int i) getColumnName,
-    required jni.JArray<jni.JString> Function() getColumnNames,
+    required int Function(jni$_.JString? string) getColumnIndex,
+    required int Function(jni$_.JString? string) getColumnIndexOrThrow,
+    required jni$_.JString? Function(int i) getColumnName,
+    required jni$_.JArray<jni$_.JString?>? Function() getColumnNames,
     required int Function() getColumnCount,
-    required jni.JArray<jni.jbyte> Function(int i) getBlob,
-    required jni.JString Function(int i) getString,
-    required void Function(int i, jni.JObject charArrayBuffer)
+    required jni$_.JByteArray? Function(int i) getBlob,
+    required jni$_.JString? Function(int i) getString,
+    required void Function(int i, jni$_.JObject? charArrayBuffer)
         copyStringToBuffer,
+    bool copyStringToBuffer$async,
     required int Function(int i) getShort,
     required int Function(int i) getInt,
     required int Function(int i) getLong,
     required double Function(int i) getFloat,
     required double Function(int i) getDouble,
     required int Function(int i) getType,
-    required bool Function(int i) isNull1,
+    required bool Function(int i) isNull$1,
     required void Function() deactivate,
+    bool deactivate$async,
     required bool Function() requery,
     required void Function() close,
+    bool close$async,
     required bool Function() isClosed,
-    required void Function(jni.JObject contentObserver) registerContentObserver,
-    required void Function(jni.JObject contentObserver)
+    required void Function(jni$_.JObject? contentObserver)
+        registerContentObserver,
+    bool registerContentObserver$async,
+    required void Function(jni$_.JObject? contentObserver)
         unregisterContentObserver,
-    required void Function(jni.JObject dataSetObserver) registerDataSetObserver,
-    required void Function(jni.JObject dataSetObserver)
+    bool unregisterContentObserver$async,
+    required void Function(jni$_.JObject? dataSetObserver)
+        registerDataSetObserver,
+    bool registerDataSetObserver$async,
+    required void Function(jni$_.JObject? dataSetObserver)
         unregisterDataSetObserver,
+    bool unregisterDataSetObserver$async,
     required void Function(
-            contentresolver_.ContentResolver contentResolver, uri_.Uri uri)
+            contentresolver$_.ContentResolver? contentResolver, uri$_.Uri? uri)
         setNotificationUri,
-    required void Function(contentresolver_.ContentResolver contentResolver,
-            jni.JList<uri_.Uri> list)
+    bool setNotificationUri$async,
+    required void Function(contentresolver$_.ContentResolver? contentResolver,
+            jni$_.JList<uri$_.Uri?>? list)
         setNotificationUris,
-    required uri_.Uri Function() getNotificationUri,
-    required jni.JList<uri_.Uri> Function() getNotificationUris,
+    bool setNotificationUris$async,
+    required uri$_.Uri? Function() getNotificationUri,
+    required jni$_.JList<uri$_.Uri?>? Function() getNotificationUris,
     required bool Function() getWantsAllOnMoveCalls,
-    required void Function(jni.JObject bundle) setExtras,
-    required jni.JObject Function() getExtras,
-    required jni.JObject Function(jni.JObject bundle) respond,
-  }) = _$CursorImpl;
+    required void Function(jni$_.JObject? bundle) setExtras,
+    bool setExtras$async,
+    required jni$_.JObject? Function() getExtras,
+    required jni$_.JObject? Function(jni$_.JObject? bundle) respond,
+  }) = _$Cursor;
 
   int getCount();
   int getPosition();
@@ -1496,43 +1616,53 @@ abstract interface class $CursorImpl {
   bool isLast();
   bool isBeforeFirst();
   bool isAfterLast();
-  int getColumnIndex(jni.JString string);
-  int getColumnIndexOrThrow(jni.JString string);
-  jni.JString getColumnName(int i);
-  jni.JArray<jni.JString> getColumnNames();
+  int getColumnIndex(jni$_.JString? string);
+  int getColumnIndexOrThrow(jni$_.JString? string);
+  jni$_.JString? getColumnName(int i);
+  jni$_.JArray<jni$_.JString?>? getColumnNames();
   int getColumnCount();
-  jni.JArray<jni.jbyte> getBlob(int i);
-  jni.JString getString(int i);
-  void copyStringToBuffer(int i, jni.JObject charArrayBuffer);
+  jni$_.JByteArray? getBlob(int i);
+  jni$_.JString? getString(int i);
+  void copyStringToBuffer(int i, jni$_.JObject? charArrayBuffer);
+  bool get copyStringToBuffer$async => false;
   int getShort(int i);
   int getInt(int i);
   int getLong(int i);
   double getFloat(int i);
   double getDouble(int i);
   int getType(int i);
-  bool isNull1(int i);
+  bool isNull$1(int i);
   void deactivate();
+  bool get deactivate$async => false;
   bool requery();
   void close();
+  bool get close$async => false;
   bool isClosed();
-  void registerContentObserver(jni.JObject contentObserver);
-  void unregisterContentObserver(jni.JObject contentObserver);
-  void registerDataSetObserver(jni.JObject dataSetObserver);
-  void unregisterDataSetObserver(jni.JObject dataSetObserver);
+  void registerContentObserver(jni$_.JObject? contentObserver);
+  bool get registerContentObserver$async => false;
+  void unregisterContentObserver(jni$_.JObject? contentObserver);
+  bool get unregisterContentObserver$async => false;
+  void registerDataSetObserver(jni$_.JObject? dataSetObserver);
+  bool get registerDataSetObserver$async => false;
+  void unregisterDataSetObserver(jni$_.JObject? dataSetObserver);
+  bool get unregisterDataSetObserver$async => false;
   void setNotificationUri(
-      contentresolver_.ContentResolver contentResolver, uri_.Uri uri);
-  void setNotificationUris(contentresolver_.ContentResolver contentResolver,
-      jni.JList<uri_.Uri> list);
-  uri_.Uri getNotificationUri();
-  jni.JList<uri_.Uri> getNotificationUris();
+      contentresolver$_.ContentResolver? contentResolver, uri$_.Uri? uri);
+  bool get setNotificationUri$async => false;
+  void setNotificationUris(contentresolver$_.ContentResolver? contentResolver,
+      jni$_.JList<uri$_.Uri?>? list);
+  bool get setNotificationUris$async => false;
+  uri$_.Uri? getNotificationUri();
+  jni$_.JList<uri$_.Uri?>? getNotificationUris();
   bool getWantsAllOnMoveCalls();
-  void setExtras(jni.JObject bundle);
-  jni.JObject getExtras();
-  jni.JObject respond(jni.JObject bundle);
+  void setExtras(jni$_.JObject? bundle);
+  bool get setExtras$async => false;
+  jni$_.JObject? getExtras();
+  jni$_.JObject? respond(jni$_.JObject? bundle);
 }
 
-class _$CursorImpl implements $CursorImpl {
-  _$CursorImpl({
+final class _$Cursor with $Cursor {
+  _$Cursor({
     required int Function() getCount,
     required int Function() getPosition,
     required bool Function(int i) move,
@@ -1545,44 +1675,56 @@ class _$CursorImpl implements $CursorImpl {
     required bool Function() isLast,
     required bool Function() isBeforeFirst,
     required bool Function() isAfterLast,
-    required int Function(jni.JString string) getColumnIndex,
-    required int Function(jni.JString string) getColumnIndexOrThrow,
-    required jni.JString Function(int i) getColumnName,
-    required jni.JArray<jni.JString> Function() getColumnNames,
+    required int Function(jni$_.JString? string) getColumnIndex,
+    required int Function(jni$_.JString? string) getColumnIndexOrThrow,
+    required jni$_.JString? Function(int i) getColumnName,
+    required jni$_.JArray<jni$_.JString?>? Function() getColumnNames,
     required int Function() getColumnCount,
-    required jni.JArray<jni.jbyte> Function(int i) getBlob,
-    required jni.JString Function(int i) getString,
-    required void Function(int i, jni.JObject charArrayBuffer)
+    required jni$_.JByteArray? Function(int i) getBlob,
+    required jni$_.JString? Function(int i) getString,
+    required void Function(int i, jni$_.JObject? charArrayBuffer)
         copyStringToBuffer,
+    this.copyStringToBuffer$async = false,
     required int Function(int i) getShort,
     required int Function(int i) getInt,
     required int Function(int i) getLong,
     required double Function(int i) getFloat,
     required double Function(int i) getDouble,
     required int Function(int i) getType,
-    required bool Function(int i) isNull1,
+    required bool Function(int i) isNull$1,
     required void Function() deactivate,
+    this.deactivate$async = false,
     required bool Function() requery,
     required void Function() close,
+    this.close$async = false,
     required bool Function() isClosed,
-    required void Function(jni.JObject contentObserver) registerContentObserver,
-    required void Function(jni.JObject contentObserver)
+    required void Function(jni$_.JObject? contentObserver)
+        registerContentObserver,
+    this.registerContentObserver$async = false,
+    required void Function(jni$_.JObject? contentObserver)
         unregisterContentObserver,
-    required void Function(jni.JObject dataSetObserver) registerDataSetObserver,
-    required void Function(jni.JObject dataSetObserver)
+    this.unregisterContentObserver$async = false,
+    required void Function(jni$_.JObject? dataSetObserver)
+        registerDataSetObserver,
+    this.registerDataSetObserver$async = false,
+    required void Function(jni$_.JObject? dataSetObserver)
         unregisterDataSetObserver,
+    this.unregisterDataSetObserver$async = false,
     required void Function(
-            contentresolver_.ContentResolver contentResolver, uri_.Uri uri)
+            contentresolver$_.ContentResolver? contentResolver, uri$_.Uri? uri)
         setNotificationUri,
-    required void Function(contentresolver_.ContentResolver contentResolver,
-            jni.JList<uri_.Uri> list)
+    this.setNotificationUri$async = false,
+    required void Function(contentresolver$_.ContentResolver? contentResolver,
+            jni$_.JList<uri$_.Uri?>? list)
         setNotificationUris,
-    required uri_.Uri Function() getNotificationUri,
-    required jni.JList<uri_.Uri> Function() getNotificationUris,
+    this.setNotificationUris$async = false,
+    required uri$_.Uri? Function() getNotificationUri,
+    required jni$_.JList<uri$_.Uri?>? Function() getNotificationUris,
     required bool Function() getWantsAllOnMoveCalls,
-    required void Function(jni.JObject bundle) setExtras,
-    required jni.JObject Function() getExtras,
-    required jni.JObject Function(jni.JObject bundle) respond,
+    required void Function(jni$_.JObject? bundle) setExtras,
+    this.setExtras$async = false,
+    required jni$_.JObject? Function() getExtras,
+    required jni$_.JObject? Function(jni$_.JObject? bundle) respond,
   })  : _getCount = getCount,
         _getPosition = getPosition,
         _move = move,
@@ -1609,7 +1751,7 @@ class _$CursorImpl implements $CursorImpl {
         _getFloat = getFloat,
         _getDouble = getDouble,
         _getType = getType,
-        _isNull1 = isNull1,
+        _isNull$1 = isNull$1,
         _deactivate = deactivate,
         _requery = requery,
         _close = close,
@@ -1639,40 +1781,53 @@ class _$CursorImpl implements $CursorImpl {
   final bool Function() _isLast;
   final bool Function() _isBeforeFirst;
   final bool Function() _isAfterLast;
-  final int Function(jni.JString string) _getColumnIndex;
-  final int Function(jni.JString string) _getColumnIndexOrThrow;
-  final jni.JString Function(int i) _getColumnName;
-  final jni.JArray<jni.JString> Function() _getColumnNames;
+  final int Function(jni$_.JString? string) _getColumnIndex;
+  final int Function(jni$_.JString? string) _getColumnIndexOrThrow;
+  final jni$_.JString? Function(int i) _getColumnName;
+  final jni$_.JArray<jni$_.JString?>? Function() _getColumnNames;
   final int Function() _getColumnCount;
-  final jni.JArray<jni.jbyte> Function(int i) _getBlob;
-  final jni.JString Function(int i) _getString;
-  final void Function(int i, jni.JObject charArrayBuffer) _copyStringToBuffer;
+  final jni$_.JByteArray? Function(int i) _getBlob;
+  final jni$_.JString? Function(int i) _getString;
+  final void Function(int i, jni$_.JObject? charArrayBuffer)
+      _copyStringToBuffer;
+  final bool copyStringToBuffer$async;
   final int Function(int i) _getShort;
   final int Function(int i) _getInt;
   final int Function(int i) _getLong;
   final double Function(int i) _getFloat;
   final double Function(int i) _getDouble;
   final int Function(int i) _getType;
-  final bool Function(int i) _isNull1;
+  final bool Function(int i) _isNull$1;
   final void Function() _deactivate;
+  final bool deactivate$async;
   final bool Function() _requery;
   final void Function() _close;
+  final bool close$async;
   final bool Function() _isClosed;
-  final void Function(jni.JObject contentObserver) _registerContentObserver;
-  final void Function(jni.JObject contentObserver) _unregisterContentObserver;
-  final void Function(jni.JObject dataSetObserver) _registerDataSetObserver;
-  final void Function(jni.JObject dataSetObserver) _unregisterDataSetObserver;
+  final void Function(jni$_.JObject? contentObserver) _registerContentObserver;
+  final bool registerContentObserver$async;
+  final void Function(jni$_.JObject? contentObserver)
+      _unregisterContentObserver;
+  final bool unregisterContentObserver$async;
+  final void Function(jni$_.JObject? dataSetObserver) _registerDataSetObserver;
+  final bool registerDataSetObserver$async;
+  final void Function(jni$_.JObject? dataSetObserver)
+      _unregisterDataSetObserver;
+  final bool unregisterDataSetObserver$async;
   final void Function(
-          contentresolver_.ContentResolver contentResolver, uri_.Uri uri)
+          contentresolver$_.ContentResolver? contentResolver, uri$_.Uri? uri)
       _setNotificationUri;
-  final void Function(contentresolver_.ContentResolver contentResolver,
-      jni.JList<uri_.Uri> list) _setNotificationUris;
-  final uri_.Uri Function() _getNotificationUri;
-  final jni.JList<uri_.Uri> Function() _getNotificationUris;
+  final bool setNotificationUri$async;
+  final void Function(contentresolver$_.ContentResolver? contentResolver,
+      jni$_.JList<uri$_.Uri?>? list) _setNotificationUris;
+  final bool setNotificationUris$async;
+  final uri$_.Uri? Function() _getNotificationUri;
+  final jni$_.JList<uri$_.Uri?>? Function() _getNotificationUris;
   final bool Function() _getWantsAllOnMoveCalls;
-  final void Function(jni.JObject bundle) _setExtras;
-  final jni.JObject Function() _getExtras;
-  final jni.JObject Function(jni.JObject bundle) _respond;
+  final void Function(jni$_.JObject? bundle) _setExtras;
+  final bool setExtras$async;
+  final jni$_.JObject? Function() _getExtras;
+  final jni$_.JObject? Function(jni$_.JObject? bundle) _respond;
 
   int getCount() {
     return _getCount();
@@ -1722,19 +1877,19 @@ class _$CursorImpl implements $CursorImpl {
     return _isAfterLast();
   }
 
-  int getColumnIndex(jni.JString string) {
+  int getColumnIndex(jni$_.JString? string) {
     return _getColumnIndex(string);
   }
 
-  int getColumnIndexOrThrow(jni.JString string) {
+  int getColumnIndexOrThrow(jni$_.JString? string) {
     return _getColumnIndexOrThrow(string);
   }
 
-  jni.JString getColumnName(int i) {
+  jni$_.JString? getColumnName(int i) {
     return _getColumnName(i);
   }
 
-  jni.JArray<jni.JString> getColumnNames() {
+  jni$_.JArray<jni$_.JString?>? getColumnNames() {
     return _getColumnNames();
   }
 
@@ -1742,15 +1897,15 @@ class _$CursorImpl implements $CursorImpl {
     return _getColumnCount();
   }
 
-  jni.JArray<jni.jbyte> getBlob(int i) {
+  jni$_.JByteArray? getBlob(int i) {
     return _getBlob(i);
   }
 
-  jni.JString getString(int i) {
+  jni$_.JString? getString(int i) {
     return _getString(i);
   }
 
-  void copyStringToBuffer(int i, jni.JObject charArrayBuffer) {
+  void copyStringToBuffer(int i, jni$_.JObject? charArrayBuffer) {
     return _copyStringToBuffer(i, charArrayBuffer);
   }
 
@@ -1778,8 +1933,8 @@ class _$CursorImpl implements $CursorImpl {
     return _getType(i);
   }
 
-  bool isNull1(int i) {
-    return _isNull1(i);
+  bool isNull$1(int i) {
+    return _isNull$1(i);
   }
 
   void deactivate() {
@@ -1798,37 +1953,37 @@ class _$CursorImpl implements $CursorImpl {
     return _isClosed();
   }
 
-  void registerContentObserver(jni.JObject contentObserver) {
+  void registerContentObserver(jni$_.JObject? contentObserver) {
     return _registerContentObserver(contentObserver);
   }
 
-  void unregisterContentObserver(jni.JObject contentObserver) {
+  void unregisterContentObserver(jni$_.JObject? contentObserver) {
     return _unregisterContentObserver(contentObserver);
   }
 
-  void registerDataSetObserver(jni.JObject dataSetObserver) {
+  void registerDataSetObserver(jni$_.JObject? dataSetObserver) {
     return _registerDataSetObserver(dataSetObserver);
   }
 
-  void unregisterDataSetObserver(jni.JObject dataSetObserver) {
+  void unregisterDataSetObserver(jni$_.JObject? dataSetObserver) {
     return _unregisterDataSetObserver(dataSetObserver);
   }
 
   void setNotificationUri(
-      contentresolver_.ContentResolver contentResolver, uri_.Uri uri) {
+      contentresolver$_.ContentResolver? contentResolver, uri$_.Uri? uri) {
     return _setNotificationUri(contentResolver, uri);
   }
 
-  void setNotificationUris(contentresolver_.ContentResolver contentResolver,
-      jni.JList<uri_.Uri> list) {
+  void setNotificationUris(contentresolver$_.ContentResolver? contentResolver,
+      jni$_.JList<uri$_.Uri?>? list) {
     return _setNotificationUris(contentResolver, list);
   }
 
-  uri_.Uri getNotificationUri() {
+  uri$_.Uri? getNotificationUri() {
     return _getNotificationUri();
   }
 
-  jni.JList<uri_.Uri> getNotificationUris() {
+  jni$_.JList<uri$_.Uri?>? getNotificationUris() {
     return _getNotificationUris();
   }
 
@@ -1836,40 +1991,86 @@ class _$CursorImpl implements $CursorImpl {
     return _getWantsAllOnMoveCalls();
   }
 
-  void setExtras(jni.JObject bundle) {
+  void setExtras(jni$_.JObject? bundle) {
     return _setExtras(bundle);
   }
 
-  jni.JObject getExtras() {
+  jni$_.JObject? getExtras() {
     return _getExtras();
   }
 
-  jni.JObject respond(jni.JObject bundle) {
+  jni$_.JObject? respond(jni$_.JObject? bundle) {
     return _respond(bundle);
   }
 }
 
-final class $CursorType extends jni.JObjType<Cursor> {
-  const $CursorType();
+final class $Cursor$NullableType extends jni$_.JObjType<Cursor?> {
+  @jni$_.internal
+  const $Cursor$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/database/Cursor;';
 
-  @override
-  Cursor fromReference(jni.JReference reference) =>
-      Cursor.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Cursor? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Cursor.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Cursor?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($CursorType).hashCode;
+  @core$_.override
+  int get hashCode => ($Cursor$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($CursorType) && other is $CursorType;
+    return other.runtimeType == ($Cursor$NullableType) &&
+        other is $Cursor$NullableType;
+  }
+}
+
+final class $Cursor$Type extends jni$_.JObjType<Cursor> {
+  @jni$_.internal
+  const $Cursor$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/database/Cursor;';
+
+  @jni$_.internal
+  @core$_.override
+  Cursor fromReference(jni$_.JReference reference) => Cursor.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Cursor?> get nullableType => const $Cursor$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Cursor$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Cursor$Type) && other is $Cursor$Type;
   }
 }

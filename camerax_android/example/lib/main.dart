@@ -1,11 +1,16 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
-import 'router.dart';
+import 'view_models.dart';
+import 'views.dart';
+
+final routeObserver = RouteObserver<ModalRoute>();
 
 void main() {
   Logger.root.onRecord.listen(onLogRecorded);
@@ -43,8 +48,51 @@ void onUncaughtError(Object error, StackTrace stackTrace) {
   Logger.root.shout(error, stackTrace);
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final GoRouter routerConfig;
+
+  @override
+  void initState() {
+    super.initState();
+    routerConfig = GoRouter(
+      observers: [
+        routeObserver,
+      ],
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) {
+            return ViewModelBinding(
+              viewBuilder: () => const HomeView(),
+              viewModelBuilder: () => HomeViewModel(),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: 'viewer',
+              builder: (context, state) {
+                final filePath = state.uri.queryParameters['uri'];
+                if (filePath == null) {
+                  throw ArgumentError.notNull('uri');
+                }
+                final uri = Uri.file(filePath);
+                return InteractiveView(
+                  uri: uri,
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

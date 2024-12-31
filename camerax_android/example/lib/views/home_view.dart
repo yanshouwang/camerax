@@ -1,5 +1,5 @@
+import 'package:camerax_android_example/main.dart';
 import 'package:camerax_android_example/models.dart';
-import 'package:camerax_android_example/router.dart';
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';

@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,158 +29,161 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../content/ContentResolver.dart' as contentresolver_;
+import '../content/ContentResolver.dart' as contentresolver$_;
 
-import '../content/Context.dart' as context_;
+import '../content/Context.dart' as context$_;
 
-import '../database/Cursor.dart' as cursor_;
+import '../database/Cursor.dart' as cursor$_;
 
-import '../net/Uri.dart' as uri_;
+import '../net/Uri.dart' as uri$_;
 
-import '../util/Size.dart' as size_;
+import '../util/Size.dart' as size$_;
 
-/// from: android.provider.MediaStore$Audio$AlbumColumns
-class MediaStore_Audio_AlbumColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_AlbumColumns> $type = type;
+/// from: `android.provider.MediaStore$Audio$AlbumColumns`
+class MediaStore$Audio$AlbumColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$AlbumColumns> $type;
 
-  MediaStore_Audio_AlbumColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  MediaStore$Audio$AlbumColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$AlbumColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$AlbumColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_AlbumColumnsType();
+  static const nullableType = $MediaStore$Audio$AlbumColumns$NullableType();
+  static const type = $MediaStore$Audio$AlbumColumns$Type();
   static final _id_ALBUM = _class.staticFieldId(
     r'ALBUM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM
+  /// from: `static public final java.lang.String ALBUM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM =>
-      _id_ALBUM.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM =>
+      _id_ALBUM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ALBUM_ART = _class.staticFieldId(
     r'ALBUM_ART',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM_ART
+  /// from: `static public final java.lang.String ALBUM_ART`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM_ART =>
-      _id_ALBUM_ART.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM_ART =>
+      _id_ALBUM_ART.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ALBUM_ID = _class.staticFieldId(
     r'ALBUM_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM_ID
+  /// from: `static public final java.lang.String ALBUM_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM_ID =>
-      _id_ALBUM_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM_ID =>
+      _id_ALBUM_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ALBUM_KEY = _class.staticFieldId(
     r'ALBUM_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM_KEY
+  /// from: `static public final java.lang.String ALBUM_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM_KEY =>
-      _id_ALBUM_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM_KEY =>
+      _id_ALBUM_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST = _class.staticFieldId(
     r'ARTIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST
+  /// from: `static public final java.lang.String ARTIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST =>
-      _id_ARTIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST =>
+      _id_ARTIST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST_ID = _class.staticFieldId(
     r'ARTIST_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST_ID
+  /// from: `static public final java.lang.String ARTIST_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST_ID =>
-      _id_ARTIST_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST_ID =>
+      _id_ARTIST_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST_KEY = _class.staticFieldId(
     r'ARTIST_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST_KEY
+  /// from: `static public final java.lang.String ARTIST_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST_KEY =>
-      _id_ARTIST_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST_KEY =>
+      _id_ARTIST_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_FIRST_YEAR = _class.staticFieldId(
     r'FIRST_YEAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FIRST_YEAR
+  /// from: `static public final java.lang.String FIRST_YEAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FIRST_YEAR =>
-      _id_FIRST_YEAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get FIRST_YEAR =>
+      _id_FIRST_YEAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LAST_YEAR = _class.staticFieldId(
     r'LAST_YEAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LAST_YEAR
+  /// from: `static public final java.lang.String LAST_YEAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LAST_YEAR =>
-      _id_LAST_YEAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get LAST_YEAR =>
+      _id_LAST_YEAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NUMBER_OF_SONGS = _class.staticFieldId(
     r'NUMBER_OF_SONGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NUMBER_OF_SONGS
+  /// from: `static public final java.lang.String NUMBER_OF_SONGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NUMBER_OF_SONGS =>
-      _id_NUMBER_OF_SONGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get NUMBER_OF_SONGS =>
+      _id_NUMBER_OF_SONGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NUMBER_OF_SONGS_FOR_ARTIST = _class.staticFieldId(
     r'NUMBER_OF_SONGS_FOR_ARTIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NUMBER_OF_SONGS_FOR_ARTIST
+  /// from: `static public final java.lang.String NUMBER_OF_SONGS_FOR_ARTIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NUMBER_OF_SONGS_FOR_ARTIST =>
-      _id_NUMBER_OF_SONGS_FOR_ARTIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get NUMBER_OF_SONGS_FOR_ARTIST =>
+      _id_NUMBER_OF_SONGS_FOR_ARTIST.get(
+          _class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Audio_AlbumColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Audio$AlbumColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -181,174 +191,236 @@ class MediaStore_Audio_AlbumColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Audio_AlbumColumns.implement(
-    $MediaStore_Audio_AlbumColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Audio$AlbumColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Audio_AlbumColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Audio$AlbumColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Audio$AlbumColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Audio$AlbumColumns.implement(
+    $MediaStore$Audio$AlbumColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Audio$AlbumColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Audio_AlbumColumnsImpl {
-  factory $MediaStore_Audio_AlbumColumnsImpl() =
-      _$MediaStore_Audio_AlbumColumnsImpl;
+abstract base mixin class $MediaStore$Audio$AlbumColumns {
+  factory $MediaStore$Audio$AlbumColumns() = _$MediaStore$Audio$AlbumColumns;
 }
 
-class _$MediaStore_Audio_AlbumColumnsImpl
-    implements $MediaStore_Audio_AlbumColumnsImpl {
-  _$MediaStore_Audio_AlbumColumnsImpl();
+final class _$MediaStore$Audio$AlbumColumns
+    with $MediaStore$Audio$AlbumColumns {
+  _$MediaStore$Audio$AlbumColumns();
 }
 
-final class $MediaStore_Audio_AlbumColumnsType
-    extends jni.JObjType<MediaStore_Audio_AlbumColumns> {
-  const $MediaStore_Audio_AlbumColumnsType();
+final class $MediaStore$Audio$AlbumColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$AlbumColumns?> {
+  @jni$_.internal
+  const $MediaStore$Audio$AlbumColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$AlbumColumns;';
 
-  @override
-  MediaStore_Audio_AlbumColumns fromReference(jni.JReference reference) =>
-      MediaStore_Audio_AlbumColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$AlbumColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$AlbumColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$AlbumColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_AlbumColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$AlbumColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_AlbumColumnsType) &&
-        other is $MediaStore_Audio_AlbumColumnsType;
+    return other.runtimeType == ($MediaStore$Audio$AlbumColumns$NullableType) &&
+        other is $MediaStore$Audio$AlbumColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Albums
-class MediaStore_Audio_Albums extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Albums> $type = type;
+final class $MediaStore$Audio$AlbumColumns$Type
+    extends jni$_.JObjType<MediaStore$Audio$AlbumColumns> {
+  @jni$_.internal
+  const $MediaStore$Audio$AlbumColumns$Type();
 
-  MediaStore_Audio_Albums.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$AlbumColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$AlbumColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$AlbumColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$AlbumColumns?> get nullableType =>
+      const $MediaStore$Audio$AlbumColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$AlbumColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$AlbumColumns$Type) &&
+        other is $MediaStore$Audio$AlbumColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Albums`
+class MediaStore$Audio$Albums extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Albums> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Albums.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Albums');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Albums');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_AlbumsType();
+  static const nullableType = $MediaStore$Audio$Albums$NullableType();
+  static const type = $MediaStore$Audio$Albums$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ENTRY_CONTENT_TYPE = _class.staticFieldId(
     r'ENTRY_CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENTRY_CONTENT_TYPE
+  /// from: `static public final java.lang.String ENTRY_CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENTRY_CONTENT_TYPE =>
-      _id_ENTRY_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENTRY_CONTENT_TYPE =>
+      _id_ENTRY_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Albums() {
-    return MediaStore_Audio_Albums.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Albums() {
+    return MediaStore$Audio$Albums.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -357,121 +429,174 @@ class MediaStore_Audio_Albums extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_AlbumsType
-    extends jni.JObjType<MediaStore_Audio_Albums> {
-  const $MediaStore_Audio_AlbumsType();
+final class $MediaStore$Audio$Albums$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Albums?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Albums$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Albums;';
 
-  @override
-  MediaStore_Audio_Albums fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Albums.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Albums? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Albums.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Albums?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_AlbumsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Albums$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_AlbumsType) &&
-        other is $MediaStore_Audio_AlbumsType;
+    return other.runtimeType == ($MediaStore$Audio$Albums$NullableType) &&
+        other is $MediaStore$Audio$Albums$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$ArtistColumns
-class MediaStore_Audio_ArtistColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_ArtistColumns> $type = type;
+final class $MediaStore$Audio$Albums$Type
+    extends jni$_.JObjType<MediaStore$Audio$Albums> {
+  @jni$_.internal
+  const $MediaStore$Audio$Albums$Type();
 
-  MediaStore_Audio_ArtistColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Albums;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Albums fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Albums.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Albums?> get nullableType =>
+      const $MediaStore$Audio$Albums$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Albums$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Albums$Type) &&
+        other is $MediaStore$Audio$Albums$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$ArtistColumns`
+class MediaStore$Audio$ArtistColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$ArtistColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$ArtistColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$ArtistColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$ArtistColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_ArtistColumnsType();
+  static const nullableType = $MediaStore$Audio$ArtistColumns$NullableType();
+  static const type = $MediaStore$Audio$ArtistColumns$Type();
   static final _id_ARTIST = _class.staticFieldId(
     r'ARTIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST
+  /// from: `static public final java.lang.String ARTIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST =>
-      _id_ARTIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST =>
+      _id_ARTIST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST_KEY = _class.staticFieldId(
     r'ARTIST_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST_KEY
+  /// from: `static public final java.lang.String ARTIST_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST_KEY =>
-      _id_ARTIST_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST_KEY =>
+      _id_ARTIST_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NUMBER_OF_ALBUMS = _class.staticFieldId(
     r'NUMBER_OF_ALBUMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NUMBER_OF_ALBUMS
+  /// from: `static public final java.lang.String NUMBER_OF_ALBUMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NUMBER_OF_ALBUMS =>
-      _id_NUMBER_OF_ALBUMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get NUMBER_OF_ALBUMS =>
+      _id_NUMBER_OF_ALBUMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NUMBER_OF_TRACKS = _class.staticFieldId(
     r'NUMBER_OF_TRACKS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NUMBER_OF_TRACKS
+  /// from: `static public final java.lang.String NUMBER_OF_TRACKS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NUMBER_OF_TRACKS =>
-      _id_NUMBER_OF_TRACKS.get(_class, const jni.JStringType());
+  static jni$_.JString? get NUMBER_OF_TRACKS =>
+      _id_NUMBER_OF_TRACKS.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Audio_ArtistColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Audio$ArtistColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -479,124 +604,187 @@ class MediaStore_Audio_ArtistColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Audio_ArtistColumns.implement(
-    $MediaStore_Audio_ArtistColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Audio$ArtistColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Audio_ArtistColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Audio$ArtistColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Audio$ArtistColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Audio$ArtistColumns.implement(
+    $MediaStore$Audio$ArtistColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Audio$ArtistColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Audio_ArtistColumnsImpl {
-  factory $MediaStore_Audio_ArtistColumnsImpl() =
-      _$MediaStore_Audio_ArtistColumnsImpl;
+abstract base mixin class $MediaStore$Audio$ArtistColumns {
+  factory $MediaStore$Audio$ArtistColumns() = _$MediaStore$Audio$ArtistColumns;
 }
 
-class _$MediaStore_Audio_ArtistColumnsImpl
-    implements $MediaStore_Audio_ArtistColumnsImpl {
-  _$MediaStore_Audio_ArtistColumnsImpl();
+final class _$MediaStore$Audio$ArtistColumns
+    with $MediaStore$Audio$ArtistColumns {
+  _$MediaStore$Audio$ArtistColumns();
 }
 
-final class $MediaStore_Audio_ArtistColumnsType
-    extends jni.JObjType<MediaStore_Audio_ArtistColumns> {
-  const $MediaStore_Audio_ArtistColumnsType();
+final class $MediaStore$Audio$ArtistColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$ArtistColumns?> {
+  @jni$_.internal
+  const $MediaStore$Audio$ArtistColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$ArtistColumns;';
 
-  @override
-  MediaStore_Audio_ArtistColumns fromReference(jni.JReference reference) =>
-      MediaStore_Audio_ArtistColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$ArtistColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$ArtistColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$ArtistColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_ArtistColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$ArtistColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_ArtistColumnsType) &&
-        other is $MediaStore_Audio_ArtistColumnsType;
+    return other.runtimeType ==
+            ($MediaStore$Audio$ArtistColumns$NullableType) &&
+        other is $MediaStore$Audio$ArtistColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Artists$Albums
-class MediaStore_Audio_Artists_Albums extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Artists_Albums> $type = type;
+final class $MediaStore$Audio$ArtistColumns$Type
+    extends jni$_.JObjType<MediaStore$Audio$ArtistColumns> {
+  @jni$_.internal
+  const $MediaStore$Audio$ArtistColumns$Type();
 
-  MediaStore_Audio_Artists_Albums.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$ArtistColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$ArtistColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$ArtistColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$ArtistColumns?> get nullableType =>
+      const $MediaStore$Audio$ArtistColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$ArtistColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$ArtistColumns$Type) &&
+        other is $MediaStore$Audio$ArtistColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Artists$Albums`
+class MediaStore$Audio$Artists$Albums extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Artists$Albums> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Artists$Albums.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Artists$Albums');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Artists$Albums');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_Artists_AlbumsType();
-  static final _id_new0 = _class.constructorId(
+  static const nullableType = $MediaStore$Audio$Artists$Albums$NullableType();
+  static const type = $MediaStore$Audio$Artists$Albums$Type();
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Artists_Albums() {
-    return MediaStore_Audio_Artists_Albums.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Artists$Albums() {
+    return MediaStore$Audio$Artists$Albums.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -605,141 +793,198 @@ class MediaStore_Audio_Artists_Albums extends jni.JObject {
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
     int j,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_Artists_AlbumsType
-    extends jni.JObjType<MediaStore_Audio_Artists_Albums> {
-  const $MediaStore_Audio_Artists_AlbumsType();
+final class $MediaStore$Audio$Artists$Albums$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Artists$Albums?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Artists$Albums$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Artists$Albums;';
 
-  @override
-  MediaStore_Audio_Artists_Albums fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Artists_Albums.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Artists$Albums? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Artists$Albums.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Artists$Albums?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_Artists_AlbumsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Artists$Albums$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_Artists_AlbumsType) &&
-        other is $MediaStore_Audio_Artists_AlbumsType;
+    return other.runtimeType ==
+            ($MediaStore$Audio$Artists$Albums$NullableType) &&
+        other is $MediaStore$Audio$Artists$Albums$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Artists
-class MediaStore_Audio_Artists extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Artists> $type = type;
+final class $MediaStore$Audio$Artists$Albums$Type
+    extends jni$_.JObjType<MediaStore$Audio$Artists$Albums> {
+  @jni$_.internal
+  const $MediaStore$Audio$Artists$Albums$Type();
 
-  MediaStore_Audio_Artists.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Artists$Albums;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Artists$Albums fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Artists$Albums.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Artists$Albums?> get nullableType =>
+      const $MediaStore$Audio$Artists$Albums$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Artists$Albums$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Artists$Albums$Type) &&
+        other is $MediaStore$Audio$Artists$Albums$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Artists`
+class MediaStore$Audio$Artists extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Artists> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Artists.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Artists');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Artists');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_ArtistsType();
+  static const nullableType = $MediaStore$Audio$Artists$NullableType();
+  static const type = $MediaStore$Audio$Artists$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ENTRY_CONTENT_TYPE = _class.staticFieldId(
     r'ENTRY_CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENTRY_CONTENT_TYPE
+  /// from: `static public final java.lang.String ENTRY_CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENTRY_CONTENT_TYPE =>
-      _id_ENTRY_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENTRY_CONTENT_TYPE =>
+      _id_ENTRY_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Artists() {
-    return MediaStore_Audio_Artists.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Artists() {
+    return MediaStore$Audio$Artists.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -748,270 +993,324 @@ class MediaStore_Audio_Artists extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_ArtistsType
-    extends jni.JObjType<MediaStore_Audio_Artists> {
-  const $MediaStore_Audio_ArtistsType();
+final class $MediaStore$Audio$Artists$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Artists?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Artists$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Artists;';
 
-  @override
-  MediaStore_Audio_Artists fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Artists.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Artists? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Artists.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Artists?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_ArtistsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Artists$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_ArtistsType) &&
-        other is $MediaStore_Audio_ArtistsType;
+    return other.runtimeType == ($MediaStore$Audio$Artists$NullableType) &&
+        other is $MediaStore$Audio$Artists$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$AudioColumns
-class MediaStore_Audio_AudioColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_AudioColumns> $type = type;
+final class $MediaStore$Audio$Artists$Type
+    extends jni$_.JObjType<MediaStore$Audio$Artists> {
+  @jni$_.internal
+  const $MediaStore$Audio$Artists$Type();
 
-  MediaStore_Audio_AudioColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Artists;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Artists fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Artists.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Artists?> get nullableType =>
+      const $MediaStore$Audio$Artists$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Artists$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Artists$Type) &&
+        other is $MediaStore$Audio$Artists$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$AudioColumns`
+class MediaStore$Audio$AudioColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$AudioColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$AudioColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$AudioColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$AudioColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_AudioColumnsType();
+  static const nullableType = $MediaStore$Audio$AudioColumns$NullableType();
+  static const type = $MediaStore$Audio$AudioColumns$Type();
   static final _id_ALBUM_ID = _class.staticFieldId(
     r'ALBUM_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM_ID
+  /// from: `static public final java.lang.String ALBUM_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM_ID =>
-      _id_ALBUM_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM_ID =>
+      _id_ALBUM_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ALBUM_KEY = _class.staticFieldId(
     r'ALBUM_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM_KEY
+  /// from: `static public final java.lang.String ALBUM_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM_KEY =>
-      _id_ALBUM_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM_KEY =>
+      _id_ALBUM_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST_ID = _class.staticFieldId(
     r'ARTIST_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST_ID
+  /// from: `static public final java.lang.String ARTIST_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST_ID =>
-      _id_ARTIST_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST_ID =>
+      _id_ARTIST_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST_KEY = _class.staticFieldId(
     r'ARTIST_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST_KEY
+  /// from: `static public final java.lang.String ARTIST_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST_KEY =>
-      _id_ARTIST_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST_KEY =>
+      _id_ARTIST_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BOOKMARK = _class.staticFieldId(
     r'BOOKMARK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BOOKMARK
+  /// from: `static public final java.lang.String BOOKMARK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BOOKMARK =>
-      _id_BOOKMARK.get(_class, const jni.JStringType());
+  static jni$_.JString? get BOOKMARK =>
+      _id_BOOKMARK.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENRE = _class.staticFieldId(
     r'GENRE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENRE
+  /// from: `static public final java.lang.String GENRE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENRE =>
-      _id_GENRE.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENRE =>
+      _id_GENRE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENRE_ID = _class.staticFieldId(
     r'GENRE_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENRE_ID
+  /// from: `static public final java.lang.String GENRE_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENRE_ID =>
-      _id_GENRE_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENRE_ID =>
+      _id_GENRE_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENRE_KEY = _class.staticFieldId(
     r'GENRE_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENRE_KEY
+  /// from: `static public final java.lang.String GENRE_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENRE_KEY =>
-      _id_GENRE_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENRE_KEY =>
+      _id_GENRE_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_ALARM = _class.staticFieldId(
     r'IS_ALARM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_ALARM
+  /// from: `static public final java.lang.String IS_ALARM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_ALARM =>
-      _id_IS_ALARM.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_ALARM =>
+      _id_IS_ALARM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_AUDIOBOOK = _class.staticFieldId(
     r'IS_AUDIOBOOK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_AUDIOBOOK
+  /// from: `static public final java.lang.String IS_AUDIOBOOK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_AUDIOBOOK =>
-      _id_IS_AUDIOBOOK.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_AUDIOBOOK =>
+      _id_IS_AUDIOBOOK.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_MUSIC = _class.staticFieldId(
     r'IS_MUSIC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_MUSIC
+  /// from: `static public final java.lang.String IS_MUSIC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_MUSIC =>
-      _id_IS_MUSIC.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_MUSIC =>
+      _id_IS_MUSIC.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_NOTIFICATION = _class.staticFieldId(
     r'IS_NOTIFICATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_NOTIFICATION
+  /// from: `static public final java.lang.String IS_NOTIFICATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_NOTIFICATION =>
-      _id_IS_NOTIFICATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_NOTIFICATION =>
+      _id_IS_NOTIFICATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_PODCAST = _class.staticFieldId(
     r'IS_PODCAST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_PODCAST
+  /// from: `static public final java.lang.String IS_PODCAST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_PODCAST =>
-      _id_IS_PODCAST.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_PODCAST =>
+      _id_IS_PODCAST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_RECORDING = _class.staticFieldId(
     r'IS_RECORDING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_RECORDING
+  /// from: `static public final java.lang.String IS_RECORDING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_RECORDING =>
-      _id_IS_RECORDING.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_RECORDING =>
+      _id_IS_RECORDING.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_RINGTONE = _class.staticFieldId(
     r'IS_RINGTONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_RINGTONE
+  /// from: `static public final java.lang.String IS_RINGTONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_RINGTONE =>
-      _id_IS_RINGTONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_RINGTONE =>
+      _id_IS_RINGTONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TITLE_KEY = _class.staticFieldId(
     r'TITLE_KEY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TITLE_KEY
+  /// from: `static public final java.lang.String TITLE_KEY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TITLE_KEY =>
-      _id_TITLE_KEY.get(_class, const jni.JStringType());
+  static jni$_.JString? get TITLE_KEY =>
+      _id_TITLE_KEY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TITLE_RESOURCE_URI = _class.staticFieldId(
     r'TITLE_RESOURCE_URI',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TITLE_RESOURCE_URI
+  /// from: `static public final java.lang.String TITLE_RESOURCE_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TITLE_RESOURCE_URI =>
-      _id_TITLE_RESOURCE_URI.get(_class, const jni.JStringType());
+  static jni$_.JString? get TITLE_RESOURCE_URI =>
+      _id_TITLE_RESOURCE_URI.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TRACK = _class.staticFieldId(
     r'TRACK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TRACK
+  /// from: `static public final java.lang.String TRACK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TRACK =>
-      _id_TRACK.get(_class, const jni.JStringType());
+  static jni$_.JString? get TRACK =>
+      _id_TRACK.get(_class, const jni$_.JStringNullableType());
 
   static final _id_YEAR = _class.staticFieldId(
     r'YEAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String YEAR
+  /// from: `static public final java.lang.String YEAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get YEAR => _id_YEAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get YEAR =>
+      _id_YEAR.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Audio_AudioColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Audio$AudioColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1019,164 +1318,226 @@ class MediaStore_Audio_AudioColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Audio_AudioColumns.implement(
-    $MediaStore_Audio_AudioColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Audio$AudioColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Audio_AudioColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Audio$AudioColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Audio$AudioColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Audio$AudioColumns.implement(
+    $MediaStore$Audio$AudioColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Audio$AudioColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Audio_AudioColumnsImpl {
-  factory $MediaStore_Audio_AudioColumnsImpl() =
-      _$MediaStore_Audio_AudioColumnsImpl;
+abstract base mixin class $MediaStore$Audio$AudioColumns {
+  factory $MediaStore$Audio$AudioColumns() = _$MediaStore$Audio$AudioColumns;
 }
 
-class _$MediaStore_Audio_AudioColumnsImpl
-    implements $MediaStore_Audio_AudioColumnsImpl {
-  _$MediaStore_Audio_AudioColumnsImpl();
+final class _$MediaStore$Audio$AudioColumns
+    with $MediaStore$Audio$AudioColumns {
+  _$MediaStore$Audio$AudioColumns();
 }
 
-final class $MediaStore_Audio_AudioColumnsType
-    extends jni.JObjType<MediaStore_Audio_AudioColumns> {
-  const $MediaStore_Audio_AudioColumnsType();
+final class $MediaStore$Audio$AudioColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$AudioColumns?> {
+  @jni$_.internal
+  const $MediaStore$Audio$AudioColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$AudioColumns;';
 
-  @override
-  MediaStore_Audio_AudioColumns fromReference(jni.JReference reference) =>
-      MediaStore_Audio_AudioColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$AudioColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$AudioColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$AudioColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_AudioColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$AudioColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_AudioColumnsType) &&
-        other is $MediaStore_Audio_AudioColumnsType;
+    return other.runtimeType == ($MediaStore$Audio$AudioColumns$NullableType) &&
+        other is $MediaStore$Audio$AudioColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Genres$Members
-class MediaStore_Audio_Genres_Members extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Genres_Members> $type = type;
+final class $MediaStore$Audio$AudioColumns$Type
+    extends jni$_.JObjType<MediaStore$Audio$AudioColumns> {
+  @jni$_.internal
+  const $MediaStore$Audio$AudioColumns$Type();
 
-  MediaStore_Audio_Genres_Members.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$AudioColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$AudioColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$AudioColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$AudioColumns?> get nullableType =>
+      const $MediaStore$Audio$AudioColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$AudioColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$AudioColumns$Type) &&
+        other is $MediaStore$Audio$AudioColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Genres$Members`
+class MediaStore$Audio$Genres$Members extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Genres$Members> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Genres$Members.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Genres$Members');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Genres$Members');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_Genres_MembersType();
+  static const nullableType = $MediaStore$Audio$Genres$Members$NullableType();
+  static const type = $MediaStore$Audio$Genres$Members$Type();
   static final _id_AUDIO_ID = _class.staticFieldId(
     r'AUDIO_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String AUDIO_ID
+  /// from: `static public final java.lang.String AUDIO_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get AUDIO_ID =>
-      _id_AUDIO_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get AUDIO_ID =>
+      _id_AUDIO_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CONTENT_DIRECTORY = _class.staticFieldId(
     r'CONTENT_DIRECTORY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_DIRECTORY
+  /// from: `static public final java.lang.String CONTENT_DIRECTORY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_DIRECTORY =>
-      _id_CONTENT_DIRECTORY.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_DIRECTORY =>
+      _id_CONTENT_DIRECTORY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENRE_ID = _class.staticFieldId(
     r'GENRE_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENRE_ID
+  /// from: `static public final java.lang.String GENRE_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENRE_ID =>
-      _id_GENRE_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENRE_ID =>
+      _id_GENRE_ID.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Genres_Members() {
-    return MediaStore_Audio_Genres_Members.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Genres$Members() {
+    return MediaStore$Audio$Genres$Members.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -1185,141 +1546,198 @@ class MediaStore_Audio_Genres_Members extends jni.JObject {
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
     int j,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_Genres_MembersType
-    extends jni.JObjType<MediaStore_Audio_Genres_Members> {
-  const $MediaStore_Audio_Genres_MembersType();
+final class $MediaStore$Audio$Genres$Members$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Genres$Members?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Genres$Members$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Genres$Members;';
 
-  @override
-  MediaStore_Audio_Genres_Members fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Genres_Members.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Genres$Members? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Genres$Members.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Genres$Members?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_Genres_MembersType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Genres$Members$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_Genres_MembersType) &&
-        other is $MediaStore_Audio_Genres_MembersType;
+    return other.runtimeType ==
+            ($MediaStore$Audio$Genres$Members$NullableType) &&
+        other is $MediaStore$Audio$Genres$Members$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Genres
-class MediaStore_Audio_Genres extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Genres> $type = type;
+final class $MediaStore$Audio$Genres$Members$Type
+    extends jni$_.JObjType<MediaStore$Audio$Genres$Members> {
+  @jni$_.internal
+  const $MediaStore$Audio$Genres$Members$Type();
 
-  MediaStore_Audio_Genres.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Genres$Members;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Genres$Members fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Genres$Members.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Genres$Members?> get nullableType =>
+      const $MediaStore$Audio$Genres$Members$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Genres$Members$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Genres$Members$Type) &&
+        other is $MediaStore$Audio$Genres$Members$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Genres`
+class MediaStore$Audio$Genres extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Genres> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Genres.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Genres');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Genres');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_GenresType();
+  static const nullableType = $MediaStore$Audio$Genres$NullableType();
+  static const type = $MediaStore$Audio$Genres$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ENTRY_CONTENT_TYPE = _class.staticFieldId(
     r'ENTRY_CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENTRY_CONTENT_TYPE
+  /// from: `static public final java.lang.String ENTRY_CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENTRY_CONTENT_TYPE =>
-      _id_ENTRY_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENTRY_CONTENT_TYPE =>
+      _id_ENTRY_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Genres() {
-    return MediaStore_Audio_Genres.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Genres() {
+    return MediaStore$Audio$Genres.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -1328,25 +1746,26 @@ class MediaStore_Audio_Genres extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getContentUriForAudioId = _class.staticMethodId(
@@ -1354,94 +1773,149 @@ class MediaStore_Audio_Genres extends jni.JObject {
     r'(Ljava/lang/String;I)Landroid/net/Uri;',
   );
 
-  static final _getContentUriForAudioId = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, $Int32)>)>>(
+  static final _getContentUriForAudioId = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUriForAudioId(java.lang.String string, int i)
+  /// from: `static public android.net.Uri getContentUriForAudioId(java.lang.String string, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUriForAudioId(
-    jni.JString string,
+  static uri$_.Uri? getContentUriForAudioId(
+    jni$_.JString? string,
     int i,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUriForAudioId(
             _class.reference.pointer,
-            _id_getContentUriForAudioId as jni.JMethodIDPtr,
-            string.reference.pointer,
+            _id_getContentUriForAudioId as jni$_.JMethodIDPtr,
+            _$string.pointer,
             i)
-        .object(const uri_.$UriType());
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_GenresType
-    extends jni.JObjType<MediaStore_Audio_Genres> {
-  const $MediaStore_Audio_GenresType();
+final class $MediaStore$Audio$Genres$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Genres?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Genres$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Genres;';
 
-  @override
-  MediaStore_Audio_Genres fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Genres.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Genres? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Genres.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Genres?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_GenresType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Genres$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_GenresType) &&
-        other is $MediaStore_Audio_GenresType;
+    return other.runtimeType == ($MediaStore$Audio$Genres$NullableType) &&
+        other is $MediaStore$Audio$Genres$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$GenresColumns
-class MediaStore_Audio_GenresColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_GenresColumns> $type = type;
+final class $MediaStore$Audio$Genres$Type
+    extends jni$_.JObjType<MediaStore$Audio$Genres> {
+  @jni$_.internal
+  const $MediaStore$Audio$Genres$Type();
 
-  MediaStore_Audio_GenresColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Genres;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Genres fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Genres.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Genres?> get nullableType =>
+      const $MediaStore$Audio$Genres$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Genres$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Genres$Type) &&
+        other is $MediaStore$Audio$Genres$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$GenresColumns`
+class MediaStore$Audio$GenresColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$GenresColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$GenresColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$GenresColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$GenresColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_GenresColumnsType();
+  static const nullableType = $MediaStore$Audio$GenresColumns$NullableType();
+  static const type = $MediaStore$Audio$GenresColumns$Type();
   static final _id_NAME = _class.staticFieldId(
     r'NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NAME
+  /// from: `static public final java.lang.String NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NAME => _id_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get NAME =>
+      _id_NAME.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Audio_GenresColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Audio$GenresColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -1449,194 +1923,257 @@ class MediaStore_Audio_GenresColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Audio_GenresColumns.implement(
-    $MediaStore_Audio_GenresColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Audio$GenresColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Audio_GenresColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Audio$GenresColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Audio$GenresColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Audio$GenresColumns.implement(
+    $MediaStore$Audio$GenresColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Audio$GenresColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Audio_GenresColumnsImpl {
-  factory $MediaStore_Audio_GenresColumnsImpl() =
-      _$MediaStore_Audio_GenresColumnsImpl;
+abstract base mixin class $MediaStore$Audio$GenresColumns {
+  factory $MediaStore$Audio$GenresColumns() = _$MediaStore$Audio$GenresColumns;
 }
 
-class _$MediaStore_Audio_GenresColumnsImpl
-    implements $MediaStore_Audio_GenresColumnsImpl {
-  _$MediaStore_Audio_GenresColumnsImpl();
+final class _$MediaStore$Audio$GenresColumns
+    with $MediaStore$Audio$GenresColumns {
+  _$MediaStore$Audio$GenresColumns();
 }
 
-final class $MediaStore_Audio_GenresColumnsType
-    extends jni.JObjType<MediaStore_Audio_GenresColumns> {
-  const $MediaStore_Audio_GenresColumnsType();
+final class $MediaStore$Audio$GenresColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$GenresColumns?> {
+  @jni$_.internal
+  const $MediaStore$Audio$GenresColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$GenresColumns;';
 
-  @override
-  MediaStore_Audio_GenresColumns fromReference(jni.JReference reference) =>
-      MediaStore_Audio_GenresColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$GenresColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$GenresColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$GenresColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_GenresColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$GenresColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_GenresColumnsType) &&
-        other is $MediaStore_Audio_GenresColumnsType;
+    return other.runtimeType ==
+            ($MediaStore$Audio$GenresColumns$NullableType) &&
+        other is $MediaStore$Audio$GenresColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Media
-class MediaStore_Audio_Media extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Media> $type = type;
+final class $MediaStore$Audio$GenresColumns$Type
+    extends jni$_.JObjType<MediaStore$Audio$GenresColumns> {
+  @jni$_.internal
+  const $MediaStore$Audio$GenresColumns$Type();
 
-  MediaStore_Audio_Media.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$GenresColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$GenresColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$GenresColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$GenresColumns?> get nullableType =>
+      const $MediaStore$Audio$GenresColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$GenresColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$GenresColumns$Type) &&
+        other is $MediaStore$Audio$GenresColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Media`
+class MediaStore$Audio$Media extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Media> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Media.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Media');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Media');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_MediaType();
+  static const nullableType = $MediaStore$Audio$Media$NullableType();
+  static const type = $MediaStore$Audio$Media$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ENTRY_CONTENT_TYPE = _class.staticFieldId(
     r'ENTRY_CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENTRY_CONTENT_TYPE
+  /// from: `static public final java.lang.String ENTRY_CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENTRY_CONTENT_TYPE =>
-      _id_ENTRY_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENTRY_CONTENT_TYPE =>
+      _id_ENTRY_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_EXTRA_MAX_BYTES = _class.staticFieldId(
     r'EXTRA_MAX_BYTES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MAX_BYTES
+  /// from: `static public final java.lang.String EXTRA_MAX_BYTES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MAX_BYTES =>
-      _id_EXTRA_MAX_BYTES.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MAX_BYTES =>
+      _id_EXTRA_MAX_BYTES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_RECORD_SOUND_ACTION = _class.staticFieldId(
     r'RECORD_SOUND_ACTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RECORD_SOUND_ACTION
+  /// from: `static public final java.lang.String RECORD_SOUND_ACTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RECORD_SOUND_ACTION =>
-      _id_RECORD_SOUND_ACTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get RECORD_SOUND_ACTION =>
+      _id_RECORD_SOUND_ACTION.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Media() {
-    return MediaStore_Audio_Media.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Media() {
+    return MediaStore$Audio$Media.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -1645,52 +2182,55 @@ class MediaStore_Audio_Media extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
-  static final _id_getContentUri1 = _class.staticMethodId(
+  static final _id_getContentUri$1 = _class.staticMethodId(
     r'getContentUri',
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri1(
-    jni.JString string,
+  static uri$_.Uri? getContentUri$1(
+    jni$_.JString? string,
     int j,
   ) {
-    return _getContentUri1(_class.reference.pointer,
-            _id_getContentUri1 as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getContentUri$1(_class.reference.pointer,
+            _id_getContentUri$1 as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getContentUriForPath = _class.staticMethodId(
@@ -1698,142 +2238,206 @@ class MediaStore_Audio_Media extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUriForPath = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUriForPath = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUriForPath(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUriForPath(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUriForPath(
-    jni.JString string,
+  static uri$_.Uri? getContentUriForPath(
+    jni$_.JString? string,
   ) {
-    return _getContentUriForPath(
-            _class.reference.pointer,
-            _id_getContentUriForPath as jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const uri_.$UriType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getContentUriForPath(_class.reference.pointer,
+            _id_getContentUriForPath as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_MediaType
-    extends jni.JObjType<MediaStore_Audio_Media> {
-  const $MediaStore_Audio_MediaType();
+final class $MediaStore$Audio$Media$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Media?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Media$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Media;';
 
-  @override
-  MediaStore_Audio_Media fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Media.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Media? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Media.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Media?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_MediaType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Media$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_MediaType) &&
-        other is $MediaStore_Audio_MediaType;
+    return other.runtimeType == ($MediaStore$Audio$Media$NullableType) &&
+        other is $MediaStore$Audio$Media$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Playlists$Members
-class MediaStore_Audio_Playlists_Members extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Playlists_Members> $type = type;
+final class $MediaStore$Audio$Media$Type
+    extends jni$_.JObjType<MediaStore$Audio$Media> {
+  @jni$_.internal
+  const $MediaStore$Audio$Media$Type();
 
-  MediaStore_Audio_Playlists_Members.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Media;';
 
-  static final _class = jni.JClass.forName(
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Media fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Media.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Media?> get nullableType =>
+      const $MediaStore$Audio$Media$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Media$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Media$Type) &&
+        other is $MediaStore$Audio$Media$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Playlists$Members`
+class MediaStore$Audio$Playlists$Members extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Playlists$Members> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Playlists$Members.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
       r'android/provider/MediaStore$Audio$Playlists$Members');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_Playlists_MembersType();
+  static const nullableType =
+      $MediaStore$Audio$Playlists$Members$NullableType();
+  static const type = $MediaStore$Audio$Playlists$Members$Type();
   static final _id_AUDIO_ID = _class.staticFieldId(
     r'AUDIO_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String AUDIO_ID
+  /// from: `static public final java.lang.String AUDIO_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get AUDIO_ID =>
-      _id_AUDIO_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get AUDIO_ID =>
+      _id_AUDIO_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CONTENT_DIRECTORY = _class.staticFieldId(
     r'CONTENT_DIRECTORY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_DIRECTORY
+  /// from: `static public final java.lang.String CONTENT_DIRECTORY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_DIRECTORY =>
-      _id_CONTENT_DIRECTORY.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_DIRECTORY =>
+      _id_CONTENT_DIRECTORY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PLAYLIST_ID = _class.staticFieldId(
     r'PLAYLIST_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PLAYLIST_ID
+  /// from: `static public final java.lang.String PLAYLIST_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PLAYLIST_ID =>
-      _id_PLAYLIST_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get PLAYLIST_ID =>
+      _id_PLAYLIST_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PLAY_ORDER = _class.staticFieldId(
     r'PLAY_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PLAY_ORDER
+  /// from: `static public final java.lang.String PLAY_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PLAY_ORDER =>
-      _id_PLAY_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get PLAY_ORDER =>
+      _id_PLAY_ORDER.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_$_ID = _class.staticFieldId(
+    r'_ID',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String _ID`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get $_ID =>
+      _id_$_ID.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Playlists_Members() {
-    return MediaStore_Audio_Playlists_Members.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Playlists$Members() {
+    return MediaStore$Audio$Playlists$Members.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -1842,26 +2446,28 @@ class MediaStore_Audio_Playlists_Members extends jni.JObject {
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
     int j,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_moveItem = _class.staticMethodId(
@@ -1869,148 +2475,214 @@ class MediaStore_Audio_Playlists_Members extends jni.JObject {
     r'(Landroid/content/ContentResolver;JII)Z',
   );
 
-  static final _moveItem = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _moveItem = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        $Int32,
-                        $Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int32,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallStaticBooleanMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int, int)>();
 
-  /// from: static public boolean moveItem(android.content.ContentResolver contentResolver, long j, int i, int i1)
+  /// from: `static public boolean moveItem(android.content.ContentResolver contentResolver, long j, int i, int i1)`
   static bool moveItem(
-    contentresolver_.ContentResolver contentResolver,
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int i,
     int i1,
   ) {
-    return _moveItem(_class.reference.pointer, _id_moveItem as jni.JMethodIDPtr,
-            contentResolver.reference.pointer, j, i, i1)
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    return _moveItem(
+            _class.reference.pointer,
+            _id_moveItem as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            j,
+            i,
+            i1)
         .boolean;
   }
 }
 
-final class $MediaStore_Audio_Playlists_MembersType
-    extends jni.JObjType<MediaStore_Audio_Playlists_Members> {
-  const $MediaStore_Audio_Playlists_MembersType();
+final class $MediaStore$Audio$Playlists$Members$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Playlists$Members?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Playlists$Members$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Landroid/provider/MediaStore$Audio$Playlists$Members;';
 
-  @override
-  MediaStore_Audio_Playlists_Members fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Playlists_Members.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Playlists$Members? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Playlists$Members.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Playlists$Members?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_Playlists_MembersType).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MediaStore$Audio$Playlists$Members$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_Playlists_MembersType) &&
-        other is $MediaStore_Audio_Playlists_MembersType;
+    return other.runtimeType ==
+            ($MediaStore$Audio$Playlists$Members$NullableType) &&
+        other is $MediaStore$Audio$Playlists$Members$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Playlists
-class MediaStore_Audio_Playlists extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Playlists> $type = type;
+final class $MediaStore$Audio$Playlists$Members$Type
+    extends jni$_.JObjType<MediaStore$Audio$Playlists$Members> {
+  @jni$_.internal
+  const $MediaStore$Audio$Playlists$Members$Type();
 
-  MediaStore_Audio_Playlists.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Landroid/provider/MediaStore$Audio$Playlists$Members;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Playlists$Members fromReference(
+          jni$_.JReference reference) =>
+      MediaStore$Audio$Playlists$Members.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Playlists$Members?> get nullableType =>
+      const $MediaStore$Audio$Playlists$Members$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Playlists$Members$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Playlists$Members$Type) &&
+        other is $MediaStore$Audio$Playlists$Members$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Playlists`
+class MediaStore$Audio$Playlists extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Playlists> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Playlists.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Playlists');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Playlists');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_PlaylistsType();
+  static const nullableType = $MediaStore$Audio$Playlists$NullableType();
+  static const type = $MediaStore$Audio$Playlists$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ENTRY_CONTENT_TYPE = _class.staticFieldId(
     r'ENTRY_CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENTRY_CONTENT_TYPE
+  /// from: `static public final java.lang.String ENTRY_CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENTRY_CONTENT_TYPE =>
-      _id_ENTRY_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENTRY_CONTENT_TYPE =>
+      _id_ENTRY_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio_Playlists() {
-    return MediaStore_Audio_Playlists.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio$Playlists() {
+    return MediaStore$Audio$Playlists.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -2019,119 +2691,174 @@ class MediaStore_Audio_Playlists extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Audio_PlaylistsType
-    extends jni.JObjType<MediaStore_Audio_Playlists> {
-  const $MediaStore_Audio_PlaylistsType();
+final class $MediaStore$Audio$Playlists$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Playlists?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Playlists$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Playlists;';
 
-  @override
-  MediaStore_Audio_Playlists fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Playlists.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Playlists? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Playlists.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Playlists?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_PlaylistsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Playlists$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_PlaylistsType) &&
-        other is $MediaStore_Audio_PlaylistsType;
+    return other.runtimeType == ($MediaStore$Audio$Playlists$NullableType) &&
+        other is $MediaStore$Audio$Playlists$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$PlaylistsColumns
-class MediaStore_Audio_PlaylistsColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_PlaylistsColumns> $type = type;
+final class $MediaStore$Audio$Playlists$Type
+    extends jni$_.JObjType<MediaStore$Audio$Playlists> {
+  @jni$_.internal
+  const $MediaStore$Audio$Playlists$Type();
 
-  MediaStore_Audio_PlaylistsColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Playlists;';
 
-  static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$PlaylistsColumns');
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Playlists fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Playlists.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Playlists?> get nullableType =>
+      const $MediaStore$Audio$Playlists$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Playlists$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Playlists$Type) &&
+        other is $MediaStore$Audio$Playlists$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$PlaylistsColumns`
+class MediaStore$Audio$PlaylistsColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$PlaylistsColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$PlaylistsColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+      r'android/provider/MediaStore$Audio$PlaylistsColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_PlaylistsColumnsType();
+  static const nullableType = $MediaStore$Audio$PlaylistsColumns$NullableType();
+  static const type = $MediaStore$Audio$PlaylistsColumns$Type();
   static final _id_DATA = _class.staticFieldId(
     r'DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATA
+  /// from: `static public final java.lang.String DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATA => _id_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATA =>
+      _id_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_ADDED = _class.staticFieldId(
     r'DATE_ADDED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_ADDED
+  /// from: `static public final java.lang.String DATE_ADDED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_ADDED =>
-      _id_DATE_ADDED.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_ADDED =>
+      _id_DATE_ADDED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_MODIFIED = _class.staticFieldId(
     r'DATE_MODIFIED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_MODIFIED
+  /// from: `static public final java.lang.String DATE_MODIFIED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_MODIFIED =>
-      _id_DATE_MODIFIED.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_MODIFIED =>
+      _id_DATE_MODIFIED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NAME = _class.staticFieldId(
     r'NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NAME
+  /// from: `static public final java.lang.String NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NAME => _id_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get NAME =>
+      _id_NAME.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Audio_PlaylistsColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Audio$PlaylistsColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2139,177 +2866,298 @@ class MediaStore_Audio_PlaylistsColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Audio_PlaylistsColumns.implement(
-    $MediaStore_Audio_PlaylistsColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Audio$PlaylistsColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Audio_PlaylistsColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Audio$PlaylistsColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Audio$PlaylistsColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Audio$PlaylistsColumns.implement(
+    $MediaStore$Audio$PlaylistsColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Audio$PlaylistsColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Audio_PlaylistsColumnsImpl {
-  factory $MediaStore_Audio_PlaylistsColumnsImpl() =
-      _$MediaStore_Audio_PlaylistsColumnsImpl;
+abstract base mixin class $MediaStore$Audio$PlaylistsColumns {
+  factory $MediaStore$Audio$PlaylistsColumns() =
+      _$MediaStore$Audio$PlaylistsColumns;
 }
 
-class _$MediaStore_Audio_PlaylistsColumnsImpl
-    implements $MediaStore_Audio_PlaylistsColumnsImpl {
-  _$MediaStore_Audio_PlaylistsColumnsImpl();
+final class _$MediaStore$Audio$PlaylistsColumns
+    with $MediaStore$Audio$PlaylistsColumns {
+  _$MediaStore$Audio$PlaylistsColumns();
 }
 
-final class $MediaStore_Audio_PlaylistsColumnsType
-    extends jni.JObjType<MediaStore_Audio_PlaylistsColumns> {
-  const $MediaStore_Audio_PlaylistsColumnsType();
+final class $MediaStore$Audio$PlaylistsColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$PlaylistsColumns?> {
+  @jni$_.internal
+  const $MediaStore$Audio$PlaylistsColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature =>
       r'Landroid/provider/MediaStore$Audio$PlaylistsColumns;';
 
-  @override
-  MediaStore_Audio_PlaylistsColumns fromReference(jni.JReference reference) =>
-      MediaStore_Audio_PlaylistsColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$PlaylistsColumns? fromReference(
+          jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$PlaylistsColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$PlaylistsColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_PlaylistsColumnsType).hashCode;
+  @core$_.override
+  int get hashCode =>
+      ($MediaStore$Audio$PlaylistsColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_PlaylistsColumnsType) &&
-        other is $MediaStore_Audio_PlaylistsColumnsType;
+    return other.runtimeType ==
+            ($MediaStore$Audio$PlaylistsColumns$NullableType) &&
+        other is $MediaStore$Audio$PlaylistsColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio$Radio
-class MediaStore_Audio_Radio extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio_Radio> $type = type;
+final class $MediaStore$Audio$PlaylistsColumns$Type
+    extends jni$_.JObjType<MediaStore$Audio$PlaylistsColumns> {
+  @jni$_.internal
+  const $MediaStore$Audio$PlaylistsColumns$Type();
 
-  MediaStore_Audio_Radio.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Landroid/provider/MediaStore$Audio$PlaylistsColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$PlaylistsColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$PlaylistsColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$PlaylistsColumns?> get nullableType =>
+      const $MediaStore$Audio$PlaylistsColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$PlaylistsColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$PlaylistsColumns$Type) &&
+        other is $MediaStore$Audio$PlaylistsColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio$Radio`
+class MediaStore$Audio$Radio extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio$Radio> $type;
+
+  @jni$_.internal
+  MediaStore$Audio$Radio.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio$Radio');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio$Radio');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Audio_RadioType();
+  static const nullableType = $MediaStore$Audio$Radio$NullableType();
+  static const type = $MediaStore$Audio$Radio$Type();
   static final _id_ENTRY_CONTENT_TYPE = _class.staticFieldId(
     r'ENTRY_CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENTRY_CONTENT_TYPE
+  /// from: `static public final java.lang.String ENTRY_CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENTRY_CONTENT_TYPE =>
-      _id_ENTRY_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENTRY_CONTENT_TYPE =>
+      _id_ENTRY_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 }
 
-final class $MediaStore_Audio_RadioType
-    extends jni.JObjType<MediaStore_Audio_Radio> {
-  const $MediaStore_Audio_RadioType();
+final class $MediaStore$Audio$Radio$NullableType
+    extends jni$_.JObjType<MediaStore$Audio$Radio?> {
+  @jni$_.internal
+  const $MediaStore$Audio$Radio$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio$Radio;';
 
-  @override
-  MediaStore_Audio_Radio fromReference(jni.JReference reference) =>
-      MediaStore_Audio_Radio.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Radio? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio$Radio.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Radio?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Audio_RadioType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Radio$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Audio_RadioType) &&
-        other is $MediaStore_Audio_RadioType;
+    return other.runtimeType == ($MediaStore$Audio$Radio$NullableType) &&
+        other is $MediaStore$Audio$Radio$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Audio
-class MediaStore_Audio extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Audio> $type = type;
+final class $MediaStore$Audio$Radio$Type
+    extends jni$_.JObjType<MediaStore$Audio$Radio> {
+  @jni$_.internal
+  const $MediaStore$Audio$Radio$Type();
 
-  MediaStore_Audio.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio$Radio;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio$Radio fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio$Radio.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio$Radio?> get nullableType =>
+      const $MediaStore$Audio$Radio$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Radio$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Radio$Type) &&
+        other is $MediaStore$Audio$Radio$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Audio`
+class MediaStore$Audio extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Audio> $type;
+
+  @jni$_.internal
+  MediaStore$Audio.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Audio');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Audio');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_AudioType();
-  static final _id_new0 = _class.constructorId(
+  static const nullableType = $MediaStore$Audio$NullableType();
+  static const type = $MediaStore$Audio$Type();
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Audio() {
-    return MediaStore_Audio.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Audio() {
+    return MediaStore$Audio.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -2318,100 +3166,153 @@ class MediaStore_Audio extends jni.JObject {
     r'(Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _keyFor = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _keyFor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.lang.String keyFor(java.lang.String string)
+  /// from: `static public java.lang.String keyFor(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString keyFor(
-    jni.JString string,
+  static jni$_.JString? keyFor(
+    jni$_.JString? string,
   ) {
-    return _keyFor(_class.reference.pointer, _id_keyFor as jni.JMethodIDPtr,
-            string.reference.pointer)
-        .object(const jni.JStringType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _keyFor(_class.reference.pointer, _id_keyFor as jni$_.JMethodIDPtr,
+            _$string.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 }
 
-final class $MediaStore_AudioType extends jni.JObjType<MediaStore_Audio> {
-  const $MediaStore_AudioType();
+final class $MediaStore$Audio$NullableType
+    extends jni$_.JObjType<MediaStore$Audio?> {
+  @jni$_.internal
+  const $MediaStore$Audio$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Audio;';
 
-  @override
-  MediaStore_Audio fromReference(jni.JReference reference) =>
-      MediaStore_Audio.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Audio.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_AudioType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_AudioType) &&
-        other is $MediaStore_AudioType;
+    return other.runtimeType == ($MediaStore$Audio$NullableType) &&
+        other is $MediaStore$Audio$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$DownloadColumns
-class MediaStore_DownloadColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_DownloadColumns> $type = type;
+final class $MediaStore$Audio$Type extends jni$_.JObjType<MediaStore$Audio> {
+  @jni$_.internal
+  const $MediaStore$Audio$Type();
 
-  MediaStore_DownloadColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Audio;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Audio fromReference(jni$_.JReference reference) =>
+      MediaStore$Audio.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Audio?> get nullableType =>
+      const $MediaStore$Audio$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Audio$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Audio$Type) &&
+        other is $MediaStore$Audio$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$DownloadColumns`
+class MediaStore$DownloadColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$DownloadColumns> $type;
+
+  @jni$_.internal
+  MediaStore$DownloadColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$DownloadColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$DownloadColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_DownloadColumnsType();
+  static const nullableType = $MediaStore$DownloadColumns$NullableType();
+  static const type = $MediaStore$DownloadColumns$Type();
   static final _id_DOWNLOAD_URI = _class.staticFieldId(
     r'DOWNLOAD_URI',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DOWNLOAD_URI
+  /// from: `static public final java.lang.String DOWNLOAD_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DOWNLOAD_URI =>
-      _id_DOWNLOAD_URI.get(_class, const jni.JStringType());
+  static jni$_.JString? get DOWNLOAD_URI =>
+      _id_DOWNLOAD_URI.get(_class, const jni$_.JStringNullableType());
 
   static final _id_REFERER_URI = _class.staticFieldId(
     r'REFERER_URI',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REFERER_URI
+  /// from: `static public final java.lang.String REFERER_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REFERER_URI =>
-      _id_REFERER_URI.get(_class, const jni.JStringType());
+  static jni$_.JString? get REFERER_URI =>
+      _id_REFERER_URI.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_DownloadColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$DownloadColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2419,289 +3320,406 @@ class MediaStore_DownloadColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_DownloadColumns.implement(
-    $MediaStore_DownloadColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$DownloadColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_DownloadColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$DownloadColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$DownloadColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$DownloadColumns.implement(
+    $MediaStore$DownloadColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$DownloadColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_DownloadColumnsImpl {
-  factory $MediaStore_DownloadColumnsImpl() = _$MediaStore_DownloadColumnsImpl;
+abstract base mixin class $MediaStore$DownloadColumns {
+  factory $MediaStore$DownloadColumns() = _$MediaStore$DownloadColumns;
 }
 
-class _$MediaStore_DownloadColumnsImpl
-    implements $MediaStore_DownloadColumnsImpl {
-  _$MediaStore_DownloadColumnsImpl();
+final class _$MediaStore$DownloadColumns with $MediaStore$DownloadColumns {
+  _$MediaStore$DownloadColumns();
 }
 
-final class $MediaStore_DownloadColumnsType
-    extends jni.JObjType<MediaStore_DownloadColumns> {
-  const $MediaStore_DownloadColumnsType();
+final class $MediaStore$DownloadColumns$NullableType
+    extends jni$_.JObjType<MediaStore$DownloadColumns?> {
+  @jni$_.internal
+  const $MediaStore$DownloadColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$DownloadColumns;';
 
-  @override
-  MediaStore_DownloadColumns fromReference(jni.JReference reference) =>
-      MediaStore_DownloadColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$DownloadColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$DownloadColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$DownloadColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_DownloadColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$DownloadColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_DownloadColumnsType) &&
-        other is $MediaStore_DownloadColumnsType;
+    return other.runtimeType == ($MediaStore$DownloadColumns$NullableType) &&
+        other is $MediaStore$DownloadColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Downloads
-class MediaStore_Downloads extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Downloads> $type = type;
+final class $MediaStore$DownloadColumns$Type
+    extends jni$_.JObjType<MediaStore$DownloadColumns> {
+  @jni$_.internal
+  const $MediaStore$DownloadColumns$Type();
 
-  MediaStore_Downloads.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$DownloadColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$DownloadColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$DownloadColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$DownloadColumns?> get nullableType =>
+      const $MediaStore$DownloadColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$DownloadColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$DownloadColumns$Type) &&
+        other is $MediaStore$DownloadColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Downloads`
+class MediaStore$Downloads extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Downloads> $type;
+
+  @jni$_.internal
+  MediaStore$Downloads.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Downloads');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Downloads');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_DownloadsType();
+  static const nullableType = $MediaStore$Downloads$NullableType();
+  static const type = $MediaStore$Downloads$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_getContentUri = _class.staticMethodId(
     r'getContentUri',
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
-  static final _id_getContentUri1 = _class.staticMethodId(
+  static final _id_getContentUri$1 = _class.staticMethodId(
     r'getContentUri',
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri1(
-    jni.JString string,
+  static uri$_.Uri? getContentUri$1(
+    jni$_.JString? string,
     int j,
   ) {
-    return _getContentUri1(_class.reference.pointer,
-            _id_getContentUri1 as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getContentUri$1(_class.reference.pointer,
+            _id_getContentUri$1 as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_DownloadsType
-    extends jni.JObjType<MediaStore_Downloads> {
-  const $MediaStore_DownloadsType();
+final class $MediaStore$Downloads$NullableType
+    extends jni$_.JObjType<MediaStore$Downloads?> {
+  @jni$_.internal
+  const $MediaStore$Downloads$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Downloads;';
 
-  @override
-  MediaStore_Downloads fromReference(jni.JReference reference) =>
-      MediaStore_Downloads.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Downloads? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Downloads.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Downloads?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_DownloadsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Downloads$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_DownloadsType) &&
-        other is $MediaStore_DownloadsType;
+    return other.runtimeType == ($MediaStore$Downloads$NullableType) &&
+        other is $MediaStore$Downloads$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Files$FileColumns
-class MediaStore_Files_FileColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Files_FileColumns> $type = type;
+final class $MediaStore$Downloads$Type
+    extends jni$_.JObjType<MediaStore$Downloads> {
+  @jni$_.internal
+  const $MediaStore$Downloads$Type();
 
-  MediaStore_Files_FileColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Downloads;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Downloads fromReference(jni$_.JReference reference) =>
+      MediaStore$Downloads.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Downloads?> get nullableType =>
+      const $MediaStore$Downloads$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Downloads$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Downloads$Type) &&
+        other is $MediaStore$Downloads$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Files$FileColumns`
+class MediaStore$Files$FileColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Files$FileColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Files$FileColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Files$FileColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Files$FileColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Files_FileColumnsType();
+  static const nullableType = $MediaStore$Files$FileColumns$NullableType();
+  static const type = $MediaStore$Files$FileColumns$Type();
   static final _id_MEDIA_TYPE = _class.staticFieldId(
     r'MEDIA_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MEDIA_TYPE
+  /// from: `static public final java.lang.String MEDIA_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MEDIA_TYPE =>
-      _id_MEDIA_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MEDIA_TYPE =>
+      _id_MEDIA_TYPE.get(_class, const jni$_.JStringNullableType());
 
-  /// from: static public final int MEDIA_TYPE_AUDIO
+  /// from: `static public final int MEDIA_TYPE_AUDIO`
   static const MEDIA_TYPE_AUDIO = 2;
 
-  /// from: static public final int MEDIA_TYPE_DOCUMENT
+  /// from: `static public final int MEDIA_TYPE_DOCUMENT`
   static const MEDIA_TYPE_DOCUMENT = 6;
 
-  /// from: static public final int MEDIA_TYPE_IMAGE
+  /// from: `static public final int MEDIA_TYPE_IMAGE`
   static const MEDIA_TYPE_IMAGE = 1;
 
-  /// from: static public final int MEDIA_TYPE_NONE
+  /// from: `static public final int MEDIA_TYPE_NONE`
   static const MEDIA_TYPE_NONE = 0;
 
-  /// from: static public final int MEDIA_TYPE_PLAYLIST
+  /// from: `static public final int MEDIA_TYPE_PLAYLIST`
   static const MEDIA_TYPE_PLAYLIST = 4;
 
-  /// from: static public final int MEDIA_TYPE_SUBTITLE
+  /// from: `static public final int MEDIA_TYPE_SUBTITLE`
   static const MEDIA_TYPE_SUBTITLE = 5;
 
-  /// from: static public final int MEDIA_TYPE_VIDEO
+  /// from: `static public final int MEDIA_TYPE_VIDEO`
   static const MEDIA_TYPE_VIDEO = 3;
   static final _id_MIME_TYPE = _class.staticFieldId(
     r'MIME_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MIME_TYPE
+  /// from: `static public final java.lang.String MIME_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MIME_TYPE =>
-      _id_MIME_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MIME_TYPE =>
+      _id_MIME_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PARENT = _class.staticFieldId(
     r'PARENT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PARENT
+  /// from: `static public final java.lang.String PARENT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PARENT =>
-      _id_PARENT.get(_class, const jni.JStringType());
+  static jni$_.JString? get PARENT =>
+      _id_PARENT.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Files_FileColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Files$FileColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -2709,124 +3727,185 @@ class MediaStore_Files_FileColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Files_FileColumns.implement(
-    $MediaStore_Files_FileColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Files$FileColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Files_FileColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Files$FileColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Files$FileColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Files$FileColumns.implement(
+    $MediaStore$Files$FileColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Files$FileColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Files_FileColumnsImpl {
-  factory $MediaStore_Files_FileColumnsImpl() =
-      _$MediaStore_Files_FileColumnsImpl;
+abstract base mixin class $MediaStore$Files$FileColumns {
+  factory $MediaStore$Files$FileColumns() = _$MediaStore$Files$FileColumns;
 }
 
-class _$MediaStore_Files_FileColumnsImpl
-    implements $MediaStore_Files_FileColumnsImpl {
-  _$MediaStore_Files_FileColumnsImpl();
+final class _$MediaStore$Files$FileColumns with $MediaStore$Files$FileColumns {
+  _$MediaStore$Files$FileColumns();
 }
 
-final class $MediaStore_Files_FileColumnsType
-    extends jni.JObjType<MediaStore_Files_FileColumns> {
-  const $MediaStore_Files_FileColumnsType();
+final class $MediaStore$Files$FileColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Files$FileColumns?> {
+  @jni$_.internal
+  const $MediaStore$Files$FileColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Files$FileColumns;';
 
-  @override
-  MediaStore_Files_FileColumns fromReference(jni.JReference reference) =>
-      MediaStore_Files_FileColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Files$FileColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Files$FileColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Files$FileColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Files_FileColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Files$FileColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Files_FileColumnsType) &&
-        other is $MediaStore_Files_FileColumnsType;
+    return other.runtimeType == ($MediaStore$Files$FileColumns$NullableType) &&
+        other is $MediaStore$Files$FileColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Files
-class MediaStore_Files extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Files> $type = type;
+final class $MediaStore$Files$FileColumns$Type
+    extends jni$_.JObjType<MediaStore$Files$FileColumns> {
+  @jni$_.internal
+  const $MediaStore$Files$FileColumns$Type();
 
-  MediaStore_Files.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Files$FileColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Files$FileColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Files$FileColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Files$FileColumns?> get nullableType =>
+      const $MediaStore$Files$FileColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Files$FileColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Files$FileColumns$Type) &&
+        other is $MediaStore$Files$FileColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Files`
+class MediaStore$Files extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Files> $type;
+
+  @jni$_.internal
+  MediaStore$Files.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Files');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Files');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_FilesType();
-  static final _id_new0 = _class.constructorId(
+  static const nullableType = $MediaStore$Files$NullableType();
+  static const type = $MediaStore$Files$Type();
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Files() {
-    return MediaStore_Files.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Files() {
+    return MediaStore$Files.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -2835,206 +3914,262 @@ class MediaStore_Files extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
-  static final _id_getContentUri1 = _class.staticMethodId(
+  static final _id_getContentUri$1 = _class.staticMethodId(
     r'getContentUri',
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri1(
-    jni.JString string,
+  static uri$_.Uri? getContentUri$1(
+    jni$_.JString? string,
     int j,
   ) {
-    return _getContentUri1(_class.reference.pointer,
-            _id_getContentUri1 as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getContentUri$1(_class.reference.pointer,
+            _id_getContentUri$1 as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_FilesType extends jni.JObjType<MediaStore_Files> {
-  const $MediaStore_FilesType();
+final class $MediaStore$Files$NullableType
+    extends jni$_.JObjType<MediaStore$Files?> {
+  @jni$_.internal
+  const $MediaStore$Files$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Files;';
 
-  @override
-  MediaStore_Files fromReference(jni.JReference reference) =>
-      MediaStore_Files.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Files? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Files.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Files?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_FilesType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Files$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_FilesType) &&
-        other is $MediaStore_FilesType;
+    return other.runtimeType == ($MediaStore$Files$NullableType) &&
+        other is $MediaStore$Files$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Images$ImageColumns
-class MediaStore_Images_ImageColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Images_ImageColumns> $type = type;
+final class $MediaStore$Files$Type extends jni$_.JObjType<MediaStore$Files> {
+  @jni$_.internal
+  const $MediaStore$Files$Type();
 
-  MediaStore_Images_ImageColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Files;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Files fromReference(jni$_.JReference reference) =>
+      MediaStore$Files.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Files?> get nullableType =>
+      const $MediaStore$Files$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Files$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Files$Type) &&
+        other is $MediaStore$Files$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Images$ImageColumns`
+class MediaStore$Images$ImageColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Images$ImageColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Images$ImageColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Images$ImageColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Images$ImageColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Images_ImageColumnsType();
+  static const nullableType = $MediaStore$Images$ImageColumns$NullableType();
+  static const type = $MediaStore$Images$ImageColumns$Type();
   static final _id_DESCRIPTION = _class.staticFieldId(
     r'DESCRIPTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DESCRIPTION
+  /// from: `static public final java.lang.String DESCRIPTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DESCRIPTION =>
-      _id_DESCRIPTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get DESCRIPTION =>
+      _id_DESCRIPTION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXPOSURE_TIME = _class.staticFieldId(
     r'EXPOSURE_TIME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXPOSURE_TIME
+  /// from: `static public final java.lang.String EXPOSURE_TIME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXPOSURE_TIME =>
-      _id_EXPOSURE_TIME.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXPOSURE_TIME =>
+      _id_EXPOSURE_TIME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_F_NUMBER = _class.staticFieldId(
     r'F_NUMBER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String F_NUMBER
+  /// from: `static public final java.lang.String F_NUMBER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get F_NUMBER =>
-      _id_F_NUMBER.get(_class, const jni.JStringType());
+  static jni$_.JString? get F_NUMBER =>
+      _id_F_NUMBER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ISO = _class.staticFieldId(
     r'ISO',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ISO
+  /// from: `static public final java.lang.String ISO`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ISO => _id_ISO.get(_class, const jni.JStringType());
+  static jni$_.JString? get ISO =>
+      _id_ISO.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_PRIVATE = _class.staticFieldId(
     r'IS_PRIVATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_PRIVATE
+  /// from: `static public final java.lang.String IS_PRIVATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_PRIVATE =>
-      _id_IS_PRIVATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_PRIVATE =>
+      _id_IS_PRIVATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LATITUDE = _class.staticFieldId(
     r'LATITUDE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LATITUDE
+  /// from: `static public final java.lang.String LATITUDE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LATITUDE =>
-      _id_LATITUDE.get(_class, const jni.JStringType());
+  static jni$_.JString? get LATITUDE =>
+      _id_LATITUDE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LONGITUDE = _class.staticFieldId(
     r'LONGITUDE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LONGITUDE
+  /// from: `static public final java.lang.String LONGITUDE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LONGITUDE =>
-      _id_LONGITUDE.get(_class, const jni.JStringType());
+  static jni$_.JString? get LONGITUDE =>
+      _id_LONGITUDE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MINI_THUMB_MAGIC = _class.staticFieldId(
     r'MINI_THUMB_MAGIC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MINI_THUMB_MAGIC
+  /// from: `static public final java.lang.String MINI_THUMB_MAGIC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MINI_THUMB_MAGIC =>
-      _id_MINI_THUMB_MAGIC.get(_class, const jni.JStringType());
+  static jni$_.JString? get MINI_THUMB_MAGIC =>
+      _id_MINI_THUMB_MAGIC.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PICASA_ID = _class.staticFieldId(
     r'PICASA_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PICASA_ID
+  /// from: `static public final java.lang.String PICASA_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PICASA_ID =>
-      _id_PICASA_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get PICASA_ID =>
+      _id_PICASA_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SCENE_CAPTURE_TYPE = _class.staticFieldId(
     r'SCENE_CAPTURE_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SCENE_CAPTURE_TYPE
+  /// from: `static public final java.lang.String SCENE_CAPTURE_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SCENE_CAPTURE_TYPE =>
-      _id_SCENE_CAPTURE_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get SCENE_CAPTURE_TYPE =>
+      _id_SCENE_CAPTURE_TYPE.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Images_ImageColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Images$ImageColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -3042,164 +4177,227 @@ class MediaStore_Images_ImageColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Images_ImageColumns.implement(
-    $MediaStore_Images_ImageColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Images$ImageColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Images_ImageColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Images$ImageColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Images$ImageColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Images$ImageColumns.implement(
+    $MediaStore$Images$ImageColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Images$ImageColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Images_ImageColumnsImpl {
-  factory $MediaStore_Images_ImageColumnsImpl() =
-      _$MediaStore_Images_ImageColumnsImpl;
+abstract base mixin class $MediaStore$Images$ImageColumns {
+  factory $MediaStore$Images$ImageColumns() = _$MediaStore$Images$ImageColumns;
 }
 
-class _$MediaStore_Images_ImageColumnsImpl
-    implements $MediaStore_Images_ImageColumnsImpl {
-  _$MediaStore_Images_ImageColumnsImpl();
+final class _$MediaStore$Images$ImageColumns
+    with $MediaStore$Images$ImageColumns {
+  _$MediaStore$Images$ImageColumns();
 }
 
-final class $MediaStore_Images_ImageColumnsType
-    extends jni.JObjType<MediaStore_Images_ImageColumns> {
-  const $MediaStore_Images_ImageColumnsType();
+final class $MediaStore$Images$ImageColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Images$ImageColumns?> {
+  @jni$_.internal
+  const $MediaStore$Images$ImageColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Images$ImageColumns;';
 
-  @override
-  MediaStore_Images_ImageColumns fromReference(jni.JReference reference) =>
-      MediaStore_Images_ImageColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images$ImageColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Images$ImageColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images$ImageColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Images_ImageColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$ImageColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Images_ImageColumnsType) &&
-        other is $MediaStore_Images_ImageColumnsType;
+    return other.runtimeType ==
+            ($MediaStore$Images$ImageColumns$NullableType) &&
+        other is $MediaStore$Images$ImageColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Images$Media
-class MediaStore_Images_Media extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Images_Media> $type = type;
+final class $MediaStore$Images$ImageColumns$Type
+    extends jni$_.JObjType<MediaStore$Images$ImageColumns> {
+  @jni$_.internal
+  const $MediaStore$Images$ImageColumns$Type();
 
-  MediaStore_Images_Media.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Images$ImageColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images$ImageColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Images$ImageColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images$ImageColumns?> get nullableType =>
+      const $MediaStore$Images$ImageColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$ImageColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Images$ImageColumns$Type) &&
+        other is $MediaStore$Images$ImageColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Images$Media`
+class MediaStore$Images$Media extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Images$Media> $type;
+
+  @jni$_.internal
+  MediaStore$Images$Media.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Images$Media');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Images$Media');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Images_MediaType();
+  static const nullableType = $MediaStore$Images$Media$NullableType();
+  static const type = $MediaStore$Images$Media$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Images_Media() {
-    return MediaStore_Images_Media.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Images$Media() {
+    return MediaStore$Images$Media.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -3208,139 +4406,152 @@ class MediaStore_Images_Media extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _query = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _query = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings)
+  /// from: `static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor query(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
-    jni.JArray<jni.JString> strings,
+  static cursor$_.Cursor? query(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
-    return _query(
-            _class.reference.pointer,
-            _id_query as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
-            strings.reference.pointer)
-        .object(const cursor_.$CursorType());
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _query(_class.reference.pointer, _id_query as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer, _$uri.pointer, _$strings.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 
-  static final _id_query1 = _class.staticMethodId(
+  static final _id_query$1 = _class.staticMethodId(
     r'query',
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _query1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _query$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings, java.lang.String string, java.lang.String string1)
+  /// from: `static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings, java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor query1(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
-    jni.JArray<jni.JString> strings,
-    jni.JString string,
-    jni.JString string1,
+  static cursor$_.Cursor? query$1(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
+    jni$_.JArray<jni$_.JString?>? strings,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return _query1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return _query$1(
             _class.reference.pointer,
-            _id_query1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
-            strings.reference.pointer,
-            string.reference.pointer,
-            string1.reference.pointer)
-        .object(const cursor_.$CursorType());
+            _id_query$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$uri.pointer,
+            _$strings.pointer,
+            _$string.pointer,
+            _$string1.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 
-  static final _id_query2 = _class.staticMethodId(
+  static final _id_query$2 = _class.staticMethodId(
     r'query',
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _query2 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _query$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings, java.lang.String string, java.lang.String[] strings1, java.lang.String string1)
+  /// from: `static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings, java.lang.String string, java.lang.String[] strings1, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor query2(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
-    jni.JArray<jni.JString> strings,
-    jni.JString string,
-    jni.JArray<jni.JString> strings1,
-    jni.JString string1,
+  static cursor$_.Cursor? query$2(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
+    jni$_.JArray<jni$_.JString?>? strings,
+    jni$_.JString? string,
+    jni$_.JArray<jni$_.JString?>? strings1,
+    jni$_.JString? string1,
   ) {
-    return _query2(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$strings1 = strings1?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return _query$2(
             _class.reference.pointer,
-            _id_query2 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
-            strings.reference.pointer,
-            string.reference.pointer,
-            strings1.reference.pointer,
-            string1.reference.pointer)
-        .object(const cursor_.$CursorType());
+            _id_query$2 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$uri.pointer,
+            _$strings.pointer,
+            _$string.pointer,
+            _$strings1.pointer,
+            _$string1.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 
   static final _id_getBitmap = _class.staticMethodId(
@@ -3348,32 +4559,38 @@ class MediaStore_Images_Media extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getBitmap = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getBitmap = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.graphics.Bitmap getBitmap(android.content.ContentResolver contentResolver, android.net.Uri uri)
+  /// from: `static public android.graphics.Bitmap getBitmap(android.content.ContentResolver contentResolver, android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getBitmap(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
+  static jni$_.JObject? getBitmap(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _getBitmap(
             _class.reference.pointer,
-            _id_getBitmap as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer)
-        .object(const jni.JObjectType());
+            _id_getBitmap as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$uri.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_insertImage = _class.staticMethodId(
@@ -3381,87 +4598,97 @@ class MediaStore_Images_Media extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _insertImage = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _insertImage = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.lang.String insertImage(android.content.ContentResolver contentResolver, java.lang.String string, java.lang.String string1, java.lang.String string2)
+  /// from: `static public java.lang.String insertImage(android.content.ContentResolver contentResolver, java.lang.String string, java.lang.String string1, java.lang.String string2)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString insertImage(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JString string,
-    jni.JString string1,
-    jni.JString string2,
+  static jni$_.JString? insertImage(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    jni$_.JString? string2,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    final _$string2 = string2?.reference ?? jni$_.jNullReference;
     return _insertImage(
             _class.reference.pointer,
-            _id_insertImage as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            string.reference.pointer,
-            string1.reference.pointer,
-            string2.reference.pointer)
-        .object(const jni.JStringType());
+            _id_insertImage as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$string.pointer,
+            _$string1.pointer,
+            _$string2.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_insertImage1 = _class.staticMethodId(
+  static final _id_insertImage$1 = _class.staticMethodId(
     r'insertImage',
     r'(Landroid/content/ContentResolver;Landroid/graphics/Bitmap;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _insertImage1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _insertImage$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.lang.String insertImage(android.content.ContentResolver contentResolver, android.graphics.Bitmap bitmap, java.lang.String string, java.lang.String string1)
+  /// from: `static public java.lang.String insertImage(android.content.ContentResolver contentResolver, android.graphics.Bitmap bitmap, java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString insertImage1(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JObject bitmap,
-    jni.JString string,
-    jni.JString string1,
+  static jni$_.JString? insertImage$1(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JObject? bitmap,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return _insertImage1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$bitmap = bitmap?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return _insertImage$1(
             _class.reference.pointer,
-            _id_insertImage1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            bitmap.reference.pointer,
-            string.reference.pointer,
-            string1.reference.pointer)
-        .object(const jni.JStringType());
+            _id_insertImage$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$bitmap.pointer,
+            _$string.pointer,
+            _$string1.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getContentUri = _class.staticMethodId(
@@ -3469,212 +4696,271 @@ class MediaStore_Images_Media extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
-  static final _id_getContentUri1 = _class.staticMethodId(
+  static final _id_getContentUri$1 = _class.staticMethodId(
     r'getContentUri',
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri1(
-    jni.JString string,
+  static uri$_.Uri? getContentUri$1(
+    jni$_.JString? string,
     int j,
   ) {
-    return _getContentUri1(_class.reference.pointer,
-            _id_getContentUri1 as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getContentUri$1(_class.reference.pointer,
+            _id_getContentUri$1 as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Images_MediaType
-    extends jni.JObjType<MediaStore_Images_Media> {
-  const $MediaStore_Images_MediaType();
+final class $MediaStore$Images$Media$NullableType
+    extends jni$_.JObjType<MediaStore$Images$Media?> {
+  @jni$_.internal
+  const $MediaStore$Images$Media$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Images$Media;';
 
-  @override
-  MediaStore_Images_Media fromReference(jni.JReference reference) =>
-      MediaStore_Images_Media.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images$Media? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Images$Media.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images$Media?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Images_MediaType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$Media$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Images_MediaType) &&
-        other is $MediaStore_Images_MediaType;
+    return other.runtimeType == ($MediaStore$Images$Media$NullableType) &&
+        other is $MediaStore$Images$Media$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Images$Thumbnails
-class MediaStore_Images_Thumbnails extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Images_Thumbnails> $type = type;
+final class $MediaStore$Images$Media$Type
+    extends jni$_.JObjType<MediaStore$Images$Media> {
+  @jni$_.internal
+  const $MediaStore$Images$Media$Type();
 
-  MediaStore_Images_Thumbnails.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Images$Media;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images$Media fromReference(jni$_.JReference reference) =>
+      MediaStore$Images$Media.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images$Media?> get nullableType =>
+      const $MediaStore$Images$Media$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$Media$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Images$Media$Type) &&
+        other is $MediaStore$Images$Media$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Images$Thumbnails`
+class MediaStore$Images$Thumbnails extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Images$Thumbnails> $type;
+
+  @jni$_.internal
+  MediaStore$Images$Thumbnails.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Images$Thumbnails');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Images$Thumbnails');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Images_ThumbnailsType();
+  static const nullableType = $MediaStore$Images$Thumbnails$NullableType();
+  static const type = $MediaStore$Images$Thumbnails$Type();
   static final _id_DATA = _class.staticFieldId(
     r'DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATA
+  /// from: `static public final java.lang.String DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATA => _id_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATA =>
+      _id_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  /// from: static public final int FULL_SCREEN_KIND
+  /// from: `static public final int FULL_SCREEN_KIND`
   static const FULL_SCREEN_KIND = 2;
   static final _id_HEIGHT = _class.staticFieldId(
     r'HEIGHT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String HEIGHT
+  /// from: `static public final java.lang.String HEIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get HEIGHT =>
-      _id_HEIGHT.get(_class, const jni.JStringType());
+  static jni$_.JString? get HEIGHT =>
+      _id_HEIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IMAGE_ID = _class.staticFieldId(
     r'IMAGE_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IMAGE_ID
+  /// from: `static public final java.lang.String IMAGE_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IMAGE_ID =>
-      _id_IMAGE_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get IMAGE_ID =>
+      _id_IMAGE_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_KIND = _class.staticFieldId(
     r'KIND',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String KIND
+  /// from: `static public final java.lang.String KIND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get KIND => _id_KIND.get(_class, const jni.JStringType());
+  static jni$_.JString? get KIND =>
+      _id_KIND.get(_class, const jni$_.JStringNullableType());
 
-  /// from: static public final int MICRO_KIND
+  /// from: `static public final int MICRO_KIND`
   static const MICRO_KIND = 3;
 
-  /// from: static public final int MINI_KIND
+  /// from: `static public final int MINI_KIND`
   static const MINI_KIND = 1;
   static final _id_THUMB_DATA = _class.staticFieldId(
     r'THUMB_DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String THUMB_DATA
+  /// from: `static public final java.lang.String THUMB_DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get THUMB_DATA =>
-      _id_THUMB_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get THUMB_DATA =>
+      _id_THUMB_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WIDTH = _class.staticFieldId(
     r'WIDTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WIDTH
+  /// from: `static public final java.lang.String WIDTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WIDTH =>
-      _id_WIDTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get WIDTH =>
+      _id_WIDTH.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Images_Thumbnails() {
-    return MediaStore_Images_Thumbnails.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Images$Thumbnails() {
+    return MediaStore$Images$Thumbnails.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -3683,39 +4969,39 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _query = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _query = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public final android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings)
+  /// from: `static public final android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor query(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
-    jni.JArray<jni.JString> strings,
+  static cursor$_.Cursor? query(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
-    return _query(
-            _class.reference.pointer,
-            _id_query as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
-            strings.reference.pointer)
-        .object(const cursor_.$CursorType());
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _query(_class.reference.pointer, _id_query as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer, _$uri.pointer, _$strings.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 
   static final _id_queryMiniThumbnails = _class.staticMethodId(
@@ -3723,43 +5009,47 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;I[Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _queryMiniThumbnails = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _queryMiniThumbnails = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
               int,
-              ffi.Pointer<ffi.Void>)>();
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public final android.database.Cursor queryMiniThumbnails(android.content.ContentResolver contentResolver, android.net.Uri uri, int i, java.lang.String[] strings)
+  /// from: `static public final android.database.Cursor queryMiniThumbnails(android.content.ContentResolver contentResolver, android.net.Uri uri, int i, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor queryMiniThumbnails(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
+  static cursor$_.Cursor? queryMiniThumbnails(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
     int i,
-    jni.JArray<jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _queryMiniThumbnails(
             _class.reference.pointer,
-            _id_queryMiniThumbnails as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
+            _id_queryMiniThumbnails as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$uri.pointer,
             i,
-            strings.reference.pointer)
-        .object(const cursor_.$CursorType());
+            _$strings.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 
   static final _id_queryMiniThumbnail = _class.staticMethodId(
@@ -3767,38 +5057,46 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;JI[Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _queryMiniThumbnail = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _queryMiniThumbnail = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public final android.database.Cursor queryMiniThumbnail(android.content.ContentResolver contentResolver, long j, int i, java.lang.String[] strings)
+  /// from: `static public final android.database.Cursor queryMiniThumbnail(android.content.ContentResolver contentResolver, long j, int i, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor queryMiniThumbnail(
-    contentresolver_.ContentResolver contentResolver,
+  static cursor$_.Cursor? queryMiniThumbnail(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int i,
-    jni.JArray<jni.JString> strings,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
     return _queryMiniThumbnail(
             _class.reference.pointer,
-            _id_queryMiniThumbnail as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_queryMiniThumbnail as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             i,
-            strings.reference.pointer)
-        .object(const cursor_.$CursorType());
+            _$strings.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 
   static final _id_cancelThumbnailRequest = _class.staticMethodId(
@@ -3806,26 +5104,29 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;J)V',
   );
 
-  static final _cancelThumbnailRequest = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _cancelThumbnailRequest = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j)
+  /// from: `static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j)`
   static void cancelThumbnailRequest(
-    contentresolver_.ContentResolver contentResolver,
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
     _cancelThumbnailRequest(
             _class.reference.pointer,
-            _id_cancelThumbnailRequest as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_cancelThumbnailRequest as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j)
         .check();
   }
@@ -3835,115 +5136,134 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;JILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getThumbnail = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getThumbnail = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, int i, android.graphics.BitmapFactory$Options options)
+  /// from: `static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, int i, android.graphics.BitmapFactory$Options options)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getThumbnail(
-    contentresolver_.ContentResolver contentResolver,
+  static jni$_.JObject? getThumbnail(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int i,
-    jni.JObject options,
+    jni$_.JObject? options,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
     return _getThumbnail(
             _class.reference.pointer,
-            _id_getThumbnail as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_getThumbnail as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             i,
-            options.reference.pointer)
-        .object(const jni.JObjectType());
+            _$options.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_cancelThumbnailRequest1 = _class.staticMethodId(
+  static final _id_cancelThumbnailRequest$1 = _class.staticMethodId(
     r'cancelThumbnailRequest',
     r'(Landroid/content/ContentResolver;JJ)V',
   );
 
-  static final _cancelThumbnailRequest1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _cancelThumbnailRequest$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        ffi.Int64
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int64
                       )>)>>('globalEnv_CallStaticVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
 
-  /// from: static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j, long j1)
-  static void cancelThumbnailRequest1(
-    contentresolver_.ContentResolver contentResolver,
+  /// from: `static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j, long j1)`
+  static void cancelThumbnailRequest$1(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int j1,
   ) {
-    _cancelThumbnailRequest1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    _cancelThumbnailRequest$1(
             _class.reference.pointer,
-            _id_cancelThumbnailRequest1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_cancelThumbnailRequest$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             j1)
         .check();
   }
 
-  static final _id_getThumbnail1 = _class.staticMethodId(
+  static final _id_getThumbnail$1 = _class.staticMethodId(
     r'getThumbnail',
     r'(Landroid/content/ContentResolver;JJILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getThumbnail1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getThumbnail$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        ffi.Int64,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int64,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int, int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, long j1, int i, android.graphics.BitmapFactory$Options options)
+  /// from: `static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, long j1, int i, android.graphics.BitmapFactory$Options options)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getThumbnail1(
-    contentresolver_.ContentResolver contentResolver,
+  static jni$_.JObject? getThumbnail$1(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int j1,
     int i,
-    jni.JObject options,
+    jni$_.JObject? options,
   ) {
-    return _getThumbnail1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
+    return _getThumbnail$1(
             _class.reference.pointer,
-            _id_getThumbnail1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_getThumbnail$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             j1,
             i,
-            options.reference.pointer)
-        .object(const jni.JObjectType());
+            _$options.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getContentUri = _class.staticMethodId(
@@ -3951,25 +5271,26 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getKindSize = _class.staticMethodId(
@@ -3977,579 +5298,690 @@ class MediaStore_Images_Thumbnails extends jni.JObject {
     r'(I)Landroid/util/Size;',
   );
 
-  static final _getKindSize = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallStaticObjectMethod')
+  static final _getKindSize = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: static public android.util.Size getKindSize(int i)
+  /// from: `static public android.util.Size getKindSize(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static size_.Size getKindSize(
+  static size$_.Size? getKindSize(
     int i,
   ) {
     return _getKindSize(
-            _class.reference.pointer, _id_getKindSize as jni.JMethodIDPtr, i)
-        .object(const size_.$SizeType());
+            _class.reference.pointer, _id_getKindSize as jni$_.JMethodIDPtr, i)
+        .object<size$_.Size?>(const size$_.$Size$NullableType());
   }
 }
 
-final class $MediaStore_Images_ThumbnailsType
-    extends jni.JObjType<MediaStore_Images_Thumbnails> {
-  const $MediaStore_Images_ThumbnailsType();
+final class $MediaStore$Images$Thumbnails$NullableType
+    extends jni$_.JObjType<MediaStore$Images$Thumbnails?> {
+  @jni$_.internal
+  const $MediaStore$Images$Thumbnails$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Images$Thumbnails;';
 
-  @override
-  MediaStore_Images_Thumbnails fromReference(jni.JReference reference) =>
-      MediaStore_Images_Thumbnails.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images$Thumbnails? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Images$Thumbnails.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images$Thumbnails?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Images_ThumbnailsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$Thumbnails$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Images_ThumbnailsType) &&
-        other is $MediaStore_Images_ThumbnailsType;
+    return other.runtimeType == ($MediaStore$Images$Thumbnails$NullableType) &&
+        other is $MediaStore$Images$Thumbnails$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Images
-class MediaStore_Images extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Images> $type = type;
+final class $MediaStore$Images$Thumbnails$Type
+    extends jni$_.JObjType<MediaStore$Images$Thumbnails> {
+  @jni$_.internal
+  const $MediaStore$Images$Thumbnails$Type();
 
-  MediaStore_Images.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Images$Thumbnails;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images$Thumbnails fromReference(jni$_.JReference reference) =>
+      MediaStore$Images$Thumbnails.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images$Thumbnails?> get nullableType =>
+      const $MediaStore$Images$Thumbnails$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$Thumbnails$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Images$Thumbnails$Type) &&
+        other is $MediaStore$Images$Thumbnails$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Images`
+class MediaStore$Images extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Images> $type;
+
+  @jni$_.internal
+  MediaStore$Images.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Images');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Images');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_ImagesType();
-  static final _id_new0 = _class.constructorId(
+  static const nullableType = $MediaStore$Images$NullableType();
+  static const type = $MediaStore$Images$Type();
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Images() {
-    return MediaStore_Images.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Images() {
+    return MediaStore$Images.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 }
 
-final class $MediaStore_ImagesType extends jni.JObjType<MediaStore_Images> {
-  const $MediaStore_ImagesType();
+final class $MediaStore$Images$NullableType
+    extends jni$_.JObjType<MediaStore$Images?> {
+  @jni$_.internal
+  const $MediaStore$Images$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Images;';
 
-  @override
-  MediaStore_Images fromReference(jni.JReference reference) =>
-      MediaStore_Images.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Images.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_ImagesType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_ImagesType) &&
-        other is $MediaStore_ImagesType;
+    return other.runtimeType == ($MediaStore$Images$NullableType) &&
+        other is $MediaStore$Images$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$MediaColumns
-class MediaStore_MediaColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_MediaColumns> $type = type;
+final class $MediaStore$Images$Type extends jni$_.JObjType<MediaStore$Images> {
+  @jni$_.internal
+  const $MediaStore$Images$Type();
 
-  MediaStore_MediaColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Images;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Images fromReference(jni$_.JReference reference) =>
+      MediaStore$Images.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Images?> get nullableType =>
+      const $MediaStore$Images$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Images$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Images$Type) &&
+        other is $MediaStore$Images$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$MediaColumns`
+class MediaStore$MediaColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$MediaColumns> $type;
+
+  @jni$_.internal
+  MediaStore$MediaColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$MediaColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$MediaColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_MediaColumnsType();
+  static const nullableType = $MediaStore$MediaColumns$NullableType();
+  static const type = $MediaStore$MediaColumns$Type();
   static final _id_ALBUM = _class.staticFieldId(
     r'ALBUM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM
+  /// from: `static public final java.lang.String ALBUM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM =>
-      _id_ALBUM.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM =>
+      _id_ALBUM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ALBUM_ARTIST = _class.staticFieldId(
     r'ALBUM_ARTIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ALBUM_ARTIST
+  /// from: `static public final java.lang.String ALBUM_ARTIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ALBUM_ARTIST =>
-      _id_ALBUM_ARTIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get ALBUM_ARTIST =>
+      _id_ALBUM_ARTIST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ARTIST = _class.staticFieldId(
     r'ARTIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ARTIST
+  /// from: `static public final java.lang.String ARTIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ARTIST =>
-      _id_ARTIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get ARTIST =>
+      _id_ARTIST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_AUTHOR = _class.staticFieldId(
     r'AUTHOR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String AUTHOR
+  /// from: `static public final java.lang.String AUTHOR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get AUTHOR =>
-      _id_AUTHOR.get(_class, const jni.JStringType());
+  static jni$_.JString? get AUTHOR =>
+      _id_AUTHOR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BITRATE = _class.staticFieldId(
     r'BITRATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BITRATE
+  /// from: `static public final java.lang.String BITRATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BITRATE =>
-      _id_BITRATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BITRATE =>
+      _id_BITRATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BUCKET_DISPLAY_NAME = _class.staticFieldId(
     r'BUCKET_DISPLAY_NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BUCKET_DISPLAY_NAME
+  /// from: `static public final java.lang.String BUCKET_DISPLAY_NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BUCKET_DISPLAY_NAME =>
-      _id_BUCKET_DISPLAY_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get BUCKET_DISPLAY_NAME =>
+      _id_BUCKET_DISPLAY_NAME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BUCKET_ID = _class.staticFieldId(
     r'BUCKET_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BUCKET_ID
+  /// from: `static public final java.lang.String BUCKET_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BUCKET_ID =>
-      _id_BUCKET_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get BUCKET_ID =>
+      _id_BUCKET_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CAPTURE_FRAMERATE = _class.staticFieldId(
     r'CAPTURE_FRAMERATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CAPTURE_FRAMERATE
+  /// from: `static public final java.lang.String CAPTURE_FRAMERATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CAPTURE_FRAMERATE =>
-      _id_CAPTURE_FRAMERATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CAPTURE_FRAMERATE =>
+      _id_CAPTURE_FRAMERATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CD_TRACK_NUMBER = _class.staticFieldId(
     r'CD_TRACK_NUMBER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CD_TRACK_NUMBER
+  /// from: `static public final java.lang.String CD_TRACK_NUMBER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CD_TRACK_NUMBER =>
-      _id_CD_TRACK_NUMBER.get(_class, const jni.JStringType());
+  static jni$_.JString? get CD_TRACK_NUMBER =>
+      _id_CD_TRACK_NUMBER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_COMPILATION = _class.staticFieldId(
     r'COMPILATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String COMPILATION
+  /// from: `static public final java.lang.String COMPILATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get COMPILATION =>
-      _id_COMPILATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get COMPILATION =>
+      _id_COMPILATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_COMPOSER = _class.staticFieldId(
     r'COMPOSER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String COMPOSER
+  /// from: `static public final java.lang.String COMPOSER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get COMPOSER =>
-      _id_COMPOSER.get(_class, const jni.JStringType());
+  static jni$_.JString? get COMPOSER =>
+      _id_COMPOSER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATA = _class.staticFieldId(
     r'DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATA
+  /// from: `static public final java.lang.String DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATA => _id_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATA =>
+      _id_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_ADDED = _class.staticFieldId(
     r'DATE_ADDED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_ADDED
+  /// from: `static public final java.lang.String DATE_ADDED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_ADDED =>
-      _id_DATE_ADDED.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_ADDED =>
+      _id_DATE_ADDED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_EXPIRES = _class.staticFieldId(
     r'DATE_EXPIRES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_EXPIRES
+  /// from: `static public final java.lang.String DATE_EXPIRES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_EXPIRES =>
-      _id_DATE_EXPIRES.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_EXPIRES =>
+      _id_DATE_EXPIRES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_MODIFIED = _class.staticFieldId(
     r'DATE_MODIFIED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_MODIFIED
+  /// from: `static public final java.lang.String DATE_MODIFIED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_MODIFIED =>
-      _id_DATE_MODIFIED.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_MODIFIED =>
+      _id_DATE_MODIFIED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_TAKEN = _class.staticFieldId(
     r'DATE_TAKEN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_TAKEN
+  /// from: `static public final java.lang.String DATE_TAKEN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_TAKEN =>
-      _id_DATE_TAKEN.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_TAKEN =>
+      _id_DATE_TAKEN.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DISC_NUMBER = _class.staticFieldId(
     r'DISC_NUMBER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DISC_NUMBER
+  /// from: `static public final java.lang.String DISC_NUMBER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DISC_NUMBER =>
-      _id_DISC_NUMBER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DISC_NUMBER =>
+      _id_DISC_NUMBER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DISPLAY_NAME = _class.staticFieldId(
     r'DISPLAY_NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DISPLAY_NAME
+  /// from: `static public final java.lang.String DISPLAY_NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DISPLAY_NAME =>
-      _id_DISPLAY_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get DISPLAY_NAME =>
+      _id_DISPLAY_NAME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DOCUMENT_ID = _class.staticFieldId(
     r'DOCUMENT_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DOCUMENT_ID
+  /// from: `static public final java.lang.String DOCUMENT_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DOCUMENT_ID =>
-      _id_DOCUMENT_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get DOCUMENT_ID =>
+      _id_DOCUMENT_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DURATION = _class.staticFieldId(
     r'DURATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DURATION
+  /// from: `static public final java.lang.String DURATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DURATION =>
-      _id_DURATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get DURATION =>
+      _id_DURATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENERATION_ADDED = _class.staticFieldId(
     r'GENERATION_ADDED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENERATION_ADDED
+  /// from: `static public final java.lang.String GENERATION_ADDED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENERATION_ADDED =>
-      _id_GENERATION_ADDED.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENERATION_ADDED =>
+      _id_GENERATION_ADDED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENERATION_MODIFIED = _class.staticFieldId(
     r'GENERATION_MODIFIED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENERATION_MODIFIED
+  /// from: `static public final java.lang.String GENERATION_MODIFIED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENERATION_MODIFIED =>
-      _id_GENERATION_MODIFIED.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENERATION_MODIFIED =>
+      _id_GENERATION_MODIFIED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GENRE = _class.staticFieldId(
     r'GENRE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GENRE
+  /// from: `static public final java.lang.String GENRE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GENRE =>
-      _id_GENRE.get(_class, const jni.JStringType());
+  static jni$_.JString? get GENRE =>
+      _id_GENRE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_HEIGHT = _class.staticFieldId(
     r'HEIGHT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String HEIGHT
+  /// from: `static public final java.lang.String HEIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get HEIGHT =>
-      _id_HEIGHT.get(_class, const jni.JStringType());
+  static jni$_.JString? get HEIGHT =>
+      _id_HEIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INSTANCE_ID = _class.staticFieldId(
     r'INSTANCE_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INSTANCE_ID
+  /// from: `static public final java.lang.String INSTANCE_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INSTANCE_ID =>
-      _id_INSTANCE_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get INSTANCE_ID =>
+      _id_INSTANCE_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_DOWNLOAD = _class.staticFieldId(
     r'IS_DOWNLOAD',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_DOWNLOAD
+  /// from: `static public final java.lang.String IS_DOWNLOAD`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_DOWNLOAD =>
-      _id_IS_DOWNLOAD.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_DOWNLOAD =>
+      _id_IS_DOWNLOAD.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_DRM = _class.staticFieldId(
     r'IS_DRM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_DRM
+  /// from: `static public final java.lang.String IS_DRM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_DRM =>
-      _id_IS_DRM.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_DRM =>
+      _id_IS_DRM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_FAVORITE = _class.staticFieldId(
     r'IS_FAVORITE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_FAVORITE
+  /// from: `static public final java.lang.String IS_FAVORITE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_FAVORITE =>
-      _id_IS_FAVORITE.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_FAVORITE =>
+      _id_IS_FAVORITE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_PENDING = _class.staticFieldId(
     r'IS_PENDING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_PENDING
+  /// from: `static public final java.lang.String IS_PENDING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_PENDING =>
-      _id_IS_PENDING.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_PENDING =>
+      _id_IS_PENDING.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_TRASHED = _class.staticFieldId(
     r'IS_TRASHED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_TRASHED
+  /// from: `static public final java.lang.String IS_TRASHED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_TRASHED =>
-      _id_IS_TRASHED.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_TRASHED =>
+      _id_IS_TRASHED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MIME_TYPE = _class.staticFieldId(
     r'MIME_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MIME_TYPE
+  /// from: `static public final java.lang.String MIME_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MIME_TYPE =>
-      _id_MIME_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MIME_TYPE =>
+      _id_MIME_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NUM_TRACKS = _class.staticFieldId(
     r'NUM_TRACKS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NUM_TRACKS
+  /// from: `static public final java.lang.String NUM_TRACKS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NUM_TRACKS =>
-      _id_NUM_TRACKS.get(_class, const jni.JStringType());
+  static jni$_.JString? get NUM_TRACKS =>
+      _id_NUM_TRACKS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ORIENTATION = _class.staticFieldId(
     r'ORIENTATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ORIENTATION
+  /// from: `static public final java.lang.String ORIENTATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ORIENTATION =>
-      _id_ORIENTATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ORIENTATION =>
+      _id_ORIENTATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ORIGINAL_DOCUMENT_ID = _class.staticFieldId(
     r'ORIGINAL_DOCUMENT_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ORIGINAL_DOCUMENT_ID
+  /// from: `static public final java.lang.String ORIGINAL_DOCUMENT_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ORIGINAL_DOCUMENT_ID =>
-      _id_ORIGINAL_DOCUMENT_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get ORIGINAL_DOCUMENT_ID =>
+      _id_ORIGINAL_DOCUMENT_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_OWNER_PACKAGE_NAME = _class.staticFieldId(
     r'OWNER_PACKAGE_NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String OWNER_PACKAGE_NAME
+  /// from: `static public final java.lang.String OWNER_PACKAGE_NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get OWNER_PACKAGE_NAME =>
-      _id_OWNER_PACKAGE_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get OWNER_PACKAGE_NAME =>
+      _id_OWNER_PACKAGE_NAME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RELATIVE_PATH = _class.staticFieldId(
     r'RELATIVE_PATH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RELATIVE_PATH
+  /// from: `static public final java.lang.String RELATIVE_PATH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RELATIVE_PATH =>
-      _id_RELATIVE_PATH.get(_class, const jni.JStringType());
+  static jni$_.JString? get RELATIVE_PATH =>
+      _id_RELATIVE_PATH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RESOLUTION = _class.staticFieldId(
     r'RESOLUTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RESOLUTION
+  /// from: `static public final java.lang.String RESOLUTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RESOLUTION =>
-      _id_RESOLUTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get RESOLUTION =>
+      _id_RESOLUTION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SIZE = _class.staticFieldId(
     r'SIZE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SIZE
+  /// from: `static public final java.lang.String SIZE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SIZE => _id_SIZE.get(_class, const jni.JStringType());
+  static jni$_.JString? get SIZE =>
+      _id_SIZE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TITLE = _class.staticFieldId(
     r'TITLE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TITLE
+  /// from: `static public final java.lang.String TITLE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TITLE =>
-      _id_TITLE.get(_class, const jni.JStringType());
+  static jni$_.JString? get TITLE =>
+      _id_TITLE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_VOLUME_NAME = _class.staticFieldId(
     r'VOLUME_NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String VOLUME_NAME
+  /// from: `static public final java.lang.String VOLUME_NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get VOLUME_NAME =>
-      _id_VOLUME_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get VOLUME_NAME =>
+      _id_VOLUME_NAME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WIDTH = _class.staticFieldId(
     r'WIDTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WIDTH
+  /// from: `static public final java.lang.String WIDTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WIDTH =>
-      _id_WIDTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get WIDTH =>
+      _id_WIDTH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITER = _class.staticFieldId(
     r'WRITER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITER
+  /// from: `static public final java.lang.String WRITER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITER =>
-      _id_WRITER.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITER =>
+      _id_WRITER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_XMP = _class.staticFieldId(
     r'XMP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String XMP
+  /// from: `static public final java.lang.String XMP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get XMP => _id_XMP.get(_class, const jni.JStringType());
+  static jni$_.JString? get XMP =>
+      _id_XMP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_YEAR = _class.staticFieldId(
     r'YEAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String YEAR
+  /// from: `static public final java.lang.String YEAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get YEAR => _id_YEAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get YEAR =>
+      _id_YEAR.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_MediaColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$MediaColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -4557,292 +5989,411 @@ class MediaStore_MediaColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_MediaColumns.implement(
-    $MediaStore_MediaColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$MediaColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_MediaColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$MediaColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$MediaColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$MediaColumns.implement(
+    $MediaStore$MediaColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$MediaColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_MediaColumnsImpl {
-  factory $MediaStore_MediaColumnsImpl() = _$MediaStore_MediaColumnsImpl;
+abstract base mixin class $MediaStore$MediaColumns {
+  factory $MediaStore$MediaColumns() = _$MediaStore$MediaColumns;
 }
 
-class _$MediaStore_MediaColumnsImpl implements $MediaStore_MediaColumnsImpl {
-  _$MediaStore_MediaColumnsImpl();
+final class _$MediaStore$MediaColumns with $MediaStore$MediaColumns {
+  _$MediaStore$MediaColumns();
 }
 
-final class $MediaStore_MediaColumnsType
-    extends jni.JObjType<MediaStore_MediaColumns> {
-  const $MediaStore_MediaColumnsType();
+final class $MediaStore$MediaColumns$NullableType
+    extends jni$_.JObjType<MediaStore$MediaColumns?> {
+  @jni$_.internal
+  const $MediaStore$MediaColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$MediaColumns;';
 
-  @override
-  MediaStore_MediaColumns fromReference(jni.JReference reference) =>
-      MediaStore_MediaColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$MediaColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$MediaColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$MediaColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_MediaColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$MediaColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_MediaColumnsType) &&
-        other is $MediaStore_MediaColumnsType;
+    return other.runtimeType == ($MediaStore$MediaColumns$NullableType) &&
+        other is $MediaStore$MediaColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$PickerMediaColumns
-class MediaStore_PickerMediaColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_PickerMediaColumns> $type = type;
+final class $MediaStore$MediaColumns$Type
+    extends jni$_.JObjType<MediaStore$MediaColumns> {
+  @jni$_.internal
+  const $MediaStore$MediaColumns$Type();
 
-  MediaStore_PickerMediaColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$MediaColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$MediaColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$MediaColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$MediaColumns?> get nullableType =>
+      const $MediaStore$MediaColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$MediaColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$MediaColumns$Type) &&
+        other is $MediaStore$MediaColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$PickerMediaColumns`
+class MediaStore$PickerMediaColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$PickerMediaColumns> $type;
+
+  @jni$_.internal
+  MediaStore$PickerMediaColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$PickerMediaColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$PickerMediaColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_PickerMediaColumnsType();
+  static const nullableType = $MediaStore$PickerMediaColumns$NullableType();
+  static const type = $MediaStore$PickerMediaColumns$Type();
   static final _id_DATA = _class.staticFieldId(
     r'DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATA
+  /// from: `static public final java.lang.String DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATA => _id_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATA =>
+      _id_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DATE_TAKEN = _class.staticFieldId(
     r'DATE_TAKEN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATE_TAKEN
+  /// from: `static public final java.lang.String DATE_TAKEN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATE_TAKEN =>
-      _id_DATE_TAKEN.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATE_TAKEN =>
+      _id_DATE_TAKEN.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DISPLAY_NAME = _class.staticFieldId(
     r'DISPLAY_NAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DISPLAY_NAME
+  /// from: `static public final java.lang.String DISPLAY_NAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DISPLAY_NAME =>
-      _id_DISPLAY_NAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get DISPLAY_NAME =>
+      _id_DISPLAY_NAME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DURATION_MILLIS = _class.staticFieldId(
     r'DURATION_MILLIS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DURATION_MILLIS
+  /// from: `static public final java.lang.String DURATION_MILLIS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DURATION_MILLIS =>
-      _id_DURATION_MILLIS.get(_class, const jni.JStringType());
+  static jni$_.JString? get DURATION_MILLIS =>
+      _id_DURATION_MILLIS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_HEIGHT = _class.staticFieldId(
     r'HEIGHT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String HEIGHT
+  /// from: `static public final java.lang.String HEIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get HEIGHT =>
-      _id_HEIGHT.get(_class, const jni.JStringType());
+  static jni$_.JString? get HEIGHT =>
+      _id_HEIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MIME_TYPE = _class.staticFieldId(
     r'MIME_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MIME_TYPE
+  /// from: `static public final java.lang.String MIME_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MIME_TYPE =>
-      _id_MIME_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MIME_TYPE =>
+      _id_MIME_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ORIENTATION = _class.staticFieldId(
     r'ORIENTATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ORIENTATION
+  /// from: `static public final java.lang.String ORIENTATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ORIENTATION =>
-      _id_ORIENTATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ORIENTATION =>
+      _id_ORIENTATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SIZE = _class.staticFieldId(
     r'SIZE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SIZE
+  /// from: `static public final java.lang.String SIZE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SIZE => _id_SIZE.get(_class, const jni.JStringType());
+  static jni$_.JString? get SIZE =>
+      _id_SIZE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WIDTH = _class.staticFieldId(
     r'WIDTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WIDTH
+  /// from: `static public final java.lang.String WIDTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WIDTH =>
-      _id_WIDTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get WIDTH =>
+      _id_WIDTH.get(_class, const jni$_.JStringNullableType());
 }
 
-final class $MediaStore_PickerMediaColumnsType
-    extends jni.JObjType<MediaStore_PickerMediaColumns> {
-  const $MediaStore_PickerMediaColumnsType();
+final class $MediaStore$PickerMediaColumns$NullableType
+    extends jni$_.JObjType<MediaStore$PickerMediaColumns?> {
+  @jni$_.internal
+  const $MediaStore$PickerMediaColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$PickerMediaColumns;';
 
-  @override
-  MediaStore_PickerMediaColumns fromReference(jni.JReference reference) =>
-      MediaStore_PickerMediaColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$PickerMediaColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$PickerMediaColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$PickerMediaColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_PickerMediaColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$PickerMediaColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_PickerMediaColumnsType) &&
-        other is $MediaStore_PickerMediaColumnsType;
+    return other.runtimeType == ($MediaStore$PickerMediaColumns$NullableType) &&
+        other is $MediaStore$PickerMediaColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Video$Media
-class MediaStore_Video_Media extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Video_Media> $type = type;
+final class $MediaStore$PickerMediaColumns$Type
+    extends jni$_.JObjType<MediaStore$PickerMediaColumns> {
+  @jni$_.internal
+  const $MediaStore$PickerMediaColumns$Type();
 
-  MediaStore_Video_Media.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$PickerMediaColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$PickerMediaColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$PickerMediaColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$PickerMediaColumns?> get nullableType =>
+      const $MediaStore$PickerMediaColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$PickerMediaColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$PickerMediaColumns$Type) &&
+        other is $MediaStore$PickerMediaColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Video$Media`
+class MediaStore$Video$Media extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Video$Media> $type;
+
+  @jni$_.internal
+  MediaStore$Video$Media.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Video$Media');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Video$Media');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Video_MediaType();
+  static const nullableType = $MediaStore$Video$Media$NullableType();
+  static const type = $MediaStore$Video$Media$Type();
   static final _id_CONTENT_TYPE = _class.staticFieldId(
     r'CONTENT_TYPE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTENT_TYPE
+  /// from: `static public final java.lang.String CONTENT_TYPE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTENT_TYPE =>
-      _id_CONTENT_TYPE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTENT_TYPE =>
+      _id_CONTENT_TYPE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Video_Media() {
-    return MediaStore_Video_Media.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Video$Media() {
+    return MediaStore$Video$Media.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -4851,202 +6402,261 @@ class MediaStore_Video_Media extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
-  static final _id_getContentUri1 = _class.staticMethodId(
+  static final _id_getContentUri$1 = _class.staticMethodId(
     r'getContentUri',
     r'(Ljava/lang/String;J)Landroid/net/Uri;',
   );
 
-  static final _getContentUri1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _getContentUri$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string, long j)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string, long j)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri1(
-    jni.JString string,
+  static uri$_.Uri? getContentUri$1(
+    jni$_.JString? string,
     int j,
   ) {
-    return _getContentUri1(_class.reference.pointer,
-            _id_getContentUri1 as jni.JMethodIDPtr, string.reference.pointer, j)
-        .object(const uri_.$UriType());
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getContentUri$1(_class.reference.pointer,
+            _id_getContentUri$1 as jni$_.JMethodIDPtr, _$string.pointer, j)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 }
 
-final class $MediaStore_Video_MediaType
-    extends jni.JObjType<MediaStore_Video_Media> {
-  const $MediaStore_Video_MediaType();
+final class $MediaStore$Video$Media$NullableType
+    extends jni$_.JObjType<MediaStore$Video$Media?> {
+  @jni$_.internal
+  const $MediaStore$Video$Media$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Video$Media;';
 
-  @override
-  MediaStore_Video_Media fromReference(jni.JReference reference) =>
-      MediaStore_Video_Media.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video$Media? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Video$Media.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video$Media?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Video_MediaType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$Media$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Video_MediaType) &&
-        other is $MediaStore_Video_MediaType;
+    return other.runtimeType == ($MediaStore$Video$Media$NullableType) &&
+        other is $MediaStore$Video$Media$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Video$Thumbnails
-class MediaStore_Video_Thumbnails extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Video_Thumbnails> $type = type;
+final class $MediaStore$Video$Media$Type
+    extends jni$_.JObjType<MediaStore$Video$Media> {
+  @jni$_.internal
+  const $MediaStore$Video$Media$Type();
 
-  MediaStore_Video_Thumbnails.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Video$Media;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video$Media fromReference(jni$_.JReference reference) =>
+      MediaStore$Video$Media.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video$Media?> get nullableType =>
+      const $MediaStore$Video$Media$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$Media$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Video$Media$Type) &&
+        other is $MediaStore$Video$Media$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Video$Thumbnails`
+class MediaStore$Video$Thumbnails extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Video$Thumbnails> $type;
+
+  @jni$_.internal
+  MediaStore$Video$Thumbnails.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Video$Thumbnails');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Video$Thumbnails');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Video_ThumbnailsType();
+  static const nullableType = $MediaStore$Video$Thumbnails$NullableType();
+  static const type = $MediaStore$Video$Thumbnails$Type();
   static final _id_DATA = _class.staticFieldId(
     r'DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DATA
+  /// from: `static public final java.lang.String DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DATA => _id_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get DATA =>
+      _id_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTERNAL_CONTENT_URI = _class.staticFieldId(
     r'EXTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri EXTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri EXTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get EXTERNAL_CONTENT_URI =>
-      _id_EXTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get EXTERNAL_CONTENT_URI =>
+      _id_EXTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
-  /// from: static public final int FULL_SCREEN_KIND
+  /// from: `static public final int FULL_SCREEN_KIND`
   static const FULL_SCREEN_KIND = 2;
   static final _id_HEIGHT = _class.staticFieldId(
     r'HEIGHT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String HEIGHT
+  /// from: `static public final java.lang.String HEIGHT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get HEIGHT =>
-      _id_HEIGHT.get(_class, const jni.JStringType());
+  static jni$_.JString? get HEIGHT =>
+      _id_HEIGHT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INTERNAL_CONTENT_URI = _class.staticFieldId(
     r'INTERNAL_CONTENT_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri INTERNAL_CONTENT_URI
+  /// from: `static public final android.net.Uri INTERNAL_CONTENT_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get INTERNAL_CONTENT_URI =>
-      _id_INTERNAL_CONTENT_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get INTERNAL_CONTENT_URI =>
+      _id_INTERNAL_CONTENT_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_KIND = _class.staticFieldId(
     r'KIND',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String KIND
+  /// from: `static public final java.lang.String KIND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get KIND => _id_KIND.get(_class, const jni.JStringType());
+  static jni$_.JString? get KIND =>
+      _id_KIND.get(_class, const jni$_.JStringNullableType());
 
-  /// from: static public final int MICRO_KIND
+  /// from: `static public final int MICRO_KIND`
   static const MICRO_KIND = 3;
 
-  /// from: static public final int MINI_KIND
+  /// from: `static public final int MINI_KIND`
   static const MINI_KIND = 1;
   static final _id_VIDEO_ID = _class.staticFieldId(
     r'VIDEO_ID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String VIDEO_ID
+  /// from: `static public final java.lang.String VIDEO_ID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get VIDEO_ID =>
-      _id_VIDEO_ID.get(_class, const jni.JStringType());
+  static jni$_.JString? get VIDEO_ID =>
+      _id_VIDEO_ID.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WIDTH = _class.staticFieldId(
     r'WIDTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WIDTH
+  /// from: `static public final java.lang.String WIDTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WIDTH =>
-      _id_WIDTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get WIDTH =>
+      _id_WIDTH.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Video_Thumbnails() {
-    return MediaStore_Video_Thumbnails.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Video$Thumbnails() {
+    return MediaStore$Video$Thumbnails.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -5055,26 +6665,29 @@ class MediaStore_Video_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;J)V',
   );
 
-  static final _cancelThumbnailRequest = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>, ffi.Int64)>)>>(
+  static final _cancelThumbnailRequest = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int64)>)>>(
           'globalEnv_CallStaticVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int)>();
 
-  /// from: static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j)
+  /// from: `static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j)`
   static void cancelThumbnailRequest(
-    contentresolver_.ContentResolver contentResolver,
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
     _cancelThumbnailRequest(
             _class.reference.pointer,
-            _id_cancelThumbnailRequest as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_cancelThumbnailRequest as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j)
         .check();
   }
@@ -5084,115 +6697,134 @@ class MediaStore_Video_Thumbnails extends jni.JObject {
     r'(Landroid/content/ContentResolver;JILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getThumbnail = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getThumbnail = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, int i, android.graphics.BitmapFactory$Options options)
+  /// from: `static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, int i, android.graphics.BitmapFactory$Options options)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getThumbnail(
-    contentresolver_.ContentResolver contentResolver,
+  static jni$_.JObject? getThumbnail(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int i,
-    jni.JObject options,
+    jni$_.JObject? options,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
     return _getThumbnail(
             _class.reference.pointer,
-            _id_getThumbnail as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_getThumbnail as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             i,
-            options.reference.pointer)
-        .object(const jni.JObjectType());
+            _$options.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
-  static final _id_cancelThumbnailRequest1 = _class.staticMethodId(
+  static final _id_cancelThumbnailRequest$1 = _class.staticMethodId(
     r'cancelThumbnailRequest',
     r'(Landroid/content/ContentResolver;JJ)V',
   );
 
-  static final _cancelThumbnailRequest1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _cancelThumbnailRequest$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        ffi.Int64
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int64
                       )>)>>('globalEnv_CallStaticVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>, int, int)>();
 
-  /// from: static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j, long j1)
-  static void cancelThumbnailRequest1(
-    contentresolver_.ContentResolver contentResolver,
+  /// from: `static public void cancelThumbnailRequest(android.content.ContentResolver contentResolver, long j, long j1)`
+  static void cancelThumbnailRequest$1(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int j1,
   ) {
-    _cancelThumbnailRequest1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    _cancelThumbnailRequest$1(
             _class.reference.pointer,
-            _id_cancelThumbnailRequest1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_cancelThumbnailRequest$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             j1)
         .check();
   }
 
-  static final _id_getThumbnail1 = _class.staticMethodId(
+  static final _id_getThumbnail$1 = _class.staticMethodId(
     r'getThumbnail',
     r'(Landroid/content/ContentResolver;JJILandroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;',
   );
 
-  static final _getThumbnail1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getThumbnail$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Int64,
-                        ffi.Int64,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int64,
+                        jni$_.Int64,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, int, int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              int,
+              int,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, long j1, int i, android.graphics.BitmapFactory$Options options)
+  /// from: `static public android.graphics.Bitmap getThumbnail(android.content.ContentResolver contentResolver, long j, long j1, int i, android.graphics.BitmapFactory$Options options)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getThumbnail1(
-    contentresolver_.ContentResolver contentResolver,
+  static jni$_.JObject? getThumbnail$1(
+    contentresolver$_.ContentResolver? contentResolver,
     int j,
     int j1,
     int i,
-    jni.JObject options,
+    jni$_.JObject? options,
   ) {
-    return _getThumbnail1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$options = options?.reference ?? jni$_.jNullReference;
+    return _getThumbnail$1(
             _class.reference.pointer,
-            _id_getThumbnail1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_getThumbnail$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             j,
             j1,
             i,
-            options.reference.pointer)
-        .object(const jni.JObjectType());
+            _$options.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getContentUri = _class.staticMethodId(
@@ -5200,25 +6832,26 @@ class MediaStore_Video_Thumbnails extends jni.JObject {
     r'(Ljava/lang/String;)Landroid/net/Uri;',
   );
 
-  static final _getContentUri = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getContentUri = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getContentUri(java.lang.String string)
+  /// from: `static public android.net.Uri getContentUri(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getContentUri(
-    jni.JString string,
+  static uri$_.Uri? getContentUri(
+    jni$_.JString? string,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getContentUri(_class.reference.pointer,
-            _id_getContentUri as jni.JMethodIDPtr, string.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getContentUri as jni$_.JMethodIDPtr, _$string.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getKindSize = _class.staticMethodId(
@@ -5226,197 +6859,251 @@ class MediaStore_Video_Thumbnails extends jni.JObject {
     r'(I)Landroid/util/Size;',
   );
 
-  static final _getKindSize = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallStaticObjectMethod')
+  static final _getKindSize = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
+          'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: static public android.util.Size getKindSize(int i)
+  /// from: `static public android.util.Size getKindSize(int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  static size_.Size getKindSize(
+  static size$_.Size? getKindSize(
     int i,
   ) {
     return _getKindSize(
-            _class.reference.pointer, _id_getKindSize as jni.JMethodIDPtr, i)
-        .object(const size_.$SizeType());
+            _class.reference.pointer, _id_getKindSize as jni$_.JMethodIDPtr, i)
+        .object<size$_.Size?>(const size$_.$Size$NullableType());
   }
 }
 
-final class $MediaStore_Video_ThumbnailsType
-    extends jni.JObjType<MediaStore_Video_Thumbnails> {
-  const $MediaStore_Video_ThumbnailsType();
+final class $MediaStore$Video$Thumbnails$NullableType
+    extends jni$_.JObjType<MediaStore$Video$Thumbnails?> {
+  @jni$_.internal
+  const $MediaStore$Video$Thumbnails$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Video$Thumbnails;';
 
-  @override
-  MediaStore_Video_Thumbnails fromReference(jni.JReference reference) =>
-      MediaStore_Video_Thumbnails.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video$Thumbnails? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Video$Thumbnails.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video$Thumbnails?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Video_ThumbnailsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$Thumbnails$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Video_ThumbnailsType) &&
-        other is $MediaStore_Video_ThumbnailsType;
+    return other.runtimeType == ($MediaStore$Video$Thumbnails$NullableType) &&
+        other is $MediaStore$Video$Thumbnails$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Video$VideoColumns
-class MediaStore_Video_VideoColumns extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Video_VideoColumns> $type = type;
+final class $MediaStore$Video$Thumbnails$Type
+    extends jni$_.JObjType<MediaStore$Video$Thumbnails> {
+  @jni$_.internal
+  const $MediaStore$Video$Thumbnails$Type();
 
-  MediaStore_Video_VideoColumns.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Video$Thumbnails;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video$Thumbnails fromReference(jni$_.JReference reference) =>
+      MediaStore$Video$Thumbnails.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video$Thumbnails?> get nullableType =>
+      const $MediaStore$Video$Thumbnails$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$Thumbnails$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Video$Thumbnails$Type) &&
+        other is $MediaStore$Video$Thumbnails$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Video$VideoColumns`
+class MediaStore$Video$VideoColumns extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Video$VideoColumns> $type;
+
+  @jni$_.internal
+  MediaStore$Video$VideoColumns.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Video$VideoColumns');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Video$VideoColumns');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_Video_VideoColumnsType();
+  static const nullableType = $MediaStore$Video$VideoColumns$NullableType();
+  static const type = $MediaStore$Video$VideoColumns$Type();
   static final _id_BOOKMARK = _class.staticFieldId(
     r'BOOKMARK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BOOKMARK
+  /// from: `static public final java.lang.String BOOKMARK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BOOKMARK =>
-      _id_BOOKMARK.get(_class, const jni.JStringType());
+  static jni$_.JString? get BOOKMARK =>
+      _id_BOOKMARK.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CATEGORY = _class.staticFieldId(
     r'CATEGORY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CATEGORY
+  /// from: `static public final java.lang.String CATEGORY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CATEGORY =>
-      _id_CATEGORY.get(_class, const jni.JStringType());
+  static jni$_.JString? get CATEGORY =>
+      _id_CATEGORY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_COLOR_RANGE = _class.staticFieldId(
     r'COLOR_RANGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String COLOR_RANGE
+  /// from: `static public final java.lang.String COLOR_RANGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get COLOR_RANGE =>
-      _id_COLOR_RANGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get COLOR_RANGE =>
+      _id_COLOR_RANGE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_COLOR_STANDARD = _class.staticFieldId(
     r'COLOR_STANDARD',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String COLOR_STANDARD
+  /// from: `static public final java.lang.String COLOR_STANDARD`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get COLOR_STANDARD =>
-      _id_COLOR_STANDARD.get(_class, const jni.JStringType());
+  static jni$_.JString? get COLOR_STANDARD =>
+      _id_COLOR_STANDARD.get(_class, const jni$_.JStringNullableType());
 
   static final _id_COLOR_TRANSFER = _class.staticFieldId(
     r'COLOR_TRANSFER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String COLOR_TRANSFER
+  /// from: `static public final java.lang.String COLOR_TRANSFER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get COLOR_TRANSFER =>
-      _id_COLOR_TRANSFER.get(_class, const jni.JStringType());
+  static jni$_.JString? get COLOR_TRANSFER =>
+      _id_COLOR_TRANSFER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DESCRIPTION = _class.staticFieldId(
     r'DESCRIPTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DESCRIPTION
+  /// from: `static public final java.lang.String DESCRIPTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DESCRIPTION =>
-      _id_DESCRIPTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get DESCRIPTION =>
+      _id_DESCRIPTION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_IS_PRIVATE = _class.staticFieldId(
     r'IS_PRIVATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String IS_PRIVATE
+  /// from: `static public final java.lang.String IS_PRIVATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get IS_PRIVATE =>
-      _id_IS_PRIVATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get IS_PRIVATE =>
+      _id_IS_PRIVATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LANGUAGE = _class.staticFieldId(
     r'LANGUAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LANGUAGE
+  /// from: `static public final java.lang.String LANGUAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LANGUAGE =>
-      _id_LANGUAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get LANGUAGE =>
+      _id_LANGUAGE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LATITUDE = _class.staticFieldId(
     r'LATITUDE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LATITUDE
+  /// from: `static public final java.lang.String LATITUDE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LATITUDE =>
-      _id_LATITUDE.get(_class, const jni.JStringType());
+  static jni$_.JString? get LATITUDE =>
+      _id_LATITUDE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LONGITUDE = _class.staticFieldId(
     r'LONGITUDE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LONGITUDE
+  /// from: `static public final java.lang.String LONGITUDE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LONGITUDE =>
-      _id_LONGITUDE.get(_class, const jni.JStringType());
+  static jni$_.JString? get LONGITUDE =>
+      _id_LONGITUDE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MINI_THUMB_MAGIC = _class.staticFieldId(
     r'MINI_THUMB_MAGIC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MINI_THUMB_MAGIC
+  /// from: `static public final java.lang.String MINI_THUMB_MAGIC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MINI_THUMB_MAGIC =>
-      _id_MINI_THUMB_MAGIC.get(_class, const jni.JStringType());
+  static jni$_.JString? get MINI_THUMB_MAGIC =>
+      _id_MINI_THUMB_MAGIC.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TAGS = _class.staticFieldId(
     r'TAGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TAGS
+  /// from: `static public final java.lang.String TAGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TAGS => _id_TAGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get TAGS =>
+      _id_TAGS.get(_class, const jni$_.JStringNullableType());
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $MediaStore_Video_VideoColumnsImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $MediaStore$Video$VideoColumns> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -5424,134 +7111,196 @@ class MediaStore_Video_VideoColumns extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory MediaStore_Video_VideoColumns.implement(
-    $MediaStore_Video_VideoColumnsImpl $impl,
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $MediaStore$Video$VideoColumns $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = MediaStore_Video_VideoColumns.fromReference(
-      ProtectedJniExtensions.newPortProxy(
-        r'android.provider.MediaStore$Video$VideoColumns',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'android.provider.MediaStore$Video$VideoColumns',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory MediaStore$Video$VideoColumns.implement(
+    $MediaStore$Video$VideoColumns $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return MediaStore$Video$VideoColumns.fromReference(
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $MediaStore_Video_VideoColumnsImpl {
-  factory $MediaStore_Video_VideoColumnsImpl() =
-      _$MediaStore_Video_VideoColumnsImpl;
+abstract base mixin class $MediaStore$Video$VideoColumns {
+  factory $MediaStore$Video$VideoColumns() = _$MediaStore$Video$VideoColumns;
 }
 
-class _$MediaStore_Video_VideoColumnsImpl
-    implements $MediaStore_Video_VideoColumnsImpl {
-  _$MediaStore_Video_VideoColumnsImpl();
+final class _$MediaStore$Video$VideoColumns
+    with $MediaStore$Video$VideoColumns {
+  _$MediaStore$Video$VideoColumns();
 }
 
-final class $MediaStore_Video_VideoColumnsType
-    extends jni.JObjType<MediaStore_Video_VideoColumns> {
-  const $MediaStore_Video_VideoColumnsType();
+final class $MediaStore$Video$VideoColumns$NullableType
+    extends jni$_.JObjType<MediaStore$Video$VideoColumns?> {
+  @jni$_.internal
+  const $MediaStore$Video$VideoColumns$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Video$VideoColumns;';
 
-  @override
-  MediaStore_Video_VideoColumns fromReference(jni.JReference reference) =>
-      MediaStore_Video_VideoColumns.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video$VideoColumns? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Video$VideoColumns.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video$VideoColumns?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_Video_VideoColumnsType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$VideoColumns$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_Video_VideoColumnsType) &&
-        other is $MediaStore_Video_VideoColumnsType;
+    return other.runtimeType == ($MediaStore$Video$VideoColumns$NullableType) &&
+        other is $MediaStore$Video$VideoColumns$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore$Video
-class MediaStore_Video extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore_Video> $type = type;
+final class $MediaStore$Video$VideoColumns$Type
+    extends jni$_.JObjType<MediaStore$Video$VideoColumns> {
+  @jni$_.internal
+  const $MediaStore$Video$VideoColumns$Type();
 
-  MediaStore_Video.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Video$VideoColumns;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video$VideoColumns fromReference(jni$_.JReference reference) =>
+      MediaStore$Video$VideoColumns.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video$VideoColumns?> get nullableType =>
+      const $MediaStore$Video$VideoColumns$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$VideoColumns$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Video$VideoColumns$Type) &&
+        other is $MediaStore$Video$VideoColumns$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore$Video`
+class MediaStore$Video extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore$Video> $type;
+
+  @jni$_.internal
+  MediaStore$Video.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/provider/MediaStore$Video');
+      jni$_.JClass.forName(r'android/provider/MediaStore$Video');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStore_VideoType();
+  static const nullableType = $MediaStore$Video$NullableType();
+  static const type = $MediaStore$Video$Type();
   static final _id_DEFAULT_SORT_ORDER = _class.staticFieldId(
     r'DEFAULT_SORT_ORDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DEFAULT_SORT_ORDER
+  /// from: `static public final java.lang.String DEFAULT_SORT_ORDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DEFAULT_SORT_ORDER =>
-      _id_DEFAULT_SORT_ORDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get DEFAULT_SORT_ORDER =>
+      _id_DEFAULT_SORT_ORDER.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory MediaStore_Video() {
-    return MediaStore_Video.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory MediaStore$Video() {
+    return MediaStore$Video.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -5560,412 +7309,522 @@ class MediaStore_Video extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;)Landroid/database/Cursor;',
   );
 
-  static final _query = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _query = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings)
+  /// from: `static public android.database.Cursor query(android.content.ContentResolver contentResolver, android.net.Uri uri, java.lang.String[] strings)`
   /// The returned object must be released after use, by calling the [release] method.
-  static cursor_.Cursor query(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
-    jni.JArray<jni.JString> strings,
+  static cursor$_.Cursor? query(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
+    jni$_.JArray<jni$_.JString?>? strings,
   ) {
-    return _query(
-            _class.reference.pointer,
-            _id_query as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer,
-            strings.reference.pointer)
-        .object(const cursor_.$CursorType());
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
+    final _$strings = strings?.reference ?? jni$_.jNullReference;
+    return _query(_class.reference.pointer, _id_query as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer, _$uri.pointer, _$strings.pointer)
+        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
   }
 }
 
-final class $MediaStore_VideoType extends jni.JObjType<MediaStore_Video> {
-  const $MediaStore_VideoType();
+final class $MediaStore$Video$NullableType
+    extends jni$_.JObjType<MediaStore$Video?> {
+  @jni$_.internal
+  const $MediaStore$Video$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore$Video;';
 
-  @override
-  MediaStore_Video fromReference(jni.JReference reference) =>
-      MediaStore_Video.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : MediaStore$Video.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStore_VideoType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStore_VideoType) &&
-        other is $MediaStore_VideoType;
+    return other.runtimeType == ($MediaStore$Video$NullableType) &&
+        other is $MediaStore$Video$NullableType;
   }
 }
 
-/// from: android.provider.MediaStore
-class MediaStore extends jni.JObject {
-  @override
-  late final jni.JObjType<MediaStore> $type = type;
+final class $MediaStore$Video$Type extends jni$_.JObjType<MediaStore$Video> {
+  @jni$_.internal
+  const $MediaStore$Video$Type();
 
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore$Video;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore$Video fromReference(jni$_.JReference reference) =>
+      MediaStore$Video.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore$Video?> get nullableType =>
+      const $MediaStore$Video$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Video$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Video$Type) &&
+        other is $MediaStore$Video$Type;
+  }
+}
+
+/// from: `android.provider.MediaStore`
+class MediaStore extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<MediaStore> $type;
+
+  @jni$_.internal
   MediaStore.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/provider/MediaStore');
+  static final _class = jni$_.JClass.forName(r'android/provider/MediaStore');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $MediaStoreType();
+  static const nullableType = $MediaStore$NullableType();
+  static const type = $MediaStore$Type();
+  static final _id_ACCESS_MEDIA_OWNER_PACKAGE_NAME_PERMISSION =
+      _class.staticFieldId(
+    r'ACCESS_MEDIA_OWNER_PACKAGE_NAME_PERMISSION',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String ACCESS_MEDIA_OWNER_PACKAGE_NAME_PERMISSION`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get ACCESS_MEDIA_OWNER_PACKAGE_NAME_PERMISSION =>
+      _id_ACCESS_MEDIA_OWNER_PACKAGE_NAME_PERMISSION.get(
+          _class, const jni$_.JStringNullableType());
+
   static final _id_ACTION_IMAGE_CAPTURE = _class.staticFieldId(
     r'ACTION_IMAGE_CAPTURE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_IMAGE_CAPTURE
+  /// from: `static public final java.lang.String ACTION_IMAGE_CAPTURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_IMAGE_CAPTURE =>
-      _id_ACTION_IMAGE_CAPTURE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_IMAGE_CAPTURE =>
+      _id_ACTION_IMAGE_CAPTURE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACTION_IMAGE_CAPTURE_SECURE = _class.staticFieldId(
     r'ACTION_IMAGE_CAPTURE_SECURE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_IMAGE_CAPTURE_SECURE
+  /// from: `static public final java.lang.String ACTION_IMAGE_CAPTURE_SECURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_IMAGE_CAPTURE_SECURE =>
-      _id_ACTION_IMAGE_CAPTURE_SECURE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_IMAGE_CAPTURE_SECURE =>
+      _id_ACTION_IMAGE_CAPTURE_SECURE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACTION_PICK_IMAGES = _class.staticFieldId(
     r'ACTION_PICK_IMAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_PICK_IMAGES
+  /// from: `static public final java.lang.String ACTION_PICK_IMAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_PICK_IMAGES =>
-      _id_ACTION_PICK_IMAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_PICK_IMAGES =>
+      _id_ACTION_PICK_IMAGES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACTION_PICK_IMAGES_SETTINGS = _class.staticFieldId(
     r'ACTION_PICK_IMAGES_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_PICK_IMAGES_SETTINGS
+  /// from: `static public final java.lang.String ACTION_PICK_IMAGES_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_PICK_IMAGES_SETTINGS =>
-      _id_ACTION_PICK_IMAGES_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_PICK_IMAGES_SETTINGS =>
+      _id_ACTION_PICK_IMAGES_SETTINGS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACTION_REVIEW = _class.staticFieldId(
     r'ACTION_REVIEW',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_REVIEW
+  /// from: `static public final java.lang.String ACTION_REVIEW`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_REVIEW =>
-      _id_ACTION_REVIEW.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_REVIEW =>
+      _id_ACTION_REVIEW.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACTION_REVIEW_SECURE = _class.staticFieldId(
     r'ACTION_REVIEW_SECURE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_REVIEW_SECURE
+  /// from: `static public final java.lang.String ACTION_REVIEW_SECURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_REVIEW_SECURE =>
-      _id_ACTION_REVIEW_SECURE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_REVIEW_SECURE =>
+      _id_ACTION_REVIEW_SECURE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACTION_VIDEO_CAPTURE = _class.staticFieldId(
     r'ACTION_VIDEO_CAPTURE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTION_VIDEO_CAPTURE
+  /// from: `static public final java.lang.String ACTION_VIDEO_CAPTURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTION_VIDEO_CAPTURE =>
-      _id_ACTION_VIDEO_CAPTURE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTION_VIDEO_CAPTURE =>
+      _id_ACTION_VIDEO_CAPTURE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_AUTHORITY = _class.staticFieldId(
     r'AUTHORITY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String AUTHORITY
+  /// from: `static public final java.lang.String AUTHORITY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get AUTHORITY =>
-      _id_AUTHORITY.get(_class, const jni.JStringType());
+  static jni$_.JString? get AUTHORITY =>
+      _id_AUTHORITY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_AUTHORITY_URI = _class.staticFieldId(
     r'AUTHORITY_URI',
     r'Landroid/net/Uri;',
   );
 
-  /// from: static public final android.net.Uri AUTHORITY_URI
+  /// from: `static public final android.net.Uri AUTHORITY_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri get AUTHORITY_URI =>
-      _id_AUTHORITY_URI.get(_class, const uri_.$UriType());
+  static uri$_.Uri? get AUTHORITY_URI =>
+      _id_AUTHORITY_URI.get(_class, const uri$_.$Uri$NullableType());
 
   static final _id_EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT = _class.staticFieldId(
     r'EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT
+  /// from: `static public final java.lang.String EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT =>
+  static jni$_.JString? get EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT =>
       _id_EXTRA_ACCEPT_ORIGINAL_MEDIA_FORMAT.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_BRIGHTNESS = _class.staticFieldId(
     r'EXTRA_BRIGHTNESS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_BRIGHTNESS
+  /// from: `static public final java.lang.String EXTRA_BRIGHTNESS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_BRIGHTNESS =>
-      _id_EXTRA_BRIGHTNESS.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_BRIGHTNESS =>
+      _id_EXTRA_BRIGHTNESS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_DURATION_LIMIT = _class.staticFieldId(
     r'EXTRA_DURATION_LIMIT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_DURATION_LIMIT
+  /// from: `static public final java.lang.String EXTRA_DURATION_LIMIT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_DURATION_LIMIT =>
-      _id_EXTRA_DURATION_LIMIT.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_DURATION_LIMIT =>
+      _id_EXTRA_DURATION_LIMIT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_FINISH_ON_COMPLETION = _class.staticFieldId(
     r'EXTRA_FINISH_ON_COMPLETION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_FINISH_ON_COMPLETION
+  /// from: `static public final java.lang.String EXTRA_FINISH_ON_COMPLETION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_FINISH_ON_COMPLETION =>
-      _id_EXTRA_FINISH_ON_COMPLETION.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_FINISH_ON_COMPLETION =>
+      _id_EXTRA_FINISH_ON_COMPLETION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_FULL_SCREEN = _class.staticFieldId(
     r'EXTRA_FULL_SCREEN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_FULL_SCREEN
+  /// from: `static public final java.lang.String EXTRA_FULL_SCREEN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_FULL_SCREEN =>
-      _id_EXTRA_FULL_SCREEN.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_FULL_SCREEN =>
+      _id_EXTRA_FULL_SCREEN.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_ALBUM = _class.staticFieldId(
     r'EXTRA_MEDIA_ALBUM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_ALBUM
+  /// from: `static public final java.lang.String EXTRA_MEDIA_ALBUM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_ALBUM =>
-      _id_EXTRA_MEDIA_ALBUM.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_ALBUM =>
+      _id_EXTRA_MEDIA_ALBUM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_ARTIST = _class.staticFieldId(
     r'EXTRA_MEDIA_ARTIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_ARTIST
+  /// from: `static public final java.lang.String EXTRA_MEDIA_ARTIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_ARTIST =>
-      _id_EXTRA_MEDIA_ARTIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_ARTIST =>
+      _id_EXTRA_MEDIA_ARTIST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_CAPABILITIES = _class.staticFieldId(
     r'EXTRA_MEDIA_CAPABILITIES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_CAPABILITIES
+  /// from: `static public final java.lang.String EXTRA_MEDIA_CAPABILITIES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_CAPABILITIES =>
-      _id_EXTRA_MEDIA_CAPABILITIES.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_CAPABILITIES =>
+      _id_EXTRA_MEDIA_CAPABILITIES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_CAPABILITIES_UID = _class.staticFieldId(
     r'EXTRA_MEDIA_CAPABILITIES_UID',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_CAPABILITIES_UID
+  /// from: `static public final java.lang.String EXTRA_MEDIA_CAPABILITIES_UID`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_CAPABILITIES_UID =>
-      _id_EXTRA_MEDIA_CAPABILITIES_UID.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_CAPABILITIES_UID =>
+      _id_EXTRA_MEDIA_CAPABILITIES_UID.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_FOCUS = _class.staticFieldId(
     r'EXTRA_MEDIA_FOCUS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_FOCUS
+  /// from: `static public final java.lang.String EXTRA_MEDIA_FOCUS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_FOCUS =>
-      _id_EXTRA_MEDIA_FOCUS.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_FOCUS =>
+      _id_EXTRA_MEDIA_FOCUS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_GENRE = _class.staticFieldId(
     r'EXTRA_MEDIA_GENRE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_GENRE
+  /// from: `static public final java.lang.String EXTRA_MEDIA_GENRE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_GENRE =>
-      _id_EXTRA_MEDIA_GENRE.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_GENRE =>
+      _id_EXTRA_MEDIA_GENRE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_PLAYLIST = _class.staticFieldId(
     r'EXTRA_MEDIA_PLAYLIST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_PLAYLIST
+  /// from: `static public final java.lang.String EXTRA_MEDIA_PLAYLIST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_PLAYLIST =>
-      _id_EXTRA_MEDIA_PLAYLIST.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_PLAYLIST =>
+      _id_EXTRA_MEDIA_PLAYLIST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_RADIO_CHANNEL = _class.staticFieldId(
     r'EXTRA_MEDIA_RADIO_CHANNEL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_RADIO_CHANNEL
+  /// from: `static public final java.lang.String EXTRA_MEDIA_RADIO_CHANNEL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_RADIO_CHANNEL =>
-      _id_EXTRA_MEDIA_RADIO_CHANNEL.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_RADIO_CHANNEL =>
+      _id_EXTRA_MEDIA_RADIO_CHANNEL.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_MEDIA_TITLE = _class.staticFieldId(
     r'EXTRA_MEDIA_TITLE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_MEDIA_TITLE
+  /// from: `static public final java.lang.String EXTRA_MEDIA_TITLE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_MEDIA_TITLE =>
-      _id_EXTRA_MEDIA_TITLE.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_MEDIA_TITLE =>
+      _id_EXTRA_MEDIA_TITLE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_OUTPUT = _class.staticFieldId(
     r'EXTRA_OUTPUT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_OUTPUT
+  /// from: `static public final java.lang.String EXTRA_OUTPUT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_OUTPUT =>
-      _id_EXTRA_OUTPUT.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_OUTPUT =>
+      _id_EXTRA_OUTPUT.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_EXTRA_PICK_IMAGES_ACCENT_COLOR = _class.staticFieldId(
+    r'EXTRA_PICK_IMAGES_ACCENT_COLOR',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String EXTRA_PICK_IMAGES_ACCENT_COLOR`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get EXTRA_PICK_IMAGES_ACCENT_COLOR =>
+      _id_EXTRA_PICK_IMAGES_ACCENT_COLOR.get(
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_EXTRA_PICK_IMAGES_IN_ORDER = _class.staticFieldId(
+    r'EXTRA_PICK_IMAGES_IN_ORDER',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String EXTRA_PICK_IMAGES_IN_ORDER`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get EXTRA_PICK_IMAGES_IN_ORDER =>
+      _id_EXTRA_PICK_IMAGES_IN_ORDER.get(
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_EXTRA_PICK_IMAGES_LAUNCH_TAB = _class.staticFieldId(
+    r'EXTRA_PICK_IMAGES_LAUNCH_TAB',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String EXTRA_PICK_IMAGES_LAUNCH_TAB`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get EXTRA_PICK_IMAGES_LAUNCH_TAB =>
+      _id_EXTRA_PICK_IMAGES_LAUNCH_TAB.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_PICK_IMAGES_MAX = _class.staticFieldId(
     r'EXTRA_PICK_IMAGES_MAX',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_PICK_IMAGES_MAX
+  /// from: `static public final java.lang.String EXTRA_PICK_IMAGES_MAX`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_PICK_IMAGES_MAX =>
-      _id_EXTRA_PICK_IMAGES_MAX.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_PICK_IMAGES_MAX =>
+      _id_EXTRA_PICK_IMAGES_MAX.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_SCREEN_ORIENTATION = _class.staticFieldId(
     r'EXTRA_SCREEN_ORIENTATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_SCREEN_ORIENTATION
+  /// from: `static public final java.lang.String EXTRA_SCREEN_ORIENTATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_SCREEN_ORIENTATION =>
-      _id_EXTRA_SCREEN_ORIENTATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_SCREEN_ORIENTATION =>
+      _id_EXTRA_SCREEN_ORIENTATION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_SHOW_ACTION_ICONS = _class.staticFieldId(
     r'EXTRA_SHOW_ACTION_ICONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_SHOW_ACTION_ICONS
+  /// from: `static public final java.lang.String EXTRA_SHOW_ACTION_ICONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_SHOW_ACTION_ICONS =>
-      _id_EXTRA_SHOW_ACTION_ICONS.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_SHOW_ACTION_ICONS =>
+      _id_EXTRA_SHOW_ACTION_ICONS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_SIZE_LIMIT = _class.staticFieldId(
     r'EXTRA_SIZE_LIMIT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_SIZE_LIMIT
+  /// from: `static public final java.lang.String EXTRA_SIZE_LIMIT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_SIZE_LIMIT =>
-      _id_EXTRA_SIZE_LIMIT.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_SIZE_LIMIT =>
+      _id_EXTRA_SIZE_LIMIT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXTRA_VIDEO_QUALITY = _class.staticFieldId(
     r'EXTRA_VIDEO_QUALITY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXTRA_VIDEO_QUALITY
+  /// from: `static public final java.lang.String EXTRA_VIDEO_QUALITY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXTRA_VIDEO_QUALITY =>
-      _id_EXTRA_VIDEO_QUALITY.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXTRA_VIDEO_QUALITY =>
+      _id_EXTRA_VIDEO_QUALITY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH = _class.staticFieldId(
     r'INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH
+  /// from: `static public final java.lang.String INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH =>
+  static jni$_.JString? get INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH =>
       _id_INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_MEDIA_SEARCH = _class.staticFieldId(
     r'INTENT_ACTION_MEDIA_SEARCH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_MEDIA_SEARCH
+  /// from: `static public final java.lang.String INTENT_ACTION_MEDIA_SEARCH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_MEDIA_SEARCH =>
-      _id_INTENT_ACTION_MEDIA_SEARCH.get(_class, const jni.JStringType());
+  static jni$_.JString? get INTENT_ACTION_MEDIA_SEARCH =>
+      _id_INTENT_ACTION_MEDIA_SEARCH.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_MUSIC_PLAYER = _class.staticFieldId(
     r'INTENT_ACTION_MUSIC_PLAYER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_MUSIC_PLAYER
+  /// from: `static public final java.lang.String INTENT_ACTION_MUSIC_PLAYER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_MUSIC_PLAYER =>
-      _id_INTENT_ACTION_MUSIC_PLAYER.get(_class, const jni.JStringType());
+  static jni$_.JString? get INTENT_ACTION_MUSIC_PLAYER =>
+      _id_INTENT_ACTION_MUSIC_PLAYER.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_STILL_IMAGE_CAMERA = _class.staticFieldId(
     r'INTENT_ACTION_STILL_IMAGE_CAMERA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_STILL_IMAGE_CAMERA
+  /// from: `static public final java.lang.String INTENT_ACTION_STILL_IMAGE_CAMERA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_STILL_IMAGE_CAMERA =>
-      _id_INTENT_ACTION_STILL_IMAGE_CAMERA.get(_class, const jni.JStringType());
+  static jni$_.JString? get INTENT_ACTION_STILL_IMAGE_CAMERA =>
+      _id_INTENT_ACTION_STILL_IMAGE_CAMERA.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE =
       _class.staticFieldId(
@@ -5973,74 +7832,75 @@ class MediaStore extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE
+  /// from: `static public final java.lang.String INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE =>
+  static jni$_.JString? get INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE =>
       _id_INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_TEXT_OPEN_FROM_SEARCH = _class.staticFieldId(
     r'INTENT_ACTION_TEXT_OPEN_FROM_SEARCH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_TEXT_OPEN_FROM_SEARCH
+  /// from: `static public final java.lang.String INTENT_ACTION_TEXT_OPEN_FROM_SEARCH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_TEXT_OPEN_FROM_SEARCH =>
+  static jni$_.JString? get INTENT_ACTION_TEXT_OPEN_FROM_SEARCH =>
       _id_INTENT_ACTION_TEXT_OPEN_FROM_SEARCH.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_VIDEO_CAMERA = _class.staticFieldId(
     r'INTENT_ACTION_VIDEO_CAMERA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_VIDEO_CAMERA
+  /// from: `static public final java.lang.String INTENT_ACTION_VIDEO_CAMERA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_VIDEO_CAMERA =>
-      _id_INTENT_ACTION_VIDEO_CAMERA.get(_class, const jni.JStringType());
+  static jni$_.JString? get INTENT_ACTION_VIDEO_CAMERA =>
+      _id_INTENT_ACTION_VIDEO_CAMERA.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH = _class.staticFieldId(
     r'INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH
+  /// from: `static public final java.lang.String INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH =>
+  static jni$_.JString? get INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH =>
       _id_INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
-  /// from: static public final int MATCH_DEFAULT
+  /// from: `static public final int MATCH_DEFAULT`
   static const MATCH_DEFAULT = 0;
 
-  /// from: static public final int MATCH_EXCLUDE
+  /// from: `static public final int MATCH_EXCLUDE`
   static const MATCH_EXCLUDE = 2;
 
-  /// from: static public final int MATCH_INCLUDE
+  /// from: `static public final int MATCH_INCLUDE`
   static const MATCH_INCLUDE = 1;
 
-  /// from: static public final int MATCH_ONLY
+  /// from: `static public final int MATCH_ONLY`
   static const MATCH_ONLY = 3;
   static final _id_MEDIA_IGNORE_FILENAME = _class.staticFieldId(
     r'MEDIA_IGNORE_FILENAME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MEDIA_IGNORE_FILENAME
+  /// from: `static public final java.lang.String MEDIA_IGNORE_FILENAME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MEDIA_IGNORE_FILENAME =>
-      _id_MEDIA_IGNORE_FILENAME.get(_class, const jni.JStringType());
+  static jni$_.JString? get MEDIA_IGNORE_FILENAME =>
+      _id_MEDIA_IGNORE_FILENAME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MEDIA_SCANNER_VOLUME = _class.staticFieldId(
     r'MEDIA_SCANNER_VOLUME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MEDIA_SCANNER_VOLUME
+  /// from: `static public final java.lang.String MEDIA_SCANNER_VOLUME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MEDIA_SCANNER_VOLUME =>
-      _id_MEDIA_SCANNER_VOLUME.get(_class, const jni.JStringType());
+  static jni$_.JString? get MEDIA_SCANNER_VOLUME =>
+      _id_MEDIA_SCANNER_VOLUME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_META_DATA_REVIEW_GALLERY_PREWARM_SERVICE =
       _class.staticFieldId(
@@ -6048,11 +7908,11 @@ class MediaStore extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String META_DATA_REVIEW_GALLERY_PREWARM_SERVICE
+  /// from: `static public final java.lang.String META_DATA_REVIEW_GALLERY_PREWARM_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get META_DATA_REVIEW_GALLERY_PREWARM_SERVICE =>
+  static jni$_.JString? get META_DATA_REVIEW_GALLERY_PREWARM_SERVICE =>
       _id_META_DATA_REVIEW_GALLERY_PREWARM_SERVICE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE =
       _class.staticFieldId(
@@ -6060,125 +7920,145 @@ class MediaStore extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE
+  /// from: `static public final java.lang.String META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE =>
+  static jni$_.JString? get META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE =>
       _id_META_DATA_STILL_IMAGE_CAMERA_PREWARM_SERVICE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
+  /// from: `static public final int PICK_IMAGES_TAB_ALBUMS`
+  static const PICK_IMAGES_TAB_ALBUMS = 0;
+
+  /// from: `static public final int PICK_IMAGES_TAB_IMAGES`
+  static const PICK_IMAGES_TAB_IMAGES = 1;
   static final _id_QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES =
       _class.staticFieldId(
     r'QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES
+  /// from: `static public final java.lang.String QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES =>
+  static jni$_.JString? get QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES =>
       _id_QUERY_ARG_INCLUDE_RECENTLY_UNMOUNTED_VOLUMES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_QUERY_ARG_LATEST_SELECTION_ONLY = _class.staticFieldId(
+    r'QUERY_ARG_LATEST_SELECTION_ONLY',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String QUERY_ARG_LATEST_SELECTION_ONLY`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get QUERY_ARG_LATEST_SELECTION_ONLY =>
+      _id_QUERY_ARG_LATEST_SELECTION_ONLY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_QUERY_ARG_MATCH_FAVORITE = _class.staticFieldId(
     r'QUERY_ARG_MATCH_FAVORITE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String QUERY_ARG_MATCH_FAVORITE
+  /// from: `static public final java.lang.String QUERY_ARG_MATCH_FAVORITE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get QUERY_ARG_MATCH_FAVORITE =>
-      _id_QUERY_ARG_MATCH_FAVORITE.get(_class, const jni.JStringType());
+  static jni$_.JString? get QUERY_ARG_MATCH_FAVORITE =>
+      _id_QUERY_ARG_MATCH_FAVORITE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_QUERY_ARG_MATCH_PENDING = _class.staticFieldId(
     r'QUERY_ARG_MATCH_PENDING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String QUERY_ARG_MATCH_PENDING
+  /// from: `static public final java.lang.String QUERY_ARG_MATCH_PENDING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get QUERY_ARG_MATCH_PENDING =>
-      _id_QUERY_ARG_MATCH_PENDING.get(_class, const jni.JStringType());
+  static jni$_.JString? get QUERY_ARG_MATCH_PENDING =>
+      _id_QUERY_ARG_MATCH_PENDING.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_QUERY_ARG_MATCH_TRASHED = _class.staticFieldId(
     r'QUERY_ARG_MATCH_TRASHED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String QUERY_ARG_MATCH_TRASHED
+  /// from: `static public final java.lang.String QUERY_ARG_MATCH_TRASHED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get QUERY_ARG_MATCH_TRASHED =>
-      _id_QUERY_ARG_MATCH_TRASHED.get(_class, const jni.JStringType());
+  static jni$_.JString? get QUERY_ARG_MATCH_TRASHED =>
+      _id_QUERY_ARG_MATCH_TRASHED.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_QUERY_ARG_RELATED_URI = _class.staticFieldId(
     r'QUERY_ARG_RELATED_URI',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String QUERY_ARG_RELATED_URI
+  /// from: `static public final java.lang.String QUERY_ARG_RELATED_URI`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get QUERY_ARG_RELATED_URI =>
-      _id_QUERY_ARG_RELATED_URI.get(_class, const jni.JStringType());
+  static jni$_.JString? get QUERY_ARG_RELATED_URI =>
+      _id_QUERY_ARG_RELATED_URI.get(_class, const jni$_.JStringNullableType());
 
   static final _id_UNKNOWN_STRING = _class.staticFieldId(
     r'UNKNOWN_STRING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String UNKNOWN_STRING
+  /// from: `static public final java.lang.String UNKNOWN_STRING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get UNKNOWN_STRING =>
-      _id_UNKNOWN_STRING.get(_class, const jni.JStringType());
+  static jni$_.JString? get UNKNOWN_STRING =>
+      _id_UNKNOWN_STRING.get(_class, const jni$_.JStringNullableType());
 
   static final _id_VOLUME_EXTERNAL = _class.staticFieldId(
     r'VOLUME_EXTERNAL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String VOLUME_EXTERNAL
+  /// from: `static public final java.lang.String VOLUME_EXTERNAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get VOLUME_EXTERNAL =>
-      _id_VOLUME_EXTERNAL.get(_class, const jni.JStringType());
+  static jni$_.JString? get VOLUME_EXTERNAL =>
+      _id_VOLUME_EXTERNAL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_VOLUME_EXTERNAL_PRIMARY = _class.staticFieldId(
     r'VOLUME_EXTERNAL_PRIMARY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String VOLUME_EXTERNAL_PRIMARY
+  /// from: `static public final java.lang.String VOLUME_EXTERNAL_PRIMARY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get VOLUME_EXTERNAL_PRIMARY =>
-      _id_VOLUME_EXTERNAL_PRIMARY.get(_class, const jni.JStringType());
+  static jni$_.JString? get VOLUME_EXTERNAL_PRIMARY =>
+      _id_VOLUME_EXTERNAL_PRIMARY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_VOLUME_INTERNAL = _class.staticFieldId(
     r'VOLUME_INTERNAL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String VOLUME_INTERNAL
+  /// from: `static public final java.lang.String VOLUME_INTERNAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get VOLUME_INTERNAL =>
-      _id_VOLUME_INTERNAL.get(_class, const jni.JStringType());
+  static jni$_.JString? get VOLUME_INTERNAL =>
+      _id_VOLUME_INTERNAL.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory MediaStore() {
     return MediaStore.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -6187,22 +8067,22 @@ class MediaStore extends jni.JObject {
     r'()I',
   );
 
-  static final _getPickImagesMaxLimit = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getPickImagesMaxLimit = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallStaticIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: static public int getPickImagesMaxLimit()
+  /// from: `static public int getPickImagesMaxLimit()`
   static int getPickImagesMaxLimit() {
     return _getPickImagesMaxLimit(_class.reference.pointer,
-            _id_getPickImagesMaxLimit as jni.JMethodIDPtr)
+            _id_getPickImagesMaxLimit as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -6211,25 +8091,26 @@ class MediaStore extends jni.JObject {
     r'(Landroid/net/Uri;)Landroid/net/Uri;',
   );
 
-  static final _setIncludePending = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _setIncludePending = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri setIncludePending(android.net.Uri uri)
+  /// from: `static public android.net.Uri setIncludePending(android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri setIncludePending(
-    uri_.Uri uri,
+  static uri$_.Uri? setIncludePending(
+    uri$_.Uri? uri,
   ) {
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _setIncludePending(_class.reference.pointer,
-            _id_setIncludePending as jni.JMethodIDPtr, uri.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_setIncludePending as jni$_.JMethodIDPtr, _$uri.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_setRequireOriginal = _class.staticMethodId(
@@ -6237,25 +8118,26 @@ class MediaStore extends jni.JObject {
     r'(Landroid/net/Uri;)Landroid/net/Uri;',
   );
 
-  static final _setRequireOriginal = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _setRequireOriginal = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri setRequireOriginal(android.net.Uri uri)
+  /// from: `static public android.net.Uri setRequireOriginal(android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri setRequireOriginal(
-    uri_.Uri uri,
+  static uri$_.Uri? setRequireOriginal(
+    uri$_.Uri? uri,
   ) {
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _setRequireOriginal(_class.reference.pointer,
-            _id_setRequireOriginal as jni.JMethodIDPtr, uri.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_setRequireOriginal as jni$_.JMethodIDPtr, _$uri.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getRequireOriginal = _class.staticMethodId(
@@ -6263,23 +8145,24 @@ class MediaStore extends jni.JObject {
     r'(Landroid/net/Uri;)Z',
   );
 
-  static final _getRequireOriginal = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getRequireOriginal = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticBooleanMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public boolean getRequireOriginal(android.net.Uri uri)
+  /// from: `static public boolean getRequireOriginal(android.net.Uri uri)`
   static bool getRequireOriginal(
-    uri_.Uri uri,
+    uri$_.Uri? uri,
   ) {
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _getRequireOriginal(_class.reference.pointer,
-            _id_getRequireOriginal as jni.JMethodIDPtr, uri.reference.pointer)
+            _id_getRequireOriginal as jni$_.JMethodIDPtr, _$uri.pointer)
         .boolean;
   }
 
@@ -6289,32 +8172,38 @@ class MediaStore extends jni.JObject {
   );
 
   static final _getOriginalMediaFormatFileDescriptor =
-      ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
                           (
-                            ffi.Pointer<ffi.Void>,
-                            ffi.Pointer<ffi.Void>
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
                           )>)>>('globalEnv_CallStaticObjectMethod')
           .asFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.os.ParcelFileDescriptor getOriginalMediaFormatFileDescriptor(android.content.Context context, android.os.ParcelFileDescriptor parcelFileDescriptor)
+  /// from: `static public android.os.ParcelFileDescriptor getOriginalMediaFormatFileDescriptor(android.content.Context context, android.os.ParcelFileDescriptor parcelFileDescriptor)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject getOriginalMediaFormatFileDescriptor(
-    context_.Context context,
-    jni.JObject parcelFileDescriptor,
+  static jni$_.JObject? getOriginalMediaFormatFileDescriptor(
+    context$_.Context? context,
+    jni$_.JObject? parcelFileDescriptor,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$parcelFileDescriptor =
+        parcelFileDescriptor?.reference ?? jni$_.jNullReference;
     return _getOriginalMediaFormatFileDescriptor(
             _class.reference.pointer,
-            _id_getOriginalMediaFormatFileDescriptor as jni.JMethodIDPtr,
-            context.reference.pointer,
-            parcelFileDescriptor.reference.pointer)
-        .object(const jni.JObjectType());
+            _id_getOriginalMediaFormatFileDescriptor as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$parcelFileDescriptor.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_createWriteRequest = _class.staticMethodId(
@@ -6322,32 +8211,38 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;',
   );
 
-  static final _createWriteRequest = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _createWriteRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.app.PendingIntent createWriteRequest(android.content.ContentResolver contentResolver, java.util.Collection collection)
+  /// from: `static public android.app.PendingIntent createWriteRequest(android.content.ContentResolver contentResolver, java.util.Collection collection)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject createWriteRequest(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JObject collection,
+  static jni$_.JObject? createWriteRequest(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JObject? collection,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$collection = collection?.reference ?? jni$_.jNullReference;
     return _createWriteRequest(
             _class.reference.pointer,
-            _id_createWriteRequest as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            collection.reference.pointer)
-        .object(const jni.JObjectType());
+            _id_createWriteRequest as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$collection.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_createTrashRequest = _class.staticMethodId(
@@ -6355,35 +8250,42 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;',
   );
 
-  static final _createTrashRequest = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _createTrashRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        $Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              int)>();
 
-  /// from: static public android.app.PendingIntent createTrashRequest(android.content.ContentResolver contentResolver, java.util.Collection collection, boolean z)
+  /// from: `static public android.app.PendingIntent createTrashRequest(android.content.ContentResolver contentResolver, java.util.Collection collection, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject createTrashRequest(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JObject collection,
+  static jni$_.JObject? createTrashRequest(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JObject? collection,
     bool z,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$collection = collection?.reference ?? jni$_.jNullReference;
     return _createTrashRequest(
             _class.reference.pointer,
-            _id_createTrashRequest as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            collection.reference.pointer,
+            _id_createTrashRequest as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$collection.pointer,
             z ? 1 : 0)
-        .object(const jni.JObjectType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_createFavoriteRequest = _class.staticMethodId(
@@ -6391,35 +8293,42 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/util/Collection;Z)Landroid/app/PendingIntent;',
   );
 
-  static final _createFavoriteRequest = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _createFavoriteRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        $Int32
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              int)>();
 
-  /// from: static public android.app.PendingIntent createFavoriteRequest(android.content.ContentResolver contentResolver, java.util.Collection collection, boolean z)
+  /// from: `static public android.app.PendingIntent createFavoriteRequest(android.content.ContentResolver contentResolver, java.util.Collection collection, boolean z)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject createFavoriteRequest(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JObject collection,
+  static jni$_.JObject? createFavoriteRequest(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JObject? collection,
     bool z,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$collection = collection?.reference ?? jni$_.jNullReference;
     return _createFavoriteRequest(
             _class.reference.pointer,
-            _id_createFavoriteRequest as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            collection.reference.pointer,
+            _id_createFavoriteRequest as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$collection.pointer,
             z ? 1 : 0)
-        .object(const jni.JObjectType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_createDeleteRequest = _class.staticMethodId(
@@ -6427,32 +8336,38 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/util/Collection;)Landroid/app/PendingIntent;',
   );
 
-  static final _createDeleteRequest = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _createDeleteRequest = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.app.PendingIntent createDeleteRequest(android.content.ContentResolver contentResolver, java.util.Collection collection)
+  /// from: `static public android.app.PendingIntent createDeleteRequest(android.content.ContentResolver contentResolver, java.util.Collection collection)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JObject createDeleteRequest(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JObject collection,
+  static jni$_.JObject? createDeleteRequest(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JObject? collection,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$collection = collection?.reference ?? jni$_.jNullReference;
     return _createDeleteRequest(
             _class.reference.pointer,
-            _id_createDeleteRequest as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            collection.reference.pointer)
-        .object(const jni.JObjectType());
+            _id_createDeleteRequest as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$collection.pointer)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getExternalVolumeNames = _class.staticMethodId(
@@ -6460,27 +8375,28 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;)Ljava/util/Set;',
   );
 
-  static final _getExternalVolumeNames = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getExternalVolumeNames = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.util.Set getExternalVolumeNames(android.content.Context context)
+  /// from: `static public java.util.Set getExternalVolumeNames(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JSet<jni.JString> getExternalVolumeNames(
-    context_.Context context,
+  static jni$_.JSet<jni$_.JString?>? getExternalVolumeNames(
+    context$_.Context? context,
   ) {
-    return _getExternalVolumeNames(
-            _class.reference.pointer,
-            _id_getExternalVolumeNames as jni.JMethodIDPtr,
-            context.reference.pointer)
-        .object(const jni.JSetType(jni.JStringType()));
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    return _getExternalVolumeNames(_class.reference.pointer,
+            _id_getExternalVolumeNames as jni$_.JMethodIDPtr, _$context.pointer)
+        .object<jni$_.JSet<jni$_.JString?>?>(
+            const jni$_.JSetNullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getRecentExternalVolumeNames = _class.staticMethodId(
@@ -6488,27 +8404,31 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;)Ljava/util/Set;',
   );
 
-  static final _getRecentExternalVolumeNames = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallStaticObjectMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+  static final _getRecentExternalVolumeNames =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallStaticObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.util.Set getRecentExternalVolumeNames(android.content.Context context)
+  /// from: `static public java.util.Set getRecentExternalVolumeNames(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JSet<jni.JString> getRecentExternalVolumeNames(
-    context_.Context context,
+  static jni$_.JSet<jni$_.JString?>? getRecentExternalVolumeNames(
+    context$_.Context? context,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
     return _getRecentExternalVolumeNames(
             _class.reference.pointer,
-            _id_getRecentExternalVolumeNames as jni.JMethodIDPtr,
-            context.reference.pointer)
-        .object(const jni.JSetType(jni.JStringType()));
+            _id_getRecentExternalVolumeNames as jni$_.JMethodIDPtr,
+            _$context.pointer)
+        .object<jni$_.JSet<jni$_.JString?>?>(
+            const jni$_.JSetNullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_getVolumeName = _class.staticMethodId(
@@ -6516,25 +8436,26 @@ class MediaStore extends jni.JObject {
     r'(Landroid/net/Uri;)Ljava/lang/String;',
   );
 
-  static final _getVolumeName = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getVolumeName = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.lang.String getVolumeName(android.net.Uri uri)
+  /// from: `static public java.lang.String getVolumeName(android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString getVolumeName(
-    uri_.Uri uri,
+  static jni$_.JString? getVolumeName(
+    uri$_.Uri? uri,
   ) {
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _getVolumeName(_class.reference.pointer,
-            _id_getVolumeName as jni.JMethodIDPtr, uri.reference.pointer)
-        .object(const jni.JStringType());
+            _id_getVolumeName as jni$_.JMethodIDPtr, _$uri.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getMediaScannerUri = _class.staticMethodId(
@@ -6542,24 +8463,24 @@ class MediaStore extends jni.JObject {
     r'()Landroid/net/Uri;',
   );
 
-  static final _getMediaScannerUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getMediaScannerUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: static public android.net.Uri getMediaScannerUri()
+  /// from: `static public android.net.Uri getMediaScannerUri()`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getMediaScannerUri() {
+  static uri$_.Uri? getMediaScannerUri() {
     return _getMediaScannerUri(_class.reference.pointer,
-            _id_getMediaScannerUri as jni.JMethodIDPtr)
-        .object(const uri_.$UriType());
+            _id_getMediaScannerUri as jni$_.JMethodIDPtr)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getVersion = _class.staticMethodId(
@@ -6567,58 +8488,64 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;)Ljava/lang/String;',
   );
 
-  static final _getVersion = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _getVersion = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.lang.String getVersion(android.content.Context context)
+  /// from: `static public java.lang.String getVersion(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString getVersion(
-    context_.Context context,
+  static jni$_.JString? getVersion(
+    context$_.Context? context,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
     return _getVersion(_class.reference.pointer,
-            _id_getVersion as jni.JMethodIDPtr, context.reference.pointer)
-        .object(const jni.JStringType());
+            _id_getVersion as jni$_.JMethodIDPtr, _$context.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
-  static final _id_getVersion1 = _class.staticMethodId(
+  static final _id_getVersion$1 = _class.staticMethodId(
     r'getVersion',
     r'(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;',
   );
 
-  static final _getVersion1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getVersion$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.lang.String getVersion(android.content.Context context, java.lang.String string)
+  /// from: `static public java.lang.String getVersion(android.content.Context context, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString getVersion1(
-    context_.Context context,
-    jni.JString string,
+  static jni$_.JString? getVersion$1(
+    context$_.Context? context,
+    jni$_.JString? string,
   ) {
-    return _getVersion1(
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return _getVersion$1(
             _class.reference.pointer,
-            _id_getVersion1 as jni.JMethodIDPtr,
-            context.reference.pointer,
-            string.reference.pointer)
-        .object(const jni.JStringType());
+            _id_getVersion$1 as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$string.pointer)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getGeneration = _class.staticMethodId(
@@ -6626,30 +8553,35 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;Ljava/lang/String;)J',
   );
 
-  static final _getGeneration = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getGeneration = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticLongMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public long getGeneration(android.content.Context context, java.lang.String string)
+  /// from: `static public long getGeneration(android.content.Context context, java.lang.String string)`
   static int getGeneration(
-    context_.Context context,
-    jni.JString string,
+    context$_.Context? context,
+    jni$_.JString? string,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _getGeneration(
             _class.reference.pointer,
-            _id_getGeneration as jni.JMethodIDPtr,
-            context.reference.pointer,
-            string.reference.pointer)
+            _id_getGeneration as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$string.pointer)
         .long;
   }
 
@@ -6658,32 +8590,37 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;',
   );
 
-  static final _getDocumentUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getDocumentUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getDocumentUri(android.content.Context context, android.net.Uri uri)
+  /// from: `static public android.net.Uri getDocumentUri(android.content.Context context, android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getDocumentUri(
-    context_.Context context,
-    uri_.Uri uri,
+  static uri$_.Uri? getDocumentUri(
+    context$_.Context? context,
+    uri$_.Uri? uri,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _getDocumentUri(
             _class.reference.pointer,
-            _id_getDocumentUri as jni.JMethodIDPtr,
-            context.reference.pointer,
-            uri.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getDocumentUri as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$uri.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_getMediaUri = _class.staticMethodId(
@@ -6691,32 +8628,37 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;',
   );
 
-  static final _getMediaUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getMediaUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getMediaUri(android.content.Context context, android.net.Uri uri)
+  /// from: `static public android.net.Uri getMediaUri(android.content.Context context, android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getMediaUri(
-    context_.Context context,
-    uri_.Uri uri,
+  static uri$_.Uri? getMediaUri(
+    context$_.Context? context,
+    uri$_.Uri? uri,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _getMediaUri(
             _class.reference.pointer,
-            _id_getMediaUri as jni.JMethodIDPtr,
-            context.reference.pointer,
-            uri.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getMediaUri as jni$_.JMethodIDPtr,
+            _$context.pointer,
+            _$uri.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
   static final _id_isCurrentSystemGallery = _class.staticMethodId(
@@ -6724,33 +8666,40 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;ILjava/lang/String;)Z',
   );
 
-  static final _isCurrentSystemGallery = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _isCurrentSystemGallery = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        $Int32,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Int32,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticBooleanMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public boolean isCurrentSystemGallery(android.content.ContentResolver contentResolver, int i, java.lang.String string)
+  /// from: `static public boolean isCurrentSystemGallery(android.content.ContentResolver contentResolver, int i, java.lang.String string)`
   static bool isCurrentSystemGallery(
-    contentresolver_.ContentResolver contentResolver,
+    contentresolver$_.ContentResolver? contentResolver,
     int i,
-    jni.JString string,
+    jni$_.JString? string,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _isCurrentSystemGallery(
             _class.reference.pointer,
-            _id_isCurrentSystemGallery as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
+            _id_isCurrentSystemGallery as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
             i,
-            string.reference.pointer)
+            _$string.pointer)
         .boolean;
   }
 
@@ -6759,65 +8708,79 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;',
   );
 
-  static final _getRedactedUri = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getRedactedUri = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public android.net.Uri getRedactedUri(android.content.ContentResolver contentResolver, android.net.Uri uri)
+  /// from: `static public android.net.Uri getRedactedUri(android.content.ContentResolver contentResolver, android.net.Uri uri)`
   /// The returned object must be released after use, by calling the [release] method.
-  static uri_.Uri getRedactedUri(
-    contentresolver_.ContentResolver contentResolver,
-    uri_.Uri uri,
+  static uri$_.Uri? getRedactedUri(
+    contentresolver$_.ContentResolver? contentResolver,
+    uri$_.Uri? uri,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$uri = uri?.reference ?? jni$_.jNullReference;
     return _getRedactedUri(
             _class.reference.pointer,
-            _id_getRedactedUri as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            uri.reference.pointer)
-        .object(const uri_.$UriType());
+            _id_getRedactedUri as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$uri.pointer)
+        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
   }
 
-  static final _id_getRedactedUri1 = _class.staticMethodId(
+  static final _id_getRedactedUri$1 = _class.staticMethodId(
     r'getRedactedUri',
     r'(Landroid/content/ContentResolver;Ljava/util/List;)Ljava/util/List;',
   );
 
-  static final _getRedactedUri1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _getRedactedUri$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.util.List getRedactedUri(android.content.ContentResolver contentResolver, java.util.List list)
+  /// from: `static public java.util.List getRedactedUri(android.content.ContentResolver contentResolver, java.util.List list)`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JList<uri_.Uri> getRedactedUri1(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JList<uri_.Uri> list,
+  static jni$_.JList<uri$_.Uri?>? getRedactedUri$1(
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JList<uri$_.Uri?>? list,
   ) {
-    return _getRedactedUri1(
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$list = list?.reference ?? jni$_.jNullReference;
+    return _getRedactedUri$1(
             _class.reference.pointer,
-            _id_getRedactedUri1 as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            list.reference.pointer)
-        .object(const jni.JListType(uri_.$UriType()));
+            _id_getRedactedUri$1 as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$list.pointer)
+        .object<jni$_.JList<uri$_.Uri?>?>(
+            const jni$_.JListNullableType<uri$_.Uri?>(
+                uri$_.$Uri$NullableType()));
   }
 
   static final _id_canManageMedia = _class.staticMethodId(
@@ -6825,23 +8788,24 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/Context;)Z',
   );
 
-  static final _canManageMedia = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _canManageMedia = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallStaticBooleanMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public boolean canManageMedia(android.content.Context context)
+  /// from: `static public boolean canManageMedia(android.content.Context context)`
   static bool canManageMedia(
-    context_.Context context,
+    context$_.Context? context,
   ) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
     return _canManageMedia(_class.reference.pointer,
-            _id_canManageMedia as jni.JMethodIDPtr, context.reference.pointer)
+            _id_canManageMedia as jni$_.JMethodIDPtr, _$context.pointer)
         .boolean;
   }
 
@@ -6851,30 +8815,36 @@ class MediaStore extends jni.JObject {
   );
 
   static final _isCurrentCloudMediaProviderAuthority =
-      ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
                           (
-                            ffi.Pointer<ffi.Void>,
-                            ffi.Pointer<ffi.Void>
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
                           )>)>>('globalEnv_CallStaticBooleanMethod')
           .asFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public boolean isCurrentCloudMediaProviderAuthority(android.content.ContentResolver contentResolver, java.lang.String string)
+  /// from: `static public boolean isCurrentCloudMediaProviderAuthority(android.content.ContentResolver contentResolver, java.lang.String string)`
   static bool isCurrentCloudMediaProviderAuthority(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JString string,
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JString? string,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _isCurrentCloudMediaProviderAuthority(
             _class.reference.pointer,
-            _id_isCurrentCloudMediaProviderAuthority as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            string.reference.pointer)
+            _id_isCurrentCloudMediaProviderAuthority as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$string.pointer)
         .boolean;
   }
 
@@ -6885,30 +8855,36 @@ class MediaStore extends jni.JObject {
   );
 
   static final _isSupportedCloudMediaProviderAuthority =
-      ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
                           (
-                            ffi.Pointer<ffi.Void>,
-                            ffi.Pointer<ffi.Void>
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
                           )>)>>('globalEnv_CallStaticBooleanMethod')
           .asFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public boolean isSupportedCloudMediaProviderAuthority(android.content.ContentResolver contentResolver, java.lang.String string)
+  /// from: `static public boolean isSupportedCloudMediaProviderAuthority(android.content.ContentResolver contentResolver, java.lang.String string)`
   static bool isSupportedCloudMediaProviderAuthority(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JString string,
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JString? string,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
     return _isSupportedCloudMediaProviderAuthority(
             _class.reference.pointer,
-            _id_isSupportedCloudMediaProviderAuthority as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            string.reference.pointer)
+            _id_isSupportedCloudMediaProviderAuthority as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$string.pointer)
         .boolean;
   }
 
@@ -6917,62 +8893,115 @@ class MediaStore extends jni.JObject {
     r'(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _notifyCloudMediaChangedEvent = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
-                      (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
-                      )>)>>('globalEnv_CallStaticVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+  static final _notifyCloudMediaChangedEvent =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public void notifyCloudMediaChangedEvent(android.content.ContentResolver contentResolver, java.lang.String string, java.lang.String string1)
+  /// from: `static public void notifyCloudMediaChangedEvent(android.content.ContentResolver contentResolver, java.lang.String string, java.lang.String string1)`
   static void notifyCloudMediaChangedEvent(
-    contentresolver_.ContentResolver contentResolver,
-    jni.JString string,
-    jni.JString string1,
+    contentresolver$_.ContentResolver? contentResolver,
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
+    final _$contentResolver =
+        contentResolver?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
     _notifyCloudMediaChangedEvent(
             _class.reference.pointer,
-            _id_notifyCloudMediaChangedEvent as jni.JMethodIDPtr,
-            contentResolver.reference.pointer,
-            string.reference.pointer,
-            string1.reference.pointer)
+            _id_notifyCloudMediaChangedEvent as jni$_.JMethodIDPtr,
+            _$contentResolver.pointer,
+            _$string.pointer,
+            _$string1.pointer)
         .check();
   }
 }
 
-final class $MediaStoreType extends jni.JObjType<MediaStore> {
-  const $MediaStoreType();
+final class $MediaStore$NullableType extends jni$_.JObjType<MediaStore?> {
+  @jni$_.internal
+  const $MediaStore$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/provider/MediaStore;';
 
-  @override
-  MediaStore fromReference(jni.JReference reference) =>
-      MediaStore.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  MediaStore? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : MediaStore.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($MediaStoreType).hashCode;
+  @core$_.override
+  int get hashCode => ($MediaStore$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($MediaStoreType) && other is $MediaStoreType;
+    return other.runtimeType == ($MediaStore$NullableType) &&
+        other is $MediaStore$NullableType;
+  }
+}
+
+final class $MediaStore$Type extends jni$_.JObjType<MediaStore> {
+  @jni$_.internal
+  const $MediaStore$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/provider/MediaStore;';
+
+  @jni$_.internal
+  @core$_.override
+  MediaStore fromReference(jni$_.JReference reference) =>
+      MediaStore.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<MediaStore?> get nullableType =>
+      const $MediaStore$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($MediaStore$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($MediaStore$Type) && other is $MediaStore$Type;
   }
 }

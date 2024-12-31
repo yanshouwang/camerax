@@ -1,1 +1,1 @@
-export 'src/camerax_plugin.dart';
+export 'src/camerax_android_plugin.dart';

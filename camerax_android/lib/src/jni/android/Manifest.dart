@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,766 +29,804 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: android.Manifest$permission
-class Manifest_permission extends jni.JObject {
-  @override
-  late final jni.JObjType<Manifest_permission> $type = type;
+/// from: `android.Manifest$permission`
+class Manifest$permission extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Manifest$permission> $type;
 
-  Manifest_permission.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  Manifest$permission.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/Manifest$permission');
+  static final _class = jni$_.JClass.forName(r'android/Manifest$permission');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Manifest_permissionType();
+  static const nullableType = $Manifest$permission$NullableType();
+  static const type = $Manifest$permission$Type();
   static final _id_ACCEPT_HANDOVER = _class.staticFieldId(
     r'ACCEPT_HANDOVER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCEPT_HANDOVER
+  /// from: `static public final java.lang.String ACCEPT_HANDOVER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCEPT_HANDOVER =>
-      _id_ACCEPT_HANDOVER.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCEPT_HANDOVER =>
+      _id_ACCEPT_HANDOVER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_BACKGROUND_LOCATION = _class.staticFieldId(
     r'ACCESS_BACKGROUND_LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_BACKGROUND_LOCATION
+  /// from: `static public final java.lang.String ACCESS_BACKGROUND_LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_BACKGROUND_LOCATION =>
-      _id_ACCESS_BACKGROUND_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_BACKGROUND_LOCATION =>
+      _id_ACCESS_BACKGROUND_LOCATION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_BLOBS_ACROSS_USERS = _class.staticFieldId(
     r'ACCESS_BLOBS_ACROSS_USERS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_BLOBS_ACROSS_USERS
+  /// from: `static public final java.lang.String ACCESS_BLOBS_ACROSS_USERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_BLOBS_ACROSS_USERS =>
-      _id_ACCESS_BLOBS_ACROSS_USERS.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_BLOBS_ACROSS_USERS =>
+      _id_ACCESS_BLOBS_ACROSS_USERS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_CHECKIN_PROPERTIES = _class.staticFieldId(
     r'ACCESS_CHECKIN_PROPERTIES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_CHECKIN_PROPERTIES
+  /// from: `static public final java.lang.String ACCESS_CHECKIN_PROPERTIES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_CHECKIN_PROPERTIES =>
-      _id_ACCESS_CHECKIN_PROPERTIES.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_CHECKIN_PROPERTIES =>
+      _id_ACCESS_CHECKIN_PROPERTIES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_COARSE_LOCATION = _class.staticFieldId(
     r'ACCESS_COARSE_LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_COARSE_LOCATION
+  /// from: `static public final java.lang.String ACCESS_COARSE_LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_COARSE_LOCATION =>
-      _id_ACCESS_COARSE_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_COARSE_LOCATION =>
+      _id_ACCESS_COARSE_LOCATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_FINE_LOCATION = _class.staticFieldId(
     r'ACCESS_FINE_LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_FINE_LOCATION
+  /// from: `static public final java.lang.String ACCESS_FINE_LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_FINE_LOCATION =>
-      _id_ACCESS_FINE_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_FINE_LOCATION =>
+      _id_ACCESS_FINE_LOCATION.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_ACCESS_HIDDEN_PROFILES = _class.staticFieldId(
+    r'ACCESS_HIDDEN_PROFILES',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String ACCESS_HIDDEN_PROFILES`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get ACCESS_HIDDEN_PROFILES =>
+      _id_ACCESS_HIDDEN_PROFILES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_LOCATION_EXTRA_COMMANDS = _class.staticFieldId(
     r'ACCESS_LOCATION_EXTRA_COMMANDS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_LOCATION_EXTRA_COMMANDS
+  /// from: `static public final java.lang.String ACCESS_LOCATION_EXTRA_COMMANDS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_LOCATION_EXTRA_COMMANDS =>
-      _id_ACCESS_LOCATION_EXTRA_COMMANDS.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_LOCATION_EXTRA_COMMANDS =>
+      _id_ACCESS_LOCATION_EXTRA_COMMANDS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_MEDIA_LOCATION = _class.staticFieldId(
     r'ACCESS_MEDIA_LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_MEDIA_LOCATION
+  /// from: `static public final java.lang.String ACCESS_MEDIA_LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_MEDIA_LOCATION =>
-      _id_ACCESS_MEDIA_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_MEDIA_LOCATION =>
+      _id_ACCESS_MEDIA_LOCATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_NETWORK_STATE = _class.staticFieldId(
     r'ACCESS_NETWORK_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_NETWORK_STATE
+  /// from: `static public final java.lang.String ACCESS_NETWORK_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_NETWORK_STATE =>
-      _id_ACCESS_NETWORK_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_NETWORK_STATE =>
+      _id_ACCESS_NETWORK_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_NOTIFICATION_POLICY = _class.staticFieldId(
     r'ACCESS_NOTIFICATION_POLICY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_NOTIFICATION_POLICY
+  /// from: `static public final java.lang.String ACCESS_NOTIFICATION_POLICY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_NOTIFICATION_POLICY =>
-      _id_ACCESS_NOTIFICATION_POLICY.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_NOTIFICATION_POLICY =>
+      _id_ACCESS_NOTIFICATION_POLICY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_ACCESS_WIFI_STATE = _class.staticFieldId(
     r'ACCESS_WIFI_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCESS_WIFI_STATE
+  /// from: `static public final java.lang.String ACCESS_WIFI_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCESS_WIFI_STATE =>
-      _id_ACCESS_WIFI_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCESS_WIFI_STATE =>
+      _id_ACCESS_WIFI_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACCOUNT_MANAGER = _class.staticFieldId(
     r'ACCOUNT_MANAGER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACCOUNT_MANAGER
+  /// from: `static public final java.lang.String ACCOUNT_MANAGER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACCOUNT_MANAGER =>
-      _id_ACCOUNT_MANAGER.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACCOUNT_MANAGER =>
+      _id_ACCOUNT_MANAGER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ACTIVITY_RECOGNITION = _class.staticFieldId(
     r'ACTIVITY_RECOGNITION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTIVITY_RECOGNITION
+  /// from: `static public final java.lang.String ACTIVITY_RECOGNITION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTIVITY_RECOGNITION =>
-      _id_ACTIVITY_RECOGNITION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTIVITY_RECOGNITION =>
+      _id_ACTIVITY_RECOGNITION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ADD_VOICEMAIL = _class.staticFieldId(
     r'ADD_VOICEMAIL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ADD_VOICEMAIL
+  /// from: `static public final java.lang.String ADD_VOICEMAIL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ADD_VOICEMAIL =>
-      _id_ADD_VOICEMAIL.get(_class, const jni.JStringType());
+  static jni$_.JString? get ADD_VOICEMAIL =>
+      _id_ADD_VOICEMAIL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ANSWER_PHONE_CALLS = _class.staticFieldId(
     r'ANSWER_PHONE_CALLS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ANSWER_PHONE_CALLS
+  /// from: `static public final java.lang.String ANSWER_PHONE_CALLS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ANSWER_PHONE_CALLS =>
-      _id_ANSWER_PHONE_CALLS.get(_class, const jni.JStringType());
+  static jni$_.JString? get ANSWER_PHONE_CALLS =>
+      _id_ANSWER_PHONE_CALLS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BATTERY_STATS = _class.staticFieldId(
     r'BATTERY_STATS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BATTERY_STATS
+  /// from: `static public final java.lang.String BATTERY_STATS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BATTERY_STATS =>
-      _id_BATTERY_STATS.get(_class, const jni.JStringType());
+  static jni$_.JString? get BATTERY_STATS =>
+      _id_BATTERY_STATS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_ACCESSIBILITY_SERVICE = _class.staticFieldId(
     r'BIND_ACCESSIBILITY_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_ACCESSIBILITY_SERVICE
+  /// from: `static public final java.lang.String BIND_ACCESSIBILITY_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_ACCESSIBILITY_SERVICE =>
-      _id_BIND_ACCESSIBILITY_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_ACCESSIBILITY_SERVICE =>
+      _id_BIND_ACCESSIBILITY_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_APPWIDGET = _class.staticFieldId(
     r'BIND_APPWIDGET',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_APPWIDGET
+  /// from: `static public final java.lang.String BIND_APPWIDGET`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_APPWIDGET =>
-      _id_BIND_APPWIDGET.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_APPWIDGET =>
+      _id_BIND_APPWIDGET.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_AUTOFILL_SERVICE = _class.staticFieldId(
     r'BIND_AUTOFILL_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_AUTOFILL_SERVICE
+  /// from: `static public final java.lang.String BIND_AUTOFILL_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_AUTOFILL_SERVICE =>
-      _id_BIND_AUTOFILL_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_AUTOFILL_SERVICE =>
+      _id_BIND_AUTOFILL_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CALL_REDIRECTION_SERVICE = _class.staticFieldId(
     r'BIND_CALL_REDIRECTION_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CALL_REDIRECTION_SERVICE
+  /// from: `static public final java.lang.String BIND_CALL_REDIRECTION_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CALL_REDIRECTION_SERVICE =>
-      _id_BIND_CALL_REDIRECTION_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CALL_REDIRECTION_SERVICE =>
+      _id_BIND_CALL_REDIRECTION_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CARRIER_MESSAGING_CLIENT_SERVICE = _class.staticFieldId(
     r'BIND_CARRIER_MESSAGING_CLIENT_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CARRIER_MESSAGING_CLIENT_SERVICE
+  /// from: `static public final java.lang.String BIND_CARRIER_MESSAGING_CLIENT_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CARRIER_MESSAGING_CLIENT_SERVICE =>
+  static jni$_.JString? get BIND_CARRIER_MESSAGING_CLIENT_SERVICE =>
       _id_BIND_CARRIER_MESSAGING_CLIENT_SERVICE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CARRIER_MESSAGING_SERVICE = _class.staticFieldId(
     r'BIND_CARRIER_MESSAGING_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CARRIER_MESSAGING_SERVICE
+  /// from: `static public final java.lang.String BIND_CARRIER_MESSAGING_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CARRIER_MESSAGING_SERVICE =>
-      _id_BIND_CARRIER_MESSAGING_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CARRIER_MESSAGING_SERVICE =>
+      _id_BIND_CARRIER_MESSAGING_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CARRIER_SERVICES = _class.staticFieldId(
     r'BIND_CARRIER_SERVICES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CARRIER_SERVICES
+  /// from: `static public final java.lang.String BIND_CARRIER_SERVICES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CARRIER_SERVICES =>
-      _id_BIND_CARRIER_SERVICES.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CARRIER_SERVICES =>
+      _id_BIND_CARRIER_SERVICES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CHOOSER_TARGET_SERVICE = _class.staticFieldId(
     r'BIND_CHOOSER_TARGET_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CHOOSER_TARGET_SERVICE
+  /// from: `static public final java.lang.String BIND_CHOOSER_TARGET_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CHOOSER_TARGET_SERVICE =>
-      _id_BIND_CHOOSER_TARGET_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CHOOSER_TARGET_SERVICE =>
+      _id_BIND_CHOOSER_TARGET_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_COMPANION_DEVICE_SERVICE = _class.staticFieldId(
     r'BIND_COMPANION_DEVICE_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_COMPANION_DEVICE_SERVICE
+  /// from: `static public final java.lang.String BIND_COMPANION_DEVICE_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_COMPANION_DEVICE_SERVICE =>
-      _id_BIND_COMPANION_DEVICE_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_COMPANION_DEVICE_SERVICE =>
+      _id_BIND_COMPANION_DEVICE_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CONDITION_PROVIDER_SERVICE = _class.staticFieldId(
     r'BIND_CONDITION_PROVIDER_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CONDITION_PROVIDER_SERVICE
+  /// from: `static public final java.lang.String BIND_CONDITION_PROVIDER_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CONDITION_PROVIDER_SERVICE =>
-      _id_BIND_CONDITION_PROVIDER_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CONDITION_PROVIDER_SERVICE =>
+      _id_BIND_CONDITION_PROVIDER_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CONTROLS = _class.staticFieldId(
     r'BIND_CONTROLS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CONTROLS
+  /// from: `static public final java.lang.String BIND_CONTROLS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CONTROLS =>
-      _id_BIND_CONTROLS.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CONTROLS =>
+      _id_BIND_CONTROLS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_CREDENTIAL_PROVIDER_SERVICE = _class.staticFieldId(
     r'BIND_CREDENTIAL_PROVIDER_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_CREDENTIAL_PROVIDER_SERVICE
+  /// from: `static public final java.lang.String BIND_CREDENTIAL_PROVIDER_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_CREDENTIAL_PROVIDER_SERVICE =>
-      _id_BIND_CREDENTIAL_PROVIDER_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_CREDENTIAL_PROVIDER_SERVICE =>
+      _id_BIND_CREDENTIAL_PROVIDER_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_DEVICE_ADMIN = _class.staticFieldId(
     r'BIND_DEVICE_ADMIN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_DEVICE_ADMIN
+  /// from: `static public final java.lang.String BIND_DEVICE_ADMIN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_DEVICE_ADMIN =>
-      _id_BIND_DEVICE_ADMIN.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_DEVICE_ADMIN =>
+      _id_BIND_DEVICE_ADMIN.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_DREAM_SERVICE = _class.staticFieldId(
     r'BIND_DREAM_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_DREAM_SERVICE
+  /// from: `static public final java.lang.String BIND_DREAM_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_DREAM_SERVICE =>
-      _id_BIND_DREAM_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_DREAM_SERVICE =>
+      _id_BIND_DREAM_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_INCALL_SERVICE = _class.staticFieldId(
     r'BIND_INCALL_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_INCALL_SERVICE
+  /// from: `static public final java.lang.String BIND_INCALL_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_INCALL_SERVICE =>
-      _id_BIND_INCALL_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_INCALL_SERVICE =>
+      _id_BIND_INCALL_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_INPUT_METHOD = _class.staticFieldId(
     r'BIND_INPUT_METHOD',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_INPUT_METHOD
+  /// from: `static public final java.lang.String BIND_INPUT_METHOD`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_INPUT_METHOD =>
-      _id_BIND_INPUT_METHOD.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_INPUT_METHOD =>
+      _id_BIND_INPUT_METHOD.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_MIDI_DEVICE_SERVICE = _class.staticFieldId(
     r'BIND_MIDI_DEVICE_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_MIDI_DEVICE_SERVICE
+  /// from: `static public final java.lang.String BIND_MIDI_DEVICE_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_MIDI_DEVICE_SERVICE =>
-      _id_BIND_MIDI_DEVICE_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_MIDI_DEVICE_SERVICE =>
+      _id_BIND_MIDI_DEVICE_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_NFC_SERVICE = _class.staticFieldId(
     r'BIND_NFC_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_NFC_SERVICE
+  /// from: `static public final java.lang.String BIND_NFC_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_NFC_SERVICE =>
-      _id_BIND_NFC_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_NFC_SERVICE =>
+      _id_BIND_NFC_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_NOTIFICATION_LISTENER_SERVICE = _class.staticFieldId(
     r'BIND_NOTIFICATION_LISTENER_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_NOTIFICATION_LISTENER_SERVICE
+  /// from: `static public final java.lang.String BIND_NOTIFICATION_LISTENER_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_NOTIFICATION_LISTENER_SERVICE =>
+  static jni$_.JString? get BIND_NOTIFICATION_LISTENER_SERVICE =>
       _id_BIND_NOTIFICATION_LISTENER_SERVICE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_PRINT_SERVICE = _class.staticFieldId(
     r'BIND_PRINT_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_PRINT_SERVICE
+  /// from: `static public final java.lang.String BIND_PRINT_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_PRINT_SERVICE =>
-      _id_BIND_PRINT_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_PRINT_SERVICE =>
+      _id_BIND_PRINT_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_QUICK_ACCESS_WALLET_SERVICE = _class.staticFieldId(
     r'BIND_QUICK_ACCESS_WALLET_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_QUICK_ACCESS_WALLET_SERVICE
+  /// from: `static public final java.lang.String BIND_QUICK_ACCESS_WALLET_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_QUICK_ACCESS_WALLET_SERVICE =>
-      _id_BIND_QUICK_ACCESS_WALLET_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_QUICK_ACCESS_WALLET_SERVICE =>
+      _id_BIND_QUICK_ACCESS_WALLET_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_QUICK_SETTINGS_TILE = _class.staticFieldId(
     r'BIND_QUICK_SETTINGS_TILE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_QUICK_SETTINGS_TILE
+  /// from: `static public final java.lang.String BIND_QUICK_SETTINGS_TILE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_QUICK_SETTINGS_TILE =>
-      _id_BIND_QUICK_SETTINGS_TILE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_QUICK_SETTINGS_TILE =>
+      _id_BIND_QUICK_SETTINGS_TILE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_REMOTEVIEWS = _class.staticFieldId(
     r'BIND_REMOTEVIEWS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_REMOTEVIEWS
+  /// from: `static public final java.lang.String BIND_REMOTEVIEWS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_REMOTEVIEWS =>
-      _id_BIND_REMOTEVIEWS.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_REMOTEVIEWS =>
+      _id_BIND_REMOTEVIEWS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_SCREENING_SERVICE = _class.staticFieldId(
     r'BIND_SCREENING_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_SCREENING_SERVICE
+  /// from: `static public final java.lang.String BIND_SCREENING_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_SCREENING_SERVICE =>
-      _id_BIND_SCREENING_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_SCREENING_SERVICE =>
+      _id_BIND_SCREENING_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_TELECOM_CONNECTION_SERVICE = _class.staticFieldId(
     r'BIND_TELECOM_CONNECTION_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_TELECOM_CONNECTION_SERVICE
+  /// from: `static public final java.lang.String BIND_TELECOM_CONNECTION_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_TELECOM_CONNECTION_SERVICE =>
-      _id_BIND_TELECOM_CONNECTION_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_TELECOM_CONNECTION_SERVICE =>
+      _id_BIND_TELECOM_CONNECTION_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_TEXT_SERVICE = _class.staticFieldId(
     r'BIND_TEXT_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_TEXT_SERVICE
+  /// from: `static public final java.lang.String BIND_TEXT_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_TEXT_SERVICE =>
-      _id_BIND_TEXT_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_TEXT_SERVICE =>
+      _id_BIND_TEXT_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_TV_INPUT = _class.staticFieldId(
     r'BIND_TV_INPUT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_TV_INPUT
+  /// from: `static public final java.lang.String BIND_TV_INPUT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_TV_INPUT =>
-      _id_BIND_TV_INPUT.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_TV_INPUT =>
+      _id_BIND_TV_INPUT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_TV_INTERACTIVE_APP = _class.staticFieldId(
     r'BIND_TV_INTERACTIVE_APP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_TV_INTERACTIVE_APP
+  /// from: `static public final java.lang.String BIND_TV_INTERACTIVE_APP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_TV_INTERACTIVE_APP =>
-      _id_BIND_TV_INTERACTIVE_APP.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_TV_INTERACTIVE_APP =>
+      _id_BIND_TV_INTERACTIVE_APP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_VISUAL_VOICEMAIL_SERVICE = _class.staticFieldId(
     r'BIND_VISUAL_VOICEMAIL_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_VISUAL_VOICEMAIL_SERVICE
+  /// from: `static public final java.lang.String BIND_VISUAL_VOICEMAIL_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_VISUAL_VOICEMAIL_SERVICE =>
-      _id_BIND_VISUAL_VOICEMAIL_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_VISUAL_VOICEMAIL_SERVICE =>
+      _id_BIND_VISUAL_VOICEMAIL_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_VOICE_INTERACTION = _class.staticFieldId(
     r'BIND_VOICE_INTERACTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_VOICE_INTERACTION
+  /// from: `static public final java.lang.String BIND_VOICE_INTERACTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_VOICE_INTERACTION =>
-      _id_BIND_VOICE_INTERACTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_VOICE_INTERACTION =>
+      _id_BIND_VOICE_INTERACTION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_VPN_SERVICE = _class.staticFieldId(
     r'BIND_VPN_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_VPN_SERVICE
+  /// from: `static public final java.lang.String BIND_VPN_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_VPN_SERVICE =>
-      _id_BIND_VPN_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_VPN_SERVICE =>
+      _id_BIND_VPN_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BIND_VR_LISTENER_SERVICE = _class.staticFieldId(
     r'BIND_VR_LISTENER_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_VR_LISTENER_SERVICE
+  /// from: `static public final java.lang.String BIND_VR_LISTENER_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_VR_LISTENER_SERVICE =>
-      _id_BIND_VR_LISTENER_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_VR_LISTENER_SERVICE =>
+      _id_BIND_VR_LISTENER_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BIND_WALLPAPER = _class.staticFieldId(
     r'BIND_WALLPAPER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BIND_WALLPAPER
+  /// from: `static public final java.lang.String BIND_WALLPAPER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BIND_WALLPAPER =>
-      _id_BIND_WALLPAPER.get(_class, const jni.JStringType());
+  static jni$_.JString? get BIND_WALLPAPER =>
+      _id_BIND_WALLPAPER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BLUETOOTH = _class.staticFieldId(
     r'BLUETOOTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BLUETOOTH
+  /// from: `static public final java.lang.String BLUETOOTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BLUETOOTH =>
-      _id_BLUETOOTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get BLUETOOTH =>
+      _id_BLUETOOTH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BLUETOOTH_ADMIN = _class.staticFieldId(
     r'BLUETOOTH_ADMIN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BLUETOOTH_ADMIN
+  /// from: `static public final java.lang.String BLUETOOTH_ADMIN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BLUETOOTH_ADMIN =>
-      _id_BLUETOOTH_ADMIN.get(_class, const jni.JStringType());
+  static jni$_.JString? get BLUETOOTH_ADMIN =>
+      _id_BLUETOOTH_ADMIN.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BLUETOOTH_ADVERTISE = _class.staticFieldId(
     r'BLUETOOTH_ADVERTISE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BLUETOOTH_ADVERTISE
+  /// from: `static public final java.lang.String BLUETOOTH_ADVERTISE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BLUETOOTH_ADVERTISE =>
-      _id_BLUETOOTH_ADVERTISE.get(_class, const jni.JStringType());
+  static jni$_.JString? get BLUETOOTH_ADVERTISE =>
+      _id_BLUETOOTH_ADVERTISE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BLUETOOTH_CONNECT = _class.staticFieldId(
     r'BLUETOOTH_CONNECT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BLUETOOTH_CONNECT
+  /// from: `static public final java.lang.String BLUETOOTH_CONNECT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BLUETOOTH_CONNECT =>
-      _id_BLUETOOTH_CONNECT.get(_class, const jni.JStringType());
+  static jni$_.JString? get BLUETOOTH_CONNECT =>
+      _id_BLUETOOTH_CONNECT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BLUETOOTH_PRIVILEGED = _class.staticFieldId(
     r'BLUETOOTH_PRIVILEGED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BLUETOOTH_PRIVILEGED
+  /// from: `static public final java.lang.String BLUETOOTH_PRIVILEGED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BLUETOOTH_PRIVILEGED =>
-      _id_BLUETOOTH_PRIVILEGED.get(_class, const jni.JStringType());
+  static jni$_.JString? get BLUETOOTH_PRIVILEGED =>
+      _id_BLUETOOTH_PRIVILEGED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BLUETOOTH_SCAN = _class.staticFieldId(
     r'BLUETOOTH_SCAN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BLUETOOTH_SCAN
+  /// from: `static public final java.lang.String BLUETOOTH_SCAN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BLUETOOTH_SCAN =>
-      _id_BLUETOOTH_SCAN.get(_class, const jni.JStringType());
+  static jni$_.JString? get BLUETOOTH_SCAN =>
+      _id_BLUETOOTH_SCAN.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BODY_SENSORS = _class.staticFieldId(
     r'BODY_SENSORS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BODY_SENSORS
+  /// from: `static public final java.lang.String BODY_SENSORS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BODY_SENSORS =>
-      _id_BODY_SENSORS.get(_class, const jni.JStringType());
+  static jni$_.JString? get BODY_SENSORS =>
+      _id_BODY_SENSORS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BODY_SENSORS_BACKGROUND = _class.staticFieldId(
     r'BODY_SENSORS_BACKGROUND',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BODY_SENSORS_BACKGROUND
+  /// from: `static public final java.lang.String BODY_SENSORS_BACKGROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BODY_SENSORS_BACKGROUND =>
-      _id_BODY_SENSORS_BACKGROUND.get(_class, const jni.JStringType());
+  static jni$_.JString? get BODY_SENSORS_BACKGROUND =>
+      _id_BODY_SENSORS_BACKGROUND.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BROADCAST_PACKAGE_REMOVED = _class.staticFieldId(
     r'BROADCAST_PACKAGE_REMOVED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BROADCAST_PACKAGE_REMOVED
+  /// from: `static public final java.lang.String BROADCAST_PACKAGE_REMOVED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BROADCAST_PACKAGE_REMOVED =>
-      _id_BROADCAST_PACKAGE_REMOVED.get(_class, const jni.JStringType());
+  static jni$_.JString? get BROADCAST_PACKAGE_REMOVED =>
+      _id_BROADCAST_PACKAGE_REMOVED.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_BROADCAST_SMS = _class.staticFieldId(
     r'BROADCAST_SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BROADCAST_SMS
+  /// from: `static public final java.lang.String BROADCAST_SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BROADCAST_SMS =>
-      _id_BROADCAST_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get BROADCAST_SMS =>
+      _id_BROADCAST_SMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BROADCAST_STICKY = _class.staticFieldId(
     r'BROADCAST_STICKY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BROADCAST_STICKY
+  /// from: `static public final java.lang.String BROADCAST_STICKY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BROADCAST_STICKY =>
-      _id_BROADCAST_STICKY.get(_class, const jni.JStringType());
+  static jni$_.JString? get BROADCAST_STICKY =>
+      _id_BROADCAST_STICKY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_BROADCAST_WAP_PUSH = _class.staticFieldId(
     r'BROADCAST_WAP_PUSH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String BROADCAST_WAP_PUSH
+  /// from: `static public final java.lang.String BROADCAST_WAP_PUSH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get BROADCAST_WAP_PUSH =>
-      _id_BROADCAST_WAP_PUSH.get(_class, const jni.JStringType());
+  static jni$_.JString? get BROADCAST_WAP_PUSH =>
+      _id_BROADCAST_WAP_PUSH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CALL_COMPANION_APP = _class.staticFieldId(
     r'CALL_COMPANION_APP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CALL_COMPANION_APP
+  /// from: `static public final java.lang.String CALL_COMPANION_APP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CALL_COMPANION_APP =>
-      _id_CALL_COMPANION_APP.get(_class, const jni.JStringType());
+  static jni$_.JString? get CALL_COMPANION_APP =>
+      _id_CALL_COMPANION_APP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CALL_PHONE = _class.staticFieldId(
     r'CALL_PHONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CALL_PHONE
+  /// from: `static public final java.lang.String CALL_PHONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CALL_PHONE =>
-      _id_CALL_PHONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CALL_PHONE =>
+      _id_CALL_PHONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CALL_PRIVILEGED = _class.staticFieldId(
     r'CALL_PRIVILEGED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CALL_PRIVILEGED
+  /// from: `static public final java.lang.String CALL_PRIVILEGED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CALL_PRIVILEGED =>
-      _id_CALL_PRIVILEGED.get(_class, const jni.JStringType());
+  static jni$_.JString? get CALL_PRIVILEGED =>
+      _id_CALL_PRIVILEGED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CAMERA = _class.staticFieldId(
     r'CAMERA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CAMERA
+  /// from: `static public final java.lang.String CAMERA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CAMERA =>
-      _id_CAMERA.get(_class, const jni.JStringType());
+  static jni$_.JString? get CAMERA =>
+      _id_CAMERA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CAPTURE_AUDIO_OUTPUT = _class.staticFieldId(
     r'CAPTURE_AUDIO_OUTPUT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CAPTURE_AUDIO_OUTPUT
+  /// from: `static public final java.lang.String CAPTURE_AUDIO_OUTPUT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CAPTURE_AUDIO_OUTPUT =>
-      _id_CAPTURE_AUDIO_OUTPUT.get(_class, const jni.JStringType());
+  static jni$_.JString? get CAPTURE_AUDIO_OUTPUT =>
+      _id_CAPTURE_AUDIO_OUTPUT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CHANGE_COMPONENT_ENABLED_STATE = _class.staticFieldId(
     r'CHANGE_COMPONENT_ENABLED_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CHANGE_COMPONENT_ENABLED_STATE
+  /// from: `static public final java.lang.String CHANGE_COMPONENT_ENABLED_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CHANGE_COMPONENT_ENABLED_STATE =>
-      _id_CHANGE_COMPONENT_ENABLED_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CHANGE_COMPONENT_ENABLED_STATE =>
+      _id_CHANGE_COMPONENT_ENABLED_STATE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CHANGE_CONFIGURATION = _class.staticFieldId(
     r'CHANGE_CONFIGURATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CHANGE_CONFIGURATION
+  /// from: `static public final java.lang.String CHANGE_CONFIGURATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CHANGE_CONFIGURATION =>
-      _id_CHANGE_CONFIGURATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get CHANGE_CONFIGURATION =>
+      _id_CHANGE_CONFIGURATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CHANGE_NETWORK_STATE = _class.staticFieldId(
     r'CHANGE_NETWORK_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CHANGE_NETWORK_STATE
+  /// from: `static public final java.lang.String CHANGE_NETWORK_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CHANGE_NETWORK_STATE =>
-      _id_CHANGE_NETWORK_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CHANGE_NETWORK_STATE =>
+      _id_CHANGE_NETWORK_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CHANGE_WIFI_MULTICAST_STATE = _class.staticFieldId(
     r'CHANGE_WIFI_MULTICAST_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CHANGE_WIFI_MULTICAST_STATE
+  /// from: `static public final java.lang.String CHANGE_WIFI_MULTICAST_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CHANGE_WIFI_MULTICAST_STATE =>
-      _id_CHANGE_WIFI_MULTICAST_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CHANGE_WIFI_MULTICAST_STATE =>
+      _id_CHANGE_WIFI_MULTICAST_STATE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CHANGE_WIFI_STATE = _class.staticFieldId(
     r'CHANGE_WIFI_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CHANGE_WIFI_STATE
+  /// from: `static public final java.lang.String CHANGE_WIFI_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CHANGE_WIFI_STATE =>
-      _id_CHANGE_WIFI_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CHANGE_WIFI_STATE =>
+      _id_CHANGE_WIFI_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CLEAR_APP_CACHE = _class.staticFieldId(
     r'CLEAR_APP_CACHE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CLEAR_APP_CACHE
+  /// from: `static public final java.lang.String CLEAR_APP_CACHE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CLEAR_APP_CACHE =>
-      _id_CLEAR_APP_CACHE.get(_class, const jni.JStringType());
+  static jni$_.JString? get CLEAR_APP_CACHE =>
+      _id_CLEAR_APP_CACHE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CONFIGURE_WIFI_DISPLAY = _class.staticFieldId(
     r'CONFIGURE_WIFI_DISPLAY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONFIGURE_WIFI_DISPLAY
+  /// from: `static public final java.lang.String CONFIGURE_WIFI_DISPLAY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONFIGURE_WIFI_DISPLAY =>
-      _id_CONFIGURE_WIFI_DISPLAY.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONFIGURE_WIFI_DISPLAY =>
+      _id_CONFIGURE_WIFI_DISPLAY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CONTROL_LOCATION_UPDATES = _class.staticFieldId(
     r'CONTROL_LOCATION_UPDATES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTROL_LOCATION_UPDATES
+  /// from: `static public final java.lang.String CONTROL_LOCATION_UPDATES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTROL_LOCATION_UPDATES =>
-      _id_CONTROL_LOCATION_UPDATES.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTROL_LOCATION_UPDATES =>
+      _id_CONTROL_LOCATION_UPDATES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS =
       _class.staticFieldId(
@@ -789,11 +834,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS
+  /// from: `static public final java.lang.String CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS =>
+  static jni$_.JString? get CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS =>
       _id_CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS =
       _class.staticFieldId(
@@ -801,405 +846,444 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS
+  /// from: `static public final java.lang.String CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS =>
+  static jni$_.JString? get CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS =>
       _id_CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_CREDENTIAL_MANAGER_SET_ORIGIN = _class.staticFieldId(
     r'CREDENTIAL_MANAGER_SET_ORIGIN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CREDENTIAL_MANAGER_SET_ORIGIN
+  /// from: `static public final java.lang.String CREDENTIAL_MANAGER_SET_ORIGIN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CREDENTIAL_MANAGER_SET_ORIGIN =>
-      _id_CREDENTIAL_MANAGER_SET_ORIGIN.get(_class, const jni.JStringType());
+  static jni$_.JString? get CREDENTIAL_MANAGER_SET_ORIGIN =>
+      _id_CREDENTIAL_MANAGER_SET_ORIGIN.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_DELETE_CACHE_FILES = _class.staticFieldId(
     r'DELETE_CACHE_FILES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DELETE_CACHE_FILES
+  /// from: `static public final java.lang.String DELETE_CACHE_FILES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DELETE_CACHE_FILES =>
-      _id_DELETE_CACHE_FILES.get(_class, const jni.JStringType());
+  static jni$_.JString? get DELETE_CACHE_FILES =>
+      _id_DELETE_CACHE_FILES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DELETE_PACKAGES = _class.staticFieldId(
     r'DELETE_PACKAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DELETE_PACKAGES
+  /// from: `static public final java.lang.String DELETE_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DELETE_PACKAGES =>
-      _id_DELETE_PACKAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get DELETE_PACKAGES =>
+      _id_DELETE_PACKAGES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DELIVER_COMPANION_MESSAGES = _class.staticFieldId(
     r'DELIVER_COMPANION_MESSAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DELIVER_COMPANION_MESSAGES
+  /// from: `static public final java.lang.String DELIVER_COMPANION_MESSAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DELIVER_COMPANION_MESSAGES =>
-      _id_DELIVER_COMPANION_MESSAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get DELIVER_COMPANION_MESSAGES =>
+      _id_DELIVER_COMPANION_MESSAGES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_DETECT_SCREEN_CAPTURE = _class.staticFieldId(
     r'DETECT_SCREEN_CAPTURE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DETECT_SCREEN_CAPTURE
+  /// from: `static public final java.lang.String DETECT_SCREEN_CAPTURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DETECT_SCREEN_CAPTURE =>
-      _id_DETECT_SCREEN_CAPTURE.get(_class, const jni.JStringType());
+  static jni$_.JString? get DETECT_SCREEN_CAPTURE =>
+      _id_DETECT_SCREEN_CAPTURE.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_DETECT_SCREEN_RECORDING = _class.staticFieldId(
+    r'DETECT_SCREEN_RECORDING',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String DETECT_SCREEN_RECORDING`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get DETECT_SCREEN_RECORDING =>
+      _id_DETECT_SCREEN_RECORDING.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_DIAGNOSTIC = _class.staticFieldId(
     r'DIAGNOSTIC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DIAGNOSTIC
+  /// from: `static public final java.lang.String DIAGNOSTIC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DIAGNOSTIC =>
-      _id_DIAGNOSTIC.get(_class, const jni.JStringType());
+  static jni$_.JString? get DIAGNOSTIC =>
+      _id_DIAGNOSTIC.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DISABLE_KEYGUARD = _class.staticFieldId(
     r'DISABLE_KEYGUARD',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DISABLE_KEYGUARD
+  /// from: `static public final java.lang.String DISABLE_KEYGUARD`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DISABLE_KEYGUARD =>
-      _id_DISABLE_KEYGUARD.get(_class, const jni.JStringType());
+  static jni$_.JString? get DISABLE_KEYGUARD =>
+      _id_DISABLE_KEYGUARD.get(_class, const jni$_.JStringNullableType());
 
   static final _id_DUMP = _class.staticFieldId(
     r'DUMP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String DUMP
+  /// from: `static public final java.lang.String DUMP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get DUMP => _id_DUMP.get(_class, const jni.JStringType());
+  static jni$_.JString? get DUMP =>
+      _id_DUMP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_ENFORCE_UPDATE_OWNERSHIP = _class.staticFieldId(
     r'ENFORCE_UPDATE_OWNERSHIP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ENFORCE_UPDATE_OWNERSHIP
+  /// from: `static public final java.lang.String ENFORCE_UPDATE_OWNERSHIP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ENFORCE_UPDATE_OWNERSHIP =>
-      _id_ENFORCE_UPDATE_OWNERSHIP.get(_class, const jni.JStringType());
+  static jni$_.JString? get ENFORCE_UPDATE_OWNERSHIP =>
+      _id_ENFORCE_UPDATE_OWNERSHIP.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_EXECUTE_APP_ACTION = _class.staticFieldId(
     r'EXECUTE_APP_ACTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXECUTE_APP_ACTION
+  /// from: `static public final java.lang.String EXECUTE_APP_ACTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXECUTE_APP_ACTION =>
-      _id_EXECUTE_APP_ACTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXECUTE_APP_ACTION =>
+      _id_EXECUTE_APP_ACTION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_EXPAND_STATUS_BAR = _class.staticFieldId(
     r'EXPAND_STATUS_BAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String EXPAND_STATUS_BAR
+  /// from: `static public final java.lang.String EXPAND_STATUS_BAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get EXPAND_STATUS_BAR =>
-      _id_EXPAND_STATUS_BAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get EXPAND_STATUS_BAR =>
+      _id_EXPAND_STATUS_BAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_FACTORY_TEST = _class.staticFieldId(
     r'FACTORY_TEST',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FACTORY_TEST
+  /// from: `static public final java.lang.String FACTORY_TEST`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FACTORY_TEST =>
-      _id_FACTORY_TEST.get(_class, const jni.JStringType());
+  static jni$_.JString? get FACTORY_TEST =>
+      _id_FACTORY_TEST.get(_class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE = _class.staticFieldId(
     r'FOREGROUND_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE =>
-      _id_FOREGROUND_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE =>
+      _id_FOREGROUND_SERVICE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_CAMERA = _class.staticFieldId(
     r'FOREGROUND_SERVICE_CAMERA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_CAMERA
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_CAMERA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_CAMERA =>
-      _id_FOREGROUND_SERVICE_CAMERA.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_CAMERA =>
+      _id_FOREGROUND_SERVICE_CAMERA.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_CONNECTED_DEVICE = _class.staticFieldId(
     r'FOREGROUND_SERVICE_CONNECTED_DEVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_CONNECTED_DEVICE
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_CONNECTED_DEVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_CONNECTED_DEVICE =>
+  static jni$_.JString? get FOREGROUND_SERVICE_CONNECTED_DEVICE =>
       _id_FOREGROUND_SERVICE_CONNECTED_DEVICE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_DATA_SYNC = _class.staticFieldId(
     r'FOREGROUND_SERVICE_DATA_SYNC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_DATA_SYNC
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_DATA_SYNC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_DATA_SYNC =>
-      _id_FOREGROUND_SERVICE_DATA_SYNC.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_DATA_SYNC =>
+      _id_FOREGROUND_SERVICE_DATA_SYNC.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_HEALTH = _class.staticFieldId(
     r'FOREGROUND_SERVICE_HEALTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_HEALTH
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_HEALTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_HEALTH =>
-      _id_FOREGROUND_SERVICE_HEALTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_HEALTH =>
+      _id_FOREGROUND_SERVICE_HEALTH.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_LOCATION = _class.staticFieldId(
     r'FOREGROUND_SERVICE_LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_LOCATION
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_LOCATION =>
-      _id_FOREGROUND_SERVICE_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_LOCATION =>
+      _id_FOREGROUND_SERVICE_LOCATION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_MEDIA_PLAYBACK = _class.staticFieldId(
     r'FOREGROUND_SERVICE_MEDIA_PLAYBACK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_MEDIA_PLAYBACK
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_MEDIA_PLAYBACK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_MEDIA_PLAYBACK =>
+  static jni$_.JString? get FOREGROUND_SERVICE_MEDIA_PLAYBACK =>
       _id_FOREGROUND_SERVICE_MEDIA_PLAYBACK.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_FOREGROUND_SERVICE_MEDIA_PROCESSING = _class.staticFieldId(
+    r'FOREGROUND_SERVICE_MEDIA_PROCESSING',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_MEDIA_PROCESSING`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get FOREGROUND_SERVICE_MEDIA_PROCESSING =>
+      _id_FOREGROUND_SERVICE_MEDIA_PROCESSING.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_MEDIA_PROJECTION = _class.staticFieldId(
     r'FOREGROUND_SERVICE_MEDIA_PROJECTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_MEDIA_PROJECTION
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_MEDIA_PROJECTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_MEDIA_PROJECTION =>
+  static jni$_.JString? get FOREGROUND_SERVICE_MEDIA_PROJECTION =>
       _id_FOREGROUND_SERVICE_MEDIA_PROJECTION.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_MICROPHONE = _class.staticFieldId(
     r'FOREGROUND_SERVICE_MICROPHONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_MICROPHONE
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_MICROPHONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_MICROPHONE =>
-      _id_FOREGROUND_SERVICE_MICROPHONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_MICROPHONE =>
+      _id_FOREGROUND_SERVICE_MICROPHONE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_PHONE_CALL = _class.staticFieldId(
     r'FOREGROUND_SERVICE_PHONE_CALL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_PHONE_CALL
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_PHONE_CALL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_PHONE_CALL =>
-      _id_FOREGROUND_SERVICE_PHONE_CALL.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_PHONE_CALL =>
+      _id_FOREGROUND_SERVICE_PHONE_CALL.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_REMOTE_MESSAGING = _class.staticFieldId(
     r'FOREGROUND_SERVICE_REMOTE_MESSAGING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_REMOTE_MESSAGING
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_REMOTE_MESSAGING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_REMOTE_MESSAGING =>
+  static jni$_.JString? get FOREGROUND_SERVICE_REMOTE_MESSAGING =>
       _id_FOREGROUND_SERVICE_REMOTE_MESSAGING.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_SPECIAL_USE = _class.staticFieldId(
     r'FOREGROUND_SERVICE_SPECIAL_USE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_SPECIAL_USE
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_SPECIAL_USE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_SPECIAL_USE =>
-      _id_FOREGROUND_SERVICE_SPECIAL_USE.get(_class, const jni.JStringType());
+  static jni$_.JString? get FOREGROUND_SERVICE_SPECIAL_USE =>
+      _id_FOREGROUND_SERVICE_SPECIAL_USE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_FOREGROUND_SERVICE_SYSTEM_EXEMPTED = _class.staticFieldId(
     r'FOREGROUND_SERVICE_SYSTEM_EXEMPTED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String FOREGROUND_SERVICE_SYSTEM_EXEMPTED
+  /// from: `static public final java.lang.String FOREGROUND_SERVICE_SYSTEM_EXEMPTED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get FOREGROUND_SERVICE_SYSTEM_EXEMPTED =>
+  static jni$_.JString? get FOREGROUND_SERVICE_SYSTEM_EXEMPTED =>
       _id_FOREGROUND_SERVICE_SYSTEM_EXEMPTED.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_GET_ACCOUNTS = _class.staticFieldId(
     r'GET_ACCOUNTS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GET_ACCOUNTS
+  /// from: `static public final java.lang.String GET_ACCOUNTS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GET_ACCOUNTS =>
-      _id_GET_ACCOUNTS.get(_class, const jni.JStringType());
+  static jni$_.JString? get GET_ACCOUNTS =>
+      _id_GET_ACCOUNTS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GET_ACCOUNTS_PRIVILEGED = _class.staticFieldId(
     r'GET_ACCOUNTS_PRIVILEGED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GET_ACCOUNTS_PRIVILEGED
+  /// from: `static public final java.lang.String GET_ACCOUNTS_PRIVILEGED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GET_ACCOUNTS_PRIVILEGED =>
-      _id_GET_ACCOUNTS_PRIVILEGED.get(_class, const jni.JStringType());
+  static jni$_.JString? get GET_ACCOUNTS_PRIVILEGED =>
+      _id_GET_ACCOUNTS_PRIVILEGED.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_GET_PACKAGE_SIZE = _class.staticFieldId(
     r'GET_PACKAGE_SIZE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GET_PACKAGE_SIZE
+  /// from: `static public final java.lang.String GET_PACKAGE_SIZE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GET_PACKAGE_SIZE =>
-      _id_GET_PACKAGE_SIZE.get(_class, const jni.JStringType());
+  static jni$_.JString? get GET_PACKAGE_SIZE =>
+      _id_GET_PACKAGE_SIZE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GET_TASKS = _class.staticFieldId(
     r'GET_TASKS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GET_TASKS
+  /// from: `static public final java.lang.String GET_TASKS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GET_TASKS =>
-      _id_GET_TASKS.get(_class, const jni.JStringType());
+  static jni$_.JString? get GET_TASKS =>
+      _id_GET_TASKS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_GLOBAL_SEARCH = _class.staticFieldId(
     r'GLOBAL_SEARCH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String GLOBAL_SEARCH
+  /// from: `static public final java.lang.String GLOBAL_SEARCH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get GLOBAL_SEARCH =>
-      _id_GLOBAL_SEARCH.get(_class, const jni.JStringType());
+  static jni$_.JString? get GLOBAL_SEARCH =>
+      _id_GLOBAL_SEARCH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_HIDE_OVERLAY_WINDOWS = _class.staticFieldId(
     r'HIDE_OVERLAY_WINDOWS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String HIDE_OVERLAY_WINDOWS
+  /// from: `static public final java.lang.String HIDE_OVERLAY_WINDOWS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get HIDE_OVERLAY_WINDOWS =>
-      _id_HIDE_OVERLAY_WINDOWS.get(_class, const jni.JStringType());
+  static jni$_.JString? get HIDE_OVERLAY_WINDOWS =>
+      _id_HIDE_OVERLAY_WINDOWS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_HIGH_SAMPLING_RATE_SENSORS = _class.staticFieldId(
     r'HIGH_SAMPLING_RATE_SENSORS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String HIGH_SAMPLING_RATE_SENSORS
+  /// from: `static public final java.lang.String HIGH_SAMPLING_RATE_SENSORS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get HIGH_SAMPLING_RATE_SENSORS =>
-      _id_HIGH_SAMPLING_RATE_SENSORS.get(_class, const jni.JStringType());
+  static jni$_.JString? get HIGH_SAMPLING_RATE_SENSORS =>
+      _id_HIGH_SAMPLING_RATE_SENSORS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INSTALL_LOCATION_PROVIDER = _class.staticFieldId(
     r'INSTALL_LOCATION_PROVIDER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INSTALL_LOCATION_PROVIDER
+  /// from: `static public final java.lang.String INSTALL_LOCATION_PROVIDER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INSTALL_LOCATION_PROVIDER =>
-      _id_INSTALL_LOCATION_PROVIDER.get(_class, const jni.JStringType());
+  static jni$_.JString? get INSTALL_LOCATION_PROVIDER =>
+      _id_INSTALL_LOCATION_PROVIDER.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INSTALL_PACKAGES = _class.staticFieldId(
     r'INSTALL_PACKAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INSTALL_PACKAGES
+  /// from: `static public final java.lang.String INSTALL_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INSTALL_PACKAGES =>
-      _id_INSTALL_PACKAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get INSTALL_PACKAGES =>
+      _id_INSTALL_PACKAGES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INSTALL_SHORTCUT = _class.staticFieldId(
     r'INSTALL_SHORTCUT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INSTALL_SHORTCUT
+  /// from: `static public final java.lang.String INSTALL_SHORTCUT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INSTALL_SHORTCUT =>
-      _id_INSTALL_SHORTCUT.get(_class, const jni.JStringType());
+  static jni$_.JString? get INSTALL_SHORTCUT =>
+      _id_INSTALL_SHORTCUT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_INSTANT_APP_FOREGROUND_SERVICE = _class.staticFieldId(
     r'INSTANT_APP_FOREGROUND_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INSTANT_APP_FOREGROUND_SERVICE
+  /// from: `static public final java.lang.String INSTANT_APP_FOREGROUND_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INSTANT_APP_FOREGROUND_SERVICE =>
-      _id_INSTANT_APP_FOREGROUND_SERVICE.get(_class, const jni.JStringType());
+  static jni$_.JString? get INSTANT_APP_FOREGROUND_SERVICE =>
+      _id_INSTANT_APP_FOREGROUND_SERVICE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTERACT_ACROSS_PROFILES = _class.staticFieldId(
     r'INTERACT_ACROSS_PROFILES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTERACT_ACROSS_PROFILES
+  /// from: `static public final java.lang.String INTERACT_ACROSS_PROFILES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTERACT_ACROSS_PROFILES =>
-      _id_INTERACT_ACROSS_PROFILES.get(_class, const jni.JStringType());
+  static jni$_.JString? get INTERACT_ACROSS_PROFILES =>
+      _id_INTERACT_ACROSS_PROFILES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_INTERNET = _class.staticFieldId(
     r'INTERNET',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String INTERNET
+  /// from: `static public final java.lang.String INTERNET`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get INTERNET =>
-      _id_INTERNET.get(_class, const jni.JStringType());
+  static jni$_.JString? get INTERNET =>
+      _id_INTERNET.get(_class, const jni$_.JStringNullableType());
 
   static final _id_KILL_BACKGROUND_PROCESSES = _class.staticFieldId(
     r'KILL_BACKGROUND_PROCESSES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String KILL_BACKGROUND_PROCESSES
+  /// from: `static public final java.lang.String KILL_BACKGROUND_PROCESSES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get KILL_BACKGROUND_PROCESSES =>
-      _id_KILL_BACKGROUND_PROCESSES.get(_class, const jni.JStringType());
+  static jni$_.JString? get KILL_BACKGROUND_PROCESSES =>
+      _id_KILL_BACKGROUND_PROCESSES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE =
       _class.staticFieldId(
@@ -1207,63 +1291,64 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE
+  /// from: `static public final java.lang.String LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE =>
+  static jni$_.JString? get LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE =>
       _id_LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK = _class.staticFieldId(
     r'LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK
+  /// from: `static public final java.lang.String LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK =>
+  static jni$_.JString? get LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK =>
       _id_LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_LOADER_USAGE_STATS = _class.staticFieldId(
     r'LOADER_USAGE_STATS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LOADER_USAGE_STATS
+  /// from: `static public final java.lang.String LOADER_USAGE_STATS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LOADER_USAGE_STATS =>
-      _id_LOADER_USAGE_STATS.get(_class, const jni.JStringType());
+  static jni$_.JString? get LOADER_USAGE_STATS =>
+      _id_LOADER_USAGE_STATS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LOCATION_HARDWARE = _class.staticFieldId(
     r'LOCATION_HARDWARE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LOCATION_HARDWARE
+  /// from: `static public final java.lang.String LOCATION_HARDWARE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LOCATION_HARDWARE =>
-      _id_LOCATION_HARDWARE.get(_class, const jni.JStringType());
+  static jni$_.JString? get LOCATION_HARDWARE =>
+      _id_LOCATION_HARDWARE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_LOCK_STATE = _class.staticFieldId(
     r'MANAGE_DEVICE_LOCK_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_LOCK_STATE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_LOCK_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_LOCK_STATE =>
-      _id_MANAGE_DEVICE_LOCK_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_LOCK_STATE =>
+      _id_MANAGE_DEVICE_LOCK_STATE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_ACCESSIBILITY = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_ACCESSIBILITY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_ACCESSIBILITY
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ACCESSIBILITY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_ACCESSIBILITY =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_ACCESSIBILITY =>
       _id_MANAGE_DEVICE_POLICY_ACCESSIBILITY.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT =
       _class.staticFieldId(
@@ -1271,22 +1356,22 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT =>
       _id_MANAGE_DEVICE_POLICY_ACCOUNT_MANAGEMENT.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_ACROSS_USERS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_ACROSS_USERS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_ACROSS_USERS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ACROSS_USERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_ACROSS_USERS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_ACROSS_USERS =>
       _id_MANAGE_DEVICE_POLICY_ACROSS_USERS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_ACROSS_USERS_FULL =
       _class.staticFieldId(
@@ -1294,11 +1379,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_ACROSS_USERS_FULL
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ACROSS_USERS_FULL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_ACROSS_USERS_FULL =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_ACROSS_USERS_FULL =>
       _id_MANAGE_DEVICE_POLICY_ACROSS_USERS_FULL.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL =
       _class.staticFieldId(
@@ -1306,138 +1391,177 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL =>
-      _id_MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL.get(
-          _class, const jni.JStringType());
+  static jni$_.JString?
+      get MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL =>
+          _id_MANAGE_DEVICE_POLICY_ACROSS_USERS_SECURITY_CRITICAL.get(
+              _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_AIRPLANE_MODE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_AIRPLANE_MODE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_AIRPLANE_MODE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_AIRPLANE_MODE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_AIRPLANE_MODE =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_AIRPLANE_MODE =>
       _id_MANAGE_DEVICE_POLICY_AIRPLANE_MODE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_APPS_CONTROL = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_APPS_CONTROL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_APPS_CONTROL
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_APPS_CONTROL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_APPS_CONTROL =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_APPS_CONTROL =>
       _id_MANAGE_DEVICE_POLICY_APPS_CONTROL.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_APP_RESTRICTIONS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_APP_RESTRICTIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_APP_RESTRICTIONS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_APP_RESTRICTIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_APP_RESTRICTIONS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_APP_RESTRICTIONS =>
       _id_MANAGE_DEVICE_POLICY_APP_RESTRICTIONS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_APP_USER_DATA = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_APP_USER_DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_APP_USER_DATA
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_APP_USER_DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_APP_USER_DATA =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_APP_USER_DATA =>
       _id_MANAGE_DEVICE_POLICY_APP_USER_DATA.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_MANAGE_DEVICE_POLICY_ASSIST_CONTENT = _class.staticFieldId(
+    r'MANAGE_DEVICE_POLICY_ASSIST_CONTENT',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ASSIST_CONTENT`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_ASSIST_CONTENT =>
+      _id_MANAGE_DEVICE_POLICY_ASSIST_CONTENT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_AUDIO_OUTPUT = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_AUDIO_OUTPUT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_AUDIO_OUTPUT
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_AUDIO_OUTPUT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_AUDIO_OUTPUT =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_AUDIO_OUTPUT =>
       _id_MANAGE_DEVICE_POLICY_AUDIO_OUTPUT.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_AUTOFILL = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_AUTOFILL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_AUTOFILL
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_AUTOFILL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_AUTOFILL =>
-      _id_MANAGE_DEVICE_POLICY_AUTOFILL.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_AUTOFILL =>
+      _id_MANAGE_DEVICE_POLICY_AUTOFILL.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_BACKUP_SERVICE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_BACKUP_SERVICE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_BACKUP_SERVICE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_BACKUP_SERVICE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_BACKUP_SERVICE =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_BACKUP_SERVICE =>
       _id_MANAGE_DEVICE_POLICY_BACKUP_SERVICE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_MANAGE_DEVICE_POLICY_BLOCK_UNINSTALL = _class.staticFieldId(
+    r'MANAGE_DEVICE_POLICY_BLOCK_UNINSTALL',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_BLOCK_UNINSTALL`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_BLOCK_UNINSTALL =>
+      _id_MANAGE_DEVICE_POLICY_BLOCK_UNINSTALL.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_BLUETOOTH = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_BLUETOOTH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_BLUETOOTH
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_BLUETOOTH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_BLUETOOTH =>
-      _id_MANAGE_DEVICE_POLICY_BLUETOOTH.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_BLUETOOTH =>
+      _id_MANAGE_DEVICE_POLICY_BLUETOOTH.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_BUGREPORT = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_BUGREPORT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_BUGREPORT
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_BUGREPORT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_BUGREPORT =>
-      _id_MANAGE_DEVICE_POLICY_BUGREPORT.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_BUGREPORT =>
+      _id_MANAGE_DEVICE_POLICY_BUGREPORT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_CALLS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_CALLS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_CALLS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_CALLS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_CALLS =>
-      _id_MANAGE_DEVICE_POLICY_CALLS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_CALLS =>
+      _id_MANAGE_DEVICE_POLICY_CALLS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_CAMERA = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_CAMERA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_CAMERA
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_CAMERA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_CAMERA =>
-      _id_MANAGE_DEVICE_POLICY_CAMERA.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_CAMERA =>
+      _id_MANAGE_DEVICE_POLICY_CAMERA.get(
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_MANAGE_DEVICE_POLICY_CAMERA_TOGGLE = _class.staticFieldId(
+    r'MANAGE_DEVICE_POLICY_CAMERA_TOGGLE',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_CAMERA_TOGGLE`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_CAMERA_TOGGLE =>
+      _id_MANAGE_DEVICE_POLICY_CAMERA_TOGGLE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_CERTIFICATES = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_CERTIFICATES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_CERTIFICATES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_CERTIFICATES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_CERTIFICATES =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_CERTIFICATES =>
       _id_MANAGE_DEVICE_POLICY_CERTIFICATES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_COMMON_CRITERIA_MODE =
       _class.staticFieldId(
@@ -1445,11 +1569,23 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_COMMON_CRITERIA_MODE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_COMMON_CRITERIA_MODE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_COMMON_CRITERIA_MODE =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_COMMON_CRITERIA_MODE =>
       _id_MANAGE_DEVICE_POLICY_COMMON_CRITERIA_MODE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_MANAGE_DEVICE_POLICY_CONTENT_PROTECTION =
+      _class.staticFieldId(
+    r'MANAGE_DEVICE_POLICY_CONTENT_PROTECTION',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_CONTENT_PROTECTION`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_CONTENT_PROTECTION =>
+      _id_MANAGE_DEVICE_POLICY_CONTENT_PROTECTION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES =
       _class.staticFieldId(
@@ -1457,21 +1593,22 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES =>
       _id_MANAGE_DEVICE_POLICY_DEBUGGING_FEATURES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_DEFAULT_SMS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_DEFAULT_SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_DEFAULT_SMS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_DEFAULT_SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_DEFAULT_SMS =>
-      _id_MANAGE_DEVICE_POLICY_DEFAULT_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_DEFAULT_SMS =>
+      _id_MANAGE_DEVICE_POLICY_DEFAULT_SMS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_DEVICE_IDENTIFIERS =
       _class.staticFieldId(
@@ -1479,53 +1616,55 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_DEVICE_IDENTIFIERS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_DEVICE_IDENTIFIERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_DEVICE_IDENTIFIERS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_DEVICE_IDENTIFIERS =>
       _id_MANAGE_DEVICE_POLICY_DEVICE_IDENTIFIERS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_DISPLAY = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_DISPLAY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_DISPLAY
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_DISPLAY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_DISPLAY =>
-      _id_MANAGE_DEVICE_POLICY_DISPLAY.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_DISPLAY =>
+      _id_MANAGE_DEVICE_POLICY_DISPLAY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_FACTORY_RESET = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_FACTORY_RESET',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_FACTORY_RESET
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_FACTORY_RESET`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_FACTORY_RESET =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_FACTORY_RESET =>
       _id_MANAGE_DEVICE_POLICY_FACTORY_RESET.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_FUN = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_FUN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_FUN
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_FUN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_FUN =>
-      _id_MANAGE_DEVICE_POLICY_FUN.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_FUN =>
+      _id_MANAGE_DEVICE_POLICY_FUN.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_INPUT_METHODS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_INPUT_METHODS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_INPUT_METHODS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_INPUT_METHODS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_INPUT_METHODS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_INPUT_METHODS =>
       _id_MANAGE_DEVICE_POLICY_INPUT_METHODS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES =
       _class.staticFieldId(
@@ -1533,11 +1672,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES =>
       _id_MANAGE_DEVICE_POLICY_INSTALL_UNKNOWN_SOURCES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_KEEP_UNINSTALLED_PACKAGES =
       _class.staticFieldId(
@@ -1545,125 +1684,156 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_KEEP_UNINSTALLED_PACKAGES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_KEEP_UNINSTALLED_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_KEEP_UNINSTALLED_PACKAGES =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_KEEP_UNINSTALLED_PACKAGES =>
       _id_MANAGE_DEVICE_POLICY_KEEP_UNINSTALLED_PACKAGES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_KEYGUARD = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_KEYGUARD',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_KEYGUARD
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_KEYGUARD`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_KEYGUARD =>
-      _id_MANAGE_DEVICE_POLICY_KEYGUARD.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_KEYGUARD =>
+      _id_MANAGE_DEVICE_POLICY_KEYGUARD.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_LOCALE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_LOCALE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_LOCALE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_LOCALE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_LOCALE =>
-      _id_MANAGE_DEVICE_POLICY_LOCALE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_LOCALE =>
+      _id_MANAGE_DEVICE_POLICY_LOCALE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_LOCATION = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_LOCATION
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_LOCATION =>
-      _id_MANAGE_DEVICE_POLICY_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_LOCATION =>
+      _id_MANAGE_DEVICE_POLICY_LOCATION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_LOCK = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_LOCK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_LOCK
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_LOCK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_LOCK =>
-      _id_MANAGE_DEVICE_POLICY_LOCK.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_LOCK =>
+      _id_MANAGE_DEVICE_POLICY_LOCK.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS =>
       _id_MANAGE_DEVICE_POLICY_LOCK_CREDENTIALS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_LOCK_TASK = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_LOCK_TASK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_LOCK_TASK
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_LOCK_TASK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_LOCK_TASK =>
-      _id_MANAGE_DEVICE_POLICY_LOCK_TASK.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_LOCK_TASK =>
+      _id_MANAGE_DEVICE_POLICY_LOCK_TASK.get(
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_MANAGE_DEVICE_POLICY_MANAGED_SUBSCRIPTIONS =
+      _class.staticFieldId(
+    r'MANAGE_DEVICE_POLICY_MANAGED_SUBSCRIPTIONS',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_MANAGED_SUBSCRIPTIONS`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_MANAGED_SUBSCRIPTIONS =>
+      _id_MANAGE_DEVICE_POLICY_MANAGED_SUBSCRIPTIONS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_METERED_DATA = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_METERED_DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_METERED_DATA
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_METERED_DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_METERED_DATA =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_METERED_DATA =>
       _id_MANAGE_DEVICE_POLICY_METERED_DATA.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_MICROPHONE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_MICROPHONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_MICROPHONE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_MICROPHONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_MICROPHONE =>
-      _id_MANAGE_DEVICE_POLICY_MICROPHONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_MICROPHONE =>
+      _id_MANAGE_DEVICE_POLICY_MICROPHONE.get(
+          _class, const jni$_.JStringNullableType());
+
+  static final _id_MANAGE_DEVICE_POLICY_MICROPHONE_TOGGLE =
+      _class.staticFieldId(
+    r'MANAGE_DEVICE_POLICY_MICROPHONE_TOGGLE',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_MICROPHONE_TOGGLE`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_MICROPHONE_TOGGLE =>
+      _id_MANAGE_DEVICE_POLICY_MICROPHONE_TOGGLE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_MOBILE_NETWORK = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_MOBILE_NETWORK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_MOBILE_NETWORK
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_MOBILE_NETWORK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_MOBILE_NETWORK =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_MOBILE_NETWORK =>
       _id_MANAGE_DEVICE_POLICY_MOBILE_NETWORK.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_MODIFY_USERS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_MODIFY_USERS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_MODIFY_USERS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_MODIFY_USERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_MODIFY_USERS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_MODIFY_USERS =>
       _id_MANAGE_DEVICE_POLICY_MODIFY_USERS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_MTE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_MTE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_MTE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_MTE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_MTE =>
-      _id_MANAGE_DEVICE_POLICY_MTE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_MTE =>
+      _id_MANAGE_DEVICE_POLICY_MTE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_NEARBY_COMMUNICATION =
       _class.staticFieldId(
@@ -1671,22 +1841,22 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_NEARBY_COMMUNICATION
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_NEARBY_COMMUNICATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_NEARBY_COMMUNICATION =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_NEARBY_COMMUNICATION =>
       _id_MANAGE_DEVICE_POLICY_NEARBY_COMMUNICATION.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_NETWORK_LOGGING = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_NETWORK_LOGGING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_NETWORK_LOGGING
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_NETWORK_LOGGING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_NETWORK_LOGGING =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_NETWORK_LOGGING =>
       _id_MANAGE_DEVICE_POLICY_NETWORK_LOGGING.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY =
       _class.staticFieldId(
@@ -1694,74 +1864,77 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY =>
       _id_MANAGE_DEVICE_POLICY_ORGANIZATION_IDENTITY.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_OVERRIDE_APN = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_OVERRIDE_APN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_OVERRIDE_APN
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_OVERRIDE_APN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_OVERRIDE_APN =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_OVERRIDE_APN =>
       _id_MANAGE_DEVICE_POLICY_OVERRIDE_APN.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PACKAGE_STATE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_PACKAGE_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PACKAGE_STATE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PACKAGE_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PACKAGE_STATE =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PACKAGE_STATE =>
       _id_MANAGE_DEVICE_POLICY_PACKAGE_STATE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA =>
       _id_MANAGE_DEVICE_POLICY_PHYSICAL_MEDIA.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PRINTING = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_PRINTING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PRINTING
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PRINTING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PRINTING =>
-      _id_MANAGE_DEVICE_POLICY_PRINTING.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PRINTING =>
+      _id_MANAGE_DEVICE_POLICY_PRINTING.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PRIVATE_DNS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_PRIVATE_DNS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PRIVATE_DNS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PRIVATE_DNS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PRIVATE_DNS =>
-      _id_MANAGE_DEVICE_POLICY_PRIVATE_DNS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PRIVATE_DNS =>
+      _id_MANAGE_DEVICE_POLICY_PRIVATE_DNS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PROFILES = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_PROFILES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PROFILES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PROFILES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PROFILES =>
-      _id_MANAGE_DEVICE_POLICY_PROFILES.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PROFILES =>
+      _id_MANAGE_DEVICE_POLICY_PROFILES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PROFILE_INTERACTION =
       _class.staticFieldId(
@@ -1769,21 +1942,22 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PROFILE_INTERACTION
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PROFILE_INTERACTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PROFILE_INTERACTION =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PROFILE_INTERACTION =>
       _id_MANAGE_DEVICE_POLICY_PROFILE_INTERACTION.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_PROXY = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_PROXY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_PROXY
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_PROXY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_PROXY =>
-      _id_MANAGE_DEVICE_POLICY_PROXY.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_PROXY =>
+      _id_MANAGE_DEVICE_POLICY_PROXY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_QUERY_SYSTEM_UPDATES =
       _class.staticFieldId(
@@ -1791,22 +1965,22 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_QUERY_SYSTEM_UPDATES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_QUERY_SYSTEM_UPDATES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_QUERY_SYSTEM_UPDATES =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_QUERY_SYSTEM_UPDATES =>
       _id_MANAGE_DEVICE_POLICY_QUERY_SYSTEM_UPDATES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_RESET_PASSWORD = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_RESET_PASSWORD',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_RESET_PASSWORD
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_RESET_PASSWORD`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_RESET_PASSWORD =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_RESET_PASSWORD =>
       _id_MANAGE_DEVICE_POLICY_RESET_PASSWORD.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_RESTRICT_PRIVATE_DNS =
       _class.staticFieldId(
@@ -1814,11 +1988,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_RESTRICT_PRIVATE_DNS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_RESTRICT_PRIVATE_DNS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_RESTRICT_PRIVATE_DNS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_RESTRICT_PRIVATE_DNS =>
       _id_MANAGE_DEVICE_POLICY_RESTRICT_PRIVATE_DNS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS =
       _class.staticFieldId(
@@ -1826,11 +2000,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS =>
       _id_MANAGE_DEVICE_POLICY_RUNTIME_PERMISSIONS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND =
       _class.staticFieldId(
@@ -1838,95 +2012,99 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND =>
       _id_MANAGE_DEVICE_POLICY_RUN_IN_BACKGROUND.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SAFE_BOOT = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SAFE_BOOT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SAFE_BOOT
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SAFE_BOOT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SAFE_BOOT =>
-      _id_MANAGE_DEVICE_POLICY_SAFE_BOOT.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SAFE_BOOT =>
+      _id_MANAGE_DEVICE_POLICY_SAFE_BOOT.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SCREEN_CAPTURE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SCREEN_CAPTURE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SCREEN_CAPTURE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SCREEN_CAPTURE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SCREEN_CAPTURE =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SCREEN_CAPTURE =>
       _id_MANAGE_DEVICE_POLICY_SCREEN_CAPTURE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SCREEN_CONTENT = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SCREEN_CONTENT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SCREEN_CONTENT
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SCREEN_CONTENT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SCREEN_CONTENT =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SCREEN_CONTENT =>
       _id_MANAGE_DEVICE_POLICY_SCREEN_CONTENT.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SECURITY_LOGGING = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SECURITY_LOGGING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SECURITY_LOGGING
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SECURITY_LOGGING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SECURITY_LOGGING =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SECURITY_LOGGING =>
       _id_MANAGE_DEVICE_POLICY_SECURITY_LOGGING.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SETTINGS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SETTINGS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SETTINGS =>
-      _id_MANAGE_DEVICE_POLICY_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SETTINGS =>
+      _id_MANAGE_DEVICE_POLICY_SETTINGS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SMS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SMS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SMS =>
-      _id_MANAGE_DEVICE_POLICY_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SMS =>
+      _id_MANAGE_DEVICE_POLICY_SMS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_STATUS_BAR = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_STATUS_BAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_STATUS_BAR
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_STATUS_BAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_STATUS_BAR =>
-      _id_MANAGE_DEVICE_POLICY_STATUS_BAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_STATUS_BAR =>
+      _id_MANAGE_DEVICE_POLICY_STATUS_BAR.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE =>
       _id_MANAGE_DEVICE_POLICY_SUPPORT_MESSAGE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SUSPEND_PERSONAL_APPS =
       _class.staticFieldId(
@@ -1934,53 +2112,55 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SUSPEND_PERSONAL_APPS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SUSPEND_PERSONAL_APPS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SUSPEND_PERSONAL_APPS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SUSPEND_PERSONAL_APPS =>
       _id_MANAGE_DEVICE_POLICY_SUSPEND_PERSONAL_APPS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SYSTEM_APPS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SYSTEM_APPS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SYSTEM_APPS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SYSTEM_APPS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SYSTEM_APPS =>
-      _id_MANAGE_DEVICE_POLICY_SYSTEM_APPS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SYSTEM_APPS =>
+      _id_MANAGE_DEVICE_POLICY_SYSTEM_APPS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS =>
       _id_MANAGE_DEVICE_POLICY_SYSTEM_DIALOGS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_SYSTEM_UPDATES = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_SYSTEM_UPDATES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_SYSTEM_UPDATES
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_SYSTEM_UPDATES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_SYSTEM_UPDATES =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_SYSTEM_UPDATES =>
       _id_MANAGE_DEVICE_POLICY_SYSTEM_UPDATES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_TIME = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_TIME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_TIME
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_TIME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_TIME =>
-      _id_MANAGE_DEVICE_POLICY_TIME.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_TIME =>
+      _id_MANAGE_DEVICE_POLICY_TIME.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING =
       _class.staticFieldId(
@@ -1988,11 +2168,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING =>
       _id_MANAGE_DEVICE_POLICY_USB_DATA_SIGNALLING.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER =
       _class.staticFieldId(
@@ -2000,600 +2180,639 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER =>
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER =>
       _id_MANAGE_DEVICE_POLICY_USB_FILE_TRANSFER.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_USERS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_USERS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_USERS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_USERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_USERS =>
-      _id_MANAGE_DEVICE_POLICY_USERS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_USERS =>
+      _id_MANAGE_DEVICE_POLICY_USERS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_VPN = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_VPN',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_VPN
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_VPN`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_VPN =>
-      _id_MANAGE_DEVICE_POLICY_VPN.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_VPN =>
+      _id_MANAGE_DEVICE_POLICY_VPN.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_WALLPAPER = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_WALLPAPER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_WALLPAPER
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_WALLPAPER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_WALLPAPER =>
-      _id_MANAGE_DEVICE_POLICY_WALLPAPER.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_WALLPAPER =>
+      _id_MANAGE_DEVICE_POLICY_WALLPAPER.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_WIFI = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_WIFI',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_WIFI
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_WIFI`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_WIFI =>
-      _id_MANAGE_DEVICE_POLICY_WIFI.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_WIFI =>
+      _id_MANAGE_DEVICE_POLICY_WIFI.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_WINDOWS = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_WINDOWS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_WINDOWS
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_WINDOWS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_WINDOWS =>
-      _id_MANAGE_DEVICE_POLICY_WINDOWS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_WINDOWS =>
+      _id_MANAGE_DEVICE_POLICY_WINDOWS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DEVICE_POLICY_WIPE_DATA = _class.staticFieldId(
     r'MANAGE_DEVICE_POLICY_WIPE_DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DEVICE_POLICY_WIPE_DATA
+  /// from: `static public final java.lang.String MANAGE_DEVICE_POLICY_WIPE_DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DEVICE_POLICY_WIPE_DATA =>
-      _id_MANAGE_DEVICE_POLICY_WIPE_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DEVICE_POLICY_WIPE_DATA =>
+      _id_MANAGE_DEVICE_POLICY_WIPE_DATA.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_DOCUMENTS = _class.staticFieldId(
     r'MANAGE_DOCUMENTS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_DOCUMENTS
+  /// from: `static public final java.lang.String MANAGE_DOCUMENTS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_DOCUMENTS =>
-      _id_MANAGE_DOCUMENTS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_DOCUMENTS =>
+      _id_MANAGE_DOCUMENTS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_EXTERNAL_STORAGE = _class.staticFieldId(
     r'MANAGE_EXTERNAL_STORAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_EXTERNAL_STORAGE
+  /// from: `static public final java.lang.String MANAGE_EXTERNAL_STORAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_EXTERNAL_STORAGE =>
-      _id_MANAGE_EXTERNAL_STORAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_EXTERNAL_STORAGE =>
+      _id_MANAGE_EXTERNAL_STORAGE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_MEDIA = _class.staticFieldId(
     r'MANAGE_MEDIA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_MEDIA
+  /// from: `static public final java.lang.String MANAGE_MEDIA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_MEDIA =>
-      _id_MANAGE_MEDIA.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_MEDIA =>
+      _id_MANAGE_MEDIA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_ONGOING_CALLS = _class.staticFieldId(
     r'MANAGE_ONGOING_CALLS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_ONGOING_CALLS
+  /// from: `static public final java.lang.String MANAGE_ONGOING_CALLS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_ONGOING_CALLS =>
-      _id_MANAGE_ONGOING_CALLS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_ONGOING_CALLS =>
+      _id_MANAGE_ONGOING_CALLS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_OWN_CALLS = _class.staticFieldId(
     r'MANAGE_OWN_CALLS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_OWN_CALLS
+  /// from: `static public final java.lang.String MANAGE_OWN_CALLS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_OWN_CALLS =>
-      _id_MANAGE_OWN_CALLS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_OWN_CALLS =>
+      _id_MANAGE_OWN_CALLS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_WIFI_INTERFACES = _class.staticFieldId(
     r'MANAGE_WIFI_INTERFACES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_WIFI_INTERFACES
+  /// from: `static public final java.lang.String MANAGE_WIFI_INTERFACES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_WIFI_INTERFACES =>
-      _id_MANAGE_WIFI_INTERFACES.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_WIFI_INTERFACES =>
+      _id_MANAGE_WIFI_INTERFACES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MANAGE_WIFI_NETWORK_SELECTION = _class.staticFieldId(
     r'MANAGE_WIFI_NETWORK_SELECTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MANAGE_WIFI_NETWORK_SELECTION
+  /// from: `static public final java.lang.String MANAGE_WIFI_NETWORK_SELECTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MANAGE_WIFI_NETWORK_SELECTION =>
-      _id_MANAGE_WIFI_NETWORK_SELECTION.get(_class, const jni.JStringType());
+  static jni$_.JString? get MANAGE_WIFI_NETWORK_SELECTION =>
+      _id_MANAGE_WIFI_NETWORK_SELECTION.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MASTER_CLEAR = _class.staticFieldId(
     r'MASTER_CLEAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MASTER_CLEAR
+  /// from: `static public final java.lang.String MASTER_CLEAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MASTER_CLEAR =>
-      _id_MASTER_CLEAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get MASTER_CLEAR =>
+      _id_MASTER_CLEAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MEDIA_CONTENT_CONTROL = _class.staticFieldId(
     r'MEDIA_CONTENT_CONTROL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MEDIA_CONTENT_CONTROL
+  /// from: `static public final java.lang.String MEDIA_CONTENT_CONTROL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MEDIA_CONTENT_CONTROL =>
-      _id_MEDIA_CONTENT_CONTROL.get(_class, const jni.JStringType());
+  static jni$_.JString? get MEDIA_CONTENT_CONTROL =>
+      _id_MEDIA_CONTENT_CONTROL.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_MEDIA_ROUTING_CONTROL = _class.staticFieldId(
+    r'MEDIA_ROUTING_CONTROL',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String MEDIA_ROUTING_CONTROL`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get MEDIA_ROUTING_CONTROL =>
+      _id_MEDIA_ROUTING_CONTROL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MODIFY_AUDIO_SETTINGS = _class.staticFieldId(
     r'MODIFY_AUDIO_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MODIFY_AUDIO_SETTINGS
+  /// from: `static public final java.lang.String MODIFY_AUDIO_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MODIFY_AUDIO_SETTINGS =>
-      _id_MODIFY_AUDIO_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MODIFY_AUDIO_SETTINGS =>
+      _id_MODIFY_AUDIO_SETTINGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MODIFY_PHONE_STATE = _class.staticFieldId(
     r'MODIFY_PHONE_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MODIFY_PHONE_STATE
+  /// from: `static public final java.lang.String MODIFY_PHONE_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MODIFY_PHONE_STATE =>
-      _id_MODIFY_PHONE_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MODIFY_PHONE_STATE =>
+      _id_MODIFY_PHONE_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MOUNT_FORMAT_FILESYSTEMS = _class.staticFieldId(
     r'MOUNT_FORMAT_FILESYSTEMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MOUNT_FORMAT_FILESYSTEMS
+  /// from: `static public final java.lang.String MOUNT_FORMAT_FILESYSTEMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MOUNT_FORMAT_FILESYSTEMS =>
-      _id_MOUNT_FORMAT_FILESYSTEMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MOUNT_FORMAT_FILESYSTEMS =>
+      _id_MOUNT_FORMAT_FILESYSTEMS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_MOUNT_UNMOUNT_FILESYSTEMS = _class.staticFieldId(
     r'MOUNT_UNMOUNT_FILESYSTEMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MOUNT_UNMOUNT_FILESYSTEMS
+  /// from: `static public final java.lang.String MOUNT_UNMOUNT_FILESYSTEMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MOUNT_UNMOUNT_FILESYSTEMS =>
-      _id_MOUNT_UNMOUNT_FILESYSTEMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get MOUNT_UNMOUNT_FILESYSTEMS =>
+      _id_MOUNT_UNMOUNT_FILESYSTEMS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_NEARBY_WIFI_DEVICES = _class.staticFieldId(
     r'NEARBY_WIFI_DEVICES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NEARBY_WIFI_DEVICES
+  /// from: `static public final java.lang.String NEARBY_WIFI_DEVICES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NEARBY_WIFI_DEVICES =>
-      _id_NEARBY_WIFI_DEVICES.get(_class, const jni.JStringType());
+  static jni$_.JString? get NEARBY_WIFI_DEVICES =>
+      _id_NEARBY_WIFI_DEVICES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NFC = _class.staticFieldId(
     r'NFC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NFC
+  /// from: `static public final java.lang.String NFC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NFC => _id_NFC.get(_class, const jni.JStringType());
+  static jni$_.JString? get NFC =>
+      _id_NFC.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NFC_PREFERRED_PAYMENT_INFO = _class.staticFieldId(
     r'NFC_PREFERRED_PAYMENT_INFO',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NFC_PREFERRED_PAYMENT_INFO
+  /// from: `static public final java.lang.String NFC_PREFERRED_PAYMENT_INFO`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NFC_PREFERRED_PAYMENT_INFO =>
-      _id_NFC_PREFERRED_PAYMENT_INFO.get(_class, const jni.JStringType());
+  static jni$_.JString? get NFC_PREFERRED_PAYMENT_INFO =>
+      _id_NFC_PREFERRED_PAYMENT_INFO.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_NFC_TRANSACTION_EVENT = _class.staticFieldId(
     r'NFC_TRANSACTION_EVENT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NFC_TRANSACTION_EVENT
+  /// from: `static public final java.lang.String NFC_TRANSACTION_EVENT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NFC_TRANSACTION_EVENT =>
-      _id_NFC_TRANSACTION_EVENT.get(_class, const jni.JStringType());
+  static jni$_.JString? get NFC_TRANSACTION_EVENT =>
+      _id_NFC_TRANSACTION_EVENT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_OVERRIDE_WIFI_CONFIG = _class.staticFieldId(
     r'OVERRIDE_WIFI_CONFIG',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String OVERRIDE_WIFI_CONFIG
+  /// from: `static public final java.lang.String OVERRIDE_WIFI_CONFIG`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get OVERRIDE_WIFI_CONFIG =>
-      _id_OVERRIDE_WIFI_CONFIG.get(_class, const jni.JStringType());
+  static jni$_.JString? get OVERRIDE_WIFI_CONFIG =>
+      _id_OVERRIDE_WIFI_CONFIG.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PACKAGE_USAGE_STATS = _class.staticFieldId(
     r'PACKAGE_USAGE_STATS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PACKAGE_USAGE_STATS
+  /// from: `static public final java.lang.String PACKAGE_USAGE_STATS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PACKAGE_USAGE_STATS =>
-      _id_PACKAGE_USAGE_STATS.get(_class, const jni.JStringType());
+  static jni$_.JString? get PACKAGE_USAGE_STATS =>
+      _id_PACKAGE_USAGE_STATS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PERSISTENT_ACTIVITY = _class.staticFieldId(
     r'PERSISTENT_ACTIVITY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PERSISTENT_ACTIVITY
+  /// from: `static public final java.lang.String PERSISTENT_ACTIVITY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PERSISTENT_ACTIVITY =>
-      _id_PERSISTENT_ACTIVITY.get(_class, const jni.JStringType());
+  static jni$_.JString? get PERSISTENT_ACTIVITY =>
+      _id_PERSISTENT_ACTIVITY.get(_class, const jni$_.JStringNullableType());
 
   static final _id_POST_NOTIFICATIONS = _class.staticFieldId(
     r'POST_NOTIFICATIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String POST_NOTIFICATIONS
+  /// from: `static public final java.lang.String POST_NOTIFICATIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get POST_NOTIFICATIONS =>
-      _id_POST_NOTIFICATIONS.get(_class, const jni.JStringType());
+  static jni$_.JString? get POST_NOTIFICATIONS =>
+      _id_POST_NOTIFICATIONS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PROCESS_OUTGOING_CALLS = _class.staticFieldId(
     r'PROCESS_OUTGOING_CALLS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PROCESS_OUTGOING_CALLS
+  /// from: `static public final java.lang.String PROCESS_OUTGOING_CALLS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PROCESS_OUTGOING_CALLS =>
-      _id_PROCESS_OUTGOING_CALLS.get(_class, const jni.JStringType());
+  static jni$_.JString? get PROCESS_OUTGOING_CALLS =>
+      _id_PROCESS_OUTGOING_CALLS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PROVIDE_OWN_AUTOFILL_SUGGESTIONS = _class.staticFieldId(
     r'PROVIDE_OWN_AUTOFILL_SUGGESTIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PROVIDE_OWN_AUTOFILL_SUGGESTIONS
+  /// from: `static public final java.lang.String PROVIDE_OWN_AUTOFILL_SUGGESTIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PROVIDE_OWN_AUTOFILL_SUGGESTIONS =>
-      _id_PROVIDE_OWN_AUTOFILL_SUGGESTIONS.get(_class, const jni.JStringType());
+  static jni$_.JString? get PROVIDE_OWN_AUTOFILL_SUGGESTIONS =>
+      _id_PROVIDE_OWN_AUTOFILL_SUGGESTIONS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_PROVIDE_REMOTE_CREDENTIALS = _class.staticFieldId(
     r'PROVIDE_REMOTE_CREDENTIALS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PROVIDE_REMOTE_CREDENTIALS
+  /// from: `static public final java.lang.String PROVIDE_REMOTE_CREDENTIALS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PROVIDE_REMOTE_CREDENTIALS =>
-      _id_PROVIDE_REMOTE_CREDENTIALS.get(_class, const jni.JStringType());
+  static jni$_.JString? get PROVIDE_REMOTE_CREDENTIALS =>
+      _id_PROVIDE_REMOTE_CREDENTIALS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_QUERY_ALL_PACKAGES = _class.staticFieldId(
     r'QUERY_ALL_PACKAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String QUERY_ALL_PACKAGES
+  /// from: `static public final java.lang.String QUERY_ALL_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get QUERY_ALL_PACKAGES =>
-      _id_QUERY_ALL_PACKAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get QUERY_ALL_PACKAGES =>
+      _id_QUERY_ALL_PACKAGES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_ASSISTANT_APP_SEARCH_DATA = _class.staticFieldId(
     r'READ_ASSISTANT_APP_SEARCH_DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_ASSISTANT_APP_SEARCH_DATA
+  /// from: `static public final java.lang.String READ_ASSISTANT_APP_SEARCH_DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_ASSISTANT_APP_SEARCH_DATA =>
-      _id_READ_ASSISTANT_APP_SEARCH_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_ASSISTANT_APP_SEARCH_DATA =>
+      _id_READ_ASSISTANT_APP_SEARCH_DATA.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_READ_BASIC_PHONE_STATE = _class.staticFieldId(
     r'READ_BASIC_PHONE_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_BASIC_PHONE_STATE
+  /// from: `static public final java.lang.String READ_BASIC_PHONE_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_BASIC_PHONE_STATE =>
-      _id_READ_BASIC_PHONE_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_BASIC_PHONE_STATE =>
+      _id_READ_BASIC_PHONE_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_CALENDAR = _class.staticFieldId(
     r'READ_CALENDAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_CALENDAR
+  /// from: `static public final java.lang.String READ_CALENDAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_CALENDAR =>
-      _id_READ_CALENDAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_CALENDAR =>
+      _id_READ_CALENDAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_CALL_LOG = _class.staticFieldId(
     r'READ_CALL_LOG',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_CALL_LOG
+  /// from: `static public final java.lang.String READ_CALL_LOG`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_CALL_LOG =>
-      _id_READ_CALL_LOG.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_CALL_LOG =>
+      _id_READ_CALL_LOG.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_CONTACTS = _class.staticFieldId(
     r'READ_CONTACTS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_CONTACTS
+  /// from: `static public final java.lang.String READ_CONTACTS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_CONTACTS =>
-      _id_READ_CONTACTS.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_CONTACTS =>
+      _id_READ_CONTACTS.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_READ_DROPBOX_DATA = _class.staticFieldId(
+    r'READ_DROPBOX_DATA',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String READ_DROPBOX_DATA`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get READ_DROPBOX_DATA =>
+      _id_READ_DROPBOX_DATA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_EXTERNAL_STORAGE = _class.staticFieldId(
     r'READ_EXTERNAL_STORAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_EXTERNAL_STORAGE
+  /// from: `static public final java.lang.String READ_EXTERNAL_STORAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_EXTERNAL_STORAGE =>
-      _id_READ_EXTERNAL_STORAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_EXTERNAL_STORAGE =>
+      _id_READ_EXTERNAL_STORAGE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_HOME_APP_SEARCH_DATA = _class.staticFieldId(
     r'READ_HOME_APP_SEARCH_DATA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_HOME_APP_SEARCH_DATA
+  /// from: `static public final java.lang.String READ_HOME_APP_SEARCH_DATA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_HOME_APP_SEARCH_DATA =>
-      _id_READ_HOME_APP_SEARCH_DATA.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_HOME_APP_SEARCH_DATA =>
+      _id_READ_HOME_APP_SEARCH_DATA.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_READ_INPUT_STATE = _class.staticFieldId(
     r'READ_INPUT_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_INPUT_STATE
+  /// from: `static public final java.lang.String READ_INPUT_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_INPUT_STATE =>
-      _id_READ_INPUT_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_INPUT_STATE =>
+      _id_READ_INPUT_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_LOGS = _class.staticFieldId(
     r'READ_LOGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_LOGS
+  /// from: `static public final java.lang.String READ_LOGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_LOGS =>
-      _id_READ_LOGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_LOGS =>
+      _id_READ_LOGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_MEDIA_AUDIO = _class.staticFieldId(
     r'READ_MEDIA_AUDIO',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_MEDIA_AUDIO
+  /// from: `static public final java.lang.String READ_MEDIA_AUDIO`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_MEDIA_AUDIO =>
-      _id_READ_MEDIA_AUDIO.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_MEDIA_AUDIO =>
+      _id_READ_MEDIA_AUDIO.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_MEDIA_IMAGES = _class.staticFieldId(
     r'READ_MEDIA_IMAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_MEDIA_IMAGES
+  /// from: `static public final java.lang.String READ_MEDIA_IMAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_MEDIA_IMAGES =>
-      _id_READ_MEDIA_IMAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_MEDIA_IMAGES =>
+      _id_READ_MEDIA_IMAGES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_MEDIA_VIDEO = _class.staticFieldId(
     r'READ_MEDIA_VIDEO',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_MEDIA_VIDEO
+  /// from: `static public final java.lang.String READ_MEDIA_VIDEO`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_MEDIA_VIDEO =>
-      _id_READ_MEDIA_VIDEO.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_MEDIA_VIDEO =>
+      _id_READ_MEDIA_VIDEO.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_MEDIA_VISUAL_USER_SELECTED = _class.staticFieldId(
     r'READ_MEDIA_VISUAL_USER_SELECTED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_MEDIA_VISUAL_USER_SELECTED
+  /// from: `static public final java.lang.String READ_MEDIA_VISUAL_USER_SELECTED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_MEDIA_VISUAL_USER_SELECTED =>
-      _id_READ_MEDIA_VISUAL_USER_SELECTED.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_MEDIA_VISUAL_USER_SELECTED =>
+      _id_READ_MEDIA_VISUAL_USER_SELECTED.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_READ_NEARBY_STREAMING_POLICY = _class.staticFieldId(
     r'READ_NEARBY_STREAMING_POLICY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_NEARBY_STREAMING_POLICY
+  /// from: `static public final java.lang.String READ_NEARBY_STREAMING_POLICY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_NEARBY_STREAMING_POLICY =>
-      _id_READ_NEARBY_STREAMING_POLICY.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_NEARBY_STREAMING_POLICY =>
+      _id_READ_NEARBY_STREAMING_POLICY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_READ_PHONE_NUMBERS = _class.staticFieldId(
     r'READ_PHONE_NUMBERS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_PHONE_NUMBERS
+  /// from: `static public final java.lang.String READ_PHONE_NUMBERS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_PHONE_NUMBERS =>
-      _id_READ_PHONE_NUMBERS.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_PHONE_NUMBERS =>
+      _id_READ_PHONE_NUMBERS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_PHONE_STATE = _class.staticFieldId(
     r'READ_PHONE_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_PHONE_STATE
+  /// from: `static public final java.lang.String READ_PHONE_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_PHONE_STATE =>
-      _id_READ_PHONE_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_PHONE_STATE =>
+      _id_READ_PHONE_STATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_PRECISE_PHONE_STATE = _class.staticFieldId(
     r'READ_PRECISE_PHONE_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_PRECISE_PHONE_STATE
+  /// from: `static public final java.lang.String READ_PRECISE_PHONE_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_PRECISE_PHONE_STATE =>
-      _id_READ_PRECISE_PHONE_STATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_PRECISE_PHONE_STATE =>
+      _id_READ_PRECISE_PHONE_STATE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_READ_SMS = _class.staticFieldId(
     r'READ_SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_SMS
+  /// from: `static public final java.lang.String READ_SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_SMS =>
-      _id_READ_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_SMS =>
+      _id_READ_SMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_SYNC_SETTINGS = _class.staticFieldId(
     r'READ_SYNC_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_SYNC_SETTINGS
+  /// from: `static public final java.lang.String READ_SYNC_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_SYNC_SETTINGS =>
-      _id_READ_SYNC_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_SYNC_SETTINGS =>
+      _id_READ_SYNC_SETTINGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_SYNC_STATS = _class.staticFieldId(
     r'READ_SYNC_STATS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_SYNC_STATS
+  /// from: `static public final java.lang.String READ_SYNC_STATS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_SYNC_STATS =>
-      _id_READ_SYNC_STATS.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_SYNC_STATS =>
+      _id_READ_SYNC_STATS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_VOICEMAIL = _class.staticFieldId(
     r'READ_VOICEMAIL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_VOICEMAIL
+  /// from: `static public final java.lang.String READ_VOICEMAIL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_VOICEMAIL =>
-      _id_READ_VOICEMAIL.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_VOICEMAIL =>
+      _id_READ_VOICEMAIL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_REBOOT = _class.staticFieldId(
     r'REBOOT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REBOOT
+  /// from: `static public final java.lang.String REBOOT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REBOOT =>
-      _id_REBOOT.get(_class, const jni.JStringType());
+  static jni$_.JString? get REBOOT =>
+      _id_REBOOT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RECEIVE_BOOT_COMPLETED = _class.staticFieldId(
     r'RECEIVE_BOOT_COMPLETED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RECEIVE_BOOT_COMPLETED
+  /// from: `static public final java.lang.String RECEIVE_BOOT_COMPLETED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RECEIVE_BOOT_COMPLETED =>
-      _id_RECEIVE_BOOT_COMPLETED.get(_class, const jni.JStringType());
+  static jni$_.JString? get RECEIVE_BOOT_COMPLETED =>
+      _id_RECEIVE_BOOT_COMPLETED.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RECEIVE_MMS = _class.staticFieldId(
     r'RECEIVE_MMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RECEIVE_MMS
+  /// from: `static public final java.lang.String RECEIVE_MMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RECEIVE_MMS =>
-      _id_RECEIVE_MMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get RECEIVE_MMS =>
+      _id_RECEIVE_MMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RECEIVE_SMS = _class.staticFieldId(
     r'RECEIVE_SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RECEIVE_SMS
+  /// from: `static public final java.lang.String RECEIVE_SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RECEIVE_SMS =>
-      _id_RECEIVE_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get RECEIVE_SMS =>
+      _id_RECEIVE_SMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RECEIVE_WAP_PUSH = _class.staticFieldId(
     r'RECEIVE_WAP_PUSH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RECEIVE_WAP_PUSH
+  /// from: `static public final java.lang.String RECEIVE_WAP_PUSH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RECEIVE_WAP_PUSH =>
-      _id_RECEIVE_WAP_PUSH.get(_class, const jni.JStringType());
+  static jni$_.JString? get RECEIVE_WAP_PUSH =>
+      _id_RECEIVE_WAP_PUSH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RECORD_AUDIO = _class.staticFieldId(
     r'RECORD_AUDIO',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RECORD_AUDIO
+  /// from: `static public final java.lang.String RECORD_AUDIO`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RECORD_AUDIO =>
-      _id_RECORD_AUDIO.get(_class, const jni.JStringType());
+  static jni$_.JString? get RECORD_AUDIO =>
+      _id_RECORD_AUDIO.get(_class, const jni$_.JStringNullableType());
 
   static final _id_REORDER_TASKS = _class.staticFieldId(
     r'REORDER_TASKS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REORDER_TASKS
+  /// from: `static public final java.lang.String REORDER_TASKS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REORDER_TASKS =>
-      _id_REORDER_TASKS.get(_class, const jni.JStringType());
+  static jni$_.JString? get REORDER_TASKS =>
+      _id_REORDER_TASKS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_PROFILE_APP_STREAMING =
       _class.staticFieldId(
@@ -2601,11 +2820,11 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_PROFILE_APP_STREAMING
+  /// from: `static public final java.lang.String REQUEST_COMPANION_PROFILE_APP_STREAMING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_PROFILE_APP_STREAMING =>
+  static jni$_.JString? get REQUEST_COMPANION_PROFILE_APP_STREAMING =>
       _id_REQUEST_COMPANION_PROFILE_APP_STREAMING.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION =
       _class.staticFieldId(
@@ -2613,33 +2832,33 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION
+  /// from: `static public final java.lang.String REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION =>
+  static jni$_.JString? get REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION =>
       _id_REQUEST_COMPANION_PROFILE_AUTOMOTIVE_PROJECTION.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_PROFILE_COMPUTER = _class.staticFieldId(
     r'REQUEST_COMPANION_PROFILE_COMPUTER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_PROFILE_COMPUTER
+  /// from: `static public final java.lang.String REQUEST_COMPANION_PROFILE_COMPUTER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_PROFILE_COMPUTER =>
+  static jni$_.JString? get REQUEST_COMPANION_PROFILE_COMPUTER =>
       _id_REQUEST_COMPANION_PROFILE_COMPUTER.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_PROFILE_GLASSES = _class.staticFieldId(
     r'REQUEST_COMPANION_PROFILE_GLASSES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_PROFILE_GLASSES
+  /// from: `static public final java.lang.String REQUEST_COMPANION_PROFILE_GLASSES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_PROFILE_GLASSES =>
+  static jni$_.JString? get REQUEST_COMPANION_PROFILE_GLASSES =>
       _id_REQUEST_COMPANION_PROFILE_GLASSES.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING =
       _class.staticFieldId(
@@ -2647,42 +2866,44 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING
+  /// from: `static public final java.lang.String REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING =>
+  static jni$_.JString? get REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING =>
       _id_REQUEST_COMPANION_PROFILE_NEARBY_DEVICE_STREAMING.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_PROFILE_WATCH = _class.staticFieldId(
     r'REQUEST_COMPANION_PROFILE_WATCH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_PROFILE_WATCH
+  /// from: `static public final java.lang.String REQUEST_COMPANION_PROFILE_WATCH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_PROFILE_WATCH =>
-      _id_REQUEST_COMPANION_PROFILE_WATCH.get(_class, const jni.JStringType());
+  static jni$_.JString? get REQUEST_COMPANION_PROFILE_WATCH =>
+      _id_REQUEST_COMPANION_PROFILE_WATCH.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_RUN_IN_BACKGROUND = _class.staticFieldId(
     r'REQUEST_COMPANION_RUN_IN_BACKGROUND',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_RUN_IN_BACKGROUND
+  /// from: `static public final java.lang.String REQUEST_COMPANION_RUN_IN_BACKGROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_RUN_IN_BACKGROUND =>
+  static jni$_.JString? get REQUEST_COMPANION_RUN_IN_BACKGROUND =>
       _id_REQUEST_COMPANION_RUN_IN_BACKGROUND.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_SELF_MANAGED = _class.staticFieldId(
     r'REQUEST_COMPANION_SELF_MANAGED',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_SELF_MANAGED
+  /// from: `static public final java.lang.String REQUEST_COMPANION_SELF_MANAGED`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_SELF_MANAGED =>
-      _id_REQUEST_COMPANION_SELF_MANAGED.get(_class, const jni.JStringType());
+  static jni$_.JString? get REQUEST_COMPANION_SELF_MANAGED =>
+      _id_REQUEST_COMPANION_SELF_MANAGED.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND =
       _class.staticFieldId(
@@ -2690,12 +2911,12 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND
+  /// from: `static public final java.lang.String REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString
+  static jni$_.JString?
       get REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND =>
           _id_REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND.get(
-              _class, const jni.JStringType());
+              _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_COMPANION_USE_DATA_IN_BACKGROUND =
       _class.staticFieldId(
@@ -2703,42 +2924,44 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_COMPANION_USE_DATA_IN_BACKGROUND
+  /// from: `static public final java.lang.String REQUEST_COMPANION_USE_DATA_IN_BACKGROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_COMPANION_USE_DATA_IN_BACKGROUND =>
+  static jni$_.JString? get REQUEST_COMPANION_USE_DATA_IN_BACKGROUND =>
       _id_REQUEST_COMPANION_USE_DATA_IN_BACKGROUND.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_DELETE_PACKAGES = _class.staticFieldId(
     r'REQUEST_DELETE_PACKAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_DELETE_PACKAGES
+  /// from: `static public final java.lang.String REQUEST_DELETE_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_DELETE_PACKAGES =>
-      _id_REQUEST_DELETE_PACKAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get REQUEST_DELETE_PACKAGES =>
+      _id_REQUEST_DELETE_PACKAGES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS = _class.staticFieldId(
     r'REQUEST_IGNORE_BATTERY_OPTIMIZATIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+  /// from: `static public final java.lang.String REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_IGNORE_BATTERY_OPTIMIZATIONS =>
+  static jni$_.JString? get REQUEST_IGNORE_BATTERY_OPTIMIZATIONS =>
       _id_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_INSTALL_PACKAGES = _class.staticFieldId(
     r'REQUEST_INSTALL_PACKAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_INSTALL_PACKAGES
+  /// from: `static public final java.lang.String REQUEST_INSTALL_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_INSTALL_PACKAGES =>
-      _id_REQUEST_INSTALL_PACKAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get REQUEST_INSTALL_PACKAGES =>
+      _id_REQUEST_INSTALL_PACKAGES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE =
       _class.staticFieldId(
@@ -2746,191 +2969,208 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE
+  /// from: `static public final java.lang.String REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE =>
+  static jni$_.JString? get REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE =>
       _id_REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_REQUEST_PASSWORD_COMPLEXITY = _class.staticFieldId(
     r'REQUEST_PASSWORD_COMPLEXITY',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String REQUEST_PASSWORD_COMPLEXITY
+  /// from: `static public final java.lang.String REQUEST_PASSWORD_COMPLEXITY`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get REQUEST_PASSWORD_COMPLEXITY =>
-      _id_REQUEST_PASSWORD_COMPLEXITY.get(_class, const jni.JStringType());
+  static jni$_.JString? get REQUEST_PASSWORD_COMPLEXITY =>
+      _id_REQUEST_PASSWORD_COMPLEXITY.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_RESTART_PACKAGES = _class.staticFieldId(
     r'RESTART_PACKAGES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RESTART_PACKAGES
+  /// from: `static public final java.lang.String RESTART_PACKAGES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RESTART_PACKAGES =>
-      _id_RESTART_PACKAGES.get(_class, const jni.JStringType());
+  static jni$_.JString? get RESTART_PACKAGES =>
+      _id_RESTART_PACKAGES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_RUN_USER_INITIATED_JOBS = _class.staticFieldId(
     r'RUN_USER_INITIATED_JOBS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String RUN_USER_INITIATED_JOBS
+  /// from: `static public final java.lang.String RUN_USER_INITIATED_JOBS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get RUN_USER_INITIATED_JOBS =>
-      _id_RUN_USER_INITIATED_JOBS.get(_class, const jni.JStringType());
+  static jni$_.JString? get RUN_USER_INITIATED_JOBS =>
+      _id_RUN_USER_INITIATED_JOBS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SCHEDULE_EXACT_ALARM = _class.staticFieldId(
     r'SCHEDULE_EXACT_ALARM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SCHEDULE_EXACT_ALARM
+  /// from: `static public final java.lang.String SCHEDULE_EXACT_ALARM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SCHEDULE_EXACT_ALARM =>
-      _id_SCHEDULE_EXACT_ALARM.get(_class, const jni.JStringType());
+  static jni$_.JString? get SCHEDULE_EXACT_ALARM =>
+      _id_SCHEDULE_EXACT_ALARM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SEND_RESPOND_VIA_MESSAGE = _class.staticFieldId(
     r'SEND_RESPOND_VIA_MESSAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SEND_RESPOND_VIA_MESSAGE
+  /// from: `static public final java.lang.String SEND_RESPOND_VIA_MESSAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SEND_RESPOND_VIA_MESSAGE =>
-      _id_SEND_RESPOND_VIA_MESSAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get SEND_RESPOND_VIA_MESSAGE =>
+      _id_SEND_RESPOND_VIA_MESSAGE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SEND_SMS = _class.staticFieldId(
     r'SEND_SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SEND_SMS
+  /// from: `static public final java.lang.String SEND_SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SEND_SMS =>
-      _id_SEND_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get SEND_SMS =>
+      _id_SEND_SMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_ALARM = _class.staticFieldId(
     r'SET_ALARM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_ALARM
+  /// from: `static public final java.lang.String SET_ALARM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_ALARM =>
-      _id_SET_ALARM.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_ALARM =>
+      _id_SET_ALARM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_ALWAYS_FINISH = _class.staticFieldId(
     r'SET_ALWAYS_FINISH',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_ALWAYS_FINISH
+  /// from: `static public final java.lang.String SET_ALWAYS_FINISH`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_ALWAYS_FINISH =>
-      _id_SET_ALWAYS_FINISH.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_ALWAYS_FINISH =>
+      _id_SET_ALWAYS_FINISH.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_ANIMATION_SCALE = _class.staticFieldId(
     r'SET_ANIMATION_SCALE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_ANIMATION_SCALE
+  /// from: `static public final java.lang.String SET_ANIMATION_SCALE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_ANIMATION_SCALE =>
-      _id_SET_ANIMATION_SCALE.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_ANIMATION_SCALE =>
+      _id_SET_ANIMATION_SCALE.get(_class, const jni$_.JStringNullableType());
+
+  static final _id_SET_BIOMETRIC_DIALOG_ADVANCED = _class.staticFieldId(
+    r'SET_BIOMETRIC_DIALOG_ADVANCED',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String SET_BIOMETRIC_DIALOG_ADVANCED`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get SET_BIOMETRIC_DIALOG_ADVANCED =>
+      _id_SET_BIOMETRIC_DIALOG_ADVANCED.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SET_DEBUG_APP = _class.staticFieldId(
     r'SET_DEBUG_APP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_DEBUG_APP
+  /// from: `static public final java.lang.String SET_DEBUG_APP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_DEBUG_APP =>
-      _id_SET_DEBUG_APP.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_DEBUG_APP =>
+      _id_SET_DEBUG_APP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_PREFERRED_APPLICATIONS = _class.staticFieldId(
     r'SET_PREFERRED_APPLICATIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_PREFERRED_APPLICATIONS
+  /// from: `static public final java.lang.String SET_PREFERRED_APPLICATIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_PREFERRED_APPLICATIONS =>
-      _id_SET_PREFERRED_APPLICATIONS.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_PREFERRED_APPLICATIONS =>
+      _id_SET_PREFERRED_APPLICATIONS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SET_PROCESS_LIMIT = _class.staticFieldId(
     r'SET_PROCESS_LIMIT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_PROCESS_LIMIT
+  /// from: `static public final java.lang.String SET_PROCESS_LIMIT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_PROCESS_LIMIT =>
-      _id_SET_PROCESS_LIMIT.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_PROCESS_LIMIT =>
+      _id_SET_PROCESS_LIMIT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_TIME = _class.staticFieldId(
     r'SET_TIME',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_TIME
+  /// from: `static public final java.lang.String SET_TIME`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_TIME =>
-      _id_SET_TIME.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_TIME =>
+      _id_SET_TIME.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_TIME_ZONE = _class.staticFieldId(
     r'SET_TIME_ZONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_TIME_ZONE
+  /// from: `static public final java.lang.String SET_TIME_ZONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_TIME_ZONE =>
-      _id_SET_TIME_ZONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_TIME_ZONE =>
+      _id_SET_TIME_ZONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_WALLPAPER = _class.staticFieldId(
     r'SET_WALLPAPER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_WALLPAPER
+  /// from: `static public final java.lang.String SET_WALLPAPER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_WALLPAPER =>
-      _id_SET_WALLPAPER.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_WALLPAPER =>
+      _id_SET_WALLPAPER.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SET_WALLPAPER_HINTS = _class.staticFieldId(
     r'SET_WALLPAPER_HINTS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SET_WALLPAPER_HINTS
+  /// from: `static public final java.lang.String SET_WALLPAPER_HINTS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SET_WALLPAPER_HINTS =>
-      _id_SET_WALLPAPER_HINTS.get(_class, const jni.JStringType());
+  static jni$_.JString? get SET_WALLPAPER_HINTS =>
+      _id_SET_WALLPAPER_HINTS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SIGNAL_PERSISTENT_PROCESSES = _class.staticFieldId(
     r'SIGNAL_PERSISTENT_PROCESSES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SIGNAL_PERSISTENT_PROCESSES
+  /// from: `static public final java.lang.String SIGNAL_PERSISTENT_PROCESSES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SIGNAL_PERSISTENT_PROCESSES =>
-      _id_SIGNAL_PERSISTENT_PROCESSES.get(_class, const jni.JStringType());
+  static jni$_.JString? get SIGNAL_PERSISTENT_PROCESSES =>
+      _id_SIGNAL_PERSISTENT_PROCESSES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SMS_FINANCIAL_TRANSACTIONS = _class.staticFieldId(
     r'SMS_FINANCIAL_TRANSACTIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SMS_FINANCIAL_TRANSACTIONS
+  /// from: `static public final java.lang.String SMS_FINANCIAL_TRANSACTIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SMS_FINANCIAL_TRANSACTIONS =>
-      _id_SMS_FINANCIAL_TRANSACTIONS.get(_class, const jni.JStringType());
+  static jni$_.JString? get SMS_FINANCIAL_TRANSACTIONS =>
+      _id_SMS_FINANCIAL_TRANSACTIONS.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_START_FOREGROUND_SERVICES_FROM_BACKGROUND =
       _class.staticFieldId(
@@ -2938,630 +3178,788 @@ class Manifest_permission extends jni.JObject {
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String START_FOREGROUND_SERVICES_FROM_BACKGROUND
+  /// from: `static public final java.lang.String START_FOREGROUND_SERVICES_FROM_BACKGROUND`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get START_FOREGROUND_SERVICES_FROM_BACKGROUND =>
+  static jni$_.JString? get START_FOREGROUND_SERVICES_FROM_BACKGROUND =>
       _id_START_FOREGROUND_SERVICES_FROM_BACKGROUND.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_START_VIEW_APP_FEATURES = _class.staticFieldId(
     r'START_VIEW_APP_FEATURES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String START_VIEW_APP_FEATURES
+  /// from: `static public final java.lang.String START_VIEW_APP_FEATURES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get START_VIEW_APP_FEATURES =>
-      _id_START_VIEW_APP_FEATURES.get(_class, const jni.JStringType());
+  static jni$_.JString? get START_VIEW_APP_FEATURES =>
+      _id_START_VIEW_APP_FEATURES.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_START_VIEW_PERMISSION_USAGE = _class.staticFieldId(
     r'START_VIEW_PERMISSION_USAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String START_VIEW_PERMISSION_USAGE
+  /// from: `static public final java.lang.String START_VIEW_PERMISSION_USAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get START_VIEW_PERMISSION_USAGE =>
-      _id_START_VIEW_PERMISSION_USAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get START_VIEW_PERMISSION_USAGE =>
+      _id_START_VIEW_PERMISSION_USAGE.get(
+          _class, const jni$_.JStringNullableType());
 
   static final _id_STATUS_BAR = _class.staticFieldId(
     r'STATUS_BAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String STATUS_BAR
+  /// from: `static public final java.lang.String STATUS_BAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get STATUS_BAR =>
-      _id_STATUS_BAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get STATUS_BAR =>
+      _id_STATUS_BAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE = _class.staticFieldId(
     r'SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE
+  /// from: `static public final java.lang.String SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE =>
+  static jni$_.JString? get SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE =>
       _id_SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_SYSTEM_ALERT_WINDOW = _class.staticFieldId(
     r'SYSTEM_ALERT_WINDOW',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SYSTEM_ALERT_WINDOW
+  /// from: `static public final java.lang.String SYSTEM_ALERT_WINDOW`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SYSTEM_ALERT_WINDOW =>
-      _id_SYSTEM_ALERT_WINDOW.get(_class, const jni.JStringType());
+  static jni$_.JString? get SYSTEM_ALERT_WINDOW =>
+      _id_SYSTEM_ALERT_WINDOW.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TRANSMIT_IR = _class.staticFieldId(
     r'TRANSMIT_IR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TRANSMIT_IR
+  /// from: `static public final java.lang.String TRANSMIT_IR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TRANSMIT_IR =>
-      _id_TRANSMIT_IR.get(_class, const jni.JStringType());
+  static jni$_.JString? get TRANSMIT_IR =>
+      _id_TRANSMIT_IR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_TURN_SCREEN_ON = _class.staticFieldId(
     r'TURN_SCREEN_ON',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String TURN_SCREEN_ON
+  /// from: `static public final java.lang.String TURN_SCREEN_ON`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get TURN_SCREEN_ON =>
-      _id_TURN_SCREEN_ON.get(_class, const jni.JStringType());
+  static jni$_.JString? get TURN_SCREEN_ON =>
+      _id_TURN_SCREEN_ON.get(_class, const jni$_.JStringNullableType());
 
   static final _id_UNINSTALL_SHORTCUT = _class.staticFieldId(
     r'UNINSTALL_SHORTCUT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String UNINSTALL_SHORTCUT
+  /// from: `static public final java.lang.String UNINSTALL_SHORTCUT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get UNINSTALL_SHORTCUT =>
-      _id_UNINSTALL_SHORTCUT.get(_class, const jni.JStringType());
+  static jni$_.JString? get UNINSTALL_SHORTCUT =>
+      _id_UNINSTALL_SHORTCUT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_UPDATE_DEVICE_STATS = _class.staticFieldId(
     r'UPDATE_DEVICE_STATS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String UPDATE_DEVICE_STATS
+  /// from: `static public final java.lang.String UPDATE_DEVICE_STATS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get UPDATE_DEVICE_STATS =>
-      _id_UPDATE_DEVICE_STATS.get(_class, const jni.JStringType());
+  static jni$_.JString? get UPDATE_DEVICE_STATS =>
+      _id_UPDATE_DEVICE_STATS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_UPDATE_PACKAGES_WITHOUT_USER_ACTION = _class.staticFieldId(
     r'UPDATE_PACKAGES_WITHOUT_USER_ACTION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String UPDATE_PACKAGES_WITHOUT_USER_ACTION
+  /// from: `static public final java.lang.String UPDATE_PACKAGES_WITHOUT_USER_ACTION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get UPDATE_PACKAGES_WITHOUT_USER_ACTION =>
+  static jni$_.JString? get UPDATE_PACKAGES_WITHOUT_USER_ACTION =>
       _id_UPDATE_PACKAGES_WITHOUT_USER_ACTION.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_USE_BIOMETRIC = _class.staticFieldId(
     r'USE_BIOMETRIC',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String USE_BIOMETRIC
+  /// from: `static public final java.lang.String USE_BIOMETRIC`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get USE_BIOMETRIC =>
-      _id_USE_BIOMETRIC.get(_class, const jni.JStringType());
+  static jni$_.JString? get USE_BIOMETRIC =>
+      _id_USE_BIOMETRIC.get(_class, const jni$_.JStringNullableType());
 
   static final _id_USE_EXACT_ALARM = _class.staticFieldId(
     r'USE_EXACT_ALARM',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String USE_EXACT_ALARM
+  /// from: `static public final java.lang.String USE_EXACT_ALARM`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get USE_EXACT_ALARM =>
-      _id_USE_EXACT_ALARM.get(_class, const jni.JStringType());
+  static jni$_.JString? get USE_EXACT_ALARM =>
+      _id_USE_EXACT_ALARM.get(_class, const jni$_.JStringNullableType());
 
   static final _id_USE_FINGERPRINT = _class.staticFieldId(
     r'USE_FINGERPRINT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String USE_FINGERPRINT
+  /// from: `static public final java.lang.String USE_FINGERPRINT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get USE_FINGERPRINT =>
-      _id_USE_FINGERPRINT.get(_class, const jni.JStringType());
+  static jni$_.JString? get USE_FINGERPRINT =>
+      _id_USE_FINGERPRINT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_USE_FULL_SCREEN_INTENT = _class.staticFieldId(
     r'USE_FULL_SCREEN_INTENT',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String USE_FULL_SCREEN_INTENT
+  /// from: `static public final java.lang.String USE_FULL_SCREEN_INTENT`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get USE_FULL_SCREEN_INTENT =>
-      _id_USE_FULL_SCREEN_INTENT.get(_class, const jni.JStringType());
+  static jni$_.JString? get USE_FULL_SCREEN_INTENT =>
+      _id_USE_FULL_SCREEN_INTENT.get(_class, const jni$_.JStringNullableType());
 
   static final _id_USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER = _class.staticFieldId(
     r'USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER
+  /// from: `static public final java.lang.String USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER =>
+  static jni$_.JString? get USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER =>
       _id_USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER.get(
-          _class, const jni.JStringType());
+          _class, const jni$_.JStringNullableType());
 
   static final _id_USE_SIP = _class.staticFieldId(
     r'USE_SIP',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String USE_SIP
+  /// from: `static public final java.lang.String USE_SIP`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get USE_SIP =>
-      _id_USE_SIP.get(_class, const jni.JStringType());
+  static jni$_.JString? get USE_SIP =>
+      _id_USE_SIP.get(_class, const jni$_.JStringNullableType());
 
   static final _id_UWB_RANGING = _class.staticFieldId(
     r'UWB_RANGING',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String UWB_RANGING
+  /// from: `static public final java.lang.String UWB_RANGING`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get UWB_RANGING =>
-      _id_UWB_RANGING.get(_class, const jni.JStringType());
+  static jni$_.JString? get UWB_RANGING =>
+      _id_UWB_RANGING.get(_class, const jni$_.JStringNullableType());
 
   static final _id_VIBRATE = _class.staticFieldId(
     r'VIBRATE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String VIBRATE
+  /// from: `static public final java.lang.String VIBRATE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get VIBRATE =>
-      _id_VIBRATE.get(_class, const jni.JStringType());
+  static jni$_.JString? get VIBRATE =>
+      _id_VIBRATE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WAKE_LOCK = _class.staticFieldId(
     r'WAKE_LOCK',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WAKE_LOCK
+  /// from: `static public final java.lang.String WAKE_LOCK`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WAKE_LOCK =>
-      _id_WAKE_LOCK.get(_class, const jni.JStringType());
+  static jni$_.JString? get WAKE_LOCK =>
+      _id_WAKE_LOCK.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_APN_SETTINGS = _class.staticFieldId(
     r'WRITE_APN_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_APN_SETTINGS
+  /// from: `static public final java.lang.String WRITE_APN_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_APN_SETTINGS =>
-      _id_WRITE_APN_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_APN_SETTINGS =>
+      _id_WRITE_APN_SETTINGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_CALENDAR = _class.staticFieldId(
     r'WRITE_CALENDAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_CALENDAR
+  /// from: `static public final java.lang.String WRITE_CALENDAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_CALENDAR =>
-      _id_WRITE_CALENDAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_CALENDAR =>
+      _id_WRITE_CALENDAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_CALL_LOG = _class.staticFieldId(
     r'WRITE_CALL_LOG',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_CALL_LOG
+  /// from: `static public final java.lang.String WRITE_CALL_LOG`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_CALL_LOG =>
-      _id_WRITE_CALL_LOG.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_CALL_LOG =>
+      _id_WRITE_CALL_LOG.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_CONTACTS = _class.staticFieldId(
     r'WRITE_CONTACTS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_CONTACTS
+  /// from: `static public final java.lang.String WRITE_CONTACTS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_CONTACTS =>
-      _id_WRITE_CONTACTS.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_CONTACTS =>
+      _id_WRITE_CONTACTS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_EXTERNAL_STORAGE = _class.staticFieldId(
     r'WRITE_EXTERNAL_STORAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_EXTERNAL_STORAGE
+  /// from: `static public final java.lang.String WRITE_EXTERNAL_STORAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_EXTERNAL_STORAGE =>
-      _id_WRITE_EXTERNAL_STORAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_EXTERNAL_STORAGE =>
+      _id_WRITE_EXTERNAL_STORAGE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_GSERVICES = _class.staticFieldId(
     r'WRITE_GSERVICES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_GSERVICES
+  /// from: `static public final java.lang.String WRITE_GSERVICES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_GSERVICES =>
-      _id_WRITE_GSERVICES.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_GSERVICES =>
+      _id_WRITE_GSERVICES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_SECURE_SETTINGS = _class.staticFieldId(
     r'WRITE_SECURE_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_SECURE_SETTINGS
+  /// from: `static public final java.lang.String WRITE_SECURE_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_SECURE_SETTINGS =>
-      _id_WRITE_SECURE_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_SECURE_SETTINGS =>
+      _id_WRITE_SECURE_SETTINGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_SETTINGS = _class.staticFieldId(
     r'WRITE_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_SETTINGS
+  /// from: `static public final java.lang.String WRITE_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_SETTINGS =>
-      _id_WRITE_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_SETTINGS =>
+      _id_WRITE_SETTINGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_SYNC_SETTINGS = _class.staticFieldId(
     r'WRITE_SYNC_SETTINGS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_SYNC_SETTINGS
+  /// from: `static public final java.lang.String WRITE_SYNC_SETTINGS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_SYNC_SETTINGS =>
-      _id_WRITE_SYNC_SETTINGS.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_SYNC_SETTINGS =>
+      _id_WRITE_SYNC_SETTINGS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_WRITE_VOICEMAIL = _class.staticFieldId(
     r'WRITE_VOICEMAIL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String WRITE_VOICEMAIL
+  /// from: `static public final java.lang.String WRITE_VOICEMAIL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get WRITE_VOICEMAIL =>
-      _id_WRITE_VOICEMAIL.get(_class, const jni.JStringType());
+  static jni$_.JString? get WRITE_VOICEMAIL =>
+      _id_WRITE_VOICEMAIL.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Manifest_permission() {
-    return Manifest_permission.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory Manifest$permission() {
+    return Manifest$permission.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 }
 
-final class $Manifest_permissionType extends jni.JObjType<Manifest_permission> {
-  const $Manifest_permissionType();
+final class $Manifest$permission$NullableType
+    extends jni$_.JObjType<Manifest$permission?> {
+  @jni$_.internal
+  const $Manifest$permission$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/Manifest$permission;';
 
-  @override
-  Manifest_permission fromReference(jni.JReference reference) =>
-      Manifest_permission.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Manifest$permission? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Manifest$permission.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Manifest$permission?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($Manifest_permissionType).hashCode;
+  @core$_.override
+  int get hashCode => ($Manifest$permission$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Manifest_permissionType) &&
-        other is $Manifest_permissionType;
+    return other.runtimeType == ($Manifest$permission$NullableType) &&
+        other is $Manifest$permission$NullableType;
   }
 }
 
-/// from: android.Manifest$permission_group
-class Manifest_permission_group extends jni.JObject {
-  @override
-  late final jni.JObjType<Manifest_permission_group> $type = type;
+final class $Manifest$permission$Type
+    extends jni$_.JObjType<Manifest$permission> {
+  @jni$_.internal
+  const $Manifest$permission$Type();
 
-  Manifest_permission_group.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/Manifest$permission;';
+
+  @jni$_.internal
+  @core$_.override
+  Manifest$permission fromReference(jni$_.JReference reference) =>
+      Manifest$permission.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Manifest$permission?> get nullableType =>
+      const $Manifest$permission$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Manifest$permission$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Manifest$permission$Type) &&
+        other is $Manifest$permission$Type;
+  }
+}
+
+/// from: `android.Manifest$permission_group`
+class Manifest$permission_group extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Manifest$permission_group> $type;
+
+  @jni$_.internal
+  Manifest$permission_group.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
   static final _class =
-      jni.JClass.forName(r'android/Manifest$permission_group');
+      jni$_.JClass.forName(r'android/Manifest$permission_group');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Manifest_permission_groupType();
+  static const nullableType = $Manifest$permission_group$NullableType();
+  static const type = $Manifest$permission_group$Type();
   static final _id_ACTIVITY_RECOGNITION = _class.staticFieldId(
     r'ACTIVITY_RECOGNITION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String ACTIVITY_RECOGNITION
+  /// from: `static public final java.lang.String ACTIVITY_RECOGNITION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get ACTIVITY_RECOGNITION =>
-      _id_ACTIVITY_RECOGNITION.get(_class, const jni.JStringType());
+  static jni$_.JString? get ACTIVITY_RECOGNITION =>
+      _id_ACTIVITY_RECOGNITION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CALENDAR = _class.staticFieldId(
     r'CALENDAR',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CALENDAR
+  /// from: `static public final java.lang.String CALENDAR`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CALENDAR =>
-      _id_CALENDAR.get(_class, const jni.JStringType());
+  static jni$_.JString? get CALENDAR =>
+      _id_CALENDAR.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CALL_LOG = _class.staticFieldId(
     r'CALL_LOG',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CALL_LOG
+  /// from: `static public final java.lang.String CALL_LOG`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CALL_LOG =>
-      _id_CALL_LOG.get(_class, const jni.JStringType());
+  static jni$_.JString? get CALL_LOG =>
+      _id_CALL_LOG.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CAMERA = _class.staticFieldId(
     r'CAMERA',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CAMERA
+  /// from: `static public final java.lang.String CAMERA`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CAMERA =>
-      _id_CAMERA.get(_class, const jni.JStringType());
+  static jni$_.JString? get CAMERA =>
+      _id_CAMERA.get(_class, const jni$_.JStringNullableType());
 
   static final _id_CONTACTS = _class.staticFieldId(
     r'CONTACTS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String CONTACTS
+  /// from: `static public final java.lang.String CONTACTS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get CONTACTS =>
-      _id_CONTACTS.get(_class, const jni.JStringType());
+  static jni$_.JString? get CONTACTS =>
+      _id_CONTACTS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_LOCATION = _class.staticFieldId(
     r'LOCATION',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String LOCATION
+  /// from: `static public final java.lang.String LOCATION`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get LOCATION =>
-      _id_LOCATION.get(_class, const jni.JStringType());
+  static jni$_.JString? get LOCATION =>
+      _id_LOCATION.get(_class, const jni$_.JStringNullableType());
 
   static final _id_MICROPHONE = _class.staticFieldId(
     r'MICROPHONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String MICROPHONE
+  /// from: `static public final java.lang.String MICROPHONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get MICROPHONE =>
-      _id_MICROPHONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get MICROPHONE =>
+      _id_MICROPHONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NEARBY_DEVICES = _class.staticFieldId(
     r'NEARBY_DEVICES',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NEARBY_DEVICES
+  /// from: `static public final java.lang.String NEARBY_DEVICES`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NEARBY_DEVICES =>
-      _id_NEARBY_DEVICES.get(_class, const jni.JStringType());
+  static jni$_.JString? get NEARBY_DEVICES =>
+      _id_NEARBY_DEVICES.get(_class, const jni$_.JStringNullableType());
 
   static final _id_NOTIFICATIONS = _class.staticFieldId(
     r'NOTIFICATIONS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String NOTIFICATIONS
+  /// from: `static public final java.lang.String NOTIFICATIONS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get NOTIFICATIONS =>
-      _id_NOTIFICATIONS.get(_class, const jni.JStringType());
+  static jni$_.JString? get NOTIFICATIONS =>
+      _id_NOTIFICATIONS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_PHONE = _class.staticFieldId(
     r'PHONE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String PHONE
+  /// from: `static public final java.lang.String PHONE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get PHONE =>
-      _id_PHONE.get(_class, const jni.JStringType());
+  static jni$_.JString? get PHONE =>
+      _id_PHONE.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_MEDIA_AURAL = _class.staticFieldId(
     r'READ_MEDIA_AURAL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_MEDIA_AURAL
+  /// from: `static public final java.lang.String READ_MEDIA_AURAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_MEDIA_AURAL =>
-      _id_READ_MEDIA_AURAL.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_MEDIA_AURAL =>
+      _id_READ_MEDIA_AURAL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_READ_MEDIA_VISUAL = _class.staticFieldId(
     r'READ_MEDIA_VISUAL',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String READ_MEDIA_VISUAL
+  /// from: `static public final java.lang.String READ_MEDIA_VISUAL`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get READ_MEDIA_VISUAL =>
-      _id_READ_MEDIA_VISUAL.get(_class, const jni.JStringType());
+  static jni$_.JString? get READ_MEDIA_VISUAL =>
+      _id_READ_MEDIA_VISUAL.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SENSORS = _class.staticFieldId(
     r'SENSORS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SENSORS
+  /// from: `static public final java.lang.String SENSORS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SENSORS =>
-      _id_SENSORS.get(_class, const jni.JStringType());
+  static jni$_.JString? get SENSORS =>
+      _id_SENSORS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_SMS = _class.staticFieldId(
     r'SMS',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String SMS
+  /// from: `static public final java.lang.String SMS`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get SMS => _id_SMS.get(_class, const jni.JStringType());
+  static jni$_.JString? get SMS =>
+      _id_SMS.get(_class, const jni$_.JStringNullableType());
 
   static final _id_STORAGE = _class.staticFieldId(
     r'STORAGE',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String STORAGE
+  /// from: `static public final java.lang.String STORAGE`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get STORAGE =>
-      _id_STORAGE.get(_class, const jni.JStringType());
+  static jni$_.JString? get STORAGE =>
+      _id_STORAGE.get(_class, const jni$_.JStringNullableType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory Manifest_permission_group() {
-    return Manifest_permission_group.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+  factory Manifest$permission_group() {
+    return Manifest$permission_group.fromReference(
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 }
 
-final class $Manifest_permission_groupType
-    extends jni.JObjType<Manifest_permission_group> {
-  const $Manifest_permission_groupType();
+final class $Manifest$permission_group$NullableType
+    extends jni$_.JObjType<Manifest$permission_group?> {
+  @jni$_.internal
+  const $Manifest$permission_group$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/Manifest$permission_group;';
 
-  @override
-  Manifest_permission_group fromReference(jni.JReference reference) =>
-      Manifest_permission_group.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Manifest$permission_group? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : Manifest$permission_group.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Manifest$permission_group?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($Manifest_permission_groupType).hashCode;
+  @core$_.override
+  int get hashCode => ($Manifest$permission_group$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Manifest_permission_groupType) &&
-        other is $Manifest_permission_groupType;
+    return other.runtimeType == ($Manifest$permission_group$NullableType) &&
+        other is $Manifest$permission_group$NullableType;
   }
 }
 
-/// from: android.Manifest
-class Manifest extends jni.JObject {
-  @override
-  late final jni.JObjType<Manifest> $type = type;
+final class $Manifest$permission_group$Type
+    extends jni$_.JObjType<Manifest$permission_group> {
+  @jni$_.internal
+  const $Manifest$permission_group$Type();
 
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/Manifest$permission_group;';
+
+  @jni$_.internal
+  @core$_.override
+  Manifest$permission_group fromReference(jni$_.JReference reference) =>
+      Manifest$permission_group.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Manifest$permission_group?> get nullableType =>
+      const $Manifest$permission_group$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Manifest$permission_group$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Manifest$permission_group$Type) &&
+        other is $Manifest$permission_group$Type;
+  }
+}
+
+/// from: `android.Manifest`
+class Manifest extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Manifest> $type;
+
+  @jni$_.internal
   Manifest.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/Manifest');
+  static final _class = jni$_.JClass.forName(r'android/Manifest');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $ManifestType();
-  static final _id_new0 = _class.constructorId(
+  static const nullableType = $Manifest$NullableType();
+  static const type = $Manifest$Type();
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory Manifest() {
     return Manifest.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 }
 
-final class $ManifestType extends jni.JObjType<Manifest> {
-  const $ManifestType();
+final class $Manifest$NullableType extends jni$_.JObjType<Manifest?> {
+  @jni$_.internal
+  const $Manifest$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/Manifest;';
 
-  @override
-  Manifest fromReference(jni.JReference reference) =>
-      Manifest.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Manifest? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Manifest.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Manifest?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($ManifestType).hashCode;
+  @core$_.override
+  int get hashCode => ($Manifest$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($ManifestType) && other is $ManifestType;
+    return other.runtimeType == ($Manifest$NullableType) &&
+        other is $Manifest$NullableType;
+  }
+}
+
+final class $Manifest$Type extends jni$_.JObjType<Manifest> {
+  @jni$_.internal
+  const $Manifest$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/Manifest;';
+
+  @jni$_.internal
+  @core$_.override
+  Manifest fromReference(jni$_.JReference reference) => Manifest.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Manifest?> get nullableType => const $Manifest$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Manifest$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Manifest$Type) && other is $Manifest$Type;
   }
 }

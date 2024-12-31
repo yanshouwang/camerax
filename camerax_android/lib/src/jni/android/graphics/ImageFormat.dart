@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,118 +29,122 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: android.graphics.ImageFormat
-class ImageFormat extends jni.JObject {
-  @override
-  late final jni.JObjType<ImageFormat> $type = type;
+/// from: `android.graphics.ImageFormat`
+class ImageFormat extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<ImageFormat> $type;
 
+  @jni$_.internal
   ImageFormat.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/graphics/ImageFormat');
+  static final _class = jni$_.JClass.forName(r'android/graphics/ImageFormat');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $ImageFormatType();
+  static const nullableType = $ImageFormat$NullableType();
+  static const type = $ImageFormat$Type();
 
-  /// from: static public final int DEPTH16
+  /// from: `static public final int DEPTH16`
   static const DEPTH16 = 1144402265;
 
-  /// from: static public final int DEPTH_JPEG
+  /// from: `static public final int DEPTH_JPEG`
   static const DEPTH_JPEG = 1768253795;
 
-  /// from: static public final int DEPTH_POINT_CLOUD
+  /// from: `static public final int DEPTH_POINT_CLOUD`
   static const DEPTH_POINT_CLOUD = 257;
 
-  /// from: static public final int FLEX_RGBA_8888
+  /// from: `static public final int FLEX_RGBA_8888`
   static const FLEX_RGBA_8888 = 42;
 
-  /// from: static public final int FLEX_RGB_888
+  /// from: `static public final int FLEX_RGB_888`
   static const FLEX_RGB_888 = 41;
 
-  /// from: static public final int HEIC
+  /// from: `static public final int HEIC`
   static const HEIC = 1212500294;
 
-  /// from: static public final int JPEG
+  /// from: `static public final int JPEG`
   static const JPEG = 256;
 
-  /// from: static public final int JPEG_R
+  /// from: `static public final int JPEG_R`
   static const JPEG_R = 4101;
 
-  /// from: static public final int NV16
+  /// from: `static public final int NV16`
   static const NV16 = 16;
 
-  /// from: static public final int NV21
+  /// from: `static public final int NV21`
   static const NV21 = 17;
 
-  /// from: static public final int PRIVATE
+  /// from: `static public final int PRIVATE`
   static const PRIVATE = 34;
 
-  /// from: static public final int RAW10
+  /// from: `static public final int RAW10`
   static const RAW10 = 37;
 
-  /// from: static public final int RAW12
+  /// from: `static public final int RAW12`
   static const RAW12 = 38;
 
-  /// from: static public final int RAW_PRIVATE
+  /// from: `static public final int RAW_PRIVATE`
   static const RAW_PRIVATE = 36;
 
-  /// from: static public final int RAW_SENSOR
+  /// from: `static public final int RAW_SENSOR`
   static const RAW_SENSOR = 32;
 
-  /// from: static public final int RGB_565
+  /// from: `static public final int RGB_565`
   static const RGB_565 = 4;
 
-  /// from: static public final int UNKNOWN
+  /// from: `static public final int UNKNOWN`
   static const UNKNOWN = 0;
 
-  /// from: static public final int Y8
+  /// from: `static public final int Y8`
   static const Y8 = 538982489;
 
-  /// from: static public final int YCBCR_P010
+  /// from: `static public final int YCBCR_P010`
   static const YCBCR_P010 = 54;
 
-  /// from: static public final int YUV_420_888
+  /// from: `static public final int YUV_420_888`
   static const YUV_420_888 = 35;
 
-  /// from: static public final int YUV_422_888
+  /// from: `static public final int YUV_422_888`
   static const YUV_422_888 = 39;
 
-  /// from: static public final int YUV_444_888
+  /// from: `static public final int YUV_444_888`
   static const YUV_444_888 = 40;
 
-  /// from: static public final int YUY2
+  /// from: `static public final int YUY2`
   static const YUY2 = 20;
 
-  /// from: static public final int YV12
+  /// from: `static public final int YV12`
   static const YV12 = 842094169;
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory ImageFormat() {
     return ImageFormat.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -142,45 +153,95 @@ class ImageFormat extends jni.JObject {
     r'(I)I',
   );
 
-  static final _getBitsPerPixel = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallStaticIntMethod')
+  static final _getBitsPerPixel = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
+          'globalEnv_CallStaticIntMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: static public int getBitsPerPixel(int i)
+  /// from: `static public int getBitsPerPixel(int i)`
   static int getBitsPerPixel(
     int i,
   ) {
     return _getBitsPerPixel(_class.reference.pointer,
-            _id_getBitsPerPixel as jni.JMethodIDPtr, i)
+            _id_getBitsPerPixel as jni$_.JMethodIDPtr, i)
         .integer;
   }
 }
 
-final class $ImageFormatType extends jni.JObjType<ImageFormat> {
-  const $ImageFormatType();
+final class $ImageFormat$NullableType extends jni$_.JObjType<ImageFormat?> {
+  @jni$_.internal
+  const $ImageFormat$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/graphics/ImageFormat;';
 
-  @override
-  ImageFormat fromReference(jni.JReference reference) =>
-      ImageFormat.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  ImageFormat? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : ImageFormat.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<ImageFormat?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($ImageFormatType).hashCode;
+  @core$_.override
+  int get hashCode => ($ImageFormat$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($ImageFormatType) && other is $ImageFormatType;
+    return other.runtimeType == ($ImageFormat$NullableType) &&
+        other is $ImageFormat$NullableType;
+  }
+}
+
+final class $ImageFormat$Type extends jni$_.JObjType<ImageFormat> {
+  @jni$_.internal
+  const $ImageFormat$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/graphics/ImageFormat;';
+
+  @jni$_.internal
+  @core$_.override
+  ImageFormat fromReference(jni$_.JReference reference) =>
+      ImageFormat.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<ImageFormat?> get nullableType =>
+      const $ImageFormat$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($ImageFormat$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ImageFormat$Type) &&
+        other is $ImageFormat$Type;
   }
 }

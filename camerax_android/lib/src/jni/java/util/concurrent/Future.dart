@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,31 +29,43 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: java.util.concurrent.Future
-class Future<$V extends jni.JObject> extends jni.JObject {
-  @override
-  late final jni.JObjType<Future<$V>> $type = type(V);
+/// from: `java.util.concurrent.Future`
+class Future<$V extends jni$_.JObject?> extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Future<$V>> $type;
 
-  final jni.JObjType<$V> V;
+  @jni$_.internal
+  final jni$_.JObjType<$V> V;
 
+  @jni$_.internal
   Future.fromReference(
     this.V,
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type<$V>(V),
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'java/util/concurrent/Future');
+  static final _class = jni$_.JClass.forName(r'java/util/concurrent/Future');
 
   /// The type which includes information such as the signature of this class.
-  static $FutureType<$V> type<$V extends jni.JObject>(
-    jni.JObjType<$V> V,
+  static $Future$NullableType<$V> nullableType<$V extends jni$_.JObject?>(
+    jni$_.JObjType<$V> V,
   ) {
-    return $FutureType(
+    return $Future$NullableType<$V>(
+      V,
+    );
+  }
+
+  static $Future$Type<$V> type<$V extends jni$_.JObject?>(
+    jni$_.JObjType<$V> V,
+  ) {
+    return $Future$Type<$V>(
       V,
     );
   }
@@ -56,19 +75,23 @@ class Future<$V extends jni.JObject> extends jni.JObject {
     r'(Z)Z',
   );
 
-  static final _cancel = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _cancel = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public abstract boolean cancel(boolean z)
+  /// from: `public abstract boolean cancel(boolean z)`
   bool cancel(
     bool z,
   ) {
-    return _cancel(reference.pointer, _id_cancel as jni.JMethodIDPtr, z ? 1 : 0)
+    return _cancel(
+            reference.pointer, _id_cancel as jni$_.JMethodIDPtr, z ? 1 : 0)
         .boolean;
   }
 
@@ -77,21 +100,22 @@ class Future<$V extends jni.JObject> extends jni.JObject {
     r'()Z',
   );
 
-  static final _isCancelled = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isCancelled = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isCancelled()
+  /// from: `public abstract boolean isCancelled()`
   bool isCancelled() {
-    return _isCancelled(reference.pointer, _id_isCancelled as jni.JMethodIDPtr)
+    return _isCancelled(
+            reference.pointer, _id_isCancelled as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -100,85 +124,86 @@ class Future<$V extends jni.JObject> extends jni.JObject {
     r'()Z',
   );
 
-  static final _isDone = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isDone = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract boolean isDone()
+  /// from: `public abstract boolean isDone()`
   bool isDone() {
-    return _isDone(reference.pointer, _id_isDone as jni.JMethodIDPtr).boolean;
+    return _isDone(reference.pointer, _id_isDone as jni$_.JMethodIDPtr).boolean;
   }
 
-  static final _id_get0 = _class.instanceMethodId(
+  static final _id_get = _class.instanceMethodId(
     r'get',
     r'()Ljava/lang/Object;',
   );
 
-  static final _get0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _get = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract V get()
+  /// from: `public abstract V get()`
   /// The returned object must be released after use, by calling the [release] method.
-  $V get0() {
-    return _get0(reference.pointer, _id_get0 as jni.JMethodIDPtr).object(V);
+  $V? get() {
+    return _get(reference.pointer, _id_get as jni$_.JMethodIDPtr)
+        .object<$V?>(V.nullableType);
   }
 
-  static final _id_get1 = _class.instanceMethodId(
+  static final _id_get$1 = _class.instanceMethodId(
     r'get',
     r'(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;',
   );
 
-  static final _get1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Int64, ffi.Pointer<ffi.Void>)>)>>(
+  static final _get$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int64, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract V get(long j, java.util.concurrent.TimeUnit timeUnit)
+  /// from: `public abstract V get(long j, java.util.concurrent.TimeUnit timeUnit)`
   /// The returned object must be released after use, by calling the [release] method.
-  $V get1(
+  $V? get$1(
     int j,
-    jni.JObject timeUnit,
+    jni$_.JObject? timeUnit,
   ) {
-    return _get1(reference.pointer, _id_get1 as jni.JMethodIDPtr, j,
-            timeUnit.reference.pointer)
-        .object(V);
+    final _$timeUnit = timeUnit?.reference ?? jni$_.jNullReference;
+    return _get$1(reference.pointer, _id_get$1 as jni$_.JMethodIDPtr, j,
+            _$timeUnit.pointer)
+        .object<$V?>(V.nullableType);
   }
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $FutureImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Future> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -186,129 +211,140 @@ class Future<$V extends jni.JObject> extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'cancel(Z)Z') {
         final $r = _$impls[$p]!.cancel(
-          $a[0]
-              .castTo(const jni.JBooleanType(), releaseOriginal: true)
+          $a![0]!
+              .as(const jni$_.JBooleanType(), releaseOriginal: true)
               .booleanValue(releaseOriginal: true),
         );
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'isCancelled()Z') {
         final $r = _$impls[$p]!.isCancelled();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'isDone()Z') {
         final $r = _$impls[$p]!.isDone();
-        return jni.JBoolean($r).reference.toPointer();
+        return jni$_.JBoolean($r).reference.toPointer();
       }
       if ($d == r'get()Ljava/lang/Object;') {
-        final $r = _$impls[$p]!.get0();
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        final $r = _$impls[$p]!.get();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
       if ($d == r'get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;') {
-        final $r = _$impls[$p]!.get1(
-          $a[0]
-              .castTo(const jni.JLongType(), releaseOriginal: true)
+        final $r = _$impls[$p]!.get$1(
+          $a![0]!
+              .as(const jni$_.JLongType(), releaseOriginal: true)
               .longValue(releaseOriginal: true),
-          $a[1].castTo(const jni.JObjectType(), releaseOriginal: true),
+          $a![1]?.as(const jni$_.JObjectType(), releaseOriginal: true),
         );
-        return ($r as jni.JObject)
-            .castTo(const jni.JObjectType())
-            .reference
-            .toPointer();
+        return ($r as jni$_.JObject?)
+                ?.as(const jni$_.JObjectType())
+                .reference
+                .toPointer() ??
+            jni$_.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory Future.implement(
-    $FutureImpl<$V> $impl,
+  static void implementIn<$V extends jni$_.JObject?>(
+    jni$_.JImplementer implementer,
+    $Future<$V> $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = Future.fromReference(
-      $impl.V,
-      ProtectedJniExtensions.newPortProxy(
-        r'java.util.concurrent.Future',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'java.util.concurrent.Future',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory Future.implement(
+    $Future<$V> $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return Future<$V>.fromReference(
+      $impl.V,
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $FutureImpl<$V extends jni.JObject> {
-  factory $FutureImpl({
-    required jni.JObjType<$V> V,
+abstract base mixin class $Future<$V extends jni$_.JObject?> {
+  factory $Future({
+    required jni$_.JObjType<$V> V,
     required bool Function(bool z) cancel,
     required bool Function() isCancelled,
     required bool Function() isDone,
-    required $V Function() get0,
-    required $V Function(int j, jni.JObject timeUnit) get1,
-  }) = _$FutureImpl;
+    required $V? Function() get,
+    required $V? Function(int j, jni$_.JObject? timeUnit) get$1,
+  }) = _$Future<$V>;
 
-  jni.JObjType<$V> get V;
+  jni$_.JObjType<$V> get V;
 
   bool cancel(bool z);
   bool isCancelled();
   bool isDone();
-  $V get0();
-  $V get1(int j, jni.JObject timeUnit);
+  $V? get();
+  $V? get$1(int j, jni$_.JObject? timeUnit);
 }
 
-class _$FutureImpl<$V extends jni.JObject> implements $FutureImpl<$V> {
-  _$FutureImpl({
+final class _$Future<$V extends jni$_.JObject?> with $Future<$V> {
+  _$Future({
     required this.V,
     required bool Function(bool z) cancel,
     required bool Function() isCancelled,
     required bool Function() isDone,
-    required $V Function() get0,
-    required $V Function(int j, jni.JObject timeUnit) get1,
+    required $V? Function() get,
+    required $V? Function(int j, jni$_.JObject? timeUnit) get$1,
   })  : _cancel = cancel,
         _isCancelled = isCancelled,
         _isDone = isDone,
-        _get0 = get0,
-        _get1 = get1;
+        _get = get,
+        _get$1 = get$1;
 
-  @override
-  final jni.JObjType<$V> V;
+  @core$_.override
+  final jni$_.JObjType<$V> V;
 
   final bool Function(bool z) _cancel;
   final bool Function() _isCancelled;
   final bool Function() _isDone;
-  final $V Function() _get0;
-  final $V Function(int j, jni.JObject timeUnit) _get1;
+  final $V? Function() _get;
+  final $V? Function(int j, jni$_.JObject? timeUnit) _get$1;
 
   bool cancel(bool z) {
     return _cancel(z);
@@ -322,43 +358,100 @@ class _$FutureImpl<$V extends jni.JObject> implements $FutureImpl<$V> {
     return _isDone();
   }
 
-  $V get0() {
-    return _get0();
+  $V? get() {
+    return _get();
   }
 
-  $V get1(int j, jni.JObject timeUnit) {
-    return _get1(j, timeUnit);
+  $V? get$1(int j, jni$_.JObject? timeUnit) {
+    return _get$1(j, timeUnit);
   }
 }
 
-final class $FutureType<$V extends jni.JObject>
-    extends jni.JObjType<Future<$V>> {
-  final jni.JObjType<$V> V;
+final class $Future$NullableType<$V extends jni$_.JObject?>
+    extends jni$_.JObjType<Future<$V>?> {
+  @jni$_.internal
+  final jni$_.JObjType<$V> V;
 
-  const $FutureType(
+  @jni$_.internal
+  const $Future$NullableType(
     this.V,
   );
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Ljava/util/concurrent/Future;';
 
-  @override
-  Future<$V> fromReference(jni.JReference reference) =>
-      Future.fromReference(V, reference);
+  @jni$_.internal
+  @core$_.override
+  Future<$V>? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Future<$V>.fromReference(
+          V,
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Future<$V>?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => Object.hash($FutureType, V);
+  @core$_.override
+  int get hashCode => Object.hash($Future$NullableType, V);
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($FutureType<$V>) &&
-        other is $FutureType<$V> &&
+    return other.runtimeType == ($Future$NullableType<$V>) &&
+        other is $Future$NullableType<$V> &&
+        V == other.V;
+  }
+}
+
+final class $Future$Type<$V extends jni$_.JObject?>
+    extends jni$_.JObjType<Future<$V>> {
+  @jni$_.internal
+  final jni$_.JObjType<$V> V;
+
+  @jni$_.internal
+  const $Future$Type(
+    this.V,
+  );
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Ljava/util/concurrent/Future;';
+
+  @jni$_.internal
+  @core$_.override
+  Future<$V> fromReference(jni$_.JReference reference) =>
+      Future<$V>.fromReference(
+        V,
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Future<$V>?> get nullableType => $Future$NullableType<$V>(V);
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => Object.hash($Future$Type, V);
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Future$Type<$V>) &&
+        other is $Future$Type<$V> &&
         V == other.V;
   }
 }

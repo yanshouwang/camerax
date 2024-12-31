@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,48 +29,52 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import '../graphics/Rect.dart' as rect_;
+import '../graphics/Rect.dart' as rect$_;
 
-/// from: android.media.Image$Plane
-class Image_Plane extends jni.JObject {
-  @override
-  late final jni.JObjType<Image_Plane> $type = type;
+/// from: `android.media.Image$Plane`
+class Image$Plane extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Image$Plane> $type;
 
-  Image_Plane.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+  @jni$_.internal
+  Image$Plane.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/media/Image$Plane');
+  static final _class = jni$_.JClass.forName(r'android/media/Image$Plane');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $Image_PlaneType();
+  static const nullableType = $Image$Plane$NullableType();
+  static const type = $Image$Plane$Type();
   static final _id_getRowStride = _class.instanceMethodId(
     r'getRowStride',
     r'()I',
   );
 
-  static final _getRowStride = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getRowStride = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getRowStride()
+  /// from: `public abstract int getRowStride()`
   int getRowStride() {
     return _getRowStride(
-            reference.pointer, _id_getRowStride as jni.JMethodIDPtr)
+            reference.pointer, _id_getRowStride as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -72,22 +83,22 @@ class Image_Plane extends jni.JObject {
     r'()I',
   );
 
-  static final _getPixelStride = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getPixelStride = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getPixelStride()
+  /// from: `public abstract int getPixelStride()`
   int getPixelStride() {
     return _getPixelStride(
-            reference.pointer, _id_getPixelStride as jni.JMethodIDPtr)
+            reference.pointer, _id_getPixelStride as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -96,84 +107,137 @@ class Image_Plane extends jni.JObject {
     r'()Ljava/nio/ByteBuffer;',
   );
 
-  static final _getBuffer = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getBuffer = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract java.nio.ByteBuffer getBuffer()
+  /// from: `public abstract java.nio.ByteBuffer getBuffer()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JByteBuffer getBuffer() {
-    return _getBuffer(reference.pointer, _id_getBuffer as jni.JMethodIDPtr)
-        .object(const jni.JByteBufferType());
+  jni$_.JByteBuffer? getBuffer() {
+    return _getBuffer(reference.pointer, _id_getBuffer as jni$_.JMethodIDPtr)
+        .object<jni$_.JByteBuffer?>(const jni$_.JByteBufferNullableType());
   }
 }
 
-final class $Image_PlaneType extends jni.JObjType<Image_Plane> {
-  const $Image_PlaneType();
+final class $Image$Plane$NullableType extends jni$_.JObjType<Image$Plane?> {
+  @jni$_.internal
+  const $Image$Plane$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/media/Image$Plane;';
 
-  @override
-  Image_Plane fromReference(jni.JReference reference) =>
-      Image_Plane.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Image$Plane? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Image$Plane.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Image$Plane?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($Image_PlaneType).hashCode;
+  @core$_.override
+  int get hashCode => ($Image$Plane$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($Image_PlaneType) && other is $Image_PlaneType;
+    return other.runtimeType == ($Image$Plane$NullableType) &&
+        other is $Image$Plane$NullableType;
   }
 }
 
-/// from: android.media.Image
-class Image extends jni.JObject {
-  @override
-  late final jni.JObjType<Image> $type = type;
+final class $Image$Plane$Type extends jni$_.JObjType<Image$Plane> {
+  @jni$_.internal
+  const $Image$Plane$Type();
 
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/media/Image$Plane;';
+
+  @jni$_.internal
+  @core$_.override
+  Image$Plane fromReference(jni$_.JReference reference) =>
+      Image$Plane.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Image$Plane?> get nullableType =>
+      const $Image$Plane$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Image$Plane$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Image$Plane$Type) &&
+        other is $Image$Plane$Type;
+  }
+}
+
+/// from: `android.media.Image`
+class Image extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Image> $type;
+
+  @jni$_.internal
   Image.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/media/Image');
+  static final _class = jni$_.JClass.forName(r'android/media/Image');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $ImageType();
+  static const nullableType = $Image$NullableType();
+  static const type = $Image$Type();
   static final _id_getFormat = _class.instanceMethodId(
     r'getFormat',
     r'()I',
   );
 
-  static final _getFormat = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getFormat = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getFormat()
+  /// from: `public abstract int getFormat()`
   int getFormat() {
-    return _getFormat(reference.pointer, _id_getFormat as jni.JMethodIDPtr)
+    return _getFormat(reference.pointer, _id_getFormat as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -182,21 +246,21 @@ class Image extends jni.JObject {
     r'()I',
   );
 
-  static final _getWidth = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getWidth = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getWidth()
+  /// from: `public abstract int getWidth()`
   int getWidth() {
-    return _getWidth(reference.pointer, _id_getWidth as jni.JMethodIDPtr)
+    return _getWidth(reference.pointer, _id_getWidth as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -205,21 +269,21 @@ class Image extends jni.JObject {
     r'()I',
   );
 
-  static final _getHeight = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getHeight = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract int getHeight()
+  /// from: `public abstract int getHeight()`
   int getHeight() {
-    return _getHeight(reference.pointer, _id_getHeight as jni.JMethodIDPtr)
+    return _getHeight(reference.pointer, _id_getHeight as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -228,22 +292,22 @@ class Image extends jni.JObject {
     r'()J',
   );
 
-  static final _getTimestamp = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getTimestamp = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract long getTimestamp()
+  /// from: `public abstract long getTimestamp()`
   int getTimestamp() {
     return _getTimestamp(
-            reference.pointer, _id_getTimestamp as jni.JMethodIDPtr)
+            reference.pointer, _id_getTimestamp as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -252,23 +316,23 @@ class Image extends jni.JObject {
     r'()Landroid/hardware/SyncFence;',
   );
 
-  static final _getFence = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getFence = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public android.hardware.SyncFence getFence()
+  /// from: `public android.hardware.SyncFence getFence()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getFence() {
-    return _getFence(reference.pointer, _id_getFence as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+  jni$_.JObject? getFence() {
+    return _getFence(reference.pointer, _id_getFence as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getHardwareBuffer = _class.instanceMethodId(
@@ -276,24 +340,24 @@ class Image extends jni.JObject {
     r'()Landroid/hardware/HardwareBuffer;',
   );
 
-  static final _getHardwareBuffer = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getHardwareBuffer = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public android.hardware.HardwareBuffer getHardwareBuffer()
+  /// from: `public android.hardware.HardwareBuffer getHardwareBuffer()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject getHardwareBuffer() {
+  jni$_.JObject? getHardwareBuffer() {
     return _getHardwareBuffer(
-            reference.pointer, _id_getHardwareBuffer as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+            reference.pointer, _id_getHardwareBuffer as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_setTimestamp = _class.instanceMethodId(
@@ -301,21 +365,21 @@ class Image extends jni.JObject {
     r'(J)V',
   );
 
-  static final _setTimestamp = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int64,)>)>>('globalEnv_CallVoidMethod')
+  static final _setTimestamp = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public void setTimestamp(long j)
+  /// from: `public void setTimestamp(long j)`
   void setTimestamp(
     int j,
   ) {
-    _setTimestamp(reference.pointer, _id_setTimestamp as jni.JMethodIDPtr, j)
+    _setTimestamp(reference.pointer, _id_setTimestamp as jni$_.JMethodIDPtr, j)
         .check();
   }
 
@@ -324,23 +388,24 @@ class Image extends jni.JObject {
     r'(Landroid/hardware/SyncFence;)V',
   );
 
-  static final _setFence = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _setFence = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void setFence(android.hardware.SyncFence syncFence)
+  /// from: `public void setFence(android.hardware.SyncFence syncFence)`
   void setFence(
-    jni.JObject syncFence,
+    jni$_.JObject? syncFence,
   ) {
-    _setFence(reference.pointer, _id_setFence as jni.JMethodIDPtr,
-            syncFence.reference.pointer)
+    final _$syncFence = syncFence?.reference ?? jni$_.jNullReference;
+    _setFence(reference.pointer, _id_setFence as jni$_.JMethodIDPtr,
+            _$syncFence.pointer)
         .check();
   }
 
@@ -349,22 +414,22 @@ class Image extends jni.JObject {
     r'()I',
   );
 
-  static final _getDataSpace = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getDataSpace = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public int getDataSpace()
+  /// from: `public int getDataSpace()`
   int getDataSpace() {
     return _getDataSpace(
-            reference.pointer, _id_getDataSpace as jni.JMethodIDPtr)
+            reference.pointer, _id_getDataSpace as jni$_.JMethodIDPtr)
         .integer;
   }
 
@@ -373,21 +438,21 @@ class Image extends jni.JObject {
     r'(I)V',
   );
 
-  static final _setDataSpace = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallVoidMethod')
+  static final _setDataSpace = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public void setDataSpace(int i)
+  /// from: `public void setDataSpace(int i)`
   void setDataSpace(
     int i,
   ) {
-    _setDataSpace(reference.pointer, _id_setDataSpace as jni.JMethodIDPtr, i)
+    _setDataSpace(reference.pointer, _id_setDataSpace as jni$_.JMethodIDPtr, i)
         .check();
   }
 
@@ -396,23 +461,24 @@ class Image extends jni.JObject {
     r'()Landroid/graphics/Rect;',
   );
 
-  static final _getCropRect = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getCropRect = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public android.graphics.Rect getCropRect()
+  /// from: `public android.graphics.Rect getCropRect()`
   /// The returned object must be released after use, by calling the [release] method.
-  rect_.Rect getCropRect() {
-    return _getCropRect(reference.pointer, _id_getCropRect as jni.JMethodIDPtr)
-        .object(const rect_.$RectType());
+  rect$_.Rect? getCropRect() {
+    return _getCropRect(
+            reference.pointer, _id_getCropRect as jni$_.JMethodIDPtr)
+        .object<rect$_.Rect?>(const rect$_.$Rect$NullableType());
   }
 
   static final _id_setCropRect = _class.instanceMethodId(
@@ -420,23 +486,24 @@ class Image extends jni.JObject {
     r'(Landroid/graphics/Rect;)V',
   );
 
-  static final _setCropRect = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _setCropRect = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void setCropRect(android.graphics.Rect rect)
+  /// from: `public void setCropRect(android.graphics.Rect rect)`
   void setCropRect(
-    rect_.Rect rect,
+    rect$_.Rect? rect,
   ) {
-    _setCropRect(reference.pointer, _id_setCropRect as jni.JMethodIDPtr,
-            rect.reference.pointer)
+    final _$rect = rect?.reference ?? jni$_.jNullReference;
+    _setCropRect(reference.pointer, _id_setCropRect as jni$_.JMethodIDPtr,
+            _$rect.pointer)
         .check();
   }
 
@@ -445,23 +512,25 @@ class Image extends jni.JObject {
     r'()[Landroid/media/Image$Plane;',
   );
 
-  static final _getPlanes = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getPlanes = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract android.media.Image$Plane[] getPlanes()
+  /// from: `public abstract android.media.Image$Plane[] getPlanes()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<Image_Plane> getPlanes() {
-    return _getPlanes(reference.pointer, _id_getPlanes as jni.JMethodIDPtr)
-        .object(const jni.JArrayType($Image_PlaneType()));
+  jni$_.JArray<Image$Plane?>? getPlanes() {
+    return _getPlanes(reference.pointer, _id_getPlanes as jni$_.JMethodIDPtr)
+        .object<jni$_.JArray<Image$Plane?>?>(
+            const jni$_.JArrayNullableType<Image$Plane?>(
+                $Image$Plane$NullableType()));
   }
 
   static final _id_close = _class.instanceMethodId(
@@ -469,45 +538,91 @@ class Image extends jni.JObject {
     r'()V',
   );
 
-  static final _close = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _close = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public abstract void close()
+  /// from: `public abstract void close()`
   void close() {
-    _close(reference.pointer, _id_close as jni.JMethodIDPtr).check();
+    _close(reference.pointer, _id_close as jni$_.JMethodIDPtr).check();
   }
 }
 
-final class $ImageType extends jni.JObjType<Image> {
-  const $ImageType();
+final class $Image$NullableType extends jni$_.JObjType<Image?> {
+  @jni$_.internal
+  const $Image$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/media/Image;';
 
-  @override
-  Image fromReference(jni.JReference reference) =>
-      Image.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  Image? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Image.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Image?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($ImageType).hashCode;
+  @core$_.override
+  int get hashCode => ($Image$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($ImageType) && other is $ImageType;
+    return other.runtimeType == ($Image$NullableType) &&
+        other is $Image$NullableType;
+  }
+}
+
+final class $Image$Type extends jni$_.JObjType<Image> {
+  @jni$_.internal
+  const $Image$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/media/Image;';
+
+  @jni$_.internal
+  @core$_.override
+  Image fromReference(jni$_.JReference reference) => Image.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Image?> get nullableType => const $Image$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($Image$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Image$Type) && other is $Image$Type;
   }
 }

@@ -1,7 +1,7 @@
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
-import 'preview_view_builder.dart';
 
 class PreviewView extends StatelessWidget {
   final CameraController controller;
@@ -15,7 +15,9 @@ class PreviewView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final builder = PreviewViewBuilder();
-    return builder.build(controller);
+    return CameraXPlugin.instance.buildPreviewView(
+      controller: controller,
+      fit: fit,
+    );
   }
 }

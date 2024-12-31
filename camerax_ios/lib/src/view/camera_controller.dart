@@ -32,16 +32,16 @@ final class MyCameraController
   Stream<bool?> get torchStateChanged => _torchStateChagnedController.stream;
 
   @override
-  Future<bool> checkAuthorization({
-    required AuthorizationType type,
+  Future<bool> checkPermissions({
+    required Permission type,
   }) async {
     final granted = ffiValue.checkAuthorizationWithType_(type.ffiValue);
     return granted;
   }
 
   @override
-  Future<bool> requestAuthorization({
-    required AuthorizationType type,
+  Future<bool> requestPermissions({
+    required Permission type,
   }) async {
     final completer = Completer<bool>();
     final ffiHandler = ffi.ObjCBlock_ffiVoid_bool.listener((granted) {

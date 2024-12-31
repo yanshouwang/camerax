@@ -3,88 +3,89 @@ android_sdk_config:
   add_gradle_deps: true
   android_example: example/
 suspend_fun_to_async: true
-enable_experiment:
-  - interface_implementation
+log_level: all
 output:
   dart:
     path: lib/src/jni/
-log_level: all
 class_path:
   - classes/jetified-listenablefuture-1.0.jar
 classes:
-  - android.Manifest
   - android.app.Activity
   - android.content.Context
-  - android.content.ContentResolver
-  - android.content.ContentValues
-  - android.database.Cursor
-  - android.graphics.ImageFormat
-  - android.graphics.PixelFormat
-  - android.graphics.Point
-  - android.graphics.Rect
-  - android.media.Image
-  - android.net.Uri
-  - android.os.Environment
-  - android.provider.MediaStore
-  - android.util.Size
-  - androidx.camera.core.CameraSelector
+  # - android.content.ContentResolver
+  # - android.content.ContentValues
+  # - android.database.Cursor
+  # - android.graphics.ImageFormat
+  # - android.graphics.PixelFormat
+  # - android.graphics.Point
+  # - android.graphics.Rect
+  # - android.media.Image
+  # - android.net.Uri
+  # - android.os.Environment
+  # - android.provider.MediaStore
+  # - android.util.Size
+  # - androidx.camera.core.CameraSelector
   # - androidx.camera.core.ImageAnalysis
   # - androidx.camera.core.ImageCapture
-  - androidx.camera.core.AspectRatio
-  - androidx.camera.core.DynamicRange
-  - androidx.camera.core.ImageInfo
-  - androidx.camera.core.ImageProxy
-  - androidx.camera.core.MirrorMode
-  - androidx.camera.core.TorchState
-  - androidx.camera.core.ZoomState
-  - androidx.camera.core.resolutionselector.AspectRatioStrategy
-  - androidx.camera.core.resolutionselector.ResolutionFilter
-  - androidx.camera.core.resolutionselector.ResolutionSelector
-  - androidx.camera.core.resolutionselector.ResolutionStrategy
-  - androidx.camera.mlkit.vision.MlKitAnalyzer
-  - androidx.camera.video.FallbackStrategy
+  # - androidx.camera.core.AspectRatio
+  # - androidx.camera.core.DynamicRange
+  # - androidx.camera.core.ImageInfo
+  # - androidx.camera.core.ImageProxy
+  # - androidx.camera.core.MirrorMode
+  # - androidx.camera.core.TorchState
+  # - androidx.camera.core.ZoomState
+  # - androidx.camera.core.resolutionselector.AspectRatioStrategy
+  # - androidx.camera.core.resolutionselector.ResolutionFilter
+  # - androidx.camera.core.resolutionselector.ResolutionSelector
+  # - androidx.camera.core.resolutionselector.ResolutionStrategy
+  # - androidx.camera.mlkit.vision.MlKitAnalyzer
+  # - androidx.camera.video.FallbackStrategy
   # - androidx.camera.video.FileOutputOptions
   # - androidx.camera.video.MediaStoreOutputOptions
-  - androidx.camera.video.OutputResults
-  - androidx.camera.video.Quality
-  - androidx.camera.video.QualitySelector
-  - androidx.camera.video.Recording
-  - androidx.camera.video.VideoRecordEvent
-  - androidx.camera.view.CameraController
-  - androidx.camera.view.LifecycleCameraController
+  # - androidx.camera.video.OutputResults
+  # - androidx.camera.video.Quality
+  # - androidx.camera.video.QualitySelector
+  # - androidx.camera.video.Recording
+  # - androidx.camera.video.VideoRecordEvent
+  # - androidx.camera.view.CameraController
+  # - androidx.camera.view.LifecycleCameraController
   # - androidx.camera.view.PreviewView
-  - androidx.camera.view.video.AudioConfig
-  - androidx.core.content.ContextCompat
-  - androidx.core.util.Consumer
+  # - androidx.camera.view.video.AudioConfig
+  # - androidx.core.content.ContextCompat
+  # - androidx.core.util.Consumer
   - androidx.lifecycle.LifecycleOwner
   - androidx.lifecycle.LiveData
   - androidx.lifecycle.Observer
-  - com.google.android.gms.tasks.OnCompleteListener
-  - com.google.android.gms.tasks.OnSuccessListener
-  - com.google.android.gms.tasks.OnFailureListener
-  - com.google.android.gms.tasks.OnCanceledListener
-  - com.google.android.gms.tasks.Task
-  - com.google.common.util.concurrent.ListenableFuture
-  - com.google.mlkit.vision.common.InputImage
-  - com.google.mlkit.vision.barcode.BarcodeScanning
-  - com.google.mlkit.vision.barcode.BarcodeScanner
-  - com.google.mlkit.vision.barcode.BarcodeScannerOptions
-  - com.google.mlkit.vision.barcode.common.Barcode
-  - com.google.mlkit.vision.face.Face
-  - com.google.mlkit.vision.face.FaceContour
-  - com.google.mlkit.vision.face.FaceDetection
-  - com.google.mlkit.vision.face.FaceDetector
-  - com.google.mlkit.vision.face.FaceDetectorOptions
-  - com.google.mlkit.vision.face.FaceLandmark
-  - com.google.mlkit.vision.interfaces.Detector
-  - java.io.File
-  - java.lang.Runnable
-  - java.util.concurrent.Executor
-  - java.util.concurrent.Executors
-  - java.util.concurrent.Future
-  - dev.hebei.camerax_android.MyFileOutputOptions
-  - dev.hebei.camerax_android.MyImageAnalysis
-  - dev.hebei.camerax_android.MyImageCapture
-  - dev.hebei.camerax_android.MyMediaStoreOutputOptions
-  - dev.hebei.camerax_android.MyPermissionsManager
-  - dev.hebei.camerax_android.MyPreviewView
+  # - com.google.android.gms.tasks.OnCompleteListener
+  # - com.google.android.gms.tasks.OnSuccessListener
+  # - com.google.android.gms.tasks.OnFailureListener
+  # - com.google.android.gms.tasks.OnCanceledListener
+  # - com.google.android.gms.tasks.Task
+  # - com.google.common.util.concurrent.ListenableFuture
+  # - com.google.mlkit.vision.common.InputImage
+  # - com.google.mlkit.vision.barcode.BarcodeScanning
+  # - com.google.mlkit.vision.barcode.BarcodeScanner
+  # - com.google.mlkit.vision.barcode.BarcodeScannerOptions
+  # - com.google.mlkit.vision.barcode.common.Barcode
+  # - com.google.mlkit.vision.face.Face
+  # - com.google.mlkit.vision.face.FaceContour
+  # - com.google.mlkit.vision.face.FaceDetection
+  # - com.google.mlkit.vision.face.FaceDetector
+  # - com.google.mlkit.vision.face.FaceDetectorOptions
+  # - com.google.mlkit.vision.face.FaceLandmark
+  # - com.google.mlkit.vision.interfaces.Detector
+  # - java.io.File
+  # - java.lang.Runnable
+  # - java.util.concurrent.Executor
+  # - java.util.concurrent.Executors
+  # - java.util.concurrent.Future
+  # - dev.hebei.camerax_android.MyFileOutputOptions
+  # - dev.hebei.camerax_android.MyImageAnalysis
+  # - dev.hebei.camerax_android.MyImageCapture
+  # - dev.hebei.camerax_android.MyMediaStoreOutputOptions
+  - dev.hebei.camerax_android.core.CameraSelector
+  - dev.hebei.camerax_android.core.PermissionManager
+  - dev.hebei.camerax_android.core.ZoomState
+  - dev.hebei.camerax_android.view.CameraController
+  - dev.hebei.camerax_android.view.LifecycleCameraController
+  - dev.hebei.camerax_android.view.PreviewView

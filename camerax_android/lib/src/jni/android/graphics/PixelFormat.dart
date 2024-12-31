@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,130 +29,134 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: android.graphics.PixelFormat
-class PixelFormat extends jni.JObject {
-  @override
-  late final jni.JObjType<PixelFormat> $type = type;
+/// from: `android.graphics.PixelFormat`
+class PixelFormat extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<PixelFormat> $type;
 
+  @jni$_.internal
   PixelFormat.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'android/graphics/PixelFormat');
+  static final _class = jni$_.JClass.forName(r'android/graphics/PixelFormat');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $PixelFormatType();
+  static const nullableType = $PixelFormat$NullableType();
+  static const type = $PixelFormat$Type();
 
-  /// from: static public final int A_8
+  /// from: `static public final int A_8`
   static const A_8 = 8;
 
-  /// from: static public final int JPEG
+  /// from: `static public final int JPEG`
   static const JPEG = 256;
 
-  /// from: static public final int LA_88
+  /// from: `static public final int LA_88`
   static const LA_88 = 10;
 
-  /// from: static public final int L_8
+  /// from: `static public final int L_8`
   static const L_8 = 9;
 
-  /// from: static public final int OPAQUE
+  /// from: `static public final int OPAQUE`
   static const OPAQUE = -1;
 
-  /// from: static public final int RGBA_1010102
+  /// from: `static public final int RGBA_1010102`
   static const RGBA_1010102 = 43;
 
-  /// from: static public final int RGBA_4444
+  /// from: `static public final int RGBA_4444`
   static const RGBA_4444 = 7;
 
-  /// from: static public final int RGBA_5551
+  /// from: `static public final int RGBA_5551`
   static const RGBA_5551 = 6;
 
-  /// from: static public final int RGBA_8888
+  /// from: `static public final int RGBA_8888`
   static const RGBA_8888 = 1;
 
-  /// from: static public final int RGBA_F16
+  /// from: `static public final int RGBA_F16`
   static const RGBA_F16 = 22;
 
-  /// from: static public final int RGBX_8888
+  /// from: `static public final int RGBX_8888`
   static const RGBX_8888 = 2;
 
-  /// from: static public final int RGB_332
+  /// from: `static public final int RGB_332`
   static const RGB_332 = 11;
 
-  /// from: static public final int RGB_565
+  /// from: `static public final int RGB_565`
   static const RGB_565 = 4;
 
-  /// from: static public final int RGB_888
+  /// from: `static public final int RGB_888`
   static const RGB_888 = 3;
 
-  /// from: static public final int TRANSLUCENT
+  /// from: `static public final int TRANSLUCENT`
   static const TRANSLUCENT = -3;
 
-  /// from: static public final int TRANSPARENT
+  /// from: `static public final int TRANSPARENT`
   static const TRANSPARENT = -2;
 
-  /// from: static public final int UNKNOWN
+  /// from: `static public final int UNKNOWN`
   static const UNKNOWN = 0;
 
-  /// from: static public final int YCbCr_420_SP
+  /// from: `static public final int YCbCr_420_SP`
   static const YCbCr_420_SP = 17;
 
-  /// from: static public final int YCbCr_422_I
+  /// from: `static public final int YCbCr_422_I`
   static const YCbCr_422_I = 20;
 
-  /// from: static public final int YCbCr_422_SP
+  /// from: `static public final int YCbCr_422_SP`
   static const YCbCr_422_SP = 16;
   static final _id_bitsPerPixel = _class.instanceFieldId(
     r'bitsPerPixel',
     r'I',
   );
 
-  /// from: public int bitsPerPixel
-  int get bitsPerPixel => _id_bitsPerPixel.get(this, const jni.jintType());
+  /// from: `public int bitsPerPixel`
+  int get bitsPerPixel => _id_bitsPerPixel.get(this, const jni$_.jintType());
 
-  /// from: public int bitsPerPixel
+  /// from: `public int bitsPerPixel`
   set bitsPerPixel(int value) =>
-      _id_bitsPerPixel.set(this, const jni.jintType(), value);
+      _id_bitsPerPixel.set(this, const jni$_.jintType(), value);
 
   static final _id_bytesPerPixel = _class.instanceFieldId(
     r'bytesPerPixel',
     r'I',
   );
 
-  /// from: public int bytesPerPixel
-  int get bytesPerPixel => _id_bytesPerPixel.get(this, const jni.jintType());
+  /// from: `public int bytesPerPixel`
+  int get bytesPerPixel => _id_bytesPerPixel.get(this, const jni$_.jintType());
 
-  /// from: public int bytesPerPixel
+  /// from: `public int bytesPerPixel`
   set bytesPerPixel(int value) =>
-      _id_bytesPerPixel.set(this, const jni.jintType(), value);
+      _id_bytesPerPixel.set(this, const jni$_.jintType(), value);
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'()V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void <init>()
+  /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
   factory PixelFormat() {
     return PixelFormat.fromReference(
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr)
+        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -154,27 +165,29 @@ class PixelFormat extends jni.JObject {
     r'(ILandroid/graphics/PixelFormat;)V',
   );
 
-  static final _getPixelFormatInfo = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<($Int32, ffi.Pointer<ffi.Void>)>)>>(
+  static final _getPixelFormatInfo = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
           'globalEnv_CallStaticVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              int, ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public void getPixelFormatInfo(int i, android.graphics.PixelFormat pixelFormat)
+  /// from: `static public void getPixelFormatInfo(int i, android.graphics.PixelFormat pixelFormat)`
   static void getPixelFormatInfo(
     int i,
-    PixelFormat pixelFormat,
+    PixelFormat? pixelFormat,
   ) {
+    final _$pixelFormat = pixelFormat?.reference ?? jni$_.jNullReference;
     _getPixelFormatInfo(
             _class.reference.pointer,
-            _id_getPixelFormatInfo as jni.JMethodIDPtr,
+            _id_getPixelFormatInfo as jni$_.JMethodIDPtr,
             i,
-            pixelFormat.reference.pointer)
+            _$pixelFormat.pointer)
         .check();
   }
 
@@ -183,45 +196,95 @@ class PixelFormat extends jni.JObject {
     r'(I)Z',
   );
 
-  static final _formatHasAlpha = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallStaticBooleanMethod')
+  static final _formatHasAlpha = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr, jni$_.VarArgs<(jni$_.Int32,)>)>>(
+          'globalEnv_CallStaticBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: static public boolean formatHasAlpha(int i)
+  /// from: `static public boolean formatHasAlpha(int i)`
   static bool formatHasAlpha(
     int i,
   ) {
-    return _formatHasAlpha(
-            _class.reference.pointer, _id_formatHasAlpha as jni.JMethodIDPtr, i)
+    return _formatHasAlpha(_class.reference.pointer,
+            _id_formatHasAlpha as jni$_.JMethodIDPtr, i)
         .boolean;
   }
 }
 
-final class $PixelFormatType extends jni.JObjType<PixelFormat> {
-  const $PixelFormatType();
+final class $PixelFormat$NullableType extends jni$_.JObjType<PixelFormat?> {
+  @jni$_.internal
+  const $PixelFormat$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroid/graphics/PixelFormat;';
 
-  @override
-  PixelFormat fromReference(jni.JReference reference) =>
-      PixelFormat.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  PixelFormat? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : PixelFormat.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PixelFormat?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($PixelFormatType).hashCode;
+  @core$_.override
+  int get hashCode => ($PixelFormat$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($PixelFormatType) && other is $PixelFormatType;
+    return other.runtimeType == ($PixelFormat$NullableType) &&
+        other is $PixelFormat$NullableType;
+  }
+}
+
+final class $PixelFormat$Type extends jni$_.JObjType<PixelFormat> {
+  @jni$_.internal
+  const $PixelFormat$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroid/graphics/PixelFormat;';
+
+  @jni$_.internal
+  @core$_.override
+  PixelFormat fromReference(jni$_.JReference reference) =>
+      PixelFormat.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<PixelFormat?> get nullableType =>
+      const $PixelFormat$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($PixelFormat$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($PixelFormat$Type) &&
+        other is $PixelFormat$Type;
   }
 }

@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,174 +29,187 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: java.io.File
-class File extends jni.JObject {
-  @override
-  late final jni.JObjType<File> $type = type;
+/// from: `java.io.File`
+class File extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<File> $type;
 
+  @jni$_.internal
   File.fromReference(
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'java/io/File');
+  static final _class = jni$_.JClass.forName(r'java/io/File');
 
   /// The type which includes information such as the signature of this class.
-  static const type = $FileType();
+  static const nullableType = $File$NullableType();
+  static const type = $File$Type();
   static final _id_pathSeparator = _class.staticFieldId(
     r'pathSeparator',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String pathSeparator
+  /// from: `static public final java.lang.String pathSeparator`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get pathSeparator =>
-      _id_pathSeparator.get(_class, const jni.JStringType());
+  static jni$_.JString? get pathSeparator =>
+      _id_pathSeparator.get(_class, const jni$_.JStringNullableType());
 
   static final _id_pathSeparatorChar = _class.staticFieldId(
     r'pathSeparatorChar',
     r'C',
   );
 
-  /// from: static public final char pathSeparatorChar
+  /// from: `static public final char pathSeparatorChar`
   static int get pathSeparatorChar =>
-      _id_pathSeparatorChar.get(_class, const jni.jcharType());
+      _id_pathSeparatorChar.get(_class, const jni$_.jcharType());
 
   static final _id_separator = _class.staticFieldId(
     r'separator',
     r'Ljava/lang/String;',
   );
 
-  /// from: static public final java.lang.String separator
+  /// from: `static public final java.lang.String separator`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JString get separator =>
-      _id_separator.get(_class, const jni.JStringType());
+  static jni$_.JString? get separator =>
+      _id_separator.get(_class, const jni$_.JStringNullableType());
 
   static final _id_separatorChar = _class.staticFieldId(
     r'separatorChar',
     r'C',
   );
 
-  /// from: static public final char separatorChar
+  /// from: `static public final char separatorChar`
   static int get separatorChar =>
-      _id_separatorChar.get(_class, const jni.jcharType());
+      _id_separatorChar.get(_class, const jni$_.jcharType());
 
-  static final _id_new0 = _class.constructorId(
+  static final _id_new$ = _class.constructorId(
     r'(Ljava/lang/String;)V',
   );
 
-  static final _new0 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void <init>(java.lang.String string)
+  /// from: `public void <init>(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
   factory File(
-    jni.JString string,
+    jni$_.JString? string,
   ) {
-    return File.fromReference(_new0(_class.reference.pointer,
-            _id_new0 as jni.JMethodIDPtr, string.reference.pointer)
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return File.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$string.pointer)
         .reference);
   }
 
-  static final _id_new1 = _class.constructorId(
+  static final _id_new$1 = _class.constructorId(
     r'(Ljava/lang/String;Ljava/lang/String;)V',
   );
 
-  static final _new1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void <init>(java.lang.String string, java.lang.String string1)
+  /// from: `public void <init>(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory File.new1(
-    jni.JString string,
-    jni.JString string1,
+  factory File.new$1(
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return File.fromReference(_new1(
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return File.fromReference(_new$1(
             _class.reference.pointer,
-            _id_new1 as jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
+            _id_new$1 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer)
         .reference);
   }
 
-  static final _id_new2 = _class.constructorId(
+  static final _id_new$2 = _class.constructorId(
     r'(Ljava/io/File;Ljava/lang/String;)V',
   );
 
-  static final _new2 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _new$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void <init>(java.io.File file, java.lang.String string)
+  /// from: `public void <init>(java.io.File file, java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory File.new2(
-    File file,
-    jni.JString string,
+  factory File.new$2(
+    File? file,
+    jni$_.JString? string,
   ) {
-    return File.fromReference(_new2(
-            _class.reference.pointer,
-            _id_new2 as jni.JMethodIDPtr,
-            file.reference.pointer,
-            string.reference.pointer)
+    final _$file = file?.reference ?? jni$_.jNullReference;
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    return File.fromReference(_new$2(_class.reference.pointer,
+            _id_new$2 as jni$_.JMethodIDPtr, _$file.pointer, _$string.pointer)
         .reference);
   }
 
-  static final _id_new3 = _class.constructorId(
+  static final _id_new$3 = _class.constructorId(
     r'(Ljava/net/URI;)V',
   );
 
-  static final _new3 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _new$3 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_NewObject')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void <init>(java.net.URI uRI)
+  /// from: `public void <init>(java.net.URI uRI)`
   /// The returned object must be released after use, by calling the [release] method.
-  factory File.new3(
-    jni.JObject uRI,
+  factory File.new$3(
+    jni$_.JObject? uRI,
   ) {
-    return File.fromReference(_new3(_class.reference.pointer,
-            _id_new3 as jni.JMethodIDPtr, uRI.reference.pointer)
+    final _$uRI = uRI?.reference ?? jni$_.jNullReference;
+    return File.fromReference(_new$3(_class.reference.pointer,
+            _id_new$3 as jni$_.JMethodIDPtr, _$uRI.pointer)
         .reference);
   }
 
@@ -198,23 +218,23 @@ class File extends jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getName = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getName = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String getName()
+  /// from: `public java.lang.String getName()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getName() {
-    return _getName(reference.pointer, _id_getName as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
+  jni$_.JString? getName() {
+    return _getName(reference.pointer, _id_getName as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getParent = _class.instanceMethodId(
@@ -222,23 +242,23 @@ class File extends jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getParent = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getParent = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String getParent()
+  /// from: `public java.lang.String getParent()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getParent() {
-    return _getParent(reference.pointer, _id_getParent as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
+  jni$_.JString? getParent() {
+    return _getParent(reference.pointer, _id_getParent as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getParentFile = _class.instanceMethodId(
@@ -246,24 +266,24 @@ class File extends jni.JObject {
     r'()Ljava/io/File;',
   );
 
-  static final _getParentFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getParentFile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.io.File getParentFile()
+  /// from: `public java.io.File getParentFile()`
   /// The returned object must be released after use, by calling the [release] method.
-  File getParentFile() {
+  File? getParentFile() {
     return _getParentFile(
-            reference.pointer, _id_getParentFile as jni.JMethodIDPtr)
-        .object(const $FileType());
+            reference.pointer, _id_getParentFile as jni$_.JMethodIDPtr)
+        .object<File?>(const $File$NullableType());
   }
 
   static final _id_getPath = _class.instanceMethodId(
@@ -271,23 +291,23 @@ class File extends jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getPath = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getPath = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String getPath()
+  /// from: `public java.lang.String getPath()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getPath() {
-    return _getPath(reference.pointer, _id_getPath as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
+  jni$_.JString? getPath() {
+    return _getPath(reference.pointer, _id_getPath as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_isAbsolute = _class.instanceMethodId(
@@ -295,21 +315,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _isAbsolute = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isAbsolute = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean isAbsolute()
+  /// from: `public boolean isAbsolute()`
   bool isAbsolute() {
-    return _isAbsolute(reference.pointer, _id_isAbsolute as jni.JMethodIDPtr)
+    return _isAbsolute(reference.pointer, _id_isAbsolute as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -318,24 +338,24 @@ class File extends jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getAbsolutePath = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getAbsolutePath = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String getAbsolutePath()
+  /// from: `public java.lang.String getAbsolutePath()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getAbsolutePath() {
+  jni$_.JString? getAbsolutePath() {
     return _getAbsolutePath(
-            reference.pointer, _id_getAbsolutePath as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
+            reference.pointer, _id_getAbsolutePath as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getAbsoluteFile = _class.instanceMethodId(
@@ -343,24 +363,24 @@ class File extends jni.JObject {
     r'()Ljava/io/File;',
   );
 
-  static final _getAbsoluteFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getAbsoluteFile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.io.File getAbsoluteFile()
+  /// from: `public java.io.File getAbsoluteFile()`
   /// The returned object must be released after use, by calling the [release] method.
-  File getAbsoluteFile() {
+  File? getAbsoluteFile() {
     return _getAbsoluteFile(
-            reference.pointer, _id_getAbsoluteFile as jni.JMethodIDPtr)
-        .object(const $FileType());
+            reference.pointer, _id_getAbsoluteFile as jni$_.JMethodIDPtr)
+        .object<File?>(const $File$NullableType());
   }
 
   static final _id_getCanonicalPath = _class.instanceMethodId(
@@ -368,24 +388,24 @@ class File extends jni.JObject {
     r'()Ljava/lang/String;',
   );
 
-  static final _getCanonicalPath = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getCanonicalPath = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String getCanonicalPath()
+  /// from: `public java.lang.String getCanonicalPath()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString getCanonicalPath() {
+  jni$_.JString? getCanonicalPath() {
     return _getCanonicalPath(
-            reference.pointer, _id_getCanonicalPath as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
+            reference.pointer, _id_getCanonicalPath as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_getCanonicalFile = _class.instanceMethodId(
@@ -393,24 +413,24 @@ class File extends jni.JObject {
     r'()Ljava/io/File;',
   );
 
-  static final _getCanonicalFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getCanonicalFile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.io.File getCanonicalFile()
+  /// from: `public java.io.File getCanonicalFile()`
   /// The returned object must be released after use, by calling the [release] method.
-  File getCanonicalFile() {
+  File? getCanonicalFile() {
     return _getCanonicalFile(
-            reference.pointer, _id_getCanonicalFile as jni.JMethodIDPtr)
-        .object(const $FileType());
+            reference.pointer, _id_getCanonicalFile as jni$_.JMethodIDPtr)
+        .object<File?>(const $File$NullableType());
   }
 
   static final _id_toURL = _class.instanceMethodId(
@@ -418,23 +438,23 @@ class File extends jni.JObject {
     r'()Ljava/net/URL;',
   );
 
-  static final _toURL = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _toURL = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.net.URL toURL()
+  /// from: `public java.net.URL toURL()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject toURL() {
-    return _toURL(reference.pointer, _id_toURL as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+  jni$_.JObject? toURL() {
+    return _toURL(reference.pointer, _id_toURL as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_toURI = _class.instanceMethodId(
@@ -442,23 +462,23 @@ class File extends jni.JObject {
     r'()Ljava/net/URI;',
   );
 
-  static final _toURI = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _toURI = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.net.URI toURI()
+  /// from: `public java.net.URI toURI()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject toURI() {
-    return _toURI(reference.pointer, _id_toURI as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
+  jni$_.JObject? toURI() {
+    return _toURI(reference.pointer, _id_toURI as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_canRead = _class.instanceMethodId(
@@ -466,21 +486,22 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _canRead = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _canRead = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean canRead()
+  /// from: `public boolean canRead()`
   bool canRead() {
-    return _canRead(reference.pointer, _id_canRead as jni.JMethodIDPtr).boolean;
+    return _canRead(reference.pointer, _id_canRead as jni$_.JMethodIDPtr)
+        .boolean;
   }
 
   static final _id_canWrite = _class.instanceMethodId(
@@ -488,21 +509,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _canWrite = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _canWrite = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean canWrite()
+  /// from: `public boolean canWrite()`
   bool canWrite() {
-    return _canWrite(reference.pointer, _id_canWrite as jni.JMethodIDPtr)
+    return _canWrite(reference.pointer, _id_canWrite as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -511,21 +532,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _exists = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _exists = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean exists()
+  /// from: `public boolean exists()`
   bool exists() {
-    return _exists(reference.pointer, _id_exists as jni.JMethodIDPtr).boolean;
+    return _exists(reference.pointer, _id_exists as jni$_.JMethodIDPtr).boolean;
   }
 
   static final _id_isDirectory = _class.instanceMethodId(
@@ -533,21 +554,22 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _isDirectory = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isDirectory = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean isDirectory()
+  /// from: `public boolean isDirectory()`
   bool isDirectory() {
-    return _isDirectory(reference.pointer, _id_isDirectory as jni.JMethodIDPtr)
+    return _isDirectory(
+            reference.pointer, _id_isDirectory as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -556,21 +578,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _isFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isFile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean isFile()
+  /// from: `public boolean isFile()`
   bool isFile() {
-    return _isFile(reference.pointer, _id_isFile as jni.JMethodIDPtr).boolean;
+    return _isFile(reference.pointer, _id_isFile as jni$_.JMethodIDPtr).boolean;
   }
 
   static final _id_isHidden = _class.instanceMethodId(
@@ -578,21 +600,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _isHidden = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isHidden = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean isHidden()
+  /// from: `public boolean isHidden()`
   bool isHidden() {
-    return _isHidden(reference.pointer, _id_isHidden as jni.JMethodIDPtr)
+    return _isHidden(reference.pointer, _id_isHidden as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -601,22 +623,22 @@ class File extends jni.JObject {
     r'()J',
   );
 
-  static final _lastModified = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _lastModified = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public long lastModified()
+  /// from: `public long lastModified()`
   int lastModified() {
     return _lastModified(
-            reference.pointer, _id_lastModified as jni.JMethodIDPtr)
+            reference.pointer, _id_lastModified as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -625,21 +647,21 @@ class File extends jni.JObject {
     r'()J',
   );
 
-  static final _length = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _length = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public long length()
+  /// from: `public long length()`
   int length() {
-    return _length(reference.pointer, _id_length as jni.JMethodIDPtr).long;
+    return _length(reference.pointer, _id_length as jni$_.JMethodIDPtr).long;
   }
 
   static final _id_createNewFile = _class.instanceMethodId(
@@ -647,22 +669,22 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _createNewFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _createNewFile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean createNewFile()
+  /// from: `public boolean createNewFile()`
   bool createNewFile() {
     return _createNewFile(
-            reference.pointer, _id_createNewFile as jni.JMethodIDPtr)
+            reference.pointer, _id_createNewFile as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -671,21 +693,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _delete = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _delete = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean delete()
+  /// from: `public boolean delete()`
   bool delete() {
-    return _delete(reference.pointer, _id_delete as jni.JMethodIDPtr).boolean;
+    return _delete(reference.pointer, _id_delete as jni$_.JMethodIDPtr).boolean;
   }
 
   static final _id_deleteOnExit = _class.instanceMethodId(
@@ -693,21 +715,21 @@ class File extends jni.JObject {
     r'()V',
   );
 
-  static final _deleteOnExit = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _deleteOnExit = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JThrowablePtr Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public void deleteOnExit()
+  /// from: `public void deleteOnExit()`
   void deleteOnExit() {
-    _deleteOnExit(reference.pointer, _id_deleteOnExit as jni.JMethodIDPtr)
+    _deleteOnExit(reference.pointer, _id_deleteOnExit as jni$_.JMethodIDPtr)
         .check();
   }
 
@@ -716,49 +738,54 @@ class File extends jni.JObject {
     r'()[Ljava/lang/String;',
   );
 
-  static final _list = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _list = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String[] list()
+  /// from: `public java.lang.String[] list()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<jni.JString> list() {
-    return _list(reference.pointer, _id_list as jni.JMethodIDPtr)
-        .object(const jni.JArrayType(jni.JStringType()));
+  jni$_.JArray<jni$_.JString?>? list() {
+    return _list(reference.pointer, _id_list as jni$_.JMethodIDPtr)
+        .object<jni$_.JArray<jni$_.JString?>?>(
+            const jni$_.JArrayNullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
-  static final _id_list1 = _class.instanceMethodId(
+  static final _id_list$1 = _class.instanceMethodId(
     r'list',
     r'(Ljava/io/FilenameFilter;)[Ljava/lang/String;',
   );
 
-  static final _list1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _list$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public java.lang.String[] list(java.io.FilenameFilter filenameFilter)
+  /// from: `public java.lang.String[] list(java.io.FilenameFilter filenameFilter)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<jni.JString> list1(
-    jni.JObject filenameFilter,
+  jni$_.JArray<jni$_.JString?>? list$1(
+    jni$_.JObject? filenameFilter,
   ) {
-    return _list1(reference.pointer, _id_list1 as jni.JMethodIDPtr,
-            filenameFilter.reference.pointer)
-        .object(const jni.JArrayType(jni.JStringType()));
+    final _$filenameFilter = filenameFilter?.reference ?? jni$_.jNullReference;
+    return _list$1(reference.pointer, _id_list$1 as jni$_.JMethodIDPtr,
+            _$filenameFilter.pointer)
+        .object<jni$_.JArray<jni$_.JString?>?>(
+            const jni$_.JArrayNullableType<jni$_.JString?>(
+                jni$_.JStringNullableType()));
   }
 
   static final _id_listFiles = _class.instanceMethodId(
@@ -766,75 +793,80 @@ class File extends jni.JObject {
     r'()[Ljava/io/File;',
   );
 
-  static final _listFiles = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _listFiles = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.io.File[] listFiles()
+  /// from: `public java.io.File[] listFiles()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<File> listFiles() {
-    return _listFiles(reference.pointer, _id_listFiles as jni.JMethodIDPtr)
-        .object(const jni.JArrayType($FileType()));
+  jni$_.JArray<File?>? listFiles() {
+    return _listFiles(reference.pointer, _id_listFiles as jni$_.JMethodIDPtr)
+        .object<jni$_.JArray<File?>?>(
+            const jni$_.JArrayNullableType<File?>($File$NullableType()));
   }
 
-  static final _id_listFiles1 = _class.instanceMethodId(
+  static final _id_listFiles$1 = _class.instanceMethodId(
     r'listFiles',
     r'(Ljava/io/FilenameFilter;)[Ljava/io/File;',
   );
 
-  static final _listFiles1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _listFiles$1 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public java.io.File[] listFiles(java.io.FilenameFilter filenameFilter)
+  /// from: `public java.io.File[] listFiles(java.io.FilenameFilter filenameFilter)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<File> listFiles1(
-    jni.JObject filenameFilter,
+  jni$_.JArray<File?>? listFiles$1(
+    jni$_.JObject? filenameFilter,
   ) {
-    return _listFiles1(reference.pointer, _id_listFiles1 as jni.JMethodIDPtr,
-            filenameFilter.reference.pointer)
-        .object(const jni.JArrayType($FileType()));
+    final _$filenameFilter = filenameFilter?.reference ?? jni$_.jNullReference;
+    return _listFiles$1(reference.pointer,
+            _id_listFiles$1 as jni$_.JMethodIDPtr, _$filenameFilter.pointer)
+        .object<jni$_.JArray<File?>?>(
+            const jni$_.JArrayNullableType<File?>($File$NullableType()));
   }
 
-  static final _id_listFiles2 = _class.instanceMethodId(
+  static final _id_listFiles$2 = _class.instanceMethodId(
     r'listFiles',
     r'(Ljava/io/FileFilter;)[Ljava/io/File;',
   );
 
-  static final _listFiles2 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _listFiles$2 = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public java.io.File[] listFiles(java.io.FileFilter fileFilter)
+  /// from: `public java.io.File[] listFiles(java.io.FileFilter fileFilter)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JArray<File> listFiles2(
-    jni.JObject fileFilter,
+  jni$_.JArray<File?>? listFiles$2(
+    jni$_.JObject? fileFilter,
   ) {
-    return _listFiles2(reference.pointer, _id_listFiles2 as jni.JMethodIDPtr,
-            fileFilter.reference.pointer)
-        .object(const jni.JArrayType($FileType()));
+    final _$fileFilter = fileFilter?.reference ?? jni$_.jNullReference;
+    return _listFiles$2(reference.pointer,
+            _id_listFiles$2 as jni$_.JMethodIDPtr, _$fileFilter.pointer)
+        .object<jni$_.JArray<File?>?>(
+            const jni$_.JArrayNullableType<File?>($File$NullableType()));
   }
 
   static final _id_mkdir = _class.instanceMethodId(
@@ -842,21 +874,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _mkdir = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _mkdir = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean mkdir()
+  /// from: `public boolean mkdir()`
   bool mkdir() {
-    return _mkdir(reference.pointer, _id_mkdir as jni.JMethodIDPtr).boolean;
+    return _mkdir(reference.pointer, _id_mkdir as jni$_.JMethodIDPtr).boolean;
   }
 
   static final _id_mkdirs = _class.instanceMethodId(
@@ -864,21 +896,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _mkdirs = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _mkdirs = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean mkdirs()
+  /// from: `public boolean mkdirs()`
   bool mkdirs() {
-    return _mkdirs(reference.pointer, _id_mkdirs as jni.JMethodIDPtr).boolean;
+    return _mkdirs(reference.pointer, _id_mkdirs as jni$_.JMethodIDPtr).boolean;
   }
 
   static final _id_renameTo = _class.instanceMethodId(
@@ -886,23 +918,24 @@ class File extends jni.JObject {
     r'(Ljava/io/File;)Z',
   );
 
-  static final _renameTo = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _renameTo = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public boolean renameTo(java.io.File file)
+  /// from: `public boolean renameTo(java.io.File file)`
   bool renameTo(
-    File file,
+    File? file,
   ) {
-    return _renameTo(reference.pointer, _id_renameTo as jni.JMethodIDPtr,
-            file.reference.pointer)
+    final _$file = file?.reference ?? jni$_.jNullReference;
+    return _renameTo(reference.pointer, _id_renameTo as jni$_.JMethodIDPtr,
+            _$file.pointer)
         .boolean;
   }
 
@@ -911,20 +944,23 @@ class File extends jni.JObject {
     r'(J)Z',
   );
 
-  static final _setLastModified = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<(ffi.Int64,)>)>>('globalEnv_CallBooleanMethod')
+  static final _setLastModified = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int64,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public boolean setLastModified(long j)
+  /// from: `public boolean setLastModified(long j)`
   bool setLastModified(
     int j,
   ) {
     return _setLastModified(
-            reference.pointer, _id_setLastModified as jni.JMethodIDPtr, j)
+            reference.pointer, _id_setLastModified as jni$_.JMethodIDPtr, j)
         .boolean;
   }
 
@@ -933,21 +969,22 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _setReadOnly = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _setReadOnly = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean setReadOnly()
+  /// from: `public boolean setReadOnly()`
   bool setReadOnly() {
-    return _setReadOnly(reference.pointer, _id_setReadOnly as jni.JMethodIDPtr)
+    return _setReadOnly(
+            reference.pointer, _id_setReadOnly as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -956,44 +993,49 @@ class File extends jni.JObject {
     r'(ZZ)Z',
   );
 
-  static final _setWritable = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr, ffi.VarArgs<($Int32, $Int32)>)>>(
+  static final _setWritable = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
 
-  /// from: public boolean setWritable(boolean z, boolean z1)
+  /// from: `public boolean setWritable(boolean z, boolean z1)`
   bool setWritable(
     bool z,
     bool z1,
   ) {
-    return _setWritable(reference.pointer, _id_setWritable as jni.JMethodIDPtr,
-            z ? 1 : 0, z1 ? 1 : 0)
+    return _setWritable(reference.pointer,
+            _id_setWritable as jni$_.JMethodIDPtr, z ? 1 : 0, z1 ? 1 : 0)
         .boolean;
   }
 
-  static final _id_setWritable1 = _class.instanceMethodId(
+  static final _id_setWritable$1 = _class.instanceMethodId(
     r'setWritable',
     r'(Z)Z',
   );
 
-  static final _setWritable1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _setWritable$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public boolean setWritable(boolean z)
-  bool setWritable1(
+  /// from: `public boolean setWritable(boolean z)`
+  bool setWritable$1(
     bool z,
   ) {
-    return _setWritable1(
-            reference.pointer, _id_setWritable1 as jni.JMethodIDPtr, z ? 1 : 0)
+    return _setWritable$1(reference.pointer,
+            _id_setWritable$1 as jni$_.JMethodIDPtr, z ? 1 : 0)
         .boolean;
   }
 
@@ -1002,44 +1044,49 @@ class File extends jni.JObject {
     r'(ZZ)Z',
   );
 
-  static final _setReadable = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr, ffi.VarArgs<($Int32, $Int32)>)>>(
+  static final _setReadable = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
 
-  /// from: public boolean setReadable(boolean z, boolean z1)
+  /// from: `public boolean setReadable(boolean z, boolean z1)`
   bool setReadable(
     bool z,
     bool z1,
   ) {
-    return _setReadable(reference.pointer, _id_setReadable as jni.JMethodIDPtr,
-            z ? 1 : 0, z1 ? 1 : 0)
+    return _setReadable(reference.pointer,
+            _id_setReadable as jni$_.JMethodIDPtr, z ? 1 : 0, z1 ? 1 : 0)
         .boolean;
   }
 
-  static final _id_setReadable1 = _class.instanceMethodId(
+  static final _id_setReadable$1 = _class.instanceMethodId(
     r'setReadable',
     r'(Z)Z',
   );
 
-  static final _setReadable1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _setReadable$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public boolean setReadable(boolean z)
-  bool setReadable1(
+  /// from: `public boolean setReadable(boolean z)`
+  bool setReadable$1(
     bool z,
   ) {
-    return _setReadable1(
-            reference.pointer, _id_setReadable1 as jni.JMethodIDPtr, z ? 1 : 0)
+    return _setReadable$1(reference.pointer,
+            _id_setReadable$1 as jni$_.JMethodIDPtr, z ? 1 : 0)
         .boolean;
   }
 
@@ -1048,44 +1095,49 @@ class File extends jni.JObject {
     r'(ZZ)Z',
   );
 
-  static final _setExecutable = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr, ffi.VarArgs<($Int32, $Int32)>)>>(
+  static final _setExecutable = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Int32, jni$_.Int32)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int, int)>();
 
-  /// from: public boolean setExecutable(boolean z, boolean z1)
+  /// from: `public boolean setExecutable(boolean z, boolean z1)`
   bool setExecutable(
     bool z,
     bool z1,
   ) {
     return _setExecutable(reference.pointer,
-            _id_setExecutable as jni.JMethodIDPtr, z ? 1 : 0, z1 ? 1 : 0)
+            _id_setExecutable as jni$_.JMethodIDPtr, z ? 1 : 0, z1 ? 1 : 0)
         .boolean;
   }
 
-  static final _id_setExecutable1 = _class.instanceMethodId(
+  static final _id_setExecutable$1 = _class.instanceMethodId(
     r'setExecutable',
     r'(Z)Z',
   );
 
-  static final _setExecutable1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-                  ffi.VarArgs<($Int32,)>)>>('globalEnv_CallBooleanMethod')
+  static final _setExecutable$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_
+                      .VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>, jni.JMethodIDPtr, int)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
 
-  /// from: public boolean setExecutable(boolean z)
-  bool setExecutable1(
+  /// from: `public boolean setExecutable(boolean z)`
+  bool setExecutable$1(
     bool z,
   ) {
-    return _setExecutable1(reference.pointer,
-            _id_setExecutable1 as jni.JMethodIDPtr, z ? 1 : 0)
+    return _setExecutable$1(reference.pointer,
+            _id_setExecutable$1 as jni$_.JMethodIDPtr, z ? 1 : 0)
         .boolean;
   }
 
@@ -1094,21 +1146,21 @@ class File extends jni.JObject {
     r'()Z',
   );
 
-  static final _canExecute = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _canExecute = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean canExecute()
+  /// from: `public boolean canExecute()`
   bool canExecute() {
-    return _canExecute(reference.pointer, _id_canExecute as jni.JMethodIDPtr)
+    return _canExecute(reference.pointer, _id_canExecute as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -1117,24 +1169,25 @@ class File extends jni.JObject {
     r'()[Ljava/io/File;',
   );
 
-  static final _listRoots = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _listRoots = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: static public java.io.File[] listRoots()
+  /// from: `static public java.io.File[] listRoots()`
   /// The returned object must be released after use, by calling the [release] method.
-  static jni.JArray<File> listRoots() {
+  static jni$_.JArray<File?>? listRoots() {
     return _listRoots(
-            _class.reference.pointer, _id_listRoots as jni.JMethodIDPtr)
-        .object(const jni.JArrayType($FileType()));
+            _class.reference.pointer, _id_listRoots as jni$_.JMethodIDPtr)
+        .object<jni$_.JArray<File?>?>(
+            const jni$_.JArrayNullableType<File?>($File$NullableType()));
   }
 
   static final _id_getTotalSpace = _class.instanceMethodId(
@@ -1142,22 +1195,22 @@ class File extends jni.JObject {
     r'()J',
   );
 
-  static final _getTotalSpace = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getTotalSpace = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public long getTotalSpace()
+  /// from: `public long getTotalSpace()`
   int getTotalSpace() {
     return _getTotalSpace(
-            reference.pointer, _id_getTotalSpace as jni.JMethodIDPtr)
+            reference.pointer, _id_getTotalSpace as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -1166,22 +1219,22 @@ class File extends jni.JObject {
     r'()J',
   );
 
-  static final _getFreeSpace = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getFreeSpace = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public long getFreeSpace()
+  /// from: `public long getFreeSpace()`
   int getFreeSpace() {
     return _getFreeSpace(
-            reference.pointer, _id_getFreeSpace as jni.JMethodIDPtr)
+            reference.pointer, _id_getFreeSpace as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -1190,22 +1243,22 @@ class File extends jni.JObject {
     r'()J',
   );
 
-  static final _getUsableSpace = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getUsableSpace = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallLongMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public long getUsableSpace()
+  /// from: `public long getUsableSpace()`
   int getUsableSpace() {
     return _getUsableSpace(
-            reference.pointer, _id_getUsableSpace as jni.JMethodIDPtr)
+            reference.pointer, _id_getUsableSpace as jni$_.JMethodIDPtr)
         .long;
   }
 
@@ -1214,72 +1267,80 @@ class File extends jni.JObject {
     r'(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;)Ljava/io/File;',
   );
 
-  static final _createTempFile = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _createTempFile = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-              ffi.Pointer<ffi.Void>,
-              jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.io.File createTempFile(java.lang.String string, java.lang.String string1, java.io.File file)
+  /// from: `static public java.io.File createTempFile(java.lang.String string, java.lang.String string1, java.io.File file)`
   /// The returned object must be released after use, by calling the [release] method.
-  static File createTempFile(
-    jni.JString string,
-    jni.JString string1,
-    File file,
+  static File? createTempFile(
+    jni$_.JString? string,
+    jni$_.JString? string1,
+    File? file,
   ) {
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    final _$file = file?.reference ?? jni$_.jNullReference;
     return _createTempFile(
             _class.reference.pointer,
-            _id_createTempFile as jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer,
-            file.reference.pointer)
-        .object(const $FileType());
+            _id_createTempFile as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer,
+            _$file.pointer)
+        .object<File?>(const $File$NullableType());
   }
 
-  static final _id_createTempFile1 = _class.staticMethodId(
+  static final _id_createTempFile$1 = _class.staticMethodId(
     r'createTempFile',
     r'(Ljava/lang/String;Ljava/lang/String;)Ljava/io/File;',
   );
 
-  static final _createTempFile1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _createTempFile$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallStaticObjectMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: static public java.io.File createTempFile(java.lang.String string, java.lang.String string1)
+  /// from: `static public java.io.File createTempFile(java.lang.String string, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  static File createTempFile1(
-    jni.JString string,
-    jni.JString string1,
+  static File? createTempFile$1(
+    jni$_.JString? string,
+    jni$_.JString? string1,
   ) {
-    return _createTempFile1(
+    final _$string = string?.reference ?? jni$_.jNullReference;
+    final _$string1 = string1?.reference ?? jni$_.jNullReference;
+    return _createTempFile$1(
             _class.reference.pointer,
-            _id_createTempFile1 as jni.JMethodIDPtr,
-            string.reference.pointer,
-            string1.reference.pointer)
-        .object(const $FileType());
+            _id_createTempFile$1 as jni$_.JMethodIDPtr,
+            _$string.pointer,
+            _$string1.pointer)
+        .object<File?>(const $File$NullableType());
   }
 
   static final _id_compareTo = _class.instanceMethodId(
@@ -1287,23 +1348,24 @@ class File extends jni.JObject {
     r'(Ljava/io/File;)I',
   );
 
-  static final _compareTo = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _compareTo = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public int compareTo(java.io.File file)
+  /// from: `public int compareTo(java.io.File file)`
   int compareTo(
-    File file,
+    File? file,
   ) {
-    return _compareTo(reference.pointer, _id_compareTo as jni.JMethodIDPtr,
-            file.reference.pointer)
+    final _$file = file?.reference ?? jni$_.jNullReference;
+    return _compareTo(reference.pointer, _id_compareTo as jni$_.JMethodIDPtr,
+            _$file.pointer)
         .integer;
   }
 
@@ -1312,71 +1374,72 @@ class File extends jni.JObject {
     r'(Ljava/lang/Object;)Z',
   );
 
-  static final _equals = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _equals = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public boolean equals(java.lang.Object object)
+  /// from: `public boolean equals(java.lang.Object object)`
   bool equals(
-    jni.JObject object,
+    jni$_.JObject? object,
   ) {
-    return _equals(reference.pointer, _id_equals as jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    return _equals(reference.pointer, _id_equals as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .boolean;
   }
 
-  static final _id_hashCode1 = _class.instanceMethodId(
+  static final _id_hashCode$1 = _class.instanceMethodId(
     r'hashCode',
     r'()I',
   );
 
-  static final _hashCode1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _hashCode$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallIntMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public int hashCode()
-  int hashCode1() {
-    return _hashCode1(reference.pointer, _id_hashCode1 as jni.JMethodIDPtr)
+  /// from: `public int hashCode()`
+  int hashCode$1() {
+    return _hashCode$1(reference.pointer, _id_hashCode$1 as jni$_.JMethodIDPtr)
         .integer;
   }
 
-  static final _id_toString1 = _class.instanceMethodId(
+  static final _id_toString$1 = _class.instanceMethodId(
     r'toString',
     r'()Ljava/lang/String;',
   );
 
-  static final _toString1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _toString$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.lang.String toString()
+  /// from: `public java.lang.String toString()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JString toString1() {
-    return _toString1(reference.pointer, _id_toString1 as jni.JMethodIDPtr)
-        .object(const jni.JStringType());
+  jni$_.JString? toString$1() {
+    return _toString$1(reference.pointer, _id_toString$1 as jni$_.JMethodIDPtr)
+        .object<jni$_.JString?>(const jni$_.JStringNullableType());
   }
 
   static final _id_toPath = _class.instanceMethodId(
@@ -1384,71 +1447,93 @@ class File extends jni.JObject {
     r'()Ljava/nio/file/Path;',
   );
 
-  static final _toPath = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _toPath = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public java.nio.file.Path toPath()
+  /// from: `public java.nio.file.Path toPath()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni.JObject toPath() {
-    return _toPath(reference.pointer, _id_toPath as jni.JMethodIDPtr)
-        .object(const jni.JObjectType());
-  }
-
-  static final _id_compareTo1 = _class.instanceMethodId(
-    r'compareTo',
-    r'(Ljava/lang/Object;)I',
-  );
-
-  static final _compareTo1 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallIntMethod')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public int compareTo(java.lang.Object object)
-  int compareTo1(
-    jni.JObject object,
-  ) {
-    return _compareTo1(reference.pointer, _id_compareTo1 as jni.JMethodIDPtr,
-            object.reference.pointer)
-        .integer;
+  jni$_.JObject? toPath() {
+    return _toPath(reference.pointer, _id_toPath as jni$_.JMethodIDPtr)
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 }
 
-final class $FileType extends jni.JObjType<File> {
-  const $FileType();
+final class $File$NullableType extends jni$_.JObjType<File?> {
+  @jni$_.internal
+  const $File$NullableType();
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Ljava/io/File;';
 
-  @override
-  File fromReference(jni.JReference reference) => File.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  File? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : File.fromReference(
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<File?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => ($FileType).hashCode;
+  @core$_.override
+  int get hashCode => ($File$NullableType).hashCode;
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($FileType) && other is $FileType;
+    return other.runtimeType == ($File$NullableType) &&
+        other is $File$NullableType;
+  }
+}
+
+final class $File$Type extends jni$_.JObjType<File> {
+  @jni$_.internal
+  const $File$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Ljava/io/File;';
+
+  @jni$_.internal
+  @core$_.override
+  File fromReference(jni$_.JReference reference) => File.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<File?> get nullableType => const $File$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($File$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($File$Type) && other is $File$Type;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'core.dart';
@@ -33,13 +34,13 @@ abstract base class CameraXPlugin extends PlatformInterface {
     _instance = instance;
   }
 
+  PermissionManager get permissionManager;
+
   CameraSelector createCameraSelector({
     LensFacing? lensFacing,
   });
 
   CameraController createCameraController();
-
-  PreviewViewBuilder createPreviewViewBuilder();
 
   ResolutionSelector createResolutionSelector({
     AspectRatioStrategy? aspectRatioStrategy,
@@ -72,5 +73,10 @@ abstract base class CameraXPlugin extends PlatformInterface {
     required List<MLObjectType> types,
     required CoordinateSystem targetCoordinateSystem,
     required MLObjectsCallback onAnalyzed,
+  });
+
+  Widget buildPreviewView({
+    required CameraController controller,
+    required BoxFit fit,
   });
 }

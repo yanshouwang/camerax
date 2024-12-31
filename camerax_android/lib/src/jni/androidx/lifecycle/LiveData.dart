@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,95 +29,49 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-import 'LifecycleOwner.dart' as lifecycleowner_;
+import 'LifecycleOwner.dart' as lifecycleowner$_;
 
-import 'Observer.dart' as observer_;
+import 'Observer.dart' as observer$_;
 
-/// from: androidx.lifecycle.LiveData
-class LiveData<$T extends jni.JObject> extends jni.JObject {
-  @override
-  late final jni.JObjType<LiveData<$T>> $type = type(T);
+/// from: `androidx.lifecycle.LiveData`
+class LiveData<$T extends jni$_.JObject?> extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<LiveData<$T>> $type;
 
-  final jni.JObjType<$T> T;
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
+  @jni$_.internal
   LiveData.fromReference(
     this.T,
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type<$T>(T),
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'androidx/lifecycle/LiveData');
+  static final _class = jni$_.JClass.forName(r'androidx/lifecycle/LiveData');
 
   /// The type which includes information such as the signature of this class.
-  static $LiveDataType<$T> type<$T extends jni.JObject>(
-    jni.JObjType<$T> T,
+  static $LiveData$NullableType<$T> nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
   ) {
-    return $LiveDataType(
+    return $LiveData$NullableType<$T>(
       T,
     );
   }
 
-  static final _id_new0 = _class.constructorId(
-    r'(Ljava/lang/Object;)V',
-  );
-
-  static final _new0 = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JniResult Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: public void <init>(T object)
-  /// The returned object must be released after use, by calling the [release] method.
-  factory LiveData(
-    $T object, {
-    jni.JObjType<$T>? T,
-  }) {
-    T ??= jni.lowestCommonSuperType([
-      object.$type,
-    ]) as jni.JObjType<$T>;
-    return LiveData.fromReference(
-        T,
-        _new0(_class.reference.pointer, _id_new0 as jni.JMethodIDPtr,
-                object.reference.pointer)
-            .reference);
-  }
-
-  static final _id_new1 = _class.constructorId(
-    r'()V',
-  );
-
-  static final _new1 = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_NewObject')
-      .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: public void <init>()
-  /// The returned object must be released after use, by calling the [release] method.
-  factory LiveData.new1({
-    required jni.JObjType<$T> T,
-  }) {
-    return LiveData.fromReference(
-        T,
-        _new1(_class.reference.pointer, _id_new1 as jni.JMethodIDPtr)
-            .reference);
+  static $LiveData$Type<$T> type<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $LiveData$Type<$T>(
+      T,
+    );
   }
 
   static final _id_observe = _class.instanceMethodId(
@@ -118,27 +79,32 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V',
   );
 
-  static final _observe = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                  ffi.Pointer<ffi.Void>,
-                  jni.JMethodIDPtr,
-                  ffi.VarArgs<
+  static final _observe = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
                       (
-                        ffi.Pointer<ffi.Void>,
-                        ffi.Pointer<ffi.Void>
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void observe(androidx.lifecycle.LifecycleOwner lifecycleOwner, androidx.lifecycle.Observer observer)
+  /// from: `public void observe(androidx.lifecycle.LifecycleOwner lifecycleOwner, androidx.lifecycle.Observer observer)`
   void observe(
-    lifecycleowner_.LifecycleOwner lifecycleOwner,
-    observer_.Observer<$T> observer,
+    lifecycleowner$_.LifecycleOwner? lifecycleOwner,
+    observer$_.Observer<jni$_.JObject?>? observer,
   ) {
-    _observe(reference.pointer, _id_observe as jni.JMethodIDPtr,
-            lifecycleOwner.reference.pointer, observer.reference.pointer)
+    final _$lifecycleOwner = lifecycleOwner?.reference ?? jni$_.jNullReference;
+    final _$observer = observer?.reference ?? jni$_.jNullReference;
+    _observe(reference.pointer, _id_observe as jni$_.JMethodIDPtr,
+            _$lifecycleOwner.pointer, _$observer.pointer)
         .check();
   }
 
@@ -147,23 +113,24 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'(Landroidx/lifecycle/Observer;)V',
   );
 
-  static final _observeForever = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _observeForever = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void observeForever(androidx.lifecycle.Observer observer)
+  /// from: `public void observeForever(androidx.lifecycle.Observer observer)`
   void observeForever(
-    observer_.Observer<$T> observer,
+    observer$_.Observer<jni$_.JObject?>? observer,
   ) {
-    _observeForever(reference.pointer, _id_observeForever as jni.JMethodIDPtr,
-            observer.reference.pointer)
+    final _$observer = observer?.reference ?? jni$_.jNullReference;
+    _observeForever(reference.pointer, _id_observeForever as jni$_.JMethodIDPtr,
+            _$observer.pointer)
         .check();
   }
 
@@ -172,23 +139,24 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'(Landroidx/lifecycle/Observer;)V',
   );
 
-  static final _removeObserver = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _removeObserver = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void removeObserver(androidx.lifecycle.Observer observer)
+  /// from: `public void removeObserver(androidx.lifecycle.Observer observer)`
   void removeObserver(
-    observer_.Observer<$T> observer,
+    observer$_.Observer<jni$_.JObject?>? observer,
   ) {
-    _removeObserver(reference.pointer, _id_removeObserver as jni.JMethodIDPtr,
-            observer.reference.pointer)
+    final _$observer = observer?.reference ?? jni$_.jNullReference;
+    _removeObserver(reference.pointer, _id_removeObserver as jni$_.JMethodIDPtr,
+            _$observer.pointer)
         .check();
   }
 
@@ -197,73 +165,24 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'(Landroidx/lifecycle/LifecycleOwner;)V',
   );
 
-  static final _removeObservers = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _removeObservers = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public void removeObservers(androidx.lifecycle.LifecycleOwner lifecycleOwner)
+  /// from: `public void removeObservers(androidx.lifecycle.LifecycleOwner lifecycleOwner)`
   void removeObservers(
-    lifecycleowner_.LifecycleOwner lifecycleOwner,
+    lifecycleowner$_.LifecycleOwner? lifecycleOwner,
   ) {
-    _removeObservers(reference.pointer, _id_removeObservers as jni.JMethodIDPtr,
-            lifecycleOwner.reference.pointer)
-        .check();
-  }
-
-  static final _id_postValue = _class.instanceMethodId(
-    r'postValue',
-    r'(Ljava/lang/Object;)V',
-  );
-
-  static final _postValue = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected void postValue(T object)
-  void postValue(
-    $T object,
-  ) {
-    _postValue(reference.pointer, _id_postValue as jni.JMethodIDPtr,
-            object.reference.pointer)
-        .check();
-  }
-
-  static final _id_setValue = _class.instanceMethodId(
-    r'setValue',
-    r'(Ljava/lang/Object;)V',
-  );
-
-  static final _setValue = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// from: protected void setValue(T object)
-  void setValue(
-    $T object,
-  ) {
-    _setValue(reference.pointer, _id_setValue as jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$lifecycleOwner = lifecycleOwner?.reference ?? jni$_.jNullReference;
+    _removeObservers(reference.pointer,
+            _id_removeObservers as jni$_.JMethodIDPtr, _$lifecycleOwner.pointer)
         .check();
   }
 
@@ -272,23 +191,23 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'()Ljava/lang/Object;',
   );
 
-  static final _getValue = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _getValue = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public T getValue()
+  /// from: `public T getValue()`
   /// The returned object must be released after use, by calling the [release] method.
-  $T getValue() {
-    return _getValue(reference.pointer, _id_getValue as jni.JMethodIDPtr)
-        .object(T);
+  $T? getValue() {
+    return _getValue(reference.pointer, _id_getValue as jni$_.JMethodIDPtr)
+        .object<$T?>(T.nullableType);
   }
 
   static final _id_isInitialized = _class.instanceMethodId(
@@ -296,67 +215,23 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'()Z',
   );
 
-  static final _isInitialized = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _isInitialized = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean isInitialized()
+  /// from: `public boolean isInitialized()`
   bool isInitialized() {
     return _isInitialized(
-            reference.pointer, _id_isInitialized as jni.JMethodIDPtr)
+            reference.pointer, _id_isInitialized as jni$_.JMethodIDPtr)
         .boolean;
-  }
-
-  static final _id_onActive = _class.instanceMethodId(
-    r'onActive',
-    r'()V',
-  );
-
-  static final _onActive = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: protected void onActive()
-  void onActive() {
-    _onActive(reference.pointer, _id_onActive as jni.JMethodIDPtr).check();
-  }
-
-  static final _id_onInactive = _class.instanceMethodId(
-    r'onInactive',
-    r'()V',
-  );
-
-  static final _onInactive = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JThrowablePtr Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
-              )>>('globalEnv_CallVoidMethod')
-      .asFunction<
-          jni.JThrowablePtr Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
-          )>();
-
-  /// from: protected void onInactive()
-  void onInactive() {
-    _onInactive(reference.pointer, _id_onInactive as jni.JMethodIDPtr).check();
   }
 
   static final _id_hasObservers = _class.instanceMethodId(
@@ -364,22 +239,22 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'()Z',
   );
 
-  static final _hasObservers = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _hasObservers = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean hasObservers()
+  /// from: `public boolean hasObservers()`
   bool hasObservers() {
     return _hasObservers(
-            reference.pointer, _id_hasObservers as jni.JMethodIDPtr)
+            reference.pointer, _id_hasObservers as jni$_.JMethodIDPtr)
         .boolean;
   }
 
@@ -388,54 +263,112 @@ class LiveData<$T extends jni.JObject> extends jni.JObject {
     r'()Z',
   );
 
-  static final _hasActiveObservers = ProtectedJniExtensions.lookup<
-          ffi.NativeFunction<
-              jni.JniResult Function(
-                ffi.Pointer<ffi.Void>,
-                jni.JMethodIDPtr,
+  static final _hasActiveObservers = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
               )>>('globalEnv_CallBooleanMethod')
       .asFunction<
-          jni.JniResult Function(
-            ffi.Pointer<ffi.Void>,
-            jni.JMethodIDPtr,
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
           )>();
 
-  /// from: public boolean hasActiveObservers()
+  /// from: `public boolean hasActiveObservers()`
   bool hasActiveObservers() {
     return _hasActiveObservers(
-            reference.pointer, _id_hasActiveObservers as jni.JMethodIDPtr)
+            reference.pointer, _id_hasActiveObservers as jni$_.JMethodIDPtr)
         .boolean;
   }
 }
 
-final class $LiveDataType<$T extends jni.JObject>
-    extends jni.JObjType<LiveData<$T>> {
-  final jni.JObjType<$T> T;
+final class $LiveData$NullableType<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<LiveData<$T>?> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
-  const $LiveDataType(
+  @jni$_.internal
+  const $LiveData$NullableType(
     this.T,
   );
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroidx/lifecycle/LiveData;';
 
-  @override
-  LiveData<$T> fromReference(jni.JReference reference) =>
-      LiveData.fromReference(T, reference);
+  @jni$_.internal
+  @core$_.override
+  LiveData<$T>? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : LiveData<$T>.fromReference(
+          T,
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LiveData<$T>?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => Object.hash($LiveDataType, T);
+  @core$_.override
+  int get hashCode => Object.hash($LiveData$NullableType, T);
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($LiveDataType<$T>) &&
-        other is $LiveDataType<$T> &&
+    return other.runtimeType == ($LiveData$NullableType<$T>) &&
+        other is $LiveData$NullableType<$T> &&
+        T == other.T;
+  }
+}
+
+final class $LiveData$Type<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<LiveData<$T>> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
+
+  @jni$_.internal
+  const $LiveData$Type(
+    this.T,
+  );
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroidx/lifecycle/LiveData;';
+
+  @jni$_.internal
+  @core$_.override
+  LiveData<$T> fromReference(jni$_.JReference reference) =>
+      LiveData<$T>.fromReference(
+        T,
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<LiveData<$T>?> get nullableType =>
+      $LiveData$NullableType<$T>(T);
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => Object.hash($LiveData$Type, T);
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($LiveData$Type<$T>) &&
+        other is $LiveData$Type<$T> &&
         T == other.T;
   }
 }

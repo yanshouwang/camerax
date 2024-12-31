@@ -7,13 +7,20 @@
 // ignore_for_file: constant_identifier_names
 // ignore_for_file: doc_directive_unknown
 // ignore_for_file: file_names
+// ignore_for_file: inference_failure_on_untyped_parameter
+// ignore_for_file: invalid_internal_annotation
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: library_prefixes
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: only_throw_errors
 // ignore_for_file: overridden_fields
 // ignore_for_file: prefer_double_quotes
+// ignore_for_file: unintended_html_in_doc_comment
 // ignore_for_file: unnecessary_cast
+// ignore_for_file: unnecessary_non_null_assertion
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: unused_element
 // ignore_for_file: unused_field
@@ -22,31 +29,43 @@
 // ignore_for_file: unused_shown_name
 // ignore_for_file: use_super_parameters
 
-import 'dart:ffi' as ffi;
-import 'dart:isolate' show ReceivePort;
+import 'dart:core' show Object, String, bool, double, int;
+import 'dart:core' as core$_;
 
-import 'package:jni/internal_helpers_for_jnigen.dart';
-import 'package:jni/jni.dart' as jni;
+import 'package:jni/_internal.dart' as jni$_;
+import 'package:jni/jni.dart' as jni$_;
 
-/// from: androidx.lifecycle.Observer
-class Observer<$T extends jni.JObject> extends jni.JObject {
-  @override
-  late final jni.JObjType<Observer<$T>> $type = type(T);
+/// from: `androidx.lifecycle.Observer`
+class Observer<$T extends jni$_.JObject?> extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<Observer<$T>> $type;
 
-  final jni.JObjType<$T> T;
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
+  @jni$_.internal
   Observer.fromReference(
     this.T,
-    jni.JReference reference,
-  ) : super.fromReference(reference);
+    jni$_.JReference reference,
+  )   : $type = type<$T>(T),
+        super.fromReference(reference);
 
-  static final _class = jni.JClass.forName(r'androidx/lifecycle/Observer');
+  static final _class = jni$_.JClass.forName(r'androidx/lifecycle/Observer');
 
   /// The type which includes information such as the signature of this class.
-  static $ObserverType<$T> type<$T extends jni.JObject>(
-    jni.JObjType<$T> T,
+  static $Observer$NullableType<$T> nullableType<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
   ) {
-    return $ObserverType(
+    return $Observer$NullableType<$T>(
+      T,
+    );
+  }
+
+  static $Observer$Type<$T> type<$T extends jni$_.JObject?>(
+    jni$_.JObjType<$T> T,
+  ) {
+    return $Observer$Type<$T>(
       T,
     );
   }
@@ -56,38 +75,37 @@ class Observer<$T extends jni.JObject> extends jni.JObject {
     r'(Ljava/lang/Object;)V',
   );
 
-  static final _onChanged = ProtectedJniExtensions.lookup<
-              ffi.NativeFunction<
-                  jni.JThrowablePtr Function(
-                      ffi.Pointer<ffi.Void>,
-                      jni.JMethodIDPtr,
-                      ffi.VarArgs<(ffi.Pointer<ffi.Void>,)>)>>(
+  static final _onChanged = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JThrowablePtr Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
           'globalEnv_CallVoidMethod')
       .asFunction<
-          jni.JThrowablePtr Function(ffi.Pointer<ffi.Void>, jni.JMethodIDPtr,
-              ffi.Pointer<ffi.Void>)>();
+          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: public abstract void onChanged(T object)
+  /// from: `public abstract void onChanged(T object)`
   void onChanged(
     $T object,
   ) {
-    _onChanged(reference.pointer, _id_onChanged as jni.JMethodIDPtr,
-            object.reference.pointer)
+    final _$object = object?.reference ?? jni$_.jNullReference;
+    _onChanged(reference.pointer, _id_onChanged as jni$_.JMethodIDPtr,
+            _$object.pointer)
         .check();
   }
 
   /// Maps a specific port to the implemented interface.
-  static final Map<int, $ObserverImpl> _$impls = {};
-  ReceivePort? _$p;
-
-  static jni.JObjectPtr _$invoke(
+  static final core$_.Map<int, $Observer> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
     int port,
-    jni.JObjectPtr descriptor,
-    jni.JObjectPtr args,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
   ) {
     return _$invokeMethod(
       port,
-      $MethodInvocation.fromAddresses(
+      jni$_.MethodInvocation.fromAddresses(
         0,
         descriptor.address,
         args.address,
@@ -95,114 +113,187 @@ class Observer<$T extends jni.JObject> extends jni.JObject {
     );
   }
 
-  static final ffi.Pointer<
-          ffi.NativeFunction<
-              jni.JObjectPtr Function(
-                  ffi.Uint64, jni.JObjectPtr, jni.JObjectPtr)>>
-      _$invokePointer = ffi.Pointer.fromFunction(_$invoke);
+  static final jni$_.Pointer<
+          jni$_.NativeFunction<
+              jni$_.JObjectPtr Function(
+                  jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)>>
+      _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
 
-  static ffi.Pointer<ffi.Void> _$invokeMethod(
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
     int $p,
-    $MethodInvocation $i,
+    jni$_.MethodInvocation $i,
   ) {
     try {
       final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
       final $a = $i.args;
       if ($d == r'onChanged(Ljava/lang/Object;)V') {
         _$impls[$p]!.onChanged(
-          $a[0].castTo(_$impls[$p]!.T, releaseOriginal: true),
+          $a![0]?.as(_$impls[$p]!.T, releaseOriginal: true),
         );
-        return jni.nullptr;
+        return jni$_.nullptr;
       }
     } catch (e) {
-      return ProtectedJniExtensions.newDartException(e);
+      return jni$_.ProtectedJniExtensions.newDartException(e);
     }
-    return jni.nullptr;
+    return jni$_.nullptr;
   }
 
-  factory Observer.implement(
-    $ObserverImpl<$T> $impl,
+  static void implementIn<$T extends jni$_.JObject?>(
+    jni$_.JImplementer implementer,
+    $Observer<$T> $impl,
   ) {
-    final $p = ReceivePort();
-    final $x = Observer.fromReference(
-      $impl.T,
-      ProtectedJniExtensions.newPortProxy(
-        r'androidx.lifecycle.Observer',
-        $p,
-        _$invokePointer,
-      ),
-    ).._$p = $p;
-    final $a = $p.sendPort.nativePort;
-    _$impls[$a] = $impl;
-    $p.listen(($m) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
       if ($m == null) {
         _$impls.remove($p.sendPort.nativePort);
         $p.close();
         return;
       }
-      final $i = $MethodInvocation.fromMessage($m as List<dynamic>);
+      final $i = jni$_.MethodInvocation.fromMessage($m);
       final $r = _$invokeMethod($p.sendPort.nativePort, $i);
-      ProtectedJniExtensions.returnResult($i.result, $r);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
     });
-    return $x;
+    implementer.add(
+      r'androidx.lifecycle.Observer',
+      $p,
+      _$invokePointer,
+      [
+        if ($impl.onChanged$async) r'onChanged(Ljava/lang/Object;)V',
+      ],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory Observer.implement(
+    $Observer<$T> $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return Observer<$T>.fromReference(
+      $impl.T,
+      $i.implementReference(),
+    );
   }
 }
 
-abstract interface class $ObserverImpl<$T extends jni.JObject> {
-  factory $ObserverImpl({
-    required jni.JObjType<$T> T,
+abstract base mixin class $Observer<$T extends jni$_.JObject?> {
+  factory $Observer({
+    required jni$_.JObjType<$T> T,
     required void Function($T object) onChanged,
-  }) = _$ObserverImpl;
+    bool onChanged$async,
+  }) = _$Observer<$T>;
 
-  jni.JObjType<$T> get T;
+  jni$_.JObjType<$T> get T;
 
   void onChanged($T object);
+  bool get onChanged$async => false;
 }
 
-class _$ObserverImpl<$T extends jni.JObject> implements $ObserverImpl<$T> {
-  _$ObserverImpl({
+final class _$Observer<$T extends jni$_.JObject?> with $Observer<$T> {
+  _$Observer({
     required this.T,
     required void Function($T object) onChanged,
+    this.onChanged$async = false,
   }) : _onChanged = onChanged;
 
-  @override
-  final jni.JObjType<$T> T;
+  @core$_.override
+  final jni$_.JObjType<$T> T;
 
   final void Function($T object) _onChanged;
+  final bool onChanged$async;
 
   void onChanged($T object) {
     return _onChanged(object);
   }
 }
 
-final class $ObserverType<$T extends jni.JObject>
-    extends jni.JObjType<Observer<$T>> {
-  final jni.JObjType<$T> T;
+final class $Observer$NullableType<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<Observer<$T>?> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
 
-  const $ObserverType(
+  @jni$_.internal
+  const $Observer$NullableType(
     this.T,
   );
 
-  @override
+  @jni$_.internal
+  @core$_.override
   String get signature => r'Landroidx/lifecycle/Observer;';
 
-  @override
-  Observer<$T> fromReference(jni.JReference reference) =>
-      Observer.fromReference(T, reference);
+  @jni$_.internal
+  @core$_.override
+  Observer<$T>? fromReference(jni$_.JReference reference) => reference.isNull
+      ? null
+      : Observer<$T>.fromReference(
+          T,
+          reference,
+        );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
 
-  @override
-  jni.JObjType get superType => const jni.JObjectType();
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Observer<$T>?> get nullableType => this;
 
-  @override
+  @jni$_.internal
+  @core$_.override
   final superCount = 1;
 
-  @override
-  int get hashCode => Object.hash($ObserverType, T);
+  @core$_.override
+  int get hashCode => Object.hash($Observer$NullableType, T);
 
-  @override
+  @core$_.override
   bool operator ==(Object other) {
-    return other.runtimeType == ($ObserverType<$T>) &&
-        other is $ObserverType<$T> &&
+    return other.runtimeType == ($Observer$NullableType<$T>) &&
+        other is $Observer$NullableType<$T> &&
+        T == other.T;
+  }
+}
+
+final class $Observer$Type<$T extends jni$_.JObject?>
+    extends jni$_.JObjType<Observer<$T>> {
+  @jni$_.internal
+  final jni$_.JObjType<$T> T;
+
+  @jni$_.internal
+  const $Observer$Type(
+    this.T,
+  );
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Landroidx/lifecycle/Observer;';
+
+  @jni$_.internal
+  @core$_.override
+  Observer<$T> fromReference(jni$_.JReference reference) =>
+      Observer<$T>.fromReference(
+        T,
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<Observer<$T>?> get nullableType =>
+      $Observer$NullableType<$T>(T);
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => Object.hash($Observer$Type, T);
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($Observer$Type<$T>) &&
+        other is $Observer$Type<$T> &&
         T == other.T;
   }
 }
