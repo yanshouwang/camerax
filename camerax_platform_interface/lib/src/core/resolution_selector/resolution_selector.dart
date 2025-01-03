@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/camerax.dart';
 
 import 'aspect_ratio_strategy.dart';
 import 'resolution_mode.dart';
@@ -21,7 +21,7 @@ abstract interface class ResolutionSelector {
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
   }) =>
-      CameraXPlugin.instance.createResolutionSelector(
+      CameraX.instance.createResolutionSelector(
         aspectRatioStrategy: aspectRatioStrategy,
         allowedResolutionMode: allowedResolutionMode,
         resolutionFilter: resolutionFilter,

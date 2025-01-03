@@ -1,19 +1,17 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/camerax.dart';
 
 import 'quality.dart';
 
 abstract interface class FallbackStrategy {
   factory FallbackStrategy.higherQualityOrLowerThan(Quality quality) =>
-      CameraXPlugin.instance
-          .createFallbackStrategyHigherQualityOrLowerThan(quality);
+      CameraX.instance.createFallbackStrategyHigherQualityOrLowerThan(quality);
 
   factory FallbackStrategy.higherQualityThan(Quality quality) =>
-      CameraXPlugin.instance.createFallbackStrategyHigherQualityThan(quality);
+      CameraX.instance.createFallbackStrategyHigherQualityThan(quality);
 
   factory FallbackStrategy.lowerQualityOrHigherThan(Quality quality) =>
-      CameraXPlugin.instance
-          .createFallbackStrategyLowerQualityOrHigherThan(quality);
+      CameraX.instance.createFallbackStrategyLowerQualityOrHigherThan(quality);
 
   factory FallbackStrategy.lowerQualityThan(Quality quality) =>
-      CameraXPlugin.instance.createFallbackStrategyLowerQualityThan(quality);
+      CameraX.instance.createFallbackStrategyLowerQualityThan(quality);
 }

@@ -1,4 +1,4 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/camerax.dart';
 import 'package:camerax_platform_interface/src/core.dart';
 import 'package:camerax_platform_interface/src/video.dart';
 import 'package:flutter/foundation.dart';
@@ -30,16 +30,16 @@ typedef VideoRecordEventCallback = void Function(VideoRecordEvent event);
 /// preview for a short period of time. To avoid the glitch, the UseCases need to
 /// be enabled/disabled before the controller is set on PreviewView.
 abstract base class CameraController extends PlatformInterface {
+  static final Object _token = Object();
+
   factory CameraController() {
-    final instance = CameraXPlugin.instance.createCameraController();
+    final instance = CameraX.instance.createCameraController();
     PlatformInterface.verify(instance, _token);
     return instance;
   }
 
   @protected
   CameraController.impl() : super(token: _token);
-
-  static final Object _token = Object();
 
   Stream<ZoomState?> get zoomStateChanged;
   Stream<bool?> get torchStateChanged;
@@ -52,7 +52,7 @@ abstract base class CameraController extends PlatformInterface {
   /// stopped and closed. When the LifecycleOwner's state is start or greater,
   /// the controller receives camera data. It stops once the LifecycleOwner is
   /// destroyed.
-  Future<void> bindToLifecycle();
+  Future<void> bind();
 
   /// Clears the previously set LifecycleOwner and stops the camera.
   Future<void> unbind();

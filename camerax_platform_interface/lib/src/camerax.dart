@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'core.dart';
@@ -8,16 +7,16 @@ import 'view.dart';
 
 /// Platform-specific implementations should implement this class to support
 /// camerax.
-abstract base class CameraXPlugin extends PlatformInterface {
-  /// Constructs a [CameraXPlugin].
-  CameraXPlugin() : super(token: _token);
+abstract base class CameraX extends PlatformInterface {
+  /// Constructs a [CameraX].
+  CameraX() : super(token: _token);
 
   static final Object _token = Object();
 
-  static CameraXPlugin? _instance;
+  static CameraX? _instance;
 
-  /// The default instance of [CameraXPlugin] to use.
-  static CameraXPlugin get instance {
+  /// The default instance of [CameraX] to use.
+  static CameraX get instance {
     final instance = _instance;
     if (instance == null) {
       throw UnimplementedError(
@@ -27,14 +26,18 @@ abstract base class CameraXPlugin extends PlatformInterface {
   }
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [CameraXPlugin] when
+  /// platform-specific class that extends [CameraX] when
   /// they register themselves.
-  static set instance(CameraXPlugin instance) {
+  static set instance(CameraX instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }
 
-  PermissionManager get permissionManager;
+  PermissionManager createPermissionManager();
+
+  CameraSelector getFrontCameraSelector();
+  CameraSelector getBackCameraSelector();
+  CameraSelector getExternalCameraSelector();
 
   CameraSelector createCameraSelector({
     LensFacing? lensFacing,
@@ -75,8 +78,5 @@ abstract base class CameraXPlugin extends PlatformInterface {
     required MLObjectsCallback onAnalyzed,
   });
 
-  Widget buildPreviewView({
-    required CameraController controller,
-    required BoxFit fit,
-  });
+  PreviewView createPreviewView();
 }

@@ -38,34 +38,6 @@ jni.Context get context {
   return jni.Context.fromReference(reference);
 }
 
-extension PermissionX on Permission {
-  jni.PermissionManager$Permission toNative() {
-    switch (this) {
-      case Permission.album:
-        return jni.PermissionManager$Permission.ALBUM!;
-      case Permission.audio:
-        return jni.PermissionManager$Permission.AUDIO!;
-      case Permission.video:
-        return jni.PermissionManager$Permission.VIDEO!;
-    }
-  }
-}
-
-extension LensFacingX on LensFacing {
-  jni.CameraSelector$LensFacing toNative() {
-    switch (this) {
-      case LensFacing.unknown:
-        return jni.CameraSelector$LensFacing.UNKNOWN!;
-      case LensFacing.front:
-        return jni.CameraSelector$LensFacing.FRONT!;
-      case LensFacing.back:
-        return jni.CameraSelector$LensFacing.BACK!;
-      case LensFacing.external:
-        return jni.CameraSelector$LensFacing.EXTERNAL!;
-    }
-  }
-}
-
 // extension ScaleTypeX on ScaleType {
 //   jni.MyPreviewView_MyScaleType get jniValue {
 //     switch (this) {

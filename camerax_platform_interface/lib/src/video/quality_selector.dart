@@ -1,4 +1,4 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/camerax.dart';
 
 import 'fallback_strategy.dart';
 import 'quality.dart';
@@ -8,7 +8,7 @@ abstract interface class QualitySelector {
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
   }) =>
-      CameraXPlugin.instance.createQualitySelectorFrom(
+      CameraX.instance.createQualitySelectorFrom(
         quality,
         fallbackStrategy: fallbackStrategy,
       );
@@ -17,7 +17,7 @@ abstract interface class QualitySelector {
     List<Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
   }) =>
-      CameraXPlugin.instance.createQualitySelectorFromOrderedList(
+      CameraX.instance.createQualitySelectorFromOrderedList(
         qualities,
         fallbackStrategy: fallbackStrategy,
       );

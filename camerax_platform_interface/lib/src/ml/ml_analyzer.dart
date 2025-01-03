@@ -1,4 +1,4 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/camerax.dart';
 import 'package:camerax_platform_interface/src/core.dart';
 
 import 'ml_object.dart';
@@ -12,7 +12,7 @@ abstract interface class MLAnalyzer implements Analyzer {
     required CoordinateSystem targetCoordinateSystem,
     required MLObjectsCallback onAnalyzed,
   }) {
-    return CameraXPlugin.instance.createMLAnalyzer(
+    return CameraX.instance.createMLAnalyzer(
       types: types,
       targetCoordinateSystem: targetCoordinateSystem,
       onAnalyzed: onAnalyzed,

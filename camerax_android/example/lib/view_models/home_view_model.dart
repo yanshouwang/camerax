@@ -44,7 +44,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   List<MLObject> get items => _items;
 
   Future<void> bind() async {
-    await controller.bindToLifecycle();
+    await controller.bind();
   }
 
   Future<void> unbind() async {
@@ -188,20 +188,21 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   void _initialize() async {
-    _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
-      logger.info(
-          'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
-      _zoomState = zoomState;
-      notifyListeners();
-    });
-    _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
-      logger.info('torchStateChanged $torchState');
-      _torchState = torchState;
-      notifyListeners();
-    });
-    var isGranted = _permissionManager.checkPermission(Permission.album) &&
-        _permissionManager.checkPermission(Permission.audio) &&
-        _permissionManager.checkPermission(Permission.video);
+    // _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
+    //   logger.info(
+    //       'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
+    //   _zoomState = zoomState;
+    //   notifyListeners();
+    // });
+    // _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
+    //   logger.info('torchStateChanged $torchState');
+    //   _torchState = torchState;
+    //   notifyListeners();
+    // });
+    var isGranted =
+        await _permissionManager.checkPermission(Permission.album) &&
+            await _permissionManager.checkPermission(Permission.audio) &&
+            await _permissionManager.checkPermission(Permission.video);
     if (!isGranted) {
       isGranted = await _permissionManager.requestPermissions([
         Permission.album,
@@ -213,10 +214,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
       throw StateError('requestPermissions failed.');
     }
     try {
-      // logger.info('initialize');
-      // await controller.initialize();
-      // logger.info('setCameraSelector');
-      // await controller.setCameraSelector(CameraSelector.back);
+      logger.info('initialize');
+      await controller.initialize();
+      logger.info('setCameraSelector');
+      await controller.setCameraSelector(CameraSelector.back);
       logger.info('bind');
       await bind();
       logger.info('complete');
@@ -250,7 +251,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba_8888);
     final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
     await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bindToLifecycle();
+    await controller.bind();
   }
 
   void _onRawPixelsAnalyzed(ImageModel imageModel) {
@@ -265,7 +266,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv_420_888);
     await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bindToLifecycle();
+    await controller.bind();
   }
 
   void _onMLAnalyzed(List<MLObject> items) {

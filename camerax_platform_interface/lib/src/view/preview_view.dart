@@ -1,23 +1,22 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/camerax.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'camera_controller.dart';
 
-class PreviewView extends StatelessWidget {
-  final CameraController controller;
-  final BoxFit fit;
+abstract base class PreviewView extends PlatformInterface {
+  static final Object _token = Object();
 
-  const PreviewView({
-    super.key,
-    required this.controller,
-    this.fit = BoxFit.contain,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CameraXPlugin.instance.buildPreviewView(
-      controller: controller,
-      fit: fit,
-    );
+  factory PreviewView() {
+    final instance = CameraX.instance.createPreviewView();
+    PlatformInterface.verify(instance, _token);
+    return instance;
   }
+
+  @protected
+  PreviewView.impl() : super(token: _token);
+
+  Future<void> setController(CameraController controller);
+
+  Widget build(BuildContext context);
 }

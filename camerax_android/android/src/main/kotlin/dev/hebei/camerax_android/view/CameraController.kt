@@ -2,6 +2,7 @@ package dev.hebei.camerax_android.view
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.map
 import dev.hebei.camerax_android.core.CameraSelector
 import dev.hebei.camerax_android.core.ZoomState
