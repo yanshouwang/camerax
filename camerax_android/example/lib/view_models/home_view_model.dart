@@ -188,17 +188,33 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   void _initialize() async {
-    // _zoomStateSubscription = controller.zoomStateChanged.listen((zoomState) {
-    //   logger.info(
-    //       'zoomStateChanged ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}');
-    //   _zoomState = zoomState;
-    //   notifyListeners();
-    // });
-    // _torchStateSubscription = controller.torchStateChanged.listen((torchState) {
-    //   logger.info('torchStateChanged $torchState');
-    //   _torchState = torchState;
-    //   notifyListeners();
-    // });
+    _torchStateSubscription = controller.torchStateChanged.listen(
+      (torchState) {
+        logger.info('torchStateChanged $torchState');
+        _torchState = torchState;
+        notifyListeners();
+      },
+      onError: (e) {
+        logger.warning('torchStateChanged error: $e');
+      },
+      onDone: () {
+        logger.info('torchStateChanged done');
+      },
+    );
+    _zoomStateSubscription = controller.zoomStateChanged.listen(
+      (zoomState) {
+        logger.info(
+            'zoomStateChanged ${zoomState.minZoomRatio}, ${zoomState.maxZoomRatio}, ${zoomState.linearZoom}, ${zoomState.zoomRatio}');
+        _zoomState = zoomState;
+        notifyListeners();
+      },
+      onError: (e) {
+        logger.warning('zoomStateChanged error: $e');
+      },
+      onDone: () {
+        logger.info('zoomStateChanged done');
+      },
+    );
     var isGranted =
         await _permissionManager.checkPermission(Permission.album) &&
             await _permissionManager.checkPermission(Permission.audio) &&
@@ -213,29 +229,20 @@ class HomeViewModel extends ViewModel with TypeLogger {
     if (!isGranted) {
       throw StateError('requestPermissions failed.');
     }
-    try {
-      logger.info('initialize');
-      await controller.initialize();
-      logger.info('setCameraSelector');
-      await controller.setCameraSelector(CameraSelector.back);
-      logger.info('bind');
-      await bind();
-      logger.info('complete');
-    } catch (e, stack) {
-      logger.severe(e, stack);
-    }
-//     _zoomState = await controller.getZoomState();
-//     _torchState = await controller.getTorchState();
+    await controller.initialize();
+    _torchState = await controller.getTorchState();
+    _zoomState = await controller.getZoomState();
+    final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
+    final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
 //     _flashMode = await controller.getImageCaptureFlashMode();
-//     notifyListeners();
-//     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
-//     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-//     logger.info(
-//         '''zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
-// torchState: $torchState
-// flashMode: $flashMode
-// isPinchToZoomEnabled: $isPinchToZoomEnabled
-// isTapToFocusEnabled: $isTapToFocusEnabled''');
+    logger.info('''torchState: $torchState
+zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+flashMode: $flashMode
+isPinchToZoomEnabled: $isPinchToZoomEnabled
+isTapToFocusEnabled: $isTapToFocusEnabled''');
+    notifyListeners();
+    await controller.setCameraSelector(CameraSelector.back);
+    await bind();
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {

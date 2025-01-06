@@ -2,6 +2,8 @@ package dev.hebei.camerax_android.legacy.view
 
 import dev.hebei.camerax_android.legacy.CameraXRegistrar
 import dev.hebei.camerax_android.legacy.PigeonApiCameraController
+import dev.hebei.camerax_android.legacy.core.TorchStateLiveData
+import dev.hebei.camerax_android.legacy.core.ZoomStateLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,28 +67,74 @@ class CameraController(registrar: CameraXRegistrar) : PigeonApiCameraController(
         }
     }
 
-    override fun isTapToFocusEnabled(
+    override fun getTorchState(
         pigeon_instance: dev.hebei.camerax_android.view.CameraController,
-        callback: (Result<Boolean>) -> Unit
+        callback: (Result<TorchStateLiveData.Wrapper>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val enabled = pigeon_instance.isTapToFocusEnabled()
-                callback(Result.success(enabled))
+                val torchStateObj = pigeon_instance.getTorchState()
+                val torchState = TorchStateLiveData.Wrapper(torchStateObj)
+                callback(Result.success(torchState))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }
         }
     }
 
-    override fun setTapToFocusEnabled(
+    override fun enableTorch(
         pigeon_instance: dev.hebei.camerax_android.view.CameraController,
-        enabled: Boolean,
+        torchEnabled: Boolean,
         callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                pigeon_instance.setTapToFocusEnabled(enabled)
+                pigeon_instance.enableTorch(torchEnabled)
+                callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun getZoomState(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        callback: (Result<ZoomStateLiveData.Wrapper>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val zoomStateObj = pigeon_instance.getZoomState()
+                val zoomState = ZoomStateLiveData.Wrapper(zoomStateObj)
+                callback(Result.success(zoomState))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun setZoomRatio(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        zoomRatio: Double,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.setZoomRatio(zoomRatio.toFloat())
+                callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun setLinearZoom(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        linearZoom: Double,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.setLinearZoom(linearZoom.toFloat())
                 callback(Result.success(Unit))
             } catch (e: Exception) {
                 callback(Result.failure(e))
@@ -116,6 +164,35 @@ class CameraController(registrar: CameraXRegistrar) : PigeonApiCameraController(
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.setPinchToZoomEnabled(enabled)
+                callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun isTapToFocusEnabled(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        callback: (Result<Boolean>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val enabled = pigeon_instance.isTapToFocusEnabled()
+                callback(Result.success(enabled))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun setTapToFocusEnabled(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        enabled: Boolean,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.setTapToFocusEnabled(enabled)
                 callback(Result.success(Unit))
             } catch (e: Exception) {
                 callback(Result.failure(e))

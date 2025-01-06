@@ -13,13 +13,7 @@ class CameraSelector internal constructor(internal val obj: androidx.camera.core
         private val builder = androidx.camera.core.CameraSelector.Builder()
 
         fun requireLensFacing(lensFacing: LensFacing): Builder {
-            @ExperimentalLensFacing val obj = when (lensFacing) {
-                LensFacing.UNKNOWN -> androidx.camera.core.CameraSelector.LENS_FACING_UNKNOWN
-                LensFacing.FRONT -> androidx.camera.core.CameraSelector.LENS_FACING_FRONT
-                LensFacing.BACK -> androidx.camera.core.CameraSelector.LENS_FACING_BACK
-                LensFacing.EXTERNAL -> androidx.camera.core.CameraSelector.LENS_FACING_EXTERNAL
-            }
-            builder.requireLensFacing(obj)
+            builder.requireLensFacing(lensFacing.obj)
             return this
         }
 
@@ -33,3 +27,20 @@ class CameraSelector internal constructor(internal val obj: androidx.camera.core
         UNKNOWN, FRONT, BACK, EXTERNAL,
     }
 }
+
+val CameraSelector.LensFacing.obj
+    @ExperimentalLensFacing get() = when (this) {
+        CameraSelector.LensFacing.UNKNOWN -> androidx.camera.core.CameraSelector.LENS_FACING_UNKNOWN
+        CameraSelector.LensFacing.FRONT -> androidx.camera.core.CameraSelector.LENS_FACING_FRONT
+        CameraSelector.LensFacing.BACK -> androidx.camera.core.CameraSelector.LENS_FACING_BACK
+        CameraSelector.LensFacing.EXTERNAL -> androidx.camera.core.CameraSelector.LENS_FACING_EXTERNAL
+    }
+
+val Int.lensFacingWrapper
+    @ExperimentalLensFacing get() = when (this) {
+        androidx.camera.core.CameraSelector.LENS_FACING_UNKNOWN -> CameraSelector.LensFacing.UNKNOWN
+        androidx.camera.core.CameraSelector.LENS_FACING_FRONT -> CameraSelector.LensFacing.FRONT
+        androidx.camera.core.CameraSelector.LENS_FACING_BACK -> CameraSelector.LensFacing.BACK
+        androidx.camera.core.CameraSelector.LENS_FACING_EXTERNAL -> CameraSelector.LensFacing.EXTERNAL
+        else -> throw NotImplementedError()
+    }

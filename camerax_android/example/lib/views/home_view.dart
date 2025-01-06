@@ -124,7 +124,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         maximum: zoomState.maxZoomRatio,
                         value: zoomState.zoomRatio,
                         onChanged: (value) {
-                          viewModel.setZoomRatio(value).ignore();
+                          viewModel.setZoomRatio(value);
                         },
                       ),
                     ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
@@ -7,7 +9,28 @@ final class CameraController extends $interface.CameraController {
   final $native.LifecycleCameraController obj;
   final $native.PreviewView viewObj;
 
-  CameraController.$native(this.obj, this.viewObj) : super.impl();
+  late final StreamController<bool> _torchStateController;
+  late final StreamController<$interface.ZoomState> _zoomStateController;
+
+  Future<$native.TorchStateObserver>? _torchStateObserver;
+  Future<$native.ZoomStateObserver>? _zoomStateObserver;
+
+  CameraController.$native(this.obj, this.viewObj) : super.impl() {
+    _torchStateController = StreamController.broadcast(
+      onListen: _onListenTorchState,
+      onCancel: _onCancelTorchState,
+    );
+    _zoomStateController = StreamController.broadcast(
+      onListen: _onListenZoomState,
+      onCancel: _onCancelZoomState,
+    );
+  }
+
+  @override
+  Stream<bool> get torchStateChanged => _torchStateController.stream;
+  @override
+  Stream<$interface.ZoomState> get zoomStateChanged =>
+      _zoomStateController.stream;
 
   factory CameraController() {
     final obj = $native.LifecycleCameraController();
@@ -55,14 +78,71 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<void> clearImageAnalysisAnalyzer() {
-    // TODO: implement clearImageAnalysisAnalyzer
-    throw UnimplementedError();
+  Future<bool?> getTorchState() async {
+    final dataObj = await obj.getTorchState();
+    final value = await dataObj.getValue();
+    return value;
   }
 
   @override
-  Future<void> enableTorch(bool enabled) {
-    // TODO: implement enableTorch
+  Future<void> enableTorch(bool enabled) async {
+    await obj.enableTorch(enabled);
+  }
+
+  @override
+  Future<$interface.ZoomState?> getZoomState() async {
+    final dataObj = await obj.getZoomState();
+    final valueObj = await dataObj.getValue();
+    if (valueObj == null) {
+      return null;
+    }
+    final minZoomRatio = await valueObj.getMinZoomRatio();
+    final maxZoomRatio = await valueObj.getMaxZoomRatio();
+    final zoomRatio = await valueObj.getZoomRatio();
+    final linearZoom = await valueObj.getLinearZoom();
+    return ZoomState(
+      minZoomRatio: minZoomRatio,
+      maxZoomRatio: maxZoomRatio,
+      zoomRatio: zoomRatio,
+      linearZoom: linearZoom,
+    );
+  }
+
+  @override
+  Future<void> setZoomRatio(double zoomRatio) async {
+    await obj.setZoomRatio(zoomRatio);
+  }
+
+  @override
+  Future<void> setLinearZoom(double linearZoom) async {
+    await obj.setLinearZoom(linearZoom);
+  }
+
+  @override
+  Future<bool> isPinchToZoomEnabled() async {
+    final enabled = await obj.isPinchToZoomEnabled();
+    return enabled;
+  }
+
+  @override
+  Future<void> setPinchToZoomEnabled(bool enabled) async {
+    await obj.setPinchToZoomEnabled(enabled);
+  }
+
+  @override
+  Future<bool> isTapToFocusEnabled() async {
+    final enabled = await obj.isTapToFocusEnabled();
+    return enabled;
+  }
+
+  @override
+  Future<void> setTapToFocusEnabled(bool enabled) async {
+    await obj.setTapToFocusEnabled(enabled);
+  }
+
+  @override
+  Future<void> clearImageAnalysisAnalyzer() {
+    // TODO: implement clearImageAnalysisAnalyzer
     throw UnimplementedError();
   }
 
@@ -128,12 +208,6 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<bool?> getTorchState() {
-    // TODO: implement getTorchState
-    throw UnimplementedError();
-  }
-
-  @override
   Future<$interface.DynamicRange> getVideoCaptureDynamicRange() {
     // TODO: implement getVideoCaptureDynamicRange
     throw UnimplementedError();
@@ -158,16 +232,6 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.ZoomState?> getZoomState() async {
-    final zoomState = await obj.getZoomState();
-    final observer = $native.Observer(
-      onChanged: (observer, value) {},
-    );
-    zoomState.observe(observer);
-    final value = await zoomState.getValue();
-  }
-
-  @override
   Future<bool> isImageAnalysisEnabled() {
     // TODO: implement isImageAnalysisEnabled
     throw UnimplementedError();
@@ -180,20 +244,8 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<bool> isPinchToZoomEnabled() {
-    // TODO: implement isPinchToZoomEnabled
-    throw UnimplementedError();
-  }
-
-  @override
   Future<bool> isRecording() {
     // TODO: implement isRecording
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> isTapToFocusEnabled() {
-    // TODO: implement isTapToFocusEnabled
     throw UnimplementedError();
   }
 
@@ -262,27 +314,9 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<void> setLinearZoom(double linearZoom) {
-    // TODO: implement setLinearZoom
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setPinchToZoomEnabled(bool enabled) {
-    // TODO: implement setPinchToZoomEnabled
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> setPreviewResolutionSelector(
       $interface.ResolutionSelector? resolutionSelector) {
     // TODO: implement setPreviewResolutionSelector
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setTapToFocusEnabled(bool enabled) {
-    // TODO: implement setTapToFocusEnabled
     throw UnimplementedError();
   }
 
@@ -314,12 +348,6 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<void> setZoomRatio(double zoomRatio) {
-    // TODO: implement setZoomRatio
-    throw UnimplementedError();
-  }
-
-  @override
   Future<$interface.Recording> startRecording(
       {required Uri uri,
       required bool enableAudio,
@@ -334,12 +362,91 @@ final class CameraController extends $interface.CameraController {
     throw UnimplementedError();
   }
 
-  @override
-  // TODO: implement torchStateChanged
-  Stream<bool?> get torchStateChanged => throw UnimplementedError();
+  void _onListenTorchState() async {
+    final completer = Completer<$native.TorchStateObserver>();
+    try {
+      final observer = _torchStateObserver;
+      if (observer != null) {
+        throw ArgumentError.value(observer);
+      }
+      _torchStateObserver = completer.future;
+      final dataObj = await obj.getTorchState();
+      final observerObj = $native.TorchStateObserver(
+        onChanged: (observer, value) {
+          _torchStateController.add(value);
+        },
+      );
+      await dataObj.observe(observerObj);
+      completer.complete(observerObj);
+    } catch (e) {
+      completer.completeError(e);
+      _zoomStateController.addError(e);
+    }
+  }
 
-  @override
-  // TODO: implement zoomStateChanged
-  Stream<$interface.ZoomState?> get zoomStateChanged =>
-      throw UnimplementedError();
+  void _onCancelTorchState() async {
+    try {
+      final observer = _torchStateObserver;
+      if (observer == null) {
+        throw ArgumentError.value(observer);
+      }
+      _torchStateObserver = null;
+      final dataObj = await obj.getTorchState();
+      final observerObj = await observer;
+      await dataObj.removeObserver(observerObj);
+    } catch (e) {
+      _zoomStateController.addError(e);
+    }
+  }
+
+  void _onListenZoomState() async {
+    final completer = Completer<$native.ZoomStateObserver>();
+    try {
+      final observer = _zoomStateObserver;
+      if (observer != null) {
+        throw ArgumentError.value(observer);
+      }
+      _zoomStateObserver = completer.future;
+      final dataObj = await obj.getZoomState();
+      final observerObj = $native.ZoomStateObserver(
+        onChanged: (observer, valueObj) async {
+          try {
+            final minZoomRatio = await valueObj.getMinZoomRatio();
+            final maxZoomRatio = await valueObj.getMaxZoomRatio();
+            final zoomRatio = await valueObj.getZoomRatio();
+            final linearZoom = await valueObj.getLinearZoom();
+            final value = ZoomState(
+              minZoomRatio: minZoomRatio,
+              maxZoomRatio: maxZoomRatio,
+              zoomRatio: zoomRatio,
+              linearZoom: linearZoom,
+            );
+            _zoomStateController.add(value);
+          } catch (e) {
+            _zoomStateController.addError(e);
+          }
+        },
+      );
+      await dataObj.observe(observerObj);
+      completer.complete(observerObj);
+    } catch (e) {
+      completer.completeError(e);
+      _zoomStateController.addError(e);
+    }
+  }
+
+  void _onCancelZoomState() async {
+    try {
+      final observer = _zoomStateObserver;
+      if (observer == null) {
+        throw ArgumentError.value(observer);
+      }
+      _zoomStateObserver = null;
+      final dataObj = await obj.getZoomState();
+      final observerObj = await observer;
+      await dataObj.removeObserver(observerObj);
+    } catch (e) {
+      _zoomStateController.addError(e);
+    }
+  }
 }

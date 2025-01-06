@@ -9,11 +9,10 @@ import 'package:jni/jni.dart' as $native;
 final class CameraController extends $interface.CameraController {
   final $native.LifecycleCameraController obj;
 
-  late final StreamController<$interface.ZoomState?>
-      _zoomStateChagnedController;
-  late final StreamController<bool?> _torchStateChagnedController;
+  late final StreamController<$interface.ZoomState> _zoomStateChagnedController;
+  late final StreamController<bool> _torchStateChagnedController;
 
-  late $native.Observer<$native.ZoomState?> _zoomStateObserverObj;
+  late $native.Observer<$native.ZoomState> _zoomStateObserverObj;
   late $native.Observer<$native.JInteger> _torchStateObserverObj;
 
   // jni.Recording? _jniRecording;
@@ -35,10 +34,10 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Stream<$interface.ZoomState?> get zoomStateChanged =>
+  Stream<$interface.ZoomState> get zoomStateChanged =>
       _zoomStateChagnedController.stream;
   @override
-  Stream<bool?> get torchStateChanged => _torchStateChagnedController.stream;
+  Stream<bool> get torchStateChanged => _torchStateChagnedController.stream;
 
   @override
   Future<void> initialize() async {

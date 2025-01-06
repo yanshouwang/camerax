@@ -25,6 +25,14 @@ enum LensFacing {
   external,
 }
 
+enum CameraState {
+  pendingOpen,
+  opening,
+  open,
+  closing,
+  closed,
+}
+
 enum ScaleType {
   fillStart,
   fillCenter,
@@ -66,44 +74,164 @@ abstract class CameraSelector {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'kotlin.Any',
+    fullClassName: 'dev.hebei.camerax_android.core.CameraStateLiveData.Wrapper',
   ),
 )
-abstract class Any {}
+abstract class CameraStateLiveData {
+  CameraState? getValue();
+
+  void observe(CameraStateObserver observer);
+  void removeObserver(CameraStateObserver observer);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.CameraStateObserver.Wrapper',
+  ),
+)
+abstract class CameraStateObserver {
+  CameraStateObserver();
+
+  late void Function(CameraState value) onChanged;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.TorchStateLiveData.Wrapper',
+  ),
+)
+abstract class TorchStateLiveData {
+  bool? getValue();
+
+  void observe(TorchStateObserver observer);
+  void removeObserver(TorchStateObserver observer);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.TorchStateObserver.Wrapper',
+  ),
+)
+abstract class TorchStateObserver {
+  TorchStateObserver();
+
+  late void Function(bool value) onChanged;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.core.ZoomState',
   ),
 )
-abstract class ZoomState extends Any {
-  late double minZoomRatio;
-  late double maxZoomRatio;
-  late double zoomRatio;
-  late double linearZoom;
+abstract class ZoomState {
+  double getMinZoomRatio();
+  double getMaxZoomRatio();
+  double getZoomRatio();
+  double getLinearZoom();
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.lifecycle.LiveData<*>',
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.ZoomStateLiveData.Wrapper',
   ),
 )
-abstract class LiveData {
-  Any getValue();
+abstract class ZoomStateLiveData {
+  ZoomState? getValue();
 
-  void observe(Observer observer);
-  void removeObserver(Observer observer);
+  void observe(ZoomStateObserver observer);
+  void removeObserver(ZoomStateObserver observer);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.lifecycle.Observer<*>',
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.ZoomStateObserver.Wrapper',
   ),
 )
-abstract class Observer {
-  Observer();
+abstract class ZoomStateObserver {
+  ZoomStateObserver();
 
-  late void Function(Any value) onChanged;
+  late void Function(ZoomState value) onChanged;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.ExposureState',
+  ),
+)
+abstract class ExposureState {
+  int getExposureCompensationIndex();
+  Range<int> getExposureCompensationRange();
+  Rational getExposureCompensationStep();
+  bool isExposureCompensationSupported();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.FocusMeteringAction',
+  ),
+)
+abstract class FocusMeteringAction {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.DynamicRange',
+  ),
+)
+abstract class DynamicRange {
+  DynamicRange(Encoding encoding, BitDepth bitDepth);
+
+  Encoding getEncoding();
+  BitDepth getBitDepth();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.CameraInfo',
+  ),
+)
+abstract class CameraInfo {
+  @static
+  bool mustPlayShutterSound();
+  CameraSelector getCameraSelector();
+  CameraStateLiveData getCameraState();
+  TorchStateLiveData getTorchState();
+  ZoomStateLiveData getZoomState();
+  ExposureState getExposureState();
+  double getIntrinsticZoomRatio();
+  LensFacing getLensFacing();
+  Set<CameraInfo> getPhysicalCameraInfos();
+  int getSensorRotationDegrees();
+  Set<Range<int>> getSupportedFrameRateRanges();
+  bool isLogicalMultiCameraSupported();
+  bool isZslSupported();
+  bool hasFlashUnit();
+  bool isFocusMeteringSupported(FocusMeteringAction action);
+  Set<DynamicRange> querySupportedDynamicRanges(
+      Set<DynamicRange> candidateDynamicRanges);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.CameraControl',
+  ),
+)
+abstract class CameraControl {
+  @async
+  void enableTorch(bool torch);
+  @async
+  void setZoomRatio(double ratio);
+  @async
+  void setLinearZoom(double linearZoom);
+  @async
+  void startFocusAndMetering(FocusMeteringAction action);
+  @async
+  void cancelFocusAndMetering();
+  @async
+  void setExposureCompensationIndex(int value);
 }
 
 @ProxyApi(
@@ -121,15 +249,27 @@ abstract class CameraController {
   @async
   void setCameraSelector(CameraSelector cameraSelector);
   @async
-  bool isTapToFocusEnabled();
+  CameraInfo getCameraInfo();
   @async
-  void setTapToFocusEnabled(bool enabled);
+  CameraControl getCameraControl();
+  @async
+  TorchStateLiveData getTorchState();
+  @async
+  void enableTorch(bool torchEnabled);
+  @async
+  ZoomStateLiveData getZoomState();
+  @async
+  void setZoomRatio(double zoomRatio);
+  @async
+  void setLinearZoom(double linearZoom);
   @async
   bool isPinchToZoomEnabled();
   @async
   void setPinchToZoomEnabled(bool enabled);
   @async
-  LiveData getZoomState();
+  bool isTapToFocusEnabled();
+  @async
+  void setTapToFocusEnabled(bool enabled);
 }
 
 @ProxyApi(
