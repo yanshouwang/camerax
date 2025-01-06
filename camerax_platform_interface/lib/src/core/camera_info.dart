@@ -1,22 +1,28 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'camera_selector.dart';
 import 'camera_state.dart';
 import 'dynamic_range.dart';
 import 'exposure_state.dart';
+import 'focus_metering_action.dart';
 import 'lens_facing.dart';
 import 'range.dart';
-import 'rotation.dart';
 import 'zoom_state.dart';
 
 /// An interface for retrieving camera information.
 ///
 /// Applications can retrieve an instance via getCameraInfo.
-abstract interface class CameraInfo {
+abstract base class CameraInfo extends PlatformInterface {
+  static final _token = Object();
+
+  CameraInfo.impl() : super(token: _token);
+
   Stream<CameraState> get cameraStateChanged;
   Stream<bool> get torchStateChanged;
   Stream<ZoomState> get zoomStateChanged;
 
   /// Returns a CameraSelector unique to this camera.
-  CameraSelector get cameraSelector;
+  Future<CameraSelector> getCameraSelector();
 
   /// Returns a LiveData of the camera's state.
   ///
@@ -28,12 +34,30 @@ abstract interface class CameraInfo {
   /// instance, this can occur when the camera is opening or closing, the OPENING
   /// and CLOSING states may not be reported to observers if they are rapidly
   /// followed by the OPEN and CLOSED states respectively.
-  CameraState get cameraState;
+  Future<CameraState> getCameraState();
+
+  /// Returns a LiveData of current TorchState.
+  ///
+  /// The torch can be turned on and off via enableTorch which will trigger the
+  /// change event to the returned LiveData. Apps can either get immediate value
+  /// via getValue or observe it via observe to update torch UI accordingly.
+  ///
+  /// If the camera doesn't have a flash unit (see hasFlashUnit), then the torch
+  /// state will be OFF.
+  Future<bool> getTorchState();
+
+  /// Returns a LiveData of ZoomState.
+  ///
+  /// The LiveData will be updated whenever the set zoom state has been changed.
+  /// This can occur when the application updates the zoom via setZoomRatio or
+  /// setLinearZoom. The zoom state can also change anytime a camera starts up,
+  /// for example when a UseCase is bound to it.
+  Future<ZoomState> getZoomState();
 
   /// Returns a ExposureState.
   ///
   /// The ExposureState contains the current exposure related information.
-  ExposureState get exposureState;
+  Future<ExposureState> getExposureState();
 
   /// Returns the intrinsic zoom ratio of this camera.
   ///
@@ -58,10 +82,10 @@ abstract interface class CameraInfo {
   /// If the camera is unable to provide necessary information to resolve its
   /// intrinsic zoom ratio, it will be considered as a standard camera which has
   /// intrinsic zoom ratio 1.0.
-  double get intrinsicZoomRatio;
+  Future<double> getIntrinsicZoomRatio();
 
   /// Returns the lens facing of this camera.
-  LensFacing get lensFacing;
+  Future<LensFacing> getLensFacing();
 
   /// Returns a set of physical camera CameraInfos.
   ///
@@ -71,11 +95,7 @@ abstract interface class CameraInfo {
   /// Check isLogicalMultiCameraSupported to see if the device is supporting
   /// physical camera or not. If the device doesn't support physical camera,
   /// empty set will be returned.
-  Set<CameraInfo> get physicalCameraInfos;
-
-  /// RReturns the sensor rotation in degrees, relative to the device's "natural"
-  /// (default) orientation.
-  int get sensorRotationDegrees;
+  Future<Set<CameraInfo>> getPhysicalCameraInfos();
 
   /// Returns an unordered set of the frame rate ranges, in frames per second,
   /// supported by this device's AE algorithm.
@@ -92,28 +112,10 @@ abstract interface class CameraInfo {
   ///
   /// The returned set does not have any ordering guarantees and frame rate ranges
   /// may overlap.
-  Set<Range<int>> get supportedFrameRateRanges;
-
-  /// Returns a LiveData of current TorchState.
-  ///
-  /// The torch can be turned on and off via enableTorch which will trigger the
-  /// change event to the returned LiveData. Apps can either get immediate value
-  /// via getValue or observe it via observe to update torch UI accordingly.
-  ///
-  /// If the camera doesn't have a flash unit (see hasFlashUnit), then the torch
-  /// state will be OFF.
-  bool get torchState;
-
-  /// Returns a LiveData of ZoomState.
-  ///
-  /// The LiveData will be updated whenever the set zoom state has been changed.
-  /// This can occur when the application updates the zoom via setZoomRatio or
-  /// setLinearZoom. The zoom state can also change anytime a camera starts up,
-  /// for example when a UseCase is bound to it.
-  ZoomState get zoomState;
+  Future<Set<Range<int>>> getSupportedFrameRateRanges();
 
   /// Returns if flash unit is available or not.
-  bool get hasFlashUnit;
+  Future<bool> hasFlashUnit();
 
   /// Returns if the given FocusMeteringAction is supported on the devices.
   ///
@@ -126,13 +128,13 @@ abstract interface class CameraInfo {
   ///
   /// If it returns false, invoking startFocusAndMetering with the given
   /// FocusMeteringAction will always fail.
-  bool get isFocusMeteringSupported;
+  Future<bool> isFocusMeteringSupported(FocusMeteringAction action);
 
   /// Returns if logical multi camera is supported on the device.
   ///
   /// A logical camera is a grouping of two or more of those physical cameras.
   /// See Multi-camera API
-  bool get isLogicalMultiCameraSupported;
+  Future<bool> isLogicalMultiCameraSupported();
 
   /// Returns if CAPTURE_MODE_ZERO_SHUTTER_LAG is supported on the current device.
   ///
@@ -140,7 +142,7 @@ abstract interface class CameraInfo {
   ///
   /// * API Level >= 23
   /// * PRIVATE reprocessing is supported
-  bool get isZSLSupported;
+  Future<bool> isZslSupported();
 
   /// Returns whether the shutter sound must be played in accordance to regional
   /// restrictions.
@@ -159,12 +161,7 @@ abstract interface class CameraInfo {
   ///
   /// This method and mustPlayShutterSound serve the same purpose, while this
   /// method is compatible on API level lower than TIRAMISU.
-  bool get mustPlayShutterSound;
-
-  /// Returns the sensor rotation, in degrees, relative to the given rotation value.
-  ///
-  /// Valid values for the relative rotation are ROTATION_0 (natural), ROTATION_90, ROTATION_180, ROTATION_270.
-  int getSensorRotationDegrees(Rotation relativeRotation);
+  Future<bool> mustPlayShutterSound();
 
   /// Returns the supported dynamic ranges of this camera from a set of candidate
   /// dynamic ranges.
@@ -204,6 +201,6 @@ abstract interface class CameraInfo {
   /// Because SDR is always supported, including SDR in candidateDynamicRanges
   /// will always result in SDR being present in the result set. If an empty
   /// candidate set is provided, an IllegalArgumentException will be thrown.
-  Set<DynamicRange> querySupportedDynamicRanges(
+  Future<Set<DynamicRange>> querySupportedDynamicRanges(
       Set<DynamicRange> candidateDynamicRanges);
 }

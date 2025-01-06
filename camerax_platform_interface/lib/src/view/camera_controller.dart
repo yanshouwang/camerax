@@ -41,8 +41,8 @@ abstract base class CameraController extends PlatformInterface {
   @protected
   CameraController.impl() : super(token: _token);
 
-  Stream<ZoomState?> get zoomStateChanged;
-  Stream<bool?> get torchStateChanged;
+  Stream<ZoomState> get zoomStateChanged;
+  Stream<bool> get torchStateChanged;
 
   Future<void> initialize();
 
@@ -100,6 +100,45 @@ abstract base class CameraController extends PlatformInterface {
   /// control values when switching between cameras.
   Future<CameraControl> getCameraControl();
 
+  /// Returns a LiveData of current TorchState.
+  ///
+  /// The torch can be turned on and off via enableTorch which will trigger the
+  /// change event to the returned LiveData.
+  Future<bool?> getTorchState();
+
+  /// Enable the torch or disable the torch.
+  ///
+  /// If the value is set before the camera is ready, CameraController waits for
+  /// the camera to be ready and then enables the torch.
+  Future<void> enableTorch(bool enabled);
+
+  /// Returns a LiveData of ZoomState.
+  ///
+  /// The LiveData will be updated whenever the set zoom state has been changed.
+  /// This can occur when the application updates the zoom via setZoomRatio or
+  /// setLinearZoom. The zoom state can also change anytime a camera starts up,
+  /// for example when setCameraSelector is called.
+  Future<ZoomState?> getZoomState();
+
+  /// Sets current zoom by ratio.
+  ///
+  /// Valid zoom values range from getMinZoomRatio to getMaxZoomRatio.
+  ///
+  /// If the value is set before the camera is ready, CameraController waits for
+  /// the camera to be ready and then sets the zoom ratio.
+  Future<void> setZoomRatio(double zoomRatio);
+
+  /// Sets current zoom by a linear zoom value ranging from 0f to 1.0f.
+  ///
+  /// LinearZoom 0f represents the minimum zoom while linearZoom 1.0f represents
+  /// the maximum zoom. The advantage of linearZoom is that it ensures the field
+  /// of view (FOV) varies linearly with the linearZoom value, for use with slider
+  /// UI elements (while setZoomRatio works well for pinch-zoom gestures).
+  ///
+  /// If the value is set before the camera is ready, CameraController waits for
+  /// the camera to be ready and then sets the linear zoom.
+  Future<void> setLinearZoom(double linearZoom);
+
   /// Returns whether pinch-to-zoom is enabled.
   ///
   /// By default pinch-to-zoom is enabled.
@@ -145,45 +184,6 @@ abstract base class CameraController extends PlatformInterface {
   /// To make sure getting the maximum resolution, only enable VIDEO_CAPTURE when
   /// shooting video.
   Future<void> setEnabledUseCases(List<UseCase> useCases);
-
-  /// Returns a LiveData of ZoomState.
-  ///
-  /// The LiveData will be updated whenever the set zoom state has been changed.
-  /// This can occur when the application updates the zoom via setZoomRatio or
-  /// setLinearZoom. The zoom state can also change anytime a camera starts up,
-  /// for example when setCameraSelector is called.
-  Future<ZoomState?> getZoomState();
-
-  /// Sets current zoom by ratio.
-  ///
-  /// Valid zoom values range from getMinZoomRatio to getMaxZoomRatio.
-  ///
-  /// If the value is set before the camera is ready, CameraController waits for
-  /// the camera to be ready and then sets the zoom ratio.
-  Future<void> setZoomRatio(double zoomRatio);
-
-  /// Sets current zoom by a linear zoom value ranging from 0f to 1.0f.
-  ///
-  /// LinearZoom 0f represents the minimum zoom while linearZoom 1.0f represents
-  /// the maximum zoom. The advantage of linearZoom is that it ensures the field
-  /// of view (FOV) varies linearly with the linearZoom value, for use with slider
-  /// UI elements (while setZoomRatio works well for pinch-zoom gestures).
-  ///
-  /// If the value is set before the camera is ready, CameraController waits for
-  /// the camera to be ready and then sets the linear zoom.
-  Future<void> setLinearZoom(double linearZoom);
-
-  /// Returns a LiveData of current TorchState.
-  ///
-  /// The torch can be turned on and off via enableTorch which will trigger the
-  /// change event to the returned LiveData.
-  Future<bool?> getTorchState();
-
-  /// Enable the torch or disable the torch.
-  ///
-  /// If the value is set before the camera is ready, CameraController waits for
-  /// the camera to be ready and then enables the torch.
-  Future<void> enableTorch(bool enabled);
 
   /// Returns the ResolutionSelector for Preview.
   ///

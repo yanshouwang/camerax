@@ -1,3 +1,5 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'focus_metering_action.dart';
 
 /// The CameraControl provides various asynchronous operations like zoom, focus
@@ -14,7 +16,11 @@ import 'focus_metering_action.dart';
 /// check the asynchronous result. If the operation is not allowed in current
 /// state, the returned ListenableFuture will fail immediately with
 /// CameraControl.OperationCanceledException.
-abstract interface class CameraControl {
+abstract base class CameraControl extends PlatformInterface {
+  static final _token = Object();
+
+  CameraControl.impl() : super(token: _token);
+
   /// Enable the torch or disable the torch.
   ///
   /// getTorchState can be used to query the torch state. If the camera doesn't
@@ -27,15 +33,14 @@ abstract interface class CameraControl {
   /// function as the flash mode set by either setFlashMode or setFlashMode.
   Future<void> enableTorch(bool torch);
 
-  /// Set the exposure compensation value for the camera.
+  /// Sets current zoom by ratio.
   ///
-  /// Only one setExposureCompensationIndex is allowed to run at the same time.
-  /// If multiple setExposureCompensationIndex are executed in a row, only the
-  /// latest one setting will be kept in the camera. The other actions will be
-  /// cancelled and the ListenableFuture will fail with the OperationCanceledException.
-  /// After all the previous actions is cancelled, the camera device will adjust
-  /// the brightness according to the latest setting.
-  Future<int> setExposureCompensationIndex(int value);
+  /// It modifies both current zoomRatio and linearZoom so if apps are observing
+  /// zoomRatio or linearZoom, they will get the update as well. If the ratio is
+  /// smaller than getMinZoomRatio or larger than getMaxZoomRatio, the returned
+  /// ListenableFuture will fail with IllegalArgumentException and it won't modify
+  /// current zoom ratio. It is the applications' duty to clamp the ratio.
+  Future<void> setZoomRatio(double ratio);
 
   /// Sets current zoom by a linear zoom value ranging from 0f to 1.0f. LinearZoom
   /// 0f represents the minimum zoom while linearZoom 1.0f represents the maximum
@@ -49,15 +54,6 @@ abstract interface class CameraControl {
   /// IllegalArgumentException and it won't modify current linearZoom and zoomRatio.
   /// It is application's duty to clamp the linearZoom within [0..1].
   Future<void> setLinearZoom(double linearZoom);
-
-  /// Sets current zoom by ratio.
-  ///
-  /// It modifies both current zoomRatio and linearZoom so if apps are observing
-  /// zoomRatio or linearZoom, they will get the update as well. If the ratio is
-  /// smaller than getMinZoomRatio or larger than getMaxZoomRatio, the returned
-  /// ListenableFuture will fail with IllegalArgumentException and it won't modify
-  /// current zoom ratio. It is the applications' duty to clamp the ratio.
-  Future<void> setZoomRatio(double ratio);
 
   /// Starts a focus and metering action configured by the FocusMeteringAction.
   ///
@@ -85,4 +81,14 @@ abstract interface class CameraControl {
   /// supported). If current FocusMeteringAction has not completed, the returned
   /// ListenableFuture in startFocusAndMetering will fail with OperationCanceledException.
   Future<void> cancelFocusAndMetering();
+
+  /// Set the exposure compensation value for the camera.
+  ///
+  /// Only one setExposureCompensationIndex is allowed to run at the same time.
+  /// If multiple setExposureCompensationIndex are executed in a row, only the
+  /// latest one setting will be kept in the camera. The other actions will be
+  /// cancelled and the ListenableFuture will fail with the OperationCanceledException.
+  /// After all the previous actions is cancelled, the camera device will adjust
+  /// the brightness according to the latest setting.
+  Future<int> setExposureCompensationIndex(int value);
 }
