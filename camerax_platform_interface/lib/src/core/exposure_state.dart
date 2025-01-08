@@ -1,9 +1,15 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'range.dart';
 
 /// An interface which contains the camera exposure related information.
 ///
 /// Applications can retrieve an instance via getExposureState.
-abstract interface class ExposureState {
+abstract base class ExposureState extends PlatformInterface {
+  static final _token = Object();
+
+  ExposureState.impl() : super(token: _token);
+
   /// Get the current exposure compensation index.
   ///
   /// The exposure value (EV) is the compensation index multiplied by the step

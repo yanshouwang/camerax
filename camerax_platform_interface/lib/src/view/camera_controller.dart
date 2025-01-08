@@ -89,7 +89,7 @@ abstract base class CameraController extends PlatformInterface {
   /// v.s. getTorchState. CameraInfo is a lower-layer API and may require more
   /// steps to achieve the same effect, and will not maintain values when switching
   /// between cameras.
-  Future<CameraInfo> getCameraInfo();
+  Future<CameraInfo?> getCameraInfo();
 
   /// Gets the CameraControl of the currently attached camera.
   ///
@@ -98,7 +98,7 @@ abstract base class CameraController extends PlatformInterface {
   /// setLinearZoom v.s. setLinearZoom. CameraControl is a lower-layer API and
   /// may require more steps to achieve the same effect, and will not maintain
   /// control values when switching between cameras.
-  Future<CameraControl> getCameraControl();
+  Future<CameraControl?> getCameraControl();
 
   /// Returns a LiveData of current TorchState.
   ///

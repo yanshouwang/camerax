@@ -33,6 +33,38 @@ enum CameraState {
   closed,
 }
 
+enum MeteringMode {
+  af,
+  ae,
+  awb,
+}
+
+enum TimeUnit {
+  nanoseconds,
+  microseconds,
+  milliseconds,
+  seconds,
+  minutes,
+  hours,
+  days,
+}
+
+enum Encoding {
+  unspecified,
+  sdr,
+  hdrUnspecified,
+  hlg,
+  hdr10,
+  hdr10Plus,
+  dolbyVision,
+}
+
+enum BitDepth {
+  unspecified,
+  with8Bit,
+  with10Bit,
+}
+
 enum ScaleType {
   fillStart,
   fillCenter,
@@ -49,11 +81,21 @@ enum ScaleType {
 )
 abstract class PermissionManager {
   @static
-  late PermissionManager instance;
+  late final PermissionManager instance;
 
   bool checkPermissioin(Permission permission);
   @async
   bool requestPermissions(List<Permission> permissions);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.legacy.core.IntRange.Wrapper',
+  ),
+)
+abstract class IntRange {
+  int getLower();
+  int getUpper();
 }
 
 @ProxyApi(
@@ -63,18 +105,19 @@ abstract class PermissionManager {
 )
 abstract class CameraSelector {
   @static
-  late CameraSelector front;
+  late final CameraSelector front;
   @static
-  late CameraSelector back;
+  late final CameraSelector back;
   @static
-  late CameraSelector external;
+  late final CameraSelector external;
 
   CameraSelector(LensFacing? lensFacing);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.CameraStateLiveData.Wrapper',
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.CameraStateLiveData.Wrapper',
   ),
 )
 abstract class CameraStateLiveData {
@@ -86,7 +129,8 @@ abstract class CameraStateLiveData {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.CameraStateObserver.Wrapper',
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.CameraStateObserver.Wrapper',
   ),
 )
 abstract class CameraStateObserver {
@@ -164,9 +208,38 @@ abstract class ZoomStateObserver {
 )
 abstract class ExposureState {
   int getExposureCompensationIndex();
-  Range<int> getExposureCompensationRange();
-  Rational getExposureCompensationStep();
+  IntRange getExposureCompensationRange();
+  double getExposureCompensationStep();
   bool isExposureCompensationSupported();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.MeteringPoint',
+  ),
+)
+abstract class MeteringPoint {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.MeteringPointArgs.Wrapper',
+  ),
+)
+abstract class MeteringPointArgs {
+  MeteringPointArgs(
+    MeteringPoint point, {
+    List<MeteringMode>? modes,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.legacy.core.DurationArgs.Wrapper',
+  ),
+)
+abstract class DurationArgs {
+  DurationArgs(int duration, TimeUnit timeUnit);
 }
 
 @ProxyApi(
@@ -174,7 +247,14 @@ abstract class ExposureState {
     fullClassName: 'dev.hebei.camerax_android.core.FocusMeteringAction',
   ),
 )
-abstract class FocusMeteringAction {}
+abstract class FocusMeteringAction {
+  FocusMeteringAction(
+    MeteringPointArgs first, {
+    List<MeteringPointArgs>? others,
+    bool? disableAutoCancel,
+    DurationArgs? autoCancelDuration,
+  });
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -203,15 +283,15 @@ abstract class CameraInfo {
   ExposureState getExposureState();
   double getIntrinsticZoomRatio();
   LensFacing getLensFacing();
-  Set<CameraInfo> getPhysicalCameraInfos();
+  List<CameraInfo> getPhysicalCameraInfos();
   int getSensorRotationDegrees();
-  Set<Range<int>> getSupportedFrameRateRanges();
+  List<IntRange> getSupportedFrameRateRanges();
   bool isLogicalMultiCameraSupported();
   bool isZslSupported();
   bool hasFlashUnit();
   bool isFocusMeteringSupported(FocusMeteringAction action);
-  Set<DynamicRange> querySupportedDynamicRanges(
-      Set<DynamicRange> candidateDynamicRanges);
+  List<DynamicRange> querySupportedDynamicRanges(
+      List<DynamicRange> candidateDynamicRanges);
 }
 
 @ProxyApi(
@@ -231,7 +311,7 @@ abstract class CameraControl {
   @async
   void cancelFocusAndMetering();
   @async
-  void setExposureCompensationIndex(int value);
+  int setExposureCompensationIndex(int value);
 }
 
 @ProxyApi(
@@ -249,9 +329,9 @@ abstract class CameraController {
   @async
   void setCameraSelector(CameraSelector cameraSelector);
   @async
-  CameraInfo getCameraInfo();
+  CameraInfo? getCameraInfo();
   @async
-  CameraControl getCameraControl();
+  CameraControl? getCameraControl();
   @async
   TorchStateLiveData getTorchState();
   @async

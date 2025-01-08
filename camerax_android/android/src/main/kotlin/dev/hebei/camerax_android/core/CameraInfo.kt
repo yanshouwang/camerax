@@ -11,12 +11,12 @@ class CameraInfo internal constructor(internal val obj: androidx.camera.core.Cam
     }
 
     val cameraSelector get() = CameraSelector(obj.cameraSelector)
-    val cameraState get() = obj.cameraState.map { obj -> obj.wrapper }
-    val torchState get() = obj.torchState.map { obj -> obj.torchStateWrapper }
+    val cameraState get() = obj.cameraState.map { obj -> obj.args }
+    val torchState get() = obj.torchState.map { obj -> obj.torchStateArgs }
     val zoomState get() = obj.zoomState.map { obj -> ZoomState(obj) }
     val exposureState get() = ExposureState(obj.exposureState)
     val intrinsicZoomRatio get() = obj.intrinsicZoomRatio
-    val lensFacing get() = obj.lensFacing.lensFacingWrapper
+    val lensFacing get() = obj.lensFacing.lensFacingArgs
     val physicalCameraInfos get() = obj.physicalCameraInfos.map { obj -> CameraInfo(obj) }.toSet()
     val sensorRotationDegrees get() = obj.sensorRotationDegrees
     val supportedFrameRateRanges get() = obj.supportedFrameRateRanges.toSet()

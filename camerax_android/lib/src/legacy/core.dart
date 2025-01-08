@@ -1,3 +1,9 @@
+export 'core/camera_control.dart';
+export 'core/camera_info.dart';
 export 'core/camera_selector.dart';
+export 'core/camera_state.dart';
+export 'core/dynamic_range.dart';
+export 'core/exposure_state.dart';
 export 'core/permission_manager.dart';
+export 'core/range.dart';
 export 'core/zoom_state.dart';

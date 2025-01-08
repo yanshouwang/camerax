@@ -12,10 +12,14 @@ import 'raw_pixels_analyzer.dart';
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController controller;
+
   CameraMode _mode;
   LensFacing _lensFacing;
-  ZoomState? _zoomState;
+  CameraInfo? _cameraInfo;
+  CameraControl? _cameraControl;
   bool? _torchState;
+  ZoomState? _zoomState;
+  ExposureState? _exposureState;
   FlashMode? _flashMode;
   Uri? _savedUri;
   ImageModel? _imageModel;
@@ -35,8 +39,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   CameraMode get mode => _mode;
   LensFacing get lensFacing => _lensFacing;
-  ZoomState? get zoomState => _zoomState;
   bool? get torchState => _torchState;
+  ZoomState? get zoomState => _zoomState;
+  ExposureState? get exposureState => _exposureState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
@@ -120,16 +125,25 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  Future<void> setZoomRatio(double zoomRatio) async {
-    await controller.setZoomRatio(zoomRatio);
-  }
-
   Future<void> toggleTorchState() async {
     final enableTorch = torchState;
     if (enableTorch == null) {
       throw ArgumentError.notNull();
     }
     await controller.enableTorch(!enableTorch);
+  }
+
+  Future<void> setZoomRatio(double zoomRatio) async {
+    await controller.setZoomRatio(zoomRatio);
+  }
+
+  Future<void> setExposure(int value) async {
+    final cameraControl = ArgumentError.checkNotNull(_cameraControl);
+    final newValue = await cameraControl.setExposureCompensationIndex(value);
+    logger.info('setExposureCompensationIndex newValue: $newValue');
+    // final cameraInfo = ArgumentError.checkNotNull(_cameraInfo);
+    // _exposureState = await cameraInfo.getExposureState();
+    // notifyListeners();
   }
 
   Future<void> setFlashMode(FlashMode flashMode) async {
@@ -230,19 +244,28 @@ class HomeViewModel extends ViewModel with TypeLogger {
       throw StateError('requestPermissions failed.');
     }
     await controller.initialize();
+    await controller.setCameraSelector(CameraSelector.back);
+    await bind();
+    // TODO: How to wait until camera really opened.
+    const duration = Duration(seconds: 1);
+    await Future.delayed(duration);
+    _cameraInfo = await controller.getCameraInfo();
+    _cameraControl = await controller.getCameraControl();
     _torchState = await controller.getTorchState();
     _zoomState = await controller.getZoomState();
+    _exposureState = await _cameraInfo?.getExposureState();
     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-//     _flashMode = await controller.getImageCaptureFlashMode();
-    logger.info('''torchState: $torchState
+    // _flashMode = await controller.getImageCaptureFlashMode();
+    logger.info('''cameraInfo: $_cameraInfo
+cameraControl: $_cameraControl
+torchState: $torchState
 zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
+exposureState: ${exposureState?.exposureCompensationIndex}, ${exposureState?.exposureCompensationRange.lower} - ${exposureState?.exposureCompensationRange.upper}, ${exposureState?.exposureCompensationStep}, ${exposureState?.isExposureCompensationSupported}
 flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
-    await controller.setCameraSelector(CameraSelector.back);
-    await bind();
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {

@@ -1,7 +1,7 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+    as $base;
 
-final class ZoomState extends $interface.ZoomState {
+final class ZoomState extends $base.ZoomState {
   @override
   final double minZoomRatio;
   @override

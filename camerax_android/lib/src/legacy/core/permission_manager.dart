@@ -1,8 +1,11 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
+import 'package:camerax_android/src/legacy/native_comparator.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+    as $base;
 
-final class PermissionManager extends $interface.PermissionManager {
+final class PermissionManager extends $base.PermissionManager
+    with NativeComparator {
+  @override
   final $native.PermissionManager obj;
 
   PermissionManager.$native(this.obj) : super.impl();
@@ -13,14 +16,13 @@ final class PermissionManager extends $interface.PermissionManager {
   }
 
   @override
-  Future<bool> checkPermission($interface.Permission permission) async {
+  Future<bool> checkPermission($base.Permission permission) async {
     final isGranted = await obj.checkPermissioin(permission.obj);
     return isGranted;
   }
 
   @override
-  Future<bool> requestPermissions(
-      List<$interface.Permission> permissions) async {
+  Future<bool> requestPermissions(List<$base.Permission> permissions) async {
     final permissionObjs =
         permissions.map((permission) => permission.obj).toList();
     final isGranted = await obj.requestPermissions(permissionObjs);
@@ -28,14 +30,14 @@ final class PermissionManager extends $interface.PermissionManager {
   }
 }
 
-extension on $interface.Permission {
+extension on $base.Permission {
   $native.Permission get obj {
     switch (this) {
-      case $interface.Permission.album:
+      case $base.Permission.album:
         return $native.Permission.album;
-      case $interface.Permission.audio:
+      case $base.Permission.audio:
         return $native.Permission.audio;
-      case $interface.Permission.video:
+      case $base.Permission.video:
         return $native.Permission.video;
     }
   }

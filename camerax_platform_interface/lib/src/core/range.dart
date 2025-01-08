@@ -1,3 +1,5 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 /// Immutable class for describing the range of two numeric values.
 ///
 /// A range (or "interval") defines the inclusive boundaries around a contiguous
@@ -10,7 +12,11 @@
 /// Although the implementation itself is immutable, there is no restriction that
 /// objects stored must also be immutable. If mutable objects are stored here,
 /// then the range effectively becomes mutable.
-abstract interface class Range<T> {
+abstract base class Range<T> extends PlatformInterface {
+  static final _token = Object();
+
+  Range.impl() : super(token: _token);
+
   /// Get the lower endpoint.
   T get lower;
 

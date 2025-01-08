@@ -67,6 +67,34 @@ class CameraController(registrar: CameraXRegistrar) : PigeonApiCameraController(
         }
     }
 
+    override fun getCameraInfo(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        callback: (Result<dev.hebei.camerax_android.core.CameraInfo?>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val cameraInfo = pigeon_instance.getCameraInfo()
+                callback(Result.success(cameraInfo))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun getCameraControl(
+        pigeon_instance: dev.hebei.camerax_android.view.CameraController,
+        callback: (Result<dev.hebei.camerax_android.core.CameraControl?>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val cameraControl = pigeon_instance.getCameraControl()
+                callback(Result.success(cameraControl))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
     override fun getTorchState(
         pigeon_instance: dev.hebei.camerax_android.view.CameraController,
         callback: (Result<TorchStateLiveData.Wrapper>) -> Unit

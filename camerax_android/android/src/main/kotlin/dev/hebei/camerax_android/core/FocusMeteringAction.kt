@@ -12,6 +12,12 @@ class FocusMeteringAction internal constructor(internal val obj: androidx.camera
         const val FLAG_AWB = androidx.camera.core.FocusMeteringAction.FLAG_AWB
     }
 
+    val autoCancelDurationInMills get() = obj.autoCancelDurationInMillis
+    val meteringPointsAe get() = obj.meteringPointsAe
+    val meteringPointsAf get() = obj.meteringPointsAf
+    val meteringPointsAwb get() = obj.meteringPointsAwb
+    val isAutoCancelEnabled get() = obj.isAutoCancelEnabled
+
     class Builder {
         constructor(point: MeteringPoint) {
             builder = androidx.camera.core.FocusMeteringAction.Builder(point.obj)

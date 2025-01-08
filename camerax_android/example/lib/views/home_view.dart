@@ -22,6 +22,8 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with RouteAware {
   late final PageController _pageController;
+  late final ValueNotifier<double?> _zoomRatio;
+  late final ValueNotifier<int?> _exposure;
 
   Offset? _onPanStartPosition;
   double? _onPanUpdateDx;
@@ -33,6 +35,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
       initialPage: 0,
       viewportFraction: 1 / 5,
     );
+    _zoomRatio = ValueNotifier(null);
+    _exposure = ValueNotifier(null);
   }
 
   @override
@@ -41,6 +45,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final controller = viewModel.controller;
     final mode = viewModel.mode;
     final zoomState = viewModel.zoomState;
+    final exposureState = viewModel.exposureState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final recording = viewModel.recording;
@@ -119,12 +124,18 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                   if (zoomState != null)
                     Container(
                       alignment: Alignment.bottomCenter,
-                      child: ZoomWidget(
-                        minimum: zoomState.minZoomRatio,
-                        maximum: zoomState.maxZoomRatio,
-                        value: zoomState.zoomRatio,
-                        onChanged: (value) {
-                          viewModel.setZoomRatio(value);
+                      child: ValueListenableBuilder(
+                        valueListenable: _zoomRatio,
+                        builder: (context, zoomRatio, child) {
+                          return ZoomWidget(
+                            minimum: zoomState.minZoomRatio,
+                            maximum: zoomState.maxZoomRatio,
+                            value: zoomRatio ?? zoomState.zoomRatio,
+                            onChanged: (value) {
+                              viewModel.setZoomRatio(value);
+                              _zoomRatio.value = value;
+                            },
+                          );
                         },
                       ),
                     ),
@@ -134,6 +145,29 @@ class _HomeViewState extends State<HomeView> with RouteAware {
           ),
           Column(
             children: [
+              if (exposureState != null)
+                ValueListenableBuilder(
+                  valueListenable: _exposure,
+                  builder: (context, exposure, child) {
+                    return CupertinoSlider(
+                      min: exposureState.exposureCompensationRange.lower
+                          .toDouble(),
+                      max: exposureState.exposureCompensationRange.upper
+                          .toDouble(),
+                      divisions:
+                          (exposureState.exposureCompensationRange.upper -
+                              exposureState.exposureCompensationRange.lower),
+                      value:
+                          (exposure ?? exposureState.exposureCompensationIndex)
+                              .toDouble(),
+                      onChanged: (value) {
+                        final newValue = value.toInt();
+                        viewModel.setExposure(newValue);
+                        _exposure.value = newValue;
+                      },
+                    );
+                  },
+                ),
               GestureDetector(
                 onPanStart: (details) {
                   _onPanStartPosition = details.localPosition;
@@ -451,6 +485,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
   void dispose() {
     routeObserver.unsubscribe(this);
     _pageController.dispose();
+    _zoomRatio.dispose();
+    _exposure.dispose();
     super.dispose();
   }
 }

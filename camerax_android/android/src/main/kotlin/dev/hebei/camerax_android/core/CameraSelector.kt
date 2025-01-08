@@ -36,11 +36,11 @@ val CameraSelector.LensFacing.obj
         CameraSelector.LensFacing.EXTERNAL -> androidx.camera.core.CameraSelector.LENS_FACING_EXTERNAL
     }
 
-val Int.lensFacingWrapper
+val Int.lensFacingArgs
     @ExperimentalLensFacing get() = when (this) {
         androidx.camera.core.CameraSelector.LENS_FACING_UNKNOWN -> CameraSelector.LensFacing.UNKNOWN
         androidx.camera.core.CameraSelector.LENS_FACING_FRONT -> CameraSelector.LensFacing.FRONT
         androidx.camera.core.CameraSelector.LENS_FACING_BACK -> CameraSelector.LensFacing.BACK
         androidx.camera.core.CameraSelector.LENS_FACING_EXTERNAL -> CameraSelector.LensFacing.EXTERNAL
-        else -> throw NotImplementedError()
+        else -> throw IllegalArgumentException()
     }

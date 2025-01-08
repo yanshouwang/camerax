@@ -18,14 +18,16 @@ class CameraControl internal constructor(val obj: androidx.camera.core.CameraCon
     }
 
     suspend fun startFocusAndMetering(action: FocusMeteringAction) {
-        obj.startFocusAndMetering(action.obj).await()
+        val result = obj.startFocusAndMetering(action.obj).await()
+        if (result.isFocusSuccessful) return
+        throw IllegalStateException("startFocusAndMetering failed.")
     }
 
     suspend fun cancelFocusAndMetering() {
         obj.cancelFocusAndMetering().await()
     }
 
-    suspend fun setExposureCompensationIndex(value: Int) {
-        obj.setExposureCompensationIndex(value).await()
+    suspend fun setExposureCompensationIndex(value: Int): Int {
+        return obj.setExposureCompensationIndex(value).await()
     }
 }

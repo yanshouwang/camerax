@@ -1,3 +1,5 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'metering_point.dart';
 
 /// A configuration used to trigger a focus and/or metering action.
@@ -31,18 +33,22 @@ import 'metering_point.dart';
 /// App can set a auto-cancel duration to let CameraX call cancelFocusAndMetering
 /// automatically in the specified duration. By default the auto-cancel duration
 /// is 5 seconds. Apps can call disableAutoCancel to disable auto-cancel.
-abstract interface class FocusMeteringAction {
+abstract base class FocusMeteringAction extends PlatformInterface {
+  static final _token = Object();
+
+  FocusMeteringAction.impl() : super(token: _token);
+
   /// Returns auto-cancel duration. Returns 0 if auto-cancel is disabled.
   Duration get autoCancelDuration;
 
   /// Returns all MeteringPoints used for AE regions.
-  List<MeteringPoint> get meteringPointsAE;
+  List<MeteringPoint> get meteringPointsAe;
 
   /// Returns all MeteringPoints used for AF regions.
-  List<MeteringPoint> get meteringPointsAF;
+  List<MeteringPoint> get meteringPointsAf;
 
   /// Returns all MeteringPoints used for AWB regions.
-  List<MeteringPoint> get meteringPointsAWB;
+  List<MeteringPoint> get meteringPointsAwb;
 
   /// Returns if auto-cancel is enabled or not.
   bool get isAutoCancelEnabled;

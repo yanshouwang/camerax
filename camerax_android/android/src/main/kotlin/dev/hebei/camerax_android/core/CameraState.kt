@@ -4,7 +4,7 @@ enum class CameraState {
     PENDING_OPEN, OPENING, OPEN, CLOSING, CLOSED,
 }
 
-val androidx.camera.core.CameraState.wrapper
+val androidx.camera.core.CameraState.args
     get() = when (type) {
         androidx.camera.core.CameraState.Type.PENDING_OPEN -> CameraState.PENDING_OPEN
         androidx.camera.core.CameraState.Type.OPENING -> CameraState.OPENING

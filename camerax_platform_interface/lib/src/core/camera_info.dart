@@ -34,7 +34,7 @@ abstract base class CameraInfo extends PlatformInterface {
   /// instance, this can occur when the camera is opening or closing, the OPENING
   /// and CLOSING states may not be reported to observers if they are rapidly
   /// followed by the OPEN and CLOSED states respectively.
-  Future<CameraState> getCameraState();
+  Future<CameraState?> getCameraState();
 
   /// Returns a LiveData of current TorchState.
   ///
@@ -44,7 +44,7 @@ abstract base class CameraInfo extends PlatformInterface {
   ///
   /// If the camera doesn't have a flash unit (see hasFlashUnit), then the torch
   /// state will be OFF.
-  Future<bool> getTorchState();
+  Future<bool?> getTorchState();
 
   /// Returns a LiveData of ZoomState.
   ///
@@ -52,7 +52,7 @@ abstract base class CameraInfo extends PlatformInterface {
   /// This can occur when the application updates the zoom via setZoomRatio or
   /// setLinearZoom. The zoom state can also change anytime a camera starts up,
   /// for example when a UseCase is bound to it.
-  Future<ZoomState> getZoomState();
+  Future<ZoomState?> getZoomState();
 
   /// Returns a ExposureState.
   ///
@@ -161,7 +161,7 @@ abstract base class CameraInfo extends PlatformInterface {
   ///
   /// This method and mustPlayShutterSound serve the same purpose, while this
   /// method is compatible on API level lower than TIRAMISU.
-  Future<bool> mustPlayShutterSound();
+  // Future<bool> mustPlayShutterSound();
 
   /// Returns the supported dynamic ranges of this camera from a set of candidate
   /// dynamic ranges.

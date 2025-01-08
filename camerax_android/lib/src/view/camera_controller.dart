@@ -45,6 +45,21 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
+  Future<$interface.CameraSelector> getCameraSelector() async {
+    final cameraSelectorObj = await obj.getCameraSelector();
+    return CameraSelector.$native(cameraSelectorObj);
+  }
+
+  @override
+  Future<void> setCameraSelector(
+      $interface.CameraSelector cameraSelector) async {
+    if (cameraSelector is! CameraSelector) {
+      throw TypeError();
+    }
+    await obj.setCameraSelector(cameraSelector.obj);
+  }
+
+  @override
   Future<void> bind() async {
     final lifecycleOwnerObj = $native.activity.as($native.LifecycleOwner.type);
     await obj.bindToLifecycle(lifecycleOwnerObj);
@@ -64,21 +79,6 @@ final class CameraController extends $interface.CameraController {
     return hasCameraObj.booleanValue(
       releaseOriginal: true,
     );
-  }
-
-  @override
-  Future<$interface.CameraSelector> getCameraSelector() async {
-    final cameraSelectorObj = await obj.getCameraSelector();
-    return CameraSelector.$native(cameraSelectorObj);
-  }
-
-  @override
-  Future<void> setCameraSelector(
-      $interface.CameraSelector cameraSelector) async {
-    if (cameraSelector is! CameraSelector) {
-      throw TypeError();
-    }
-    await obj.setCameraSelector(cameraSelector.obj);
   }
 
   @override

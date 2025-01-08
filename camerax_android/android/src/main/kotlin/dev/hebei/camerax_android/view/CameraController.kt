@@ -1,6 +1,5 @@
 package dev.hebei.camerax_android.view
 
-import android.util.Log
 import androidx.annotation.FloatRange
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
@@ -8,7 +7,7 @@ import dev.hebei.camerax_android.core.CameraControl
 import dev.hebei.camerax_android.core.CameraInfo
 import dev.hebei.camerax_android.core.CameraSelector
 import dev.hebei.camerax_android.core.ZoomState
-import dev.hebei.camerax_android.core.torchStateWrapper
+import dev.hebei.camerax_android.core.torchStateArgs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.withContext
@@ -17,9 +16,7 @@ abstract class CameraController {
     internal abstract val obj: androidx.camera.view.CameraController
 
     suspend fun initialize() {
-        Log.i("TAG", "begin initialize")
         obj.initializationFuture.await()
-        Log.i("TAG", "end initialize")
     }
 
     suspend fun hasCamera(cameraSelector: CameraSelector): Boolean {
@@ -58,7 +55,7 @@ abstract class CameraController {
 
     suspend fun getTorchState(): LiveData<Boolean> {
         return withContext(Dispatchers.Main) {
-            obj.torchState.map { torchStateObj -> torchStateObj.torchStateWrapper }
+            obj.torchState.map { torchStateObj -> torchStateObj.torchStateArgs }
         }
     }
 

@@ -33,3 +33,11 @@ val LensFacing.obj
         LensFacing.BACK -> dev.hebei.camerax_android.core.CameraSelector.LensFacing.BACK
         LensFacing.EXTERNAL -> dev.hebei.camerax_android.core.CameraSelector.LensFacing.EXTERNAL
     }
+
+val dev.hebei.camerax_android.core.CameraSelector.LensFacing.args
+    get() = when (this) {
+        dev.hebei.camerax_android.core.CameraSelector.LensFacing.UNKNOWN -> LensFacing.UNKNOWN
+        dev.hebei.camerax_android.core.CameraSelector.LensFacing.FRONT -> LensFacing.FRONT
+        dev.hebei.camerax_android.core.CameraSelector.LensFacing.BACK -> LensFacing.BACK
+        dev.hebei.camerax_android.core.CameraSelector.LensFacing.EXTERNAL -> LensFacing.EXTERNAL
+    }
