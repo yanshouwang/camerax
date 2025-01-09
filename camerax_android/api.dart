@@ -149,6 +149,35 @@ enum ImageFormat {
   yv12,
 }
 
+enum MirrorMode {
+  off,
+  on,
+  onFrontOnly,
+}
+
+enum AudioState {
+  active,
+  disabled,
+  sourceSilenced,
+  encoderError,
+  sourceError,
+  muted,
+}
+
+enum VideoRecordFinalizeEventError {
+  none,
+  unknown,
+  fileSizeLimitReached,
+  insufficientStorage,
+  sourceInactive,
+  inavlidOuputOptions,
+  encodingFailed,
+  recorderError,
+  noValidData,
+  durationLimitReached,
+  recordingGarbageCollected,
+}
+
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.core.PermissionManager',
@@ -165,12 +194,35 @@ abstract class PermissionManager {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'java.lang.Throwable',
+  ),
+)
+abstract class Throwable {
+  late final String code;
+  late final String message;
+  late final String details;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.util,Size',
   ),
 )
 abstract class Size {
   int getWidth();
   int getHeight();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.graphics.Rect',
+  ),
+)
+abstract class Rect {
+  Rect(int left, int top, int right, int bottom);
+
+  int width();
+  int height();
 }
 
 @ProxyApi(
@@ -472,6 +524,204 @@ abstract class ResolutionSelector {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.ImageInfo',
+  ),
+)
+abstract class ImageInfo {
+  int getTimestamp();
+  int getRotationDegrees();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+      fullClassName: 'dev.hebei.camerax_android.core.ImageProxy.PlaneProxy'),
+)
+abstract class PlaneProxy {
+  Uint8List getBuffer();
+  int getRowStride();
+  int getPixelStride();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.ImageProxy',
+  ),
+)
+abstract class ImageProxy {
+  ImageFormat getFormat();
+  int getWidth();
+  int getHieght();
+  List<PlaneProxy> getPlanes();
+  Rect? getCropRect();
+  void setCropRect(Rect? rect);
+  ImageInfo getImageInfo();
+  void close();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.core.ImageAnalysis.Analyzer',
+  ),
+)
+abstract class Analyzer {
+  late void Function(ImageProxy image) analyze;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.Quality',
+  ),
+)
+abstract class Quality {
+  @static
+  late final Quality fhd;
+  @static
+  late final Quality hd;
+  @static
+  late final Quality highest;
+  @static
+  late final Quality lowest;
+  @static
+  late final Quality sd;
+  @static
+  late final Quality uhd;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.FallbackStrategy',
+  ),
+)
+abstract class FallbackStrategy {
+  FallbackStrategy.higherQualityOrLowerThan(Quality quality);
+  FallbackStrategy.higherQualityThan(Quality quality);
+  FallbackStrategy.lowerQualityOrHigherThan(Quality quality);
+  FallbackStrategy.lowerQuality(Quality quality);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.QualitySelector',
+  ),
+)
+abstract class QualitySelector {
+  QualitySelector.fromQuality(Quality quality);
+  QualitySelector.fromQualityAndFallbackStrategy(
+      Quality quality, FallbackStrategy fallbackStrategy);
+  QualitySelector.fromOrderedList(List<Quality> qualities);
+  QualitySelector.fromOrderedListAndFallbackStrategy(
+      List<Quality> qualities, FallbackStrategy fallbackStrategy);
+
+  Size? getResolution(CameraInfo cameraInfo, Quality quality);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.view.video.AudioConfig',
+  ),
+)
+abstract class AudioConfig {
+  AudioConfig.create(bool enableAudio);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.AudioStats',
+  ),
+)
+abstract class AudioStats {
+  double getAudioAmplitude();
+  AudioState getAudioState();
+  Throwable? getErrorCause();
+  bool hasAudio();
+  bool hasError();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.RecordingStats',
+  ),
+)
+abstract class RecordingStats {
+  AudioStats getAudioStats();
+  int getNumBytesRecorded();
+  int getRecordedDurationNanos();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent',
+  ),
+)
+abstract class VideoRecordEvent {
+  RecordingStats getRecordingStats();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Status',
+  ),
+)
+abstract class VideoRecordStatusEvent {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Start',
+  ),
+)
+abstract class VideoRecordStartEvent {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Pause',
+  ),
+)
+abstract class VideoRecordPauseEvent {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Resume',
+  ),
+)
+abstract class VideoRecordResumeEvent {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Finalize',
+  ),
+)
+abstract class VideoRecordFinalizeEvent {
+  Throwable? getCause();
+  VideoRecordFinalizeEventError getError();
+  String getOutputUri();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.video.VideoRecordEventConsumer',
+  ),
+)
+abstract class VideoRecordEventConsumer {
+  late void Function(VideoRecordEvent event) accept;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.video.Recording',
+  ),
+)
+abstract class Recording {
+  bool isPersistene();
+  void mute(bool muted);
+  void pause();
+  void resume();
+  void stop();
+  void close();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.view.CameraController',
   ),
 )
@@ -532,7 +782,9 @@ abstract class CameraController {
   @async
   void setImageCaptureFlashMode(FlashMode flashMode);
   @async
-  Uri takePicture(Uri uri);
+  Uint8List takePictureToMemory();
+  @async
+  String takePictureToUri(String uri);
   @async
   ResolutionSelector getImageAnalysisResolutionSelector();
   @async
@@ -575,9 +827,9 @@ abstract class CameraController {
   bool isRecording();
   @async
   Recording startRecording({
-    required Uri uri,
-    required bool enableAudio,
-    VideoRecordEventCallback listener,
+    required String uri,
+    required AudioConfig audioConfig,
+    required VideoRecordEventConsumer listener,
   });
 }
 

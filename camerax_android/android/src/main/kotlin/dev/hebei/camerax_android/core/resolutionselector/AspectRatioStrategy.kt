@@ -22,13 +22,8 @@ class AspectRatioStrategy {
 
     internal val obj: androidx.camera.core.resolutionselector.AspectRatioStrategy
 
-    fun getFallbackRule(): FallbackRule {
-        return obj.fallbackRule.aspectRatioFallbackRuleArgs
-    }
-
-    fun getPreferredAspectRatio(): AspectRatio {
-        return obj.preferredAspectRatio.aspectRatioArgs
-    }
+    val fallbackRule get() = obj.fallbackRule.aspectRatioFallbackRuleArgs
+    val preferredAspectRatio get() = obj.preferredAspectRatio.aspectRatioArgs
 
     enum class FallbackRule {
         NONE, AUTO,

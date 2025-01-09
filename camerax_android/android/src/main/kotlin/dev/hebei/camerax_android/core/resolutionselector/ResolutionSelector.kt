@@ -1,26 +1,27 @@
 package dev.hebei.camerax_android.core.resolutionselector
 
 class ResolutionSelector internal constructor(internal val obj: androidx.camera.core.resolutionselector.ResolutionSelector) {
-    fun getAllowedResolutionMode(): ResolutionMode {
-        return obj.allowedResolutionMode.resolutionModeArgs
-    }
+    val allowedResolutionMode get() = obj.allowedResolutionMode.resolutionModeArgs
 
-    fun getAspectRatioStrategy(): AspectRatioStrategy {
-        val obj = this.obj.aspectRatioStrategy
-        return AspectRatioStrategy(obj)
-    }
+    val aspectRatioStrategy: AspectRatioStrategy
+        get() {
+            val obj = this.obj.aspectRatioStrategy
+            return AspectRatioStrategy(obj)
+        }
 
-    fun getResolutionFilter(): ResolutionFilter? {
-        val obj = this.obj.resolutionFilter
-        return if (obj == null) null
-        else ResolutionFilter(obj)
-    }
+    val resolutionFilter: ResolutionFilter?
+        get() {
+            val obj = this.obj.resolutionFilter
+            return if (obj == null) null
+            else ResolutionFilter(obj)
+        }
 
-    fun getResolutionStrategy(): ResolutionStrategy? {
-        val obj = this.obj.resolutionStrategy
-        return if (obj == null) null
-        else ResolutionStrategy(obj)
-    }
+    val resolutionStrategy: ResolutionStrategy?
+        get() {
+            val obj = this.obj.resolutionStrategy
+            return if (obj == null) null
+            else ResolutionStrategy(obj)
+        }
 
     class Builder {
         internal constructor(obj: androidx.camera.core.resolutionselector.ResolutionSelector.Builder) {

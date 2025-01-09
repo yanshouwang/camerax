@@ -18,13 +18,8 @@ class ResolutionStrategy {
 
     internal val obj: androidx.camera.core.resolutionselector.ResolutionStrategy
 
-    fun getBoundSize(): Size? {
-        return obj.boundSize
-    }
-
-    fun getFallbackRule(): FallbackRule {
-        return obj.fallbackRule.resolutionFallbackRuleArgs
-    }
+    val boundSize get() = obj.boundSize
+    val fallbackRule get() = obj.fallbackRule.resolutionFallbackRuleArgs
 
     enum class FallbackRule {
         NONE, CLOSEST_HIGHER_THEN_LOWER, CLOSET_HIGHER, CLOSEST_LOWER_THEN_HIGHER, CLOSET_LOWER,
