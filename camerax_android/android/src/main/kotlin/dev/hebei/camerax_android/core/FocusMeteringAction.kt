@@ -19,38 +19,42 @@ class FocusMeteringAction internal constructor(internal val obj: androidx.camera
     val isAutoCancelEnabled get() = obj.isAutoCancelEnabled
 
     class Builder {
+        internal constructor(obj: androidx.camera.core.FocusMeteringAction.Builder) {
+            this.obj = obj
+        }
+
         constructor(point: MeteringPoint) {
-            builder = androidx.camera.core.FocusMeteringAction.Builder(point.obj)
+            this.obj = androidx.camera.core.FocusMeteringAction.Builder(point.obj)
         }
 
         constructor(point: MeteringPoint, @MeteringMode meteringMode: Int) {
-            builder = androidx.camera.core.FocusMeteringAction.Builder(point.obj, meteringMode)
+            this.obj = androidx.camera.core.FocusMeteringAction.Builder(point.obj, meteringMode)
         }
 
-        private val builder: androidx.camera.core.FocusMeteringAction.Builder
+        private val obj: androidx.camera.core.FocusMeteringAction.Builder
 
         fun addPoint(point: MeteringPoint): Builder {
-            builder.addPoint(point.obj)
-            return this
+            val obj = this.obj.addPoint(point.obj)
+            return Builder(obj)
         }
 
         fun addPoint(point: MeteringPoint, @MeteringMode meteringMode: Int): Builder {
-            builder.addPoint(point.obj, meteringMode)
-            return this
+            val obj = this.obj.addPoint(point.obj, meteringMode)
+            return Builder(obj)
         }
 
         fun disableAutoCancel(): Builder {
-            builder.disableAutoCancel()
-            return this
+            val obj = this.obj.disableAutoCancel()
+            return Builder(obj)
         }
 
         fun setAutoCancelDuration(@IntRange(from = 1) duration: Long, timeUnit: TimeUnit): Builder {
-            builder.setAutoCancelDuration(duration, timeUnit)
-            return this
+            val obj = this.obj.setAutoCancelDuration(duration, timeUnit)
+            return Builder(obj)
         }
 
         fun build(): FocusMeteringAction {
-            val obj = builder.build()
+            val obj = this.obj.build()
             return FocusMeteringAction(obj)
         }
     }

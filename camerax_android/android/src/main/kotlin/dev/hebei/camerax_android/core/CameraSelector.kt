@@ -1,7 +1,5 @@
 package dev.hebei.camerax_android.core
 
-import androidx.camera.core.ExperimentalLensFacing
-
 class CameraSelector internal constructor(internal val obj: androidx.camera.core.CameraSelector) {
     companion object {
         val FRONT = CameraSelector(androidx.camera.core.CameraSelector.DEFAULT_FRONT_CAMERA)
@@ -10,16 +8,24 @@ class CameraSelector internal constructor(internal val obj: androidx.camera.core
     }
 
     class Builder {
-        private val builder = androidx.camera.core.CameraSelector.Builder()
+        internal constructor(obj: androidx.camera.core.CameraSelector.Builder) {
+            this.obj = obj
+        }
+
+        constructor() {
+            this.obj = androidx.camera.core.CameraSelector.Builder()
+        }
+
+        internal val obj: androidx.camera.core.CameraSelector.Builder
 
         fun requireLensFacing(lensFacing: LensFacing): Builder {
-            builder.requireLensFacing(lensFacing.obj)
-            return this
+            val obj = this.obj.requireLensFacing(lensFacing.obj)
+            return Builder(obj)
         }
 
         fun build(): CameraSelector {
-            val selector = builder.build()
-            return CameraSelector(selector)
+            val obj = this.obj.build()
+            return CameraSelector(obj)
         }
     }
 
@@ -29,7 +35,7 @@ class CameraSelector internal constructor(internal val obj: androidx.camera.core
 }
 
 val CameraSelector.LensFacing.obj
-    @ExperimentalLensFacing get() = when (this) {
+    @androidx.camera.core.ExperimentalLensFacing get() = when (this) {
         CameraSelector.LensFacing.UNKNOWN -> androidx.camera.core.CameraSelector.LENS_FACING_UNKNOWN
         CameraSelector.LensFacing.FRONT -> androidx.camera.core.CameraSelector.LENS_FACING_FRONT
         CameraSelector.LensFacing.BACK -> androidx.camera.core.CameraSelector.LENS_FACING_BACK
@@ -37,7 +43,7 @@ val CameraSelector.LensFacing.obj
     }
 
 val Int.lensFacingArgs
-    @ExperimentalLensFacing get() = when (this) {
+    @androidx.camera.core.ExperimentalLensFacing get() = when (this) {
         androidx.camera.core.CameraSelector.LENS_FACING_UNKNOWN -> CameraSelector.LensFacing.UNKNOWN
         androidx.camera.core.CameraSelector.LENS_FACING_FRONT -> CameraSelector.LensFacing.FRONT
         androidx.camera.core.CameraSelector.LENS_FACING_BACK -> CameraSelector.LensFacing.BACK

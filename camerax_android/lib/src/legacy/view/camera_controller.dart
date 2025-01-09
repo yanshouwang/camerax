@@ -201,18 +201,6 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.CaptureMode> getImageCaptureMode() {
-    // TODO: implement getImageCaptureMode
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.FlashMode> getImageCaptureFlashMode() {
-    // TODO: implement getImageCaptureFlashMode
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> setImageCaptureResolutionSelector(
       $base.ResolutionSelector? resolutionSelector) {
     // TODO: implement setImageCaptureResolutionSelector
@@ -220,8 +208,20 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
+  Future<$base.CaptureMode> getImageCaptureMode() {
+    // TODO: implement getImageCaptureMode
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> setImageCaptureMode($base.CaptureMode captureMode) {
     // TODO: implement setImageCaptureMode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.FlashMode> getImageCaptureFlashMode() {
+    // TODO: implement getImageCaptureFlashMode
     throw UnimplementedError();
   }
 
@@ -238,92 +238,8 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.DynamicRange> getVideoCaptureDynamicRange() {
-    // TODO: implement getVideoCaptureDynamicRange
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.MirrorMode> getVideoCaptureMirrorMode() {
-    // TODO: implement getVideoCaptureMirrorMode
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.QualitySelector> getVideoCaptureQualitySelector() {
-    // TODO: implement getVideoCaptureQualitySelector
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() {
-    // TODO: implement getVideoCaptureTargetFrameRate
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> isRecording() {
-    // TODO: implement isRecording
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setVideoCaptureDynamicRange($base.DynamicRange dynamicRange) {
-    // TODO: implement setVideoCaptureDynamicRange
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) {
-    // TODO: implement setVideoCaptureMirrorMode
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setVideoCaptureQualitySelector(
-      $base.QualitySelector qualitySelector) {
-    // TODO: implement setVideoCaptureQualitySelector
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> setVideoCaptureTargetFrameRate(
-      $base.Range<int> targetFrameRate) {
-    // TODO: implement setVideoCaptureTargetFrameRate
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.Recording> startRecording({
-    required Uri uri,
-    required bool enableAudio,
-    required $base.VideoRecordEventCallback listener,
-  }) {
-    // TODO: implement startRecording
-    throw UnimplementedError();
-  }
-
-  @override
   Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() {
     // TODO: implement getImageAnalysisResolutionSelector
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.BackpressureStrategy> getImageAnalysisBackpressureStrategy() {
-    // TODO: implement getImageAnalysisBackpressureStrategy
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<int> getImageAnalysisImageQueueDepth() {
-    // TODO: implement getImageAnalysisImageQueueDepth
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() {
-    // TODO: implement getImageAnalysisOutputImageFormat
     throw UnimplementedError();
   }
 
@@ -335,6 +251,12 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
+  Future<$base.BackpressureStrategy> getImageAnalysisBackpressureStrategy() {
+    // TODO: implement getImageAnalysisBackpressureStrategy
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> setImageAnalysisBackpressureStrategy(
       $base.BackpressureStrategy backpressureStrategy) {
     // TODO: implement setImageAnalysisBackpressureStrategy
@@ -342,8 +264,20 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
+  Future<int> getImageAnalysisImageQueueDepth() {
+    // TODO: implement getImageAnalysisImageQueueDepth
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth) {
     // TODO: implement setImageAnalysisImageQueueDepth
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() {
+    // TODO: implement getImageAnalysisOutputImageFormat
     throw UnimplementedError();
   }
 
@@ -363,6 +297,72 @@ final class CameraController extends $base.CameraController {
   @override
   Future<void> clearImageAnalysisAnalyzer() {
     // TODO: implement clearImageAnalysisAnalyzer
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.DynamicRange> getVideoCaptureDynamicRange() {
+    // TODO: implement getVideoCaptureDynamicRange
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setVideoCaptureDynamicRange($base.DynamicRange dynamicRange) {
+    // TODO: implement setVideoCaptureDynamicRange
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.MirrorMode> getVideoCaptureMirrorMode() {
+    // TODO: implement getVideoCaptureMirrorMode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) {
+    // TODO: implement setVideoCaptureMirrorMode
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.QualitySelector> getVideoCaptureQualitySelector() {
+    // TODO: implement getVideoCaptureQualitySelector
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setVideoCaptureQualitySelector(
+      $base.QualitySelector qualitySelector) {
+    // TODO: implement setVideoCaptureQualitySelector
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() {
+    // TODO: implement getVideoCaptureTargetFrameRate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setVideoCaptureTargetFrameRate(
+      $base.Range<int> targetFrameRate) {
+    // TODO: implement setVideoCaptureTargetFrameRate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> isRecording() {
+    // TODO: implement isRecording
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<$base.Recording> startRecording({
+    required Uri uri,
+    required bool enableAudio,
+    required $base.VideoRecordEventCallback listener,
+  }) {
+    // TODO: implement startRecording
     throw UnimplementedError();
   }
 

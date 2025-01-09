@@ -74,6 +74,81 @@ enum ScaleType {
   fitEnd,
 }
 
+enum UseCase {
+  imageCapture,
+  imageAnalysis,
+  videoCapture,
+}
+
+enum ResolutionMode {
+  preferCaptureRateOverHigherResolution,
+  preferHigherResolutionOverCaptureRate,
+}
+
+enum AspectRatio {
+  ratioDefault,
+  ratio4_3,
+  ratio16_9,
+}
+
+enum AspectRatioFallbackRule {
+  none,
+  auto,
+}
+
+enum ResolutionFallbackRule {
+  none,
+  closestHigherThenLower,
+  closestHigher,
+  closestLowerThenHigher,
+  closestLower,
+}
+
+enum CaptureMode {
+  maximumQuality,
+  minimumLatency,
+  zeroShutterlag,
+}
+
+enum FlashMode {
+  auto,
+  on,
+  off,
+  screen,
+}
+
+enum BackpressureStrategy {
+  keepOnlyLatest,
+  blockProducer,
+}
+
+enum ImageFormat {
+  depth16,
+  depthJpeg,
+  depthPointCloud,
+  flexRgba8888,
+  flexRgb888,
+  heic,
+  jpeg,
+  jpegR,
+  nv16,
+  nv21,
+  private,
+  raw10,
+  raw12,
+  rawPrivate,
+  rawSensor,
+  rgb565,
+  unknown,
+  y8,
+  ycbcrP010,
+  yuv420888,
+  yuv422888,
+  yuv444888,
+  yuy2,
+  yv12,
+}
+
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.core.PermissionManager',
@@ -86,6 +161,16 @@ abstract class PermissionManager {
   bool checkPermissioin(Permission permission);
   @async
   bool requestPermissions(List<Permission> permissions);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.util,Size',
+  ),
+)
+abstract class Size {
+  int getWidth();
+  int getHeight();
 }
 
 @ProxyApi(
@@ -316,6 +401,77 @@ abstract class CameraControl {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.core.resolutionselector.AspectRatioStrategy',
+  ),
+)
+abstract class AspectRatioStrategy {
+  @static
+  late final AspectRatioStrategy ratio16_9FallbackAutoStrategy;
+  @static
+  late final AspectRatioStrategy ratio4_3FallbackAutoStrategy;
+
+  AspectRatioStrategy({
+    required AspectRatio preferredAspectRatio,
+    required AspectRatioFallbackRule fallbackRule,
+  });
+
+  AspectRatio getPreferredAspectRatio();
+  AspectRatioFallbackRule getFallbackRule();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.core.resolutionselector.ResolutionFilter',
+  ),
+)
+abstract class ResolutionFilter {
+  late List<Size> Function(List<Size> supportedSizes, int rotationDegrees)
+      filter;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.core.resolutionselector.ResolutionStrategy',
+  ),
+)
+abstract class ResolutionStrategy {
+  @static
+  late final ResolutionStrategy highestAvailableStrategy;
+
+  ResolutionStrategy({
+    required Size boundSize,
+    required ResolutionFallbackRule fallbackRule,
+  });
+
+  Size? getBoundSize();
+  ResolutionFallbackRule getFallbackRule();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.core.resolutionselector.ResolutionSelector',
+  ),
+)
+abstract class ResolutionSelector {
+  ResolutionSelector({
+    ResolutionMode? allowedResolutionMode,
+    AspectRatioStrategy? aspectRatioStrategy,
+    ResolutionFilter? resolutionFilter,
+    ResolutionStrategy? resolutionStrategy,
+  });
+
+  ResolutionMode getResolutionMode();
+  AspectRatioStrategy getAspectRatioStrategy();
+  ResolutionFilter? getResolutionFilter();
+  ResolutionStrategy? getResolutionStrategy();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.view.CameraController',
   ),
 )
@@ -350,6 +506,79 @@ abstract class CameraController {
   bool isTapToFocusEnabled();
   @async
   void setTapToFocusEnabled(bool enabled);
+  @async
+  bool isImageCaptureEnabled();
+  @async
+  bool isImageAnalysisEnabled();
+  @async
+  bool isVideoCaptureEnabled();
+  @async
+  void setEnabledUseCases(List<UseCase> enabledUseCases);
+  @async
+  ResolutionSelector? getPreviewResolutionSelector();
+  @async
+  void setPreviewResolutionSelector(ResolutionSelector? resolutionSelector);
+  @async
+  ResolutionSelector? getImageCaptureResolutionSelector();
+  @async
+  void setImageCaptureResolutionSelector(
+      ResolutionSelector? resolutionSelector);
+  @async
+  CaptureMode getImageCaptureMode();
+  @async
+  void setImageCaptureMode(CaptureMode captureMode);
+  @async
+  FlashMode getImageCaptureFlashMode();
+  @async
+  void setImageCaptureFlashMode(FlashMode flashMode);
+  @async
+  Uri takePicture(Uri uri);
+  @async
+  ResolutionSelector getImageAnalysisResolutionSelector();
+  @async
+  void setImageAnalysisResolutionSelector(
+      ResolutionSelector resolutionSelector);
+  @async
+  BackpressureStrategy getImageAnalysisBackpressureStrategy();
+  @async
+  void setImageAnalysisBackpressureStrategy(
+      BackpressureStrategy backpressureStrategy);
+  @async
+  int getImageAnalysisImageQueueDepth();
+  @async
+  void setImageAnalysisImageQueueDepth(int imageQueueDepth);
+  @async
+  ImageFormat getImageAnalysisOutputImageFormat();
+  @async
+  void setImageAnalysisOutputImageFormat(ImageFormat outputImageFormat);
+  @async
+  void setImageAnalysisAnalyzer(Analyzer analyzer);
+  @async
+  void clearImageAnalysisAnalyzer();
+  @async
+  DynamicRange getVideoCaptureDynamicRange();
+  @async
+  void setVideoCaptureDynamicRange(DynamicRange dynamicRange);
+  @async
+  MirrorMode getVideoCaptureMirrorMode();
+  @async
+  void setVideoCaptureMirrorMode(MirrorMode mirrorMode);
+  @async
+  QualitySelector getVideoCaptureQualitySelector();
+  @async
+  void setVideoCaptureQualitySelector(QualitySelector qualitySelector);
+  @async
+  IntRange getVideoCaptureTargetFrameRate();
+  @async
+  void setVideoCaptureTargetFrameRate(IntRange targetFrameRate);
+  @async
+  bool isRecording();
+  @async
+  Recording startRecording({
+    required Uri uri,
+    required bool enableAudio,
+    VideoRecordEventCallback listener,
+  });
 }
 
 @ProxyApi(

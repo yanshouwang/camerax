@@ -20,7 +20,7 @@ class DynamicRange {
     }
 
     enum class BitDepth {
-        UNSPECIFIED, WITH_8_BIT, WITH_10_BIT,
+        BIT_DEPTH_UNSPECIFIED, BIT_DEPTH_8_BIT, BIT_DEPTH_10_BIT,
     }
 }
 
@@ -37,9 +37,9 @@ val DynamicRange.Encoding.obj
 
 val DynamicRange.BitDepth.obj
     get() = when (this) {
-        DynamicRange.BitDepth.UNSPECIFIED -> androidx.camera.core.DynamicRange.BIT_DEPTH_UNSPECIFIED
-        DynamicRange.BitDepth.WITH_8_BIT -> androidx.camera.core.DynamicRange.BIT_DEPTH_8_BIT
-        DynamicRange.BitDepth.WITH_10_BIT -> androidx.camera.core.DynamicRange.BIT_DEPTH_10_BIT
+        DynamicRange.BitDepth.BIT_DEPTH_UNSPECIFIED -> androidx.camera.core.DynamicRange.BIT_DEPTH_UNSPECIFIED
+        DynamicRange.BitDepth.BIT_DEPTH_8_BIT -> androidx.camera.core.DynamicRange.BIT_DEPTH_8_BIT
+        DynamicRange.BitDepth.BIT_DEPTH_10_BIT -> androidx.camera.core.DynamicRange.BIT_DEPTH_10_BIT
     }
 
 val Int.encodingArgs
@@ -56,8 +56,8 @@ val Int.encodingArgs
 
 val Int.bitDepthArgs
     get() = when (this) {
-        androidx.camera.core.DynamicRange.BIT_DEPTH_UNSPECIFIED -> DynamicRange.BitDepth.UNSPECIFIED
-        androidx.camera.core.DynamicRange.BIT_DEPTH_8_BIT -> DynamicRange.BitDepth.WITH_8_BIT
-        androidx.camera.core.DynamicRange.BIT_DEPTH_10_BIT -> DynamicRange.BitDepth.WITH_10_BIT
+        androidx.camera.core.DynamicRange.BIT_DEPTH_UNSPECIFIED -> DynamicRange.BitDepth.BIT_DEPTH_UNSPECIFIED
+        androidx.camera.core.DynamicRange.BIT_DEPTH_8_BIT -> DynamicRange.BitDepth.BIT_DEPTH_8_BIT
+        androidx.camera.core.DynamicRange.BIT_DEPTH_10_BIT -> DynamicRange.BitDepth.BIT_DEPTH_10_BIT
         else -> throw IllegalArgumentException()
     }

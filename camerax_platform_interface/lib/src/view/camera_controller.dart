@@ -271,90 +271,6 @@ abstract base class CameraController extends PlatformInterface {
     required Uri uri,
   });
 
-  /// Gets the DynamicRange for video capture.
-  Future<DynamicRange> getVideoCaptureDynamicRange();
-
-  /// Sets the DynamicRange for video capture.
-  ///
-  /// The dynamic range specifies how the range of colors, highlights and shadows
-  /// that are captured by the video producer are displayed on a display. Some
-  /// dynamic ranges will allow the video to make full use of the extended range
-  /// of brightness of a display when the video is played back.
-  ///
-  /// The supported dynamic ranges for video capture can be queried through the
-  /// androidx.camera.video.VideoCapabilities returned by getVideoCapabilities
-  /// via getSupportedDynamicRanges.
-  ///
-  /// It is possible to choose a high dynamic range (HDR) with unspecified encoding
-  /// by providing HDR_UNSPECIFIED_10_BIT.
-  ///
-  /// If the dynamic range is not provided, the default value is SDR.
-  Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange);
-
-  /// Gets the mirror mode for video capture.
-  Future<MirrorMode> getVideoCaptureMirrorMode();
-
-  /// Sets the mirror mode for video capture.
-  ///
-  /// Valid values include: MIRROR_MODE_OFF, MIRROR_MODE_ON and MIRROR_MODE_ON_FRONT_ONLY.
-  /// If not set, it defaults to MIRROR_MODE_OFF.
-  Future<void> setVideoCaptureMirrorMode(MirrorMode mirrorMode);
-
-  /// Returns the QualitySelector for VIDEO_CAPTURE.
-  Future<QualitySelector> getVideoCaptureQualitySelector();
-
-  /// Sets the QualitySelector for VIDEO_CAPTURE.
-  ///
-  /// The provided quality selector is used to select the resolution of the
-  /// recording depending on the resolutions supported by the camera and codec
-  /// capabilities.
-  ///
-  /// If no quality selector is provided, the default is DEFAULT_QUALITY_SELECTOR.
-  ///
-  /// Changing the value will reconfigure the camera which will cause video capture
-  /// to stop. To avoid this, set the value before controller is bound to lifecycle.
-  Future<void> setVideoCaptureQualitySelector(QualitySelector qualitySelector);
-
-  /// Gets the target frame rate in frames per second for video capture.
-  Future<Range<int>> getVideoCaptureTargetFrameRate();
-
-  /// Sets the target frame rate range in frames per second for video capture.
-  ///
-  /// This target will be used as a part of the heuristics for the algorithm that
-  /// determines the final frame rate range and resolution of all concurrently
-  /// bound use cases.
-  ///
-  /// It is not guaranteed that this target frame rate will be the final range,
-  /// as other use cases as well as frame rate restrictions of the device may
-  /// affect the outcome of the algorithm that chooses the actual frame rate.
-  ///
-  /// By default, the value is FRAME_RATE_RANGE_UNSPECIFIED. For supported frame
-  /// rates, see getSupportedFrameRateRanges.
-  Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate);
-
-  /// Returns whether there is an in-progress video recording.
-  Future<bool> isRecording();
-
-  /// Takes a video to a given file.
-  ///
-  /// Only a single recording can be active at a time, so if isRecording is true,
-  /// this will throw an IllegalStateException.
-  ///
-  /// Upon successfully starting the recording, a VideoRecordEvent.Start event
-  /// will be the first event sent to the provided event listener.
-  ///
-  /// If errors occur while starting the recording, a VideoRecordEvent.Finalize
-  /// event will be the first event sent to the provided listener, and information
-  /// about the error can be found in that event's getError method.
-  ///
-  /// Recording with audio requires the RECORD_AUDIO permission; without it,
-  /// starting a recording will fail with a SecurityException.
-  Future<Recording> startRecording({
-    required Uri uri,
-    required bool enableAudio,
-    required VideoRecordEventCallback listener,
-  });
-
   /// Returns the mode with which images are acquired.
   ///
   /// If not set, it defaults to STRATEGY_KEEP_ONLY_LATEST.
@@ -450,4 +366,88 @@ abstract base class CameraController extends PlatformInterface {
   /// this method will reconfigure the camera which might cause additional latency.
   /// To avoid this, call this method when the lifecycle is not active.
   Future<void> clearImageAnalysisAnalyzer();
+
+  /// Gets the DynamicRange for video capture.
+  Future<DynamicRange> getVideoCaptureDynamicRange();
+
+  /// Sets the DynamicRange for video capture.
+  ///
+  /// The dynamic range specifies how the range of colors, highlights and shadows
+  /// that are captured by the video producer are displayed on a display. Some
+  /// dynamic ranges will allow the video to make full use of the extended range
+  /// of brightness of a display when the video is played back.
+  ///
+  /// The supported dynamic ranges for video capture can be queried through the
+  /// androidx.camera.video.VideoCapabilities returned by getVideoCapabilities
+  /// via getSupportedDynamicRanges.
+  ///
+  /// It is possible to choose a high dynamic range (HDR) with unspecified encoding
+  /// by providing HDR_UNSPECIFIED_10_BIT.
+  ///
+  /// If the dynamic range is not provided, the default value is SDR.
+  Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange);
+
+  /// Gets the mirror mode for video capture.
+  Future<MirrorMode> getVideoCaptureMirrorMode();
+
+  /// Sets the mirror mode for video capture.
+  ///
+  /// Valid values include: MIRROR_MODE_OFF, MIRROR_MODE_ON and MIRROR_MODE_ON_FRONT_ONLY.
+  /// If not set, it defaults to MIRROR_MODE_OFF.
+  Future<void> setVideoCaptureMirrorMode(MirrorMode mirrorMode);
+
+  /// Returns the QualitySelector for VIDEO_CAPTURE.
+  Future<QualitySelector> getVideoCaptureQualitySelector();
+
+  /// Sets the QualitySelector for VIDEO_CAPTURE.
+  ///
+  /// The provided quality selector is used to select the resolution of the
+  /// recording depending on the resolutions supported by the camera and codec
+  /// capabilities.
+  ///
+  /// If no quality selector is provided, the default is DEFAULT_QUALITY_SELECTOR.
+  ///
+  /// Changing the value will reconfigure the camera which will cause video capture
+  /// to stop. To avoid this, set the value before controller is bound to lifecycle.
+  Future<void> setVideoCaptureQualitySelector(QualitySelector qualitySelector);
+
+  /// Gets the target frame rate in frames per second for video capture.
+  Future<Range<int>> getVideoCaptureTargetFrameRate();
+
+  /// Sets the target frame rate range in frames per second for video capture.
+  ///
+  /// This target will be used as a part of the heuristics for the algorithm that
+  /// determines the final frame rate range and resolution of all concurrently
+  /// bound use cases.
+  ///
+  /// It is not guaranteed that this target frame rate will be the final range,
+  /// as other use cases as well as frame rate restrictions of the device may
+  /// affect the outcome of the algorithm that chooses the actual frame rate.
+  ///
+  /// By default, the value is FRAME_RATE_RANGE_UNSPECIFIED. For supported frame
+  /// rates, see getSupportedFrameRateRanges.
+  Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate);
+
+  /// Returns whether there is an in-progress video recording.
+  Future<bool> isRecording();
+
+  /// Takes a video to a given file.
+  ///
+  /// Only a single recording can be active at a time, so if isRecording is true,
+  /// this will throw an IllegalStateException.
+  ///
+  /// Upon successfully starting the recording, a VideoRecordEvent.Start event
+  /// will be the first event sent to the provided event listener.
+  ///
+  /// If errors occur while starting the recording, a VideoRecordEvent.Finalize
+  /// event will be the first event sent to the provided listener, and information
+  /// about the error can be found in that event's getError method.
+  ///
+  /// Recording with audio requires the RECORD_AUDIO permission; without it,
+  /// starting a recording will fail with a SecurityException.
+  Future<Recording> startRecording({
+    required Uri uri,
+    required bool enableAudio,
+    required VideoRecordEventCallback listener,
+  });
 }

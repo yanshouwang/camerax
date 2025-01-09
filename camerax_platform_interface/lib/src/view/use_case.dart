@@ -1,5 +1,5 @@
 enum UseCase {
-  imageAnalysis,
   imageCapture,
+  imageAnalysis,
   videoCapture,
 }
