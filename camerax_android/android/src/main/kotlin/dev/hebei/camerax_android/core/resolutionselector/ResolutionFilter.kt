@@ -16,6 +16,10 @@ class ResolutionFilter {
 
     internal val obj: androidx.camera.core.resolutionselector.ResolutionFilter
 
+    fun filter(supportedSizes: MutableList<Size>, rotationDegrees: Int): MutableList<Size> {
+        return obj.filter(supportedSizes, rotationDegrees)
+    }
+
     interface Stub {
         fun filter(supportedSizes: MutableList<Size>, rotationDegrees: Int): MutableList<Size>
     }

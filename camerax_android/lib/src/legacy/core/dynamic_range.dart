@@ -1,17 +1,24 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/native_comparator.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
-final class DynamicRange extends $base.DynamicRange with NativeComparator {
-  @override
+import 'bit_depth.dart';
+import 'encoding.dart';
+
+final class DynamicRange extends $base.DynamicRange {
   final $native.DynamicRange obj;
 
   DynamicRange.$native(this.obj) : super.impl();
 
   @override
-  $base.BitDepth get bitDepth => throw UnimplementedError();
+  Future<$base.BitDepth> getBitDepth() async {
+    final obj = await this.obj.getBitDepth();
+    return obj.args;
+  }
 
   @override
-  $base.Encoding get encoding => throw UnimplementedError();
+  Future<$base.Encoding> getEncoding() async {
+    final obj = await this.obj.getEncoding();
+    return obj.args;
+  }
 }

@@ -41,5 +41,5 @@ abstract interface class MeteringPoint {
   /// Metering rectangle width = size * sensorSizeOrCropRegion.width
   /// Metering rectangle height = size * sensorSizeOrCropRegion.height
   /// ```
-  double get size;
+  Future<double> getSize();
 }

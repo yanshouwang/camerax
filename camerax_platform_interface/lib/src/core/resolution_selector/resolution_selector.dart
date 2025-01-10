@@ -1,30 +1,31 @@
-import 'dart:ui' as ui;
-
 import 'package:camerax_platform_interface/src/camerax.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'aspect_ratio_strategy.dart';
+import 'resolution_filter.dart';
 import 'resolution_mode.dart';
 import 'resolution_strategy.dart';
 
-typedef ResolutionFilter = List<ui.Size> Function(
-    List<ui.Size> supportedSizes, int rotationDegrees);
+abstract base class ResolutionSelector extends PlatformInterface {
+  static final _token = Object();
 
-abstract interface class ResolutionSelector {
-  AspectRatioStrategy get aspectRatioStrategy;
-  ResolutionMode get allowedResolutionMode;
-  ResolutionFilter? get resolutionFilter;
-  ResolutionStrategy? get resolutionStrategy;
+  ResolutionSelector.impl() : super(token: _token);
 
   factory ResolutionSelector({
-    AspectRatioStrategy? aspectRatioStrategy,
     ResolutionMode? allowedResolutionMode,
+    AspectRatioStrategy? aspectRatioStrategy,
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
   }) =>
       CameraX.instance.createResolutionSelector(
-        aspectRatioStrategy: aspectRatioStrategy,
         allowedResolutionMode: allowedResolutionMode,
+        aspectRatioStrategy: aspectRatioStrategy,
         resolutionFilter: resolutionFilter,
         resolutionStrategy: resolutionStrategy,
       );
+
+  Future<ResolutionMode> getAllowedResolutionMode();
+  Future<AspectRatioStrategy> getAspectRatioStrategy();
+  Future<ResolutionFilter?> getResolutionFilter();
+  Future<ResolutionStrategy?> getResolutionStrategy();
 }

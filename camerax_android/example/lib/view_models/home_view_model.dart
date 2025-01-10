@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:camerax_android_example/models.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -18,8 +19,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
   CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
   bool? _torchState;
-  ZoomState? _zoomState;
-  ExposureState? _exposureState;
+  double? _minZoomRatio;
+  double? _maxZoomRatio;
+  double? _zoomRatio;
+  int? _minExposureIndex;
+  int? _maxExposureIndex;
+  int? _exposureIndex;
   FlashMode? _flashMode;
   Uri? _savedUri;
   ImageModel? _imageModel;
@@ -40,8 +45,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
   CameraMode get mode => _mode;
   LensFacing get lensFacing => _lensFacing;
   bool? get torchState => _torchState;
-  ZoomState? get zoomState => _zoomState;
-  ExposureState? get exposureState => _exposureState;
+  double? get minZoomRatio => _minZoomRatio;
+  double? get maxZoomRatio => _maxZoomRatio;
+  double? get zoomRatio => _zoomRatio;
+  int? get minExposureIndex => _minExposureIndex;
+  int? get maxExposureIndex => _maxExposureIndex;
+  int? get exposureIndex => _exposureIndex;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
@@ -139,10 +148,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> setExposure(int value) async {
     final cameraControl = ArgumentError.checkNotNull(_cameraControl);
-    final newValue = await cameraControl.setExposureCompensationIndex(value);
-    logger.info('setExposureCompensationIndex newValue: $newValue');
-    // final cameraInfo = ArgumentError.checkNotNull(_cameraInfo);
-    // _exposureState = await cameraInfo.getExposureState();
+    final exposureIndex =
+        await cameraControl.setExposureCompensationIndex(value);
+    logger.info('setExposureCompensationIndex: $exposureIndex');
+    // _exposureIndex = exposureIndex;
     // notifyListeners();
   }
 
@@ -160,9 +169,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     final filePath = path.join(directory.path,
         'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG');
     final uri = Uri.file(filePath);
-    _savedUri = await controller.takePicture(
-      uri: uri,
-    );
+    _savedUri = await controller.takePicture(uri);
     notifyListeners();
   }
 
@@ -179,14 +186,14 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _recording = await controller.startRecording(
       uri: uri,
       enableAudio: true,
-      listener: (event) {
+      listener: (event) async {
         logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
           return;
         }
-        final error = event.error;
+        final error = await event.getError();
         if (error == null) {
-          _savedUri = event.savedUri;
+          _savedUri = await event.getOutputUri();
         } else {
           logger.info('Record Video failed $error.');
         }
@@ -216,10 +223,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
       },
     );
     _zoomStateSubscription = controller.zoomStateChanged.listen(
-      (zoomState) {
-        logger.info(
-            'zoomStateChanged ${zoomState.minZoomRatio}, ${zoomState.maxZoomRatio}, ${zoomState.linearZoom}, ${zoomState.zoomRatio}');
-        _zoomState = zoomState;
+      (zoomState) async {
+        final minZoomRatio = await zoomState.getMinZoomRatio();
+        final maxZoomRatio = await zoomState.getMaxZoomRatio();
+        final zoomRatio = await zoomState.getZoomRatio();
+        _minZoomRatio = minZoomRatio;
+        _maxZoomRatio = maxZoomRatio;
+        _zoomRatio = zoomRatio;
         notifyListeners();
       },
       onError: (e) {
@@ -252,16 +262,33 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _cameraInfo = await controller.getCameraInfo();
     _cameraControl = await controller.getCameraControl();
     _torchState = await controller.getTorchState();
-    _zoomState = await controller.getZoomState();
-    _exposureState = await _cameraInfo?.getExposureState();
+    final zoomState = await controller.getZoomState();
+    if (zoomState != null) {
+      final minZoomRatio = await zoomState.getMinZoomRatio();
+      final maxZoomRatio = await zoomState.getMaxZoomRatio();
+      final zoomRatio = await zoomState.getZoomRatio();
+      _minZoomRatio = minZoomRatio;
+      _maxZoomRatio = maxZoomRatio;
+      _zoomRatio = zoomRatio;
+    }
+    final exposureState = await _cameraInfo?.getExposureState();
+    if (exposureState != null) {
+      final range = await exposureState.getExposureCompensationRange();
+      final minExposureIndex = await range.getLower();
+      final maxExposureIndex = await range.getUpper();
+      final exposureIndex = await exposureState.getExposureCompensationIndex();
+      _minExposureIndex = minExposureIndex;
+      _maxExposureIndex = maxExposureIndex;
+      _exposureIndex = exposureIndex;
+    }
     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
     // _flashMode = await controller.getImageCaptureFlashMode();
     logger.info('''cameraInfo: $_cameraInfo
 cameraControl: $_cameraControl
 torchState: $torchState
-zoomState: ${zoomState?.minZoomRatio}, ${zoomState?.maxZoomRatio}, ${zoomState?.linearZoom}, ${zoomState?.zoomRatio}
-exposureState: ${exposureState?.exposureCompensationIndex}, ${exposureState?.exposureCompensationRange.lower} - ${exposureState?.exposureCompensationRange.upper}, ${exposureState?.exposureCompensationStep}, ${exposureState?.isExposureCompensationSupported}
+zoomState: $zoomState
+exposureState: $exposureState
 flashMode: $flashMode
 isPinchToZoomEnabled: $isPinchToZoomEnabled
 isTapToFocusEnabled: $isTapToFocusEnabled''');
@@ -278,7 +305,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
 
   Future<void> _setRawAnalyzer() async {
     await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba_8888);
+    await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba8888);
     final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
@@ -294,7 +321,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
 
   Future<void> _setMLAnalyzer(MLAnalyzer analyzer) async {
     await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv_420_888);
+    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }

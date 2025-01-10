@@ -23,4 +23,5 @@ export 'core/permission.dart';
 export 'core/plane_proxy.dart';
 export 'core/range.dart';
 export 'core/resolution_selector.dart';
+export 'core/size.dart';
 export 'core/zoom_state.dart';

@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -36,7 +38,7 @@ class MLItemsPainter extends CustomPainter {
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, ui.Size size) {
     debugPrint('DRAW ON $size');
     final paint = Paint()
       ..style = PaintingStyle.stroke

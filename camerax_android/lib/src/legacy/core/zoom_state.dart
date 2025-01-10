@@ -1,20 +1,33 @@
+import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
 final class ZoomState extends $base.ZoomState {
-  @override
-  final double minZoomRatio;
-  @override
-  final double maxZoomRatio;
-  @override
-  final double zoomRatio;
-  @override
-  final double linearZoom;
+  final $native.ZoomState obj;
 
-  ZoomState({
-    required this.minZoomRatio,
-    required this.maxZoomRatio,
-    required this.zoomRatio,
-    required this.linearZoom,
-  }) : super.impl();
+  ZoomState.$native(this.obj) : super.impl();
+
+  @override
+  Future<double> getLinearZoom() async {
+    final value = await obj.getLinearZoom();
+    return value;
+  }
+
+  @override
+  Future<double> getMaxZoomRatio() async {
+    final value = await obj.getMaxZoomRatio();
+    return value;
+  }
+
+  @override
+  Future<double> getMinZoomRatio() async {
+    final vlaue = await obj.getMinZoomRatio();
+    return vlaue;
+  }
+
+  @override
+  Future<double> getZoomRatio() async {
+    final value = await obj.getZoomRatio();
+    return value;
+  }
 }

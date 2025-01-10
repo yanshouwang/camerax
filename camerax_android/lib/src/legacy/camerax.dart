@@ -1,33 +1,34 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+    as $base;
 
 import 'core.dart';
+import 'video.dart';
 import 'view.dart';
 
-final class CameraX extends $interface.CameraX {
+final class CameraX extends $base.CameraX {
   @override
-  $interface.PermissionManager createPermissionManager() {
+  $base.PermissionManager createPermissionManager() {
     return PermissionManager();
   }
 
   @override
-  $interface.CameraSelector getFrontCameraSelector() {
+  $base.CameraSelector getFrontCameraSelector() {
     return CameraSelector.front;
   }
 
   @override
-  $interface.CameraSelector getBackCameraSelector() {
+  $base.CameraSelector getBackCameraSelector() {
     return CameraSelector.back;
   }
 
   @override
-  $interface.CameraSelector getExternalCameraSelector() {
+  $base.CameraSelector getExternalCameraSelector() {
     return CameraSelector.external;
   }
 
   @override
-  $interface.CameraSelector createCameraSelector({
-    $interface.LensFacing? lensFacing,
+  $base.CameraSelector createCameraSelector({
+    $base.LensFacing? lensFacing,
   }) {
     return CameraSelector(
       lensFacing: lensFacing,
@@ -35,75 +36,120 @@ final class CameraX extends $interface.CameraX {
   }
 
   @override
-  $interface.CameraController createCameraController() {
+  $base.CameraController createCameraController() {
     return CameraController();
   }
 
   @override
-  $interface.PreviewView createPreviewView() {
+  $base.PreviewView createPreviewView() {
     return PreviewView();
   }
 
   @override
-  $interface.FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
-      $interface.Quality quality) {
-    // TODO: implement createFallbackStrategyHigherQualityOrLowerThan
-    throw UnimplementedError();
+  $base.FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
+      $base.Quality quality) {
+    return FallbackStrategy.higherQualityOrLowerThan(quality);
   }
 
   @override
-  $interface.FallbackStrategy createFallbackStrategyHigherQualityThan(
-      $interface.Quality quality) {
-    // TODO: implement createFallbackStrategyHigherQualityThan
-    throw UnimplementedError();
+  $base.FallbackStrategy createFallbackStrategyHigherQualityThan(
+      $base.Quality quality) {
+    return FallbackStrategy.higherQualityThan(quality);
   }
 
   @override
-  $interface.FallbackStrategy createFallbackStrategyLowerQualityOrHigherThan(
-      $interface.Quality quality) {
-    // TODO: implement createFallbackStrategyLowerQualityOrHigherThan
-    throw UnimplementedError();
+  $base.FallbackStrategy createFallbackStrategyLowerQualityOrHigherThan(
+      $base.Quality quality) {
+    return FallbackStrategy.lowerQualityOrHigherThan(quality);
   }
 
   @override
-  $interface.FallbackStrategy createFallbackStrategyLowerQualityThan(
-      $interface.Quality quality) {
-    // TODO: implement createFallbackStrategyLowerQualityThan
-    throw UnimplementedError();
+  $base.FallbackStrategy createFallbackStrategyLowerQualityThan(
+      $base.Quality quality) {
+    return FallbackStrategy.lowerQualityThan(quality);
   }
 
   @override
-  $interface.MLAnalyzer createMLAnalyzer(
-      {required List<$interface.MLObjectType> types,
-      required $interface.CoordinateSystem targetCoordinateSystem,
-      required $interface.MLObjectsCallback onAnalyzed}) {
+  $base.MLAnalyzer createMLAnalyzer({
+    required List<$base.MLObjectType> types,
+    required $base.CoordinateSystem targetCoordinateSystem,
+    required $base.MLObjectsCallback onAnalyzed,
+  }) {
     // TODO: implement createMLAnalyzer
     throw UnimplementedError();
   }
 
   @override
-  $interface.QualitySelector createQualitySelectorFrom(
-      $interface.Quality quality,
-      {$interface.FallbackStrategy? fallbackStrategy}) {
-    // TODO: implement createQualitySelectorFrom
-    throw UnimplementedError();
+  $base.QualitySelector createQualitySelectorFrom(
+    $base.Quality quality, {
+    $base.FallbackStrategy? fallbackStrategy,
+  }) {
+    return QualitySelector.from(
+      quality,
+      fallbackStrategy: fallbackStrategy,
+    );
   }
 
   @override
-  $interface.QualitySelector createQualitySelectorFromOrderedList(
-      List<$interface.Quality> qualities,
-      {$interface.FallbackStrategy? fallbackStrategy}) {
-    // TODO: implement createQualitySelectorFromOrderedList
-    throw UnimplementedError();
+  $base.QualitySelector createQualitySelectorFromOrderedList(
+    List<$base.Quality> qualities, {
+    $base.FallbackStrategy? fallbackStrategy,
+  }) {
+    return QualitySelector.fromOrderedList(
+      qualities,
+      fallbackStrategy: fallbackStrategy,
+    );
   }
 
   @override
-  $interface.ResolutionSelector createResolutionSelector(
-      {$interface.AspectRatioStrategy? aspectRatioStrategy,
-      $interface.ResolutionMode? allowedResolutionMode,
-      $interface.ResolutionFilter? resolutionFilter,
-      $interface.ResolutionStrategy? resolutionStrategy}) {
-    // TODO: implement createResolutionSelector
-    throw UnimplementedError();
+  $base.ResolutionSelector createResolutionSelector({
+    $base.ResolutionMode? allowedResolutionMode,
+    $base.AspectRatioStrategy? aspectRatioStrategy,
+    $base.ResolutionFilter? resolutionFilter,
+    $base.ResolutionStrategy? resolutionStrategy,
+  }) {
+    return ResolutionSelector(
+      allowedResolutionMode: allowedResolutionMode,
+      aspectRatioStrategy: aspectRatioStrategy,
+      resolutionFilter: resolutionFilter,
+      resolutionStrategy: resolutionStrategy,
+    );
+  }
+
+  @override
+  $base.AspectRatioStrategy createAspectRatioStrategy({
+    required $base.AspectRatio preferredAspectRatio,
+    required $base.AspectRatioFallbackRule fallbackRule,
+  }) {
+    return AspectRatioStrategy(
+      preferredAspectRatio: preferredAspectRatio,
+      fallbackRule: fallbackRule,
+    );
+  }
+
+  @override
+  $base.ResolutionStrategy createResolutionStrategy({
+    required $base.Size boundSize,
+    required $base.ResolutionFallbackRule fallbackRule,
+  }) {
+    return ResolutionStrategy(
+      boundSize: boundSize,
+      fallbackRule: fallbackRule,
+    );
+  }
+
+  @override
+  $base.ResolutionStrategy getHighestAvailableStrategy() {
+    return ResolutionStrategy.highestAvailableStrategy;
+  }
+
+  @override
+  $base.AspectRatioStrategy getRatio16_9FallbackAutoStrategy() {
+    return AspectRatioStrategy.ratio16_9FallbackAutoStrategy;
+  }
+
+  @override
+  $base.AspectRatioStrategy getRatio4_3FallbackAutoStrategy() {
+    return AspectRatioStrategy.ratio4_3FallbackAutoStrategy;
   }
 }

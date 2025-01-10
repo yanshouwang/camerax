@@ -60,9 +60,9 @@ enum Encoding {
 }
 
 enum BitDepth {
-  unspecified,
-  with8Bit,
-  with10Bit,
+  bitDepthUnspecified,
+  bitDepth8Bit,
+  bitDepth10Bit,
 }
 
 enum ScaleType {
@@ -105,9 +105,9 @@ enum ResolutionFallbackRule {
 }
 
 enum CaptureMode {
-  maximumQuality,
-  minimumLatency,
-  zeroShutterlag,
+  maximizeQuality,
+  minimizeLatency,
+  zeroShutterLag,
 }
 
 enum FlashMode {
@@ -142,11 +142,20 @@ enum ImageFormat {
   unknown,
   y8,
   ycbcrP010,
-  yuv420888,
-  yuv422888,
-  yuv444888,
+  yuv420_888,
+  yuv422_888,
+  yuv444_888,
   yuy2,
   yv12,
+}
+
+enum Quality {
+  fhd,
+  hd,
+  highest,
+  lowest,
+  sd,
+  uhd,
 }
 
 enum MirrorMode {
@@ -198,17 +207,19 @@ abstract class PermissionManager {
   ),
 )
 abstract class Throwable {
-  late final String code;
-  late final String message;
-  late final String details;
+  String getCode();
+  String getMessage();
+  String getDetails();
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'android.util,Size',
+    fullClassName: 'android.util.Size',
   ),
 )
 abstract class Size {
+  Size(int width, int height);
+
   int getWidth();
   int getHeight();
 }
@@ -221,8 +232,8 @@ abstract class Size {
 abstract class Rect {
   Rect(int left, int top, int right, int bottom);
 
-  int width();
-  int height();
+  int getWidth();
+  int getHeight();
 }
 
 @ProxyApi(
@@ -231,6 +242,8 @@ abstract class Rect {
   ),
 )
 abstract class IntRange {
+  IntRange(int lower, int upper);
+
   int getLower();
   int getUpper();
 }
@@ -273,7 +286,7 @@ abstract class CameraStateLiveData {
 abstract class CameraStateObserver {
   CameraStateObserver();
 
-  late void Function(CameraState value) onChanged;
+  late final void Function(CameraState value) onChanged;
 }
 
 @ProxyApi(
@@ -298,7 +311,7 @@ abstract class TorchStateLiveData {
 abstract class TorchStateObserver {
   TorchStateObserver();
 
-  late void Function(bool value) onChanged;
+  late final void Function(bool value) onChanged;
 }
 
 @ProxyApi(
@@ -335,7 +348,7 @@ abstract class ZoomStateLiveData {
 abstract class ZoomStateObserver {
   ZoomStateObserver();
 
-  late void Function(ZoomState value) onChanged;
+  late final void Function(ZoomState value) onChanged;
 }
 
 @ProxyApi(
@@ -463,10 +476,10 @@ abstract class AspectRatioStrategy {
   @static
   late final AspectRatioStrategy ratio4_3FallbackAutoStrategy;
 
-  AspectRatioStrategy({
-    required AspectRatio preferredAspectRatio,
-    required AspectRatioFallbackRule fallbackRule,
-  });
+  AspectRatioStrategy(
+    AspectRatio preferredAspectRatio,
+    AspectRatioFallbackRule fallbackRule,
+  );
 
   AspectRatio getPreferredAspectRatio();
   AspectRatioFallbackRule getFallbackRule();
@@ -479,7 +492,9 @@ abstract class AspectRatioStrategy {
   ),
 )
 abstract class ResolutionFilter {
-  late List<Size> Function(List<Size> supportedSizes, int rotationDegrees)
+  ResolutionFilter();
+
+  late final List<Size> Function(List<Size> supportedSizes, int rotationDegrees)
       filter;
 }
 
@@ -493,10 +508,10 @@ abstract class ResolutionStrategy {
   @static
   late final ResolutionStrategy highestAvailableStrategy;
 
-  ResolutionStrategy({
-    required Size boundSize,
-    required ResolutionFallbackRule fallbackRule,
-  });
+  ResolutionStrategy(
+    Size boundSize,
+    ResolutionFallbackRule fallbackRule,
+  );
 
   Size? getBoundSize();
   ResolutionFallbackRule getFallbackRule();
@@ -516,7 +531,7 @@ abstract class ResolutionSelector {
     ResolutionStrategy? resolutionStrategy,
   });
 
-  ResolutionMode getResolutionMode();
+  ResolutionMode getAllowedResolutionMode();
   AspectRatioStrategy getAspectRatioStrategy();
   ResolutionFilter? getResolutionFilter();
   ResolutionStrategy? getResolutionStrategy();
@@ -538,8 +553,8 @@ abstract class ImageInfo {
 )
 abstract class PlaneProxy {
   Uint8List getBuffer();
-  int getRowStride();
   int getPixelStride();
+  int getRowStride();
 }
 
 @ProxyApi(
@@ -552,9 +567,9 @@ abstract class ImageProxy {
   int getWidth();
   int getHieght();
   List<PlaneProxy> getPlanes();
+  ImageInfo getImageInfo();
   Rect? getCropRect();
   void setCropRect(Rect? rect);
-  ImageInfo getImageInfo();
   void close();
 }
 
@@ -564,27 +579,9 @@ abstract class ImageProxy {
   ),
 )
 abstract class Analyzer {
-  late void Function(ImageProxy image) analyze;
-}
+  Analyzer();
 
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.Quality',
-  ),
-)
-abstract class Quality {
-  @static
-  late final Quality fhd;
-  @static
-  late final Quality hd;
-  @static
-  late final Quality highest;
-  @static
-  late final Quality lowest;
-  @static
-  late final Quality sd;
-  @static
-  late final Quality uhd;
+  late final void Function(ImageProxy image) analyze;
 }
 
 @ProxyApi(
@@ -596,7 +593,7 @@ abstract class FallbackStrategy {
   FallbackStrategy.higherQualityOrLowerThan(Quality quality);
   FallbackStrategy.higherQualityThan(Quality quality);
   FallbackStrategy.lowerQualityOrHigherThan(Quality quality);
-  FallbackStrategy.lowerQuality(Quality quality);
+  FallbackStrategy.lowerQualityThan(Quality quality);
 }
 
 @ProxyApi(
@@ -605,12 +602,15 @@ abstract class FallbackStrategy {
   ),
 )
 abstract class QualitySelector {
-  QualitySelector.fromQuality(Quality quality);
-  QualitySelector.fromQualityAndFallbackStrategy(
-      Quality quality, FallbackStrategy fallbackStrategy);
-  QualitySelector.fromOrderedList(List<Quality> qualities);
-  QualitySelector.fromOrderedListAndFallbackStrategy(
-      List<Quality> qualities, FallbackStrategy fallbackStrategy);
+  QualitySelector.from(
+    Quality quality, {
+    FallbackStrategy? fallbackStrategy,
+  });
+
+  QualitySelector.fromOrderedList(
+    List<Quality> qualities, {
+    FallbackStrategy? fallbackStrategy,
+  });
 
   Size? getResolution(CameraInfo cameraInfo, Quality quality);
 }
@@ -662,35 +662,35 @@ abstract class VideoRecordEvent {
     fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Status',
   ),
 )
-abstract class VideoRecordStatusEvent {}
+abstract class VideoRecordStatusEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Start',
   ),
 )
-abstract class VideoRecordStartEvent {}
+abstract class VideoRecordStartEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Pause',
   ),
 )
-abstract class VideoRecordPauseEvent {}
+abstract class VideoRecordPauseEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Resume',
   ),
 )
-abstract class VideoRecordResumeEvent {}
+abstract class VideoRecordResumeEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Finalize',
   ),
 )
-abstract class VideoRecordFinalizeEvent {
+abstract class VideoRecordFinalizeEvent extends VideoRecordEvent {
   Throwable? getCause();
   VideoRecordFinalizeEventError getError();
   String getOutputUri();
@@ -703,7 +703,9 @@ abstract class VideoRecordFinalizeEvent {
   ),
 )
 abstract class VideoRecordEventConsumer {
-  late void Function(VideoRecordEvent event) accept;
+  VideoRecordEventConsumer();
+
+  late final void Function(VideoRecordEvent event) accept;
 }
 
 @ProxyApi(

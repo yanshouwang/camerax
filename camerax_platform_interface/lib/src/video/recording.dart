@@ -1,3 +1,5 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 /// Provides controls for the currently active recording.
 ///
 /// An active recording is created by starting a pending recording with start. If
@@ -13,7 +15,11 @@
 /// it will be automatically stopped at a future point in time when the object is
 /// garbage collected, and no new recordings can be started from the same Recorder
 /// that generated the object until that occurs.
-abstract interface class Recording {
+abstract base class Recording extends PlatformInterface {
+  static final _token = Object();
+
+  Recording.impl() : super(token: _token);
+
   /// Mutes or un-mutes the current recording.
   ///
   /// The output file will contain an audio track even the whole recording is
@@ -23,7 +29,7 @@ abstract interface class Recording {
   ///
   /// Muting or unmuting a recording that isn't created withAudioEnabled with
   /// audio enabled is no-op.
-  void mute(bool muted);
+  Future<void> mute(bool muted);
 
   /// Pauses the current recording if active.
   ///
@@ -32,7 +38,7 @@ abstract interface class Recording {
   ///
   /// If the recording has already been paused or has been finalized internally,
   /// this is a no-op.
-  void pause();
+  Future<void> pause();
 
   /// Resumes the current recording if paused.
   ///
@@ -40,12 +46,12 @@ abstract interface class Recording {
   /// event which will be sent to the listener passed to start.
   ///
   /// If the recording is active or has been finalized internally, this is a no-op.
-  void resume();
+  Future<void> resume();
 
   /// Stops the recording, as if calling close.
   ///
   /// This method is equivalent to calling close.
-  void stop();
+  Future<void> stop();
 
   /// Close this recording.
   ///
@@ -60,5 +66,5 @@ abstract interface class Recording {
   ///
   /// This method is invoked automatically on active recording instances managed
   /// by the try-with-resources statement.
-  void close();
+  Future<void> close();
 }

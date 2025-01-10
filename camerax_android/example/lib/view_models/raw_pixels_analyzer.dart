@@ -6,36 +6,40 @@ import 'package:flutter/cupertino.dart';
 
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
-class RawPixelsAnalyzer implements Analyzer {
+final class RawPixelsAnalyzer extends Analyzer {
   final ImageModelCallback onAnalyzed;
 
-  RawPixelsAnalyzer(this.onAnalyzed);
+  RawPixelsAnalyzer(this.onAnalyzed) : super.impl();
 
   @override
-  void analyze(ImageProxy imageProxy) async {
+  void analyze(ImageProxy image) async {
     try {
-      debugPrint('image size ${imageProxy.width} * ${imageProxy.height}');
-      final format = imageProxy.format;
-      if (format != ImageFormat.rgba_8888) {
+      final format = await image.getFormat();
+      final width = await image.getWidth();
+      final height = await image.getHeight();
+      final planes = await image.getPlanes();
+      final rotationDegrees = await image.getRotationDegrees();
+      debugPrint('image size: $width * $height');
+      if (format != ImageFormat.rgba8888) {
         throw ArgumentError.value(format);
       }
-      final rawPixels = imageProxy.planeProxies.first.value;
+      final rawPixels = await planes.first.getBuffer();
       final buffer = await ui.ImmutableBuffer.fromUint8List(rawPixels);
       final descriptor = ui.ImageDescriptor.raw(
         buffer,
-        width: imageProxy.width,
-        height: imageProxy.height,
+        width: width,
+        height: height,
         pixelFormat: ui.PixelFormat.rgba8888,
       );
       final codec = await descriptor.instantiateCodec();
       final frame = await codec.getNextFrame();
       final imageModel = ImageModel(
         image: frame.image,
-        rotationDegrees: imageProxy.rotationDegrees,
+        rotationDegrees: rotationDegrees,
       );
       onAnalyzed(imageModel);
     } finally {
-      imageProxy.close();
+      image.close();
     }
   }
 }

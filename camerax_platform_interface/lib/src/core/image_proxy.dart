@@ -1,13 +1,18 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'image_format.dart';
 import 'plane_proxy.dart';
 
-abstract interface class ImageProxy {
-  ImageFormat get format;
-  int get width;
-  int get height;
-  int get rotationDegrees;
-  List<PlaneProxy> get planeProxies;
-  int get timestamp;
+abstract base class ImageProxy extends PlatformInterface {
+  static final _token = Object();
 
-  void close();
+  ImageProxy.impl() : super(token: _token);
+
+  Future<ImageFormat> getFormat();
+  Future<int> getWidth();
+  Future<int> getHeight();
+  Future<int> getRotationDegrees();
+  Future<List<PlaneProxy>> getPlanes();
+  Future<int> getTimestamp();
+  Future<void> close();
 }

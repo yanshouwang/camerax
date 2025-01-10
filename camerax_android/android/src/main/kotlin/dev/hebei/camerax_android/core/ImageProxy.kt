@@ -8,10 +8,10 @@ class ImageProxy internal constructor(internal val obj: androidx.camera.core.Ima
     val width get() = obj.width
     val height get() = obj.height
     val planes get() = obj.planes.map { PlaneProxy(it) }.toTypedArray()
-    val cropRect get() = obj.cropRect
     val image
         @androidx.camera.core.ExperimentalGetImage get() = obj.image
     val imageInfo get() = ImageInfo(obj.imageInfo)
+    val cropRect get() = obj.cropRect
 
     fun setCropRect(rect: Rect?) {
         obj.setCropRect(rect)
@@ -27,7 +27,7 @@ class ImageProxy internal constructor(internal val obj: androidx.camera.core.Ima
 
     class PlaneProxy(internal val obj: androidx.camera.core.ImageProxy.PlaneProxy) {
         val buffer get() = obj.buffer
-        val rowStride get() = obj.rowStride
         val pixelStride get() = obj.pixelStride
+        val rowStride get() = obj.rowStride
     }
 }

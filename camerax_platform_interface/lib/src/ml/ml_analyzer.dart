@@ -6,7 +6,7 @@ import 'ml_object_type.dart';
 
 typedef MLObjectsCallback = void Function(List<MLObject> items);
 
-abstract interface class MLAnalyzer implements Analyzer {
+abstract base class MLAnalyzer extends Analyzer {
   factory MLAnalyzer({
     required List<MLObjectType> types,
     required CoordinateSystem targetCoordinateSystem,

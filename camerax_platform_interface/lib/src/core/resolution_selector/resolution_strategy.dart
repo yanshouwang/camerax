@@ -1,19 +1,24 @@
-import 'dart:ui' as ui;
+import 'package:camerax_platform_interface/src/camerax.dart';
+import 'package:camerax_platform_interface/src/core.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'resolution_fallback_rule.dart';
+abstract base class ResolutionStrategy extends PlatformInterface {
+  static final _token = Object();
 
-final class ResolutionStrategy {
-  final ui.Size? boundSize;
-  final ResolutionFallbackRule fallbackRule;
+  ResolutionStrategy.impl() : super(token: _token);
 
-  const ResolutionStrategy({
-    required ui.Size this.boundSize,
-    required this.fallbackRule,
-  });
+  factory ResolutionStrategy({
+    required Size boundSize,
+    required ResolutionFallbackRule fallbackRule,
+  }) =>
+      CameraX.instance.createResolutionStrategy(
+        boundSize: boundSize,
+        fallbackRule: fallbackRule,
+      );
 
-  const ResolutionStrategy._()
-      : boundSize = null,
-        fallbackRule = ResolutionFallbackRule.none;
+  Future<Size?> getBoundSize();
+  Future<ResolutionFallbackRule> getFallbackRule();
 
-  static const highestAvailableStrategy = ResolutionStrategy._();
+  static ResolutionStrategy get highestAvailableStrategy =>
+      CameraX.instance.getHighestAvailableStrategy();
 }

@@ -267,9 +267,7 @@ abstract base class CameraController extends PlatformInterface {
   /// take a picture with the maximum available resolution, make sure that the
   /// PreviewView's aspect ratio matches the max JPEG resolution supported by the
   /// camera.
-  Future<Uri> takePicture({
-    required Uri uri,
-  });
+  Future<Uri> takePicture(Uri uri);
 
   /// Returns the mode with which images are acquired.
   ///

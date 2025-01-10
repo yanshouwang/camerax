@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/native_comparator.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
@@ -13,8 +12,7 @@ import 'focus_metering_action.dart';
 import 'range.dart';
 import 'zoom_state.dart';
 
-final class CameraInfo extends $base.CameraInfo with NativeComparator {
-  @override
+final class CameraInfo extends $base.CameraInfo {
   final $native.CameraInfo obj;
 
   late final StreamController<$base.CameraState> _cameraStateChangedController;
@@ -68,22 +66,7 @@ final class CameraInfo extends $base.CameraInfo with NativeComparator {
   @override
   Future<$base.ExposureState> getExposureState() async {
     final obj = await this.obj.getExposureState();
-    final index = await obj.getExposureCompensationIndex();
-    final rangeObj = await obj.getExposureCompensationRange();
-    final lower = await rangeObj.getLower();
-    final upper = await rangeObj.getUpper();
-    final range = Range(
-      lower: lower,
-      upper: upper,
-    );
-    final step = await obj.getExposureCompensationStep();
-    final isSupported = await obj.isExposureCompensationSupported();
-    return ExposureState(
-      exposureCompensationIndex: index,
-      exposureCompensationRange: range,
-      exposureCompensationStep: step,
-      isExposureCompensationSupported: isSupported,
-    );
+    return ExposureState.$native(obj);
   }
 
   @override
@@ -106,18 +89,8 @@ final class CameraInfo extends $base.CameraInfo with NativeComparator {
 
   @override
   Future<Set<$base.Range<int>>> getSupportedFrameRateRanges() async {
-    final ranges = <$base.Range<int>>{};
     final objs = await obj.getSupportedFrameRateRanges();
-    for (var obj in objs) {
-      final lower = await obj.getLower();
-      final upper = await obj.getUpper();
-      final range = Range<int>(
-        lower: lower,
-        upper: upper,
-      );
-      ranges.add(range);
-    }
-    return ranges;
+    return objs.map((obj) => IntRange.$native(obj)).toSet();
   }
 
   @override
@@ -131,19 +104,7 @@ final class CameraInfo extends $base.CameraInfo with NativeComparator {
   Future<$base.ZoomState?> getZoomState() async {
     final dataObj = await this.obj.getZoomState();
     final obj = await dataObj.getValue();
-    if (obj == null) {
-      return null;
-    }
-    final minZoomRatio = await obj.getMinZoomRatio();
-    final maxZoomRatio = await obj.getMaxZoomRatio();
-    final zoomRatio = await obj.getZoomRatio();
-    final linearZoom = await obj.getLinearZoom();
-    return ZoomState(
-      minZoomRatio: minZoomRatio,
-      maxZoomRatio: maxZoomRatio,
-      zoomRatio: zoomRatio,
-      linearZoom: linearZoom,
-    );
+    return obj == null ? null : ZoomState.$native(obj);
   }
 
   @override
@@ -268,18 +229,9 @@ final class CameraInfo extends $base.CameraInfo with NativeComparator {
       _zoomStateObserver = completer.future;
       final dataObj = await obj.getZoomState();
       final observerObj = $native.ZoomStateObserver(
-        onChanged: (observer, valueObj) async {
+        onChanged: (obj, valueObj) {
           try {
-            final minZoomRatio = await valueObj.getMinZoomRatio();
-            final maxZoomRatio = await valueObj.getMaxZoomRatio();
-            final zoomRatio = await valueObj.getZoomRatio();
-            final linearZoom = await valueObj.getLinearZoom();
-            final value = ZoomState(
-              minZoomRatio: minZoomRatio,
-              maxZoomRatio: maxZoomRatio,
-              zoomRatio: zoomRatio,
-              linearZoom: linearZoom,
-            );
+            final value = ZoomState.$native(valueObj);
             _zoomStateChangedController.add(value);
           } catch (e) {
             _zoomStateChangedController.addError(e);

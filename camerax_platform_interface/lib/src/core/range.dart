@@ -18,8 +18,8 @@ abstract base class Range<T> extends PlatformInterface {
   Range.impl() : super(token: _token);
 
   /// Get the lower endpoint.
-  T get lower;
+  Future<T> getLower();
 
   /// Get the upper endpoint.
-  T get upper;
+  Future<T> getUpper();
 }

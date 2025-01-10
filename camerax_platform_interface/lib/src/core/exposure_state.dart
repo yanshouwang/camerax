@@ -24,7 +24,7 @@ abstract base class ExposureState extends PlatformInterface {
   /// The exposure value resets to default when there is no UseCase associated
   /// with the camera. For example, unbind all use cases from the camera or when
   /// the lifecycle changed that all the use case stopping data from the camera.
-  int get exposureCompensationIndex;
+  Future<int> getExposureCompensationIndex();
 
   /// Get the maximum and minimum exposure compensation values for setExposureCompensationIndex
   ///
@@ -36,11 +36,11 @@ abstract base class ExposureState extends PlatformInterface {
   /// Min.exposure compensation * getExposureCompensationStep <= minimum supported EV
   /// Max.exposure compensation * getExposureCompensationStep >= maximum supported EV
   /// ```
-  Range<int> get exposureCompensationRange;
+  Future<Range<int>> getExposureCompensationRange();
 
   /// Get the smallest step by which the exposure compensation can be changed.
-  double get exposureCompensationStep;
+  Future<double> getExposureCompensationStep();
 
   /// Whether exposure compensation is supported for this camera.
-  bool get isExposureCompensationSupported;
+  Future<bool> isExposureCompensationSupported();
 }

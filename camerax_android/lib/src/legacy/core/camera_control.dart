@@ -1,12 +1,10 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/native_comparator.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
 import 'focus_metering_action.dart';
 
-final class CameraControl extends $base.CameraControl with NativeComparator {
-  @override
+final class CameraControl extends $base.CameraControl {
   final $native.CameraControl obj;
 
   CameraControl.$native(this.obj) : super.impl();

@@ -2,8 +2,16 @@ import 'dart:async';
 
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/core.dart';
+import 'package:camerax_android/src/legacy/core/backpressure_strategy.dart';
+import 'package:camerax_android/src/legacy/core/capture_mode.dart';
+import 'package:camerax_android/src/legacy/core/flash_mode.dart';
+import 'package:camerax_android/src/legacy/core/image_format.dart';
+import 'package:camerax_android/src/legacy/core/mirror_mode.dart';
+import 'package:camerax_android/src/legacy/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
+
+import 'use_case.dart';
 
 final class CameraController extends $base.CameraController {
   final $native.LifecycleCameraController obj;
@@ -110,19 +118,7 @@ final class CameraController extends $base.CameraController {
   Future<$base.ZoomState?> getZoomState() async {
     final dataObj = await obj.getZoomState();
     final valueObj = await dataObj.getValue();
-    if (valueObj == null) {
-      return null;
-    }
-    final minZoomRatio = await valueObj.getMinZoomRatio();
-    final maxZoomRatio = await valueObj.getMaxZoomRatio();
-    final zoomRatio = await valueObj.getZoomRatio();
-    final linearZoom = await valueObj.getLinearZoom();
-    return ZoomState(
-      minZoomRatio: minZoomRatio,
-      maxZoomRatio: maxZoomRatio,
-      zoomRatio: zoomRatio,
-      linearZoom: linearZoom,
-    );
+    return valueObj == null ? null : ZoomState.$native(valueObj);
   }
 
   @override
@@ -158,202 +154,214 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<bool> isImageCaptureEnabled() {
-    // TODO: implement isImageCaptureEnabled
-    throw UnimplementedError();
+  Future<bool> isImageCaptureEnabled() async {
+    final enabled = await obj.isImageCaptureEnabled();
+    return enabled;
   }
 
   @override
-  Future<bool> isVideoCaptureEnabled() {
-    // TODO: implement isVideoCaptureEnabled
-    throw UnimplementedError();
+  Future<bool> isImageAnalysisEnabled() async {
+    final enabled = await obj.isImageAnalysisEnabled();
+    return enabled;
   }
 
   @override
-  Future<bool> isImageAnalysisEnabled() {
-    // TODO: implement isImageAnalysisEnabled
-    throw UnimplementedError();
+  Future<bool> isVideoCaptureEnabled() async {
+    final enabled = await obj.isVideoCaptureEnabled();
+    return enabled;
   }
 
   @override
-  Future<void> setEnabledUseCases(List<$base.UseCase> useCases) {
-    // TODO: implement setEnabledUseCases
-    throw UnimplementedError();
+  Future<void> setEnabledUseCases(List<$base.UseCase> useCases) async {
+    final useCaseObjs = useCases.map((useCase) => useCase.obj).toList();
+    await obj.setEnabledUseCases(useCaseObjs);
   }
 
   @override
-  Future<$base.ResolutionSelector?> getPreviewResolutionSelector() {
-    // TODO: implement getPreviewResolutionSelector
-    throw UnimplementedError();
+  Future<$base.ResolutionSelector?> getPreviewResolutionSelector() async {
+    final obj = await this.obj.getPreviewResolutionSelector();
+    return obj == null ? null : ResolutionSelector.$native(obj);
   }
 
   @override
   Future<void> setPreviewResolutionSelector(
-      $base.ResolutionSelector? resolutionSelector) {
-    // TODO: implement setPreviewResolutionSelector
-    throw UnimplementedError();
+      $base.ResolutionSelector? resolutionSelector) async {
+    if (resolutionSelector is! ResolutionSelector) {
+      throw TypeError();
+    }
+    await obj.setPreviewResolutionSelector(resolutionSelector.obj);
   }
 
   @override
-  Future<$base.ResolutionSelector?> getImageCaptureResolutionSelector() {
-    // TODO: implement getImageCaptureResolutionSelector
-    throw UnimplementedError();
+  Future<$base.ResolutionSelector?> getImageCaptureResolutionSelector() async {
+    final obj = await this.obj.getImageCaptureResolutionSelector();
+    return obj == null ? null : ResolutionSelector.$native(obj);
   }
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-      $base.ResolutionSelector? resolutionSelector) {
-    // TODO: implement setImageCaptureResolutionSelector
-    throw UnimplementedError();
+      $base.ResolutionSelector? resolutionSelector) async {
+    if (resolutionSelector is! ResolutionSelector) {
+      throw TypeError();
+    }
+    await obj.setImageCaptureResolutionSelector(resolutionSelector.obj);
   }
 
   @override
-  Future<$base.CaptureMode> getImageCaptureMode() {
-    // TODO: implement getImageCaptureMode
-    throw UnimplementedError();
+  Future<$base.CaptureMode> getImageCaptureMode() async {
+    final obj = await this.obj.getImageCaptureMode();
+    return obj.args;
   }
 
   @override
-  Future<void> setImageCaptureMode($base.CaptureMode captureMode) {
-    // TODO: implement setImageCaptureMode
-    throw UnimplementedError();
+  Future<void> setImageCaptureMode($base.CaptureMode captureMode) async {
+    await obj.setImageCaptureMode(captureMode.obj);
   }
 
   @override
-  Future<$base.FlashMode> getImageCaptureFlashMode() {
-    // TODO: implement getImageCaptureFlashMode
-    throw UnimplementedError();
+  Future<$base.FlashMode> getImageCaptureFlashMode() async {
+    final obj = await this.obj.getImageCaptureFlashMode();
+    return obj.args;
   }
 
   @override
-  Future<void> setImageCaptureFlashMode($base.FlashMode flashMode) {
-    // TODO: implement setImageCaptureFlashMode
-    throw UnimplementedError();
+  Future<void> setImageCaptureFlashMode($base.FlashMode flashMode) async {
+    await obj.setImageCaptureFlashMode(flashMode.obj);
   }
 
   @override
-  Future<Uri> takePicture({required Uri uri}) {
-    // TODO: implement takePicture
-    throw UnimplementedError();
+  Future<Uri> takePicture(Uri uri) async {
+    final savedUri = await obj.takePictureToUri('$uri');
+    return Uri.parse(savedUri);
   }
 
   @override
-  Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() {
-    // TODO: implement getImageAnalysisResolutionSelector
-    throw UnimplementedError();
+  Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() async {
+    final obj = await this.obj.getImageAnalysisResolutionSelector();
+    return ResolutionSelector.$native(obj);
   }
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
-      $base.ResolutionSelector? resolutionSelector) {
-    // TODO: implement setImageAnalysisResolutionSelector
-    throw UnimplementedError();
+      $base.ResolutionSelector? resolutionSelector) async {
+    if (resolutionSelector is! ResolutionSelector) {
+      throw TypeError();
+    }
+    await obj.setImageAnalysisResolutionSelector(resolutionSelector.obj);
   }
 
   @override
-  Future<$base.BackpressureStrategy> getImageAnalysisBackpressureStrategy() {
-    // TODO: implement getImageAnalysisBackpressureStrategy
-    throw UnimplementedError();
+  Future<$base.BackpressureStrategy>
+      getImageAnalysisBackpressureStrategy() async {
+    final obj = await this.obj.getImageAnalysisBackpressureStrategy();
+    return obj.args;
   }
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-      $base.BackpressureStrategy backpressureStrategy) {
-    // TODO: implement setImageAnalysisBackpressureStrategy
-    throw UnimplementedError();
+      $base.BackpressureStrategy backpressureStrategy) async {
+    await obj.setImageAnalysisBackpressureStrategy(backpressureStrategy.obj);
   }
 
   @override
-  Future<int> getImageAnalysisImageQueueDepth() {
-    // TODO: implement getImageAnalysisImageQueueDepth
-    throw UnimplementedError();
+  Future<int> getImageAnalysisImageQueueDepth() async {
+    final imageQueueDepth = await obj.getImageAnalysisImageQueueDepth();
+    return imageQueueDepth;
   }
 
   @override
-  Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth) {
-    // TODO: implement setImageAnalysisImageQueueDepth
-    throw UnimplementedError();
+  Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth) async {
+    await obj.setImageAnalysisImageQueueDepth(imageQueueDepth);
   }
 
   @override
-  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() {
-    // TODO: implement getImageAnalysisOutputImageFormat
-    throw UnimplementedError();
+  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() async {
+    final obj = await this.obj.getImageAnalysisOutputImageFormat();
+    return obj.args;
   }
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      $base.ImageFormat outputImageFormat) {
-    // TODO: implement setImageAnalysisOutputImageFormat
-    throw UnimplementedError();
+      $base.ImageFormat outputImageFormat) async {
+    await obj.setImageAnalysisOutputImageFormat(outputImageFormat.obj);
   }
 
   @override
-  Future<void> setImageAnalysisAnalyzer($base.Analyzer analyzer) {
-    // TODO: implement setImageAnalysisAnalyzer
-    throw UnimplementedError();
+  Future<void> setImageAnalysisAnalyzer($base.Analyzer analyzer) async {
+    final obj = $native.Analyzer(
+      analyze: (obj, imageObj) {
+        final image = ImageProxy.$native(imageObj);
+        analyzer.analyze(image);
+      },
+    );
+    await this.obj.setImageAnalysisAnalyzer(obj);
   }
 
   @override
-  Future<void> clearImageAnalysisAnalyzer() {
-    // TODO: implement clearImageAnalysisAnalyzer
-    throw UnimplementedError();
+  Future<void> clearImageAnalysisAnalyzer() async {
+    await obj.clearImageAnalysisAnalyzer();
   }
 
   @override
-  Future<$base.DynamicRange> getVideoCaptureDynamicRange() {
-    // TODO: implement getVideoCaptureDynamicRange
-    throw UnimplementedError();
+  Future<$base.DynamicRange> getVideoCaptureDynamicRange() async {
+    final obj = await this.obj.getVideoCaptureDynamicRange();
+    return DynamicRange.$native(obj);
   }
 
   @override
-  Future<void> setVideoCaptureDynamicRange($base.DynamicRange dynamicRange) {
-    // TODO: implement setVideoCaptureDynamicRange
-    throw UnimplementedError();
+  Future<void> setVideoCaptureDynamicRange(
+      $base.DynamicRange dynamicRange) async {
+    if (dynamicRange is! DynamicRange) {
+      throw TypeError();
+    }
+    await obj.setVideoCaptureDynamicRange(dynamicRange.obj);
   }
 
   @override
-  Future<$base.MirrorMode> getVideoCaptureMirrorMode() {
-    // TODO: implement getVideoCaptureMirrorMode
-    throw UnimplementedError();
+  Future<$base.MirrorMode> getVideoCaptureMirrorMode() async {
+    final obj = await this.obj.getVideoCaptureMirrorMode();
+    return obj.args;
   }
 
   @override
-  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) {
-    // TODO: implement setVideoCaptureMirrorMode
-    throw UnimplementedError();
+  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) async {
+    await obj.setVideoCaptureMirrorMode(mirrorMode.obj);
   }
 
   @override
-  Future<$base.QualitySelector> getVideoCaptureQualitySelector() {
-    // TODO: implement getVideoCaptureQualitySelector
-    throw UnimplementedError();
+  Future<$base.QualitySelector> getVideoCaptureQualitySelector() async {
+    final obj = await this.obj.getVideoCaptureQualitySelector();
+    return QualitySelector.$native(obj);
   }
 
   @override
   Future<void> setVideoCaptureQualitySelector(
-      $base.QualitySelector qualitySelector) {
-    // TODO: implement setVideoCaptureQualitySelector
-    throw UnimplementedError();
+      $base.QualitySelector qualitySelector) async {
+    if (qualitySelector is! QualitySelector) {
+      throw TypeError();
+    }
+    await obj.setVideoCaptureQualitySelector(qualitySelector.obj);
   }
 
   @override
-  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() {
-    // TODO: implement getVideoCaptureTargetFrameRate
-    throw UnimplementedError();
+  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() async {
+    final obj = await this.obj.getVideoCaptureTargetFrameRate();
+    return IntRange.$native(obj);
   }
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(
-      $base.Range<int> targetFrameRate) {
-    // TODO: implement setVideoCaptureTargetFrameRate
-    throw UnimplementedError();
+      $base.Range<int> targetFrameRate) async {
+    if (targetFrameRate is! IntRange) {
+      throw TypeError();
+    }
+    await obj.setVideoCaptureTargetFrameRate(targetFrameRate.obj);
   }
 
   @override
-  Future<bool> isRecording() {
-    // TODO: implement isRecording
-    throw UnimplementedError();
+  Future<bool> isRecording() async {
+    final isRecording = await obj.isRecording();
+    return isRecording;
   }
 
   @override
@@ -361,9 +369,35 @@ final class CameraController extends $base.CameraController {
     required Uri uri,
     required bool enableAudio,
     required $base.VideoRecordEventCallback listener,
-  }) {
-    // TODO: implement startRecording
-    throw UnimplementedError();
+  }) async {
+    final audioConfigObj = $native.AudioConfig.create(
+      enableAudio: enableAudio,
+    );
+    final listenerObj = $native.VideoRecordEventConsumer(
+      accept: (obj, eventObj) {
+        if (eventObj is $native.VideoRecordStatusEvent) {
+          final event = VideoRecordStatusEvent.$native(eventObj);
+          listener(event);
+        } else if (eventObj is $native.VideoRecordStartEvent) {
+          final event = VideoRecordStartEvent.$native(eventObj);
+          listener(event);
+        } else if (eventObj is $native.VideoRecordPauseEvent) {
+          final event = VideoRecordPauseEvent.$native(eventObj);
+          listener(event);
+        } else if (eventObj is $native.VideoRecordResumeEvent) {
+          final event = VideoRecordResumeEvent.$native(eventObj);
+          listener(event);
+        } else if (eventObj is $native.VideoRecordFinalizeEvent) {
+          final event = VideoRecordFinalizeEvent.$native(eventObj);
+          listener(event);
+        } else {
+          throw TypeError();
+        }
+      },
+    );
+    final obj =
+        await this.obj.startRecording('$uri', audioConfigObj, listenerObj);
+    return Recording.$native(obj);
   }
 
   void _onListenTorchStateChanged() async {
@@ -413,18 +447,9 @@ final class CameraController extends $base.CameraController {
       _zoomStateObserver = completer.future;
       final dataObj = await obj.getZoomState();
       final observerObj = $native.ZoomStateObserver(
-        onChanged: (observer, valueObj) async {
+        onChanged: (obj, valueObj) {
           try {
-            final minZoomRatio = await valueObj.getMinZoomRatio();
-            final maxZoomRatio = await valueObj.getMaxZoomRatio();
-            final zoomRatio = await valueObj.getZoomRatio();
-            final linearZoom = await valueObj.getLinearZoom();
-            final value = ZoomState(
-              minZoomRatio: minZoomRatio,
-              maxZoomRatio: maxZoomRatio,
-              zoomRatio: zoomRatio,
-              linearZoom: linearZoom,
-            );
+            final value = ZoomState.$native(valueObj);
             _zoomStateChangedController.add(value);
           } catch (e) {
             _zoomStateChangedController.addError(e);

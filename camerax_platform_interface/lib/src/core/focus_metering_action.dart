@@ -39,17 +39,17 @@ abstract base class FocusMeteringAction extends PlatformInterface {
   FocusMeteringAction.impl() : super(token: _token);
 
   /// Returns auto-cancel duration. Returns 0 if auto-cancel is disabled.
-  Duration get autoCancelDuration;
+  Future<Duration> getAutoCancelDuration();
 
   /// Returns all MeteringPoints used for AE regions.
-  List<MeteringPoint> get meteringPointsAe;
+  Future<List<MeteringPoint>> getMeteringPointsAe();
 
   /// Returns all MeteringPoints used for AF regions.
-  List<MeteringPoint> get meteringPointsAf;
+  Future<List<MeteringPoint>> getMeteringPointsAf();
 
   /// Returns all MeteringPoints used for AWB regions.
-  List<MeteringPoint> get meteringPointsAwb;
+  Future<List<MeteringPoint>> getMeteringPointsAwb();
 
   /// Returns if auto-cancel is enabled or not.
-  bool get isAutoCancelEnabled;
+  Future<bool> isAutoCancelEnabled();
 }

@@ -1,4 +1,6 @@
 enum ImageFormat {
-  yuv_420_888,
-  rgba_8888,
+  jpeg,
+  jpegR,
+  yuv420_888,
+  rgba8888,
 }

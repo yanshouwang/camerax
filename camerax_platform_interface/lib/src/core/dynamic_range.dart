@@ -8,8 +8,8 @@ abstract base class DynamicRange extends PlatformInterface {
 
   DynamicRange.impl() : super(token: _token);
 
-  Encoding get encoding;
-  BitDepth get bitDepth;
+  Future<Encoding> getEncoding();
+  Future<BitDepth> getBitDepth();
 
   // static const unspecifid = DynamicRange(
   //   encoding: Encoding.unspecified,

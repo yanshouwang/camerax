@@ -14,11 +14,14 @@ import dev.hebei.camerax_android.legacy.core.FocusMeteringAction
 import dev.hebei.camerax_android.legacy.core.IntRange
 import dev.hebei.camerax_android.legacy.core.MeteringPointArgs
 import dev.hebei.camerax_android.legacy.core.PermissionManager
+import dev.hebei.camerax_android.legacy.core.Rect
+import dev.hebei.camerax_android.legacy.core.Size
 import dev.hebei.camerax_android.legacy.core.TorchStateLiveData
 import dev.hebei.camerax_android.legacy.core.TorchStateObserver
 import dev.hebei.camerax_android.legacy.core.ZoomState
 import dev.hebei.camerax_android.legacy.core.ZoomStateLiveData
 import dev.hebei.camerax_android.legacy.core.ZoomStateObserver
+import dev.hebei.camerax_android.legacy.core.resolutionselector.AspectRatioStrategy
 import dev.hebei.camerax_android.legacy.view.CameraController
 import dev.hebei.camerax_android.legacy.view.LifecycleCameraController
 import dev.hebei.camerax_android.legacy.view.PreviewView
@@ -30,6 +33,18 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
 
     override fun getPigeonApiPermissionManager(): PigeonApiPermissionManager {
         return PermissionManager(this)
+    }
+
+    override fun getPigeonApiThrowable(): PigeonApiThrowable {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiSize(): PigeonApiSize {
+        return Size(this)
+    }
+
+    override fun getPigeonApiRect(): PigeonApiRect {
+        return Rect(this)
     }
 
     override fun getPigeonApiIntRange(): PigeonApiIntRange {
@@ -94,6 +109,74 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
 
     override fun getPigeonApiCameraControl(): PigeonApiCameraControl {
         return CameraControl(this)
+    }
+
+    override fun getPigeonApiAspectRatioStrategy(): PigeonApiAspectRatioStrategy {
+        return AspectRatioStrategy(this)
+    }
+
+    override fun getPigeonApiResolutionFilter(): PigeonApiResolutionFilter {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiResolutionStrategy(): PigeonApiResolutionStrategy {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiResolutionSelector(): PigeonApiResolutionSelector {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiImageInfo(): PigeonApiImageInfo {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiPlaneProxy(): PigeonApiPlaneProxy {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiImageProxy(): PigeonApiImageProxy {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiAnalyzer(): PigeonApiAnalyzer {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiFallbackStrategy(): PigeonApiFallbackStrategy {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiQualitySelector(): PigeonApiQualitySelector {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiAudioConfig(): PigeonApiAudioConfig {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiAudioStats(): PigeonApiAudioStats {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiRecordingStats(): PigeonApiRecordingStats {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiVideoRecordEvent(): PigeonApiVideoRecordEvent {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiVideoRecordFinalizeEvent(): PigeonApiVideoRecordFinalizeEvent {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiVideoRecordEventConsumer(): PigeonApiVideoRecordEventConsumer {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPigeonApiRecording(): PigeonApiRecording {
+        TODO("Not yet implemented")
     }
 
     override fun getPigeonApiCameraController(): PigeonApiCameraController {

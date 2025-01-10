@@ -1,9 +1,8 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/native_comparator.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
-final class CameraSelector extends $base.CameraSelector with NativeComparator {
+final class CameraSelector extends $base.CameraSelector {
   static CameraSelector get front =>
       CameraSelector.$native($native.CameraSelector.front);
   static CameraSelector get back =>
@@ -11,7 +10,6 @@ final class CameraSelector extends $base.CameraSelector with NativeComparator {
   static CameraSelector get external =>
       CameraSelector.$native($native.CameraSelector.external);
 
-  @override
   final $native.CameraSelector obj;
 
   CameraSelector.$native(this.obj) : super.impl();

@@ -34,9 +34,9 @@ val Encoding.obj
 
 val BitDepth.obj
     get() = when (this) {
-        BitDepth.UNSPECIFIED -> dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_UNSPECIFIED
-        BitDepth.WITH8BIT -> dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_8_BIT
-        BitDepth.WITH10BIT -> dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_10_BIT
+        BitDepth.BIT_DEPTH_UNSPECIFIED -> dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_UNSPECIFIED
+        BitDepth.BIT_DEPTH8BIT -> dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_8_BIT
+        BitDepth.BIT_DEPTH10BIT -> dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_10_BIT
     }
 
 val dev.hebei.camerax_android.core.DynamicRange.Encoding.args
@@ -52,7 +52,7 @@ val dev.hebei.camerax_android.core.DynamicRange.Encoding.args
 
 val dev.hebei.camerax_android.core.DynamicRange.BitDepth.args
     get() = when (this) {
-        dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_UNSPECIFIED -> BitDepth.UNSPECIFIED
-        dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_8_BIT -> BitDepth.WITH8BIT
-        dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_10_BIT -> BitDepth.WITH10BIT
+        dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_UNSPECIFIED -> BitDepth.BIT_DEPTH_UNSPECIFIED
+        dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_8_BIT -> BitDepth.BIT_DEPTH8BIT
+        dev.hebei.camerax_android.core.DynamicRange.BitDepth.BIT_DEPTH_10_BIT -> BitDepth.BIT_DEPTH10BIT
     }

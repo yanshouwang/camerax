@@ -7,8 +7,8 @@ abstract base class ZoomState extends PlatformInterface {
   @protected
   ZoomState.impl() : super(token: _token);
 
-  double get minZoomRatio;
-  double get maxZoomRatio;
-  double get zoomRatio;
-  double get linearZoom;
+  Future<double> getMinZoomRatio();
+  Future<double> getMaxZoomRatio();
+  Future<double> getZoomRatio();
+  Future<double> getLinearZoom();
 }

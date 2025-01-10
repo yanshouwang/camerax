@@ -3,7 +3,7 @@ import 'package:camerax_android_example/models.dart';
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+    as $base;
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -22,8 +22,8 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with RouteAware {
   late final PageController _pageController;
-  late final ValueNotifier<double?> _zoomRatio;
-  late final ValueNotifier<int?> _exposure;
+  late final ValueNotifier<double?> _viewZoomRatio;
+  late final ValueNotifier<int?> _viewExposureIndex;
 
   Offset? _onPanStartPosition;
   double? _onPanUpdateDx;
@@ -35,8 +35,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
       initialPage: 0,
       viewportFraction: 1 / 5,
     );
-    _zoomRatio = ValueNotifier(null);
-    _exposure = ValueNotifier(null);
+    _viewZoomRatio = ValueNotifier(null);
+    _viewExposureIndex = ValueNotifier(null);
   }
 
   @override
@@ -44,8 +44,12 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final viewModel = ViewModel.of<HomeViewModel>(context);
     final controller = viewModel.controller;
     final mode = viewModel.mode;
-    final zoomState = viewModel.zoomState;
-    final exposureState = viewModel.exposureState;
+    final minZoomRatio = viewModel.minZoomRatio;
+    final maxZoomRatio = viewModel.maxZoomRatio;
+    final zoomRatio = viewModel.zoomRatio;
+    final minExposureIndex = viewModel.minExposureIndex;
+    final maxExposureIndex = viewModel.maxExposureIndex;
+    final exposureIndex = viewModel.exposureIndex;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final recording = viewModel.recording;
@@ -68,12 +72,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       duration: const Duration(milliseconds: 100),
                       onTap: () {
                         switch (flashMode) {
-                          case $interface.FlashMode.auto:
-                            viewModel.setFlashMode($interface.FlashMode.on);
-                          case $interface.FlashMode.on:
-                            viewModel.setFlashMode($interface.FlashMode.off);
-                          case $interface.FlashMode.off:
-                            viewModel.setFlashMode($interface.FlashMode.auto);
+                          case $base.FlashMode.auto:
+                            viewModel.setFlashMode($base.FlashMode.on);
+                          case $base.FlashMode.on:
+                            viewModel.setFlashMode($base.FlashMode.off);
+                          case $base.FlashMode.off:
+                            viewModel.setFlashMode($base.FlashMode.auto);
+                          case $base.FlashMode.screen:
+                            viewModel.setFlashMode($base.FlashMode.screen);
                         }
                       },
                       child: Container(
@@ -85,9 +91,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               .resolveFrom(context),
                         ),
                         child: Icon(
-                          flashMode == $interface.FlashMode.auto
+                          flashMode == $base.FlashMode.auto
                               ? Symbols.flash_auto
-                              : flashMode == $interface.FlashMode.on
+                              : flashMode == $base.FlashMode.on
                                   ? Symbols.flash_on
                                   : Symbols.flash_off,
                           color: CupertinoColors.label.resolveFrom(context),
@@ -121,19 +127,21 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                     MLItemsView(
                       items: items,
                     ),
-                  if (zoomState != null)
+                  if (minZoomRatio != null &&
+                      maxZoomRatio != null &&
+                      zoomRatio != null)
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: ValueListenableBuilder(
-                        valueListenable: _zoomRatio,
-                        builder: (context, zoomRatio, child) {
+                        valueListenable: _viewZoomRatio,
+                        builder: (context, viewZoomRatio, child) {
                           return ZoomWidget(
-                            minimum: zoomState.minZoomRatio,
-                            maximum: zoomState.maxZoomRatio,
-                            value: zoomRatio ?? zoomState.zoomRatio,
+                            minimum: minZoomRatio,
+                            maximum: maxZoomRatio,
+                            value: viewZoomRatio ?? zoomRatio,
                             onChanged: (value) {
                               viewModel.setZoomRatio(value);
-                              _zoomRatio.value = value;
+                              _viewZoomRatio.value = value;
                             },
                           );
                         },
@@ -145,25 +153,21 @@ class _HomeViewState extends State<HomeView> with RouteAware {
           ),
           Column(
             children: [
-              if (exposureState != null)
+              if (minExposureIndex != null &&
+                  maxExposureIndex != null &&
+                  exposureIndex != null)
                 ValueListenableBuilder(
-                  valueListenable: _exposure,
-                  builder: (context, exposure, child) {
+                  valueListenable: _viewExposureIndex,
+                  builder: (context, viewExposureIndex, child) {
                     return CupertinoSlider(
-                      min: exposureState.exposureCompensationRange.lower
-                          .toDouble(),
-                      max: exposureState.exposureCompensationRange.upper
-                          .toDouble(),
-                      divisions:
-                          (exposureState.exposureCompensationRange.upper -
-                              exposureState.exposureCompensationRange.lower),
-                      value:
-                          (exposure ?? exposureState.exposureCompensationIndex)
-                              .toDouble(),
+                      min: minExposureIndex.toDouble(),
+                      max: maxExposureIndex.toDouble(),
+                      divisions: maxExposureIndex - minExposureIndex,
+                      value: (viewExposureIndex ?? exposureIndex).toDouble(),
                       onChanged: (value) {
                         final newValue = value.toInt();
                         viewModel.setExposure(newValue);
-                        _exposure.value = newValue;
+                        _viewExposureIndex.value = newValue;
                       },
                     );
                   },
@@ -442,8 +446,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             color: CupertinoColors.label.resolveFrom(context),
                           ),
                         ),
-                        flip:
-                            viewModel.lensFacing == $interface.LensFacing.back,
+                        flip: viewModel.lensFacing == $base.LensFacing.back,
                       ),
                     ),
                   ),
@@ -485,14 +488,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
   void dispose() {
     routeObserver.unsubscribe(this);
     _pageController.dispose();
-    _zoomRatio.dispose();
-    _exposure.dispose();
+    _viewZoomRatio.dispose();
+    _viewExposureIndex.dispose();
     super.dispose();
   }
 }
 
 class PreviewView extends StatefulWidget {
-  final $interface.CameraController controller;
+  final $base.CameraController controller;
 
   const PreviewView({
     super.key,
@@ -504,12 +507,12 @@ class PreviewView extends StatefulWidget {
 }
 
 class _PreviewViewState extends State<PreviewView> {
-  late final $interface.PreviewView _obj;
+  late final $base.PreviewView _obj;
 
   @override
   void initState() {
     super.initState();
-    _obj = $interface.PreviewView();
+    _obj = $base.PreviewView();
     _obj.setController(widget.controller);
   }
 

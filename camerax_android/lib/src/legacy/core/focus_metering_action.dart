@@ -1,32 +1,39 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/native_comparator.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
-final class FocusMeteringAction extends $base.FocusMeteringAction
-    with NativeComparator {
-  @override
+final class FocusMeteringAction extends $base.FocusMeteringAction {
   final $native.FocusMeteringAction obj;
 
   FocusMeteringAction.$native(this.obj) : super.impl();
 
   @override
-  // TODO: implement autoCancelDuration
-  Duration get autoCancelDuration => throw UnimplementedError();
+  Future<Duration> getAutoCancelDuration() async {
+    // TODO: implement getAutoCancelDuration
+    throw UnimplementedError();
+  }
 
   @override
-  // TODO: implement isAutoCancelEnabled
-  bool get isAutoCancelEnabled => throw UnimplementedError();
+  Future<List<$base.MeteringPoint>> getMeteringPointsAe() {
+    // TODO: implement getMeteringPointsAe
+    throw UnimplementedError();
+  }
 
   @override
-  // TODO: implement meteringPointsAe
-  List<$base.MeteringPoint> get meteringPointsAe => throw UnimplementedError();
+  Future<List<$base.MeteringPoint>> getMeteringPointsAf() {
+    // TODO: implement getMeteringPointsAf
+    throw UnimplementedError();
+  }
 
   @override
-  // TODO: implement meteringPointsAf
-  List<$base.MeteringPoint> get meteringPointsAf => throw UnimplementedError();
+  Future<List<$base.MeteringPoint>> getMeteringPointsAwb() {
+    // TODO: implement getMeteringPointsAwb
+    throw UnimplementedError();
+  }
 
   @override
-  // TODO: implement meteringPointsAwb
-  List<$base.MeteringPoint> get meteringPointsAwb => throw UnimplementedError();
+  Future<bool> isAutoCancelEnabled() {
+    // TODO: implement isAutoCancelEnabled
+    throw UnimplementedError();
+  }
 }
