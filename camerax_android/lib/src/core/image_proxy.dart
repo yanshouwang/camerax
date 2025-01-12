@@ -1,44 +1,54 @@
-// import 'package:camerax_android/src/jni.dart' as jni;
-// import 'package:camerax_platform_interface/camerax_platform_interface.dart';
-// import 'package:jni/jni.dart';
+import 'package:camerax_android/src/jni.dart' as $native;
+import 'package:camerax_platform_interface/camerax_platform_interface.dart'
+    as $base;
 
-// import 'plane_proxy.dart';
+import 'image_format.dart';
+import 'plane_proxy.dart';
 
-// final class MyImageProxy implements ImageProxy {
-//   final jni.ImageProxy jniValue;
+final class ImageProxy extends $base.ImageProxy {
+  final $native.ImageProxy obj;
 
-//   MyImageProxy.jni(this.jniValue);
+  ImageProxy.$native(this.obj) : super.impl();
 
-//   @override
-//   ImageFormat get format => jniValue.getFormat().dartImageFormat;
+  @override
+  Future<$base.ImageFormat> getFormat() async {
+    return obj.getFormat().args;
+  }
 
-//   @override
-//   int get width => jniValue.getWidth();
+  @override
+  Future<int> getWidth() async {
+    return obj.getWidth();
+  }
 
-//   @override
-//   int get height => jniValue.getHeight();
+  @override
+  Future<int> getHeight() async {
+    return obj.getHeight();
+  }
 
-//   @override
-//   int get rotationDegrees => jniValue.getImageInfo().getRotationDegrees();
+  @override
+  Future<int> getRotationDegrees() async {
+    return obj.getImageInfo().getRotationDegrees();
+  }
 
-//   @override
-//   List<PlaneProxy> get planeProxies {
-//     final jniPlaneProxies = jniValue.getPlanes();
-//     final planeProxies = <PlaneProxy>[];
-//     for (var i = 0; i < jniPlaneProxies.length; i++) {
-//       final jniPlaneProxy = jniPlaneProxies[i];
-//       final planeProxy = MyPlaneProxy.jni(jniPlaneProxy);
-//       planeProxies.add(planeProxy);
-//     }
-//     return planeProxies;
-//   }
+  @override
+  Future<List<$base.PlaneProxy>> getPlanes() async {
+    final planeObjs = obj.getPlanes();
+    final planes = <$base.PlaneProxy>[];
+    for (var i = 0; i < planeObjs.length; i++) {
+      final planeObj = planeObjs[i];
+      final plane = MyPlaneProxy.$native(planeObj);
+      planes.add(plane);
+    }
+    return planes;
+  }
 
-//   @override
-//   int get timestamp => jniValue.getImageInfo().getTimestamp();
+  @override
+  Future<int> getTimestamp() async {
+    return obj.getImageInfo().getTimestamp();
+  }
 
-//   @override
-//   void close() {
-//     jniValue.close();
-//     jniValue.release();
-//   }
-// }
+  @override
+  Future<void> close() async {
+    obj.close();
+  }
+}

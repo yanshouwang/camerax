@@ -283,7 +283,7 @@ abstract base class CameraController extends PlatformInterface {
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   Future<void> setImageAnalysisBackpressureStrategy(
-      BackpressureStrategy backpressureStrategy);
+      BackpressureStrategy strategy);
 
   /// Gets the image queue depth of ImageAnalysis.
   Future<int> getImageAnalysisImageQueueDepth();
@@ -295,7 +295,7 @@ abstract base class CameraController extends PlatformInterface {
   ///
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
-  Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth);
+  Future<void> setImageAnalysisImageQueueDepth(int depth);
 
   /// Gets the output image format for ImageAnalysis.
   ///
@@ -317,7 +317,7 @@ abstract base class CameraController extends PlatformInterface {
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   /// If the value is changed when the camera is active, check the getFormat value
   /// to determine when the new format takes effect.
-  Future<void> setImageAnalysisOutputImageFormat(ImageFormat outputImageFormat);
+  Future<void> setImageAnalysisOutputImageFormat(ImageFormat format);
 
   /// Returns the ResolutionSelector for ImageAnalysis.
   ///

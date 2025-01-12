@@ -12,7 +12,7 @@ extension ImageFormatArgs on $base.ImageFormat {
       case $base.ImageFormat.yuv420_888:
         return $native.ImageFormat.yuv420_888;
       case $base.ImageFormat.rgba8888:
-        return $native.ImageFormat.flexRgba8888;
+        return $native.ImageFormat.rgba8888;
     }
   }
 }
@@ -26,10 +26,8 @@ extension ImageFormatObj on $native.ImageFormat {
         return $base.ImageFormat.jpegR;
       case $native.ImageFormat.yuv420_888:
         return $base.ImageFormat.yuv420_888;
-      case $native.ImageFormat.flexRgba8888:
+      case $native.ImageFormat.rgba8888:
         return $base.ImageFormat.rgba8888;
-      default:
-        throw ArgumentError.value(this);
     }
   }
 }

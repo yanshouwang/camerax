@@ -39,13 +39,13 @@ final class QualitySelector extends $base.QualitySelector {
     return QualitySelector.$native(obj);
   }
 
-  @override
-  Future<$base.Size?> getResolution(
+  static Future<$base.Size?> getResolution(
       $base.CameraInfo cameraInfo, $base.Quality quality) async {
     if (cameraInfo is! CameraInfo) {
       throw TypeError();
     }
-    final obj = await this.obj.getResolution(cameraInfo.obj, quality.obj);
+    final obj = await $native.QualitySelector.getResolution(
+        cameraInfo.obj, quality.obj);
     return obj == null ? null : Size.$native(obj);
   }
 }

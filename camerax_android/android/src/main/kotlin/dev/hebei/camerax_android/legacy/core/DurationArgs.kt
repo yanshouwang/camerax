@@ -5,13 +5,11 @@ import dev.hebei.camerax_android.legacy.PigeonApiDurationArgs
 import dev.hebei.camerax_android.legacy.TimeUnit
 
 class DurationArgs(registrar: CameraXRegistrar) : PigeonApiDurationArgs(registrar) {
-    override fun pigeon_defaultConstructor(
-        duration: Long, timeUnit: TimeUnit
-    ): Wrapper {
-        return Wrapper(duration, timeUnit.obj)
+    override fun pigeon_defaultConstructor(duration: Long, timeUnit: TimeUnit): Stub {
+        return Stub(duration, timeUnit.obj)
     }
 
-    data class Wrapper(val duration: Long, val timeUnit: java.util.concurrent.TimeUnit)
+    data class Stub(val duration: Long, val timeUnit: java.util.concurrent.TimeUnit)
 }
 
 val TimeUnit.obj

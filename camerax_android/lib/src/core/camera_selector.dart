@@ -1,16 +1,16 @@
 import 'package:camerax_android/src/jni.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+    as $base;
 
-final class CameraSelector extends $interface.CameraSelector {
+final class CameraSelector extends $base.CameraSelector {
   final $native.CameraSelector obj;
 
   CameraSelector.$native(this.obj) : super.impl();
 
   factory CameraSelector({
-    $interface.LensFacing? lensFacing,
+    $base.LensFacing? lensFacing,
   }) {
-    final builderObj = $native.CameraSelector$Builder();
+    final builderObj = $native.CameraSelector$Builder.new$1();
     if (lensFacing != null) {
       builderObj.requireLensFacing(lensFacing.obj);
     }
@@ -25,16 +25,16 @@ final class CameraSelector extends $interface.CameraSelector {
   bool operator ==(Object other) => other is CameraSelector && obj == other.obj;
 }
 
-extension on $interface.LensFacing {
+extension LensFacingArgs on $base.LensFacing {
   $native.CameraSelector$LensFacing get obj {
     switch (this) {
-      case $interface.LensFacing.unknown:
+      case $base.LensFacing.unknown:
         return $native.CameraSelector$LensFacing.UNKNOWN!;
-      case $interface.LensFacing.front:
+      case $base.LensFacing.front:
         return $native.CameraSelector$LensFacing.FRONT!;
-      case $interface.LensFacing.back:
+      case $base.LensFacing.back:
         return $native.CameraSelector$LensFacing.BACK!;
-      case $interface.LensFacing.external:
+      case $base.LensFacing.external:
         return $native.CameraSelector$LensFacing.EXTERNAL!;
     }
   }

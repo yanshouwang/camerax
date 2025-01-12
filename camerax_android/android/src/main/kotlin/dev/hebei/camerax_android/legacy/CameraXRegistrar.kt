@@ -2,45 +2,44 @@ package dev.hebei.camerax_android.legacy
 
 import android.app.Activity
 import android.content.Context
-import dev.hebei.camerax_android.legacy.core.CameraControl
-import dev.hebei.camerax_android.legacy.core.CameraInfo
-import dev.hebei.camerax_android.legacy.core.CameraSelector
-import dev.hebei.camerax_android.legacy.core.CameraStateLiveData
-import dev.hebei.camerax_android.legacy.core.CameraStateObserver
-import dev.hebei.camerax_android.legacy.core.DurationArgs
-import dev.hebei.camerax_android.legacy.core.DynamicRange
-import dev.hebei.camerax_android.legacy.core.ExposureState
-import dev.hebei.camerax_android.legacy.core.FocusMeteringAction
-import dev.hebei.camerax_android.legacy.core.IntRange
-import dev.hebei.camerax_android.legacy.core.MeteringPointArgs
-import dev.hebei.camerax_android.legacy.core.PermissionManager
-import dev.hebei.camerax_android.legacy.core.Rect
-import dev.hebei.camerax_android.legacy.core.Size
-import dev.hebei.camerax_android.legacy.core.TorchStateLiveData
-import dev.hebei.camerax_android.legacy.core.TorchStateObserver
-import dev.hebei.camerax_android.legacy.core.ZoomState
-import dev.hebei.camerax_android.legacy.core.ZoomStateLiveData
-import dev.hebei.camerax_android.legacy.core.ZoomStateObserver
+import dev.hebei.camerax_android.legacy.core.*
 import dev.hebei.camerax_android.legacy.core.resolutionselector.AspectRatioStrategy
+import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionFilter
+import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionSelector
+import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionStrategy
+import dev.hebei.camerax_android.legacy.ml.*
+import dev.hebei.camerax_android.legacy.video.*
 import dev.hebei.camerax_android.legacy.view.CameraController
 import dev.hebei.camerax_android.legacy.view.LifecycleCameraController
 import dev.hebei.camerax_android.legacy.view.PreviewView
+import dev.hebei.camerax_android.legacy.view.video.AudioConfig
 import io.flutter.plugin.common.BinaryMessenger
 
-class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
-    CameraXPigeonProxyApiRegistrar(messenger) {
+class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : CameraXPigeonProxyApiRegistrar(messenger) {
     var activity: Activity? = null
 
     override fun getPigeonApiPermissionManager(): PigeonApiPermissionManager {
         return PermissionManager(this)
     }
 
-    override fun getPigeonApiThrowable(): PigeonApiThrowable {
-        TODO("Not yet implemented")
+    override fun getPigeonApiAutoCloseable(): PigeonApiAutoCloseable {
+        return AutoCloseable(this)
+    }
+
+    override fun getPigeonApiUri(): PigeonApiUri {
+        return Uri(this)
     }
 
     override fun getPigeonApiSize(): PigeonApiSize {
         return Size(this)
+    }
+
+    override fun getPigeonApiPoint(): PigeonApiPoint {
+        return Point(this)
+    }
+
+    override fun getPigeonApiPointF(): PigeonApiPointF {
+        return PointF(this)
     }
 
     override fun getPigeonApiRect(): PigeonApiRect {
@@ -99,6 +98,10 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
         return FocusMeteringAction(this)
     }
 
+    override fun getPigeonApiFocusMeteringResult(): PigeonApiFocusMeteringResult {
+        return FocusMeteringResult(this)
+    }
+
     override fun getPigeonApiDynamicRange(): PigeonApiDynamicRange {
         return DynamicRange(this)
     }
@@ -116,67 +119,187 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
     }
 
     override fun getPigeonApiResolutionFilter(): PigeonApiResolutionFilter {
-        TODO("Not yet implemented")
+        return ResolutionFilter(this)
     }
 
     override fun getPigeonApiResolutionStrategy(): PigeonApiResolutionStrategy {
-        TODO("Not yet implemented")
+        return ResolutionStrategy(this)
     }
 
     override fun getPigeonApiResolutionSelector(): PigeonApiResolutionSelector {
-        TODO("Not yet implemented")
+        return ResolutionSelector(this)
     }
 
     override fun getPigeonApiImageInfo(): PigeonApiImageInfo {
-        TODO("Not yet implemented")
+        return ImageInfo(this)
     }
 
     override fun getPigeonApiPlaneProxy(): PigeonApiPlaneProxy {
-        TODO("Not yet implemented")
+        return ImageProxy.PlaneProxy(this)
     }
 
     override fun getPigeonApiImageProxy(): PigeonApiImageProxy {
-        TODO("Not yet implemented")
+        return ImageProxy(this)
     }
 
     override fun getPigeonApiAnalyzer(): PigeonApiAnalyzer {
-        TODO("Not yet implemented")
+        return ImageAnalysis.Analyzer(this)
+    }
+
+    override fun getPigeonApiDetector(): PigeonApiDetector {
+        return Detector(this)
+    }
+
+    override fun getPigeonApiAddress(): PigeonApiAddress {
+        return Barcode.Address(this)
+    }
+
+    override fun getPigeonApiCalendarDateTime(): PigeonApiCalendarDateTime {
+        return Barcode.CalendarDateTime(this)
+    }
+
+    override fun getPigeonApiCalendarEvent(): PigeonApiCalendarEvent {
+        return Barcode.CalendarEvent(this)
+    }
+
+    override fun getPigeonApiContactInfo(): PigeonApiContactInfo {
+        return Barcode.ContactInfo(this)
+    }
+
+    override fun getPigeonApiDriverLicense(): PigeonApiDriverLicense {
+        return Barcode.DriverLicense(this)
+    }
+
+    override fun getPigeonApiEmail(): PigeonApiEmail {
+        return Barcode.Email(this)
+    }
+
+    override fun getPigeonApiGeoPoint(): PigeonApiGeoPoint {
+        return Barcode.GeoPoint(this)
+    }
+
+    override fun getPigeonApiPersonName(): PigeonApiPersonName {
+        return Barcode.PersonName(this)
+    }
+
+    override fun getPigeonApiPhone(): PigeonApiPhone {
+        return Barcode.Phone(this)
+    }
+
+    override fun getPigeonApiSms(): PigeonApiSms {
+        return Barcode.Sms(this)
+    }
+
+    override fun getPigeonApiUrlBookmark(): PigeonApiUrlBookmark {
+        return Barcode.UrlBookmark(this)
+    }
+
+    override fun getPigeonApiWiFi(): PigeonApiWiFi {
+        return Barcode.WiFi(this)
+    }
+
+    override fun getPigeonApiBarcode(): PigeonApiBarcode {
+        return Barcode(this)
+    }
+
+    override fun getPigeonApiZoomCallback(): PigeonApiZoomCallback {
+        return ZoomSuggestionOptions.ZoomCallback(this)
+    }
+
+    override fun getPigeonApiZoomSuggestionOptions(): PigeonApiZoomSuggestionOptions {
+        return ZoomSuggestionOptions(this)
+    }
+
+    override fun getPigeonApiBarcodeScannerOptions(): PigeonApiBarcodeScannerOptions {
+        return BarcodeScannerOptions(this)
+    }
+
+    override fun getPigeonApiBarcodeScanner(): PigeonApiBarcodeScanner {
+        return BarcodeScanner(this)
+    }
+
+    override fun getPigeonApiBarcodeScanning(): PigeonApiBarcodeScanning {
+        return BarcodeScanning(this)
+    }
+
+    override fun getPigeonApiFaceDetectorOptions(): PigeonApiFaceDetectorOptions {
+        return FaceDetectorOptions(this)
+    }
+
+    override fun getPigeonApiFaceContour(): PigeonApiFaceContour {
+        return FaceContour(this)
+    }
+
+    override fun getPigeonApiFaceLandmark(): PigeonApiFaceLandmark {
+        return FaceLandmark(this)
+    }
+
+    override fun getPigeonApiFace(): PigeonApiFace {
+        return Face(this)
+    }
+
+    override fun getPigeonApiFaceDetector(): PigeonApiFaceDetector {
+        return FaceDetector(this)
+    }
+
+    override fun getPigeonApiFaceDetection(): PigeonApiFaceDetection {
+        return FaceDetection(this)
+    }
+
+    override fun getPigeonApiMlkitAnalyzerResult(): PigeonApiMlkitAnalyzerResult {
+        return MlKitAnalyzer.Result(this)
+    }
+
+    override fun getPigeonApiMlKitAnalyzerResultConsumer(): PigeonApiMlKitAnalyzerResultConsumer {
+        return MlKitAnalyzerResultConsumer(this)
+    }
+
+    override fun getPigeonApiMlKitAnalyzer(): PigeonApiMlKitAnalyzer {
+        return MlKitAnalyzer(this)
+    }
+
+    override fun getPigeonApiQuality(): PigeonApiQuality {
+        return Quality(this)
     }
 
     override fun getPigeonApiFallbackStrategy(): PigeonApiFallbackStrategy {
-        TODO("Not yet implemented")
+        return FallbackStrategy(this)
     }
 
     override fun getPigeonApiQualitySelector(): PigeonApiQualitySelector {
-        TODO("Not yet implemented")
+        return QualitySelector(this)
     }
 
     override fun getPigeonApiAudioConfig(): PigeonApiAudioConfig {
-        TODO("Not yet implemented")
+        return AudioConfig(this)
     }
 
     override fun getPigeonApiAudioStats(): PigeonApiAudioStats {
-        TODO("Not yet implemented")
+        return AudioStats(this)
     }
 
     override fun getPigeonApiRecordingStats(): PigeonApiRecordingStats {
-        TODO("Not yet implemented")
+        return RecordingStats(this)
     }
 
     override fun getPigeonApiVideoRecordEvent(): PigeonApiVideoRecordEvent {
-        TODO("Not yet implemented")
+        return VideoRecordEvent(this)
     }
 
     override fun getPigeonApiVideoRecordFinalizeEvent(): PigeonApiVideoRecordFinalizeEvent {
-        TODO("Not yet implemented")
+        return VideoRecordEvent.Finalize(this)
+    }
+
+    override fun getPigeonApiVideoOutputResults(): PigeonApiVideoOutputResults {
+        return OutputResults(this)
     }
 
     override fun getPigeonApiVideoRecordEventConsumer(): PigeonApiVideoRecordEventConsumer {
-        TODO("Not yet implemented")
+        return VideoRecordEventConsumer(this)
     }
 
     override fun getPigeonApiRecording(): PigeonApiRecording {
-        TODO("Not yet implemented")
+        return Recording(this)
     }
 
     override fun getPigeonApiCameraController(): PigeonApiCameraController {

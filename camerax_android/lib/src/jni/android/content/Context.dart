@@ -35,14 +35,6 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import '../../java/io/File.dart' as file$_;
-
-import '../../java/util/concurrent/Executor.dart' as executor$_;
-
-import '../net/Uri.dart' as uri$_;
-
-import 'ContentResolver.dart' as contentresolver$_;
-
 /// from: `android.content.Context$BindServiceFlags`
 class Context$BindServiceFlags extends jni$_.JObject {
   @jni$_.internal
@@ -1335,11 +1327,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract android.content.ContentResolver getContentResolver()`
   /// The returned object must be released after use, by calling the [release] method.
-  contentresolver$_.ContentResolver? getContentResolver() {
+  jni$_.JObject? getContentResolver() {
     return _getContentResolver(
             reference.pointer, _id_getContentResolver as jni$_.JMethodIDPtr)
-        .object<contentresolver$_.ContentResolver?>(
-            const contentresolver$_.$ContentResolver$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getMainLooper = _class.instanceMethodId(
@@ -1386,11 +1377,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public java.util.concurrent.Executor getMainExecutor()`
   /// The returned object must be released after use, by calling the [release] method.
-  executor$_.Executor? getMainExecutor() {
+  jni$_.JObject? getMainExecutor() {
     return _getMainExecutor(
             reference.pointer, _id_getMainExecutor as jni$_.JMethodIDPtr)
-        .object<executor$_.Executor?>(
-            const executor$_.$Executor$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getApplicationContext = _class.instanceMethodId(
@@ -2233,13 +2223,13 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getFileStreamPath(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getFileStreamPath(
+  jni$_.JObject? getFileStreamPath(
     jni$_.JString? string,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getFileStreamPath(reference.pointer,
             _id_getFileStreamPath as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getDataDir = _class.instanceMethodId(
@@ -2261,9 +2251,9 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getDataDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getDataDir() {
+  jni$_.JObject? getDataDir() {
     return _getDataDir(reference.pointer, _id_getDataDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getFilesDir = _class.instanceMethodId(
@@ -2285,10 +2275,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getFilesDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getFilesDir() {
+  jni$_.JObject? getFilesDir() {
     return _getFilesDir(
             reference.pointer, _id_getFilesDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getNoBackupFilesDir = _class.instanceMethodId(
@@ -2310,10 +2300,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getNoBackupFilesDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getNoBackupFilesDir() {
+  jni$_.JObject? getNoBackupFilesDir() {
     return _getNoBackupFilesDir(
             reference.pointer, _id_getNoBackupFilesDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getExternalFilesDir = _class.instanceMethodId(
@@ -2334,13 +2324,13 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getExternalFilesDir(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getExternalFilesDir(
+  jni$_.JObject? getExternalFilesDir(
     jni$_.JString? string,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getExternalFilesDir(reference.pointer,
             _id_getExternalFilesDir as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getExternalFilesDirs = _class.instanceMethodId(
@@ -2361,15 +2351,15 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File[] getExternalFilesDirs(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JArray<file$_.File?>? getExternalFilesDirs(
+  jni$_.JArray<jni$_.JObject?>? getExternalFilesDirs(
     jni$_.JString? string,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getExternalFilesDirs(reference.pointer,
             _id_getExternalFilesDirs as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<jni$_.JArray<file$_.File?>?>(
-            const jni$_.JArrayNullableType<file$_.File?>(
-                file$_.$File$NullableType()));
+        .object<jni$_.JArray<jni$_.JObject?>?>(
+            const jni$_.JArrayNullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_getObbDir = _class.instanceMethodId(
@@ -2391,9 +2381,9 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getObbDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getObbDir() {
+  jni$_.JObject? getObbDir() {
     return _getObbDir(reference.pointer, _id_getObbDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getObbDirs = _class.instanceMethodId(
@@ -2415,11 +2405,11 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File[] getObbDirs()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JArray<file$_.File?>? getObbDirs() {
+  jni$_.JArray<jni$_.JObject?>? getObbDirs() {
     return _getObbDirs(reference.pointer, _id_getObbDirs as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<file$_.File?>?>(
-            const jni$_.JArrayNullableType<file$_.File?>(
-                file$_.$File$NullableType()));
+        .object<jni$_.JArray<jni$_.JObject?>?>(
+            const jni$_.JArrayNullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_getCacheDir = _class.instanceMethodId(
@@ -2441,10 +2431,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getCacheDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getCacheDir() {
+  jni$_.JObject? getCacheDir() {
     return _getCacheDir(
             reference.pointer, _id_getCacheDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getCodeCacheDir = _class.instanceMethodId(
@@ -2466,10 +2456,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getCodeCacheDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getCodeCacheDir() {
+  jni$_.JObject? getCodeCacheDir() {
     return _getCodeCacheDir(
             reference.pointer, _id_getCodeCacheDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getExternalCacheDir = _class.instanceMethodId(
@@ -2491,10 +2481,10 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getExternalCacheDir()`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getExternalCacheDir() {
+  jni$_.JObject? getExternalCacheDir() {
     return _getExternalCacheDir(
             reference.pointer, _id_getExternalCacheDir as jni$_.JMethodIDPtr)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getExternalCacheDirs = _class.instanceMethodId(
@@ -2516,12 +2506,12 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File[] getExternalCacheDirs()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JArray<file$_.File?>? getExternalCacheDirs() {
+  jni$_.JArray<jni$_.JObject?>? getExternalCacheDirs() {
     return _getExternalCacheDirs(
             reference.pointer, _id_getExternalCacheDirs as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<file$_.File?>?>(
-            const jni$_.JArrayNullableType<file$_.File?>(
-                file$_.$File$NullableType()));
+        .object<jni$_.JArray<jni$_.JObject?>?>(
+            const jni$_.JArrayNullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_getExternalMediaDirs = _class.instanceMethodId(
@@ -2543,12 +2533,12 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File[] getExternalMediaDirs()`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JArray<file$_.File?>? getExternalMediaDirs() {
+  jni$_.JArray<jni$_.JObject?>? getExternalMediaDirs() {
     return _getExternalMediaDirs(
             reference.pointer, _id_getExternalMediaDirs as jni$_.JMethodIDPtr)
-        .object<jni$_.JArray<file$_.File?>?>(
-            const jni$_.JArrayNullableType<file$_.File?>(
-                file$_.$File$NullableType()));
+        .object<jni$_.JArray<jni$_.JObject?>?>(
+            const jni$_.JArrayNullableType<jni$_.JObject?>(
+                jni$_.JObjectNullableType()));
   }
 
   static final _id_fileList = _class.instanceMethodId(
@@ -2596,14 +2586,14 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getDir(java.lang.String string, int i)`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getDir(
+  jni$_.JObject? getDir(
     jni$_.JString? string,
     int i,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getDir(reference.pointer, _id_getDir as jni$_.JMethodIDPtr,
             _$string.pointer, i)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_openOrCreateDatabase = _class.instanceMethodId(
@@ -2777,13 +2767,13 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract java.io.File getDatabasePath(java.lang.String string)`
   /// The returned object must be released after use, by calling the [release] method.
-  file$_.File? getDatabasePath(
+  jni$_.JObject? getDatabasePath(
     jni$_.JString? string,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
     return _getDatabasePath(reference.pointer,
             _id_getDatabasePath as jni$_.JMethodIDPtr, _$string.pointer)
-        .object<file$_.File?>(const file$_.$File$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_databaseList = _class.instanceMethodId(
@@ -4477,7 +4467,7 @@ class Context extends jni$_.JObject {
   bool bindService$2(
     jni$_.JObject? intent,
     int i,
-    executor$_.Executor? executor,
+    jni$_.JObject? executor,
     jni$_.JObject? serviceConnection,
   ) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -4524,7 +4514,7 @@ class Context extends jni$_.JObject {
   bool bindService$3(
     jni$_.JObject? intent,
     Context$BindServiceFlags? bindServiceFlags,
-    executor$_.Executor? executor,
+    jni$_.JObject? executor,
     jni$_.JObject? serviceConnection,
   ) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -4576,7 +4566,7 @@ class Context extends jni$_.JObject {
     jni$_.JObject? intent,
     int i,
     jni$_.JString? string,
-    executor$_.Executor? executor,
+    jni$_.JObject? executor,
     jni$_.JObject? serviceConnection,
   ) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -4628,7 +4618,7 @@ class Context extends jni$_.JObject {
     jni$_.JObject? intent,
     Context$BindServiceFlags? bindServiceFlags,
     jni$_.JString? string,
-    executor$_.Executor? executor,
+    jni$_.JObject? executor,
     jni$_.JObject? serviceConnection,
   ) {
     final _$intent = intent?.reference ?? jni$_.jNullReference;
@@ -5193,7 +5183,7 @@ class Context extends jni$_.JObject {
   /// from: `public abstract void grantUriPermission(java.lang.String string, android.net.Uri uri, int i)`
   void grantUriPermission(
     jni$_.JString? string,
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -5226,7 +5216,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract void revokeUriPermission(android.net.Uri uri, int i)`
   void revokeUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
   ) {
     final _$uri = uri?.reference ?? jni$_.jNullReference;
@@ -5262,7 +5252,7 @@ class Context extends jni$_.JObject {
   /// from: `public abstract void revokeUriPermission(java.lang.String string, android.net.Uri uri, int i)`
   void revokeUriPermission$1(
     jni$_.JString? string,
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
   ) {
     final _$string = string?.reference ?? jni$_.jNullReference;
@@ -5299,7 +5289,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract int checkUriPermission(android.net.Uri uri, int i, int i1, int i2)`
   int checkUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
     int i1,
     int i2,
@@ -5344,7 +5334,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public int checkContentUriPermissionFull(android.net.Uri uri, int i, int i1, int i2)`
   int checkContentUriPermissionFull(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
     int i1,
     int i2,
@@ -5384,7 +5374,7 @@ class Context extends jni$_.JObject {
   /// from: `public java.lang.Object[] checkUriPermissions(java.util.List list, int i, int i1, int i2)`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JIntArray? checkUriPermissions(
-    jni$_.JList<uri$_.Uri?>? list,
+    jni$_.JList<jni$_.JObject?>? list,
     int i,
     int i1,
     int i2,
@@ -5419,7 +5409,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract int checkCallingUriPermission(android.net.Uri uri, int i)`
   int checkCallingUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
   ) {
     final _$uri = uri?.reference ?? jni$_.jNullReference;
@@ -5454,7 +5444,7 @@ class Context extends jni$_.JObject {
   /// from: `public java.lang.Object[] checkCallingUriPermissions(java.util.List list, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JIntArray? checkCallingUriPermissions(
-    jni$_.JList<uri$_.Uri?>? list,
+    jni$_.JList<jni$_.JObject?>? list,
     int i,
   ) {
     final _$list = list?.reference ?? jni$_.jNullReference;
@@ -5488,7 +5478,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract int checkCallingOrSelfUriPermission(android.net.Uri uri, int i)`
   int checkCallingOrSelfUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
   ) {
     final _$uri = uri?.reference ?? jni$_.jNullReference;
@@ -5523,7 +5513,7 @@ class Context extends jni$_.JObject {
   /// from: `public java.lang.Object[] checkCallingOrSelfUriPermissions(java.util.List list, int i)`
   /// The returned object must be released after use, by calling the [release] method.
   jni$_.JIntArray? checkCallingOrSelfUriPermissions(
-    jni$_.JList<uri$_.Uri?>? list,
+    jni$_.JList<jni$_.JObject?>? list,
     int i,
   ) {
     final _$list = list?.reference ?? jni$_.jNullReference;
@@ -5567,7 +5557,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract int checkUriPermission(android.net.Uri uri, java.lang.String string, java.lang.String string1, int i, int i1, int i2)`
   int checkUriPermission$1(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     jni$_.JString? string,
     jni$_.JString? string1,
     int i,
@@ -5619,7 +5609,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract void enforceUriPermission(android.net.Uri uri, int i, int i1, int i2, java.lang.String string)`
   void enforceUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
     int i1,
     int i2,
@@ -5665,7 +5655,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract void enforceCallingUriPermission(android.net.Uri uri, int i, java.lang.String string)`
   void enforceCallingUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
     jni$_.JString? string,
   ) {
@@ -5707,7 +5697,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract void enforceCallingOrSelfUriPermission(android.net.Uri uri, int i, java.lang.String string)`
   void enforceCallingOrSelfUriPermission(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     int i,
     jni$_.JString? string,
   ) {
@@ -5756,7 +5746,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public abstract void enforceUriPermission(android.net.Uri uri, java.lang.String string, java.lang.String string1, int i, int i1, int i2, java.lang.String string2)`
   void enforceUriPermission$1(
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
     jni$_.JString? string,
     jni$_.JString? string1,
     int i,
@@ -6204,7 +6194,7 @@ class Context extends jni$_.JObject {
 
   /// from: `public void registerDeviceIdChangeListener(java.util.concurrent.Executor executor, java.util.function.IntConsumer intConsumer)`
   void registerDeviceIdChangeListener(
-    executor$_.Executor? executor,
+    jni$_.JObject? executor,
     jni$_.JObject? intConsumer,
   ) {
     final _$executor = executor?.reference ?? jni$_.jNullReference;

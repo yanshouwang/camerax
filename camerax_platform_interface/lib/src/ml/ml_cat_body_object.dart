@@ -1,8 +1,8 @@
 import 'ml_body_object.dart';
 import 'ml_object_type.dart';
 
-final class MLCatBodyObject extends MLBodyObject {
-  MLCatBodyObject({
+final class MlCatBodyObject extends MlBodyObject {
+  MlCatBodyObject({
     required super.time,
     required super.duration,
     required super.bounds,
@@ -10,5 +10,5 @@ final class MLCatBodyObject extends MLBodyObject {
   });
 
   @override
-  MLObjectType get type => MLObjectType.catBody;
+  MlObjectType get type => MlObjectType.catBody;
 }

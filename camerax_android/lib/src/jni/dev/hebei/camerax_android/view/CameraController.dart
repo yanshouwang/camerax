@@ -37,9 +37,155 @@ import 'package:jni/jni.dart' as jni$_;
 
 import '../../../../androidx/lifecycle/LiveData.dart' as livedata$_;
 
+import '../core/CameraControl.dart' as cameracontrol$_;
+
+import '../core/CameraInfo.dart' as camerainfo$_;
+
 import '../core/CameraSelector.dart' as cameraselector$_;
 
+import '../core/DynamicRange.dart' as dynamicrange$_;
+
+import '../core/ImageAnalysis.dart' as imageanalysis$_;
+
+import '../core/ImageCapture.dart' as imagecapture$_;
+
+import '../core/ImageFormat.dart' as imageformat$_;
+
+import '../core/MirrorMode.dart' as mirrormode$_;
+
 import '../core/ZoomState.dart' as zoomstate$_;
+
+import '../core/resolutionselector/ResolutionSelector.dart'
+    as resolutionselector$_;
+
+import 'video/AudioConfig.dart' as audioconfig$_;
+
+/// from: `dev.hebei.camerax_android.view.CameraController$Companion`
+class CameraController$Companion extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<CameraController$Companion> $type;
+
+  @jni$_.internal
+  CameraController$Companion.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+      r'dev/hebei/camerax_android/view/CameraController$Companion');
+
+  /// The type which includes information such as the signature of this class.
+  static const nullableType = $CameraController$Companion$NullableType();
+  static const type = $CameraController$Companion$Type();
+  static final _id_new$ = _class.constructorId(
+    r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
+  );
+
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory CameraController$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return CameraController$Companion.fromReference(_new$(
+            _class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$defaultConstructorMarker.pointer)
+        .reference);
+  }
+}
+
+final class $CameraController$Companion$NullableType
+    extends jni$_.JObjType<CameraController$Companion?> {
+  @jni$_.internal
+  const $CameraController$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/view/CameraController$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraController$Companion? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : CameraController$Companion.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraController$Companion?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($CameraController$Companion$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraController$Companion$NullableType) &&
+        other is $CameraController$Companion$NullableType;
+  }
+}
+
+final class $CameraController$Companion$Type
+    extends jni$_.JObjType<CameraController$Companion> {
+  @jni$_.internal
+  const $CameraController$Companion$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/view/CameraController$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraController$Companion fromReference(jni$_.JReference reference) =>
+      CameraController$Companion.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraController$Companion?> get nullableType =>
+      const $CameraController$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($CameraController$Companion$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraController$Companion$Type) &&
+        other is $CameraController$Companion$Type;
+  }
+}
 
 /// from: `dev.hebei.camerax_android.view.CameraController`
 class CameraController extends jni$_.JObject {
@@ -59,6 +205,24 @@ class CameraController extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CameraController$NullableType();
   static const type = $CameraController$Type();
+  static final _id_Companion = _class.staticFieldId(
+    r'Companion',
+    r'Ldev/hebei/camerax_android/view/CameraController$Companion;',
+  );
+
+  /// from: `static public final dev.hebei.camerax_android.view.CameraController$Companion Companion`
+  /// The returned object must be released after use, by calling the [release] method.
+  static CameraController$Companion? get Companion => _id_Companion.get(
+      _class, const $CameraController$Companion$NullableType());
+
+  /// from: `static public final int IMAGE_CAPTURE`
+  static const IMAGE_CAPTURE = 1;
+
+  /// from: `static public final int IMAGE_ANALYSIS`
+  static const IMAGE_ANALYSIS = 2;
+
+  /// from: `static public final int VIDEO_CAPTURE`
+  static const VIDEO_CAPTURE = 4;
   static final _id_initialize = _class.instanceMethodId(
     r'initialize',
     r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
@@ -226,12 +390,12 @@ class CameraController extends jni$_.JObject {
     return const jni$_.JObjectType().fromReference($o);
   }
 
-  static final _id_isTapToFocusEnabled = _class.instanceMethodId(
-    r'isTapToFocusEnabled',
+  static final _id_getCameraInfo = _class.instanceMethodId(
+    r'getCameraInfo',
     r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
   );
 
-  static final _isTapToFocusEnabled = jni$_.ProtectedJniExtensions.lookup<
+  static final _getCameraInfo = jni$_.ProtectedJniExtensions.lookup<
               jni$_.NativeFunction<
                   jni$_.JniResult Function(
                       jni$_.Pointer<jni$_.Void>,
@@ -242,35 +406,113 @@ class CameraController extends jni$_.JObject {
           jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: `public final java.lang.Object isTapToFocusEnabled(kotlin.coroutines.Continuation continuation)`
+  /// from: `public final java.lang.Object getCameraInfo(kotlin.coroutines.Continuation continuation)`
   /// The returned object must be released after use, by calling the [release] method.
-  core$_.Future<jni$_.JBoolean> isTapToFocusEnabled() async {
+  core$_.Future<camerainfo$_.CameraInfo?> getCameraInfo() async {
     final $p = jni$_.ReceivePort();
     final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
 
-    _isTapToFocusEnabled(
-            reference.pointer,
-            _id_isTapToFocusEnabled as jni$_.JMethodIDPtr,
+    _getCameraInfo(reference.pointer, _id_getCameraInfo as jni$_.JMethodIDPtr,
             _$continuation.pointer)
         .object<jni$_.JObject>(const jni$_.JObjectType());
     _$continuation.release();
     final $o =
         jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
-    final $k = const jni$_.JBooleanType().jClass.reference;
+    final $k = const camerainfo$_.$CameraInfo$NullableType().jClass.reference;
     if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
       $k.release();
       throw 'Failed';
     }
     $k.release();
-    return const jni$_.JBooleanType().fromReference($o);
+    return const camerainfo$_.$CameraInfo$NullableType().fromReference($o);
   }
 
-  static final _id_setTapToFocusEnabled = _class.instanceMethodId(
-    r'setTapToFocusEnabled',
+  static final _id_getCameraControl = _class.instanceMethodId(
+    r'getCameraControl',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getCameraControl = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getCameraControl(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<cameracontrol$_.CameraControl?> getCameraControl() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getCameraControl(reference.pointer,
+            _id_getCameraControl as jni$_.JMethodIDPtr, _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k =
+        const cameracontrol$_.$CameraControl$NullableType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const cameracontrol$_.$CameraControl$NullableType()
+        .fromReference($o);
+  }
+
+  static final _id_getTorchState = _class.instanceMethodId(
+    r'getTorchState',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getTorchState = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getTorchState(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<livedata$_.LiveData<jni$_.JBoolean>> getTorchState() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getTorchState(reference.pointer, _id_getTorchState as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k =
+        const livedata$_.$LiveData$Type<jni$_.JBoolean>(jni$_.JBooleanType())
+            .jClass
+            .reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const livedata$_.$LiveData$Type<jni$_.JBoolean>(jni$_.JBooleanType())
+        .fromReference($o);
+  }
+
+  static final _id_enableTorch = _class.instanceMethodId(
+    r'enableTorch',
     r'(ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;',
   );
 
-  static final _setTapToFocusEnabled = jni$_.ProtectedJniExtensions.lookup<
+  static final _enableTorch = jni$_.ProtectedJniExtensions.lookup<
               jni$_.NativeFunction<
                   jni$_.JniResult Function(
                       jni$_.Pointer<jni$_.Void>,
@@ -282,19 +524,143 @@ class CameraController extends jni$_.JObject {
           jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: `public final java.lang.Object setTapToFocusEnabled(boolean z, kotlin.coroutines.Continuation continuation)`
+  /// from: `public final java.lang.Object enableTorch(boolean z, kotlin.coroutines.Continuation continuation)`
   /// The returned object must be released after use, by calling the [release] method.
-  core$_.Future<jni$_.JObject> setTapToFocusEnabled(
+  core$_.Future<jni$_.JObject> enableTorch(
     bool z,
   ) async {
     final $p = jni$_.ReceivePort();
     final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
 
-    _setTapToFocusEnabled(
-            reference.pointer,
-            _id_setTapToFocusEnabled as jni$_.JMethodIDPtr,
-            z ? 1 : 0,
+    _enableTorch(reference.pointer, _id_enableTorch as jni$_.JMethodIDPtr,
+            z ? 1 : 0, _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getZoomState = _class.instanceMethodId(
+    r'getZoomState',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getZoomState = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getZoomState(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<livedata$_.LiveData<zoomstate$_.ZoomState>>
+      getZoomState() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getZoomState(reference.pointer, _id_getZoomState as jni$_.JMethodIDPtr,
             _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const livedata$_.$LiveData$Type<zoomstate$_.ZoomState>(
+            zoomstate$_.$ZoomState$Type())
+        .jClass
+        .reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const livedata$_.$LiveData$Type<zoomstate$_.ZoomState>(
+            zoomstate$_.$ZoomState$Type())
+        .fromReference($o);
+  }
+
+  static final _id_setZoomRatio = _class.instanceMethodId(
+    r'setZoomRatio',
+    r'(FLkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setZoomRatio = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, double, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setZoomRatio(float f, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setZoomRatio(
+    double f,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _setZoomRatio(reference.pointer, _id_setZoomRatio as jni$_.JMethodIDPtr, f,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_setLinearZoom = _class.instanceMethodId(
+    r'setLinearZoom',
+    r'(FLkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setLinearZoom = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, double, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setLinearZoom(float f, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setLinearZoom(
+    double f,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _setLinearZoom(reference.pointer, _id_setLinearZoom as jni$_.JMethodIDPtr,
+            f, _$continuation.pointer)
         .object<jni$_.JObject>(const jni$_.JObjectType());
     _$continuation.release();
     final $o =
@@ -390,12 +756,12 @@ class CameraController extends jni$_.JObject {
     return const jni$_.JObjectType().fromReference($o);
   }
 
-  static final _id_getZoomState = _class.instanceMethodId(
-    r'getZoomState',
+  static final _id_isTapToFocusEnabled = _class.instanceMethodId(
+    r'isTapToFocusEnabled',
     r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
   );
 
-  static final _getZoomState = jni$_.ProtectedJniExtensions.lookup<
+  static final _isTapToFocusEnabled = jni$_.ProtectedJniExtensions.lookup<
               jni$_.NativeFunction<
                   jni$_.JniResult Function(
                       jni$_.Pointer<jni$_.Void>,
@@ -406,61 +772,58 @@ class CameraController extends jni$_.JObject {
           jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: `public final java.lang.Object getZoomState(kotlin.coroutines.Continuation continuation)`
+  /// from: `public final java.lang.Object isTapToFocusEnabled(kotlin.coroutines.Continuation continuation)`
   /// The returned object must be released after use, by calling the [release] method.
-  core$_.Future<livedata$_.LiveData<zoomstate$_.ZoomState?>>
-      getZoomState() async {
+  core$_.Future<jni$_.JBoolean> isTapToFocusEnabled() async {
     final $p = jni$_.ReceivePort();
     final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
 
-    _getZoomState(reference.pointer, _id_getZoomState as jni$_.JMethodIDPtr,
+    _isTapToFocusEnabled(
+            reference.pointer,
+            _id_isTapToFocusEnabled as jni$_.JMethodIDPtr,
             _$continuation.pointer)
         .object<jni$_.JObject>(const jni$_.JObjectType());
     _$continuation.release();
     final $o =
         jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
-    final $k = const livedata$_.$LiveData$Type<zoomstate$_.ZoomState?>(
-            zoomstate$_.$ZoomState$NullableType())
-        .jClass
-        .reference;
+    final $k = const jni$_.JBooleanType().jClass.reference;
     if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
       $k.release();
       throw 'Failed';
     }
     $k.release();
-    return const livedata$_.$LiveData$Type<zoomstate$_.ZoomState?>(
-            zoomstate$_.$ZoomState$NullableType())
-        .fromReference($o);
+    return const jni$_.JBooleanType().fromReference($o);
   }
 
-  static final _id_setZoomRatio = _class.instanceMethodId(
-    r'setZoomRatio',
-    r'(FLkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  static final _id_setTapToFocusEnabled = _class.instanceMethodId(
+    r'setTapToFocusEnabled',
+    r'(ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;',
   );
 
-  static final _setZoomRatio = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Double,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
+  static final _setTapToFocusEnabled = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
+          'globalEnv_CallObjectMethod')
       .asFunction<
           jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, jni$_.Pointer<jni$_.Void>)>();
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: `public final java.lang.Object setZoomRatio(float f, kotlin.coroutines.Continuation continuation)`
+  /// from: `public final java.lang.Object setTapToFocusEnabled(boolean z, kotlin.coroutines.Continuation continuation)`
   /// The returned object must be released after use, by calling the [release] method.
-  core$_.Future<jni$_.JObject> setZoomRatio(
-    double f,
+  core$_.Future<jni$_.JObject> setTapToFocusEnabled(
+    bool z,
   ) async {
     final $p = jni$_.ReceivePort();
     final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
 
-    _setZoomRatio(reference.pointer, _id_setZoomRatio as jni$_.JMethodIDPtr, f,
+    _setTapToFocusEnabled(
+            reference.pointer,
+            _id_setTapToFocusEnabled as jni$_.JMethodIDPtr,
+            z ? 1 : 0,
             _$continuation.pointer)
         .object<jni$_.JObject>(const jni$_.JObjectType());
     _$continuation.release();
@@ -475,35 +838,1856 @@ class CameraController extends jni$_.JObject {
     return const jni$_.JObjectType().fromReference($o);
   }
 
-  static final _id_setLinearZoom = _class.instanceMethodId(
-    r'setLinearZoom',
-    r'(FLkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  static final _id_isImageCaptureEnabled = _class.instanceMethodId(
+    r'isImageCaptureEnabled',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
   );
 
-  static final _setLinearZoom = jni$_.ProtectedJniExtensions.lookup<
+  static final _isImageCaptureEnabled = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object isImageCaptureEnabled(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JBoolean> isImageCaptureEnabled() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _isImageCaptureEnabled(
+            reference.pointer,
+            _id_isImageCaptureEnabled as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JBooleanType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JBooleanType().fromReference($o);
+  }
+
+  static final _id_isImageAnalysisEnabled = _class.instanceMethodId(
+    r'isImageAnalysisEnabled',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _isImageAnalysisEnabled = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object isImageAnalysisEnabled(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JBoolean> isImageAnalysisEnabled() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _isImageAnalysisEnabled(
+            reference.pointer,
+            _id_isImageAnalysisEnabled as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JBooleanType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JBooleanType().fromReference($o);
+  }
+
+  static final _id_isVideoCaptureEnabled = _class.instanceMethodId(
+    r'isVideoCaptureEnabled',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _isVideoCaptureEnabled = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object isVideoCaptureEnabled(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JBoolean> isVideoCaptureEnabled() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _isVideoCaptureEnabled(
+            reference.pointer,
+            _id_isVideoCaptureEnabled as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JBooleanType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JBooleanType().fromReference($o);
+  }
+
+  static final _id_setEnabledUseCases = _class.instanceMethodId(
+    r'setEnabledUseCases',
+    r'(ILkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setEnabledUseCases = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_
+                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setEnabledUseCases(int i, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setEnabledUseCases(
+    int i,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _setEnabledUseCases(
+            reference.pointer,
+            _id_setEnabledUseCases as jni$_.JMethodIDPtr,
+            i,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getPreviewResolutionSelector = _class.instanceMethodId(
+    r'getPreviewResolutionSelector',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getPreviewResolutionSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getPreviewResolutionSelector(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<resolutionselector$_.ResolutionSelector?>
+      getPreviewResolutionSelector() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getPreviewResolutionSelector(
+            reference.pointer,
+            _id_getPreviewResolutionSelector as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const resolutionselector$_.$ResolutionSelector$NullableType()
+        .jClass
+        .reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const resolutionselector$_.$ResolutionSelector$NullableType()
+        .fromReference($o);
+  }
+
+  static final _id_setPreviewResolutionSelector = _class.instanceMethodId(
+    r'setPreviewResolutionSelector',
+    r'(Ldev/hebei/camerax_android/core/resolutionselector/ResolutionSelector;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setPreviewResolutionSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setPreviewResolutionSelector(dev.hebei.camerax_android.core.resolutionselector.ResolutionSelector resolutionSelector, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setPreviewResolutionSelector(
+    resolutionselector$_.ResolutionSelector? resolutionSelector,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$resolutionSelector =
+        resolutionSelector?.reference ?? jni$_.jNullReference;
+    _setPreviewResolutionSelector(
+            reference.pointer,
+            _id_setPreviewResolutionSelector as jni$_.JMethodIDPtr,
+            _$resolutionSelector.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageCaptureResolutionSelector = _class.instanceMethodId(
+    r'getImageCaptureResolutionSelector',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageCaptureResolutionSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageCaptureResolutionSelector(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<resolutionselector$_.ResolutionSelector?>
+      getImageCaptureResolutionSelector() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageCaptureResolutionSelector(
+            reference.pointer,
+            _id_getImageCaptureResolutionSelector as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const resolutionselector$_.$ResolutionSelector$NullableType()
+        .jClass
+        .reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const resolutionselector$_.$ResolutionSelector$NullableType()
+        .fromReference($o);
+  }
+
+  static final _id_setImageCaptureResolutionSelector = _class.instanceMethodId(
+    r'setImageCaptureResolutionSelector',
+    r'(Ldev/hebei/camerax_android/core/resolutionselector/ResolutionSelector;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageCaptureResolutionSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageCaptureResolutionSelector(dev.hebei.camerax_android.core.resolutionselector.ResolutionSelector resolutionSelector, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageCaptureResolutionSelector(
+    resolutionselector$_.ResolutionSelector? resolutionSelector,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$resolutionSelector =
+        resolutionSelector?.reference ?? jni$_.jNullReference;
+    _setImageCaptureResolutionSelector(
+            reference.pointer,
+            _id_setImageCaptureResolutionSelector as jni$_.JMethodIDPtr,
+            _$resolutionSelector.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageCaptureMode = _class.instanceMethodId(
+    r'getImageCaptureMode',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageCaptureMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageCaptureMode(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<imagecapture$_.ImageCapture$CaptureMode>
+      getImageCaptureMode() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageCaptureMode(
+            reference.pointer,
+            _id_getImageCaptureMode as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k =
+        const imagecapture$_.$ImageCapture$CaptureMode$Type().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const imagecapture$_.$ImageCapture$CaptureMode$Type()
+        .fromReference($o);
+  }
+
+  static final _id_setImageCaptureMode = _class.instanceMethodId(
+    r'setImageCaptureMode',
+    r'(Ldev/hebei/camerax_android/core/ImageCapture$CaptureMode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageCaptureMode = jni$_.ProtectedJniExtensions.lookup<
           jni$_.NativeFunction<
               jni$_.JniResult Function(
                   jni$_.Pointer<jni$_.Void>,
                   jni$_.JMethodIDPtr,
                   jni$_.VarArgs<
                       (
-                        jni$_.Double,
+                        jni$_.Pointer<jni$_.Void>,
                         jni$_.Pointer<jni$_.Void>
                       )>)>>('globalEnv_CallObjectMethod')
       .asFunction<
-          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, double, jni$_.Pointer<jni$_.Void>)>();
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: `public final java.lang.Object setLinearZoom(float f, kotlin.coroutines.Continuation continuation)`
+  /// from: `public final java.lang.Object setImageCaptureMode(dev.hebei.camerax_android.core.ImageCapture$CaptureMode captureMode, kotlin.coroutines.Continuation continuation)`
   /// The returned object must be released after use, by calling the [release] method.
-  core$_.Future<jni$_.JObject> setLinearZoom(
-    double f,
+  core$_.Future<jni$_.JObject> setImageCaptureMode(
+    imagecapture$_.ImageCapture$CaptureMode? captureMode,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$captureMode = captureMode?.reference ?? jni$_.jNullReference;
+    _setImageCaptureMode(
+            reference.pointer,
+            _id_setImageCaptureMode as jni$_.JMethodIDPtr,
+            _$captureMode.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageCaptureFlashMode = _class.instanceMethodId(
+    r'getImageCaptureFlashMode',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageCaptureFlashMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageCaptureFlashMode(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<imagecapture$_.ImageCapture$FlashMode>
+      getImageCaptureFlashMode() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageCaptureFlashMode(
+            reference.pointer,
+            _id_getImageCaptureFlashMode as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k =
+        const imagecapture$_.$ImageCapture$FlashMode$Type().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const imagecapture$_.$ImageCapture$FlashMode$Type()
+        .fromReference($o);
+  }
+
+  static final _id_setImageCaptureFlashMode = _class.instanceMethodId(
+    r'setImageCaptureFlashMode',
+    r'(Ldev/hebei/camerax_android/core/ImageCapture$FlashMode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageCaptureFlashMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageCaptureFlashMode(dev.hebei.camerax_android.core.ImageCapture$FlashMode flashMode, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageCaptureFlashMode(
+    imagecapture$_.ImageCapture$FlashMode? flashMode,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$flashMode = flashMode?.reference ?? jni$_.jNullReference;
+    _setImageCaptureFlashMode(
+            reference.pointer,
+            _id_setImageCaptureFlashMode as jni$_.JMethodIDPtr,
+            _$flashMode.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageCaptureIoExecutor = _class.instanceMethodId(
+    r'getImageCaptureIoExecutor',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageCaptureIoExecutor = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageCaptureIoExecutor(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject?> getImageCaptureIoExecutor() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageCaptureIoExecutor(
+            reference.pointer,
+            _id_getImageCaptureIoExecutor as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectNullableType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectNullableType().fromReference($o);
+  }
+
+  static final _id_setImageCaptureIoExecutor = _class.instanceMethodId(
+    r'setImageCaptureIoExecutor',
+    r'(Ljava/util/concurrent/Executor;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageCaptureIoExecutor = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageCaptureIoExecutor(java.util.concurrent.Executor executor, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageCaptureIoExecutor(
+    jni$_.JObject? executor,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    _setImageCaptureIoExecutor(
+            reference.pointer,
+            _id_setImageCaptureIoExecutor as jni$_.JMethodIDPtr,
+            _$executor.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_takePicture = _class.instanceMethodId(
+    r'takePicture',
+    r'(Ljava/util/concurrent/Executor;Ldev/hebei/camerax_android/core/ImageCapture$OnImageCapturedCallback;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _takePicture = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object takePicture(java.util.concurrent.Executor executor, dev.hebei.camerax_android.core.ImageCapture$OnImageCapturedCallback onImageCapturedCallback, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> takePicture(
+    jni$_.JObject? executor,
+    imagecapture$_.ImageCapture$OnImageCapturedCallback?
+        onImageCapturedCallback,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    final _$onImageCapturedCallback =
+        onImageCapturedCallback?.reference ?? jni$_.jNullReference;
+    _takePicture(
+            reference.pointer,
+            _id_takePicture as jni$_.JMethodIDPtr,
+            _$executor.pointer,
+            _$onImageCapturedCallback.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_takePicture$1 = _class.instanceMethodId(
+    r'takePicture',
+    r'(Ldev/hebei/camerax_android/core/ImageCapture$OutputFileOptions;Ljava/util/concurrent/Executor;Ldev/hebei/camerax_android/core/ImageCapture$OnImageSavedCallback;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _takePicture$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object takePicture(dev.hebei.camerax_android.core.ImageCapture$OutputFileOptions outputFileOptions, java.util.concurrent.Executor executor, dev.hebei.camerax_android.core.ImageCapture$OnImageSavedCallback onImageSavedCallback, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> takePicture$1(
+    imagecapture$_.ImageCapture$OutputFileOptions? outputFileOptions,
+    jni$_.JObject? executor,
+    imagecapture$_.ImageCapture$OnImageSavedCallback? onImageSavedCallback,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$outputFileOptions =
+        outputFileOptions?.reference ?? jni$_.jNullReference;
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    final _$onImageSavedCallback =
+        onImageSavedCallback?.reference ?? jni$_.jNullReference;
+    _takePicture$1(
+            reference.pointer,
+            _id_takePicture$1 as jni$_.JMethodIDPtr,
+            _$outputFileOptions.pointer,
+            _$executor.pointer,
+            _$onImageSavedCallback.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageAnalysisResolutionSelector = _class.instanceMethodId(
+    r'getImageAnalysisResolutionSelector',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageAnalysisResolutionSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageAnalysisResolutionSelector(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<resolutionselector$_.ResolutionSelector?>
+      getImageAnalysisResolutionSelector() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageAnalysisResolutionSelector(
+            reference.pointer,
+            _id_getImageAnalysisResolutionSelector as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const resolutionselector$_.$ResolutionSelector$NullableType()
+        .jClass
+        .reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const resolutionselector$_.$ResolutionSelector$NullableType()
+        .fromReference($o);
+  }
+
+  static final _id_setImageAnalysisResolutionSelector = _class.instanceMethodId(
+    r'setImageAnalysisResolutionSelector',
+    r'(Ldev/hebei/camerax_android/core/resolutionselector/ResolutionSelector;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageAnalysisResolutionSelector =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageAnalysisResolutionSelector(dev.hebei.camerax_android.core.resolutionselector.ResolutionSelector resolutionSelector, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageAnalysisResolutionSelector(
+    resolutionselector$_.ResolutionSelector? resolutionSelector,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$resolutionSelector =
+        resolutionSelector?.reference ?? jni$_.jNullReference;
+    _setImageAnalysisResolutionSelector(
+            reference.pointer,
+            _id_setImageAnalysisResolutionSelector as jni$_.JMethodIDPtr,
+            _$resolutionSelector.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageAnalysisBackpressureStrategy =
+      _class.instanceMethodId(
+    r'getImageAnalysisBackpressureStrategy',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageAnalysisBackpressureStrategy =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageAnalysisBackpressureStrategy(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<imageanalysis$_.ImageAnalysis$BackpressureStrategy>
+      getImageAnalysisBackpressureStrategy() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageAnalysisBackpressureStrategy(
+            reference.pointer,
+            _id_getImageAnalysisBackpressureStrategy as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const imageanalysis$_.$ImageAnalysis$BackpressureStrategy$Type()
+        .jClass
+        .reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const imageanalysis$_.$ImageAnalysis$BackpressureStrategy$Type()
+        .fromReference($o);
+  }
+
+  static final _id_setImageAnalysisBackpressureStrategy =
+      _class.instanceMethodId(
+    r'setImageAnalysisBackpressureStrategy',
+    r'(Ldev/hebei/camerax_android/core/ImageAnalysis$BackpressureStrategy;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageAnalysisBackpressureStrategy =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageAnalysisBackpressureStrategy(dev.hebei.camerax_android.core.ImageAnalysis$BackpressureStrategy backpressureStrategy, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageAnalysisBackpressureStrategy(
+    imageanalysis$_.ImageAnalysis$BackpressureStrategy? backpressureStrategy,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$backpressureStrategy =
+        backpressureStrategy?.reference ?? jni$_.jNullReference;
+    _setImageAnalysisBackpressureStrategy(
+            reference.pointer,
+            _id_setImageAnalysisBackpressureStrategy as jni$_.JMethodIDPtr,
+            _$backpressureStrategy.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageAnalysisImageQueueDepth = _class.instanceMethodId(
+    r'getImageAnalysisImageQueueDepth',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageAnalysisImageQueueDepth =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageAnalysisImageQueueDepth(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JInteger> getImageAnalysisImageQueueDepth() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageAnalysisImageQueueDepth(
+            reference.pointer,
+            _id_getImageAnalysisImageQueueDepth as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JIntegerType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JIntegerType().fromReference($o);
+  }
+
+  static final _id_setImageAnalysisImageQueueDepth = _class.instanceMethodId(
+    r'setImageAnalysisImageQueueDepth',
+    r'(ILkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageAnalysisImageQueueDepth =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Int32,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageAnalysisImageQueueDepth(int i, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageAnalysisImageQueueDepth(
+    int i,
   ) async {
     final $p = jni$_.ReceivePort();
     final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
 
-    _setLinearZoom(reference.pointer, _id_setLinearZoom as jni$_.JMethodIDPtr,
-            f, _$continuation.pointer)
+    _setImageAnalysisImageQueueDepth(
+            reference.pointer,
+            _id_setImageAnalysisImageQueueDepth as jni$_.JMethodIDPtr,
+            i,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageAnalysisOutputImageFormat = _class.instanceMethodId(
+    r'getImageAnalysisOutputImageFormat',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageAnalysisOutputImageFormat =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageAnalysisOutputImageFormat(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<imageformat$_.ImageFormat>
+      getImageAnalysisOutputImageFormat() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageAnalysisOutputImageFormat(
+            reference.pointer,
+            _id_getImageAnalysisOutputImageFormat as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const imageformat$_.$ImageFormat$Type().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const imageformat$_.$ImageFormat$Type().fromReference($o);
+  }
+
+  static final _id_setImageAnalysisOutputImageFormat = _class.instanceMethodId(
+    r'setImageAnalysisOutputImageFormat',
+    r'(Ldev/hebei/camerax_android/core/ImageFormat;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageAnalysisOutputImageFormat =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageAnalysisOutputImageFormat(dev.hebei.camerax_android.core.ImageFormat imageFormat, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageAnalysisOutputImageFormat(
+    imageformat$_.ImageFormat? imageFormat,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$imageFormat = imageFormat?.reference ?? jni$_.jNullReference;
+    _setImageAnalysisOutputImageFormat(
+            reference.pointer,
+            _id_setImageAnalysisOutputImageFormat as jni$_.JMethodIDPtr,
+            _$imageFormat.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getImageAnalysisBackgroundExecutor = _class.instanceMethodId(
+    r'getImageAnalysisBackgroundExecutor',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getImageAnalysisBackgroundExecutor =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getImageAnalysisBackgroundExecutor(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject?> getImageAnalysisBackgroundExecutor() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getImageAnalysisBackgroundExecutor(
+            reference.pointer,
+            _id_getImageAnalysisBackgroundExecutor as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectNullableType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectNullableType().fromReference($o);
+  }
+
+  static final _id_setImageAnalysisBackgroundExecutor = _class.instanceMethodId(
+    r'setImageAnalysisBackgroundExecutor',
+    r'(Ljava/util/concurrent/Executor;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageAnalysisBackgroundExecutor =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageAnalysisBackgroundExecutor(java.util.concurrent.Executor executor, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageAnalysisBackgroundExecutor(
+    jni$_.JObject? executor,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    _setImageAnalysisBackgroundExecutor(
+            reference.pointer,
+            _id_setImageAnalysisBackgroundExecutor as jni$_.JMethodIDPtr,
+            _$executor.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_setImageAnalysisAnalyzer = _class.instanceMethodId(
+    r'setImageAnalysisAnalyzer',
+    r'(Ljava/util/concurrent/Executor;Ldev/hebei/camerax_android/core/ImageAnalysis$Analyzer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setImageAnalysisAnalyzer = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setImageAnalysisAnalyzer(java.util.concurrent.Executor executor, dev.hebei.camerax_android.core.ImageAnalysis$Analyzer analyzer, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setImageAnalysisAnalyzer(
+    jni$_.JObject? executor,
+    imageanalysis$_.ImageAnalysis$Analyzer? analyzer,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    final _$analyzer = analyzer?.reference ?? jni$_.jNullReference;
+    _setImageAnalysisAnalyzer(
+            reference.pointer,
+            _id_setImageAnalysisAnalyzer as jni$_.JMethodIDPtr,
+            _$executor.pointer,
+            _$analyzer.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_clearImageAnalysisAnalyzer = _class.instanceMethodId(
+    r'clearImageAnalysisAnalyzer',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _clearImageAnalysisAnalyzer =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object clearImageAnalysisAnalyzer(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> clearImageAnalysisAnalyzer() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _clearImageAnalysisAnalyzer(
+            reference.pointer,
+            _id_clearImageAnalysisAnalyzer as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getVideoCaptureDynamicRange = _class.instanceMethodId(
+    r'getVideoCaptureDynamicRange',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getVideoCaptureDynamicRange =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getVideoCaptureDynamicRange(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<dynamicrange$_.DynamicRange>
+      getVideoCaptureDynamicRange() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getVideoCaptureDynamicRange(
+            reference.pointer,
+            _id_getVideoCaptureDynamicRange as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const dynamicrange$_.$DynamicRange$Type().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const dynamicrange$_.$DynamicRange$Type().fromReference($o);
+  }
+
+  static final _id_setVideoCaptureDynamicRange = _class.instanceMethodId(
+    r'setVideoCaptureDynamicRange',
+    r'(Ldev/hebei/camerax_android/core/DynamicRange;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setVideoCaptureDynamicRange =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setVideoCaptureDynamicRange(dev.hebei.camerax_android.core.DynamicRange dynamicRange, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setVideoCaptureDynamicRange(
+    dynamicrange$_.DynamicRange? dynamicRange,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$dynamicRange = dynamicRange?.reference ?? jni$_.jNullReference;
+    _setVideoCaptureDynamicRange(
+            reference.pointer,
+            _id_setVideoCaptureDynamicRange as jni$_.JMethodIDPtr,
+            _$dynamicRange.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getVideoCaptureMirrorMode = _class.instanceMethodId(
+    r'getVideoCaptureMirrorMode',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getVideoCaptureMirrorMode = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getVideoCaptureMirrorMode(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<mirrormode$_.MirrorMode> getVideoCaptureMirrorMode() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getVideoCaptureMirrorMode(
+            reference.pointer,
+            _id_getVideoCaptureMirrorMode as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const mirrormode$_.$MirrorMode$Type().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const mirrormode$_.$MirrorMode$Type().fromReference($o);
+  }
+
+  static final _id_setVideoCaptureMirrorMode = _class.instanceMethodId(
+    r'setVideoCaptureMirrorMode',
+    r'(Ldev/hebei/camerax_android/core/MirrorMode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setVideoCaptureMirrorMode = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setVideoCaptureMirrorMode(dev.hebei.camerax_android.core.MirrorMode mirrorMode, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setVideoCaptureMirrorMode(
+    mirrormode$_.MirrorMode? mirrorMode,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$mirrorMode = mirrorMode?.reference ?? jni$_.jNullReference;
+    _setVideoCaptureMirrorMode(
+            reference.pointer,
+            _id_setVideoCaptureMirrorMode as jni$_.JMethodIDPtr,
+            _$mirrorMode.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getVideoCaptureQualitySelector = _class.instanceMethodId(
+    r'getVideoCaptureQualitySelector',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getVideoCaptureQualitySelector =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getVideoCaptureQualitySelector(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> getVideoCaptureQualitySelector() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getVideoCaptureQualitySelector(
+            reference.pointer,
+            _id_getVideoCaptureQualitySelector as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_setVideoCaptureQualitySelector = _class.instanceMethodId(
+    r'setVideoCaptureQualitySelector',
+    r'(Ldev/hebei/camerax_android/video/QualitySelector;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setVideoCaptureQualitySelector =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setVideoCaptureQualitySelector(dev.hebei.camerax_android.video.QualitySelector qualitySelector, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setVideoCaptureQualitySelector(
+    jni$_.JObject? qualitySelector,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$qualitySelector =
+        qualitySelector?.reference ?? jni$_.jNullReference;
+    _setVideoCaptureQualitySelector(
+            reference.pointer,
+            _id_setVideoCaptureQualitySelector as jni$_.JMethodIDPtr,
+            _$qualitySelector.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_getVideoCaptureTargetFrameRate = _class.instanceMethodId(
+    r'getVideoCaptureTargetFrameRate',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _getVideoCaptureTargetFrameRate =
+      jni$_.ProtectedJniExtensions.lookup<
+                  jni$_.NativeFunction<
+                      jni$_.JniResult Function(
+                          jni$_.Pointer<jni$_.Void>,
+                          jni$_.JMethodIDPtr,
+                          jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+              'globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object getVideoCaptureTargetFrameRate(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> getVideoCaptureTargetFrameRate() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _getVideoCaptureTargetFrameRate(
+            reference.pointer,
+            _id_getVideoCaptureTargetFrameRate as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_setVideoCaptureTargetFrameRate = _class.instanceMethodId(
+    r'setVideoCaptureTargetFrameRate',
+    r'(Landroid/util/Range;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _setVideoCaptureTargetFrameRate =
+      jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<
+                          (
+                            jni$_.Pointer<jni$_.Void>,
+                            jni$_.Pointer<jni$_.Void>
+                          )>)>>('globalEnv_CallObjectMethod')
+          .asFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object setVideoCaptureTargetFrameRate(android.util.Range range, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> setVideoCaptureTargetFrameRate(
+    jni$_.JObject? range,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$range = range?.reference ?? jni$_.jNullReference;
+    _setVideoCaptureTargetFrameRate(
+            reference.pointer,
+            _id_setVideoCaptureTargetFrameRate as jni$_.JMethodIDPtr,
+            _$range.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_isRecording = _class.instanceMethodId(
+    r'isRecording',
+    r'(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _isRecording = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object isRecording(kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JBoolean> isRecording() async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+
+    _isRecording(reference.pointer, _id_isRecording as jni$_.JMethodIDPtr,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JBooleanType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JBooleanType().fromReference($o);
+  }
+
+  static final _id_startRecording = _class.instanceMethodId(
+    r'startRecording',
+    r'(Ldev/hebei/camerax_android/video/FileOutputOptions;Ldev/hebei/camerax_android/view/video/AudioConfig;Ljava/util/concurrent/Executor;Landroidx/core/util/Consumer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _startRecording = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object startRecording(dev.hebei.camerax_android.video.FileOutputOptions fileOutputOptions, dev.hebei.camerax_android.view.video.AudioConfig audioConfig, java.util.concurrent.Executor executor, androidx.core.util.Consumer consumer, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> startRecording(
+    jni$_.JObject? fileOutputOptions,
+    audioconfig$_.AudioConfig? audioConfig,
+    jni$_.JObject? executor,
+    jni$_.JObject? consumer,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$fileOutputOptions =
+        fileOutputOptions?.reference ?? jni$_.jNullReference;
+    final _$audioConfig = audioConfig?.reference ?? jni$_.jNullReference;
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    final _$consumer = consumer?.reference ?? jni$_.jNullReference;
+    _startRecording(
+            reference.pointer,
+            _id_startRecording as jni$_.JMethodIDPtr,
+            _$fileOutputOptions.pointer,
+            _$audioConfig.pointer,
+            _$executor.pointer,
+            _$consumer.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_startRecording$1 = _class.instanceMethodId(
+    r'startRecording',
+    r'(Ldev/hebei/camerax_android/video/MediaStoreOutputOptions;Ldev/hebei/camerax_android/view/video/AudioConfig;Ljava/util/concurrent/Executor;Landroidx/core/util/Consumer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _startRecording$1 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object startRecording(dev.hebei.camerax_android.video.MediaStoreOutputOptions mediaStoreOutputOptions, dev.hebei.camerax_android.view.video.AudioConfig audioConfig, java.util.concurrent.Executor executor, androidx.core.util.Consumer consumer, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> startRecording$1(
+    jni$_.JObject? mediaStoreOutputOptions,
+    audioconfig$_.AudioConfig? audioConfig,
+    jni$_.JObject? executor,
+    jni$_.JObject? consumer,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$mediaStoreOutputOptions =
+        mediaStoreOutputOptions?.reference ?? jni$_.jNullReference;
+    final _$audioConfig = audioConfig?.reference ?? jni$_.jNullReference;
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    final _$consumer = consumer?.reference ?? jni$_.jNullReference;
+    _startRecording$1(
+            reference.pointer,
+            _id_startRecording$1 as jni$_.JMethodIDPtr,
+            _$mediaStoreOutputOptions.pointer,
+            _$audioConfig.pointer,
+            _$executor.pointer,
+            _$consumer.pointer,
+            _$continuation.pointer)
+        .object<jni$_.JObject>(const jni$_.JObjectType());
+    _$continuation.release();
+    final $o =
+        jni$_.JGlobalReference(jni$_.JObjectPtr.fromAddress(await $p.first));
+    final $k = const jni$_.JObjectType().jClass.reference;
+    if (!jni$_.Jni.env.IsInstanceOf($o.pointer, $k.pointer)) {
+      $k.release();
+      throw 'Failed';
+    }
+    $k.release();
+    return const jni$_.JObjectType().fromReference($o);
+  }
+
+  static final _id_startRecording$2 = _class.instanceMethodId(
+    r'startRecording',
+    r'(Ldev/hebei/camerax_android/video/FileDescriptorOutputOptions;Ldev/hebei/camerax_android/view/video/AudioConfig;Ljava/util/concurrent/Executor;Landroidx/core/util/Consumer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;',
+  );
+
+  static final _startRecording$2 = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                  jni$_.Pointer<jni$_.Void>,
+                  jni$_.JMethodIDPtr,
+                  jni$_.VarArgs<
+                      (
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>,
+                        jni$_.Pointer<jni$_.Void>
+                      )>)>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public final java.lang.Object startRecording(dev.hebei.camerax_android.video.FileDescriptorOutputOptions fileDescriptorOutputOptions, dev.hebei.camerax_android.view.video.AudioConfig audioConfig, java.util.concurrent.Executor executor, androidx.core.util.Consumer consumer, kotlin.coroutines.Continuation continuation)`
+  /// The returned object must be released after use, by calling the [release] method.
+  core$_.Future<jni$_.JObject> startRecording$2(
+    jni$_.JObject? fileDescriptorOutputOptions,
+    audioconfig$_.AudioConfig? audioConfig,
+    jni$_.JObject? executor,
+    jni$_.JObject? consumer,
+  ) async {
+    final $p = jni$_.ReceivePort();
+    final _$continuation = jni$_.ProtectedJniExtensions.newPortContinuation($p);
+    final _$fileDescriptorOutputOptions =
+        fileDescriptorOutputOptions?.reference ?? jni$_.jNullReference;
+    final _$audioConfig = audioConfig?.reference ?? jni$_.jNullReference;
+    final _$executor = executor?.reference ?? jni$_.jNullReference;
+    final _$consumer = consumer?.reference ?? jni$_.jNullReference;
+    _startRecording$2(
+            reference.pointer,
+            _id_startRecording$2 as jni$_.JMethodIDPtr,
+            _$fileDescriptorOutputOptions.pointer,
+            _$audioConfig.pointer,
+            _$executor.pointer,
+            _$consumer.pointer,
+            _$continuation.pointer)
         .object<jni$_.JObject>(const jni$_.JObjectType());
     _$continuation.release();
     final $o =

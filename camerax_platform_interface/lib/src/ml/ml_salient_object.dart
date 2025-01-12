@@ -1,10 +1,10 @@
 import 'ml_object.dart';
 import 'ml_object_type.dart';
 
-final class MLSalientObject extends MLObject {
+final class MlSalientObject extends MlObject {
   final int id;
 
-  MLSalientObject({
+  MlSalientObject({
     required super.time,
     required super.duration,
     required super.bounds,
@@ -12,5 +12,5 @@ final class MLSalientObject extends MLObject {
   });
 
   @override
-  MLObjectType get type => MLObjectType.salientObject;
+  MlObjectType get type => MlObjectType.salientObject;
 }

@@ -106,7 +106,7 @@ final class CameraController extends $base.CameraController {
   Future<bool?> getTorchState() async {
     final dataObj = await obj.getTorchState();
     final value = await dataObj.getValue();
-    return value;
+    return value == $native.TorchState.on;
   }
 
   @override
@@ -231,14 +231,15 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<Uri> takePicture(Uri uri) async {
-    final savedUri = await obj.takePictureToUri('$uri');
-    return Uri.parse(savedUri);
+    throw UnimplementedError();
+    // final savedUri = await obj.takePicture('$uri');
+    // return Uri.parse(savedUri);
   }
 
   @override
   Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() async {
     final obj = await this.obj.getImageAnalysisResolutionSelector();
-    return ResolutionSelector.$native(obj);
+    return obj == null ? null : ResolutionSelector.$native(obj);
   }
 
   @override
@@ -259,8 +260,8 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-      $base.BackpressureStrategy backpressureStrategy) async {
-    await obj.setImageAnalysisBackpressureStrategy(backpressureStrategy.obj);
+      $base.BackpressureStrategy strategy) async {
+    await obj.setImageAnalysisBackpressureStrategy(strategy.obj);
   }
 
   @override
@@ -270,8 +271,8 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<void> setImageAnalysisImageQueueDepth(int imageQueueDepth) async {
-    await obj.setImageAnalysisImageQueueDepth(imageQueueDepth);
+  Future<void> setImageAnalysisImageQueueDepth(int depth) async {
+    await obj.setImageAnalysisImageQueueDepth(depth);
   }
 
   @override
@@ -282,8 +283,8 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      $base.ImageFormat outputImageFormat) async {
-    await obj.setImageAnalysisOutputImageFormat(outputImageFormat.obj);
+      $base.ImageFormat format) async {
+    await obj.setImageAnalysisOutputImageFormat(format.obj);
   }
 
   @override
@@ -370,34 +371,35 @@ final class CameraController extends $base.CameraController {
     required bool enableAudio,
     required $base.VideoRecordEventCallback listener,
   }) async {
-    final audioConfigObj = $native.AudioConfig.create(
-      enableAudio: enableAudio,
-    );
-    final listenerObj = $native.VideoRecordEventConsumer(
-      accept: (obj, eventObj) {
-        if (eventObj is $native.VideoRecordStatusEvent) {
-          final event = VideoRecordStatusEvent.$native(eventObj);
-          listener(event);
-        } else if (eventObj is $native.VideoRecordStartEvent) {
-          final event = VideoRecordStartEvent.$native(eventObj);
-          listener(event);
-        } else if (eventObj is $native.VideoRecordPauseEvent) {
-          final event = VideoRecordPauseEvent.$native(eventObj);
-          listener(event);
-        } else if (eventObj is $native.VideoRecordResumeEvent) {
-          final event = VideoRecordResumeEvent.$native(eventObj);
-          listener(event);
-        } else if (eventObj is $native.VideoRecordFinalizeEvent) {
-          final event = VideoRecordFinalizeEvent.$native(eventObj);
-          listener(event);
-        } else {
-          throw TypeError();
-        }
-      },
-    );
-    final obj =
-        await this.obj.startRecording('$uri', audioConfigObj, listenerObj);
-    return Recording.$native(obj);
+    throw UnimplementedError();
+    // final audioConfigObj = $native.AudioConfig.create(
+    //   enableAudio: enableAudio,
+    // );
+    // final listenerObj = $native.VideoRecordEventConsumer(
+    //   accept: (obj, eventObj) {
+    //     if (eventObj is $native.VideoRecordStatusEvent) {
+    //       final event = VideoRecordStatusEvent.$native(eventObj);
+    //       listener(event);
+    //     } else if (eventObj is $native.VideoRecordStartEvent) {
+    //       final event = VideoRecordStartEvent.$native(eventObj);
+    //       listener(event);
+    //     } else if (eventObj is $native.VideoRecordPauseEvent) {
+    //       final event = VideoRecordPauseEvent.$native(eventObj);
+    //       listener(event);
+    //     } else if (eventObj is $native.VideoRecordResumeEvent) {
+    //       final event = VideoRecordResumeEvent.$native(eventObj);
+    //       listener(event);
+    //     } else if (eventObj is $native.VideoRecordFinalizeEvent) {
+    //       final event = VideoRecordFinalizeEvent.$native(eventObj);
+    //       listener(event);
+    //     } else {
+    //       throw TypeError();
+    //     }
+    //   },
+    // );
+    // final obj =
+    //     await this.obj.startRecording('$uri', audioConfigObj, listenerObj);
+    // return Recording.$native(obj);
   }
 
   void _onListenTorchStateChanged() async {
@@ -411,7 +413,7 @@ final class CameraController extends $base.CameraController {
       final dataObj = await obj.getTorchState();
       final observerObj = $native.TorchStateObserver(
         onChanged: (observer, value) {
-          _torchStateChangedController.add(value);
+          _torchStateChangedController.add(value == $native.TorchState.on);
         },
       );
       await dataObj.observe(observerObj);

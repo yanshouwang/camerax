@@ -44,13 +44,13 @@ val Int.backpressureStrategyArgs
 val ImageFormat.imageAnalysisObj
     get() = when (this) {
         ImageFormat.YUV_420_888 -> androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888
-        ImageFormat.FLEX_RGBA_8888 -> androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
+        ImageFormat.RGBA_8888 -> androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
         else -> throw IllegalArgumentException()
     }
 
 val Int.imageAnalysisImageFormatArgs
     get() = when (this) {
         androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888 -> ImageFormat.YUV_420_888
-        androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888 -> ImageFormat.FLEX_RGBA_8888
+        androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888 -> ImageFormat.RGBA_8888
         else -> throw IllegalArgumentException()
     }

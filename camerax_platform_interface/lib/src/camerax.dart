@@ -87,10 +87,12 @@ abstract base class CameraX extends PlatformInterface {
     FallbackStrategy? fallbackStrategy,
   });
 
-  MLAnalyzer createMLAnalyzer({
-    required List<MLObjectType> types,
+  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
+
+  MlKitAnalyzer createMlKitAnalyzer({
+    required List<MlObjectType> types,
     required CoordinateSystem targetCoordinateSystem,
-    required MLObjectsCallback onAnalyzed,
+    required MlObjectsCallback onAnalyzed,
   });
 
   PreviewView createPreviewView();

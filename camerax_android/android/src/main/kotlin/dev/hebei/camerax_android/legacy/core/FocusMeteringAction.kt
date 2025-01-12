@@ -5,14 +5,13 @@ import dev.hebei.camerax_android.legacy.PigeonApiFocusMeteringAction
 
 class FocusMeteringAction(registrar: CameraXRegistrar) : PigeonApiFocusMeteringAction(registrar) {
     override fun pigeon_defaultConstructor(
-        first: MeteringPointArgs.Wrapper,
-        others: List<MeteringPointArgs.Wrapper>?,
+        first: MeteringPointArgs.Stub,
+        others: List<MeteringPointArgs.Stub>?,
         disableAutoCancel: Boolean?,
-        autoCancelDuration: DurationArgs.Wrapper?
-    ): dev.hebei.camerax_android.core.FocusMeteringAction {
-        val builder =
-            if (first.mode == null) dev.hebei.camerax_android.core.FocusMeteringAction.Builder(first.point)
-            else dev.hebei.camerax_android.core.FocusMeteringAction.Builder(first.point, first.mode)
+        autoCancelDuration: DurationArgs.Stub?
+    ): androidx.camera.core.FocusMeteringAction {
+        val builder = if (first.mode == null) androidx.camera.core.FocusMeteringAction.Builder(first.point)
+        else androidx.camera.core.FocusMeteringAction.Builder(first.point, first.mode)
         if (others != null) {
             for (otherPoint in others) {
                 if (otherPoint.mode == null) builder.addPoint(otherPoint.point)

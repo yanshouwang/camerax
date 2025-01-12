@@ -4,15 +4,17 @@ import 'package:camerax_platform_interface/src/core.dart';
 import 'ml_object.dart';
 import 'ml_object_type.dart';
 
-typedef MLObjectsCallback = void Function(List<MLObject> items);
+typedef MlObjectsCallback = void Function(List<MlObject> items);
 
-abstract base class MLAnalyzer extends Analyzer {
-  factory MLAnalyzer({
-    required List<MLObjectType> types,
+abstract base class MlKitAnalyzer extends Analyzer {
+  MlKitAnalyzer.impl() : super.impl();
+
+  factory MlKitAnalyzer({
+    required List<MlObjectType> types,
     required CoordinateSystem targetCoordinateSystem,
-    required MLObjectsCallback onAnalyzed,
+    required MlObjectsCallback onAnalyzed,
   }) {
-    return CameraX.instance.createMLAnalyzer(
+    return CameraX.instance.createMlKitAnalyzer(
       types: types,
       targetCoordinateSystem: targetCoordinateSystem,
       onAnalyzed: onAnalyzed,

@@ -1,9 +1,9 @@
 import 'ml_object.dart';
 
-abstract base class MLBodyObject extends MLObject {
+abstract base class MlBodyObject extends MlObject {
   final int id;
 
-  MLBodyObject({
+  MlBodyObject({
     required super.time,
     required super.duration,
     required super.bounds,

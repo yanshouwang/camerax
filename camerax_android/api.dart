@@ -33,6 +33,11 @@ enum CameraState {
   closed,
 }
 
+enum TorchState {
+  on,
+  off,
+}
+
 enum MeteringMode {
   af,
   ae,
@@ -49,6 +54,18 @@ enum TimeUnit {
   days,
 }
 
+enum AspectRatio {
+  ratioDefault,
+  ratio4_3,
+  ratio16_9,
+}
+
+enum BitDepth {
+  bitDepthUnspecified,
+  bitDepth8Bit,
+  bitDepth10Bit,
+}
+
 enum Encoding {
   unspecified,
   sdr,
@@ -57,12 +74,6 @@ enum Encoding {
   hdr10,
   hdr10Plus,
   dolbyVision,
-}
-
-enum BitDepth {
-  bitDepthUnspecified,
-  bitDepth8Bit,
-  bitDepth10Bit,
 }
 
 enum ScaleType {
@@ -83,12 +94,6 @@ enum UseCase {
 enum ResolutionMode {
   preferCaptureRateOverHigherResolution,
   preferHigherResolutionOverCaptureRate,
-}
-
-enum AspectRatio {
-  ratioDefault,
-  ratio4_3,
-  ratio16_9,
 }
 
 enum AspectRatioFallbackRule {
@@ -122,40 +127,17 @@ enum BackpressureStrategy {
   blockProducer,
 }
 
-enum ImageFormat {
-  depth16,
-  depthJpeg,
-  depthPointCloud,
-  flexRgba8888,
-  flexRgb888,
-  heic,
-  jpeg,
-  jpegR,
-  nv16,
-  nv21,
-  private,
-  raw10,
-  raw12,
-  rawPrivate,
-  rawSensor,
-  rgb565,
-  unknown,
-  y8,
-  ycbcrP010,
-  yuv420_888,
-  yuv422_888,
-  yuv444_888,
-  yuy2,
-  yv12,
+enum CoordinateSystem {
+  original,
+  sensor,
+  viewReferenced,
 }
 
-enum Quality {
-  fhd,
-  hd,
-  highest,
-  lowest,
-  sd,
-  uhd,
+enum ImageFormat {
+  yuv420_888,
+  rgba8888,
+  jpeg,
+  jpegR,
 }
 
 enum MirrorMode {
@@ -179,12 +161,123 @@ enum VideoRecordFinalizeEventError {
   fileSizeLimitReached,
   insufficientStorage,
   sourceInactive,
-  inavlidOuputOptions,
+  invalidOuputOptions,
   encodingFailed,
   recorderError,
   noValidData,
   durationLimitReached,
   recordingGarbageCollected,
+}
+
+enum BarcodeFormat {
+  unknown,
+  all,
+  code128,
+  code39,
+  code93,
+  codabar,
+  dataMatrix,
+  ean13,
+  ean8,
+  itf,
+  qrCode,
+  upcA,
+  upcE,
+  pdf417,
+  aztec,
+}
+
+enum BarcodeValueType {
+  unknown,
+  contactInfo,
+  email,
+  isbn,
+  phone,
+  product,
+  sms,
+  text,
+  url,
+  wifi,
+  geo,
+  calendarEvent,
+  driverLicense,
+}
+
+enum AddressType {
+  unknown,
+  work,
+  home,
+}
+
+enum EmailType {
+  unknown,
+  work,
+  home,
+}
+
+enum PhoneType {
+  unknown,
+  work,
+  home,
+  fax,
+  mobile,
+}
+
+enum WiFiEncryptionType {
+  open,
+  wpa,
+  wep,
+}
+
+enum FaceClassificationMode {
+  none,
+  all,
+}
+
+enum FaceContourMode {
+  none,
+  all,
+}
+
+enum FaceLandmarkMode {
+  none,
+  all,
+}
+
+enum FacePerformanceMode {
+  fast,
+  accurate,
+}
+
+enum FaceContourType {
+  face,
+  leftCheek,
+  leftEye,
+  leftEyebrowBottom,
+  leftEyebrowTop,
+  lowerLipBottom,
+  lowerLipTop,
+  noseBottom,
+  noseBridge,
+  rightCheek,
+  rightEye,
+  rightEyebrowBottom,
+  rightEyebrowTop,
+  upperLipBottom,
+  upperLipTop,
+}
+
+enum FaceLandmarkType {
+  leftCheek,
+  leftEar,
+  leftEye,
+  mouthBottom,
+  mouthLeft,
+  mouthRight,
+  noseBase,
+  rightCheek,
+  rightEar,
+  rightEye,
 }
 
 @ProxyApi(
@@ -203,13 +296,29 @@ abstract class PermissionManager {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'java.lang.Throwable',
+    fullClassName: 'java.lang.AutoCloseable',
   ),
 )
-abstract class Throwable {
-  String getCode();
-  String getMessage();
-  String getDetails();
+abstract class AutoCloseable {
+  void close();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'java.io.Closeable',
+  ),
+)
+abstract class Closeable extends AutoCloseable {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.net.Uri',
+  ),
+)
+abstract class Uri {
+  Uri.parse(String uriString);
+
+  String? getPath();
 }
 
 @ProxyApi(
@@ -226,6 +335,30 @@ abstract class Size {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.graphics.Point',
+  ),
+)
+abstract class Point {
+  Point();
+
+  late final int x;
+  late final int y;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.graphics.PointF',
+  ),
+)
+abstract class PointF {
+  PointF();
+
+  late final double x;
+  late final double y;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.graphics.Rect',
   ),
 )
@@ -238,7 +371,7 @@ abstract class Rect {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.legacy.core.IntRange.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.IntRange.Stub',
   ),
 )
 abstract class IntRange {
@@ -250,7 +383,7 @@ abstract class IntRange {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.CameraSelector',
+    fullClassName: 'androidx.camera.core.CameraSelector',
   ),
 )
 abstract class CameraSelector {
@@ -266,8 +399,7 @@ abstract class CameraSelector {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.CameraStateLiveData.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.CameraStateLiveData.Stub',
   ),
 )
 abstract class CameraStateLiveData {
@@ -279,8 +411,7 @@ abstract class CameraStateLiveData {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.CameraStateObserver.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.CameraStateObserver.Impl',
   ),
 )
 abstract class CameraStateObserver {
@@ -291,12 +422,11 @@ abstract class CameraStateObserver {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.TorchStateLiveData.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.TorchStateLiveData.Stub',
   ),
 )
 abstract class TorchStateLiveData {
-  bool? getValue();
+  TorchState? getValue();
 
   void observe(TorchStateObserver observer);
   void removeObserver(TorchStateObserver observer);
@@ -304,19 +434,18 @@ abstract class TorchStateLiveData {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.TorchStateObserver.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.TorchStateObserver.Impl',
   ),
 )
 abstract class TorchStateObserver {
   TorchStateObserver();
 
-  late final void Function(bool value) onChanged;
+  late final void Function(TorchState value) onChanged;
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.ZoomState',
+    fullClassName: 'androidx.camera.core.ZoomState',
   ),
 )
 abstract class ZoomState {
@@ -328,8 +457,7 @@ abstract class ZoomState {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.ZoomStateLiveData.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.ZoomStateLiveData.Stub',
   ),
 )
 abstract class ZoomStateLiveData {
@@ -341,8 +469,7 @@ abstract class ZoomStateLiveData {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.ZoomStateObserver.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.ZoomStateObserver.Impl',
   ),
 )
 abstract class ZoomStateObserver {
@@ -353,7 +480,7 @@ abstract class ZoomStateObserver {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.ExposureState',
+    fullClassName: 'androidx.camera.core.ExposureState',
   ),
 )
 abstract class ExposureState {
@@ -365,7 +492,7 @@ abstract class ExposureState {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.MeteringPoint',
+    fullClassName: 'androidx.camera.core.MeteringPoint',
   ),
 )
 abstract class MeteringPoint {}
@@ -373,7 +500,7 @@ abstract class MeteringPoint {}
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.hebei.camerax_android.legacy.core.MeteringPointArgs.Wrapper',
+        'dev.hebei.camerax_android.legacy.core.MeteringPointArgs.Stub',
   ),
 )
 abstract class MeteringPointArgs {
@@ -385,7 +512,7 @@ abstract class MeteringPointArgs {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.legacy.core.DurationArgs.Wrapper',
+    fullClassName: 'dev.hebei.camerax_android.legacy.core.DurationArgs.Stub',
   ),
 )
 abstract class DurationArgs {
@@ -394,7 +521,7 @@ abstract class DurationArgs {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.FocusMeteringAction',
+    fullClassName: 'androidx.camera.core.FocusMeteringAction',
   ),
 )
 abstract class FocusMeteringAction {
@@ -408,7 +535,16 @@ abstract class FocusMeteringAction {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.DynamicRange',
+    fullClassName: 'androidx.camera.core.FocusMeteringResult',
+  ),
+)
+abstract class FocusMeteringResult {
+  bool isFocusSuccessful();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.DynamicRange',
   ),
 )
 abstract class DynamicRange {
@@ -420,7 +556,7 @@ abstract class DynamicRange {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.CameraInfo',
+    fullClassName: 'androidx.camera.core.CameraInfo',
   ),
 )
 abstract class CameraInfo {
@@ -446,7 +582,7 @@ abstract class CameraInfo {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.CameraControl',
+    fullClassName: 'androidx.camera.core.CameraControl',
   ),
 )
 abstract class CameraControl {
@@ -457,7 +593,7 @@ abstract class CameraControl {
   @async
   void setLinearZoom(double linearZoom);
   @async
-  void startFocusAndMetering(FocusMeteringAction action);
+  FocusMeteringResult startFocusAndMetering(FocusMeteringAction action);
   @async
   void cancelFocusAndMetering();
   @async
@@ -467,7 +603,7 @@ abstract class CameraControl {
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.hebei.camerax_android.core.resolutionselector.AspectRatioStrategy',
+        'androidx.camera.core.resolutionselector.AspectRatioStrategy',
   ),
 )
 abstract class AspectRatioStrategy {
@@ -487,8 +623,7 @@ abstract class AspectRatioStrategy {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.core.resolutionselector.ResolutionFilter',
+    fullClassName: 'androidx.camera.core.resolutionselector.ResolutionFilter',
   ),
 )
 abstract class ResolutionFilter {
@@ -500,8 +635,7 @@ abstract class ResolutionFilter {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.core.resolutionselector.ResolutionStrategy',
+    fullClassName: 'androidx.camera.core.resolutionselector.ResolutionStrategy',
   ),
 )
 abstract class ResolutionStrategy {
@@ -519,8 +653,7 @@ abstract class ResolutionStrategy {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.core.resolutionselector.ResolutionSelector',
+    fullClassName: 'androidx.camera.core.resolutionselector.ResolutionSelector',
   ),
 )
 abstract class ResolutionSelector {
@@ -539,7 +672,7 @@ abstract class ResolutionSelector {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.ImageInfo',
+    fullClassName: 'androidx.camera.core.ImageInfo',
   ),
 )
 abstract class ImageInfo {
@@ -549,7 +682,7 @@ abstract class ImageInfo {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-      fullClassName: 'dev.hebei.camerax_android.core.ImageProxy.PlaneProxy'),
+      fullClassName: 'androidx.camera.core.ImageProxy.PlaneProxy'),
 )
 abstract class PlaneProxy {
   Uint8List getBuffer();
@@ -559,23 +692,22 @@ abstract class PlaneProxy {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.ImageProxy',
+    fullClassName: 'androidx.camera.core.ImageProxy',
   ),
 )
-abstract class ImageProxy {
+abstract class ImageProxy extends AutoCloseable {
   ImageFormat getFormat();
   int getWidth();
   int getHieght();
   List<PlaneProxy> getPlanes();
   ImageInfo getImageInfo();
-  Rect? getCropRect();
+  Rect getCropRect();
   void setCropRect(Rect? rect);
-  void close();
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.ImageAnalysis.Analyzer',
+    fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
   ),
 )
 abstract class Analyzer {
@@ -586,7 +718,444 @@ abstract class Analyzer {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.FallbackStrategy',
+    fullClassName: 'dev.hebei.camerax_android.legacy.ml.Detector.Stub',
+  ),
+)
+abstract class Detector extends Closeable {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Address',
+  ),
+)
+abstract class Address {
+  AddressType getType();
+  List<String> getAddressLines();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime',
+  ),
+)
+abstract class CalendarDateTime {
+  String? getRawValue();
+  int getYear();
+  int getMonth();
+  int getDay();
+  int getHours();
+  int getMinutes();
+  int getSeconds();
+  bool isUtc();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent',
+  ),
+)
+abstract class CalendarEvent {
+  CalendarDateTime? getStart();
+  CalendarDateTime? getEnd();
+  String? getLocation();
+  String? getOrganizer();
+  String? getSummary();
+  String? getDescription();
+  String? getStatus();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.ContactInfo',
+  ),
+)
+abstract class ContactInfo {
+  List<Address> getAddresses();
+  List<Email> getEmails();
+  PersonName? getName();
+  String? getOrganization();
+  List<Phone> getPhones();
+  String? getTitle();
+  List<String> getUrls();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'com.google.mlkit.vision.barcode.common.Barcode.DriverLicense',
+  ),
+)
+abstract class DriverLicense {
+  String? getLicenseNumber();
+  String? getDocumentType();
+  String? getExpiryDate();
+  String? getFirstName();
+  String? getMiddleName();
+  String? getLastName();
+  String? getGender();
+  String? getBirthDate();
+  String? getIssueDate();
+  String? getIssuingCountry();
+  String? getAddressState();
+  String? getAddressCity();
+  String? getAddressStreet();
+  String? getAddressZip();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Email',
+  ),
+)
+abstract class Email {
+  EmailType getType();
+  String? getAddress();
+  String? getSubgect();
+  String? getBody();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.GeoPoint',
+  ),
+)
+abstract class GeoPoint {
+  double getLat();
+  double getLng();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.PersonName',
+  ),
+)
+abstract class PersonName {
+  String? getFormattedName();
+  String? getPronunciation();
+  String? getPrefix();
+  String? getFirst();
+  String? getMiddle();
+  String? getLast();
+  String? getSuffix();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Phone',
+  ),
+)
+abstract class Phone {
+  PhoneType getType();
+  String? getNumber();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Sms',
+  ),
+)
+abstract class Sms {
+  String? getPhoneNumber();
+  String? getMessage();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark',
+  ),
+)
+abstract class UrlBookmark {
+  String? getTitle();
+  String? getUrl();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.WiFi',
+  ),
+)
+abstract class WiFi {
+  WiFiEncryptionType getEncryptionType();
+  String? getSsid();
+  String? getPassword();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode',
+  ),
+)
+abstract class Barcode {
+  Rect? getBoundingBox();
+  List<Point>? getCornerPoints();
+  BarcodeFormat getFormat();
+  BarcodeValueType getValueType();
+  Uint8List? getRawBytes();
+  String? getRawValue();
+  String? getDisplayValue();
+  CalendarEvent? getCalendarEvent();
+  ContactInfo? getContactInfo();
+  DriverLicense? getDriverLicense();
+  Email? getEmail();
+  GeoPoint? getGeoPoint();
+  Phone? getPhone();
+  Sms? getSms();
+  UrlBookmark? getUrl();
+  WiFi? getWifi();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'com.google.mlkit.vision.barcode.ZoomSuggestionOptions.ZoomCallback',
+  ),
+)
+abstract class ZoomCallback {
+  ZoomCallback();
+
+  late final bool Function(double zoomRatio) setZoom;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.ZoomSuggestionOptions',
+  ),
+)
+abstract class ZoomSuggestionOptions {
+  ZoomSuggestionOptions.build({
+    required ZoomCallback zoomCallback,
+    double? maxSupportedZoomRatio,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.BarcodeScannerOptions',
+  ),
+)
+abstract class BarcodeScannerOptions {
+  BarcodeScannerOptions.build({
+    bool? enableAllPotentialBarcodes,
+    List<BarcodeFormat>? formats,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.android.odml.image.MlImage',
+  ),
+)
+abstract class MlImage {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.common.InputImage',
+  ),
+)
+abstract class InputImage {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.legacy.ml.BarcodeScanner.Stub',
+  ),
+)
+abstract class BarcodeScanner extends Detector {
+  @async
+  List<Barcode> process0(MlImage image);
+  @async
+  List<Barcode> process1(InputImage image);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.BarcodeScanning',
+  ),
+)
+abstract class BarcodeScanning {
+  @static
+  BarcodeScanner getClient({
+    BarcodeScannerOptions? options,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.face.FaceDetectorOptions',
+  ),
+)
+abstract class FaceDetectorOptions {
+  FaceDetectorOptions.build({
+    bool? enableTracking,
+    FaceClassificationMode? classificationMode,
+    FaceContourMode? contourMode,
+    FaceLandmarkMode? landmarkMode,
+    double? minFaceSize,
+    FacePerformanceMode? performanceMode,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.face.FaceContour',
+  ),
+)
+abstract class FaceContour {
+  FaceContourType getType();
+  List<PointF> getPoints();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.face.FaceLandmark',
+  ),
+)
+abstract class FaceLandmark {
+  FaceLandmarkType getType();
+  PointF getPosition();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.face.Face',
+  ),
+)
+abstract class Face {
+  Rect getBoundingBox();
+  List<FaceContour> getAllContours();
+  List<FaceLandmark> getAllLandmarks();
+  FaceContour? getContour(FaceContourType contourType);
+  FaceLandmark? getLandmark(FaceLandmarkType landmarkType);
+  double getHeadEulerAngleX();
+  double getHeadEulerAngleY();
+  double getHeadEulerAngleZ();
+  double? getLeftEyeOpenProbability();
+  double? getRightEyeOpenProbability();
+  double? getSmilingProbability();
+  int? getTrackingId();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.legacy.ml.FaceDetector.Stub',
+  ),
+)
+abstract class FaceDetector extends Detector {
+  @async
+  List<Face> process0(MlImage image);
+  @async
+  List<Face> process1(InputImage image);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.face.FaceDetection',
+  ),
+)
+abstract class FaceDetection {
+  @static
+  FaceDetector getClient({
+    FaceDetectorOptions? options,
+  });
+}
+
+// @ProxyApi(
+//   kotlinOptions: KotlinProxyApiOptions(
+//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.ImageLabeler.Stub',
+//   ),
+// )
+// abstract class ImageLabeler extends Detector {}
+
+// @ProxyApi(
+//   kotlinOptions: KotlinProxyApiOptions(
+//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.ObjectDetector.Stub',
+//   ),
+// )
+// abstract class ObjectDetector extends Detector {}
+
+// @ProxyApi(
+//   kotlinOptions: KotlinProxyApiOptions(
+//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.PoseDetector.Stub',
+//   ),
+// )
+// abstract class PoseDetector extends Detector {}
+
+// @ProxyApi(
+//   kotlinOptions: KotlinProxyApiOptions(
+//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.Segmenter.Stub',
+//   ),
+// )
+// abstract class Segmenter extends Detector {}
+
+// @ProxyApi(
+//   kotlinOptions: KotlinProxyApiOptions(
+//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.TextRecognizer.Stub',
+//   ),
+// )
+// abstract class TextRecognizer extends Detector {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.mlkit.vision.MlKitAnalyzer.Result',
+  ),
+)
+abstract class MlkitAnalyzerResult {
+  int getTimestamp();
+  List<Object?>? getThrowable(Detector detector);
+  List<Barcode>? getBarcodes(BarcodeScanner detector);
+  List<Face>? getFaces(FaceDetector detector);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.MlKitAnalyzerResultConsumer.Impl',
+  ),
+)
+abstract class MlKitAnalyzerResultConsumer {
+  MlKitAnalyzerResultConsumer();
+
+  late final void Function(MlkitAnalyzerResult value) accept;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.mlkit.vision.MlKitAnalyzer',
+  ),
+)
+abstract class MlKitAnalyzer {
+  MlKitAnalyzer({
+    required List<Detector> detectors,
+    required CoordinateSystem targetCoordinateSystem,
+    required MlKitAnalyzerResultConsumer consumer,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.video.Quality',
+  ),
+)
+abstract class Quality {
+  @static
+  late final Quality fhd;
+  @static
+  late final Quality hd;
+  @static
+  late final Quality highest;
+  @static
+  late final Quality lowest;
+  @static
+  late final Quality sd;
+  @static
+  late final Quality uhd;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.video.FallbackStrategy',
   ),
 )
 abstract class FallbackStrategy {
@@ -598,7 +1167,7 @@ abstract class FallbackStrategy {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.QualitySelector',
+    fullClassName: 'androidx.camera.video.QualitySelector',
   ),
 )
 abstract class QualitySelector {
@@ -612,34 +1181,38 @@ abstract class QualitySelector {
     FallbackStrategy? fallbackStrategy,
   });
 
+  @static
   Size? getResolution(CameraInfo cameraInfo, Quality quality);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.view.video.AudioConfig',
+    fullClassName: 'androidx.camera.view.video.AudioConfig',
   ),
 )
 abstract class AudioConfig {
+  @static
+  late final AudioConfig audioDisabled;
+
   AudioConfig.create(bool enableAudio);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.AudioStats',
+    fullClassName: 'androidx.camera.video.AudioStats',
   ),
 )
 abstract class AudioStats {
   double getAudioAmplitude();
   AudioState getAudioState();
-  Throwable? getErrorCause();
+  List<Object?>? getErrorCause();
   bool hasAudio();
   bool hasError();
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.RecordingStats',
+    fullClassName: 'androidx.camera.video.RecordingStats',
   ),
 )
 abstract class RecordingStats {
@@ -650,7 +1223,7 @@ abstract class RecordingStats {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent',
+    fullClassName: 'androidx.camera.video.VideoRecordEvent',
   ),
 )
 abstract class VideoRecordEvent {
@@ -659,58 +1232,67 @@ abstract class VideoRecordEvent {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Status',
+    fullClassName: 'androidx.camera.video.VideoRecordEvent.Status',
   ),
 )
 abstract class VideoRecordStatusEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Start',
+    fullClassName: 'androidx.camera.video.VideoRecordEvent.Start',
   ),
 )
 abstract class VideoRecordStartEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Pause',
+    fullClassName: 'androidx.camera.video.VideoRecordEvent.Pause',
   ),
 )
 abstract class VideoRecordPauseEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Resume',
+    fullClassName: 'androidx.camera.video.VideoRecordEvent.Resume',
   ),
 )
 abstract class VideoRecordResumeEvent extends VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.VideoRecordEvent.Finalize',
+    fullClassName: 'androidx.camera.video.VideoRecordEvent.Finalize',
   ),
 )
 abstract class VideoRecordFinalizeEvent extends VideoRecordEvent {
-  Throwable? getCause();
+  List<Object?>? getCause();
   VideoRecordFinalizeEventError getError();
-  String getOutputUri();
+  VideoOutputResults getOutputResults();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.video.OutputResults',
+  ),
+)
+abstract class VideoOutputResults {
+  Uri getOutputUri();
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.hebei.camerax_android.legacy.video.VideoRecordEventConsumer',
+        'dev.hebei.camerax_android.legacy.VideoRecordEventConsumer.Impl',
   ),
 )
 abstract class VideoRecordEventConsumer {
   VideoRecordEventConsumer();
 
-  late final void Function(VideoRecordEvent event) accept;
+  late final void Function(VideoRecordEvent value) accept;
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.video.Recording',
+    fullClassName: 'androidx.camera.video.Recording',
   ),
 )
 abstract class Recording {
@@ -724,7 +1306,7 @@ abstract class Recording {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.view.CameraController',
+    fullClassName: 'androidx.camera.view.CameraController',
   ),
 )
 abstract class CameraController {
@@ -783,28 +1365,26 @@ abstract class CameraController {
   FlashMode getImageCaptureFlashMode();
   @async
   void setImageCaptureFlashMode(FlashMode flashMode);
+  // @async
+  // Uint8List takePicture();
   @async
-  Uint8List takePictureToMemory();
-  @async
-  String takePictureToUri(String uri);
-  @async
-  ResolutionSelector getImageAnalysisResolutionSelector();
+  ResolutionSelector? getImageAnalysisResolutionSelector();
   @async
   void setImageAnalysisResolutionSelector(
-      ResolutionSelector resolutionSelector);
+      ResolutionSelector? resolutionSelector);
   @async
   BackpressureStrategy getImageAnalysisBackpressureStrategy();
   @async
-  void setImageAnalysisBackpressureStrategy(
-      BackpressureStrategy backpressureStrategy);
+  void setImageAnalysisBackpressureStrategy(BackpressureStrategy strategy);
   @async
   int getImageAnalysisImageQueueDepth();
   @async
-  void setImageAnalysisImageQueueDepth(int imageQueueDepth);
+  void setImageAnalysisImageQueueDepth(int depth);
   @async
   ImageFormat getImageAnalysisOutputImageFormat();
   @async
-  void setImageAnalysisOutputImageFormat(ImageFormat outputImageFormat);
+  void setImageAnalysisOutputImageFormat(
+      ImageFormat imageAnalysisOutputImageFormat);
   @async
   void setImageAnalysisAnalyzer(Analyzer analyzer);
   @async
@@ -827,17 +1407,17 @@ abstract class CameraController {
   void setVideoCaptureTargetFrameRate(IntRange targetFrameRate);
   @async
   bool isRecording();
-  @async
-  Recording startRecording({
-    required String uri,
-    required AudioConfig audioConfig,
-    required VideoRecordEventConsumer listener,
-  });
+  // @async
+  // Recording startRecording({
+  //   required String uri,
+  //   required AudioConfig audioConfig,
+  //   required VideoRecordEventConsumer listener,
+  // });
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.view.LifecycleCameraController',
+    fullClassName: 'androidx.camera.view.LifecycleCameraController',
   ),
 )
 abstract class LifecycleCameraController extends CameraController {
@@ -851,7 +1431,7 @@ abstract class LifecycleCameraController extends CameraController {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.view.PreviewView',
+    fullClassName: 'androidx.camera.view.PreviewView',
   ),
 )
 abstract class PreviewView {

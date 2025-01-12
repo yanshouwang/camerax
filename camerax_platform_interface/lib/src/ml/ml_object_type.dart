@@ -1,4 +1,4 @@
-enum MLObjectType {
+enum MlObjectType {
   // Barcodes
   codabar,
   code39,

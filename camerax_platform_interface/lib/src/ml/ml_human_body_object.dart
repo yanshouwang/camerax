@@ -1,8 +1,8 @@
 import 'ml_body_object.dart';
 import 'ml_object_type.dart';
 
-final class MLHumanBodyObject extends MLBodyObject {
-  MLHumanBodyObject({
+final class MlHumanBodyObject extends MlBodyObject {
+  MlHumanBodyObject({
     required super.time,
     required super.duration,
     required super.bounds,
@@ -10,5 +10,5 @@ final class MLHumanBodyObject extends MLBodyObject {
   });
 
   @override
-  MLObjectType get type => MLObjectType.humanBody;
+  MlObjectType get type => MlObjectType.humanBody;
 }

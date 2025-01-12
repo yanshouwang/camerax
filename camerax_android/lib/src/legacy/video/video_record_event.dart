@@ -60,8 +60,10 @@ final class VideoRecordFinalizeEvent extends $base.VideoRecordFinalizeEvent
   }
 
   @override
-  Future<Uri> getOutputUri() async {
-    final value = await obj.getOutputUri();
-    return Uri.parse(value);
+  Future<Uri?> getOutputUri() async {
+    final resultsObj = await obj.getOutputResults();
+    final uriObj = await resultsObj.getOutputUri();
+    final value = await uriObj.getPath();
+    return value == null ? null : Uri.parse(value);
   }
 }

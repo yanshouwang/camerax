@@ -26,5 +26,5 @@ val Int.audioStateArgs
         androidx.camera.video.AudioStats.AUDIO_STATE_ENCODER_ERROR -> AudioStats.AudioState.ENCODER_ERROR
         androidx.camera.video.AudioStats.AUDIO_STATE_SOURCE_ERROR -> AudioStats.AudioState.SOURCE_ERROR
         androidx.camera.video.AudioStats.AUDIO_STATE_MUTED -> AudioStats.AudioState.MUTED
-        else -> throw TypeCastException()
+        else -> throw IllegalArgumentException()
     }

@@ -8,14 +8,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewView(registrar) {
-    override fun pigeon_defaultConstructor(): dev.hebei.camerax_android.view.PreviewView {
+    override fun pigeon_defaultConstructor(): androidx.camera.view.PreviewView {
         val context = registrar.activity ?: registrar.context
-        return dev.hebei.camerax_android.view.PreviewView(context)
+        return androidx.camera.view.PreviewView(context)
     }
 
     override fun getController(
-        pigeon_instance: dev.hebei.camerax_android.view.PreviewView,
-        callback: (Result<dev.hebei.camerax_android.view.CameraController?>) -> Unit
+        pigeon_instance: androidx.camera.view.PreviewView,
+        callback: (Result<androidx.camera.view.CameraController?>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -28,8 +28,8 @@ class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewVie
     }
 
     override fun setController(
-        pigeon_instance: dev.hebei.camerax_android.view.PreviewView,
-        controller: dev.hebei.camerax_android.view.CameraController?,
+        pigeon_instance: androidx.camera.view.PreviewView,
+        controller: androidx.camera.view.CameraController?,
         callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
@@ -43,8 +43,7 @@ class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewVie
     }
 
     override fun getScaleType(
-        pigeon_instance: dev.hebei.camerax_android.view.PreviewView,
-        callback: (Result<ScaleType>) -> Unit
+        pigeon_instance: androidx.camera.view.PreviewView, callback: (Result<ScaleType>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -57,9 +56,7 @@ class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewVie
     }
 
     override fun setScaleType(
-        pigeon_instance: dev.hebei.camerax_android.view.PreviewView,
-        scaleType: ScaleType,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.view.PreviewView, scaleType: ScaleType, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -74,20 +71,20 @@ class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewVie
 
 val ScaleType.obj
     get() = when (this) {
-        ScaleType.FILL_START -> dev.hebei.camerax_android.view.PreviewView.ScaleType.FILL_START
-        ScaleType.FILL_CENTER -> dev.hebei.camerax_android.view.PreviewView.ScaleType.FILL_CENTER
-        ScaleType.FILL_END -> dev.hebei.camerax_android.view.PreviewView.ScaleType.FILL_END
-        ScaleType.FIT_START -> dev.hebei.camerax_android.view.PreviewView.ScaleType.FIT_START
-        ScaleType.FIT_CENTER -> dev.hebei.camerax_android.view.PreviewView.ScaleType.FIT_CENTER
-        ScaleType.FIT_END -> dev.hebei.camerax_android.view.PreviewView.ScaleType.FIT_END
+        ScaleType.FILL_START -> androidx.camera.view.PreviewView.ScaleType.FILL_START
+        ScaleType.FILL_CENTER -> androidx.camera.view.PreviewView.ScaleType.FILL_CENTER
+        ScaleType.FILL_END -> androidx.camera.view.PreviewView.ScaleType.FILL_END
+        ScaleType.FIT_START -> androidx.camera.view.PreviewView.ScaleType.FIT_START
+        ScaleType.FIT_CENTER -> androidx.camera.view.PreviewView.ScaleType.FIT_CENTER
+        ScaleType.FIT_END -> androidx.camera.view.PreviewView.ScaleType.FIT_END
     }
 
-val dev.hebei.camerax_android.view.PreviewView.ScaleType.args
+val androidx.camera.view.PreviewView.ScaleType.args
     get() = when (this) {
-        dev.hebei.camerax_android.view.PreviewView.ScaleType.FILL_START -> ScaleType.FILL_START
-        dev.hebei.camerax_android.view.PreviewView.ScaleType.FILL_CENTER -> ScaleType.FILL_CENTER
-        dev.hebei.camerax_android.view.PreviewView.ScaleType.FILL_END -> ScaleType.FILL_END
-        dev.hebei.camerax_android.view.PreviewView.ScaleType.FIT_START -> ScaleType.FIT_START
-        dev.hebei.camerax_android.view.PreviewView.ScaleType.FIT_CENTER -> ScaleType.FIT_CENTER
-        dev.hebei.camerax_android.view.PreviewView.ScaleType.FIT_END -> ScaleType.FIT_END
+        androidx.camera.view.PreviewView.ScaleType.FILL_START -> ScaleType.FILL_START
+        androidx.camera.view.PreviewView.ScaleType.FILL_CENTER -> ScaleType.FILL_CENTER
+        androidx.camera.view.PreviewView.ScaleType.FILL_END -> ScaleType.FILL_END
+        androidx.camera.view.PreviewView.ScaleType.FIT_START -> ScaleType.FIT_START
+        androidx.camera.view.PreviewView.ScaleType.FIT_CENTER -> ScaleType.FIT_CENTER
+        androidx.camera.view.PreviewView.ScaleType.FIT_END -> ScaleType.FIT_END
     }

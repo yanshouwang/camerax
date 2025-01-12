@@ -58,5 +58,5 @@ val Int.finalizeErrorArgs
         androidx.camera.video.VideoRecordEvent.Finalize.ERROR_NO_VALID_DATA -> VideoRecordEvent.Finalize.Error.NO_VALID_DATA
         androidx.camera.video.VideoRecordEvent.Finalize.ERROR_DURATION_LIMIT_REACHED -> VideoRecordEvent.Finalize.Error.DURATION_LIMIT_REACHED
         androidx.camera.video.VideoRecordEvent.Finalize.ERROR_RECORDING_GARBAGE_COLLECTED -> VideoRecordEvent.Finalize.Error.RECORDING_GARBAGE_COLLECTED
-        else -> throw TypeCastException()
+        else -> throw IllegalArgumentException()
     }

@@ -23,19 +23,24 @@ extension QualityArgs on $base.Quality {
 
 extension QualityObj on $native.Quality {
   $base.Quality get args {
-    switch (this) {
-      case $native.Quality.fhd:
-        return $base.Quality.fhd;
-      case $native.Quality.hd:
-        return $base.Quality.hd;
-      case $native.Quality.highest:
-        return $base.Quality.highest;
-      case $native.Quality.lowest:
-        return $base.Quality.lowest;
-      case $native.Quality.sd:
-        return $base.Quality.sd;
-      case $native.Quality.uhd:
-        return $base.Quality.uhd;
+    if (this == $native.Quality.fhd) {
+      return $base.Quality.fhd;
     }
+    if (this == $native.Quality.hd) {
+      return $base.Quality.hd;
+    }
+    if (this == $native.Quality.highest) {
+      return $base.Quality.highest;
+    }
+    if (this == $native.Quality.lowest) {
+      return $base.Quality.lowest;
+    }
+    if (this == $native.Quality.sd) {
+      return $base.Quality.sd;
+    }
+    if (this == $native.Quality.uhd) {
+      return $base.Quality.uhd;
+    }
+    throw ArgumentError.value(this);
   }
 }

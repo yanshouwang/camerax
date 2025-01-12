@@ -64,7 +64,7 @@ abstract base class VideoRecordFinalizeEvent extends VideoRecordEvent {
   /// Returns the actual Uri of the output destination if the OutputOptions is
   /// implemented by MediaStoreOutputOptions or FileOutputOptions, otherwise
   /// returns EMPTY.
-  Future<Uri> getOutputUri();
+  Future<Uri?> getOutputUri();
 
   /// Gets the error cause.
   ///

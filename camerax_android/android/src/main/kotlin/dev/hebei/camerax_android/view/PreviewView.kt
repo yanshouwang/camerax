@@ -32,28 +32,34 @@ class PreviewView(context: Context) : PlatformView {
     }
 
     suspend fun getScaleType() = withContext(Dispatchers.Main) {
-        when (obj.scaleType) {
-            androidx.camera.view.PreviewView.ScaleType.FILL_START -> ScaleType.FILL_START
-            androidx.camera.view.PreviewView.ScaleType.FILL_CENTER -> ScaleType.FILL_CENTER
-            androidx.camera.view.PreviewView.ScaleType.FILL_END -> ScaleType.FILL_END
-            androidx.camera.view.PreviewView.ScaleType.FIT_START -> ScaleType.FIT_START
-            androidx.camera.view.PreviewView.ScaleType.FIT_CENTER -> ScaleType.FIT_CENTER
-            androidx.camera.view.PreviewView.ScaleType.FIT_END -> ScaleType.FIT_END
-        }
+        obj.scaleType.args
     }
 
     suspend fun setScaleType(scaleType: ScaleType) = withContext(Dispatchers.Main) {
-        obj.scaleType = when (scaleType) {
-            ScaleType.FILL_START -> androidx.camera.view.PreviewView.ScaleType.FILL_START
-            ScaleType.FILL_CENTER -> androidx.camera.view.PreviewView.ScaleType.FILL_CENTER
-            ScaleType.FILL_END -> androidx.camera.view.PreviewView.ScaleType.FILL_END
-            ScaleType.FIT_START -> androidx.camera.view.PreviewView.ScaleType.FIT_START
-            ScaleType.FIT_CENTER -> androidx.camera.view.PreviewView.ScaleType.FIT_CENTER
-            ScaleType.FIT_END -> androidx.camera.view.PreviewView.ScaleType.FIT_END
-        }
+        obj.scaleType = scaleType.obj
     }
 
     enum class ScaleType {
         FILL_START, FILL_CENTER, FILL_END, FIT_START, FIT_CENTER, FIT_END,
     }
 }
+
+val PreviewView.ScaleType.obj
+    get() = when (this) {
+        PreviewView.ScaleType.FILL_START -> androidx.camera.view.PreviewView.ScaleType.FILL_START
+        PreviewView.ScaleType.FILL_CENTER -> androidx.camera.view.PreviewView.ScaleType.FILL_CENTER
+        PreviewView.ScaleType.FILL_END -> androidx.camera.view.PreviewView.ScaleType.FILL_END
+        PreviewView.ScaleType.FIT_START -> androidx.camera.view.PreviewView.ScaleType.FIT_START
+        PreviewView.ScaleType.FIT_CENTER -> androidx.camera.view.PreviewView.ScaleType.FIT_CENTER
+        PreviewView.ScaleType.FIT_END -> androidx.camera.view.PreviewView.ScaleType.FIT_END
+    }
+
+val androidx.camera.view.PreviewView.ScaleType.args
+    get() = when (this) {
+        androidx.camera.view.PreviewView.ScaleType.FILL_START -> PreviewView.ScaleType.FILL_START
+        androidx.camera.view.PreviewView.ScaleType.FILL_CENTER -> PreviewView.ScaleType.FILL_CENTER
+        androidx.camera.view.PreviewView.ScaleType.FILL_END -> PreviewView.ScaleType.FILL_END
+        androidx.camera.view.PreviewView.ScaleType.FIT_START -> PreviewView.ScaleType.FIT_START
+        androidx.camera.view.PreviewView.ScaleType.FIT_CENTER -> PreviewView.ScaleType.FIT_CENTER
+        androidx.camera.view.PreviewView.ScaleType.FIT_END -> PreviewView.ScaleType.FIT_END
+    }

@@ -1,13 +1,13 @@
 import 'ml_object.dart';
 import 'ml_object_type.dart';
 
-final class MLFaceObject extends MLObject {
+final class MlFaceObject extends MlObject {
   final int id;
   final double rollAngle;
   final double yawAngle;
   final double pitchAngle;
 
-  MLFaceObject({
+  MlFaceObject({
     required super.time,
     required super.duration,
     required super.bounds,
@@ -18,5 +18,5 @@ final class MLFaceObject extends MLObject {
   });
 
   @override
-  MLObjectType get type => MLObjectType.face;
+  MlObjectType get type => MlObjectType.face;
 }

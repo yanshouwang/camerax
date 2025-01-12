@@ -28,5 +28,6 @@ abstract base class QualitySelector extends PlatformInterface {
         fallbackStrategy: fallbackStrategy,
       );
 
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
+  static Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+      CameraX.instance.getResolution(cameraInfo, quality);
 }

@@ -41,230 +41,6 @@ import 'CameraController.dart' as cameracontroller$_;
 
 import 'LifecycleCameraController.dart' as lifecyclecameracontroller$_;
 
-/// from: `dev.hebei.camerax_android.view.PreviewView$Factory`
-class PreviewView$Factory extends jni$_.JObject {
-  @jni$_.internal
-  @core$_.override
-  final jni$_.JObjType<PreviewView$Factory> $type;
-
-  @jni$_.internal
-  PreviewView$Factory.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
-
-  static final _class = jni$_.JClass.forName(
-      r'dev/hebei/camerax_android/view/PreviewView$Factory');
-
-  /// The type which includes information such as the signature of this class.
-  static const nullableType = $PreviewView$Factory$NullableType();
-  static const type = $PreviewView$Factory$Type();
-  static final _id_INSTANCE = _class.staticFieldId(
-    r'INSTANCE',
-    r'Ldev/hebei/camerax_android/view/PreviewView$Factory;',
-  );
-
-  /// from: `static public final dev.hebei.camerax_android.view.PreviewView$Factory INSTANCE`
-  /// The returned object must be released after use, by calling the [release] method.
-  static PreviewView$Factory? get INSTANCE =>
-      _id_INSTANCE.get(_class, const $PreviewView$Factory$NullableType());
-
-  static final _id_create = _class.instanceMethodId(
-    r'create',
-    r'(Landroid/content/Context;ILjava/lang/Object;)Lio/flutter/plugin/platform/PlatformView;',
-  );
-
-  static final _create = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public io.flutter.plugin.platform.PlatformView create(android.content.Context context, int i, java.lang.Object object)`
-  /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject create(
-    context$_.Context context,
-    int i,
-    jni$_.JObject? object,
-  ) {
-    final _$context = context.reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return _create(reference.pointer, _id_create as jni$_.JMethodIDPtr,
-            _$context.pointer, i, _$object.pointer)
-        .object<jni$_.JObject>(const jni$_.JObjectType());
-  }
-
-  static final _id_addView = _class.instanceMethodId(
-    r'addView',
-    r'(ILdev/hebei/camerax_android/view/PreviewView;)V',
-  );
-
-  static final _addView = jni$_.ProtectedJniExtensions.lookup<
-              jni$_.NativeFunction<
-                  jni$_.JThrowablePtr Function(
-                      jni$_.Pointer<jni$_.Void>,
-                      jni$_.JMethodIDPtr,
-                      jni$_
-                          .VarArgs<(jni$_.Int32, jni$_.Pointer<jni$_.Void>)>)>>(
-          'globalEnv_CallVoidMethod')
-      .asFunction<
-          jni$_.JThrowablePtr Function(jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr, int, jni$_.Pointer<jni$_.Void>)>();
-
-  /// from: `public final void addView(int i, dev.hebei.camerax_android.view.PreviewView previewView)`
-  void addView(
-    int i,
-    PreviewView previewView,
-  ) {
-    final _$previewView = previewView.reference;
-    _addView(reference.pointer, _id_addView as jni$_.JMethodIDPtr, i,
-            _$previewView.pointer)
-        .check();
-  }
-
-  static final _id_retrieveView = _class.instanceMethodId(
-    r'retrieveView',
-    r'(I)Ldev/hebei/camerax_android/view/PreviewView;',
-  );
-
-  static final _retrieveView = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
-
-  /// from: `public final dev.hebei.camerax_android.view.PreviewView retrieveView(int i)`
-  /// The returned object must be released after use, by calling the [release] method.
-  PreviewView? retrieveView(
-    int i,
-  ) {
-    return _retrieveView(
-            reference.pointer, _id_retrieveView as jni$_.JMethodIDPtr, i)
-        .object<PreviewView?>(const $PreviewView$NullableType());
-  }
-
-  static final _id_removeView = _class.instanceMethodId(
-    r'removeView',
-    r'(I)Ldev/hebei/camerax_android/view/PreviewView;',
-  );
-
-  static final _removeView = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<(jni$_.Int32,)>)>>('globalEnv_CallObjectMethod')
-      .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>, jni$_.JMethodIDPtr, int)>();
-
-  /// from: `public final dev.hebei.camerax_android.view.PreviewView removeView(int i)`
-  /// The returned object must be released after use, by calling the [release] method.
-  PreviewView? removeView(
-    int i,
-  ) {
-    return _removeView(
-            reference.pointer, _id_removeView as jni$_.JMethodIDPtr, i)
-        .object<PreviewView?>(const $PreviewView$NullableType());
-  }
-}
-
-final class $PreviewView$Factory$NullableType
-    extends jni$_.JObjType<PreviewView$Factory?> {
-  @jni$_.internal
-  const $PreviewView$Factory$NullableType();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature =>
-      r'Ldev/hebei/camerax_android/view/PreviewView$Factory;';
-
-  @jni$_.internal
-  @core$_.override
-  PreviewView$Factory? fromReference(jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : PreviewView$Factory.fromReference(
-              reference,
-            );
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectType();
-
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType<PreviewView$Factory?> get nullableType => this;
-
-  @jni$_.internal
-  @core$_.override
-  final superCount = 1;
-
-  @core$_.override
-  int get hashCode => ($PreviewView$Factory$NullableType).hashCode;
-
-  @core$_.override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewView$Factory$NullableType) &&
-        other is $PreviewView$Factory$NullableType;
-  }
-}
-
-final class $PreviewView$Factory$Type
-    extends jni$_.JObjType<PreviewView$Factory> {
-  @jni$_.internal
-  const $PreviewView$Factory$Type();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature =>
-      r'Ldev/hebei/camerax_android/view/PreviewView$Factory;';
-
-  @jni$_.internal
-  @core$_.override
-  PreviewView$Factory fromReference(jni$_.JReference reference) =>
-      PreviewView$Factory.fromReference(
-        reference,
-      );
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectType();
-
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType<PreviewView$Factory?> get nullableType =>
-      const $PreviewView$Factory$NullableType();
-
-  @jni$_.internal
-  @core$_.override
-  final superCount = 1;
-
-  @core$_.override
-  int get hashCode => ($PreviewView$Factory$Type).hashCode;
-
-  @core$_.override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($PreviewView$Factory$Type) &&
-        other is $PreviewView$Factory$Type;
-  }
-}
-
 /// from: `dev.hebei.camerax_android.view.PreviewView$ScaleType`
 class PreviewView$ScaleType extends jni$_.JObject {
   @jni$_.internal
@@ -496,43 +272,28 @@ class PreviewView extends jni$_.JObject {
   static const nullableType = $PreviewView$NullableType();
   static const type = $PreviewView$Type();
   static final _id_new$ = _class.constructorId(
-    r'(Landroid/content/Context;ILjava/lang/Object;)V',
+    r'(Landroid/content/Context;)V',
   );
 
   static final _new$ = jni$_.ProtectedJniExtensions.lookup<
-          jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                  jni$_.Pointer<jni$_.Void>,
-                  jni$_.JMethodIDPtr,
-                  jni$_.VarArgs<
-                      (
-                        jni$_.Pointer<jni$_.Void>,
-                        jni$_.Int32,
-                        jni$_.Pointer<jni$_.Void>
-                      )>)>>('globalEnv_NewObject')
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_NewObject')
       .asFunction<
-          jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              int,
-              jni$_.Pointer<jni$_.Void>)>();
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
 
-  /// from: `public void <init>(android.content.Context context, int i, java.lang.Object object)`
+  /// from: `public void <init>(android.content.Context context)`
   /// The returned object must be released after use, by calling the [release] method.
   factory PreviewView(
     context$_.Context context,
-    int i,
-    jni$_.JObject? object,
   ) {
     final _$context = context.reference;
-    final _$object = object?.reference ?? jni$_.jNullReference;
-    return PreviewView.fromReference(_new$(
-            _class.reference.pointer,
-            _id_new$ as jni$_.JMethodIDPtr,
-            _$context.pointer,
-            i,
-            _$object.pointer)
+    return PreviewView.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$context.pointer)
         .reference);
   }
 

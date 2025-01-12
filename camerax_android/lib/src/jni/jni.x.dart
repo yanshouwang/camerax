@@ -1,41 +1,16 @@
-// import 'dart:typed_data';
+import 'package:jni/jni.dart';
 
-// import 'package:camerax_android/src/core.dart';
-// import 'package:camerax_android/src/ml.dart';
-import 'package:camerax_platform_interface/camerax_platform_interface.dart';
-// import 'package:hybrid_os/hybrid_os.dart';
-import 'package:jni/jni.dart' as jni;
+import 'android/app/_package.dart';
+import 'android/content/_package.dart';
 
-import 'android/_package.dart' as jni;
-import 'android/app/_package.dart' as jni;
-import 'android/content/_package.dart' as jni;
-// import 'android/graphics/_package.dart' as jni;
-// import 'android/net/_package.dart' as jni;
-// import 'android/util/_package.dart' as jni;
-// import 'androidx/camera/core/_package.dart' as jni;
-// import 'androidx/camera/core/resolutionselector/_package.dart' as jni;
-// import 'androidx/camera/video/_package.dart' as jni;
-// import 'androidx/camera/view/_package.dart' as jni;
-// import 'androidx/camera/view/video/_package.dart' as jni;
-// import 'androidx/core/util/_package.dart' as jni;
-import 'androidx/lifecycle/_package.dart' as jni;
-// import 'com/google/common/util/concurrent/_package.dart' as jni;
-// import 'com/google/mlkit/vision/barcode/_package.dart' as jni;
-// import 'com/google/mlkit/vision/barcode/common/_package.dart' as jni;
-// import 'com/google/mlkit/vision/face/_package.dart' as jni;
-// import 'com/google/mlkit/vision/interfaces/_package.dart' as jni;
-import 'dev/hebei/camerax_android/core/_package.dart' as jni;
-import 'dev/hebei/camerax_android/view/_package.dart' as jni;
-// import 'java/util/concurrent/_package.dart' as jni;
-
-jni.Activity get activity {
-  final reference = jni.Jni.getCurrentActivity();
-  return jni.Activity.fromReference(reference);
+Activity get activity {
+  final reference = Jni.getCurrentActivity();
+  return Activity.fromReference(reference);
 }
 
-jni.Context get context {
-  final reference = jni.Jni.getCachedApplicationContext();
-  return jni.Context.fromReference(reference);
+Context get context {
+  final reference = Jni.getCachedApplicationContext();
+  return Context.fromReference(reference);
 }
 
 // extension ScaleTypeX on ScaleType {

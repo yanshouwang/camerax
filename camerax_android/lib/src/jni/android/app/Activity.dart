@@ -35,15 +35,7 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-import '../../java/lang/Runnable.dart' as runnable$_;
-
-import '../../java/util/concurrent/Executor.dart' as executor$_;
-
 import '../content/Context.dart' as context$_;
-
-import '../database/Cursor.dart' as cursor$_;
-
-import '../net/Uri.dart' as uri$_;
 
 /// from: `android.app.Activity$ScreenCaptureCallback`
 class Activity$ScreenCaptureCallback extends jni$_.JObject {
@@ -2217,8 +2209,8 @@ class Activity extends jni$_.JObject {
 
   /// from: `public final android.database.Cursor managedQuery(android.net.Uri uri, java.lang.String[] strings, java.lang.String string, java.lang.String[] strings1, java.lang.String string1)`
   /// The returned object must be released after use, by calling the [release] method.
-  cursor$_.Cursor? managedQuery(
-    uri$_.Uri? uri,
+  jni$_.JObject? managedQuery(
+    jni$_.JObject? uri,
     jni$_.JArray<jni$_.JString?>? strings,
     jni$_.JString? string,
     jni$_.JArray<jni$_.JString?>? strings1,
@@ -2237,7 +2229,7 @@ class Activity extends jni$_.JObject {
             _$string.pointer,
             _$strings1.pointer,
             _$string1.pointer)
-        .object<cursor$_.Cursor?>(const cursor$_.$Cursor$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_startManagingCursor = _class.instanceMethodId(
@@ -2258,7 +2250,7 @@ class Activity extends jni$_.JObject {
 
   /// from: `public void startManagingCursor(android.database.Cursor cursor)`
   void startManagingCursor(
-    cursor$_.Cursor? cursor,
+    jni$_.JObject? cursor,
   ) {
     final _$cursor = cursor?.reference ?? jni$_.jNullReference;
     _startManagingCursor(reference.pointer,
@@ -2284,7 +2276,7 @@ class Activity extends jni$_.JObject {
 
   /// from: `public void stopManagingCursor(android.database.Cursor cursor)`
   void stopManagingCursor(
-    cursor$_.Cursor? cursor,
+    jni$_.JObject? cursor,
   ) {
     final _$cursor = cursor?.reference ?? jni$_.jNullReference;
     _stopManagingCursor(reference.pointer,
@@ -4235,7 +4227,7 @@ class Activity extends jni$_.JObject {
   /// from: `public final void setFeatureDrawableUri(int i, android.net.Uri uri)`
   void setFeatureDrawableUri(
     int i,
-    uri$_.Uri? uri,
+    jni$_.JObject? uri,
   ) {
     final _$uri = uri?.reference ?? jni$_.jNullReference;
     _setFeatureDrawableUri(reference.pointer,
@@ -5684,10 +5676,10 @@ class Activity extends jni$_.JObject {
 
   /// from: `public android.net.Uri getReferrer()`
   /// The returned object must be released after use, by calling the [release] method.
-  uri$_.Uri? getReferrer() {
+  jni$_.JObject? getReferrer() {
     return _getReferrer(
             reference.pointer, _id_getReferrer as jni$_.JMethodIDPtr)
-        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_onProvideReferrer = _class.instanceMethodId(
@@ -5709,10 +5701,10 @@ class Activity extends jni$_.JObject {
 
   /// from: `public android.net.Uri onProvideReferrer()`
   /// The returned object must be released after use, by calling the [release] method.
-  uri$_.Uri? onProvideReferrer() {
+  jni$_.JObject? onProvideReferrer() {
     return _onProvideReferrer(
             reference.pointer, _id_onProvideReferrer as jni$_.JMethodIDPtr)
-        .object<uri$_.Uri?>(const uri$_.$Uri$NullableType());
+        .object<jni$_.JObject?>(const jni$_.JObjectNullableType());
   }
 
   static final _id_getCallingPackage = _class.instanceMethodId(
@@ -6928,7 +6920,7 @@ class Activity extends jni$_.JObject {
 
   /// from: `public final void runOnUiThread(java.lang.Runnable runnable)`
   void runOnUiThread(
-    runnable$_.Runnable? runnable,
+    jni$_.JObject? runnable,
   ) {
     final _$runnable = runnable?.reference ?? jni$_.jNullReference;
     _runOnUiThread(reference.pointer, _id_runOnUiThread as jni$_.JMethodIDPtr,
@@ -7918,7 +7910,7 @@ class Activity extends jni$_.JObject {
 
   /// from: `public void registerScreenCaptureCallback(java.util.concurrent.Executor executor, android.app.Activity$ScreenCaptureCallback screenCaptureCallback)`
   void registerScreenCaptureCallback(
-    executor$_.Executor? executor,
+    jni$_.JObject? executor,
     Activity$ScreenCaptureCallback? screenCaptureCallback,
   ) {
     final _$executor = executor?.reference ?? jni$_.jNullReference;

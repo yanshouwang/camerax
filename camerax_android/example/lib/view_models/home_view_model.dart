@@ -28,7 +28,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   FlashMode? _flashMode;
   Uri? _savedUri;
   ImageModel? _imageModel;
-  List<MLObject> _items;
+  List<MlObject> _items;
 
   late final StreamSubscription _zoomStateSubscription;
   late final StreamSubscription _torchStateSubscription;
@@ -55,7 +55,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
   ImageModel? get imageModel => _imageModel;
-  List<MLObject> get items => _items;
+  List<MlObject> get items => _items;
 
   Future<void> bind() async {
     await controller.bind();
@@ -75,30 +75,30 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setRawAnalyzer();
         break;
       case CameraMode.scanCode:
-        final analyzer = MLAnalyzer(
+        final analyzer = MlKitAnalyzer(
           types: [
             // Barcodes
-            MLObjectType.codabar,
-            MLObjectType.code39,
-            MLObjectType.code39Mode43,
-            MLObjectType.code93,
-            MLObjectType.code128,
-            MLObjectType.ean8,
-            MLObjectType.ean13,
-            MLObjectType.gs1DataBar,
-            MLObjectType.gs1DataBarExpanded,
-            MLObjectType.gs1DataBarLimited,
-            MLObjectType.interleave2of5,
-            MLObjectType.itf14,
-            MLObjectType.upcA,
-            MLObjectType.upcE,
+            MlObjectType.codabar,
+            MlObjectType.code39,
+            MlObjectType.code39Mode43,
+            MlObjectType.code93,
+            MlObjectType.code128,
+            MlObjectType.ean8,
+            MlObjectType.ean13,
+            MlObjectType.gs1DataBar,
+            MlObjectType.gs1DataBarExpanded,
+            MlObjectType.gs1DataBarLimited,
+            MlObjectType.interleave2of5,
+            MlObjectType.itf14,
+            MlObjectType.upcA,
+            MlObjectType.upcE,
             // 2D Codes
-            MLObjectType.aztec,
-            MLObjectType.dataMatrix,
-            MLObjectType.microPDF417,
-            MLObjectType.microQR,
-            MLObjectType.pdf417,
-            MLObjectType.qr,
+            MlObjectType.aztec,
+            MlObjectType.dataMatrix,
+            MlObjectType.microPDF417,
+            MlObjectType.microQR,
+            MlObjectType.pdf417,
+            MlObjectType.qr,
           ],
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
           onAnalyzed: _onMLAnalyzed,
@@ -106,10 +106,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
-        final analyzer = MLAnalyzer(
+        final analyzer = MlKitAnalyzer(
           types: [
             // Faces
-            MLObjectType.face,
+            MlObjectType.face,
           ],
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
           onAnalyzed: _onMLAnalyzed,
@@ -231,6 +231,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
         _maxZoomRatio = maxZoomRatio;
         _zoomRatio = zoomRatio;
         notifyListeners();
+        logger.info('zoomState: $minZoomRatio - $maxZoomRatio, $zoomRatio');
       },
       onError: (e) {
         logger.warning('zoomStateChanged error: $e');
@@ -319,14 +320,14 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     notifyListeners();
   }
 
-  Future<void> _setMLAnalyzer(MLAnalyzer analyzer) async {
+  Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }
 
-  void _onMLAnalyzed(List<MLObject> items) {
+  void _onMLAnalyzed(List<MlObject> items) {
     if (mode != CameraMode.scanCode && mode != CameraMode.scanFace) {
       return;
     }

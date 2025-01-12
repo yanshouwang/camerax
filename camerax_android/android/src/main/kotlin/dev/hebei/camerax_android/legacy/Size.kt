@@ -1,7 +1,4 @@
-package dev.hebei.camerax_android.legacy.core
-
-import dev.hebei.camerax_android.legacy.CameraXRegistrar
-import dev.hebei.camerax_android.legacy.PigeonApiSize
+package dev.hebei.camerax_android.legacy
 
 class Size(registrar: CameraXRegistrar) : PigeonApiSize(registrar) {
     override fun pigeon_defaultConstructor(width: Long, height: Long): android.util.Size {

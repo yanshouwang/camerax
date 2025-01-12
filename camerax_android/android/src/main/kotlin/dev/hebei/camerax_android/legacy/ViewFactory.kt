@@ -1,8 +1,7 @@
-package dev.hebei.camerax_android.legacy.view
+package dev.hebei.camerax_android.legacy
 
 import android.content.Context
 import android.view.View
-import dev.hebei.camerax_android.legacy.CameraXPigeonInstanceManager
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory

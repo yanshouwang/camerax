@@ -70,10 +70,10 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.MLAnalyzer createMLAnalyzer({
-    required List<$base.MLObjectType> types,
+  $base.MlKitAnalyzer createMlKitAnalyzer({
+    required List<$base.MlObjectType> types,
     required $base.CoordinateSystem targetCoordinateSystem,
-    required $base.MLObjectsCallback onAnalyzed,
+    required $base.MlObjectsCallback onAnalyzed,
   }) {
     // TODO: implement createMLAnalyzer
     throw UnimplementedError();
@@ -151,5 +151,12 @@ final class CameraX extends $base.CameraX {
   @override
   $base.AspectRatioStrategy getRatio4_3FallbackAutoStrategy() {
     return AspectRatioStrategy.ratio4_3FallbackAutoStrategy;
+  }
+
+  @override
+  Future<$base.Size?> getResolution(
+      $base.CameraInfo cameraInfo, $base.Quality quality) async {
+    final size = await QualitySelector.getResolution(cameraInfo, quality);
+    return size;
   }
 }

@@ -1,8 +1,5 @@
-package dev.hebei.camerax_android.legacy.core
+package dev.hebei.camerax_android.legacy
 
-import dev.hebei.camerax_android.legacy.CameraXRegistrar
-import dev.hebei.camerax_android.legacy.Permission
-import dev.hebei.camerax_android.legacy.PigeonApiPermissionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

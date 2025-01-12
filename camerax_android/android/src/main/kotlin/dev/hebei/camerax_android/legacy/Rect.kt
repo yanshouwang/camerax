@@ -1,12 +1,7 @@
-package dev.hebei.camerax_android.legacy.core
-
-import dev.hebei.camerax_android.legacy.CameraXRegistrar
-import dev.hebei.camerax_android.legacy.PigeonApiRect
+package dev.hebei.camerax_android.legacy
 
 class Rect(registrar: CameraXRegistrar) : PigeonApiRect(registrar) {
-    override fun pigeon_defaultConstructor(
-        left: Long, top: Long, right: Long, bottom: Long
-    ): android.graphics.Rect {
+    override fun pigeon_defaultConstructor(left: Long, top: Long, right: Long, bottom: Long): android.graphics.Rect {
         return android.graphics.Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
     }
 

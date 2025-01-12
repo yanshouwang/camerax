@@ -1,91 +1,108 @@
 package dev.hebei.camerax_android.legacy.core
 
-import dev.hebei.camerax_android.core.CameraControl
-import dev.hebei.camerax_android.core.FocusMeteringAction
+import androidx.core.content.ContextCompat
+import com.google.common.util.concurrent.FutureCallback
+import com.google.common.util.concurrent.Futures
 import dev.hebei.camerax_android.legacy.CameraXRegistrar
 import dev.hebei.camerax_android.legacy.PigeonApiCameraControl
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class CameraControl(registrar: CameraXRegistrar) : PigeonApiCameraControl(registrar) {
+class CameraControl(private val registrar: CameraXRegistrar) : PigeonApiCameraControl(registrar) {
     override fun enableTorch(
-        pigeon_instance: CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.core.CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                pigeon_instance.enableTorch(torch)
+        val future = pigeon_instance.enableTorch(torch)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Void> {
+            override fun onSuccess(result: Void) {
                 callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
             }
-        }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
     }
 
     override fun setZoomRatio(
-        pigeon_instance: CameraControl, ratio: Double, callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.core.CameraControl, ratio: Double, callback: (Result<Unit>) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                pigeon_instance.setZoomRatio(ratio.toFloat())
+        val future = pigeon_instance.setZoomRatio(ratio.toFloat())
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Void> {
+            override fun onSuccess(result: Void) {
                 callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
             }
-        }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
     }
 
     override fun setLinearZoom(
-        pigeon_instance: CameraControl, linearZoom: Double, callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.core.CameraControl, linearZoom: Double, callback: (Result<Unit>) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                pigeon_instance.setLinearZoom(linearZoom.toFloat())
+        val future = pigeon_instance.setLinearZoom(linearZoom.toFloat())
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Void> {
+            override fun onSuccess(result: Void) {
                 callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
             }
-        }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
     }
 
     override fun startFocusAndMetering(
-        pigeon_instance: CameraControl,
-        action: FocusMeteringAction,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.core.CameraControl,
+        action: androidx.camera.core.FocusMeteringAction,
+        callback: (Result<androidx.camera.core.FocusMeteringResult>) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                pigeon_instance.startFocusAndMetering(action)
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
+        val future = pigeon_instance.startFocusAndMetering(action)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<androidx.camera.core.FocusMeteringResult> {
+            override fun onSuccess(result: androidx.camera.core.FocusMeteringResult) {
+                callback(Result.success(result))
             }
-        }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
     }
 
     override fun cancelFocusAndMetering(
-        pigeon_instance: CameraControl, callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.core.CameraControl, callback: (Result<Unit>) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                pigeon_instance.cancelFocusAndMetering()
+        val future = pigeon_instance.cancelFocusAndMetering()
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Void> {
+            override fun onSuccess(result: Void) {
                 callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
             }
-        }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+
+        }, executor)
     }
 
     override fun setExposureCompensationIndex(
-        pigeon_instance: CameraControl, value: Long, callback: (Result<Long>) -> Unit
+        pigeon_instance: androidx.camera.core.CameraControl, value: Long, callback: (Result<Long>) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Default).launch {
-            try {
-                val newValue = pigeon_instance.setExposureCompensationIndex(value.toInt())
-                callback(Result.success(newValue.toLong()))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
+        val future = pigeon_instance.setExposureCompensationIndex(value.toInt())
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Int> {
+            override fun onSuccess(result: Int) {
+                callback(Result.success(result.toLong()))
             }
-        }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
     }
 }

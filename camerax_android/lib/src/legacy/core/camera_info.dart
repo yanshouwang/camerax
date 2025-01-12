@@ -97,7 +97,7 @@ final class CameraInfo extends $base.CameraInfo {
   Future<bool?> getTorchState() async {
     final dataObj = await obj.getTorchState();
     final value = await dataObj.getValue();
-    return value;
+    return value == $native.TorchState.on;
   }
 
   @override
@@ -193,7 +193,7 @@ final class CameraInfo extends $base.CameraInfo {
       final dataObj = await obj.getTorchState();
       final observerObj = $native.TorchStateObserver(
         onChanged: (observer, value) {
-          _torchStateChangedController.add(value);
+          _torchStateChangedController.add(value == $native.TorchState.on);
         },
       );
       await dataObj.observe(observerObj);

@@ -9,13 +9,12 @@ import kotlinx.coroutines.launch
 
 class LifecycleCameraController(private val registrar: CameraXRegistrar) :
     PigeonApiLifecycleCameraController(registrar) {
-    override fun pigeon_defaultConstructor(): dev.hebei.camerax_android.view.LifecycleCameraController {
-        return dev.hebei.camerax_android.view.LifecycleCameraController(registrar.context)
+    override fun pigeon_defaultConstructor(): androidx.camera.view.LifecycleCameraController {
+        return androidx.camera.view.LifecycleCameraController(registrar.context)
     }
 
     override fun bindToLifecycle(
-        pigeon_instance: dev.hebei.camerax_android.view.LifecycleCameraController,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.view.LifecycleCameraController, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -29,8 +28,7 @@ class LifecycleCameraController(private val registrar: CameraXRegistrar) :
     }
 
     override fun unbind(
-        pigeon_instance: dev.hebei.camerax_android.view.LifecycleCameraController,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.view.LifecycleCameraController, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {

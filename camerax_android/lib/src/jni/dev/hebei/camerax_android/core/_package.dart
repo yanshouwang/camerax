@@ -1,3 +1,17 @@
+export 'AspectRatio.dart';
+export 'CameraControl.dart';
+export 'CameraInfo.dart';
 export 'CameraSelector.dart';
+export 'CameraState.dart';
+export 'DynamicRange.dart';
+export 'ExposureState.dart';
+export 'FocusMeteringAction.dart';
+export 'ImageAnalysis.dart';
+export 'ImageCapture.dart';
+export 'ImageFormat.dart';
+export 'ImageInfo.dart';
+export 'ImageProxy.dart';
+export 'MeteringPoint.dart';
+export 'MirrorMode.dart';
 export 'PermissionManager.dart';
 export 'ZoomState.dart';

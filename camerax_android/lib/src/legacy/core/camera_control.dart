@@ -36,10 +36,12 @@ final class CameraControl extends $base.CameraControl {
   }
 
   @override
-  Future<void> startFocusAndMetering($base.FocusMeteringAction action) async {
+  Future<bool> startFocusAndMetering($base.FocusMeteringAction action) async {
     if (action is! FocusMeteringAction) {
       throw TypeError();
     }
-    await obj.startFocusAndMetering(action.obj);
+    final result = await obj.startFocusAndMetering(action.obj);
+    final value = await result.isFocusSuccessful();
+    return value;
   }
 }

@@ -35,110 +35,6 @@ import 'dart:core' as core$_;
 import 'package:jni/_internal.dart' as jni$_;
 import 'package:jni/jni.dart' as jni$_;
 
-/// from: `dev.hebei.camerax_android.core.CameraSelector$Builder$WhenMappings`
-class CameraSelector$Builder$WhenMappings extends jni$_.JObject {
-  @jni$_.internal
-  @core$_.override
-  final jni$_.JObjType<CameraSelector$Builder$WhenMappings> $type;
-
-  @jni$_.internal
-  CameraSelector$Builder$WhenMappings.fromReference(
-    jni$_.JReference reference,
-  )   : $type = type,
-        super.fromReference(reference);
-
-  static final _class = jni$_.JClass.forName(
-      r'dev/hebei/camerax_android/core/CameraSelector$Builder$WhenMappings');
-
-  /// The type which includes information such as the signature of this class.
-  static const nullableType =
-      $CameraSelector$Builder$WhenMappings$NullableType();
-  static const type = $CameraSelector$Builder$WhenMappings$Type();
-}
-
-final class $CameraSelector$Builder$WhenMappings$NullableType
-    extends jni$_.JObjType<CameraSelector$Builder$WhenMappings?> {
-  @jni$_.internal
-  const $CameraSelector$Builder$WhenMappings$NullableType();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature =>
-      r'Ldev/hebei/camerax_android/core/CameraSelector$Builder$WhenMappings;';
-
-  @jni$_.internal
-  @core$_.override
-  CameraSelector$Builder$WhenMappings? fromReference(
-          jni$_.JReference reference) =>
-      reference.isNull
-          ? null
-          : CameraSelector$Builder$WhenMappings.fromReference(
-              reference,
-            );
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
-
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType<CameraSelector$Builder$WhenMappings?> get nullableType => this;
-
-  @jni$_.internal
-  @core$_.override
-  final superCount = 1;
-
-  @core$_.override
-  int get hashCode =>
-      ($CameraSelector$Builder$WhenMappings$NullableType).hashCode;
-
-  @core$_.override
-  bool operator ==(Object other) {
-    return other.runtimeType ==
-            ($CameraSelector$Builder$WhenMappings$NullableType) &&
-        other is $CameraSelector$Builder$WhenMappings$NullableType;
-  }
-}
-
-final class $CameraSelector$Builder$WhenMappings$Type
-    extends jni$_.JObjType<CameraSelector$Builder$WhenMappings> {
-  @jni$_.internal
-  const $CameraSelector$Builder$WhenMappings$Type();
-
-  @jni$_.internal
-  @core$_.override
-  String get signature =>
-      r'Ldev/hebei/camerax_android/core/CameraSelector$Builder$WhenMappings;';
-
-  @jni$_.internal
-  @core$_.override
-  CameraSelector$Builder$WhenMappings fromReference(
-          jni$_.JReference reference) =>
-      CameraSelector$Builder$WhenMappings.fromReference(
-        reference,
-      );
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType get superType => const jni$_.JObjectNullableType();
-
-  @jni$_.internal
-  @core$_.override
-  jni$_.JObjType<CameraSelector$Builder$WhenMappings?> get nullableType =>
-      const $CameraSelector$Builder$WhenMappings$NullableType();
-
-  @jni$_.internal
-  @core$_.override
-  final superCount = 1;
-
-  @core$_.override
-  int get hashCode => ($CameraSelector$Builder$WhenMappings$Type).hashCode;
-
-  @core$_.override
-  bool operator ==(Object other) {
-    return other.runtimeType == ($CameraSelector$Builder$WhenMappings$Type) &&
-        other is $CameraSelector$Builder$WhenMappings$Type;
-  }
-}
-
 /// from: `dev.hebei.camerax_android.core.CameraSelector$Builder`
 class CameraSelector$Builder extends jni$_.JObject {
   @jni$_.internal
@@ -158,10 +54,36 @@ class CameraSelector$Builder extends jni$_.JObject {
   static const nullableType = $CameraSelector$Builder$NullableType();
   static const type = $CameraSelector$Builder$Type();
   static final _id_new$ = _class.constructorId(
-    r'()V',
+    r'(Landroidx/camera/core/CameraSelector$Builder;)V',
   );
 
   static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `public void <init>(androidx.camera.core.CameraSelector$Builder builder)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory CameraSelector$Builder(
+    jni$_.JObject builder,
+  ) {
+    final _$builder = builder.reference;
+    return CameraSelector$Builder.fromReference(_new$(_class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr, _$builder.pointer)
+        .reference);
+  }
+
+  static final _id_new$1 = _class.constructorId(
+    r'()V',
+  );
+
+  static final _new$1 = jni$_.ProtectedJniExtensions.lookup<
           jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
@@ -175,9 +97,9 @@ class CameraSelector$Builder extends jni$_.JObject {
 
   /// from: `public void <init>()`
   /// The returned object must be released after use, by calling the [release] method.
-  factory CameraSelector$Builder() {
+  factory CameraSelector$Builder.new$1() {
     return CameraSelector$Builder.fromReference(
-        _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr)
+        _new$1(_class.reference.pointer, _id_new$1 as jni$_.JMethodIDPtr)
             .reference);
   }
 
@@ -309,6 +231,206 @@ final class $CameraSelector$Builder$Type
   bool operator ==(Object other) {
     return other.runtimeType == ($CameraSelector$Builder$Type) &&
         other is $CameraSelector$Builder$Type;
+  }
+}
+
+/// from: `dev.hebei.camerax_android.core.CameraSelector$Companion`
+class CameraSelector$Companion extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JObjType<CameraSelector$Companion> $type;
+
+  @jni$_.internal
+  CameraSelector$Companion.fromReference(
+    jni$_.JReference reference,
+  )   : $type = type,
+        super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+      r'dev/hebei/camerax_android/core/CameraSelector$Companion');
+
+  /// The type which includes information such as the signature of this class.
+  static const nullableType = $CameraSelector$Companion$NullableType();
+  static const type = $CameraSelector$Companion$Type();
+  static final _id_getFRONT = _class.instanceMethodId(
+    r'getFRONT',
+    r'()Ldev/hebei/camerax_android/core/CameraSelector;',
+  );
+
+  static final _getFRONT = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
+
+  /// from: `public final dev.hebei.camerax_android.core.CameraSelector getFRONT()`
+  /// The returned object must be released after use, by calling the [release] method.
+  CameraSelector getFRONT() {
+    return _getFRONT(reference.pointer, _id_getFRONT as jni$_.JMethodIDPtr)
+        .object<CameraSelector>(const $CameraSelector$Type());
+  }
+
+  static final _id_getBACK = _class.instanceMethodId(
+    r'getBACK',
+    r'()Ldev/hebei/camerax_android/core/CameraSelector;',
+  );
+
+  static final _getBACK = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
+
+  /// from: `public final dev.hebei.camerax_android.core.CameraSelector getBACK()`
+  /// The returned object must be released after use, by calling the [release] method.
+  CameraSelector getBACK() {
+    return _getBACK(reference.pointer, _id_getBACK as jni$_.JMethodIDPtr)
+        .object<CameraSelector>(const $CameraSelector$Type());
+  }
+
+  static final _id_getEXTERNAL = _class.instanceMethodId(
+    r'getEXTERNAL',
+    r'()Ldev/hebei/camerax_android/core/CameraSelector;',
+  );
+
+  static final _getEXTERNAL = jni$_.ProtectedJniExtensions.lookup<
+          jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )>>('globalEnv_CallObjectMethod')
+      .asFunction<
+          jni$_.JniResult Function(
+            jni$_.Pointer<jni$_.Void>,
+            jni$_.JMethodIDPtr,
+          )>();
+
+  /// from: `public final dev.hebei.camerax_android.core.CameraSelector getEXTERNAL()`
+  /// The returned object must be released after use, by calling the [release] method.
+  CameraSelector getEXTERNAL() {
+    return _getEXTERNAL(
+            reference.pointer, _id_getEXTERNAL as jni$_.JMethodIDPtr)
+        .object<CameraSelector>(const $CameraSelector$Type());
+  }
+
+  static final _id_new$ = _class.constructorId(
+    r'(Lkotlin/jvm/internal/DefaultConstructorMarker;)V',
+  );
+
+  static final _new$ = jni$_.ProtectedJniExtensions.lookup<
+              jni$_.NativeFunction<
+                  jni$_.JniResult Function(
+                      jni$_.Pointer<jni$_.Void>,
+                      jni$_.JMethodIDPtr,
+                      jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>)>>(
+          'globalEnv_NewObject')
+      .asFunction<
+          jni$_.JniResult Function(jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr, jni$_.Pointer<jni$_.Void>)>();
+
+  /// from: `synthetic public void <init>(kotlin.jvm.internal.DefaultConstructorMarker defaultConstructorMarker)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory CameraSelector$Companion(
+    jni$_.JObject? defaultConstructorMarker,
+  ) {
+    final _$defaultConstructorMarker =
+        defaultConstructorMarker?.reference ?? jni$_.jNullReference;
+    return CameraSelector$Companion.fromReference(_new$(
+            _class.reference.pointer,
+            _id_new$ as jni$_.JMethodIDPtr,
+            _$defaultConstructorMarker.pointer)
+        .reference);
+  }
+}
+
+final class $CameraSelector$Companion$NullableType
+    extends jni$_.JObjType<CameraSelector$Companion?> {
+  @jni$_.internal
+  const $CameraSelector$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/core/CameraSelector$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraSelector$Companion? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+          ? null
+          : CameraSelector$Companion.fromReference(
+              reference,
+            );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraSelector$Companion?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($CameraSelector$Companion$NullableType).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraSelector$Companion$NullableType) &&
+        other is $CameraSelector$Companion$NullableType;
+  }
+}
+
+final class $CameraSelector$Companion$Type
+    extends jni$_.JObjType<CameraSelector$Companion> {
+  @jni$_.internal
+  const $CameraSelector$Companion$Type();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Ldev/hebei/camerax_android/core/CameraSelector$Companion;';
+
+  @jni$_.internal
+  @core$_.override
+  CameraSelector$Companion fromReference(jni$_.JReference reference) =>
+      CameraSelector$Companion.fromReference(
+        reference,
+      );
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType get superType => const jni$_.JObjectType();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JObjType<CameraSelector$Companion?> get nullableType =>
+      const $CameraSelector$Companion$NullableType();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($CameraSelector$Companion$Type).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($CameraSelector$Companion$Type) &&
+        other is $CameraSelector$Companion$Type;
   }
 }
 
@@ -522,6 +644,16 @@ class CameraSelector extends jni$_.JObject {
   /// The type which includes information such as the signature of this class.
   static const nullableType = $CameraSelector$NullableType();
   static const type = $CameraSelector$Type();
+  static final _id_Companion = _class.staticFieldId(
+    r'Companion',
+    r'Ldev/hebei/camerax_android/core/CameraSelector$Companion;',
+  );
+
+  /// from: `static public final dev.hebei.camerax_android.core.CameraSelector$Companion Companion`
+  /// The returned object must be released after use, by calling the [release] method.
+  static CameraSelector$Companion? get Companion =>
+      _id_Companion.get(_class, const $CameraSelector$Companion$NullableType());
+
   static final _id_new$ = _class.constructorId(
     r'(Landroidx/camera/core/CameraSelector;)V',
   );

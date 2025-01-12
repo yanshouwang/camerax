@@ -2,11 +2,11 @@ package dev.hebei.camerax_android.legacy.core
 
 import dev.hebei.camerax_android.legacy.CameraState
 
-val dev.hebei.camerax_android.core.CameraState.args
-    get() = when (this) {
-        dev.hebei.camerax_android.core.CameraState.PENDING_OPEN -> CameraState.PENDING_OPEN
-        dev.hebei.camerax_android.core.CameraState.OPENING -> CameraState.OPENING
-        dev.hebei.camerax_android.core.CameraState.OPEN -> CameraState.OPEN
-        dev.hebei.camerax_android.core.CameraState.CLOSING -> CameraState.CLOSING
-        dev.hebei.camerax_android.core.CameraState.CLOSED -> CameraState.CLOSED
+val androidx.camera.core.CameraState.args
+    get() = when (type) {
+        androidx.camera.core.CameraState.Type.PENDING_OPEN -> CameraState.PENDING_OPEN
+        androidx.camera.core.CameraState.Type.OPENING -> CameraState.OPENING
+        androidx.camera.core.CameraState.Type.OPEN -> CameraState.OPEN
+        androidx.camera.core.CameraState.Type.CLOSING -> CameraState.CLOSING
+        androidx.camera.core.CameraState.Type.CLOSED -> CameraState.CLOSED
     }

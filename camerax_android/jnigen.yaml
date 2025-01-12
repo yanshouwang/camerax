@@ -83,9 +83,28 @@ classes:
   # - dev.hebei.camerax_android.MyImageAnalysis
   # - dev.hebei.camerax_android.MyImageCapture
   # - dev.hebei.camerax_android.MyMediaStoreOutputOptions
+  - dev.hebei.camerax_android.core.resolutionselector.AspectRatioStrategy
+  - dev.hebei.camerax_android.core.resolutionselector.ResolutionFilter
+  - dev.hebei.camerax_android.core.resolutionselector.ResolutionSelector
+  - dev.hebei.camerax_android.core.resolutionselector.ResolutionStrategy
+  - dev.hebei.camerax_android.core.AspectRatio
+  - dev.hebei.camerax_android.core.CameraControl
+  - dev.hebei.camerax_android.core.CameraInfo
   - dev.hebei.camerax_android.core.CameraSelector
+  - dev.hebei.camerax_android.core.CameraState
+  - dev.hebei.camerax_android.core.DynamicRange
+  - dev.hebei.camerax_android.core.ExposureState
+  - dev.hebei.camerax_android.core.FocusMeteringAction
+  - dev.hebei.camerax_android.core.ImageAnalysis
+  - dev.hebei.camerax_android.core.ImageCapture
+  - dev.hebei.camerax_android.core.ImageFormat
+  - dev.hebei.camerax_android.core.ImageInfo
+  - dev.hebei.camerax_android.core.ImageProxy
+  - dev.hebei.camerax_android.core.MeteringPoint
+  - dev.hebei.camerax_android.core.MirrorMode
   - dev.hebei.camerax_android.core.PermissionManager
   - dev.hebei.camerax_android.core.ZoomState
+  - dev.hebei.camerax_android.view.video.AudioConfig
   - dev.hebei.camerax_android.view.CameraController
   - dev.hebei.camerax_android.view.LifecycleCameraController
   - dev.hebei.camerax_android.view.PreviewView

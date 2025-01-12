@@ -17,10 +17,9 @@ class CameraControl internal constructor(val obj: androidx.camera.core.CameraCon
         obj.setLinearZoom(linearZoom).await()
     }
 
-    suspend fun startFocusAndMetering(action: FocusMeteringAction) {
+    suspend fun startFocusAndMetering(action: FocusMeteringAction): Boolean {
         val result = obj.startFocusAndMetering(action.obj).await()
-        if (result.isFocusSuccessful) return
-        throw IllegalStateException("startFocusAndMetering failed.")
+        return result.isFocusSuccessful
     }
 
     suspend fun cancelFocusAndMetering() {

@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/cupertino.dart';
 
 class MLItemsView extends StatelessWidget {
-  final List<MLObject> items;
+  final List<MlObject> items;
 
   const MLItemsView({
     super.key,
@@ -26,7 +26,7 @@ class MLItemsView extends StatelessWidget {
 
 class MLItemsPainter extends CustomPainter {
   final double devicePixelRatio;
-  final List<MLObject> items;
+  final List<MlObject> items;
   final double strokeWidth;
   final Color color;
 
@@ -46,7 +46,7 @@ class MLItemsPainter extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..color = color;
     for (var item in items) {
-      if (item is MLCodeObject) {
+      if (item is MlCodeObject) {
         final points = item.corners
             .map((point) => Offset(
                   point.dx / devicePixelRatio,
@@ -62,7 +62,7 @@ class MLItemsPainter extends CustomPainter {
           item.bounds.right / devicePixelRatio,
           item.bounds.bottom / devicePixelRatio,
         );
-        if (item is MLFaceObject) {
+        if (item is MlFaceObject) {
           canvas.drawRect(rect, paint);
           final idPainter = TextPainter(
             text: TextSpan(

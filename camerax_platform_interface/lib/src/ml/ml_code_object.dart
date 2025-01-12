@@ -4,14 +4,14 @@ import 'dart:ui' as ui;
 import 'ml_object.dart';
 import 'ml_object_type.dart';
 
-final class MLCodeObject extends MLObject {
+final class MlCodeObject extends MlObject {
   @override
-  final MLObjectType type;
+  final MlObjectType type;
   final List<ui.Offset> corners;
   final Uint8List? value;
   final String? stringValue;
 
-  MLCodeObject({
+  MlCodeObject({
     required this.type,
     required super.time,
     required super.duration,
