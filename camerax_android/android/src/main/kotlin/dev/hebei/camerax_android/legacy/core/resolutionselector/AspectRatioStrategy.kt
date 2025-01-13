@@ -16,19 +16,11 @@ class AspectRatioStrategy(registrar: CameraXRegistrar) : PigeonApiAspectRatioStr
         )
     }
 
-    override fun ratio16_9FallbackAutoStrategy(): androidx.camera.core.resolutionselector.AspectRatioStrategy {
-        return androidx.camera.core.resolutionselector.AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY
-    }
-
-    override fun ratio4_3FallbackAutoStrategy(): androidx.camera.core.resolutionselector.AspectRatioStrategy {
-        return androidx.camera.core.resolutionselector.AspectRatioStrategy.RATIO_4_3_FALLBACK_AUTO_STRATEGY
-    }
-
-    override fun getPreferredAspectRatio(pigeon_instance: androidx.camera.core.resolutionselector.AspectRatioStrategy): AspectRatio {
+    override fun preferredAspectRatio(pigeon_instance: androidx.camera.core.resolutionselector.AspectRatioStrategy): AspectRatio {
         return pigeon_instance.preferredAspectRatio.aspectRatioArgs
     }
 
-    override fun getFallbackRule(pigeon_instance: androidx.camera.core.resolutionselector.AspectRatioStrategy): AspectRatioFallbackRule {
+    override fun fallbackRule(pigeon_instance: androidx.camera.core.resolutionselector.AspectRatioStrategy): AspectRatioFallbackRule {
         return pigeon_instance.fallbackRule.aspectRatioFallbackRuleArgs
     }
 

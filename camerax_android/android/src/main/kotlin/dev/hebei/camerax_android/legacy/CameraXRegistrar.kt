@@ -39,8 +39,7 @@ import dev.hebei.camerax_android.legacy.view.PreviewView
 import dev.hebei.camerax_android.legacy.view.video.AudioConfig
 import io.flutter.plugin.common.BinaryMessenger
 
-class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
-    CameraXPigeonProxyApiRegistrar(messenger) {
+class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : CameraXPigeonProxyApiRegistrar(messenger) {
     var activity: Activity? = null
 
     override fun getPigeonApiPermissionManager(): PigeonApiPermissionManager {
@@ -171,8 +170,8 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
         return ImageAnalysis.Analyzer(this)
     }
 
-    override fun getPigeonApiImageAnalyzer(): PigeonApiImageAnalyzer {
-        return ImageAnalyzer(this)
+    override fun getPigeonApiRawAnalyzer(): PigeonApiRawAnalyzer {
+        return RawAnalyzer(this)
     }
 
     override fun getPigeonApiDetector(): PigeonApiDetector {
@@ -305,6 +304,22 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
 
     override fun getPigeonApiVideoRecordEvent(): PigeonApiVideoRecordEvent {
         return VideoRecordEvent(this)
+    }
+
+    override fun getPigeonApiVideoRecordStatusEvent(): PigeonApiVideoRecordStatusEvent {
+        return VideoRecordEvent.Status(this)
+    }
+
+    override fun getPigeonApiVideoRecordStartEvent(): PigeonApiVideoRecordStartEvent {
+        return VideoRecordEvent.Start(this)
+    }
+
+    override fun getPigeonApiVideoRecordPauseEvent(): PigeonApiVideoRecordPauseEvent {
+        return VideoRecordEvent.Pause(this)
+    }
+
+    override fun getPigeonApiVideoRecordResumeEvent(): PigeonApiVideoRecordResumeEvent {
+        return VideoRecordEvent.Resume(this)
     }
 
     override fun getPigeonApiVideoRecordFinalizeEvent(): PigeonApiVideoRecordFinalizeEvent {

@@ -6,8 +6,13 @@ import 'package:flutter/cupertino.dart';
 
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
-Analyzer rawPixelsAnalyzer(ImageModelCallback callback) {
-  return Analyzer((image) async {
+class RawPixelsAnalyzer implements Analyzer {
+  final ImageModelCallback callback;
+
+  RawPixelsAnalyzer(this.callback);
+
+  @override
+  void analyze(ImageProxy image) async {
     try {
       final format = image.format;
       final width = image.width;
@@ -36,5 +41,5 @@ Analyzer rawPixelsAnalyzer(ImageModelCallback callback) {
     } finally {
       image.close();
     }
-  });
+  }
 }

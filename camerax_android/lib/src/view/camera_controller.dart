@@ -349,7 +349,7 @@ final class CameraController extends $base.CameraController {
   Future<$base.Recording> startRecording({
     required Uri uri,
     required bool enableAudio,
-    required $base.VideoRecordEventCallback listener,
+    required $base.VideoRecordEventConsumer listener,
   }) async {
     throw UnimplementedError();
     // await obj

@@ -615,18 +615,10 @@ abstract class CameraControl {
   ),
 )
 abstract class AspectRatioStrategy {
-  @static
-  late final AspectRatioStrategy ratio16_9FallbackAutoStrategy;
-  @static
-  late final AspectRatioStrategy ratio4_3FallbackAutoStrategy;
+  AspectRatioStrategy();
 
-  AspectRatioStrategy(
-    AspectRatio preferredAspectRatio,
-    AspectRatioFallbackRule fallbackRule,
-  );
-
-  AspectRatio getPreferredAspectRatio();
-  AspectRatioFallbackRule getFallbackRule();
+  late final AspectRatio preferredAspectRatio;
+  late final AspectRatioFallbackRule fallbackRule;
 }
 
 @ProxyApi(
@@ -647,16 +639,10 @@ abstract class ResolutionFilter {
   ),
 )
 abstract class ResolutionStrategy {
-  @static
-  late final ResolutionStrategy highestAvailableStrategy;
+  ResolutionStrategy();
 
-  ResolutionStrategy(
-    Size boundSize,
-    ResolutionFallbackRule fallbackRule,
-  );
-
-  Size? getBoundSize();
-  ResolutionFallbackRule getFallbackRule();
+  late final Size? boundSize;
+  late final ResolutionFallbackRule fallbackRule;
 }
 
 @ProxyApi(
@@ -665,17 +651,12 @@ abstract class ResolutionStrategy {
   ),
 )
 abstract class ResolutionSelector {
-  ResolutionSelector({
-    ResolutionMode? allowedResolutionMode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  });
+  ResolutionSelector();
 
-  ResolutionMode getAllowedResolutionMode();
-  AspectRatioStrategy getAspectRatioStrategy();
-  ResolutionFilter? getResolutionFilter();
-  ResolutionStrategy? getResolutionStrategy();
+  late final ResolutionMode allowedResolutionMode;
+  late final AspectRatioStrategy aspectRatioStrategy;
+  late final ResolutionFilter? resolutionFilter;
+  late final ResolutionStrategy? resolutionStrategy;
 }
 
 @ProxyApi(
@@ -725,8 +706,8 @@ abstract class Analyzer {}
     fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
   ),
 )
-abstract class ImageAnalyzer implements Analyzer {
-  ImageAnalyzer();
+abstract class RawAnalyzer implements Analyzer {
+  RawAnalyzer();
 
   late final void Function(ImageProxy image) analyze;
 }
@@ -1132,6 +1113,8 @@ abstract class MlKitAnalyzer implements Analyzer {
     required CoordinateSystem targetCoordinateSystem,
     required MlKitAnalyzerResultConsumer consumer,
   });
+
+  void analyze(ImageProxy image);
 }
 
 @ProxyApi(
@@ -1196,6 +1179,8 @@ abstract class AudioConfig {
   late final AudioConfig audioDisabled;
 
   AudioConfig.create(bool enableAudio);
+
+  bool getAudioEnabled();
 }
 
 @ProxyApi(
@@ -1227,37 +1212,43 @@ abstract class RecordingStats {
     fullClassName: 'androidx.camera.video.VideoRecordEvent',
   ),
 )
-abstract class VideoRecordEvent {
-  RecordingStats getRecordingStats();
-}
+abstract class VideoRecordEvent {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Status',
   ),
 )
-abstract class VideoRecordStatusEvent extends VideoRecordEvent {}
+abstract class VideoRecordStatusEvent extends VideoRecordEvent {
+  late final RecordingStats recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Start',
   ),
 )
-abstract class VideoRecordStartEvent extends VideoRecordEvent {}
+abstract class VideoRecordStartEvent extends VideoRecordEvent {
+  late final RecordingStats recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Pause',
   ),
 )
-abstract class VideoRecordPauseEvent extends VideoRecordEvent {}
+abstract class VideoRecordPauseEvent extends VideoRecordEvent {
+  late final RecordingStats recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Resume',
   ),
 )
-abstract class VideoRecordResumeEvent extends VideoRecordEvent {}
+abstract class VideoRecordResumeEvent extends VideoRecordEvent {
+  late final RecordingStats recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -1274,9 +1265,10 @@ abstract class VideoOutputResults {
   ),
 )
 abstract class VideoRecordFinalizeEvent extends VideoRecordEvent {
-  List<Object?>? getCause();
-  VideoRecordFinalizeEventError getError();
-  VideoOutputResults getOutputResults();
+  late final RecordingStats recordingStats;
+  late final List<Object?>? cause;
+  late final VideoRecordFinalizeEventError error;
+  late final VideoOutputResults outputResults;
 }
 
 @ProxyApi(

@@ -46,28 +46,6 @@ abstract base class CameraX extends PlatformInterface {
 
   CameraController createCameraController();
 
-  AspectRatioStrategy getRatio4_3FallbackAutoStrategy();
-  AspectRatioStrategy getRatio16_9FallbackAutoStrategy();
-
-  AspectRatioStrategy createAspectRatioStrategy({
-    required AspectRatio preferredAspectRatio,
-    required AspectRatioFallbackRule fallbackRule,
-  });
-
-  ResolutionStrategy getHighestAvailableStrategy();
-
-  ResolutionStrategy createResolutionStrategy({
-    required Size boundSize,
-    required ResolutionFallbackRule fallbackRule,
-  });
-
-  ResolutionSelector createResolutionSelector({
-    ResolutionMode? allowedResolutionMode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  });
-
   FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
       Quality quality);
 
@@ -119,8 +97,6 @@ abstract base class CameraX extends PlatformInterface {
   FaceDetector createFaceDetector({
     FaceDetectorOptions? options,
   });
-
-  Analyzer createAnalyzer(ImageProxyCallback analyze);
 
   MlKitAnalyzer createMlKitAnalyzer({
     required List<Detector> detectors,

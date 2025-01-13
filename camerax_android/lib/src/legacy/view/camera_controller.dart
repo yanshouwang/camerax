@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_android/src/legacy/core.dart';
+import 'package:camerax_android/src/legacy/ml.dart';
 import 'package:camerax_android/src/legacy/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
@@ -176,31 +177,25 @@ final class CameraController extends $base.CameraController {
   @override
   Future<$base.ResolutionSelector?> getPreviewResolutionSelector() async {
     final obj = await this.obj.getPreviewResolutionSelector();
-    return obj == null ? null : ResolutionSelector.$native(obj);
+    return obj?.args;
   }
 
   @override
   Future<void> setPreviewResolutionSelector(
       $base.ResolutionSelector? resolutionSelector) async {
-    if (resolutionSelector is! ResolutionSelector) {
-      throw TypeError();
-    }
-    await obj.setPreviewResolutionSelector(resolutionSelector.obj);
+    await obj.setPreviewResolutionSelector(resolutionSelector?.obj);
   }
 
   @override
   Future<$base.ResolutionSelector?> getImageCaptureResolutionSelector() async {
     final obj = await this.obj.getImageCaptureResolutionSelector();
-    return obj == null ? null : ResolutionSelector.$native(obj);
+    return obj?.args;
   }
 
   @override
   Future<void> setImageCaptureResolutionSelector(
       $base.ResolutionSelector? resolutionSelector) async {
-    if (resolutionSelector is! ResolutionSelector) {
-      throw TypeError();
-    }
-    await obj.setImageCaptureResolutionSelector(resolutionSelector.obj);
+    await obj.setImageCaptureResolutionSelector(resolutionSelector?.obj);
   }
 
   @override
@@ -235,16 +230,13 @@ final class CameraController extends $base.CameraController {
   @override
   Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() async {
     final obj = await this.obj.getImageAnalysisResolutionSelector();
-    return obj == null ? null : ResolutionSelector.$native(obj);
+    return obj?.args;
   }
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
       $base.ResolutionSelector? resolutionSelector) async {
-    if (resolutionSelector is! ResolutionSelector) {
-      throw TypeError();
-    }
-    await obj.setImageAnalysisResolutionSelector(resolutionSelector.obj);
+    await obj.setImageAnalysisResolutionSelector(resolutionSelector?.obj);
   }
 
   @override
@@ -285,10 +277,12 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<void> setImageAnalysisAnalyzer($base.Analyzer analyzer) async {
-    if (analyzer is! Analyzer) {
-      throw TypeError();
-    }
-    await obj.setImageAnalysisAnalyzer(analyzer.obj);
+    final obj = analyzer is MlKitAnalyzer
+        ? analyzer.obj
+        : $native.RawAnalyzer(
+            analyze: (obj, image) => analyzer.analyze(image.args),
+          );
+    await this.obj.setImageAnalysisAnalyzer(obj);
   }
 
   @override
@@ -356,7 +350,7 @@ final class CameraController extends $base.CameraController {
   Future<$base.Recording> startRecording({
     required Uri uri,
     required bool enableAudio,
-    required $base.VideoRecordEventCallback listener,
+    required $base.VideoRecordEventConsumer listener,
   }) async {
     throw UnimplementedError();
     // final audioConfigObj = $native.AudioConfig.create(

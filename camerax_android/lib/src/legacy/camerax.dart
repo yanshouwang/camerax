@@ -107,67 +107,10 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.ResolutionSelector createResolutionSelector({
-    $base.ResolutionMode? allowedResolutionMode,
-    $base.AspectRatioStrategy? aspectRatioStrategy,
-    $base.ResolutionFilter? resolutionFilter,
-    $base.ResolutionStrategy? resolutionStrategy,
-  }) {
-    return ResolutionSelector(
-      allowedResolutionMode: allowedResolutionMode,
-      aspectRatioStrategy: aspectRatioStrategy,
-      resolutionFilter: resolutionFilter,
-      resolutionStrategy: resolutionStrategy,
-    );
-  }
-
-  @override
-  $base.AspectRatioStrategy createAspectRatioStrategy({
-    required $base.AspectRatio preferredAspectRatio,
-    required $base.AspectRatioFallbackRule fallbackRule,
-  }) {
-    return AspectRatioStrategy(
-      preferredAspectRatio: preferredAspectRatio,
-      fallbackRule: fallbackRule,
-    );
-  }
-
-  @override
-  $base.ResolutionStrategy createResolutionStrategy({
-    required $base.Size boundSize,
-    required $base.ResolutionFallbackRule fallbackRule,
-  }) {
-    return ResolutionStrategy(
-      boundSize: boundSize,
-      fallbackRule: fallbackRule,
-    );
-  }
-
-  @override
-  $base.ResolutionStrategy getHighestAvailableStrategy() {
-    return ResolutionStrategy.highestAvailableStrategy;
-  }
-
-  @override
-  $base.AspectRatioStrategy getRatio16_9FallbackAutoStrategy() {
-    return AspectRatioStrategy.ratio16_9FallbackAutoStrategy;
-  }
-
-  @override
-  $base.AspectRatioStrategy getRatio4_3FallbackAutoStrategy() {
-    return AspectRatioStrategy.ratio4_3FallbackAutoStrategy;
-  }
-
-  @override
   Future<$base.Size?> getResolution(
       $base.CameraInfo cameraInfo, $base.Quality quality) async {
     final size = await QualitySelector.getResolution(cameraInfo, quality);
     return size;
-  }
-
-  @override
-  $base.Analyzer createAnalyzer($base.ImageProxyCallback analyze) {
-    return ImageAnalyzer(analyze);
   }
 
   @override

@@ -4,13 +4,13 @@ export 'package:camerax_platform_interface/camerax_platform_interface.dart'
         AudioStats,
         Quality,
         RecordingStats,
+        VideoRecordEventConsumer,
         VideoRecordEvent,
         VideoRecordStatusEvent,
         VideoRecordStartEvent,
         VideoRecordPauseEvent,
         VideoRecordResumeEvent,
-        VideoRecordFinalizeEvent,
-        VideoRecordEventCallback;
+        VideoRecordFinalizeEvent;
 
 export 'video/fallback_strategy.dart';
 export 'video/quality_selector.dart';

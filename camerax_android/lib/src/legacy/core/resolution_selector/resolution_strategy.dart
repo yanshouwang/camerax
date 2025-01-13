@@ -5,36 +5,23 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart'
 
 import 'resolutioin_fallback_rule.dart';
 
-final class ResolutionStrategy extends $base.ResolutionStrategy {
-  static ResolutionStrategy get highestAvailableStrategy {
-    final obj = $native.ResolutionStrategy.highestAvailableStrategy;
-    return ResolutionStrategy.$native(obj);
-  }
-
-  final $native.ResolutionStrategy obj;
-
-  ResolutionStrategy.$native(this.obj) : super.impl();
-
-  factory ResolutionStrategy({
-    required $base.Size boundSize,
-    required $base.ResolutionFallbackRule fallbackRule,
-  }) {
-    final obj = $native.ResolutionStrategy(
-      boundSize: boundSize.obj,
+extension ResolutionStrategyArgs on $base.ResolutionStrategy {
+  $native.ResolutionStrategy get obj {
+    return $native.ResolutionStrategy(
+      boundSize: boundSize?.obj,
       fallbackRule: fallbackRule.obj,
     );
-    return ResolutionStrategy.$native(obj);
   }
+}
 
-  @override
-  Future<$base.Size?> getBoundSize() async {
-    final obj = await this.obj.getBoundSize();
-    return obj?.args;
-  }
-
-  @override
-  Future<$base.ResolutionFallbackRule> getFallbackRule() async {
-    final obj = await this.obj.getFallbackRule();
-    return obj.args;
+extension ResolutionStrategyObj on $native.ResolutionStrategy {
+  $base.ResolutionStrategy get args {
+    final boundSize = this.boundSize;
+    return boundSize == null
+        ? $base.ResolutionStrategy.highestAvailableStrategy
+        : $base.ResolutionStrategy(
+            boundSize: boundSize.args,
+            fallbackRule: fallbackRule.args,
+          );
   }
 }

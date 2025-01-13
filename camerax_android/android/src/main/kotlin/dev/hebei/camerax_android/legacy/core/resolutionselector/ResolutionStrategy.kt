@@ -6,20 +6,17 @@ import dev.hebei.camerax_android.legacy.ResolutionFallbackRule
 
 class ResolutionStrategy(registrar: CameraXRegistrar) : PigeonApiResolutionStrategy(registrar) {
     override fun pigeon_defaultConstructor(
-        boundSize: android.util.Size, fallbackRule: ResolutionFallbackRule
+        boundSize: android.util.Size?, fallbackRule: ResolutionFallbackRule
     ): androidx.camera.core.resolutionselector.ResolutionStrategy {
-        return androidx.camera.core.resolutionselector.ResolutionStrategy(boundSize, fallbackRule.obj)
+        return if (boundSize == null) androidx.camera.core.resolutionselector.ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY
+        else androidx.camera.core.resolutionselector.ResolutionStrategy(boundSize, fallbackRule.obj)
     }
 
-    override fun highestAvailableStrategy(): androidx.camera.core.resolutionselector.ResolutionStrategy {
-        return androidx.camera.core.resolutionselector.ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY
-    }
-
-    override fun getBoundSize(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionStrategy): android.util.Size? {
+    override fun boundSize(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionStrategy): android.util.Size? {
         return pigeon_instance.boundSize
     }
 
-    override fun getFallbackRule(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionStrategy): ResolutionFallbackRule {
+    override fun fallbackRule(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionStrategy): ResolutionFallbackRule {
         return pigeon_instance.fallbackRule.resolutionFallbackRuleArgs
     }
 }

@@ -15,7 +15,8 @@ final class PermissionManager extends $base.PermissionManager {
 
   @override
   Future<bool> checkPermission($base.Permission permission) async {
-    return obj.checkPermission(permission.obj);
+    final isGranted = obj.checkPermission(permission.obj);
+    return isGranted;
   }
 
   @override

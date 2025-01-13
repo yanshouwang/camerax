@@ -262,7 +262,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   Future<void> _setRawAnalyzer() async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba8888);
-    final analyzer = rawPixelsAnalyzer(_onRawPixelsAnalyzed);
+    final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }

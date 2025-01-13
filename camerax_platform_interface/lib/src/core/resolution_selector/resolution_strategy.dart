@@ -1,26 +1,29 @@
-import 'package:camerax_platform_interface/src/camerax.dart';
 import 'package:camerax_platform_interface/src/common.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'resolution_fallback_rule.dart';
 
-abstract base class ResolutionStrategy extends PlatformInterface {
-  static final _token = Object();
+final class ResolutionStrategy {
+  static const highestAvailableStrategy = ResolutionStrategy._();
 
-  ResolutionStrategy.impl() : super(token: _token);
+  final Size? boundSize;
+  final ResolutionFallbackRule fallbackRule;
 
-  factory ResolutionStrategy({
-    required Size boundSize,
-    required ResolutionFallbackRule fallbackRule,
-  }) =>
-      CameraX.instance.createResolutionStrategy(
-        boundSize: boundSize,
-        fallbackRule: fallbackRule,
-      );
+  const ResolutionStrategy._()
+      : boundSize = null,
+        fallbackRule = ResolutionFallbackRule.none;
 
-  Future<Size?> getBoundSize();
-  Future<ResolutionFallbackRule> getFallbackRule();
+  const ResolutionStrategy({
+    required Size this.boundSize,
+    required this.fallbackRule,
+  });
 
-  static ResolutionStrategy get highestAvailableStrategy =>
-      CameraX.instance.getHighestAvailableStrategy();
+  @override
+  int get hashCode => Object.hash(boundSize, fallbackRule);
+
+  @override
+  bool operator ==(Object other) {
+    return other is ResolutionStrategy &&
+        other.boundSize == boundSize &&
+        other.fallbackRule == fallbackRule;
+  }
 }

@@ -6,18 +6,13 @@ import dev.hebei.camerax_android.legacy.ResolutionMode
 
 class ResolutionSelector(registrar: CameraXRegistrar) : PigeonApiResolutionSelector(registrar) {
     override fun pigeon_defaultConstructor(
-        allowedResolutionMode: ResolutionMode?,
-        aspectRatioStrategy: androidx.camera.core.resolutionselector.AspectRatioStrategy?,
+        allowedResolutionMode: ResolutionMode,
+        aspectRatioStrategy: androidx.camera.core.resolutionselector.AspectRatioStrategy,
         resolutionFilter: androidx.camera.core.resolutionselector.ResolutionFilter?,
         resolutionStrategy: androidx.camera.core.resolutionselector.ResolutionStrategy?
     ): androidx.camera.core.resolutionselector.ResolutionSelector {
         val builder = androidx.camera.core.resolutionselector.ResolutionSelector.Builder()
-        if (allowedResolutionMode != null) {
-            builder.setAllowedResolutionMode(allowedResolutionMode.obj)
-        }
-        if (aspectRatioStrategy != null) {
-            builder.setAspectRatioStrategy(aspectRatioStrategy)
-        }
+            .setAllowedResolutionMode(allowedResolutionMode.obj).setAspectRatioStrategy(aspectRatioStrategy)
         if (resolutionFilter != null) {
             builder.setResolutionFilter(resolutionFilter)
         }
@@ -27,19 +22,19 @@ class ResolutionSelector(registrar: CameraXRegistrar) : PigeonApiResolutionSelec
         return builder.build()
     }
 
-    override fun getAllowedResolutionMode(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): ResolutionMode {
+    override fun allowedResolutionMode(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): ResolutionMode {
         return pigeon_instance.allowedResolutionMode.resolutionModeArgs
     }
 
-    override fun getAspectRatioStrategy(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.AspectRatioStrategy {
+    override fun aspectRatioStrategy(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.AspectRatioStrategy {
         return pigeon_instance.aspectRatioStrategy
     }
 
-    override fun getResolutionFilter(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.ResolutionFilter? {
+    override fun resolutionFilter(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.ResolutionFilter? {
         return pigeon_instance.resolutionFilter
     }
 
-    override fun getResolutionStrategy(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.ResolutionStrategy? {
+    override fun resolutionStrategy(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.ResolutionStrategy? {
         return pigeon_instance.resolutionStrategy
     }
 }

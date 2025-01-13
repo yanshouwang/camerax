@@ -4,20 +4,44 @@ import dev.hebei.camerax_android.legacy.*
 import dev.hebei.camerax_android.legacy.common.args
 
 class VideoRecordEvent(registrar: CameraXRegistrar) : PigeonApiVideoRecordEvent(registrar) {
-    override fun getRecordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent): androidx.camera.video.RecordingStats {
-        return pigeon_instance.recordingStats
+    class Status(registrar: CameraXRegistrar) : PigeonApiVideoRecordStatusEvent(registrar) {
+        override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Status): androidx.camera.video.RecordingStats {
+            return pigeon_instance.recordingStats
+        }
+    }
+
+    class Start(registrar: CameraXRegistrar) : PigeonApiVideoRecordStartEvent(registrar) {
+        override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Start): androidx.camera.video.RecordingStats {
+            return pigeon_instance.recordingStats
+        }
+    }
+
+    class Pause(registrar: CameraXRegistrar) : PigeonApiVideoRecordPauseEvent(registrar) {
+        override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Pause): androidx.camera.video.RecordingStats {
+            return pigeon_instance.recordingStats
+        }
+    }
+
+    class Resume(registrar: CameraXRegistrar) : PigeonApiVideoRecordResumeEvent(registrar) {
+        override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Resume): androidx.camera.video.RecordingStats {
+            return pigeon_instance.recordingStats
+        }
     }
 
     class Finalize(registrar: CameraXRegistrar) : PigeonApiVideoRecordFinalizeEvent(registrar) {
-        override fun getCause(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): List<Any?>? {
+        override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): androidx.camera.video.RecordingStats {
+            return pigeon_instance.recordingStats
+        }
+
+        override fun cause(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): List<Any?>? {
             return pigeon_instance.cause?.args
         }
 
-        override fun getError(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): VideoRecordFinalizeEventError {
+        override fun error(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): VideoRecordFinalizeEventError {
             return pigeon_instance.error.finalizeErrorArgs
         }
 
-        override fun getOutputResults(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): androidx.camera.video.OutputResults {
+        override fun outputResults(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): androidx.camera.video.OutputResults {
             return pigeon_instance.outputResults
         }
     }

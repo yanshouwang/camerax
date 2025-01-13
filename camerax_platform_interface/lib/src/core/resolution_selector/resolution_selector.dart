@@ -6,26 +6,17 @@ import 'resolution_filter.dart';
 import 'resolution_mode.dart';
 import 'resolution_strategy.dart';
 
-abstract base class ResolutionSelector extends PlatformInterface {
-  static final _token = Object();
+final class ResolutionSelector {
+  final ResolutionMode allowedResolutionMode;
+  final AspectRatioStrategy aspectRatioStrategy;
+  final ResolutionFilter? resolutionFilter;
+  final ResolutionStrategy? resolutionStrategy;
 
-  ResolutionSelector.impl() : super(token: _token);
-
-  factory ResolutionSelector({
-    ResolutionMode? allowedResolutionMode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  }) =>
-      CameraX.instance.createResolutionSelector(
-        allowedResolutionMode: allowedResolutionMode,
-        aspectRatioStrategy: aspectRatioStrategy,
-        resolutionFilter: resolutionFilter,
-        resolutionStrategy: resolutionStrategy,
-      );
-
-  Future<ResolutionMode> getAllowedResolutionMode();
-  Future<AspectRatioStrategy> getAspectRatioStrategy();
-  Future<ResolutionFilter?> getResolutionFilter();
-  Future<ResolutionStrategy?> getResolutionStrategy();
+  const ResolutionSelector({
+    this.allowedResolutionMode =
+        ResolutionMode.preferCaptureRateOverHigherResolution,
+    this.aspectRatioStrategy = AspectRatioStrategy.ratio4_3FallbackAutoStrategy,
+    this.resolutionFilter,
+    this.resolutionStrategy,
+  });
 }

@@ -20,6 +20,12 @@ class MlKitAnalyzer(private val registrar: CameraXRegistrar) : PigeonApiMlKitAna
         )
     }
 
+    override fun analyze(
+        pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer, image: androidx.camera.core.ImageProxy
+    ) {
+        pigeon_instance.analyze(image)
+    }
+
     class Result(registrar: CameraXRegistrar) : PigeonApiMlKitAnalyzerResult(registrar) {
         override fun timestamp(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result): Long {
             return pigeon_instance.timestamp

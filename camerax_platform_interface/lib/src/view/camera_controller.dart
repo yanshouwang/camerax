@@ -6,7 +6,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'use_case.dart';
 
-typedef VideoRecordEventCallback = void Function(VideoRecordEvent event);
+typedef VideoRecordEventConsumer = void Function(VideoRecordEvent event);
 
 /// The abstract base camera controller class.
 ///
@@ -445,6 +445,6 @@ abstract base class CameraController extends PlatformInterface {
   Future<Recording> startRecording({
     required Uri uri,
     required bool enableAudio,
-    required VideoRecordEventCallback listener,
+    required VideoRecordEventConsumer listener,
   });
 }

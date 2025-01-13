@@ -11,4 +11,8 @@ class AudioConfig(registrar: CameraXRegistrar) : PigeonApiAudioConfig(registrar)
     override fun audioDisabled(): androidx.camera.view.video.AudioConfig {
         return androidx.camera.view.video.AudioConfig.AUDIO_DISABLED
     }
+
+    override fun getAudioEnabled(pigeon_instance: androidx.camera.view.video.AudioConfig): Boolean {
+        return pigeon_instance.audioEnabled
+    }
 }
