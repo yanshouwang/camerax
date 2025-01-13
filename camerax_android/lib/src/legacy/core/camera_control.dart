@@ -41,7 +41,6 @@ final class CameraControl extends $base.CameraControl {
       throw TypeError();
     }
     final result = await obj.startFocusAndMetering(action.obj);
-    final value = await result.isFocusSuccessful();
-    return value;
+    return result.isFocusSuccessful;
   }
 }

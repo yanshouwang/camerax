@@ -1,14 +1,30 @@
-import 'package:flutter/foundation.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+final class ZoomState {
+  final double minZoomRatio;
+  final double maxZoomRatio;
+  final double zoomRatio;
+  final double linearZoom;
 
-abstract base class ZoomState extends PlatformInterface {
-  static final _token = Object();
+  ZoomState({
+    required this.minZoomRatio,
+    required this.maxZoomRatio,
+    required this.zoomRatio,
+    required this.linearZoom,
+  });
 
-  @protected
-  ZoomState.impl() : super(token: _token);
+  @override
+  int get hashCode => Object.hash(
+        minZoomRatio,
+        maxZoomRatio,
+        zoomRatio,
+        linearZoom,
+      );
 
-  Future<double> getMinZoomRatio();
-  Future<double> getMaxZoomRatio();
-  Future<double> getZoomRatio();
-  Future<double> getLinearZoom();
+  @override
+  bool operator ==(Object other) {
+    return other is ZoomState &&
+        other.minZoomRatio == minZoomRatio &&
+        other.maxZoomRatio == maxZoomRatio &&
+        other.zoomRatio == zoomRatio &&
+        other.linearZoom == linearZoom;
+  }
 }

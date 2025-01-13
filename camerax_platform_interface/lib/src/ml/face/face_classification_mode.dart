@@ -1,0 +1,4 @@
+enum FaceClassificationMode {
+  none,
+  all,
+}

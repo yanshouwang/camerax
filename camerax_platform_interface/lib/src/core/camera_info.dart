@@ -1,3 +1,4 @@
+import 'package:camerax_platform_interface/src/common.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'camera_selector.dart';
@@ -6,7 +7,6 @@ import 'dynamic_range.dart';
 import 'exposure_state.dart';
 import 'focus_metering_action.dart';
 import 'lens_facing.dart';
-import 'range.dart';
 import 'zoom_state.dart';
 
 /// An interface for retrieving camera information.

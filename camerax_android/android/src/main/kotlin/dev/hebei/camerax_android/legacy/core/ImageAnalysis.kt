@@ -3,17 +3,7 @@ package dev.hebei.camerax_android.legacy.core
 import dev.hebei.camerax_android.legacy.*
 
 class ImageAnalysis {
-    class Analyzer(registrar: CameraXRegistrar) : PigeonApiAnalyzer(registrar) {
-        override fun pigeon_defaultConstructor(): androidx.camera.core.ImageAnalysis.Analyzer {
-            return Impl(this)
-        }
-
-        class Impl(private val api: Analyzer) : androidx.camera.core.ImageAnalysis.Analyzer {
-            override fun analyze(image: androidx.camera.core.ImageProxy) {
-                api.analyze(this, image) {}
-            }
-        }
-    }
+    class Analyzer(registrar: CameraXRegistrar) : PigeonApiAnalyzer(registrar)
 }
 
 val BackpressureStrategy.obj

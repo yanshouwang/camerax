@@ -1,5 +1,6 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import 'common.dart';
 import 'core.dart';
 import 'ml.dart';
 import 'video.dart';
@@ -89,11 +90,41 @@ abstract base class CameraX extends PlatformInterface {
 
   Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
 
-  MlKitAnalyzer createMlKitAnalyzer({
-    required List<MlObjectType> types,
-    required CoordinateSystem targetCoordinateSystem,
-    required MlObjectsCallback onAnalyzed,
+  PreviewView createPreviewView();
+
+  ZoomSuggestionOptions createZoomSuggestionOptions({
+    required ZoomCallback zoomCallback,
+    double? maxSupportedZoomRatio,
   });
 
-  PreviewView createPreviewView();
+  BarcodeScannerOptions createBarcodeScannerOptions({
+    bool? enableAllPotentialBarcodes,
+    List<BarcodeFormat>? formats,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
+  });
+
+  BarcodeScanner createBarcodeScanner({
+    BarcodeScannerOptions? options,
+  });
+
+  FaceDetectorOptions createFaceDetectorOptions({
+    bool? enableTracking,
+    FaceClassificationMode? classificationMode,
+    FaceContourMode? contourMode,
+    FaceLandmarkMode? landmarkMode,
+    double? minFaceSize,
+    FacePerformanceMode? performanceMode,
+  });
+
+  FaceDetector createFaceDetector({
+    FaceDetectorOptions? options,
+  });
+
+  Analyzer createAnalyzer(ImageProxyCallback analyze);
+
+  MlKitAnalyzer createMlKitAnalyzer({
+    required List<Detector> detectors,
+    required CoordinateSystem targetCoordinateSystem,
+    required MlKitAnalyzerResultConsumer consumer,
+  });
 }

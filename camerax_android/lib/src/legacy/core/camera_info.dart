@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
+import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
@@ -9,7 +10,6 @@ import 'camera_state.dart';
 import 'dynamic_range.dart';
 import 'exposure_state.dart';
 import 'focus_metering_action.dart';
-import 'range.dart';
 import 'zoom_state.dart';
 
 final class CameraInfo extends $base.CameraInfo {
@@ -66,7 +66,7 @@ final class CameraInfo extends $base.CameraInfo {
   @override
   Future<$base.ExposureState> getExposureState() async {
     final obj = await this.obj.getExposureState();
-    return ExposureState.$native(obj);
+    return obj.args;
   }
 
   @override
@@ -90,7 +90,7 @@ final class CameraInfo extends $base.CameraInfo {
   @override
   Future<Set<$base.Range<int>>> getSupportedFrameRateRanges() async {
     final objs = await obj.getSupportedFrameRateRanges();
-    return objs.map((obj) => IntRange.$native(obj)).toSet();
+    return objs.map((obj) => obj.args).toSet();
   }
 
   @override
@@ -104,7 +104,7 @@ final class CameraInfo extends $base.CameraInfo {
   Future<$base.ZoomState?> getZoomState() async {
     final dataObj = await this.obj.getZoomState();
     final obj = await dataObj.getValue();
-    return obj == null ? null : ZoomState.$native(obj);
+    return obj?.args;
   }
 
   @override
@@ -138,11 +138,11 @@ final class CameraInfo extends $base.CameraInfo {
   @override
   Future<Set<$base.DynamicRange>> querySupportedDynamicRanges(
       Set<$base.DynamicRange> candidateDynamicRanges) async {
-    final ranges = candidateDynamicRanges.cast<DynamicRange>();
-    final candidateDynamicRangeObjs = ranges.map((range) => range.obj).toList();
-    final objs =
+    final candidateDynamicRangeObjs =
+        candidateDynamicRanges.map((range) => range.obj).toList();
+    final rangeObjs =
         await obj.querySupportedDynamicRanges(candidateDynamicRangeObjs);
-    return ranges.where((range) => objs.contains(range.obj)).toSet();
+    return rangeObjs.map((obj) => obj.args).toSet();
   }
 
   void _onListenCameraStateChanged() async {
@@ -155,7 +155,7 @@ final class CameraInfo extends $base.CameraInfo {
       _cameraStateObserver = completer.future;
       final dataObj = await obj.getCameraState();
       final observerObj = $native.CameraStateObserver(
-        onChanged: (observer, valueObj) {
+        onChanged: (obj, valueObj) {
           _cameraStateChangedController.add(valueObj.args);
         },
       );
@@ -192,7 +192,7 @@ final class CameraInfo extends $base.CameraInfo {
       _torchStateObserver = completer.future;
       final dataObj = await obj.getTorchState();
       final observerObj = $native.TorchStateObserver(
-        onChanged: (observer, value) {
+        onChanged: (obj, value) {
           _torchStateChangedController.add(value == $native.TorchState.on);
         },
       );
@@ -231,8 +231,7 @@ final class CameraInfo extends $base.CameraInfo {
       final observerObj = $native.ZoomStateObserver(
         onChanged: (obj, valueObj) {
           try {
-            final value = ZoomState.$native(valueObj);
-            _zoomStateChangedController.add(value);
+            _zoomStateChangedController.add(valueObj.args);
           } catch (e) {
             _zoomStateChangedController.addError(e);
           }

@@ -1,9 +1,11 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
+import 'aspect_ratio_startegy.dart';
+import 'resolution_filter.dart';
 import 'resolution_mode.dart';
+import 'resolution_strategy.dart';
 
 final class ResolutionSelector extends $base.ResolutionSelector {
   final $native.ResolutionSelector obj;

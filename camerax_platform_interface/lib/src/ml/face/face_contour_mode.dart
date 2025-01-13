@@ -1,0 +1,4 @@
+enum FaceContourMode {
+  none,
+  all,
+}

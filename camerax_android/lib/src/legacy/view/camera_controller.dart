@@ -1,12 +1,8 @@
 import 'dart:async';
 
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
+import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_android/src/legacy/core.dart';
-import 'package:camerax_android/src/legacy/core/backpressure_strategy.dart';
-import 'package:camerax_android/src/legacy/core/capture_mode.dart';
-import 'package:camerax_android/src/legacy/core/flash_mode.dart';
-import 'package:camerax_android/src/legacy/core/image_format.dart';
-import 'package:camerax_android/src/legacy/core/mirror_mode.dart';
 import 'package:camerax_android/src/legacy/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
@@ -118,7 +114,7 @@ final class CameraController extends $base.CameraController {
   Future<$base.ZoomState?> getZoomState() async {
     final dataObj = await obj.getZoomState();
     final valueObj = await dataObj.getValue();
-    return valueObj == null ? null : ZoomState.$native(valueObj);
+    return valueObj?.args;
   }
 
   @override
@@ -289,13 +285,10 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<void> setImageAnalysisAnalyzer($base.Analyzer analyzer) async {
-    final obj = $native.Analyzer(
-      analyze: (obj, imageObj) {
-        final image = ImageProxy.$native(imageObj);
-        analyzer.analyze(image);
-      },
-    );
-    await this.obj.setImageAnalysisAnalyzer(obj);
+    if (analyzer is! Analyzer) {
+      throw TypeError();
+    }
+    await obj.setImageAnalysisAnalyzer(analyzer.obj);
   }
 
   @override
@@ -306,15 +299,12 @@ final class CameraController extends $base.CameraController {
   @override
   Future<$base.DynamicRange> getVideoCaptureDynamicRange() async {
     final obj = await this.obj.getVideoCaptureDynamicRange();
-    return DynamicRange.$native(obj);
+    return obj.args;
   }
 
   @override
   Future<void> setVideoCaptureDynamicRange(
       $base.DynamicRange dynamicRange) async {
-    if (dynamicRange is! DynamicRange) {
-      throw TypeError();
-    }
     await obj.setVideoCaptureDynamicRange(dynamicRange.obj);
   }
 
@@ -347,15 +337,12 @@ final class CameraController extends $base.CameraController {
   @override
   Future<$base.Range<int>> getVideoCaptureTargetFrameRate() async {
     final obj = await this.obj.getVideoCaptureTargetFrameRate();
-    return IntRange.$native(obj);
+    return obj.args;
   }
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(
       $base.Range<int> targetFrameRate) async {
-    if (targetFrameRate is! IntRange) {
-      throw TypeError();
-    }
     await obj.setVideoCaptureTargetFrameRate(targetFrameRate.obj);
   }
 
@@ -412,7 +399,7 @@ final class CameraController extends $base.CameraController {
       _torchStateObserver = completer.future;
       final dataObj = await obj.getTorchState();
       final observerObj = $native.TorchStateObserver(
-        onChanged: (observer, value) {
+        onChanged: (obj, value) {
           _torchStateChangedController.add(value == $native.TorchState.on);
         },
       );
@@ -451,8 +438,7 @@ final class CameraController extends $base.CameraController {
       final observerObj = $native.ZoomStateObserver(
         onChanged: (obj, valueObj) {
           try {
-            final value = ZoomState.$native(valueObj);
-            _zoomStateChangedController.add(value);
+            _zoomStateChangedController.add(valueObj.args);
           } catch (e) {
             _zoomStateChangedController.addError(e);
           }

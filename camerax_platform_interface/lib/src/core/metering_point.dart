@@ -28,7 +28,7 @@
 ///
 /// The metering rectangle defined by the MeteringPoint has the same shape as the
 /// sensor array.
-abstract interface class MeteringPoint {
+final class MeteringPoint {
   /// Size of the MeteringPoint width and height (ranging from 0 to 1). It is the
   /// percentage of the sensor width/height (or crop region width/height if crop
   /// region is set).
@@ -41,5 +41,7 @@ abstract interface class MeteringPoint {
   /// Metering rectangle width = size * sensorSizeOrCropRegion.width
   /// Metering rectangle height = size * sensorSizeOrCropRegion.height
   /// ```
-  Future<double> getSize();
+  final double size;
+
+  MeteringPoint(this.size);
 }

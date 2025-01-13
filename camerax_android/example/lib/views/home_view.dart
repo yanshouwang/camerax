@@ -9,7 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-import 'ml_items_view.dart';
+import 'barcodes_view.dart';
+import 'faces_view.dart';
 import 'raw_pixels_view.dart';
 import 'thumbnail.dart';
 
@@ -44,17 +45,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final viewModel = ViewModel.of<HomeViewModel>(context);
     final controller = viewModel.controller;
     final mode = viewModel.mode;
-    final minZoomRatio = viewModel.minZoomRatio;
-    final maxZoomRatio = viewModel.maxZoomRatio;
-    final zoomRatio = viewModel.zoomRatio;
-    final minExposureIndex = viewModel.minExposureIndex;
-    final maxExposureIndex = viewModel.maxExposureIndex;
-    final exposureIndex = viewModel.exposureIndex;
+    final zoomState = viewModel.zoomState;
+    final exposureState = viewModel.exposureState;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
     final recording = viewModel.recording;
     final imageModel = viewModel.imageModel;
-    final items = viewModel.items;
+    final barcodes = viewModel.barcodes;
+    final faces = viewModel.faces;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
     return CupertinoPageScaffold(
@@ -123,22 +121,24 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         ),
                       ),
                     ),
-                  if (items.isNotEmpty)
-                    MLItemsView(
-                      items: items,
+                  if (barcodes.isNotEmpty)
+                    BarcodesView(
+                      barcodes: barcodes,
                     ),
-                  if (minZoomRatio != null &&
-                      maxZoomRatio != null &&
-                      zoomRatio != null)
+                  if (faces.isNotEmpty)
+                    FacesView(
+                      faces: faces,
+                    ),
+                  if (zoomState != null)
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: ValueListenableBuilder(
                         valueListenable: _viewZoomRatio,
                         builder: (context, viewZoomRatio, child) {
                           return ZoomWidget(
-                            minimum: minZoomRatio,
-                            maximum: maxZoomRatio,
-                            value: viewZoomRatio ?? zoomRatio,
+                            minimum: zoomState.minZoomRatio,
+                            maximum: zoomState.maxZoomRatio,
+                            value: viewZoomRatio ?? zoomState.zoomRatio,
                             onChanged: (value) {
                               viewModel.setZoomRatio(value);
                               _viewZoomRatio.value = value;
@@ -153,17 +153,20 @@ class _HomeViewState extends State<HomeView> with RouteAware {
           ),
           Column(
             children: [
-              if (minExposureIndex != null &&
-                  maxExposureIndex != null &&
-                  exposureIndex != null)
+              if (exposureState != null)
                 ValueListenableBuilder(
                   valueListenable: _viewExposureIndex,
                   builder: (context, viewExposureIndex, child) {
+                    final range = exposureState.exposureCompensationRange;
+                    final lower = range.lower;
+                    final upper = range.upper;
                     return CupertinoSlider(
-                      min: minExposureIndex.toDouble(),
-                      max: maxExposureIndex.toDouble(),
-                      divisions: maxExposureIndex - minExposureIndex,
-                      value: (viewExposureIndex ?? exposureIndex).toDouble(),
+                      min: lower.toDouble(),
+                      max: upper.toDouble(),
+                      divisions: upper - lower,
+                      value: (viewExposureIndex ??
+                              exposureState.exposureCompensationIndex)
+                          .toDouble(),
                       onChanged: (value) {
                         final newValue = value.toInt();
                         viewModel.setExposure(newValue);

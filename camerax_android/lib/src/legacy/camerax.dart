@@ -1,6 +1,8 @@
+import 'package:camerax_android/src/legacy/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
+import 'common.dart';
 import 'core.dart';
 import 'video.dart';
 import 'view.dart';
@@ -71,12 +73,15 @@ final class CameraX extends $base.CameraX {
 
   @override
   $base.MlKitAnalyzer createMlKitAnalyzer({
-    required List<$base.MlObjectType> types,
+    required List<$base.Detector> detectors,
     required $base.CoordinateSystem targetCoordinateSystem,
-    required $base.MlObjectsCallback onAnalyzed,
+    required $base.MlKitAnalyzerResultConsumer consumer,
   }) {
-    // TODO: implement createMLAnalyzer
-    throw UnimplementedError();
+    return MlKitAnalyzer(
+      detectors: detectors,
+      targetCoordinateSystem: targetCoordinateSystem,
+      consumer: consumer,
+    );
   }
 
   @override
@@ -158,5 +163,71 @@ final class CameraX extends $base.CameraX {
       $base.CameraInfo cameraInfo, $base.Quality quality) async {
     final size = await QualitySelector.getResolution(cameraInfo, quality);
     return size;
+  }
+
+  @override
+  $base.Analyzer createAnalyzer($base.ImageProxyCallback analyze) {
+    return ImageAnalyzer(analyze);
+  }
+
+  @override
+  $base.BarcodeScanner createBarcodeScanner({
+    $base.BarcodeScannerOptions? options,
+  }) {
+    return BarcodeScanner(
+      options: options,
+    );
+  }
+
+  @override
+  $base.BarcodeScannerOptions createBarcodeScannerOptions({
+    bool? enableAllPotentialBarcodes,
+    List<$base.BarcodeFormat>? formats,
+    $base.ZoomSuggestionOptions? zoomSuggestionOptions,
+  }) {
+    return BarcodeScannerOptions(
+      enableAllPotentialBarcodes: enableAllPotentialBarcodes,
+      formats: formats,
+      zoomSuggestionOptions: zoomSuggestionOptions,
+    );
+  }
+
+  @override
+  $base.FaceDetector createFaceDetector({
+    $base.FaceDetectorOptions? options,
+  }) {
+    return FaceDetector(
+      options: options,
+    );
+  }
+
+  @override
+  $base.FaceDetectorOptions createFaceDetectorOptions({
+    bool? enableTracking,
+    $base.FaceClassificationMode? classificationMode,
+    $base.FaceContourMode? contourMode,
+    $base.FaceLandmarkMode? landmarkMode,
+    double? minFaceSize,
+    $base.FacePerformanceMode? performanceMode,
+  }) {
+    return FaceDetectorOptions(
+      enableTracking: enableTracking,
+      classificationMode: classificationMode,
+      contourMode: contourMode,
+      landmarkMode: landmarkMode,
+      minFaceSize: minFaceSize,
+      performanceMode: performanceMode,
+    );
+  }
+
+  @override
+  $base.ZoomSuggestionOptions createZoomSuggestionOptions({
+    required $base.ZoomCallback zoomCallback,
+    double? maxSupportedZoomRatio,
+  }) {
+    return ZoomSuggestionOptions(
+      zoomCallback: zoomCallback,
+      maxSupportedZoomRatio: maxSupportedZoomRatio,
+    );
   }
 }

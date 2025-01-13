@@ -1,15 +1,36 @@
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
 import 'audio_state.dart';
 
-abstract base class AudioStats extends PlatformInterface {
-  static final _token = Object();
+final class AudioStats {
+  final double audioAmplitude;
+  final AudioState audioState;
+  final Object? error;
+  final bool hasAudio;
+  final bool hasError;
 
-  AudioStats.impl() : super(token: _token);
+  AudioStats({
+    required this.audioAmplitude,
+    required this.audioState,
+    required this.error,
+    required this.hasAudio,
+    required this.hasError,
+  });
 
-  Future<double> getAudioAmplitude();
-  Future<AudioState> getAudioState();
-  Future<Object?> getError();
-  Future<bool> hasAudio();
-  Future<bool> hasError();
+  @override
+  int get hashCode => Object.hash(
+        audioAmplitude,
+        audioState,
+        error,
+        hasAudio,
+        hasError,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    return other is AudioStats &&
+        other.audioAmplitude == audioAmplitude &&
+        other.audioState == audioState &&
+        other.error == error &&
+        other.hasAudio == hasAudio &&
+        other.hasError == hasError;
+  }
 }

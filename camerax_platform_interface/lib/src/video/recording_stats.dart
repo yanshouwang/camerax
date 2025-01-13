@@ -1,13 +1,28 @@
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
 import 'audio_stats.dart';
 
-abstract base class RecordingStats extends PlatformInterface {
-  static final _token = Object();
+final class RecordingStats {
+  final AudioStats audioStats;
+  final int numBytesRecorded;
+  final int recordedDurationNanos;
 
-  RecordingStats.impl() : super(token: _token);
+  RecordingStats({
+    required this.audioStats,
+    required this.numBytesRecorded,
+    required this.recordedDurationNanos,
+  });
 
-  Future<AudioStats> getAudioStats();
-  Future<int> getNumBytesRecorded();
-  Future<int> getRecordedDurationNanos();
+  @override
+  int get hashCode => Object.hash(
+        audioStats,
+        numBytesRecorded,
+        recordedDurationNanos,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    return other is RecordingStats &&
+        other.audioStats == audioStats &&
+        other.numBytesRecorded == numBytesRecorded &&
+        other.recordedDurationNanos == recordedDurationNanos;
+  }
 }

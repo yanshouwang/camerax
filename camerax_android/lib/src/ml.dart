@@ -1,1 +1,1 @@
-export 'ml/ml_analyzer.dart';
+export 'ml/mlkit_analyzer.dart';

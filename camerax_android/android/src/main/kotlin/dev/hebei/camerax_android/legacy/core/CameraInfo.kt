@@ -2,7 +2,10 @@ package dev.hebei.camerax_android.legacy.core
 
 import androidx.lifecycle.map
 import dev.hebei.camerax_android.legacy.*
-import dev.hebei.camerax_android.legacy.IntRange
+import dev.hebei.camerax_android.legacy.common.CameraStateLiveData
+import dev.hebei.camerax_android.legacy.common.IntRange
+import dev.hebei.camerax_android.legacy.common.TorchStateLiveData
+import dev.hebei.camerax_android.legacy.common.ZoomStateLiveData
 
 class CameraInfo(registrar: CameraXRegistrar) : PigeonApiCameraInfo(registrar) {
     override fun mustPlayShutterSound(): Boolean {

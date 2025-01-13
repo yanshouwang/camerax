@@ -1,5 +1,6 @@
-import 'package:camerax_android/src/legacy.dart';
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
+import 'package:camerax_android/src/legacy/common.dart';
+import 'package:camerax_android/src/legacy/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
@@ -46,6 +47,6 @@ final class QualitySelector extends $base.QualitySelector {
     }
     final obj = await $native.QualitySelector.getResolution(
         cameraInfo.obj, quality.obj);
-    return obj == null ? null : Size.$native(obj);
+    return obj?.args;
   }
 }

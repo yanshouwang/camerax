@@ -6,7 +6,9 @@ import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import dev.hebei.camerax_android.legacy.*
 import dev.hebei.camerax_android.legacy.core.*
-import dev.hebei.camerax_android.legacy.IntRange
+import dev.hebei.camerax_android.legacy.common.IntRange
+import dev.hebei.camerax_android.legacy.common.TorchStateLiveData
+import dev.hebei.camerax_android.legacy.common.ZoomStateLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await

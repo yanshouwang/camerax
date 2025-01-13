@@ -1,5 +1,5 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/core.dart';
+import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
@@ -11,13 +11,10 @@ final class ResolutionFilter extends $base.ResolutionFilter {
   @override
   List<$base.Size> filter(
       List<$base.Size> supportedSizes, int rotationDegrees) {
-    final supportedSizeObjs =
-        supportedSizes.cast<Size>().map((size) => size.obj).toList();
+    final supportedSizeObjs = supportedSizes.map((size) => size.obj).toList();
     final sizeObjs = obj.filter(obj, supportedSizeObjs, rotationDegrees);
-    return supportedSizes
-        .cast<Size>()
-        .where((size) => sizeObjs.contains(size.obj))
-        .toList();
+    final sizes = sizeObjs.map((obj) => obj.args).toList();
+    return sizes;
   }
 
   factory ResolutionFilter(
@@ -25,9 +22,10 @@ final class ResolutionFilter extends $base.ResolutionFilter {
     final obj = $native.ResolutionFilter(
       filter: (obj, supportedSizeObjs, rotationDegrees) {
         final supportedSizes =
-            supportedSizeObjs.map((obj) => Size.$native(obj)).toList();
+            supportedSizeObjs.map((obj) => obj.args).toList();
         final sizes = filter(supportedSizes, rotationDegrees);
-        return sizes.cast<Size>().map((size) => size.obj).toList();
+        final sizeObjs = sizes.map((size) => size.obj).toList();
+        return sizeObjs;
       },
     );
     return ResolutionFilter.$native(obj);

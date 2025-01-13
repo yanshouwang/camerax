@@ -2,12 +2,36 @@ package dev.hebei.camerax_android.legacy
 
 import android.app.Activity
 import android.content.Context
+import dev.hebei.camerax_android.legacy.common.CameraStateLiveData
+import dev.hebei.camerax_android.legacy.common.CameraStateObserver
+import dev.hebei.camerax_android.legacy.common.IntRange
+import dev.hebei.camerax_android.legacy.common.MlKitAnalyzerResultConsumer
+import dev.hebei.camerax_android.legacy.common.PermissionManager
+import dev.hebei.camerax_android.legacy.common.Point
+import dev.hebei.camerax_android.legacy.common.PointF
+import dev.hebei.camerax_android.legacy.common.Rect
+import dev.hebei.camerax_android.legacy.common.Size
+import dev.hebei.camerax_android.legacy.common.TorchStateLiveData
+import dev.hebei.camerax_android.legacy.common.TorchStateObserver
+import dev.hebei.camerax_android.legacy.common.Uri
+import dev.hebei.camerax_android.legacy.common.VideoRecordEventConsumer
+import dev.hebei.camerax_android.legacy.common.ZoomStateLiveData
+import dev.hebei.camerax_android.legacy.common.ZoomStateObserver
 import dev.hebei.camerax_android.legacy.core.*
 import dev.hebei.camerax_android.legacy.core.resolutionselector.AspectRatioStrategy
 import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionFilter
 import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionSelector
 import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionStrategy
 import dev.hebei.camerax_android.legacy.ml.*
+import dev.hebei.camerax_android.legacy.ml.barcode.Barcode
+import dev.hebei.camerax_android.legacy.ml.barcode.BarcodeScanner
+import dev.hebei.camerax_android.legacy.ml.barcode.BarcodeScannerOptions
+import dev.hebei.camerax_android.legacy.ml.barcode.ZoomSuggestionOptions
+import dev.hebei.camerax_android.legacy.ml.face.Face
+import dev.hebei.camerax_android.legacy.ml.face.FaceContour
+import dev.hebei.camerax_android.legacy.ml.face.FaceDetector
+import dev.hebei.camerax_android.legacy.ml.face.FaceDetectorOptions
+import dev.hebei.camerax_android.legacy.ml.face.FaceLandmark
 import dev.hebei.camerax_android.legacy.video.*
 import dev.hebei.camerax_android.legacy.view.CameraController
 import dev.hebei.camerax_android.legacy.view.LifecycleCameraController
@@ -15,7 +39,8 @@ import dev.hebei.camerax_android.legacy.view.PreviewView
 import dev.hebei.camerax_android.legacy.view.video.AudioConfig
 import io.flutter.plugin.common.BinaryMessenger
 
-class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : CameraXPigeonProxyApiRegistrar(messenger) {
+class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
+    CameraXPigeonProxyApiRegistrar(messenger) {
     var activity: Activity? = null
 
     override fun getPigeonApiPermissionManager(): PigeonApiPermissionManager {
@@ -23,7 +48,7 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
     }
 
     override fun getPigeonApiAutoCloseable(): PigeonApiAutoCloseable {
-        return AutoCloseable(this)
+        return dev.hebei.camerax_android.legacy.common.AutoCloseable(this)
     }
 
     override fun getPigeonApiUri(): PigeonApiUri {
@@ -146,6 +171,10 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return ImageAnalysis.Analyzer(this)
     }
 
+    override fun getPigeonApiImageAnalyzer(): PigeonApiImageAnalyzer {
+        return ImageAnalyzer(this)
+    }
+
     override fun getPigeonApiDetector(): PigeonApiDetector {
         return Detector(this)
     }
@@ -218,10 +247,6 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return BarcodeScanner(this)
     }
 
-    override fun getPigeonApiBarcodeScanning(): PigeonApiBarcodeScanning {
-        return BarcodeScanning(this)
-    }
-
     override fun getPigeonApiFaceDetectorOptions(): PigeonApiFaceDetectorOptions {
         return FaceDetectorOptions(this)
     }
@@ -242,11 +267,7 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return FaceDetector(this)
     }
 
-    override fun getPigeonApiFaceDetection(): PigeonApiFaceDetection {
-        return FaceDetection(this)
-    }
-
-    override fun getPigeonApiMlkitAnalyzerResult(): PigeonApiMlkitAnalyzerResult {
+    override fun getPigeonApiMlKitAnalyzerResult(): PigeonApiMlKitAnalyzerResult {
         return MlKitAnalyzer.Result(this)
     }
 

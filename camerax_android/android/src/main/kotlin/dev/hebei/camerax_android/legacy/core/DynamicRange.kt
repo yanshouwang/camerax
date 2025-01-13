@@ -10,11 +10,11 @@ class DynamicRange(registrar: CameraXRegistrar) : PigeonApiDynamicRange(registra
         return androidx.camera.core.DynamicRange(encoding.obj, bitDepth.obj)
     }
 
-    override fun getEncoding(pigeon_instance: androidx.camera.core.DynamicRange): Encoding {
+    override fun encoding(pigeon_instance: androidx.camera.core.DynamicRange): Encoding {
         return pigeon_instance.encoding.encodingArgs
     }
 
-    override fun getBitDepth(pigeon_instance: androidx.camera.core.DynamicRange): BitDepth {
+    override fun bitDepth(pigeon_instance: androidx.camera.core.DynamicRange): BitDepth {
         return pigeon_instance.bitDepth.bitDepthArgs
     }
 }

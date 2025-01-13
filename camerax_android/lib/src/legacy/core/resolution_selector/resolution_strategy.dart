@@ -1,5 +1,5 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
-import 'package:camerax_android/src/legacy/core.dart';
+import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
 
@@ -19,9 +19,6 @@ final class ResolutionStrategy extends $base.ResolutionStrategy {
     required $base.Size boundSize,
     required $base.ResolutionFallbackRule fallbackRule,
   }) {
-    if (boundSize is! Size) {
-      throw TypeError();
-    }
     final obj = $native.ResolutionStrategy(
       boundSize: boundSize.obj,
       fallbackRule: fallbackRule.obj,
@@ -32,7 +29,7 @@ final class ResolutionStrategy extends $base.ResolutionStrategy {
   @override
   Future<$base.Size?> getBoundSize() async {
     final obj = await this.obj.getBoundSize();
-    return obj == null ? null : Size.$native(obj);
+    return obj?.args;
   }
 
   @override

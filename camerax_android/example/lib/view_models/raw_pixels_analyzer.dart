@@ -6,24 +6,19 @@ import 'package:flutter/cupertino.dart';
 
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
-final class RawPixelsAnalyzer extends Analyzer {
-  final ImageModelCallback onAnalyzed;
-
-  RawPixelsAnalyzer(this.onAnalyzed) : super.impl();
-
-  @override
-  void analyze(ImageProxy image) async {
+Analyzer rawPixelsAnalyzer(ImageModelCallback callback) {
+  return Analyzer((image) async {
     try {
-      final format = await image.getFormat();
-      final width = await image.getWidth();
-      final height = await image.getHeight();
-      final planes = await image.getPlanes();
-      final rotationDegrees = await image.getRotationDegrees();
+      final format = image.format;
+      final width = image.width;
+      final height = image.height;
+      final planes = image.planes;
+      final rotationDegrees = image.imageInfo.rotationDegrees;
       debugPrint('image size: $width * $height');
       if (format != ImageFormat.rgba8888) {
         throw ArgumentError.value(format);
       }
-      final rawPixels = await planes.first.getBuffer();
+      final rawPixels = planes.first.buffer;
       final buffer = await ui.ImmutableBuffer.fromUint8List(rawPixels);
       final descriptor = ui.ImageDescriptor.raw(
         buffer,
@@ -37,9 +32,9 @@ final class RawPixelsAnalyzer extends Analyzer {
         image: frame.image,
         rotationDegrees: rotationDegrees,
       );
-      onAnalyzed(imageModel);
+      callback(imageModel);
     } finally {
       image.close();
     }
-  }
+  });
 }

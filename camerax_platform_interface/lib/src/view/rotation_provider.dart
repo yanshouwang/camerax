@@ -1,1 +1,0 @@
-// TODO: implement the `RotationProvider` class.

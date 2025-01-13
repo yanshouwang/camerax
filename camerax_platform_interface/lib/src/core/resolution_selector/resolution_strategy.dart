@@ -1,6 +1,8 @@
 import 'package:camerax_platform_interface/src/camerax.dart';
-import 'package:camerax_platform_interface/src/core.dart';
+import 'package:camerax_platform_interface/src/common.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+import 'resolution_fallback_rule.dart';
 
 abstract base class ResolutionStrategy extends PlatformInterface {
   static final _token = Object();

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:camerax_android_example/models.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -13,22 +12,21 @@ import 'raw_pixels_analyzer.dart';
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController controller;
+  final BarcodeScanner _barcodeScanner;
+  final FaceDetector _faceDetector;
 
   CameraMode _mode;
   LensFacing _lensFacing;
   CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
   bool? _torchState;
-  double? _minZoomRatio;
-  double? _maxZoomRatio;
-  double? _zoomRatio;
-  int? _minExposureIndex;
-  int? _maxExposureIndex;
-  int? _exposureIndex;
+  ZoomState? _zoomState;
+  ExposureState? _exposureState;
   FlashMode? _flashMode;
   Uri? _savedUri;
   ImageModel? _imageModel;
-  List<MlObject> _items;
+  List<Barcode> _barcodes;
+  List<Face> _faces;
 
   late final StreamSubscription _zoomStateSubscription;
   late final StreamSubscription _torchStateSubscription;
@@ -36,26 +34,26 @@ class HomeViewModel extends ViewModel with TypeLogger {
   HomeViewModel()
       : _permissionManager = PermissionManager(),
         controller = CameraController(),
+        _barcodeScanner = BarcodeScanner(),
+        _faceDetector = FaceDetector(),
         _mode = CameraMode.takePicture,
         _lensFacing = LensFacing.back,
-        _items = [] {
+        _barcodes = [],
+        _faces = [] {
     _initialize();
   }
 
   CameraMode get mode => _mode;
   LensFacing get lensFacing => _lensFacing;
   bool? get torchState => _torchState;
-  double? get minZoomRatio => _minZoomRatio;
-  double? get maxZoomRatio => _maxZoomRatio;
-  double? get zoomRatio => _zoomRatio;
-  int? get minExposureIndex => _minExposureIndex;
-  int? get maxExposureIndex => _maxExposureIndex;
-  int? get exposureIndex => _exposureIndex;
+  ZoomState? get zoomState => _zoomState;
+  ExposureState? get exposureState => _exposureState;
   FlashMode? get flashMode => _flashMode;
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
   ImageModel? get imageModel => _imageModel;
-  List<MlObject> get items => _items;
+  List<Barcode> get barcodes => _barcodes;
+  List<Face> get faces => _faces;
 
   Future<void> bind() async {
     await controller.bind();
@@ -76,50 +74,29 @@ class HomeViewModel extends ViewModel with TypeLogger {
         break;
       case CameraMode.scanCode:
         final analyzer = MlKitAnalyzer(
-          types: [
-            // Barcodes
-            MlObjectType.codabar,
-            MlObjectType.code39,
-            MlObjectType.code39Mode43,
-            MlObjectType.code93,
-            MlObjectType.code128,
-            MlObjectType.ean8,
-            MlObjectType.ean13,
-            MlObjectType.gs1DataBar,
-            MlObjectType.gs1DataBarExpanded,
-            MlObjectType.gs1DataBarLimited,
-            MlObjectType.interleave2of5,
-            MlObjectType.itf14,
-            MlObjectType.upcA,
-            MlObjectType.upcE,
-            // 2D Codes
-            MlObjectType.aztec,
-            MlObjectType.dataMatrix,
-            MlObjectType.microPDF417,
-            MlObjectType.microQR,
-            MlObjectType.pdf417,
-            MlObjectType.qr,
+          detectors: [
+            _barcodeScanner,
           ],
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          onAnalyzed: _onMLAnalyzed,
+          consumer: _extractML,
         );
         await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
         final analyzer = MlKitAnalyzer(
-          types: [
-            // Faces
-            MlObjectType.face,
+          detectors: [
+            _faceDetector,
           ],
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          onAnalyzed: _onMLAnalyzed,
+          consumer: _extractML,
         );
         await _setMLAnalyzer(analyzer);
         break;
     }
     _mode = mode;
     _imageModel = null;
-    _items = [];
+    _barcodes = [];
+    _faces = [];
     notifyListeners();
   }
 
@@ -186,14 +163,14 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _recording = await controller.startRecording(
       uri: uri,
       enableAudio: true,
-      listener: (event) async {
+      listener: (event) {
         logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
           return;
         }
-        final error = await event.getError();
+        final error = event.error;
         if (error == null) {
-          _savedUri = await event.getOutputUri();
+          _savedUri = event.outputUri;
         } else {
           logger.info('Record Video failed $error.');
         }
@@ -224,14 +201,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
     );
     _zoomStateSubscription = controller.zoomStateChanged.listen(
       (zoomState) async {
-        final minZoomRatio = await zoomState.getMinZoomRatio();
-        final maxZoomRatio = await zoomState.getMaxZoomRatio();
-        final zoomRatio = await zoomState.getZoomRatio();
-        _minZoomRatio = minZoomRatio;
-        _maxZoomRatio = maxZoomRatio;
-        _zoomRatio = zoomRatio;
+        logger.info('zoomState: $zoomState');
+        _zoomState = zoomState;
         notifyListeners();
-        logger.info('zoomState: $minZoomRatio - $maxZoomRatio, $zoomRatio');
       },
       onError: (e) {
         logger.warning('zoomStateChanged error: $e');
@@ -263,28 +235,11 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _cameraInfo = await controller.getCameraInfo();
     _cameraControl = await controller.getCameraControl();
     _torchState = await controller.getTorchState();
-    final zoomState = await controller.getZoomState();
-    if (zoomState != null) {
-      final minZoomRatio = await zoomState.getMinZoomRatio();
-      final maxZoomRatio = await zoomState.getMaxZoomRatio();
-      final zoomRatio = await zoomState.getZoomRatio();
-      _minZoomRatio = minZoomRatio;
-      _maxZoomRatio = maxZoomRatio;
-      _zoomRatio = zoomRatio;
-    }
-    final exposureState = await _cameraInfo?.getExposureState();
-    if (exposureState != null) {
-      final range = await exposureState.getExposureCompensationRange();
-      final minExposureIndex = await range.getLower();
-      final maxExposureIndex = await range.getUpper();
-      final exposureIndex = await exposureState.getExposureCompensationIndex();
-      _minExposureIndex = minExposureIndex;
-      _maxExposureIndex = maxExposureIndex;
-      _exposureIndex = exposureIndex;
-    }
+    _zoomState = await controller.getZoomState();
+    _exposureState = await _cameraInfo?.getExposureState();
+    _flashMode = await controller.getImageCaptureFlashMode();
     final isPinchToZoomEnabled = await controller.isPinchToZoomEnabled();
     final isTapToFocusEnabled = await controller.isTapToFocusEnabled();
-    // _flashMode = await controller.getImageCaptureFlashMode();
     logger.info('''cameraInfo: $_cameraInfo
 cameraControl: $_cameraControl
 torchState: $torchState
@@ -307,7 +262,7 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
   Future<void> _setRawAnalyzer() async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba8888);
-    final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
+    final analyzer = rawPixelsAnalyzer(_onRawPixelsAnalyzed);
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }
@@ -327,12 +282,20 @@ isTapToFocusEnabled: $isTapToFocusEnabled''');
     await controller.bind();
   }
 
-  void _onMLAnalyzed(List<MlObject> items) {
-    if (mode != CameraMode.scanCode && mode != CameraMode.scanFace) {
-      return;
+  void _extractML(MlKitAnalyzerResult result) async {
+    switch (mode) {
+      case CameraMode.scanCode:
+        final barcodes = await result.getValue(_barcodeScanner);
+        _barcodes = barcodes ?? [];
+        notifyListeners();
+        break;
+      case CameraMode.scanFace:
+        final faces = await result.getValue(_faceDetector);
+        _faces = faces ?? [];
+        notifyListeners();
+        break;
+      default:
     }
-    _items = items;
-    notifyListeners();
   }
 
   Future<void> _clearImageAnalysisAnalyzer() async {

@@ -2,7 +2,11 @@ package dev.hebei.camerax_android.legacy.ml
 
 import androidx.core.content.ContextCompat
 import dev.hebei.camerax_android.legacy.*
+import dev.hebei.camerax_android.legacy.common.MlKitAnalyzerResultConsumer
+import dev.hebei.camerax_android.legacy.common.args
 import dev.hebei.camerax_android.legacy.core.obj
+import dev.hebei.camerax_android.legacy.ml.barcode.BarcodeScanner
+import dev.hebei.camerax_android.legacy.ml.face.FaceDetector
 
 class MlKitAnalyzer(private val registrar: CameraXRegistrar) : PigeonApiMlKitAnalyzer(registrar) {
     override fun pigeon_defaultConstructor(
@@ -16,8 +20,8 @@ class MlKitAnalyzer(private val registrar: CameraXRegistrar) : PigeonApiMlKitAna
         )
     }
 
-    class Result(registrar: CameraXRegistrar) : PigeonApiMlkitAnalyzerResult(registrar) {
-        override fun getTimestamp(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result): Long {
+    class Result(registrar: CameraXRegistrar) : PigeonApiMlKitAnalyzerResult(registrar) {
+        override fun timestamp(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result): Long {
             return pigeon_instance.timestamp
         }
 

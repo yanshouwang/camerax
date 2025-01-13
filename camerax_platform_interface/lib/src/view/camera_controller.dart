@@ -1,7 +1,7 @@
 import 'package:camerax_platform_interface/src/camerax.dart';
+import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/core.dart';
 import 'package:camerax_platform_interface/src/video.dart';
-import 'package:flutter/foundation.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'use_case.dart';
@@ -38,7 +38,6 @@ abstract base class CameraController extends PlatformInterface {
     return instance;
   }
 
-  @protected
   CameraController.impl() : super(token: _token);
 
   Stream<ZoomState> get zoomStateChanged;

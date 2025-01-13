@@ -1,5 +1,4 @@
 import 'package:camerax_platform_interface/src/camerax.dart';
-import 'package:flutter/foundation.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'lens_facing.dart';
@@ -24,6 +23,5 @@ abstract base class CameraSelector extends PlatformInterface {
     return instance;
   }
 
-  @protected
   CameraSelector.impl() : super(token: _token);
 }

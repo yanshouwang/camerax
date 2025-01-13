@@ -1,0 +1,17 @@
+enum FaceContourType {
+  face,
+  leftCheek,
+  leftEye,
+  leftEyebrowBottom,
+  leftEyebrowTop,
+  lowerLipBottom,
+  lowerLipTop,
+  noseBottom,
+  noseBridge,
+  rightCheek,
+  rightEye,
+  rightEyebrowBottom,
+  rightEyebrowTop,
+  upperLipBottom,
+  upperLipTop,
+}

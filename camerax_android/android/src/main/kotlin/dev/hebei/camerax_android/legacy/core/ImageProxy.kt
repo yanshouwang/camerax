@@ -1,25 +1,26 @@
 package dev.hebei.camerax_android.legacy.core
 
 import dev.hebei.camerax_android.legacy.*
+import dev.hebei.camerax_android.legacy.common.imageFormatArgs
 
 class ImageProxy(registrar: CameraXRegistrar) : PigeonApiImageProxy(registrar) {
-    override fun getFormat(pigeon_instance: androidx.camera.core.ImageProxy): ImageFormat {
+    override fun format(pigeon_instance: androidx.camera.core.ImageProxy): ImageFormat {
         return pigeon_instance.format.imageFormatArgs
     }
 
-    override fun getWidth(pigeon_instance: androidx.camera.core.ImageProxy): Long {
+    override fun width(pigeon_instance: androidx.camera.core.ImageProxy): Long {
         return pigeon_instance.width.toLong()
     }
 
-    override fun getHieght(pigeon_instance: androidx.camera.core.ImageProxy): Long {
+    override fun height(pigeon_instance: androidx.camera.core.ImageProxy): Long {
         return pigeon_instance.height.toLong()
     }
 
-    override fun getPlanes(pigeon_instance: androidx.camera.core.ImageProxy): List<androidx.camera.core.ImageProxy.PlaneProxy> {
+    override fun planes(pigeon_instance: androidx.camera.core.ImageProxy): List<androidx.camera.core.ImageProxy.PlaneProxy> {
         return pigeon_instance.planes.toList()
     }
 
-    override fun getImageInfo(pigeon_instance: androidx.camera.core.ImageProxy): androidx.camera.core.ImageInfo {
+    override fun imageInfo(pigeon_instance: androidx.camera.core.ImageProxy): androidx.camera.core.ImageInfo {
         return pigeon_instance.imageInfo
     }
 
@@ -32,7 +33,7 @@ class ImageProxy(registrar: CameraXRegistrar) : PigeonApiImageProxy(registrar) {
     }
 
     class PlaneProxy(registrar: CameraXRegistrar) : PigeonApiPlaneProxy(registrar) {
-        override fun getBuffer(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): ByteArray {
+        override fun buffer(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): ByteArray {
             val buffer = pigeon_instance.buffer
             val size = buffer.remaining()
             val value = ByteArray(size)
@@ -40,11 +41,11 @@ class ImageProxy(registrar: CameraXRegistrar) : PigeonApiImageProxy(registrar) {
             return value
         }
 
-        override fun getPixelStride(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): Long {
+        override fun pixelStride(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): Long {
             return pigeon_instance.pixelStride.toLong()
         }
 
-        override fun getRowStride(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): Long {
+        override fun rowStride(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): Long {
             return pigeon_instance.rowStride.toLong()
         }
     }

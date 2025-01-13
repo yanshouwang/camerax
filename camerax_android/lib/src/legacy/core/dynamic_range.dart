@@ -5,20 +5,20 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart'
 import 'bit_depth.dart';
 import 'encoding.dart';
 
-final class DynamicRange extends $base.DynamicRange {
-  final $native.DynamicRange obj;
-
-  DynamicRange.$native(this.obj) : super.impl();
-
-  @override
-  Future<$base.BitDepth> getBitDepth() async {
-    final obj = await this.obj.getBitDepth();
-    return obj.args;
+extension DynamicRangeArgs on $base.DynamicRange {
+  $native.DynamicRange get obj {
+    return $native.DynamicRange(
+      encoding: encoding.obj,
+      bitDepth: bitDepth.obj,
+    );
   }
+}
 
-  @override
-  Future<$base.Encoding> getEncoding() async {
-    final obj = await this.obj.getEncoding();
-    return obj.args;
+extension DynamicRangeObj on $native.DynamicRange {
+  $base.DynamicRange get args {
+    return $base.DynamicRange(
+      encoding: encoding.args,
+      bitDepth: bitDepth.args,
+    );
   }
 }

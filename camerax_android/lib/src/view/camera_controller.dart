@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/jni.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+    as $base;
 import 'package:jni/jni.dart' as $native;
 
-final class CameraController extends $interface.CameraController {
+final class CameraController extends $base.CameraController {
   final $native.LifecycleCameraController obj;
 
-  late final StreamController<$interface.ZoomState> _zoomStateChagnedController;
+  late final StreamController<$base.ZoomState> _zoomStateChagnedController;
   late final StreamController<bool> _torchStateChagnedController;
 
   late $native.Observer<$native.ZoomState> _zoomStateObserverObj;
@@ -34,7 +34,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Stream<$interface.ZoomState> get zoomStateChanged =>
+  Stream<$base.ZoomState> get zoomStateChanged =>
       _zoomStateChagnedController.stream;
   @override
   Stream<bool> get torchStateChanged => _torchStateChagnedController.stream;
@@ -45,14 +45,13 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.CameraSelector> getCameraSelector() async {
+  Future<$base.CameraSelector> getCameraSelector() async {
     final cameraSelectorObj = await obj.getCameraSelector();
     return CameraSelector.$native(cameraSelectorObj);
   }
 
   @override
-  Future<void> setCameraSelector(
-      $interface.CameraSelector cameraSelector) async {
+  Future<void> setCameraSelector($base.CameraSelector cameraSelector) async {
     if (cameraSelector is! CameraSelector) {
       throw TypeError();
     }
@@ -71,7 +70,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<bool> hasCamera($interface.CameraSelector cameraSelector) async {
+  Future<bool> hasCamera($base.CameraSelector cameraSelector) async {
     if (cameraSelector is! CameraSelector) {
       throw TypeError();
     }
@@ -108,10 +107,17 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.ZoomState?> getZoomState() async {
-    final liveZoomStateObj = await obj.getZoomState();
-    final zoomStateObj = liveZoomStateObj.getValue();
-    return zoomStateObj == null ? null : ZoomState.$native(zoomStateObj);
+  Future<$base.ZoomState?> getZoomState() async {
+    final dataObj = await this.obj.getZoomState();
+    final obj = dataObj.getValue();
+    return obj == null
+        ? null
+        : $base.ZoomState(
+            minZoomRatio: obj.getMinZoomRatio(),
+            maxZoomRatio: obj.getMaxZoomRatio(),
+            zoomRatio: obj.getZoomRatio(),
+            linearZoom: obj.getLinearZoom(),
+          );
   }
 
   @override
@@ -162,7 +168,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.ResolutionSelector?> getPreviewResolutionSelector() async {
+  Future<$base.ResolutionSelector?> getPreviewResolutionSelector() async {
     throw UnimplementedError();
     // final jniResolutionSelector =
     //     await obj.getPreviewResolutionSelectorOnMainThread();
@@ -174,7 +180,7 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setPreviewResolutionSelector(
-      $interface.ResolutionSelector? resolutionSelector) async {
+      $base.ResolutionSelector? resolutionSelector) async {
     throw UnimplementedError();
     // if (resolutionSelector == null) {
     //   final jniResolutionSelector =
@@ -190,34 +196,33 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.FlashMode> getImageCaptureFlashMode() async {
+  Future<$base.FlashMode> getImageCaptureFlashMode() async {
     throw UnimplementedError();
     // final jniFlashMode = await obj.getImageCaptureFlashModeOnMainThread();
     // return jniFlashMode.dartFlashMode;
   }
 
   @override
-  Future<void> setImageCaptureFlashMode($interface.FlashMode flashMode) async {
+  Future<void> setImageCaptureFlashMode($base.FlashMode flashMode) async {
     throw UnimplementedError();
     // await obj.setImageCaptureFlashModeOnMainThread(flashMode.jniValue);
   }
 
   @override
-  Future<$interface.CaptureMode> getImageCaptureMode() async {
+  Future<$base.CaptureMode> getImageCaptureMode() async {
     throw UnimplementedError();
     // final jniCaptureMode = await obj.getImageCaptureModeOnMainThread();
     // return jniCaptureMode.dartCaptureMode;
   }
 
   @override
-  Future<void> setImageCaptureMode($interface.CaptureMode captureMode) async {
+  Future<void> setImageCaptureMode($base.CaptureMode captureMode) async {
     throw UnimplementedError();
     // await obj.setImageCaptureModeOnMainThread(captureMode.jniValue);
   }
 
   @override
-  Future<$interface.ResolutionSelector?>
-      getImageCaptureResolutionSelector() async {
+  Future<$base.ResolutionSelector?> getImageCaptureResolutionSelector() async {
     throw UnimplementedError();
     // final jniResolutionSelector =
     //     await obj.getImageCaptureResolutionSelectorOnMainThread();
@@ -229,7 +234,7 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-      $interface.ResolutionSelector? resolutionSelector) async {
+      $base.ResolutionSelector? resolutionSelector) async {
     throw UnimplementedError();
     // if (resolutionSelector == null) {
     //   final jniResolutionSelector =
@@ -288,7 +293,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.DynamicRange> getVideoCaptureDynamicRange() async {
+  Future<$base.DynamicRange> getVideoCaptureDynamicRange() async {
     throw UnimplementedError();
     // final jniDynamicRange = await obj.getVideoCaptureDynamicRangeOnMainThread();
     // return jniDynamicRange.dartValue;
@@ -296,27 +301,26 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setVideoCaptureDynamicRange(
-      $interface.DynamicRange dynamicRange) async {
+      $base.DynamicRange dynamicRange) async {
     throw UnimplementedError();
     // await obj.setVideoCaptureDynamicRangeOnMainThread(dynamicRange.jniValue);
   }
 
   @override
-  Future<$interface.MirrorMode> getVideoCaptureMirrorMode() async {
+  Future<$base.MirrorMode> getVideoCaptureMirrorMode() async {
     throw UnimplementedError();
     // final jniMirrorMode = await obj.getVideoCaptureMirrorModeOnMainThread();
     // return jniMirrorMode.dartMirrorMode;
   }
 
   @override
-  Future<void> setVideoCaptureMirrorMode(
-      $interface.MirrorMode mirrorMode) async {
+  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) async {
     throw UnimplementedError();
     // await obj.setVideoCaptureMirrorModeOnMainThread(mirrorMode.jniValue);
   }
 
   @override
-  Future<$interface.QualitySelector> getVideoCaptureQualitySelector() async {
+  Future<$base.QualitySelector> getVideoCaptureQualitySelector() async {
     throw UnimplementedError();
     // final jniQualitySelector =
     //     await obj.getVideoCaptureQualitySelectorOnMainThread();
@@ -325,7 +329,7 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setVideoCaptureQualitySelector(
-      $interface.QualitySelector qualitySelector) async {
+      $base.QualitySelector qualitySelector) async {
     throw UnimplementedError();
     // if (qualitySelector is! MyQualitySelector) {
     //   throw TypeError();
@@ -342,10 +346,10 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.Recording> startRecording({
+  Future<$base.Recording> startRecording({
     required Uri uri,
     required bool enableAudio,
-    required $interface.VideoRecordEventCallback listener,
+    required $base.VideoRecordEventCallback listener,
   }) async {
     throw UnimplementedError();
     // await obj
@@ -388,7 +392,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.BackpressureStrategy>
+  Future<$base.BackpressureStrategy>
       getImageAnalysisBackpressureStrategy() async {
     throw UnimplementedError();
     // final jniBackpressureStrategy =
@@ -398,7 +402,7 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-      $interface.BackpressureStrategy strategy) async {
+      $base.BackpressureStrategy strategy) async {
     throw UnimplementedError();
     // await obj
     //     .setImageAnalysisBackpressureStrategyOnMainThread(strategy.jniValue);
@@ -419,7 +423,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.ImageFormat> getImageAnalysisOutputImageFormat() async {
+  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() async {
     throw UnimplementedError();
     // final jniOutputImageFormat =
     //     await obj.getImageAnalysisOutputImageFormatOnMainThread();
@@ -428,15 +432,14 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      $interface.ImageFormat outputImageFormat) async {
+      $base.ImageFormat outputImageFormat) async {
     throw UnimplementedError();
     // await obj.setImageAnalysisOutputImageFormatOnMainThread(
     //     outputImageFormat.jniValue);
   }
 
   @override
-  Future<$interface.ResolutionSelector?>
-      getImageAnalysisResolutionSelector() async {
+  Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() async {
     throw UnimplementedError();
     // final jniResolutionSelector =
     //     await obj.getImageAnalysisResolutionSelectorOnMainThread();
@@ -448,7 +451,7 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
-      $interface.ResolutionSelector? resolutionSelector) async {
+      $base.ResolutionSelector? resolutionSelector) async {
     throw UnimplementedError();
     // if (resolutionSelector == null) {
     //   final jniResolutionSelector =
@@ -465,7 +468,7 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<void> setImageAnalysisAnalyzer($interface.Analyzer analyzer) async {
+  Future<void> setImageAnalysisAnalyzer($base.Analyzer analyzer) async {
     throw UnimplementedError();
     // final jniExecutor =
     //     jni.Executors.newSingleThreadExecutor().castTo(jni.Executor.type);
@@ -543,19 +546,19 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<$interface.CameraControl> getCameraControl() {
+  Future<$base.CameraControl> getCameraControl() {
     // TODO: implement getCameraControl
     throw UnimplementedError();
   }
 
   @override
-  Future<$interface.CameraInfo> getCameraInfo() {
+  Future<$base.CameraInfo> getCameraInfo() {
     // TODO: implement getCameraInfo
     throw UnimplementedError();
   }
 
   @override
-  Future<$interface.Range<int>> getVideoCaptureTargetFrameRate() {
+  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() {
     // TODO: implement getVideoCaptureTargetFrameRate
     throw UnimplementedError();
   }
@@ -579,14 +582,14 @@ final class CameraController extends $interface.CameraController {
   }
 
   @override
-  Future<void> setEnabledUseCases(List<$interface.UseCase> useCases) {
+  Future<void> setEnabledUseCases(List<$base.UseCase> useCases) {
     // TODO: implement setEnabledUseCases
     throw UnimplementedError();
   }
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(
-      $interface.Range<int> targetFrameRate) {
+      $base.Range<int> targetFrameRate) {
     // TODO: implement setVideoCaptureTargetFrameRate
     throw UnimplementedError();
   }

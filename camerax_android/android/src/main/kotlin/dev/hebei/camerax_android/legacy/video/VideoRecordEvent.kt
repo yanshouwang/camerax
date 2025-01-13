@@ -1,6 +1,7 @@
 package dev.hebei.camerax_android.legacy.video
 
 import dev.hebei.camerax_android.legacy.*
+import dev.hebei.camerax_android.legacy.common.args
 
 class VideoRecordEvent(registrar: CameraXRegistrar) : PigeonApiVideoRecordEvent(registrar) {
     override fun getRecordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent): androidx.camera.video.RecordingStats {
@@ -9,9 +10,7 @@ class VideoRecordEvent(registrar: CameraXRegistrar) : PigeonApiVideoRecordEvent(
 
     class Finalize(registrar: CameraXRegistrar) : PigeonApiVideoRecordFinalizeEvent(registrar) {
         override fun getCause(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): List<Any?>? {
-            val cause = pigeon_instance.cause
-            return if (cause == null) null
-            else cause.args
+            return pigeon_instance.cause?.args
         }
 
         override fun getError(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): VideoRecordFinalizeEventError {

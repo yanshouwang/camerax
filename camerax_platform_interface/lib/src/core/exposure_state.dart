@@ -1,15 +1,9 @@
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
-import 'range.dart';
+import 'package:camerax_platform_interface/src/common.dart';
 
 /// An interface which contains the camera exposure related information.
 ///
 /// Applications can retrieve an instance via getExposureState.
-abstract base class ExposureState extends PlatformInterface {
-  static final _token = Object();
-
-  ExposureState.impl() : super(token: _token);
-
+final class ExposureState {
   /// Get the current exposure compensation index.
   ///
   /// The exposure value (EV) is the compensation index multiplied by the step
@@ -24,7 +18,7 @@ abstract base class ExposureState extends PlatformInterface {
   /// The exposure value resets to default when there is no UseCase associated
   /// with the camera. For example, unbind all use cases from the camera or when
   /// the lifecycle changed that all the use case stopping data from the camera.
-  Future<int> getExposureCompensationIndex();
+  final int exposureCompensationIndex;
 
   /// Get the maximum and minimum exposure compensation values for setExposureCompensationIndex
   ///
@@ -36,11 +30,36 @@ abstract base class ExposureState extends PlatformInterface {
   /// Min.exposure compensation * getExposureCompensationStep <= minimum supported EV
   /// Max.exposure compensation * getExposureCompensationStep >= maximum supported EV
   /// ```
-  Future<Range<int>> getExposureCompensationRange();
+  final Range<int> exposureCompensationRange;
 
   /// Get the smallest step by which the exposure compensation can be changed.
-  Future<double> getExposureCompensationStep();
+  final double exposureCompensationStep;
 
   /// Whether exposure compensation is supported for this camera.
-  Future<bool> isExposureCompensationSupported();
+  final bool isExposureCompensationSupported;
+
+  ExposureState({
+    required this.exposureCompensationIndex,
+    required this.exposureCompensationRange,
+    required this.exposureCompensationStep,
+    required this.isExposureCompensationSupported,
+  });
+
+  @override
+  int get hashCode => Object.hash(
+        exposureCompensationIndex,
+        exposureCompensationRange,
+        exposureCompensationStep,
+        isExposureCompensationSupported,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    return other is ExposureState &&
+        other.exposureCompensationIndex == exposureCompensationIndex &&
+        other.exposureCompensationRange == exposureCompensationRange &&
+        other.exposureCompensationStep == exposureCompensationStep &&
+        other.isExposureCompensationSupported ==
+            isExposureCompensationSupported;
+  }
 }

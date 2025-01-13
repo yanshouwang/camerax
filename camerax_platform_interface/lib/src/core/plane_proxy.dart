@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+final class PlaneProxy {
+  final Uint8List buffer;
+  final int pixelStride;
+  final int rowStride;
 
-abstract base class PlaneProxy extends PlatformInterface {
-  static final _token = Object();
-
-  PlaneProxy.impl() : super(token: _token);
-
-  Future<Uint8List> getBuffer();
-  Future<int> getPixelStride();
-  Future<int> getRowStride();
+  PlaneProxy({
+    required this.buffer,
+    required this.pixelStride,
+    required this.rowStride,
+  });
 }
