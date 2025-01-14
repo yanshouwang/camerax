@@ -1,5 +1,5 @@
 import 'recording_stats.dart';
-import 'video_output_results.dart';
+import 'output_results.dart';
 
 /// VideoRecordEvent is used to report video recording events and status.
 ///
@@ -71,7 +71,7 @@ final class VideoRecordFinalizeEvent extends VideoRecordEvent {
   /// Returns the actual Uri of the output destination if the OutputOptions is
   /// implemented by MediaStoreOutputOptions or FileOutputOptions, otherwise
   /// returns EMPTY.
-  final VideoOutputResults? outputResults;
+  final OutputResults? outputResults;
 
   /// Gets the error cause.
   ///

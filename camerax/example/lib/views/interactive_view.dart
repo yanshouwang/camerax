@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:camerax_android_example/util.dart';
+import 'package:camerax_example/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:video_player/video_player.dart';
 

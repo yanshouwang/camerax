@@ -510,15 +510,10 @@ abstract class MeteringPoint {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.core.SurfaceOrientedMeteringPointFactory',
+    fullClassName: 'androidx.camera.core.MeteringPointFactory',
   ),
 )
-abstract class SurfaceOrientedMeteringPointFactory {
-  SurfaceOrientedMeteringPointFactory.build({
-    required double width,
-    required double height,
-  });
-
+abstract class MeteringPointFactory {
   MeteringPoint createPoint(
     double x,
     double y, {
@@ -528,8 +523,18 @@ abstract class SurfaceOrientedMeteringPointFactory {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.SurfaceOrientedMeteringPointFactory',
+  ),
+)
+abstract class SurfaceOrientedMeteringPointFactory
+    extends MeteringPointFactory {
+  SurfaceOrientedMeteringPointFactory(double width, double height);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.hebei.camerax_android.legacy.core.MeteringPointArgs.Stub',
+        'dev.hebei.camerax_android.legacy.core.FocusMeteringAction.MeteringPointArgs.Stub',
   ),
 )
 abstract class MeteringPointArgs {
@@ -541,7 +546,8 @@ abstract class MeteringPointArgs {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.legacy.core.DurationArgs.Stub',
+    fullClassName:
+        'dev.hebei.camerax_android.legacy.core.FocusMeteringAction.DurationArgs.Stub',
   ),
 )
 abstract class DurationArgs {
@@ -752,8 +758,7 @@ abstract class OutputFileOptions {
   ),
 )
 abstract class OutputFileResults {
-  late final ImageFormat imageFormat;
-  late final String savedUri;
+  late final String? savedUri;
 }
 
 @ProxyApi(
@@ -1362,8 +1367,8 @@ abstract class VideoRecordResumeEvent extends VideoRecordEvent {
     fullClassName: 'androidx.camera.video.OutputResults',
   ),
 )
-abstract class VideoOutputResults {
-  late final String outputUri;
+abstract class OutputResults {
+  late final String? outputUri;
 }
 
 @ProxyApi(
@@ -1375,7 +1380,7 @@ abstract class VideoRecordFinalizeEvent extends VideoRecordEvent {
   late final RecordingStats recordingStats;
   late final List<Object?>? cause;
   late final VideoRecordFinalizeEventError error;
-  late final VideoOutputResults outputResults;
+  late final OutputResults outputResults;
 }
 
 @ProxyApi(
@@ -1466,9 +1471,10 @@ abstract class CameraController {
   @async
   void setImageCaptureFlashMode(FlashMode flashMode);
   @async
-  Uint8List takePictureToMemory(OnImageCapturedCallback callback);
-  Uint8List takePictureToFile(
-      OutputFileOptions outputFileOptions, OnImageSavedCallback callback);
+  void takePictureToMemory(OnImageCapturedCallback capturedCallback);
+  @async
+  void takePictureToFile(
+      OutputFileOptions outputFileOptions, OnImageSavedCallback savedCallback);
   @async
   ResolutionSelector? getImageAnalysisResolutionSelector();
   @async

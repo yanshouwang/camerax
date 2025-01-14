@@ -10,11 +10,8 @@ final class SurfaceOrientedMeteringPointFactory
 
   SurfaceOrientedMeteringPointFactory.$native(this.obj) : super.impl();
 
-  factory SurfaceOrientedMeteringPointFactory({
-    required double width,
-    required double height,
-  }) {
-    final obj = $native.SurfaceOrientedMeteringPointFactory.build(
+  factory SurfaceOrientedMeteringPointFactory(double width, double height) {
+    final obj = $native.SurfaceOrientedMeteringPointFactory(
       width: width,
       height: height,
     );

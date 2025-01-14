@@ -1,6 +1,6 @@
 name: camerax
 description: 'Work with audiovisual assets, control device cameras, process audio, and configure system audio interactions.'
-version: 0.0.1
+version: 1.0.0-dev.0
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
 topics:
@@ -19,10 +19,6 @@ dependencies:
     path: ../camerax_platform_interface
   camerax_android:
     path: ../camerax_android
-  camerax_ios:
-    path: ../camerax_ios
-  camerax_linux:
-    path: ../camerax_linux
   meta: ^1.15.0
 
 dev_dependencies:
@@ -35,5 +31,3 @@ flutter:
     platforms:
       android:
         default_package: camerax_android
-      ios:
-        default_package: camerax_ios

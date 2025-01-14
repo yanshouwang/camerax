@@ -2,21 +2,8 @@ package dev.hebei.camerax_android.legacy
 
 import android.app.Activity
 import android.content.Context
-import dev.hebei.camerax_android.legacy.common.CameraStateLiveData
-import dev.hebei.camerax_android.legacy.common.CameraStateObserver
+import dev.hebei.camerax_android.legacy.common.*
 import dev.hebei.camerax_android.legacy.common.IntRange
-import dev.hebei.camerax_android.legacy.common.MlKitAnalyzerResultConsumer
-import dev.hebei.camerax_android.legacy.common.PermissionManager
-import dev.hebei.camerax_android.legacy.common.Point
-import dev.hebei.camerax_android.legacy.common.PointF
-import dev.hebei.camerax_android.legacy.common.Rect
-import dev.hebei.camerax_android.legacy.common.Size
-import dev.hebei.camerax_android.legacy.common.TorchStateLiveData
-import dev.hebei.camerax_android.legacy.common.TorchStateObserver
-import dev.hebei.camerax_android.legacy.common.Uri
-import dev.hebei.camerax_android.legacy.common.VideoRecordEventConsumer
-import dev.hebei.camerax_android.legacy.common.ZoomStateLiveData
-import dev.hebei.camerax_android.legacy.common.ZoomStateObserver
 import dev.hebei.camerax_android.legacy.core.*
 import dev.hebei.camerax_android.legacy.core.resolutionselector.AspectRatioStrategy
 import dev.hebei.camerax_android.legacy.core.resolutionselector.ResolutionFilter
@@ -47,11 +34,11 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
     }
 
     override fun getPigeonApiAutoCloseable(): PigeonApiAutoCloseable {
-        return dev.hebei.camerax_android.legacy.common.AutoCloseable(this)
+        return AutoCloseable(this)
     }
 
-    override fun getPigeonApiUri(): PigeonApiUri {
-        return Uri(this)
+    override fun getPigeonApiLocation(): PigeonApiLocation {
+        return Location(this)
     }
 
     override fun getPigeonApiSize(): PigeonApiSize {
@@ -110,12 +97,24 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return ExposureState(this)
     }
 
+    override fun getPigeonApiMeteringPoint(): PigeonApiMeteringPoint {
+        return MeteringPoint(this)
+    }
+
+    override fun getPigeonApiMeteringPointFactory(): PigeonApiMeteringPointFactory {
+        return MeteringPointFactory(this)
+    }
+
+    override fun getPigeonApiSurfaceOrientedMeteringPointFactory(): PigeonApiSurfaceOrientedMeteringPointFactory {
+        return SurfaceOrientedMeteringPointFactory(this)
+    }
+
     override fun getPigeonApiMeteringPointArgs(): PigeonApiMeteringPointArgs {
-        return MeteringPointArgs(this)
+        return FocusMeteringAction.MeteringPointArgs(this)
     }
 
     override fun getPigeonApiDurationArgs(): PigeonApiDurationArgs {
-        return DurationArgs(this)
+        return FocusMeteringAction.DurationArgs(this)
     }
 
     override fun getPigeonApiFocusMeteringAction(): PigeonApiFocusMeteringAction {
@@ -164,6 +163,26 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
 
     override fun getPigeonApiImageProxy(): PigeonApiImageProxy {
         return ImageProxy(this)
+    }
+
+    override fun getPigeonApiMetadata(): PigeonApiMetadata {
+        return ImageCapture.Metadata(this)
+    }
+
+    override fun getPigeonApiOutputFileOptions(): PigeonApiOutputFileOptions {
+        return ImageCapture.OutputFileOptions(this)
+    }
+
+    override fun getPigeonApiOutputFileResults(): PigeonApiOutputFileResults {
+        return ImageCapture.OutputFileResults(this)
+    }
+
+    override fun getPigeonApiOnImageCapturedCallback(): PigeonApiOnImageCapturedCallback {
+        return ImageCapture.OnImageCapturedCallback(this)
+    }
+
+    override fun getPigeonApiOnImageSavedCallback(): PigeonApiOnImageSavedCallback {
+        return ImageCapture.OnImageSavedCallback(this)
     }
 
     override fun getPigeonApiAnalyzer(): PigeonApiAnalyzer {
@@ -290,6 +309,10 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return QualitySelector(this)
     }
 
+    override fun getPigeonApiFileOutputOptions(): PigeonApiFileOutputOptions {
+        return FileOutputOptions(this)
+    }
+
     override fun getPigeonApiAudioConfig(): PigeonApiAudioConfig {
         return AudioConfig(this)
     }
@@ -326,7 +349,7 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return VideoRecordEvent.Finalize(this)
     }
 
-    override fun getPigeonApiVideoOutputResults(): PigeonApiVideoOutputResults {
+    override fun getPigeonApiOutputResults(): PigeonApiOutputResults {
         return OutputResults(this)
     }
 

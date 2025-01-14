@@ -8,6 +8,7 @@ import dev.hebei.camerax_android.legacy.*
 import dev.hebei.camerax_android.legacy.core.*
 import dev.hebei.camerax_android.legacy.common.IntRange
 import dev.hebei.camerax_android.legacy.common.TorchStateLiveData
+import dev.hebei.camerax_android.legacy.common.VideoRecordEventConsumer
 import dev.hebei.camerax_android.legacy.common.ZoomStateLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -387,6 +388,39 @@ class CameraController(private val registrar: CameraXRegistrar) : PigeonApiCamer
         }
     }
 
+    override fun takePictureToMemory(
+        pigeon_instance: androidx.camera.view.CameraController,
+        capturedCallback: androidx.camera.core.ImageCapture.OnImageCapturedCallback,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val executor = ContextCompat.getMainExecutor(registrar.context)
+                pigeon_instance.takePicture(executor, capturedCallback)
+                callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun takePictureToFile(
+        pigeon_instance: androidx.camera.view.CameraController,
+        outputFileOptions: androidx.camera.core.ImageCapture.OutputFileOptions,
+        savedCallback: androidx.camera.core.ImageCapture.OnImageSavedCallback,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val executor = ContextCompat.getMainExecutor(registrar.context)
+                pigeon_instance.takePicture(outputFileOptions, executor, savedCallback)
+                callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
     override fun getImageAnalysisResolutionSelector(
         pigeon_instance: androidx.camera.view.CameraController,
         callback: (Result<androidx.camera.core.resolutionselector.ResolutionSelector?>) -> Unit
@@ -647,6 +681,24 @@ class CameraController(private val registrar: CameraXRegistrar) : PigeonApiCamer
             try {
                 val value = pigeon_instance.isRecording
                 callback(Result.success(value))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun startRecording(
+        pigeon_instance: androidx.camera.view.CameraController,
+        outputOptions: androidx.camera.video.FileOutputOptions,
+        audioConfig: androidx.camera.view.video.AudioConfig,
+        listener: VideoRecordEventConsumer.Impl,
+        callback: (Result<androidx.camera.video.Recording>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val executor = ContextCompat.getMainExecutor(registrar.context)
+                val recording = pigeon_instance.startRecording(outputOptions, audioConfig, executor, listener)
+                callback(Result.success(recording))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }

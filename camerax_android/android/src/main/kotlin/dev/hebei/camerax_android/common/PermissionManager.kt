@@ -28,8 +28,7 @@ object PermissionManager {
     suspend fun requestPermissions(permissions: List<Permission>): Boolean {
         return suspendCoroutine { continuation ->
             try {
-                val binding =
-                    this.binding ?: throw IllegalStateException("Activity binding is null.")
+                val binding = this.binding ?: throw IllegalStateException("Activity binding is null.")
                 val activity = binding.activity
                 val listener = object : PluginRegistry.RequestPermissionsResultListener {
                     override fun onRequestPermissionsResult(
@@ -80,4 +79,4 @@ val PermissionManager.Permission.values
     }
 
 val List<PermissionManager.Permission>.values: Array<String>
-    get() = flatMap { values.toList() }.toTypedArray()
+    get() = flatMap { it.values.toList() }.toTypedArray()

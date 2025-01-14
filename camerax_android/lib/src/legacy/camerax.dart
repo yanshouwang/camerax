@@ -205,10 +205,7 @@ final class CameraX extends $base.CameraX {
   @override
   $base.SurfaceOrientedMeteringPointFactory
       createSurfaceOrientedMeteringPointFactory(width, height) {
-    return SurfaceOrientedMeteringPointFactory(
-      width: width,
-      height: height,
-    );
+    return SurfaceOrientedMeteringPointFactory(width, height);
   }
 
   @override

@@ -69,7 +69,7 @@ export 'package:camerax_platform_interface/camerax_platform_interface.dart'
         AudioStats,
         Quality,
         RecordingStats,
-        VideoOutputResults,
+        OutputResults,
         VideoRecordEventConsumer,
         VideoRecordEvent,
         VideoRecordStatusEvent,

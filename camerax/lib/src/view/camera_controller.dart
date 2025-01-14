@@ -79,8 +79,8 @@ final class CameraController with ChangeNotifier {
   /// Only call this method after camera is initialized. e.g. after the ListenableFuture
   /// from getInitializationFuture is finished. Calling it prematurely throws
   /// IllegalStateException.
-  Future<bool> hasCamera($base.CameraSelector cameraSelector) =>
-      _obj.hasCamera(cameraSelector);
+  Future<bool> hasCamera(CameraSelector cameraSelector) =>
+      _obj.hasCamera(cameraSelector.obj);
 
   /// Gets the CameraSelector.
   ///

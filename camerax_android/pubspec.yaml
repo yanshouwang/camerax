@@ -1,6 +1,6 @@
 name: camerax_android
 description: 'Android implementation of the camerax plugin.'
-version: 0.0.1
+version: 1.0.0-dev.0
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
 topics:
@@ -18,9 +18,6 @@ dependencies:
   camerax_platform_interface:
     path: ../camerax_platform_interface
   jni: ^0.13.0
-  logging: ^1.2.0
-  hybrid_logging: ^1.0.0
-  # hybrid_os: ^0.0.1
 
 dev_dependencies:
   flutter_test:

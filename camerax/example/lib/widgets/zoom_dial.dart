@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:camerax_android_example/util.dart';
+import 'package:camerax_example/util.dart';
 import 'package:flutter/cupertino.dart';
 
 class ZoomDial extends StatelessWidget {
