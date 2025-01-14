@@ -1,7 +1,7 @@
 package dev.hebei.camerax_android
 
-import dev.hebei.camerax_android.legacy.CameraXRegistrar
 import dev.hebei.camerax_android.common.PermissionManager
+import dev.hebei.camerax_android.legacy.CameraXRegistrar
 import dev.hebei.camerax_android.legacy.common.ViewFactory
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
