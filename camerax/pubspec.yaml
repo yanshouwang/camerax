@@ -23,6 +23,7 @@ dependencies:
     path: ../camerax_ios
   camerax_linux:
     path: ../camerax_linux
+  meta: ^1.15.0
 
 dev_dependencies:
   flutter_test:

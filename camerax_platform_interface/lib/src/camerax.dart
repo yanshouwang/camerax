@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'common.dart';
@@ -44,6 +46,18 @@ abstract base class CameraX extends PlatformInterface {
     LensFacing? lensFacing,
   });
 
+  OutputFileOptions createOutputFileOptions({
+    required File file,
+    Metadata? metadata,
+  });
+
+  FileOutputOptions createFileOutputOptions({
+    required File file,
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    Location? location,
+  });
+
   CameraController createCameraController();
 
   FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
@@ -68,7 +82,17 @@ abstract base class CameraX extends PlatformInterface {
 
   Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
 
-  PreviewView createPreviewView();
+  SurfaceOrientedMeteringPointFactory createSurfaceOrientedMeteringPointFactory(
+    double width,
+    double height,
+  );
+
+  FocusMeteringAction createFocusMeteringAction(
+    (MeteringPoint, List<MeteringMode>) first, {
+    List<(MeteringPoint, List<MeteringMode>)>? others,
+    bool? disableAutoCancel,
+    Duration? autoCancelDuration,
+  });
 
   ZoomSuggestionOptions createZoomSuggestionOptions({
     required ZoomCallback zoomCallback,
@@ -103,4 +127,6 @@ abstract base class CameraX extends PlatformInterface {
     required CoordinateSystem targetCoordinateSystem,
     required MlKitAnalyzerResultConsumer consumer,
   });
+
+  PreviewView createPreviewView();
 }

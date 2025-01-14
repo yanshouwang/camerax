@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camerax_android/src/legacy/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
@@ -171,6 +173,56 @@ final class CameraX extends $base.CameraX {
     return ZoomSuggestionOptions(
       zoomCallback: zoomCallback,
       maxSupportedZoomRatio: maxSupportedZoomRatio,
+    );
+  }
+
+  @override
+  $base.FileOutputOptions createFileOutputOptions({
+    required File file,
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    $base.Location? location,
+  }) {
+    return FileOutputOptions(
+      file: file,
+      durationLimit: durationLimit,
+      fileSizeLimitBytes: fileSizeLimitBytes,
+      location: location,
+    );
+  }
+
+  @override
+  $base.OutputFileOptions createOutputFileOptions({
+    required File file,
+    $base.Metadata? metadata,
+  }) {
+    return OutputFileOptions(
+      file: file,
+      metadata: metadata,
+    );
+  }
+
+  @override
+  $base.SurfaceOrientedMeteringPointFactory
+      createSurfaceOrientedMeteringPointFactory(width, height) {
+    return SurfaceOrientedMeteringPointFactory(
+      width: width,
+      height: height,
+    );
+  }
+
+  @override
+  $base.FocusMeteringAction createFocusMeteringAction(
+    ($base.MeteringPoint, List<$base.MeteringMode>) first, {
+    List<($base.MeteringPoint, List<$base.MeteringMode>)>? others,
+    bool? disableAutoCancel,
+    Duration? autoCancelDuration,
+  }) {
+    return FocusMeteringAction(
+      first,
+      others: others,
+      disableAutoCancel: disableAutoCancel,
+      autoCancelDuration: autoCancelDuration,
     );
   }
 }

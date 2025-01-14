@@ -3,14 +3,14 @@ import 'audio_state.dart';
 final class AudioStats {
   final double audioAmplitude;
   final AudioState audioState;
-  final Object? error;
+  final Object? errorCause;
   final bool hasAudio;
   final bool hasError;
 
   AudioStats({
     required this.audioAmplitude,
     required this.audioState,
-    required this.error,
+    required this.errorCause,
     required this.hasAudio,
     required this.hasError,
   });
@@ -19,7 +19,7 @@ final class AudioStats {
   int get hashCode => Object.hash(
         audioAmplitude,
         audioState,
-        error,
+        errorCause,
         hasAudio,
         hasError,
       );
@@ -29,7 +29,7 @@ final class AudioStats {
     return other is AudioStats &&
         other.audioAmplitude == audioAmplitude &&
         other.audioState == audioState &&
-        other.error == error &&
+        other.errorCause == errorCause &&
         other.hasAudio == hasAudio &&
         other.hasError == hasError;
   }

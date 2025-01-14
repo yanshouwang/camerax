@@ -7,6 +7,7 @@ import 'dynamic_range.dart';
 import 'exposure_state.dart';
 import 'focus_metering_action.dart';
 import 'lens_facing.dart';
+import 'torch_state.dart';
 import 'zoom_state.dart';
 
 /// An interface for retrieving camera information.
@@ -18,7 +19,7 @@ abstract base class CameraInfo extends PlatformInterface {
   CameraInfo.impl() : super(token: _token);
 
   Stream<CameraState> get cameraStateChanged;
-  Stream<bool> get torchStateChanged;
+  Stream<TorchState> get torchStateChanged;
   Stream<ZoomState> get zoomStateChanged;
 
   /// Returns a CameraSelector unique to this camera.
@@ -44,7 +45,7 @@ abstract base class CameraInfo extends PlatformInterface {
   ///
   /// If the camera doesn't have a flash unit (see hasFlashUnit), then the torch
   /// state will be OFF.
-  Future<bool?> getTorchState();
+  Future<TorchState?> getTorchState();
 
   /// Returns a LiveData of ZoomState.
   ///

@@ -1,4 +1,5 @@
 import 'recording_stats.dart';
+import 'video_output_results.dart';
 
 /// VideoRecordEvent is used to report video recording events and status.
 ///
@@ -70,7 +71,7 @@ final class VideoRecordFinalizeEvent extends VideoRecordEvent {
   /// Returns the actual Uri of the output destination if the OutputOptions is
   /// implemented by MediaStoreOutputOptions or FileOutputOptions, otherwise
   /// returns EMPTY.
-  final Uri? outputUri;
+  final VideoOutputResults? outputResults;
 
   /// Gets the error cause.
   ///
@@ -79,11 +80,11 @@ final class VideoRecordFinalizeEvent extends VideoRecordEvent {
   /// Note that not all error types include an error cause. For some error types,
   /// the file may still be generated successfully with no error cause. For example,
   /// ERROR_FILE_SIZE_LIMIT_REACHED, ERROR_DURATION_LIMIT_REACHED and ERROR_SOURCE_INACTIVE.
-  final Object? error;
+  final Object? cause;
 
   VideoRecordFinalizeEvent({
     required super.recordingStats,
-    required this.outputUri,
-    required this.error,
+    required this.outputResults,
+    required this.cause,
   });
 }

@@ -5,6 +5,7 @@ import 'package:camerax_platform_interface/src/video.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'use_case.dart';
+import 'video.dart';
 
 typedef VideoRecordEventConsumer = void Function(VideoRecordEvent event);
 
@@ -41,7 +42,7 @@ abstract base class CameraController extends PlatformInterface {
   CameraController.impl() : super(token: _token);
 
   Stream<ZoomState> get zoomStateChanged;
-  Stream<bool> get torchStateChanged;
+  Stream<TorchState> get torchStateChanged;
 
   Future<void> initialize();
 
@@ -103,7 +104,7 @@ abstract base class CameraController extends PlatformInterface {
   ///
   /// The torch can be turned on and off via enableTorch which will trigger the
   /// change event to the returned LiveData.
-  Future<bool?> getTorchState();
+  Future<TorchState?> getTorchState();
 
   /// Enable the torch or disable the torch.
   ///
@@ -253,6 +254,17 @@ abstract base class CameraController extends PlatformInterface {
   Future<void> setImageCaptureResolutionSelector(
       ResolutionSelector? resolutionSelector);
 
+  /// Captures a new still image for in memory access.
+  ///
+  /// The listener is responsible for calling close on the returned image.
+  Future<void> takePictureToMemory({
+    CaptureStartedCallback? onCaptureStarted,
+    CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    CaptureSuccessCallback? onCaptureSuccess,
+    CaptureErrorCallback? onError,
+  });
+
   /// Captures a new still image and saves to a file along with application
   /// specified metadata.
   ///
@@ -266,7 +278,14 @@ abstract base class CameraController extends PlatformInterface {
   /// take a picture with the maximum available resolution, make sure that the
   /// PreviewView's aspect ratio matches the max JPEG resolution supported by the
   /// camera.
-  Future<Uri> takePicture(Uri uri);
+  Future<void> takePictureToFile(
+    OutputFileOptions outputFileOptions, {
+    CaptureStartedCallback? onCaptureStarted,
+    CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    ImageSavedCallback? onImageSaved,
+    CaptureErrorCallback? onError,
+  });
 
   /// Returns the mode with which images are acquired.
   ///
@@ -442,9 +461,9 @@ abstract base class CameraController extends PlatformInterface {
   ///
   /// Recording with audio requires the RECORD_AUDIO permission; without it,
   /// starting a recording will fail with a SecurityException.
-  Future<Recording> startRecording({
-    required Uri uri,
-    required bool enableAudio,
+  Future<Recording> startRecording(
+    FileOutputOptions outputOptions, {
+    required AudioConfig audioConfig,
     required VideoRecordEventConsumer listener,
   });
 }

@@ -34,8 +34,8 @@ enum CameraState {
 }
 
 enum TorchState {
-  on,
   off,
+  on,
 }
 
 enum MeteringMode {
@@ -312,13 +312,14 @@ abstract class Closeable extends AutoCloseable {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'android.net.Uri',
+    fullClassName: 'android.location.Location',
   ),
 )
-abstract class Uri {
-  Uri.parse(String uriString);
+abstract class Location {
+  Location();
 
-  String? getPath();
+  late final double latitude;
+  late final double longitude;
 }
 
 @ProxyApi(
@@ -503,7 +504,27 @@ abstract class ExposureState {
     fullClassName: 'androidx.camera.core.MeteringPoint',
   ),
 )
-abstract class MeteringPoint {}
+abstract class MeteringPoint {
+  late final double size;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.SurfaceOrientedMeteringPointFactory',
+  ),
+)
+abstract class SurfaceOrientedMeteringPointFactory {
+  SurfaceOrientedMeteringPointFactory.build({
+    required double width,
+    required double height,
+  });
+
+  MeteringPoint createPoint(
+    double x,
+    double y, {
+    double? size,
+  });
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -533,12 +554,18 @@ abstract class DurationArgs {
   ),
 )
 abstract class FocusMeteringAction {
-  FocusMeteringAction(
+  FocusMeteringAction.build(
     MeteringPointArgs first, {
     List<MeteringPointArgs>? others,
     bool? disableAutoCancel,
     DurationArgs? autoCancelDuration,
   });
+
+  int getAutoCancelDurationInMillis();
+  List<MeteringPoint> getMeteringPointsAe();
+  List<MeteringPoint> getMeteringPointsAf();
+  List<MeteringPoint> getMeteringPointsAwb();
+  bool isAutoCancelEnabled();
 }
 
 @ProxyApi(
@@ -692,6 +719,71 @@ abstract class ImageProxy extends AutoCloseable {
   late final ImageInfo imageInfo;
   Rect getCropRect();
   void setCropRect(Rect? rect);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.ImageCapture.Metadata',
+  ),
+)
+abstract class Metadata {
+  Metadata();
+
+  late final bool isReversedHorizontal;
+  late final bool isReversedVertical;
+  late final Location? location;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.ImageCapture.OutputFileOptions',
+  ),
+)
+abstract class OutputFileOptions {
+  OutputFileOptions.build(
+    String file, {
+    Metadata? metadata,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.ImageCapture.OutputFileResults',
+  ),
+)
+abstract class OutputFileResults {
+  late final ImageFormat imageFormat;
+  late final String savedUri;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.ImageCapture.OnImageCapturedCallback',
+  ),
+)
+abstract class OnImageCapturedCallback {
+  OnImageCapturedCallback();
+
+  late final void Function()? onCaptureStarted;
+  late final void Function(int progress)? onCaptureProcessProgressed;
+  late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
+  late final void Function(ImageProxy image)? onCaptureSuccess;
+  late final void Function(List<Object?> exception)? onError;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.ImageCapture.OnImageSavedCallback',
+  ),
+)
+abstract class OnImageSavedCallback {
+  OnImageSavedCallback();
+
+  late final void Function()? onCaptureStarted;
+  late final void Function(int progress)? onCaptureProcessProgressed;
+  late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
+  late final void Function(OutputFileResults outputFileResults)? onImageSaved;
+  late final void Function(List<Object?> exception)? onError;
 }
 
 @ProxyApi(
@@ -1171,6 +1263,21 @@ abstract class QualitySelector {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.video.FileOutputOptions',
+  ),
+)
+abstract class FileOutputOptions {
+  FileOutputOptions.build({
+    int? durationLimitMillis,
+    int? fileSizeLimitBytes,
+    Location? location,
+  });
+
+  late final String file;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.view.video.AudioConfig',
   ),
 )
@@ -1256,7 +1363,7 @@ abstract class VideoRecordResumeEvent extends VideoRecordEvent {
   ),
 )
 abstract class VideoOutputResults {
-  late final Uri outputUri;
+  late final String outputUri;
 }
 
 @ProxyApi(
@@ -1358,8 +1465,10 @@ abstract class CameraController {
   FlashMode getImageCaptureFlashMode();
   @async
   void setImageCaptureFlashMode(FlashMode flashMode);
-  // @async
-  // Uint8List takePicture();
+  @async
+  Uint8List takePictureToMemory(OnImageCapturedCallback callback);
+  Uint8List takePictureToFile(
+      OutputFileOptions outputFileOptions, OnImageSavedCallback callback);
   @async
   ResolutionSelector? getImageAnalysisResolutionSelector();
   @async
@@ -1400,12 +1509,12 @@ abstract class CameraController {
   void setVideoCaptureTargetFrameRate(IntRange targetFrameRate);
   @async
   bool isRecording();
-  // @async
-  // Recording startRecording({
-  //   required String uri,
-  //   required AudioConfig audioConfig,
-  //   required VideoRecordEventConsumer listener,
-  // });
+  @async
+  Recording startRecording(
+    FileOutputOptions outputOptions,
+    AudioConfig audioConfig,
+    VideoRecordEventConsumer listener,
+  );
 }
 
 @ProxyApi(

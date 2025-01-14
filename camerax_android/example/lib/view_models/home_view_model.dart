@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:camerax_android_example/models.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -19,7 +20,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   LensFacing _lensFacing;
   CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
-  bool? _torchState;
+  TorchState? _torchState;
   ZoomState? _zoomState;
   ExposureState? _exposureState;
   FlashMode? _flashMode;
@@ -45,7 +46,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   CameraMode get mode => _mode;
   LensFacing get lensFacing => _lensFacing;
-  bool? get torchState => _torchState;
+  TorchState? get torchState => _torchState;
   ZoomState? get zoomState => _zoomState;
   ExposureState? get exposureState => _exposureState;
   FlashMode? get flashMode => _flashMode;
@@ -112,11 +113,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> toggleTorchState() async {
-    final enableTorch = torchState;
-    if (enableTorch == null) {
+    final torchState = this.torchState;
+    if (torchState == null) {
       throw ArgumentError.notNull();
     }
-    await controller.enableTorch(!enableTorch);
+    final enableTorch = torchState == TorchState.off;
+    await controller.enableTorch(enableTorch);
   }
 
   Future<void> setZoomRatio(double zoomRatio) async {
@@ -145,9 +147,20 @@ class HomeViewModel extends ViewModel with TypeLogger {
     }
     final filePath = path.join(directory.path,
         'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG');
-    final uri = Uri.file(filePath);
-    _savedUri = await controller.takePicture(uri);
-    notifyListeners();
+    final file = File(filePath);
+    final options = OutputFileOptions(
+      file: file,
+    );
+    await controller.takePictureToFile(
+      options,
+      onImageSaved: (outputFileResults) {
+        _savedUri = outputFileResults.savedUri;
+        notifyListeners();
+      },
+      onError: (exception) {
+        logger.info('takePicture failed, $exception');
+      },
+    );
   }
 
   Recording? _recording;
@@ -159,20 +172,22 @@ class HomeViewModel extends ViewModel with TypeLogger {
     }
     final filePath = path.join(directory.path,
         'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
-    final uri = Uri.file(filePath);
+    final file = File(filePath);
+    final options = FileOutputOptions(file: file);
     _recording = await controller.startRecording(
-      uri: uri,
-      enableAudio: true,
+      options,
+      audioConfig: AudioConfig.audioDisabled,
       listener: (event) {
         logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
           return;
         }
-        final error = event.error;
+        final error = event.cause;
+        final results = event.outputResults;
         if (error == null) {
-          _savedUri = event.outputUri;
+          _savedUri = results?.outputUri;
         } else {
-          logger.info('Record Video failed $error.');
+          logger.info('startRecording failed, $error');
         }
         _recording = null;
         notifyListeners();

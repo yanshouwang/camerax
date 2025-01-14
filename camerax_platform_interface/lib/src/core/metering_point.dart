@@ -1,3 +1,5 @@
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 /// A MeteringPoint is used to specify a region which can then be converted to
 /// sensor coordinate system for focus and metering purpose.
 ///
@@ -28,7 +30,9 @@
 ///
 /// The metering rectangle defined by the MeteringPoint has the same shape as the
 /// sensor array.
-final class MeteringPoint {
+abstract base class MeteringPoint extends PlatformInterface {
+  static final _token = Object();
+
   /// Size of the MeteringPoint width and height (ranging from 0 to 1). It is the
   /// percentage of the sensor width/height (or crop region width/height if crop
   /// region is set).
@@ -43,5 +47,7 @@ final class MeteringPoint {
   /// ```
   final double size;
 
-  MeteringPoint(this.size);
+  MeteringPoint.impl({
+    required this.size,
+  }) : super(token: _token);
 }

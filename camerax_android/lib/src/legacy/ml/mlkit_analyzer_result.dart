@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
+import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
-import 'package:flutter/services.dart';
 
 import 'barcode.dart';
 import 'detector.dart';
@@ -20,14 +20,8 @@ final class MlKitAnalyzerResult extends $base.MlKitAnalyzerResult {
     if (detector is! Detector) {
       throw TypeError();
     }
-    final args = await obj.getThrowable(detector.obj);
-    return args == null
-        ? null
-        : PlatformException(
-            code: args[0] as String,
-            message: args[1] as String?,
-            details: args[2],
-          );
+    final obj = await this.obj.getThrowable(detector.obj);
+    return obj?.args;
   }
 
   @override

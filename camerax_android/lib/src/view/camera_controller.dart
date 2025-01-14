@@ -4,16 +4,16 @@ import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/jni.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $base;
-import 'package:jni/jni.dart' as $native;
+// import 'package:jni/jni.dart' as $native;
 
 final class CameraController extends $base.CameraController {
   final $native.LifecycleCameraController obj;
 
   late final StreamController<$base.ZoomState> _zoomStateChagnedController;
-  late final StreamController<bool> _torchStateChagnedController;
+  late final StreamController<$base.TorchState> _torchStateChagnedController;
 
-  late $native.Observer<$native.ZoomState> _zoomStateObserverObj;
-  late $native.Observer<$native.JInteger> _torchStateObserverObj;
+  // late $native.Observer<$native.ZoomState> _zoomStateObserverObj;
+  // late $native.Observer<$native.JInteger> _torchStateObserverObj;
 
   // jni.Recording? _jniRecording;
 
@@ -37,7 +37,8 @@ final class CameraController extends $base.CameraController {
   Stream<$base.ZoomState> get zoomStateChanged =>
       _zoomStateChagnedController.stream;
   @override
-  Stream<bool> get torchStateChanged => _torchStateChagnedController.stream;
+  Stream<$base.TorchState> get torchStateChanged =>
+      _torchStateChagnedController.stream;
 
   @override
   Future<void> initialize() async {
@@ -131,7 +132,7 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<bool?> getTorchState() async {
+  Future<$base.TorchState?> getTorchState() async {
     throw UnimplementedError();
     // final jniTorchStateData = await obj.getTorchStateOnMainThread();
     // final jniTorchState = jniTorchStateData.getValue();
@@ -251,7 +252,27 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<Uri> takePicture(Uri uri) async {
+  Future<void> takePictureToMemory({
+    $base.CaptureStartedCallback? onCaptureStarted,
+    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $base.CaptureSuccessCallback? onCaptureSuccess,
+    $base.CaptureErrorCallback? onError,
+  }) {
+    // TODO: implement takePictureToMemory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> takePictureToFile(
+    $base.OutputFileOptions outputFileOptions, {
+    $base.CaptureStartedCallback? onCaptureStarted,
+    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $base.ImageSavedCallback? onImageSaved,
+    $base.CaptureErrorCallback? onError,
+  }) {
+    // TODO: implement takePictureToFile
     throw UnimplementedError();
     // final completer = Completer<Uri>();
     // final jniPath = uri.toFilePath().toJString();
@@ -346,9 +367,9 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.Recording> startRecording({
-    required Uri uri,
-    required bool enableAudio,
+  Future<$base.Recording> startRecording(
+    $base.FileOutputOptions outputOptions, {
+    required $base.AudioConfig audioConfig,
     required $base.VideoRecordEventConsumer listener,
   }) async {
     throw UnimplementedError();

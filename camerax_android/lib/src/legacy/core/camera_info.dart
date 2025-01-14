@@ -10,13 +10,14 @@ import 'camera_state.dart';
 import 'dynamic_range.dart';
 import 'exposure_state.dart';
 import 'focus_metering_action.dart';
+import 'torch_state.dart';
 import 'zoom_state.dart';
 
 final class CameraInfo extends $base.CameraInfo {
   final $native.CameraInfo obj;
 
   late final StreamController<$base.CameraState> _cameraStateChangedController;
-  late final StreamController<bool> _torchStateChangedController;
+  late final StreamController<$base.TorchState> _torchStateChangedController;
   late final StreamController<$base.ZoomState> _zoomStateChangedController;
 
   Future<$native.CameraStateObserver>? _cameraStateObserver;
@@ -42,7 +43,8 @@ final class CameraInfo extends $base.CameraInfo {
   Stream<$base.CameraState> get cameraStateChanged =>
       _cameraStateChangedController.stream;
   @override
-  Stream<bool> get torchStateChanged => _torchStateChangedController.stream;
+  Stream<$base.TorchState> get torchStateChanged =>
+      _torchStateChangedController.stream;
   @override
   Stream<$base.ZoomState> get zoomStateChanged =>
       _zoomStateChangedController.stream;
@@ -94,10 +96,10 @@ final class CameraInfo extends $base.CameraInfo {
   }
 
   @override
-  Future<bool?> getTorchState() async {
-    final dataObj = await obj.getTorchState();
-    final value = await dataObj.getValue();
-    return value == $native.TorchState.on;
+  Future<$base.TorchState?> getTorchState() async {
+    final dataObj = await this.obj.getTorchState();
+    final obj = await dataObj.getValue();
+    return obj?.args;
   }
 
   @override
@@ -192,8 +194,8 @@ final class CameraInfo extends $base.CameraInfo {
       _torchStateObserver = completer.future;
       final dataObj = await obj.getTorchState();
       final observerObj = $native.TorchStateObserver(
-        onChanged: (obj, value) {
-          _torchStateChangedController.add(value == $native.TorchState.on);
+        onChanged: (obj, valueObj) {
+          _torchStateChangedController.add(valueObj.args);
         },
       );
       await dataObj.observe(observerObj);

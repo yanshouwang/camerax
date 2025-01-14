@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
@@ -14,7 +16,7 @@ final class CameraController extends $base.CameraController {
   final $native.LifecycleCameraController obj;
   final $native.PreviewView viewObj;
 
-  late final StreamController<bool> _torchStateChangedController;
+  late final StreamController<$base.TorchState> _torchStateChangedController;
   late final StreamController<$base.ZoomState> _zoomStateChangedController;
 
   Future<$native.TorchStateObserver>? _torchStateObserver;
@@ -32,7 +34,8 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Stream<bool> get torchStateChanged => _torchStateChangedController.stream;
+  Stream<$base.TorchState> get torchStateChanged =>
+      _torchStateChangedController.stream;
   @override
   Stream<$base.ZoomState> get zoomStateChanged =>
       _zoomStateChangedController.stream;
@@ -100,10 +103,10 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<bool?> getTorchState() async {
-    final dataObj = await obj.getTorchState();
-    final value = await dataObj.getValue();
-    return value == $native.TorchState.on;
+  Future<$base.TorchState?> getTorchState() async {
+    final dataObj = await this.obj.getTorchState();
+    final obj = await dataObj.getValue();
+    return obj?.args;
   }
 
   @override
@@ -221,10 +224,76 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<Uri> takePicture(Uri uri) async {
-    throw UnimplementedError();
-    // final savedUri = await obj.takePicture('$uri');
-    // return Uri.parse(savedUri);
+  Future<void> takePictureToMemory({
+    $base.CaptureStartedCallback? onCaptureStarted,
+    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $base.CaptureSuccessCallback? onCaptureSuccess,
+    $base.CaptureErrorCallback? onError,
+  }) async {
+    final callback = $native.OnImageCapturedCallback(
+      onCaptureStarted:
+          onCaptureStarted == null ? null : (obj) => onCaptureStarted(),
+      onCaptureProcessProgressed: onCaptureProcessProgressed == null
+          ? null
+          : (obj, progress) => onCaptureProcessProgressed(progress),
+      onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
+          ? null
+          : (obj, bitmapObj) async {
+              final bitmap = await _decodeImage(bitmapObj);
+              onPostviewBitmapAvailable(bitmap);
+            },
+      onCaptureSuccess: onCaptureSuccess == null
+          ? null
+          : (obj, imageObj) => onCaptureSuccess(imageObj.args),
+      onError: onError == null
+          ? null
+          : (obj, exceptionObj) => onError(exceptionObj.args),
+    );
+    await obj.takePictureToMemory(callback);
+  }
+
+  @override
+  Future<void> takePictureToFile(
+    $base.OutputFileOptions outputFileOptions, {
+    $base.CaptureStartedCallback? onCaptureStarted,
+    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $base.ImageSavedCallback? onImageSaved,
+    $base.CaptureErrorCallback? onError,
+  }) async {
+    if (outputFileOptions is! OutputFileOptions) {
+      throw TypeError();
+    }
+    final callback = $native.OnImageSavedCallback(
+      onCaptureStarted:
+          onCaptureStarted == null ? null : (obj) => onCaptureStarted(),
+      onCaptureProcessProgressed: onCaptureProcessProgressed == null
+          ? null
+          : (obj, progress) => onCaptureProcessProgressed(progress),
+      onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
+          ? null
+          : (obj, bitmapObj) async {
+              final bitmap = await _decodeImage(bitmapObj);
+              onPostviewBitmapAvailable(bitmap);
+            },
+      onImageSaved: onImageSaved == null
+          ? null
+          : (obj, resultsObj) => onImageSaved(resultsObj.args),
+      onError: onError == null
+          ? null
+          : (obj, exceptionObj) => onError(exceptionObj.args),
+    );
+    await obj.takePictureToFile(outputFileOptions.obj, callback);
+  }
+
+  Future<ui.Image> _decodeImage(Uint8List value) async {
+    final buffer = await ui.ImmutableBuffer.fromUint8List(value);
+    final descriptor = await ui.ImageDescriptor.encoded(buffer);
+    final codec = await descriptor.instantiateCodec();
+    final frame = await codec.getNextFrame();
+    final image = frame.image;
+    return image;
   }
 
   @override
@@ -347,40 +416,22 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.Recording> startRecording({
-    required Uri uri,
-    required bool enableAudio,
+  Future<$base.Recording> startRecording(
+    $base.FileOutputOptions outputOptions, {
+    required $base.AudioConfig audioConfig,
     required $base.VideoRecordEventConsumer listener,
   }) async {
-    throw UnimplementedError();
-    // final audioConfigObj = $native.AudioConfig.create(
-    //   enableAudio: enableAudio,
-    // );
-    // final listenerObj = $native.VideoRecordEventConsumer(
-    //   accept: (obj, eventObj) {
-    //     if (eventObj is $native.VideoRecordStatusEvent) {
-    //       final event = VideoRecordStatusEvent.$native(eventObj);
-    //       listener(event);
-    //     } else if (eventObj is $native.VideoRecordStartEvent) {
-    //       final event = VideoRecordStartEvent.$native(eventObj);
-    //       listener(event);
-    //     } else if (eventObj is $native.VideoRecordPauseEvent) {
-    //       final event = VideoRecordPauseEvent.$native(eventObj);
-    //       listener(event);
-    //     } else if (eventObj is $native.VideoRecordResumeEvent) {
-    //       final event = VideoRecordResumeEvent.$native(eventObj);
-    //       listener(event);
-    //     } else if (eventObj is $native.VideoRecordFinalizeEvent) {
-    //       final event = VideoRecordFinalizeEvent.$native(eventObj);
-    //       listener(event);
-    //     } else {
-    //       throw TypeError();
-    //     }
-    //   },
-    // );
-    // final obj =
-    //     await this.obj.startRecording('$uri', audioConfigObj, listenerObj);
-    // return Recording.$native(obj);
+    if (outputOptions is! FileOutputOptions) {
+      throw TypeError();
+    }
+    final obj = await this.obj.startRecording(
+          outputOptions.obj,
+          audioConfig.obj,
+          $native.VideoRecordEventConsumer(
+            accept: (obj, eventObj) => listener(eventObj.args),
+          ),
+        );
+    return obj.args;
   }
 
   void _onListenTorchStateChanged() async {
@@ -393,8 +444,8 @@ final class CameraController extends $base.CameraController {
       _torchStateObserver = completer.future;
       final dataObj = await obj.getTorchState();
       final observerObj = $native.TorchStateObserver(
-        onChanged: (obj, value) {
-          _torchStateChangedController.add(value == $native.TorchState.on);
+        onChanged: (obj, valueObj) {
+          _torchStateChangedController.add(valueObj.args);
         },
       );
       await dataObj.observe(observerObj);

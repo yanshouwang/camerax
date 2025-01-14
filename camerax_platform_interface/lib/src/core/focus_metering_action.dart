@@ -1,5 +1,7 @@
+import 'package:camerax_platform_interface/src/camerax.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import 'metering_mode.dart';
 import 'metering_point.dart';
 
 /// A configuration used to trigger a focus and/or metering action.
@@ -37,6 +39,19 @@ abstract base class FocusMeteringAction extends PlatformInterface {
   static final _token = Object();
 
   FocusMeteringAction.impl() : super(token: _token);
+
+  factory FocusMeteringAction(
+    (MeteringPoint, List<MeteringMode>) first, {
+    List<(MeteringPoint, List<MeteringMode>)>? others,
+    bool? disableAutoCancel,
+    Duration? autoCancelDuration,
+  }) =>
+      CameraX.instance.createFocusMeteringAction(
+        first,
+        others: others,
+        disableAutoCancel: disableAutoCancel,
+        autoCancelDuration: autoCancelDuration,
+      );
 
   /// Returns auto-cancel duration. Returns 0 if auto-cancel is disabled.
   Future<Duration> getAutoCancelDuration();

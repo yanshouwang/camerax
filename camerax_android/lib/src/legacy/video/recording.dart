@@ -32,3 +32,9 @@ final class Recording extends $base.Recording {
     await obj.stop();
   }
 }
+
+extension RecordingObj on $native.Recording {
+  Recording get args {
+    return Recording.$native(this);
+  }
+}
