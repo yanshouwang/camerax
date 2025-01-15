@@ -1,9 +1,9 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $interface;
 
-import 'camerax.dart';
+import 'legacy.dart';
 
-final class CameraXLinuxPlugin {
+abstract final class CameraXiOSPlugin {
   static void registerWith() {
     $interface.CameraX.instance = CameraX();
   }

@@ -1,1 +1,2 @@
-export 'src/camerax_plugin.dart';
+export 'src/camerax_ios_plugin.dart';
+export 'src/legacy.dart';
