@@ -1,3 +1,7 @@
-## 0.0.1
+## 1.0.0-dev.0
 
-* TODO: Describe initial release.
+* Add common library.
+* Add core library.
+* Add ml library.
+* Add video library.
+* Add view library.

@@ -1,3 +1,7 @@
-## 0.0.1
+## 1.0.0-dev.0
 
-* TODO: Describe initial release.
+* Add common APIs.
+* Add core APIs.
+* Add ml APIs.
+* Add video APIs.
+* Add view APIs.
