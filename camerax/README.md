@@ -1,6 +1,6 @@
 # camerax
 
-A new Flutter plugin project.
+Work with audiovisual assets, control device cameras, process audio, and configure system audio interactions.
 
 ## Getting Started
 
