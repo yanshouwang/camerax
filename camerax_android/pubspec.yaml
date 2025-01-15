@@ -15,8 +15,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  camerax_platform_interface:
-    path: ../camerax_platform_interface
+  camerax_platform_interface: ^1.0.0-dev.0
   # jni: ^0.13.0
 
 dev_dependencies:
