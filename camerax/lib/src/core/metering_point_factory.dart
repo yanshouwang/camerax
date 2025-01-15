@@ -8,9 +8,9 @@ abstract base class MeteringPointFactory {
   @internal
   $interface.MeteringPointFactory get obj;
 
-  Future<MeteringPoint> createPoint({
-    required double x,
-    required double y,
+  Future<MeteringPoint> createPoint(
+    double x,
+    double y, {
     double? size,
   }) async {
     final obj = await this.obj.createPoint(
