@@ -1,41 +1,41 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension AudioStateArgs on $base.AudioState {
+extension AudioStateArgs on $interface.AudioState {
   $native.AudioState get obj {
     switch (this) {
-      case $base.AudioState.active:
+      case $interface.AudioState.active:
         return $native.AudioState.active;
-      case $base.AudioState.disabled:
+      case $interface.AudioState.disabled:
         return $native.AudioState.disabled;
-      case $base.AudioState.sourceSilenced:
+      case $interface.AudioState.sourceSilenced:
         return $native.AudioState.sourceSilenced;
-      case $base.AudioState.encoderError:
+      case $interface.AudioState.encoderError:
         return $native.AudioState.encoderError;
-      case $base.AudioState.sourceError:
+      case $interface.AudioState.sourceError:
         return $native.AudioState.sourceError;
-      case $base.AudioState.muted:
+      case $interface.AudioState.muted:
         return $native.AudioState.muted;
     }
   }
 }
 
 extension AudioStateObj on $native.AudioState {
-  $base.AudioState get args {
+  $interface.AudioState get args {
     switch (this) {
       case $native.AudioState.active:
-        return $base.AudioState.active;
+        return $interface.AudioState.active;
       case $native.AudioState.disabled:
-        return $base.AudioState.disabled;
+        return $interface.AudioState.disabled;
       case $native.AudioState.sourceSilenced:
-        return $base.AudioState.sourceSilenced;
+        return $interface.AudioState.sourceSilenced;
       case $native.AudioState.encoderError:
-        return $base.AudioState.encoderError;
+        return $interface.AudioState.encoderError;
       case $native.AudioState.sourceError:
-        return $base.AudioState.sourceError;
+        return $interface.AudioState.sourceError;
       case $native.AudioState.muted:
-        return $base.AudioState.muted;
+        return $interface.AudioState.muted;
     }
   }
 }

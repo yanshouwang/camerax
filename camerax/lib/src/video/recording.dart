@@ -1,14 +1,14 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 final class Recording {
-  final $base.Recording _obj;
+  final $interface.Recording _obj;
 
   Recording._native(this._obj);
 
   @internal
-  $base.Recording get obj => _obj;
+  $interface.Recording get obj => _obj;
 
   /// Mutes or un-mutes the current recording.
   ///
@@ -59,7 +59,7 @@ final class Recording {
   Future<void> close() => _obj.close();
 }
 
-extension RecordingObj on $base.Recording {
+extension RecordingObj on $interface.Recording {
   @internal
   Recording get args {
     return Recording._native(this);

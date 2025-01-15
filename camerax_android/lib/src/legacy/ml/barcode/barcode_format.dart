@@ -1,77 +1,77 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension BarcodeFormatArgs on $base.BarcodeFormat {
+extension BarcodeFormatArgs on $interface.BarcodeFormat {
   $native.BarcodeFormat get obj {
     switch (this) {
-      case $base.BarcodeFormat.unknown:
+      case $interface.BarcodeFormat.unknown:
         return $native.BarcodeFormat.unknown;
-      case $base.BarcodeFormat.all:
+      case $interface.BarcodeFormat.all:
         return $native.BarcodeFormat.all;
-      case $base.BarcodeFormat.code128:
+      case $interface.BarcodeFormat.code128:
         return $native.BarcodeFormat.code128;
-      case $base.BarcodeFormat.code39:
+      case $interface.BarcodeFormat.code39:
         return $native.BarcodeFormat.code39;
-      case $base.BarcodeFormat.code93:
+      case $interface.BarcodeFormat.code93:
         return $native.BarcodeFormat.code93;
-      case $base.BarcodeFormat.codabar:
+      case $interface.BarcodeFormat.codabar:
         return $native.BarcodeFormat.codabar;
-      case $base.BarcodeFormat.dataMatrix:
+      case $interface.BarcodeFormat.dataMatrix:
         return $native.BarcodeFormat.dataMatrix;
-      case $base.BarcodeFormat.ean13:
+      case $interface.BarcodeFormat.ean13:
         return $native.BarcodeFormat.ean13;
-      case $base.BarcodeFormat.ean8:
+      case $interface.BarcodeFormat.ean8:
         return $native.BarcodeFormat.ean8;
-      case $base.BarcodeFormat.itf:
+      case $interface.BarcodeFormat.itf:
         return $native.BarcodeFormat.itf;
-      case $base.BarcodeFormat.qrCode:
+      case $interface.BarcodeFormat.qrCode:
         return $native.BarcodeFormat.qrCode;
-      case $base.BarcodeFormat.upcA:
+      case $interface.BarcodeFormat.upcA:
         return $native.BarcodeFormat.upcA;
-      case $base.BarcodeFormat.upcE:
+      case $interface.BarcodeFormat.upcE:
         return $native.BarcodeFormat.upcE;
-      case $base.BarcodeFormat.pdf417:
+      case $interface.BarcodeFormat.pdf417:
         return $native.BarcodeFormat.pdf417;
-      case $base.BarcodeFormat.aztec:
+      case $interface.BarcodeFormat.aztec:
         return $native.BarcodeFormat.aztec;
     }
   }
 }
 
 extension BarcodeFormatObj on $native.BarcodeFormat {
-  $base.BarcodeFormat get args {
+  $interface.BarcodeFormat get args {
     switch (this) {
       case $native.BarcodeFormat.unknown:
-        return $base.BarcodeFormat.unknown;
+        return $interface.BarcodeFormat.unknown;
       case $native.BarcodeFormat.all:
-        return $base.BarcodeFormat.all;
+        return $interface.BarcodeFormat.all;
       case $native.BarcodeFormat.code128:
-        return $base.BarcodeFormat.code128;
+        return $interface.BarcodeFormat.code128;
       case $native.BarcodeFormat.code39:
-        return $base.BarcodeFormat.code39;
+        return $interface.BarcodeFormat.code39;
       case $native.BarcodeFormat.code93:
-        return $base.BarcodeFormat.code93;
+        return $interface.BarcodeFormat.code93;
       case $native.BarcodeFormat.codabar:
-        return $base.BarcodeFormat.codabar;
+        return $interface.BarcodeFormat.codabar;
       case $native.BarcodeFormat.dataMatrix:
-        return $base.BarcodeFormat.dataMatrix;
+        return $interface.BarcodeFormat.dataMatrix;
       case $native.BarcodeFormat.ean13:
-        return $base.BarcodeFormat.ean13;
+        return $interface.BarcodeFormat.ean13;
       case $native.BarcodeFormat.ean8:
-        return $base.BarcodeFormat.ean8;
+        return $interface.BarcodeFormat.ean8;
       case $native.BarcodeFormat.itf:
-        return $base.BarcodeFormat.itf;
+        return $interface.BarcodeFormat.itf;
       case $native.BarcodeFormat.qrCode:
-        return $base.BarcodeFormat.qrCode;
+        return $interface.BarcodeFormat.qrCode;
       case $native.BarcodeFormat.upcA:
-        return $base.BarcodeFormat.upcA;
+        return $interface.BarcodeFormat.upcA;
       case $native.BarcodeFormat.upcE:
-        return $base.BarcodeFormat.upcE;
+        return $interface.BarcodeFormat.upcE;
       case $native.BarcodeFormat.pdf417:
-        return $base.BarcodeFormat.pdf417;
+        return $interface.BarcodeFormat.pdf417;
       case $native.BarcodeFormat.aztec:
-        return $base.BarcodeFormat.aztec;
+        return $interface.BarcodeFormat.aztec;
     }
   }
 }

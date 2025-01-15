@@ -1,25 +1,25 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension AspectRatioFallbackRuleArgs on $base.AspectRatioFallbackRule {
+extension AspectRatioFallbackRuleArgs on $interface.AspectRatioFallbackRule {
   $native.AspectRatioFallbackRule get obj {
     switch (this) {
-      case $base.AspectRatioFallbackRule.none:
+      case $interface.AspectRatioFallbackRule.none:
         return $native.AspectRatioFallbackRule.none;
-      case $base.AspectRatioFallbackRule.auto:
+      case $interface.AspectRatioFallbackRule.auto:
         return $native.AspectRatioFallbackRule.auto;
     }
   }
 }
 
 extension AspectRatioFallbackRuleObj on $native.AspectRatioFallbackRule {
-  $base.AspectRatioFallbackRule get args {
+  $interface.AspectRatioFallbackRule get args {
     switch (this) {
       case $native.AspectRatioFallbackRule.none:
-        return $base.AspectRatioFallbackRule.none;
+        return $interface.AspectRatioFallbackRule.none;
       case $native.AspectRatioFallbackRule.auto:
-        return $base.AspectRatioFallbackRule.auto;
+        return $interface.AspectRatioFallbackRule.auto;
     }
   }
 }

@@ -1,22 +1,22 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 final class FallbackStrategy {
-  final $base.FallbackStrategy _obj;
+  final $interface.FallbackStrategy _obj;
 
-  FallbackStrategy.higherQualityOrLowerThan($base.Quality quality)
-      : _obj = $base.FallbackStrategy.higherQualityOrLowerThan(quality);
+  FallbackStrategy.higherQualityOrLowerThan($interface.Quality quality)
+      : _obj = $interface.FallbackStrategy.higherQualityOrLowerThan(quality);
 
-  FallbackStrategy.higherQualityThan($base.Quality quality)
-      : _obj = $base.FallbackStrategy.higherQualityThan(quality);
+  FallbackStrategy.higherQualityThan($interface.Quality quality)
+      : _obj = $interface.FallbackStrategy.higherQualityThan(quality);
 
-  FallbackStrategy.lowerQualityOrHigherThan($base.Quality quality)
-      : _obj = $base.FallbackStrategy.lowerQualityOrHigherThan(quality);
+  FallbackStrategy.lowerQualityOrHigherThan($interface.Quality quality)
+      : _obj = $interface.FallbackStrategy.lowerQualityOrHigherThan(quality);
 
-  FallbackStrategy.lowerQualityThan($base.Quality quality)
-      : _obj = $base.FallbackStrategy.lowerQualityThan(quality);
+  FallbackStrategy.lowerQualityThan($interface.Quality quality)
+      : _obj = $interface.FallbackStrategy.lowerQualityThan(quality);
 
   @internal
-  $base.FallbackStrategy get obj => _obj;
+  $interface.FallbackStrategy get obj => _obj;
 }

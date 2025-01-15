@@ -1,12 +1,12 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'image_format.dart';
 import 'image_info.dart';
 import 'plane_proxy.dart';
 
-final class ImageProxy extends $base.ImageProxy {
+final class ImageProxy extends $interface.ImageProxy {
   final $native.ImageProxy obj;
 
   ImageProxy.$native(
@@ -25,7 +25,7 @@ final class ImageProxy extends $base.ImageProxy {
 }
 
 extension ImageProxyObj on $native.ImageProxy {
-  $base.ImageProxy get args {
+  $interface.ImageProxy get args {
     return ImageProxy.$native(
       this,
       format: format.args,

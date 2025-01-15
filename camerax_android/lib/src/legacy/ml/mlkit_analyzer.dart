@@ -1,20 +1,20 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'detector.dart';
 import 'mlkit_analyzer_result.dart';
 
-final class MlKitAnalyzer extends $base.MlKitAnalyzer {
+final class MlKitAnalyzer extends $interface.MlKitAnalyzer {
   final $native.MlKitAnalyzer obj;
 
   MlKitAnalyzer.$native(this.obj) : super.impl();
 
   factory MlKitAnalyzer({
-    required List<$base.Detector> detectors,
-    required $base.CoordinateSystem targetCoordinateSystem,
-    required $base.MlKitAnalyzerResultConsumer consumer,
+    required List<$interface.Detector> detectors,
+    required $interface.CoordinateSystem targetCoordinateSystem,
+    required $interface.MlKitAnalyzerResultConsumer consumer,
   }) {
     final obj = $native.MlKitAnalyzer(
       detectors:
@@ -30,7 +30,7 @@ final class MlKitAnalyzer extends $base.MlKitAnalyzer {
   }
 
   @override
-  void analyze($base.ImageProxy image) async {
+  void analyze($interface.ImageProxy image) async {
     if (image is! ImageProxy) {
       throw TypeError();
     }

@@ -1,16 +1,16 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 final class ZoomSuggestionOptions {
-  final $base.ZoomSuggestionOptions _obj;
+  final $interface.ZoomSuggestionOptions _obj;
 
   ZoomSuggestionOptions({
-    required $base.ZoomCallback zoomCallback,
+    required $interface.ZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,
-  }) : _obj = $base.ZoomSuggestionOptions(
+  }) : _obj = $interface.ZoomSuggestionOptions(
           zoomCallback: zoomCallback,
           maxSupportedZoomRatio: maxSupportedZoomRatio,
         );
 
-  $base.ZoomSuggestionOptions get obj => _obj;
+  $interface.ZoomSuggestionOptions get obj => _obj;
 }

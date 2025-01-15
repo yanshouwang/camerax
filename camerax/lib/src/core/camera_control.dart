@@ -1,5 +1,5 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 import 'focus_metering_action.dart';
@@ -19,12 +19,12 @@ import 'focus_metering_action.dart';
 /// state, the returned ListenableFuture will fail immediately with
 /// CameraControl.OperationCanceledException.
 final class CameraControl {
-  final $base.CameraControl _obj;
+  final $interface.CameraControl _obj;
 
   CameraControl._native(this._obj);
 
   @internal
-  $base.CameraControl get obj => _obj;
+  $interface.CameraControl get obj => _obj;
 
   /// Enable the torch or disable the torch.
   ///
@@ -101,7 +101,7 @@ final class CameraControl {
       _obj.setExposureCompensationIndex(value);
 }
 
-extension CameraControlObj on $base.CameraControl {
+extension CameraControlObj on $interface.CameraControl {
   @internal
   CameraControl get args {
     return CameraControl._native(this);

@@ -1,18 +1,18 @@
 import 'dart:io';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 final class OutputFileOptions {
-  final $base.OutputFileOptions _obj;
+  final $interface.OutputFileOptions _obj;
 
   OutputFileOptions({
     required File file,
-    $base.Metadata? metadata,
-  }) : _obj = $base.OutputFileOptions(
+    $interface.Metadata? metadata,
+  }) : _obj = $interface.OutputFileOptions(
           file: file,
           metadata: metadata,
         );
 
-  $base.OutputFileOptions get obj => _obj;
+  $interface.OutputFileOptions get obj => _obj;
 }

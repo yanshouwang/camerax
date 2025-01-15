@@ -8,16 +8,17 @@ import 'package:camerax_android/src/legacy/core.dart';
 import 'package:camerax_android/src/legacy/ml.dart';
 import 'package:camerax_android/src/legacy/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'use_case.dart';
 
-final class CameraController extends $base.CameraController {
+final class CameraController extends $interface.CameraController {
   final $native.LifecycleCameraController obj;
   final $native.PreviewView viewObj;
 
-  late final StreamController<$base.TorchState> _torchStateChangedController;
-  late final StreamController<$base.ZoomState> _zoomStateChangedController;
+  late final StreamController<$interface.TorchState>
+      _torchStateChangedController;
+  late final StreamController<$interface.ZoomState> _zoomStateChangedController;
 
   Future<$native.TorchStateObserver>? _torchStateObserver;
   Future<$native.ZoomStateObserver>? _zoomStateObserver;
@@ -34,10 +35,10 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Stream<$base.TorchState> get torchStateChanged =>
+  Stream<$interface.TorchState> get torchStateChanged =>
       _torchStateChangedController.stream;
   @override
-  Stream<$base.ZoomState> get zoomStateChanged =>
+  Stream<$interface.ZoomState> get zoomStateChanged =>
       _zoomStateChangedController.stream;
 
   factory CameraController() {
@@ -52,7 +53,7 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<bool> hasCamera($base.CameraSelector cameraSelector) async {
+  Future<bool> hasCamera($interface.CameraSelector cameraSelector) async {
     if (cameraSelector is! CameraSelector) {
       throw TypeError();
     }
@@ -61,13 +62,14 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.CameraSelector> getCameraSelector() async {
+  Future<$interface.CameraSelector> getCameraSelector() async {
     final cameraSelectorObj = await obj.getCameraSelector();
     return CameraSelector.$native(cameraSelectorObj);
   }
 
   @override
-  Future<void> setCameraSelector($base.CameraSelector cameraSelector) async {
+  Future<void> setCameraSelector(
+      $interface.CameraSelector cameraSelector) async {
     if (cameraSelector is! CameraSelector) {
       throw TypeError();
     }
@@ -75,7 +77,7 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.CameraInfo?> getCameraInfo() async {
+  Future<$interface.CameraInfo?> getCameraInfo() async {
     final obj = await this.obj.getCameraInfo();
     if (obj == null) {
       return null;
@@ -84,7 +86,7 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.CameraControl?> getCameraControl() async {
+  Future<$interface.CameraControl?> getCameraControl() async {
     final obj = await this.obj.getCameraControl();
     if (obj == null) {
       return null;
@@ -103,7 +105,7 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.TorchState?> getTorchState() async {
+  Future<$interface.TorchState?> getTorchState() async {
     final dataObj = await this.obj.getTorchState();
     final obj = await dataObj.getValue();
     return obj?.args;
@@ -115,7 +117,7 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.ZoomState?> getZoomState() async {
+  Future<$interface.ZoomState?> getZoomState() async {
     final dataObj = await obj.getZoomState();
     final valueObj = await dataObj.getValue();
     return valueObj?.args;
@@ -172,64 +174,65 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<void> setEnabledUseCases(List<$base.UseCase> useCases) async {
+  Future<void> setEnabledUseCases(List<$interface.UseCase> useCases) async {
     final useCaseObjs = useCases.map((useCase) => useCase.obj).toList();
     await obj.setEnabledUseCases(useCaseObjs);
   }
 
   @override
-  Future<$base.ResolutionSelector?> getPreviewResolutionSelector() async {
+  Future<$interface.ResolutionSelector?> getPreviewResolutionSelector() async {
     final obj = await this.obj.getPreviewResolutionSelector();
     return obj?.args;
   }
 
   @override
   Future<void> setPreviewResolutionSelector(
-      $base.ResolutionSelector? resolutionSelector) async {
+      $interface.ResolutionSelector? resolutionSelector) async {
     await obj.setPreviewResolutionSelector(resolutionSelector?.obj);
   }
 
   @override
-  Future<$base.ResolutionSelector?> getImageCaptureResolutionSelector() async {
+  Future<$interface.ResolutionSelector?>
+      getImageCaptureResolutionSelector() async {
     final obj = await this.obj.getImageCaptureResolutionSelector();
     return obj?.args;
   }
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-      $base.ResolutionSelector? resolutionSelector) async {
+      $interface.ResolutionSelector? resolutionSelector) async {
     await obj.setImageCaptureResolutionSelector(resolutionSelector?.obj);
   }
 
   @override
-  Future<$base.CaptureMode> getImageCaptureMode() async {
+  Future<$interface.CaptureMode> getImageCaptureMode() async {
     final obj = await this.obj.getImageCaptureMode();
     return obj.args;
   }
 
   @override
-  Future<void> setImageCaptureMode($base.CaptureMode captureMode) async {
+  Future<void> setImageCaptureMode($interface.CaptureMode captureMode) async {
     await obj.setImageCaptureMode(captureMode.obj);
   }
 
   @override
-  Future<$base.FlashMode> getImageCaptureFlashMode() async {
+  Future<$interface.FlashMode> getImageCaptureFlashMode() async {
     final obj = await this.obj.getImageCaptureFlashMode();
     return obj.args;
   }
 
   @override
-  Future<void> setImageCaptureFlashMode($base.FlashMode flashMode) async {
+  Future<void> setImageCaptureFlashMode($interface.FlashMode flashMode) async {
     await obj.setImageCaptureFlashMode(flashMode.obj);
   }
 
   @override
   Future<void> takePictureToMemory({
-    $base.CaptureStartedCallback? onCaptureStarted,
-    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    $base.CaptureSuccessCallback? onCaptureSuccess,
-    $base.CaptureErrorCallback? onError,
+    $interface.CaptureStartedCallback? onCaptureStarted,
+    $interface.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $interface.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $interface.CaptureSuccessCallback? onCaptureSuccess,
+    $interface.CaptureErrorCallback? onError,
   }) async {
     final callback = $native.OnImageCapturedCallback(
       onCaptureStarted:
@@ -255,12 +258,12 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<void> takePictureToFile(
-    $base.OutputFileOptions outputFileOptions, {
-    $base.CaptureStartedCallback? onCaptureStarted,
-    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    $base.ImageSavedCallback? onImageSaved,
-    $base.CaptureErrorCallback? onError,
+    $interface.OutputFileOptions outputFileOptions, {
+    $interface.CaptureStartedCallback? onCaptureStarted,
+    $interface.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $interface.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $interface.ImageSavedCallback? onImageSaved,
+    $interface.CaptureErrorCallback? onError,
   }) async {
     if (outputFileOptions is! OutputFileOptions) {
       throw TypeError();
@@ -297,19 +300,20 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() async {
+  Future<$interface.ResolutionSelector?>
+      getImageAnalysisResolutionSelector() async {
     final obj = await this.obj.getImageAnalysisResolutionSelector();
     return obj?.args;
   }
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
-      $base.ResolutionSelector? resolutionSelector) async {
+      $interface.ResolutionSelector? resolutionSelector) async {
     await obj.setImageAnalysisResolutionSelector(resolutionSelector?.obj);
   }
 
   @override
-  Future<$base.BackpressureStrategy>
+  Future<$interface.BackpressureStrategy>
       getImageAnalysisBackpressureStrategy() async {
     final obj = await this.obj.getImageAnalysisBackpressureStrategy();
     return obj.args;
@@ -317,7 +321,7 @@ final class CameraController extends $base.CameraController {
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-      $base.BackpressureStrategy strategy) async {
+      $interface.BackpressureStrategy strategy) async {
     await obj.setImageAnalysisBackpressureStrategy(strategy.obj);
   }
 
@@ -333,19 +337,19 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() async {
+  Future<$interface.ImageFormat> getImageAnalysisOutputImageFormat() async {
     final obj = await this.obj.getImageAnalysisOutputImageFormat();
     return obj.args;
   }
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-      $base.ImageFormat format) async {
+      $interface.ImageFormat format) async {
     await obj.setImageAnalysisOutputImageFormat(format.obj);
   }
 
   @override
-  Future<void> setImageAnalysisAnalyzer($base.Analyzer analyzer) async {
+  Future<void> setImageAnalysisAnalyzer($interface.Analyzer analyzer) async {
     final obj = analyzer is MlKitAnalyzer
         ? analyzer.obj
         : $native.RawAnalyzer(
@@ -360,37 +364,38 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.DynamicRange> getVideoCaptureDynamicRange() async {
+  Future<$interface.DynamicRange> getVideoCaptureDynamicRange() async {
     final obj = await this.obj.getVideoCaptureDynamicRange();
     return obj.args;
   }
 
   @override
   Future<void> setVideoCaptureDynamicRange(
-      $base.DynamicRange dynamicRange) async {
+      $interface.DynamicRange dynamicRange) async {
     await obj.setVideoCaptureDynamicRange(dynamicRange.obj);
   }
 
   @override
-  Future<$base.MirrorMode> getVideoCaptureMirrorMode() async {
+  Future<$interface.MirrorMode> getVideoCaptureMirrorMode() async {
     final obj = await this.obj.getVideoCaptureMirrorMode();
     return obj.args;
   }
 
   @override
-  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) async {
+  Future<void> setVideoCaptureMirrorMode(
+      $interface.MirrorMode mirrorMode) async {
     await obj.setVideoCaptureMirrorMode(mirrorMode.obj);
   }
 
   @override
-  Future<$base.QualitySelector> getVideoCaptureQualitySelector() async {
+  Future<$interface.QualitySelector> getVideoCaptureQualitySelector() async {
     final obj = await this.obj.getVideoCaptureQualitySelector();
     return QualitySelector.$native(obj);
   }
 
   @override
   Future<void> setVideoCaptureQualitySelector(
-      $base.QualitySelector qualitySelector) async {
+      $interface.QualitySelector qualitySelector) async {
     if (qualitySelector is! QualitySelector) {
       throw TypeError();
     }
@@ -398,14 +403,14 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() async {
+  Future<$interface.Range<int>> getVideoCaptureTargetFrameRate() async {
     final obj = await this.obj.getVideoCaptureTargetFrameRate();
     return obj.args;
   }
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(
-      $base.Range<int> targetFrameRate) async {
+      $interface.Range<int> targetFrameRate) async {
     await obj.setVideoCaptureTargetFrameRate(targetFrameRate.obj);
   }
 
@@ -416,10 +421,10 @@ final class CameraController extends $base.CameraController {
   }
 
   @override
-  Future<$base.Recording> startRecording(
-    $base.FileOutputOptions outputOptions, {
-    required $base.AudioConfig audioConfig,
-    required $base.VideoRecordEventConsumer listener,
+  Future<$interface.Recording> startRecording(
+    $interface.FileOutputOptions outputOptions, {
+    required $interface.AudioConfig audioConfig,
+    required $interface.VideoRecordEventConsumer listener,
   }) async {
     if (outputOptions is! FileOutputOptions) {
       throw TypeError();

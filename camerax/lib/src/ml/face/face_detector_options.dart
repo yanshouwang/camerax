@@ -1,18 +1,18 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 final class FaceDetectorOptions {
-  final $base.FaceDetectorOptions _obj;
+  final $interface.FaceDetectorOptions _obj;
 
   FaceDetectorOptions({
     bool? enableTracking,
-    $base.FaceClassificationMode? classificationMode,
-    $base.FaceContourMode? contourMode,
-    $base.FaceLandmarkMode? landmarkMode,
+    $interface.FaceClassificationMode? classificationMode,
+    $interface.FaceContourMode? contourMode,
+    $interface.FaceLandmarkMode? landmarkMode,
     double? minFaceSize,
-    $base.FacePerformanceMode? performanceMode,
-  }) : _obj = $base.FaceDetectorOptions(
+    $interface.FacePerformanceMode? performanceMode,
+  }) : _obj = $interface.FaceDetectorOptions(
           enableTracking: enableTracking,
           classificationMode: classificationMode,
           contourMode: contourMode,
@@ -22,5 +22,5 @@ final class FaceDetectorOptions {
         );
 
   @internal
-  $base.FaceDetectorOptions get obj => _obj;
+  $interface.FaceDetectorOptions get obj => _obj;
 }

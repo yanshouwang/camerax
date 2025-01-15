@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'camera_selector.dart';
 import 'camera_state.dart';
@@ -13,12 +13,14 @@ import 'focus_metering_action.dart';
 import 'torch_state.dart';
 import 'zoom_state.dart';
 
-final class CameraInfo extends $base.CameraInfo {
+final class CameraInfo extends $interface.CameraInfo {
   final $native.CameraInfo obj;
 
-  late final StreamController<$base.CameraState> _cameraStateChangedController;
-  late final StreamController<$base.TorchState> _torchStateChangedController;
-  late final StreamController<$base.ZoomState> _zoomStateChangedController;
+  late final StreamController<$interface.CameraState>
+      _cameraStateChangedController;
+  late final StreamController<$interface.TorchState>
+      _torchStateChangedController;
+  late final StreamController<$interface.ZoomState> _zoomStateChangedController;
 
   Future<$native.CameraStateObserver>? _cameraStateObserver;
   Future<$native.TorchStateObserver>? _torchStateObserver;
@@ -40,23 +42,23 @@ final class CameraInfo extends $base.CameraInfo {
   }
 
   @override
-  Stream<$base.CameraState> get cameraStateChanged =>
+  Stream<$interface.CameraState> get cameraStateChanged =>
       _cameraStateChangedController.stream;
   @override
-  Stream<$base.TorchState> get torchStateChanged =>
+  Stream<$interface.TorchState> get torchStateChanged =>
       _torchStateChangedController.stream;
   @override
-  Stream<$base.ZoomState> get zoomStateChanged =>
+  Stream<$interface.ZoomState> get zoomStateChanged =>
       _zoomStateChangedController.stream;
 
   @override
-  Future<$base.CameraSelector> getCameraSelector() async {
+  Future<$interface.CameraSelector> getCameraSelector() async {
     final obj = await this.obj.getCameraSelector();
     return CameraSelector.$native(obj);
   }
 
   @override
-  Future<$base.CameraState?> getCameraState() async {
+  Future<$interface.CameraState?> getCameraState() async {
     final dataObj = await this.obj.getCameraState();
     final obj = await dataObj.getValue();
     if (obj == null) {
@@ -66,7 +68,7 @@ final class CameraInfo extends $base.CameraInfo {
   }
 
   @override
-  Future<$base.ExposureState> getExposureState() async {
+  Future<$interface.ExposureState> getExposureState() async {
     final obj = await this.obj.getExposureState();
     return obj.args;
   }
@@ -78,32 +80,32 @@ final class CameraInfo extends $base.CameraInfo {
   }
 
   @override
-  Future<$base.LensFacing> getLensFacing() async {
+  Future<$interface.LensFacing> getLensFacing() async {
     final obj = await this.obj.getLensFacing();
     return obj.args;
   }
 
   @override
-  Future<Set<$base.CameraInfo>> getPhysicalCameraInfos() async {
+  Future<Set<$interface.CameraInfo>> getPhysicalCameraInfos() async {
     final objs = await obj.getPhysicalCameraInfos();
     return objs.map((obj) => CameraInfo.$native(obj)).toSet();
   }
 
   @override
-  Future<Set<$base.Range<int>>> getSupportedFrameRateRanges() async {
+  Future<Set<$interface.Range<int>>> getSupportedFrameRateRanges() async {
     final objs = await obj.getSupportedFrameRateRanges();
     return objs.map((obj) => obj.args).toSet();
   }
 
   @override
-  Future<$base.TorchState?> getTorchState() async {
+  Future<$interface.TorchState?> getTorchState() async {
     final dataObj = await this.obj.getTorchState();
     final obj = await dataObj.getValue();
     return obj?.args;
   }
 
   @override
-  Future<$base.ZoomState?> getZoomState() async {
+  Future<$interface.ZoomState?> getZoomState() async {
     final dataObj = await this.obj.getZoomState();
     final obj = await dataObj.getValue();
     return obj?.args;
@@ -117,7 +119,7 @@ final class CameraInfo extends $base.CameraInfo {
 
   @override
   Future<bool> isFocusMeteringSupported(
-      $base.FocusMeteringAction action) async {
+      $interface.FocusMeteringAction action) async {
     if (action is! FocusMeteringAction) {
       throw TypeError();
     }
@@ -138,8 +140,8 @@ final class CameraInfo extends $base.CameraInfo {
   }
 
   @override
-  Future<Set<$base.DynamicRange>> querySupportedDynamicRanges(
-      Set<$base.DynamicRange> candidateDynamicRanges) async {
+  Future<Set<$interface.DynamicRange>> querySupportedDynamicRanges(
+      Set<$interface.DynamicRange> candidateDynamicRanges) async {
     final candidateDynamicRangeObjs =
         candidateDynamicRanges.map((range) => range.obj).toList();
     final rangeObjs =

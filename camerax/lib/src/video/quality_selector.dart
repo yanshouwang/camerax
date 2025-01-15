@@ -1,40 +1,40 @@
 import 'package:camerax/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 import 'fallback_strategy.dart';
 
 final class QualitySelector {
-  final $base.QualitySelector _obj;
+  final $interface.QualitySelector _obj;
 
   QualitySelector._native(this._obj);
 
   QualitySelector.from(
-    $base.Quality quality, {
+    $interface.Quality quality, {
     FallbackStrategy? fallbackStrategy,
-  }) : _obj = $base.QualitySelector.from(
+  }) : _obj = $interface.QualitySelector.from(
           quality,
           fallbackStrategy: fallbackStrategy?.obj,
         );
 
   QualitySelector.fromOrderedList(
-    List<$base.Quality> qualities, {
+    List<$interface.Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
-  }) : _obj = $base.QualitySelector.fromOrderedList(
+  }) : _obj = $interface.QualitySelector.fromOrderedList(
           qualities,
           fallbackStrategy: fallbackStrategy?.obj,
         );
 
-  static Future<$base.Size?> getResolution(
-          CameraInfo cameraInfo, $base.Quality quality) =>
-      $base.QualitySelector.getResolution(cameraInfo.obj, quality);
+  static Future<$interface.Size?> getResolution(
+          CameraInfo cameraInfo, $interface.Quality quality) =>
+      $interface.QualitySelector.getResolution(cameraInfo.obj, quality);
 
   @internal
-  $base.QualitySelector get obj => _obj;
+  $interface.QualitySelector get obj => _obj;
 }
 
-extension QualitySelectorObj on $base.QualitySelector {
+extension QualitySelectorObj on $interface.QualitySelector {
   @internal
   QualitySelector get args {
     return QualitySelector._native(this);

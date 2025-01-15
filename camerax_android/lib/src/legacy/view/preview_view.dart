@@ -1,13 +1,13 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
 
-final class PreviewView extends $base.PreviewView {
+final class PreviewView extends $interface.PreviewView {
   final $native.PreviewView obj;
 
   PreviewView.$native(this.obj) : super.impl();
@@ -18,7 +18,7 @@ final class PreviewView extends $base.PreviewView {
   }
 
   @override
-  Future<void> setController($base.CameraController controller) async {
+  Future<void> setController($interface.CameraController controller) async {
     if (controller is! CameraController) {
       throw TypeError();
     }

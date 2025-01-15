@@ -1,11 +1,11 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'metering_point.dart';
 
 final class SurfaceOrientedMeteringPointFactory
-    extends $base.SurfaceOrientedMeteringPointFactory {
+    extends $interface.SurfaceOrientedMeteringPointFactory {
   final $native.SurfaceOrientedMeteringPointFactory obj;
 
   SurfaceOrientedMeteringPointFactory.$native(this.obj) : super.impl();
@@ -19,7 +19,7 @@ final class SurfaceOrientedMeteringPointFactory
   }
 
   @override
-  Future<$base.MeteringPoint> createPoint(
+  Future<$interface.MeteringPoint> createPoint(
     double x,
     double y, {
     double? size,

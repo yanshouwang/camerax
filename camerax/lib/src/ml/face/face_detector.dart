@@ -1,20 +1,20 @@
 import 'package:camerax/src/ml/detector.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 import 'face_detector_options.dart';
 
-final class FaceDetector extends Detector<List<$base.Face>> {
-  final $base.FaceDetector _obj;
+final class FaceDetector extends Detector<List<$interface.Face>> {
+  final $interface.FaceDetector _obj;
 
   FaceDetector({
     FaceDetectorOptions? options,
-  }) : _obj = $base.FaceDetector(
+  }) : _obj = $interface.FaceDetector(
           options: options?.obj,
         );
 
   @internal
   @override
-  $base.FaceDetector get obj => _obj;
+  $interface.FaceDetector get obj => _obj;
 }

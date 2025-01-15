@@ -1,8 +1,8 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension SizeArgs on $base.Size {
+extension SizeArgs on $interface.Size {
   $native.Size get obj {
     return $native.Size(
       width: width,
@@ -12,7 +12,7 @@ extension SizeArgs on $base.Size {
 }
 
 extension SizeObj on $native.Size {
-  $base.Size get args {
-    return $base.Size(width, height);
+  $interface.Size get args {
+    return $interface.Size(width, height);
   }
 }

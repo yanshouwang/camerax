@@ -1,10 +1,10 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 extension DriverLicenseObj on $native.DriverLicense {
-  $base.DriverLicense get args {
-    return $base.DriverLicense(
+  $interface.DriverLicense get args {
+    return $interface.DriverLicense(
       licenseNumber: licenseNumber,
       documentType: documentType,
       expiryDate: expiryDate,

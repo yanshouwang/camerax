@@ -1,32 +1,32 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'recording_stats.dart';
 import 'video_output_results.dart';
 
 extension VideoRecordEventObj on $native.VideoRecordEvent {
-  $base.VideoRecordEvent get args {
+  $interface.VideoRecordEvent get args {
     final event = this;
     if (event is $native.VideoRecordStatusEvent) {
-      return $base.VideoRecordStatusEvent(
+      return $interface.VideoRecordStatusEvent(
         recordingStats: event.recordingStats.args,
       );
     } else if (event is $native.VideoRecordStartEvent) {
-      return $base.VideoRecordStartEvent(
+      return $interface.VideoRecordStartEvent(
         recordingStats: event.recordingStats.args,
       );
     } else if (event is $native.VideoRecordPauseEvent) {
-      return $base.VideoRecordPauseEvent(
+      return $interface.VideoRecordPauseEvent(
         recordingStats: event.recordingStats.args,
       );
     } else if (event is $native.VideoRecordResumeEvent) {
-      return $base.VideoRecordResumeEvent(
+      return $interface.VideoRecordResumeEvent(
         recordingStats: event.recordingStats.args,
       );
     } else if (event is $native.VideoRecordFinalizeEvent) {
-      return $base.VideoRecordFinalizeEvent(
+      return $interface.VideoRecordFinalizeEvent(
         recordingStats: event.recordingStats.args,
         outputResults: event.outputResults.args,
         cause: event.cause?.args,

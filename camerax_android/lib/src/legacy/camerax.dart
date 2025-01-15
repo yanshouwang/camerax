@@ -2,37 +2,37 @@ import 'dart:io';
 
 import 'package:camerax_android/src/legacy/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'common.dart';
 import 'core.dart';
 import 'video.dart';
 import 'view.dart';
 
-final class CameraX extends $base.CameraX {
+final class CameraX extends $interface.CameraX {
   @override
-  $base.PermissionManager createPermissionManager() {
+  $interface.PermissionManager createPermissionManager() {
     return PermissionManager();
   }
 
   @override
-  $base.CameraSelector getFrontCameraSelector() {
+  $interface.CameraSelector getFrontCameraSelector() {
     return CameraSelector.front;
   }
 
   @override
-  $base.CameraSelector getBackCameraSelector() {
+  $interface.CameraSelector getBackCameraSelector() {
     return CameraSelector.back;
   }
 
   @override
-  $base.CameraSelector getExternalCameraSelector() {
+  $interface.CameraSelector getExternalCameraSelector() {
     return CameraSelector.external;
   }
 
   @override
-  $base.CameraSelector createCameraSelector({
-    $base.LensFacing? lensFacing,
+  $interface.CameraSelector createCameraSelector({
+    $interface.LensFacing? lensFacing,
   }) {
     return CameraSelector(
       lensFacing: lensFacing,
@@ -40,44 +40,44 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.CameraController createCameraController() {
+  $interface.CameraController createCameraController() {
     return CameraController();
   }
 
   @override
-  $base.PreviewView createPreviewView() {
+  $interface.PreviewView createPreviewView() {
     return PreviewView();
   }
 
   @override
-  $base.FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
-      $base.Quality quality) {
+  $interface.FallbackStrategy createFallbackStrategyHigherQualityOrLowerThan(
+      $interface.Quality quality) {
     return FallbackStrategy.higherQualityOrLowerThan(quality);
   }
 
   @override
-  $base.FallbackStrategy createFallbackStrategyHigherQualityThan(
-      $base.Quality quality) {
+  $interface.FallbackStrategy createFallbackStrategyHigherQualityThan(
+      $interface.Quality quality) {
     return FallbackStrategy.higherQualityThan(quality);
   }
 
   @override
-  $base.FallbackStrategy createFallbackStrategyLowerQualityOrHigherThan(
-      $base.Quality quality) {
+  $interface.FallbackStrategy createFallbackStrategyLowerQualityOrHigherThan(
+      $interface.Quality quality) {
     return FallbackStrategy.lowerQualityOrHigherThan(quality);
   }
 
   @override
-  $base.FallbackStrategy createFallbackStrategyLowerQualityThan(
-      $base.Quality quality) {
+  $interface.FallbackStrategy createFallbackStrategyLowerQualityThan(
+      $interface.Quality quality) {
     return FallbackStrategy.lowerQualityThan(quality);
   }
 
   @override
-  $base.MlKitAnalyzer createMlKitAnalyzer({
-    required List<$base.Detector> detectors,
-    required $base.CoordinateSystem targetCoordinateSystem,
-    required $base.MlKitAnalyzerResultConsumer consumer,
+  $interface.MlKitAnalyzer createMlKitAnalyzer({
+    required List<$interface.Detector> detectors,
+    required $interface.CoordinateSystem targetCoordinateSystem,
+    required $interface.MlKitAnalyzerResultConsumer consumer,
   }) {
     return MlKitAnalyzer(
       detectors: detectors,
@@ -87,9 +87,9 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.QualitySelector createQualitySelectorFrom(
-    $base.Quality quality, {
-    $base.FallbackStrategy? fallbackStrategy,
+  $interface.QualitySelector createQualitySelectorFrom(
+    $interface.Quality quality, {
+    $interface.FallbackStrategy? fallbackStrategy,
   }) {
     return QualitySelector.from(
       quality,
@@ -98,9 +98,9 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.QualitySelector createQualitySelectorFromOrderedList(
-    List<$base.Quality> qualities, {
-    $base.FallbackStrategy? fallbackStrategy,
+  $interface.QualitySelector createQualitySelectorFromOrderedList(
+    List<$interface.Quality> qualities, {
+    $interface.FallbackStrategy? fallbackStrategy,
   }) {
     return QualitySelector.fromOrderedList(
       qualities,
@@ -109,15 +109,15 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  Future<$base.Size?> getResolution(
-      $base.CameraInfo cameraInfo, $base.Quality quality) async {
+  Future<$interface.Size?> getResolution(
+      $interface.CameraInfo cameraInfo, $interface.Quality quality) async {
     final size = await QualitySelector.getResolution(cameraInfo, quality);
     return size;
   }
 
   @override
-  $base.BarcodeScanner createBarcodeScanner({
-    $base.BarcodeScannerOptions? options,
+  $interface.BarcodeScanner createBarcodeScanner({
+    $interface.BarcodeScannerOptions? options,
   }) {
     return BarcodeScanner(
       options: options,
@@ -125,10 +125,10 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.BarcodeScannerOptions createBarcodeScannerOptions({
+  $interface.BarcodeScannerOptions createBarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
-    List<$base.BarcodeFormat>? formats,
-    $base.ZoomSuggestionOptions? zoomSuggestionOptions,
+    List<$interface.BarcodeFormat>? formats,
+    $interface.ZoomSuggestionOptions? zoomSuggestionOptions,
   }) {
     return BarcodeScannerOptions(
       enableAllPotentialBarcodes: enableAllPotentialBarcodes,
@@ -138,8 +138,8 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.FaceDetector createFaceDetector({
-    $base.FaceDetectorOptions? options,
+  $interface.FaceDetector createFaceDetector({
+    $interface.FaceDetectorOptions? options,
   }) {
     return FaceDetector(
       options: options,
@@ -147,13 +147,13 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.FaceDetectorOptions createFaceDetectorOptions({
+  $interface.FaceDetectorOptions createFaceDetectorOptions({
     bool? enableTracking,
-    $base.FaceClassificationMode? classificationMode,
-    $base.FaceContourMode? contourMode,
-    $base.FaceLandmarkMode? landmarkMode,
+    $interface.FaceClassificationMode? classificationMode,
+    $interface.FaceContourMode? contourMode,
+    $interface.FaceLandmarkMode? landmarkMode,
     double? minFaceSize,
-    $base.FacePerformanceMode? performanceMode,
+    $interface.FacePerformanceMode? performanceMode,
   }) {
     return FaceDetectorOptions(
       enableTracking: enableTracking,
@@ -166,8 +166,8 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.ZoomSuggestionOptions createZoomSuggestionOptions({
-    required $base.ZoomCallback zoomCallback,
+  $interface.ZoomSuggestionOptions createZoomSuggestionOptions({
+    required $interface.ZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,
   }) {
     return ZoomSuggestionOptions(
@@ -177,11 +177,11 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.FileOutputOptions createFileOutputOptions({
+  $interface.FileOutputOptions createFileOutputOptions({
     required File file,
     Duration? durationLimit,
     int? fileSizeLimitBytes,
-    $base.Location? location,
+    $interface.Location? location,
   }) {
     return FileOutputOptions(
       file: file,
@@ -192,9 +192,9 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.OutputFileOptions createOutputFileOptions({
+  $interface.OutputFileOptions createOutputFileOptions({
     required File file,
-    $base.Metadata? metadata,
+    $interface.Metadata? metadata,
   }) {
     return OutputFileOptions(
       file: file,
@@ -203,15 +203,15 @@ final class CameraX extends $base.CameraX {
   }
 
   @override
-  $base.SurfaceOrientedMeteringPointFactory
+  $interface.SurfaceOrientedMeteringPointFactory
       createSurfaceOrientedMeteringPointFactory(width, height) {
     return SurfaceOrientedMeteringPointFactory(width, height);
   }
 
   @override
-  $base.FocusMeteringAction createFocusMeteringAction(
-    ($base.MeteringPoint, List<$base.MeteringMode>) first, {
-    List<($base.MeteringPoint, List<$base.MeteringMode>)>? others,
+  $interface.FocusMeteringAction createFocusMeteringAction(
+    ($interface.MeteringPoint, List<$interface.MeteringMode>) first, {
+    List<($interface.MeteringPoint, List<$interface.MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) {

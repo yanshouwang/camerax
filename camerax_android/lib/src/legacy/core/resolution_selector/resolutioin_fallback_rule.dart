@@ -1,37 +1,37 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension ResolutioinFallbackRuleArgs on $base.ResolutionFallbackRule {
+extension ResolutioinFallbackRuleArgs on $interface.ResolutionFallbackRule {
   $native.ResolutionFallbackRule get obj {
     switch (this) {
-      case $base.ResolutionFallbackRule.none:
+      case $interface.ResolutionFallbackRule.none:
         return $native.ResolutionFallbackRule.none;
-      case $base.ResolutionFallbackRule.closestHigherThenLower:
+      case $interface.ResolutionFallbackRule.closestHigherThenLower:
         return $native.ResolutionFallbackRule.closestHigherThenLower;
-      case $base.ResolutionFallbackRule.closestHigher:
+      case $interface.ResolutionFallbackRule.closestHigher:
         return $native.ResolutionFallbackRule.closestHigher;
-      case $base.ResolutionFallbackRule.closestLowerThenHigher:
+      case $interface.ResolutionFallbackRule.closestLowerThenHigher:
         return $native.ResolutionFallbackRule.closestLowerThenHigher;
-      case $base.ResolutionFallbackRule.closestLower:
+      case $interface.ResolutionFallbackRule.closestLower:
         return $native.ResolutionFallbackRule.closestLower;
     }
   }
 }
 
 extension ResolutioinFallbackRuleObj on $native.ResolutionFallbackRule {
-  $base.ResolutionFallbackRule get args {
+  $interface.ResolutionFallbackRule get args {
     switch (this) {
       case $native.ResolutionFallbackRule.none:
-        return $base.ResolutionFallbackRule.none;
+        return $interface.ResolutionFallbackRule.none;
       case $native.ResolutionFallbackRule.closestHigherThenLower:
-        return $base.ResolutionFallbackRule.closestHigherThenLower;
+        return $interface.ResolutionFallbackRule.closestHigherThenLower;
       case $native.ResolutionFallbackRule.closestHigher:
-        return $base.ResolutionFallbackRule.closestHigher;
+        return $interface.ResolutionFallbackRule.closestHigher;
       case $native.ResolutionFallbackRule.closestLowerThenHigher:
-        return $base.ResolutionFallbackRule.closestLowerThenHigher;
+        return $interface.ResolutionFallbackRule.closestLowerThenHigher;
       case $native.ResolutionFallbackRule.closestLower:
-        return $base.ResolutionFallbackRule.closestLower;
+        return $interface.ResolutionFallbackRule.closestLower;
     }
   }
 }

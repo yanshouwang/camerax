@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'barcode_format.dart';
 import 'barcode_value_type.dart';
@@ -16,8 +16,8 @@ import 'url_bookmark.dart';
 import 'wifi.dart';
 
 extension BarcodeObj on $native.Barcode {
-  $base.Barcode get args {
-    return $base.Barcode(
+  $interface.Barcode get args {
+    return $interface.Barcode(
       format: format.args,
       boundingBox: boundingBox?.args,
       cornerPoints: cornerPoints?.map((obj) => obj.args).toList(),

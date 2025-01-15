@@ -1,15 +1,15 @@
 import 'package:camerax/src/ml/detector.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 final class MlKitAnalyzerResult {
-  final $base.MlKitAnalyzerResult _obj;
+  final $interface.MlKitAnalyzerResult _obj;
 
   MlKitAnalyzerResult._native(this._obj);
 
   @internal
-  $base.MlKitAnalyzerResult get obj => _obj;
+  $interface.MlKitAnalyzerResult get obj => _obj;
 
   int get timestamp => _obj.timestamp;
 
@@ -18,7 +18,7 @@ final class MlKitAnalyzerResult {
   Future<T?> getValue<T>(Detector<T> detector) => _obj.getValue(detector.obj);
 }
 
-extension MlKitAnalyzerResultObj on $base.MlKitAnalyzerResult {
+extension MlKitAnalyzerResultObj on $interface.MlKitAnalyzerResult {
   @internal
   MlKitAnalyzerResult get args {
     return MlKitAnalyzerResult._native(this);

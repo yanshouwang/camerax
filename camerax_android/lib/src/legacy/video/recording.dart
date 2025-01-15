@@ -1,8 +1,8 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-final class Recording extends $base.Recording {
+final class Recording extends $interface.Recording {
   final $native.Recording obj;
 
   Recording.$native(this.obj) : super.impl();

@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-final class FileOutputOptions extends $base.FileOutputOptions {
+final class FileOutputOptions extends $interface.FileOutputOptions {
   final $native.FileOutputOptions obj;
 
   FileOutputOptions.$native(
@@ -17,7 +17,7 @@ final class FileOutputOptions extends $base.FileOutputOptions {
     required File file,
     Duration? durationLimit,
     int? fileSizeLimitBytes,
-    $base.Location? location,
+    $interface.Location? location,
   }) {
     final obj = $native.FileOutputOptions.build(
       file: file.path,

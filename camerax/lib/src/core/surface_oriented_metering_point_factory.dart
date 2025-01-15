@@ -1,16 +1,16 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 import 'metering_point_factory.dart';
 
 final class SurfaceOrientedMeteringPointFactory extends MeteringPointFactory {
-  final $base.SurfaceOrientedMeteringPointFactory _obj;
+  final $interface.SurfaceOrientedMeteringPointFactory _obj;
 
   SurfaceOrientedMeteringPointFactory(double width, double height)
-      : _obj = $base.SurfaceOrientedMeteringPointFactory(width, height);
+      : _obj = $interface.SurfaceOrientedMeteringPointFactory(width, height);
 
   @internal
   @override
-  $base.MeteringPointFactory get obj => _obj;
+  $interface.MeteringPointFactory get obj => _obj;
 }

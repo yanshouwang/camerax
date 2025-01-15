@@ -1,13 +1,13 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'aspect_ratio_startegy.dart';
 import 'resolution_mode.dart';
 import 'resolution_strategy.dart';
 
-extension ResolutionSelectorArgs on $base.ResolutionSelector {
+extension ResolutionSelectorArgs on $interface.ResolutionSelector {
   $native.ResolutionSelector get obj {
     final resolutionFilter = this.resolutionFilter;
     return $native.ResolutionSelector(
@@ -29,14 +29,14 @@ extension ResolutionSelectorArgs on $base.ResolutionSelector {
 }
 
 extension ResolutionSelectorObj on $native.ResolutionSelector {
-  $base.ResolutionSelector get args {
+  $interface.ResolutionSelector get args {
     final resolutionFilter = this.resolutionFilter;
-    return $base.ResolutionSelector(
+    return $interface.ResolutionSelector(
       allowedResolutionMode: allowedResolutionMode.args,
       aspectRatioStrategy: aspectRatioStrategy.args,
       resolutionFilter: resolutionFilter == null
           ? null
-          : (List<$base.Size> supportedSizes, int rotationDegrees) {
+          : (List<$interface.Size> supportedSizes, int rotationDegrees) {
               final supportedSizeObjs =
                   supportedSizes.map((size) => size.obj).toList();
               final sizeObjs = resolutionFilter.filter(

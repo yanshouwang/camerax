@@ -1,36 +1,36 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 extension BarcodeValueTypeObj on $native.BarcodeValueType {
-  $base.BarcodeValueType get args {
+  $interface.BarcodeValueType get args {
     switch (this) {
       case $native.BarcodeValueType.unknown:
-        return $base.BarcodeValueType.unknown;
+        return $interface.BarcodeValueType.unknown;
       case $native.BarcodeValueType.contactInfo:
-        return $base.BarcodeValueType.contactInfo;
+        return $interface.BarcodeValueType.contactInfo;
       case $native.BarcodeValueType.email:
-        return $base.BarcodeValueType.email;
+        return $interface.BarcodeValueType.email;
       case $native.BarcodeValueType.isbn:
-        return $base.BarcodeValueType.isbn;
+        return $interface.BarcodeValueType.isbn;
       case $native.BarcodeValueType.phone:
-        return $base.BarcodeValueType.phone;
+        return $interface.BarcodeValueType.phone;
       case $native.BarcodeValueType.product:
-        return $base.BarcodeValueType.product;
+        return $interface.BarcodeValueType.product;
       case $native.BarcodeValueType.sms:
-        return $base.BarcodeValueType.sms;
+        return $interface.BarcodeValueType.sms;
       case $native.BarcodeValueType.text:
-        return $base.BarcodeValueType.text;
+        return $interface.BarcodeValueType.text;
       case $native.BarcodeValueType.url:
-        return $base.BarcodeValueType.url;
+        return $interface.BarcodeValueType.url;
       case $native.BarcodeValueType.wifi:
-        return $base.BarcodeValueType.wifi;
+        return $interface.BarcodeValueType.wifi;
       case $native.BarcodeValueType.geo:
-        return $base.BarcodeValueType.geo;
+        return $interface.BarcodeValueType.geo;
       case $native.BarcodeValueType.calendarEvent:
-        return $base.BarcodeValueType.calendarEvent;
+        return $interface.BarcodeValueType.calendarEvent;
       case $native.BarcodeValueType.driverLicense:
-        return $base.BarcodeValueType.driverLicense;
+        return $interface.BarcodeValueType.driverLicense;
     }
   }
 }

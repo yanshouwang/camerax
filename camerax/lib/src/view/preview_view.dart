@@ -1,5 +1,5 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
@@ -17,12 +17,12 @@ class PreviewView extends StatefulWidget {
 }
 
 class _PreviewViewState extends State<PreviewView> {
-  late final $base.PreviewView _obj;
+  late final $interface.PreviewView _obj;
 
   @override
   void initState() {
     super.initState();
-    _obj = $base.PreviewView();
+    _obj = $interface.PreviewView();
     _obj.setController(widget.controller.obj);
   }
 

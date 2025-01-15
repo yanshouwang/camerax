@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
@@ -9,11 +9,11 @@ import 'camera_selector.dart';
 import 'focus_metering_action.dart';
 
 class CameraInfo extends ChangeNotifier {
-  final $base.CameraInfo _obj;
+  final $interface.CameraInfo _obj;
 
-  $base.CameraState? _cameraState;
-  $base.ZoomState? _zoomState;
-  $base.TorchState? _torchState;
+  $interface.CameraState? _cameraState;
+  $interface.ZoomState? _zoomState;
+  $interface.TorchState? _torchState;
 
   late final StreamSubscription _cameraStateChangedSubscription;
   late final StreamSubscription _zoomStateChangedSubscription;
@@ -41,10 +41,10 @@ class CameraInfo extends ChangeNotifier {
   }
 
   @internal
-  $base.CameraInfo get obj => _obj;
-  $base.CameraState? get cameraState => _cameraState;
-  $base.ZoomState? get zoomState => _zoomState;
-  $base.TorchState? get torchState => _torchState;
+  $interface.CameraInfo get obj => _obj;
+  $interface.CameraState? get cameraState => _cameraState;
+  $interface.ZoomState? get zoomState => _zoomState;
+  $interface.TorchState? get torchState => _torchState;
 
   /// Returns a CameraSelector unique to this camera.
   Future<CameraSelector> getCameraSelector() async {
@@ -62,7 +62,7 @@ class CameraInfo extends ChangeNotifier {
   /// instance, this can occur when the camera is opening or closing, the OPENING
   /// and CLOSING states may not be reported to observers if they are rapidly
   /// followed by the OPEN and CLOSED states respectively.
-  Future<$base.CameraState?> getCameraState() => obj.getCameraState();
+  Future<$interface.CameraState?> getCameraState() => obj.getCameraState();
 
   /// Returns a LiveData of current TorchState.
   ///
@@ -72,7 +72,7 @@ class CameraInfo extends ChangeNotifier {
   ///
   /// If the camera doesn't have a flash unit (see hasFlashUnit), then the torch
   /// state will be OFF.
-  Future<$base.TorchState?> getTorchState() => _obj.getTorchState();
+  Future<$interface.TorchState?> getTorchState() => _obj.getTorchState();
 
   /// Returns a LiveData of ZoomState.
   ///
@@ -80,12 +80,13 @@ class CameraInfo extends ChangeNotifier {
   /// This can occur when the application updates the zoom via setZoomRatio or
   /// setLinearZoom. The zoom state can also change anytime a camera starts up,
   /// for example when a UseCase is bound to it.
-  Future<$base.ZoomState?> getZoomState() => _obj.getZoomState();
+  Future<$interface.ZoomState?> getZoomState() => _obj.getZoomState();
 
   /// Returns a ExposureState.
   ///
   /// The ExposureState contains the current exposure related information.
-  Future<$base.ExposureState> getExposureState() => _obj.getExposureState();
+  Future<$interface.ExposureState> getExposureState() =>
+      _obj.getExposureState();
 
   /// Returns the intrinsic zoom ratio of this camera.
   ///
@@ -113,7 +114,7 @@ class CameraInfo extends ChangeNotifier {
   Future<double> getIntrinsicZoomRatio() => _obj.getIntrinsicZoomRatio();
 
   /// Returns the lens facing of this camera.
-  Future<$base.LensFacing> getLensFacing() => _obj.getLensFacing();
+  Future<$interface.LensFacing> getLensFacing() => _obj.getLensFacing();
 
   /// Returns a set of physical camera CameraInfos.
   ///
@@ -143,7 +144,7 @@ class CameraInfo extends ChangeNotifier {
   ///
   /// The returned set does not have any ordering guarantees and frame rate ranges
   /// may overlap.
-  Future<Set<$base.Range<int>>> getSupportedFrameRateRanges() =>
+  Future<Set<$interface.Range<int>>> getSupportedFrameRateRanges() =>
       _obj.getSupportedFrameRateRanges();
 
   /// Returns if flash unit is available or not.
@@ -235,8 +236,8 @@ class CameraInfo extends ChangeNotifier {
   /// Because SDR is always supported, including SDR in candidateDynamicRanges
   /// will always result in SDR being present in the result set. If an empty
   /// candidate set is provided, an IllegalArgumentException will be thrown.
-  Future<Set<$base.DynamicRange>> querySupportedDynamicRanges(
-          Set<$base.DynamicRange> candidateDynamicRanges) =>
+  Future<Set<$interface.DynamicRange>> querySupportedDynamicRanges(
+          Set<$interface.DynamicRange> candidateDynamicRanges) =>
       _obj.querySupportedDynamicRanges(candidateDynamicRanges);
 
   @override
@@ -248,7 +249,7 @@ class CameraInfo extends ChangeNotifier {
   }
 }
 
-extension CameraInfoObj on $base.CameraInfo {
+extension CameraInfoObj on $interface.CameraInfo {
   @internal
   CameraInfo get args {
     return CameraInfo._native(this);

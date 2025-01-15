@@ -2,19 +2,19 @@ import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_android/src/legacy/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'fallback_strategy.dart';
 import 'quality.dart';
 
-final class QualitySelector extends $base.QualitySelector {
+final class QualitySelector extends $interface.QualitySelector {
   final $native.QualitySelector obj;
 
   QualitySelector.$native(this.obj) : super.impl();
 
   factory QualitySelector.from(
-    $base.Quality quality, {
-    $base.FallbackStrategy? fallbackStrategy,
+    $interface.Quality quality, {
+    $interface.FallbackStrategy? fallbackStrategy,
   }) {
     if (fallbackStrategy is! FallbackStrategy?) {
       throw TypeError();
@@ -27,8 +27,8 @@ final class QualitySelector extends $base.QualitySelector {
   }
 
   factory QualitySelector.fromOrderedList(
-    List<$base.Quality> qualities, {
-    $base.FallbackStrategy? fallbackStrategy,
+    List<$interface.Quality> qualities, {
+    $interface.FallbackStrategy? fallbackStrategy,
   }) {
     if (fallbackStrategy is! FallbackStrategy?) {
       throw TypeError();
@@ -40,8 +40,8 @@ final class QualitySelector extends $base.QualitySelector {
     return QualitySelector.$native(obj);
   }
 
-  static Future<$base.Size?> getResolution(
-      $base.CameraInfo cameraInfo, $base.Quality quality) async {
+  static Future<$interface.Size?> getResolution(
+      $interface.CameraInfo cameraInfo, $interface.Quality quality) async {
     if (cameraInfo is! CameraInfo) {
       throw TypeError();
     }

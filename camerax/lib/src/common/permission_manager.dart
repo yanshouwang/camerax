@@ -1,17 +1,18 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 class PermissionManager {
-  final $base.PermissionManager obj;
+  final $interface.PermissionManager obj;
 
-  PermissionManager() : obj = $base.PermissionManager();
+  PermissionManager() : obj = $interface.PermissionManager();
 
-  Future<bool> checkPermission($base.Permission permission) async {
+  Future<bool> checkPermission($interface.Permission permission) async {
     final isGranted = await obj.checkPermission(permission);
     return isGranted;
   }
 
-  Future<bool> requestPermissions(List<$base.Permission> permissions) async {
+  Future<bool> requestPermissions(
+      List<$interface.Permission> permissions) async {
     final isGranted = await obj.requestPermissions(permissions);
     return isGranted;
   }

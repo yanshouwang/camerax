@@ -1,18 +1,18 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'metering_mode.dart';
 import 'metering_point.dart';
 
-final class FocusMeteringAction extends $base.FocusMeteringAction {
+final class FocusMeteringAction extends $interface.FocusMeteringAction {
   final $native.FocusMeteringAction obj;
 
   FocusMeteringAction.$native(this.obj) : super.impl();
 
   factory FocusMeteringAction(
-    ($base.MeteringPoint, List<$base.MeteringMode>) first, {
-    List<($base.MeteringPoint, List<$base.MeteringMode>)>? others,
+    ($interface.MeteringPoint, List<$interface.MeteringMode>) first, {
+    List<($interface.MeteringPoint, List<$interface.MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) {
@@ -34,19 +34,19 @@ final class FocusMeteringAction extends $base.FocusMeteringAction {
   }
 
   @override
-  Future<List<$base.MeteringPoint>> getMeteringPointsAe() async {
+  Future<List<$interface.MeteringPoint>> getMeteringPointsAe() async {
     final objs = await obj.getMeteringPointsAe();
     return objs.map((obj) => obj.args).toList();
   }
 
   @override
-  Future<List<$base.MeteringPoint>> getMeteringPointsAf() async {
+  Future<List<$interface.MeteringPoint>> getMeteringPointsAf() async {
     final objs = await obj.getMeteringPointsAf();
     return objs.map((obj) => obj.args).toList();
   }
 
   @override
-  Future<List<$base.MeteringPoint>> getMeteringPointsAwb() async {
+  Future<List<$interface.MeteringPoint>> getMeteringPointsAwb() async {
     final objs = await obj.getMeteringPointsAwb();
     return objs.map((obj) => obj.args).toList();
   }
@@ -58,7 +58,7 @@ final class FocusMeteringAction extends $base.FocusMeteringAction {
   }
 }
 
-extension on ($base.MeteringPoint, List<$base.MeteringMode>) {
+extension on ($interface.MeteringPoint, List<$interface.MeteringMode>) {
   $native.MeteringPointArgs get obj {
     final point = this.$1;
     if (point is! MeteringPoint) {

@@ -1,10 +1,10 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 import 'focus_metering_action.dart';
 
-final class CameraControl extends $base.CameraControl {
+final class CameraControl extends $interface.CameraControl {
   final $native.CameraControl obj;
 
   CameraControl.$native(this.obj) : super.impl();
@@ -36,7 +36,8 @@ final class CameraControl extends $base.CameraControl {
   }
 
   @override
-  Future<bool> startFocusAndMetering($base.FocusMeteringAction action) async {
+  Future<bool> startFocusAndMetering(
+      $interface.FocusMeteringAction action) async {
     if (action is! FocusMeteringAction) {
       throw TypeError();
     }

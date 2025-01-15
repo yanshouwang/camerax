@@ -1,20 +1,20 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 extension PhoneTypeObj on $native.PhoneType {
-  $base.PhoneType get args {
+  $interface.PhoneType get args {
     switch (this) {
       case $native.PhoneType.unknown:
-        return $base.PhoneType.unknown;
+        return $interface.PhoneType.unknown;
       case $native.PhoneType.work:
-        return $base.PhoneType.work;
+        return $interface.PhoneType.work;
       case $native.PhoneType.home:
-        return $base.PhoneType.home;
+        return $interface.PhoneType.home;
       case $native.PhoneType.fax:
-        return $base.PhoneType.fax;
+        return $interface.PhoneType.fax;
       case $native.PhoneType.mobile:
-        return $base.PhoneType.mobile;
+        return $interface.PhoneType.mobile;
     }
   }
 }

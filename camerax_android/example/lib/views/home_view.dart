@@ -3,7 +3,7 @@ import 'package:camerax_android_example/models.dart';
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -70,14 +70,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       duration: const Duration(milliseconds: 100),
                       onTap: () {
                         switch (flashMode) {
-                          case $base.FlashMode.auto:
-                            viewModel.setFlashMode($base.FlashMode.on);
-                          case $base.FlashMode.on:
-                            viewModel.setFlashMode($base.FlashMode.off);
-                          case $base.FlashMode.off:
-                            viewModel.setFlashMode($base.FlashMode.auto);
-                          case $base.FlashMode.screen:
-                            viewModel.setFlashMode($base.FlashMode.screen);
+                          case $interface.FlashMode.auto:
+                            viewModel.setFlashMode($interface.FlashMode.on);
+                          case $interface.FlashMode.on:
+                            viewModel.setFlashMode($interface.FlashMode.off);
+                          case $interface.FlashMode.off:
+                            viewModel.setFlashMode($interface.FlashMode.auto);
+                          case $interface.FlashMode.screen:
+                            viewModel.setFlashMode($interface.FlashMode.screen);
                         }
                       },
                       child: Container(
@@ -89,9 +89,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               .resolveFrom(context),
                         ),
                         child: Icon(
-                          flashMode == $base.FlashMode.auto
+                          flashMode == $interface.FlashMode.auto
                               ? Symbols.flash_auto
-                              : flashMode == $base.FlashMode.on
+                              : flashMode == $interface.FlashMode.on
                                   ? Symbols.flash_on
                                   : Symbols.flash_off,
                           color: CupertinoColors.label.resolveFrom(context),
@@ -449,7 +449,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             color: CupertinoColors.label.resolveFrom(context),
                           ),
                         ),
-                        flip: viewModel.lensFacing == $base.LensFacing.back,
+                        flip:
+                            viewModel.lensFacing == $interface.LensFacing.back,
                       ),
                     ),
                   ),
@@ -498,7 +499,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
 }
 
 class PreviewView extends StatefulWidget {
-  final $base.CameraController controller;
+  final $interface.CameraController controller;
 
   const PreviewView({
     super.key,
@@ -510,12 +511,12 @@ class PreviewView extends StatefulWidget {
 }
 
 class _PreviewViewState extends State<PreviewView> {
-  late final $base.PreviewView _obj;
+  late final $interface.PreviewView _obj;
 
   @override
   void initState() {
     super.initState();
-    _obj = $base.PreviewView();
+    _obj = $interface.PreviewView();
     _obj.setController(widget.controller);
   }
 

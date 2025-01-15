@@ -1,45 +1,45 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension QualityArgs on $base.Quality {
+extension QualityArgs on $interface.Quality {
   $native.Quality get obj {
     switch (this) {
-      case $base.Quality.fhd:
+      case $interface.Quality.fhd:
         return $native.Quality.fhd;
-      case $base.Quality.hd:
+      case $interface.Quality.hd:
         return $native.Quality.hd;
-      case $base.Quality.highest:
+      case $interface.Quality.highest:
         return $native.Quality.highest;
-      case $base.Quality.lowest:
+      case $interface.Quality.lowest:
         return $native.Quality.lowest;
-      case $base.Quality.sd:
+      case $interface.Quality.sd:
         return $native.Quality.sd;
-      case $base.Quality.uhd:
+      case $interface.Quality.uhd:
         return $native.Quality.uhd;
     }
   }
 }
 
 extension QualityObj on $native.Quality {
-  $base.Quality get args {
+  $interface.Quality get args {
     if (this == $native.Quality.fhd) {
-      return $base.Quality.fhd;
+      return $interface.Quality.fhd;
     }
     if (this == $native.Quality.hd) {
-      return $base.Quality.hd;
+      return $interface.Quality.hd;
     }
     if (this == $native.Quality.highest) {
-      return $base.Quality.highest;
+      return $interface.Quality.highest;
     }
     if (this == $native.Quality.lowest) {
-      return $base.Quality.lowest;
+      return $interface.Quality.lowest;
     }
     if (this == $native.Quality.sd) {
-      return $base.Quality.sd;
+      return $interface.Quality.sd;
     }
     if (this == $native.Quality.uhd) {
-      return $base.Quality.uhd;
+      return $interface.Quality.uhd;
     }
     throw ArgumentError.value(this);
   }

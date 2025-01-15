@@ -1,15 +1,15 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension MeteringModeArgs on $base.MeteringMode {
+extension MeteringModeArgs on $interface.MeteringMode {
   $native.MeteringMode get obj {
     switch (this) {
-      case $base.MeteringMode.ae:
+      case $interface.MeteringMode.ae:
         return $native.MeteringMode.ae;
-      case $base.MeteringMode.af:
+      case $interface.MeteringMode.af:
         return $native.MeteringMode.af;
-      case $base.MeteringMode.awb:
+      case $interface.MeteringMode.awb:
         return $native.MeteringMode.awb;
     }
   }

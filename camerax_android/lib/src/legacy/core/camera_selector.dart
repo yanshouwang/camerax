@@ -1,8 +1,8 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-final class CameraSelector extends $base.CameraSelector {
+final class CameraSelector extends $interface.CameraSelector {
   static CameraSelector get front =>
       CameraSelector.$native($native.CameraSelector.front);
   static CameraSelector get back =>
@@ -15,7 +15,7 @@ final class CameraSelector extends $base.CameraSelector {
   CameraSelector.$native(this.obj) : super.impl();
 
   factory CameraSelector({
-    $base.LensFacing? lensFacing,
+    $interface.LensFacing? lensFacing,
   }) {
     final obj = $native.CameraSelector(
       lensFacing: lensFacing?.obj,
@@ -30,32 +30,32 @@ final class CameraSelector extends $base.CameraSelector {
   bool operator ==(Object other) => other is CameraSelector && obj == other.obj;
 }
 
-extension BaseLensFacing on $base.LensFacing {
+extension BaseLensFacing on $interface.LensFacing {
   $native.LensFacing get obj {
     switch (this) {
-      case $base.LensFacing.unknown:
+      case $interface.LensFacing.unknown:
         return $native.LensFacing.unknown;
-      case $base.LensFacing.front:
+      case $interface.LensFacing.front:
         return $native.LensFacing.front;
-      case $base.LensFacing.back:
+      case $interface.LensFacing.back:
         return $native.LensFacing.back;
-      case $base.LensFacing.external:
+      case $interface.LensFacing.external:
         return $native.LensFacing.external;
     }
   }
 }
 
 extension NativeLensFacing on $native.LensFacing {
-  $base.LensFacing get args {
+  $interface.LensFacing get args {
     switch (this) {
       case $native.LensFacing.unknown:
-        return $base.LensFacing.unknown;
+        return $interface.LensFacing.unknown;
       case $native.LensFacing.front:
-        return $base.LensFacing.front;
+        return $interface.LensFacing.front;
       case $native.LensFacing.back:
-        return $base.LensFacing.back;
+        return $interface.LensFacing.back;
       case $native.LensFacing.external:
-        return $base.LensFacing.external;
+        return $interface.LensFacing.external;
     }
   }
 }

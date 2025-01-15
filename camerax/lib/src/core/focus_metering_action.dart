@@ -1,18 +1,18 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:meta/meta.dart';
 
 import 'metering_point.dart';
 
 class FocusMeteringAction {
-  final $base.FocusMeteringAction _obj;
+  final $interface.FocusMeteringAction _obj;
 
   FocusMeteringAction(
-    (MeteringPoint, List<$base.MeteringMode>) first, {
-    List<(MeteringPoint, List<$base.MeteringMode>)>? others,
+    (MeteringPoint, List<$interface.MeteringMode>) first, {
+    List<(MeteringPoint, List<$interface.MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
-  }) : _obj = $base.FocusMeteringAction(
+  }) : _obj = $interface.FocusMeteringAction(
           (first.$1.obj, first.$2),
           others: others?.map((other) => (other.$1.obj, other.$2)).toList(),
           disableAutoCancel: disableAutoCancel,
@@ -20,5 +20,5 @@ class FocusMeteringAction {
         );
 
   @internal
-  $base.FocusMeteringAction get obj => _obj;
+  $interface.FocusMeteringAction get obj => _obj;
 }

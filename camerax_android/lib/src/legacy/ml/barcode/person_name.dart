@@ -1,10 +1,10 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
 extension PersonNameObj on $native.PersonName {
-  $base.PersonName get args {
-    return $base.PersonName(
+  $interface.PersonName get args {
+    return $interface.PersonName(
       formattedName: formattedName,
       pronunciation: pronunciation,
       prefix: prefix,

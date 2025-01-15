@@ -1,13 +1,13 @@
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 
-extension FaceClassificationModeArgs on $base.FaceClassificationMode {
+extension FaceClassificationModeArgs on $interface.FaceClassificationMode {
   $native.FaceClassificationMode get obj {
     switch (this) {
-      case $base.FaceClassificationMode.none:
+      case $interface.FaceClassificationMode.none:
         return $native.FaceClassificationMode.none;
-      case $base.FaceClassificationMode.all:
+      case $interface.FaceClassificationMode.all:
         return $native.FaceClassificationMode.all;
     }
   }

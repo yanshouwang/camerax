@@ -4,7 +4,7 @@ import 'package:camerax/src/core.dart';
 import 'package:camerax/src/ml.dart';
 import 'package:camerax/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $base;
+    as $interface;
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
@@ -28,16 +28,16 @@ import 'package:meta/meta.dart';
 /// preview for a short period of time. To avoid the glitch, the UseCases need to
 /// be enabled/disabled before the controller is set on PreviewView.
 final class CameraController with ChangeNotifier {
-  final $base.CameraController _obj;
+  final $interface.CameraController _obj;
 
-  $base.ZoomState? _zoomState;
-  $base.TorchState? _torchState;
+  $interface.ZoomState? _zoomState;
+  $interface.TorchState? _torchState;
 
   late final StreamSubscription _zoomStateChangedSubscription;
   late final StreamSubscription _torchStateChangedSubscription;
 
   CameraController()
-      : _obj = $base.CameraController(),
+      : _obj = $interface.CameraController(),
         _zoomState = null,
         _torchState = null {
     _zoomStateChangedSubscription = _obj.zoomStateChanged.listen(
@@ -55,9 +55,9 @@ final class CameraController with ChangeNotifier {
   }
 
   @internal
-  $base.CameraController get obj => _obj;
-  $base.ZoomState? get zoomState => _zoomState;
-  $base.TorchState? get torchState => _torchState;
+  $interface.CameraController get obj => _obj;
+  $interface.ZoomState? get zoomState => _zoomState;
+  $interface.TorchState? get torchState => _torchState;
 
   Future<void> initialize() => _obj.initialize();
 
@@ -130,7 +130,7 @@ final class CameraController with ChangeNotifier {
   ///
   /// The torch can be turned on and off via enableTorch which will trigger the
   /// change event to the returned LiveData.
-  Future<$base.TorchState?> getTorchState() => _obj.getTorchState();
+  Future<$interface.TorchState?> getTorchState() => _obj.getTorchState();
 
   /// Enable the torch or disable the torch.
   ///
@@ -144,7 +144,7 @@ final class CameraController with ChangeNotifier {
   /// This can occur when the application updates the zoom via setZoomRatio or
   /// setLinearZoom. The zoom state can also change anytime a camera starts up,
   /// for example when setCameraSelector is called.
-  Future<$base.ZoomState?> getZoomState() => _obj.getZoomState();
+  Future<$interface.ZoomState?> getZoomState() => _obj.getZoomState();
 
   /// Sets current zoom by ratio.
   ///
@@ -212,14 +212,14 @@ final class CameraController with ChangeNotifier {
   ///
   /// To make sure getting the maximum resolution, only enable VIDEO_CAPTURE when
   /// shooting video.
-  Future<void> setEnabledUseCases(List<$base.UseCase> useCases) =>
+  Future<void> setEnabledUseCases(List<$interface.UseCase> useCases) =>
       _obj.setEnabledUseCases(useCases);
 
   /// Returns the ResolutionSelector for Preview.
   ///
   /// This method returns the value set by setPreviewResolutionSelector. It returns
   /// null if the value has not been set.
-  Future<$base.ResolutionSelector?> getPreviewResolutionSelector() =>
+  Future<$interface.ResolutionSelector?> getPreviewResolutionSelector() =>
       _obj.getPreviewResolutionSelector();
 
   /// Sets the ResolutionSelector for Preview.
@@ -234,11 +234,11 @@ final class CameraController with ChangeNotifier {
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   Future<void> setPreviewResolutionSelector(
-          $base.ResolutionSelector? resolutionSelector) =>
+          $interface.ResolutionSelector? resolutionSelector) =>
       _obj.setPreviewResolutionSelector(resolutionSelector);
 
   /// Gets the flash mode for ImageCapture.
-  Future<$base.FlashMode> getImageCaptureFlashMode() =>
+  Future<$interface.FlashMode> getImageCaptureFlashMode() =>
       _obj.getImageCaptureFlashMode();
 
   /// Sets the flash mode for ImageCapture.
@@ -252,11 +252,12 @@ final class CameraController with ChangeNotifier {
   /// application's responsibility to change flash mode to the desired one if it
   /// leads to a no-op case (e.g. switching to rear camera while FLASH_MODE_SCREEN
   /// is still set). Otherwise, FLASH_MODE_OFF will be set.
-  Future<void> setImageCaptureFlashMode($base.FlashMode flashMode) =>
+  Future<void> setImageCaptureFlashMode($interface.FlashMode flashMode) =>
       _obj.setImageCaptureFlashMode(flashMode);
 
   /// Returns the image capture mode.
-  Future<$base.CaptureMode> getImageCaptureMode() => _obj.getImageCaptureMode();
+  Future<$interface.CaptureMode> getImageCaptureMode() =>
+      _obj.getImageCaptureMode();
 
   /// Sets the image capture mode.
   ///
@@ -266,14 +267,14 @@ final class CameraController with ChangeNotifier {
   ///
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
-  Future<void> setImageCaptureMode($base.CaptureMode captureMode) =>
+  Future<void> setImageCaptureMode($interface.CaptureMode captureMode) =>
       _obj.setImageCaptureMode(captureMode);
 
   /// Returns the ResolutionSelector for ImageCapture.
   ///
   /// This method returns the value set by setImageCaptureResolutionSelector
   /// (ResolutionSelector)}. It returns null if the value has not been set.
-  Future<$base.ResolutionSelector?> getImageCaptureResolutionSelector() =>
+  Future<$interface.ResolutionSelector?> getImageCaptureResolutionSelector() =>
       _obj.getImageCaptureResolutionSelector();
 
   /// Sets the ResolutionSelector for ImageCapture.
@@ -288,18 +289,18 @@ final class CameraController with ChangeNotifier {
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   Future<void> setImageCaptureResolutionSelector(
-          $base.ResolutionSelector? resolutionSelector) =>
+          $interface.ResolutionSelector? resolutionSelector) =>
       _obj.setImageCaptureResolutionSelector(resolutionSelector);
 
   /// Captures a new still image for in memory access.
   ///
   /// The listener is responsible for calling close on the returned image.
   Future<void> takePictureToMemory({
-    $base.CaptureStartedCallback? onCaptureStarted,
-    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $interface.CaptureStartedCallback? onCaptureStarted,
+    $interface.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $interface.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
     CaptureSuccessCallback? onCaptureSuccess,
-    $base.CaptureErrorCallback? onError,
+    $interface.CaptureErrorCallback? onError,
   }) =>
       _obj.takePictureToMemory(
         onCaptureStarted: onCaptureStarted,
@@ -326,11 +327,11 @@ final class CameraController with ChangeNotifier {
   /// camera.
   Future<void> takePictureToFile(
     OutputFileOptions outputFileOptions, {
-    $base.CaptureStartedCallback? onCaptureStarted,
-    $base.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    $base.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    $base.ImageSavedCallback? onImageSaved,
-    $base.CaptureErrorCallback? onError,
+    $interface.CaptureStartedCallback? onCaptureStarted,
+    $interface.CaptureProcessProgressedCallback? onCaptureProcessProgressed,
+    $interface.PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
+    $interface.ImageSavedCallback? onImageSaved,
+    $interface.CaptureErrorCallback? onError,
   }) =>
       _obj.takePictureToFile(
         outputFileOptions.obj,
@@ -344,8 +345,9 @@ final class CameraController with ChangeNotifier {
   /// Returns the mode with which images are acquired.
   ///
   /// If not set, it defaults to STRATEGY_KEEP_ONLY_LATEST.
-  Future<$base.BackpressureStrategy> getImageAnalysisBackpressureStrategy() =>
-      _obj.getImageAnalysisBackpressureStrategy();
+  Future<$interface.BackpressureStrategy>
+      getImageAnalysisBackpressureStrategy() =>
+          _obj.getImageAnalysisBackpressureStrategy();
 
   /// Sets the backpressure strategy to apply to the image producer to deal with
   /// scenarios where images may be produced faster than they can be analyzed.
@@ -356,7 +358,7 @@ final class CameraController with ChangeNotifier {
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   Future<void> setImageAnalysisBackpressureStrategy(
-          $base.BackpressureStrategy strategy) =>
+          $interface.BackpressureStrategy strategy) =>
       _obj.setImageAnalysisBackpressureStrategy(strategy);
 
   /// Gets the image queue depth of ImageAnalysis.
@@ -377,7 +379,7 @@ final class CameraController with ChangeNotifier {
   ///
   /// The returned image format can be either OUTPUT_IMAGE_FORMAT_YUV_420_888 or
   /// OUTPUT_IMAGE_FORMAT_RGBA_8888.
-  Future<$base.ImageFormat> getImageAnalysisOutputImageFormat() =>
+  Future<$interface.ImageFormat> getImageAnalysisOutputImageFormat() =>
       _obj.getImageAnalysisOutputImageFormat();
 
   /// Sets the output image format for ImageAnalysis.
@@ -394,14 +396,15 @@ final class CameraController with ChangeNotifier {
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   /// If the value is changed when the camera is active, check the getFormat value
   /// to determine when the new format takes effect.
-  Future<void> setImageAnalysisOutputImageFormat($base.ImageFormat format) =>
+  Future<void> setImageAnalysisOutputImageFormat(
+          $interface.ImageFormat format) =>
       _obj.setImageAnalysisOutputImageFormat(format);
 
   /// Returns the ResolutionSelector for ImageAnalysis.
   ///
   /// This method returns the value set by setImageAnalysisResolutionSelector. It
   /// returns null if the value has not been set.
-  Future<$base.ResolutionSelector?> getImageAnalysisResolutionSelector() =>
+  Future<$interface.ResolutionSelector?> getImageAnalysisResolutionSelector() =>
       _obj.getImageAnalysisResolutionSelector();
 
   /// Sets the ResolutionSelector for ImageAnalysis.
@@ -415,7 +418,7 @@ final class CameraController with ChangeNotifier {
   /// Changing the value will reconfigure the camera which will cause additional
   /// latency. To avoid this, set the value before controller is bound to lifecycle.
   Future<void> setImageAnalysisResolutionSelector(
-          $base.ResolutionSelector? resolutionSelector) =>
+          $interface.ResolutionSelector? resolutionSelector) =>
       _obj.setImageAnalysisResolutionSelector(resolutionSelector);
 
   /// Sets an analyzer to receive and analyze images.
@@ -454,7 +457,7 @@ final class CameraController with ChangeNotifier {
       _obj.clearImageAnalysisAnalyzer();
 
   /// Gets the DynamicRange for video capture.
-  Future<$base.DynamicRange> getVideoCaptureDynamicRange() =>
+  Future<$interface.DynamicRange> getVideoCaptureDynamicRange() =>
       _obj.getVideoCaptureDynamicRange();
 
   /// Sets the DynamicRange for video capture.
@@ -472,18 +475,19 @@ final class CameraController with ChangeNotifier {
   /// by providing HDR_UNSPECIFIED_10_BIT.
   ///
   /// If the dynamic range is not provided, the default value is SDR.
-  Future<void> setVideoCaptureDynamicRange($base.DynamicRange dynamicRange) =>
+  Future<void> setVideoCaptureDynamicRange(
+          $interface.DynamicRange dynamicRange) =>
       _obj.setVideoCaptureDynamicRange(dynamicRange);
 
   /// Gets the mirror mode for video capture.
-  Future<$base.MirrorMode> getVideoCaptureMirrorMode() =>
+  Future<$interface.MirrorMode> getVideoCaptureMirrorMode() =>
       _obj.getVideoCaptureMirrorMode();
 
   /// Sets the mirror mode for video capture.
   ///
   /// Valid values include: MIRROR_MODE_OFF, MIRROR_MODE_ON and MIRROR_MODE_ON_FRONT_ONLY.
   /// If not set, it defaults to MIRROR_MODE_OFF.
-  Future<void> setVideoCaptureMirrorMode($base.MirrorMode mirrorMode) =>
+  Future<void> setVideoCaptureMirrorMode($interface.MirrorMode mirrorMode) =>
       _obj.setVideoCaptureMirrorMode(mirrorMode);
 
   /// Returns the QualitySelector for VIDEO_CAPTURE.
@@ -507,7 +511,7 @@ final class CameraController with ChangeNotifier {
       _obj.setVideoCaptureQualitySelector(qualitySelector.obj);
 
   /// Gets the target frame rate in frames per second for video capture.
-  Future<$base.Range<int>> getVideoCaptureTargetFrameRate() =>
+  Future<$interface.Range<int>> getVideoCaptureTargetFrameRate() =>
       _obj.getVideoCaptureTargetFrameRate();
 
   /// Sets the target frame rate range in frames per second for video capture.
@@ -523,7 +527,7 @@ final class CameraController with ChangeNotifier {
   /// By default, the value is FRAME_RATE_RANGE_UNSPECIFIED. For supported frame
   /// rates, see getSupportedFrameRateRanges.
   Future<void> setVideoCaptureTargetFrameRate(
-          $base.Range<int> targetFrameRate) =>
+          $interface.Range<int> targetFrameRate) =>
       _obj.setVideoCaptureTargetFrameRate(targetFrameRate);
 
   /// Returns whether there is an in-progress video recording.
@@ -545,8 +549,8 @@ final class CameraController with ChangeNotifier {
   /// starting a recording will fail with a SecurityException.
   Future<Recording> startRecording(
     FileOutputOptions outputOptions, {
-    required $base.AudioConfig audioConfig,
-    required $base.VideoRecordEventConsumer listener,
+    required $interface.AudioConfig audioConfig,
+    required $interface.VideoRecordEventConsumer listener,
   }) async {
     final obj = await _obj.startRecording(
       outputOptions.obj,
@@ -564,13 +568,13 @@ final class CameraController with ChangeNotifier {
   }
 }
 
-final class _RawAnalyzer implements $base.Analyzer {
+final class _RawAnalyzer implements $interface.Analyzer {
   final Analyzer _analyzer;
 
   _RawAnalyzer(this._analyzer);
 
   @override
-  void analyze($base.ImageProxy image) {
+  void analyze($interface.ImageProxy image) {
     _analyzer.analyze(image.args);
   }
 }
