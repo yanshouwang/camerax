@@ -1,0 +1,17 @@
+import 'package:camerax_platform_interface/src/camerax.dart';
+
+import 'analyzer.dart';
+import 'image_proxy.dart';
+
+typedef ImageProxyCallback = void Function(ImageProxy image);
+
+abstract base class ImageAnalyzer extends Analyzer {
+  ImageAnalyzer.impl() : super.impl();
+
+  factory ImageAnalyzer({
+    required ImageProxyCallback analyze,
+  }) =>
+      CameraX.instance.createImageAnalyzer(
+        analyze: analyze,
+      );
+}

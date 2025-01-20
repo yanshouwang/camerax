@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:camerax/src/core.dart';
-import 'package:camerax/src/ml.dart';
 import 'package:camerax/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $interface;
@@ -437,14 +436,8 @@ final class CameraController with ChangeNotifier {
   /// If the getDefaultTargetResolution returns a non-null value, calling this
   /// method will reconfigure the camera which might cause additional latency.
   /// To avoid this, set the value before controller is bound to the lifecycle.
-  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) async {
-    if (analyzer is MlKitAnalyzer) {
-      await _obj.setImageAnalysisAnalyzer(analyzer.obj);
-    } else {
-      final obj = _RawAnalyzer(analyzer);
-      await _obj.setImageAnalysisAnalyzer(obj);
-    }
-  }
+  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) =>
+      _obj.setImageAnalysisAnalyzer(analyzer.obj);
 
   /// Removes a previously set analyzer.
   ///
@@ -565,16 +558,5 @@ final class CameraController with ChangeNotifier {
     _zoomStateChangedSubscription.cancel();
     _torchStateChangedSubscription.cancel();
     super.dispose();
-  }
-}
-
-final class _RawAnalyzer implements $interface.Analyzer {
-  final Analyzer _analyzer;
-
-  _RawAnalyzer(this._analyzer);
-
-  @override
-  void analyze($interface.ImageProxy image) {
-    _analyzer.analyze(image.args);
   }
 }

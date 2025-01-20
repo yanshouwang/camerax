@@ -169,7 +169,8 @@ class PigeonInstanceManager {
     OnImageCapturedCallback.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     OnImageSavedCallback.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     Analyzer.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    RawAnalyzer.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    ImageAnalyzer.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    JpegAnalyzer.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     Detector.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     Address.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     CalendarDateTime.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
@@ -7394,8 +7395,9 @@ class Analyzer extends PigeonInternalProxyApiBaseClass {
   }
 }
 
-class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
-  RawAnalyzer({
+class ImageAnalyzer extends PigeonInternalProxyApiBaseClass
+    implements Analyzer {
+  ImageAnalyzer({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
     required this.analyze,
@@ -7403,11 +7405,11 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
     final int pigeonVar_instanceIdentifier =
         pigeon_instanceManager.addDartCreatedInstance(this);
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecRawAnalyzer;
+        _pigeonVar_codecImageAnalyzer;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
     () async {
       const String pigeonVar_channelName =
-          'dev.flutter.pigeon.camerax_android.RawAnalyzer.pigeon_defaultConstructor';
+          'dev.flutter.pigeon.camerax_android.ImageAnalyzer.pigeon_defaultConstructor';
       final BasicMessageChannel<Object?> pigeonVar_channel =
           BasicMessageChannel<Object?>(
         pigeonVar_channelName,
@@ -7430,18 +7432,18 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
     }();
   }
 
-  /// Constructs [RawAnalyzer] without creating the associated native object.
+  /// Constructs [ImageAnalyzer] without creating the associated native object.
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies for an [PigeonInstanceManager].
   @protected
-  RawAnalyzer.pigeon_detached({
+  ImageAnalyzer.pigeon_detached({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
     required this.analyze,
   });
 
-  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecRawAnalyzer =
+  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecImageAnalyzer =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
   /// Callback method.
@@ -7454,8 +7456,8 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
   ///
   /// ```dart
   /// final WeakReference weakMyVariable = WeakReference(myVariable);
-  /// final RawAnalyzer instance = RawAnalyzer(
-  ///  analyze: (RawAnalyzer pigeon_instance, ...) {
+  /// final ImageAnalyzer instance = ImageAnalyzer(
+  ///  analyze: (ImageAnalyzer pigeon_instance, ...) {
   ///    print(weakMyVariable?.target);
   ///  },
   /// );
@@ -7464,7 +7466,7 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
   /// Alternatively, [PigeonInstanceManager.removeWeakReference] can be used to
   /// release the associated Native object manually.
   final void Function(
-    RawAnalyzer pigeon_instance,
+    ImageAnalyzer pigeon_instance,
     ImageProxy image,
   ) analyze;
 
@@ -7473,7 +7475,7 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
     void Function(
-      RawAnalyzer pigeon_instance,
+      ImageAnalyzer pigeon_instance,
       ImageProxy image,
     )? analyze,
   }) {
@@ -7484,7 +7486,7 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
     {
       final BasicMessageChannel<Object?> pigeonVar_channel =
           BasicMessageChannel<Object?>(
-              'dev.flutter.pigeon.camerax_android.RawAnalyzer.analyze',
+              'dev.flutter.pigeon.camerax_android.ImageAnalyzer.analyze',
               pigeonChannelCodec,
               binaryMessenger: binaryMessenger);
       if (pigeon_clearHandlers) {
@@ -7492,14 +7494,15 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RawAnalyzer.analyze was null.');
+              'Argument for dev.flutter.pigeon.camerax_android.ImageAnalyzer.analyze was null.');
           final List<Object?> args = (message as List<Object?>?)!;
-          final RawAnalyzer? arg_pigeon_instance = (args[0] as RawAnalyzer?);
+          final ImageAnalyzer? arg_pigeon_instance =
+              (args[0] as ImageAnalyzer?);
           assert(arg_pigeon_instance != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RawAnalyzer.analyze was null, expected non-null RawAnalyzer.');
+              'Argument for dev.flutter.pigeon.camerax_android.ImageAnalyzer.analyze was null, expected non-null ImageAnalyzer.');
           final ImageProxy? arg_image = (args[1] as ImageProxy?);
           assert(arg_image != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RawAnalyzer.analyze was null, expected non-null ImageProxy.');
+              'Argument for dev.flutter.pigeon.camerax_android.ImageAnalyzer.analyze was null, expected non-null ImageProxy.');
           try {
             (analyze ?? arg_pigeon_instance!.analyze)
                 .call(arg_pigeon_instance!, arg_image!);
@@ -7516,11 +7519,144 @@ class RawAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
   }
 
   @override
-  RawAnalyzer pigeon_copy() {
-    return RawAnalyzer.pigeon_detached(
+  ImageAnalyzer pigeon_copy() {
+    return ImageAnalyzer.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
       analyze: analyze,
+    );
+  }
+}
+
+class JpegAnalyzer extends PigeonInternalProxyApiBaseClass implements Analyzer {
+  JpegAnalyzer({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.consumer,
+    required CoordinateSystem targetCoordinateSystem,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecJpegAnalyzer;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.JpegAnalyzer.pigeon_defaultConstructor';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final List<Object?>? pigeonVar_replyList = await pigeonVar_channel.send(
+              <Object?>[pigeonVar_instanceIdentifier, targetCoordinateSystem])
+          as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [JpegAnalyzer] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  JpegAnalyzer.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.consumer,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecJpegAnalyzer =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  /// Callback method.
+  ///
+  /// For the associated Native object to be automatically garbage collected,
+  /// it is required that the implementation of this `Function` doesn't have a
+  /// strong reference to the encapsulating class instance. When this `Function`
+  /// references a non-local variable, it is strongly recommended to access it
+  /// with a `WeakReference`:
+  ///
+  /// ```dart
+  /// final WeakReference weakMyVariable = WeakReference(myVariable);
+  /// final JpegAnalyzer instance = JpegAnalyzer(
+  ///  consumer: (JpegAnalyzer pigeon_instance, ...) {
+  ///    print(weakMyVariable?.target);
+  ///  },
+  /// );
+  /// ```
+  ///
+  /// Alternatively, [PigeonInstanceManager.removeWeakReference] can be used to
+  /// release the associated Native object manually.
+  final void Function(
+    JpegAnalyzer pigeon_instance,
+    Uint8List value,
+  ) consumer;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    void Function(
+      JpegAnalyzer pigeon_instance,
+      Uint8List value,
+    )? consumer,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+              'dev.flutter.pigeon.camerax_android.JpegAnalyzer.consumer',
+              pigeonChannelCodec,
+              binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_android.JpegAnalyzer.consumer was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final JpegAnalyzer? arg_pigeon_instance = (args[0] as JpegAnalyzer?);
+          assert(arg_pigeon_instance != null,
+              'Argument for dev.flutter.pigeon.camerax_android.JpegAnalyzer.consumer was null, expected non-null JpegAnalyzer.');
+          final Uint8List? arg_value = (args[1] as Uint8List?);
+          assert(arg_value != null,
+              'Argument for dev.flutter.pigeon.camerax_android.JpegAnalyzer.consumer was null, expected non-null Uint8List.');
+          try {
+            (consumer ?? arg_pigeon_instance!.consumer)
+                .call(arg_pigeon_instance!, arg_value!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  JpegAnalyzer pigeon_copy() {
+    return JpegAnalyzer.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      consumer: consumer,
     );
   }
 }
@@ -10889,33 +11025,6 @@ class MlKitAnalyzer extends PigeonInternalProxyApiBaseClass
           }
         });
       }
-    }
-  }
-
-  Future<void> analyze(ImageProxy image) async {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecMlKitAnalyzer;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.MlKitAnalyzer.analyze';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_channel.send(<Object?>[this, image]) as List<Object?>?;
-    if (pigeonVar_replyList == null) {
-      throw _createConnectionError(pigeonVar_channelName);
-    } else if (pigeonVar_replyList.length > 1) {
-      throw PlatformException(
-        code: pigeonVar_replyList[0]! as String,
-        message: pigeonVar_replyList[1] as String?,
-        details: pigeonVar_replyList[2],
-      );
-    } else {
-      return;
     }
   }
 

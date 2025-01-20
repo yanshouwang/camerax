@@ -15,6 +15,7 @@ final class MlKitAnalyzerResult {
 
   Future<Object?> getThrowable(Detector detector) =>
       _obj.getThrowable(detector.obj);
+
   Future<T?> getValue<T>(Detector<T> detector) => _obj.getValue(detector.obj);
 }
 

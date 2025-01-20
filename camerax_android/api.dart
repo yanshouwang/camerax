@@ -803,10 +803,23 @@ abstract class Analyzer {}
     fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
   ),
 )
-abstract class RawAnalyzer implements Analyzer {
-  RawAnalyzer();
+abstract class ImageAnalyzer implements Analyzer {
+  ImageAnalyzer();
 
   late final void Function(ImageProxy image) analyze;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
+  ),
+)
+abstract class JpegAnalyzer implements Analyzer {
+  JpegAnalyzer({
+    required CoordinateSystem targetCoordinateSystem,
+  });
+
+  late final void Function(Uint8List value) consumer;
 }
 
 @ProxyApi(
@@ -1210,8 +1223,6 @@ abstract class MlKitAnalyzer implements Analyzer {
     required CoordinateSystem targetCoordinateSystem,
     required MlKitAnalyzerResultConsumer consumer,
   });
-
-  void analyze(ImageProxy image);
 }
 
 @ProxyApi(

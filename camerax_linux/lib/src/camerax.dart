@@ -183,4 +183,19 @@ final class CameraX extends $interface.CameraX {
     // TODO: implement getResolution
     throw UnimplementedError();
   }
+
+  @override
+  $interface.ImageAnalyzer createImageAnalyzer(
+      {required $interface.ImageProxyCallback analyze}) {
+    // TODO: implement createImageAnalyzer
+    throw UnimplementedError();
+  }
+
+  @override
+  $interface.JpegAnalyzer createJpegAnalyzer(
+      {required $interface.CoordinateSystem targetCoordinateSystem,
+      required $interface.JpegConsumer consumer}) {
+    // TODO: implement createJpegAnalyzer
+    throw UnimplementedError();
+  }
 }

@@ -5,7 +5,6 @@ import 'dart:ui' as ui;
 import 'package:camerax_android/src/legacy/camerax.g.dart' as $native;
 import 'package:camerax_android/src/legacy/common.dart';
 import 'package:camerax_android/src/legacy/core.dart';
-import 'package:camerax_android/src/legacy/ml.dart';
 import 'package:camerax_android/src/legacy/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $interface;
@@ -350,12 +349,10 @@ final class CameraController extends $interface.CameraController {
 
   @override
   Future<void> setImageAnalysisAnalyzer($interface.Analyzer analyzer) async {
-    final obj = analyzer is MlKitAnalyzer
-        ? analyzer.obj
-        : $native.RawAnalyzer(
-            analyze: (obj, image) => analyzer.analyze(image.args),
-          );
-    await this.obj.setImageAnalysisAnalyzer(obj);
+    if (analyzer is! Analyzer) {
+      throw TypeError();
+    }
+    await obj.setImageAnalysisAnalyzer(analyzer.obj);
   }
 
   @override

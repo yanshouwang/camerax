@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:camerax_android/src/legacy/ml.dart';
+import 'package:camerax_android/src/legacy/view/jpeg_analyzer.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart'
     as $interface;
 
 import 'common.dart';
 import 'core.dart';
+import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
 
@@ -220,6 +221,26 @@ final class CameraX extends $interface.CameraX {
       others: others,
       disableAutoCancel: disableAutoCancel,
       autoCancelDuration: autoCancelDuration,
+    );
+  }
+
+  @override
+  $interface.ImageAnalyzer createImageAnalyzer({
+    required $interface.ImageProxyCallback analyze,
+  }) {
+    return ImageAnalyzer(
+      analyze: analyze,
+    );
+  }
+
+  @override
+  $interface.JpegAnalyzer createJpegAnalyzer({
+    required $interface.CoordinateSystem targetCoordinateSystem,
+    required $interface.JpegConsumer consumer,
+  }) {
+    return JpegAnalyzer(
+      targetCoordinateSystem: targetCoordinateSystem,
+      consumer: consumer,
     );
   }
 }

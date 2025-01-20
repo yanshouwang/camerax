@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:camerax/camerax.dart';
 import 'package:camerax_example/models.dart';
@@ -8,7 +10,7 @@ import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
-import 'raw_pixels_analyzer.dart';
+typedef ImageModelCallback = void Function(ImageModel imageModel);
 
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
@@ -24,6 +26,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   ExposureState? _exposureState;
   Uri? _savedUri;
   ImageModel? _imageModel;
+  Uint8List? _jpegValue;
   List<Barcode> _barcodes;
   List<Face> _faces;
 
@@ -47,6 +50,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
   ImageModel? get imageModel => _imageModel;
+  Uint8List? get jpegValue => _jpegValue;
   List<Barcode> get barcodes => _barcodes;
   List<Face> get faces => _faces;
 
@@ -58,6 +62,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _cameraControl = await controller.getCameraControl();
     _cameraInfo = await controller.getCameraInfo();
     _exposureState = await _cameraInfo?.getExposureState();
+    logger.info(
+        'exposureState: ${exposureState?.exposureCompensationRange.lower} - ${exposureState?.exposureCompensationRange.upper}, ${exposureState?.exposureCompensationStep}');
     notifyListeners();
   }
 
@@ -77,7 +83,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _clearImageAnalysisAnalyzer();
         break;
       case CameraMode.rawValue:
-        await _setRawAnalyzer();
+        // await _setImageAnalyzer();
+        await _setJpegAnalyzer();
         break;
       case CameraMode.scanCode:
         final analyzer = MlKitAnalyzer(
@@ -102,6 +109,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     }
     _mode = mode;
     _imageModel = null;
+    _jpegValue = null;
     _barcodes = [];
     _faces = [];
     notifyListeners();
@@ -223,6 +231,15 @@ class HomeViewModel extends ViewModel with TypeLogger {
     }
     await controller.initialize();
     await controller.setCameraSelector(CameraSelector.back);
+    // TODO: Use resolutionFilter will cause ANR error.
+    final resolutionSelector = ResolutionSelector(
+      // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
+      resolutionStrategy: ResolutionStrategy(
+        boundSize: Size(1024, 768),
+        fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
+      ),
+    );
+    await controller.setImageAnalysisResolutionSelector(resolutionSelector);
     await bind();
   }
 
@@ -234,10 +251,54 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.setCameraSelector(cameraSelector);
   }
 
-  Future<void> _setRawAnalyzer() async {
+  Future<void> _setImageAnalyzer() async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba8888);
-    final analyzer = RawPixelsAnalyzer(_onRawPixelsAnalyzed);
+    final analyzer = ImageAnalyzer(
+      analyze: (image) async {
+        try {
+          final format = image.format;
+          final width = image.width;
+          final height = image.height;
+          final planes = image.planes;
+          final rotationDegrees = image.imageInfo.rotationDegrees;
+          logger.info('image: $width * $height, $rotationDegrees°');
+          if (format != ImageFormat.rgba8888) {
+            throw ArgumentError.value(format);
+          }
+          final rawPixels = planes.first.buffer;
+          final buffer = await ui.ImmutableBuffer.fromUint8List(rawPixels);
+          final descriptor = ui.ImageDescriptor.raw(
+            buffer,
+            width: width,
+            height: height,
+            pixelFormat: ui.PixelFormat.rgba8888,
+          );
+          final codec = await descriptor.instantiateCodec();
+          final frame = await codec.getNextFrame();
+          final imageModel = ImageModel(
+            image: frame.image,
+            rotationDegrees: rotationDegrees,
+          );
+          _onRawPixelsAnalyzed(imageModel);
+        } finally {
+          image.close();
+        }
+      },
+    );
+    await controller.setImageAnalysisAnalyzer(analyzer);
+    await controller.bind();
+  }
+
+  Future<void> _setJpegAnalyzer() async {
+    await controller.unbind();
+    final analyzer = JpegAnalyzer(
+      targetCoordinateSystem: CoordinateSystem.viewReferenced,
+      consumer: (value) {
+        _jpegValue = value;
+        notifyListeners();
+      },
+    );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }

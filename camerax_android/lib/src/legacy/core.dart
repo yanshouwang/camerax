@@ -1,3 +1,4 @@
+export 'core/analyzer.dart';
 export 'core/aspect_ratio.dart';
 export 'core/backpressure_strategy.dart';
 export 'core/bit_depth.dart';
@@ -12,6 +13,7 @@ export 'core/encoding.dart';
 export 'core/exposure_state.dart';
 export 'core/flash_mode.dart';
 export 'core/focus_metering_action.dart';
+export 'core/image_analyzer.dart';
 export 'core/image_format.dart';
 export 'core/image_info.dart';
 export 'core/image_proxy.dart';

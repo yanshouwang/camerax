@@ -94,6 +94,15 @@ abstract base class CameraX extends PlatformInterface {
     Duration? autoCancelDuration,
   });
 
+  ImageAnalyzer createImageAnalyzer({
+    required ImageProxyCallback analyze,
+  });
+
+  JpegAnalyzer createJpegAnalyzer({
+    required CoordinateSystem targetCoordinateSystem,
+    required JpegConsumer consumer,
+  });
+
   ZoomSuggestionOptions createZoomSuggestionOptions({
     required ZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,

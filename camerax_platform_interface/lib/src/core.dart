@@ -13,6 +13,7 @@ export 'core/encoding.dart';
 export 'core/exposure_state.dart';
 export 'core/flash_mode.dart';
 export 'core/focus_metering_action.dart';
+export 'core/image_analyzer.dart';
 export 'core/image_captured_callback.dart';
 export 'core/image_format.dart';
 export 'core/image_info.dart';

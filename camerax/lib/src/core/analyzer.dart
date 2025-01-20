@@ -1,5 +1,8 @@
-import 'image_proxy.dart';
+import 'package:camerax_platform_interface/camerax_platform_interface.dart'
+    as $interface;
+import 'package:meta/meta.dart';
 
-abstract interface class Analyzer {
-  void analyze(ImageProxy image);
+abstract base class Analyzer {
+  @internal
+  $interface.Analyzer get obj;
 }

@@ -1,14 +1,15 @@
 package dev.hebei.camerax_android.legacy.core
 
+import android.graphics.Bitmap
 import dev.hebei.camerax_android.legacy.CameraXRegistrar
-import dev.hebei.camerax_android.legacy.PigeonApiRawAnalyzer
+import dev.hebei.camerax_android.legacy.PigeonApiImageAnalyzer
 
-class RawAnalyzer(registrar: CameraXRegistrar) : PigeonApiRawAnalyzer(registrar) {
+class ImageAnalyzer(registrar: CameraXRegistrar) : PigeonApiImageAnalyzer(registrar) {
     override fun pigeon_defaultConstructor(): androidx.camera.core.ImageAnalysis.Analyzer {
         return Impl(this)
     }
 
-    class Impl(private val api: RawAnalyzer) : androidx.camera.core.ImageAnalysis.Analyzer {
+    class Impl(private val api: ImageAnalyzer) : androidx.camera.core.ImageAnalysis.Analyzer {
         override fun analyze(image: androidx.camera.core.ImageProxy) {
             api.analyze(this, image) {}
         }

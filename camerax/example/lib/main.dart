@@ -32,9 +32,9 @@ void onLogRecorded(LogRecord record) {
 
 void onStartUp() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]);
   const style = SystemUiOverlayStyle(
     statusBarColor: Color(0x00000000),
   );

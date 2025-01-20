@@ -49,6 +49,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final savedUri = viewModel.savedUri;
     final recording = viewModel.recording;
     final imageModel = viewModel.imageModel;
+    final jpegValue = viewModel.jpegValue;
     final barcodes = viewModel.barcodes;
     final faces = viewModel.faces;
     const pageDuration = Duration(milliseconds: 300);
@@ -120,6 +121,18 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             child: RawPixelsView(
                               image: imageModel.image,
                               rotationDegrees: imageModel.rotationDegrees,
+                            ),
+                          ),
+                        ),
+                      if (jpegValue != null)
+                        Container(
+                          alignment: Alignment.topRight,
+                          margin: const EdgeInsets.all(20.0),
+                          child: SizedBox(
+                            width: 100.0,
+                            child: Image.memory(
+                              jpegValue,
+                              gaplessPlayback: true,
                             ),
                           ),
                         ),

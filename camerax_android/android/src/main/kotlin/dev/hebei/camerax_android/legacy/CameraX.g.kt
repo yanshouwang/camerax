@@ -617,10 +617,16 @@ abstract class CameraXPigeonProxyApiRegistrar(val binaryMessenger: BinaryMesseng
   }
 
   /**
-   * An implementation of [PigeonApiRawAnalyzer] used to add a new Dart instance of
-   * `RawAnalyzer` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiImageAnalyzer] used to add a new Dart instance of
+   * `ImageAnalyzer` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiRawAnalyzer(): PigeonApiRawAnalyzer
+  abstract fun getPigeonApiImageAnalyzer(): PigeonApiImageAnalyzer
+
+  /**
+   * An implementation of [PigeonApiJpegAnalyzer] used to add a new Dart instance of
+   * `JpegAnalyzer` to the Dart `InstanceManager`.
+   */
+  abstract fun getPigeonApiJpegAnalyzer(): PigeonApiJpegAnalyzer
 
   /**
    * An implementation of [PigeonApiDetector] used to add a new Dart instance of
@@ -950,7 +956,8 @@ abstract class CameraXPigeonProxyApiRegistrar(val binaryMessenger: BinaryMesseng
     PigeonApiOutputFileOptions.setUpMessageHandlers(binaryMessenger, getPigeonApiOutputFileOptions())
     PigeonApiOnImageCapturedCallback.setUpMessageHandlers(binaryMessenger, getPigeonApiOnImageCapturedCallback())
     PigeonApiOnImageSavedCallback.setUpMessageHandlers(binaryMessenger, getPigeonApiOnImageSavedCallback())
-    PigeonApiRawAnalyzer.setUpMessageHandlers(binaryMessenger, getPigeonApiRawAnalyzer())
+    PigeonApiImageAnalyzer.setUpMessageHandlers(binaryMessenger, getPigeonApiImageAnalyzer())
+    PigeonApiJpegAnalyzer.setUpMessageHandlers(binaryMessenger, getPigeonApiJpegAnalyzer())
     PigeonApiZoomCallback.setUpMessageHandlers(binaryMessenger, getPigeonApiZoomCallback())
     PigeonApiZoomSuggestionOptions.setUpMessageHandlers(binaryMessenger, getPigeonApiZoomSuggestionOptions())
     PigeonApiBarcodeScannerOptions.setUpMessageHandlers(binaryMessenger, getPigeonApiBarcodeScannerOptions())
@@ -1006,7 +1013,8 @@ abstract class CameraXPigeonProxyApiRegistrar(val binaryMessenger: BinaryMesseng
     PigeonApiOutputFileOptions.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiOnImageCapturedCallback.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiOnImageSavedCallback.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiRawAnalyzer.setUpMessageHandlers(binaryMessenger, null)
+    PigeonApiImageAnalyzer.setUpMessageHandlers(binaryMessenger, null)
+    PigeonApiJpegAnalyzer.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiZoomCallback.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiZoomSuggestionOptions.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiBarcodeScannerOptions.setUpMessageHandlers(binaryMessenger, null)
@@ -1160,7 +1168,10 @@ private class CameraXPigeonProxyApiBaseCodec(val registrar: CameraXPigeonProxyAp
       registrar.getPigeonApiOnImageSavedCallback().pigeon_newInstance(value) { }
     }
      else if (value is androidx.camera.core.ImageAnalysis.Analyzer) {
-      registrar.getPigeonApiRawAnalyzer().pigeon_newInstance(value) { }
+      registrar.getPigeonApiImageAnalyzer().pigeon_newInstance(value) { }
+    }
+     else if (value is androidx.camera.core.ImageAnalysis.Analyzer) {
+      registrar.getPigeonApiJpegAnalyzer().pigeon_newInstance(value) { }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.Address) {
       registrar.getPigeonApiAddress().pigeon_newInstance(value) { }
@@ -5651,15 +5662,15 @@ open class PigeonApiAnalyzer(open val pigeonRegistrar: CameraXPigeonProxyApiRegi
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiRawAnalyzer(open val pigeonRegistrar: CameraXPigeonProxyApiRegistrar) {
+abstract class PigeonApiImageAnalyzer(open val pigeonRegistrar: CameraXPigeonProxyApiRegistrar) {
   abstract fun pigeon_defaultConstructor(): androidx.camera.core.ImageAnalysis.Analyzer
 
   companion object {
     @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiRawAnalyzer?) {
+    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiImageAnalyzer?) {
       val codec = api?.pigeonRegistrar?.codec ?: CameraXPigeonCodec()
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.RawAnalyzer.pigeon_defaultConstructor", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.ImageAnalyzer.pigeon_defaultConstructor", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -5680,7 +5691,7 @@ abstract class PigeonApiRawAnalyzer(open val pigeonRegistrar: CameraXPigeonProxy
   }
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of RawAnalyzer and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of ImageAnalyzer and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: androidx.camera.core.ImageAnalysis.Analyzer, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -5693,7 +5704,7 @@ abstract class PigeonApiRawAnalyzer(open val pigeonRegistrar: CameraXPigeonProxy
       Result.success(Unit)
       return
     }
-    throw IllegalStateException("Attempting to create a new Dart instance of RawAnalyzer, but the class has a nonnull callback method.")
+    throw IllegalStateException("Attempting to create a new Dart instance of ImageAnalyzer, but the class has a nonnull callback method.")
   }
 
   fun analyze(pigeon_instanceArg: androidx.camera.core.ImageAnalysis.Analyzer, imageArg: androidx.camera.core.ImageProxy, callback: (Result<Unit>) -> Unit)
@@ -5706,9 +5717,89 @@ abstract class PigeonApiRawAnalyzer(open val pigeonRegistrar: CameraXPigeonProxy
     }
     val binaryMessenger = pigeonRegistrar.binaryMessenger
     val codec = pigeonRegistrar.codec
-    val channelName = "dev.flutter.pigeon.camerax_android.RawAnalyzer.analyze"
+    val channelName = "dev.flutter.pigeon.camerax_android.ImageAnalyzer.analyze"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
     channel.send(listOf(pigeon_instanceArg, imageArg)) {
+      if (it is List<*>) {
+        if (it.size > 1) {
+          callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
+        } else {
+          callback(Result.success(Unit))
+        }
+      } else {
+        callback(Result.failure(createConnectionError(channelName)))
+      } 
+    }
+  }
+
+  @Suppress("FunctionName")
+  /** An implementation of [PigeonApiAnalyzer] used to access callback methods */
+  fun pigeon_getPigeonApiAnalyzer(): PigeonApiAnalyzer
+  {
+    return pigeonRegistrar.getPigeonApiAnalyzer()
+  }
+
+}
+@Suppress("UNCHECKED_CAST")
+abstract class PigeonApiJpegAnalyzer(open val pigeonRegistrar: CameraXPigeonProxyApiRegistrar) {
+  abstract fun pigeon_defaultConstructor(targetCoordinateSystem: CoordinateSystem): androidx.camera.core.ImageAnalysis.Analyzer
+
+  companion object {
+    @Suppress("LocalVariableName")
+    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiJpegAnalyzer?) {
+      val codec = api?.pigeonRegistrar?.codec ?: CameraXPigeonCodec()
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.JpegAnalyzer.pigeon_defaultConstructor", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val pigeon_identifierArg = args[0] as Long
+            val targetCoordinateSystemArg = args[1] as CoordinateSystem
+            val wrapped: List<Any?> = try {
+              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(targetCoordinateSystemArg), pigeon_identifierArg)
+              listOf(null)
+            } catch (exception: Throwable) {
+              wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+    }
+  }
+
+  @Suppress("LocalVariableName", "FunctionName")
+  /** Creates a Dart instance of JpegAnalyzer and attaches it to [pigeon_instanceArg]. */
+  fun pigeon_newInstance(pigeon_instanceArg: androidx.camera.core.ImageAnalysis.Analyzer, callback: (Result<Unit>) -> Unit)
+{
+    if (pigeonRegistrar.ignoreCallsToDart) {
+      callback(
+          Result.failure(
+              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
+      return
+    }
+    if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
+      Result.success(Unit)
+      return
+    }
+    throw IllegalStateException("Attempting to create a new Dart instance of JpegAnalyzer, but the class has a nonnull callback method.")
+  }
+
+  fun consumer(pigeon_instanceArg: androidx.camera.core.ImageAnalysis.Analyzer, valueArg: ByteArray, callback: (Result<Unit>) -> Unit)
+{
+    if (pigeonRegistrar.ignoreCallsToDart) {
+      callback(
+          Result.failure(
+              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
+      return
+    }
+    val binaryMessenger = pigeonRegistrar.binaryMessenger
+    val codec = pigeonRegistrar.codec
+    val channelName = "dev.flutter.pigeon.camerax_android.JpegAnalyzer.consumer"
+    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+    channel.send(listOf(pigeon_instanceArg, valueArg)) {
       if (it is List<*>) {
         if (it.size > 1) {
           callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
@@ -7403,8 +7494,6 @@ abstract class PigeonApiMlKitAnalyzerResultConsumer(open val pigeonRegistrar: Ca
 abstract class PigeonApiMlKitAnalyzer(open val pigeonRegistrar: CameraXPigeonProxyApiRegistrar) {
   abstract fun pigeon_defaultConstructor(detectors: List<dev.hebei.camerax_android.legacy.ml.Detector.Stub>, targetCoordinateSystem: CoordinateSystem, consumer: dev.hebei.camerax_android.legacy.common.MlKitAnalyzerResultConsumer.Impl): androidx.camera.mlkit.vision.MlKitAnalyzer
 
-  abstract fun analyze(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer, image: androidx.camera.core.ImageProxy)
-
   companion object {
     @Suppress("LocalVariableName")
     fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiMlKitAnalyzer?) {
@@ -7420,25 +7509,6 @@ abstract class PigeonApiMlKitAnalyzer(open val pigeonRegistrar: CameraXPigeonPro
             val consumerArg = args[3] as dev.hebei.camerax_android.legacy.common.MlKitAnalyzerResultConsumer.Impl
             val wrapped: List<Any?> = try {
               api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(detectorsArg,targetCoordinateSystemArg,consumerArg), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzer.analyze", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_instanceArg = args[0] as androidx.camera.mlkit.vision.MlKitAnalyzer
-            val imageArg = args[1] as androidx.camera.core.ImageProxy
-            val wrapped: List<Any?> = try {
-              api.analyze(pigeon_instanceArg, imageArg)
               listOf(null)
             } catch (exception: Throwable) {
               wrapError(exception)

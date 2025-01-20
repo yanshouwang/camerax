@@ -8,7 +8,7 @@ import 'mlkit_analyzer_result.dart';
 
 typedef MlKitAnalyzerResultConsumer = void Function(MlKitAnalyzerResult result);
 
-final class MlKitAnalyzer implements Analyzer {
+final class MlKitAnalyzer extends Analyzer {
   final $interface.MlKitAnalyzer _obj;
 
   MlKitAnalyzer({
@@ -22,10 +22,6 @@ final class MlKitAnalyzer implements Analyzer {
         );
 
   @internal
-  $interface.MlKitAnalyzer get obj => _obj;
-
   @override
-  void analyze(ImageProxy image) {
-    _obj.analyze(image.obj);
-  }
+  $interface.MlKitAnalyzer get obj => _obj;
 }

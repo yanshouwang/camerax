@@ -21,12 +21,14 @@ import dev.hebei.camerax_android.legacy.ml.face.FaceDetectorOptions
 import dev.hebei.camerax_android.legacy.ml.face.FaceLandmark
 import dev.hebei.camerax_android.legacy.video.*
 import dev.hebei.camerax_android.legacy.view.CameraController
+import dev.hebei.camerax_android.legacy.view.JpegAnalyzer
 import dev.hebei.camerax_android.legacy.view.LifecycleCameraController
 import dev.hebei.camerax_android.legacy.view.PreviewView
 import dev.hebei.camerax_android.legacy.view.video.AudioConfig
 import io.flutter.plugin.common.BinaryMessenger
 
-class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : CameraXPigeonProxyApiRegistrar(messenger) {
+class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
+    CameraXPigeonProxyApiRegistrar(messenger) {
     var activity: Activity? = null
 
     override fun getPigeonApiPermissionManager(): PigeonApiPermissionManager {
@@ -189,8 +191,12 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) : Camer
         return ImageAnalysis.Analyzer(this)
     }
 
-    override fun getPigeonApiRawAnalyzer(): PigeonApiRawAnalyzer {
-        return RawAnalyzer(this)
+    override fun getPigeonApiImageAnalyzer(): PigeonApiImageAnalyzer {
+        return ImageAnalyzer(this)
+    }
+
+    override fun getPigeonApiJpegAnalyzer(): PigeonApiJpegAnalyzer {
+        return JpegAnalyzer(this)
     }
 
     override fun getPigeonApiDetector(): PigeonApiDetector {

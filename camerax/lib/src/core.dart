@@ -3,6 +3,7 @@ export 'core/camera_control.dart';
 export 'core/camera_info.dart';
 export 'core/camera_selector.dart';
 export 'core/focus_metering_action.dart';
+export 'core/image_analyzer.dart';
 export 'core/image_capture_callback.dart';
 export 'core/image_proxy.dart';
 export 'core/metering_point_factory.dart';
