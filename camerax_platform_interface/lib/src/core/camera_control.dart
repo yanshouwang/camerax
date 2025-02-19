@@ -73,7 +73,7 @@ abstract base class CameraControl extends PlatformInterface {
   /// If none of the points with either AF/AE/AWB can be supported on the device
   /// or none of the points generates valid metering rectangles, the returned
   /// ListenableFuture in startFocusAndMetering will fail immediately.
-  Future<void> startFocusAndMetering(FocusMeteringAction action);
+  Future<bool> startFocusAndMetering(FocusMeteringAction action);
 
   /// Cancels current FocusMeteringAction and clears AF/AE/AWB regions.
   ///

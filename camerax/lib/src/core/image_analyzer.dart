@@ -3,14 +3,17 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart'
 import 'package:meta/meta.dart';
 
 import 'analyzer.dart';
+import 'image_proxy.dart';
+
+typedef ImageProxyCallback = void Function(ImageProxy image);
 
 final class ImageAnalyzer extends Analyzer {
   final $interface.ImageAnalyzer _obj;
 
   ImageAnalyzer({
-    required $interface.ImageProxyCallback analyze,
+    required ImageProxyCallback analyze,
   }) : _obj = $interface.ImageAnalyzer(
-          analyze: analyze,
+          analyze: (image) => analyze(image.args),
         );
 
   @internal
