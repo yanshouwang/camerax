@@ -8,12 +8,14 @@ import 'package:flutter/widgets.dart';
 import 'camera_controller.dart';
 
 final class PreviewView extends $interface.PreviewView {
-  final $native.PreviewView obj;
+  final $native.PreviewViewProvider obj;
+  // final $native.PreviewView obj;
 
   PreviewView.$native(this.obj) : super.impl();
 
   factory PreviewView() {
-    final obj = $native.PreviewView();
+    final obj = $native.PreviewViewProvider();
+    // final obj = $native.PreviewView();
     return PreviewView.$native(obj);
   }
 
@@ -22,6 +24,7 @@ final class PreviewView extends $interface.PreviewView {
     if (controller is! CameraController) {
       throw TypeError();
     }
+    final obj = await this.obj.getView();
     await obj.setController(controller.obj);
   }
 
@@ -40,7 +43,7 @@ final class PreviewView extends $interface.PreviewView {
         final viewId = obj.pigeon_instanceManager.getIdentifier(obj);
         return _initAndroidView(
           params,
-          hybridComposition: true,
+          hybridComposition: false,
           creationParams: viewId,
           creationParamsCodec: const StandardMessageCodec(),
         )

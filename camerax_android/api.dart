@@ -296,6 +296,17 @@ abstract class PermissionManager {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.view.PreviewViewProvider',
+  ),
+)
+abstract class PreviewViewProvider {
+  PreviewViewProvider();
+
+  PreviewView getView();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'java.lang.AutoCloseable',
   ),
 )

@@ -56,7 +56,9 @@ class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewVie
     }
 
     override fun setScaleType(
-        pigeon_instance: androidx.camera.view.PreviewView, scaleType: ScaleType, callback: (Result<Unit>) -> Unit
+        pigeon_instance: androidx.camera.view.PreviewView,
+        scaleType: ScaleType,
+        callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {

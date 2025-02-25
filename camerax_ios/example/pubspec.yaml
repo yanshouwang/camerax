@@ -18,7 +18,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  camerax_platform_interface: ^1.0.0-dev.3
+  camerax_platform_interface: ^1.0.0-dev.4
   camerax_ios:
     # When depending on this package from a real application you should use:
     #   camerax_ios: ^x.y.z
