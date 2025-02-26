@@ -10,7 +10,9 @@ import kotlinx.coroutines.launch
 class PreviewView(private val registrar: CameraXRegistrar) : PigeonApiPreviewView(registrar) {
     override fun pigeon_defaultConstructor(): androidx.camera.view.PreviewView {
         val context = registrar.activity ?: registrar.context
-        return androidx.camera.view.PreviewView(context)
+        return androidx.camera.view.PreviewView(context).apply {
+            this.implementationMode = androidx.camera.view.PreviewView.ImplementationMode.COMPATIBLE
+        }
     }
 
     override fun getController(

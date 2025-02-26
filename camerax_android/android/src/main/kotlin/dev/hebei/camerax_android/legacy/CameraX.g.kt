@@ -371,12 +371,6 @@ abstract class CameraXPigeonProxyApiRegistrar(val binaryMessenger: BinaryMesseng
   abstract fun getPigeonApiPermissionManager(): PigeonApiPermissionManager
 
   /**
-   * An implementation of [PigeonApiPreviewViewProvider] used to add a new Dart instance of
-   * `PreviewViewProvider` to the Dart `InstanceManager`.
-   */
-  abstract fun getPigeonApiPreviewViewProvider(): PigeonApiPreviewViewProvider
-
-  /**
    * An implementation of [PigeonApiAutoCloseable] used to add a new Dart instance of
    * `AutoCloseable` to the Dart `InstanceManager`.
    */
@@ -931,7 +925,6 @@ abstract class CameraXPigeonProxyApiRegistrar(val binaryMessenger: BinaryMesseng
   fun setUp() {
     CameraXPigeonInstanceManagerApi.setUpMessageHandlers(binaryMessenger, instanceManager)
     PigeonApiPermissionManager.setUpMessageHandlers(binaryMessenger, getPigeonApiPermissionManager())
-    PigeonApiPreviewViewProvider.setUpMessageHandlers(binaryMessenger, getPigeonApiPreviewViewProvider())
     PigeonApiAutoCloseable.setUpMessageHandlers(binaryMessenger, getPigeonApiAutoCloseable())
     PigeonApiLocation.setUpMessageHandlers(binaryMessenger, getPigeonApiLocation())
     PigeonApiSize.setUpMessageHandlers(binaryMessenger, getPigeonApiSize())
@@ -989,7 +982,6 @@ abstract class CameraXPigeonProxyApiRegistrar(val binaryMessenger: BinaryMesseng
   fun tearDown() {
     CameraXPigeonInstanceManagerApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiPermissionManager.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiPreviewViewProvider.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiAutoCloseable.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiLocation.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiSize.setUpMessageHandlers(binaryMessenger, null)
@@ -1071,9 +1063,6 @@ private class CameraXPigeonProxyApiBaseCodec(val registrar: CameraXPigeonProxyAp
 
     if (value is dev.hebei.camerax_android.common.PermissionManager) {
       registrar.getPigeonApiPermissionManager().pigeon_newInstance(value) { }
-    }
-     else if (value is dev.hebei.camerax_android.view.PreviewViewProvider) {
-      registrar.getPigeonApiPreviewViewProvider().pigeon_newInstance(value) { }
     }
      else if (value is android.location.Location) {
       registrar.getPigeonApiLocation().pigeon_newInstance(value) { }
@@ -2230,85 +2219,6 @@ abstract class PigeonApiPermissionManager(open val pigeonRegistrar: CameraXPigeo
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
       val channelName = "dev.flutter.pigeon.camerax_android.PermissionManager.pigeon_newInstance"
-      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg)) {
-        if (it is List<*>) {
-          if (it.size > 1) {
-            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-          } else {
-            callback(Result.success(Unit))
-          }
-        } else {
-          callback(Result.failure(createConnectionError(channelName)))
-        } 
-      }
-    }
-  }
-
-}
-@Suppress("UNCHECKED_CAST")
-abstract class PigeonApiPreviewViewProvider(open val pigeonRegistrar: CameraXPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(): dev.hebei.camerax_android.view.PreviewViewProvider
-
-  abstract fun getView(pigeon_instance: dev.hebei.camerax_android.view.PreviewViewProvider): androidx.camera.view.PreviewView
-
-  companion object {
-    @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiPreviewViewProvider?) {
-      val codec = api?.pigeonRegistrar?.codec ?: CameraXPigeonCodec()
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.PreviewViewProvider.pigeon_defaultConstructor", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_identifierArg = args[0] as Long
-            val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.PreviewViewProvider.getView", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_instanceArg = args[0] as dev.hebei.camerax_android.view.PreviewViewProvider
-            val wrapped: List<Any?> = try {
-              listOf(api.getView(pigeon_instanceArg))
-            } catch (exception: Throwable) {
-              wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-
-  @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of PreviewViewProvider and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: dev.hebei.camerax_android.view.PreviewViewProvider, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
-      callback(Result.success(Unit))
-    }     else {
-      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val binaryMessenger = pigeonRegistrar.binaryMessenger
-      val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.PreviewViewProvider.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg)) {
         if (it is List<*>) {

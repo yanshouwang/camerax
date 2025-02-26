@@ -8,14 +8,12 @@ import 'package:flutter/widgets.dart';
 import 'camera_controller.dart';
 
 final class PreviewView extends $interface.PreviewView {
-  final $native.PreviewViewProvider obj;
-  // final $native.PreviewView obj;
+  final $native.PreviewView obj;
 
   PreviewView.$native(this.obj) : super.impl();
 
   factory PreviewView() {
-    final obj = $native.PreviewViewProvider();
-    // final obj = $native.PreviewView();
+    final obj = $native.PreviewView();
     return PreviewView.$native(obj);
   }
 
@@ -24,7 +22,6 @@ final class PreviewView extends $interface.PreviewView {
     if (controller is! CameraController) {
       throw TypeError();
     }
-    final obj = await this.obj.getView();
     await obj.setController(controller.obj);
   }
 

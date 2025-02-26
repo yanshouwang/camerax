@@ -24,7 +24,6 @@ import dev.hebei.camerax_android.legacy.view.CameraController
 import dev.hebei.camerax_android.legacy.view.JpegAnalyzer
 import dev.hebei.camerax_android.legacy.view.LifecycleCameraController
 import dev.hebei.camerax_android.legacy.view.PreviewView
-import dev.hebei.camerax_android.legacy.view.PreviewViewProvider
 import dev.hebei.camerax_android.legacy.view.video.AudioConfig
 import io.flutter.plugin.common.BinaryMessenger
 
@@ -34,10 +33,6 @@ class CameraXRegistrar(val context: Context, messenger: BinaryMessenger) :
 
     override fun getPigeonApiPermissionManager(): PigeonApiPermissionManager {
         return PermissionManager(this)
-    }
-
-    override fun getPigeonApiPreviewViewProvider(): PigeonApiPreviewViewProvider {
-        return PreviewViewProvider(this)
     }
 
     override fun getPigeonApiAutoCloseable(): PigeonApiAutoCloseable {
