@@ -1,7 +1,8 @@
-## 1.0.0-dev.5
+## 1.0.0-dev.6
 
 * Add common library.
 * Add core library.
 * Add ml library.
 * Add video library.
 * Add view library.
+* Add camera2 APIs.
