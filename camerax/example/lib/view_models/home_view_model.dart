@@ -18,12 +18,15 @@ class HomeViewModel extends ViewModel with TypeLogger {
   final BarcodeScanner _barcodeScanner;
   final FaceDetector _faceDetector;
 
+  late final StreamSubscription _zoomStateChangedSubscription;
+
   CameraMode _mode;
   LensFacing _lensFacing;
   FlashMode? _flashMode;
-  CameraControl? _cameraControl;
   CameraInfo? _cameraInfo;
-  ExposureState? _exposureState;
+  CameraControl? _cameraControl;
+  Camera2CameraInfo? _camera2Info;
+  Camera2CameraControl? _camera2Control;
   Uri? _savedUri;
   ImageModel? _imageModel;
   Uint8List? _jpegValue;
@@ -39,14 +42,40 @@ class HomeViewModel extends ViewModel with TypeLogger {
         _lensFacing = LensFacing.back,
         _barcodes = [],
         _faces = [] {
-    _initialize();
+    _zoomStateChangedSubscription =
+        _controller.zoomStateChanged.listen((e) => zoomState = e);
+    _setUp();
   }
 
   CameraController get controller => _controller;
   CameraMode get mode => _mode;
   LensFacing get lensFacing => _lensFacing;
   FlashMode? get flashMode => _flashMode;
+
+  ZoomState? _zoomState;
+  ZoomState? get zoomState => _zoomState;
+  set zoomState(ZoomState? value) {
+    if (_zoomState == value) return;
+    _zoomState = value;
+    notifyListeners();
+  }
+
+  ExposureState? _exposureState;
   ExposureState? get exposureState => _exposureState;
+  set exposureState(ExposureState? value) {
+    if (_exposureState == value) return;
+    _exposureState = value;
+    notifyListeners();
+  }
+
+  LimitedValue<int>? _exposureTimeState;
+  LimitedValue<int>? get exposureTimeState => _exposureTimeState;
+  set exposureTimeState(LimitedValue<int>? value) {
+    if (_exposureTimeState == value) return;
+    _exposureTimeState = value;
+    notifyListeners();
+  }
+
   Uri? get savedUri => _savedUri;
   bool get recording => _recording != null;
   ImageModel? get imageModel => _imageModel;
@@ -59,20 +88,41 @@ class HomeViewModel extends ViewModel with TypeLogger {
     // TODO: How to wait until camera really opened.
     const duration = Duration(seconds: 1);
     await Future.delayed(duration);
-    _cameraControl = await controller.getCameraControl();
-    _cameraInfo = await controller.getCameraInfo();
-    _exposureState = await _cameraInfo?.getExposureState();
+    final cameraInfo = await controller.getCameraInfo();
+    final cameraControl = await controller.getCameraControl();
+    if (cameraInfo == null || cameraControl == null) {
+      return;
+    }
+    final camera2Info = Camera2CameraInfo.from(cameraInfo);
+    final camera2Control = Camera2CameraControl.from(cameraControl);
+    final exposureState = await cameraInfo.getExposureState();
+    final exposureTimeRange =
+        await camera2Info.getSensorInfoExposureTimeRange();
     logger.info(
-        'exposureState: ${exposureState?.exposureCompensationRange.lower} - ${exposureState?.exposureCompensationRange.upper}, ${exposureState?.exposureCompensationStep}');
-    notifyListeners();
+        'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}');
+    final exposureTimeState = exposureTimeRange == null
+        ? null
+        : LimitedValue(
+            minimum: exposureTimeRange.lower,
+            maximum: exposureTimeRange.upper,
+            value: exposureTimeRange.lower,
+          );
+    _cameraInfo = cameraInfo;
+    _cameraControl = cameraControl;
+    _camera2Info = camera2Info;
+    _camera2Control = camera2Control;
+    this.exposureState = exposureState;
+    this.exposureTimeState = exposureTimeState;
   }
 
   Future<void> unbind() async {
     await controller.unbind();
-    _cameraControl = null;
-    _cameraInfo?.dispose();
     _cameraInfo = null;
+    _cameraControl = null;
+    _camera2Info = null;
+    _camera2Control = null;
     _exposureState = null;
+    _exposureTimeState = null;
     notifyListeners();
   }
 
@@ -126,26 +176,36 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  Future<void> toggleTorchState() async {
-    final torchState = _controller.torchState;
-    if (torchState == null) {
-      throw ArgumentError.notNull();
-    }
-    final enableTorch = torchState == TorchState.off;
-    await controller.enableTorch(enableTorch);
-  }
+  // Future<void> toggleTorchState() async {
+  //   final torchState = _controller.torchState;
+  //   if (torchState == null) {
+  //     throw ArgumentError.notNull();
+  //   }
+  //   final enableTorch = torchState == TorchState.off;
+  //   await controller.enableTorch(enableTorch);
+  // }
 
   Future<void> setZoomRatio(double zoomRatio) async {
     await controller.setZoomRatio(zoomRatio);
   }
 
-  Future<void> setExposure(int value) async {
-    final cameraControl = ArgumentError.checkNotNull(_cameraControl);
-    final exposureIndex =
-        await cameraControl.setExposureCompensationIndex(value);
-    logger.info('setExposureCompensationIndex: $exposureIndex');
-    // _exposureIndex = exposureIndex;
-    // notifyListeners();
+  Future<void> setExposureCompensationIndex(int value) async {
+    final control = ArgumentError.checkNotNull(_cameraControl);
+    final exposureIndex = await control.setExposureCompensationIndex(value);
+    logger.info('New exposure compensation index: $exposureIndex');
+  }
+
+  Future<void> setExposureTime(int? value) async {
+    final control = ArgumentError.checkNotNull(_camera2Control);
+    final bundle = value == null
+        ? CaptureRequestOptions(
+            aeMode: ControlAeMode.on,
+          )
+        : CaptureRequestOptions(
+            aeMode: ControlAeMode.off,
+            sensorExposureTime: value,
+          );
+    await control.setCaptureRequestOptions(bundle);
   }
 
   Future<void> setFlashMode(FlashMode flashMode) async {
@@ -214,7 +274,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _recording?.stop();
   }
 
-  void _initialize() async {
+  void _setUp() async {
     var isGranted =
         await _permissionManager.checkPermission(Permission.album) &&
             await _permissionManager.checkPermission(Permission.audio) &&
@@ -342,7 +402,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   void dispose() {
     _clearImageAnalysisAnalyzer();
     unbind();
-    _controller.dispose();
+    _zoomStateChangedSubscription.cancel();
     super.dispose();
   }
 }

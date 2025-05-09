@@ -39,10 +39,13 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     _viewExposureIndex = ValueNotifier(null);
   }
 
+  // int? _exposureTime;
+
   @override
   Widget build(BuildContext context) {
     final viewModel = ViewModel.of<HomeViewModel>(context);
     final controller = viewModel.controller;
+    final zoomState = viewModel.zoomState;
     final exposureState = viewModel.exposureState;
     final mode = viewModel.mode;
     final flashMode = viewModel.flashMode;
@@ -103,68 +106,62 @@ class _HomeViewState extends State<HomeView> with RouteAware {
           ),
           Expanded(
             child: ClipRect(
-              child: ListenableBuilder(
-                listenable: controller,
-                builder: (context, child) {
-                  final zoomState = controller.zoomState;
-                  return Stack(
-                    children: [
-                      PreviewView(
-                        controller: controller,
+              child: Stack(
+                children: [
+                  PreviewWidget(
+                    controller: controller,
+                  ),
+                  if (imageModel != null)
+                    Container(
+                      alignment: Alignment.topRight,
+                      margin: const EdgeInsets.all(20.0),
+                      child: SizedBox(
+                        width: 100.0,
+                        child: RawPixelsView(
+                          image: imageModel.image,
+                          rotationDegrees: imageModel.rotationDegrees,
+                        ),
                       ),
-                      if (imageModel != null)
-                        Container(
-                          alignment: Alignment.topRight,
-                          margin: const EdgeInsets.all(20.0),
-                          child: SizedBox(
-                            width: 100.0,
-                            child: RawPixelsView(
-                              image: imageModel.image,
-                              rotationDegrees: imageModel.rotationDegrees,
-                            ),
-                          ),
+                    ),
+                  if (jpegValue != null)
+                    Container(
+                      alignment: Alignment.topRight,
+                      margin: const EdgeInsets.all(20.0),
+                      child: SizedBox(
+                        width: 100.0,
+                        child: Image.memory(
+                          jpegValue,
+                          gaplessPlayback: true,
                         ),
-                      if (jpegValue != null)
-                        Container(
-                          alignment: Alignment.topRight,
-                          margin: const EdgeInsets.all(20.0),
-                          child: SizedBox(
-                            width: 100.0,
-                            child: Image.memory(
-                              jpegValue,
-                              gaplessPlayback: true,
-                            ),
-                          ),
-                        ),
-                      if (barcodes.isNotEmpty)
-                        BarcodesView(
-                          barcodes: barcodes,
-                        ),
-                      if (faces.isNotEmpty)
-                        FacesView(
-                          faces: faces,
-                        ),
-                      if (zoomState != null)
-                        Container(
-                          alignment: Alignment.bottomCenter,
-                          child: ValueListenableBuilder(
-                            valueListenable: _viewZoomRatio,
-                            builder: (context, viewZoomRatio, child) {
-                              return ZoomWidget(
-                                minimum: zoomState.minZoomRatio,
-                                maximum: zoomState.maxZoomRatio,
-                                value: viewZoomRatio ?? zoomState.zoomRatio,
-                                onChanged: (value) {
-                                  viewModel.setZoomRatio(value);
-                                  _viewZoomRatio.value = value;
-                                },
-                              );
+                      ),
+                    ),
+                  if (barcodes.isNotEmpty)
+                    BarcodesView(
+                      barcodes: barcodes,
+                    ),
+                  if (faces.isNotEmpty)
+                    FacesView(
+                      faces: faces,
+                    ),
+                  if (zoomState != null)
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      child: ValueListenableBuilder(
+                        valueListenable: _viewZoomRatio,
+                        builder: (context, viewZoomRatio, child) {
+                          return ZoomWidget(
+                            minimum: zoomState.minZoomRatio,
+                            maximum: zoomState.maxZoomRatio,
+                            value: viewZoomRatio ?? zoomState.zoomRatio,
+                            onChanged: (value) {
+                              viewModel.setZoomRatio(value);
+                              _viewZoomRatio.value = value;
                             },
-                          ),
-                        ),
-                    ],
-                  );
-                },
+                          );
+                        },
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
@@ -186,7 +183,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           .toDouble(),
                       onChanged: (value) {
                         final newValue = value.toInt();
-                        viewModel.setExposure(newValue);
+                        viewModel.setExposureCompensationIndex(newValue);
                         _viewExposureIndex.value = newValue;
                       },
                     );
@@ -429,6 +426,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               }
                             }
                           : null,
+                      // onTap: () async {
+                      //   final exposureTime = _exposureTime;
+                      //   final newValue =
+                      //       exposureTime == null ? 50 * 1000 * 1000 : null;
+                      //   await viewModel.setExposureTime(newValue);
+                      //   _exposureTime = newValue;
+                      //   debugPrint('exposureTime: $newValue');
+                      // },
                       child: Container(
                         margin: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(

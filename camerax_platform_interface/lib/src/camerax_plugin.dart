@@ -1,0 +1,149 @@
+import 'dart:io';
+
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+import 'camera2.dart';
+import 'common.dart';
+import 'core.dart';
+import 'ml.dart';
+import 'video.dart';
+import 'view.dart';
+
+/// Platform-specific implementations should implement this class to support
+/// camerax.
+abstract base class CameraXPlugin extends PlatformInterface {
+  /// Constructs a [CameraXPlugin].
+  CameraXPlugin() : super(token: _token);
+
+  static final _token = Object();
+
+  static CameraXPlugin? _instance;
+
+  /// The default instance of [CameraXPlugin] to use.
+  static CameraXPlugin get instance {
+    final instance = _instance;
+    if (instance == null) {
+      throw UnimplementedError(
+          'CameraController is not implemented on this platform.');
+    }
+    return instance;
+  }
+
+  /// Platform-specific implementations should set this with their own
+  /// platform-specific class that extends [CameraXPlugin] when
+  /// they register themselves.
+  static set instance(CameraXPlugin instance) {
+    PlatformInterface.verifyToken(instance, _token);
+    _instance = instance;
+  }
+
+  PermissionManager newPermissionManager();
+
+  CameraSelector newCameraSelector({
+    LensFacing? lensFacing,
+  });
+  CameraSelector newFrontCameraSelector();
+  CameraSelector newBackCameraSelector();
+  CameraSelector newExternalCameraSelector();
+
+  OutputFileOptions newOutputFileOptions({
+    required File file,
+    Metadata? metadata,
+  });
+
+  FileOutputOptions newFileOutputOptions({
+    required File file,
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    Location? location,
+  });
+
+  CameraController newCameraController();
+
+  FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(Quality quality);
+
+  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality);
+
+  FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(Quality quality);
+
+  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
+
+  QualitySelector newQualitySelectorFrom(
+    Quality quality, {
+    FallbackStrategy? fallbackStrategy,
+  });
+
+  QualitySelector newQualitySelectorFromOrderedList(
+    List<Quality> qualities, {
+    FallbackStrategy? fallbackStrategy,
+  });
+
+  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
+
+  SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
+    double width,
+    double height,
+  );
+
+  FocusMeteringAction newFocusMeteringAction(
+    (MeteringPoint, List<MeteringMode>) first, {
+    List<(MeteringPoint, List<MeteringMode>)>? others,
+    bool? disableAutoCancel,
+    Duration? autoCancelDuration,
+  });
+
+  ImageAnalyzer newImageAnalyzer({
+    required ImageProxyCallback analyze,
+  });
+
+  JpegAnalyzer newJpegAnalyzer({
+    required CoordinateSystem targetCoordinateSystem,
+    required JpegConsumer consumer,
+  });
+
+  ZoomSuggestionOptions newZoomSuggestionOptions({
+    required ZoomCallback zoomCallback,
+    double? maxSupportedZoomRatio,
+  });
+
+  BarcodeScannerOptions newBarcodeScannerOptions({
+    bool? enableAllPotentialBarcodes,
+    List<BarcodeFormat>? formats,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
+  });
+
+  BarcodeScanner newBarcodeScanner({
+    BarcodeScannerOptions? options,
+  });
+
+  FaceDetectorOptions newFaceDetectorOptions({
+    bool? enableTracking,
+    FaceClassificationMode? classificationMode,
+    FaceContourMode? contourMode,
+    FaceLandmarkMode? landmarkMode,
+    double? minFaceSize,
+    FacePerformanceMode? performanceMode,
+  });
+
+  FaceDetector newFaceDetector({
+    FaceDetectorOptions? options,
+  });
+
+  MlKitAnalyzer newMlKitAnalyzer({
+    required List<Detector> detectors,
+    required CoordinateSystem targetCoordinateSystem,
+    required MlKitAnalyzerResultConsumer consumer,
+  });
+
+  PreviewView newPreviewView();
+
+  Camera2CameraControl newCamera2CameraControlFrom(CameraControl cameraControl);
+  Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo);
+  CaptureRequestOptions newCaptureRequestOptions({
+    ControlMode? mode,
+    ControlAeMode? aeMode,
+    ControlAfMode? afMode,
+    ControlAwbMode? awbMode,
+    int? sensorExposureTime,
+  });
+}

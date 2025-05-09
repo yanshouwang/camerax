@@ -1,0 +1,2 @@
+/Users/yanshouwang/dev/camerax/camerax_android/example/android/app/.cxx/Debug/52501k29/x86/CMakeFiles/edit_cache.dir
+/Users/yanshouwang/dev/camerax/camerax_android/example/android/app/.cxx/Debug/52501k29/x86/CMakeFiles/rebuild_cache.dir

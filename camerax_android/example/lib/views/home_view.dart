@@ -2,8 +2,7 @@ import 'package:camerax_android_example/main.dart';
 import 'package:camerax_android_example/models.dart';
 import 'package:camerax_android_example/view_models.dart';
 import 'package:camerax_android_example/widgets.dart';
-import 'package:camerax_platform_interface/camerax_platform_interface.dart'
-    as $interface;
+import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -70,14 +69,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       duration: const Duration(milliseconds: 100),
                       onTap: () {
                         switch (flashMode) {
-                          case $interface.FlashMode.auto:
-                            viewModel.setFlashMode($interface.FlashMode.on);
-                          case $interface.FlashMode.on:
-                            viewModel.setFlashMode($interface.FlashMode.off);
-                          case $interface.FlashMode.off:
-                            viewModel.setFlashMode($interface.FlashMode.auto);
-                          case $interface.FlashMode.screen:
-                            viewModel.setFlashMode($interface.FlashMode.screen);
+                          case FlashMode.auto:
+                            viewModel.setFlashMode(FlashMode.on);
+                          case FlashMode.on:
+                            viewModel.setFlashMode(FlashMode.off);
+                          case FlashMode.off:
+                            viewModel.setFlashMode(FlashMode.auto);
+                          case FlashMode.screen:
+                            viewModel.setFlashMode(FlashMode.screen);
                         }
                       },
                       child: Container(
@@ -89,9 +88,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               .resolveFrom(context),
                         ),
                         child: Icon(
-                          flashMode == $interface.FlashMode.auto
+                          flashMode == FlashMode.auto
                               ? Symbols.flash_auto
-                              : flashMode == $interface.FlashMode.on
+                              : flashMode == FlashMode.on
                                   ? Symbols.flash_on
                                   : Symbols.flash_off,
                           color: CupertinoColors.label.resolveFrom(context),
@@ -106,7 +105,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
             child: ClipRect(
               child: Stack(
                 children: [
-                  PreviewView(
+                  PreviewWidget(
                     controller: controller,
                   ),
                   if (imageModel != null)
@@ -449,8 +448,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             color: CupertinoColors.label.resolveFrom(context),
                           ),
                         ),
-                        flip:
-                            viewModel.lensFacing == $interface.LensFacing.back,
+                        flip: viewModel.lensFacing == LensFacing.back,
                       ),
                     ),
                   ),
@@ -494,47 +492,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     _pageController.dispose();
     _viewZoomRatio.dispose();
     _viewExposureIndex.dispose();
-    super.dispose();
-  }
-}
-
-class PreviewView extends StatefulWidget {
-  final $interface.CameraController controller;
-
-  const PreviewView({
-    super.key,
-    required this.controller,
-  });
-
-  @override
-  State<PreviewView> createState() => _PreviewViewState();
-}
-
-class _PreviewViewState extends State<PreviewView> {
-  late final $interface.PreviewView _obj;
-
-  @override
-  void initState() {
-    super.initState();
-    _obj = $interface.PreviewView();
-    _obj.setController(widget.controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _obj.build(context);
-  }
-
-  @override
-  void didUpdateWidget(covariant PreviewView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller) {
-      _obj.setController(widget.controller);
-    }
-  }
-
-  @override
-  void dispose() {
     super.dispose();
   }
 }

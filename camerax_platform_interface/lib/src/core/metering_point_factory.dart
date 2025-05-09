@@ -1,12 +1,6 @@
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
 import 'metering_point.dart';
 
-abstract base class MeteringPointFactory extends PlatformInterface {
-  static final _token = Object();
-
-  MeteringPointFactory.impl() : super(token: _token);
-
+abstract interface class MeteringPointFactory {
   Future<MeteringPoint> createPoint(
     double x,
     double y, {

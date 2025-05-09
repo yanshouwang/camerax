@@ -28,7 +28,7 @@ object PermissionManager {
     suspend fun requestPermissions(permissions: List<Permission>): Boolean {
         return suspendCoroutine { continuation ->
             try {
-                val binding = this.binding ?: throw IllegalStateException("Activity binding is null.")
+                val binding = binding ?: throw IllegalStateException("Activity binding is null.")
                 val activity = binding.activity
                 val listener = object : PluginRegistry.RequestPermissionsResultListener {
                     override fun onRequestPermissionsResult(
@@ -55,11 +55,11 @@ object PermissionManager {
     }
 
     internal fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        this.binding = binding
+        PermissionManager.binding = binding
     }
 
     internal fun onDetachedFromActivity() {
-        this.binding = null
+        binding = null
     }
 
     enum class Permission {

@@ -3,29 +3,28 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/legacy/camerax.g.dart',
-    kotlinOut:
-        'android/src/main/kotlin/dev/hebei/camerax_android/legacy/CameraX.g.kt',
+    dartOut: 'lib/src/camerax.g.dart',
+    kotlinOut: 'android/src/main/kotlin/dev/hebei/camerax_android/CameraX.g.kt',
     kotlinOptions: KotlinOptions(
-      package: 'dev.hebei.camerax_android.legacy',
+      package: 'dev.hebei.camerax_android',
       errorClassName: 'CameraXError',
     ),
   ),
 )
-enum Permission {
+enum PermissionApi {
   album,
   audio,
   video,
 }
 
-enum LensFacing {
+enum LensFacingApi {
   unknown,
   front,
   back,
   external,
 }
 
-enum CameraState {
+enum CameraStateApi {
   pendingOpen,
   opening,
   open,
@@ -33,18 +32,18 @@ enum CameraState {
   closed,
 }
 
-enum TorchState {
+enum TorchStateApi {
   off,
   on,
 }
 
-enum MeteringMode {
+enum MeteringModeApi {
   af,
   ae,
   awb,
 }
 
-enum TimeUnit {
+enum TimeUnitApi {
   nanoseconds,
   microseconds,
   milliseconds,
@@ -54,19 +53,19 @@ enum TimeUnit {
   days,
 }
 
-enum AspectRatio {
+enum AspectRatioApi {
   ratioDefault,
   ratio4_3,
   ratio16_9,
 }
 
-enum BitDepth {
+enum BitDepthApi {
   bitDepthUnspecified,
   bitDepth8Bit,
   bitDepth10Bit,
 }
 
-enum Encoding {
+enum EncodingApi {
   unspecified,
   sdr,
   hdrUnspecified,
@@ -76,7 +75,7 @@ enum Encoding {
   dolbyVision,
 }
 
-enum ScaleType {
+enum ScaleTypeApi {
   fillStart,
   fillCenter,
   fillEnd,
@@ -85,23 +84,23 @@ enum ScaleType {
   fitEnd,
 }
 
-enum UseCase {
+enum UseCaseApi {
   imageCapture,
   imageAnalysis,
   videoCapture,
 }
 
-enum ResolutionMode {
+enum ResolutionModeApi {
   preferCaptureRateOverHigherResolution,
   preferHigherResolutionOverCaptureRate,
 }
 
-enum AspectRatioFallbackRule {
+enum AspectRatioFallbackRuleApi {
   none,
   auto,
 }
 
-enum ResolutionFallbackRule {
+enum ResolutionFallbackRuleApi {
   none,
   closestHigherThenLower,
   closestHigher,
@@ -109,44 +108,44 @@ enum ResolutionFallbackRule {
   closestLower,
 }
 
-enum CaptureMode {
+enum CaptureModeApi {
   maximizeQuality,
   minimizeLatency,
   zeroShutterLag,
 }
 
-enum FlashMode {
+enum FlashModeApi {
   auto,
   on,
   off,
   screen,
 }
 
-enum BackpressureStrategy {
+enum BackpressureStrategyApi {
   keepOnlyLatest,
   blockProducer,
 }
 
-enum CoordinateSystem {
+enum CoordinateSystemApi {
   original,
   sensor,
   viewReferenced,
 }
 
-enum ImageFormat {
+enum ImageFormatApi {
   yuv420_888,
   rgba8888,
   jpeg,
   jpegR,
 }
 
-enum MirrorMode {
+enum MirrorModeApi {
   off,
   on,
   onFrontOnly,
 }
 
-enum AudioState {
+enum AudioStateApi {
   active,
   disabled,
   sourceSilenced,
@@ -155,7 +154,7 @@ enum AudioState {
   muted,
 }
 
-enum VideoRecordFinalizeEventError {
+enum VideoRecordFinalizeEventErrorApi {
   none,
   unknown,
   fileSizeLimitReached,
@@ -169,7 +168,7 @@ enum VideoRecordFinalizeEventError {
   recordingGarbageCollected,
 }
 
-enum BarcodeFormat {
+enum BarcodeFormatApi {
   unknown,
   all,
   code128,
@@ -187,7 +186,7 @@ enum BarcodeFormat {
   aztec,
 }
 
-enum BarcodeValueType {
+enum BarcodeValueTypeApi {
   unknown,
   contactInfo,
   email,
@@ -203,19 +202,19 @@ enum BarcodeValueType {
   driverLicense,
 }
 
-enum AddressType {
+enum AddressTypeApi {
   unknown,
   work,
   home,
 }
 
-enum EmailType {
+enum EmailTypeApi {
   unknown,
   work,
   home,
 }
 
-enum PhoneType {
+enum PhoneTypeApi {
   unknown,
   work,
   home,
@@ -223,33 +222,33 @@ enum PhoneType {
   mobile,
 }
 
-enum WiFiEncryptionType {
+enum WiFiEncryptionTypeApi {
   open,
   wpa,
   wep,
 }
 
-enum FaceClassificationMode {
+enum FaceClassificationModeApi {
   none,
   all,
 }
 
-enum FaceContourMode {
+enum FaceContourModeApi {
   none,
   all,
 }
 
-enum FaceLandmarkMode {
+enum FaceLandmarkModeApi {
   none,
   all,
 }
 
-enum FacePerformanceMode {
+enum FacePerformanceModeApi {
   fast,
   accurate,
 }
 
-enum FaceContourType {
+enum FaceContourTypeApi {
   face,
   leftCheek,
   leftEye,
@@ -267,7 +266,7 @@ enum FaceContourType {
   upperLipTop,
 }
 
-enum FaceLandmarkType {
+enum FaceLandmarkTypeApi {
   leftCheek,
   leftEar,
   leftEye,
@@ -280,18 +279,56 @@ enum FaceLandmarkType {
   rightEye,
 }
 
+enum ControlModeApi {
+  auto,
+  off,
+  offKeepState,
+  useExtendedSceneMode,
+  useSceneMode,
+}
+
+enum ControlAeModeApi {
+  off,
+  on,
+  onAlwaysFlash,
+  onAutoFlash,
+  onAutoFlashRedeye,
+  onExternalFlash,
+  onLowLightBoostBrightnessPriority,
+}
+
+enum ControlAfModeApi {
+  auto,
+  continuousPicture,
+  edof,
+  macro,
+  off,
+}
+
+enum ControlAwbModeApi {
+  auto,
+  cloudyDaylight,
+  daylight,
+  fluorescent,
+  incandesecent,
+  off,
+  shade,
+  twilight,
+  warmFluorescent,
+}
+
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.common.PermissionManager',
   ),
 )
-abstract class PermissionManager {
+abstract class PermissionManagerApi {
   @static
-  late final PermissionManager instance;
+  late final PermissionManagerApi instance;
 
-  bool checkPermissioin(Permission permission);
+  bool checkPermissioin(PermissionApi permission);
   @async
-  bool requestPermissions(List<Permission> permissions);
+  bool requestPermissions(List<PermissionApi> permissions);
 }
 
 @ProxyApi(
@@ -299,7 +336,7 @@ abstract class PermissionManager {
     fullClassName: 'java.lang.AutoCloseable',
   ),
 )
-abstract class AutoCloseable {
+abstract class AutoCloseableApi {
   void close();
 }
 
@@ -308,15 +345,15 @@ abstract class AutoCloseable {
     fullClassName: 'java.io.Closeable',
   ),
 )
-abstract class Closeable extends AutoCloseable {}
+abstract class CloseableApi extends AutoCloseableApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.location.Location',
   ),
 )
-abstract class Location {
-  Location();
+abstract class LocationApi {
+  LocationApi();
 
   late final double latitude;
   late final double longitude;
@@ -327,8 +364,8 @@ abstract class Location {
     fullClassName: 'android.util.Size',
   ),
 )
-abstract class Size {
-  Size();
+abstract class SizeApi {
+  SizeApi();
 
   late final int width;
   late final int height;
@@ -339,8 +376,8 @@ abstract class Size {
     fullClassName: 'android.graphics.Point',
   ),
 )
-abstract class Point {
-  Point();
+abstract class PointApi {
+  PointApi();
 
   late final int x;
   late final int y;
@@ -351,8 +388,8 @@ abstract class Point {
     fullClassName: 'android.graphics.PointF',
   ),
 )
-abstract class PointF {
-  PointF();
+abstract class PointFApi {
+  PointFApi();
 
   late final double x;
   late final double y;
@@ -363,8 +400,8 @@ abstract class PointF {
     fullClassName: 'android.graphics.Rect',
   ),
 )
-abstract class Rect {
-  Rect();
+abstract class RectApi {
+  RectApi();
 
   late final int left;
   late final int top;
@@ -374,11 +411,23 @@ abstract class Rect {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.legacy.common.IntRange.Stub',
+    fullClassName: 'dev.hebei.camerax_android.common.IntRange',
   ),
 )
-abstract class IntRange {
-  IntRange();
+abstract class IntRangeApi {
+  IntRangeApi();
+
+  late final int lower;
+  late final int upper;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.common.LongRange',
+  ),
+)
+abstract class LongRangeApi {
+  LongRangeApi();
 
   late final int lower;
   late final int upper;
@@ -389,65 +438,61 @@ abstract class IntRange {
     fullClassName: 'androidx.camera.core.CameraSelector',
   ),
 )
-abstract class CameraSelector {
+abstract class CameraSelectorApi {
   @static
-  late final CameraSelector front;
+  late final CameraSelectorApi front;
   @static
-  late final CameraSelector back;
+  late final CameraSelectorApi back;
   @static
-  late final CameraSelector external;
+  late final CameraSelectorApi external;
 
-  CameraSelector(LensFacing? lensFacing);
+  CameraSelectorApi(LensFacingApi? lensFacing);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.CameraStateLiveData.Stub',
+    fullClassName: 'dev.hebei.camerax_android.common.CameraStateLiveData',
   ),
 )
-abstract class CameraStateLiveData {
-  CameraState? getValue();
+abstract class CameraStateLiveDataApi {
+  CameraStateApi? getValue();
 
-  void observe(CameraStateObserver observer);
-  void removeObserver(CameraStateObserver observer);
+  void observe(CameraStateObserverApi observer);
+  void removeObserver(CameraStateObserverApi observer);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.CameraStateObserver.Impl',
+    fullClassName: 'dev.hebei.camerax_android.common.CameraStateObserver',
   ),
 )
-abstract class CameraStateObserver {
-  CameraStateObserver();
+abstract class CameraStateObserverApi {
+  CameraStateObserverApi();
 
-  late final void Function(CameraState value) onChanged;
+  late final void Function(CameraStateApi value) onChanged;
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.TorchStateLiveData.Stub',
+    fullClassName: 'dev.hebei.camerax_android.common.TorchStateLiveData',
   ),
 )
-abstract class TorchStateLiveData {
-  TorchState? getValue();
+abstract class TorchStateLiveDataApi {
+  TorchStateApi? getValue();
 
-  void observe(TorchStateObserver observer);
-  void removeObserver(TorchStateObserver observer);
+  void observe(TorchStateObserverApi observer);
+  void removeObserver(TorchStateObserverApi observer);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.TorchStateObserver.Impl',
+    fullClassName: 'dev.hebei.camerax_android.common.TorchStateObserver',
   ),
 )
-abstract class TorchStateObserver {
-  TorchStateObserver();
+abstract class TorchStateObserverApi {
+  TorchStateObserverApi();
 
-  late final void Function(TorchState value) onChanged;
+  late final void Function(TorchStateApi value) onChanged;
 }
 
 @ProxyApi(
@@ -455,7 +500,7 @@ abstract class TorchStateObserver {
     fullClassName: 'androidx.camera.core.ZoomState',
   ),
 )
-abstract class ZoomState {
+abstract class ZoomStateApi {
   late final double minZoomRatio;
   late final double maxZoomRatio;
   late final double zoomRatio;
@@ -464,27 +509,25 @@ abstract class ZoomState {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.ZoomStateLiveData.Stub',
+    fullClassName: 'dev.hebei.camerax_android.common.ZoomStateLiveData',
   ),
 )
-abstract class ZoomStateLiveData {
-  ZoomState? getValue();
+abstract class ZoomStateLiveDataApi {
+  ZoomStateApi? getValue();
 
-  void observe(ZoomStateObserver observer);
-  void removeObserver(ZoomStateObserver observer);
+  void observe(ZoomStateObserverApi observer);
+  void removeObserver(ZoomStateObserverApi observer);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.ZoomStateObserver.Impl',
+    fullClassName: 'dev.hebei.camerax_android.common.ZoomStateObserver',
   ),
 )
-abstract class ZoomStateObserver {
-  ZoomStateObserver();
+abstract class ZoomStateObserverApi {
+  ZoomStateObserverApi();
 
-  late final void Function(ZoomState value) onChanged;
+  late final void Function(ZoomStateApi value) onChanged;
 }
 
 @ProxyApi(
@@ -492,9 +535,9 @@ abstract class ZoomStateObserver {
     fullClassName: 'androidx.camera.core.ExposureState',
   ),
 )
-abstract class ExposureState {
+abstract class ExposureStateApi {
   late final int exposureCompensationIndex;
-  late final IntRange exposureCompensationRange;
+  late final IntRangeApi exposureCompensationRange;
   late final double exposureCompensationStep;
   late final bool isExposureCompensationSupported;
 }
@@ -504,7 +547,7 @@ abstract class ExposureState {
     fullClassName: 'androidx.camera.core.MeteringPoint',
   ),
 )
-abstract class MeteringPoint {
+abstract class MeteringPointApi {
   late final double size;
 }
 
@@ -513,8 +556,8 @@ abstract class MeteringPoint {
     fullClassName: 'androidx.camera.core.MeteringPointFactory',
   ),
 )
-abstract class MeteringPointFactory {
-  MeteringPoint createPoint(
+abstract class MeteringPointFactoryApi {
+  MeteringPointApi createPoint(
     double x,
     double y, {
     double? size,
@@ -526,32 +569,30 @@ abstract class MeteringPointFactory {
     fullClassName: 'androidx.camera.core.SurfaceOrientedMeteringPointFactory',
   ),
 )
-abstract class SurfaceOrientedMeteringPointFactory
-    extends MeteringPointFactory {
-  SurfaceOrientedMeteringPointFactory(double width, double height);
+abstract class SurfaceOrientedMeteringPointFactoryApi
+    extends MeteringPointFactoryApi {
+  SurfaceOrientedMeteringPointFactoryApi(double width, double height);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.FocusMeteringAction.MeteringPointArgs.Stub',
+    fullClassName: 'dev.hebei.camerax_android.core.MeteringPointTuple',
   ),
 )
-abstract class MeteringPointArgs {
-  MeteringPointArgs(
-    MeteringPoint point, {
-    List<MeteringMode>? modes,
+abstract class MeteringPointTupleApi {
+  MeteringPointTupleApi(
+    MeteringPointApi point, {
+    List<MeteringModeApi>? modes,
   });
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.core.FocusMeteringAction.DurationArgs.Stub',
+    fullClassName: 'dev.hebei.camerax_android.core.DurationTuple',
   ),
 )
-abstract class DurationArgs {
-  DurationArgs(int duration, TimeUnit timeUnit);
+abstract class DurationTupleApi {
+  DurationTupleApi(int duration, TimeUnitApi timeUnit);
 }
 
 @ProxyApi(
@@ -559,18 +600,18 @@ abstract class DurationArgs {
     fullClassName: 'androidx.camera.core.FocusMeteringAction',
   ),
 )
-abstract class FocusMeteringAction {
-  FocusMeteringAction.build(
-    MeteringPointArgs first, {
-    List<MeteringPointArgs>? others,
+abstract class FocusMeteringActionApi {
+  FocusMeteringActionApi.build(
+    MeteringPointTupleApi first, {
+    List<MeteringPointTupleApi>? others,
     bool? disableAutoCancel,
-    DurationArgs? autoCancelDuration,
+    DurationTupleApi? autoCancelDuration,
   });
 
   int getAutoCancelDurationInMillis();
-  List<MeteringPoint> getMeteringPointsAe();
-  List<MeteringPoint> getMeteringPointsAf();
-  List<MeteringPoint> getMeteringPointsAwb();
+  List<MeteringPointApi> getMeteringPointsAe();
+  List<MeteringPointApi> getMeteringPointsAf();
+  List<MeteringPointApi> getMeteringPointsAwb();
   bool isAutoCancelEnabled();
 }
 
@@ -579,7 +620,7 @@ abstract class FocusMeteringAction {
     fullClassName: 'androidx.camera.core.FocusMeteringResult',
   ),
 )
-abstract class FocusMeteringResult {
+abstract class FocusMeteringResultApi {
   late final bool isFocusSuccessful;
 }
 
@@ -588,11 +629,11 @@ abstract class FocusMeteringResult {
     fullClassName: 'androidx.camera.core.DynamicRange',
   ),
 )
-abstract class DynamicRange {
-  DynamicRange();
+abstract class DynamicRangeApi {
+  DynamicRangeApi();
 
-  late final Encoding encoding;
-  late final BitDepth bitDepth;
+  late final EncodingApi encoding;
+  late final BitDepthApi bitDepth;
 }
 
 @ProxyApi(
@@ -600,25 +641,25 @@ abstract class DynamicRange {
     fullClassName: 'androidx.camera.core.CameraInfo',
   ),
 )
-abstract class CameraInfo {
+abstract class CameraInfoApi {
   @static
   bool mustPlayShutterSound();
-  CameraSelector getCameraSelector();
-  CameraStateLiveData getCameraState();
-  TorchStateLiveData getTorchState();
-  ZoomStateLiveData getZoomState();
-  ExposureState getExposureState();
+  CameraSelectorApi getCameraSelector();
+  CameraStateLiveDataApi getCameraState();
+  TorchStateLiveDataApi getTorchState();
+  ZoomStateLiveDataApi getZoomState();
+  ExposureStateApi getExposureState();
   double getIntrinsticZoomRatio();
-  LensFacing getLensFacing();
-  List<CameraInfo> getPhysicalCameraInfos();
+  LensFacingApi getLensFacing();
+  List<CameraInfoApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees();
-  List<IntRange> getSupportedFrameRateRanges();
+  List<IntRangeApi> getSupportedFrameRateRanges();
   bool isLogicalMultiCameraSupported();
   bool isZslSupported();
   bool hasFlashUnit();
-  bool isFocusMeteringSupported(FocusMeteringAction action);
-  List<DynamicRange> querySupportedDynamicRanges(
-      List<DynamicRange> candidateDynamicRanges);
+  bool isFocusMeteringSupported(FocusMeteringActionApi action);
+  List<DynamicRangeApi> querySupportedDynamicRanges(
+      List<DynamicRangeApi> candidateDynamicRanges);
 }
 
 @ProxyApi(
@@ -626,7 +667,7 @@ abstract class CameraInfo {
     fullClassName: 'androidx.camera.core.CameraControl',
   ),
 )
-abstract class CameraControl {
+abstract class CameraControlApi {
   @async
   void enableTorch(bool torch);
   @async
@@ -634,7 +675,7 @@ abstract class CameraControl {
   @async
   void setLinearZoom(double linearZoom);
   @async
-  FocusMeteringResult startFocusAndMetering(FocusMeteringAction action);
+  FocusMeteringResultApi startFocusAndMetering(FocusMeteringActionApi action);
   @async
   void cancelFocusAndMetering();
   @async
@@ -647,11 +688,11 @@ abstract class CameraControl {
         'androidx.camera.core.resolutionselector.AspectRatioStrategy',
   ),
 )
-abstract class AspectRatioStrategy {
-  AspectRatioStrategy();
+abstract class AspectRatioStrategyApi {
+  AspectRatioStrategyApi();
 
-  late final AspectRatio preferredAspectRatio;
-  late final AspectRatioFallbackRule fallbackRule;
+  late final AspectRatioApi preferredAspectRatio;
+  late final AspectRatioFallbackRuleApi fallbackRule;
 }
 
 @ProxyApi(
@@ -659,11 +700,11 @@ abstract class AspectRatioStrategy {
     fullClassName: 'androidx.camera.core.resolutionselector.ResolutionFilter',
   ),
 )
-abstract class ResolutionFilter {
-  ResolutionFilter();
+abstract class ResolutionFilterApi {
+  ResolutionFilterApi();
 
-  late final List<Size> Function(List<Size> supportedSizes, int rotationDegrees)
-      filter;
+  late final List<SizeApi> Function(
+      List<SizeApi> supportedSizes, int rotationDegrees) filter;
 }
 
 @ProxyApi(
@@ -671,11 +712,11 @@ abstract class ResolutionFilter {
     fullClassName: 'androidx.camera.core.resolutionselector.ResolutionStrategy',
   ),
 )
-abstract class ResolutionStrategy {
-  ResolutionStrategy();
+abstract class ResolutionStrategyApi {
+  ResolutionStrategyApi();
 
-  late final Size? boundSize;
-  late final ResolutionFallbackRule fallbackRule;
+  late final SizeApi? boundSize;
+  late final ResolutionFallbackRuleApi fallbackRule;
 }
 
 @ProxyApi(
@@ -683,13 +724,13 @@ abstract class ResolutionStrategy {
     fullClassName: 'androidx.camera.core.resolutionselector.ResolutionSelector',
   ),
 )
-abstract class ResolutionSelector {
-  ResolutionSelector();
+abstract class ResolutionSelectorApi {
+  ResolutionSelectorApi();
 
-  late final ResolutionMode allowedResolutionMode;
-  late final AspectRatioStrategy aspectRatioStrategy;
-  late final ResolutionFilter? resolutionFilter;
-  late final ResolutionStrategy? resolutionStrategy;
+  late final ResolutionModeApi allowedResolutionMode;
+  late final AspectRatioStrategyApi aspectRatioStrategy;
+  late final ResolutionFilterApi? resolutionFilter;
+  late final ResolutionStrategyApi? resolutionStrategy;
 }
 
 @ProxyApi(
@@ -697,7 +738,7 @@ abstract class ResolutionSelector {
     fullClassName: 'androidx.camera.core.ImageInfo',
   ),
 )
-abstract class ImageInfo {
+abstract class ImageInfoApi {
   late final int timestamp;
   late final int rotationDegrees;
 }
@@ -706,7 +747,7 @@ abstract class ImageInfo {
   kotlinOptions: KotlinProxyApiOptions(
       fullClassName: 'androidx.camera.core.ImageProxy.PlaneProxy'),
 )
-abstract class PlaneProxy {
+abstract class PlaneProxyApi {
   late final Uint8List buffer;
   late final int pixelStride;
   late final int rowStride;
@@ -717,14 +758,14 @@ abstract class PlaneProxy {
     fullClassName: 'androidx.camera.core.ImageProxy',
   ),
 )
-abstract class ImageProxy extends AutoCloseable {
-  late final ImageFormat format;
+abstract class ImageProxyApi extends AutoCloseableApi {
+  late final ImageFormatApi format;
   late final int width;
   late final int height;
-  late final List<PlaneProxy> planes;
-  late final ImageInfo imageInfo;
-  Rect getCropRect();
-  void setCropRect(Rect? rect);
+  late final List<PlaneProxyApi> planes;
+  late final ImageInfoApi imageInfo;
+  RectApi getCropRect();
+  void setCropRect(RectApi? rect);
 }
 
 @ProxyApi(
@@ -732,12 +773,12 @@ abstract class ImageProxy extends AutoCloseable {
     fullClassName: 'androidx.camera.core.ImageCapture.Metadata',
   ),
 )
-abstract class Metadata {
-  Metadata();
+abstract class MetadataApi {
+  MetadataApi();
 
   late final bool isReversedHorizontal;
   late final bool isReversedVertical;
-  late final Location? location;
+  late final LocationApi? location;
 }
 
 @ProxyApi(
@@ -745,10 +786,10 @@ abstract class Metadata {
     fullClassName: 'androidx.camera.core.ImageCapture.OutputFileOptions',
   ),
 )
-abstract class OutputFileOptions {
-  OutputFileOptions.build(
+abstract class OutputFileOptionsApi {
+  OutputFileOptionsApi.build(
     String file, {
-    Metadata? metadata,
+    MetadataApi? metadata,
   });
 }
 
@@ -757,7 +798,7 @@ abstract class OutputFileOptions {
     fullClassName: 'androidx.camera.core.ImageCapture.OutputFileResults',
   ),
 )
-abstract class OutputFileResults {
+abstract class OutputFileResultsApi {
   late final String? savedUri;
 }
 
@@ -766,13 +807,13 @@ abstract class OutputFileResults {
     fullClassName: 'androidx.camera.core.ImageCapture.OnImageCapturedCallback',
   ),
 )
-abstract class OnImageCapturedCallback {
-  OnImageCapturedCallback();
+abstract class OnImageCapturedCallbackApi {
+  OnImageCapturedCallbackApi();
 
   late final void Function()? onCaptureStarted;
   late final void Function(int progress)? onCaptureProcessProgressed;
   late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
-  late final void Function(ImageProxy image)? onCaptureSuccess;
+  late final void Function(ImageProxyApi image)? onCaptureSuccess;
   late final void Function(List<Object?> exception)? onError;
 }
 
@@ -781,13 +822,14 @@ abstract class OnImageCapturedCallback {
     fullClassName: 'androidx.camera.core.ImageCapture.OnImageSavedCallback',
   ),
 )
-abstract class OnImageSavedCallback {
-  OnImageSavedCallback();
+abstract class OnImageSavedCallbackApi {
+  OnImageSavedCallbackApi();
 
   late final void Function()? onCaptureStarted;
   late final void Function(int progress)? onCaptureProcessProgressed;
   late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
-  late final void Function(OutputFileResults outputFileResults)? onImageSaved;
+  late final void Function(OutputFileResultsApi outputFileResults)?
+      onImageSaved;
   late final void Function(List<Object?> exception)? onError;
 }
 
@@ -796,17 +838,17 @@ abstract class OnImageSavedCallback {
     fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
   ),
 )
-abstract class Analyzer {}
+abstract class AnalyzerApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
   ),
 )
-abstract class ImageAnalyzer implements Analyzer {
-  ImageAnalyzer();
+abstract class ImageAnalyzerApi implements AnalyzerApi {
+  ImageAnalyzerApi();
 
-  late final void Function(ImageProxy image) analyze;
+  late final void Function(ImageProxyApi image) analyze;
 }
 
 @ProxyApi(
@@ -814,9 +856,9 @@ abstract class ImageAnalyzer implements Analyzer {
     fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
   ),
 )
-abstract class JpegAnalyzer implements Analyzer {
-  JpegAnalyzer({
-    required CoordinateSystem targetCoordinateSystem,
+abstract class JpegAnalyzerApi implements AnalyzerApi {
+  JpegAnalyzerApi({
+    required CoordinateSystemApi targetCoordinateSystem,
   });
 
   late final void Function(Uint8List value) consumer;
@@ -824,18 +866,18 @@ abstract class JpegAnalyzer implements Analyzer {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.legacy.ml.Detector.Stub',
+    fullClassName: 'dev.hebei.camerax_android.ml.Detector',
   ),
 )
-abstract class Detector extends Closeable {}
+abstract class DetectorApi extends CloseableApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Address',
   ),
 )
-abstract class Address {
-  late final AddressType type;
+abstract class AddressApi {
+  late final AddressTypeApi type;
   late final List<String> addressLines;
 }
 
@@ -845,7 +887,7 @@ abstract class Address {
         'com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime',
   ),
 )
-abstract class CalendarDateTime {
+abstract class CalendarDateTimeApi {
   late final String? rawValue;
   late final int year;
   late final int month;
@@ -862,9 +904,9 @@ abstract class CalendarDateTime {
         'com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent',
   ),
 )
-abstract class CalendarEvent {
-  late final CalendarDateTime? start;
-  late final CalendarDateTime? end;
+abstract class CalendarEventApi {
+  late final CalendarDateTimeApi? start;
+  late final CalendarDateTimeApi? end;
   late final String? location;
   late final String? organizer;
   late final String? summary;
@@ -877,12 +919,12 @@ abstract class CalendarEvent {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.ContactInfo',
   ),
 )
-abstract class ContactInfo {
-  late final List<Address> addresses;
-  late final List<Email> emails;
-  late final PersonName? name;
+abstract class ContactInfoApi {
+  late final List<AddressApi> addresses;
+  late final List<EmailApi> emails;
+  late final PersonNameApi? name;
   late final String? organization;
-  late final List<Phone> phones;
+  late final List<PhoneApi> phones;
   late final String? title;
   late final List<String> urls;
 }
@@ -893,7 +935,7 @@ abstract class ContactInfo {
         'com.google.mlkit.vision.barcode.common.Barcode.DriverLicense',
   ),
 )
-abstract class DriverLicense {
+abstract class DriverLicenseApi {
   late final String? licenseNumber;
   late final String? documentType;
   late final String? expiryDate;
@@ -915,8 +957,8 @@ abstract class DriverLicense {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Email',
   ),
 )
-abstract class Email {
-  late final EmailType type;
+abstract class EmailApi {
+  late final EmailTypeApi type;
   late final String? address;
   late final String? subject;
   late final String? body;
@@ -927,7 +969,7 @@ abstract class Email {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.GeoPoint',
   ),
 )
-abstract class GeoPoint {
+abstract class GeoPointApi {
   late final double lat;
   late final double lng;
 }
@@ -937,7 +979,7 @@ abstract class GeoPoint {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.PersonName',
   ),
 )
-abstract class PersonName {
+abstract class PersonNameApi {
   late final String? formattedName;
   late final String? pronunciation;
   late final String? prefix;
@@ -952,8 +994,8 @@ abstract class PersonName {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Phone',
   ),
 )
-abstract class Phone {
-  late final PhoneType type;
+abstract class PhoneApi {
+  late final PhoneTypeApi type;
   late final String? number;
 }
 
@@ -962,7 +1004,7 @@ abstract class Phone {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Sms',
   ),
 )
-abstract class Sms {
+abstract class SmsApi {
   late final String? phoneNumber;
   late final String? message;
 }
@@ -972,7 +1014,7 @@ abstract class Sms {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark',
   ),
 )
-abstract class UrlBookmark {
+abstract class UrlBookmarkApi {
   late final String? title;
   late final String? url;
 }
@@ -982,8 +1024,8 @@ abstract class UrlBookmark {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.WiFi',
   ),
 )
-abstract class WiFi {
-  late final WiFiEncryptionType encryptionType;
+abstract class WiFiApi {
+  late final WiFiEncryptionTypeApi encryptionType;
   late final String? ssid;
   late final String? password;
 }
@@ -993,23 +1035,23 @@ abstract class WiFi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode',
   ),
 )
-abstract class Barcode {
-  late final Rect? boundingBox;
-  late final List<Point>? cornerPoints;
-  late final BarcodeFormat format;
-  late final BarcodeValueType valueType;
+abstract class BarcodeApi {
+  late final RectApi? boundingBox;
+  late final List<PointApi>? cornerPoints;
+  late final BarcodeFormatApi format;
+  late final BarcodeValueTypeApi valueType;
   late final Uint8List? rawBytes;
   late final String? rawValue;
   late final String? displayValue;
-  late final CalendarEvent? calendarEvent;
-  late final ContactInfo? contactInfo;
-  late final DriverLicense? driverLicense;
-  late final Email? email;
-  late final GeoPoint? geoPoint;
-  late final Phone? phone;
-  late final Sms? sms;
-  late final UrlBookmark? url;
-  late final WiFi? wifi;
+  late final CalendarEventApi? calendarEvent;
+  late final ContactInfoApi? contactInfo;
+  late final DriverLicenseApi? driverLicense;
+  late final EmailApi? email;
+  late final GeoPointApi? geoPoint;
+  late final PhoneApi? phone;
+  late final SmsApi? sms;
+  late final UrlBookmarkApi? url;
+  late final WiFiApi? wifi;
 }
 
 @ProxyApi(
@@ -1018,8 +1060,8 @@ abstract class Barcode {
         'com.google.mlkit.vision.barcode.ZoomSuggestionOptions.ZoomCallback',
   ),
 )
-abstract class ZoomCallback {
-  ZoomCallback();
+abstract class ZoomCallbackApi {
+  ZoomCallbackApi();
 
   late final bool Function(double zoomRatio) setZoom;
 }
@@ -1029,9 +1071,9 @@ abstract class ZoomCallback {
     fullClassName: 'com.google.mlkit.vision.barcode.ZoomSuggestionOptions',
   ),
 )
-abstract class ZoomSuggestionOptions {
-  ZoomSuggestionOptions.build({
-    required ZoomCallback zoomCallback,
+abstract class ZoomSuggestionOptionsApi {
+  ZoomSuggestionOptionsApi.build({
+    required ZoomCallbackApi zoomCallback,
     double? maxSupportedZoomRatio,
   });
 }
@@ -1041,11 +1083,11 @@ abstract class ZoomSuggestionOptions {
     fullClassName: 'com.google.mlkit.vision.barcode.BarcodeScannerOptions',
   ),
 )
-abstract class BarcodeScannerOptions {
-  BarcodeScannerOptions.build({
+abstract class BarcodeScannerOptionsApi {
+  BarcodeScannerOptionsApi.build({
     bool? enableAllPotentialBarcodes,
-    List<BarcodeFormat>? formats,
-    ZoomSuggestionOptions? zoomSuggestionOptions,
+    List<BarcodeFormatApi>? formats,
+    ZoomSuggestionOptionsApi? zoomSuggestionOptions,
   });
 }
 
@@ -1054,30 +1096,29 @@ abstract class BarcodeScannerOptions {
     fullClassName: 'com.google.android.odml.image.MlImage',
   ),
 )
-abstract class MlImage {}
+abstract class MlImageApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'com.google.mlkit.vision.common.InputImage',
   ),
 )
-abstract class InputImage {}
+abstract class InputImageApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.ml.barcode.BarcodeScanner.Stub',
+    fullClassName: 'dev.hebei.camerax_android.ml.barcode.BarcodeScanner',
   ),
 )
-abstract class BarcodeScanner extends Detector {
-  BarcodeScanner({
-    BarcodeScannerOptions? options,
+abstract class BarcodeScannerApi extends DetectorApi {
+  BarcodeScannerApi({
+    BarcodeScannerOptionsApi? options,
   });
 
   @async
-  List<Barcode> process0(MlImage image);
+  List<BarcodeApi> process0(MlImageApi image);
   @async
-  List<Barcode> process1(InputImage image);
+  List<BarcodeApi> process1(InputImageApi image);
 }
 
 @ProxyApi(
@@ -1085,14 +1126,14 @@ abstract class BarcodeScanner extends Detector {
     fullClassName: 'com.google.mlkit.vision.face.FaceDetectorOptions',
   ),
 )
-abstract class FaceDetectorOptions {
-  FaceDetectorOptions.build({
+abstract class FaceDetectorOptionsApi {
+  FaceDetectorOptionsApi.build({
     bool? enableTracking,
-    FaceClassificationMode? classificationMode,
-    FaceContourMode? contourMode,
-    FaceLandmarkMode? landmarkMode,
+    FaceClassificationModeApi? classificationMode,
+    FaceContourModeApi? contourMode,
+    FaceLandmarkModeApi? landmarkMode,
     double? minFaceSize,
-    FacePerformanceMode? performanceMode,
+    FacePerformanceModeApi? performanceMode,
   });
 }
 
@@ -1101,9 +1142,9 @@ abstract class FaceDetectorOptions {
     fullClassName: 'com.google.mlkit.vision.face.FaceContour',
   ),
 )
-abstract class FaceContour {
-  late final FaceContourType type;
-  late final List<PointF> points;
+abstract class FaceContourApi {
+  late final FaceContourTypeApi type;
+  late final List<PointFApi> points;
 }
 
 @ProxyApi(
@@ -1111,9 +1152,9 @@ abstract class FaceContour {
     fullClassName: 'com.google.mlkit.vision.face.FaceLandmark',
   ),
 )
-abstract class FaceLandmark {
-  late final FaceLandmarkType type;
-  late final PointF position;
+abstract class FaceLandmarkApi {
+  late final FaceLandmarkTypeApi type;
+  late final PointFApi position;
 }
 
 @ProxyApi(
@@ -1121,10 +1162,10 @@ abstract class FaceLandmark {
     fullClassName: 'com.google.mlkit.vision.face.Face',
   ),
 )
-abstract class Face {
-  late final Rect boundingBox;
-  late final List<FaceContour> allContours;
-  late final List<FaceLandmark> allLandmarks;
+abstract class FaceApi {
+  late final RectApi boundingBox;
+  late final List<FaceContourApi> allContours;
+  late final List<FaceLandmarkApi> allLandmarks;
   late final double headEulerAngleX;
   late final double headEulerAngleY;
   late final double headEulerAngleZ;
@@ -1133,83 +1174,83 @@ abstract class Face {
   late final double? smilingProbability;
   late final int? trackingId;
 
-  FaceContour? getContour(FaceContourType contourType);
-  FaceLandmark? getLandmark(FaceLandmarkType landmarkType);
+  FaceContourApi? getContour(FaceContourTypeApi contourType);
+  FaceLandmarkApi? getLandmark(FaceLandmarkTypeApi landmarkType);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.legacy.ml.face.FaceDetector.Stub',
+    fullClassName: 'dev.hebei.camerax_android.ml.face.FaceDetector',
   ),
 )
-abstract class FaceDetector extends Detector {
-  FaceDetector({
-    FaceDetectorOptions? options,
+abstract class FaceDetectorApi extends DetectorApi {
+  FaceDetectorApi({
+    FaceDetectorOptionsApi? options,
   });
 
   @async
-  List<Face> process0(MlImage image);
+  List<FaceApi> process0(MlImageApi image);
   @async
-  List<Face> process1(InputImage image);
+  List<FaceApi> process1(InputImageApi image);
 }
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.ImageLabeler.Stub',
+//     fullClassName: 'dev.hebei.camerax_android.ml.ImageLabeler',
 //   ),
 // )
-// abstract class ImageLabeler extends Detector {}
+// abstract class ImageLabelerApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.ObjectDetector.Stub',
+//     fullClassName: 'dev.hebei.camerax_android.ml.ObjectDetector',
 //   ),
 // )
-// abstract class ObjectDetector extends Detector {}
+// abstract class ObjectDetectorApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.PoseDetector.Stub',
+//     fullClassName: 'dev.hebei.camerax_android.ml.PoseDetector',
 //   ),
 // )
-// abstract class PoseDetector extends Detector {}
+// abstract class PoseDetectorApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.Segmenter.Stub',
+//     fullClassName: 'dev.hebei.camerax_android.ml.Segmenter',
 //   ),
 // )
-// abstract class Segmenter extends Detector {}
+// abstract class SegmenterApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.legacy.ml.TextRecognizer.Stub',
+//     fullClassName: 'dev.hebei.camerax_android.ml.TextRecognizer',
 //   ),
 // )
-// abstract class TextRecognizer extends Detector {}
+// abstract class TextRecognizerApi extends DetectorApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.mlkit.vision.MlKitAnalyzer.Result',
   ),
 )
-abstract class MlKitAnalyzerResult {
+abstract class MlKitAnalyzerResultApi {
   late final int timestamp;
-  List<Object?>? getThrowable(Detector detector);
-  List<Barcode>? getBarcodes(BarcodeScanner detector);
-  List<Face>? getFaces(FaceDetector detector);
+  List<Object?>? getThrowable(DetectorApi detector);
+  List<BarcodeApi>? getBarcodes(BarcodeScannerApi detector);
+  List<FaceApi>? getFaces(FaceDetectorApi detector);
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.hebei.camerax_android.legacy.common.MlKitAnalyzerResultConsumer.Impl',
+        'dev.hebei.camerax_android.common.MlKitAnalyzerResultConsumer',
   ),
 )
-abstract class MlKitAnalyzerResultConsumer {
-  MlKitAnalyzerResultConsumer();
+abstract class MlKitAnalyzerResultConsumerApi {
+  MlKitAnalyzerResultConsumerApi();
 
-  late final void Function(MlKitAnalyzerResult value) accept;
+  late final void Function(MlKitAnalyzerResultApi value) accept;
 }
 
 @ProxyApi(
@@ -1217,11 +1258,11 @@ abstract class MlKitAnalyzerResultConsumer {
     fullClassName: 'androidx.camera.mlkit.vision.MlKitAnalyzer',
   ),
 )
-abstract class MlKitAnalyzer implements Analyzer {
-  MlKitAnalyzer({
-    required List<Detector> detectors,
-    required CoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumer consumer,
+abstract class MlKitAnalyzerApi implements AnalyzerApi {
+  MlKitAnalyzerApi({
+    required List<DetectorApi> detectors,
+    required CoordinateSystemApi targetCoordinateSystem,
+    required MlKitAnalyzerResultConsumerApi consumer,
   });
 }
 
@@ -1230,19 +1271,19 @@ abstract class MlKitAnalyzer implements Analyzer {
     fullClassName: 'androidx.camera.video.Quality',
   ),
 )
-abstract class Quality {
+abstract class QualityApi {
   @static
-  late final Quality fhd;
+  late final QualityApi fhd;
   @static
-  late final Quality hd;
+  late final QualityApi hd;
   @static
-  late final Quality highest;
+  late final QualityApi highest;
   @static
-  late final Quality lowest;
+  late final QualityApi lowest;
   @static
-  late final Quality sd;
+  late final QualityApi sd;
   @static
-  late final Quality uhd;
+  late final QualityApi uhd;
 }
 
 @ProxyApi(
@@ -1250,11 +1291,11 @@ abstract class Quality {
     fullClassName: 'androidx.camera.video.FallbackStrategy',
   ),
 )
-abstract class FallbackStrategy {
-  FallbackStrategy.higherQualityOrLowerThan(Quality quality);
-  FallbackStrategy.higherQualityThan(Quality quality);
-  FallbackStrategy.lowerQualityOrHigherThan(Quality quality);
-  FallbackStrategy.lowerQualityThan(Quality quality);
+abstract class FallbackStrategyApi {
+  FallbackStrategyApi.higherQualityOrLowerThan(QualityApi quality);
+  FallbackStrategyApi.higherQualityThan(QualityApi quality);
+  FallbackStrategyApi.lowerQualityOrHigherThan(QualityApi quality);
+  FallbackStrategyApi.lowerQualityThan(QualityApi quality);
 }
 
 @ProxyApi(
@@ -1262,19 +1303,19 @@ abstract class FallbackStrategy {
     fullClassName: 'androidx.camera.video.QualitySelector',
   ),
 )
-abstract class QualitySelector {
-  QualitySelector.from(
-    Quality quality, {
-    FallbackStrategy? fallbackStrategy,
+abstract class QualitySelectorApi {
+  QualitySelectorApi.from(
+    QualityApi quality, {
+    FallbackStrategyApi? fallbackStrategy,
   });
 
-  QualitySelector.fromOrderedList(
-    List<Quality> qualities, {
-    FallbackStrategy? fallbackStrategy,
+  QualitySelectorApi.fromOrderedList(
+    List<QualityApi> qualities, {
+    FallbackStrategyApi? fallbackStrategy,
   });
 
   @static
-  Size? getResolution(CameraInfo cameraInfo, Quality quality);
+  SizeApi? getResolution(CameraInfoApi cameraInfo, QualityApi quality);
 }
 
 @ProxyApi(
@@ -1282,11 +1323,11 @@ abstract class QualitySelector {
     fullClassName: 'androidx.camera.video.FileOutputOptions',
   ),
 )
-abstract class FileOutputOptions {
-  FileOutputOptions.build({
+abstract class FileOutputOptionsApi {
+  FileOutputOptionsApi.build({
     int? durationLimitMillis,
     int? fileSizeLimitBytes,
-    Location? location,
+    LocationApi? location,
   });
 
   late final String file;
@@ -1297,11 +1338,11 @@ abstract class FileOutputOptions {
     fullClassName: 'androidx.camera.view.video.AudioConfig',
   ),
 )
-abstract class AudioConfig {
+abstract class AudioConfigApi {
   @static
-  late final AudioConfig audioDisabled;
+  late final AudioConfigApi audioDisabled;
 
-  AudioConfig.create(bool enableAudio);
+  AudioConfigApi.create(bool enableAudio);
 
   bool getAudioEnabled();
 }
@@ -1311,9 +1352,9 @@ abstract class AudioConfig {
     fullClassName: 'androidx.camera.video.AudioStats',
   ),
 )
-abstract class AudioStats {
+abstract class AudioStatsApi {
   late final double audioAmplitude;
-  late final AudioState audioState;
+  late final AudioStateApi audioState;
   late final List<Object?>? errorCause;
   late final bool hasAudio;
   late final bool hasError;
@@ -1324,8 +1365,8 @@ abstract class AudioStats {
     fullClassName: 'androidx.camera.video.RecordingStats',
   ),
 )
-abstract class RecordingStats {
-  late final AudioStats audioStats;
+abstract class RecordingStatsApi {
+  late final AudioStatsApi audioStats;
   late final int numBytesRecorded;
   late final int recordedDurationNanos;
 }
@@ -1335,15 +1376,15 @@ abstract class RecordingStats {
     fullClassName: 'androidx.camera.video.VideoRecordEvent',
   ),
 )
-abstract class VideoRecordEvent {}
+abstract class VideoRecordEventApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Status',
   ),
 )
-abstract class VideoRecordStatusEvent extends VideoRecordEvent {
-  late final RecordingStats recordingStats;
+abstract class VideoRecordStatusEventApi extends VideoRecordEventApi {
+  late final RecordingStatsApi recordingStats;
 }
 
 @ProxyApi(
@@ -1351,8 +1392,8 @@ abstract class VideoRecordStatusEvent extends VideoRecordEvent {
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Start',
   ),
 )
-abstract class VideoRecordStartEvent extends VideoRecordEvent {
-  late final RecordingStats recordingStats;
+abstract class VideoRecordStartEventApi extends VideoRecordEventApi {
+  late final RecordingStatsApi recordingStats;
 }
 
 @ProxyApi(
@@ -1360,8 +1401,8 @@ abstract class VideoRecordStartEvent extends VideoRecordEvent {
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Pause',
   ),
 )
-abstract class VideoRecordPauseEvent extends VideoRecordEvent {
-  late final RecordingStats recordingStats;
+abstract class VideoRecordPauseEventApi extends VideoRecordEventApi {
+  late final RecordingStatsApi recordingStats;
 }
 
 @ProxyApi(
@@ -1369,8 +1410,8 @@ abstract class VideoRecordPauseEvent extends VideoRecordEvent {
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Resume',
   ),
 )
-abstract class VideoRecordResumeEvent extends VideoRecordEvent {
-  late final RecordingStats recordingStats;
+abstract class VideoRecordResumeEventApi extends VideoRecordEventApi {
+  late final RecordingStatsApi recordingStats;
 }
 
 @ProxyApi(
@@ -1378,7 +1419,7 @@ abstract class VideoRecordResumeEvent extends VideoRecordEvent {
     fullClassName: 'androidx.camera.video.OutputResults',
   ),
 )
-abstract class OutputResults {
+abstract class OutputResultsApi {
   late final String? outputUri;
 }
 
@@ -1387,23 +1428,22 @@ abstract class OutputResults {
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Finalize',
   ),
 )
-abstract class VideoRecordFinalizeEvent extends VideoRecordEvent {
-  late final RecordingStats recordingStats;
+abstract class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
+  late final RecordingStatsApi recordingStats;
   late final List<Object?>? cause;
-  late final VideoRecordFinalizeEventError error;
-  late final OutputResults outputResults;
+  late final VideoRecordFinalizeEventErrorApi error;
+  late final OutputResultsApi outputResults;
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.hebei.camerax_android.legacy.common.VideoRecordEventConsumer.Impl',
+    fullClassName: 'dev.hebei.camerax_android.common.VideoRecordEventConsumer',
   ),
 )
-abstract class VideoRecordEventConsumer {
-  VideoRecordEventConsumer();
+abstract class VideoRecordEventConsumerApi {
+  VideoRecordEventConsumerApi();
 
-  late final void Function(VideoRecordEvent value) accept;
+  late final void Function(VideoRecordEventApi value) accept;
 }
 
 @ProxyApi(
@@ -1411,7 +1451,7 @@ abstract class VideoRecordEventConsumer {
     fullClassName: 'androidx.camera.video.Recording',
   ),
 )
-abstract class Recording {
+abstract class RecordingApi {
   bool isPersistene();
   void mute(bool muted);
   void pause();
@@ -1425,25 +1465,25 @@ abstract class Recording {
     fullClassName: 'androidx.camera.view.CameraController',
   ),
 )
-abstract class CameraController {
+abstract class CameraControllerApi {
   @async
   void initialize();
   @async
-  bool hasCamera(CameraSelector cameraSelector);
+  bool hasCamera(CameraSelectorApi cameraSelector);
   @async
-  CameraSelector getCameraSelector();
+  CameraSelectorApi getCameraSelector();
   @async
-  void setCameraSelector(CameraSelector cameraSelector);
+  void setCameraSelector(CameraSelectorApi cameraSelector);
   @async
-  CameraInfo? getCameraInfo();
+  CameraInfoApi? getCameraInfo();
   @async
-  CameraControl? getCameraControl();
+  CameraControlApi? getCameraControl();
   @async
-  TorchStateLiveData getTorchState();
+  TorchStateLiveDataApi getTorchState();
   @async
   void enableTorch(bool torchEnabled);
   @async
-  ZoomStateLiveData getZoomState();
+  ZoomStateLiveDataApi getZoomState();
   @async
   void setZoomRatio(double zoomRatio);
   @async
@@ -1463,74 +1503,74 @@ abstract class CameraController {
   @async
   bool isVideoCaptureEnabled();
   @async
-  void setEnabledUseCases(List<UseCase> enabledUseCases);
+  void setEnabledUseCases(List<UseCaseApi> enabledUseCases);
   @async
-  ResolutionSelector? getPreviewResolutionSelector();
+  ResolutionSelectorApi? getPreviewResolutionSelector();
   @async
-  void setPreviewResolutionSelector(ResolutionSelector? resolutionSelector);
+  void setPreviewResolutionSelector(ResolutionSelectorApi? resolutionSelector);
   @async
-  ResolutionSelector? getImageCaptureResolutionSelector();
+  ResolutionSelectorApi? getImageCaptureResolutionSelector();
   @async
   void setImageCaptureResolutionSelector(
-      ResolutionSelector? resolutionSelector);
+      ResolutionSelectorApi? resolutionSelector);
   @async
-  CaptureMode getImageCaptureMode();
+  CaptureModeApi getImageCaptureMode();
   @async
-  void setImageCaptureMode(CaptureMode captureMode);
+  void setImageCaptureMode(CaptureModeApi captureMode);
   @async
-  FlashMode getImageCaptureFlashMode();
+  FlashModeApi getImageCaptureFlashMode();
   @async
-  void setImageCaptureFlashMode(FlashMode flashMode);
+  void setImageCaptureFlashMode(FlashModeApi flashMode);
   @async
-  void takePictureToMemory(OnImageCapturedCallback capturedCallback);
+  void takePictureToMemory(OnImageCapturedCallbackApi capturedCallback);
   @async
-  void takePictureToFile(
-      OutputFileOptions outputFileOptions, OnImageSavedCallback savedCallback);
+  void takePictureToFile(OutputFileOptionsApi outputFileOptions,
+      OnImageSavedCallbackApi savedCallback);
   @async
-  ResolutionSelector? getImageAnalysisResolutionSelector();
+  ResolutionSelectorApi? getImageAnalysisResolutionSelector();
   @async
   void setImageAnalysisResolutionSelector(
-      ResolutionSelector? resolutionSelector);
+      ResolutionSelectorApi? resolutionSelector);
   @async
-  BackpressureStrategy getImageAnalysisBackpressureStrategy();
+  BackpressureStrategyApi getImageAnalysisBackpressureStrategy();
   @async
-  void setImageAnalysisBackpressureStrategy(BackpressureStrategy strategy);
+  void setImageAnalysisBackpressureStrategy(BackpressureStrategyApi strategy);
   @async
   int getImageAnalysisImageQueueDepth();
   @async
   void setImageAnalysisImageQueueDepth(int depth);
   @async
-  ImageFormat getImageAnalysisOutputImageFormat();
+  ImageFormatApi getImageAnalysisOutputImageFormat();
   @async
   void setImageAnalysisOutputImageFormat(
-      ImageFormat imageAnalysisOutputImageFormat);
+      ImageFormatApi imageAnalysisOutputImageFormat);
   @async
-  void setImageAnalysisAnalyzer(Analyzer analyzer);
+  void setImageAnalysisAnalyzer(AnalyzerApi analyzer);
   @async
   void clearImageAnalysisAnalyzer();
   @async
-  DynamicRange getVideoCaptureDynamicRange();
+  DynamicRangeApi getVideoCaptureDynamicRange();
   @async
-  void setVideoCaptureDynamicRange(DynamicRange dynamicRange);
+  void setVideoCaptureDynamicRange(DynamicRangeApi dynamicRange);
   @async
-  MirrorMode getVideoCaptureMirrorMode();
+  MirrorModeApi getVideoCaptureMirrorMode();
   @async
-  void setVideoCaptureMirrorMode(MirrorMode mirrorMode);
+  void setVideoCaptureMirrorMode(MirrorModeApi mirrorMode);
   @async
-  QualitySelector getVideoCaptureQualitySelector();
+  QualitySelectorApi getVideoCaptureQualitySelector();
   @async
-  void setVideoCaptureQualitySelector(QualitySelector qualitySelector);
+  void setVideoCaptureQualitySelector(QualitySelectorApi qualitySelector);
   @async
-  IntRange getVideoCaptureTargetFrameRate();
+  IntRangeApi getVideoCaptureTargetFrameRate();
   @async
-  void setVideoCaptureTargetFrameRate(IntRange targetFrameRate);
+  void setVideoCaptureTargetFrameRate(IntRangeApi targetFrameRate);
   @async
   bool isRecording();
   @async
-  Recording startRecording(
-    FileOutputOptions outputOptions,
-    AudioConfig audioConfig,
-    VideoRecordEventConsumer listener,
+  RecordingApi startRecording(
+    FileOutputOptionsApi outputOptions,
+    AudioConfigApi audioConfig,
+    VideoRecordEventConsumerApi listener,
   );
 }
 
@@ -1539,8 +1579,8 @@ abstract class CameraController {
     fullClassName: 'androidx.camera.view.LifecycleCameraController',
   ),
 )
-abstract class LifecycleCameraController extends CameraController {
-  LifecycleCameraController();
+abstract class LifecycleCameraControllerApi extends CameraControllerApi {
+  LifecycleCameraControllerApi();
 
   @async
   void bindToLifecycle();
@@ -1553,15 +1593,59 @@ abstract class LifecycleCameraController extends CameraController {
     fullClassName: 'androidx.camera.view.PreviewView',
   ),
 )
-abstract class PreviewView {
-  PreviewView();
+abstract class PreviewViewApi {
+  PreviewViewApi();
 
   @async
-  CameraController? getController();
+  CameraControllerApi? getController();
   @async
-  void setController(CameraController? controller);
+  void setController(CameraControllerApi? controller);
   @async
-  ScaleType getScaleType();
+  ScaleTypeApi getScaleType();
   @async
-  void setScaleType(ScaleType scaleType);
+  void setScaleType(ScaleTypeApi scaleType);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.camera2.interop.Camera2CameraControl',
+  ),
+)
+abstract class Camera2CameraControlApi {
+  Camera2CameraControlApi.from(CameraControlApi cameraControl);
+
+  @async
+  void addCaptureRequestOptions(CaptureRequestOptionsApi bundle);
+  @async
+  void clearCaptureRequestOptions();
+  CaptureRequestOptionsApi getCaptureRequestOptions();
+  @async
+  void setCaptureRequestOptions(CaptureRequestOptionsApi bundle);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.camera2.interop.Camera2CameraInfo',
+  ),
+)
+abstract class Camera2CameraInfoApi {
+  Camera2CameraInfoApi.from(CameraInfoApi cameraInfo);
+
+  LongRangeApi? getSensorInfoExposureTimeRange();
+  String getCameraId();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.camera2.interop.CaptureRequestOptions',
+  ),
+)
+abstract class CaptureRequestOptionsApi {
+  CaptureRequestOptionsApi.build({
+    ControlModeApi? mode,
+    ControlAeModeApi? aeMode,
+    ControlAfModeApi? afMode,
+    ControlAwbModeApi? awbMode,
+    int? sensorExposureTime,
+  });
 }

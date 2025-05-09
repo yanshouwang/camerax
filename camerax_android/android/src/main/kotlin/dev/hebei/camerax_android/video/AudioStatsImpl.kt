@@ -1,0 +1,39 @@
+package dev.hebei.camerax_android.video
+
+import dev.hebei.camerax_android.AudioStateApi
+import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.PigeonApiAudioStatsApi
+import dev.hebei.camerax_android.common.api
+
+class AudioStatsImpl(registrar: CameraXRegistrar) : PigeonApiAudioStatsApi(registrar) {
+    override fun audioAmplitude(pigeon_instance: androidx.camera.video.AudioStats): Double {
+        return pigeon_instance.audioAmplitude
+    }
+
+    override fun audioState(pigeon_instance: androidx.camera.video.AudioStats): AudioStateApi {
+        return pigeon_instance.audioState.audioStateApi
+    }
+
+    override fun errorCause(pigeon_instance: androidx.camera.video.AudioStats): List<Any?>? {
+        return pigeon_instance.errorCause?.api
+    }
+
+    override fun hasAudio(pigeon_instance: androidx.camera.video.AudioStats): Boolean {
+        return pigeon_instance.hasAudio()
+    }
+
+    override fun hasError(pigeon_instance: androidx.camera.video.AudioStats): Boolean {
+        return pigeon_instance.hasError()
+    }
+}
+
+val Int.audioStateApi
+    get() = when (this) {
+        androidx.camera.video.AudioStats.AUDIO_STATE_ACTIVE -> AudioStateApi.ACTIVE
+        androidx.camera.video.AudioStats.AUDIO_STATE_DISABLED -> AudioStateApi.DISABLED
+        androidx.camera.video.AudioStats.AUDIO_STATE_SOURCE_SILENCED -> AudioStateApi.SOURCE_SILENCED
+        androidx.camera.video.AudioStats.AUDIO_STATE_ENCODER_ERROR -> AudioStateApi.ENCODER_ERROR
+        androidx.camera.video.AudioStats.AUDIO_STATE_SOURCE_ERROR -> AudioStateApi.SOURCE_ERROR
+        androidx.camera.video.AudioStats.AUDIO_STATE_MUTED -> AudioStateApi.MUTED
+        else -> throw IllegalArgumentException()
+    }

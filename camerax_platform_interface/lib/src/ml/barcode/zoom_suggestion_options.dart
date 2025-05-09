@@ -1,19 +1,25 @@
-import 'package:camerax_platform_interface/src/camerax.dart';
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 typedef ZoomCallback = bool Function(double zoomRatio);
 
-abstract base class ZoomSuggestionOptions extends PlatformInterface {
-  static final _token = Object();
+final _token = Object();
 
-  ZoomSuggestionOptions.impl() : super(token: _token);
-
+abstract interface class ZoomSuggestionOptions {
   factory ZoomSuggestionOptions({
     required ZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,
-  }) =>
-      CameraX.instance.createZoomSuggestionOptions(
-        zoomCallback: zoomCallback,
-        maxSupportedZoomRatio: maxSupportedZoomRatio,
-      );
+  }) {
+    final instance = CameraXPlugin.instance.newZoomSuggestionOptions(
+      zoomCallback: zoomCallback,
+      maxSupportedZoomRatio: maxSupportedZoomRatio,
+    );
+    PlatformInterface.verify(instance as PlatformInterface, _token);
+    return instance;
+  }
+}
+
+abstract base class ZoomSuggestionOptionsChannel extends PlatformInterface
+    implements ZoomSuggestionOptions {
+  ZoomSuggestionOptionsChannel.impl() : super(token: _token);
 }
