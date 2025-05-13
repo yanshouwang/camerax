@@ -1,2 +1,0 @@
-/Users/yanshouwang/dev/camerax/camerax/example/android/app/.cxx/RelWithDebInfo/5h5o4433/arm64-v8a/CMakeFiles/edit_cache.dir
-/Users/yanshouwang/dev/camerax/camerax/example/android/app/.cxx/RelWithDebInfo/5h5o4433/arm64-v8a/CMakeFiles/rebuild_cache.dir

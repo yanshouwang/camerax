@@ -5,9 +5,7 @@ environment:
 workspace:
   - camerax_platform_interface
   - camerax_android
-  - camerax_android/example
   - camerax_ios
-  - camerax_ios/example
   - camerax_linux
   - camerax_linux/example
   - camerax

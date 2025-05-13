@@ -2,217 +2,231 @@ import 'dart:io';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'camera2.dart';
+import 'common.dart';
+import 'core.dart';
+import 'ml.dart';
+import 'video.dart';
+import 'view.dart';
+
 final class CameraXiOSPlugin extends CameraXPlugin {
   static void registerWith() {
     CameraXPlugin.instance = CameraXiOSPlugin();
   }
 
   @override
-  CameraSelector newBackCameraSelector() {
-    // TODO: implement getBackCameraSelector
-    throw UnimplementedError();
-  }
+  PermissionManager newPermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector newExternalCameraSelector() {
-    // TODO: implement getExternalCameraSelector
-    throw UnimplementedError();
-  }
+  CameraSelector newFrontCameraSelector() => CameraSelectorImpl.front;
+  @override
+  CameraSelector newBackCameraSelector() => CameraSelectorImpl.back;
+  @override
+  CameraSelector newExternalCameraSelector() => CameraSelectorImpl.external;
+  @override
+  CameraSelector newCameraSelector({
+    LensFacing? lensFacing,
+  }) =>
+      CameraSelectorImpl(
+        lensFacing: lensFacing,
+      );
 
   @override
-  CameraSelector newFrontCameraSelector() {
-    // TODO: implement getFrontCameraSelector
-    throw UnimplementedError();
-  }
+  CameraController newCameraController() => CameraControllerImpl();
 
   @override
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) {
-    // TODO: implement getResolution
-    throw UnimplementedError();
-  }
-
-  @override
-  BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options}) {
-    // TODO: implement newBarcodeScanner
-    throw UnimplementedError();
-  }
-
-  @override
-  BarcodeScannerOptions newBarcodeScannerOptions(
-      {bool? enableAllPotentialBarcodes,
-      List<BarcodeFormat>? formats,
-      ZoomSuggestionOptions? zoomSuggestionOptions}) {
-    // TODO: implement newBarcodeScannerOptions
-    throw UnimplementedError();
-  }
-
-  @override
-  Camera2CameraControl newCamera2CameraControlFrom(
-      CameraControl cameraControl) {
-    // TODO: implement newCamera2CameraControlFrom
-    throw UnimplementedError();
-  }
-
-  @override
-  Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo) {
-    // TODO: implement newCamera2CameraInfoFrom
-    throw UnimplementedError();
-  }
-
-  @override
-  CameraController newCameraController() {
-    // TODO: implement newCameraController
-    throw UnimplementedError();
-  }
-
-  @override
-  CameraSelector newCameraSelector({LensFacing? lensFacing}) {
-    // TODO: implement newCameraSelector
-    throw UnimplementedError();
-  }
-
-  @override
-  CaptureRequestOptions newCaptureRequestOptions(
-      {ControlMode? mode,
-      ControlAeMode? aeMode,
-      ControlAfMode? afMode,
-      ControlAwbMode? awbMode,
-      int? sensorExposureTime}) {
-    // TODO: implement newCaptureRequestOptions
-    throw UnimplementedError();
-  }
-
-  @override
-  FaceDetector newFaceDetector({FaceDetectorOptions? options}) {
-    // TODO: implement newFaceDetector
-    throw UnimplementedError();
-  }
-
-  @override
-  FaceDetectorOptions newFaceDetectorOptions(
-      {bool? enableTracking,
-      FaceClassificationMode? classificationMode,
-      FaceContourMode? contourMode,
-      FaceLandmarkMode? landmarkMode,
-      double? minFaceSize,
-      FacePerformanceMode? performanceMode}) {
-    // TODO: implement newFaceDetectorOptions
-    throw UnimplementedError();
-  }
+  PreviewView newPreviewView() => PreviewViewImpl();
 
   @override
   FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(
-      Quality quality) {
-    // TODO: implement newFallbackStrategyHigherQualityOrLowerThan
-    throw UnimplementedError();
-  }
-
+          Quality quality) =>
+      FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
-  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality) {
-    // TODO: implement newFallbackStrategyHigherQualityThan
-    throw UnimplementedError();
-  }
-
+  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality) =>
+      FallbackStrategyImpl.higherQualityThan(quality);
   @override
   FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(
-      Quality quality) {
-    // TODO: implement newFallbackStrategyLowerQualityOrHigherThan
-    throw UnimplementedError();
-  }
+          Quality quality) =>
+      FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
+  @override
+  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality) =>
+      FallbackStrategyImpl.lowerQualityThan(quality);
 
   @override
-  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality) {
-    // TODO: implement newFallbackStrategyLowerQualityThan
-    throw UnimplementedError();
-  }
+  MlKitAnalyzer newMlKitAnalyzer({
+    required List<Detector> detectors,
+    required CoordinateSystem targetCoordinateSystem,
+    required MlKitAnalyzerResultConsumer consumer,
+  }) =>
+      MlKitAnalyzerImpl(
+        detectors: detectors,
+        targetCoordinateSystem: targetCoordinateSystem,
+        consumer: consumer,
+      );
 
   @override
-  FileOutputOptions newFileOutputOptions(
-      {required File file,
-      Duration? durationLimit,
-      int? fileSizeLimitBytes,
-      Location? location}) {
-    // TODO: implement newFileOutputOptions
-    throw UnimplementedError();
-  }
+  QualitySelector newQualitySelectorFrom(
+    Quality quality, {
+    FallbackStrategy? fallbackStrategy,
+  }) =>
+      QualitySelectorImpl.from(
+        quality,
+        fallbackStrategy: fallbackStrategy,
+      );
 
   @override
-  FocusMeteringAction newFocusMeteringAction(
-      (MeteringPoint, List<MeteringMode>) first,
-      {List<(MeteringPoint, List<MeteringMode>)>? others,
-      bool? disableAutoCancel,
-      Duration? autoCancelDuration}) {
-    // TODO: implement newFocusMeteringAction
-    throw UnimplementedError();
-  }
+  QualitySelector newQualitySelectorFromOrderedList(
+    List<Quality> qualities, {
+    FallbackStrategy? fallbackStrategy,
+  }) =>
+      QualitySelectorImpl.fromOrderedList(
+        qualities,
+        fallbackStrategy: fallbackStrategy,
+      );
 
   @override
-  ImageAnalyzer newImageAnalyzer({required ImageProxyCallback analyze}) {
-    // TODO: implement newImageAnalyzer
-    throw UnimplementedError();
-  }
+  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+      QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
-  JpegAnalyzer newJpegAnalyzer(
-      {required CoordinateSystem targetCoordinateSystem,
-      required JpegConsumer consumer}) {
-    // TODO: implement newJpegAnalyzer
-    throw UnimplementedError();
-  }
+  BarcodeScanner newBarcodeScanner({
+    BarcodeScannerOptions? options,
+  }) =>
+      BarcodeScannerImpl(
+        options: options,
+      );
 
   @override
-  MlKitAnalyzer newMlKitAnalyzer(
-      {required List<Detector> detectors,
-      required CoordinateSystem targetCoordinateSystem,
-      required MlKitAnalyzerResultConsumer consumer}) {
-    // TODO: implement newMlKitAnalyzer
-    throw UnimplementedError();
-  }
+  BarcodeScannerOptions newBarcodeScannerOptions({
+    bool? enableAllPotentialBarcodes,
+    List<BarcodeFormat>? formats,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
+  }) =>
+      BarcodeScannerOptionsImpl(
+        enableAllPotentialBarcodes: enableAllPotentialBarcodes,
+        formats: formats,
+        zoomSuggestionOptions: zoomSuggestionOptions,
+      );
 
   @override
-  OutputFileOptions newOutputFileOptions(
-      {required File file, Metadata? metadata}) {
-    // TODO: implement newOutputFileOptions
-    throw UnimplementedError();
-  }
+  FaceDetector newFaceDetector({
+    FaceDetectorOptions? options,
+  }) =>
+      FaceDetectorImpl(
+        options: options,
+      );
 
   @override
-  PermissionManager newPermissionManager() {
-    // TODO: implement newPermissionManager
-    throw UnimplementedError();
-  }
+  FaceDetectorOptions newFaceDetectorOptions({
+    bool? enableTracking,
+    FaceClassificationMode? classificationMode,
+    FaceContourMode? contourMode,
+    FaceLandmarkMode? landmarkMode,
+    double? minFaceSize,
+    FacePerformanceMode? performanceMode,
+  }) =>
+      FaceDetectorOptionsImpl(
+        enableTracking: enableTracking,
+        classificationMode: classificationMode,
+        contourMode: contourMode,
+        landmarkMode: landmarkMode,
+        minFaceSize: minFaceSize,
+        performanceMode: performanceMode,
+      );
 
   @override
-  PreviewView newPreviewView() {
-    // TODO: implement newPreviewView
-    throw UnimplementedError();
-  }
+  ZoomSuggestionOptions newZoomSuggestionOptions({
+    required ZoomCallback zoomCallback,
+    double? maxSupportedZoomRatio,
+  }) =>
+      ZoomSuggestionOptionsImpl(
+        zoomCallback: zoomCallback,
+        maxSupportedZoomRatio: maxSupportedZoomRatio,
+      );
 
   @override
-  QualitySelector newQualitySelectorFrom(Quality quality,
-      {FallbackStrategy? fallbackStrategy}) {
-    // TODO: implement newQualitySelectorFrom
-    throw UnimplementedError();
-  }
+  FileOutputOptions newFileOutputOptions({
+    required File file,
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    Location? location,
+  }) =>
+      FileOutputOptionsImpl(
+        file: file,
+        durationLimit: durationLimit,
+        fileSizeLimitBytes: fileSizeLimitBytes,
+        location: location,
+      );
 
   @override
-  QualitySelector newQualitySelectorFromOrderedList(List<Quality> qualities,
-      {FallbackStrategy? fallbackStrategy}) {
-    // TODO: implement newQualitySelectorFromOrderedList
-    throw UnimplementedError();
-  }
+  OutputFileOptions newOutputFileOptions({
+    required File file,
+    Metadata? metadata,
+  }) =>
+      OutputFileOptionsImpl(
+        file: file,
+        metadata: metadata,
+      );
 
   @override
   SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
-      double width, double height) {
-    // TODO: implement newSurfaceOrientedMeteringPointFactory
-    throw UnimplementedError();
-  }
+          width, height) =>
+      SurfaceOrientedMeteringPointFactoryImpl(width, height);
 
   @override
-  ZoomSuggestionOptions newZoomSuggestionOptions(
-      {required ZoomCallback zoomCallback, double? maxSupportedZoomRatio}) {
-    // TODO: implement newZoomSuggestionOptions
-    throw UnimplementedError();
-  }
+  FocusMeteringAction newFocusMeteringAction(
+    (MeteringPoint, List<MeteringMode>) first, {
+    List<(MeteringPoint, List<MeteringMode>)>? others,
+    bool? disableAutoCancel,
+    Duration? autoCancelDuration,
+  }) =>
+      FocusMeteringActionImpl(
+        first,
+        others: others,
+        disableAutoCancel: disableAutoCancel,
+        autoCancelDuration: autoCancelDuration,
+      );
+
+  @override
+  ImageAnalyzer newImageAnalyzer({
+    required ImageProxyCallback analyze,
+  }) =>
+      ImageAnalyzerImpl(
+        analyze: analyze,
+      );
+
+  @override
+  JpegAnalyzer newJpegAnalyzer({
+    required CoordinateSystem targetCoordinateSystem,
+    required JpegConsumer consumer,
+  }) =>
+      JpegAnalyzerImpl(
+        targetCoordinateSystem: targetCoordinateSystem,
+        consumer: consumer,
+      );
+
+  @override
+  Camera2CameraControl newCamera2CameraControlFrom(
+          CameraControl cameraControl) =>
+      Camera2CameraControlImpl.from(cameraControl);
+
+  @override
+  Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo) =>
+      Camera2CameraInfoImpl.from(cameraInfo);
+
+  @override
+  CaptureRequestOptions newCaptureRequestOptions({
+    ControlMode? mode,
+    ControlAeMode? aeMode,
+    ControlAfMode? afMode,
+    ControlAwbMode? awbMode,
+    int? sensorExposureTime,
+  }) =>
+      CaptureRequestOptionsImpl(
+        mode: mode,
+        aeMode: aeMode,
+        afMode: afMode,
+        awbMode: awbMode,
+        sensorExposureTime: sensorExposureTime,
+      );
 }

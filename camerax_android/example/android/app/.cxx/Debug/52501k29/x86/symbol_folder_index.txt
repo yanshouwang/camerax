@@ -1,1 +1,0 @@
-/Users/yanshouwang/dev/camerax/camerax_android/example/build/app/intermediates/cxx/Debug/52501k29/obj/x86
