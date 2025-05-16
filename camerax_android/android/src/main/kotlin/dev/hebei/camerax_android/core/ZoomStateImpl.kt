@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiZoomStateApi
 
-class ZoomStateImpl(registrar: CameraXRegistrar) : PigeonApiZoomStateApi(registrar) {
+class ZoomStateImpl(impl: CameraXImpl) : PigeonApiZoomStateApi(impl) {
     override fun minZoomRatio(pigeon_instance: androidx.camera.core.ZoomState): Double {
         return pigeon_instance.minZoomRatio.toDouble()
     }

@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiRecordingStatsApi
 
-class RecordingStatsImpl(registrar: CameraXRegistrar) : PigeonApiRecordingStatsApi(registrar) {
+class RecordingStatsImpl(impl: CameraXImpl) : PigeonApiRecordingStatsApi(impl) {
     override fun audioStats(pigeon_instance: androidx.camera.video.RecordingStats): androidx.camera.video.AudioStats {
         return pigeon_instance.audioStats
     }

@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiQualitySelectorApi
 
-class QualitySelectorImpl(registrar: CameraXRegistrar) : PigeonApiQualitySelectorApi(registrar) {
+class QualitySelectorImpl(impl: CameraXImpl) : PigeonApiQualitySelectorApi(impl) {
     override fun from(
         quality: androidx.camera.video.Quality, fallbackStrategy: androidx.camera.video.FallbackStrategy?
     ): androidx.camera.video.QualitySelector {

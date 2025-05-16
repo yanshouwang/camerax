@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.view.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiAudioConfigApi
 
-class AudioConfigImpl(registrar: CameraXRegistrar) : PigeonApiAudioConfigApi(registrar) {
+class AudioConfigImpl(impl: CameraXImpl) : PigeonApiAudioConfigApi(impl) {
     override fun create(enableAudio: Boolean): androidx.camera.view.video.AudioConfig {
         return androidx.camera.view.video.AudioConfig.create(enableAudio)
     }

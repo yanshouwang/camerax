@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.common
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiLocationApi
 
-class LocationImpl(registrar: CameraXRegistrar) : PigeonApiLocationApi(registrar) {
+class LocationImpl(impl: CameraXImpl) : PigeonApiLocationApi(impl) {
     override fun pigeon_defaultConstructor(latitude: Double, longitude: Double): android.location.Location {
         return android.location.Location(null).apply {
             this.latitude = latitude

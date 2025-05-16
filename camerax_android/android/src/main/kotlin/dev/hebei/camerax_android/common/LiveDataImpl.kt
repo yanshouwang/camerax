@@ -1,19 +1,19 @@
 package dev.hebei.camerax_android.common
 
 import dev.hebei.camerax_android.CameraStateApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiCameraStateLiveDataApi
 import dev.hebei.camerax_android.PigeonApiTorchStateLiveDataApi
 import dev.hebei.camerax_android.PigeonApiZoomStateLiveDataApi
 import dev.hebei.camerax_android.TorchStateApi
 
-class CameraStateLiveDataImpl(private val registrar: CameraXRegistrar) : PigeonApiCameraStateLiveDataApi(registrar) {
+class CameraStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiCameraStateLiveDataApi(impl) {
     override fun getValue(pigeon_instance: CameraStateLiveData): CameraStateApi? {
         return pigeon_instance.value
     }
 
     override fun observe(pigeon_instance: CameraStateLiveData, observer: CameraStateObserver) {
-        val owner = registrar.activity as androidx.lifecycle.LifecycleOwner
+        val owner = impl.activity as androidx.lifecycle.LifecycleOwner
         pigeon_instance.observe(owner, observer)
     }
 
@@ -22,13 +22,13 @@ class CameraStateLiveDataImpl(private val registrar: CameraXRegistrar) : PigeonA
     }
 }
 
-class TorchStateLiveDataImpl(private val registrar: CameraXRegistrar) : PigeonApiTorchStateLiveDataApi(registrar) {
+class TorchStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiTorchStateLiveDataApi(impl) {
     override fun getValue(pigeon_instance: TorchStateLiveData): TorchStateApi? {
         return pigeon_instance.value
     }
 
     override fun observe(pigeon_instance: TorchStateLiveData, observer: TorchStateObserver) {
-        val owner = registrar.activity as androidx.lifecycle.LifecycleOwner
+        val owner = impl.activity as androidx.lifecycle.LifecycleOwner
         return pigeon_instance.observe(owner, observer)
     }
 
@@ -37,13 +37,13 @@ class TorchStateLiveDataImpl(private val registrar: CameraXRegistrar) : PigeonAp
     }
 }
 
-class ZoomStateLiveDataImpl(private val registrar: CameraXRegistrar) : PigeonApiZoomStateLiveDataApi(registrar) {
+class ZoomStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiZoomStateLiveDataApi(impl) {
     override fun getValue(pigeon_instance: ZoomStateLiveData): androidx.camera.core.ZoomState? {
         return pigeon_instance.value
     }
 
     override fun observe(pigeon_instance: ZoomStateLiveData, observer: ZoomStateObserver) {
-        val owner = registrar.activity as androidx.lifecycle.LifecycleOwner
+        val owner = impl.activity as androidx.lifecycle.LifecycleOwner
         pigeon_instance.observe(owner, observer)
     }
 

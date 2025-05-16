@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.core.resolutionselector
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiResolutionFilterApi
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.suspendCoroutine
 
-class ResolutionFilterImpl(registrar: CameraXRegistrar) : PigeonApiResolutionFilterApi(registrar) {
+class ResolutionFilterImpl(impl: CameraXImpl) : PigeonApiResolutionFilterApi(impl) {
     override fun pigeon_defaultConstructor(): androidx.camera.core.resolutionselector.ResolutionFilter {
         return Impl(this)
     }

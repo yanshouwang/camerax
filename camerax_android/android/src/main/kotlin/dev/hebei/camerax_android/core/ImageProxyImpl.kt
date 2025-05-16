@@ -1,12 +1,12 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.ImageFormatApi
 import dev.hebei.camerax_android.PigeonApiImageProxyApi
 import dev.hebei.camerax_android.PigeonApiPlaneProxyApi
 import dev.hebei.camerax_android.common.imageFormatApi
 
-class ImageProxyImpl(registrar: CameraXRegistrar) : PigeonApiImageProxyApi(registrar) {
+class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
     override fun format(pigeon_instance: androidx.camera.core.ImageProxy): ImageFormatApi {
         return pigeon_instance.format.imageFormatApi
     }
@@ -35,7 +35,7 @@ class ImageProxyImpl(registrar: CameraXRegistrar) : PigeonApiImageProxyApi(regis
         pigeon_instance.setCropRect(rect)
     }
 
-    class PlaneProxyImpl(registrar: CameraXRegistrar) : PigeonApiPlaneProxyApi(registrar) {
+    class PlaneProxyImpl(impl: CameraXImpl) : PigeonApiPlaneProxyApi(impl) {
         override fun buffer(pigeon_instance: androidx.camera.core.ImageProxy.PlaneProxy): ByteArray {
             val buffer = pigeon_instance.buffer
             val size = buffer.remaining()

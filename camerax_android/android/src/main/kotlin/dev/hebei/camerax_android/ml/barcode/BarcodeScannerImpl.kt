@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.ml.barcode
 
 import com.google.android.gms.tasks.Task
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiBarcodeScannerApi
 import dev.hebei.camerax_android.ml.Detector
 
-class BarcodeScannerImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeScannerApi(registrar) {
+class BarcodeScannerImpl(impl: CameraXImpl) : PigeonApiBarcodeScannerApi(impl) {
     override fun pigeon_defaultConstructor(options: com.google.mlkit.vision.barcode.BarcodeScannerOptions?): BarcodeScanner {
         val obj = if (options == null) com.google.mlkit.vision.barcode.BarcodeScanning.getClient()
         else com.google.mlkit.vision.barcode.BarcodeScanning.getClient(options)

@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.core.resolutionselector
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiResolutionStrategyApi
 import dev.hebei.camerax_android.ResolutionFallbackRuleApi
 
-class ResolutionStrategyImpl(registrar: CameraXRegistrar) : PigeonApiResolutionStrategyApi(registrar) {
+class ResolutionStrategyImpl(impl: CameraXImpl) : PigeonApiResolutionStrategyApi(impl) {
     override fun pigeon_defaultConstructor(
         boundSize: android.util.Size?, fallbackRule: ResolutionFallbackRuleApi
     ): androidx.camera.core.resolutionselector.ResolutionStrategy {

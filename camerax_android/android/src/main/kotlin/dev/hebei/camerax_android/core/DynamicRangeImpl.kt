@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.core
 
 import dev.hebei.camerax_android.BitDepthApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.EncodingApi
 import dev.hebei.camerax_android.PigeonApiDynamicRangeApi
 
-class DynamicRangeImpl(registrar: CameraXRegistrar) : PigeonApiDynamicRangeApi(registrar) {
+class DynamicRangeImpl(impl: CameraXImpl) : PigeonApiDynamicRangeApi(impl) {
     override fun pigeon_defaultConstructor(
         encoding: EncodingApi, bitDepth: BitDepthApi
     ): androidx.camera.core.DynamicRange {

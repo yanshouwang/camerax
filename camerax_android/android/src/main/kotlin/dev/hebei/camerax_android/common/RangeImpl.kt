@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.common
 
 import android.util.Range
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiIntRangeApi
 import dev.hebei.camerax_android.PigeonApiLongRangeApi
 
-class IntRangeImpl(registrar: CameraXRegistrar) : PigeonApiIntRangeApi(registrar) {
+class IntRangeImpl(impl: CameraXImpl) : PigeonApiIntRangeApi(impl) {
     override fun pigeon_defaultConstructor(lower: Long, upper: Long): IntRange {
         val obj = Range(lower.toInt(), upper.toInt())
         return IntRange(obj)
@@ -20,7 +20,7 @@ class IntRangeImpl(registrar: CameraXRegistrar) : PigeonApiIntRangeApi(registrar
     }
 }
 
-class LongRangeImpl(registrar: CameraXRegistrar) : PigeonApiLongRangeApi(registrar) {
+class LongRangeImpl(impl: CameraXImpl) : PigeonApiLongRangeApi(impl) {
     override fun pigeon_defaultConstructor(lower: Long, upper: Long): LongRange {
         val obj = Range(lower, upper)
         return LongRange(obj)

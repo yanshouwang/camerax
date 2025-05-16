@@ -86,33 +86,33 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Future<void> bind() async {
     await controller.bind();
     // TODO: How to wait until camera really opened.
-    const duration = Duration(seconds: 1);
-    await Future.delayed(duration);
-    final cameraInfo = await controller.getCameraInfo();
-    final cameraControl = await controller.getCameraControl();
-    if (cameraInfo == null || cameraControl == null) {
-      return;
-    }
-    final camera2Info = Camera2CameraInfo.from(cameraInfo);
-    final camera2Control = Camera2CameraControl.from(cameraControl);
-    final exposureState = await cameraInfo.getExposureState();
-    final exposureTimeRange =
-        await camera2Info.getSensorInfoExposureTimeRange();
-    logger.info(
-        'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}');
-    final exposureTimeState = exposureTimeRange == null
-        ? null
-        : LimitedValue(
-            minimum: exposureTimeRange.lower,
-            maximum: exposureTimeRange.upper,
-            value: exposureTimeRange.lower,
-          );
-    _cameraInfo = cameraInfo;
-    _cameraControl = cameraControl;
-    _camera2Info = camera2Info;
-    _camera2Control = camera2Control;
-    this.exposureState = exposureState;
-    this.exposureTimeState = exposureTimeState;
+    // const duration = Duration(seconds: 1);
+    // await Future.delayed(duration);
+    // final cameraInfo = await controller.getCameraInfo();
+    // final cameraControl = await controller.getCameraControl();
+    // if (cameraInfo == null || cameraControl == null) {
+    //   return;
+    // }
+    // final camera2Info = Camera2CameraInfo.from(cameraInfo);
+    // final camera2Control = Camera2CameraControl.from(cameraControl);
+    // final exposureState = await cameraInfo.getExposureState();
+    // final exposureTimeRange =
+    //     await camera2Info.getSensorInfoExposureTimeRange();
+    // logger.info(
+    //     'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}');
+    // final exposureTimeState = exposureTimeRange == null
+    //     ? null
+    //     : LimitedValue(
+    //         minimum: exposureTimeRange.lower,
+    //         maximum: exposureTimeRange.upper,
+    //         value: exposureTimeRange.lower,
+    //       );
+    // _cameraInfo = cameraInfo;
+    // _cameraControl = cameraControl;
+    // _camera2Info = camera2Info;
+    // _camera2Control = camera2Control;
+    // this.exposureState = exposureState;
+    // this.exposureTimeState = exposureTimeState;
   }
 
   Future<void> unbind() async {

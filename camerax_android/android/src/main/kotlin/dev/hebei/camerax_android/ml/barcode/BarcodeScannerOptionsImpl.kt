@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.ml.barcode
 
 import dev.hebei.camerax_android.BarcodeFormatApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiBarcodeScannerOptionsApi
 
-class BarcodeScannerOptionsImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeScannerOptionsApi(registrar) {
+class BarcodeScannerOptionsImpl(impl: CameraXImpl) : PigeonApiBarcodeScannerOptionsApi(impl) {
     override fun build(
         enableAllPotentialBarcodes: Boolean?,
         formats: List<BarcodeFormatApi>?,

@@ -2,12 +2,12 @@ package dev.hebei.camerax_android.common
 
 import android.content.Context
 import android.view.View
-import dev.hebei.camerax_android.CameraXPigeonInstanceManager
+import dev.hebei.camerax_android.CameraXApiPigeonInstanceManager
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 
-class ViewFactory(private val instanceManager: CameraXPigeonInstanceManager) :
+class ViewFactory(private val instanceManager: CameraXApiPigeonInstanceManager) :
     PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val identifier = when (args) {

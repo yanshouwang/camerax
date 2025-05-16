@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.video
 
 import dev.hebei.camerax_android.AudioStateApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiAudioStatsApi
 import dev.hebei.camerax_android.common.api
 
-class AudioStatsImpl(registrar: CameraXRegistrar) : PigeonApiAudioStatsApi(registrar) {
+class AudioStatsImpl(impl: CameraXImpl) : PigeonApiAudioStatsApi(impl) {
     override fun audioAmplitude(pigeon_instance: androidx.camera.video.AudioStats): Double {
         return pigeon_instance.audioAmplitude
     }

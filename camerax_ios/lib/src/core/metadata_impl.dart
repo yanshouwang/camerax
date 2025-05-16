@@ -1,5 +1,5 @@
-import 'package:camerax_android/src/camerax.g.dart';
-import 'package:camerax_android/src/common.dart';
+import 'package:camerax_ios/src/camerax.g.dart';
+import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 extension MetadataX on Metadata {

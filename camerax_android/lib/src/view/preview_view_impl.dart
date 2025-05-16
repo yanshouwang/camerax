@@ -36,11 +36,11 @@ final class PreviewViewImpl extends PreviewViewChannel {
         );
       },
       onCreatePlatformView: (params) {
-        final viewId = api.pigeon_instanceManager.getIdentifier(api);
+        final identifier = api.pigeon_instanceManager.getIdentifier(api);
         return _initAndroidView(
           params,
           hybridComposition: false,
-          creationParams: viewId,
+          creationParams: identifier,
           creationParamsCodec: const StandardMessageCodec(),
         )
           ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)

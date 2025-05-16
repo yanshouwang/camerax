@@ -1,13 +1,13 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.MeteringModeApi
 import dev.hebei.camerax_android.PigeonApiDurationTupleApi
 import dev.hebei.camerax_android.PigeonApiFocusMeteringActionApi
 import dev.hebei.camerax_android.PigeonApiMeteringPointTupleApi
 import dev.hebei.camerax_android.TimeUnitApi
 
-class FocusMeteringActionImpl(registrar: CameraXRegistrar) : PigeonApiFocusMeteringActionApi(registrar) {
+class FocusMeteringActionImpl(impl: CameraXImpl) : PigeonApiFocusMeteringActionApi(impl) {
     override fun build(
         first: MeteringPointTuple,
         others: List<MeteringPointTuple>?,
@@ -51,7 +51,7 @@ class FocusMeteringActionImpl(registrar: CameraXRegistrar) : PigeonApiFocusMeter
         return pigeon_instance.isAutoCancelEnabled
     }
 
-    class MeteringPointTupleImpl(registrar: CameraXRegistrar) : PigeonApiMeteringPointTupleApi(registrar) {
+    class MeteringPointTupleImpl(impl: CameraXImpl) : PigeonApiMeteringPointTupleApi(impl) {
         override fun pigeon_defaultConstructor(
             point: androidx.camera.core.MeteringPoint, modes: List<MeteringModeApi>?
         ): MeteringPointTuple {
@@ -61,7 +61,7 @@ class FocusMeteringActionImpl(registrar: CameraXRegistrar) : PigeonApiFocusMeter
         }
     }
 
-    class DurationTupleImpl(registrar: CameraXRegistrar) : PigeonApiDurationTupleApi(registrar) {
+    class DurationTupleImpl(impl: CameraXImpl) : PigeonApiDurationTupleApi(impl) {
         override fun pigeon_defaultConstructor(duration: Long, timeUnit: TimeUnitApi): DurationTuple {
             return DurationTuple(duration, timeUnit.impl)
         }

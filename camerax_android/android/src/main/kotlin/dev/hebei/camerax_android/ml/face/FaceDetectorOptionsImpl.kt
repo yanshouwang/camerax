@@ -1,13 +1,13 @@
 package dev.hebei.camerax_android.ml.face
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.FaceClassificationModeApi
 import dev.hebei.camerax_android.FaceContourModeApi
 import dev.hebei.camerax_android.FaceLandmarkModeApi
 import dev.hebei.camerax_android.FacePerformanceModeApi
 import dev.hebei.camerax_android.PigeonApiFaceDetectorOptionsApi
 
-class FaceDetectorOptionsImpl(registrar: CameraXRegistrar) : PigeonApiFaceDetectorOptionsApi(registrar) {
+class FaceDetectorOptionsImpl(impl: CameraXImpl) : PigeonApiFaceDetectorOptionsApi(impl) {
     override fun build(
         enableTracking: Boolean?,
         classificationMode: FaceClassificationModeApi?,

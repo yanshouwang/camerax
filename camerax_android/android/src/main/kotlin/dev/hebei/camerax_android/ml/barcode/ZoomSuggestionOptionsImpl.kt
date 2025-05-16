@@ -1,12 +1,12 @@
 package dev.hebei.camerax_android.ml.barcode
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiZoomCallbackApi
 import dev.hebei.camerax_android.PigeonApiZoomSuggestionOptionsApi
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.suspendCoroutine
 
-class ZoomSuggestionOptionsImpl(registrar: CameraXRegistrar) : PigeonApiZoomSuggestionOptionsApi(registrar) {
+class ZoomSuggestionOptionsImpl(impl: CameraXImpl) : PigeonApiZoomSuggestionOptionsApi(impl) {
     override fun build(
         zoomCallback: com.google.mlkit.vision.barcode.ZoomSuggestionOptions.ZoomCallback, maxSupportedZoomRatio: Double?
     ): com.google.mlkit.vision.barcode.ZoomSuggestionOptions {
@@ -17,7 +17,7 @@ class ZoomSuggestionOptionsImpl(registrar: CameraXRegistrar) : PigeonApiZoomSugg
         return builder.build()
     }
 
-    class ZoomCallbackImpl(registrar: CameraXRegistrar) : PigeonApiZoomCallbackApi(registrar) {
+    class ZoomCallbackImpl(impl: CameraXImpl) : PigeonApiZoomCallbackApi(impl) {
         override fun pigeon_defaultConstructor(): com.google.mlkit.vision.barcode.ZoomSuggestionOptions.ZoomCallback {
             return Impl(this)
         }

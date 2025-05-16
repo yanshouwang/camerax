@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.ml.face
 
 import com.google.android.gms.tasks.Task
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiFaceDetectorApi
 import dev.hebei.camerax_android.ml.Detector
 
-class FaceDetectorImpl(registrar: CameraXRegistrar) : PigeonApiFaceDetectorApi(registrar) {
+class FaceDetectorImpl(impl: CameraXImpl) : PigeonApiFaceDetectorApi(impl) {
     override fun pigeon_defaultConstructor(options: com.google.mlkit.vision.face.FaceDetectorOptions?): FaceDetector {
         val obj = if (options == null) com.google.mlkit.vision.face.FaceDetection.getClient()
         else com.google.mlkit.vision.face.FaceDetection.getClient(options)

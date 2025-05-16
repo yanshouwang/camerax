@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiQualityApi
 
-class QualityImpl(registrar: CameraXRegistrar) : PigeonApiQualityApi(registrar) {
+class QualityImpl(impl: CameraXImpl) : PigeonApiQualityApi(impl) {
     override fun fhd(): androidx.camera.video.Quality {
         return androidx.camera.video.Quality.FHD
     }

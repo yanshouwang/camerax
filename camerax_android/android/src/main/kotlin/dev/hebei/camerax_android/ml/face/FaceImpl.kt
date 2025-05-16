@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.ml.face
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.FaceContourTypeApi
 import dev.hebei.camerax_android.FaceLandmarkTypeApi
 import dev.hebei.camerax_android.PigeonApiFaceApi
 
-class FaceImpl(registrar: CameraXRegistrar) : PigeonApiFaceApi(registrar) {
+class FaceImpl(impl: CameraXImpl) : PigeonApiFaceApi(impl) {
     override fun boundingBox(pigeon_instance: com.google.mlkit.vision.face.Face): android.graphics.Rect {
         return pigeon_instance.boundingBox
     }

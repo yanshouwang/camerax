@@ -1,14 +1,15 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import androidx.camera.core.ImageInfo
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiImageInfoApi
 
-class ImageInfoImpl(registrar: CameraXRegistrar) : PigeonApiImageInfoApi(registrar) {
-    override fun timestamp(pigeon_instance: androidx.camera.core.ImageInfo): Long {
+class ImageInfoImpl(impl: CameraXImpl) : PigeonApiImageInfoApi(impl) {
+    override fun timestamp(pigeon_instance: ImageInfo): Long {
         return pigeon_instance.timestamp
     }
 
-    override fun rotationDegrees(pigeon_instance: androidx.camera.core.ImageInfo): Long {
+    override fun rotationDegrees(pigeon_instance: ImageInfo): Long {
         return pigeon_instance.rotationDegrees.toLong()
     }
 }

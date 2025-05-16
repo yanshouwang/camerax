@@ -1,15 +1,17 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiImageAnalyzerApi
 
-class ImageAnalyzerImpl(registrar: CameraXRegistrar) : PigeonApiImageAnalyzerApi(registrar) {
-    override fun pigeon_defaultConstructor(): androidx.camera.core.ImageAnalysis.Analyzer {
+class ImageAnalyzerImpl(impl: CameraXImpl) : PigeonApiImageAnalyzerApi(impl) {
+    override fun pigeon_defaultConstructor(): ImageAnalysis.Analyzer {
         return Impl(this)
     }
 
-    class Impl(private val api: ImageAnalyzerImpl) : androidx.camera.core.ImageAnalysis.Analyzer {
-        override fun analyze(image: androidx.camera.core.ImageProxy) {
+    class Impl(private val api: ImageAnalyzerImpl) : ImageAnalysis.Analyzer {
+        override fun analyze(image: ImageProxy) {
             api.analyze(this, image) {}
         }
     }

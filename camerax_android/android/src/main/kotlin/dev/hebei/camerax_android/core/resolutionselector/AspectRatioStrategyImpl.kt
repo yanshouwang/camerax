@@ -2,12 +2,12 @@ package dev.hebei.camerax_android.core.resolutionselector
 
 import dev.hebei.camerax_android.AspectRatioApi
 import dev.hebei.camerax_android.AspectRatioFallbackRuleApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiAspectRatioStrategyApi
 import dev.hebei.camerax_android.core.aspectRatioApi
 import dev.hebei.camerax_android.core.impl
 
-class AspectRatioStrategyImpl(registrar: CameraXRegistrar) : PigeonApiAspectRatioStrategyApi(registrar) {
+class AspectRatioStrategyImpl(impl: CameraXImpl) : PigeonApiAspectRatioStrategyApi(impl) {
     override fun pigeon_defaultConstructor(
         preferredAspectRatio: AspectRatioApi, fallbackRule: AspectRatioFallbackRuleApi
     ): androidx.camera.core.resolutionselector.AspectRatioStrategy {

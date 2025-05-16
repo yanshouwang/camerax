@@ -1,20 +1,18 @@
 package dev.hebei.camerax_android.common
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PermissionApi
 import dev.hebei.camerax_android.PigeonApiPermissionManagerApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PermissionManagerImpl(registrar: CameraXRegistrar) : PigeonApiPermissionManagerApi(registrar) {
+class PermissionManagerImpl(impl: CameraXImpl) : PigeonApiPermissionManagerApi(impl) {
     override fun instance(): PermissionManager {
         return PermissionManager
     }
 
-    override fun checkPermissioin(
-        pigeon_instance: PermissionManager, permission: PermissionApi
-    ): Boolean {
+    override fun checkPermissioin(pigeon_instance: PermissionManager, permission: PermissionApi): Boolean {
         return PermissionManager.checkPermission(permission.impl)
     }
 

@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'camera2.dart';
+// import 'camera2.dart';
 import 'common.dart';
 import 'core.dart';
-import 'ml.dart';
+// import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
 
@@ -40,17 +40,21 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   @override
   FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(
           Quality quality) =>
-      FallbackStrategyImpl.higherQualityOrLowerThan(quality);
+      throw UnimplementedError();
+  // FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
   FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality) =>
-      FallbackStrategyImpl.higherQualityThan(quality);
+      throw UnimplementedError();
+  // FallbackStrategyImpl.higherQualityThan(quality);
   @override
   FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(
           Quality quality) =>
-      FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
+      throw UnimplementedError();
+  // FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
   @override
   FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality) =>
-      FallbackStrategyImpl.lowerQualityThan(quality);
+      throw UnimplementedError();
+  // FallbackStrategyImpl.lowerQualityThan(quality);
 
   @override
   MlKitAnalyzer newMlKitAnalyzer({
@@ -58,43 +62,48 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     required CoordinateSystem targetCoordinateSystem,
     required MlKitAnalyzerResultConsumer consumer,
   }) =>
-      MlKitAnalyzerImpl(
-        detectors: detectors,
-        targetCoordinateSystem: targetCoordinateSystem,
-        consumer: consumer,
-      );
+      throw UnimplementedError();
+  // MlKitAnalyzerImpl(
+  //   detectors: detectors,
+  //   targetCoordinateSystem: targetCoordinateSystem,
+  //   consumer: consumer,
+  // );
 
   @override
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
   }) =>
-      QualitySelectorImpl.from(
-        quality,
-        fallbackStrategy: fallbackStrategy,
-      );
+      throw UnimplementedError();
+  // QualitySelectorImpl.from(
+  //   quality,
+  //   fallbackStrategy: fallbackStrategy,
+  // );
 
   @override
   QualitySelector newQualitySelectorFromOrderedList(
     List<Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
   }) =>
-      QualitySelectorImpl.fromOrderedList(
-        qualities,
-        fallbackStrategy: fallbackStrategy,
-      );
+      throw UnimplementedError();
+  // QualitySelectorImpl.fromOrderedList(
+  //   qualities,
+  //   fallbackStrategy: fallbackStrategy,
+  // );
 
   @override
   Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
-      QualitySelectorImpl.getResolution(cameraInfo, quality);
+      throw UnimplementedError();
+  // QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
   BarcodeScanner newBarcodeScanner({
     BarcodeScannerOptions? options,
   }) =>
-      BarcodeScannerImpl(
-        options: options,
-      );
+      throw UnimplementedError();
+  // BarcodeScannerImpl(
+  //   options: options,
+  // );
 
   @override
   BarcodeScannerOptions newBarcodeScannerOptions({
@@ -102,19 +111,21 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
   }) =>
-      BarcodeScannerOptionsImpl(
-        enableAllPotentialBarcodes: enableAllPotentialBarcodes,
-        formats: formats,
-        zoomSuggestionOptions: zoomSuggestionOptions,
-      );
+      throw UnimplementedError();
+  // BarcodeScannerOptionsImpl(
+  //   enableAllPotentialBarcodes: enableAllPotentialBarcodes,
+  //   formats: formats,
+  //   zoomSuggestionOptions: zoomSuggestionOptions,
+  // );
 
   @override
   FaceDetector newFaceDetector({
     FaceDetectorOptions? options,
   }) =>
-      FaceDetectorImpl(
-        options: options,
-      );
+      throw UnimplementedError();
+  // FaceDetectorImpl(
+  //   options: options,
+  // );
 
   @override
   FaceDetectorOptions newFaceDetectorOptions({
@@ -125,24 +136,26 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     double? minFaceSize,
     FacePerformanceMode? performanceMode,
   }) =>
-      FaceDetectorOptionsImpl(
-        enableTracking: enableTracking,
-        classificationMode: classificationMode,
-        contourMode: contourMode,
-        landmarkMode: landmarkMode,
-        minFaceSize: minFaceSize,
-        performanceMode: performanceMode,
-      );
+      throw UnimplementedError();
+  // FaceDetectorOptionsImpl(
+  //   enableTracking: enableTracking,
+  //   classificationMode: classificationMode,
+  //   contourMode: contourMode,
+  //   landmarkMode: landmarkMode,
+  //   minFaceSize: minFaceSize,
+  //   performanceMode: performanceMode,
+  // );
 
   @override
   ZoomSuggestionOptions newZoomSuggestionOptions({
     required ZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,
   }) =>
-      ZoomSuggestionOptionsImpl(
-        zoomCallback: zoomCallback,
-        maxSupportedZoomRatio: maxSupportedZoomRatio,
-      );
+      throw UnimplementedError();
+  // ZoomSuggestionOptionsImpl(
+  //   zoomCallback: zoomCallback,
+  //   maxSupportedZoomRatio: maxSupportedZoomRatio,
+  // );
 
   @override
   FileOutputOptions newFileOutputOptions({
@@ -171,7 +184,8 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   @override
   SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
           width, height) =>
-      SurfaceOrientedMeteringPointFactoryImpl(width, height);
+      throw UnimplementedError();
+  // SurfaceOrientedMeteringPointFactoryImpl(width, height);
 
   @override
   FocusMeteringAction newFocusMeteringAction(
@@ -180,12 +194,13 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) =>
-      FocusMeteringActionImpl(
-        first,
-        others: others,
-        disableAutoCancel: disableAutoCancel,
-        autoCancelDuration: autoCancelDuration,
-      );
+      throw UnimplementedError();
+  // FocusMeteringActionImpl(
+  //   first,
+  //   others: others,
+  //   disableAutoCancel: disableAutoCancel,
+  //   autoCancelDuration: autoCancelDuration,
+  // );
 
   @override
   ImageAnalyzer newImageAnalyzer({
@@ -200,19 +215,22 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     required CoordinateSystem targetCoordinateSystem,
     required JpegConsumer consumer,
   }) =>
-      JpegAnalyzerImpl(
-        targetCoordinateSystem: targetCoordinateSystem,
-        consumer: consumer,
-      );
+      throw UnimplementedError();
+  // JpegAnalyzerImpl(
+  //   targetCoordinateSystem: targetCoordinateSystem,
+  //   consumer: consumer,
+  // );
 
   @override
   Camera2CameraControl newCamera2CameraControlFrom(
           CameraControl cameraControl) =>
-      Camera2CameraControlImpl.from(cameraControl);
+      throw UnimplementedError();
+  // Camera2CameraControlImpl.from(cameraControl);
 
   @override
   Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo) =>
-      Camera2CameraInfoImpl.from(cameraInfo);
+      throw UnimplementedError();
+  // Camera2CameraInfoImpl.from(cameraInfo);
 
   @override
   CaptureRequestOptions newCaptureRequestOptions({
@@ -222,11 +240,12 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     ControlAwbMode? awbMode,
     int? sensorExposureTime,
   }) =>
-      CaptureRequestOptionsImpl(
-        mode: mode,
-        aeMode: aeMode,
-        afMode: afMode,
-        awbMode: awbMode,
-        sensorExposureTime: sensorExposureTime,
-      );
+      throw UnimplementedError();
+  // CaptureRequestOptionsImpl(
+  //   mode: mode,
+  //   aeMode: aeMode,
+  //   afMode: afMode,
+  //   awbMode: awbMode,
+  //   sensorExposureTime: sensorExposureTime,
+  // );
 }

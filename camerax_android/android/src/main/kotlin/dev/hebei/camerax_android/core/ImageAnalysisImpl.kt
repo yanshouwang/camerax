@@ -1,13 +1,13 @@
 package dev.hebei.camerax_android.core
 
 import dev.hebei.camerax_android.BackpressureStrategyApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.CoordinateSystemApi
 import dev.hebei.camerax_android.ImageFormatApi
 import dev.hebei.camerax_android.PigeonApiAnalyzerApi
 
 class ImageAnalysisImpl {
-    class AnalyzerImpl(registrar: CameraXRegistrar) : PigeonApiAnalyzerApi(registrar)
+    class AnalyzerImpl(impl: CameraXImpl) : PigeonApiAnalyzerApi(impl)
 }
 
 val BackpressureStrategyApi.impl

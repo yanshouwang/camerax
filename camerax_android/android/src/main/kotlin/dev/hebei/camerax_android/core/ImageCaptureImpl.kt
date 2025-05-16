@@ -1,6 +1,6 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.CaptureModeApi
 import dev.hebei.camerax_android.FlashModeApi
 import dev.hebei.camerax_android.PigeonApiMetadataApi
@@ -12,7 +12,7 @@ import dev.hebei.camerax_android.common.api
 import dev.hebei.camerax_android.common.fileImpl
 
 class ImageCaptureImpl {
-    class MetadataImpl(registrar: CameraXRegistrar) : PigeonApiMetadataApi(registrar) {
+    class MetadataImpl(impl: CameraXImpl) : PigeonApiMetadataApi(impl) {
         override fun pigeon_defaultConstructor(
             isReversedHorizontal: Boolean, isReversedVertical: Boolean, location: android.location.Location?
         ): androidx.camera.core.ImageCapture.Metadata {
@@ -36,7 +36,7 @@ class ImageCaptureImpl {
         }
     }
 
-    class OutputFileOptionsImpl(registrar: CameraXRegistrar) : PigeonApiOutputFileOptionsApi(registrar) {
+    class OutputFileOptionsImpl(impl: CameraXImpl) : PigeonApiOutputFileOptionsApi(impl) {
         override fun build(
             file: String, metadata: androidx.camera.core.ImageCapture.Metadata?
         ): androidx.camera.core.ImageCapture.OutputFileOptions {
@@ -48,13 +48,13 @@ class ImageCaptureImpl {
         }
     }
 
-    class OutputFileResultsImpl(registrar: CameraXRegistrar) : PigeonApiOutputFileResultsApi(registrar) {
+    class OutputFileResultsImpl(impl: CameraXImpl) : PigeonApiOutputFileResultsApi(impl) {
         override fun savedUri(pigeon_instance: androidx.camera.core.ImageCapture.OutputFileResults): String? {
             return pigeon_instance.savedUri?.api
         }
     }
 
-    class OnImageCapturedCallbackImpl(registrar: CameraXRegistrar) : PigeonApiOnImageCapturedCallbackApi(registrar) {
+    class OnImageCapturedCallbackImpl(impl: CameraXImpl) : PigeonApiOnImageCapturedCallbackApi(impl) {
         override fun pigeon_defaultConstructor(): androidx.camera.core.ImageCapture.OnImageCapturedCallback {
             return Impl(this)
         }
@@ -88,7 +88,7 @@ class ImageCaptureImpl {
         }
     }
 
-    class OnImageSavedCallbackImpl(registrar: CameraXRegistrar) : PigeonApiOnImageSavedCallbackApi(registrar) {
+    class OnImageSavedCallbackImpl(impl: CameraXImpl) : PigeonApiOnImageSavedCallbackApi(impl) {
         override fun pigeon_defaultConstructor(): androidx.camera.core.ImageCapture.OnImageSavedCallback {
             return Impl(this)
         }

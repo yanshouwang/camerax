@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.common
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiSizeApi
 
-class SizeImpl(registrar: CameraXRegistrar) : PigeonApiSizeApi(registrar) {
+class SizeImpl(impl: CameraXImpl) : PigeonApiSizeApi(impl) {
     override fun pigeon_defaultConstructor(width: Long, height: Long): android.util.Size {
         return android.util.Size(width.toInt(), height.toInt())
     }

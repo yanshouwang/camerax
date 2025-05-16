@@ -1,7 +1,7 @@
 package dev.hebei.camerax_android.core
 
 import androidx.lifecycle.map
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.LensFacingApi
 import dev.hebei.camerax_android.PigeonApiCameraInfoApi
 import dev.hebei.camerax_android.common.CameraStateLiveData
@@ -9,7 +9,7 @@ import dev.hebei.camerax_android.common.IntRange
 import dev.hebei.camerax_android.common.TorchStateLiveData
 import dev.hebei.camerax_android.common.ZoomStateLiveData
 
-class CameraInfoImpl(registrar: CameraXRegistrar) : PigeonApiCameraInfoApi(registrar) {
+class CameraInfoImpl(impl: CameraXImpl) : PigeonApiCameraInfoApi(impl) {
     override fun mustPlayShutterSound(): Boolean {
         return androidx.camera.core.CameraInfo.mustPlayShutterSound()
     }

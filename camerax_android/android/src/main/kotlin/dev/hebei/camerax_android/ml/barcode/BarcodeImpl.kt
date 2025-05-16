@@ -3,7 +3,7 @@ package dev.hebei.camerax_android.ml.barcode
 import dev.hebei.camerax_android.AddressTypeApi
 import dev.hebei.camerax_android.BarcodeFormatApi
 import dev.hebei.camerax_android.BarcodeValueTypeApi
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.EmailTypeApi
 import dev.hebei.camerax_android.PhoneTypeApi
 import dev.hebei.camerax_android.PigeonApiAddressApi
@@ -21,7 +21,7 @@ import dev.hebei.camerax_android.PigeonApiUrlBookmarkApi
 import dev.hebei.camerax_android.PigeonApiWiFiApi
 import dev.hebei.camerax_android.WiFiEncryptionTypeApi
 
-class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) {
+class BarcodeImpl(impl: CameraXImpl) : PigeonApiBarcodeApi(impl) {
     override fun boundingBox(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode): android.graphics.Rect? {
         return pigeon_instance.boundingBox
     }
@@ -86,7 +86,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         return pigeon_instance.wifi
     }
 
-    class AddressImpl(registrar: CameraXRegistrar) : PigeonApiAddressApi(registrar) {
+    class AddressImpl(impl: CameraXImpl) : PigeonApiAddressApi(impl) {
         override fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Address): AddressTypeApi {
             return pigeon_instance.type.addressTypeApi
         }
@@ -96,7 +96,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class CalendarDateTimeImpl(registrar: CameraXRegistrar) : PigeonApiCalendarDateTimeApi(registrar) {
+    class CalendarDateTimeImpl(impl: CameraXImpl) : PigeonApiCalendarDateTimeApi(impl) {
         override fun rawValue(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime): String? {
             return pigeon_instance.rawValue
         }
@@ -130,7 +130,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class CalendarEventImpl(registrar: CameraXRegistrar) : PigeonApiCalendarEventApi(registrar) {
+    class CalendarEventImpl(impl: CameraXImpl) : PigeonApiCalendarEventApi(impl) {
         override fun start(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent): com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime? {
             return pigeon_instance.start
         }
@@ -160,7 +160,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class ContactInfoImpl(registrar: CameraXRegistrar) : PigeonApiContactInfoApi(registrar) {
+    class ContactInfoImpl(impl: CameraXImpl) : PigeonApiContactInfoApi(impl) {
         override fun addresses(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.ContactInfo): List<com.google.mlkit.vision.barcode.common.Barcode.Address> {
             return pigeon_instance.addresses
         }
@@ -190,7 +190,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class DriverLicenseImpl(registrar: CameraXRegistrar) : PigeonApiDriverLicenseApi(registrar) {
+    class DriverLicenseImpl(impl: CameraXImpl) : PigeonApiDriverLicenseApi(impl) {
         override fun licenseNumber(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.DriverLicense): String? {
             return pigeon_instance.licenseNumber
         }
@@ -248,7 +248,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class EmailImpl(registrar: CameraXRegistrar) : PigeonApiEmailApi(registrar) {
+    class EmailImpl(impl: CameraXImpl) : PigeonApiEmailApi(impl) {
         override fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Email): EmailTypeApi {
             return pigeon_instance.type.emailTypeApi
         }
@@ -266,7 +266,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class GeoPointImpl(registrar: CameraXRegistrar) : PigeonApiGeoPointApi(registrar) {
+    class GeoPointImpl(impl: CameraXImpl) : PigeonApiGeoPointApi(impl) {
         override fun lat(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.GeoPoint): Double {
             return pigeon_instance.lat
         }
@@ -276,7 +276,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class PersonNameImpl(registrar: CameraXRegistrar) : PigeonApiPersonNameApi(registrar) {
+    class PersonNameImpl(impl: CameraXImpl) : PigeonApiPersonNameApi(impl) {
         override fun formattedName(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.PersonName): String? {
             return pigeon_instance.formattedName
         }
@@ -306,7 +306,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class PhoneImpl(registrar: CameraXRegistrar) : PigeonApiPhoneApi(registrar) {
+    class PhoneImpl(impl: CameraXImpl) : PigeonApiPhoneApi(impl) {
         override fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Phone): PhoneTypeApi {
             return pigeon_instance.type.phoneTypeApi
         }
@@ -316,7 +316,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class SmsImpl(registrar: CameraXRegistrar) : PigeonApiSmsApi(registrar) {
+    class SmsImpl(impl: CameraXImpl) : PigeonApiSmsApi(impl) {
         override fun phoneNumber(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Sms): String? {
             return pigeon_instance.phoneNumber
         }
@@ -326,7 +326,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class UrlBookmarkImpl(registrar: CameraXRegistrar) : PigeonApiUrlBookmarkApi(registrar) {
+    class UrlBookmarkImpl(impl: CameraXImpl) : PigeonApiUrlBookmarkApi(impl) {
         override fun title(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark): String? {
             return pigeon_instance.title
         }
@@ -336,7 +336,7 @@ class BarcodeImpl(registrar: CameraXRegistrar) : PigeonApiBarcodeApi(registrar) 
         }
     }
 
-    class WiFiImpl(registrar: CameraXRegistrar) : PigeonApiWiFiApi(registrar) {
+    class WiFiImpl(impl: CameraXImpl) : PigeonApiWiFiApi(impl) {
         override fun encryptionType(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.WiFi): WiFiEncryptionTypeApi {
             return pigeon_instance.encryptionType.wifiEncryptionTypeApi
         }

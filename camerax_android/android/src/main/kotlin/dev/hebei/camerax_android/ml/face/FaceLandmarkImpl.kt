@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.ml.face
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.FaceLandmarkTypeApi
 import dev.hebei.camerax_android.PigeonApiFaceLandmarkApi
 
-class FaceLandmarkImpl(registrar: CameraXRegistrar) : PigeonApiFaceLandmarkApi(registrar) {
+class FaceLandmarkImpl(impl: CameraXImpl) : PigeonApiFaceLandmarkApi(impl) {
     override fun type(pigeon_instance: com.google.mlkit.vision.face.FaceLandmark): FaceLandmarkTypeApi {
         return pigeon_instance.landmarkType.faceLandmarkTypeApi
     }

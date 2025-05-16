@@ -1,6 +1,6 @@
 package dev.hebei.camerax_android.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiVideoRecordEventApi
 import dev.hebei.camerax_android.PigeonApiVideoRecordFinalizeEventApi
 import dev.hebei.camerax_android.PigeonApiVideoRecordPauseEventApi
@@ -10,32 +10,32 @@ import dev.hebei.camerax_android.PigeonApiVideoRecordStatusEventApi
 import dev.hebei.camerax_android.VideoRecordFinalizeEventErrorApi
 import dev.hebei.camerax_android.common.api
 
-class VideoRecordEventImpl(registrar: CameraXRegistrar) : PigeonApiVideoRecordEventApi(registrar) {
-    class StatusImpl(registrar: CameraXRegistrar) : PigeonApiVideoRecordStatusEventApi(registrar) {
+class VideoRecordEventImpl(impl: CameraXImpl) : PigeonApiVideoRecordEventApi(impl) {
+    class StatusImpl(impl: CameraXImpl) : PigeonApiVideoRecordStatusEventApi(impl) {
         override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Status): androidx.camera.video.RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class StartImpl(registrar: CameraXRegistrar) : PigeonApiVideoRecordStartEventApi(registrar) {
+    class StartImpl(impl: CameraXImpl) : PigeonApiVideoRecordStartEventApi(impl) {
         override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Start): androidx.camera.video.RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class PauseImpl(registrar: CameraXRegistrar) : PigeonApiVideoRecordPauseEventApi(registrar) {
+    class PauseImpl(impl: CameraXImpl) : PigeonApiVideoRecordPauseEventApi(impl) {
         override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Pause): androidx.camera.video.RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class ResumeImpl(registrar: CameraXRegistrar) : PigeonApiVideoRecordResumeEventApi(registrar) {
+    class ResumeImpl(impl: CameraXImpl) : PigeonApiVideoRecordResumeEventApi(impl) {
         override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Resume): androidx.camera.video.RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class FinalizeImpl(registrar: CameraXRegistrar) : PigeonApiVideoRecordFinalizeEventApi(registrar) {
+    class FinalizeImpl(impl: CameraXImpl) : PigeonApiVideoRecordFinalizeEventApi(impl) {
         override fun recordingStats(pigeon_instance: androidx.camera.video.VideoRecordEvent.Finalize): androidx.camera.video.RecordingStats {
             return pigeon_instance.recordingStats
         }

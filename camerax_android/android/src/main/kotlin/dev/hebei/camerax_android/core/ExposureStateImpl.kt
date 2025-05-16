@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.common.IntRange
 import dev.hebei.camerax_android.PigeonApiExposureStateApi
 
-class ExposureStateImpl(registrar: CameraXRegistrar) : PigeonApiExposureStateApi(registrar) {
+class ExposureStateImpl(impl: CameraXImpl) : PigeonApiExposureStateApi(impl) {
     override fun exposureCompensationIndex(pigeon_instance: androidx.camera.core.ExposureState): Long {
         return pigeon_instance.exposureCompensationIndex.toLong()
     }

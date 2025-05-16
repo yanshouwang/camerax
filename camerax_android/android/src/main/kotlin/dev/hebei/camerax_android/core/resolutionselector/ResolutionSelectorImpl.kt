@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.core.resolutionselector
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiResolutionSelectorApi
 import dev.hebei.camerax_android.ResolutionModeApi
 
-class ResolutionSelectorImpl(registrar: CameraXRegistrar) : PigeonApiResolutionSelectorApi(registrar) {
+class ResolutionSelectorImpl(impl: CameraXImpl) : PigeonApiResolutionSelectorApi(impl) {
     override fun pigeon_defaultConstructor(
         allowedResolutionMode: ResolutionModeApi,
         aspectRatioStrategy: androidx.camera.core.resolutionselector.AspectRatioStrategy,

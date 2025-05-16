@@ -4,7 +4,9 @@ import 'package:pigeon/pigeon.dart';
 @ConfigurePigeon(
   PigeonOptions(
     dartOut: 'lib/src/camerax.g.dart',
-    kotlinOut: 'android/src/main/kotlin/dev/hebei/camerax_android/CameraX.g.kt',
+    dartOptions: DartOptions(),
+    kotlinOut:
+        'android/src/main/kotlin/dev/hebei/camerax_android/CameraXApi.g.kt',
     kotlinOptions: KotlinOptions(
       package: 'dev.hebei.camerax_android',
       errorClassName: 'CameraXError',

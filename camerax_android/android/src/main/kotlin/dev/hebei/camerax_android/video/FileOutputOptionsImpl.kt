@@ -1,11 +1,11 @@
 package dev.hebei.camerax_android.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiFileOutputOptionsApi
 import dev.hebei.camerax_android.common.api
 import dev.hebei.camerax_android.common.fileImpl
 
-class FileOutputOptionsImpl(registrar: CameraXRegistrar) : PigeonApiFileOutputOptionsApi(registrar) {
+class FileOutputOptionsImpl(impl: CameraXImpl) : PigeonApiFileOutputOptionsApi(impl) {
     override fun build(
         file: String, durationLimitMillis: Long?, fileSizeLimitBytes: Long?, location: android.location.Location?
     ): androidx.camera.video.FileOutputOptions {

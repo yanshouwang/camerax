@@ -1,16 +1,16 @@
 package dev.hebei.camerax_android.view
 
 import androidx.lifecycle.LifecycleOwner
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiLifecycleCameraControllerApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LifecycleCameraControllerImpl(private val registrar: CameraXRegistrar) :
-    PigeonApiLifecycleCameraControllerApi(registrar) {
+class LifecycleCameraControllerImpl(private val impl: CameraXImpl) :
+    PigeonApiLifecycleCameraControllerApi(impl) {
     override fun pigeon_defaultConstructor(): androidx.camera.view.LifecycleCameraController {
-        return androidx.camera.view.LifecycleCameraController(registrar.context)
+        return androidx.camera.view.LifecycleCameraController(impl.context)
     }
 
     override fun bindToLifecycle(
@@ -18,7 +18,7 @@ class LifecycleCameraControllerImpl(private val registrar: CameraXRegistrar) :
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val lifecycleOwner = registrar.activity as LifecycleOwner
+                val lifecycleOwner = impl.activity as LifecycleOwner
                 pigeon_instance.bindToLifecycle(lifecycleOwner)
                 callback(Result.success(Unit))
             } catch (e: Exception) {

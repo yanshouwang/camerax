@@ -8,25 +8,25 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
 /** CameraXAndroidPlugin */
 class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
-    private lateinit var registrar: CameraXRegistrar
+    private lateinit var impl: CameraXImpl
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        registrar = CameraXRegistrar(binding.applicationContext, binding.binaryMessenger)
-        registrar.setUp()
-        val viewFactory = ViewFactory(registrar.instanceManager)
+        impl = CameraXImpl(binding.applicationContext, binding.binaryMessenger)
+        impl.setUp()
+        val viewFactory = ViewFactory(impl.instanceManager)
         binding.platformViewRegistry.registerViewFactory(
             "camerax.hebei.dev/PreviewView", viewFactory
         )
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        registrar.tearDown()
-        registrar.instanceManager.stopFinalizationListener()
+        impl.tearDown()
+        impl.instanceManager.stopFinalizationListener()
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         PermissionManager.onAttachedToActivity(binding)
-        registrar.activity = binding.activity
+        impl.activity = binding.activity
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
@@ -35,7 +35,7 @@ class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
 
     override fun onDetachedFromActivity() {
         PermissionManager.onDetachedFromActivity()
-        registrar.activity = null
+        impl.activity = null
     }
 
     override fun onDetachedFromActivityForConfigChanges() {

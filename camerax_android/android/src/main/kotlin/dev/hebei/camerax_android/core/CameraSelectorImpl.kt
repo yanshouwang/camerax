@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.core
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.LensFacingApi
 import dev.hebei.camerax_android.PigeonApiCameraSelectorApi
 
-class CameraSelectorImpl(registrar: CameraXRegistrar) : PigeonApiCameraSelectorApi(registrar) {
+class CameraSelectorImpl(impl: CameraXImpl) : PigeonApiCameraSelectorApi(impl) {
     override fun pigeon_defaultConstructor(lensFacing: LensFacingApi?): androidx.camera.core.CameraSelector {
         val builder = androidx.camera.core.CameraSelector.Builder()
         if (lensFacing != null) {

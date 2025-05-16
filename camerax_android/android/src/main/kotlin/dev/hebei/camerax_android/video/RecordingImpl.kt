@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.video
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiRecordingApi
 
-class RecordingImpl(registrar: CameraXRegistrar) : PigeonApiRecordingApi(registrar) {
+class RecordingImpl(impl: CameraXImpl) : PigeonApiRecordingApi(impl) {
     @androidx.camera.video.ExperimentalPersistentRecording
     override fun isPersistene(pigeon_instance: androidx.camera.video.Recording): Boolean {
         return pigeon_instance.isPersistent

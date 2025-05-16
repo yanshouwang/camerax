@@ -1,10 +1,10 @@
 package dev.hebei.camerax_android.ml.face
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.FaceContourTypeApi
 import dev.hebei.camerax_android.PigeonApiFaceContourApi
 
-class FaceContourImpl(registrar: CameraXRegistrar) : PigeonApiFaceContourApi(registrar) {
+class FaceContourImpl(impl: CameraXImpl) : PigeonApiFaceContourApi(impl) {
     override fun type(pigeon_instance: com.google.mlkit.vision.face.FaceContour): FaceContourTypeApi {
         return pigeon_instance.faceContourType.faceContourTypeApi
     }

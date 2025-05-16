@@ -1,9 +1,9 @@
 package dev.hebei.camerax_android.common
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiPointFApi
 
-class PointFImpl(registrar: CameraXRegistrar) : PigeonApiPointFApi(registrar) {
+class PointFImpl(impl: CameraXImpl) : PigeonApiPointFApi(impl) {
     override fun pigeon_defaultConstructor(x: Double, y: Double): android.graphics.PointF {
         return android.graphics.PointF(x.toFloat(), y.toFloat())
     }

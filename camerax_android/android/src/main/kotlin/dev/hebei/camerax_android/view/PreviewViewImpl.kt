@@ -1,15 +1,15 @@
 package dev.hebei.camerax_android.view
 
-import dev.hebei.camerax_android.CameraXRegistrar
+import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiPreviewViewApi
 import dev.hebei.camerax_android.ScaleTypeApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PreviewViewImpl(private val registrar: CameraXRegistrar) : PigeonApiPreviewViewApi(registrar) {
+class PreviewViewImpl(private val impl: CameraXImpl) : PigeonApiPreviewViewApi(impl) {
     override fun pigeon_defaultConstructor(): androidx.camera.view.PreviewView {
-        val context = registrar.activity ?: registrar.context
+        val context = impl.activity ?: impl.context
         return androidx.camera.view.PreviewView(context).apply {
             this.implementationMode = androidx.camera.view.PreviewView.ImplementationMode.COMPATIBLE
         }
