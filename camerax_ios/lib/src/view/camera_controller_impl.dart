@@ -12,22 +12,75 @@ import 'use_case_impl.dart';
 
 final class CameraControllerImpl extends CameraControllerChannel {
   final CameraControllerApi api;
-  final PreviewViewApi viewApi;
 
+  late final TorchStateObserverApi _torchStateObserverApi;
+  late final ZoomStateObserverApi _zoomStateObserverApi;
   late final StreamController<TorchState> _torchStateChangedController;
   late final StreamController<ZoomState> _zoomStateChangedController;
 
-  Future<TorchStateObserverApi>? _torchStateObserverApiFuture;
-  Future<ZoomStateObserverApi>? _zoomStateObserverApiFuture;
+  Future<NSKeyValueObservationApi>? _torchStateObserverationApiFuture;
+  Future<NSKeyValueObservationApi>? _zoomStateObserverationApiFuture;
 
-  CameraControllerImpl.impl(this.api, this.viewApi) : super.impl() {
+  CameraControllerImpl.impl(this.api) : super.impl() {
+    _torchStateObserverApi = TorchStateObserverApi(
+      onChanged: (_, e) => _torchStateChangedController.add(e.impl),
+    );
+    _zoomStateObserverApi = ZoomStateObserverApi(
+      onChanged: (_, e) => _zoomStateChangedController.add(e.impl),
+    );
     _torchStateChangedController = StreamController.broadcast(
-      onListen: _onListenTorchStateChanged,
-      onCancel: _onCancelTorchStateChanged,
+      onListen: () async {
+        try {
+          var future = _torchStateObserverationApiFuture;
+          if (future != null) {
+            throw ArgumentError.value(future);
+          }
+          final observerApi = _torchStateObserverApi;
+          _torchStateObserverationApiFuture =
+              future = api.observeTorchState(observerApi);
+          await future;
+        } catch (e) {
+          _torchStateChangedController.addError(e);
+        }
+      },
+      onCancel: () async {
+        try {
+          final future =
+              ArgumentError.checkNotNull(_torchStateObserverationApiFuture);
+          _torchStateObserverationApiFuture = null;
+          final observationApi = await future;
+          await observationApi.invalidate();
+        } catch (e) {
+          _torchStateChangedController.addError(e);
+        }
+      },
     );
     _zoomStateChangedController = StreamController.broadcast(
-      onListen: _onListenZoomStateChanged,
-      onCancel: _onCancelZoomStateChanged,
+      onListen: () async {
+        try {
+          var future = _zoomStateObserverationApiFuture;
+          if (future != null) {
+            throw ArgumentError.value(future);
+          }
+          final observerApi = _zoomStateObserverApi;
+          _zoomStateObserverationApiFuture =
+              future = api.observeZoomState(observerApi);
+          await future;
+        } catch (e) {
+          _zoomStateChangedController.addError(e);
+        }
+      },
+      onCancel: () async {
+        try {
+          final future =
+              ArgumentError.checkNotNull(_zoomStateObserverationApiFuture);
+          _zoomStateObserverationApiFuture = null;
+          final observerationApi = await future;
+          await observerationApi.invalidate();
+        } catch (e) {
+          _zoomStateChangedController.addError(e);
+        }
+      },
     );
   }
 
@@ -39,8 +92,7 @@ final class CameraControllerImpl extends CameraControllerChannel {
 
   factory CameraControllerImpl() {
     final api = CameraControllerApi();
-    final viewApi = PreviewViewApi();
-    return CameraControllerImpl.impl(api, viewApi);
+    return CameraControllerImpl.impl(api);
   }
 
   @override
@@ -349,69 +401,5 @@ final class CameraControllerImpl extends CameraControllerChannel {
           ),
         )
         .then((e) => e.impl);
-  }
-
-  void _onListenTorchStateChanged() async {
-    final completer = Completer<TorchStateObserverApi>();
-    try {
-      final future = _torchStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _torchStateObserverApiFuture = completer.future;
-      final observerApi = TorchStateObserverApi(
-        onChanged: (_, torchStateApi) {
-          _torchStateChangedController.add(torchStateApi.impl);
-        },
-      );
-      await api.observeTorchState(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _torchStateChangedController.addError(e);
-    }
-  }
-
-  void _onCancelTorchStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_torchStateObserverApiFuture);
-      _torchStateObserverApiFuture = null;
-      final observerApi = await future;
-      await api.removeTorchStateObserver(observerApi);
-    } catch (e) {
-      _torchStateChangedController.addError(e);
-    }
-  }
-
-  void _onListenZoomStateChanged() async {
-    final completer = Completer<ZoomStateObserverApi>();
-    try {
-      final future = _zoomStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _zoomStateObserverApiFuture = completer.future;
-      final observerApi = ZoomStateObserverApi(
-        onChanged: (_, zoomStateApi) {
-          _zoomStateChangedController.add(zoomStateApi.impl);
-        },
-      );
-      await api.observeZoomState(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _zoomStateChangedController.addError(e);
-    }
-  }
-
-  void _onCancelZoomStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_zoomStateObserverApiFuture);
-      _zoomStateObserverApiFuture = null;
-      final observerApi = await future;
-      await api.removeZoomStateObserver(observerApi);
-    } catch (e) {
-      _zoomStateChangedController.addError(e);
-    }
   }
 }

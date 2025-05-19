@@ -123,7 +123,7 @@ class _ZoomWidgetState extends State<ZoomWidget> {
                       if (newValue == oldValue) {
                         return;
                       }
-                      debugPrint('ZoomWidget value changed $newValue');
+                      // debugPrint('ZoomWidget value changed $newValue');
                       widget.onChanged?.call(newValue);
                     },
                     onPointerUp: (event) {

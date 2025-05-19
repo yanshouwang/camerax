@@ -14,29 +14,35 @@ public class PreviewView: UIView {
         AVCaptureVideoPreviewLayer.self
     }
     
-    private var previewLayer: AVCaptureVideoPreviewLayer {
-        layer as! AVCaptureVideoPreviewLayer
+    public override var layer: AVCaptureVideoPreviewLayer {
+        super.layer as! AVCaptureVideoPreviewLayer
     }
     
     public var controller: CameraController? {
-        didSet { previewLayer.session = controller?.session }
+        didSet { layer.session = controller?.session }
     }
     
     public var scaleType: ScaleType {
-        get { previewLayer.videoGravity.api }
-        set { previewLayer.videoGravity = newValue.impl }
+        get { layer.videoGravity.api }
+        set { layer.videoGravity = newValue.impl }
     }
     
-    public override func didMoveToSuperview() {
-        debugPrint("Preview didMoveToSuperview")
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setUp()
+    }
+    
+    private func setUp() {
+        layer.videoGravity = .resizeAspectFill
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
         addGestureRecognizer(tapGestureRecognizer)
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
         addGestureRecognizer(pinchGestureRecognizer)
-    }
-    
-    public override func removeFromSuperview() {
-        debugPrint("Preview removeFromSuperview")
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -44,7 +50,7 @@ public class PreviewView: UIView {
             return
         }
         let layerPoint = sender.location(in: self)
-        let devicePoint = previewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
+        let devicePoint = layer.captureDevicePointConverted(fromLayerPoint: layerPoint)
         try? controller.focusAndExpose(devicePoint: devicePoint, continuous: false)
     }
     

@@ -7,17 +7,7 @@
 
 import Foundation
 
-typealias Observer<T> = ObserverBase & ObserverProtocol
-
-class ObserverBase: NSObject {
-    internal var observations: [NSObject: NSKeyValueObservation]
-    
-    override init() {
-        self.observations = [:]
-    }
-}
-
-protocol ObserverProtocol: NSObjectProtocol {
+protocol Observer<T> {
     associatedtype T
     
     func onChanged(_ value: T) -> Void

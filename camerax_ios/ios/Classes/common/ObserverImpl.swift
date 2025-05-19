@@ -19,9 +19,7 @@ class ZoomStateObserverImpl: PigeonApiDelegateZoomStateObserverApi {
     }
 }
 
-class TorchStateObserver: Observer<TorchState> {
-    typealias T = TorchState
-    
+class TorchStateObserver: Observer {
     let api: PigeonApiTorchStateObserverApi
     
     init(_ api: PigeonApiTorchStateObserverApi) {
@@ -33,9 +31,7 @@ class TorchStateObserver: Observer<TorchState> {
     }
 }
 
-class ZoomStateObserver: Observer<ZoomState> {
-    typealias T = ZoomState
-    
+class ZoomStateObserver: Observer {
     let api: PigeonApiZoomStateObserverApi
     
     init(_ api: PigeonApiZoomStateObserverApi) {

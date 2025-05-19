@@ -33,9 +33,21 @@ class ImageCaptureImpl {
         }
     }
     
-    class OutputResultsImpl: PigeonApiDelegateOutputFileResultsApi {
+    class OutputFileResultsImpl: PigeonApiDelegateOutputFileResultsApi {
         func savedUri(pigeonApi: PigeonApiOutputFileResultsApi, pigeonInstance: ImageCapture.OutputFileResults) throws -> String? {
             return pigeonInstance.savedUri.absoluteString
+        }
+    }
+    
+    class OnImageCapturedCallbackImpl: PigeonApiDelegateOnImageCapturedCallbackApi {
+        func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageCapturedCallbackApi) throws -> any ImageCapture.OnImageCapturedCallback {
+            fatalError()
+        }
+    }
+    
+    class OnImageSavedCallbackImpl: PigeonApiDelegateOnImageSavedCallbackApi {
+        func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageSavedCallbackApi) throws -> any ImageCapture.OnImageSavedCallback {
+            fatalError()
         }
     }
 }

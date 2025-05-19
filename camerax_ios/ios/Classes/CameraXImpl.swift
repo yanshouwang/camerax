@@ -8,6 +8,11 @@
 import Foundation
 
 class CameraXImpl: CameraXApiPigeonProxyApiDelegate {
+    func pigeonApiNSKeyValueObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiNSKeyValueObservationApi {
+        let impl = NSKeyValueObservationImpl()
+        return PigeonApiNSKeyValueObservationApi(pigeonRegistrar: registrar, delegate: impl)
+    }
+    
     func pigeonApiPermissionManagerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiPermissionManagerApi {
         let impl = PermissionManagerImpl()
         return PigeonApiPermissionManagerApi(pigeonRegistrar: registrar, delegate: impl)
@@ -69,16 +74,18 @@ class CameraXImpl: CameraXApiPigeonProxyApiDelegate {
     }
     
     func pigeonApiOutputFileResultsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOutputFileResultsApi {
-        let impl = ImageCaptureImpl.OutputResultsImpl()
+        let impl = ImageCaptureImpl.OutputFileResultsImpl()
         return PigeonApiOutputFileResultsApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiOnImageCapturedCallbackApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOnImageCapturedCallbackApi {
-        fatalError()
+        let impl = ImageCaptureImpl.OnImageCapturedCallbackImpl()
+        return PigeonApiOnImageCapturedCallbackApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiOnImageSavedCallbackApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOnImageSavedCallbackApi {
-        fatalError()
+        let impl = ImageCaptureImpl.OnImageSavedCallbackImpl()
+        return PigeonApiOnImageSavedCallbackApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiImageAnalyzerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiImageAnalyzerApi {
@@ -87,51 +94,63 @@ class CameraXImpl: CameraXApiPigeonProxyApiDelegate {
     }
     
     func pigeonApiFileOutputOptionsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiFileOutputOptionsApi {
-        fatalError()
+        let impl = FileOutputOptionsImpl()
+        return PigeonApiFileOutputOptionsApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiAudioConfigApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAudioConfigApi {
-        fatalError()
+        let impl = AudioConfigImpl()
+        return PigeonApiAudioConfigApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiAudioStatsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAudioStatsApi {
-        fatalError()
+        let impl = AudioStatsImpl()
+        return PigeonApiAudioStatsApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiRecordingStatsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiRecordingStatsApi {
-        fatalError()
+        let impl = RecordingStatsImpl()
+        return PigeonApiRecordingStatsApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiVideoRecordStatusEventApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordStatusEventApi {
-        fatalError()
+        let impl = VideoRecordEventImpl.StatusImpl()
+        return PigeonApiVideoRecordStatusEventApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiVideoRecordStartEventApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordStartEventApi {
-        fatalError()
+        let impl = VideoRecordEventImpl.StartImpl()
+        return PigeonApiVideoRecordStartEventApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiVideoRecordPauseEventApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordPauseEventApi {
-        fatalError()
+        let impl = VideoRecordEventImpl.PauseImpl()
+        return PigeonApiVideoRecordPauseEventApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiVideoRecordResumeEventApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordResumeEventApi {
-        fatalError()
+        let impl = VideoRecordEventImpl.ResumeImpl()
+        return PigeonApiVideoRecordResumeEventApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiOutputResultsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOutputResultsApi {
-        fatalError()
+        let impl = OutputResultsImpl()
+        return PigeonApiOutputResultsApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiVideoRecordFinalizeEventApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordFinalizeEventApi {
-        fatalError()
+        let impl = VideoRecordEventImpl.FinalizeImpl()
+        return PigeonApiVideoRecordFinalizeEventApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiVideoRecordEventConsumerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordEventConsumerApi {
-        fatalError()
+        let impl = VideoRecordEventConsumerImpl()
+        return PigeonApiVideoRecordEventConsumerApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiRecordingApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiRecordingApi {
-        fatalError()
+        let impl = RecordingImpl()
+        return PigeonApiRecordingApi(pigeonRegistrar: registrar, delegate: impl)
     }
     
     func pigeonApiCameraControllerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraControllerApi {

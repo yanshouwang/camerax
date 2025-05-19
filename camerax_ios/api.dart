@@ -339,6 +339,15 @@ abstract class CameraSelectorApi {
   CameraSelectorApi(LensFacingApi? lensFacing);
 }
 
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'NSKeyValueObservation',
+  ),
+)
+abstract class NSKeyValueObservationApi {
+  void invalidate();
+}
+
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(
 //     name: 'CameraStateObserver',
@@ -500,14 +509,11 @@ abstract class ZoomStateObserverApi {
 //   bool mustPlayShutterSound();
 //   CameraSelectorApi getCameraSelector();
 //   CameraStateApi? getCameraState();
-//   void observeCameraState(CameraStateObserverApi observer);
-//   void removeCameraStateObserver(CameraStateObserverApi observer);
+//   NSKeyValueObservationApi observeCameraState(CameraStateObserverApi observer);
 //   TorchStateApi? getTorchState();
-//   void observeTorchState(TorchStateObserverApi observer);
-//   void removeTorchStateObserver(TorchStateObserverApi observer);
+//   NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
 //   ZoomStateApi? getZoomState();
-//   void observeZoomState(ZoomStateObserverApi observer);
-//   void removeZoomStateObserver(ZoomStateObserverApi observer);
+//   NSKeyValueObservationApi observeZoomState(ZoomStateObserverApi observer);
 //   // ExposureStateApi getExposureState();
 //   double getIntrinsticZoomRatio();
 //   LensFacingApi getLensFacing();
@@ -923,12 +929,10 @@ abstract class CameraControllerApi {
   // CameraInfoApi? getCameraInfo();
   // CameraControlApi? getCameraControl();
   TorchStateApi? getTorchState();
-  void observeTorchState(TorchStateObserverApi observer);
-  void removeTorchStateObserver(TorchStateObserverApi observer);
+  NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
   void enableTorch(bool torchEnabled);
   ZoomStateApi? getZoomState();
-  void observeZoomState(ZoomStateObserverApi observer);
-  void removeZoomStateObserver(ZoomStateObserverApi observer);
+  NSKeyValueObservationApi observeZoomState(ZoomStateObserverApi observer);
   void setZoomRatio(double zoomRatio);
   void setLinearZoom(double linearZoom);
   bool isPinchToZoomEnabled();

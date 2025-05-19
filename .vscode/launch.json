@@ -5,81 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "camerax",
+            "name": "example",
             "cwd": "camerax/example",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "camerax (profile mode)",
+            "name": "example (profile mode)",
             "cwd": "camerax/example",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "camerax (release mode)",
+            "name": "example (release mode)",
             "cwd": "camerax/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "camerax_android",
-            "cwd": "camerax_android/example",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "camerax_android (profile mode)",
-            "cwd": "camerax_android/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "camerax_android (release mode)",
-            "cwd": "camerax_android/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "camerax_ios",
-            "cwd": "camerax_ios/example",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "camerax_ios (profile mode)",
-            "cwd": "camerax_ios/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "camerax_ios (release mode)",
-            "cwd": "camerax_ios/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "camerax_linux",
-            "cwd": "camerax_linux/example",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "camerax_linux (profile mode)",
-            "cwd": "camerax_linux/example",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "camerax_linux (release mode)",
-            "cwd": "camerax_linux/example",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

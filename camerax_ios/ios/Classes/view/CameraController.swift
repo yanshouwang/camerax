@@ -26,8 +26,7 @@ public class CameraController: NSObject {
             return outputImageFormat.imageFormatApi
         }
         set {
-            let key = kCVPixelBufferPixelFormatTypeKey as String
-            captureVideoDataOutput.videoSettings = [key: newValue.impl]
+            captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = newValue.impl
         }
     }
     
@@ -76,11 +75,10 @@ public class CameraController: NSObject {
         try? addCapturePhotoOutput()
         try? addCaptureMovieFileOutput()
         try? addCaptureVideoDataOutput()
+        
         session.sessionPreset = .high
         captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
-        let videoDataOutputFormatKey = kCVPixelBufferPixelFormatTypeKey as String
-        let videoDataOutputFormatValue = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-        captureVideoDataOutput.videoSettings = [videoDataOutputFormatKey: videoDataOutputFormatValue]
+        captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
     }
     
     public func bind() {
@@ -114,26 +112,26 @@ public class CameraController: NSObject {
     }
     
     public func setZoomRatio(_ zoomRatio: Double) throws {
-        guard let videoDeviceInput = self.videoDeviceInput else {
+        guard let input = self.videoDeviceInput else {
             throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
         }
-        let videoDevice = videoDeviceInput.device
-        try videoDevice.lockForConfiguration()
-        defer { videoDevice.unlockForConfiguration() }
-        videoDevice.zoomRatio = zoomRatio
+        let device = input.device
+        try device.lockForConfiguration()
+        defer { device.unlockForConfiguration() }
+        device.zoomRatio = zoomRatio
     }
     
     public func setLinearZoom(_ linearZoom: Double) throws {
-        guard let videoDeviceInput = self.videoDeviceInput else {
+        guard let input = self.videoDeviceInput else {
             throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
         }
-        let videoDevice = videoDeviceInput.device
-        try videoDevice.lockForConfiguration()
-        defer { videoDevice.unlockForConfiguration() }
-        let minZoomRatio = videoDevice.minZoomRatio
-        let maxZoomRatio = videoDevice.maxZoomRatio
+        let device = input.device
+        try device.lockForConfiguration()
+        defer { device.unlockForConfiguration() }
+        let minZoomRatio = device.minZoomRatio
+        let maxZoomRatio = device.maxZoomRatio
         let zoomRatio = ZoomMath.getZoomRatioFromLinearZoom(linearZoom: linearZoom, minZoomRatio: minZoomRatio, maxZoomRatio: maxZoomRatio)
-        videoDevice.zoomRatio = zoomRatio
+        device.zoomRatio = zoomRatio
     }
     
     public func enableTorch(_ torchEnabled: Bool) throws {
@@ -260,35 +258,35 @@ public class CameraController: NSObject {
     }
     
     private func addAudioDeviceInput() throws {
-        guard let audioDevice = AVCaptureDevice.default(for: .audio),
-              let audioDeviceInput = try? AVCaptureDeviceInput(device: audioDevice) else {
+        guard let device = AVCaptureDevice.default(for: .audio),
+              let input = try? AVCaptureDeviceInput(device: device) else {
             throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
         }
-        guard session.canAddInput(audioDeviceInput) else {
+        guard session.canAddInput(input) else {
             throw CameraXError(code: "add-input-error", message: "Can not add input", details: nil)
         }
-        session.addInput(audioDeviceInput)
-        self.audioDeviceInput = audioDeviceInput
+        session.addInput(input)
+        self.audioDeviceInput = input
     }
     
     internal func focusAndExpose(devicePoint: CGPoint, continuous: Bool) throws {
-        guard let videoDeviceInput = self.videoDeviceInput else {
+        guard let input = self.videoDeviceInput else {
             return
         }
-        let videoDevice = videoDeviceInput.device
-        try videoDevice.lockForConfiguration()
-        defer { videoDevice.unlockForConfiguration() }
+        let device = input.device
+        try device.lockForConfiguration()
+        defer { device.unlockForConfiguration() }
         let focusMode = continuous ? AVCaptureDevice.FocusMode.continuousAutoFocus : .autoFocus
-        if videoDevice.isFocusPointOfInterestSupported && videoDevice.isFocusModeSupported(focusMode) {
-            videoDevice.focusPointOfInterest = devicePoint
-            videoDevice.focusMode = focusMode
+        if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(focusMode) {
+            device.focusPointOfInterest = devicePoint
+            device.focusMode = focusMode
         }
         let exposureMode = continuous ? AVCaptureDevice.ExposureMode.continuousAutoExposure : .autoExpose
-        if videoDevice.isExposurePointOfInterestSupported && videoDevice.isExposureModeSupported(exposureMode) {
-            videoDevice.exposurePointOfInterest = devicePoint
-            videoDevice.exposureMode = exposureMode
+        if device.isExposurePointOfInterestSupported && device.isExposureModeSupported(exposureMode) {
+            device.exposurePointOfInterest = devicePoint
+            device.exposureMode = exposureMode
         }
-        videoDevice.isSubjectAreaChangeMonitoringEnabled = !continuous
+        device.isSubjectAreaChangeMonitoringEnabled = !continuous
     }
     
     private func addCapturePhotoOutput() throws {

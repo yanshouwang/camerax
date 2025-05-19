@@ -22,8 +22,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with RouteAware {
   late final PageController _pageController;
-  late final ValueNotifier<double?> _viewZoomRatio;
-  late final ValueNotifier<int?> _viewExposureIndex;
 
   Offset? _onPanStartPosition;
   double? _onPanUpdateDx;
@@ -35,8 +33,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
       initialPage: 0,
       viewportFraction: 1 / 5,
     );
-    _viewZoomRatio = ValueNotifier(null);
-    _viewExposureIndex = ValueNotifier(null);
   }
 
   // int? _exposureTime;
@@ -46,7 +42,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final viewModel = ViewModel.of<HomeViewModel>(context);
     final controller = viewModel.controller;
     final zoomState = viewModel.zoomState;
-    final exposureState = viewModel.exposureState;
     final mode = viewModel.mode;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
@@ -146,19 +141,11 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                   if (zoomState != null)
                     Container(
                       alignment: Alignment.bottomCenter,
-                      child: ValueListenableBuilder(
-                        valueListenable: _viewZoomRatio,
-                        builder: (context, viewZoomRatio, child) {
-                          return ZoomWidget(
-                            minimum: zoomState.minZoomRatio,
-                            maximum: zoomState.maxZoomRatio,
-                            value: viewZoomRatio ?? zoomState.zoomRatio,
-                            onChanged: (value) {
-                              viewModel.setZoomRatio(value);
-                              _viewZoomRatio.value = value;
-                            },
-                          );
-                        },
+                      child: ZoomWidget(
+                        minimum: zoomState.minZoomRatio,
+                        maximum: zoomState.maxZoomRatio,
+                        value: zoomState.zoomRatio,
+                        onChanged: (value) => viewModel.setZoomRatio(value),
                       ),
                     ),
                 ],
@@ -167,28 +154,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
           ),
           Column(
             children: [
-              if (exposureState != null)
-                ValueListenableBuilder(
-                  valueListenable: _viewExposureIndex,
-                  builder: (context, viewExposureIndex, child) {
-                    final range = exposureState.exposureCompensationRange;
-                    final lower = range.lower;
-                    final upper = range.upper;
-                    return CupertinoSlider(
-                      min: lower.toDouble(),
-                      max: upper.toDouble(),
-                      divisions: upper - lower,
-                      value: (viewExposureIndex ??
-                              exposureState.exposureCompensationIndex)
-                          .toDouble(),
-                      onChanged: (value) {
-                        final newValue = value.toInt();
-                        viewModel.setExposureCompensationIndex(newValue);
-                        _viewExposureIndex.value = newValue;
-                      },
-                    );
-                  },
-                ),
               GestureDetector(
                 onPanStart: (details) {
                   _onPanStartPosition = details.localPosition;
@@ -513,8 +478,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
   void dispose() {
     routeObserver.unsubscribe(this);
     _pageController.dispose();
-    _viewZoomRatio.dispose();
-    _viewExposureIndex.dispose();
     super.dispose();
   }
 }

@@ -44,21 +44,11 @@ class CameraControllerImpl: PigeonApiDelegateCameraControllerApi {
         return pigeonInstance.torchState?.api
     }
     
-    func observeTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws {
-        if observer.observations.keys.contains(pigeonInstance) {
-            throw CameraXError(code: "state-error", message: "\(observer) is already observed", details: nil)
-        }
-        observer.observations[pigeonInstance] = pigeonInstance.observe(\.torchState, options: .new) { _, change in
+    func observeTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws -> NSKeyValueObservation {
+        return pigeonInstance.observe(\.torchState, options: .new) { _, change in
             guard let newValue = change.newValue, let torchState = newValue else { return }
             observer.onChanged(torchState)
         }
-    }
-    
-    func removeTorchStateObserver(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws {
-        guard let observation = observer.observations.removeValue(forKey: pigeonInstance) else {
-            throw CameraXError(code: "state-error", message: "\(observer) is not observed", details: nil)
-        }
-        observation.invalidate()
     }
     
     func enableTorch(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, torchEnabled: Bool) throws {
@@ -69,21 +59,11 @@ class CameraControllerImpl: PigeonApiDelegateCameraControllerApi {
         return pigeonInstance.zoomState
     }
     
-    func observeZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws {
-        if observer.observations.keys.contains(pigeonInstance) {
-            throw CameraXError(code: "state-error", message: "\(observer) is already observed", details: nil)
-        }
-        observer.observations[pigeonInstance] = pigeonInstance.observe(\.zoomState, options: .new) { _, change in
+    func observeZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws -> NSKeyValueObservation {
+        return pigeonInstance.observe(\.zoomState, options: .new) { _, change in
             guard let newValue = change.newValue, let zoomState = newValue else { return }
             observer.onChanged(zoomState)
         }
-    }
-    
-    func removeZoomStateObserver(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws {
-        guard let observation = observer.observations.removeValue(forKey: pigeonInstance) else {
-            throw CameraXError(code: "state-error", message: "\(observer) is not observed", details: nil)
-        }
-        observation.invalidate()
     }
     
     func setZoomRatio(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, zoomRatio: Double) throws {

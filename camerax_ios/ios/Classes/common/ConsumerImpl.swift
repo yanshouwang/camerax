@@ -7,4 +7,10 @@
 
 import Foundation
 
+class VideoRecordEventConsumerImpl: PigeonApiDelegateVideoRecordEventConsumerApi {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiVideoRecordEventConsumerApi) throws -> VideoRecordEventConsumer {
+        fatalError()
+    }
+}
+
 class VideoRecordEventConsumer: NSObject {}

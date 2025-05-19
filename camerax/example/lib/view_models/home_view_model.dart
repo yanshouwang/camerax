@@ -15,8 +15,8 @@ typedef ImageModelCallback = void Function(ImageModel imageModel);
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
-  final BarcodeScanner _barcodeScanner;
-  final FaceDetector _faceDetector;
+  // final BarcodeScanner _barcodeScanner;
+  // final FaceDetector _faceDetector;
 
   late final StreamSubscription _zoomStateChangedSubscription;
 
@@ -36,8 +36,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
   HomeViewModel()
       : _permissionManager = PermissionManager(),
         _controller = CameraController(),
-        _barcodeScanner = BarcodeScanner(),
-        _faceDetector = FaceDetector(),
+        // _barcodeScanner = BarcodeScanner(),
+        // _faceDetector = FaceDetector(),
         _mode = CameraMode.takePicture,
         _lensFacing = LensFacing.back,
         _barcodes = [],
@@ -134,27 +134,27 @@ class HomeViewModel extends ViewModel with TypeLogger {
         break;
       case CameraMode.rawValue:
         // await _setImageAnalyzer();
-        await _setJpegAnalyzer();
+        // await _setJpegAnalyzer();
         break;
       case CameraMode.scanCode:
-        final analyzer = MlKitAnalyzer(
-          detectors: [
-            _barcodeScanner,
-          ],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _extractML,
-        );
-        await _setMLAnalyzer(analyzer);
+        // final analyzer = MlKitAnalyzer(
+        //   detectors: [
+        //     _barcodeScanner,
+        //   ],
+        //   targetCoordinateSystem: CoordinateSystem.viewReferenced,
+        //   consumer: _extractML,
+        // );
+        // await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
-        final analyzer = MlKitAnalyzer(
-          detectors: [
-            _faceDetector,
-          ],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _extractML,
-        );
-        await _setMLAnalyzer(analyzer);
+        // final analyzer = MlKitAnalyzer(
+        //   detectors: [
+        //     _faceDetector,
+        //   ],
+        //   targetCoordinateSystem: CoordinateSystem.viewReferenced,
+        //   consumer: _extractML,
+        // );
+        // await _setMLAnalyzer(analyzer);
         break;
     }
     _mode = mode;
@@ -289,17 +289,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     if (!isGranted) {
       throw StateError('requestPermissions failed.');
     }
-    await controller.initialize();
+    // await controller.initialize();
     await controller.setCameraSelector(CameraSelector.back);
     // TODO: Use resolutionFilter will cause ANR error.
-    final resolutionSelector = ResolutionSelector(
-      // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
-      resolutionStrategy: ResolutionStrategy(
-        boundSize: Size(1024, 768),
-        fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
-      ),
-    );
-    await controller.setImageAnalysisResolutionSelector(resolutionSelector);
+    // final resolutionSelector = ResolutionSelector(
+    //   // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
+    //   resolutionStrategy: ResolutionStrategy(
+    //     boundSize: Size(1024, 768),
+    //     fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
+    //   ),
+    // );
+    // await controller.setImageAnalysisResolutionSelector(resolutionSelector);
     await bind();
   }
 
@@ -379,19 +379,19 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   void _extractML(MlKitAnalyzerResult result) async {
-    switch (mode) {
-      case CameraMode.scanCode:
-        final barcodes = await result.getValue(_barcodeScanner);
-        _barcodes = barcodes ?? [];
-        notifyListeners();
-        break;
-      case CameraMode.scanFace:
-        final faces = await result.getValue(_faceDetector);
-        _faces = faces ?? [];
-        notifyListeners();
-        break;
-      default:
-    }
+    // switch (mode) {
+    //   case CameraMode.scanCode:
+    //     final barcodes = await result.getValue(_barcodeScanner);
+    //     _barcodes = barcodes ?? [];
+    //     notifyListeners();
+    //     break;
+    //   case CameraMode.scanFace:
+    //     final faces = await result.getValue(_faceDetector);
+    //     _faces = faces ?? [];
+    //     notifyListeners();
+    //     break;
+    //   default:
+    // }
   }
 
   Future<void> _clearImageAnalysisAnalyzer() async {
