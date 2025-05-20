@@ -1,5 +1,5 @@
 //
-//  CameraSelectorImpl.swift
+//  CameraSelectorDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/16.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class CameraSelectorImpl: PigeonApiDelegateCameraSelectorApi {
+class CameraSelectorDelegate: PigeonApiDelegateCameraSelectorApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraSelectorApi, lensFacing: LensFacingApi?) throws -> CameraSelector {
-        return CameraSelector(lensFacing: lensFacing?.impl)
+        return CameraSelector(lensFacing: lensFacing?.delegate)
     }
     
     func front(pigeonApi: PigeonApiCameraSelectorApi) throws -> CameraSelector {

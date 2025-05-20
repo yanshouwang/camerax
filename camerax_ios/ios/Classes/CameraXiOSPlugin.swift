@@ -5,8 +5,8 @@ public class CameraXiOSPlugin: NSObject, FlutterPlugin {
     var api: CameraXApiPigeonProxyApiRegistrar?
     
     init(messenger: FlutterBinaryMessenger) {
-        let impl = CameraXImpl()
-        api = CameraXApiPigeonProxyApiRegistrar(binaryMessenger: messenger, apiDelegate: impl)
+        let delegate = CameraXDelegate()
+        api = CameraXApiPigeonProxyApiRegistrar(binaryMessenger: messenger, apiDelegate: delegate)
         api!.setUp()
     }
     

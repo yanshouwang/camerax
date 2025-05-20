@@ -1,5 +1,5 @@
 //
-//  PreviewViewImpl.swift
+//  PreviewViewDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PreviewViewImpl: PigeonApiDelegatePreviewViewApi {
+class PreviewViewDelegate: PigeonApiDelegatePreviewViewApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiPreviewViewApi) throws -> PreviewView {
         return PreviewView()
     }
@@ -25,7 +25,7 @@ class PreviewViewImpl: PigeonApiDelegatePreviewViewApi {
     }
     
     func setScaleType(pigeonApi: PigeonApiPreviewViewApi, pigeonInstance: PreviewView, scaleType: ScaleTypeApi) throws {
-        pigeonInstance.scaleType = scaleType.impl
+        pigeonInstance.scaleType = scaleType.delegate
     }
 }
 
@@ -49,7 +49,7 @@ extension PreviewView.ScaleType {
 }
 
 extension ScaleTypeApi {
-    var impl: PreviewView.ScaleType {
+    var delegate: PreviewView.ScaleType {
         switch self {
         case .fillCenter:
             return .fillCenter

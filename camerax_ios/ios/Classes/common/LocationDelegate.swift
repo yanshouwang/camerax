@@ -1,5 +1,5 @@
 //
-//  LocationImpl.swift
+//  LocationDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/16.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class LocationImpl: PigeonApiDelegateLocationApi {
+class LocationDelegate: PigeonApiDelegateLocationApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiLocationApi, latitude: Double, longitude: Double) throws -> CLLocation {
         return CLLocation(latitude: latitude, longitude: longitude)
     }

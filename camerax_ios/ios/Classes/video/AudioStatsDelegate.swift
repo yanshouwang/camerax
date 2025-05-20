@@ -1,5 +1,5 @@
 //
-//  AudioStatsImpl.swift
+//  AudioStatsDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AudioStatsImpl: PigeonApiDelegateAudioStatsApi {
+class AudioStatsDelegate: PigeonApiDelegateAudioStatsApi {
     func audioAmplitude(pigeonApi: PigeonApiAudioStatsApi, pigeonInstance: AudioStats) throws -> Double {
         fatalError()
     }

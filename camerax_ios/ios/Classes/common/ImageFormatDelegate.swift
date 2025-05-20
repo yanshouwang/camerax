@@ -1,5 +1,5 @@
 //
-//  ImageFormatImpl.swift
+//  ImageFormatDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/15.
@@ -19,7 +19,7 @@ extension ImageFormat {
 }
 
 extension ImageFormatApi {
-    var impl: ImageFormat {
+    var delegate: ImageFormat {
         switch self {
         case .yuv420888:
             return .yuv420888

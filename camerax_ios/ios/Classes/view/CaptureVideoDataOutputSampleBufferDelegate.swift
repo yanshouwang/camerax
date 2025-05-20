@@ -19,9 +19,9 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        debugPrint("Did output sample buffer.")
+        debugPrint("captureOutput didOutput")
         guard let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            debugPrint("image buffer is nil.")
+            debugPrint("CMSampleBufferGetImageBuffer is nil")
             return
         }
         CVPixelBufferLockBaseAddress(buffer, .readOnly)
@@ -62,7 +62,7 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        debugPrint("Did drop sample buffer.")
+        debugPrint("captureOutput didDrop")
     }
     
     private func bgraToRGBA(value: inout Data) {

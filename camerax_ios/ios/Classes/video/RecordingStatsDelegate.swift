@@ -1,5 +1,5 @@
 //
-//  RecordingStatsImpl.swift
+//  RecordingStatsDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RecordingStatsImpl: PigeonApiDelegateRecordingStatsApi {
+class RecordingStatsDelegate: PigeonApiDelegateRecordingStatsApi {
     func audioStats(pigeonApi: PigeonApiRecordingStatsApi, pigeonInstance: RecordingStats) throws -> AudioStats {
         fatalError()
     }

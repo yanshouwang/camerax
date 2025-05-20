@@ -1,5 +1,5 @@
 //
-//  ObserverImpl.swift
+//  ObserverDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/15.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-class TorchStateObserverImpl: PigeonApiDelegateTorchStateObserverApi {
+class TorchStateObserverDelegate: PigeonApiDelegateTorchStateObserverApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiTorchStateObserverApi) throws -> TorchStateObserver {
         return TorchStateObserver(pigeonApi)
     }
 }
 
-class ZoomStateObserverImpl: PigeonApiDelegateZoomStateObserverApi {
+class ZoomStateObserverDelegate: PigeonApiDelegateZoomStateObserverApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiZoomStateObserverApi) throws -> ZoomStateObserver {
         return ZoomStateObserver(pigeonApi)
     }

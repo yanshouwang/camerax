@@ -1,5 +1,5 @@
 //
-//  RecordingImpl.swift
+//  RecordingDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RecordingImpl: PigeonApiDelegateRecordingApi {
+class RecordingDelegate: PigeonApiDelegateRecordingApi {
     func isPersistene(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws -> Bool {
         fatalError()
     }

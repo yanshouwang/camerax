@@ -1,5 +1,5 @@
 //
-//  ImageProxyImpl.swift
+//  ImageProxyDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/16.
@@ -8,7 +8,7 @@
 import Foundation
 import Flutter
 
-class ImageProxyImpl: PigeonApiDelegateImageProxyApi {
+class ImageProxyDelegate: PigeonApiDelegateImageProxyApi {
     func format(pigeonApi: PigeonApiImageProxyApi, pigeonInstance: ImageProxy) throws -> ImageFormatApi {
         return pigeonInstance.format.api
     }
@@ -29,7 +29,7 @@ class ImageProxyImpl: PigeonApiDelegateImageProxyApi {
         return pigeonInstance.imageInfo
     }
     
-    class PlaneProxyImpl: PigeonApiDelegatePlaneProxyApi {
+    class PlaneProxyDelegate: PigeonApiDelegatePlaneProxyApi {
         func buffer(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData {
             return FlutterStandardTypedData(bytes: pigeonInstance.data)
         }

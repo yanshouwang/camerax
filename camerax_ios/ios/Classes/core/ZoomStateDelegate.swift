@@ -1,5 +1,5 @@
 //
-//  ZoomStateImpl.swift
+//  ZoomStateDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ZoomStateImpl: PigeonApiDelegateZoomStateApi {
+class ZoomStateDelegate: PigeonApiDelegateZoomStateApi {
     func minZoomRatio(pigeonApi: PigeonApiZoomStateApi, pigeonInstance: ZoomState) throws -> Double {
         return pigeonInstance.minZoomRatio
     }

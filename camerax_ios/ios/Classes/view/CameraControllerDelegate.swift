@@ -1,5 +1,5 @@
 //
-//  CameraControllerImpl.swift
+//  CameraControllerDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CameraControllerImpl: PigeonApiDelegateCameraControllerApi {
+class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraControllerApi) throws -> CameraController {
         return CameraController()
     }
@@ -159,7 +159,7 @@ class CameraControllerImpl: PigeonApiDelegateCameraControllerApi {
     }
     
     func setImageAnalysisOutputImageFormat(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, imageAnalysisOutputImageFormat: ImageFormatApi) throws {
-        pigeonInstance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.impl
+        pigeonInstance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.delegate
     }
     
     func setImageAnalysisAnalyzer(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, analyzer: any ImageAnalysis.Analyzer) throws {

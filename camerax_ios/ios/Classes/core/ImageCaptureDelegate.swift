@@ -1,5 +1,5 @@
 //
-//  ImageCaptureImpl.swift
+//  ImageCaptureDelegate.swift
 //  camerax_ios
 //
 //  Created by 闫守旺 on 2025/5/15.
@@ -8,8 +8,8 @@
 import Foundation
 import CoreLocation
 
-class ImageCaptureImpl {
-    class MetadataImpl: PigeonApiDelegateMetadataApi {
+class ImageCaptureDelegate {
+    class MetadataDelegate: PigeonApiDelegateMetadataApi {
         func pigeonDefaultConstructor(pigeonApi: PigeonApiMetadataApi, isReversedHorizontal: Bool, isReversedVertical: Bool, location: CLLocation?) throws -> ImageCapture.Metadata {
             return ImageCapture.Metadata(isReversedHorizontal: isReversedHorizontal, isReversedVertical: isReversedVertical, location: location)
         }
@@ -27,25 +27,25 @@ class ImageCaptureImpl {
         }
     }
     
-    class OutputFileOptionsImpl: PigeonApiDelegateOutputFileOptionsApi {
+    class OutputFileOptionsDelegate: PigeonApiDelegateOutputFileOptionsApi {
         func build(pigeonApi: PigeonApiOutputFileOptionsApi, file: String, metadata: ImageCapture.Metadata?) throws -> ImageCapture.OutputFileOptions {
             return ImageCapture.OutputFileOptions(file: file, metadata: metadata)
         }
     }
     
-    class OutputFileResultsImpl: PigeonApiDelegateOutputFileResultsApi {
+    class OutputFileResultsDelegate: PigeonApiDelegateOutputFileResultsApi {
         func savedUri(pigeonApi: PigeonApiOutputFileResultsApi, pigeonInstance: ImageCapture.OutputFileResults) throws -> String? {
             return pigeonInstance.savedUri.absoluteString
         }
     }
     
-    class OnImageCapturedCallbackImpl: PigeonApiDelegateOnImageCapturedCallbackApi {
+    class OnImageCapturedCallbackDelegate: PigeonApiDelegateOnImageCapturedCallbackApi {
         func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageCapturedCallbackApi) throws -> any ImageCapture.OnImageCapturedCallback {
             fatalError()
         }
     }
     
-    class OnImageSavedCallbackImpl: PigeonApiDelegateOnImageSavedCallbackApi {
+    class OnImageSavedCallbackDelegate: PigeonApiDelegateOnImageSavedCallbackApi {
         func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageSavedCallbackApi) throws -> any ImageCapture.OnImageSavedCallback {
             fatalError()
         }
@@ -66,7 +66,7 @@ extension ImageCapture.FlashMode {
 }
 
 extension FlashModeApi {
-    var impl: ImageCapture.FlashMode {
+    var delegate: ImageCapture.FlashMode {
         switch self {
         case .auto:
             return .auto
