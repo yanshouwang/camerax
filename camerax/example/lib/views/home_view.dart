@@ -45,7 +45,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final mode = viewModel.mode;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
-    final recording = viewModel.recording;
+    final isRecording = viewModel.isRecording;
     final imageModel = viewModel.imageModel;
     final jpegValue = viewModel.jpegValue;
     final barcodes = viewModel.barcodes;
@@ -384,7 +384,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           ? () {
                               if (mode == CameraMode.takePicture) {
                                 viewModel.takePicture();
-                              } else if (recording) {
+                              } else if (isRecording) {
                                 viewModel.stopRecording();
                               } else {
                                 viewModel.startRecording();
@@ -403,7 +403,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         margin: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: recording
+                          color: isRecording
                               ? CupertinoColors.systemRed.resolveFrom(context)
                               : CupertinoColors.label.resolveFrom(context),
                         ),

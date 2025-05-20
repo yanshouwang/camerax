@@ -18,20 +18,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
   // final BarcodeScanner _barcodeScanner;
   // final FaceDetector _faceDetector;
 
+  late final StreamSubscription _torchStateChangedSubscription;
   late final StreamSubscription _zoomStateChangedSubscription;
 
-  CameraMode _mode;
-  LensFacing _lensFacing;
-  FlashMode? _flashMode;
   CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
   Camera2CameraInfo? _camera2Info;
   Camera2CameraControl? _camera2Control;
-  Uri? _savedUri;
-  ImageModel? _imageModel;
-  Uint8List? _jpegValue;
-  List<Barcode> _barcodes;
-  List<Face> _faces;
 
   HomeViewModel()
       : _permissionManager = PermissionManager(),
@@ -42,15 +35,46 @@ class HomeViewModel extends ViewModel with TypeLogger {
         _lensFacing = LensFacing.back,
         _barcodes = [],
         _faces = [] {
+    _torchStateChangedSubscription =
+        _controller.torchStateChanged.listen((e) => torchState = e);
     _zoomStateChangedSubscription =
         _controller.zoomStateChanged.listen((e) => zoomState = e);
     _setUp();
   }
 
   CameraController get controller => _controller;
+
+  CameraMode _mode;
   CameraMode get mode => _mode;
+  set mode(CameraMode value) {
+    if (_mode == value) return;
+    _mode = value;
+    notifyListeners();
+  }
+
+  LensFacing _lensFacing;
   LensFacing get lensFacing => _lensFacing;
+  set lensFacing(LensFacing value) {
+    if (_lensFacing == value) return;
+    _lensFacing = value;
+    notifyListeners();
+  }
+
+  FlashMode? _flashMode;
   FlashMode? get flashMode => _flashMode;
+  set flashMode(FlashMode? value) {
+    if (_flashMode == value) return;
+    _flashMode = value;
+    notifyListeners();
+  }
+
+  TorchState? _torchState;
+  TorchState? get torchState => _torchState;
+  set torchState(TorchState? value) {
+    if (_torchState == value) return;
+    _torchState = value;
+    notifyListeners();
+  }
 
   ZoomState? _zoomState;
   ZoomState? get zoomState => _zoomState;
@@ -76,12 +100,55 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
+  Uri? _savedUri;
   Uri? get savedUri => _savedUri;
-  bool get recording => _recording != null;
+  set savedUri(Uri? value) {
+    if (_savedUri == value) return;
+    _savedUri = value;
+    notifyListeners();
+  }
+
+  Recording? _recording;
+  Recording? get recording => _recording;
+  set recording(Recording? value) {
+    if (_recording == value) return;
+    _recording = value;
+    notifyListeners();
+  }
+
+  bool get isRecording => recording != null;
+
+  ImageModel? _imageModel;
   ImageModel? get imageModel => _imageModel;
+  set imageModel(ImageModel? value) {
+    if (_imageModel == value) return;
+    _imageModel = value;
+    notifyListeners();
+  }
+
+  Uint8List? _jpegValue;
   Uint8List? get jpegValue => _jpegValue;
+  set jpegValue(Uint8List? value) {
+    if (_jpegValue == value) return;
+    _jpegValue = value;
+    notifyListeners();
+  }
+
+  List<Barcode> _barcodes;
   List<Barcode> get barcodes => _barcodes;
+  set barcodes(List<Barcode> value) {
+    if (_barcodes == value) return;
+    _barcodes = value;
+    notifyListeners();
+  }
+
+  List<Face> _faces;
   List<Face> get faces => _faces;
+  set faces(List<Face> value) {
+    if (_faces == value) return;
+    _faces = value;
+    notifyListeners();
+  }
 
   Future<void> bind() async {
     await controller.bind();
@@ -121,9 +188,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _cameraControl = null;
     _camera2Info = null;
     _camera2Control = null;
-    _exposureState = null;
-    _exposureTimeState = null;
-    notifyListeners();
+    exposureState = null;
+    exposureTimeState = null;
   }
 
   Future<void> setMode(CameraMode mode) async {
@@ -133,7 +199,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _clearImageAnalysisAnalyzer();
         break;
       case CameraMode.rawValue:
-        // await _setImageAnalyzer();
+        await _setImageAnalyzer();
         // await _setJpegAnalyzer();
         break;
       case CameraMode.scanCode:
@@ -157,33 +223,31 @@ class HomeViewModel extends ViewModel with TypeLogger {
         // await _setMLAnalyzer(analyzer);
         break;
     }
-    _mode = mode;
-    _imageModel = null;
-    _jpegValue = null;
-    _barcodes = [];
-    _faces = [];
-    notifyListeners();
+    this.mode = mode;
+    imageModel = null;
+    jpegValue = null;
+    barcodes = [];
+    faces = [];
   }
 
   Future<void> toggleLensFacing() async {
     if (lensFacing == LensFacing.back) {
       await _setCameraSelector(CameraSelector.front);
-      _lensFacing = LensFacing.front;
+      lensFacing = LensFacing.front;
     } else {
       await _setCameraSelector(CameraSelector.back);
-      _lensFacing = LensFacing.back;
+      lensFacing = LensFacing.back;
     }
-    notifyListeners();
   }
 
-  // Future<void> toggleTorchState() async {
-  //   final torchState = _controller.torchState;
-  //   if (torchState == null) {
-  //     throw ArgumentError.notNull();
-  //   }
-  //   final enableTorch = torchState == TorchState.off;
-  //   await controller.enableTorch(enableTorch);
-  // }
+  Future<void> toggleTorchState() async {
+    final torchState = this.torchState;
+    if (torchState == null) {
+      throw ArgumentError.notNull();
+    }
+    final enabled = torchState == TorchState.off;
+    await controller.enableTorch(enabled);
+  }
 
   Future<void> setZoomRatio(double zoomRatio) async {
     await controller.setZoomRatio(zoomRatio);
@@ -210,8 +274,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> setFlashMode(FlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
-    _flashMode = await controller.getImageCaptureFlashMode();
-    notifyListeners();
+    flashMode = await controller.getImageCaptureFlashMode();
   }
 
   Future<void> takePicture() async {
@@ -228,16 +291,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.takePictureToFile(
       options,
       onImageSaved: (outputFileResults) {
-        _savedUri = outputFileResults.savedUri;
-        notifyListeners();
+        savedUri = outputFileResults.savedUri;
       },
       onError: (exception) {
         logger.info('takePicture failed, $exception');
       },
     );
   }
-
-  Recording? _recording;
 
   Future<void> startRecording() async {
     final directory = await getExternalStorageDirectory();
@@ -248,7 +308,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
         'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
     final file = File(filePath);
     final options = FileOutputOptions(file: file);
-    _recording = await controller.startRecording(
+    recording = await controller.startRecording(
       options,
       audioConfig: AudioConfig.audioDisabled,
       listener: (event) {
@@ -259,19 +319,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
         final error = event.cause;
         final results = event.outputResults;
         if (error == null) {
-          _savedUri = results?.outputUri;
+          savedUri = results?.outputUri;
         } else {
           logger.info('startRecording failed, $error');
         }
-        _recording = null;
-        notifyListeners();
+        recording = null;
       },
     );
-    notifyListeners();
   }
 
   void stopRecording() {
-    _recording?.stop();
+    recording?.stop();
   }
 
   void _setUp() async {
@@ -355,8 +413,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     final analyzer = JpegAnalyzer(
       targetCoordinateSystem: CoordinateSystem.viewReferenced,
       consumer: (value) {
-        _jpegValue = value;
-        notifyListeners();
+        jpegValue = value;
       },
     );
     await controller.setImageAnalysisAnalyzer(analyzer);
@@ -367,8 +424,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     if (mode != CameraMode.rawValue) {
       return;
     }
-    _imageModel = imageModel;
-    notifyListeners();
+    this.imageModel = imageModel;
   }
 
   Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
@@ -382,13 +438,11 @@ class HomeViewModel extends ViewModel with TypeLogger {
     // switch (mode) {
     //   case CameraMode.scanCode:
     //     final barcodes = await result.getValue(_barcodeScanner);
-    //     _barcodes = barcodes ?? [];
-    //     notifyListeners();
+    //     this.barcodes = barcodes ?? [];
     //     break;
     //   case CameraMode.scanFace:
     //     final faces = await result.getValue(_faceDetector);
-    //     _faces = faces ?? [];
-    //     notifyListeners();
+    //     this.faces = faces ?? [];
     //     break;
     //   default:
     // }
