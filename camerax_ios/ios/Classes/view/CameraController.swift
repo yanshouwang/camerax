@@ -82,7 +82,9 @@ public class CameraController: NSObject {
     }
     
     public func bind() {
-        session.startRunning()
+        DispatchQueue.global(qos: .background).async {
+            self.session.startRunning()
+        }
         rotationProvider.addListener(rotationListener)
     }
     
