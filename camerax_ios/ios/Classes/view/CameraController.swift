@@ -17,22 +17,11 @@ public class CameraController: NSObject {
         get { capturePhotoSettings.flashMode.api }
         set { capturePhotoSettings.flashMode = newValue.impl }
     }
-    var imageAnalysisOutputImageFormat: ImageFormat {
-        get {
-            let key = kCVPixelBufferPixelFormatTypeKey as String
-            guard let outputImageFormat = captureVideoDataOutput.videoSettings[key] as? Int else {
-                return .yuv420888
-            }
-            return outputImageFormat.imageFormatApi
-        }
-        set {
-            captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = newValue.impl
-        }
-    }
     
     internal let session: AVCaptureSession
     
     private var cameraSelector: CameraSelector
+    private var imageAnalysisResolutionSelector: ResolutionSelector?
     private var videoDeviceInput: AVCaptureDeviceInput?
     private var audioDeviceInput: AVCaptureDeviceInput?
     private var videoZoomFactorObservation: NSKeyValueObservation?
@@ -160,9 +149,7 @@ public class CameraController: NSObject {
         //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
         //        }
         //        settings.flashMode = capturePhotoSettings.flashMode
-        //        if #available(iOS 13.0, *) {
-        //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-        //        }
+        //        settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
         let delegate = CapturePhotoCaptureDelegate(url: url, completionHandler: handler)
         capturePhotoCaptureDelegate = delegate
         capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
@@ -185,6 +172,79 @@ public class CameraController: NSObject {
         captureMovieFileOutput.stopRecording()
     }
     
+    public func getImageAnalysisResolutionSelector() -> ResolutionSelector? {
+        return imageAnalysisResolutionSelector
+    }
+    
+    func setImageAnalysisResolutionSelector(_ selector: ResolutionSelector?) throws {
+        guard let input = videoDeviceInput else {
+            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
+        }
+        guard var videoSettings = captureVideoDataOutput.videoSettings else {
+            throw CameraXError(code: "nil-error", message: "videoSettings is nil", details: nil)
+        }
+        let device = input.device
+        let activeFormat = device.activeFormat
+        let formatDescription = activeFormat.formatDescription
+        let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
+        let deviceRatio = CGFloat(dimensions.width) / CGFloat(dimensions.height)
+        if let selector = selector, let resolutionStrategy = selector.resolutionStrategy, let boundSize = resolutionStrategy.boundSize {
+            if #available(iOS 16.0, *) {
+                let fallbackRule = resolutionStrategy.fallbackRule
+                let ratio = CGFloat(boundSize.width) / CGFloat(boundSize.height)
+                let width: Int, height: Int
+                switch fallbackRule {
+                case .none:
+                    if ratio != deviceRatio {
+                        throw CameraXError(code: "unsupported-error", message: "Video settings dimensions must maintain the source device activeFormat's aspect ratio", details: nil)
+                    }
+                    width = boundSize.width
+                    height = boundSize.height
+                case .closestHigherThenLower:
+                    fallthrough
+                case .closestHigher:
+                    if ratio > deviceRatio {
+                        width = boundSize.width
+                        height = (CGFloat(boundSize.width) / deviceRatio).roundToEvenInt()
+                    } else {
+                        width = (CGFloat(boundSize.height) * deviceRatio).roundToEvenInt()
+                        height = boundSize.height
+                    }
+                case .closestLowerThenHigher:
+                    fallthrough
+                case .closestLower:
+                    let ratio = CGFloat(boundSize.width) / CGFloat(boundSize.height)
+                    if ratio > deviceRatio {
+                        width = (CGFloat(boundSize.height) * deviceRatio).roundToEvenInt()
+                        height = boundSize.height
+                    } else {
+                        width = boundSize.width
+                        height = (CGFloat(boundSize.width) / deviceRatio).roundToEvenInt()
+                    }
+                }
+                videoSettings[kCVPixelBufferWidthKey as String] = width
+                videoSettings[kCVPixelBufferHeightKey as String] = height
+                captureVideoDataOutput.videoSettings = videoSettings
+            } else {
+                throw CameraXError(code: "unsupported-error", message: "setImageAnalysisResolutionSelector is unsupported before iOS 16.0", details: nil)
+            }
+        } else {
+            videoSettings.removeValue(forKey: kCVPixelBufferWidthKey as String)
+            videoSettings.removeValue(forKey: kCVPixelBufferHeightKey as String)
+        }
+        imageAnalysisResolutionSelector = selector
+    }
+    
+    public func getImageAnalysisOutputImageFormat() -> ImageFormat {
+        let key = kCVPixelBufferPixelFormatTypeKey as String
+        guard let outputImageFormat = captureVideoDataOutput.videoSettings[key] as? Int else { return .yuv420888 }
+        return outputImageFormat.imageFormatApi
+    }
+    
+    public func setImageAnalysisOutputImageFormat(_ format: ImageFormat) {
+        captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = format.impl
+    }
+    
     public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) {
         let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer) { return self.rotation }
         captureVideoDataOutputSampleBufferDelegate = delegate
@@ -195,12 +255,6 @@ public class CameraController: NSObject {
         captureVideoDataOutput.setSampleBufferDelegate(nil, queue: captureVideoDataOutputQueue)
     }
     
-    private func getVideoDevice(_ cameraSelector: CameraSelector) -> AVCaptureDevice? {
-        guard let deviceType = getVideoDeviceType(cameraSelector) else { return nil }
-        let position = cameraSelector.lensFacing.impl
-        return AVCaptureDevice.default(deviceType, for: .video, position: position)
-    }
-    
     private func getVideoDeviceType(_ cameraSelector: CameraSelector) -> AVCaptureDevice.DeviceType? {
         switch cameraSelector.lensFacing {
         case .unknown:
@@ -208,12 +262,17 @@ public class CameraController: NSObject {
         case .front:
             return .builtInWideAngleCamera
         case .back:
-            if #available(iOS 13.0, *) { return .builtInTripleCamera }
-            else { return .builtInDualCamera }
+            return .builtInTripleCamera
         case .external:
             if #available(iOS 17.0, *) { return .external }
             else { return nil }
         }
+    }
+    
+    private func getVideoDevice(_ cameraSelector: CameraSelector) -> AVCaptureDevice? {
+        guard let deviceType = getVideoDeviceType(cameraSelector) else { return nil }
+        let position = cameraSelector.lensFacing.impl
+        return AVCaptureDevice.default(deviceType, for: .video, position: position)
     }
     
     private func removeVideoDeviceInput() {
@@ -315,28 +374,27 @@ public class CameraController: NSObject {
 
 extension AVCaptureDevice {
     var minZoomRatio: Double {
-        if #available(iOS 13.0, *), let factor = virtualDeviceSwitchOverVideoZoomFactors.first {
-            return minAvailableVideoZoomFactor / factor.doubleValue
+        if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
+            return minAvailableVideoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
         } else {
             return minAvailableVideoZoomFactor
         }
     }
     
     var maxZoomRatio: Double {
-        if #available(iOS 13.0, *),
-           let minX = virtualDeviceSwitchOverVideoZoomFactors.first,
-           let maxX = virtualDeviceSwitchOverVideoZoomFactors.last {
+        if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first,
+           let lastSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.last {
             // 5x digital zoom factor
-            return min(maxAvailableVideoZoomFactor / minX.doubleValue, maxX.doubleValue / minX.doubleValue * 5.0)
+            return CGFloat(truncating: lastSwitchOverVideoZoomFactor) / CGFloat(truncating: firstSwitchOverVideoZoomFactor) * 5.0
         } else {
-            return min(maxAvailableVideoZoomFactor, 10.0)
+            return maxAvailableVideoZoomFactor
         }
     }
     
     var zoomRatio: Double {
         get {
-            if #available(iOS 13.0, *), let factor = virtualDeviceSwitchOverVideoZoomFactors.first {
-                return videoZoomFactor / factor.doubleValue
+            if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
+                return videoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
             } else {
                 return videoZoomFactor
             }
@@ -345,8 +403,8 @@ extension AVCaptureDevice {
             if newValue < minZoomRatio || newValue > maxZoomRatio {
                 return
             }
-            if #available(iOS 13.0, *), let factor = virtualDeviceSwitchOverVideoZoomFactors.first {
-                videoZoomFactor = newValue * factor.doubleValue
+            if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
+                videoZoomFactor = newValue * CGFloat(truncating: firstSwitchOverVideoZoomFactor)
             } else {
                 videoZoomFactor = newValue
             }
@@ -355,5 +413,23 @@ extension AVCaptureDevice {
     
     var zoomState: ZoomState {
         return ZoomState(minZoomRatio: minZoomRatio, maxZoomRatio: maxZoomRatio, zoomRatio: zoomRatio)
+    }
+}
+
+extension CGFloat {
+    func roundToEvenInt() -> Int {
+        let rounded = rounded(.toNearestOrEven)
+        let value = Int(rounded)
+        if value % 2 == 0 {
+            return value
+        }
+        let evenMinus = value - 1
+        let evenPlus = value + 1
+        let diffMinus = self - CGFloat(evenMinus)
+        let diffPlus = self - CGFloat(evenPlus)
+        if abs(diffMinus) < abs(diffPlus) {
+            return evenMinus
+        }
+        return evenPlus
     }
 }

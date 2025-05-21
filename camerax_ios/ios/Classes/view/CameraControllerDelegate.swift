@@ -138,6 +138,14 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         }
     }
     
+    func getImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ResolutionSelector? {
+        return pigeonInstance.getImageAnalysisResolutionSelector()
+    }
+    
+    func setImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, resolutionSelector: ResolutionSelector?) throws {
+        try pigeonInstance.setImageAnalysisResolutionSelector(resolutionSelector)
+    }
+    
     func getImageAnalysisBackpressureStrategy(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> BackpressureStrategyApi {
         throw CameraXError(code: "unimplemented-error", message: "getImageAnalysisBackpressureStrategy is not implemented", details: nil)
     }
@@ -155,11 +163,11 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     }
     
     func getImageAnalysisOutputImageFormat(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ImageFormatApi {
-        return pigeonInstance.imageAnalysisOutputImageFormat.api
+        return pigeonInstance.getImageAnalysisOutputImageFormat().api
     }
     
     func setImageAnalysisOutputImageFormat(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, imageAnalysisOutputImageFormat: ImageFormatApi) throws {
-        pigeonInstance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.delegate
+        pigeonInstance.setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat.delegate)
     }
     
     func setImageAnalysisAnalyzer(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, analyzer: any ImageAnalysis.Analyzer) throws {

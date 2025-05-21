@@ -29,7 +29,7 @@ public class PermissionManager: NSObject {
         case .audio:
             return AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
         case .album:
-            if #available(iOS 14, *) {
+            if #available(iOS 14.0, *) {
                 return PHPhotoLibrary.authorizationStatus(for: .readWrite) == .authorized
             } else {
                 return PHPhotoLibrary.authorizationStatus() == .authorized
@@ -57,7 +57,7 @@ public class PermissionManager: NSObject {
         case .audio:
             AVCaptureDevice.requestAccess(for: .audio, completionHandler: handler)
         case .album:
-            if #available(iOS 14, *) {
+            if #available(iOS 14.0, *) {
                 PHPhotoLibrary.requestAuthorization(for: .readWrite) { handler($0 == .authorized || $0 == .limited) }
             } else {
                 PHPhotoLibrary.requestAuthorization() { handler($0 == .authorized) }

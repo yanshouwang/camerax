@@ -297,8 +297,7 @@ final class CameraControllerImpl extends CameraControllerChannel {
   @override
   Future<void> setImageAnalysisResolutionSelector(
           ResolutionSelector? resolutionSelector) =>
-      throw UnimplementedError();
-  // api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
+      api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
   Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy() =>

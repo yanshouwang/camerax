@@ -249,17 +249,17 @@ abstract class LocationApi {
   late final double longitude;
 }
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'Size',
-//   ),
-// )
-// abstract class SizeApi {
-//   SizeApi();
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'IntSize',
+  ),
+)
+abstract class SizeApi {
+  SizeApi();
 
-//   late final int width;
-//   late final int height;
-// }
+  late final int width;
+  late final int height;
+}
 
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(
@@ -572,31 +572,31 @@ abstract class ZoomStateObserverApi {
 //       List<SizeApi> supportedSizes, int rotationDegrees) filter;
 // }
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'ResolutionStrategy',
-//   ),
-// )
-// abstract class ResolutionStrategyApi {
-//   ResolutionStrategyApi();
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'ResolutionStrategy',
+  ),
+)
+abstract class ResolutionStrategyApi {
+  ResolutionStrategyApi();
 
-//   late final SizeApi? boundSize;
-//   late final ResolutionFallbackRuleApi fallbackRule;
-// }
+  late final SizeApi? boundSize;
+  late final ResolutionFallbackRuleApi fallbackRule;
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'ResolutionSelector',
-//   ),
-// )
-// abstract class ResolutionSelectorApi {
-//   ResolutionSelectorApi();
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'ResolutionSelector',
+  ),
+)
+abstract class ResolutionSelectorApi {
+  ResolutionSelectorApi();
 
-//   late final ResolutionModeApi allowedResolutionMode;
-//   late final AspectRatioStrategyApi aspectRatioStrategy;
-//   late final ResolutionFilterApi? resolutionFilter;
-//   late final ResolutionStrategyApi? resolutionStrategy;
-// }
+  // late final ResolutionModeApi allowedResolutionMode;
+  // late final AspectRatioStrategyApi aspectRatioStrategy;
+  // late final ResolutionFilterApi? resolutionFilter;
+  late final ResolutionStrategyApi? resolutionStrategy;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -957,9 +957,9 @@ abstract class CameraControllerApi {
   @async
   void takePictureToFile(OutputFileOptionsApi outputFileOptions,
       OnImageSavedCallbackApi savedCallback);
-  // ResolutionSelectorApi? getImageAnalysisResolutionSelector();
-  // void setImageAnalysisResolutionSelector(
-  //     ResolutionSelectorApi? resolutionSelector);
+  ResolutionSelectorApi? getImageAnalysisResolutionSelector();
+  void setImageAnalysisResolutionSelector(
+      ResolutionSelectorApi? resolutionSelector);
   BackpressureStrategyApi getImageAnalysisBackpressureStrategy();
   void setImageAnalysisBackpressureStrategy(BackpressureStrategyApi strategy);
   int getImageAnalysisImageQueueDepth();

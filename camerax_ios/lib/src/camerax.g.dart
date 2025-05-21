@@ -132,11 +132,14 @@ class PigeonInstanceManager {
     AutoCloseableApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     CloseableApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     LocationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    SizeApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     CameraSelectorApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     NSKeyValueObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     TorchStateObserverApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ZoomStateApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ZoomStateObserverApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    ResolutionStrategyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    ResolutionSelectorApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ImageInfoApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     PlaneProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ImageProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
@@ -1267,6 +1270,134 @@ class LocationApi extends PigeonInternalProxyApiBaseClass {
   }
 }
 
+class SizeApi extends PigeonInternalProxyApiBaseClass {
+  SizeApi({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.width,
+    required this.height,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecSizeApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.SizeApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, width, height]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [SizeApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  SizeApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.width,
+    required this.height,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecSizeApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  final int width;
+
+  final int height;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    SizeApi Function(
+      int width,
+      int height,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+              'dev.flutter.pigeon.camerax_ios.SizeApi.pigeon_newInstance',
+              pigeonChannelCodec,
+              binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.SizeApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.SizeApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_width = (args[1] as int?);
+          assert(arg_width != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.SizeApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_height = (args[2] as int?);
+          assert(arg_height != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.SizeApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_width!, arg_height!) ??
+                  SizeApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    width: arg_width!,
+                    height: arg_height!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  SizeApi pigeon_copy() {
+    return SizeApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      width: width,
+      height: height,
+    );
+  }
+}
+
 class CameraSelectorApi extends PigeonInternalProxyApiBaseClass {
   CameraSelectorApi({
     super.pigeon_binaryMessenger,
@@ -1968,6 +2099,253 @@ class ZoomStateObserverApi extends PigeonInternalProxyApiBaseClass {
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
       onChanged: onChanged,
+    );
+  }
+}
+
+class ResolutionStrategyApi extends PigeonInternalProxyApiBaseClass {
+  ResolutionStrategyApi({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    this.boundSize,
+    required this.fallbackRule,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecResolutionStrategyApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.ResolutionStrategyApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, boundSize, fallbackRule]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [ResolutionStrategyApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  ResolutionStrategyApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    this.boundSize,
+    required this.fallbackRule,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec
+      _pigeonVar_codecResolutionStrategyApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  final SizeApi? boundSize;
+
+  final ResolutionFallbackRuleApi fallbackRule;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    ResolutionStrategyApi Function(
+      SizeApi? boundSize,
+      ResolutionFallbackRuleApi fallbackRule,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.ResolutionStrategyApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.ResolutionStrategyApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.ResolutionStrategyApi.pigeon_newInstance was null, expected non-null int.');
+          final SizeApi? arg_boundSize = (args[1] as SizeApi?);
+          final ResolutionFallbackRuleApi? arg_fallbackRule =
+              (args[2] as ResolutionFallbackRuleApi?);
+          assert(arg_fallbackRule != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.ResolutionStrategyApi.pigeon_newInstance was null, expected non-null ResolutionFallbackRuleApi.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_boundSize, arg_fallbackRule!) ??
+                  ResolutionStrategyApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    boundSize: arg_boundSize,
+                    fallbackRule: arg_fallbackRule!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  ResolutionStrategyApi pigeon_copy() {
+    return ResolutionStrategyApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      boundSize: boundSize,
+      fallbackRule: fallbackRule,
+    );
+  }
+}
+
+class ResolutionSelectorApi extends PigeonInternalProxyApiBaseClass {
+  ResolutionSelectorApi({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    this.resolutionStrategy,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecResolutionSelectorApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.ResolutionSelectorApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, resolutionStrategy]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [ResolutionSelectorApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  ResolutionSelectorApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    this.resolutionStrategy,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec
+      _pigeonVar_codecResolutionSelectorApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  final ResolutionStrategyApi? resolutionStrategy;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    ResolutionSelectorApi Function(ResolutionStrategyApi? resolutionStrategy)?
+        pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.ResolutionSelectorApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.ResolutionSelectorApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.ResolutionSelectorApi.pigeon_newInstance was null, expected non-null int.');
+          final ResolutionStrategyApi? arg_resolutionStrategy =
+              (args[1] as ResolutionStrategyApi?);
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_resolutionStrategy) ??
+                  ResolutionSelectorApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    resolutionStrategy: arg_resolutionStrategy,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  ResolutionSelectorApi pigeon_copy() {
+    return ResolutionSelectorApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      resolutionStrategy: resolutionStrategy,
     );
   }
 }
@@ -6076,6 +6454,65 @@ class CameraControllerApi extends PigeonInternalProxyApiBaseClass {
     );
     final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
         .send(<Object?>[this, outputFileOptions, savedCallback]);
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_sendFuture as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return;
+    }
+  }
+
+  Future<ResolutionSelectorApi?> getImageAnalysisResolutionSelector() async {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecCameraControllerApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.CameraControllerApi.getImageAnalysisResolutionSelector';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture =
+        pigeonVar_channel.send(<Object?>[this]);
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_sendFuture as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else {
+      return (pigeonVar_replyList[0] as ResolutionSelectorApi?);
+    }
+  }
+
+  Future<void> setImageAnalysisResolutionSelector(
+      ResolutionSelectorApi? resolutionSelector) async {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecCameraControllerApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.CameraControllerApi.setImageAnalysisResolutionSelector';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture =
+        pigeonVar_channel.send(<Object?>[this, resolutionSelector]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
