@@ -1,5 +1,7 @@
 package dev.hebei.camerax_android.common
 
-val java.io.File.api: String get() = path
+import java.io.File
 
-val String.fileImpl get() = java.io.File(this)
+val File.api: String get() = path
+
+val String.fileImpl get() = File(this)

@@ -1,5 +1,6 @@
 package dev.hebei.camerax_android.view
 
+import androidx.camera.view.LifecycleCameraController
 import androidx.lifecycle.LifecycleOwner
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiLifecycleCameraControllerApi
@@ -7,15 +8,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LifecycleCameraControllerImpl(private val impl: CameraXImpl) :
-    PigeonApiLifecycleCameraControllerApi(impl) {
-    override fun pigeon_defaultConstructor(): androidx.camera.view.LifecycleCameraController {
-        return androidx.camera.view.LifecycleCameraController(impl.context)
+class LifecycleCameraControllerImpl(private val impl: CameraXImpl) : PigeonApiLifecycleCameraControllerApi(impl) {
+    override fun pigeon_defaultConstructor(): LifecycleCameraController {
+        return LifecycleCameraController(impl.context)
     }
 
-    override fun bindToLifecycle(
-        pigeon_instance: androidx.camera.view.LifecycleCameraController, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun bindToLifecycle(pigeon_instance: LifecycleCameraController, callback: (Result<Unit>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val lifecycleOwner = impl.activity as LifecycleOwner
@@ -27,9 +25,7 @@ class LifecycleCameraControllerImpl(private val impl: CameraXImpl) :
         }
     }
 
-    override fun unbind(
-        pigeon_instance: androidx.camera.view.LifecycleCameraController, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun unbind(pigeon_instance: LifecycleCameraController, callback: (Result<Unit>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.unbind()

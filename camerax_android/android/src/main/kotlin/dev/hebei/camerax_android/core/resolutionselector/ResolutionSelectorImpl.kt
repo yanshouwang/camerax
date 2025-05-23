@@ -1,5 +1,9 @@
 package dev.hebei.camerax_android.core.resolutionselector
 
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
+import androidx.camera.core.resolutionselector.ResolutionFilter
+import androidx.camera.core.resolutionselector.ResolutionSelector
+import androidx.camera.core.resolutionselector.ResolutionStrategy
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiResolutionSelectorApi
 import dev.hebei.camerax_android.ResolutionModeApi
@@ -7,12 +11,12 @@ import dev.hebei.camerax_android.ResolutionModeApi
 class ResolutionSelectorImpl(impl: CameraXImpl) : PigeonApiResolutionSelectorApi(impl) {
     override fun pigeon_defaultConstructor(
         allowedResolutionMode: ResolutionModeApi,
-        aspectRatioStrategy: androidx.camera.core.resolutionselector.AspectRatioStrategy,
-        resolutionFilter: androidx.camera.core.resolutionselector.ResolutionFilter?,
-        resolutionStrategy: androidx.camera.core.resolutionselector.ResolutionStrategy?
-    ): androidx.camera.core.resolutionselector.ResolutionSelector {
-        val builder = androidx.camera.core.resolutionselector.ResolutionSelector.Builder()
-            .setAllowedResolutionMode(allowedResolutionMode.impl).setAspectRatioStrategy(aspectRatioStrategy)
+        aspectRatioStrategy: AspectRatioStrategy,
+        resolutionFilter: ResolutionFilter?,
+        resolutionStrategy: ResolutionStrategy?
+    ): ResolutionSelector {
+        val builder = ResolutionSelector.Builder().setAllowedResolutionMode(allowedResolutionMode.impl)
+            .setAspectRatioStrategy(aspectRatioStrategy)
         if (resolutionFilter != null) {
             builder.setResolutionFilter(resolutionFilter)
         }
@@ -22,32 +26,32 @@ class ResolutionSelectorImpl(impl: CameraXImpl) : PigeonApiResolutionSelectorApi
         return builder.build()
     }
 
-    override fun allowedResolutionMode(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): ResolutionModeApi {
+    override fun allowedResolutionMode(pigeon_instance: ResolutionSelector): ResolutionModeApi {
         return pigeon_instance.allowedResolutionMode.resolutionModeApi
     }
 
-    override fun aspectRatioStrategy(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.AspectRatioStrategy {
+    override fun aspectRatioStrategy(pigeon_instance: ResolutionSelector): AspectRatioStrategy {
         return pigeon_instance.aspectRatioStrategy
     }
 
-    override fun resolutionFilter(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.ResolutionFilter? {
+    override fun resolutionFilter(pigeon_instance: ResolutionSelector): ResolutionFilter? {
         return pigeon_instance.resolutionFilter
     }
 
-    override fun resolutionStrategy(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): androidx.camera.core.resolutionselector.ResolutionStrategy? {
+    override fun resolutionStrategy(pigeon_instance: ResolutionSelector): ResolutionStrategy? {
         return pigeon_instance.resolutionStrategy
     }
 }
 
 val ResolutionModeApi.impl
     get() = when (this) {
-        ResolutionModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> androidx.camera.core.resolutionselector.ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-        ResolutionModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> androidx.camera.core.resolutionselector.ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+        ResolutionModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+        ResolutionModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
     }
 
 val Int.resolutionModeApi
     get() = when (this) {
-        androidx.camera.core.resolutionselector.ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-        androidx.camera.core.resolutionselector.ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+        ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+        ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
         else -> throw IllegalArgumentException()
     }

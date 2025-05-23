@@ -1,7 +1,18 @@
 package dev.hebei.camerax_android.view
 
+import androidx.camera.core.CameraControl
+import androidx.camera.core.CameraInfo
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.DynamicRange
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.resolutionselector.ResolutionSelector
+import androidx.camera.video.FileOutputOptions
+import androidx.camera.video.QualitySelector
+import androidx.camera.video.Recording
+import androidx.camera.view.CameraController
+import androidx.camera.view.video.AudioConfig
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.map
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import dev.hebei.camerax_android.BackpressureStrategyApi
@@ -23,14 +34,13 @@ import dev.hebei.camerax_android.core.imageAnalysisImageFormatApi
 import dev.hebei.camerax_android.core.imageAnalysisImpl
 import dev.hebei.camerax_android.core.impl
 import dev.hebei.camerax_android.core.mirrorModeApi
-import dev.hebei.camerax_android.core.torchStateApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 
 class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraControllerApi(impl) {
-    override fun initialize(pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Unit>) -> Unit) {
+    override fun initialize(pigeon_instance: CameraController, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.initializationFuture
         val executor = ContextCompat.getMainExecutor(impl.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
@@ -45,9 +55,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun hasCamera(
-        pigeon_instance: androidx.camera.view.CameraController,
-        cameraSelector: androidx.camera.core.CameraSelector,
-        callback: (Result<Boolean>) -> Unit
+        pigeon_instance: CameraController, cameraSelector: CameraSelector, callback: (Result<Boolean>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -59,10 +67,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getCameraSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.CameraSelector>) -> Unit
-    ) {
+    override fun getCameraSelector(pigeon_instance: CameraController, callback: (Result<CameraSelector>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.cameraSelector
@@ -74,9 +79,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setCameraSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        cameraSelector: androidx.camera.core.CameraSelector,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, cameraSelector: CameraSelector, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -88,10 +91,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getCameraInfo(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.CameraInfo?>) -> Unit
-    ) {
+    override fun getCameraInfo(pigeon_instance: CameraController, callback: (Result<CameraInfo?>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.cameraInfo
@@ -102,10 +102,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getCameraControl(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.CameraControl?>) -> Unit
-    ) {
+    override fun getCameraControl(pigeon_instance: CameraController, callback: (Result<CameraControl?>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.cameraControl
@@ -116,13 +113,10 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getTorchState(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<TorchStateLiveData>) -> Unit
-    ) {
+    override fun getTorchState(pigeon_instance: CameraController, callback: (Result<TorchStateLiveData>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val obj = pigeon_instance.torchState.map { state -> state.torchStateApi }
-                val value = TorchStateLiveData(obj)
+                val value = TorchStateLiveData(pigeon_instance.torchState)
                 callback(Result.success(value))
             } catch (e: Exception) {
                 callback(Result.failure(e))
@@ -131,7 +125,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun enableTorch(
-        pigeon_instance: androidx.camera.view.CameraController, torchEnabled: Boolean, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, torchEnabled: Boolean, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -143,13 +137,10 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getZoomState(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<ZoomStateLiveData>) -> Unit
-    ) {
+    override fun getZoomState(pigeon_instance: CameraController, callback: (Result<ZoomStateLiveData>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val obj = pigeon_instance.zoomState
-                val value = ZoomStateLiveData(obj)
+                val value = ZoomStateLiveData(pigeon_instance.zoomState)
                 callback(Result.success(value))
             } catch (e: Exception) {
                 callback(Result.failure(e))
@@ -157,9 +148,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun setZoomRatio(
-        pigeon_instance: androidx.camera.view.CameraController, zoomRatio: Double, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun setZoomRatio(pigeon_instance: CameraController, zoomRatio: Double, callback: (Result<Unit>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.setZoomRatio(zoomRatio.toFloat()).await()
@@ -171,7 +160,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setLinearZoom(
-        pigeon_instance: androidx.camera.view.CameraController, linearZoom: Double, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, linearZoom: Double, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -183,9 +172,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun isPinchToZoomEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Boolean>) -> Unit
-    ) {
+    override fun isPinchToZoomEnabled(pigeon_instance: CameraController, callback: (Result<Boolean>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.isPinchToZoomEnabled
@@ -197,7 +184,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setPinchToZoomEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, enabled: Boolean, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, enabled: Boolean, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -209,9 +196,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun isTapToFocusEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Boolean>) -> Unit
-    ) {
+    override fun isTapToFocusEnabled(pigeon_instance: CameraController, callback: (Result<Boolean>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.isTapToFocusEnabled
@@ -223,7 +208,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setTapToFocusEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, enabled: Boolean, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, enabled: Boolean, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -235,9 +220,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun isImageCaptureEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Boolean>) -> Unit
-    ) {
+    override fun isImageCaptureEnabled(pigeon_instance: CameraController, callback: (Result<Boolean>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.isImageCaptureEnabled
@@ -248,9 +231,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun isImageAnalysisEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Boolean>) -> Unit
-    ) {
+    override fun isImageAnalysisEnabled(pigeon_instance: CameraController, callback: (Result<Boolean>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.isImageAnalysisEnabled
@@ -261,9 +242,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun isVideoCaptureEnabled(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Boolean>) -> Unit
-    ) {
+    override fun isVideoCaptureEnabled(pigeon_instance: CameraController, callback: (Result<Boolean>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.isVideoCaptureEnabled
@@ -275,9 +254,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setEnabledUseCases(
-        pigeon_instance: androidx.camera.view.CameraController,
-        enabledUseCases: List<UseCaseApi>,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, enabledUseCases: List<UseCaseApi>, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -291,8 +268,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getPreviewResolutionSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.resolutionselector.ResolutionSelector?>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<ResolutionSelector?>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -305,9 +281,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setPreviewResolutionSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        resolutionSelector: androidx.camera.core.resolutionselector.ResolutionSelector?,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, resolutionSelector: ResolutionSelector?, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -320,8 +294,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getImageCaptureResolutionSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.resolutionselector.ResolutionSelector?>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<ResolutionSelector?>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -334,9 +307,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageCaptureResolutionSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        resolutionSelector: androidx.camera.core.resolutionselector.ResolutionSelector?,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, resolutionSelector: ResolutionSelector?, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -348,9 +319,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getImageCaptureMode(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<CaptureModeApi>) -> Unit
-    ) {
+    override fun getImageCaptureMode(pigeon_instance: CameraController, callback: (Result<CaptureModeApi>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.imageCaptureMode.captureModeApi
@@ -362,9 +331,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageCaptureMode(
-        pigeon_instance: androidx.camera.view.CameraController,
-        captureMode: CaptureModeApi,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, captureMode: CaptureModeApi, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -376,9 +343,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getImageCaptureFlashMode(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<FlashModeApi>) -> Unit
-    ) {
+    override fun getImageCaptureFlashMode(pigeon_instance: CameraController, callback: (Result<FlashModeApi>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.imageCaptureFlashMode.flashModeApi
@@ -390,9 +355,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageCaptureFlashMode(
-        pigeon_instance: androidx.camera.view.CameraController,
-        flashMode: FlashModeApi,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, flashMode: FlashModeApi, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -405,8 +368,8 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun takePictureToMemory(
-        pigeon_instance: androidx.camera.view.CameraController,
-        capturedCallback: androidx.camera.core.ImageCapture.OnImageCapturedCallback,
+        pigeon_instance: CameraController,
+        capturedCallback: ImageCapture.OnImageCapturedCallback,
         callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
@@ -421,9 +384,9 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun takePictureToFile(
-        pigeon_instance: androidx.camera.view.CameraController,
-        outputFileOptions: androidx.camera.core.ImageCapture.OutputFileOptions,
-        savedCallback: androidx.camera.core.ImageCapture.OnImageSavedCallback,
+        pigeon_instance: CameraController,
+        outputFileOptions: ImageCapture.OutputFileOptions,
+        savedCallback: ImageCapture.OnImageSavedCallback,
         callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
@@ -438,8 +401,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getImageAnalysisResolutionSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.resolutionselector.ResolutionSelector?>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<ResolutionSelector?>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -452,9 +414,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageAnalysisResolutionSelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        resolutionSelector: androidx.camera.core.resolutionselector.ResolutionSelector?,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, resolutionSelector: ResolutionSelector?, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -467,7 +427,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getImageAnalysisBackpressureStrategy(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<BackpressureStrategyApi>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<BackpressureStrategyApi>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -480,9 +440,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageAnalysisBackpressureStrategy(
-        pigeon_instance: androidx.camera.view.CameraController,
-        strategy: BackpressureStrategyApi,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, strategy: BackpressureStrategyApi, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -494,9 +452,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun getImageAnalysisImageQueueDepth(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Long>) -> Unit
-    ) {
+    override fun getImageAnalysisImageQueueDepth(pigeon_instance: CameraController, callback: (Result<Long>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.imageAnalysisImageQueueDepth.toLong()
@@ -508,7 +464,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageAnalysisImageQueueDepth(
-        pigeon_instance: androidx.camera.view.CameraController, depth: Long, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, depth: Long, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -521,7 +477,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getImageAnalysisOutputImageFormat(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<ImageFormatApi>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<ImageFormatApi>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -534,7 +490,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageAnalysisOutputImageFormat(
-        pigeon_instance: androidx.camera.view.CameraController,
+        pigeon_instance: CameraController,
         imageAnalysisOutputImageFormat: ImageFormatApi,
         callback: (Result<Unit>) -> Unit
     ) {
@@ -549,9 +505,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setImageAnalysisAnalyzer(
-        pigeon_instance: androidx.camera.view.CameraController,
-        analyzer: androidx.camera.core.ImageAnalysis.Analyzer,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, analyzer: ImageAnalysis.Analyzer, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -564,9 +518,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun clearImageAnalysisAnalyzer(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun clearImageAnalysisAnalyzer(pigeon_instance: CameraController, callback: (Result<Unit>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.clearImageAnalysisAnalyzer()
@@ -578,8 +530,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getVideoCaptureDynamicRange(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.core.DynamicRange>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<DynamicRange>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -592,9 +543,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setVideoCaptureDynamicRange(
-        pigeon_instance: androidx.camera.view.CameraController,
-        dynamicRange: androidx.camera.core.DynamicRange,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, dynamicRange: DynamicRange, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -607,7 +556,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getVideoCaptureMirrorMode(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<MirrorModeApi>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<MirrorModeApi>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -620,9 +569,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setVideoCaptureMirrorMode(
-        pigeon_instance: androidx.camera.view.CameraController,
-        mirrorMode: MirrorModeApi,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, mirrorMode: MirrorModeApi, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -635,8 +582,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getVideoCaptureQualitySelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        callback: (Result<androidx.camera.video.QualitySelector>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<QualitySelector>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -649,9 +595,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setVideoCaptureQualitySelector(
-        pigeon_instance: androidx.camera.view.CameraController,
-        qualitySelector: androidx.camera.video.QualitySelector,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, qualitySelector: QualitySelector, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -664,7 +608,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun getVideoCaptureTargetFrameRate(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<IntRange>) -> Unit
+        pigeon_instance: CameraController, callback: (Result<IntRange>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -678,9 +622,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun setVideoCaptureTargetFrameRate(
-        pigeon_instance: androidx.camera.view.CameraController,
-        targetFrameRate: IntRange,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController, targetFrameRate: IntRange, callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -692,9 +634,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun isRecording(
-        pigeon_instance: androidx.camera.view.CameraController, callback: (Result<Boolean>) -> Unit
-    ) {
+    override fun isRecording(pigeon_instance: CameraController, callback: (Result<Boolean>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val value = pigeon_instance.isRecording
@@ -706,11 +646,11 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     }
 
     override fun startRecording(
-        pigeon_instance: androidx.camera.view.CameraController,
-        outputOptions: androidx.camera.video.FileOutputOptions,
-        audioConfig: androidx.camera.view.video.AudioConfig,
+        pigeon_instance: CameraController,
+        outputOptions: FileOutputOptions,
+        audioConfig: AudioConfig,
         listener: VideoRecordEventConsumer,
-        callback: (Result<androidx.camera.video.Recording>) -> Unit
+        callback: (Result<Recording>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -723,3 +663,10 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 }
+
+val UseCaseApi.impl
+    get() = when (this) {
+        UseCaseApi.IMAGE_CAPTURE -> CameraController.IMAGE_CAPTURE
+        UseCaseApi.IMAGE_ANALYSIS -> CameraController.IMAGE_ANALYSIS
+        UseCaseApi.VIDEO_CAPTURE -> CameraController.VIDEO_CAPTURE
+    }

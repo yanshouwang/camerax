@@ -1,5 +1,6 @@
 package dev.hebei.camerax_android.core.resolutionselector
 
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import dev.hebei.camerax_android.AspectRatioApi
 import dev.hebei.camerax_android.AspectRatioFallbackRuleApi
 import dev.hebei.camerax_android.CameraXImpl
@@ -10,15 +11,15 @@ import dev.hebei.camerax_android.core.impl
 class AspectRatioStrategyImpl(impl: CameraXImpl) : PigeonApiAspectRatioStrategyApi(impl) {
     override fun pigeon_defaultConstructor(
         preferredAspectRatio: AspectRatioApi, fallbackRule: AspectRatioFallbackRuleApi
-    ): androidx.camera.core.resolutionselector.AspectRatioStrategy {
-        return androidx.camera.core.resolutionselector.AspectRatioStrategy(preferredAspectRatio.impl, fallbackRule.impl)
+    ): AspectRatioStrategy {
+        return AspectRatioStrategy(preferredAspectRatio.impl, fallbackRule.impl)
     }
 
-    override fun preferredAspectRatio(pigeon_instance: androidx.camera.core.resolutionselector.AspectRatioStrategy): AspectRatioApi {
+    override fun preferredAspectRatio(pigeon_instance: AspectRatioStrategy): AspectRatioApi {
         return pigeon_instance.preferredAspectRatio.aspectRatioApi
     }
 
-    override fun fallbackRule(pigeon_instance: androidx.camera.core.resolutionselector.AspectRatioStrategy): AspectRatioFallbackRuleApi {
+    override fun fallbackRule(pigeon_instance: AspectRatioStrategy): AspectRatioFallbackRuleApi {
         return pigeon_instance.fallbackRule.aspectRatioFallbackRuleApi
     }
 
@@ -26,13 +27,13 @@ class AspectRatioStrategyImpl(impl: CameraXImpl) : PigeonApiAspectRatioStrategyA
 
 val AspectRatioFallbackRuleApi.impl
     get() = when (this) {
-        AspectRatioFallbackRuleApi.NONE -> androidx.camera.core.resolutionselector.AspectRatioStrategy.FALLBACK_RULE_NONE
-        AspectRatioFallbackRuleApi.AUTO -> androidx.camera.core.resolutionselector.AspectRatioStrategy.FALLBACK_RULE_AUTO
+        AspectRatioFallbackRuleApi.NONE -> AspectRatioStrategy.FALLBACK_RULE_NONE
+        AspectRatioFallbackRuleApi.AUTO -> AspectRatioStrategy.FALLBACK_RULE_AUTO
     }
 
 val Int.aspectRatioFallbackRuleApi
     get() = when (this) {
-        androidx.camera.core.resolutionselector.AspectRatioStrategy.FALLBACK_RULE_NONE -> AspectRatioFallbackRuleApi.NONE
-        androidx.camera.core.resolutionselector.AspectRatioStrategy.FALLBACK_RULE_AUTO -> AspectRatioFallbackRuleApi.AUTO
+        AspectRatioStrategy.FALLBACK_RULE_NONE -> AspectRatioFallbackRuleApi.NONE
+        AspectRatioStrategy.FALLBACK_RULE_AUTO -> AspectRatioFallbackRuleApi.AUTO
         else -> throw IllegalArgumentException()
     }

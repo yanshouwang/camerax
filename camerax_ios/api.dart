@@ -348,16 +348,16 @@ abstract class NSKeyValueObservationApi {
   void invalidate();
 }
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'CameraStateObserver',
-//   ),
-// )
-// abstract class CameraStateObserverApi {
-//   CameraStateObserverApi();
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'CameraStateObserver',
+  ),
+)
+abstract class CameraStateObserverApi {
+  CameraStateObserverApi();
 
-//   late final void Function(CameraStateApi value) onChanged;
-// }
+  late final void Function(CameraStateApi value) onChanged;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -405,87 +405,87 @@ abstract class ZoomStateObserverApi {
 //   late final bool isExposureCompensationSupported;
 // }
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'MeteringPoint',
-//   ),
-// )
-// abstract class MeteringPointApi {
-//   late final double size;
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'MeteringPoint',
+  ),
+)
+abstract class MeteringPointApi {
+  late final double size;
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'MeteringPointFactory',
-//   ),
-// )
-// abstract class MeteringPointFactoryApi {
-//   MeteringPointApi createPoint(
-//     double x,
-//     double y, {
-//     double? size,
-//   });
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'MeteringPointFactory',
+  ),
+)
+abstract class MeteringPointFactoryApi {
+  MeteringPointApi createPoint(
+    double x,
+    double y, {
+    double? size,
+  });
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'SurfaceOrientedMeteringPointFactory',
-//   ),
-// )
-// abstract class SurfaceOrientedMeteringPointFactoryApi
-//     extends MeteringPointFactoryApi {
-//   SurfaceOrientedMeteringPointFactoryApi(double width, double height);
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'SurfaceOrientedMeteringPointFactory',
+  ),
+)
+abstract class SurfaceOrientedMeteringPointFactoryApi
+    extends MeteringPointFactoryApi {
+  SurfaceOrientedMeteringPointFactoryApi(double width, double height);
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'MeteringPointTuple',
-//   ),
-// )
-// abstract class MeteringPointTupleApi {
-//   MeteringPointTupleApi(
-//     MeteringPointApi point, {
-//     List<MeteringModeApi>? modes,
-//   });
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'MeteringPointTuple',
+  ),
+)
+abstract class MeteringPointTupleApi {
+  MeteringPointTupleApi(
+    MeteringPointApi point, {
+    List<MeteringModeApi>? modes,
+  });
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'DurationTuple',
-//   ),
-// )
-// abstract class DurationTupleApi {
-//   DurationTupleApi(int duration, TimeUnitApi timeUnit);
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'DurationTuple',
+  ),
+)
+abstract class DurationTupleApi {
+  DurationTupleApi(int duration, TimeUnitApi timeUnit);
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'FocusMeteringAction',
-//   ),
-// )
-// abstract class FocusMeteringActionApi {
-//   FocusMeteringActionApi.build(
-//     MeteringPointTupleApi first, {
-//     List<MeteringPointTupleApi>? others,
-//     bool? disableAutoCancel,
-//     DurationTupleApi? autoCancelDuration,
-//   });
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'FocusMeteringAction',
+  ),
+)
+abstract class FocusMeteringActionApi {
+  FocusMeteringActionApi.build(
+    MeteringPointTupleApi first, {
+    List<MeteringPointTupleApi>? others,
+    bool? disableAutoCancel,
+    DurationTupleApi? autoCancelDuration,
+  });
 
-//   int getAutoCancelDurationInMillis();
-//   List<MeteringPointApi> getMeteringPointsAe();
-//   List<MeteringPointApi> getMeteringPointsAf();
-//   List<MeteringPointApi> getMeteringPointsAwb();
-//   bool isAutoCancelEnabled();
-// }
+  int getAutoCancelDurationInMillis();
+  List<MeteringPointApi> getMeteringPointsAe();
+  List<MeteringPointApi> getMeteringPointsAf();
+  List<MeteringPointApi> getMeteringPointsAwb();
+  bool isAutoCancelEnabled();
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'FocusMeteringResult',
-//   ),
-// )
-// abstract class FocusMeteringResultApi {
-//   late final bool isFocusSuccessful;
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'FocusMeteringResult',
+  ),
+)
+abstract class FocusMeteringResultApi {
+  late final bool isFocusSuccessful;
+}
 
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(
@@ -499,54 +499,48 @@ abstract class ZoomStateObserverApi {
 //   late final BitDepthApi bitDepth;
 // }
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'CameraInfo',
-//   ),
-// )
-// abstract class CameraInfoApi {
-//   @static
-//   bool mustPlayShutterSound();
-//   CameraSelectorApi getCameraSelector();
-//   CameraStateApi? getCameraState();
-//   NSKeyValueObservationApi observeCameraState(CameraStateObserverApi observer);
-//   TorchStateApi? getTorchState();
-//   NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
-//   ZoomStateApi? getZoomState();
-//   NSKeyValueObservationApi observeZoomState(ZoomStateObserverApi observer);
-//   // ExposureStateApi getExposureState();
-//   double getIntrinsticZoomRatio();
-//   LensFacingApi getLensFacing();
-//   List<CameraInfoApi> getPhysicalCameraInfos();
-//   int getSensorRotationDegrees();
-//   // List<IntRangeApi> getSupportedFrameRateRanges();
-//   bool isLogicalMultiCameraSupported();
-//   bool isZslSupported();
-//   bool hasFlashUnit();
-//   bool isFocusMeteringSupported(FocusMeteringActionApi action);
-//   List<DynamicRangeApi> querySupportedDynamicRanges(
-//       List<DynamicRangeApi> candidateDynamicRanges);
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'CameraInfo',
+  ),
+)
+abstract class CameraInfoApi {
+  @static
+  bool mustPlayShutterSound();
+  CameraSelectorApi getCameraSelector();
+  CameraStateApi? getCameraState();
+  NSKeyValueObservationApi observeCameraState(CameraStateObserverApi observer);
+  TorchStateApi? getTorchState();
+  NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
+  ZoomStateApi? getZoomState();
+  NSKeyValueObservationApi observeZoomState(ZoomStateObserverApi observer);
+  // ExposureStateApi getExposureState();
+  double getIntrinsticZoomRatio();
+  LensFacingApi getLensFacing();
+  List<CameraInfoApi> getPhysicalCameraInfos();
+  int getSensorRotationDegrees();
+  // List<IntRangeApi> getSupportedFrameRateRanges();
+  bool isLogicalMultiCameraSupported();
+  bool isZslSupported();
+  bool hasFlashUnit();
+  bool isFocusMeteringSupported(FocusMeteringActionApi action);
+  // List<DynamicRangeApi> querySupportedDynamicRanges(
+  //     List<DynamicRangeApi> candidateDynamicRanges);
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'CameraControl',
-//   ),
-// )
-// abstract class CameraControlApi {
-//   @async
-//   void enableTorch(bool torch);
-//   @async
-//   void setZoomRatio(double ratio);
-//   @async
-//   void setLinearZoom(double linearZoom);
-//   @async
-//   FocusMeteringResultApi startFocusAndMetering(FocusMeteringActionApi action);
-//   @async
-//   void cancelFocusAndMetering();
-//   @async
-//   int setExposureCompensationIndex(int value);
-// }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'CameraControl',
+  ),
+)
+abstract class CameraControlApi {
+  void enableTorch(bool torch);
+  void setZoomRatio(double ratio);
+  void setLinearZoom(double linearZoom);
+  FocusMeteringResultApi startFocusAndMetering(FocusMeteringActionApi action);
+  void cancelFocusAndMetering();
+  int setExposureCompensationIndex(int value);
+}
 
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(
@@ -771,17 +765,29 @@ abstract class ImageAnalyzerApi implements AnalyzerApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
+    name: 'OutputOptions',
+  ),
+)
+abstract class OutputOptionsApi {
+  int getDurationLimitMillis();
+  int getFileSizeLimit();
+  LocationApi? getLocation();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
     name: 'FileOutputOptions',
   ),
 )
-abstract class FileOutputOptionsApi {
+abstract class FileOutputOptionsApi extends OutputOptionsApi {
   FileOutputOptionsApi.build({
+    required String file,
     int? durationLimitMillis,
     int? fileSizeLimitBytes,
     LocationApi? location,
   });
 
-  late final String file;
+  String getFile();
 }
 
 @ProxyApi(
@@ -902,13 +908,12 @@ abstract class VideoRecordEventConsumerApi {
     name: 'Recording',
   ),
 )
-abstract class RecordingApi {
-  bool isPersistene();
+abstract class RecordingApi extends AutoCloseableApi {
+  bool isPersistent();
   void mute(bool muted);
   void pause();
   void resume();
   void stop();
-  void close();
 }
 
 @ProxyApi(
@@ -919,15 +924,14 @@ abstract class RecordingApi {
 abstract class CameraControllerApi {
   CameraControllerApi();
 
-  @async
   void initialize();
   void bind();
   void unbind();
   bool hasCamera(CameraSelectorApi cameraSelector);
   CameraSelectorApi getCameraSelector();
   void setCameraSelector(CameraSelectorApi cameraSelector);
-  // CameraInfoApi? getCameraInfo();
-  // CameraControlApi? getCameraControl();
+  CameraInfoApi? getCameraInfo();
+  CameraControlApi? getCameraControl();
   TorchStateApi? getTorchState();
   NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
   void enableTorch(bool torchEnabled);
@@ -952,9 +956,7 @@ abstract class CameraControllerApi {
   void setImageCaptureMode(CaptureModeApi captureMode);
   FlashModeApi getImageCaptureFlashMode();
   void setImageCaptureFlashMode(FlashModeApi flashMode);
-  @async
   void takePictureToMemory(OnImageCapturedCallbackApi capturedCallback);
-  @async
   void takePictureToFile(OutputFileOptionsApi outputFileOptions,
       OnImageSavedCallbackApi savedCallback);
   ResolutionSelectorApi? getImageAnalysisResolutionSelector();
@@ -1007,12 +1009,9 @@ abstract class PreviewViewApi {
 // abstract class Camera2CameraControlApi {
 //   Camera2CameraControlApi.from(CameraControlApi cameraControl);
 
-//   @async
 //   void addCaptureRequestOptions(CaptureRequestOptionsApi bundle);
-//   @async
 //   void clearCaptureRequestOptions();
 //   CaptureRequestOptionsApi getCaptureRequestOptions();
-//   @async
 //   void setCaptureRequestOptions(CaptureRequestOptionsApi bundle);
 // }
 

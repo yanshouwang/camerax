@@ -39,13 +39,32 @@ public class VideoRecordEvent: NSObject {
     }
     
     public class Finalize: VideoRecordEvent {
-        public let savedUri: URL
-        public let error: Error?
+        public let outputResults: OutputResults
+        public let cause: Any?
+        public let error: Error
+        public var hasError: Bool {
+            return error != .none
+        }
         
-        internal init(recordingStats: RecordingStats, savedUri: URL, error: Error?) {
-            self.savedUri = savedUri
+        init(recordingStats: RecordingStats, outputResults: OutputResults, cause: Any?, error: Error) {
+            self.outputResults = outputResults
+            self.cause = cause
             self.error = error
             super.init(recordingStats: recordingStats)
+        }
+        
+        public enum Error {
+            case none,
+                 unknown,
+                 fileSizeLimitReached,
+                 insufficientStorage,
+                 sourceInactive,
+                 invalidOuputOptions,
+                 encodingFailed,
+                 recorderError,
+                 noValidData,
+                 durationLimitReached,
+                 recordingGarbageCollected
         }
     }
 }

@@ -14,17 +14,17 @@ public class PreviewView: UIView {
         AVCaptureVideoPreviewLayer.self
     }
     
-    public override var layer: AVCaptureVideoPreviewLayer {
+    public var previewLayer: AVCaptureVideoPreviewLayer {
         super.layer as! AVCaptureVideoPreviewLayer
     }
     
     public var controller: CameraController? {
-        didSet { layer.session = controller?.session }
+        didSet { previewLayer.session = controller?.session }
     }
     
     public var scaleType: ScaleType {
-        get { layer.videoGravity.api }
-        set { layer.videoGravity = newValue.impl }
+        get { previewLayer.videoGravity.api }
+        set { previewLayer.videoGravity = newValue.impl }
     }
     
     public override init(frame: CGRect) {
@@ -38,7 +38,7 @@ public class PreviewView: UIView {
     }
     
     private func setUp() {
-        layer.videoGravity = .resizeAspectFill
+        previewLayer.videoGravity = .resizeAspectFill
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         addGestureRecognizer(tapGestureRecognizer)
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
@@ -46,16 +46,16 @@ public class PreviewView: UIView {
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        guard let controller, controller.isTapToFocusEnabled else {
+        guard let controller, controller.isTapToFocusEnabled() else {
             return
         }
         let layerPoint = sender.location(in: self)
-        let devicePoint = layer.captureDevicePointConverted(fromLayerPoint: layerPoint)
-        try? controller.focusAndExpose(devicePoint: devicePoint, continuous: false)
+        let devicePoint = previewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
+        _ = try? controller.startFocusAndMetering(devicePoint, false)
     }
     
     @objc func handlePinch(sender: UIPinchGestureRecognizer) {
-        guard let controller, controller.isPinchToZoomEnabled, let zoomState = controller.zoomState else {
+        guard let controller, controller.isPinchToZoomEnabled(), let zoomState = controller.getZoomState() else {
             return
         }
         switch sender.state {

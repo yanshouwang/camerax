@@ -9,22 +9,42 @@ import Foundation
 
 class AudioStatsDelegate: PigeonApiDelegateAudioStatsApi {
     func audioAmplitude(pigeonApi: PigeonApiAudioStatsApi, pigeonInstance: AudioStats) throws -> Double {
-        fatalError()
+        return pigeonInstance.audioAmplitude
     }
     
     func audioState(pigeonApi: PigeonApiAudioStatsApi, pigeonInstance: AudioStats) throws -> AudioStateApi {
-        fatalError()
+        return pigeonInstance.audioState.api
     }
     
     func errorCause(pigeonApi: PigeonApiAudioStatsApi, pigeonInstance: AudioStats) throws -> [Any?]? {
-        fatalError()
+        return if let errorCause = pigeonInstance.errorCause { wrap(errorCause) }
+        else { nil }
     }
     
     func hasAudio(pigeonApi: PigeonApiAudioStatsApi, pigeonInstance: AudioStats) throws -> Bool {
-        fatalError()
+        return pigeonInstance.hasAudio
     }
     
     func hasError(pigeonApi: PigeonApiAudioStatsApi, pigeonInstance: AudioStats) throws -> Bool {
-        fatalError()
+        return pigeonInstance.hasError
+    }
+}
+
+extension AudioStats.AudioState {
+    var api: AudioStateApi {
+        switch self {
+        case .active:
+            return .active
+        case .disabled:
+            return .disabled
+        case .sourceSilenced:
+            return .sourceSilenced
+        case .encoderError:
+            return .encoderError
+        case .sourceError:
+            return .sourceError
+        case .muted:
+            return .muted
+        }
     }
 }

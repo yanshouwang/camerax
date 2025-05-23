@@ -9,21 +9,26 @@ import Foundation
 import AVFoundation
 
 class CaptureFileOutputRecordingDelegate: NSObject, AVCaptureFileOutputRecordingDelegate {
-    let listener: (VideoRecordEvent) -> Void
+    let listener: any Consumer<VideoRecordEvent>
     
-    init(listener: @escaping (VideoRecordEvent) -> Void) {
+    init(listener: any Consumer<VideoRecordEvent>) {
         self.listener = listener
     }
     
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         debugPrint("did start recording to \(fileURL)")
-//        let event = VideoRecordEvent.Start(recordingStats: recordingStats)
-//        listener(event)
+        let audioStats = AudioStats(audioAmplitude: 0.0, audioState: .active, errorCause: nil, hasAudio: false, hasError: false)
+        let recordingStats = RecordingStats(audioStats: audioStats, numBytesRecorded: 0, recorderedDurationNanos: 0)
+        let event = VideoRecordEvent.Start(recordingStats: recordingStats)
+        listener.accept(event)
     }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: (any Error)?) {
         debugPrint("did finish recording to \(outputFileURL)")
-//        let event = VideoRecordEvent.Finalize(recordingStats: recordingStats, savedUri: outputFileURL, error: error)
-//        listener(event)
+        let audioStats = AudioStats(audioAmplitude: 0.0, audioState: .active, errorCause: nil, hasAudio: false, hasError: false)
+        let recordingStats = RecordingStats(audioStats: audioStats, numBytesRecorded: 0, recorderedDurationNanos: 0)
+        let outputResults = OutputResults(outputUri: outputFileURL)
+        let event = VideoRecordEvent.Finalize(recordingStats: recordingStats, outputResults: outputResults, cause: error, error: .none)
+        listener.accept(event)
     }
 }

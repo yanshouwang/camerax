@@ -2,6 +2,8 @@ package dev.hebei.camerax_android.ml
 
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.core.content.ContextCompat
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.face.Face
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.CoordinateSystemApi
 import dev.hebei.camerax_android.PigeonApiMlKitAnalyzerApi
@@ -29,15 +31,11 @@ class MlKitAnalyzerImpl(private val impl: CameraXImpl) : PigeonApiMlKitAnalyzerA
             return pigeon_instance.getThrowable(detector.obj)?.api
         }
 
-        override fun getBarcodes(
-            pigeon_instance: MlKitAnalyzer.Result, detector: BarcodeScanner
-        ): List<com.google.mlkit.vision.barcode.common.Barcode>? {
+        override fun getBarcodes(pigeon_instance: MlKitAnalyzer.Result, detector: BarcodeScanner): List<Barcode>? {
             return pigeon_instance.getValue(detector.obj)
         }
 
-        override fun getFaces(
-            pigeon_instance: MlKitAnalyzer.Result, detector: FaceDetector
-        ): List<com.google.mlkit.vision.face.Face>? {
+        override fun getFaces(pigeon_instance: MlKitAnalyzer.Result, detector: FaceDetector): List<Face>? {
             return pigeon_instance.getValue(detector.obj)
         }
     }

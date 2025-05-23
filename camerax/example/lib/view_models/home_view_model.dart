@@ -278,10 +278,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> takePicture() async {
-    final directory = await getExternalStorageDirectory();
-    if (directory == null) {
-      throw ArgumentError.notNull('directory');
-    }
+    final directory = await getApplicationDocumentsDirectory();
     final filePath = path.join(directory.path,
         'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG');
     final file = File(filePath);
@@ -300,10 +297,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> startRecording() async {
-    final directory = await getExternalStorageDirectory();
-    if (directory == null) {
-      throw ArgumentError.notNull('directory');
-    }
+    final directory = await getApplicationDocumentsDirectory();
     final filePath = path.join(directory.path,
         'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
     final file = File(filePath);

@@ -1322,17 +1322,29 @@ abstract class QualitySelectorApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.video.OutputOptions',
+  ),
+)
+abstract class OutputOptionsApi {
+  int getDurationLimitMillis();
+  int getFileSizeLimit();
+  LocationApi? getLocation();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.FileOutputOptions',
   ),
 )
-abstract class FileOutputOptionsApi {
+abstract class FileOutputOptionsApi extends OutputOptionsApi {
   FileOutputOptionsApi.build({
+    required String file,
     int? durationLimitMillis,
     int? fileSizeLimitBytes,
     LocationApi? location,
   });
 
-  late final String file;
+  String getFile();
 }
 
 @ProxyApi(
@@ -1453,13 +1465,12 @@ abstract class VideoRecordEventConsumerApi {
     fullClassName: 'androidx.camera.video.Recording',
   ),
 )
-abstract class RecordingApi {
-  bool isPersistene();
+abstract class RecordingApi extends AutoCloseableApi {
+  bool isPersistent();
   void mute(bool muted);
   void pause();
   void resume();
   void stop();
-  void close();
 }
 
 @ProxyApi(

@@ -1,30 +1,31 @@
 package dev.hebei.camerax_android.video
 
+import androidx.camera.video.Quality
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiQualityApi
 
 class QualityImpl(impl: CameraXImpl) : PigeonApiQualityApi(impl) {
-    override fun fhd(): androidx.camera.video.Quality {
-        return androidx.camera.video.Quality.FHD
+    override fun fhd(): Quality {
+        return Quality.FHD
     }
 
-    override fun hd(): androidx.camera.video.Quality {
-        return androidx.camera.video.Quality.HD
+    override fun hd(): Quality {
+        return Quality.HD
     }
 
-    override fun highest(): androidx.camera.video.Quality {
-        return androidx.camera.video.Quality.HIGHEST
+    override fun highest(): Quality {
+        return Quality.HIGHEST
     }
 
-    override fun lowest(): androidx.camera.video.Quality {
-        return androidx.camera.video.Quality.LOWEST
+    override fun lowest(): Quality {
+        return Quality.LOWEST
     }
 
-    override fun sd(): androidx.camera.video.Quality {
-        return androidx.camera.video.Quality.SD
+    override fun sd(): Quality {
+        return Quality.SD
     }
 
-    override fun uhd(): androidx.camera.video.Quality {
-        return androidx.camera.video.Quality.UHD
+    override fun uhd(): Quality {
+        return Quality.UHD
     }
 }

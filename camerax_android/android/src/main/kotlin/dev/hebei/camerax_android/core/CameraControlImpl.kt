@@ -1,5 +1,8 @@
 package dev.hebei.camerax_android.core
 
+import androidx.camera.core.CameraControl
+import androidx.camera.core.FocusMeteringAction
+import androidx.camera.core.FocusMeteringResult
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
@@ -7,11 +10,7 @@ import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiCameraControlApi
 
 class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlApi(impl) {
-    override fun enableTorch(
-        pigeon_instance: androidx.camera.core.CameraControl,
-        torch: Boolean,
-        callback: (Result<Unit>) -> Unit
-    ) {
+    override fun enableTorch(pigeon_instance: CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.enableTorch(torch)
         val executor = ContextCompat.getMainExecutor(impl.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
@@ -25,11 +24,7 @@ class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlA
         }, executor)
     }
 
-    override fun setZoomRatio(
-        pigeon_instance: androidx.camera.core.CameraControl,
-        ratio: Double,
-        callback: (Result<Unit>) -> Unit
-    ) {
+    override fun setZoomRatio(pigeon_instance: CameraControl, ratio: Double, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.setZoomRatio(ratio.toFloat())
         val executor = ContextCompat.getMainExecutor(impl.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
@@ -44,9 +39,7 @@ class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlA
     }
 
     override fun setLinearZoom(
-        pigeon_instance: androidx.camera.core.CameraControl,
-        linearZoom: Double,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraControl, linearZoom: Double, callback: (Result<Unit>) -> Unit
     ) {
         val future = pigeon_instance.setLinearZoom(linearZoom.toFloat())
         val executor = ContextCompat.getMainExecutor(impl.context)
@@ -62,15 +55,13 @@ class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlA
     }
 
     override fun startFocusAndMetering(
-        pigeon_instance: androidx.camera.core.CameraControl,
-        action: androidx.camera.core.FocusMeteringAction,
-        callback: (Result<androidx.camera.core.FocusMeteringResult>) -> Unit
+        pigeon_instance: CameraControl, action: FocusMeteringAction, callback: (Result<FocusMeteringResult>) -> Unit
     ) {
         val future = pigeon_instance.startFocusAndMetering(action)
         val executor = ContextCompat.getMainExecutor(impl.context)
         Futures.addCallback(
-            future, object : FutureCallback<androidx.camera.core.FocusMeteringResult> {
-                override fun onSuccess(result: androidx.camera.core.FocusMeteringResult) {
+            future, object : FutureCallback<FocusMeteringResult> {
+                override fun onSuccess(result: FocusMeteringResult) {
                     callback(Result.success(result))
                 }
 
@@ -81,9 +72,7 @@ class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlA
         )
     }
 
-    override fun cancelFocusAndMetering(
-        pigeon_instance: androidx.camera.core.CameraControl, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun cancelFocusAndMetering(pigeon_instance: CameraControl, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.cancelFocusAndMetering()
         val executor = ContextCompat.getMainExecutor(impl.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
@@ -94,14 +83,11 @@ class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlA
             override fun onFailure(t: Throwable) {
                 callback(Result.failure(t))
             }
-
         }, executor)
     }
 
     override fun setExposureCompensationIndex(
-        pigeon_instance: androidx.camera.core.CameraControl,
-        value: Long,
-        callback: (Result<Long>) -> Unit
+        pigeon_instance: CameraControl, value: Long, callback: (Result<Long>) -> Unit
     ) {
         val future = pigeon_instance.setExposureCompensationIndex(value.toInt())
         val executor = ContextCompat.getMainExecutor(impl.context)

@@ -9,14 +9,14 @@ import Foundation
 
 class RecordingStatsDelegate: PigeonApiDelegateRecordingStatsApi {
     func audioStats(pigeonApi: PigeonApiRecordingStatsApi, pigeonInstance: RecordingStats) throws -> AudioStats {
-        fatalError()
+        return pigeonInstance.audioStats
     }
     
     func numBytesRecorded(pigeonApi: PigeonApiRecordingStatsApi, pigeonInstance: RecordingStats) throws -> Int64 {
-        fatalError()
+        return pigeonInstance.numBytesRecorded
     }
     
     func recordedDurationNanos(pigeonApi: PigeonApiRecordingStatsApi, pigeonInstance: RecordingStats) throws -> Int64 {
-        fatalError()
+        return pigeonInstance.recorderedDurationNanos
     }
 }

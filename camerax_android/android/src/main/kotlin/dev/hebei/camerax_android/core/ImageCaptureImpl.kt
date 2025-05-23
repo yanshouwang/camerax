@@ -1,5 +1,10 @@
 package dev.hebei.camerax_android.core
 
+import android.graphics.Bitmap
+import android.location.Location
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.CaptureModeApi
 import dev.hebei.camerax_android.FlashModeApi
@@ -14,33 +19,31 @@ import dev.hebei.camerax_android.common.fileImpl
 class ImageCaptureImpl {
     class MetadataImpl(impl: CameraXImpl) : PigeonApiMetadataApi(impl) {
         override fun pigeon_defaultConstructor(
-            isReversedHorizontal: Boolean, isReversedVertical: Boolean, location: android.location.Location?
-        ): androidx.camera.core.ImageCapture.Metadata {
-            return androidx.camera.core.ImageCapture.Metadata().apply {
+            isReversedHorizontal: Boolean, isReversedVertical: Boolean, location: Location?
+        ): ImageCapture.Metadata {
+            return ImageCapture.Metadata().apply {
                 this.isReversedHorizontal = isReversedHorizontal
                 this.isReversedVertical = isReversedVertical
                 this.location = location
             }
         }
 
-        override fun isReversedHorizontal(pigeon_instance: androidx.camera.core.ImageCapture.Metadata): Boolean {
+        override fun isReversedHorizontal(pigeon_instance: ImageCapture.Metadata): Boolean {
             return pigeon_instance.isReversedHorizontal
         }
 
-        override fun isReversedVertical(pigeon_instance: androidx.camera.core.ImageCapture.Metadata): Boolean {
+        override fun isReversedVertical(pigeon_instance: ImageCapture.Metadata): Boolean {
             return pigeon_instance.isReversedVertical
         }
 
-        override fun location(pigeon_instance: androidx.camera.core.ImageCapture.Metadata): android.location.Location? {
+        override fun location(pigeon_instance: ImageCapture.Metadata): Location? {
             return pigeon_instance.location
         }
     }
 
     class OutputFileOptionsImpl(impl: CameraXImpl) : PigeonApiOutputFileOptionsApi(impl) {
-        override fun build(
-            file: String, metadata: androidx.camera.core.ImageCapture.Metadata?
-        ): androidx.camera.core.ImageCapture.OutputFileOptions {
-            val builder = androidx.camera.core.ImageCapture.OutputFileOptions.Builder(file.fileImpl)
+        override fun build(file: String, metadata: ImageCapture.Metadata?): ImageCapture.OutputFileOptions {
+            val builder = ImageCapture.OutputFileOptions.Builder(file.fileImpl)
             if (metadata != null) {
                 builder.setMetadata(metadata)
             }
@@ -49,73 +52,67 @@ class ImageCaptureImpl {
     }
 
     class OutputFileResultsImpl(impl: CameraXImpl) : PigeonApiOutputFileResultsApi(impl) {
-        override fun savedUri(pigeon_instance: androidx.camera.core.ImageCapture.OutputFileResults): String? {
+        override fun savedUri(pigeon_instance: ImageCapture.OutputFileResults): String? {
             return pigeon_instance.savedUri?.api
         }
     }
 
     class OnImageCapturedCallbackImpl(impl: CameraXImpl) : PigeonApiOnImageCapturedCallbackApi(impl) {
-        override fun pigeon_defaultConstructor(): androidx.camera.core.ImageCapture.OnImageCapturedCallback {
-            return Impl(this)
-        }
+        override fun pigeon_defaultConstructor(): ImageCapture.OnImageCapturedCallback {
+            return object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureStarted() {
+                    super.onCaptureStarted()
+                    onCaptureStarted(this) {}
+                }
 
-        class Impl(private val api: PigeonApiOnImageCapturedCallbackApi) :
-            androidx.camera.core.ImageCapture.OnImageCapturedCallback() {
-            override fun onCaptureStarted() {
-                super.onCaptureStarted()
-                api.onCaptureStarted(this) {}
-            }
+                override fun onCaptureProcessProgressed(progress: Int) {
+                    super.onCaptureProcessProgressed(progress)
+                    onCaptureProcessProgressed(this, progress.toLong()) {}
+                }
 
-            override fun onCaptureProcessProgressed(progress: Int) {
-                super.onCaptureProcessProgressed(progress)
-                api.onCaptureProcessProgressed(this, progress.toLong()) {}
-            }
+                override fun onPostviewBitmapAvailable(bitmap: Bitmap) {
+                    super.onPostviewBitmapAvailable(bitmap)
+                    onPostviewBitmapAvailable(this, bitmap.api) {}
+                }
 
-            override fun onPostviewBitmapAvailable(bitmap: android.graphics.Bitmap) {
-                super.onPostviewBitmapAvailable(bitmap)
-                api.onPostviewBitmapAvailable(this, bitmap.api) {}
-            }
+                override fun onCaptureSuccess(image: ImageProxy) {
+                    super.onCaptureSuccess(image)
+                    onCaptureSuccess(this, image) {}
+                }
 
-            override fun onCaptureSuccess(image: androidx.camera.core.ImageProxy) {
-                super.onCaptureSuccess(image)
-                api.onCaptureSuccess(this, image) {}
-            }
-
-            override fun onError(exception: androidx.camera.core.ImageCaptureException) {
-                super.onError(exception)
-                api.onError(this, exception.api) {}
+                override fun onError(exception: ImageCaptureException) {
+                    super.onError(exception)
+                    onError(this, exception.api) {}
+                }
             }
         }
     }
 
     class OnImageSavedCallbackImpl(impl: CameraXImpl) : PigeonApiOnImageSavedCallbackApi(impl) {
-        override fun pigeon_defaultConstructor(): androidx.camera.core.ImageCapture.OnImageSavedCallback {
-            return Impl(this)
-        }
+        override fun pigeon_defaultConstructor(): ImageCapture.OnImageSavedCallback {
+            return object : ImageCapture.OnImageSavedCallback {
+                override fun onCaptureStarted() {
+                    super.onCaptureStarted()
+                    onCaptureStarted(this) {}
+                }
 
-        class Impl(private val api: PigeonApiOnImageSavedCallbackApi) :
-            androidx.camera.core.ImageCapture.OnImageSavedCallback {
-            override fun onCaptureStarted() {
-                super.onCaptureStarted()
-                api.onCaptureStarted(this) {}
-            }
+                override fun onCaptureProcessProgressed(progress: Int) {
+                    super.onCaptureProcessProgressed(progress)
+                    onCaptureProcessProgressed(this, progress.toLong()) {}
+                }
 
-            override fun onCaptureProcessProgressed(progress: Int) {
-                super.onCaptureProcessProgressed(progress)
-                api.onCaptureProcessProgressed(this, progress.toLong()) {}
-            }
+                override fun onPostviewBitmapAvailable(bitmap: Bitmap) {
+                    super.onPostviewBitmapAvailable(bitmap)
+                    onPostviewBitmapAvailable(this, bitmap.api) {}
+                }
 
-            override fun onPostviewBitmapAvailable(bitmap: android.graphics.Bitmap) {
-                super.onPostviewBitmapAvailable(bitmap)
-                api.onPostviewBitmapAvailable(this, bitmap.api) {}
-            }
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    onImageSaved(this, outputFileResults) {}
+                }
 
-            override fun onImageSaved(outputFileResults: androidx.camera.core.ImageCapture.OutputFileResults) {
-                api.onImageSaved(this, outputFileResults) {}
-            }
-
-            override fun onError(exception: androidx.camera.core.ImageCaptureException) {
-                api.onError(this, exception.api) {}
+                override fun onError(exception: ImageCaptureException) {
+                    onError(this, exception.api) {}
+                }
             }
         }
     }
@@ -123,32 +120,32 @@ class ImageCaptureImpl {
 
 val CaptureModeApi.impl
     get() = when (this) {
-        CaptureModeApi.MAXIMIZE_QUALITY -> androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
-        CaptureModeApi.MINIMIZE_LATENCY -> androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
-        CaptureModeApi.ZERO_SHUTTER_LAG -> androidx.camera.core.ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
+        CaptureModeApi.MAXIMIZE_QUALITY -> ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
+        CaptureModeApi.MINIMIZE_LATENCY -> ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
+        CaptureModeApi.ZERO_SHUTTER_LAG -> ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
     }
 
 val Int.captureModeApi
     get() = when (this) {
-        androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY -> CaptureModeApi.MINIMIZE_LATENCY
-        androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY -> CaptureModeApi.MINIMIZE_LATENCY
-        androidx.camera.core.ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG -> CaptureModeApi.MINIMIZE_LATENCY
+        ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY -> CaptureModeApi.MINIMIZE_LATENCY
+        ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY -> CaptureModeApi.MINIMIZE_LATENCY
+        ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG -> CaptureModeApi.MINIMIZE_LATENCY
         else -> throw IllegalArgumentException()
     }
 
 val FlashModeApi.impl
     get() = when (this) {
-        FlashModeApi.AUTO -> androidx.camera.core.ImageCapture.FLASH_MODE_AUTO
-        FlashModeApi.ON -> androidx.camera.core.ImageCapture.FLASH_MODE_ON
-        FlashModeApi.OFF -> androidx.camera.core.ImageCapture.FLASH_MODE_OFF
-        FlashModeApi.SCREEN -> androidx.camera.core.ImageCapture.FLASH_MODE_SCREEN
+        FlashModeApi.AUTO -> ImageCapture.FLASH_MODE_AUTO
+        FlashModeApi.ON -> ImageCapture.FLASH_MODE_ON
+        FlashModeApi.OFF -> ImageCapture.FLASH_MODE_OFF
+        FlashModeApi.SCREEN -> ImageCapture.FLASH_MODE_SCREEN
     }
 
 val Int.flashModeApi
     get() = when (this) {
-        androidx.camera.core.ImageCapture.FLASH_MODE_AUTO -> FlashModeApi.AUTO
-        androidx.camera.core.ImageCapture.FLASH_MODE_ON -> FlashModeApi.ON
-        androidx.camera.core.ImageCapture.FLASH_MODE_OFF -> FlashModeApi.OFF
-        androidx.camera.core.ImageCapture.FLASH_MODE_SCREEN -> FlashModeApi.SCREEN
+        ImageCapture.FLASH_MODE_AUTO -> FlashModeApi.AUTO
+        ImageCapture.FLASH_MODE_ON -> FlashModeApi.ON
+        ImageCapture.FLASH_MODE_OFF -> FlashModeApi.OFF
+        ImageCapture.FLASH_MODE_SCREEN -> FlashModeApi.SCREEN
         else -> throw IllegalArgumentException()
     }

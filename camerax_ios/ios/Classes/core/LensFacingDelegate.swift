@@ -21,3 +21,18 @@ extension LensFacingApi {
         }
     }
 }
+
+extension LensFacing {
+    var api: LensFacingApi {
+        switch self {
+        case .unknown:
+            return .unknown
+        case .front:
+            return .front
+        case .back:
+            return .back
+        case .external:
+            return .external
+        }
+    }
+}

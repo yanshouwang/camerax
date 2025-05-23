@@ -29,26 +29,84 @@ class ImageCaptureDelegate {
     
     class OutputFileOptionsDelegate: PigeonApiDelegateOutputFileOptionsApi {
         func build(pigeonApi: PigeonApiOutputFileOptionsApi, file: String, metadata: ImageCapture.Metadata?) throws -> ImageCapture.OutputFileOptions {
-            return ImageCapture.OutputFileOptions(file: file, metadata: metadata)
+            let url = URL(fileURLWithPath: file)
+            return ImageCapture.OutputFileOptions(url: url, metadata: metadata)
         }
     }
     
     class OutputFileResultsDelegate: PigeonApiDelegateOutputFileResultsApi {
         func savedUri(pigeonApi: PigeonApiOutputFileResultsApi, pigeonInstance: ImageCapture.OutputFileResults) throws -> String? {
-            return pigeonInstance.savedUri.absoluteString
+            return pigeonInstance.savedUrl.absoluteString
         }
     }
     
     class OnImageCapturedCallbackDelegate: PigeonApiDelegateOnImageCapturedCallbackApi {
         func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageCapturedCallbackApi) throws -> any ImageCapture.OnImageCapturedCallback {
-            fatalError()
+            return OnImageCapturedCallback(pigeonApi)
         }
     }
     
     class OnImageSavedCallbackDelegate: PigeonApiDelegateOnImageSavedCallbackApi {
         func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageSavedCallbackApi) throws -> any ImageCapture.OnImageSavedCallback {
-            fatalError()
+            return OnImageSavedCallback(pigeonApi)
         }
+    }
+}
+
+class OnImageCapturedCallback: NSObject, ImageCapture.OnImageCapturedCallback {
+    private let api: PigeonApiOnImageCapturedCallbackApi
+    
+    init(_ api: PigeonApiOnImageCapturedCallbackApi) {
+        self.api = api
+    }
+    
+    func onCaptureStarted() {
+        api.onCaptureStarted(pigeonInstance: self) { _ in }
+    }
+    
+    func onCaptureProcessProgressed(_ progress: Int) {
+        api.onCaptureProcessProgressed(pigeonInstance: self, progress: Int64(progress)) { _ in }
+    }
+    
+    func onPostviewBitmapAvailable(_ bitmap: Data) {
+        api.onPostviewBitmapAvailable(pigeonInstance: self, bitmap: bitmap.api) { _ in }
+    }
+    
+    func onCaptureSuccess(_ image: ImageProxy) {
+        api.onCaptureSuccess(pigeonInstance: self, image: image) { _ in }
+    }
+    
+    func onError(_ error: any Error) {
+        let exception = wrap(error)
+        api.onError(pigeonInstance: self, exception: exception) { _ in }
+    }
+}
+class OnImageSavedCallback: NSObject, ImageCapture.OnImageSavedCallback {
+    private let api: PigeonApiOnImageSavedCallbackApi
+    
+    init(_ api: PigeonApiOnImageSavedCallbackApi) {
+        self.api = api
+    }
+    
+    func onCaptureStarted() {
+        api.onCaptureStarted(pigeonInstance: self) { _ in }
+    }
+    
+    func onCaptureProcessProgressed(_ progress: Int) {
+        api.onCaptureProcessProgressed(pigeonInstance: self, progress: Int64(progress)) { _ in }
+    }
+    
+    func onPostviewBitmapAvailable(_ bitmap: Data) {
+        api.onPostviewBitmapAvailable(pigeonInstance: self, bitmap: bitmap.api)  { _ in }
+    }
+    
+    func onImageSaved(_ outputFileResults: ImageCapture.OutputFileResults) {
+        api.onImageSaved(pigeonInstance: self, outputFileResults: outputFileResults) { _ in }
+    }
+    
+    func onError(_ error: any Error) {
+        let exception = wrap(error)
+        api.onError(pigeonInstance: self, exception: exception) { _ in }
     }
 }
 

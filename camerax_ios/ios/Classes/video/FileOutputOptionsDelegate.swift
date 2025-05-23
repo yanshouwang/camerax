@@ -10,10 +10,21 @@ import CoreLocation
 
 class FileOutputOptionsDelegate: PigeonApiDelegateFileOutputOptionsApi {
     func build(pigeonApi: PigeonApiFileOutputOptionsApi, file: String, durationLimitMillis: Int64?, fileSizeLimitBytes: Int64?, location: CLLocation?) throws -> FileOutputOptions {
-        fatalError()
+        let url = URL(fileURLWithPath: file)
+        let builder = FileOutputOptions.Builder(url)
+        if let durationLimitMillis {
+            _ = builder.setDurationLimitMillis(durationLimitMillis)
+        }
+        if let fileSizeLimitBytes {
+            _ = builder.setFileSizeLimit(fileSizeLimitBytes)
+        }
+        if let location {
+            _ = builder.setLocation(location)
+        }
+        return builder.build()
     }
     
-    func file(pigeonApi: PigeonApiFileOutputOptionsApi, pigeonInstance: FileOutputOptions) throws -> String {
-        fatalError()
+    func getFile(pigeonApi: PigeonApiFileOutputOptionsApi, pigeonInstance: FileOutputOptions) throws -> String {
+        return pigeonInstance.url.absoluteString
     }
 }

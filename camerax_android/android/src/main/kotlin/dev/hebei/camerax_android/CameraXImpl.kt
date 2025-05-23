@@ -56,6 +56,7 @@ import dev.hebei.camerax_android.ml.face.FaceLandmarkImpl
 import dev.hebei.camerax_android.video.AudioStatsImpl
 import dev.hebei.camerax_android.video.FallbackStrategyImpl
 import dev.hebei.camerax_android.video.FileOutputOptionsImpl
+import dev.hebei.camerax_android.video.OutputOptionsImpl
 import dev.hebei.camerax_android.video.OutputResultsImpl
 import dev.hebei.camerax_android.video.QualityImpl
 import dev.hebei.camerax_android.video.QualitySelectorImpl
@@ -358,6 +359,10 @@ class CameraXImpl(val context: Context, messenger: BinaryMessenger) : CameraXApi
 
     override fun getPigeonApiQualitySelectorApi(): PigeonApiQualitySelectorApi {
         return QualitySelectorImpl(this)
+    }
+
+    override fun getPigeonApiOutputOptionsApi(): PigeonApiOutputOptionsApi {
+        return OutputOptionsImpl(this)
     }
 
     override fun getPigeonApiFileOutputOptionsApi(): PigeonApiFileOutputOptionsApi {

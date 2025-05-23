@@ -9,6 +9,6 @@ import Foundation
 
 class OutputResultsDelegate: PigeonApiDelegateOutputResultsApi {
     func outputUri(pigeonApi: PigeonApiOutputResultsApi, pigeonInstance: OutputResults) throws -> String? {
-        fatalError()
+        return pigeonInstance.outputUri?.absoluteString
     }
 }

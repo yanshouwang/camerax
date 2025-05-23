@@ -1,10 +1,11 @@
 package dev.hebei.camerax_android.core
 
+import androidx.camera.core.TorchState
 import dev.hebei.camerax_android.TorchStateApi
 
 val Int.torchStateApi
     get() = when (this) {
-        androidx.camera.core.TorchState.OFF -> TorchStateApi.OFF
-        androidx.camera.core.TorchState.ON -> TorchStateApi.ON
+        TorchState.OFF -> TorchStateApi.OFF
+        TorchState.ON -> TorchStateApi.ON
         else -> throw IllegalArgumentException()
     }

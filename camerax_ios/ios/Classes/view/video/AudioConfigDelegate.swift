@@ -9,14 +9,14 @@ import Foundation
 
 class AudioConfigDelegate: PigeonApiDelegateAudioConfigApi {
     func create(pigeonApi: PigeonApiAudioConfigApi, enableAudio: Bool) throws -> AudioConfig {
-        fatalError()
+        return AudioConfig.create(enableAudio)
     }
     
     func audioDisabled(pigeonApi: PigeonApiAudioConfigApi) throws -> AudioConfig {
-        fatalError()
+        return AudioConfig.audioDisabled
     }
     
     func getAudioEnabled(pigeonApi: PigeonApiAudioConfigApi, pigeonInstance: AudioConfig) throws -> Bool {
-        fatalError()
+        return pigeonInstance.audioEnabled
     }
 }

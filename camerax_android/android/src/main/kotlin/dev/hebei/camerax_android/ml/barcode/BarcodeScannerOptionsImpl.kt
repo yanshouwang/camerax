@@ -1,5 +1,7 @@
 package dev.hebei.camerax_android.ml.barcode
 
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
 import dev.hebei.camerax_android.BarcodeFormatApi
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiBarcodeScannerOptionsApi
@@ -8,9 +10,9 @@ class BarcodeScannerOptionsImpl(impl: CameraXImpl) : PigeonApiBarcodeScannerOpti
     override fun build(
         enableAllPotentialBarcodes: Boolean?,
         formats: List<BarcodeFormatApi>?,
-        zoomSuggestionOptions: com.google.mlkit.vision.barcode.ZoomSuggestionOptions?
-    ): com.google.mlkit.vision.barcode.BarcodeScannerOptions {
-        val builder = com.google.mlkit.vision.barcode.BarcodeScannerOptions.Builder()
+        zoomSuggestionOptions: ZoomSuggestionOptions?
+    ): BarcodeScannerOptions {
+        val builder = BarcodeScannerOptions.Builder()
         if (enableAllPotentialBarcodes == true) {
             builder.enableAllPotentialBarcodes()
         }

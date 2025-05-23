@@ -18,8 +18,8 @@ final class CameraControllerImpl extends CameraControllerChannel {
   late final StreamController<TorchState> _torchStateChangedController;
   late final StreamController<ZoomState> _zoomStateChangedController;
 
-  Future<NSKeyValueObservationApi>? _torchStateObserverationApiFuture;
-  Future<NSKeyValueObservationApi>? _zoomStateObserverationApiFuture;
+  Future<NSKeyValueObservationApi>? _torchStateObservationApiFuture;
+  Future<NSKeyValueObservationApi>? _zoomStateObservationApiFuture;
 
   CameraControllerImpl.impl(this.api) : super.impl() {
     _torchStateObserverApi = TorchStateObserverApi(
@@ -31,12 +31,12 @@ final class CameraControllerImpl extends CameraControllerChannel {
     _torchStateChangedController = StreamController.broadcast(
       onListen: () async {
         try {
-          var future = _torchStateObserverationApiFuture;
+          var future = _torchStateObservationApiFuture;
           if (future != null) {
             throw ArgumentError.value(future);
           }
           final observerApi = _torchStateObserverApi;
-          _torchStateObserverationApiFuture =
+          _torchStateObservationApiFuture =
               future = api.observeTorchState(observerApi);
           await future;
         } catch (e) {
@@ -46,8 +46,8 @@ final class CameraControllerImpl extends CameraControllerChannel {
       onCancel: () async {
         try {
           final future =
-              ArgumentError.checkNotNull(_torchStateObserverationApiFuture);
-          _torchStateObserverationApiFuture = null;
+              ArgumentError.checkNotNull(_torchStateObservationApiFuture);
+          _torchStateObservationApiFuture = null;
           final observationApi = await future;
           await observationApi.invalidate();
         } catch (e) {
@@ -58,12 +58,12 @@ final class CameraControllerImpl extends CameraControllerChannel {
     _zoomStateChangedController = StreamController.broadcast(
       onListen: () async {
         try {
-          var future = _zoomStateObserverationApiFuture;
+          var future = _zoomStateObservationApiFuture;
           if (future != null) {
             throw ArgumentError.value(future);
           }
           final observerApi = _zoomStateObserverApi;
-          _zoomStateObserverationApiFuture =
+          _zoomStateObservationApiFuture =
               future = api.observeZoomState(observerApi);
           await future;
         } catch (e) {
@@ -73,8 +73,8 @@ final class CameraControllerImpl extends CameraControllerChannel {
       onCancel: () async {
         try {
           final future =
-              ArgumentError.checkNotNull(_zoomStateObserverationApiFuture);
-          _zoomStateObserverationApiFuture = null;
+              ArgumentError.checkNotNull(_zoomStateObservationApiFuture);
+          _zoomStateObservationApiFuture = null;
           final observerationApi = await future;
           await observerationApi.invalidate();
         } catch (e) {
@@ -119,12 +119,12 @@ final class CameraControllerImpl extends CameraControllerChannel {
   }
 
   @override
-  Future<CameraInfo?> getCameraInfo() => throw UnimplementedError();
-  // api.getCameraInfo().then((e) => e?.impl);
+  Future<CameraInfo?> getCameraInfo() =>
+      api.getCameraInfo().then((e) => e?.impl);
 
   @override
-  Future<CameraControl?> getCameraControl() => throw UnimplementedError();
-  // api.getCameraControl().then((e) => e?.impl);
+  Future<CameraControl?> getCameraControl() =>
+      api.getCameraControl().then((e) => e?.impl);
 
   @override
   Future<void> bind() => api.bind();
@@ -291,8 +291,7 @@ final class CameraControllerImpl extends CameraControllerChannel {
 
   @override
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector() =>
-      throw UnimplementedError();
-  // api.getImageAnalysisResolutionSelector().then((e) => e?.impl);
+      api.getImageAnalysisResolutionSelector().then((e) => e?.impl);
 
   @override
   Future<void> setImageAnalysisResolutionSelector(

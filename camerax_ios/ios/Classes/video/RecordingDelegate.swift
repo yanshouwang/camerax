@@ -8,27 +8,24 @@
 import Foundation
 
 class RecordingDelegate: PigeonApiDelegateRecordingApi {
-    func isPersistene(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws -> Bool {
-        fatalError()
+    func isPersistent(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws -> Bool {
+        let isPersistent = try pigeonInstance.isPersistent()
+        return isPersistent
     }
     
     func mute(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording, muted: Bool) throws {
-        fatalError()
+        try pigeonInstance.mute(muted)
     }
     
     func pause(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws {
-        fatalError()
+        try pigeonInstance.pause()
     }
     
     func resume(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws {
-        fatalError()
+        try pigeonInstance.resume()
     }
     
     func stop(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws {
-        fatalError()
-    }
-    
-    func close(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws {
-        fatalError()
+        pigeonInstance.stop()
     }
 }

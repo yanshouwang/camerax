@@ -12,12 +12,8 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         return CameraController()
     }
     
-    func initialize(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, completion: @escaping (Result<Void, any Error>) -> Void) {
-        do {
-            throw CameraXError(code: "unimplemented-error", message: "initialize is not implemented", details: nil)
-        } catch {
-            completion(.failure(error))
-        }
+    func initialize(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws {
+        throw CameraXError(code: "unimplemented-error", message: "initialize is not implemented", details: nil)
     }
     
     func bind(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws {
@@ -40,15 +36,20 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         try pigeonInstance.setCameraSelector(cameraSelector)
     }
     
+    func getCameraInfo(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> (any CameraInfo)? {
+        return pigeonInstance
+    }
+    
+    func getCameraControl(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> (any CameraControl)? {
+        return pigeonInstance
+    }
+    
     func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateApi? {
-        return pigeonInstance.torchState?.api
+        return pigeonInstance.getTorchState()?.api
     }
     
     func observeTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws -> NSKeyValueObservation {
-        return pigeonInstance.observe(\.torchState, options: .new) { _, change in
-            guard let newValue = change.newValue, let torchState = newValue else { return }
-            observer.onChanged(torchState)
-        }
+        return pigeonInstance.observeTorchState(observer.onChanged)
     }
     
     func enableTorch(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, torchEnabled: Bool) throws {
@@ -56,14 +57,11 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     }
     
     func getZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ZoomState? {
-        return pigeonInstance.zoomState
+        return pigeonInstance.getZoomState()
     }
     
     func observeZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws -> NSKeyValueObservation {
-        return pigeonInstance.observe(\.zoomState, options: .new) { _, change in
-            guard let newValue = change.newValue, let zoomState = newValue else { return }
-            observer.onChanged(zoomState)
-        }
+        return pigeonInstance.observeZoomState(observer.onChanged)
     }
     
     func setZoomRatio(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, zoomRatio: Double) throws {
@@ -75,19 +73,19 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     }
     
     func isPinchToZoomEnabled(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> Bool {
-        return pigeonInstance.isPinchToZoomEnabled
+        return pigeonInstance.isPinchToZoomEnabled()
     }
     
     func setPinchToZoomEnabled(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, enabled: Bool) throws {
-        pigeonInstance.isPinchToZoomEnabled = enabled
+        pigeonInstance.setPinchToZoomEnabled(enabled)
     }
     
     func isTapToFocusEnabled(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> Bool {
-        return pigeonInstance.isTapToFocusEnabled
+        return pigeonInstance.isTapToFocusEnabled()
     }
     
     func setTapToFocusEnabled(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, enabled: Bool) throws {
-        pigeonInstance.isTapToFocusEnabled = enabled
+        pigeonInstance.setTapToFocusEnabled(enabled)
     }
     
     func isImageCaptureEnabled(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> Bool {
@@ -115,27 +113,19 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     }
     
     func getImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> FlashModeApi {
-        throw CameraXError(code: "unimplemented-error", message: "getImageCaptureFlashMode is not implemented", details: nil)
+        return pigeonInstance.getImageCaptureFlashMode().api
     }
     
     func setImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, flashMode: FlashModeApi) throws {
-        throw CameraXError(code: "unimplemented-error", message: "setImageCaptureFlashMode is not implemented", details: nil)
+        pigeonInstance.setImageCaptureFlashMode(flashMode.delegate)
     }
     
-    func takePictureToMemory(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: any ImageCapture.OnImageCapturedCallback, completion: @escaping (Result<Void, any Error>) -> Void) {
-        do {
-            throw CameraXError(code: "unimplemented-error", message: "takePictureToMemory is not implemented", details: nil)
-        } catch {
-            completion(.failure(error))
-        }
+    func takePictureToMemory(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: any ImageCapture.OnImageCapturedCallback) throws {
+        try pigeonInstance.takePicture(capturedCallback)
     }
     
-    func takePictureToFile(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputFileOptions: ImageCapture.OutputFileOptions, savedCallback: any ImageCapture.OnImageSavedCallback, completion: @escaping (Result<Void, any Error>) -> Void) {
-        do {
-            throw CameraXError(code: "unimplemented-error", message: "takePictureToFile is not implemented", details: nil)
-        } catch {
-            completion(.failure(error))
-        }
+    func takePictureToFile(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputFileOptions: ImageCapture.OutputFileOptions, savedCallback: any ImageCapture.OnImageSavedCallback) throws {
+        try pigeonInstance.takePicture(outputFileOptions, savedCallback)
     }
     
     func getImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ResolutionSelector? {
@@ -187,10 +177,11 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     }
     
     func isRecording(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> Bool {
-        throw CameraXError(code: "unimplemented-error", message: "isRecording is not implemented", details: nil)
+        return pigeonInstance.isRecording()
     }
     
     func startRecording(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputOptions: FileOutputOptions, audioConfig: AudioConfig, listener: VideoRecordEventConsumer) throws -> Recording {
-        throw CameraXError(code: "unimplemented-error", message: "startRecording is not implemented", details: nil)
+        let recording = try pigeonInstance.startRecording(outputOptions, audioConfig, listener: listener)
+        return recording
     }
 }

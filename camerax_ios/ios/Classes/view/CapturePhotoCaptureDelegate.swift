@@ -9,16 +9,17 @@ import Foundation
 import AVFoundation
 
 class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
-    let url: URL
-    let handler: (Error?) -> Void
+    private let options: ImageCapture.OutputFileOptions
+    private let callback: ImageCapture.OnImageSavedCallback
     
-    init(url: URL, completionHandler handler: @escaping ((any Error)?) -> Void) {
-        self.url = url
-        self.handler = handler
+    init(_ options: ImageCapture.OutputFileOptions, _ callback: ImageCapture.OnImageSavedCallback) {
+        self.options = options
+        self.callback = callback
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, willBeginCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
         debugPrint("will begin capture.")
+        callback.onCaptureStarted()
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
@@ -41,13 +42,14 @@ class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
         debugPrint("did finish processing photo.")
         do {
-            guard let data = photo.fileDataRepresentation() else {
-                throw CameraXError(code: "nil-error", message: "fileDataRepresentation is nil", details: nil)
-            }
+            if let error { throw error }
+            let url = options.url
+            guard let data = photo.fileDataRepresentation() else { throw CameraXError(code: "nil-error", message: "photo is nil", details: nil) }
             try data.write(to: url, options: .atomic)
-            handler(nil)
+            let results = ImageCapture.OutputFileResults(savedUri: url)
+            callback.onImageSaved(results)
         } catch {
-            handler(error)
+            callback.onError(error)
         }
     }
     

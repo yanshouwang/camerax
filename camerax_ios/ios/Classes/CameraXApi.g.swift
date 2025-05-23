@@ -374,6 +374,9 @@ protocol CameraXApiPigeonProxyApiDelegate {
   /// An implementation of [PigeonApiNSKeyValueObservationApi] used to add a new Dart instance of
   /// `NSKeyValueObservationApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiNSKeyValueObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiNSKeyValueObservationApi
+  /// An implementation of [PigeonApiCameraStateObserverApi] used to add a new Dart instance of
+  /// `CameraStateObserverApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiCameraStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraStateObserverApi
   /// An implementation of [PigeonApiTorchStateObserverApi] used to add a new Dart instance of
   /// `TorchStateObserverApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiTorchStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiTorchStateObserverApi
@@ -383,6 +386,33 @@ protocol CameraXApiPigeonProxyApiDelegate {
   /// An implementation of [PigeonApiZoomStateObserverApi] used to add a new Dart instance of
   /// `ZoomStateObserverApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiZoomStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateObserverApi
+  /// An implementation of [PigeonApiMeteringPointApi] used to add a new Dart instance of
+  /// `MeteringPointApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiMeteringPointApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiMeteringPointApi
+  /// An implementation of [PigeonApiMeteringPointFactoryApi] used to add a new Dart instance of
+  /// `MeteringPointFactoryApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiMeteringPointFactoryApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiMeteringPointFactoryApi
+  /// An implementation of [PigeonApiSurfaceOrientedMeteringPointFactoryApi] used to add a new Dart instance of
+  /// `SurfaceOrientedMeteringPointFactoryApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiSurfaceOrientedMeteringPointFactoryApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiSurfaceOrientedMeteringPointFactoryApi
+  /// An implementation of [PigeonApiMeteringPointTupleApi] used to add a new Dart instance of
+  /// `MeteringPointTupleApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiMeteringPointTupleApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiMeteringPointTupleApi
+  /// An implementation of [PigeonApiDurationTupleApi] used to add a new Dart instance of
+  /// `DurationTupleApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiDurationTupleApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiDurationTupleApi
+  /// An implementation of [PigeonApiFocusMeteringActionApi] used to add a new Dart instance of
+  /// `FocusMeteringActionApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiFocusMeteringActionApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiFocusMeteringActionApi
+  /// An implementation of [PigeonApiFocusMeteringResultApi] used to add a new Dart instance of
+  /// `FocusMeteringResultApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiFocusMeteringResultApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiFocusMeteringResultApi
+  /// An implementation of [PigeonApiCameraInfoApi] used to add a new Dart instance of
+  /// `CameraInfoApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiCameraInfoApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraInfoApi
+  /// An implementation of [PigeonApiCameraControlApi] used to add a new Dart instance of
+  /// `CameraControlApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiCameraControlApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraControlApi
   /// An implementation of [PigeonApiResolutionStrategyApi] used to add a new Dart instance of
   /// `ResolutionStrategyApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiResolutionStrategyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiResolutionStrategyApi
@@ -419,6 +449,9 @@ protocol CameraXApiPigeonProxyApiDelegate {
   /// An implementation of [PigeonApiImageAnalyzerApi] used to add a new Dart instance of
   /// `ImageAnalyzerApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiImageAnalyzerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiImageAnalyzerApi
+  /// An implementation of [PigeonApiOutputOptionsApi] used to add a new Dart instance of
+  /// `OutputOptionsApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiOutputOptionsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOutputOptionsApi
   /// An implementation of [PigeonApiFileOutputOptionsApi] used to add a new Dart instance of
   /// `FileOutputOptionsApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiFileOutputOptionsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiFileOutputOptionsApi
@@ -523,8 +556,16 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiSizeApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiSizeApi(self))
     PigeonApiCameraSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraSelectorApi(self))
     PigeonApiNSKeyValueObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiNSKeyValueObservationApi(self))
+    PigeonApiCameraStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraStateObserverApi(self))
     PigeonApiTorchStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiTorchStateObserverApi(self))
     PigeonApiZoomStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiZoomStateObserverApi(self))
+    PigeonApiMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiMeteringPointFactoryApi(self))
+    PigeonApiSurfaceOrientedMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiSurfaceOrientedMeteringPointFactoryApi(self))
+    PigeonApiMeteringPointTupleApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiMeteringPointTupleApi(self))
+    PigeonApiDurationTupleApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiDurationTupleApi(self))
+    PigeonApiFocusMeteringActionApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiFocusMeteringActionApi(self))
+    PigeonApiCameraInfoApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraInfoApi(self))
+    PigeonApiCameraControlApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraControlApi(self))
     PigeonApiResolutionStrategyApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiResolutionStrategyApi(self))
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiResolutionSelectorApi(self))
     PigeonApiMetadataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiMetadataApi(self))
@@ -532,6 +573,7 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOnImageCapturedCallbackApi(self))
     PigeonApiOnImageSavedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOnImageSavedCallbackApi(self))
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiImageAnalyzerApi(self))
+    PigeonApiOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOutputOptionsApi(self))
     PigeonApiFileOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiFileOutputOptionsApi(self))
     PigeonApiAudioConfigApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiAudioConfigApi(self))
     PigeonApiVideoRecordEventConsumerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVideoRecordEventConsumerApi(self))
@@ -547,8 +589,16 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiSizeApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCameraSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiNSKeyValueObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiCameraStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiTorchStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiZoomStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiSurfaceOrientedMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiMeteringPointTupleApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiDurationTupleApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiFocusMeteringActionApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiCameraInfoApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiCameraControlApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiResolutionStrategyApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiMetadataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
@@ -556,6 +606,7 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiOnImageSavedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiFileOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiAudioConfigApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiVideoRecordEventConsumerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
@@ -672,6 +723,17 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
       }
 
 
+      if let instance = value as? CameraStateObserver {
+        pigeonRegistrar.apiDelegate.pigeonApiCameraStateObserverApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
       if let instance = value as? TorchStateObserver {
         pigeonRegistrar.apiDelegate.pigeonApiTorchStateObserverApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
@@ -696,6 +758,105 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 
       if let instance = value as? ZoomStateObserver {
         pigeonRegistrar.apiDelegate.pigeonApiZoomStateObserverApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? MeteringPoint {
+        pigeonRegistrar.apiDelegate.pigeonApiMeteringPointApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? SurfaceOrientedMeteringPointFactory {
+        pigeonRegistrar.apiDelegate.pigeonApiSurfaceOrientedMeteringPointFactoryApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? MeteringPointFactory {
+        pigeonRegistrar.apiDelegate.pigeonApiMeteringPointFactoryApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? MeteringPointTuple {
+        pigeonRegistrar.apiDelegate.pigeonApiMeteringPointTupleApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? DurationTuple {
+        pigeonRegistrar.apiDelegate.pigeonApiDurationTupleApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? FocusMeteringAction {
+        pigeonRegistrar.apiDelegate.pigeonApiFocusMeteringActionApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? FocusMeteringResult {
+        pigeonRegistrar.apiDelegate.pigeonApiFocusMeteringResultApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? CameraInfo {
+        pigeonRegistrar.apiDelegate.pigeonApiCameraInfoApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? CameraControl {
+        pigeonRegistrar.apiDelegate.pigeonApiCameraControlApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -751,17 +912,6 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 
       if let instance = value as? ImageProxy {
         pigeonRegistrar.apiDelegate.pigeonApiImageProxyApi(pigeonRegistrar).pigeonNewInstance(
-          pigeonInstance: instance
-        ) { _ in }
-        super.writeByte(128)
-        super.writeValue(
-          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
-        return
-      }
-
-
-      if let instance = value as? AutoCloseable {
-        pigeonRegistrar.apiDelegate.pigeonApiAutoCloseableApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -850,6 +1000,17 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 
       if let instance = value as? FileOutputOptions {
         pigeonRegistrar.apiDelegate.pigeonApiFileOutputOptionsApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? OutputOptions {
+        pigeonRegistrar.apiDelegate.pigeonApiOutputOptionsApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -982,6 +1143,17 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 
       if let instance = value as? Recording {
         pigeonRegistrar.apiDelegate.pigeonApiRecordingApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? AutoCloseable {
+        pigeonRegistrar.apiDelegate.pigeonApiAutoCloseableApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -2073,6 +2245,94 @@ final class PigeonApiNSKeyValueObservationApi: PigeonApiProtocolNSKeyValueObserv
     }
   }
 }
+protocol PigeonApiDelegateCameraStateObserverApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraStateObserverApi) throws -> CameraStateObserver
+}
+
+protocol PigeonApiProtocolCameraStateObserverApi {
+  func onChanged(pigeonInstance pigeonInstanceArg: CameraStateObserver, value valueArg: CameraStateApi, completion: @escaping (Result<Void, CameraXError>) -> Void)
+}
+
+final class PigeonApiCameraStateObserverApi: PigeonApiProtocolCameraStateObserverApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateCameraStateObserverApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateCameraStateObserverApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiCameraStateObserverApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraStateObserverApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of CameraStateObserverApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: CameraStateObserver, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      completion(
+        .failure(
+          CameraXError(
+            code: "new-instance-error",
+            message: "Error: Attempting to create a new Dart instance of CameraStateObserverApi, but the class has a nonnull callback method.", details: "")))
+    }
+  }
+  func onChanged(pigeonInstance pigeonInstanceArg: CameraStateObserver, value valueArg: CameraStateApi, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+      return
+    }
+    let binaryMessenger = pigeonRegistrar.binaryMessenger
+    let codec = pigeonRegistrar.codec
+    let channelName: String = "dev.flutter.pigeon.camerax_ios.CameraStateObserverApi.onChanged"
+    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+    channel.sendMessage([pigeonInstanceArg, valueArg] as [Any?]) { response in
+      guard let listResponse = response as? [Any?] else {
+        completion(.failure(createConnectionError(withChannelName: channelName)))
+        return
+      }
+      if listResponse.count > 1 {
+        let code: String = listResponse[0] as! String
+        let message: String? = nilOrValue(listResponse[1])
+        let details: String? = nilOrValue(listResponse[2])
+        completion(.failure(CameraXError(code: code, message: message, details: details)))
+      } else {
+        completion(.success(()))
+      }
+    }
+  }
+
+}
 protocol PigeonApiDelegateTorchStateObserverApi {
   func pigeonDefaultConstructor(pigeonApi: PigeonApiTorchStateObserverApi) throws -> TorchStateObserver
 }
@@ -2302,6 +2562,1025 @@ withIdentifier: pigeonIdentifierArg)
     }
   }
 
+}
+protocol PigeonApiDelegateMeteringPointApi {
+  func size(pigeonApi: PigeonApiMeteringPointApi, pigeonInstance: MeteringPoint) throws -> Double
+}
+
+protocol PigeonApiProtocolMeteringPointApi {
+}
+
+final class PigeonApiMeteringPointApi: PigeonApiProtocolMeteringPointApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateMeteringPointApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateMeteringPointApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  ///Creates a Dart instance of MeteringPointApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: MeteringPoint, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let sizeArg = try! pigeonDelegate.size(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.MeteringPointApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg, sizeArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateMeteringPointFactoryApi {
+  func createPoint(pigeonApi: PigeonApiMeteringPointFactoryApi, pigeonInstance: MeteringPointFactory, x: Double, y: Double, size: Double?) throws -> MeteringPoint
+}
+
+protocol PigeonApiProtocolMeteringPointFactoryApi {
+}
+
+final class PigeonApiMeteringPointFactoryApi: PigeonApiProtocolMeteringPointFactoryApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateMeteringPointFactoryApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateMeteringPointFactoryApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiMeteringPointFactoryApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let createPointChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.MeteringPointFactoryApi.createPoint", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      createPointChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! MeteringPointFactory
+        let xArg = args[1] as! Double
+        let yArg = args[2] as! Double
+        let sizeArg: Double? = nilOrValue(args[3])
+        do {
+          let result = try api.pigeonDelegate.createPoint(pigeonApi: api, pigeonInstance: pigeonInstanceArg, x: xArg, y: yArg, size: sizeArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      createPointChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of MeteringPointFactoryApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: MeteringPointFactory, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.MeteringPointFactoryApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateSurfaceOrientedMeteringPointFactoryApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiSurfaceOrientedMeteringPointFactoryApi, width: Double, height: Double) throws -> SurfaceOrientedMeteringPointFactory
+}
+
+protocol PigeonApiProtocolSurfaceOrientedMeteringPointFactoryApi {
+}
+
+final class PigeonApiSurfaceOrientedMeteringPointFactoryApi: PigeonApiProtocolSurfaceOrientedMeteringPointFactoryApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateSurfaceOrientedMeteringPointFactoryApi
+  ///An implementation of [MeteringPointFactoryApi] used to access callback methods
+  var pigeonApiMeteringPointFactoryApi: PigeonApiMeteringPointFactoryApi {
+    return pigeonRegistrar.apiDelegate.pigeonApiMeteringPointFactoryApi(pigeonRegistrar)
+  }
+
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateSurfaceOrientedMeteringPointFactoryApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiSurfaceOrientedMeteringPointFactoryApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.SurfaceOrientedMeteringPointFactoryApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let widthArg = args[1] as! Double
+        let heightArg = args[2] as! Double
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, width: widthArg, height: heightArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of SurfaceOrientedMeteringPointFactoryApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: SurfaceOrientedMeteringPointFactory, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.SurfaceOrientedMeteringPointFactoryApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateMeteringPointTupleApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiMeteringPointTupleApi, point: MeteringPoint, modes: [MeteringModeApi]?) throws -> MeteringPointTuple
+}
+
+protocol PigeonApiProtocolMeteringPointTupleApi {
+}
+
+final class PigeonApiMeteringPointTupleApi: PigeonApiProtocolMeteringPointTupleApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateMeteringPointTupleApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateMeteringPointTupleApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiMeteringPointTupleApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.MeteringPointTupleApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let pointArg = args[1] as! MeteringPoint
+        let modesArg: [MeteringModeApi]? = nilOrValue(args[2])
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, point: pointArg, modes: modesArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of MeteringPointTupleApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: MeteringPointTuple, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.MeteringPointTupleApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateDurationTupleApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiDurationTupleApi, duration: Int64, timeUnit: TimeUnitApi) throws -> DurationTuple
+}
+
+protocol PigeonApiProtocolDurationTupleApi {
+}
+
+final class PigeonApiDurationTupleApi: PigeonApiProtocolDurationTupleApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateDurationTupleApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateDurationTupleApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiDurationTupleApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.DurationTupleApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let durationArg = args[1] as! Int64
+        let timeUnitArg = args[2] as! TimeUnitApi
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, duration: durationArg, timeUnit: timeUnitArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of DurationTupleApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: DurationTuple, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.DurationTupleApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateFocusMeteringActionApi {
+  func build(pigeonApi: PigeonApiFocusMeteringActionApi, first: MeteringPointTuple, others: [MeteringPointTuple]?, disableAutoCancel: Bool?, autoCancelDuration: DurationTuple?) throws -> FocusMeteringAction
+  func getAutoCancelDurationInMillis(pigeonApi: PigeonApiFocusMeteringActionApi, pigeonInstance: FocusMeteringAction) throws -> Int64
+  func getMeteringPointsAe(pigeonApi: PigeonApiFocusMeteringActionApi, pigeonInstance: FocusMeteringAction) throws -> [MeteringPoint]
+  func getMeteringPointsAf(pigeonApi: PigeonApiFocusMeteringActionApi, pigeonInstance: FocusMeteringAction) throws -> [MeteringPoint]
+  func getMeteringPointsAwb(pigeonApi: PigeonApiFocusMeteringActionApi, pigeonInstance: FocusMeteringAction) throws -> [MeteringPoint]
+  func isAutoCancelEnabled(pigeonApi: PigeonApiFocusMeteringActionApi, pigeonInstance: FocusMeteringAction) throws -> Bool
+}
+
+protocol PigeonApiProtocolFocusMeteringActionApi {
+}
+
+final class PigeonApiFocusMeteringActionApi: PigeonApiProtocolFocusMeteringActionApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateFocusMeteringActionApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateFocusMeteringActionApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiFocusMeteringActionApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let buildChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.build", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      buildChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let firstArg = args[1] as! MeteringPointTuple
+        let othersArg: [MeteringPointTuple]? = nilOrValue(args[2])
+        let disableAutoCancelArg: Bool? = nilOrValue(args[3])
+        let autoCancelDurationArg: DurationTuple? = nilOrValue(args[4])
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.build(pigeonApi: api, first: firstArg, others: othersArg, disableAutoCancel: disableAutoCancelArg, autoCancelDuration: autoCancelDurationArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      buildChannel.setMessageHandler(nil)
+    }
+    let getAutoCancelDurationInMillisChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.getAutoCancelDurationInMillis", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getAutoCancelDurationInMillisChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.getAutoCancelDurationInMillis(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getAutoCancelDurationInMillisChannel.setMessageHandler(nil)
+    }
+    let getMeteringPointsAeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.getMeteringPointsAe", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getMeteringPointsAeChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.getMeteringPointsAe(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getMeteringPointsAeChannel.setMessageHandler(nil)
+    }
+    let getMeteringPointsAfChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.getMeteringPointsAf", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getMeteringPointsAfChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.getMeteringPointsAf(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getMeteringPointsAfChannel.setMessageHandler(nil)
+    }
+    let getMeteringPointsAwbChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.getMeteringPointsAwb", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getMeteringPointsAwbChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.getMeteringPointsAwb(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getMeteringPointsAwbChannel.setMessageHandler(nil)
+    }
+    let isAutoCancelEnabledChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.isAutoCancelEnabled", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      isAutoCancelEnabledChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.isAutoCancelEnabled(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      isAutoCancelEnabledChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of FocusMeteringActionApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: FocusMeteringAction, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.FocusMeteringActionApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateFocusMeteringResultApi {
+  func isFocusSuccessful(pigeonApi: PigeonApiFocusMeteringResultApi, pigeonInstance: FocusMeteringResult) throws -> Bool
+}
+
+protocol PigeonApiProtocolFocusMeteringResultApi {
+}
+
+final class PigeonApiFocusMeteringResultApi: PigeonApiProtocolFocusMeteringResultApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateFocusMeteringResultApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateFocusMeteringResultApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  ///Creates a Dart instance of FocusMeteringResultApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: FocusMeteringResult, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let isFocusSuccessfulArg = try! pigeonDelegate.isFocusSuccessful(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.FocusMeteringResultApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg, isFocusSuccessfulArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateCameraInfoApi {
+  func mustPlayShutterSound(pigeonApi: PigeonApiCameraInfoApi) throws -> Bool
+  func getCameraSelector(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> CameraSelector
+  func getCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> CameraStateApi?
+  func observeCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, observer: CameraStateObserver) throws -> NSKeyValueObservation
+  func getTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> TorchStateApi?
+  func observeTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, observer: TorchStateObserver) throws -> NSKeyValueObservation
+  func getZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> ZoomState?
+  func observeZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, observer: ZoomStateObserver) throws -> NSKeyValueObservation
+  func getIntrinsticZoomRatio(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> Double
+  func getLensFacing(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> LensFacingApi
+  func getPhysicalCameraInfos(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> [CameraInfo]
+  func getSensorRotationDegrees(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> Int64
+  func isLogicalMultiCameraSupported(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> Bool
+  func isZslSupported(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> Bool
+  func hasFlashUnit(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> Bool
+  func isFocusMeteringSupported(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, action: FocusMeteringAction) throws -> Bool
+}
+
+protocol PigeonApiProtocolCameraInfoApi {
+}
+
+final class PigeonApiCameraInfoApi: PigeonApiProtocolCameraInfoApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateCameraInfoApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateCameraInfoApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiCameraInfoApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let mustPlayShutterSoundChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.mustPlayShutterSound", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      mustPlayShutterSoundChannel.setMessageHandler { _, reply in
+        do {
+          let result = try api.pigeonDelegate.mustPlayShutterSound(pigeonApi: api)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      mustPlayShutterSoundChannel.setMessageHandler(nil)
+    }
+    let getCameraSelectorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getCameraSelector", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getCameraSelectorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getCameraSelector(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getCameraSelectorChannel.setMessageHandler(nil)
+    }
+    let getCameraStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getCameraState", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getCameraStateChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getCameraState(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getCameraStateChannel.setMessageHandler(nil)
+    }
+    let observeCameraStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.observeCameraState", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      observeCameraStateChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        let observerArg = args[1] as! CameraStateObserver
+        do {
+          let result = try api.pigeonDelegate.observeCameraState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      observeCameraStateChannel.setMessageHandler(nil)
+    }
+    let getTorchStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getTorchState", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getTorchStateChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getTorchState(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getTorchStateChannel.setMessageHandler(nil)
+    }
+    let observeTorchStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.observeTorchState", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      observeTorchStateChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        let observerArg = args[1] as! TorchStateObserver
+        do {
+          let result = try api.pigeonDelegate.observeTorchState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      observeTorchStateChannel.setMessageHandler(nil)
+    }
+    let getZoomStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getZoomState", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getZoomStateChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getZoomState(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getZoomStateChannel.setMessageHandler(nil)
+    }
+    let observeZoomStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.observeZoomState", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      observeZoomStateChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        let observerArg = args[1] as! ZoomStateObserver
+        do {
+          let result = try api.pigeonDelegate.observeZoomState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      observeZoomStateChannel.setMessageHandler(nil)
+    }
+    let getIntrinsticZoomRatioChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getIntrinsticZoomRatio", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getIntrinsticZoomRatioChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getIntrinsticZoomRatio(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getIntrinsticZoomRatioChannel.setMessageHandler(nil)
+    }
+    let getLensFacingChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getLensFacing", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getLensFacingChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getLensFacing(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getLensFacingChannel.setMessageHandler(nil)
+    }
+    let getPhysicalCameraInfosChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getPhysicalCameraInfos", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getPhysicalCameraInfosChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getPhysicalCameraInfos(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getPhysicalCameraInfosChannel.setMessageHandler(nil)
+    }
+    let getSensorRotationDegreesChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getSensorRotationDegrees", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getSensorRotationDegreesChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.getSensorRotationDegrees(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getSensorRotationDegreesChannel.setMessageHandler(nil)
+    }
+    let isLogicalMultiCameraSupportedChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.isLogicalMultiCameraSupported", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      isLogicalMultiCameraSupportedChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.isLogicalMultiCameraSupported(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      isLogicalMultiCameraSupportedChannel.setMessageHandler(nil)
+    }
+    let isZslSupportedChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.isZslSupported", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      isZslSupportedChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.isZslSupported(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      isZslSupportedChannel.setMessageHandler(nil)
+    }
+    let hasFlashUnitChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.hasFlashUnit", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      hasFlashUnitChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        do {
+          let result = try api.pigeonDelegate.hasFlashUnit(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      hasFlashUnitChannel.setMessageHandler(nil)
+    }
+    let isFocusMeteringSupportedChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.isFocusMeteringSupported", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      isFocusMeteringSupportedChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraInfo
+        let actionArg = args[1] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.isFocusMeteringSupported(pigeonApi: api, pigeonInstance: pigeonInstanceArg, action: actionArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      isFocusMeteringSupportedChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of CameraInfoApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: CameraInfo, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.CameraInfoApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateCameraControlApi {
+  func enableTorch(pigeonApi: PigeonApiCameraControlApi, pigeonInstance: CameraControl, torch: Bool) throws
+  func setZoomRatio(pigeonApi: PigeonApiCameraControlApi, pigeonInstance: CameraControl, ratio: Double) throws
+  func setLinearZoom(pigeonApi: PigeonApiCameraControlApi, pigeonInstance: CameraControl, linearZoom: Double) throws
+  func startFocusAndMetering(pigeonApi: PigeonApiCameraControlApi, pigeonInstance: CameraControl, action: FocusMeteringAction) throws -> FocusMeteringResult
+  func cancelFocusAndMetering(pigeonApi: PigeonApiCameraControlApi, pigeonInstance: CameraControl) throws
+  func setExposureCompensationIndex(pigeonApi: PigeonApiCameraControlApi, pigeonInstance: CameraControl, value: Int64) throws -> Int64
+}
+
+protocol PigeonApiProtocolCameraControlApi {
+}
+
+final class PigeonApiCameraControlApi: PigeonApiProtocolCameraControlApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateCameraControlApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateCameraControlApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiCameraControlApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let enableTorchChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControlApi.enableTorch", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      enableTorchChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraControl
+        let torchArg = args[1] as! Bool
+        do {
+          try api.pigeonDelegate.enableTorch(pigeonApi: api, pigeonInstance: pigeonInstanceArg, torch: torchArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      enableTorchChannel.setMessageHandler(nil)
+    }
+    let setZoomRatioChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControlApi.setZoomRatio", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      setZoomRatioChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraControl
+        let ratioArg = args[1] as! Double
+        do {
+          try api.pigeonDelegate.setZoomRatio(pigeonApi: api, pigeonInstance: pigeonInstanceArg, ratio: ratioArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      setZoomRatioChannel.setMessageHandler(nil)
+    }
+    let setLinearZoomChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControlApi.setLinearZoom", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      setLinearZoomChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraControl
+        let linearZoomArg = args[1] as! Double
+        do {
+          try api.pigeonDelegate.setLinearZoom(pigeonApi: api, pigeonInstance: pigeonInstanceArg, linearZoom: linearZoomArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      setLinearZoomChannel.setMessageHandler(nil)
+    }
+    let startFocusAndMeteringChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControlApi.startFocusAndMetering", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      startFocusAndMeteringChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraControl
+        let actionArg = args[1] as! FocusMeteringAction
+        do {
+          let result = try api.pigeonDelegate.startFocusAndMetering(pigeonApi: api, pigeonInstance: pigeonInstanceArg, action: actionArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      startFocusAndMeteringChannel.setMessageHandler(nil)
+    }
+    let cancelFocusAndMeteringChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControlApi.cancelFocusAndMetering", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      cancelFocusAndMeteringChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraControl
+        do {
+          try api.pigeonDelegate.cancelFocusAndMetering(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      cancelFocusAndMeteringChannel.setMessageHandler(nil)
+    }
+    let setExposureCompensationIndexChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControlApi.setExposureCompensationIndex", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      setExposureCompensationIndexChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraControl
+        let valueArg = args[1] as! Int64
+        do {
+          let result = try api.pigeonDelegate.setExposureCompensationIndex(pigeonApi: api, pigeonInstance: pigeonInstanceArg, value: valueArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      setExposureCompensationIndexChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of CameraControlApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: CameraControl, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.CameraControlApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
 }
 protocol PigeonApiDelegateResolutionStrategyApi {
   func pigeonDefaultConstructor(pigeonApi: PigeonApiResolutionStrategyApi, boundSize: IntSize?, fallbackRule: ResolutionFallbackRuleApi) throws -> ResolutionStrategy
@@ -3405,9 +4684,111 @@ withIdentifier: pigeonIdentifierArg)
   }
 
 }
+protocol PigeonApiDelegateOutputOptionsApi {
+  func getDurationLimitMillis(pigeonApi: PigeonApiOutputOptionsApi, pigeonInstance: OutputOptions) throws -> Int64
+  func getFileSizeLimit(pigeonApi: PigeonApiOutputOptionsApi, pigeonInstance: OutputOptions) throws -> Int64
+  func getLocation(pigeonApi: PigeonApiOutputOptionsApi, pigeonInstance: OutputOptions) throws -> CLLocation?
+}
+
+protocol PigeonApiProtocolOutputOptionsApi {
+}
+
+final class PigeonApiOutputOptionsApi: PigeonApiProtocolOutputOptionsApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateOutputOptionsApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateOutputOptionsApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiOutputOptionsApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let getDurationLimitMillisChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.OutputOptionsApi.getDurationLimitMillis", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getDurationLimitMillisChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! OutputOptions
+        do {
+          let result = try api.pigeonDelegate.getDurationLimitMillis(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getDurationLimitMillisChannel.setMessageHandler(nil)
+    }
+    let getFileSizeLimitChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.OutputOptionsApi.getFileSizeLimit", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getFileSizeLimitChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! OutputOptions
+        do {
+          let result = try api.pigeonDelegate.getFileSizeLimit(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getFileSizeLimitChannel.setMessageHandler(nil)
+    }
+    let getLocationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.OutputOptionsApi.getLocation", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getLocationChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! OutputOptions
+        do {
+          let result = try api.pigeonDelegate.getLocation(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getLocationChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of OutputOptionsApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: OutputOptions, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.OutputOptionsApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
 protocol PigeonApiDelegateFileOutputOptionsApi {
   func build(pigeonApi: PigeonApiFileOutputOptionsApi, file: String, durationLimitMillis: Int64?, fileSizeLimitBytes: Int64?, location: CLLocation?) throws -> FileOutputOptions
-  func file(pigeonApi: PigeonApiFileOutputOptionsApi, pigeonInstance: FileOutputOptions) throws -> String
+  func getFile(pigeonApi: PigeonApiFileOutputOptionsApi, pigeonInstance: FileOutputOptions) throws -> String
 }
 
 protocol PigeonApiProtocolFileOutputOptionsApi {
@@ -3416,6 +4797,11 @@ protocol PigeonApiProtocolFileOutputOptionsApi {
 final class PigeonApiFileOutputOptionsApi: PigeonApiProtocolFileOutputOptionsApi  {
   unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
   let pigeonDelegate: PigeonApiDelegateFileOutputOptionsApi
+  ///An implementation of [OutputOptionsApi] used to access callback methods
+  var pigeonApiOutputOptionsApi: PigeonApiOutputOptionsApi {
+    return pigeonRegistrar.apiDelegate.pigeonApiOutputOptionsApi(pigeonRegistrar)
+  }
+
   init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateFileOutputOptionsApi) {
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
@@ -3447,6 +4833,21 @@ withIdentifier: pigeonIdentifierArg)
     } else {
       buildChannel.setMessageHandler(nil)
     }
+    let getFileChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.FileOutputOptionsApi.getFile", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getFileChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! FileOutputOptions
+        do {
+          let result = try api.pigeonDelegate.getFile(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getFileChannel.setMessageHandler(nil)
+    }
   }
 
   ///Creates a Dart instance of FileOutputOptionsApi and attaches it to [pigeonInstance].
@@ -3461,12 +4862,11 @@ withIdentifier: pigeonIdentifierArg)
       completion(.success(()))
     }     else {
       let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let fileArg = try! pigeonDelegate.file(pigeonApi: self, pigeonInstance: pigeonInstance)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.FileOutputOptionsApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg, fileArg] as [Any?]) { response in
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
           completion(.failure(createConnectionError(withChannelName: channelName)))
           return
@@ -4150,12 +5550,11 @@ withIdentifier: pigeonIdentifierArg)
 
 }
 protocol PigeonApiDelegateRecordingApi {
-  func isPersistene(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws -> Bool
+  func isPersistent(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws -> Bool
   func mute(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording, muted: Bool) throws
   func pause(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws
   func resume(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws
   func stop(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws
-  func close(pigeonApi: PigeonApiRecordingApi, pigeonInstance: Recording) throws
 }
 
 protocol PigeonApiProtocolRecordingApi {
@@ -4164,6 +5563,11 @@ protocol PigeonApiProtocolRecordingApi {
 final class PigeonApiRecordingApi: PigeonApiProtocolRecordingApi  {
   unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
   let pigeonDelegate: PigeonApiDelegateRecordingApi
+  ///An implementation of [AutoCloseableApi] used to access callback methods
+  var pigeonApiAutoCloseableApi: PigeonApiAutoCloseableApi {
+    return pigeonRegistrar.apiDelegate.pigeonApiAutoCloseableApi(pigeonRegistrar)
+  }
+
   init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateRecordingApi) {
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
@@ -4174,20 +5578,20 @@ final class PigeonApiRecordingApi: PigeonApiProtocolRecordingApi  {
       ? FlutterStandardMessageCodec(
         readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
       : FlutterStandardMessageCodec.sharedInstance()
-    let isPersisteneChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.RecordingApi.isPersistene", binaryMessenger: binaryMessenger, codec: codec)
+    let isPersistentChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.RecordingApi.isPersistent", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      isPersisteneChannel.setMessageHandler { message, reply in
+      isPersistentChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let pigeonInstanceArg = args[0] as! Recording
         do {
-          let result = try api.pigeonDelegate.isPersistene(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          let result = try api.pigeonDelegate.isPersistent(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
           reply(wrapResult(result))
         } catch {
           reply(wrapError(error))
         }
       }
     } else {
-      isPersisteneChannel.setMessageHandler(nil)
+      isPersistentChannel.setMessageHandler(nil)
     }
     let muteChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.RecordingApi.mute", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
@@ -4250,21 +5654,6 @@ final class PigeonApiRecordingApi: PigeonApiProtocolRecordingApi  {
     } else {
       stopChannel.setMessageHandler(nil)
     }
-    let closeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.RecordingApi.close", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      closeChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! Recording
-        do {
-          try api.pigeonDelegate.close(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(nil))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      closeChannel.setMessageHandler(nil)
-    }
   }
 
   ///Creates a Dart instance of RecordingApi and attaches it to [pigeonInstance].
@@ -4302,12 +5691,14 @@ final class PigeonApiRecordingApi: PigeonApiProtocolRecordingApi  {
 }
 protocol PigeonApiDelegateCameraControllerApi {
   func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraControllerApi) throws -> CameraController
-  func initialize(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, completion: @escaping (Result<Void, Error>) -> Void)
+  func initialize(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws
   func bind(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws
   func unbind(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws
   func hasCamera(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, cameraSelector: CameraSelector) throws -> Bool
   func getCameraSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraSelector
   func setCameraSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, cameraSelector: CameraSelector) throws
+  func getCameraInfo(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraInfo?
+  func getCameraControl(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraControl?
   func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateApi?
   func observeTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws -> NSKeyValueObservation
   func enableTorch(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, torchEnabled: Bool) throws
@@ -4327,8 +5718,8 @@ protocol PigeonApiDelegateCameraControllerApi {
   func setImageCaptureMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, captureMode: CaptureModeApi) throws
   func getImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> FlashModeApi
   func setImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, flashMode: FlashModeApi) throws
-  func takePictureToMemory(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: ImageCapture.OnImageCapturedCallback, completion: @escaping (Result<Void, Error>) -> Void)
-  func takePictureToFile(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputFileOptions: ImageCapture.OutputFileOptions, savedCallback: ImageCapture.OnImageSavedCallback, completion: @escaping (Result<Void, Error>) -> Void)
+  func takePictureToMemory(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: ImageCapture.OnImageCapturedCallback) throws
+  func takePictureToFile(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputFileOptions: ImageCapture.OutputFileOptions, savedCallback: ImageCapture.OnImageSavedCallback) throws
   func getImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ResolutionSelector?
   func setImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, resolutionSelector: ResolutionSelector?) throws
   func getImageAnalysisBackpressureStrategy(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> BackpressureStrategyApi
@@ -4383,13 +5774,11 @@ withIdentifier: pigeonIdentifierArg)
       initializeChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let pigeonInstanceArg = args[0] as! CameraController
-        api.pigeonDelegate.initialize(pigeonApi: api, pigeonInstance: pigeonInstanceArg) { result in
-          switch result {
-          case .success:
-            reply(wrapResult(nil))
-          case .failure(let error):
-            reply(wrapError(error))
-          }
+        do {
+          try api.pigeonDelegate.initialize(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
         }
       }
     } else {
@@ -4471,6 +5860,36 @@ withIdentifier: pigeonIdentifierArg)
       }
     } else {
       setCameraSelectorChannel.setMessageHandler(nil)
+    }
+    let getCameraInfoChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.getCameraInfo", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getCameraInfoChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraController
+        do {
+          let result = try api.pigeonDelegate.getCameraInfo(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getCameraInfoChannel.setMessageHandler(nil)
+    }
+    let getCameraControlChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.getCameraControl", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getCameraControlChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraController
+        do {
+          let result = try api.pigeonDelegate.getCameraControl(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getCameraControlChannel.setMessageHandler(nil)
     }
     let getTorchStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.getTorchState", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
@@ -4773,13 +6192,11 @@ withIdentifier: pigeonIdentifierArg)
         let args = message as! [Any?]
         let pigeonInstanceArg = args[0] as! CameraController
         let capturedCallbackArg = args[1] as! ImageCapture.OnImageCapturedCallback
-        api.pigeonDelegate.takePictureToMemory(pigeonApi: api, pigeonInstance: pigeonInstanceArg, capturedCallback: capturedCallbackArg) { result in
-          switch result {
-          case .success:
-            reply(wrapResult(nil))
-          case .failure(let error):
-            reply(wrapError(error))
-          }
+        do {
+          try api.pigeonDelegate.takePictureToMemory(pigeonApi: api, pigeonInstance: pigeonInstanceArg, capturedCallback: capturedCallbackArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
         }
       }
     } else {
@@ -4792,13 +6209,11 @@ withIdentifier: pigeonIdentifierArg)
         let pigeonInstanceArg = args[0] as! CameraController
         let outputFileOptionsArg = args[1] as! ImageCapture.OutputFileOptions
         let savedCallbackArg = args[2] as! ImageCapture.OnImageSavedCallback
-        api.pigeonDelegate.takePictureToFile(pigeonApi: api, pigeonInstance: pigeonInstanceArg, outputFileOptions: outputFileOptionsArg, savedCallback: savedCallbackArg) { result in
-          switch result {
-          case .success:
-            reply(wrapResult(nil))
-          case .failure(let error):
-            reply(wrapError(error))
-          }
+        do {
+          try api.pigeonDelegate.takePictureToFile(pigeonApi: api, pigeonInstance: pigeonInstanceArg, outputFileOptions: outputFileOptionsArg, savedCallback: savedCallbackArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
         }
       }
     } else {

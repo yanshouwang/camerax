@@ -7,6 +7,12 @@
 
 import Foundation
 
+class CameraStateObserverDelegate: PigeonApiDelegateCameraStateObserverApi {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraStateObserverApi) throws -> CameraStateObserver {
+        return CameraStateObserver(pigeonApi)
+    }
+}
+
 class TorchStateObserverDelegate: PigeonApiDelegateTorchStateObserverApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiTorchStateObserverApi) throws -> TorchStateObserver {
         return TorchStateObserver(pigeonApi)
@@ -19,8 +25,20 @@ class ZoomStateObserverDelegate: PigeonApiDelegateZoomStateObserverApi {
     }
 }
 
-class TorchStateObserver: Observer {
-    let api: PigeonApiTorchStateObserverApi
+class CameraStateObserver: NSObject, Observer {
+    private let api: PigeonApiCameraStateObserverApi
+    
+    init(_ api: PigeonApiCameraStateObserverApi) {
+        self.api = api
+    }
+    
+    func onChanged(_ value: CameraState) {
+        api.onChanged(pigeonInstance: self, value: value.api) { _ in }
+    }
+}
+
+class TorchStateObserver: NSObject, Observer {
+    private let api: PigeonApiTorchStateObserverApi
     
     init(_ api: PigeonApiTorchStateObserverApi) {
         self.api = api
@@ -31,8 +49,8 @@ class TorchStateObserver: Observer {
     }
 }
 
-class ZoomStateObserver: Observer {
-    let api: PigeonApiZoomStateObserverApi
+class ZoomStateObserver: NSObject, Observer {
+    private let api: PigeonApiZoomStateObserverApi
     
     init(_ api: PigeonApiZoomStateObserverApi) {
         self.api = api

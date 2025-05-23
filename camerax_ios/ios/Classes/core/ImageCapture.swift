@@ -23,20 +23,20 @@ public class ImageCapture: NSObject {
     }
     
     public class OutputFileOptions: NSObject {
-        let file: String
+        let url: URL
         let metadata: Metadata?
         
-        init(file: String, metadata: Metadata?) {
-            self.file = file
+        init(url: URL, metadata: Metadata?) {
+            self.url = url
             self.metadata = metadata
         }
     }
     
     public class OutputFileResults: NSObject {
-        let savedUri: URL
+        let savedUrl: URL
         
         init(savedUri: URL) {
-            self.savedUri = savedUri
+            self.savedUrl = savedUri
         }
     }
     
@@ -44,20 +44,20 @@ public class ImageCapture: NSObject {
         case auto, on, off
     }
     
-    protocol OnImageCapturedCallback: NSObjectProtocol {
-        func onCaptureStarted()
-        func onCaptureProcessProgressed(progress: Int)
-        func onPostviewBitmapAvailable(bitmap: Data)
-        func onCaptureSuccess(image: ImageProxy)
-        func onError(exception: Error)
+    public protocol OnImageCapturedCallback: NSObjectProtocol {
+        func onCaptureStarted() -> Void
+        func onCaptureProcessProgressed(_ progress: Int) -> Void
+        func onPostviewBitmapAvailable(_ bitmap: Data) -> Void
+        func onCaptureSuccess(_ image: ImageProxy) -> Void
+        func onError(_ error: Error) -> Void
     }
     
-    protocol OnImageSavedCallback: NSObjectProtocol {
-        func onCaptureStarted()
-        func onCaptureProcessProgressed(progress: Int)
-        func onPostviewBitmapAvailable(bitmap: Data)
-        func onImageSaved(outputFileResults: OutputFileResults)
-        func onError(Error exception: Error)
+    public protocol OnImageSavedCallback: NSObjectProtocol {
+        func onCaptureStarted() -> Void
+        func onCaptureProcessProgressed(_ progress: Int) -> Void
+        func onPostviewBitmapAvailable(_ bitmap: Data) -> Void
+        func onImageSaved(_ outputFileResults: OutputFileResults) -> Void
+        func onError(_ error: Error) -> Void
     }
 }
 

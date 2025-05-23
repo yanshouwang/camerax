@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Observer<T> {
+public protocol Observer<T>: NSObjectProtocol {
     associatedtype T
     
     func onChanged(_ value: T) -> Void

@@ -7,12 +7,10 @@ import dev.hebei.camerax_android.PigeonApiImageAnalyzerApi
 
 class ImageAnalyzerImpl(impl: CameraXImpl) : PigeonApiImageAnalyzerApi(impl) {
     override fun pigeon_defaultConstructor(): ImageAnalysis.Analyzer {
-        return Impl(this)
-    }
-
-    class Impl(private val api: ImageAnalyzerImpl) : ImageAnalysis.Analyzer {
-        override fun analyze(image: ImageProxy) {
-            api.analyze(this, image) {}
+        return object : ImageAnalysis.Analyzer {
+            override fun analyze(image: ImageProxy) {
+                analyze(this, image) {}
+            }
         }
     }
 }

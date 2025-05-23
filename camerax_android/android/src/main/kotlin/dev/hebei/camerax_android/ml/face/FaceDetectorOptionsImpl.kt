@@ -1,5 +1,6 @@
 package dev.hebei.camerax_android.ml.face
 
+import com.google.mlkit.vision.face.FaceDetectorOptions
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.FaceClassificationModeApi
 import dev.hebei.camerax_android.FaceContourModeApi
@@ -15,8 +16,8 @@ class FaceDetectorOptionsImpl(impl: CameraXImpl) : PigeonApiFaceDetectorOptionsA
         landmarkMode: FaceLandmarkModeApi?,
         minFaceSize: Double?,
         performanceMode: FacePerformanceModeApi?
-    ): com.google.mlkit.vision.face.FaceDetectorOptions {
-        val builder = com.google.mlkit.vision.face.FaceDetectorOptions.Builder()
+    ): FaceDetectorOptions {
+        val builder = FaceDetectorOptions.Builder()
         if (enableTracking == true) {
             builder.enableTracking()
         }
@@ -41,24 +42,24 @@ class FaceDetectorOptionsImpl(impl: CameraXImpl) : PigeonApiFaceDetectorOptionsA
 
 val FaceClassificationModeApi.impl
     get() = when (this) {
-        FaceClassificationModeApi.NONE -> com.google.mlkit.vision.face.FaceDetectorOptions.CLASSIFICATION_MODE_NONE
-        FaceClassificationModeApi.ALL -> com.google.mlkit.vision.face.FaceDetectorOptions.CLASSIFICATION_MODE_ALL
+        FaceClassificationModeApi.NONE -> FaceDetectorOptions.CLASSIFICATION_MODE_NONE
+        FaceClassificationModeApi.ALL -> FaceDetectorOptions.CLASSIFICATION_MODE_ALL
     }
 
 val FaceContourModeApi.impl
     get() = when (this) {
-        FaceContourModeApi.NONE -> com.google.mlkit.vision.face.FaceDetectorOptions.CONTOUR_MODE_NONE
-        FaceContourModeApi.ALL -> com.google.mlkit.vision.face.FaceDetectorOptions.CONTOUR_MODE_ALL
+        FaceContourModeApi.NONE -> FaceDetectorOptions.CONTOUR_MODE_NONE
+        FaceContourModeApi.ALL -> FaceDetectorOptions.CONTOUR_MODE_ALL
     }
 
 val FaceLandmarkModeApi.impl
     get() = when (this) {
-        FaceLandmarkModeApi.NONE -> com.google.mlkit.vision.face.FaceDetectorOptions.LANDMARK_MODE_NONE
-        FaceLandmarkModeApi.ALL -> com.google.mlkit.vision.face.FaceDetectorOptions.LANDMARK_MODE_ALL
+        FaceLandmarkModeApi.NONE -> FaceDetectorOptions.LANDMARK_MODE_NONE
+        FaceLandmarkModeApi.ALL -> FaceDetectorOptions.LANDMARK_MODE_ALL
     }
 
 val FacePerformanceModeApi.impl
     get() = when (this) {
-        FacePerformanceModeApi.FAST -> com.google.mlkit.vision.face.FaceDetectorOptions.PERFORMANCE_MODE_FAST
-        FacePerformanceModeApi.ACCURATE -> com.google.mlkit.vision.face.FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE
+        FacePerformanceModeApi.FAST -> FaceDetectorOptions.PERFORMANCE_MODE_FAST
+        FacePerformanceModeApi.ACCURATE -> FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE
     }

@@ -1,11 +1,13 @@
 package dev.hebei.camerax_android.common
 
-import dev.hebei.camerax_android.CameraStateApi
+import androidx.camera.core.CameraState
+import androidx.camera.core.ZoomState
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiCameraStateObserverApi
 import dev.hebei.camerax_android.PigeonApiTorchStateObserverApi
 import dev.hebei.camerax_android.PigeonApiZoomStateObserverApi
-import dev.hebei.camerax_android.TorchStateApi
+import dev.hebei.camerax_android.core.api
+import dev.hebei.camerax_android.core.torchStateApi
 
 
 class CameraStateObserverImpl(impl: CameraXImpl) : PigeonApiCameraStateObserverApi(impl) {
@@ -27,19 +29,19 @@ class ZoomStateObserverImpl(impl: CameraXImpl) : PigeonApiZoomStateObserverApi(i
 }
 
 class CameraStateObserver(private val impl: CameraStateObserverImpl) {
-    val obj = androidx.lifecycle.Observer<CameraStateApi> { value ->
-        impl.onChanged(this, value) {}
+    val obj = androidx.lifecycle.Observer<CameraState> { value ->
+        impl.onChanged(this, value.api) {}
     }
 }
 
 class TorchStateObserver(private val impl: TorchStateObserverImpl) {
-    val obj = androidx.lifecycle.Observer<TorchStateApi> { value ->
-        impl.onChanged(this, value) {}
+    val obj = androidx.lifecycle.Observer<Int> { value ->
+        impl.onChanged(this, value.torchStateApi) {}
     }
 }
 
 class ZoomStateObserver(private val impl: ZoomStateObserverImpl) {
-    internal val obj = androidx.lifecycle.Observer<androidx.camera.core.ZoomState> { value ->
+    internal val obj = androidx.lifecycle.Observer<ZoomState> { value ->
         impl.onChanged(this, value) {}
     }
 }

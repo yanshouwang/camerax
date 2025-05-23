@@ -8,14 +8,23 @@
 import Foundation
 import CoreLocation
 
-public class FileOutputOptions: NSObject {
-    let duratioinLimitMills: Int?
-    let fileSizeLimitBytes: Int?
-    let location: CLLocation?
+public class FileOutputOptions: OutputOptions {
+    public let url: URL
     
-    init(duratioinLimitMills: Int?, fileSizeLimitBytes: Int?, location: CLLocation?) {
-        self.duratioinLimitMills = duratioinLimitMills
-        self.fileSizeLimitBytes = fileSizeLimitBytes
-        self.location = location
+    public init(url: URL, fileSizeLimit: Int64, durationLimitMillis: Int64, location: CLLocation?) {
+        self.url = url
+        super.init(fileSizeLimit: fileSizeLimit, durationLimitMillis: durationLimitMillis, location: location)
+    }
+    
+    public class Builder: OutputOptions.Builder<FileOutputOptions, Builder> {
+        var url: URL
+        
+        init(_ file: URL) {
+            self.url = file
+        }
+        
+        public func build() -> FileOutputOptions {
+            return FileOutputOptions(url: url, fileSizeLimit: fileSizeLimit, durationLimitMillis: durationLimitMillis, location: location)
+        }
     }
 }

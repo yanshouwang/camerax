@@ -8,11 +8,15 @@
 import Foundation
 
 public class AudioConfig: NSObject {
-    static let audioDisabled = AudioConfig(audioEnabled: false)
+    static let audioDisabled = AudioConfig.create(false)
+    
+    static func create(_ enableAudio: Bool) -> AudioConfig {
+        return AudioConfig(enableAudio)
+    }
     
     public let audioEnabled: Bool
     
-    init(audioEnabled: Bool) {
+    private init(_ audioEnabled: Bool) {
         self.audioEnabled = audioEnabled
     }
 }

@@ -7,10 +7,6 @@
 
 import Foundation
 
-public class TorchState: NSObject {
-    public let value: Bool
-    
-    init(_ value: Bool) {
-        self.value = value
-    }
+@objc public enum TorchState: Int {
+    case off, on
 }
