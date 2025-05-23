@@ -17,9 +17,12 @@ class RawPixelsView extends StatelessWidget {
     final quarterTurns = rotationDegrees ~/ 90;
     return RotatedBox(
       quarterTurns: quarterTurns,
-      child: RawImage(
-        image: image,
-        fit: BoxFit.cover,
+      child: ColoredBox(
+        color: CupertinoColors.black,
+        child: RawImage(
+          image: image,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

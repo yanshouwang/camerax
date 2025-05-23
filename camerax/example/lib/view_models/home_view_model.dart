@@ -372,14 +372,14 @@ class HomeViewModel extends ViewModel with TypeLogger {
           final format = image.format;
           final width = image.width;
           final height = image.height;
-          final planes = image.planes;
+          final plane = image.planes.first;
+          // final width = plane.rowStride ~/ plane.pixelStride;
           final rotationDegrees = image.imageInfo.rotationDegrees;
           logger.info('image: $width * $height, $rotationDegrees°');
           if (format != ImageFormat.rgba8888) {
             throw ArgumentError.value(format);
           }
-          final rawPixels = planes.first.buffer;
-          final buffer = await ui.ImmutableBuffer.fromUint8List(rawPixels);
+          final buffer = await ui.ImmutableBuffer.fromUint8List(plane.value);
           final descriptor = ui.ImageDescriptor.raw(
             buffer,
             width: width,

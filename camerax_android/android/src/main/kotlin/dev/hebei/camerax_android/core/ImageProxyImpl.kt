@@ -8,6 +8,7 @@ import dev.hebei.camerax_android.ImageFormatApi
 import dev.hebei.camerax_android.PigeonApiImageProxyApi
 import dev.hebei.camerax_android.PigeonApiPlaneProxyApi
 import dev.hebei.camerax_android.common.imageFormatApi
+import java.nio.ByteBuffer
 
 class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
     override fun format(pigeon_instance: ImageProxy): ImageFormatApi {
@@ -39,12 +40,8 @@ class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
     }
 
     class PlaneProxyImpl(impl: CameraXImpl) : PigeonApiPlaneProxyApi(impl) {
-        override fun buffer(pigeon_instance: ImageProxy.PlaneProxy): ByteArray {
-            val buffer = pigeon_instance.buffer
-            val size = buffer.remaining()
-            val value = ByteArray(size)
-            buffer.get(value)
-            return value
+        override fun buffer(pigeon_instance: ImageProxy.PlaneProxy): ByteBuffer {
+            return  pigeon_instance.buffer
         }
 
         override fun pixelStride(pigeon_instance: ImageProxy.PlaneProxy): Long {

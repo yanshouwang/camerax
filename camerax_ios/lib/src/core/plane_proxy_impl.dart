@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 extension PlaneProxyApiX on PlaneProxyApi {
   PlaneProxy get impl {
     return PlaneProxy(
-      buffer: buffer,
+      value: buffer,
       pixelStride: pixelStride,
       rowStride: rowStride,
     );

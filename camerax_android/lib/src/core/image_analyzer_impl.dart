@@ -14,7 +14,10 @@ final class ImageAnalyzerImpl extends ImageAnalyzerChannel with AnalyzerImpl {
     required ImageProxyCallback analyze,
   }) {
     final api = ImageAnalyzerApi(
-      analyze: (_, imageApi) => analyze(imageApi.impl),
+      analyze: (_, imageApi) async {
+        final image = await imageApi.impl();
+        analyze(image);
+      },
     );
     return ImageAnalyzerImpl.impl(api);
   }

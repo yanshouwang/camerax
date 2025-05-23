@@ -335,6 +335,24 @@ abstract class PermissionManagerApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'java.nio.Buffer',
+  ),
+)
+abstract class BufferApi {
+  int remaining();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'java.nio.ByteBuffer',
+  ),
+)
+abstract class ByteBufferApi extends BufferApi {
+  Uint8List get(int width, int height, int pixelStride, int rowStride);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'java.lang.AutoCloseable',
   ),
 )
@@ -750,7 +768,7 @@ abstract class ImageInfoApi {
       fullClassName: 'androidx.camera.core.ImageProxy.PlaneProxy'),
 )
 abstract class PlaneProxyApi {
-  late final Uint8List buffer;
+  late final ByteBufferApi buffer;
   late final int pixelStride;
   late final int rowStride;
 }
