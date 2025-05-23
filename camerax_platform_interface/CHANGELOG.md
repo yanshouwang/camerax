@@ -1,4 +1,4 @@
-## 1.0.0-dev.6
+## 1.0.0-dev.7
 
 * Add common APIs.
 * Add core APIs.
