@@ -3786,7 +3786,7 @@ final class PigeonApiImageInfoApi: PigeonApiProtocolImageInfoApi  {
   }
 }
 protocol PigeonApiDelegatePlaneProxyApi {
-  func buffer(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData
+  func value(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData
   func pixelStride(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64
   func rowStride(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64
 }
@@ -3813,14 +3813,14 @@ final class PigeonApiPlaneProxyApi: PigeonApiProtocolPlaneProxyApi  {
       completion(.success(()))
     }     else {
       let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let bufferArg = try! pigeonDelegate.buffer(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let valueArg = try! pigeonDelegate.value(pigeonApi: self, pigeonInstance: pigeonInstance)
       let pixelStrideArg = try! pigeonDelegate.pixelStride(pigeonApi: self, pigeonInstance: pigeonInstance)
       let rowStrideArg = try! pigeonDelegate.rowStride(pigeonApi: self, pigeonInstance: pigeonInstance)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.PlaneProxyApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg, bufferArg, pixelStrideArg, rowStrideArg] as [Any?]) { response in
+      channel.sendMessage([pigeonIdentifierArg, valueArg, pixelStrideArg, rowStrideArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
           completion(.failure(createConnectionError(withChannelName: channelName)))
           return

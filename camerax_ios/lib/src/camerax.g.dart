@@ -4344,12 +4344,12 @@ class PlaneProxyApi extends PigeonInternalProxyApiBaseClass {
   PlaneProxyApi.pigeon_detached({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
-    required this.buffer,
+    required this.value,
     required this.pixelStride,
     required this.rowStride,
   });
 
-  final Uint8List buffer;
+  final Uint8List value;
 
   final int pixelStride;
 
@@ -4360,7 +4360,7 @@ class PlaneProxyApi extends PigeonInternalProxyApiBaseClass {
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
     PlaneProxyApi Function(
-      Uint8List buffer,
+      Uint8List value,
       int pixelStride,
       int rowStride,
     )? pigeon_newInstance,
@@ -4385,8 +4385,8 @@ class PlaneProxyApi extends PigeonInternalProxyApiBaseClass {
           final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
           assert(arg_pigeon_instanceIdentifier != null,
               'Argument for dev.flutter.pigeon.camerax_ios.PlaneProxyApi.pigeon_newInstance was null, expected non-null int.');
-          final Uint8List? arg_buffer = (args[1] as Uint8List?);
-          assert(arg_buffer != null,
+          final Uint8List? arg_value = (args[1] as Uint8List?);
+          assert(arg_value != null,
               'Argument for dev.flutter.pigeon.camerax_ios.PlaneProxyApi.pigeon_newInstance was null, expected non-null Uint8List.');
           final int? arg_pixelStride = (args[2] as int?);
           assert(arg_pixelStride != null,
@@ -4398,11 +4398,11 @@ class PlaneProxyApi extends PigeonInternalProxyApiBaseClass {
             (pigeon_instanceManager ?? PigeonInstanceManager.instance)
                 .addHostCreatedInstance(
               pigeon_newInstance?.call(
-                      arg_buffer!, arg_pixelStride!, arg_rowStride!) ??
+                      arg_value!, arg_pixelStride!, arg_rowStride!) ??
                   PlaneProxyApi.pigeon_detached(
                     pigeon_binaryMessenger: pigeon_binaryMessenger,
                     pigeon_instanceManager: pigeon_instanceManager,
-                    buffer: arg_buffer!,
+                    value: arg_value!,
                     pixelStride: arg_pixelStride!,
                     rowStride: arg_rowStride!,
                   ),
@@ -4425,7 +4425,7 @@ class PlaneProxyApi extends PigeonInternalProxyApiBaseClass {
     return PlaneProxyApi.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
-      buffer: buffer,
+      value: value,
       pixelStride: pixelStride,
       rowStride: rowStride,
     );

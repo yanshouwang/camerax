@@ -30,7 +30,7 @@ class ImageProxyDelegate: PigeonApiDelegateImageProxyApi {
     }
     
     class PlaneProxyDelegate: PigeonApiDelegatePlaneProxyApi {
-        func buffer(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData {
+        func value(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData {
             return FlutterStandardTypedData(bytes: pigeonInstance.data)
         }
         

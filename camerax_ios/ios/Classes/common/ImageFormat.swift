@@ -15,7 +15,7 @@ extension ImageFormat {
     var impl: Int {
         switch self {
         case .yuv420888:
-            return Int(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)
+            return Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
         case .rgba8888:
             return Int(kCVPixelFormatType_32BGRA)
         }
@@ -31,7 +31,7 @@ extension OSType {
 extension Int {
     var imageFormatApi: ImageFormat {
         switch self {
-        case Int(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange):
+        case Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange):
             return .yuv420888
         case Int(kCVPixelFormatType_32BGRA):
             return .rgba8888

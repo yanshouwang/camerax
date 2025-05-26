@@ -32,33 +32,44 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
         var planes = [ImageProxy.PlaneProxy]()
         let isPlanar = CVPixelBufferIsPlanar(buffer)
         if isPlanar {
-            for i in 0 ..< CVPixelBufferGetPlaneCount(buffer) {
-                guard let baseAddressOfPlane = CVPixelBufferGetBaseAddressOfPlane(buffer, i) else {
+            for index in 0 ..< CVPixelBufferGetPlaneCount(buffer) {
+                guard let addressOfPlane = CVPixelBufferGetBaseAddressOfPlane(buffer, index) else {
                     debugPrint("CVPixelBufferGetBaseAddressOfPlane is nil")
                     return
                 }
-                let widthOfPlane = CVPixelBufferGetWidthOfPlane(buffer, i)
-                let heightOfPlane = CVPixelBufferGetHeightOfPlane(buffer, i)
-                let bytesPerRowOfPlane = CVPixelBufferGetBytesPerRowOfPlane(buffer, i)
+                let widthOfPlane = CVPixelBufferGetWidthOfPlane(buffer, index)
+                let heightOfPlane = CVPixelBufferGetHeightOfPlane(buffer, index)
+                let bytesPerRowOfPlane = CVPixelBufferGetBytesPerRowOfPlane(buffer, index)
                 let bytesPerPixelOfPlane = bytesPerRowOfPlane / widthOfPlane
-                let dataOfPlane = Data(bytes: baseAddressOfPlane, count: bytesPerRowOfPlane * heightOfPlane)
-                let plane = ImageProxy.PlaneProxy(data: dataOfPlane, rowStride: bytesPerRowOfPlane, pixelStride: bytesPerPixelOfPlane)
+                var srcOfPlane = vImage_Buffer(data: addressOfPlane, height: vImagePixelCount(heightOfPlane), width: vImagePixelCount(widthOfPlane), rowBytes: bytesPerRowOfPlane)
+                let destBytesPerRowOfPlane = widthOfPlane * bytesPerPixelOfPlane
+                let destCountOfPlane = destBytesPerRowOfPlane * heightOfPlane
+                let destAddressOfPlane = UnsafeMutableRawPointer.allocate(byteCount: destCountOfPlane, alignment: 1)
+                defer { destAddressOfPlane.deallocate() }
+                var destOfPlane = vImage_Buffer(data: destAddressOfPlane, height: vImagePixelCount(heightOfPlane), width: vImagePixelCount(widthOfPlane), rowBytes: destBytesPerRowOfPlane)
+                let errorOfPlane = vImageCopyBuffer(&srcOfPlane, &destOfPlane, bytesPerPixelOfPlane, vImage_Flags(kvImageNoFlags))
+                guard errorOfPlane == vImage_Error(kvImageNoError) else {
+                    debugPrint("vImageCopyBuffer failed with error \(errorOfPlane)")
+                    return
+                }
+                let dataOfPlane = Data(bytes: destAddressOfPlane, count: destCountOfPlane)
+                let plane = ImageProxy.PlaneProxy(data: dataOfPlane, rowStride: destBytesPerRowOfPlane, pixelStride: bytesPerPixelOfPlane)
                 planes.append(plane)
             }
         } else {
-            guard let srcBaseAddress = CVPixelBufferGetBaseAddress(buffer) else {
+            guard let address = CVPixelBufferGetBaseAddress(buffer) else {
                 debugPrint("CVPixelBufferGetBaseAddress is nil")
                 return
             }
+            let bytesPerRow = CVPixelBufferGetBytesPerRow(buffer)
             let bytesPerPixel = MemoryLayout<Pixel_8888>.stride
             let alignment = MemoryLayout<Pixel_8888>.alignment
-            let srcBytesPerRow = CVPixelBufferGetBytesPerRow(buffer)
-            var src = vImage_Buffer(data: srcBaseAddress, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: srcBytesPerRow)
+            var src = vImage_Buffer(data: address, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: bytesPerRow)
             let destBytesPerRow = width * bytesPerPixel
             let destCount = destBytesPerRow * height
-            let destBaseAddress = UnsafeMutableRawPointer.allocate(byteCount: destCount, alignment: alignment)
-            defer { destBaseAddress.deallocate() }
-            var dest = vImage_Buffer(data: destBaseAddress, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: destBytesPerRow)
+            let destAddress = UnsafeMutableRawPointer.allocate(byteCount: destCount, alignment: alignment)
+            defer { destAddress.deallocate() }
+            var dest = vImage_Buffer(data: destAddress, height: vImagePixelCount(height), width: vImagePixelCount(width), rowBytes: destBytesPerRow)
             // B(0) G(1) R(2) A(3)
             // R(2) G(1) B(0) A(3)
             let error = vImagePermuteChannels_ARGB8888(&src, &dest, [2, 1, 0, 3], vImage_Flags(kvImageNoFlags))
@@ -66,8 +77,8 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
                 debugPrint("vImagePermuteChannels_ARGB8888 failed with error \(error)")
                 return
             }
-            let destData = Data(bytes: destBaseAddress, count: destCount)
-            let plane = ImageProxy.PlaneProxy(data: destData, rowStride: destBytesPerRow, pixelStride: bytesPerPixel)
+            let data = Data(bytes: destAddress, count: destCount)
+            let plane = ImageProxy.PlaneProxy(data: data, rowStride: destBytesPerRow, pixelStride: bytesPerPixel)
             planes.append(plane)
         }
         let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer).milliseconds

@@ -608,7 +608,7 @@ abstract class ImageInfoApi {
   ),
 )
 abstract class PlaneProxyApi {
-  late final Uint8List buffer;
+  late final Uint8List value;
   late final int pixelStride;
   late final int rowStride;
 }
