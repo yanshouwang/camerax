@@ -63,7 +63,9 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         
         session.sessionPreset = .high
         captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
-        captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+        var videoSettings = captureVideoDataOutput.videoSettings ?? [:]
+        videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+        captureVideoDataOutput.videoSettings = videoSettings
     }
     
     public func bind() {
@@ -371,34 +373,20 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         captureVideoDataOutput.setSampleBufferDelegate(nil, queue: captureVideoDataOutputQueue)
     }
     
-    private func getVideoDeviceType(_ cameraSelector: CameraSelector) -> AVCaptureDevice.DeviceType? {
+    private func getVideoDevice(_ cameraSelector: CameraSelector) -> AVCaptureDevice? {
         switch cameraSelector.lensFacing {
         case .unknown:
             return nil
         case .front:
-            return .builtInWideAngleCamera
+            return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
         case .back:
-            return .builtInTripleCamera
+            if let device = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) { return device }
+            else if let device = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) { return device }
+            else { return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) }
         case .external:
-            if #available(iOS 17.0, *) { return .external }
+            if #available(iOS 17.0, *) { return AVCaptureDevice.default(.external, for: .video, position: .unspecified) }
             else { return nil }
         }
-    }
-    
-    private func getVideoDevice(_ cameraSelector: CameraSelector) -> AVCaptureDevice? {
-        guard let deviceType = getVideoDeviceType(cameraSelector) else { return nil }
-        let position = cameraSelector.lensFacing.impl
-        return AVCaptureDevice.default(deviceType, for: .video, position: position)
-    }
-    
-    private func removeVideoDeviceInput() {
-        guard let input = self.videoDeviceInput else {
-            return
-        }
-        videoZoomFactorObservation?.invalidate()
-        isTorchActiveObservation?.invalidate()
-        session.removeInput(input)
-        self.videoDeviceInput = nil
     }
     
     private func addVideoDeviceInput() throws {
@@ -428,6 +416,16 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
             let devicePoint = CGPoint(x: 0.5, y: 0.5)
             _ = try? self.startFocusAndMetering(devicePoint, true)
         }
+    }
+    
+    private func removeVideoDeviceInput() {
+        guard let input = self.videoDeviceInput else {
+            return
+        }
+        videoZoomFactorObservation?.invalidate()
+        isTorchActiveObservation?.invalidate()
+        session.removeInput(input)
+        self.videoDeviceInput = nil
     }
     
     func getAudioDevice() -> AVCaptureDevice? {

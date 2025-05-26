@@ -11,18 +11,3 @@ import AVFoundation
 public enum LensFacing: Int {
     case unknown, front, back, external
 }
-
-extension LensFacing {
-    var impl: AVCaptureDevice.Position {
-        switch self {
-        case .unknown:
-            fatalError()
-        case .front:
-            return .front
-        case .back:
-            return .back
-        default:
-            return .unspecified
-        }
-    }
-}

@@ -1,3 +1,6 @@
-## 1.0.0-dev.7
+## 1.0.0-dev.8
 
-* Rush registration
+* Add common impls.
+* Add core impls.
+* Add video impls.
+* Add view impls.
