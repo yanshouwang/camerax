@@ -24,7 +24,9 @@ class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
     }
 
     override fun planes(pigeon_instance: ImageProxy): List<ImageProxy.PlaneProxy> {
-        return pigeon_instance.planes.toList()
+        val width = pigeon_instance.width
+        val height = pigeon_instance.height
+        return pigeon_instance.planes.map { PlaneProxyWrapper(it, width, height) }
     }
 
     override fun imageInfo(pigeon_instance: ImageProxy): ImageInfo {
@@ -40,16 +42,51 @@ class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
     }
 
     class PlaneProxyImpl(impl: CameraXImpl) : PigeonApiPlaneProxyApi(impl) {
-        override fun buffer(pigeon_instance: ImageProxy.PlaneProxy): ByteBuffer {
-            return  pigeon_instance.buffer
+        override fun value(pigeon_instance: ImageProxy.PlaneProxy): ByteArray {
+            if (pigeon_instance !is PlaneProxyWrapper) throw TypeCastException()
+            return pigeon_instance.getValue()
         }
 
         override fun pixelStride(pigeon_instance: ImageProxy.PlaneProxy): Long {
+            if (pigeon_instance !is PlaneProxyWrapper) throw TypeCastException()
             return pigeon_instance.pixelStride.toLong()
         }
 
         override fun rowStride(pigeon_instance: ImageProxy.PlaneProxy): Long {
+            if (pigeon_instance !is PlaneProxyWrapper) throw TypeCastException()
             return pigeon_instance.rowStride.toLong()
+        }
+    }
+
+    class PlaneProxyWrapper(private val plane: ImageProxy.PlaneProxy, private val width: Int, private val height: Int) :
+        ImageProxy.PlaneProxy {
+        override fun getRowStride(): Int {
+            return width * plane.pixelStride
+        }
+
+        override fun getPixelStride(): Int {
+            return plane.pixelStride
+        }
+
+        override fun getBuffer(): ByteBuffer {
+            return plane.buffer
+        }
+
+        fun getValue(): ByteArray {
+            val buffer = plane.buffer
+            val pixelStride = plane.pixelStride
+            val rowStride = width * pixelStride
+            val value = ByteArray(rowStride * height)
+            if (rowStride == plane.rowStride) {
+                buffer.get(value)
+            } else {
+                val emptyValue = ByteArray(plane.rowStride - rowStride)
+                for (row in 0 until height) {
+                    buffer.get(value, row * rowStride, rowStride)
+                    buffer.get(emptyValue)
+                }
+            }
+            return value
         }
     }
 }

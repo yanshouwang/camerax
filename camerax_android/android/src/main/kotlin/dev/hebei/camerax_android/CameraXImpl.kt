@@ -6,8 +6,6 @@ import dev.hebei.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.hebei.camerax_android.camera2.interop.Camera2CameraInfoImpl
 import dev.hebei.camerax_android.camera2.interop.CaptureRequestOptionsImpl
 import dev.hebei.camerax_android.common.AutoCloseableImpl
-import dev.hebei.camerax_android.common.BufferImpl
-import dev.hebei.camerax_android.common.ByteBufferImpl
 import dev.hebei.camerax_android.common.CameraStateLiveDataImpl
 import dev.hebei.camerax_android.common.CameraStateObserverImpl
 import dev.hebei.camerax_android.common.IntRangeImpl
@@ -77,14 +75,6 @@ class CameraXImpl(val context: Context, messenger: BinaryMessenger) : CameraXApi
 
     override fun getPigeonApiPermissionManagerApi(): PigeonApiPermissionManagerApi {
         return PermissionManagerImpl(this)
-    }
-
-    override fun getPigeonApiBufferApi(): PigeonApiBufferApi {
-        return BufferImpl(this)
-    }
-
-    override fun getPigeonApiByteBufferApi(): PigeonApiByteBufferApi {
-        return ByteBufferImpl(this)
     }
 
     override fun getPigeonApiAutoCloseableApi(): PigeonApiAutoCloseableApi {

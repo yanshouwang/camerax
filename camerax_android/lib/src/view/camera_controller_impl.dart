@@ -218,10 +218,7 @@ final class CameraControllerImpl extends CameraControllerChannel {
             },
       onCaptureSuccess: onCaptureSuccess == null
           ? null
-          : (_, imageApi) async {
-              final image = await imageApi.impl();
-              onCaptureSuccess(image);
-            },
+          : (_, e)  => onCaptureSuccess(e.impl),
       onError: onError == null
           ? null
           : (_, exceptionApi) => onError(exceptionApi.impl),
