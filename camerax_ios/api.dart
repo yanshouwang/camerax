@@ -231,13 +231,6 @@ abstract class AutoCloseableApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
-    name: 'Closeable',
-  ),
-)
-abstract class CloseableApi extends AutoCloseableApi {}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
     name: 'CLLocation',
     import: 'CoreLocation',
   ),
