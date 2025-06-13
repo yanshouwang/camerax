@@ -1,6 +1,6 @@
 name: camerax_platform_interface
 description: 'A common platform interface for the camerax plugin.'
-version: 1.0.0-dev.9
+version: 1.0.0-dev.10
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
 topics:

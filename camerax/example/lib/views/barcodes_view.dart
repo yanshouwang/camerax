@@ -58,6 +58,11 @@ class _BarcodesPainter extends CustomPainter {
           .toList();
       final path = Path()..addPolygon(corners, true);
       canvas.drawPath(path, paint);
+      final valuePainter = TextPainter(
+        text: TextSpan(text: barcode.rawValue),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      valuePainter.paint(canvas, corners.first);
     }
   }
 

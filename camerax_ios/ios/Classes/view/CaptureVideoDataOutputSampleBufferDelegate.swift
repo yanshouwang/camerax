@@ -19,6 +19,9 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
         self.rotationProvider = rotationProvider
     }
     
+    private var analyzingImage: ImageProxy?
+    private var cachedImage: ImageProxy?
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         debugPrint("captureOutput didOutput")
         guard let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
@@ -26,6 +29,7 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
             return
         }
         CVPixelBufferLockBaseAddress(buffer, .readOnly)
+        defer { CVPixelBufferUnlockBaseAddress(buffer, .readOnly) }
         let format = CVPixelBufferGetPixelFormatType(buffer)
         let width = CVPixelBufferGetWidth(buffer)
         let height = CVPixelBufferGetHeight(buffer)
@@ -84,8 +88,23 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
         let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer).milliseconds
         let rotationDegrees = 90 - rotationProvider()
         let imageInfo = ImageInfo(timestamp: timestamp, rotationDegrees: rotationDegrees)
-        let image = ImageProxy(buffer: buffer, format: format.imageFormatApi, width: width, height: height, planes: planes, imageInfo: imageInfo)
-        analyzer.analyze(image)
+        let image = ImageProxy(format: format.imageFormatApi, width: width, height: height, planes: planes, imageInfo: imageInfo) {
+            DispatchQueue.main.async {
+                guard let cachedImage = self.cachedImage else { return }
+                self.analyzer.analyze(cachedImage)
+                self.analyzingImage = cachedImage
+                self.cachedImage = nil
+            }
+        }
+        DispatchQueue.main.async {
+            if let analyzingImage = self.analyzingImage, !analyzingImage.isClosed {
+                self.cachedImage = image
+            } else {
+                self.analyzer.analyze(image)
+                self.analyzingImage = image
+                self.cachedImage = nil
+            }
+        }
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {

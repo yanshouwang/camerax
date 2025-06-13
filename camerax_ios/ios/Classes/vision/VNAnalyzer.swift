@@ -10,14 +10,14 @@ import Vision
 
 public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
     public func analyze(_ image: ImageProxy) {
-        let orientation = getOrientation()
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image.buffer, orientation: orientation, options: [:])
-        let request = VNDetectBarcodesRequest() { request, error in }
-        do {
-            try imageRequestHandler.perform([request])
-        } catch {
-            debugPrint("VNImageRequestHandler error \(error)")
-        }
+//        let orientation = getOrientation()
+//        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image.buffer, orientation: orientation, options: [:])
+//        let request = VNDetectBarcodesRequest() { request, error in }
+//        do {
+//            try imageRequestHandler.perform([request])
+//        } catch {
+//            debugPrint("VNImageRequestHandler error \(error)")
+//        }
     }
     
     private func getOrientation() -> CGImagePropertyOrientation {

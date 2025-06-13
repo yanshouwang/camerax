@@ -9,25 +9,30 @@ import Foundation
 import AVFoundation
 
 public class ImageProxy: NSObject, AutoCloseable {
-    internal let buffer: CVImageBuffer
-    
     public let format: ImageFormat
     public let width: Int
     public let height: Int
     public let planes: [PlaneProxy]
     public let imageInfo: ImageInfo
+    internal private(set) var isClosed: Bool
+    private let onClosed: () -> Void
     
-    init(buffer: CVImageBuffer, format: ImageFormat, width: Int, height: Int, planes: [PlaneProxy], imageInfo: ImageInfo) {
-        self.buffer = buffer
+    init(format: ImageFormat, width: Int, height: Int, planes: [PlaneProxy], imageInfo: ImageInfo, onClosed: @escaping () -> Void) {
         self.format = format
         self.width = width
         self.height = height
         self.planes = planes
         self.imageInfo = imageInfo
+        self.isClosed = false
+        self.onClosed = onClosed
     }
     
     public func close() {
-        CVPixelBufferUnlockBaseAddress(buffer, .readOnly)
+        if isClosed {
+            return
+        }
+        isClosed = true
+        onClosed()
     }
     
     public class PlaneProxy: NSObject {
