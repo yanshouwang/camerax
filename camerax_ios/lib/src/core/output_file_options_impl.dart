@@ -5,7 +5,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'metadata_impl.dart';
 
-final class OutputFileOptionsImpl extends OutputFileOptionsChannel {
+final class OutputFileOptionsImpl extends OutputFileOptions {
   final OutputFileOptionsApi api;
 
   OutputFileOptionsImpl.impl(this.api) : super.impl();

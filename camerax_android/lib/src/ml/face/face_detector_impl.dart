@@ -4,11 +4,11 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'face_detector_options_impl.dart';
 
-final class FaceDetectorImpl extends FaceDetectorChannel with DetectorImpl {
+final class FaceDetectorImpl extends FaceDetector with DetectorImpl {
   @override
   final FaceDetectorApi api;
 
-  FaceDetectorImpl.impl(this.api) : super.impl();
+  FaceDetectorImpl.internal(this.api) : super.impl();
 
   factory FaceDetectorImpl({
     FaceDetectorOptions? options,
@@ -19,6 +19,6 @@ final class FaceDetectorImpl extends FaceDetectorChannel with DetectorImpl {
     final api = FaceDetectorApi(
       options: options?.api,
     );
-    return FaceDetectorImpl.impl(api);
+    return FaceDetectorImpl.internal(api);
   }
 }

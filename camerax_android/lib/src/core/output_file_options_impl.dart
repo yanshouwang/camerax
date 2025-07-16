@@ -5,10 +5,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'metadata_impl.dart';
 
-final class OutputFileOptionsImpl extends OutputFileOptionsChannel {
+final class OutputFileOptionsImpl extends OutputFileOptions {
   final OutputFileOptionsApi api;
 
-  OutputFileOptionsImpl.impl(this.api) : super.impl();
+  OutputFileOptionsImpl.internal(this.api) : super.impl();
 
   factory OutputFileOptionsImpl({
     required File file,
@@ -18,6 +18,6 @@ final class OutputFileOptionsImpl extends OutputFileOptionsChannel {
       file: file.path,
       metadata: metadata?.api,
     );
-    return OutputFileOptionsImpl.impl(api);
+    return OutputFileOptionsImpl.internal(api);
   }
 }

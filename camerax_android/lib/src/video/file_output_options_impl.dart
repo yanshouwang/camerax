@@ -4,10 +4,10 @@ import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FileOutputOptionsImpl extends FileOutputOptionsChannel {
+final class FileOutputOptionsImpl extends FileOutputOptions {
   final FileOutputOptionsApi api;
 
-  FileOutputOptionsImpl.impl(
+  FileOutputOptionsImpl.internal(
     this.api, {
     required super.file,
   }) : super.impl();
@@ -24,7 +24,7 @@ final class FileOutputOptionsImpl extends FileOutputOptionsChannel {
       fileSizeLimitBytes: fileSizeLimitBytes,
       location: location?.api,
     );
-    return FileOutputOptionsImpl.impl(
+    return FileOutputOptionsImpl.internal(
       api,
       file: file,
     );

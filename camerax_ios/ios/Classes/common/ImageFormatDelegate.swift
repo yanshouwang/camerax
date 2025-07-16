@@ -14,6 +14,8 @@ extension ImageFormat {
             return .yuv420888
         case .rgba8888:
             return .rgba8888
+        case .jpeg:
+            return .jpeg
         }
     }
 }
@@ -26,9 +28,7 @@ extension ImageFormatApi {
         case .rgba8888:
             return .rgba8888
         case .jpeg:
-            fatalError()
-        case .jpegR:
-            fatalError()
+            return .jpeg
         }
     }
 }

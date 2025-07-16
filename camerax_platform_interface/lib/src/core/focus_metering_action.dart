@@ -1,27 +1,23 @@
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'metering_mode.dart';
 import 'metering_point.dart';
 
-final _token = Object();
+abstract base class FocusMeteringAction {
+  FocusMeteringAction.impl();
 
-abstract interface class FocusMeteringAction {
   factory FocusMeteringAction(
     (MeteringPoint, List<MeteringMode>) first, {
     List<(MeteringPoint, List<MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
-  }) {
-    final instance = CameraXPlugin.instance.newFocusMeteringAction(
-      first,
-      others: others,
-      disableAutoCancel: disableAutoCancel,
-      autoCancelDuration: autoCancelDuration,
-    );
-    PlatformInterface.verify(instance as PlatformInterface, _token);
-    return instance;
-  }
+  }) =>
+      CameraXPlugin.instance.newFocusMeteringAction(
+        first,
+        others: others,
+        disableAutoCancel: disableAutoCancel,
+        autoCancelDuration: autoCancelDuration,
+      );
 
   /// Returns auto-cancel duration. Returns 0 if auto-cancel is disabled.
   Future<Duration> getAutoCancelDuration();
@@ -37,9 +33,4 @@ abstract interface class FocusMeteringAction {
 
   /// Returns if auto-cancel is enabled or not.
   Future<bool> isAutoCancelEnabled();
-}
-
-abstract base class FocusMeteringActionChannel extends PlatformInterface
-    implements FocusMeteringAction {
-  FocusMeteringActionChannel.impl() : super(token: _token);
 }

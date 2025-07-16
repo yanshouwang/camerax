@@ -1,7 +1,7 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class RecordingImpl extends RecordingChannel {
+final class RecordingImpl extends Recording {
   final RecordingApi api;
 
   RecordingImpl.impl(this.api) : super.impl();

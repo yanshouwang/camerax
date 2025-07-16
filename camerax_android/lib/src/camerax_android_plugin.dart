@@ -18,11 +18,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   PermissionManager newPermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector newFrontCameraSelector() => CameraSelectorImpl.front;
+  CameraSelector getFrontCameraSelector() => CameraSelectorImpl.front;
   @override
-  CameraSelector newBackCameraSelector() => CameraSelectorImpl.back;
+  CameraSelector getBackCameraSelector() => CameraSelectorImpl.back;
   @override
-  CameraSelector newExternalCameraSelector() => CameraSelectorImpl.external;
+  CameraSelector getExternalCameraSelector() => CameraSelectorImpl.external;
   @override
   CameraSelector newCameraSelector({
     LensFacing? lensFacing,
@@ -65,6 +65,10 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
       );
 
   @override
+  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+      QualitySelectorImpl.getResolution(cameraInfo, quality);
+
+  @override
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
@@ -83,10 +87,6 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
         qualities,
         fallbackStrategy: fallbackStrategy,
       );
-
-  @override
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
-      QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
   BarcodeScanner newBarcodeScanner({
@@ -193,16 +193,6 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }) =>
       ImageAnalyzerImpl(
         analyze: analyze,
-      );
-
-  @override
-  JpegAnalyzer newJpegAnalyzer({
-    required CoordinateSystem targetCoordinateSystem,
-    required JpegConsumer consumer,
-  }) =>
-      JpegAnalyzerImpl(
-        targetCoordinateSystem: targetCoordinateSystem,
-        consumer: consumer,
       );
 
   @override

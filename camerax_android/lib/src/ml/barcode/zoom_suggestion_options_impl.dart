@@ -1,10 +1,10 @@
 import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptionsChannel {
+final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptions {
   final ZoomSuggestionOptionsApi api;
 
-  ZoomSuggestionOptionsImpl.impl(this.api) : super.impl();
+  ZoomSuggestionOptionsImpl.internal(this.api) : super.impl();
 
   factory ZoomSuggestionOptionsImpl({
     required ZoomCallback zoomCallback,
@@ -16,6 +16,6 @@ final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptionsChannel {
       ),
       maxSupportedZoomRatio: maxSupportedZoomRatio,
     );
-    return ZoomSuggestionOptionsImpl.impl(api);
+    return ZoomSuggestionOptionsImpl.internal(api);
   }
 }

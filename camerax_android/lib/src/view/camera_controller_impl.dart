@@ -10,7 +10,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'use_case_impl.dart';
 
-final class CameraControllerImpl extends CameraControllerChannel {
+final class CameraControllerImpl extends CameraController {
   final LifecycleCameraControllerApi api;
 
   late final TorchStateObserverApi _torchStateObserverApi;
@@ -216,9 +216,8 @@ final class CameraControllerImpl extends CameraControllerChannel {
               final bitmap = await _decodeImage(bitmapApi);
               onPostviewBitmapAvailable(bitmap);
             },
-      onCaptureSuccess: onCaptureSuccess == null
-          ? null
-          : (_, e)  => onCaptureSuccess(e.impl),
+      onCaptureSuccess:
+          onCaptureSuccess == null ? null : (_, e) => onCaptureSuccess(e.impl),
       onError: onError == null
           ? null
           : (_, exceptionApi) => onError(exceptionApi.impl),

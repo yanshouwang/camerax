@@ -2,6 +2,7 @@ package dev.hebei.camerax_android
 
 import android.app.Activity
 import android.content.Context
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import dev.hebei.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.hebei.camerax_android.camera2.interop.Camera2CameraInfoImpl
 import dev.hebei.camerax_android.camera2.interop.CaptureRequestOptionsImpl
@@ -64,14 +65,18 @@ import dev.hebei.camerax_android.video.RecordingImpl
 import dev.hebei.camerax_android.video.RecordingStatsImpl
 import dev.hebei.camerax_android.video.VideoRecordEventImpl
 import dev.hebei.camerax_android.view.CameraControllerImpl
-import dev.hebei.camerax_android.view.JpegAnalyzerImpl
 import dev.hebei.camerax_android.view.LifecycleCameraControllerImpl
 import dev.hebei.camerax_android.view.PreviewViewImpl
 import dev.hebei.camerax_android.view.video.AudioConfigImpl
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
 
-class CameraXImpl(val context: Context, messenger: BinaryMessenger) : CameraXApiPigeonProxyApiRegistrar(messenger) {
-    var activity: Activity? = null
+class CameraXImpl(binaryMessenger: BinaryMessenger, val context: Context) :
+    CameraXApiPigeonProxyApiRegistrar(binaryMessenger), ActivityAware {
+    var binding: ActivityPluginBinding? = null
+
+    val activity: Activity get() = binding?.activity ?: throw NullPointerException("Activity binding is null")
 
     override fun getPigeonApiPermissionManagerApi(): PigeonApiPermissionManagerApi {
         return PermissionManagerImpl(this)
@@ -239,10 +244,6 @@ class CameraXImpl(val context: Context, messenger: BinaryMessenger) : CameraXApi
 
     override fun getPigeonApiImageAnalyzerApi(): PigeonApiImageAnalyzerApi {
         return ImageAnalyzerImpl(this)
-    }
-
-    override fun getPigeonApiJpegAnalyzerApi(): PigeonApiJpegAnalyzerApi {
-        return JpegAnalyzerImpl(this)
     }
 
     override fun getPigeonApiDetectorApi(): PigeonApiDetectorApi {
@@ -429,15 +430,34 @@ class CameraXImpl(val context: Context, messenger: BinaryMessenger) : CameraXApi
         return PreviewViewImpl(this)
     }
 
+    @ExperimentalCamera2Interop
     override fun getPigeonApiCamera2CameraControlApi(): PigeonApiCamera2CameraControlApi {
         return Camera2CameraControlImpl(this)
     }
 
+    @ExperimentalCamera2Interop
     override fun getPigeonApiCamera2CameraInfoApi(): PigeonApiCamera2CameraInfoApi {
         return Camera2CameraInfoImpl(this)
     }
 
+    @ExperimentalCamera2Interop
     override fun getPigeonApiCaptureRequestOptionsApi(): PigeonApiCaptureRequestOptionsApi {
         return CaptureRequestOptionsImpl(this)
+    }
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        this.binding = binding
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
+        onDetachedFromActivity()
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        onAttachedToActivity(binding)
+    }
+
+    override fun onDetachedFromActivity() {
+        this.binding = null
     }
 }

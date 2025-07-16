@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'lens_facing_impl.dart';
 
-final class CameraSelectorImpl extends CameraSelectorChannel {
+final class CameraSelectorImpl extends CameraSelector {
   static CameraSelectorImpl get front =>
       CameraSelectorImpl.impl(CameraSelectorApi.front);
   static CameraSelectorImpl get back =>

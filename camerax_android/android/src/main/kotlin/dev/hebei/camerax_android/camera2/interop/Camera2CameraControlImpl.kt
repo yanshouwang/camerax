@@ -2,6 +2,7 @@ package dev.hebei.camerax_android.camera2.interop
 
 import androidx.camera.camera2.interop.Camera2CameraControl
 import androidx.camera.camera2.interop.CaptureRequestOptions
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.CameraControl
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
@@ -9,6 +10,7 @@ import com.google.common.util.concurrent.Futures
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.PigeonApiCamera2CameraControlApi
 
+@ExperimentalCamera2Interop
 class Camera2CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCamera2CameraControlApi(impl) {
     override fun from(cameraControl: CameraControl): Camera2CameraControl {
         return Camera2CameraControl.from(cameraControl)

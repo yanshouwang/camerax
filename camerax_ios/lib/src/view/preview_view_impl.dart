@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'camera_controller_impl.dart';
 
-final class PreviewViewImpl extends PreviewViewChannel {
+final class PreviewViewImpl extends PreviewView {
   final PreviewViewApi api;
 
   PreviewViewImpl.impl(this.api) : super.impl();

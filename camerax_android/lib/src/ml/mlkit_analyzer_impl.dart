@@ -5,11 +5,11 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'detector_impl.dart';
 import 'mlkit_analyzer_result_impl.dart';
 
-final class MlKitAnalyzerImpl extends MlKitAnalyzerChannel with AnalyzerImpl {
+final class MlKitAnalyzerImpl extends MlKitAnalyzer with AnalyzerImpl {
   @override
   final MlKitAnalyzerApi api;
 
-  MlKitAnalyzerImpl.impl(this.api) : super.impl();
+  MlKitAnalyzerImpl.internal(this.api) : super.impl();
 
   factory MlKitAnalyzerImpl({
     required List<Detector> detectors,
@@ -23,6 +23,6 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzerChannel with AnalyzerImpl {
         accept: (_, resultApi) => consumer(resultApi.impl),
       ),
     );
-    return MlKitAnalyzerImpl.impl(api);
+    return MlKitAnalyzerImpl.internal(api);
   }
 }

@@ -15,8 +15,8 @@ typedef ImageModelCallback = void Function(ImageModel imageModel);
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
-  final BarcodeScanner _barcodeScanner;
-  final FaceDetector _faceDetector;
+  // final BarcodeScanner _barcodeScanner;
+  // final FaceDetector _faceDetector;
 
   late final StreamSubscription _torchStateChangedSubscription;
   late final StreamSubscription _zoomStateChangedSubscription;
@@ -27,18 +27,20 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Camera2CameraControl? _camera2Control;
 
   HomeViewModel()
-      : _permissionManager = PermissionManager(),
-        _controller = CameraController(),
-        _barcodeScanner = BarcodeScanner(),
-        _faceDetector = FaceDetector(),
-        _mode = CameraMode.takePicture,
-        _lensFacing = LensFacing.back,
-        _barcodes = [],
-        _faces = [] {
-    _torchStateChangedSubscription =
-        _controller.torchStateChanged.listen((e) => torchState = e);
-    _zoomStateChangedSubscription =
-        _controller.zoomStateChanged.listen((e) => zoomState = e);
+    : _permissionManager = PermissionManager(),
+      _controller = CameraController(),
+      // _barcodeScanner = BarcodeScanner(),
+      // _faceDetector = FaceDetector(),
+      _mode = CameraMode.takePicture,
+      _lensFacing = LensFacing.back,
+      _barcodes = [],
+      _faces = [] {
+    _torchStateChangedSubscription = _controller.torchStateChanged.listen(
+      (e) => torchState = e,
+    );
+    _zoomStateChangedSubscription = _controller.zoomStateChanged.listen(
+      (e) => zoomState = e,
+    );
     _setUp();
   }
 
@@ -126,14 +128,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  Uint8List? _jpegValue;
-  Uint8List? get jpegValue => _jpegValue;
-  set jpegValue(Uint8List? value) {
-    if (_jpegValue == value) return;
-    _jpegValue = value;
-    notifyListeners();
-  }
-
   List<Barcode> _barcodes;
   List<Barcode> get barcodes => _barcodes;
   set barcodes(List<Barcode> value) {
@@ -200,32 +194,26 @@ class HomeViewModel extends ViewModel with TypeLogger {
         break;
       case CameraMode.rawValue:
         await _setImageAnalyzer();
-        // await _setJpegAnalyzer();
         break;
       case CameraMode.scanCode:
-        final analyzer = MlKitAnalyzer(
-          detectors: [
-            _barcodeScanner,
-          ],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _extractML,
-        );
-        await _setMLAnalyzer(analyzer);
+        // final analyzer = MlKitAnalyzer(
+        //   detectors: [_barcodeScanner],
+        //   targetCoordinateSystem: CoordinateSystem.viewReferenced,
+        //   consumer: _extractML,
+        // );
+        // await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
-        final analyzer = MlKitAnalyzer(
-          detectors: [
-            _faceDetector,
-          ],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _extractML,
-        );
-        await _setMLAnalyzer(analyzer);
+        // final analyzer = MlKitAnalyzer(
+        //   detectors: [_faceDetector],
+        //   targetCoordinateSystem: CoordinateSystem.viewReferenced,
+        //   consumer: _extractML,
+        // );
+        // await _setMLAnalyzer(analyzer);
         break;
     }
     this.mode = mode;
     imageModel = null;
-    jpegValue = null;
     barcodes = [];
     faces = [];
   }
@@ -261,14 +249,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> setExposureTime(int? value) async {
     final control = ArgumentError.checkNotNull(_camera2Control);
-    final bundle = value == null
-        ? CaptureRequestOptions(
-            aeMode: ControlAeMode.on,
-          )
-        : CaptureRequestOptions(
-            aeMode: ControlAeMode.off,
-            sensorExposureTime: value,
-          );
+    final bundle =
+        value == null
+            ? CaptureRequestOptions(aeMode: ControlAeMode.on)
+            : CaptureRequestOptions(
+              aeMode: ControlAeMode.off,
+              sensorExposureTime: value,
+            );
     await control.setCaptureRequestOptions(bundle);
   }
 
@@ -278,28 +265,60 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> takePicture() async {
+    // await controller.takePictureToMemory(
+    //   onCaptureStarted: () {
+    //     logger.info('onCaptureStarted');
+    //   },
+    //   onCaptureProcessProgressed: (progress) {
+    //     logger.info('onCaptureProcessProgressed: $progress');
+    //   },
+    //   onPostviewBitmapAvailable: (bitmap) {
+    //     logger.info('onPostviewBitmapAvailable');
+    //   },
+    //   onCaptureSuccess: (image) async {
+    //     logger.info(
+    //       'onCaptureSuccess: ${image.format}, ${image.width}, ${image.height}, ${image.imageInfo.rotationDegrees}',
+    //     );
+    //     await image.close();
+    //   },
+    //   onError: (exception) {
+    //     logger.warning('onError', exception);
+    //   },
+    // );
     final directory = await getApplicationDocumentsDirectory();
-    final filePath = path.join(directory.path,
-        'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG');
-    final file = File(filePath);
-    final options = OutputFileOptions(
-      file: file,
+    final filePath = path.join(
+      directory.path,
+      'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG',
     );
+    final file = File(filePath);
+    final options = OutputFileOptions(file: file);
     await controller.takePictureToFile(
       options,
+      onCaptureStarted: () {
+        logger.info('onCaptureStarted');
+      },
+      onCaptureProcessProgressed: (progress) {
+        logger.info('onCaptureProcessProgressed: $progress');
+      },
+      onPostviewBitmapAvailable: (bitmap) {
+        logger.info('onPostviewBitmapAvailable');
+      },
       onImageSaved: (outputFileResults) {
+        logger.info('onImageSaved: ${outputFileResults.savedUri}');
         savedUri = outputFileResults.savedUri;
       },
       onError: (exception) {
-        logger.info('takePicture failed, $exception');
+        logger.warning('onError, $exception');
       },
     );
   }
 
   Future<void> startRecording() async {
     final directory = await getApplicationDocumentsDirectory();
-    final filePath = path.join(directory.path,
-        'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV');
+    final filePath = path.join(
+      directory.path,
+      'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
+    );
     final file = File(filePath);
     final options = FileOutputOptions(file: file);
     recording = await controller.startRecording(
@@ -315,7 +334,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
         if (error == null) {
           savedUri = results?.outputUri;
         } else {
-          logger.info('startRecording failed, $error');
+          logger.warning('startRecording failed, $error');
         }
         recording = null;
       },
@@ -329,8 +348,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
   void _setUp() async {
     var isGranted =
         await _permissionManager.checkPermission(Permission.album) &&
-            await _permissionManager.checkPermission(Permission.audio) &&
-            await _permissionManager.checkPermission(Permission.video);
+        await _permissionManager.checkPermission(Permission.audio) &&
+        await _permissionManager.checkPermission(Permission.video);
     if (!isGranted) {
       isGranted = await _permissionManager.requestPermissions([
         Permission.album,
@@ -403,18 +422,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.bind();
   }
 
-  Future<void> _setJpegAnalyzer() async {
-    await controller.unbind();
-    final analyzer = JpegAnalyzer(
-      targetCoordinateSystem: CoordinateSystem.viewReferenced,
-      consumer: (value) {
-        jpegValue = value;
-      },
-    );
-    await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bind();
-  }
-
   void _onRawPixelsAnalyzed(ImageModel imageModel) {
     if (mode != CameraMode.rawValue) {
       return;
@@ -422,26 +429,26 @@ class HomeViewModel extends ViewModel with TypeLogger {
     this.imageModel = imageModel;
   }
 
-  Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
-    await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
-    await controller.setImageAnalysisAnalyzer(analyzer);
-    await controller.bind();
-  }
+  // Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
+  //   await controller.unbind();
+  //   await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
+  //   await controller.setImageAnalysisAnalyzer(analyzer);
+  //   await controller.bind();
+  // }
 
-  void _extractML(MlKitAnalyzerResult result) async {
-    switch (mode) {
-      case CameraMode.scanCode:
-        final barcodes = await result.getValue(_barcodeScanner);
-        this.barcodes = barcodes ?? [];
-        break;
-      case CameraMode.scanFace:
-        final faces = await result.getValue(_faceDetector);
-        this.faces = faces ?? [];
-        break;
-      default:
-    }
-  }
+  // void _extractML(MlKitAnalyzerResult result) async {
+  //   switch (mode) {
+  //     case CameraMode.scanCode:
+  //       final barcodes = await result.getValue(_barcodeScanner);
+  //       this.barcodes = barcodes ?? [];
+  //       break;
+  //     case CameraMode.scanFace:
+  //       final faces = await result.getValue(_faceDetector);
+  //       this.faces = faces ?? [];
+  //       break;
+  //     default:
+  //   }
+  // }
 
   Future<void> _clearImageAnalysisAnalyzer() async {
     await controller.clearImageAnalysisAnalyzer();

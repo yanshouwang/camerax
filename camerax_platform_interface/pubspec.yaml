@@ -1,5 +1,5 @@
 name: camerax_platform_interface
-description: 'A common platform interface for the camerax plugin.'
+description: "A common platform interface for the camerax plugin."
 version: 1.0.0-dev.10
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
@@ -8,8 +8,8 @@ topics:
   - camerax
 
 environment:
-  sdk: ^3.6.0
-  flutter: '>=3.3.0'
+  sdk: ^3.7.2
+  flutter: ">=3.3.0"
 resolution: workspace
 
 dependencies:

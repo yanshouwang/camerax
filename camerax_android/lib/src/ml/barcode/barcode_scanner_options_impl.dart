@@ -4,10 +4,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'barcode_format_impl.dart';
 import 'zoom_suggestion_options_impl.dart';
 
-final class BarcodeScannerOptionsImpl extends BarcodeScannerOptionsChannel {
+final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
   final BarcodeScannerOptionsApi api;
 
-  BarcodeScannerOptionsImpl.impl(this.api) : super.impl();
+  BarcodeScannerOptionsImpl.internal(this.api) : super.impl();
 
   factory BarcodeScannerOptionsImpl({
     bool? enableAllPotentialBarcodes,
@@ -22,6 +22,6 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptionsChannel {
       formats: formats?.map((e) => e.api).toList(),
       zoomSuggestionOptions: zoomSuggestionOptions.api,
     );
-    return BarcodeScannerOptionsImpl.impl(api);
+    return BarcodeScannerOptionsImpl.internal(api);
   }
 }

@@ -4,7 +4,7 @@ import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FileOutputOptionsImpl extends FileOutputOptionsChannel {
+final class FileOutputOptionsImpl extends FileOutputOptions {
   final FileOutputOptionsApi api;
 
   FileOutputOptionsImpl.impl(

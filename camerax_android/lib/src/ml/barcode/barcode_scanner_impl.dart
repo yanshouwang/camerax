@@ -4,11 +4,11 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'barcode_scanner_options_impl.dart';
 
-final class BarcodeScannerImpl extends BarcodeScannerChannel with DetectorImpl {
+final class BarcodeScannerImpl extends BarcodeScanner with DetectorImpl {
   @override
   final BarcodeScannerApi api;
 
-  BarcodeScannerImpl.impl(this.api) : super.impl();
+  BarcodeScannerImpl.internal(this.api) : super.impl();
 
   factory BarcodeScannerImpl({
     BarcodeScannerOptions? options,
@@ -19,6 +19,6 @@ final class BarcodeScannerImpl extends BarcodeScannerChannel with DetectorImpl {
     final api = BarcodeScannerApi(
       options: options?.api,
     );
-    return BarcodeScannerImpl.impl(api);
+    return BarcodeScannerImpl.internal(api);
   }
 }

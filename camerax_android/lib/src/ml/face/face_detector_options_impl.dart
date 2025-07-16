@@ -6,10 +6,10 @@ import 'face_contour_mode_impl.dart';
 import 'face_landmark_mode_impl.dart';
 import 'face_performance_mode_impl.dart';
 
-final class FaceDetectorOptionsImpl extends FaceDetectorOptionsChannel {
+final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
   final FaceDetectorOptionsApi api;
 
-  FaceDetectorOptionsImpl.impl(this.api) : super.impl();
+  FaceDetectorOptionsImpl.internal(this.api) : super.impl();
 
   factory FaceDetectorOptionsImpl({
     bool? enableTracking,
@@ -27,6 +27,6 @@ final class FaceDetectorOptionsImpl extends FaceDetectorOptionsChannel {
       minFaceSize: minFaceSize,
       performanceMode: performanceMode?.api,
     );
-    return FaceDetectorOptionsImpl.impl(api);
+    return FaceDetectorOptionsImpl.internal(api);
   }
 }

@@ -1,12 +1,10 @@
 name: _
 publish_to: none
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.7.2
 workspace:
   - camerax_platform_interface
   - camerax_android
   - camerax_ios
-  - camerax_linux
-  - camerax_linux/example
   - camerax
   - camerax/example

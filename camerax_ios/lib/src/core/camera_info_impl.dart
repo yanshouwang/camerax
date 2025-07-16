@@ -13,7 +13,7 @@ import 'lens_facing_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
-final class CameraInfoImpl extends CameraInfoChannel {
+final class CameraInfoImpl extends CameraInfo {
   final CameraInfoApi api;
 
   late final CameraStateObserverApi _cameraStateObserverApi;

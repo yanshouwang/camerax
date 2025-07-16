@@ -3,10 +3,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'focus_metering_action_impl.dart';
 
-final class CameraControlImpl extends CameraControlChannel {
+final class CameraControlImpl extends CameraControl {
   final CameraControlApi api;
 
-  CameraControlImpl.impl(this.api) : super.impl();
+  CameraControlImpl.internal(this.api) : super.impl();
 
   @override
   Future<void> cancelFocusAndMetering() => api.cancelFocusAndMetering();
@@ -37,5 +37,5 @@ final class CameraControlImpl extends CameraControlChannel {
 }
 
 extension CameraControlApiX on CameraControlApi {
-  CameraControl get impl => CameraControlImpl.impl(this);
+  CameraControl get impl => CameraControlImpl.internal(this);
 }

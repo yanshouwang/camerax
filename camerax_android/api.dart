@@ -138,7 +138,6 @@ enum ImageFormatApi {
   yuv420_888,
   rgba8888,
   jpeg,
-  jpegR,
 }
 
 enum MirrorModeApi {
@@ -853,19 +852,6 @@ abstract class ImageAnalyzerApi implements AnalyzerApi {
   ImageAnalyzerApi();
 
   late final void Function(ImageProxyApi image) analyze;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.core.ImageAnalysis.Analyzer',
-  ),
-)
-abstract class JpegAnalyzerApi implements AnalyzerApi {
-  JpegAnalyzerApi({
-    required CoordinateSystemApi targetCoordinateSystem,
-  });
-
-  late final void Function(Uint8List value) consumer;
 }
 
 @ProxyApi(

@@ -4,10 +4,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'metering_mode_impl.dart';
 import 'metering_point_impl.dart';
 
-final class FocusMeteringActionImpl extends FocusMeteringActionChannel {
+final class FocusMeteringActionImpl extends FocusMeteringAction {
   final FocusMeteringActionApi api;
 
-  FocusMeteringActionImpl.impl(this.api) : super.impl();
+  FocusMeteringActionImpl.internal(this.api) : super.impl();
 
   factory FocusMeteringActionImpl(
     (MeteringPoint, List<MeteringMode>) first, {
@@ -21,7 +21,7 @@ final class FocusMeteringActionImpl extends FocusMeteringActionChannel {
       disableAutoCancel: disableAutoCancel,
       autoCancelDuration: autoCancelDuration?.api,
     );
-    return FocusMeteringActionImpl.impl(api);
+    return FocusMeteringActionImpl.internal(api);
   }
 
   @override

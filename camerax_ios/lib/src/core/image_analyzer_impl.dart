@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'analyzer_impl.dart';
 import 'image_proxy_impl.dart';
 
-final class ImageAnalyzerImpl extends ImageAnalyzerChannel with AnalyzerImpl {
+final class ImageAnalyzerImpl extends ImageAnalyzer with AnalyzerImpl {
   @override
   final ImageAnalyzerApi api;
 

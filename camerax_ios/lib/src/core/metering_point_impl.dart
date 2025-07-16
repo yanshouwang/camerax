@@ -1,7 +1,7 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class MeteringPointImpl extends MeteringPointChannel {
+final class MeteringPointImpl extends MeteringPoint {
   final MeteringPointApi api;
 
   MeteringPointImpl.impl(

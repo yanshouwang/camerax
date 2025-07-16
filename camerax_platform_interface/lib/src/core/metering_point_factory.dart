@@ -1,6 +1,8 @@
 import 'metering_point.dart';
 
-abstract interface class MeteringPointFactory {
+abstract base class MeteringPointFactory {
+  MeteringPointFactory.impl();
+
   Future<MeteringPoint> createPoint(
     double x,
     double y, {

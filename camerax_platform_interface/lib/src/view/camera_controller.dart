@@ -2,21 +2,16 @@ import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/core.dart';
 import 'package:camerax_platform_interface/src/video.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'use_case.dart';
 import 'video.dart';
 
 typedef VideoRecordEventConsumer = void Function(VideoRecordEvent event);
 
-final _token = Object();
+abstract base class CameraController {
+  CameraController.impl();
 
-abstract interface class CameraController {
-  factory CameraController() {
-    final instance = CameraXPlugin.instance.newCameraController();
-    PlatformInterface.verify(instance as CameraControllerChannel, _token);
-    return instance;
-  }
+  factory CameraController() => CameraXPlugin.instance.newCameraController();
 
   Stream<ZoomState> get zoomStateChanged;
   Stream<TorchState> get torchStateChanged;
@@ -94,9 +89,4 @@ abstract interface class CameraController {
     required AudioConfig audioConfig,
     required VideoRecordEventConsumer listener,
   });
-}
-
-abstract base class CameraControllerChannel extends PlatformInterface
-    implements CameraController {
-  CameraControllerChannel.impl() : super(token: _token);
 }

@@ -1,6 +1,7 @@
 package dev.hebei.camerax_android.core
 
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ExperimentalLensFacing
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.LensFacingApi
 import dev.hebei.camerax_android.PigeonApiCameraSelectorApi
@@ -22,13 +23,14 @@ class CameraSelectorImpl(impl: CameraXImpl) : PigeonApiCameraSelectorApi(impl) {
         return CameraSelector.DEFAULT_BACK_CAMERA
     }
 
+    @ExperimentalLensFacing
     override fun external(): CameraSelector {
         return CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_EXTERNAL).build()
     }
 }
 
 val LensFacingApi.impl
-    get() = when (this) {
+    @ExperimentalLensFacing get() = when (this) {
         LensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
         LensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
         LensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
@@ -36,7 +38,7 @@ val LensFacingApi.impl
     }
 
 val Int.lensFacingApi
-    get() = when (this) {
+    @ExperimentalLensFacing get() = when (this) {
         CameraSelector.LENS_FACING_UNKNOWN -> LensFacingApi.UNKNOWN
         CameraSelector.LENS_FACING_FRONT -> LensFacingApi.FRONT
         CameraSelector.LENS_FACING_BACK -> LensFacingApi.BACK

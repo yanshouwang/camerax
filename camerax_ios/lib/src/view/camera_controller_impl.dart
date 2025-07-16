@@ -10,7 +10,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'use_case_impl.dart';
 
-final class CameraControllerImpl extends CameraControllerChannel {
+final class CameraControllerImpl extends CameraController {
   final CameraControllerApi api;
 
   late final TorchStateObserverApi _torchStateObserverApi;

@@ -18,11 +18,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PermissionManager newPermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector newFrontCameraSelector() => CameraSelectorImpl.front;
+  CameraSelector getFrontCameraSelector() => CameraSelectorImpl.front;
   @override
-  CameraSelector newBackCameraSelector() => CameraSelectorImpl.back;
+  CameraSelector getBackCameraSelector() => CameraSelectorImpl.back;
   @override
-  CameraSelector newExternalCameraSelector() => CameraSelectorImpl.external;
+  CameraSelector getExternalCameraSelector() => CameraSelectorImpl.external;
   @override
   CameraSelector newCameraSelector({
     LensFacing? lensFacing,
@@ -70,6 +70,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   // );
 
   @override
+  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+      throw UnimplementedError();
+  // QualitySelectorImpl.getResolution(cameraInfo, quality);
+
+  @override
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
@@ -90,11 +95,6 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   //   qualities,
   //   fallbackStrategy: fallbackStrategy,
   // );
-
-  @override
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
-      throw UnimplementedError();
-  // QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
   BarcodeScanner newBarcodeScanner({
@@ -209,17 +209,6 @@ final class CameraXiOSPlugin extends CameraXPlugin {
       ImageAnalyzerImpl(
         analyze: analyze,
       );
-
-  @override
-  JpegAnalyzer newJpegAnalyzer({
-    required CoordinateSystem targetCoordinateSystem,
-    required JpegConsumer consumer,
-  }) =>
-      throw UnimplementedError();
-  // JpegAnalyzerImpl(
-  //   targetCoordinateSystem: targetCoordinateSystem,
-  //   consumer: consumer,
-  // );
 
   @override
   Camera2CameraControl newCamera2CameraControlFrom(

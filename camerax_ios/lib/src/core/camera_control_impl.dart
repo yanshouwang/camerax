@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'focus_metering_action_impl.dart';
 
-final class CameraControlImpl extends CameraControlChannel {
+final class CameraControlImpl extends CameraControl {
   final CameraControlApi api;
 
   CameraControlImpl.impl(this.api) : super.impl();

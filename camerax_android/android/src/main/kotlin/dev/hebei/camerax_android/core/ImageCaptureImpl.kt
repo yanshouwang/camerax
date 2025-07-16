@@ -2,6 +2,7 @@ package dev.hebei.camerax_android.core
 
 import android.graphics.Bitmap
 import android.location.Location
+import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
@@ -119,14 +120,14 @@ class ImageCaptureImpl {
 }
 
 val CaptureModeApi.impl
-    get() = when (this) {
+    @ExperimentalZeroShutterLag get() = when (this) {
         CaptureModeApi.MAXIMIZE_QUALITY -> ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
         CaptureModeApi.MINIMIZE_LATENCY -> ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
         CaptureModeApi.ZERO_SHUTTER_LAG -> ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
     }
 
 val Int.captureModeApi
-    get() = when (this) {
+    @ExperimentalZeroShutterLag get() = when (this) {
         ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY -> CaptureModeApi.MINIMIZE_LATENCY
         ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY -> CaptureModeApi.MINIMIZE_LATENCY
         ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG -> CaptureModeApi.MINIMIZE_LATENCY

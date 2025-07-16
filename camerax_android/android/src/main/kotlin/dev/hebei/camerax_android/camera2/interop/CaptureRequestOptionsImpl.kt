@@ -2,6 +2,7 @@ package dev.hebei.camerax_android.camera2.interop
 
 import android.hardware.camera2.CaptureRequest
 import androidx.camera.camera2.interop.CaptureRequestOptions
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import dev.hebei.camerax_android.CameraXImpl
 import dev.hebei.camerax_android.ControlAeModeApi
 import dev.hebei.camerax_android.ControlAfModeApi
@@ -10,6 +11,7 @@ import dev.hebei.camerax_android.ControlModeApi
 import dev.hebei.camerax_android.PigeonApiCaptureRequestOptionsApi
 import dev.hebei.camerax_android.camera2.impl
 
+@ExperimentalCamera2Interop
 class CaptureRequestOptionsImpl(impl: CameraXImpl) : PigeonApiCaptureRequestOptionsApi(impl) {
     override fun build(
         mode: ControlModeApi?,

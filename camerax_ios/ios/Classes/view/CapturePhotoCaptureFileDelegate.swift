@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
+class CapturePhotoCaptureFileDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     private let options: ImageCapture.OutputFileOptions
     private let callback: ImageCapture.OnImageSavedCallback
     
@@ -26,17 +26,12 @@ class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
         debugPrint("will capture photo.")
     }
     
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishRecordingLivePhotoMovieForEventualFileAt outputFileURL: URL, resolvedSettings: AVCaptureResolvedPhotoSettings) {
-        debugPrint("did finish recording live photo movie for eventual file.")
+    func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        debugPrint("did capture photo.")
     }
     
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingLivePhotoToMovieFileAt outputFileURL: URL, duration: CMTime, photoDisplayTime: CMTime, resolvedSettings: AVCaptureResolvedPhotoSettings, error: (any Error)?) {
-        debugPrint("did finish processing live photo to movie file.")
-    }
-    
-    @available(iOS 17.0, *)
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishCapturingDeferredPhotoProxy deferredPhotoProxy: AVCaptureDeferredPhotoProxy?, error: (any Error)?) {
-        debugPrint("did finish capturing deferred photo proxy.")
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: (any Error)?) {
+        debugPrint("did finish capture.")
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
@@ -53,7 +48,16 @@ class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
         }
     }
     
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: (any Error)?) {
-        debugPrint("did finish capture.")
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishRecordingLivePhotoMovieForEventualFileAt outputFileURL: URL, resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        debugPrint("did finish recording live photo movie for eventual file.")
+    }
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingLivePhotoToMovieFileAt outputFileURL: URL, duration: CMTime, photoDisplayTime: CMTime, resolvedSettings: AVCaptureResolvedPhotoSettings, error: (any Error)?) {
+        debugPrint("did finish processing live photo to movie file.")
+    }
+    
+    @available(iOS 17.0, *)
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishCapturingDeferredPhotoProxy deferredPhotoProxy: AVCaptureDeferredPhotoProxy?, error: (any Error)?) {
+        debugPrint("did finish capturing deferred photo proxy.")
     }
 }

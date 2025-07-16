@@ -1,25 +1,18 @@
 # camerax_platform_interface
 
-A common platform interface for the [`camerax`][1] plugin.
+A new Flutter plugin project.
 
-This interface allows platform-specific implementations of the `camerax`
-plugin, as well as the plugin itself, to ensure they are supporting the
-same interface.
+## Getting Started
 
-# Usage
+This project is a starting point for a Flutter
+[plug-in package](https://flutter.dev/to/develop-plugins),
+a specialized package that includes platform-specific implementation code for
+Android and/or iOS.
 
-To implement a new platform-specific implementation of `camerax`, 
-extend [`CameraX`][2] with an implementation that performs the
-platform-specific behavior, and when you register your plugin, set the default
-`CameraX` by calling `CameraX.instance = CameraXImpl()`.
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
 
-# Note on breaking changes
-
-Strongly prefer non-breaking changes (such as adding a method to the interface)
-over breaking changes for this package.
-
-See https://flutter.dev/go/platform-interface-breaking-changes for a discussion
-on why a less-clean interface is preferable to a breaking change.
-
-[1]: https://pub.dev/packages/camerax
-[2]: lib/src/camerax.dart
+The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
+To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
+You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/to/pubspec-plugin-platforms.

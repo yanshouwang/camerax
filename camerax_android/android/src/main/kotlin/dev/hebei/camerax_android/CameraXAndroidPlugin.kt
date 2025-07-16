@@ -11,12 +11,13 @@ class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
     private lateinit var impl: CameraXImpl
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        impl = CameraXImpl(binding.applicationContext, binding.binaryMessenger)
+        val binaryMessenger = binding.binaryMessenger
+        val context = binding.applicationContext
+        impl = CameraXImpl(binaryMessenger, context)
         impl.setUp()
+        val viewTypeId = "camerax.hebei.dev/PreviewView"
         val viewFactory = ViewFactory(impl.instanceManager)
-        binding.platformViewRegistry.registerViewFactory(
-            "camerax.hebei.dev/PreviewView", viewFactory
-        )
+        binding.platformViewRegistry.registerViewFactory(viewTypeId, viewFactory)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -26,19 +27,21 @@ class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         PermissionManager.onAttachedToActivity(binding)
-        impl.activity = binding.activity
+        impl.onAttachedToActivity(binding)
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {
+        PermissionManager.onDetachedFromActivityForConfigChanges()
+        impl.onDetachedFromActivityForConfigChanges()
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        onAttachedToActivity(binding)
+        PermissionManager.onReattachedToActivityForConfigChanges(binding)
+        impl.onReattachedToActivityForConfigChanges(binding)
     }
 
     override fun onDetachedFromActivity() {
         PermissionManager.onDetachedFromActivity()
-        impl.activity = null
-    }
-
-    override fun onDetachedFromActivityForConfigChanges() {
-        onDetachedFromActivity()
+        impl.onDetachedFromActivity()
     }
 }

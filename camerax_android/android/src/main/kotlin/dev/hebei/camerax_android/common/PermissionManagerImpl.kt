@@ -21,8 +21,8 @@ class PermissionManagerImpl(impl: CameraXImpl) : PigeonApiPermissionManagerApi(i
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val permissionObjs = permissions.map { permission -> permission.impl }
-                val isGranted = PermissionManager.requestPermissions(permissionObjs)
+                val permissionImpls = permissions.map { permission -> permission.impl }
+                val isGranted = PermissionManager.requestPermissions(permissionImpls)
                 callback(Result.success(isGranted))
             } catch (e: Exception) {
                 callback(Result.failure(e))

@@ -5,7 +5,7 @@ import 'image_format_impl.dart';
 import 'image_info_impl.dart';
 import 'plane_proxy_impl.dart';
 
-final class ImageProxyImpl extends ImageProxyChannel {
+final class ImageProxyImpl extends ImageProxy {
   final ImageProxyApi api;
 
   ImageProxyImpl.impl(

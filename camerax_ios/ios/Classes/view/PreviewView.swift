@@ -27,22 +27,29 @@ public class PreviewView: UIView {
         set { previewLayer.videoGravity = newValue.impl }
     }
     
+    private let tapGestureRecognizer: UITapGestureRecognizer
+    private let pinchGestureRecognizer: UIPinchGestureRecognizer
+    
     public override init(frame: CGRect) {
+        self.tapGestureRecognizer = UITapGestureRecognizer()
+        self.pinchGestureRecognizer = UIPinchGestureRecognizer()
         super.init(frame: frame)
-        setUp()
+        self.previewLayer.videoGravity = .resizeAspectFill
+        self.tapGestureRecognizer.addTarget(self, action: #selector(handleTap(sender:)))
+        self.pinchGestureRecognizer.addTarget(self, action: #selector(handlePinch(sender:)))
+        self.addGestureRecognizer(tapGestureRecognizer)
+        self.addGestureRecognizer(pinchGestureRecognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     public required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setUp()
+        fatalError()
     }
     
-    private func setUp() {
-        previewLayer.videoGravity = .resizeAspectFill
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        addGestureRecognizer(tapGestureRecognizer)
-        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(sender:)))
-        addGestureRecognizer(pinchGestureRecognizer)
+    deinit {
+        self.removeGestureRecognizer(tapGestureRecognizer)
+        self.removeGestureRecognizer(pinchGestureRecognizer)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -71,8 +78,31 @@ public class PreviewView: UIView {
         }
     }
     
+    @objc func handleOrientationDidChange() {
+        let orientation = UIDevice.current.orientation
+        guard let connection = previewLayer.connection, let videoOrientation = orientation.videoOrientation else { return }
+        connection.videoOrientation = videoOrientation
+    }
+    
     public enum ScaleType: Int {
         case fillCenter, fillEnd, fillStart, fitCenter, fitEnd, fitStart
+    }
+}
+
+extension UIDeviceOrientation {
+    var videoOrientation: AVCaptureVideoOrientation? {
+        switch self {
+        case .portrait:
+            return .portrait
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        case .landscapeLeft:
+            return .landscapeRight
+        case .landscapeRight:
+            return .landscapeLeft
+        default:
+            return nil
+        }
     }
 }
 

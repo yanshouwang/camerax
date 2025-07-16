@@ -5,10 +5,10 @@ import 'image_format_impl.dart';
 import 'image_info_impl.dart';
 import 'plane_proxy_impl.dart';
 
-final class ImageProxyImpl extends ImageProxyChannel {
+final class ImageProxyImpl extends ImageProxy {
   final ImageProxyApi api;
 
-  ImageProxyImpl.impl(
+  ImageProxyImpl.internal(
     this.api, {
     required super.format,
     required super.width,
@@ -27,19 +27,8 @@ extension ImageProxyApiX on ImageProxyApi {
     final width = this.width;
     final height = this.height;
     final imageInfo = this.imageInfo.impl;
-    // final planes = await Stream.fromIterable(this.planes).asyncMap((e) async {
-    //   final buffer = e.buffer;
-    //   final pixelStride = e.pixelStride;
-    //   final rowStride = e.rowStride;
-    //   final value = await buffer.get(width, height, pixelStride, rowStride);
-    //   return PlaneProxy(
-    //     value: value,
-    //     pixelStride: pixelStride,
-    //     rowStride: width * pixelStride,
-    //   );
-    // }).toList();
-    final planes = this.planes.map((e)=>e.impl).toList();
-    return ImageProxyImpl.impl(
+    final planes = this.planes.map((e) => e.impl).toList();
+    return ImageProxyImpl.internal(
       this,
       format: format,
       width: width,

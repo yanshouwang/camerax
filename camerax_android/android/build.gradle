@@ -3,7 +3,7 @@ version = "1.0-SNAPSHOT"
 
 buildscript {
     ext.kotlin_version = "1.8.22"
-    ext.camerax_version = "1.4.1"
+    ext.camerax_version = "1.4.2"
     repositories {
         google()
         mavenCentral()
@@ -67,11 +67,11 @@ android {
 
         implementation "com.google.mlkit:barcode-scanning:17.3.0"
         implementation "com.google.mlkit:face-detection:16.1.7"
-//        implementation "com.google.mlkit:image-labeling:17.0.8"
-//        implementation "com.google.mlkit:object-detection:17.0.1"
-//        implementation "com.google.mlkit:pose-detection:17.0.0"
-//        implementation "com.google.mlkit:segmentation-selfie:16.0.0-beta5"
-//        implementation "com.google.mlkit:text-recognition:16.0.0"
+        // implementation "com.google.mlkit:image-labeling:17.0.8"
+        // implementation "com.google.mlkit:object-detection:17.0.1"
+        // implementation "com.google.mlkit:pose-detection:17.0.0"
+        // implementation "com.google.mlkit:segmentation-selfie:16.0.0-beta5"
+        // implementation "com.google.mlkit:text-recognition:16.0.0"
 
         implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.7.3"
 
@@ -84,9 +84,9 @@ android {
             useJUnitPlatform()
 
             testLogging {
-                events "passed", "skipped", "failed", "standardOut", "standardError"
-                outputs.upToDateWhen { false }
-                showStandardStreams = true
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen { false }
+               showStandardStreams = true
             }
         }
     }

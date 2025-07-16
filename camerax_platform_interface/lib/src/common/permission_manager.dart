@@ -1,22 +1,12 @@
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'permission.dart';
 
-final _token = Object();
+abstract base class PermissionManager {
+  PermissionManager.impl();
 
-abstract interface class PermissionManager {
-  factory PermissionManager() {
-    final instance = CameraXPlugin.instance.newPermissionManager();
-    PlatformInterface.verify(instance as PlatformInterface, _token);
-    return instance;
-  }
+  factory PermissionManager() => CameraXPlugin.instance.newPermissionManager();
 
   Future<bool> checkPermission(Permission permission);
   Future<bool> requestPermissions(List<Permission> permissions);
-}
-
-abstract base class PermissionManagerChannel extends PlatformInterface
-    implements PermissionManager {
-  PermissionManagerChannel.impl() : super(token: _token);
 }

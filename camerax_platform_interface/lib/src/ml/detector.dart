@@ -1,3 +1,5 @@
-abstract interface class Detector<T> {
+abstract base class Detector<T> {
+  Detector.impl();
+
   Future<void> close();
 }

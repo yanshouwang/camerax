@@ -1,14 +1,13 @@
 import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class PermissionManagerImpl extends PermissionManagerChannel {
+final class PermissionManagerImpl extends PermissionManager {
   final PermissionManagerApi api;
 
-  PermissionManagerImpl.impl(this.api) : super.impl();
+  PermissionManagerImpl.internal(this.api) : super.impl();
 
   factory PermissionManagerImpl() {
-    final api = PermissionManagerApi.instance;
-    return PermissionManagerImpl.impl(api);
+    return PermissionManagerImpl.internal(PermissionManagerApi.instance);
   }
 
   @override

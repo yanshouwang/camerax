@@ -3,6 +3,7 @@ package dev.hebei.camerax_android.core
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.DynamicRange
+import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ExposureState
 import androidx.camera.core.FocusMeteringAction
 import dev.hebei.camerax_android.CameraXImpl
@@ -62,6 +63,7 @@ class CameraInfoImpl(impl: CameraXImpl) : PigeonApiCameraInfoApi(impl) {
         return pigeon_instance.isLogicalMultiCameraSupported
     }
 
+    @ExperimentalZeroShutterLag
     override fun isZslSupported(pigeon_instance: CameraInfo): Boolean {
         return pigeon_instance.isZslSupported
     }

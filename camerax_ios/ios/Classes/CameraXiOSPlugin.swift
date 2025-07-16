@@ -14,7 +14,8 @@ public class CameraXiOSPlugin: NSObject, FlutterPlugin {
         let messenger = registrar.messenger()
         let instance = CameraXiOSPlugin(messenger: messenger)
         let viewFactory = ViewFactory(instanceManager: instance.api!.instanceManager)
-        registrar.register(viewFactory, withId: "camerax.hebei.dev/PreviewView")
+        let viewTypeId = "camerax.hebei.dev/PreviewView"
+        registrar.register(viewFactory, withId: viewTypeId)
         registrar.publish(instance)
     }
     

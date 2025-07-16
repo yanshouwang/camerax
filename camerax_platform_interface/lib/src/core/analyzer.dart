@@ -1,1 +1,3 @@
-abstract interface class Analyzer {}
+abstract base class Analyzer {
+  Analyzer.impl();
+}

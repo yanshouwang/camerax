@@ -2,7 +2,11 @@ import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CaptureRequestOptionsImpl extends CaptureRequestOptionsChannel {
+final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
+  final CaptureRequestOptionsApi api;
+
+  CaptureRequestOptionsImpl.internal(this.api) : super.impl();
+
   factory CaptureRequestOptionsImpl({
     ControlMode? mode,
     ControlAeMode? aeMode,
@@ -17,14 +21,10 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptionsChannel {
       awbMode: awbMode?.api,
       sensorExposureTime: sensorExposureTime,
     );
-    return CaptureRequestOptionsImpl.impl(api);
+    return CaptureRequestOptionsImpl.internal(api);
   }
-
-  final CaptureRequestOptionsApi api;
-
-  CaptureRequestOptionsImpl.impl(this.api) : super.impl();
 }
 
 extension CaptureRequestOptioinsApiX on CaptureRequestOptionsApi {
-  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.impl(this);
+  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.internal(this);
 }

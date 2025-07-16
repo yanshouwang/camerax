@@ -58,8 +58,9 @@ class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
         }
     }
 
-    class PlaneProxyWrapper(private val plane: ImageProxy.PlaneProxy, private val width: Int, private val height: Int) :
-        ImageProxy.PlaneProxy {
+    class PlaneProxyWrapper(
+        private val plane: ImageProxy.PlaneProxy, private val width: Int, private val height: Int
+    ) : ImageProxy.PlaneProxy {
         override fun getRowStride(): Int {
             return width * plane.pixelStride
         }
@@ -75,6 +76,14 @@ class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
         fun getValue(): ByteArray {
             val buffer = plane.buffer
             val pixelStride = plane.pixelStride
+            // The pixel stride and row stride of JPEG is 0
+            if (pixelStride == 0) {
+                val remaining = buffer.remaining()
+                val value = ByteArray(remaining)
+                buffer.get(value)
+                return value
+            }
+            // Remove the stride alignment
             val rowStride = width * pixelStride
             val value = ByteArray(rowStride * height)
             if (rowStride == plane.rowStride) {

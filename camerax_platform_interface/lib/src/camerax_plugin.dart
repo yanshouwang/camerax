@@ -23,8 +23,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
   static CameraXPlugin get instance {
     final instance = _instance;
     if (instance == null) {
-      throw UnimplementedError(
-          'CameraController is not implemented on this platform.');
+      throw UnimplementedError();
     }
     return instance;
   }
@@ -33,18 +32,18 @@ abstract base class CameraXPlugin extends PlatformInterface {
   /// platform-specific class that extends [CameraXPlugin] when
   /// they register themselves.
   static set instance(CameraXPlugin instance) {
-    PlatformInterface.verifyToken(instance, _token);
+    PlatformInterface.verify(instance, _token);
     _instance = instance;
   }
 
   PermissionManager newPermissionManager();
 
+  CameraSelector getFrontCameraSelector();
+  CameraSelector getBackCameraSelector();
+  CameraSelector getExternalCameraSelector();
   CameraSelector newCameraSelector({
     LensFacing? lensFacing,
   });
-  CameraSelector newFrontCameraSelector();
-  CameraSelector newBackCameraSelector();
-  CameraSelector newExternalCameraSelector();
 
   OutputFileOptions newOutputFileOptions({
     required File file,
@@ -68,6 +67,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
 
+  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
+
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
@@ -77,8 +78,6 @@ abstract base class CameraXPlugin extends PlatformInterface {
     List<Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
   });
-
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
 
   SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
     double width,
@@ -94,11 +93,6 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   ImageAnalyzer newImageAnalyzer({
     required ImageProxyCallback analyze,
-  });
-
-  JpegAnalyzer newJpegAnalyzer({
-    required CoordinateSystem targetCoordinateSystem,
-    required JpegConsumer consumer,
   });
 
   ZoomSuggestionOptions newZoomSuggestionOptions({

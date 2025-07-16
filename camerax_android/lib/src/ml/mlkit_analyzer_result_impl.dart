@@ -6,10 +6,10 @@ import 'barcode.dart';
 import 'detector_impl.dart';
 import 'face.dart';
 
-final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResultChannel {
+final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   final MlKitAnalyzerResultApi api;
 
-  MlKitAnalyzerResultImpl.impl(
+  MlKitAnalyzerResultImpl.internal(
     this.api, {
     required super.timestamp,
   }) : super.impl();
@@ -42,7 +42,7 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResultChannel {
 
 extension MlKitAnalyzerResultApiX on MlKitAnalyzerResultApi {
   MlKitAnalyzerResult get impl {
-    return MlKitAnalyzerResultImpl.impl(
+    return MlKitAnalyzerResultImpl.internal(
       this,
       timestamp: timestamp,
     );

@@ -50,6 +50,7 @@ public class RotationProvider: NSObject {
     }
     
     private func orientationToSurfaceRotation(_ orientation: Int) -> Int {
+        debugPrint("orientation: \(orientation)")
         if orientation >= 315 || orientation < 45 {
             return 0
         } else if orientation >= 225 {

@@ -47,7 +47,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         _isPinchToZoomEnabled = true
         session = AVCaptureSession()
         capturePhotoOutput = AVCapturePhotoOutput()
-        capturePhotoSettings = AVCapturePhotoSettings()
+        capturePhotoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
         captureMovieFileOutput = AVCaptureMovieFileOutput()
         captureVideoDataOutput = AVCaptureVideoDataOutput()
         captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
@@ -256,21 +256,43 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     }
     
     public func takePicture(_ capturedCallback: ImageCapture.OnImageCapturedCallback) throws -> Void {
-        throw CameraXError(code: "unimplemented-error", message: "takePicture is not implemented", details: nil)
+        let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
+        if #available(iOS 16.0, *) {
+            debugPrint(capturePhotoOutput.maxPhotoDimensions)
+            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
+        } else {
+            capturePhotoOutput.isHighResolutionCaptureEnabled = true
+        }
+//        if #available(iOS 13.0, *) {
+//            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
+//        }
+//        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
+//        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
+//            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
+//        }
+//        settings.flashMode = capturePhotoSettings.flashMode
+        let delegate = CapturePhotoCaptureMemoryDelegate(capturedCallback)
+        capturePhotoCaptureDelegate = delegate
+        capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
     }
     
     public func takePicture(_ outputFileOptions: ImageCapture.OutputFileOptions, _ savedCallback: ImageCapture.OnImageSavedCallback) throws -> Void {
         let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-        //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
-        //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
-        //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
-        //        }
-        //        if #available(iOS 16.0, *) {
-        //            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
-        //        }
-        //        settings.flashMode = capturePhotoSettings.flashMode
-        //        settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-        let delegate = CapturePhotoCaptureDelegate(outputFileOptions, savedCallback)
+        if #available(iOS 16.0, *) {
+            debugPrint(capturePhotoOutput.maxPhotoDimensions)
+            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
+        } else {
+            capturePhotoOutput.isHighResolutionCaptureEnabled = true
+        }
+//        if #available(iOS 13.0, *) {
+//            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
+//        }
+//        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
+//        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
+//            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
+//        }
+//        settings.flashMode = capturePhotoSettings.flashMode
+        let delegate = CapturePhotoCaptureFileDelegate(outputFileOptions, savedCallback)
         capturePhotoCaptureDelegate = delegate
         capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
     }
@@ -380,7 +402,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         case .front:
             return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
         case .back:
-            if let device = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) { return device }
+            if #available(iOS 13.0, *), let device = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) { return device }
             else if let device = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) { return device }
             else { return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) }
         case .external:
@@ -449,6 +471,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
             throw CameraXError(code: "add-output-error", message: "Can not add output", details: nil)
         }
         session.addOutput(capturePhotoOutput)
+        
     }
     
     private func addCaptureMovieFileOutput() throws {
@@ -486,7 +509,7 @@ extension AVCaptureDevice {
     }
     
     var minZoomRatio: Double {
-        if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
+        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
             return minAvailableVideoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
         } else {
             return minAvailableVideoZoomFactor
@@ -494,8 +517,7 @@ extension AVCaptureDevice {
     }
     
     var maxZoomRatio: Double {
-        if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first,
-           let lastSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.last {
+        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first, let lastSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.last {
             // 5x digital zoom factor
             return CGFloat(truncating: lastSwitchOverVideoZoomFactor) / CGFloat(truncating: firstSwitchOverVideoZoomFactor) * 5.0
         } else {
@@ -505,7 +527,7 @@ extension AVCaptureDevice {
     
     var zoomRatio: Double {
         get {
-            if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
+            if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
                 return videoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
             } else {
                 return videoZoomFactor
@@ -515,7 +537,7 @@ extension AVCaptureDevice {
             if newValue < minZoomRatio || newValue > maxZoomRatio {
                 return
             }
-            if let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
+            if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = virtualDeviceSwitchOverVideoZoomFactors.first {
                 videoZoomFactor = newValue * CGFloat(truncating: firstSwitchOverVideoZoomFactor)
             } else {
                 videoZoomFactor = newValue

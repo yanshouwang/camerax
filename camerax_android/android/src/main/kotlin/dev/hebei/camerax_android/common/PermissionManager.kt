@@ -5,18 +5,19 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.PluginRegistry
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-object PermissionManager {
+object PermissionManager : ActivityAware {
     private const val REQUEST_CODE = 1949
     private var binding: ActivityPluginBinding? = null
 
     fun checkPermission(permission: Permission): Boolean {
-        val binding = binding ?: throw IllegalStateException("Activity binding is null.")
+        val binding = binding ?: throw NullPointerException("Activity binding is null")
         val activity = binding.activity
         return permission.values.all { value ->
             ContextCompat.checkSelfPermission(
@@ -28,7 +29,7 @@ object PermissionManager {
     suspend fun requestPermissions(permissions: List<Permission>): Boolean {
         return suspendCoroutine { continuation ->
             try {
-                val binding = binding ?: throw IllegalStateException("Activity binding is null.")
+                val binding = binding ?: throw NullPointerException("Activity binding is null")
                 val activity = binding.activity
                 val listener = object : PluginRegistry.RequestPermissionsResultListener {
                     override fun onRequestPermissionsResult(
@@ -54,12 +55,20 @@ object PermissionManager {
         }
     }
 
-    internal fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        PermissionManager.binding = binding
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        this.binding = binding
     }
 
-    internal fun onDetachedFromActivity() {
-        binding = null
+    override fun onDetachedFromActivityForConfigChanges() {
+        onDetachedFromActivity()
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        onAttachedToActivity(binding)
+    }
+
+    override fun onDetachedFromActivity() {
+        this.binding = null
     }
 
     enum class Permission {

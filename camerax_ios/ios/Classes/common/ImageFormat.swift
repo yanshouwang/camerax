@@ -8,7 +8,7 @@
 import Foundation
 
 public enum ImageFormat: Int {
-    case yuv420888, rgba8888
+    case yuv420888, rgba8888, jpeg
 }
 
 extension ImageFormat {
@@ -18,6 +18,8 @@ extension ImageFormat {
             return Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
         case .rgba8888:
             return Int(kCVPixelFormatType_32BGRA)
+        case .jpeg:
+            fatalError()
         }
     }
 }

@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'metering_mode_impl.dart';
 import 'metering_point_impl.dart';
 
-final class FocusMeteringActionImpl extends FocusMeteringActionChannel {
+final class FocusMeteringActionImpl extends FocusMeteringAction {
   final FocusMeteringActionApi api;
 
   FocusMeteringActionImpl.impl(this.api) : super.impl();

@@ -4,7 +4,11 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'capture_request_options_impl.dart';
 
-final class Camera2CameraControlImpl extends Camera2CameraControlChannel {
+final class Camera2CameraControlImpl extends Camera2CameraControl {
+  final Camera2CameraControlApi api;
+
+  Camera2CameraControlImpl.internal(this.api) : super.impl();
+
   factory Camera2CameraControlImpl.from(CameraControl cameraControl) {
     if (cameraControl is! CameraControlImpl) {
       throw TypeError();
@@ -12,12 +16,8 @@ final class Camera2CameraControlImpl extends Camera2CameraControlChannel {
     final api = Camera2CameraControlApi.from(
       cameraControl: cameraControl.api,
     );
-    return Camera2CameraControlImpl.impl(api);
+    return Camera2CameraControlImpl.internal(api);
   }
-
-  final Camera2CameraControlApi api;
-
-  Camera2CameraControlImpl.impl(this.api) : super.impl();
 
   @override
   Future<void> addCaptureRequestOptions(CaptureRequestOptions bundle) {

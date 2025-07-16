@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'metering_point_impl.dart';
 
 final class SurfaceOrientedMeteringPointFactoryImpl
-    extends SurfaceOrientedMeteringPointFactoryChannel {
+    extends SurfaceOrientedMeteringPointFactory {
   final SurfaceOrientedMeteringPointFactoryApi api;
 
   SurfaceOrientedMeteringPointFactoryImpl.impl(this.api) : super.impl();

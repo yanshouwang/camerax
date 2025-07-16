@@ -27,11 +27,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Here is the Camera Usage Description</string>
+	<string>Camera Usage Description</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Here is the Microphone Usage Description</string>
+	<string>Microphone Usage Description</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Here is the Photo Library Usage Description</string>
+	<string>Photo Library Usage Description</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -136,7 +136,6 @@ enum ImageFormatApi {
   yuv420_888,
   rgba8888,
   jpeg,
-  jpegR,
 }
 
 enum MirrorModeApi {

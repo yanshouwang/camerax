@@ -13,7 +13,7 @@ import 'lens_facing_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
-final class CameraInfoImpl extends CameraInfoChannel {
+final class CameraInfoImpl extends CameraInfo {
   final CameraInfoApi api;
 
   late final StreamController<CameraState> _cameraStateChangedController;
@@ -24,7 +24,7 @@ final class CameraInfoImpl extends CameraInfoChannel {
   Future<TorchStateObserverApi>? _torchStateObserverApiFuture;
   Future<ZoomStateObserverApi>? _zoomStateObserverApiFuture;
 
-  CameraInfoImpl.impl(this.api) : super.impl() {
+  CameraInfoImpl.internal(this.api) : super.impl() {
     _cameraStateChangedController = StreamController.broadcast(
       onListen: _onListenCameraStateChanged,
       onCancel: _onCancelCameraStateChanged,
@@ -220,5 +220,5 @@ final class CameraInfoImpl extends CameraInfoChannel {
 }
 
 extension CameraInfoApiX on CameraInfoApi {
-  CameraInfo get impl => CameraInfoImpl.impl(this);
+  CameraInfo get impl => CameraInfoImpl.internal(this);
 }

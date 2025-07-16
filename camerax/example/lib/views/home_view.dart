@@ -29,10 +29,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(
-      initialPage: 0,
-      viewportFraction: 1 / 5,
-    );
+    _pageController = PageController(initialPage: 0, viewportFraction: 1 / 5);
   }
 
   // int? _exposureTime;
@@ -47,7 +44,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final savedUri = viewModel.savedUri;
     final isRecording = viewModel.isRecording;
     final imageModel = viewModel.imageModel;
-    final jpegValue = viewModel.jpegValue;
     final barcodes = viewModel.barcodes;
     final faces = viewModel.faces;
     const pageDuration = Duration(milliseconds: 300);
@@ -89,8 +85,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           flashMode == FlashMode.auto
                               ? Symbols.flash_auto
                               : flashMode == FlashMode.on
-                                  ? Symbols.flash_on
-                                  : Symbols.flash_off,
+                              ? Symbols.flash_on
+                              : Symbols.flash_off,
                           color: CupertinoColors.label.resolveFrom(context),
                         ),
                       ),
@@ -103,9 +99,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
             child: ClipRect(
               child: Stack(
                 children: [
-                  PreviewWidget(
-                    controller: controller,
-                  ),
+                  PreviewWidget(controller: controller),
                   if (imageModel != null)
                     Container(
                       alignment: Alignment.topRight,
@@ -118,26 +112,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         ),
                       ),
                     ),
-                  if (jpegValue != null)
-                    Container(
-                      alignment: Alignment.topRight,
-                      margin: const EdgeInsets.all(20.0),
-                      child: SizedBox(
-                        width: 100.0,
-                        child: Image.memory(
-                          jpegValue,
-                          gaplessPlayback: true,
-                        ),
-                      ),
-                    ),
-                  if (barcodes.isNotEmpty)
-                    BarcodesView(
-                      barcodes: barcodes,
-                    ),
-                  if (faces.isNotEmpty)
-                    FacesView(
-                      faces: faces,
-                    ),
+                  if (barcodes.isNotEmpty) BarcodesView(barcodes: barcodes),
+                  if (faces.isNotEmpty) FacesView(faces: faces),
                   if (zoomState != null)
                     Container(
                       alignment: Alignment.bottomCenter,
@@ -229,14 +205,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Picture',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: mode == CameraMode.takePicture
+                            style: CupertinoTheme.of(
+                              context,
+                            ).textTheme.textStyle.copyWith(
+                              color:
+                                  mode == CameraMode.takePicture
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                                ),
+                            ),
                           ),
                         ),
                       ),
@@ -253,14 +229,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Video',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: mode == CameraMode.recordVideo
+                            style: CupertinoTheme.of(
+                              context,
+                            ).textTheme.textStyle.copyWith(
+                              color:
+                                  mode == CameraMode.recordVideo
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                                ),
+                            ),
                           ),
                         ),
                       ),
@@ -277,14 +253,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Raw',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: mode == CameraMode.rawValue
+                            style: CupertinoTheme.of(
+                              context,
+                            ).textTheme.textStyle.copyWith(
+                              color:
+                                  mode == CameraMode.rawValue
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                                ),
+                            ),
                           ),
                         ),
                       ),
@@ -301,14 +277,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Code',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: mode == CameraMode.scanCode
+                            style: CupertinoTheme.of(
+                              context,
+                            ).textTheme.textStyle.copyWith(
+                              color:
+                                  mode == CameraMode.scanCode
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                                ),
+                            ),
                           ),
                         ),
                       ),
@@ -325,14 +301,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Face',
-                            style: CupertinoTheme.of(context)
-                                .textTheme
-                                .textStyle
-                                .copyWith(
-                                  color: mode == CameraMode.scanFace
+                            style: CupertinoTheme.of(
+                              context,
+                            ).textTheme.textStyle.copyWith(
+                              color:
+                                  mode == CameraMode.scanFace
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                                ),
+                            ),
                           ),
                         ),
                       ),
@@ -345,26 +321,28 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                 children: [
                   AnimatedTapWidget(
                     duration: const Duration(milliseconds: 100),
-                    onTap: savedUri == null
-                        ? null
-                        : () {
-                            context.go('/viewer?uri=${savedUri.toFilePath()}');
-                          },
+                    onTap:
+                        savedUri == null
+                            ? null
+                            : () {
+                              context.go(
+                                '/viewer?uri=${savedUri.toFilePath()}',
+                              );
+                            },
                     child: Container(
                       width: 48.0,
                       height: 48.0,
                       clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: savedUri == null
-                          ? Icon(
-                              Symbols.image,
-                              color: CupertinoColors.label.resolveFrom(context),
-                            )
-                          : Thumbnail(
-                              uri: savedUri,
-                            ),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child:
+                          savedUri == null
+                              ? Icon(
+                                Symbols.image,
+                                color: CupertinoColors.label.resolveFrom(
+                                  context,
+                                ),
+                              )
+                              : Thumbnail(uri: savedUri),
                     ),
                   ),
                   Container(
@@ -379,18 +357,19 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                     ),
                     child: AnimatedTapWidget(
                       duration: const Duration(milliseconds: 100),
-                      onTap: mode == CameraMode.takePicture ||
-                              mode == CameraMode.recordVideo
-                          ? () {
-                              if (mode == CameraMode.takePicture) {
-                                viewModel.takePicture();
-                              } else if (isRecording) {
-                                viewModel.stopRecording();
-                              } else {
-                                viewModel.startRecording();
+                      onTap:
+                          mode == CameraMode.takePicture ||
+                                  mode == CameraMode.recordVideo
+                              ? () {
+                                if (mode == CameraMode.takePicture) {
+                                  viewModel.takePicture();
+                                } else if (isRecording) {
+                                  viewModel.stopRecording();
+                                } else {
+                                  viewModel.startRecording();
+                                }
                               }
-                            }
-                          : null,
+                              : null,
                       // onTap: () async {
                       //   final exposureTime = _exposureTime;
                       //   final newValue =
@@ -403,9 +382,12 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         margin: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: isRecording
-                              ? CupertinoColors.systemRed.resolveFrom(context)
-                              : CupertinoColors.label.resolveFrom(context),
+                          color:
+                              isRecording
+                                  ? CupertinoColors.systemRed.resolveFrom(
+                                    context,
+                                  )
+                                  : CupertinoColors.label.resolveFrom(context),
                         ),
                       ),
                     ),
@@ -420,8 +402,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       height: 48.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: CupertinoColors.quaternarySystemFill
-                            .resolveFrom(context),
+                        color: CupertinoColors.quaternarySystemFill.resolveFrom(
+                          context,
+                        ),
                       ),
                       child: FlipWidget(
                         duration: const Duration(milliseconds: 100),

@@ -6,7 +6,15 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'fallback_strategy_impl.dart';
 import 'quality_impl.dart';
 
-final class QualitySelectorImpl extends QualitySelectorChannel {
+final class QualitySelectorImpl extends QualitySelector {
+  static Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) {
+    if (cameraInfo is! CameraInfoImpl) {
+      throw TypeError();
+    }
+    return QualitySelectorApi.getResolution(cameraInfo.api, quality.api)
+        .then((e) => e?.impl);
+  }
+
   final QualitySelectorApi api;
 
   QualitySelectorImpl.impl(this.api) : super.impl();
@@ -37,14 +45,6 @@ final class QualitySelectorImpl extends QualitySelectorChannel {
       fallbackStrategy: fallbackStrategy?.api,
     );
     return QualitySelectorImpl.impl(api);
-  }
-
-  static Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) {
-    if (cameraInfo is! CameraInfoImpl) {
-      throw TypeError();
-    }
-    return QualitySelectorApi.getResolution(cameraInfo.api, quality.api)
-        .then((e) => e?.impl);
   }
 }
 
