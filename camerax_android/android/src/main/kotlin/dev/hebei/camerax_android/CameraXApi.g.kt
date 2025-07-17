@@ -585,34 +585,10 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
   abstract fun getPigeonApiImageProxyApi(): PigeonApiImageProxyApi
 
   /**
-   * An implementation of [PigeonApiMetadataApi] used to add a new Dart instance of
-   * `MetadataApi` to the Dart `InstanceManager`.
-   */
-  abstract fun getPigeonApiMetadataApi(): PigeonApiMetadataApi
-
-  /**
-   * An implementation of [PigeonApiOutputFileOptionsApi] used to add a new Dart instance of
-   * `OutputFileOptionsApi` to the Dart `InstanceManager`.
-   */
-  abstract fun getPigeonApiOutputFileOptionsApi(): PigeonApiOutputFileOptionsApi
-
-  /**
-   * An implementation of [PigeonApiOutputFileResultsApi] used to add a new Dart instance of
-   * `OutputFileResultsApi` to the Dart `InstanceManager`.
-   */
-  abstract fun getPigeonApiOutputFileResultsApi(): PigeonApiOutputFileResultsApi
-
-  /**
    * An implementation of [PigeonApiOnImageCapturedCallbackApi] used to add a new Dart instance of
    * `OnImageCapturedCallbackApi` to the Dart `InstanceManager`.
    */
   abstract fun getPigeonApiOnImageCapturedCallbackApi(): PigeonApiOnImageCapturedCallbackApi
-
-  /**
-   * An implementation of [PigeonApiOnImageSavedCallbackApi] used to add a new Dart instance of
-   * `OnImageSavedCallbackApi` to the Dart `InstanceManager`.
-   */
-  abstract fun getPigeonApiOnImageSavedCallbackApi(): PigeonApiOnImageSavedCallbackApi
 
   /**
    * An implementation of [PigeonApiAnalyzerApi] used to add a new Dart instance of
@@ -978,10 +954,7 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
     PigeonApiResolutionStrategyApi.setUpMessageHandlers(binaryMessenger, getPigeonApiResolutionStrategyApi())
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger, getPigeonApiResolutionSelectorApi())
     PigeonApiImageProxyApi.setUpMessageHandlers(binaryMessenger, getPigeonApiImageProxyApi())
-    PigeonApiMetadataApi.setUpMessageHandlers(binaryMessenger, getPigeonApiMetadataApi())
-    PigeonApiOutputFileOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiOutputFileOptionsApi())
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger, getPigeonApiOnImageCapturedCallbackApi())
-    PigeonApiOnImageSavedCallbackApi.setUpMessageHandlers(binaryMessenger, getPigeonApiOnImageSavedCallbackApi())
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger, getPigeonApiImageAnalyzerApi())
     PigeonApiZoomCallbackApi.setUpMessageHandlers(binaryMessenger, getPigeonApiZoomCallbackApi())
     PigeonApiZoomSuggestionOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiZoomSuggestionOptionsApi())
@@ -1039,10 +1012,7 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
     PigeonApiResolutionStrategyApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiImageProxyApi.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiMetadataApi.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiOutputFileOptionsApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiOnImageSavedCallbackApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiZoomCallbackApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiZoomSuggestionOptionsApi.setUpMessageHandlers(binaryMessenger, null)
@@ -1196,20 +1166,8 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
      else if (value is androidx.camera.core.ImageProxy) {
       registrar.getPigeonApiImageProxyApi().pigeon_newInstance(value) { }
     }
-     else if (value is androidx.camera.core.ImageCapture.Metadata) {
-      registrar.getPigeonApiMetadataApi().pigeon_newInstance(value) { }
-    }
-     else if (value is androidx.camera.core.ImageCapture.OutputFileOptions) {
-      registrar.getPigeonApiOutputFileOptionsApi().pigeon_newInstance(value) { }
-    }
-     else if (value is androidx.camera.core.ImageCapture.OutputFileResults) {
-      registrar.getPigeonApiOutputFileResultsApi().pigeon_newInstance(value) { }
-    }
      else if (value is androidx.camera.core.ImageCapture.OnImageCapturedCallback) {
       registrar.getPigeonApiOnImageCapturedCallbackApi().pigeon_newInstance(value) { }
-    }
-     else if (value is androidx.camera.core.ImageCapture.OnImageSavedCallback) {
-      registrar.getPigeonApiOnImageSavedCallbackApi().pigeon_newInstance(value) { }
     }
      else if (value is androidx.camera.core.ImageAnalysis.Analyzer) {
       registrar.getPigeonApiImageAnalyzerApi().pigeon_newInstance(value) { }
@@ -1388,9 +1346,8 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
 }
 
 enum class PermissionApi(val raw: Int) {
-  ALBUM(0),
-  AUDIO(1),
-  VIDEO(2);
+  VIDEO(0),
+  AUDIO(1);
 
   companion object {
     fun ofRaw(raw: Int): PermissionApi? {
@@ -5233,176 +5190,6 @@ abstract class PigeonApiImageProxyApi(open val pigeonRegistrar: CameraXApiPigeon
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiMetadataApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(isReversedHorizontal: Boolean, isReversedVertical: Boolean, location: android.location.Location?): androidx.camera.core.ImageCapture.Metadata
-
-  abstract fun isReversedHorizontal(pigeon_instance: androidx.camera.core.ImageCapture.Metadata): Boolean
-
-  abstract fun isReversedVertical(pigeon_instance: androidx.camera.core.ImageCapture.Metadata): Boolean
-
-  abstract fun location(pigeon_instance: androidx.camera.core.ImageCapture.Metadata): android.location.Location?
-
-  companion object {
-    @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiMetadataApi?) {
-      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MetadataApi.pigeon_defaultConstructor", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_identifierArg = args[0] as Long
-            val isReversedHorizontalArg = args[1] as Boolean
-            val isReversedVerticalArg = args[2] as Boolean
-            val locationArg = args[3] as android.location.Location?
-            val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(isReversedHorizontalArg,isReversedVerticalArg,locationArg), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              CameraXApiPigeonUtils.wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-
-  @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of MetadataApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: androidx.camera.core.ImageCapture.Metadata, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
-      callback(Result.success(Unit))
-    }     else {
-      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val isReversedHorizontalArg = isReversedHorizontal(pigeon_instanceArg)
-      val isReversedVerticalArg = isReversedVertical(pigeon_instanceArg)
-      val locationArg = location(pigeon_instanceArg)
-      val binaryMessenger = pigeonRegistrar.binaryMessenger
-      val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.MetadataApi.pigeon_newInstance"
-      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg, isReversedHorizontalArg, isReversedVerticalArg, locationArg)) {
-        if (it is List<*>) {
-          if (it.size > 1) {
-            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-          } else {
-            callback(Result.success(Unit))
-          }
-        } else {
-          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-        } 
-      }
-    }
-  }
-
-}
-@Suppress("UNCHECKED_CAST")
-abstract class PigeonApiOutputFileOptionsApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun build(file: String, metadata: androidx.camera.core.ImageCapture.Metadata?): androidx.camera.core.ImageCapture.OutputFileOptions
-
-  companion object {
-    @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiOutputFileOptionsApi?) {
-      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.OutputFileOptionsApi.build", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_identifierArg = args[0] as Long
-            val fileArg = args[1] as String
-            val metadataArg = args[2] as androidx.camera.core.ImageCapture.Metadata?
-            val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.build(fileArg,metadataArg), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              CameraXApiPigeonUtils.wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-
-  @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of OutputFileOptionsApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: androidx.camera.core.ImageCapture.OutputFileOptions, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
-      callback(Result.success(Unit))
-    }     else {
-      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val binaryMessenger = pigeonRegistrar.binaryMessenger
-      val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.OutputFileOptionsApi.pigeon_newInstance"
-      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg)) {
-        if (it is List<*>) {
-          if (it.size > 1) {
-            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-          } else {
-            callback(Result.success(Unit))
-          }
-        } else {
-          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-        } 
-      }
-    }
-  }
-
-}
-@Suppress("UNCHECKED_CAST")
-abstract class PigeonApiOutputFileResultsApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun savedUri(pigeon_instance: androidx.camera.core.ImageCapture.OutputFileResults): String?
-
-  @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of OutputFileResultsApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: androidx.camera.core.ImageCapture.OutputFileResults, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
-      callback(Result.success(Unit))
-    }     else {
-      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val savedUriArg = savedUri(pigeon_instanceArg)
-      val binaryMessenger = pigeonRegistrar.binaryMessenger
-      val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.OutputFileResultsApi.pigeon_newInstance"
-      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg, savedUriArg)) {
-        if (it is List<*>) {
-          if (it.size > 1) {
-            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-          } else {
-            callback(Result.success(Unit))
-          }
-        } else {
-          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-        } 
-      }
-    }
-  }
-
-}
-@Suppress("UNCHECKED_CAST")
 abstract class PigeonApiOnImageCapturedCallbackApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun pigeon_defaultConstructor(): androidx.camera.core.ImageCapture.OnImageCapturedCallback
 
@@ -5572,191 +5359,6 @@ abstract class PigeonApiOnImageCapturedCallbackApi(open val pigeonRegistrar: Cam
     val binaryMessenger = pigeonRegistrar.binaryMessenger
     val codec = pigeonRegistrar.codec
     val channelName = "dev.flutter.pigeon.camerax_android.OnImageCapturedCallbackApi.onError"
-    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pigeon_instanceArg, exceptionArg)) {
-      if (it is List<*>) {
-        if (it.size > 1) {
-          callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-        } else {
-          callback(Result.success(Unit))
-        }
-      } else {
-        callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-      } 
-    }
-  }
-
-}
-@Suppress("UNCHECKED_CAST")
-abstract class PigeonApiOnImageSavedCallbackApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(): androidx.camera.core.ImageCapture.OnImageSavedCallback
-
-  companion object {
-    @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiOnImageSavedCallbackApi?) {
-      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.pigeon_defaultConstructor", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_identifierArg = args[0] as Long
-            val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              CameraXApiPigeonUtils.wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-
-  @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of OnImageSavedCallbackApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: androidx.camera.core.ImageCapture.OnImageSavedCallback, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
-      callback(Result.success(Unit))
-    }     else {
-      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val binaryMessenger = pigeonRegistrar.binaryMessenger
-      val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.pigeon_newInstance"
-      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg)) {
-        if (it is List<*>) {
-          if (it.size > 1) {
-            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-          } else {
-            callback(Result.success(Unit))
-          }
-        } else {
-          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-        } 
-      }
-    }
-  }
-
-  fun onCaptureStarted(pigeon_instanceArg: androidx.camera.core.ImageCapture.OnImageSavedCallback, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-      return
-    }
-    val binaryMessenger = pigeonRegistrar.binaryMessenger
-    val codec = pigeonRegistrar.codec
-    val channelName = "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.onCaptureStarted"
-    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pigeon_instanceArg)) {
-      if (it is List<*>) {
-        if (it.size > 1) {
-          callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-        } else {
-          callback(Result.success(Unit))
-        }
-      } else {
-        callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-      } 
-    }
-  }
-
-  fun onCaptureProcessProgressed(pigeon_instanceArg: androidx.camera.core.ImageCapture.OnImageSavedCallback, progressArg: Long, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-      return
-    }
-    val binaryMessenger = pigeonRegistrar.binaryMessenger
-    val codec = pigeonRegistrar.codec
-    val channelName = "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.onCaptureProcessProgressed"
-    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pigeon_instanceArg, progressArg)) {
-      if (it is List<*>) {
-        if (it.size > 1) {
-          callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-        } else {
-          callback(Result.success(Unit))
-        }
-      } else {
-        callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-      } 
-    }
-  }
-
-  fun onPostviewBitmapAvailable(pigeon_instanceArg: androidx.camera.core.ImageCapture.OnImageSavedCallback, bitmapArg: ByteArray, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-      return
-    }
-    val binaryMessenger = pigeonRegistrar.binaryMessenger
-    val codec = pigeonRegistrar.codec
-    val channelName = "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.onPostviewBitmapAvailable"
-    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pigeon_instanceArg, bitmapArg)) {
-      if (it is List<*>) {
-        if (it.size > 1) {
-          callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-        } else {
-          callback(Result.success(Unit))
-        }
-      } else {
-        callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-      } 
-    }
-  }
-
-  fun onImageSaved(pigeon_instanceArg: androidx.camera.core.ImageCapture.OnImageSavedCallback, outputFileResultsArg: androidx.camera.core.ImageCapture.OutputFileResults, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-      return
-    }
-    val binaryMessenger = pigeonRegistrar.binaryMessenger
-    val codec = pigeonRegistrar.codec
-    val channelName = "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.onImageSaved"
-    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(pigeon_instanceArg, outputFileResultsArg)) {
-      if (it is List<*>) {
-        if (it.size > 1) {
-          callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-        } else {
-          callback(Result.success(Unit))
-        }
-      } else {
-        callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-      } 
-    }
-  }
-
-  fun onError(pigeon_instanceArg: androidx.camera.core.ImageCapture.OnImageSavedCallback, exceptionArg: List<Any?>, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-      return
-    }
-    val binaryMessenger = pigeonRegistrar.binaryMessenger
-    val codec = pigeonRegistrar.codec
-    val channelName = "dev.flutter.pigeon.camerax_android.OnImageSavedCallbackApi.onError"
     val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
     channel.send(listOf(pigeon_instanceArg, exceptionArg)) {
       if (it is List<*>) {
@@ -8907,9 +8509,7 @@ abstract class PigeonApiCameraControllerApi(open val pigeonRegistrar: CameraXApi
 
   abstract fun setImageCaptureFlashMode(pigeon_instance: androidx.camera.view.CameraController, flashMode: FlashModeApi, callback: (Result<Unit>) -> Unit)
 
-  abstract fun takePictureToMemory(pigeon_instance: androidx.camera.view.CameraController, capturedCallback: androidx.camera.core.ImageCapture.OnImageCapturedCallback, callback: (Result<Unit>) -> Unit)
-
-  abstract fun takePictureToFile(pigeon_instance: androidx.camera.view.CameraController, outputFileOptions: androidx.camera.core.ImageCapture.OutputFileOptions, savedCallback: androidx.camera.core.ImageCapture.OnImageSavedCallback, callback: (Result<Unit>) -> Unit)
+  abstract fun takePicture(pigeon_instance: androidx.camera.view.CameraController, capturedCallback: androidx.camera.core.ImageCapture.OnImageCapturedCallback, callback: (Result<Unit>) -> Unit)
 
   abstract fun getImageAnalysisResolutionSelector(pigeon_instance: androidx.camera.view.CameraController, callback: (Result<androidx.camera.core.resolutionselector.ResolutionSelector?>) -> Unit)
 
@@ -9496,34 +9096,13 @@ abstract class PigeonApiCameraControllerApi(open val pigeonRegistrar: CameraXApi
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerApi.takePictureToMemory", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerApi.takePicture", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_instanceArg = args[0] as androidx.camera.view.CameraController
             val capturedCallbackArg = args[1] as androidx.camera.core.ImageCapture.OnImageCapturedCallback
-            api.takePictureToMemory(pigeon_instanceArg, capturedCallbackArg) { result: Result<Unit> ->
-              val error = result.exceptionOrNull()
-              if (error != null) {
-                reply.reply(CameraXApiPigeonUtils.wrapError(error))
-              } else {
-                reply.reply(CameraXApiPigeonUtils.wrapResult(null))
-              }
-            }
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraControllerApi.takePictureToFile", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_instanceArg = args[0] as androidx.camera.view.CameraController
-            val outputFileOptionsArg = args[1] as androidx.camera.core.ImageCapture.OutputFileOptions
-            val savedCallbackArg = args[2] as androidx.camera.core.ImageCapture.OnImageSavedCallback
-            api.takePictureToFile(pigeon_instanceArg, outputFileOptionsArg, savedCallbackArg) { result: Result<Unit> ->
+            api.takePicture(pigeon_instanceArg, capturedCallbackArg) { result: Result<Unit> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(CameraXApiPigeonUtils.wrapError(error))

@@ -218,24 +218,8 @@ class CameraXImpl(binaryMessenger: BinaryMessenger, val context: Context) :
         return ImageProxyImpl(this)
     }
 
-    override fun getPigeonApiMetadataApi(): PigeonApiMetadataApi {
-        return ImageCaptureImpl.MetadataImpl(this)
-    }
-
-    override fun getPigeonApiOutputFileOptionsApi(): PigeonApiOutputFileOptionsApi {
-        return ImageCaptureImpl.OutputFileOptionsImpl(this)
-    }
-
-    override fun getPigeonApiOutputFileResultsApi(): PigeonApiOutputFileResultsApi {
-        return ImageCaptureImpl.OutputFileResultsImpl(this)
-    }
-
     override fun getPigeonApiOnImageCapturedCallbackApi(): PigeonApiOnImageCapturedCallbackApi {
         return ImageCaptureImpl.OnImageCapturedCallbackImpl(this)
-    }
-
-    override fun getPigeonApiOnImageSavedCallbackApi(): PigeonApiOnImageSavedCallbackApi {
-        return ImageCaptureImpl.OnImageSavedCallbackImpl(this)
     }
 
     override fun getPigeonApiAnalyzerApi(): PigeonApiAnalyzerApi {

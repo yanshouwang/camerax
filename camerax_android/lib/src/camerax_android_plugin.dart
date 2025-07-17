@@ -24,12 +24,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   @override
   CameraSelector getExternalCameraSelector() => CameraSelectorImpl.external;
   @override
-  CameraSelector newCameraSelector({
-    LensFacing? lensFacing,
-  }) =>
-      CameraSelectorImpl(
-        lensFacing: lensFacing,
-      );
+  CameraSelector newCameraSelector({LensFacing? lensFacing}) =>
+      CameraSelectorImpl(lensFacing: lensFacing);
 
   @override
   CameraController newCameraController() => CameraControllerImpl();
@@ -39,15 +35,15 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
 
   @override
   FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(
-          Quality quality) =>
-      FallbackStrategyImpl.higherQualityOrLowerThan(quality);
+    Quality quality,
+  ) => FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
   FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality) =>
       FallbackStrategyImpl.higherQualityThan(quality);
   @override
   FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(
-          Quality quality) =>
-      FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
+    Quality quality,
+  ) => FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
   @override
   FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality) =>
       FallbackStrategyImpl.lowerQualityThan(quality);
@@ -57,12 +53,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     required List<Detector> detectors,
     required CoordinateSystem targetCoordinateSystem,
     required MlKitAnalyzerResultConsumer consumer,
-  }) =>
-      MlKitAnalyzerImpl(
-        detectors: detectors,
-        targetCoordinateSystem: targetCoordinateSystem,
-        consumer: consumer,
-      );
+  }) => MlKitAnalyzerImpl(
+    detectors: detectors,
+    targetCoordinateSystem: targetCoordinateSystem,
+    consumer: consumer,
+  );
 
   @override
   Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
@@ -72,49 +67,35 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
-  }) =>
-      QualitySelectorImpl.from(
-        quality,
-        fallbackStrategy: fallbackStrategy,
-      );
+  }) => QualitySelectorImpl.from(quality, fallbackStrategy: fallbackStrategy);
 
   @override
   QualitySelector newQualitySelectorFromOrderedList(
     List<Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
-  }) =>
-      QualitySelectorImpl.fromOrderedList(
-        qualities,
-        fallbackStrategy: fallbackStrategy,
-      );
+  }) => QualitySelectorImpl.fromOrderedList(
+    qualities,
+    fallbackStrategy: fallbackStrategy,
+  );
 
   @override
-  BarcodeScanner newBarcodeScanner({
-    BarcodeScannerOptions? options,
-  }) =>
-      BarcodeScannerImpl(
-        options: options,
-      );
+  BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options}) =>
+      BarcodeScannerImpl(options: options);
 
   @override
   BarcodeScannerOptions newBarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
-  }) =>
-      BarcodeScannerOptionsImpl(
-        enableAllPotentialBarcodes: enableAllPotentialBarcodes,
-        formats: formats,
-        zoomSuggestionOptions: zoomSuggestionOptions,
-      );
+  }) => BarcodeScannerOptionsImpl(
+    enableAllPotentialBarcodes: enableAllPotentialBarcodes,
+    formats: formats,
+    zoomSuggestionOptions: zoomSuggestionOptions,
+  );
 
   @override
-  FaceDetector newFaceDetector({
-    FaceDetectorOptions? options,
-  }) =>
-      FaceDetectorImpl(
-        options: options,
-      );
+  FaceDetector newFaceDetector({FaceDetectorOptions? options}) =>
+      FaceDetectorImpl(options: options);
 
   @override
   FaceDetectorOptions newFaceDetectorOptions({
@@ -124,25 +105,23 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     FaceLandmarkMode? landmarkMode,
     double? minFaceSize,
     FacePerformanceMode? performanceMode,
-  }) =>
-      FaceDetectorOptionsImpl(
-        enableTracking: enableTracking,
-        classificationMode: classificationMode,
-        contourMode: contourMode,
-        landmarkMode: landmarkMode,
-        minFaceSize: minFaceSize,
-        performanceMode: performanceMode,
-      );
+  }) => FaceDetectorOptionsImpl(
+    enableTracking: enableTracking,
+    classificationMode: classificationMode,
+    contourMode: contourMode,
+    landmarkMode: landmarkMode,
+    minFaceSize: minFaceSize,
+    performanceMode: performanceMode,
+  );
 
   @override
   ZoomSuggestionOptions newZoomSuggestionOptions({
     required ZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,
-  }) =>
-      ZoomSuggestionOptionsImpl(
-        zoomCallback: zoomCallback,
-        maxSupportedZoomRatio: maxSupportedZoomRatio,
-      );
+  }) => ZoomSuggestionOptionsImpl(
+    zoomCallback: zoomCallback,
+    maxSupportedZoomRatio: maxSupportedZoomRatio,
+  );
 
   @override
   FileOutputOptions newFileOutputOptions({
@@ -150,28 +129,18 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
     Location? location,
-  }) =>
-      FileOutputOptionsImpl(
-        file: file,
-        durationLimit: durationLimit,
-        fileSizeLimitBytes: fileSizeLimitBytes,
-        location: location,
-      );
-
-  @override
-  OutputFileOptions newOutputFileOptions({
-    required File file,
-    Metadata? metadata,
-  }) =>
-      OutputFileOptionsImpl(
-        file: file,
-        metadata: metadata,
-      );
+  }) => FileOutputOptionsImpl(
+    file: file,
+    durationLimit: durationLimit,
+    fileSizeLimitBytes: fileSizeLimitBytes,
+    location: location,
+  );
 
   @override
   SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
-          width, height) =>
-      SurfaceOrientedMeteringPointFactoryImpl(width, height);
+    width,
+    height,
+  ) => SurfaceOrientedMeteringPointFactoryImpl(width, height);
 
   @override
   FocusMeteringAction newFocusMeteringAction(
@@ -179,26 +148,21 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     List<(MeteringPoint, List<MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
-  }) =>
-      FocusMeteringActionImpl(
-        first,
-        others: others,
-        disableAutoCancel: disableAutoCancel,
-        autoCancelDuration: autoCancelDuration,
-      );
+  }) => FocusMeteringActionImpl(
+    first,
+    others: others,
+    disableAutoCancel: disableAutoCancel,
+    autoCancelDuration: autoCancelDuration,
+  );
 
   @override
-  ImageAnalyzer newImageAnalyzer({
-    required ImageProxyCallback analyze,
-  }) =>
-      ImageAnalyzerImpl(
-        analyze: analyze,
-      );
+  ImageAnalyzer newImageAnalyzer({required ImageProxyCallback analyze}) =>
+      ImageAnalyzerImpl(analyze: analyze);
 
   @override
   Camera2CameraControl newCamera2CameraControlFrom(
-          CameraControl cameraControl) =>
-      Camera2CameraControlImpl.from(cameraControl);
+    CameraControl cameraControl,
+  ) => Camera2CameraControlImpl.from(cameraControl);
 
   @override
   Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo) =>
@@ -211,12 +175,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     ControlAfMode? afMode,
     ControlAwbMode? awbMode,
     int? sensorExposureTime,
-  }) =>
-      CaptureRequestOptionsImpl(
-        mode: mode,
-        aeMode: aeMode,
-        afMode: afMode,
-        awbMode: awbMode,
-        sensorExposureTime: sensorExposureTime,
-      );
+  }) => CaptureRequestOptionsImpl(
+    mode: mode,
+    aeMode: aeMode,
+    afMode: afMode,
+    awbMode: awbMode,
+    sensorExposureTime: sensorExposureTime,
+  );
 }

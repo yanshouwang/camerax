@@ -4,6 +4,7 @@ import androidx.camera.core.CameraControl
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.DynamicRange
+import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.resolutionselector.ResolutionSelector
@@ -330,9 +331,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun setImageCaptureMode(
-        pigeon_instance: CameraController, captureMode: CaptureModeApi, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun setImageCaptureMode(pigeon_instance: CameraController, captureMode: CaptureModeApi, callback: (Result<Unit>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.imageCaptureMode = captureMode.impl
@@ -367,7 +366,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun takePictureToMemory(
+    override fun takePicture(
         pigeon_instance: CameraController,
         capturedCallback: ImageCapture.OnImageCapturedCallback,
         callback: (Result<Unit>) -> Unit
@@ -376,23 +375,6 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
             try {
                 val executor = ContextCompat.getMainExecutor(impl.context)
                 pigeon_instance.takePicture(executor, capturedCallback)
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
-    }
-
-    override fun takePictureToFile(
-        pigeon_instance: CameraController,
-        outputFileOptions: ImageCapture.OutputFileOptions,
-        savedCallback: ImageCapture.OnImageSavedCallback,
-        callback: (Result<Unit>) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val executor = ContextCompat.getMainExecutor(impl.context)
-                pigeon_instance.takePicture(outputFileOptions, executor, savedCallback)
                 callback(Result.success(Unit))
             } catch (e: Exception) {
                 callback(Result.failure(e))

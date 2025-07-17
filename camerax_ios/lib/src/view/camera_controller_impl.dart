@@ -217,7 +217,7 @@ final class CameraControllerImpl extends CameraController {
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
-  Future<void> takePictureToMemory({
+  Future<void> takePicture({
     CaptureStartedCallback? onCaptureStarted,
     CaptureProcessProgressedCallback? onCaptureProcessProgressed,
     PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
@@ -243,41 +243,7 @@ final class CameraControllerImpl extends CameraController {
           ? null
           : (_, exceptionApi) => onError(exceptionApi.impl),
     );
-    return api.takePictureToMemory(callbackApi);
-  }
-
-  @override
-  Future<void> takePictureToFile(
-    OutputFileOptions outputFileOptions, {
-    CaptureStartedCallback? onCaptureStarted,
-    CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    ImageSavedCallback? onImageSaved,
-    CaptureErrorCallback? onError,
-  }) {
-    if (outputFileOptions is! OutputFileOptionsImpl) {
-      throw TypeError();
-    }
-    final callbackApi = OnImageSavedCallbackApi(
-      onCaptureStarted:
-          onCaptureStarted == null ? null : (_) => onCaptureStarted(),
-      onCaptureProcessProgressed: onCaptureProcessProgressed == null
-          ? null
-          : (_, progress) => onCaptureProcessProgressed(progress),
-      onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
-          ? null
-          : (_, bitmapApi) async {
-              final bitmap = await _decodeImage(bitmapApi);
-              onPostviewBitmapAvailable(bitmap);
-            },
-      onImageSaved: onImageSaved == null
-          ? null
-          : (_, resultsApi) => onImageSaved(resultsApi.impl),
-      onError: onError == null
-          ? null
-          : (_, exceptionApi) => onError(exceptionApi.impl),
-    );
-    return api.takePictureToFile(outputFileOptions.api, callbackApi);
+    return api.takePicture(callbackApi);
   }
 
   Future<ui.Image> _decodeImage(Uint8List value) async {

@@ -14,32 +14,34 @@ public class PreviewView: UIView {
         AVCaptureVideoPreviewLayer.self
     }
     
-    public var previewLayer: AVCaptureVideoPreviewLayer {
+    public override var layer: AVCaptureVideoPreviewLayer {
         super.layer as! AVCaptureVideoPreviewLayer
-    }
-    
-    public var controller: CameraController? {
-        didSet { previewLayer.session = controller?.session }
-    }
-    
-    public var scaleType: ScaleType {
-        get { previewLayer.videoGravity.api }
-        set { previewLayer.videoGravity = newValue.impl }
     }
     
     private let tapGestureRecognizer: UITapGestureRecognizer
     private let pinchGestureRecognizer: UIPinchGestureRecognizer
+    private var controller: CameraController?
+    
+    private var session: AVCaptureSession? {
+        get { layer.session }
+        set { layer.session = newValue }
+    }
+    
+    private var videoGravity: AVLayerVideoGravity {
+        get { self.layer.videoGravity }
+        set { self.layer.videoGravity = newValue }
+    }
     
     public override init(frame: CGRect) {
         self.tapGestureRecognizer = UITapGestureRecognizer()
         self.pinchGestureRecognizer = UIPinchGestureRecognizer()
         super.init(frame: frame)
-        self.previewLayer.videoGravity = .resizeAspectFill
-        self.tapGestureRecognizer.addTarget(self, action: #selector(handleTap(sender:)))
-        self.pinchGestureRecognizer.addTarget(self, action: #selector(handlePinch(sender:)))
-        self.addGestureRecognizer(tapGestureRecognizer)
-        self.addGestureRecognizer(pinchGestureRecognizer)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+        self.layer.videoGravity = .resizeAspectFill
+        self.tapGestureRecognizer.addTarget(self, action: .handleTapGestureRecognizer)
+        self.pinchGestureRecognizer.addTarget(self, action: .handlePinchGestureRecognizer)
+        self.addGestureRecognizer(self.tapGestureRecognizer)
+        self.addGestureRecognizer(self.pinchGestureRecognizer)
+        NotificationCenter.default.addObserver(self, selector: .handleOrientationDidChangeNotification, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     public required init?(coder: NSCoder) {
@@ -47,22 +49,45 @@ public class PreviewView: UIView {
     }
     
     deinit {
-        self.removeGestureRecognizer(tapGestureRecognizer)
-        self.removeGestureRecognizer(pinchGestureRecognizer)
+        self.tapGestureRecognizer.removeTarget(self, action: .handleTapGestureRecognizer)
+        self.pinchGestureRecognizer.removeTarget(self, action: .handlePinchGestureRecognizer)
+        self.removeGestureRecognizer(self.tapGestureRecognizer)
+        self.removeGestureRecognizer(self.pinchGestureRecognizer)
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-        guard let controller, controller.isTapToFocusEnabled() else {
+    func getController() -> CameraController? {
+        return controller
+    }
+    
+    func setController(_ controller: CameraController?) {
+        if let controller {
+            self.layer.session = controller.session
+            updateVideoOrientation()
+        } else {
+            self.layer.session = nil
+        }
+    }
+    
+    func getScaleType() -> ScaleType {
+        return self.videoGravity.scaleType
+    }
+    
+    func setScaleType(_ scaleType: ScaleType) {
+        self.videoGravity = scaleType.videoGravity
+    }
+    
+    @objc fileprivate func handleTapGestureRecognizer(_ sender: UITapGestureRecognizer) {
+        guard let controller = self.controller , controller.isTapToFocusEnabled() else {
             return
         }
         let layerPoint = sender.location(in: self)
-        let devicePoint = previewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
+        let devicePoint = self.layer.captureDevicePointConverted(fromLayerPoint: layerPoint)
         _ = try? controller.startFocusAndMetering(devicePoint, false)
     }
     
-    @objc func handlePinch(sender: UIPinchGestureRecognizer) {
-        guard let controller, controller.isPinchToZoomEnabled(), let zoomState = controller.getZoomState() else {
+    @objc fileprivate func handlePinchGestureRecognizer(_ sender: UIPinchGestureRecognizer) {
+        guard let controller = self.controller, controller.isPinchToZoomEnabled(), let zoomState = controller.getZoomState() else {
             return
         }
         switch sender.state {
@@ -78,9 +103,17 @@ public class PreviewView: UIView {
         }
     }
     
-    @objc func handleOrientationDidChange() {
+    @objc fileprivate func handleOrientationDidChangeNotification(_ notification: Notification) {
+        updateVideoOrientation()
+    }
+    
+    private func updateVideoOrientation() {
         let orientation = UIDevice.current.orientation
-        guard let connection = previewLayer.connection, let videoOrientation = orientation.videoOrientation else { return }
+        guard let videoOrientation = orientation.videoOrientation else { return }
+        guard let connection = self.layer.connection else {
+            debugPrint("preview connection is nil")
+            return
+        }
         connection.videoOrientation = videoOrientation
     }
     
@@ -89,25 +122,22 @@ public class PreviewView: UIView {
     }
 }
 
-extension UIDeviceOrientation {
-    var videoOrientation: AVCaptureVideoOrientation? {
-        switch self {
-        case .portrait:
-            return .portrait
-        case .portraitUpsideDown:
-            return .portraitUpsideDown
-        case .landscapeLeft:
-            return .landscapeRight
-        case .landscapeRight:
-            return .landscapeLeft
-        default:
-            return nil
-        }
+fileprivate extension Selector {
+    static var handleTapGestureRecognizer: Selector {
+        return #selector(PreviewView.handleTapGestureRecognizer(_:))
+    }
+    
+    static var handlePinchGestureRecognizer: Selector {
+        return #selector(PreviewView.handlePinchGestureRecognizer(_:))
+    }
+    
+    static var handleOrientationDidChangeNotification: Selector {
+        return #selector(PreviewView.handleOrientationDidChangeNotification(_:))
     }
 }
 
-extension PreviewView.ScaleType {
-    var impl: AVLayerVideoGravity {
+fileprivate extension PreviewView.ScaleType {
+    var videoGravity: AVLayerVideoGravity {
         switch self {
         case .fillCenter:
             return .resizeAspectFill
@@ -125,8 +155,8 @@ extension PreviewView.ScaleType {
     }
 }
 
-extension AVLayerVideoGravity {
-    var api: PreviewView.ScaleType {
+fileprivate extension AVLayerVideoGravity {
+    var scaleType: PreviewView.ScaleType {
         switch self {
         case .resizeAspectFill:
             return .fillCenter
@@ -136,6 +166,22 @@ extension AVLayerVideoGravity {
             fatalError()
         default:
             fatalError()
+        }
+    }
+}
+
+fileprivate extension UIDeviceOrientation {
+    var videoOrientation: AVCaptureVideoOrientation? {
+        debugPrint("UIDevice orientation: \(self)")
+        switch self {
+        case .portrait, .portraitUpsideDown:
+            return .portrait
+        case .landscapeLeft:
+            return .landscapeRight
+        case .landscapeRight:
+            return .landscapeLeft
+        default:
+            return nil
         }
     }
 }

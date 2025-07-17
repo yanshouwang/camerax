@@ -120,12 +120,8 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         pigeonInstance.setImageCaptureFlashMode(flashMode.delegate)
     }
     
-    func takePictureToMemory(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: any ImageCapture.OnImageCapturedCallback) throws {
+    func takePicture(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: any ImageCapture.OnImageCapturedCallback) throws {
         try pigeonInstance.takePicture(capturedCallback)
-    }
-    
-    func takePictureToFile(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputFileOptions: ImageCapture.OutputFileOptions, savedCallback: any ImageCapture.OnImageSavedCallback) throws {
-        try pigeonInstance.takePicture(outputFileOptions, savedCallback)
     }
     
     func getImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ResolutionSelector? {

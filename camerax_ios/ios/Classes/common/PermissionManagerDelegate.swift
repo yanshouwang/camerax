@@ -26,12 +26,10 @@ class PermissionManagerDelegate: PigeonApiDelegatePermissionManagerApi {
 extension PermissionApi {
     var delegate: PermissionManager.Permission {
         switch self {
-        case .album:
-            return .album
-        case .audio:
-            return .audio
         case .video:
             return .video
+        case .audio:
+            return .audio
         }
     }
 }

@@ -48,19 +48,11 @@ abstract base class CameraController {
   Future<ResolutionSelector?> getImageCaptureResolutionSelector();
   Future<void> setImageCaptureResolutionSelector(
       ResolutionSelector? resolutionSelector);
-  Future<void> takePictureToMemory({
+  Future<void> takePicture({
     CaptureStartedCallback? onCaptureStarted,
     CaptureProcessProgressedCallback? onCaptureProcessProgressed,
     PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
     CaptureSuccessCallback? onCaptureSuccess,
-    CaptureErrorCallback? onError,
-  });
-  Future<void> takePictureToFile(
-    OutputFileOptions outputFileOptions, {
-    CaptureStartedCallback? onCaptureStarted,
-    CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    ImageSavedCallback? onImageSaved,
     CaptureErrorCallback? onError,
   });
   Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy();

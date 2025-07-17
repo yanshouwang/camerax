@@ -33,7 +33,6 @@ class PermissionManagerImpl(impl: CameraXImpl) : PigeonApiPermissionManagerApi(i
 
 val PermissionApi.impl
     get() = when (this) {
-        PermissionApi.ALBUM -> PermissionManager.Permission.ALBUM
-        PermissionApi.AUDIO -> PermissionManager.Permission.AUDIO
         PermissionApi.VIDEO -> PermissionManager.Permission.VIDEO
+        PermissionApi.AUDIO -> PermissionManager.Permission.AUDIO
     }

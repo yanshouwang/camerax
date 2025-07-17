@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 import 'package:camerax/camerax.dart';
 import 'package:camerax_example/models.dart';
 import 'package:clover/clover.dart';
+import 'package:exif/exif.dart';
 import 'package:hybrid_logging/hybrid_logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -265,35 +266,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> takePicture() async {
-    // await controller.takePictureToMemory(
-    //   onCaptureStarted: () {
-    //     logger.info('onCaptureStarted');
-    //   },
-    //   onCaptureProcessProgressed: (progress) {
-    //     logger.info('onCaptureProcessProgressed: $progress');
-    //   },
-    //   onPostviewBitmapAvailable: (bitmap) {
-    //     logger.info('onPostviewBitmapAvailable');
-    //   },
-    //   onCaptureSuccess: (image) async {
-    //     logger.info(
-    //       'onCaptureSuccess: ${image.format}, ${image.width}, ${image.height}, ${image.imageInfo.rotationDegrees}',
-    //     );
-    //     await image.close();
-    //   },
-    //   onError: (exception) {
-    //     logger.warning('onError', exception);
-    //   },
-    // );
-    final directory = await getApplicationDocumentsDirectory();
-    final filePath = path.join(
-      directory.path,
-      'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG',
-    );
-    final file = File(filePath);
-    final options = OutputFileOptions(file: file);
-    await controller.takePictureToFile(
-      options,
+    await controller.takePicture(
       onCaptureStarted: () {
         logger.info('onCaptureStarted');
       },
@@ -303,12 +276,30 @@ class HomeViewModel extends ViewModel with TypeLogger {
       onPostviewBitmapAvailable: (bitmap) {
         logger.info('onPostviewBitmapAvailable');
       },
-      onImageSaved: (outputFileResults) {
-        logger.info('onImageSaved: ${outputFileResults.savedUri}');
-        savedUri = outputFileResults.savedUri;
+      onCaptureSuccess: (image) async {
+        logger.info(
+          'onCaptureSuccess: ${image.format}, ${image.width}, ${image.height}, ${image.imageInfo.rotationDegrees}',
+        );
+        try {
+          final directory = await getApplicationDocumentsDirectory();
+          final filePath = path.join(
+            directory.path,
+            'IMG_${DateTime.timestamp().millisecondsSinceEpoch}.JPG',
+          );
+          final file = File(filePath);
+          final value = image.planes[0].value;
+          final exif = readExifFromBytes(value);
+          logger.info(exif);
+          await file.writeAsBytes(value, flush: true);
+          savedUri = file.uri;
+        } catch (e) {
+          logger.warning('save image failed', e);
+        } finally {
+          await image.close();
+        }
       },
       onError: (exception) {
-        logger.warning('onError, $exception');
+        logger.warning('onError', exception);
       },
     );
   }
@@ -347,12 +338,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   void _setUp() async {
     var isGranted =
-        await _permissionManager.checkPermission(Permission.album) &&
         await _permissionManager.checkPermission(Permission.audio) &&
         await _permissionManager.checkPermission(Permission.video);
     if (!isGranted) {
       isGranted = await _permissionManager.requestPermissions([
-        Permission.album,
         Permission.audio,
         Permission.video,
       ]);

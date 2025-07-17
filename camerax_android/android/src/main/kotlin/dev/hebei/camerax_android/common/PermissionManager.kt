@@ -2,7 +2,6 @@ package dev.hebei.camerax_android.common
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -19,11 +18,7 @@ object PermissionManager : ActivityAware {
     fun checkPermission(permission: Permission): Boolean {
         val binding = binding ?: throw NullPointerException("Activity binding is null")
         val activity = binding.activity
-        return permission.values.all { value ->
-            ContextCompat.checkSelfPermission(
-                activity, value
-            ) == PackageManager.PERMISSION_GRANTED
-        }
+        return ContextCompat.checkSelfPermission(activity, permission.value) == PackageManager.PERMISSION_GRANTED
     }
 
     suspend fun requestPermissions(permissions: List<Permission>): Boolean {
@@ -72,20 +67,15 @@ object PermissionManager : ActivityAware {
     }
 
     enum class Permission {
-        ALBUM, AUDIO, VIDEO,
+        VIDEO, AUDIO,
     }
 }
 
-val PermissionManager.Permission.values
+val PermissionManager.Permission.value: String
     get() = when (this) {
-        PermissionManager.Permission.ALBUM -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) emptyArray()
-        else arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-
-        PermissionManager.Permission.AUDIO -> arrayOf(Manifest.permission.RECORD_AUDIO)
-        PermissionManager.Permission.VIDEO -> arrayOf(Manifest.permission.CAMERA)
+        PermissionManager.Permission.VIDEO -> Manifest.permission.CAMERA
+        PermissionManager.Permission.AUDIO -> Manifest.permission.RECORD_AUDIO
     }
 
 val List<PermissionManager.Permission>.values: Array<String>
-    get() = flatMap { it.values.toList() }.toTypedArray()
+    get() = map { it.value }.toTypedArray()

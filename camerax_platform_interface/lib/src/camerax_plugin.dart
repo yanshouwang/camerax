@@ -45,11 +45,6 @@ abstract base class CameraXPlugin extends PlatformInterface {
     LensFacing? lensFacing,
   });
 
-  OutputFileOptions newOutputFileOptions({
-    required File file,
-    Metadata? metadata,
-  });
-
   FileOutputOptions newFileOutputOptions({
     required File file,
     Duration? durationLimit,

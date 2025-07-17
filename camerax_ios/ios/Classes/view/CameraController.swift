@@ -31,28 +31,20 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     private var captureVideoDataOutputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
     private let captureVideoDataOutputQueue: DispatchQueue
     private let rotationProvider: RotationProvider
-    private var rotation: Int
-    
-    private lazy var rotationListener = RotationProvider.Listener() { rotation in
-        if rotation == self.rotation {
-            return
-        }
-        self.rotation = rotation
-    }
+    private lazy var rotationListener = RotationProvider.Listener { rotation in self.updateVideoOrientation(rotation) }
     
     public override init() {
-        cameraSelector = .back
-        torchState = .off
-        _isTapToFocusEnabled = true
-        _isPinchToZoomEnabled = true
-        session = AVCaptureSession()
-        capturePhotoOutput = AVCapturePhotoOutput()
-        capturePhotoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-        captureMovieFileOutput = AVCaptureMovieFileOutput()
-        captureVideoDataOutput = AVCaptureVideoDataOutput()
-        captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
-        rotationProvider = RotationProvider()
-        rotation = 0
+        self.cameraSelector = .back
+        self.torchState = .off
+        self._isTapToFocusEnabled = true
+        self._isPinchToZoomEnabled = true
+        self.session = AVCaptureSession()
+        self.capturePhotoOutput = AVCapturePhotoOutput()
+        self.capturePhotoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+        self.captureMovieFileOutput = AVCaptureMovieFileOutput()
+        self.captureVideoDataOutput = AVCaptureVideoDataOutput()
+        self.captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
+        self.rotationProvider = RotationProvider()
         super.init()
         
         try? addVideoDeviceInput()
@@ -61,23 +53,27 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         try? addCaptureMovieFileOutput()
         try? addCaptureVideoDataOutput()
         
-        session.sessionPreset = .high
-        captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
+        self.session.sessionPreset = .high
+        self.captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
         var videoSettings = captureVideoDataOutput.videoSettings ?? [:]
         videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-        captureVideoDataOutput.videoSettings = videoSettings
+        self.captureVideoDataOutput.videoSettings = videoSettings
     }
     
     public func bind() {
         DispatchQueue.global(qos: .background).async {
             self.session.startRunning()
+            let rotation = self.rotationProvider.getRotation()
+            self.updateVideoOrientation(rotation)
+            self.rotationProvider.addListener(self.rotationListener)
+            self.rotationProvider.enable()
         }
-        rotationProvider.addListener(rotationListener)
     }
     
     public func unbind() {
         session.stopRunning()
-        rotationProvider.removeListener(rotationListener)
+        self.rotationProvider.removeListener(self.rotationListener)
+        self.rotationProvider.disable()
     }
     
     public func hasCamera(cameraSelector: CameraSelector) -> Bool {
@@ -271,28 +267,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
 //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
 //        }
 //        settings.flashMode = capturePhotoSettings.flashMode
-        let delegate = CapturePhotoCaptureMemoryDelegate(capturedCallback)
-        capturePhotoCaptureDelegate = delegate
-        capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
-    }
-    
-    public func takePicture(_ outputFileOptions: ImageCapture.OutputFileOptions, _ savedCallback: ImageCapture.OnImageSavedCallback) throws -> Void {
-        let settings = AVCapturePhotoSettings(from: capturePhotoSettings)
-        if #available(iOS 16.0, *) {
-            debugPrint(capturePhotoOutput.maxPhotoDimensions)
-            settings.maxPhotoDimensions = capturePhotoOutput.maxPhotoDimensions
-        } else {
-            capturePhotoOutput.isHighResolutionCaptureEnabled = true
-        }
-//        if #available(iOS 13.0, *) {
-//            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-//        }
-//        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
-//        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
-//            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
-//        }
-//        settings.flashMode = capturePhotoSettings.flashMode
-        let delegate = CapturePhotoCaptureFileDelegate(outputFileOptions, savedCallback)
+        let delegate = CapturePhotoCaptureDelegate(capturedCallback)
         capturePhotoCaptureDelegate = delegate
         capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
     }
@@ -316,7 +291,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         return imageAnalysisResolutionSelector
     }
     
-    func setImageAnalysisResolutionSelector(_ selector: ResolutionSelector?) throws {
+    public func setImageAnalysisResolutionSelector(_ selector: ResolutionSelector?) throws {
         guard let input = videoDeviceInput else {
             throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
         }
@@ -386,13 +361,28 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     }
     
     public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) {
-        let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer) { return self.rotation }
-        captureVideoDataOutputSampleBufferDelegate = delegate
+        let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer, rotationProvider: rotationProvider)
         captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: captureVideoDataOutputQueue)
+        captureVideoDataOutputSampleBufferDelegate = delegate
     }
     
     public func clearImageAnalysisAnalyzer() {
         captureVideoDataOutput.setSampleBufferDelegate(nil, queue: captureVideoDataOutputQueue)
+        captureVideoDataOutputSampleBufferDelegate = nil
+    }
+    
+    private func updateVideoOrientation(_ rotation: Int) {
+        guard let videoOrientation = CameraOrientationUtil.getVideoOrientation(rotation) else { return }
+        setVideoOrientation(for: capturePhotoOutput, videoOrientation: videoOrientation)
+        setVideoOrientation(for: captureMovieFileOutput, videoOrientation: videoOrientation)
+    }
+    
+    func setVideoOrientation(for output: AVCaptureOutput, videoOrientation: AVCaptureVideoOrientation) {
+        guard let connection = output.connection(with: .video) else {
+            debugPrint("output connection is nil")
+            return
+        }
+        connection.videoOrientation = videoOrientation
     }
     
     private func getVideoDevice(_ cameraSelector: CameraSelector) -> AVCaptureDevice? {
@@ -450,7 +440,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.videoDeviceInput = nil
     }
     
-    func getAudioDevice() -> AVCaptureDevice? {
+    private func getAudioDevice() -> AVCaptureDevice? {
         return AVCaptureDevice.default(for: .audio)
     }
     
@@ -550,7 +540,7 @@ extension AVCaptureDevice {
     }
 }
 
-extension CGFloat {
+fileprivate extension CGFloat {
     func roundToEvenInt() -> Int {
         let rounded = rounded(.toNearestOrEven)
         let value = Int(rounded)

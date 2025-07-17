@@ -28,12 +28,10 @@ final class PermissionManagerImpl extends PermissionManager {
 extension PermissionX on Permission {
   PermissionApi get api {
     switch (this) {
-      case Permission.album:
-        return PermissionApi.album;
-      case Permission.audio:
-        return PermissionApi.audio;
       case Permission.video:
         return PermissionApi.video;
+      case Permission.audio:
+        return PermissionApi.audio;
     }
   }
 }

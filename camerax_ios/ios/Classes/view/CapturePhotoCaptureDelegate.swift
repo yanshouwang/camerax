@@ -1,19 +1,17 @@
 //
-//  CapturePhotoToMemoryDelegate.swift
+//  CapturePhotoCaptureToMemoryDelegate.swift
 //  camerax_ios
 //
-//  Created by 闫守旺 on 2024/7/14.
+//  Created by 闫守旺 on 2025/7/16.
 //
 
 import Foundation
 import AVFoundation
 
-class CapturePhotoCaptureFileDelegate: NSObject, AVCapturePhotoCaptureDelegate {
-    private let options: ImageCapture.OutputFileOptions
-    private let callback: ImageCapture.OnImageSavedCallback
+class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
+    private let callback: ImageCapture.OnImageCapturedCallback
     
-    init(_ options: ImageCapture.OutputFileOptions, _ callback: ImageCapture.OnImageSavedCallback) {
-        self.options = options
+    init(_ callback: ImageCapture.OnImageCapturedCallback) {
         self.callback = callback
     }
     
@@ -38,11 +36,17 @@ class CapturePhotoCaptureFileDelegate: NSObject, AVCapturePhotoCaptureDelegate {
         debugPrint("did finish processing photo.")
         do {
             if let error { throw error }
-            let url = options.url
             guard let data = photo.fileDataRepresentation() else { throw CameraXError(code: "nil-error", message: "photo is nil", details: nil) }
-            try data.write(to: url, options: .atomic)
-            let results = ImageCapture.OutputFileResults(savedUri: url)
-            callback.onImageSaved(results)
+            guard let exif = photo.metadata[kCGImagePropertyExifDictionary as String] as? [String: Any] else { throw CameraXError(code: "nil-error", message: "exif is nil", details: nil) }
+            guard let width = exif[kCGImagePropertyExifPixelXDimension as String] as? Int else { throw CameraXError(code: "nil-error", message: "width is nil", details: nil) }
+            guard let height = exif[kCGImagePropertyExifPixelYDimension as String] as? Int else { throw CameraXError(code: "nil-error", message: "height is nil", details: nil) }
+            guard let orientationValue = photo.metadata[kCGImagePropertyOrientation as String] as? UInt32, let orientation = CGImagePropertyOrientation(rawValue: orientationValue) else { throw CameraXError(code: "nil-error", message: "orientation is nil", details: nil) }
+            let planes = [ ImageProxy.PlaneProxy(data: data, rowStride: 0, pixelStride: 0) ]
+            let timestamp = photo.timestamp
+            let rotationDegrees = orientation.degrees
+            let imageInfo = ImageInfo(timestamp: timestamp, rotationDegrees: rotationDegrees)
+            let image = ImageProxy(format: .jpeg, width: width, height: height, planes: planes, imageInfo: imageInfo) {}
+            callback.onCaptureSuccess(image)
         } catch {
             callback.onError(error)
         }
@@ -59,5 +63,20 @@ class CapturePhotoCaptureFileDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     @available(iOS 17.0, *)
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCapturingDeferredPhotoProxy deferredPhotoProxy: AVCaptureDeferredPhotoProxy?, error: (any Error)?) {
         debugPrint("did finish capturing deferred photo proxy.")
+    }
+}
+
+extension CGImagePropertyOrientation {
+    var degrees: Int {
+        switch self {
+        case .up, .upMirrored:
+            return 0
+        case .down, .downMirrored:
+            return 180
+        case .leftMirrored, .right:
+            return 90
+        case .rightMirrored, .left:
+            return 270
+        }
     }
 }

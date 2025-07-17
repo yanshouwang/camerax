@@ -35,22 +35,28 @@ public class RotationProvider: NSObject {
         self.listeners = []
     }
     
+    public func enable() {
+        orientationListener.enable()
+    }
+    
+    public func disable() {
+        orientationListener.disable()
+    }
+    
+    public func getRotation() -> Int {
+        return rotation
+    }
+    
     public func addListener(_ listener: Listener) {
-        if orientationListener.canDetectOrientation() && !listeners.contains(listener) {
-            listeners.append(listener)
-            orientationListener.enable()
-        }
+        guard orientationListener.canDetectOrientation() && !listeners.contains(where: { $0 === listener }) else { return }
+        listeners.append(listener)
     }
     
     public func removeListener(_ listener: Listener) {
-        listeners.removeAll() { item in item === listener }
-        if listeners.isEmpty {
-            orientationListener.disable()
-        }
+        listeners.removeAll() { $0 === listener }
     }
     
     private func orientationToSurfaceRotation(_ orientation: Int) -> Int {
-        debugPrint("orientation: \(orientation)")
         if orientation >= 315 || orientation < 45 {
             return 0
         } else if orientation >= 225 {
@@ -63,8 +69,8 @@ public class RotationProvider: NSObject {
     }
     
     public class Listener: NSObject {
-        internal let onRotationChanged: (Int) -> Void
-
+        fileprivate let onRotationChanged: (Int) -> Void
+        
         init(onRotationChanged: @escaping (Int) -> Void) {
             self.onRotationChanged = onRotationChanged
         }

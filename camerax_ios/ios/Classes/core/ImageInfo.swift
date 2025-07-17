@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import AVFoundation
 
 public class ImageInfo: NSObject {
-    public let timestamp: Int
+    public let timestamp: CMTime
     public let rotationDegrees: Int
     
-    init(timestamp: Int, rotationDegrees: Int) {
+    init(timestamp: CMTime, rotationDegrees: Int) {
         self.timestamp = timestamp
         self.rotationDegrees = rotationDegrees
     }

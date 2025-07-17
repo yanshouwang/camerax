@@ -12,9 +12,8 @@ import 'package:pigeon/pigeon.dart';
   ),
 )
 enum PermissionApi {
-  album,
-  audio,
   video,
+  audio,
 }
 
 enum LensFacingApi {
@@ -622,40 +621,6 @@ abstract class ImageProxyApi extends AutoCloseableApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageCapture.Metadata',
-  ),
-)
-abstract class MetadataApi {
-  MetadataApi();
-
-  late final bool isReversedHorizontal;
-  late final bool isReversedVertical;
-  late final LocationApi? location;
-}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageCapture.OutputFileOptions',
-  ),
-)
-abstract class OutputFileOptionsApi {
-  OutputFileOptionsApi.build(
-    String file, {
-    MetadataApi? metadata,
-  });
-}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageCapture.OutputFileResults',
-  ),
-)
-abstract class OutputFileResultsApi {
-  late final String? savedUri;
-}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
     name: 'ImageCapture.OnImageCapturedCallback',
   ),
 )
@@ -666,22 +631,6 @@ abstract class OnImageCapturedCallbackApi {
   late final void Function(int progress)? onCaptureProcessProgressed;
   late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
   late final void Function(ImageProxyApi image)? onCaptureSuccess;
-  late final void Function(List<Object?> exception)? onError;
-}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageCapture.OnImageSavedCallback',
-  ),
-)
-abstract class OnImageSavedCallbackApi {
-  OnImageSavedCallbackApi();
-
-  late final void Function()? onCaptureStarted;
-  late final void Function(int progress)? onCaptureProcessProgressed;
-  late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
-  late final void Function(OutputFileResultsApi outputFileResults)?
-      onImageSaved;
   late final void Function(List<Object?> exception)? onError;
 }
 
@@ -948,9 +897,7 @@ abstract class CameraControllerApi {
   void setImageCaptureMode(CaptureModeApi captureMode);
   FlashModeApi getImageCaptureFlashMode();
   void setImageCaptureFlashMode(FlashModeApi flashMode);
-  void takePictureToMemory(OnImageCapturedCallbackApi capturedCallback);
-  void takePictureToFile(OutputFileOptionsApi outputFileOptions,
-      OnImageSavedCallbackApi savedCallback);
+  void takePicture(OnImageCapturedCallbackApi capturedCallback);
   ResolutionSelectorApi? getImageAnalysisResolutionSelector();
   void setImageAnalysisResolutionSelector(
       ResolutionSelectorApi? resolutionSelector);

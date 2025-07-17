@@ -18,8 +18,8 @@ import Foundation
 /// zoomRatio = 1.0f, cropWidth = 10000, zoomRatio = 5.5f, cropWidth = 1818.18 zoomRatio = 10.0f,
 /// cropWidth = 1000 As observed, zoomRatio = 5.5f does not yield cropWidth = 5500 which would be the
 /// actual zooming amount middle point.
-public class ZoomMath {
-    private init() {}
+public class ZoomMath: NSObject {
+    private override init() {}
     
     public static func getLinearZoomFromZoomRatio(zoomRatio: Double, minZoomRatio: Double, maxZoomRatio: Double) -> Double {
         // if zoom is not supported i.e. minZoomRatio = maxZoomRatio, return 0

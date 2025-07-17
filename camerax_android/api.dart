@@ -14,9 +14,8 @@ import 'package:pigeon/pigeon.dart';
   ),
 )
 enum PermissionApi {
-  album,
-  audio,
   video,
+  audio,
 }
 
 enum LensFacingApi {
@@ -773,40 +772,6 @@ abstract class ImageProxyApi extends AutoCloseableApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.core.ImageCapture.Metadata',
-  ),
-)
-abstract class MetadataApi {
-  MetadataApi();
-
-  late final bool isReversedHorizontal;
-  late final bool isReversedVertical;
-  late final LocationApi? location;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.core.ImageCapture.OutputFileOptions',
-  ),
-)
-abstract class OutputFileOptionsApi {
-  OutputFileOptionsApi.build(
-    String file, {
-    MetadataApi? metadata,
-  });
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.core.ImageCapture.OutputFileResults',
-  ),
-)
-abstract class OutputFileResultsApi {
-  late final String? savedUri;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.core.ImageCapture.OnImageCapturedCallback',
   ),
 )
@@ -817,22 +782,6 @@ abstract class OnImageCapturedCallbackApi {
   late final void Function(int progress)? onCaptureProcessProgressed;
   late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
   late final void Function(ImageProxyApi image)? onCaptureSuccess;
-  late final void Function(List<Object?> exception)? onError;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.core.ImageCapture.OnImageSavedCallback',
-  ),
-)
-abstract class OnImageSavedCallbackApi {
-  OnImageSavedCallbackApi();
-
-  late final void Function()? onCaptureStarted;
-  late final void Function(int progress)? onCaptureProcessProgressed;
-  late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
-  late final void Function(OutputFileResultsApi outputFileResults)?
-      onImageSaved;
   late final void Function(List<Object?> exception)? onError;
 }
 
@@ -1523,10 +1472,7 @@ abstract class CameraControllerApi {
   @async
   void setImageCaptureFlashMode(FlashModeApi flashMode);
   @async
-  void takePictureToMemory(OnImageCapturedCallbackApi capturedCallback);
-  @async
-  void takePictureToFile(OutputFileOptionsApi outputFileOptions,
-      OnImageSavedCallbackApi savedCallback);
+  void takePicture(OnImageCapturedCallbackApi capturedCallback);
   @async
   ResolutionSelectorApi? getImageAnalysisResolutionSelector();
   @async

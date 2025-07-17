@@ -433,21 +433,9 @@ protocol CameraXApiPigeonProxyApiDelegate {
   /// An implementation of [PigeonApiImageProxyApi] used to add a new Dart instance of
   /// `ImageProxyApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiImageProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiImageProxyApi
-  /// An implementation of [PigeonApiMetadataApi] used to add a new Dart instance of
-  /// `MetadataApi` to the Dart `InstanceManager` and make calls to Dart.
-  func pigeonApiMetadataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiMetadataApi
-  /// An implementation of [PigeonApiOutputFileOptionsApi] used to add a new Dart instance of
-  /// `OutputFileOptionsApi` to the Dart `InstanceManager` and make calls to Dart.
-  func pigeonApiOutputFileOptionsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOutputFileOptionsApi
-  /// An implementation of [PigeonApiOutputFileResultsApi] used to add a new Dart instance of
-  /// `OutputFileResultsApi` to the Dart `InstanceManager` and make calls to Dart.
-  func pigeonApiOutputFileResultsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOutputFileResultsApi
   /// An implementation of [PigeonApiOnImageCapturedCallbackApi] used to add a new Dart instance of
   /// `OnImageCapturedCallbackApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiOnImageCapturedCallbackApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOnImageCapturedCallbackApi
-  /// An implementation of [PigeonApiOnImageSavedCallbackApi] used to add a new Dart instance of
-  /// `OnImageSavedCallbackApi` to the Dart `InstanceManager` and make calls to Dart.
-  func pigeonApiOnImageSavedCallbackApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOnImageSavedCallbackApi
   /// An implementation of [PigeonApiAnalyzerApi] used to add a new Dart instance of
   /// `AnalyzerApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiAnalyzerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAnalyzerApi
@@ -570,10 +558,7 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiCameraControlApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraControlApi(self))
     PigeonApiResolutionStrategyApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiResolutionStrategyApi(self))
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiResolutionSelectorApi(self))
-    PigeonApiMetadataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiMetadataApi(self))
-    PigeonApiOutputFileOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOutputFileOptionsApi(self))
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOnImageCapturedCallbackApi(self))
-    PigeonApiOnImageSavedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOnImageSavedCallbackApi(self))
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiImageAnalyzerApi(self))
     PigeonApiOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOutputOptionsApi(self))
     PigeonApiFileOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiFileOutputOptionsApi(self))
@@ -603,10 +588,7 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiCameraControlApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiResolutionStrategyApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiMetadataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiOutputFileOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiOnImageSavedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiFileOutputOptionsApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
@@ -912,52 +894,8 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
       }
 
 
-      if let instance = value as? ImageCapture.Metadata {
-        pigeonRegistrar.apiDelegate.pigeonApiMetadataApi(pigeonRegistrar).pigeonNewInstance(
-          pigeonInstance: instance
-        ) { _ in }
-        super.writeByte(128)
-        super.writeValue(
-          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
-        return
-      }
-
-
-      if let instance = value as? ImageCapture.OutputFileOptions {
-        pigeonRegistrar.apiDelegate.pigeonApiOutputFileOptionsApi(pigeonRegistrar).pigeonNewInstance(
-          pigeonInstance: instance
-        ) { _ in }
-        super.writeByte(128)
-        super.writeValue(
-          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
-        return
-      }
-
-
-      if let instance = value as? ImageCapture.OutputFileResults {
-        pigeonRegistrar.apiDelegate.pigeonApiOutputFileResultsApi(pigeonRegistrar).pigeonNewInstance(
-          pigeonInstance: instance
-        ) { _ in }
-        super.writeByte(128)
-        super.writeValue(
-          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
-        return
-      }
-
-
       if let instance = value as? ImageCapture.OnImageCapturedCallback {
         pigeonRegistrar.apiDelegate.pigeonApiOnImageCapturedCallbackApi(pigeonRegistrar).pigeonNewInstance(
-          pigeonInstance: instance
-        ) { _ in }
-        super.writeByte(128)
-        super.writeValue(
-          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
-        return
-      }
-
-
-      if let instance = value as? ImageCapture.OnImageSavedCallback {
-        pigeonRegistrar.apiDelegate.pigeonApiOnImageSavedCallbackApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -1203,9 +1141,8 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 }
 
 enum PermissionApi: Int {
-  case album = 0
+  case video = 0
   case audio = 1
-  case video = 2
 }
 
 enum LensFacingApi: Int {
@@ -3837,209 +3774,6 @@ final class PigeonApiImageProxyApi: PigeonApiProtocolImageProxyApi  {
     }
   }
 }
-protocol PigeonApiDelegateMetadataApi {
-  func pigeonDefaultConstructor(pigeonApi: PigeonApiMetadataApi, isReversedHorizontal: Bool, isReversedVertical: Bool, location: CLLocation?) throws -> ImageCapture.Metadata
-  func isReversedHorizontal(pigeonApi: PigeonApiMetadataApi, pigeonInstance: ImageCapture.Metadata) throws -> Bool
-  func isReversedVertical(pigeonApi: PigeonApiMetadataApi, pigeonInstance: ImageCapture.Metadata) throws -> Bool
-  func location(pigeonApi: PigeonApiMetadataApi, pigeonInstance: ImageCapture.Metadata) throws -> CLLocation?
-}
-
-protocol PigeonApiProtocolMetadataApi {
-}
-
-final class PigeonApiMetadataApi: PigeonApiProtocolMetadataApi  {
-  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
-  let pigeonDelegate: PigeonApiDelegateMetadataApi
-  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateMetadataApi) {
-    self.pigeonRegistrar = pigeonRegistrar
-    self.pigeonDelegate = delegate
-  }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiMetadataApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.MetadataApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonIdentifierArg = args[0] as! Int64
-        let isReversedHorizontalArg = args[1] as! Bool
-        let isReversedVerticalArg = args[2] as! Bool
-        let locationArg: CLLocation? = nilOrValue(args[3])
-        do {
-          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
-try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, isReversedHorizontal: isReversedHorizontalArg, isReversedVertical: isReversedVerticalArg, location: locationArg),
-withIdentifier: pigeonIdentifierArg)
-          reply(wrapResult(nil))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      pigeonDefaultConstructorChannel.setMessageHandler(nil)
-    }
-  }
-
-  ///Creates a Dart instance of MetadataApi and attaches it to [pigeonInstance].
-  func pigeonNewInstance(pigeonInstance: ImageCapture.Metadata, completion: @escaping (Result<Void, CameraXError>) -> Void) {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
-      completion(.success(()))
-    }     else {
-      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let isReversedHorizontalArg = try! pigeonDelegate.isReversedHorizontal(pigeonApi: self, pigeonInstance: pigeonInstance)
-      let isReversedVerticalArg = try! pigeonDelegate.isReversedVertical(pigeonApi: self, pigeonInstance: pigeonInstance)
-      let locationArg = try! pigeonDelegate.location(pigeonApi: self, pigeonInstance: pigeonInstance)
-      let binaryMessenger = pigeonRegistrar.binaryMessenger
-      let codec = pigeonRegistrar.codec
-      let channelName: String = "dev.flutter.pigeon.camerax_ios.MetadataApi.pigeon_newInstance"
-      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg, isReversedHorizontalArg, isReversedVerticalArg, locationArg] as [Any?]) { response in
-        guard let listResponse = response as? [Any?] else {
-          completion(.failure(createConnectionError(withChannelName: channelName)))
-          return
-        }
-        if listResponse.count > 1 {
-          let code: String = listResponse[0] as! String
-          let message: String? = nilOrValue(listResponse[1])
-          let details: String? = nilOrValue(listResponse[2])
-          completion(.failure(CameraXError(code: code, message: message, details: details)))
-        } else {
-          completion(.success(()))
-        }
-      }
-    }
-  }
-}
-protocol PigeonApiDelegateOutputFileOptionsApi {
-  func build(pigeonApi: PigeonApiOutputFileOptionsApi, file: String, metadata: ImageCapture.Metadata?) throws -> ImageCapture.OutputFileOptions
-}
-
-protocol PigeonApiProtocolOutputFileOptionsApi {
-}
-
-final class PigeonApiOutputFileOptionsApi: PigeonApiProtocolOutputFileOptionsApi  {
-  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
-  let pigeonDelegate: PigeonApiDelegateOutputFileOptionsApi
-  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateOutputFileOptionsApi) {
-    self.pigeonRegistrar = pigeonRegistrar
-    self.pigeonDelegate = delegate
-  }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiOutputFileOptionsApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let buildChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.OutputFileOptionsApi.build", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      buildChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonIdentifierArg = args[0] as! Int64
-        let fileArg = args[1] as! String
-        let metadataArg: ImageCapture.Metadata? = nilOrValue(args[2])
-        do {
-          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
-try api.pigeonDelegate.build(pigeonApi: api, file: fileArg, metadata: metadataArg),
-withIdentifier: pigeonIdentifierArg)
-          reply(wrapResult(nil))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      buildChannel.setMessageHandler(nil)
-    }
-  }
-
-  ///Creates a Dart instance of OutputFileOptionsApi and attaches it to [pigeonInstance].
-  func pigeonNewInstance(pigeonInstance: ImageCapture.OutputFileOptions, completion: @escaping (Result<Void, CameraXError>) -> Void) {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
-      completion(.success(()))
-    }     else {
-      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let binaryMessenger = pigeonRegistrar.binaryMessenger
-      let codec = pigeonRegistrar.codec
-      let channelName: String = "dev.flutter.pigeon.camerax_ios.OutputFileOptionsApi.pigeon_newInstance"
-      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
-        guard let listResponse = response as? [Any?] else {
-          completion(.failure(createConnectionError(withChannelName: channelName)))
-          return
-        }
-        if listResponse.count > 1 {
-          let code: String = listResponse[0] as! String
-          let message: String? = nilOrValue(listResponse[1])
-          let details: String? = nilOrValue(listResponse[2])
-          completion(.failure(CameraXError(code: code, message: message, details: details)))
-        } else {
-          completion(.success(()))
-        }
-      }
-    }
-  }
-}
-protocol PigeonApiDelegateOutputFileResultsApi {
-  func savedUri(pigeonApi: PigeonApiOutputFileResultsApi, pigeonInstance: ImageCapture.OutputFileResults) throws -> String?
-}
-
-protocol PigeonApiProtocolOutputFileResultsApi {
-}
-
-final class PigeonApiOutputFileResultsApi: PigeonApiProtocolOutputFileResultsApi  {
-  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
-  let pigeonDelegate: PigeonApiDelegateOutputFileResultsApi
-  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateOutputFileResultsApi) {
-    self.pigeonRegistrar = pigeonRegistrar
-    self.pigeonDelegate = delegate
-  }
-  ///Creates a Dart instance of OutputFileResultsApi and attaches it to [pigeonInstance].
-  func pigeonNewInstance(pigeonInstance: ImageCapture.OutputFileResults, completion: @escaping (Result<Void, CameraXError>) -> Void) {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
-      completion(.success(()))
-    }     else {
-      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let savedUriArg = try! pigeonDelegate.savedUri(pigeonApi: self, pigeonInstance: pigeonInstance)
-      let binaryMessenger = pigeonRegistrar.binaryMessenger
-      let codec = pigeonRegistrar.codec
-      let channelName: String = "dev.flutter.pigeon.camerax_ios.OutputFileResultsApi.pigeon_newInstance"
-      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg, savedUriArg] as [Any?]) { response in
-        guard let listResponse = response as? [Any?] else {
-          completion(.failure(createConnectionError(withChannelName: channelName)))
-          return
-        }
-        if listResponse.count > 1 {
-          let code: String = listResponse[0] as! String
-          let message: String? = nilOrValue(listResponse[1])
-          let details: String? = nilOrValue(listResponse[2])
-          completion(.failure(CameraXError(code: code, message: message, details: details)))
-        } else {
-          completion(.success(()))
-        }
-      }
-    }
-  }
-}
 protocol PigeonApiDelegateOnImageCapturedCallbackApi {
   func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageCapturedCallbackApi) throws -> ImageCapture.OnImageCapturedCallback
 }
@@ -4244,228 +3978,6 @@ withIdentifier: pigeonIdentifierArg)
     let binaryMessenger = pigeonRegistrar.binaryMessenger
     let codec = pigeonRegistrar.codec
     let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageCapturedCallbackApi.onError"
-    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pigeonInstanceArg, exceptionArg] as [Any?]) { response in
-      guard let listResponse = response as? [Any?] else {
-        completion(.failure(createConnectionError(withChannelName: channelName)))
-        return
-      }
-      if listResponse.count > 1 {
-        let code: String = listResponse[0] as! String
-        let message: String? = nilOrValue(listResponse[1])
-        let details: String? = nilOrValue(listResponse[2])
-        completion(.failure(CameraXError(code: code, message: message, details: details)))
-      } else {
-        completion(.success(()))
-      }
-    }
-  }
-
-}
-protocol PigeonApiDelegateOnImageSavedCallbackApi {
-  func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageSavedCallbackApi) throws -> ImageCapture.OnImageSavedCallback
-}
-
-protocol PigeonApiProtocolOnImageSavedCallbackApi {
-  func onCaptureStarted(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, completion: @escaping (Result<Void, CameraXError>) -> Void)
-  func onCaptureProcessProgressed(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, progress progressArg: Int64, completion: @escaping (Result<Void, CameraXError>) -> Void)
-  func onPostviewBitmapAvailable(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, bitmap bitmapArg: FlutterStandardTypedData, completion: @escaping (Result<Void, CameraXError>) -> Void)
-  func onImageSaved(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, outputFileResults outputFileResultsArg: ImageCapture.OutputFileResults, completion: @escaping (Result<Void, CameraXError>) -> Void)
-  func onError(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, exception exceptionArg: [Any?], completion: @escaping (Result<Void, CameraXError>) -> Void)
-}
-
-final class PigeonApiOnImageSavedCallbackApi: PigeonApiProtocolOnImageSavedCallbackApi  {
-  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
-  let pigeonDelegate: PigeonApiDelegateOnImageSavedCallbackApi
-  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateOnImageSavedCallbackApi) {
-    self.pigeonRegistrar = pigeonRegistrar
-    self.pigeonDelegate = delegate
-  }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiOnImageSavedCallbackApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonIdentifierArg = args[0] as! Int64
-        do {
-          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
-try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api),
-withIdentifier: pigeonIdentifierArg)
-          reply(wrapResult(nil))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      pigeonDefaultConstructorChannel.setMessageHandler(nil)
-    }
-  }
-
-  ///Creates a Dart instance of OnImageSavedCallbackApi and attaches it to [pigeonInstance].
-  func pigeonNewInstance(pigeonInstance: ImageCapture.OnImageSavedCallback, completion: @escaping (Result<Void, CameraXError>) -> Void) {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
-      completion(.success(()))
-    }     else {
-      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let binaryMessenger = pigeonRegistrar.binaryMessenger
-      let codec = pigeonRegistrar.codec
-      let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.pigeon_newInstance"
-      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
-        guard let listResponse = response as? [Any?] else {
-          completion(.failure(createConnectionError(withChannelName: channelName)))
-          return
-        }
-        if listResponse.count > 1 {
-          let code: String = listResponse[0] as! String
-          let message: String? = nilOrValue(listResponse[1])
-          let details: String? = nilOrValue(listResponse[2])
-          completion(.failure(CameraXError(code: code, message: message, details: details)))
-        } else {
-          completion(.success(()))
-        }
-      }
-    }
-  }
-  func onCaptureStarted(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-      return
-    }
-    let binaryMessenger = pigeonRegistrar.binaryMessenger
-    let codec = pigeonRegistrar.codec
-    let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.onCaptureStarted"
-    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pigeonInstanceArg] as [Any?]) { response in
-      guard let listResponse = response as? [Any?] else {
-        completion(.failure(createConnectionError(withChannelName: channelName)))
-        return
-      }
-      if listResponse.count > 1 {
-        let code: String = listResponse[0] as! String
-        let message: String? = nilOrValue(listResponse[1])
-        let details: String? = nilOrValue(listResponse[2])
-        completion(.failure(CameraXError(code: code, message: message, details: details)))
-      } else {
-        completion(.success(()))
-      }
-    }
-  }
-
-  func onCaptureProcessProgressed(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, progress progressArg: Int64, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-      return
-    }
-    let binaryMessenger = pigeonRegistrar.binaryMessenger
-    let codec = pigeonRegistrar.codec
-    let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.onCaptureProcessProgressed"
-    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pigeonInstanceArg, progressArg] as [Any?]) { response in
-      guard let listResponse = response as? [Any?] else {
-        completion(.failure(createConnectionError(withChannelName: channelName)))
-        return
-      }
-      if listResponse.count > 1 {
-        let code: String = listResponse[0] as! String
-        let message: String? = nilOrValue(listResponse[1])
-        let details: String? = nilOrValue(listResponse[2])
-        completion(.failure(CameraXError(code: code, message: message, details: details)))
-      } else {
-        completion(.success(()))
-      }
-    }
-  }
-
-  func onPostviewBitmapAvailable(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, bitmap bitmapArg: FlutterStandardTypedData, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-      return
-    }
-    let binaryMessenger = pigeonRegistrar.binaryMessenger
-    let codec = pigeonRegistrar.codec
-    let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.onPostviewBitmapAvailable"
-    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pigeonInstanceArg, bitmapArg] as [Any?]) { response in
-      guard let listResponse = response as? [Any?] else {
-        completion(.failure(createConnectionError(withChannelName: channelName)))
-        return
-      }
-      if listResponse.count > 1 {
-        let code: String = listResponse[0] as! String
-        let message: String? = nilOrValue(listResponse[1])
-        let details: String? = nilOrValue(listResponse[2])
-        completion(.failure(CameraXError(code: code, message: message, details: details)))
-      } else {
-        completion(.success(()))
-      }
-    }
-  }
-
-  func onImageSaved(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, outputFileResults outputFileResultsArg: ImageCapture.OutputFileResults, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-      return
-    }
-    let binaryMessenger = pigeonRegistrar.binaryMessenger
-    let codec = pigeonRegistrar.codec
-    let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.onImageSaved"
-    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-    channel.sendMessage([pigeonInstanceArg, outputFileResultsArg] as [Any?]) { response in
-      guard let listResponse = response as? [Any?] else {
-        completion(.failure(createConnectionError(withChannelName: channelName)))
-        return
-      }
-      if listResponse.count > 1 {
-        let code: String = listResponse[0] as! String
-        let message: String? = nilOrValue(listResponse[1])
-        let details: String? = nilOrValue(listResponse[2])
-        completion(.failure(CameraXError(code: code, message: message, details: details)))
-      } else {
-        completion(.success(()))
-      }
-    }
-  }
-
-  func onError(pigeonInstance pigeonInstanceArg: ImageCapture.OnImageSavedCallback, exception exceptionArg: [Any?], completion: @escaping (Result<Void, CameraXError>) -> Void)   {
-    if pigeonRegistrar.ignoreCallsToDart {
-      completion(
-        .failure(
-          CameraXError(
-            code: "ignore-calls-error",
-            message: "Calls to Dart are being ignored.", details: "")))
-      return
-    }
-    let binaryMessenger = pigeonRegistrar.binaryMessenger
-    let codec = pigeonRegistrar.codec
-    let channelName: String = "dev.flutter.pigeon.camerax_ios.OnImageSavedCallbackApi.onError"
     let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
     channel.sendMessage([pigeonInstanceArg, exceptionArg] as [Any?]) { response in
       guard let listResponse = response as? [Any?] else {
@@ -5657,8 +5169,7 @@ protocol PigeonApiDelegateCameraControllerApi {
   func setImageCaptureMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, captureMode: CaptureModeApi) throws
   func getImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> FlashModeApi
   func setImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, flashMode: FlashModeApi) throws
-  func takePictureToMemory(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: ImageCapture.OnImageCapturedCallback) throws
-  func takePictureToFile(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, outputFileOptions: ImageCapture.OutputFileOptions, savedCallback: ImageCapture.OnImageSavedCallback) throws
+  func takePicture(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, capturedCallback: ImageCapture.OnImageCapturedCallback) throws
   func getImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ResolutionSelector?
   func setImageAnalysisResolutionSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, resolutionSelector: ResolutionSelector?) throws
   func getImageAnalysisBackpressureStrategy(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> BackpressureStrategyApi
@@ -6125,38 +5636,21 @@ withIdentifier: pigeonIdentifierArg)
     } else {
       setImageCaptureFlashModeChannel.setMessageHandler(nil)
     }
-    let takePictureToMemoryChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.takePictureToMemory", binaryMessenger: binaryMessenger, codec: codec)
+    let takePictureChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.takePicture", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      takePictureToMemoryChannel.setMessageHandler { message, reply in
+      takePictureChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let pigeonInstanceArg = args[0] as! CameraController
         let capturedCallbackArg = args[1] as! ImageCapture.OnImageCapturedCallback
         do {
-          try api.pigeonDelegate.takePictureToMemory(pigeonApi: api, pigeonInstance: pigeonInstanceArg, capturedCallback: capturedCallbackArg)
+          try api.pigeonDelegate.takePicture(pigeonApi: api, pigeonInstance: pigeonInstanceArg, capturedCallback: capturedCallbackArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
         }
       }
     } else {
-      takePictureToMemoryChannel.setMessageHandler(nil)
-    }
-    let takePictureToFileChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.takePictureToFile", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      takePictureToFileChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! CameraController
-        let outputFileOptionsArg = args[1] as! ImageCapture.OutputFileOptions
-        let savedCallbackArg = args[2] as! ImageCapture.OnImageSavedCallback
-        do {
-          try api.pigeonDelegate.takePictureToFile(pigeonApi: api, pigeonInstance: pigeonInstanceArg, outputFileOptions: outputFileOptionsArg, savedCallback: savedCallbackArg)
-          reply(wrapResult(nil))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      takePictureToFileChannel.setMessageHandler(nil)
+      takePictureChannel.setMessageHandler(nil)
     }
     let getImageAnalysisResolutionSelectorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.getImageAnalysisResolutionSelector", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {

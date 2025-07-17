@@ -12,15 +12,14 @@ import Accelerate
 
 class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let analyzer: ImageAnalysis.Analyzer
-    private let rotationProvider: () -> Int
+    private var rotationProvider: RotationProvider
+    private var analyzingImage: ImageProxy?
+    private var cachedImage: ImageProxy?
     
-    init(analyzer: ImageAnalysis.Analyzer, rotationProvider: @escaping () -> Int) {
+    init(analyzer: ImageAnalysis.Analyzer, rotationProvider: RotationProvider) {
         self.analyzer = analyzer
         self.rotationProvider = rotationProvider
     }
-    
-    private var analyzingImage: ImageProxy?
-    private var cachedImage: ImageProxy?
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         debugPrint("captureOutput didOutput")
@@ -85,8 +84,11 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
             let plane = ImageProxy.PlaneProxy(data: data, rowStride: destBytesPerRow, pixelStride: bytesPerPixel)
             planes.append(plane)
         }
-        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer).milliseconds
-        let rotationDegrees = 90 - rotationProvider()
+        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+        let relativeRotationDegrees = rotationProvider.getRotation()
+        let sensorOrientation = 90
+        let isOppositeFacing = connection.isOppositeFacing
+        let rotationDegrees = CameraOrientationUtil.getRelativeImageRotation(destRotationDegrees: relativeRotationDegrees, sourceRotationDegrees: sensorOrientation, isOppositeFacing: isOppositeFacing)
         let imageInfo = ImageInfo(timestamp: timestamp, rotationDegrees: rotationDegrees)
         let image = ImageProxy(format: format.imageFormatApi, width: width, height: height, planes: planes, imageInfo: imageInfo) {
             DispatchQueue.main.async {
@@ -112,8 +114,13 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
     }
 }
 
-extension CMTime {
-    var milliseconds: Int {
-        return Int(self.seconds * 1000)
+fileprivate extension AVCaptureConnection {
+    var isOppositeFacing: Bool {
+        guard let input = inputPorts.map({ $0.input }).filter({ $0 is AVCaptureDeviceInput }).first as? AVCaptureDeviceInput else {
+            debugPrint("input is nil")
+            return true
+        }
+        let device = input.device
+        return device.position == .back
     }
 }

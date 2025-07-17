@@ -13,19 +13,19 @@ class PreviewViewDelegate: PigeonApiDelegatePreviewViewApi {
     }
     
     func getController(pigeonApi: PigeonApiPreviewViewApi, pigeonInstance: PreviewView) throws -> CameraController? {
-        return pigeonInstance.controller
+        return pigeonInstance.getController()
     }
     
     func setController(pigeonApi: PigeonApiPreviewViewApi, pigeonInstance: PreviewView, controller: CameraController?) throws {
-        pigeonInstance.controller = controller
+        pigeonInstance.setController(controller)
     }
     
     func getScaleType(pigeonApi: PigeonApiPreviewViewApi, pigeonInstance: PreviewView) throws -> ScaleTypeApi {
-        return pigeonInstance.scaleType.api
+        return pigeonInstance.getScaleType().api
     }
     
     func setScaleType(pigeonApi: PigeonApiPreviewViewApi, pigeonInstance: PreviewView, scaleType: ScaleTypeApi) throws {
-        pigeonInstance.scaleType = scaleType.delegate
+        pigeonInstance.setScaleType(scaleType.delegate)
     }
 }
 
