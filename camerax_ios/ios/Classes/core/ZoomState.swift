@@ -8,6 +8,14 @@
 import Foundation
 
 public class ZoomState: NSObject {
+    public static func == (lhs: ZoomState, rhs: ZoomState) -> Bool {
+        return lhs.minZoomRatio == rhs.minZoomRatio && lhs.maxZoomRatio == rhs.maxZoomRatio && lhs.zoomRatio == rhs.zoomRatio
+    }
+    
+    public static func !=(lhs: ZoomState, rhs: ZoomState) -> Bool {
+        return !(lhs == rhs)
+    }
+    
     public let minZoomRatio: Double
     public let maxZoomRatio: Double
     public let zoomRatio: Double

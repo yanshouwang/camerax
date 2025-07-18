@@ -13,13 +13,11 @@ class PermissionManagerDelegate: PigeonApiDelegatePermissionManagerApi {
     }
     
     func checkPermissioin(pigeonApi: PigeonApiPermissionManagerApi, pigeonInstance: PermissionManager, permission: PermissionApi) throws -> Bool {
-        return pigeonInstance.checkPermission(permission: permission.delegate)
+        return pigeonInstance.checkPermission(permission.delegate)
     }
     
     func requestPermissions(pigeonApi: PigeonApiPermissionManagerApi, pigeonInstance: PermissionManager, permissions: [PermissionApi], completion: @escaping (Result<Bool, any Error>) -> Void) {
-        pigeonInstance.requestPermissions(permissions: permissions.map { $0.delegate }) {
-            completion(.success($0))
-        }
+        pigeonInstance.requestPermissions(permissions.map { $0.delegate }) { completion(.success($0)) }
     }
 }
 

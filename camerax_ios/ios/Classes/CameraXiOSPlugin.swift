@@ -2,12 +2,12 @@ import Flutter
 import UIKit
 
 public class CameraXiOSPlugin: NSObject, FlutterPlugin {
-    var api: CameraXApiPigeonProxyApiRegistrar?
+    private var api: CameraXApiPigeonProxyApiRegistrar?
     
-    init(messenger: FlutterBinaryMessenger) {
+    private init(messenger: FlutterBinaryMessenger) {
         let delegate = CameraXDelegate()
-        api = CameraXApiPigeonProxyApiRegistrar(binaryMessenger: messenger, apiDelegate: delegate)
-        api!.setUp()
+        self.api = CameraXApiPigeonProxyApiRegistrar(binaryMessenger: messenger, apiDelegate: delegate)
+        self.api!.setUp()
     }
     
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -20,8 +20,8 @@ public class CameraXiOSPlugin: NSObject, FlutterPlugin {
     }
     
     public func detachFromEngine(for registrar: any FlutterPluginRegistrar) {
-        api!.ignoreCallsToDart = true
-        api!.tearDown()
-        api = nil
+        self.api!.ignoreCallsToDart = true
+        self.api!.tearDown()
+        self.api = nil
     }
 }

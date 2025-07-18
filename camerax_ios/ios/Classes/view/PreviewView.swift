@@ -87,7 +87,7 @@ public class PreviewView: UIView {
     }
     
     @objc fileprivate func handlePinchGestureRecognizer(_ sender: UIPinchGestureRecognizer) {
-        guard let controller = self.controller, controller.isPinchToZoomEnabled(), let zoomState = controller.getZoomState() else {
+        guard let controller = self.controller, controller.isPinchToZoomEnabled(), let zoomState = controller.getZoomState().getValue() else {
             return
         }
         switch sender.state {
@@ -109,7 +109,9 @@ public class PreviewView: UIView {
     
     private func updateVideoOrientation() {
         let orientation = UIDevice.current.orientation
+        debugPrint("ui device orientation: \(orientation)")
         guard let videoOrientation = orientation.videoOrientation else { return }
+        debugPrint("update preview layer orientation: \(videoOrientation)")
         guard let connection = self.layer.connection else {
             debugPrint("preview connection is nil")
             return
@@ -172,7 +174,6 @@ fileprivate extension AVLayerVideoGravity {
 
 fileprivate extension UIDeviceOrientation {
     var videoOrientation: AVCaptureVideoOrientation? {
-        debugPrint("UIDevice orientation: \(self)")
         switch self {
         case .portrait, .portraitUpsideDown:
             return .portrait

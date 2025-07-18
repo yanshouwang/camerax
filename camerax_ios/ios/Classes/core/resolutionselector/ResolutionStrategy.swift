@@ -8,17 +8,17 @@
 import Foundation
 
 public class ResolutionStrategy: NSObject {
-    static let highestAvailableStrategy = ResolutionStrategy()
+    public static let highestAvailableStrategy = ResolutionStrategy()
     
     public let boundSize: Size<Int>?
     public let fallbackRule: FallbackRule
     
-    public override init() {
+    private override init() {
         self.boundSize = nil
         self.fallbackRule = .none
     }
     
-    init(boundSize: Size<Int>, fallbackRule: FallbackRule) {
+    public init(boundSize: Size<Int>, fallbackRule: FallbackRule) {
         self.boundSize = boundSize
         self.fallbackRule = fallbackRule
     }

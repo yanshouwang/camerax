@@ -26,16 +26,16 @@ final class CameraInfoImpl extends CameraInfo {
 
   CameraInfoImpl.internal(this.api) : super.impl() {
     _cameraStateChangedController = StreamController.broadcast(
-      onListen: _onListenCameraStateChanged,
-      onCancel: _onCancelCameraStateChanged,
+      onListen: _listenCameraStateChanged,
+      onCancel: _cancelCameraStateChanged,
     );
     _torchStateChangedController = StreamController.broadcast(
-      onListen: _onListenTorchStateChanged,
-      onCancel: _onCancelTorchStateChanged,
+      onListen: _listenTorchStateChanged,
+      onCancel: _cancelTorchStateChanged,
     );
     _zoomStateChangedController = StreamController.broadcast(
-      onListen: _onListenZoomStateChanged,
-      onCancel: _onCancelZoomStateChanged,
+      onListen: _listenZoomStateChanged,
+      onCancel: _cancelZoomStateChanged,
     );
   }
 
@@ -112,7 +112,7 @@ final class CameraInfoImpl extends CameraInfo {
         .then((e1) => e1.map((e2) => e2.impl).toSet());
   }
 
-  void _onListenCameraStateChanged() async {
+  void _listenCameraStateChanged() async {
     final completer = Completer<CameraStateObserverApi>();
     try {
       final future = _cameraStateObserverApiFuture;
@@ -134,7 +134,7 @@ final class CameraInfoImpl extends CameraInfo {
     }
   }
 
-  void _onCancelCameraStateChanged() async {
+  void _cancelCameraStateChanged() async {
     try {
       final future = ArgumentError.checkNotNull(_cameraStateObserverApiFuture);
       _cameraStateObserverApiFuture = null;
@@ -146,7 +146,7 @@ final class CameraInfoImpl extends CameraInfo {
     }
   }
 
-  void _onListenTorchStateChanged() async {
+  void _listenTorchStateChanged() async {
     final completer = Completer<TorchStateObserverApi>();
     try {
       final future = _torchStateObserverApiFuture;
@@ -168,7 +168,7 @@ final class CameraInfoImpl extends CameraInfo {
     }
   }
 
-  void _onCancelTorchStateChanged() async {
+  void _cancelTorchStateChanged() async {
     try {
       final future = ArgumentError.checkNotNull(_torchStateObserverApiFuture);
       _torchStateObserverApiFuture = null;
@@ -180,7 +180,7 @@ final class CameraInfoImpl extends CameraInfo {
     }
   }
 
-  void _onListenZoomStateChanged() async {
+  void _listenZoomStateChanged() async {
     final completer = Completer<ZoomStateObserverApi>();
     try {
       final future = _zoomStateObserverApiFuture;
@@ -206,7 +206,7 @@ final class CameraInfoImpl extends CameraInfo {
     }
   }
 
-  void _onCancelZoomStateChanged() async {
+  void _cancelZoomStateChanged() async {
     try {
       final future = ArgumentError.checkNotNull(_zoomStateObserverApiFuture);
       _zoomStateObserverApiFuture = null;

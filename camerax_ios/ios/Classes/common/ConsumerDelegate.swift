@@ -21,6 +21,6 @@ class VideoRecordEventConsumer: NSObject, Consumer {
     }
     
     func accept(_ value: VideoRecordEvent) {
-        api.accept(pigeonInstance: self, value: value) { _ in }
+        self.api.accept(pigeonInstance: self, value: value) { _ in }
     }
 }

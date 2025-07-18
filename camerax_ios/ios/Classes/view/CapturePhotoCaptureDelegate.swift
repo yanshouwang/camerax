@@ -66,7 +66,7 @@ class CapturePhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
     }
 }
 
-extension CGImagePropertyOrientation {
+fileprivate extension CGImagePropertyOrientation {
     var degrees: Int {
         switch self {
         case .up, .upMirrored:

@@ -8,9 +8,9 @@
 import Foundation
 
 public class AudioConfig: NSObject {
-    static let audioDisabled = AudioConfig.create(false)
+    public static let audioDisabled = AudioConfig.create(false)
     
-    static func create(_ enableAudio: Bool) -> AudioConfig {
+    public static func create(_ enableAudio: Bool) -> AudioConfig {
         return AudioConfig(enableAudio)
     }
     

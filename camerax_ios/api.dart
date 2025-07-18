@@ -332,11 +332,14 @@ abstract class CameraSelectorApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
-    name: 'NSKeyValueObservation',
+    name: 'CameraStateLiveData',
   ),
 )
-abstract class NSKeyValueObservationApi {
-  void invalidate();
+abstract class CameraStateLiveDataApi {
+  CameraStateApi? getValue();
+
+  void observe(CameraStateObserverApi observer);
+  void removeObserver(CameraStateObserverApi observer);
 }
 
 @ProxyApi(
@@ -348,6 +351,18 @@ abstract class CameraStateObserverApi {
   CameraStateObserverApi();
 
   late final void Function(CameraStateApi value) onChanged;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'TorchStateLiveData',
+  ),
+)
+abstract class TorchStateLiveDataApi {
+  TorchStateApi? getValue();
+
+  void observe(TorchStateObserverApi observer);
+  void removeObserver(TorchStateObserverApi observer);
 }
 
 @ProxyApi(
@@ -371,6 +386,18 @@ abstract class ZoomStateApi {
   late final double maxZoomRatio;
   late final double zoomRatio;
   late final double linearZoom;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'ZoomStateLiveData',
+  ),
+)
+abstract class ZoomStateLiveDataApi {
+  ZoomStateApi? getValue();
+
+  void observe(ZoomStateObserverApi observer);
+  void removeObserver(ZoomStateObserverApi observer);
 }
 
 @ProxyApi(
@@ -499,12 +526,9 @@ abstract class CameraInfoApi {
   @static
   bool mustPlayShutterSound();
   CameraSelectorApi getCameraSelector();
-  CameraStateApi? getCameraState();
-  NSKeyValueObservationApi observeCameraState(CameraStateObserverApi observer);
-  TorchStateApi? getTorchState();
-  NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
-  ZoomStateApi? getZoomState();
-  NSKeyValueObservationApi observeZoomState(ZoomStateObserverApi observer);
+  CameraStateLiveDataApi getCameraState();
+  TorchStateLiveDataApi getTorchState();
+  ZoomStateLiveDataApi getZoomState();
   // ExposureStateApi getExposureState();
   double getIntrinsticZoomRatio();
   LensFacingApi getLensFacing();
@@ -873,11 +897,9 @@ abstract class CameraControllerApi {
   void setCameraSelector(CameraSelectorApi cameraSelector);
   CameraInfoApi? getCameraInfo();
   CameraControlApi? getCameraControl();
-  TorchStateApi? getTorchState();
-  NSKeyValueObservationApi observeTorchState(TorchStateObserverApi observer);
+  TorchStateLiveDataApi getTorchState();
   void enableTorch(bool torchEnabled);
-  ZoomStateApi? getZoomState();
-  NSKeyValueObservationApi observeZoomState(ZoomStateObserverApi observer);
+  ZoomStateLiveDataApi getZoomState();
   void setZoomRatio(double zoomRatio);
   void setLinearZoom(double linearZoom);
   bool isPinchToZoomEnabled();

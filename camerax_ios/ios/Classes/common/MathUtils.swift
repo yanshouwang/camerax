@@ -19,7 +19,7 @@ public class MathUtils {
     ///   - min: minimum resulting value.
     ///   - max: maximum resulting value.
     /// - Returns: the clamped value.
-    static func clamp(_ value: CGFloat, min: CGFloat, max: CGFloat) -> CGFloat {
+    public static func clamp(_ value: CGFloat, min: CGFloat, max: CGFloat) -> CGFloat {
         if value < min {
             return min
         }

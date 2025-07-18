@@ -6,7 +6,18 @@
 //
 
 import Foundation
+import AVFoundation
 
-@objc public enum TorchState: Int {
+public enum TorchState: Int {
     case off, on
+}
+
+extension Bool {
+    var avTorchState: AVCaptureDevice.TorchMode {
+        return self ? .on : .off
+    }
+    
+    var cxTorchState: TorchState {
+        return self ? .on : .off
+    }
 }

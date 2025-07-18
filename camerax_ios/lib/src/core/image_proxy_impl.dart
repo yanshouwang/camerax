@@ -8,7 +8,7 @@ import 'plane_proxy_impl.dart';
 final class ImageProxyImpl extends ImageProxy {
   final ImageProxyApi api;
 
-  ImageProxyImpl.impl(
+  ImageProxyImpl.internal(
     this.api, {
     required super.format,
     required super.width,
@@ -23,7 +23,7 @@ final class ImageProxyImpl extends ImageProxy {
 
 extension ImageProxyApiX on ImageProxyApi {
   ImageProxy get impl {
-    return ImageProxyImpl.impl(
+    return ImageProxyImpl.internal(
       this,
       format: format.impl,
       width: width,

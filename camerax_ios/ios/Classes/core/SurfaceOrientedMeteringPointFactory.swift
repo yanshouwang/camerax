@@ -11,7 +11,7 @@ public class SurfaceOrientedMeteringPointFactory: MeteringPointFactory {
     private let width: CGFloat
     private let height: CGFloat
     
-    init(_ width: CGFloat, _ height: CGFloat) {
+    public init(_ width: CGFloat, _ height: CGFloat) {
         self.width = width
         self.height = height
     }

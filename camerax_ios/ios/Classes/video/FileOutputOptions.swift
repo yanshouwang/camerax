@@ -11,15 +11,15 @@ import CoreLocation
 public class FileOutputOptions: OutputOptions {
     public let url: URL
     
-    public init(url: URL, fileSizeLimit: Int64, durationLimitMillis: Int64, location: CLLocation?) {
+    init(url: URL, fileSizeLimit: Int64, durationLimitMillis: Int64, location: CLLocation?) {
         self.url = url
         super.init(fileSizeLimit: fileSizeLimit, durationLimitMillis: durationLimitMillis, location: location)
     }
     
     public class Builder: OutputOptions.Builder<FileOutputOptions, Builder> {
-        var url: URL
+        private var url: URL
         
-        init(_ file: URL) {
+        public init(_ file: URL) {
             self.url = file
         }
         

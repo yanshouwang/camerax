@@ -6,33 +6,33 @@
 // final class FallbackStrategyImpl extends FallbackStrategyChannel {
 //   final FallbackStrategyApi api;
 
-//   FallbackStrategyImpl.impl(this.api) : super.impl();
+//   FallbackStrategyImpl.internal(this.api) : super.impl();
 
 //   factory FallbackStrategyImpl.higherQualityOrLowerThan(Quality quality) {
 //     final api = FallbackStrategyApi.higherQualityOrLowerThan(
 //       quality: quality.api,
 //     );
-//     return FallbackStrategyImpl.impl(api);
+//     return FallbackStrategyImpl.internal(api);
 //   }
 
 //   factory FallbackStrategyImpl.higherQualityThan(Quality quality) {
 //     final api = FallbackStrategyApi.higherQualityThan(
 //       quality: quality.api,
 //     );
-//     return FallbackStrategyImpl.impl(api);
+//     return FallbackStrategyImpl.internal(api);
 //   }
 
 //   factory FallbackStrategyImpl.lowerQualityOrHigherThan(Quality quality) {
 //     final api = FallbackStrategyApi.lowerQualityOrHigherThan(
 //       quality: quality.api,
 //     );
-//     return FallbackStrategyImpl.impl(api);
+//     return FallbackStrategyImpl.internal(api);
 //   }
 
 //   factory FallbackStrategyImpl.lowerQualityThan(Quality quality) {
 //     final api = FallbackStrategyApi.lowerQualityThan(
 //       quality: quality.api,
 //     );
-//     return FallbackStrategyImpl.impl(api);
+//     return FallbackStrategyImpl.internal(api);
 //   }
 // }

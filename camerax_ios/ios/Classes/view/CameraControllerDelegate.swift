@@ -17,7 +17,7 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
     }
     
     func bind(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws {
-        pigeonInstance.bind()
+        try pigeonInstance.bind()
     }
     
     func unbind(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws {
@@ -44,24 +44,18 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         return pigeonInstance
     }
     
-    func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateApi? {
-        return pigeonInstance.getTorchState()?.api
-    }
-    
-    func observeTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws -> NSKeyValueObservation {
-        return pigeonInstance.observeTorchState(observer.onChanged)
+    func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateLiveData {
+        let instance = pigeonInstance.getTorchState()
+        return TorchStateLiveData(instance)
     }
     
     func enableTorch(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, torchEnabled: Bool) throws {
         try pigeonInstance.enableTorch(torchEnabled)
     }
     
-    func getZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ZoomState? {
-        return pigeonInstance.getZoomState()
-    }
-    
-    func observeZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws -> NSKeyValueObservation {
-        return pigeonInstance.observeZoomState(observer.onChanged)
+    func getZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ZoomStateLiveData {
+        let instance = pigeonInstance.getZoomState()
+        return ZoomStateLiveData(instance)
     }
     
     func setZoomRatio(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, zoomRatio: Double) throws {

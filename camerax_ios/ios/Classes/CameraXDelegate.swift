@@ -33,14 +33,19 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
         return PigeonApiCameraSelectorApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
-    func pigeonApiNSKeyValueObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiNSKeyValueObservationApi {
-        let delegate = NSKeyValueObservationDelegate()
-        return PigeonApiNSKeyValueObservationApi(pigeonRegistrar: registrar, delegate: delegate)
+    func pigeonApiCameraStateLiveDataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraStateLiveDataApi {
+        let delegate = CameraStateLiveDataDelegate()
+        return PigeonApiCameraStateLiveDataApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiCameraStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraStateObserverApi {
         let delegate = CameraStateObserverDelegate()
         return PigeonApiCameraStateObserverApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiTorchStateLiveDataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiTorchStateLiveDataApi {
+        let delegate = TorchStateLiveDataDelegate()
+        return PigeonApiTorchStateLiveDataApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiTorchStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiTorchStateObserverApi {
@@ -51,6 +56,11 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
     func pigeonApiZoomStateApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateApi {
         let delegate = ZoomStateDelegate()
         return PigeonApiZoomStateApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiZoomStateLiveDataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateLiveDataApi {
+        let delegate = ZoomStateLiveDataDelegate()
+        return PigeonApiZoomStateLiveDataApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiZoomStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateObserverApi {

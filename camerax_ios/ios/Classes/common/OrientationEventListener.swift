@@ -8,34 +8,30 @@
 import Foundation
 import CoreMotion
 
-class OrientationEventListener: NSObject {
-    static let ORIENTATION_UNKNOWN = -1
+public class OrientationEventListener: NSObject {
+    public static let ORIENTATION_UNKNOWN = -1
 
     private let motionManger: CMMotionManager
     private var enabled: Bool
     private var orientation: Int
     private var onOrientationChanged: (Int) -> Void
     
-    init(onOrientationChanged: @escaping (Int) -> Void) {
+    public init(onOrientationChanged: @escaping (Int) -> Void) {
         self.motionManger = CMMotionManager()
         self.enabled = false
         self.orientation = OrientationEventListener.ORIENTATION_UNKNOWN
         self.onOrientationChanged = onOrientationChanged
     }
     
-    func canDetectOrientation() -> Bool {
-        return motionManger.isAccelerometerAvailable
+    public func canDetectOrientation() -> Bool {
+        return self.motionManger.isAccelerometerAvailable
     }
     
-    func enable() {
-        if enabled {
-            return
-        }
+    public func enable() {
+        guard !self.enabled else { return }
         debugPrint("OrientationEventListener enabled")
-        motionManger.startAccelerometerUpdates(to: .main) { [self] data, error in
-            guard let accelerometerData = data, error == nil else {
-                return
-            }
+        self.motionManger.startAccelerometerUpdates(to: .main) { data, error in
+            guard let accelerometerData = data, error == nil else { return }
             var orientation = OrientationEventListener.ORIENTATION_UNKNOWN
             let acceleration = accelerometerData.acceleration
             let x = acceleration.x * 9.81
@@ -56,21 +52,17 @@ class OrientationEventListener: NSObject {
                     orientation += 360
                 }
             }
-            if orientation == self.orientation {
-                return
-            }
+            guard self.orientation != orientation else { return }
             self.orientation = orientation
             self.onOrientationChanged(orientation)
         }
-        enabled = true
+        self.enabled = true
     }
     
-    func disable() {
-        if !enabled {
-            return
-        }
+    public func disable() {
+        guard self.enabled else { return }
         debugPrint("OrientationEventListener disabled")
-        motionManger.stopAccelerometerUpdates()
-        enabled = false
+        self.motionManger.stopAccelerometerUpdates()
+        self.enabled = false
     }
 }

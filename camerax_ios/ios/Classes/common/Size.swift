@@ -11,7 +11,7 @@ public class Size<T: Numeric>: NSObject {
     public let width: T
     public let height: T
     
-    init(width: T, height: T) {
+    public init(width: T, height: T) {
         self.width = width
         self.height = height
     }

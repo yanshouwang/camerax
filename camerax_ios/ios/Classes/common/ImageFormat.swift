@@ -12,7 +12,7 @@ public enum ImageFormat: Int {
 }
 
 extension ImageFormat {
-    var impl: Int {
+    var cvPixelFormat: Int {
         switch self {
         case .yuv420888:
             return Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
@@ -25,13 +25,13 @@ extension ImageFormat {
 }
 
 extension OSType {
-    var imageFormatApi: ImageFormat {
-        return Int(self).imageFormatApi
+    var cxImageFormat: ImageFormat {
+        return Int(self).cxImageFormat
     }
 }
 
 extension Int {
-    var imageFormatApi: ImageFormat {
+    var cxImageFormat: ImageFormat {
         switch self {
         case Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange):
             return .yuv420888

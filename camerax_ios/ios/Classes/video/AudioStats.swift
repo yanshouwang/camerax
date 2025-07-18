@@ -8,11 +8,11 @@
 import Foundation
 
 public class AudioStats: NSObject {
-    let audioAmplitude: Double
-    let audioState: AudioState
-    let errorCause: Error?
-    let hasAudio: Bool
-    let hasError: Bool
+    public let audioAmplitude: Double
+    public let audioState: AudioState
+    public let errorCause: Error?
+    public let hasAudio: Bool
+    public let hasError: Bool
     
     init(audioAmplitude: Double, audioState: AudioState, errorCause: Error?, hasAudio: Bool, hasError: Bool) {
         self.audioAmplitude = audioAmplitude

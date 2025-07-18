@@ -8,7 +8,7 @@
 import Foundation
 
 public class OutputResults: NSObject {
-    let outputUri: URL?
+    public let outputUri: URL?
     
     init(outputUri: URL?) {
         self.outputUri = outputUri

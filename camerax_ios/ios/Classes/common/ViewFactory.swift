@@ -8,8 +8,8 @@
 import Flutter
 import UIKit
 
-public class ViewFactory: NSObject, FlutterPlatformViewFactory {
-    unowned let instanceManager: CameraXApiPigeonInstanceManager
+class ViewFactory: NSObject, FlutterPlatformViewFactory {
+    unowned private let instanceManager: CameraXApiPigeonInstanceManager
     
     init(instanceManager: CameraXApiPigeonInstanceManager) {
         self.instanceManager = instanceManager

@@ -13,9 +13,3 @@ extension Data {
         return FlutterStandardTypedData(bytes: self)
     }
 }
-
-extension FlutterStandardTypedData {
-    var delegate: Data {
-        return data
-    }
-}

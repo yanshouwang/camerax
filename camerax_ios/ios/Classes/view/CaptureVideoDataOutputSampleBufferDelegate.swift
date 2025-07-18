@@ -90,7 +90,7 @@ class CaptureVideoDataOutputSampleBufferDelegate: NSObject, AVCaptureVideoDataOu
         let isOppositeFacing = connection.isOppositeFacing
         let rotationDegrees = CameraOrientationUtil.getRelativeImageRotation(destRotationDegrees: relativeRotationDegrees, sourceRotationDegrees: sensorOrientation, isOppositeFacing: isOppositeFacing)
         let imageInfo = ImageInfo(timestamp: timestamp, rotationDegrees: rotationDegrees)
-        let image = ImageProxy(format: format.imageFormatApi, width: width, height: height, planes: planes, imageInfo: imageInfo) {
+        let image = ImageProxy(format: format.cxImageFormat, width: width, height: height, planes: planes, imageInfo: imageInfo) {
             DispatchQueue.main.async {
                 guard let cachedImage = self.cachedImage else { return }
                 self.analyzer.analyze(cachedImage)

@@ -33,7 +33,7 @@ class CaptureFileOutputRecordingDelegate: NSObject, AVCaptureFileOutputRecording
     }
 }
 
-extension AVCaptureFileOutput {
+fileprivate extension AVCaptureFileOutput {
     var audioStats: AudioStats {
         let audioAmplitudeNone = 0.0
         guard let connection = connection(with: .audio) else { return AudioStats(audioAmplitude: audioAmplitudeNone, audioState: .disabled, errorCause: nil, hasAudio: false, hasError: false) }
@@ -41,7 +41,7 @@ extension AVCaptureFileOutput {
     }
 }
 
-extension AVCaptureConnection {
+fileprivate extension AVCaptureConnection {
     var audioAmplitude: Double {
         guard let value = audioChannels.map({ $0.averagePowerLevel / $0.peakHoldLevel }).max() else { return 0.0 }
         return Double(value)

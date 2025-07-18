@@ -24,7 +24,7 @@ public class ImageCapture: NSObject {
 }
 
 extension ImageCapture.FlashMode {
-    var impl: AVCaptureDevice.FlashMode {
+    var avFlashMode: AVCaptureDevice.FlashMode {
         switch self {
         case .auto:
             return .auto
@@ -37,7 +37,7 @@ extension ImageCapture.FlashMode {
 }
 
 extension AVCaptureDevice.FlashMode {
-    var api: ImageCapture.FlashMode {
+    var cxFlashMode: ImageCapture.FlashMode {
         switch self {
         case .auto:
             return .auto

@@ -26,7 +26,7 @@ public class TimeUnit: NSObject, TimeUnitProtocol {
     static let c5: Int64 = c4 * 60
     static let c6: Int64 = c5 * 24
     
-    static func x(_ d: Int64, _ m: Int64, _ over: Int64) -> Int64 {
+    private static func x(_ d: Int64, _ m: Int64, _ over: Int64) -> Int64 {
         if d > +over {
             return Int64.max
         }

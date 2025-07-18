@@ -15,7 +15,7 @@ public class Recording: NSObject, AutoCloseable {
         self.output = output
     }
     
-    func isPersistent() throws -> Bool {
+    public func isPersistent() throws -> Bool {
         throw CameraXError(code: "unimplemented-error", message: "isPersistent is not implemented", details: nil)
     }
     

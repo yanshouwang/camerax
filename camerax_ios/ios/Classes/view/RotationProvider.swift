@@ -13,7 +13,7 @@ public class RotationProvider: NSObject {
     private var rotation: Int
     private var listeners: [Listener]
     
-    lazy var orientationListener = OrientationEventListener() { orientation in
+    private lazy var orientationListener = OrientationEventListener() { orientation in
         if orientation == OrientationEventListener.ORIENTATION_UNKNOWN {
             // Short-circuit if orientation is unknown. Unknown rotation
             // can't be handled so it shouldn't be sent.
@@ -30,7 +30,7 @@ public class RotationProvider: NSObject {
         }
     }
     
-    override init() {
+    public override init() {
         self.rotation = INVALID_SURFACE_ROTATION
         self.listeners = []
     }

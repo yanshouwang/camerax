@@ -376,18 +376,24 @@ protocol CameraXApiPigeonProxyApiDelegate {
   /// An implementation of [PigeonApiCameraSelectorApi] used to add a new Dart instance of
   /// `CameraSelectorApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiCameraSelectorApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraSelectorApi
-  /// An implementation of [PigeonApiNSKeyValueObservationApi] used to add a new Dart instance of
-  /// `NSKeyValueObservationApi` to the Dart `InstanceManager` and make calls to Dart.
-  func pigeonApiNSKeyValueObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiNSKeyValueObservationApi
+  /// An implementation of [PigeonApiCameraStateLiveDataApi] used to add a new Dart instance of
+  /// `CameraStateLiveDataApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiCameraStateLiveDataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraStateLiveDataApi
   /// An implementation of [PigeonApiCameraStateObserverApi] used to add a new Dart instance of
   /// `CameraStateObserverApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiCameraStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraStateObserverApi
+  /// An implementation of [PigeonApiTorchStateLiveDataApi] used to add a new Dart instance of
+  /// `TorchStateLiveDataApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiTorchStateLiveDataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiTorchStateLiveDataApi
   /// An implementation of [PigeonApiTorchStateObserverApi] used to add a new Dart instance of
   /// `TorchStateObserverApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiTorchStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiTorchStateObserverApi
   /// An implementation of [PigeonApiZoomStateApi] used to add a new Dart instance of
   /// `ZoomStateApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiZoomStateApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateApi
+  /// An implementation of [PigeonApiZoomStateLiveDataApi] used to add a new Dart instance of
+  /// `ZoomStateLiveDataApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiZoomStateLiveDataApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateLiveDataApi
   /// An implementation of [PigeonApiZoomStateObserverApi] used to add a new Dart instance of
   /// `ZoomStateObserverApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiZoomStateObserverApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateObserverApi
@@ -545,9 +551,11 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiLocationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiLocationApi(self))
     PigeonApiSizeApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiSizeApi(self))
     PigeonApiCameraSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraSelectorApi(self))
-    PigeonApiNSKeyValueObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiNSKeyValueObservationApi(self))
+    PigeonApiCameraStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraStateLiveDataApi(self))
     PigeonApiCameraStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraStateObserverApi(self))
+    PigeonApiTorchStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiTorchStateLiveDataApi(self))
     PigeonApiTorchStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiTorchStateObserverApi(self))
+    PigeonApiZoomStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiZoomStateLiveDataApi(self))
     PigeonApiZoomStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiZoomStateObserverApi(self))
     PigeonApiMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiMeteringPointFactoryApi(self))
     PigeonApiSurfaceOrientedMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiSurfaceOrientedMeteringPointFactoryApi(self))
@@ -575,9 +583,11 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiLocationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiSizeApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCameraSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiNSKeyValueObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiCameraStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCameraStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiTorchStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiTorchStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiZoomStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiZoomStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiSurfaceOrientedMeteringPointFactoryApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
@@ -685,8 +695,8 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
       }
 
 
-      if let instance = value as? NSKeyValueObservation {
-        pigeonRegistrar.apiDelegate.pigeonApiNSKeyValueObservationApi(pigeonRegistrar).pigeonNewInstance(
+      if let instance = value as? CameraStateLiveData {
+        pigeonRegistrar.apiDelegate.pigeonApiCameraStateLiveDataApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -698,6 +708,17 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 
       if let instance = value as? CameraStateObserver {
         pigeonRegistrar.apiDelegate.pigeonApiCameraStateObserverApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? TorchStateLiveData {
+        pigeonRegistrar.apiDelegate.pigeonApiTorchStateLiveDataApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -720,6 +741,17 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
 
       if let instance = value as? ZoomState {
         pigeonRegistrar.apiDelegate.pigeonApiZoomStateApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? ZoomStateLiveData {
+        pigeonRegistrar.apiDelegate.pigeonApiZoomStateLiveDataApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -2051,45 +2083,79 @@ withIdentifier: pigeonIdentifierArg)
     }
   }
 }
-protocol PigeonApiDelegateNSKeyValueObservationApi {
-  func invalidate(pigeonApi: PigeonApiNSKeyValueObservationApi, pigeonInstance: NSKeyValueObservation) throws
+protocol PigeonApiDelegateCameraStateLiveDataApi {
+  func getValue(pigeonApi: PigeonApiCameraStateLiveDataApi, pigeonInstance: CameraStateLiveData) throws -> CameraStateApi?
+  func observe(pigeonApi: PigeonApiCameraStateLiveDataApi, pigeonInstance: CameraStateLiveData, observer: CameraStateObserver) throws
+  func removeObserver(pigeonApi: PigeonApiCameraStateLiveDataApi, pigeonInstance: CameraStateLiveData, observer: CameraStateObserver) throws
 }
 
-protocol PigeonApiProtocolNSKeyValueObservationApi {
+protocol PigeonApiProtocolCameraStateLiveDataApi {
 }
 
-final class PigeonApiNSKeyValueObservationApi: PigeonApiProtocolNSKeyValueObservationApi  {
+final class PigeonApiCameraStateLiveDataApi: PigeonApiProtocolCameraStateLiveDataApi  {
   unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
-  let pigeonDelegate: PigeonApiDelegateNSKeyValueObservationApi
-  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateNSKeyValueObservationApi) {
+  let pigeonDelegate: PigeonApiDelegateCameraStateLiveDataApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateCameraStateLiveDataApi) {
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
   }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiNSKeyValueObservationApi?) {
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiCameraStateLiveDataApi?) {
     let codec: FlutterStandardMessageCodec =
       api != nil
       ? FlutterStandardMessageCodec(
         readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
       : FlutterStandardMessageCodec.sharedInstance()
-    let invalidateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.NSKeyValueObservationApi.invalidate", binaryMessenger: binaryMessenger, codec: codec)
+    let getValueChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraStateLiveDataApi.getValue", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
-      invalidateChannel.setMessageHandler { message, reply in
+      getValueChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! NSKeyValueObservation
+        let pigeonInstanceArg = args[0] as! CameraStateLiveData
         do {
-          try api.pigeonDelegate.invalidate(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          let result = try api.pigeonDelegate.getValue(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getValueChannel.setMessageHandler(nil)
+    }
+    let observeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraStateLiveDataApi.observe", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      observeChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraStateLiveData
+        let observerArg = args[1] as! CameraStateObserver
+        do {
+          try api.pigeonDelegate.observe(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
           reply(wrapResult(nil))
         } catch {
           reply(wrapError(error))
         }
       }
     } else {
-      invalidateChannel.setMessageHandler(nil)
+      observeChannel.setMessageHandler(nil)
+    }
+    let removeObserverChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraStateLiveDataApi.removeObserver", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      removeObserverChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! CameraStateLiveData
+        let observerArg = args[1] as! CameraStateObserver
+        do {
+          try api.pigeonDelegate.removeObserver(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      removeObserverChannel.setMessageHandler(nil)
     }
   }
 
-  ///Creates a Dart instance of NSKeyValueObservationApi and attaches it to [pigeonInstance].
-  func pigeonNewInstance(pigeonInstance: NSKeyValueObservation, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+  ///Creates a Dart instance of CameraStateLiveDataApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: CameraStateLiveData, completion: @escaping (Result<Void, CameraXError>) -> Void) {
     if pigeonRegistrar.ignoreCallsToDart {
       completion(
         .failure(
@@ -2102,7 +2168,7 @@ final class PigeonApiNSKeyValueObservationApi: PigeonApiProtocolNSKeyValueObserv
       let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
-      let channelName: String = "dev.flutter.pigeon.camerax_ios.NSKeyValueObservationApi.pigeon_newInstance"
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.CameraStateLiveDataApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
       channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
@@ -2208,6 +2274,110 @@ withIdentifier: pigeonIdentifierArg)
     }
   }
 
+}
+protocol PigeonApiDelegateTorchStateLiveDataApi {
+  func getValue(pigeonApi: PigeonApiTorchStateLiveDataApi, pigeonInstance: TorchStateLiveData) throws -> TorchStateApi?
+  func observe(pigeonApi: PigeonApiTorchStateLiveDataApi, pigeonInstance: TorchStateLiveData, observer: TorchStateObserver) throws
+  func removeObserver(pigeonApi: PigeonApiTorchStateLiveDataApi, pigeonInstance: TorchStateLiveData, observer: TorchStateObserver) throws
+}
+
+protocol PigeonApiProtocolTorchStateLiveDataApi {
+}
+
+final class PigeonApiTorchStateLiveDataApi: PigeonApiProtocolTorchStateLiveDataApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateTorchStateLiveDataApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateTorchStateLiveDataApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiTorchStateLiveDataApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let getValueChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.TorchStateLiveDataApi.getValue", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getValueChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! TorchStateLiveData
+        do {
+          let result = try api.pigeonDelegate.getValue(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getValueChannel.setMessageHandler(nil)
+    }
+    let observeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.TorchStateLiveDataApi.observe", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      observeChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! TorchStateLiveData
+        let observerArg = args[1] as! TorchStateObserver
+        do {
+          try api.pigeonDelegate.observe(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      observeChannel.setMessageHandler(nil)
+    }
+    let removeObserverChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.TorchStateLiveDataApi.removeObserver", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      removeObserverChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! TorchStateLiveData
+        let observerArg = args[1] as! TorchStateObserver
+        do {
+          try api.pigeonDelegate.removeObserver(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      removeObserverChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of TorchStateLiveDataApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: TorchStateLiveData, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.TorchStateLiveDataApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
 }
 protocol PigeonApiDelegateTorchStateObserverApi {
   func pigeonDefaultConstructor(pigeonApi: PigeonApiTorchStateObserverApi) throws -> TorchStateObserver
@@ -2335,6 +2505,110 @@ final class PigeonApiZoomStateApi: PigeonApiProtocolZoomStateApi  {
       let channelName: String = "dev.flutter.pigeon.camerax_ios.ZoomStateApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
       channel.sendMessage([pigeonIdentifierArg, minZoomRatioArg, maxZoomRatioArg, zoomRatioArg, linearZoomArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateZoomStateLiveDataApi {
+  func getValue(pigeonApi: PigeonApiZoomStateLiveDataApi, pigeonInstance: ZoomStateLiveData) throws -> ZoomState?
+  func observe(pigeonApi: PigeonApiZoomStateLiveDataApi, pigeonInstance: ZoomStateLiveData, observer: ZoomStateObserver) throws
+  func removeObserver(pigeonApi: PigeonApiZoomStateLiveDataApi, pigeonInstance: ZoomStateLiveData, observer: ZoomStateObserver) throws
+}
+
+protocol PigeonApiProtocolZoomStateLiveDataApi {
+}
+
+final class PigeonApiZoomStateLiveDataApi: PigeonApiProtocolZoomStateLiveDataApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateZoomStateLiveDataApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateZoomStateLiveDataApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiZoomStateLiveDataApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let getValueChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.ZoomStateLiveDataApi.getValue", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      getValueChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! ZoomStateLiveData
+        do {
+          let result = try api.pigeonDelegate.getValue(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      getValueChannel.setMessageHandler(nil)
+    }
+    let observeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.ZoomStateLiveDataApi.observe", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      observeChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! ZoomStateLiveData
+        let observerArg = args[1] as! ZoomStateObserver
+        do {
+          try api.pigeonDelegate.observe(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      observeChannel.setMessageHandler(nil)
+    }
+    let removeObserverChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.ZoomStateLiveDataApi.removeObserver", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      removeObserverChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonInstanceArg = args[0] as! ZoomStateLiveData
+        let observerArg = args[1] as! ZoomStateObserver
+        do {
+          try api.pigeonDelegate.removeObserver(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      removeObserverChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of ZoomStateLiveDataApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: ZoomStateLiveData, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.ZoomStateLiveDataApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
           completion(.failure(createConnectionError(withChannelName: channelName)))
           return
@@ -2994,12 +3268,9 @@ final class PigeonApiFocusMeteringResultApi: PigeonApiProtocolFocusMeteringResul
 protocol PigeonApiDelegateCameraInfoApi {
   func mustPlayShutterSound(pigeonApi: PigeonApiCameraInfoApi) throws -> Bool
   func getCameraSelector(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> CameraSelector
-  func getCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> CameraStateApi?
-  func observeCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, observer: CameraStateObserver) throws -> NSKeyValueObservation
-  func getTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> TorchStateApi?
-  func observeTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, observer: TorchStateObserver) throws -> NSKeyValueObservation
-  func getZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> ZoomState?
-  func observeZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo, observer: ZoomStateObserver) throws -> NSKeyValueObservation
+  func getCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> CameraStateLiveData
+  func getTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> TorchStateLiveData
+  func getZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> ZoomStateLiveData
   func getIntrinsticZoomRatio(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> Double
   func getLensFacing(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> LensFacingApi
   func getPhysicalCameraInfos(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: CameraInfo) throws -> [CameraInfo]
@@ -3069,22 +3340,6 @@ final class PigeonApiCameraInfoApi: PigeonApiProtocolCameraInfoApi  {
     } else {
       getCameraStateChannel.setMessageHandler(nil)
     }
-    let observeCameraStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.observeCameraState", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      observeCameraStateChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! CameraInfo
-        let observerArg = args[1] as! CameraStateObserver
-        do {
-          let result = try api.pigeonDelegate.observeCameraState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      observeCameraStateChannel.setMessageHandler(nil)
-    }
     let getTorchStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getTorchState", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       getTorchStateChannel.setMessageHandler { message, reply in
@@ -3100,22 +3355,6 @@ final class PigeonApiCameraInfoApi: PigeonApiProtocolCameraInfoApi  {
     } else {
       getTorchStateChannel.setMessageHandler(nil)
     }
-    let observeTorchStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.observeTorchState", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      observeTorchStateChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! CameraInfo
-        let observerArg = args[1] as! TorchStateObserver
-        do {
-          let result = try api.pigeonDelegate.observeTorchState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      observeTorchStateChannel.setMessageHandler(nil)
-    }
     let getZoomStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getZoomState", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       getZoomStateChannel.setMessageHandler { message, reply in
@@ -3130,22 +3369,6 @@ final class PigeonApiCameraInfoApi: PigeonApiProtocolCameraInfoApi  {
       }
     } else {
       getZoomStateChannel.setMessageHandler(nil)
-    }
-    let observeZoomStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.observeZoomState", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      observeZoomStateChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! CameraInfo
-        let observerArg = args[1] as! ZoomStateObserver
-        do {
-          let result = try api.pigeonDelegate.observeZoomState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      observeZoomStateChannel.setMessageHandler(nil)
     }
     let getIntrinsticZoomRatioChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraInfoApi.getIntrinsticZoomRatio", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
@@ -5150,11 +5373,9 @@ protocol PigeonApiDelegateCameraControllerApi {
   func setCameraSelector(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, cameraSelector: CameraSelector) throws
   func getCameraInfo(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraInfo?
   func getCameraControl(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraControl?
-  func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateApi?
-  func observeTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws -> NSKeyValueObservation
+  func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateLiveData
   func enableTorch(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, torchEnabled: Bool) throws
-  func getZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ZoomState?
-  func observeZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws -> NSKeyValueObservation
+  func getZoomState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> ZoomStateLiveData
   func setZoomRatio(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, zoomRatio: Double) throws
   func setLinearZoom(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, linearZoom: Double) throws
   func isPinchToZoomEnabled(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> Bool
@@ -5356,22 +5577,6 @@ withIdentifier: pigeonIdentifierArg)
     } else {
       getTorchStateChannel.setMessageHandler(nil)
     }
-    let observeTorchStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.observeTorchState", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      observeTorchStateChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! CameraController
-        let observerArg = args[1] as! TorchStateObserver
-        do {
-          let result = try api.pigeonDelegate.observeTorchState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      observeTorchStateChannel.setMessageHandler(nil)
-    }
     let enableTorchChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.enableTorch", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       enableTorchChannel.setMessageHandler { message, reply in
@@ -5402,22 +5607,6 @@ withIdentifier: pigeonIdentifierArg)
       }
     } else {
       getZoomStateChannel.setMessageHandler(nil)
-    }
-    let observeZoomStateChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.observeZoomState", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      observeZoomStateChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! CameraController
-        let observerArg = args[1] as! ZoomStateObserver
-        do {
-          let result = try api.pigeonDelegate.observeZoomState(pigeonApi: api, pigeonInstance: pigeonInstanceArg, observer: observerArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      observeZoomStateChannel.setMessageHandler(nil)
     }
     let setZoomRatioChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.CameraControllerApi.setZoomRatio", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {

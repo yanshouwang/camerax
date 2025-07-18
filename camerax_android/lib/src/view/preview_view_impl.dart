@@ -9,11 +9,11 @@ import 'camera_controller_impl.dart';
 final class PreviewViewImpl extends PreviewView {
   final PreviewViewApi api;
 
-  PreviewViewImpl.impl(this.api) : super.impl();
+  PreviewViewImpl.internal(this.api) : super.impl();
 
   factory PreviewViewImpl() {
     final api = PreviewViewApi();
-    return PreviewViewImpl.impl(api);
+    return PreviewViewImpl.internal(api);
   }
 
   @override

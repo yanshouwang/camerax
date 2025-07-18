@@ -20,7 +20,7 @@ public class MeteringPoint: NSObject {
 }
 
 extension MeteringPoint {
-    var impl: CGPoint {
+    var cgPoint: CGPoint {
         return CGPoint(x: x, y: y)
     }
 }

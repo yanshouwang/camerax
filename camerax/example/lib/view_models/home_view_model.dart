@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:camerax/camerax.dart';
@@ -75,6 +74,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   TorchState? get torchState => _torchState;
   set torchState(TorchState? value) {
     if (_torchState == value) return;
+    logger.info('torchState changed: $value');
     _torchState = value;
     notifyListeners();
   }
@@ -83,6 +83,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   ZoomState? get zoomState => _zoomState;
   set zoomState(ZoomState? value) {
     if (_zoomState == value) return;
+    logger.info('zoomState changed: $value');
     _zoomState = value;
     notifyListeners();
   }
@@ -350,16 +351,18 @@ class HomeViewModel extends ViewModel with TypeLogger {
       throw StateError('requestPermissions failed.');
     }
     // await controller.initialize();
-    await controller.setCameraSelector(CameraSelector.back);
-    final resolutionSelector = ResolutionSelector(
-      // TODO: Use resolutionFilter will cause ANR error.
-      // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
-      resolutionStrategy: ResolutionStrategy(
-        boundSize: Size(1024, 768),
-        fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
-      ),
-    );
-    await controller.setImageAnalysisResolutionSelector(resolutionSelector);
+    // await controller.setCameraSelector(CameraSelector.front);
+    // final resolutionSelector = ResolutionSelector(
+    //   // TODO: Use resolutionFilter will cause ANR error.
+    //   // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
+    //   resolutionStrategy: ResolutionStrategy(
+    //     boundSize: Size(1024, 768),
+    //     fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
+    //   ),
+    // );
+    // await controller.setImageAnalysisResolutionSelector(resolutionSelector);
+    // zoomState = await controller.getZoomState();
+    // torchState = await controller.getTorchState();
     await bind();
   }
 
@@ -447,6 +450,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   void dispose() {
     _clearImageAnalysisAnalyzer();
     unbind();
+    _torchStateChangedSubscription.cancel();
     _zoomStateChangedSubscription.cancel();
     super.dispose();
   }

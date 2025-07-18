@@ -10,7 +10,7 @@ import Foundation
 public typealias MeteringPointFactory = MeteringPointFactoryBase & MeteringPointFactoryProtocol
 
 public class MeteringPointFactoryBase: NSObject {
-    static func getDefaultPointSize() -> CGFloat {
+    fileprivate static func getDefaultPointSize() -> CGFloat {
         return 0.15
     }
 }

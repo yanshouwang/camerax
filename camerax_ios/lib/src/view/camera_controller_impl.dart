@@ -13,74 +13,20 @@ import 'use_case_impl.dart';
 final class CameraControllerImpl extends CameraController {
   final CameraControllerApi api;
 
-  late final TorchStateObserverApi _torchStateObserverApi;
-  late final ZoomStateObserverApi _zoomStateObserverApi;
   late final StreamController<TorchState> _torchStateChangedController;
   late final StreamController<ZoomState> _zoomStateChangedController;
 
-  Future<NSKeyValueObservationApi>? _torchStateObservationApiFuture;
-  Future<NSKeyValueObservationApi>? _zoomStateObservationApiFuture;
+  Future<TorchStateObserverApi>? _torchStateObserverApiFuture;
+  Future<ZoomStateObserverApi>? _zoomStateObserverApiFuture;
 
-  CameraControllerImpl.impl(this.api) : super.impl() {
-    _torchStateObserverApi = TorchStateObserverApi(
-      onChanged: (_, e) => _torchStateChangedController.add(e.impl),
-    );
-    _zoomStateObserverApi = ZoomStateObserverApi(
-      onChanged: (_, e) => _zoomStateChangedController.add(e.impl),
-    );
+  CameraControllerImpl.internal(this.api) : super.impl() {
     _torchStateChangedController = StreamController.broadcast(
-      onListen: () async {
-        try {
-          var future = _torchStateObservationApiFuture;
-          if (future != null) {
-            throw ArgumentError.value(future);
-          }
-          final observerApi = _torchStateObserverApi;
-          _torchStateObservationApiFuture =
-              future = api.observeTorchState(observerApi);
-          await future;
-        } catch (e) {
-          _torchStateChangedController.addError(e);
-        }
-      },
-      onCancel: () async {
-        try {
-          final future =
-              ArgumentError.checkNotNull(_torchStateObservationApiFuture);
-          _torchStateObservationApiFuture = null;
-          final observationApi = await future;
-          await observationApi.invalidate();
-        } catch (e) {
-          _torchStateChangedController.addError(e);
-        }
-      },
+      onListen: _listenTorchStateChanged,
+      onCancel: _cancelTorchStateChanged,
     );
     _zoomStateChangedController = StreamController.broadcast(
-      onListen: () async {
-        try {
-          var future = _zoomStateObservationApiFuture;
-          if (future != null) {
-            throw ArgumentError.value(future);
-          }
-          final observerApi = _zoomStateObserverApi;
-          _zoomStateObservationApiFuture =
-              future = api.observeZoomState(observerApi);
-          await future;
-        } catch (e) {
-          _zoomStateChangedController.addError(e);
-        }
-      },
-      onCancel: () async {
-        try {
-          final future =
-              ArgumentError.checkNotNull(_zoomStateObservationApiFuture);
-          _zoomStateObservationApiFuture = null;
-          final observerationApi = await future;
-          await observerationApi.invalidate();
-        } catch (e) {
-          _zoomStateChangedController.addError(e);
-        }
-      },
+      onListen: _listenZoomStateChanged,
+      onCancel: _cancelZoomStateChanged,
     );
   }
 
@@ -92,7 +38,7 @@ final class CameraControllerImpl extends CameraController {
 
   factory CameraControllerImpl() {
     final api = CameraControllerApi();
-    return CameraControllerImpl.impl(api);
+    return CameraControllerImpl.internal(api);
   }
 
   @override
@@ -134,13 +80,14 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e?.impl);
+      api.getTorchState().then((e) => e.getValue()).then((e) => e?.impl);
 
   @override
   Future<void> enableTorch(bool enabled) => api.enableTorch(enabled);
 
   @override
-  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
+  Future<ZoomState?> getZoomState() =>
+      api.getZoomState().then((e) => e.getValue()).then((e) => e?.impl);
 
   @override
   Future<void> setZoomRatio(double zoomRatio) => api.setZoomRatio(zoomRatio);
@@ -185,8 +132,8 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setPreviewResolutionSelector(
-          ResolutionSelector? resolutionSelector) =>
-      throw UnimplementedError();
+    ResolutionSelector? resolutionSelector,
+  ) => throw UnimplementedError();
   // api.setPreviewResolutionSelector(resolutionSelector?.api);
 
   @override
@@ -196,8 +143,8 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-          ResolutionSelector? resolutionSelector) =>
-      throw UnimplementedError();
+    ResolutionSelector? resolutionSelector,
+  ) => throw UnimplementedError();
   // api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
@@ -227,21 +174,25 @@ final class CameraControllerImpl extends CameraController {
     final callbackApi = OnImageCapturedCallbackApi(
       onCaptureStarted:
           onCaptureStarted == null ? null : (_) => onCaptureStarted(),
-      onCaptureProcessProgressed: onCaptureProcessProgressed == null
-          ? null
-          : (_, progress) => onCaptureProcessProgressed(progress),
-      onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
-          ? null
-          : (_, bitmapApi) async {
-              final bitmap = await _decodeImage(bitmapApi);
-              onPostviewBitmapAvailable(bitmap);
-            },
-      onCaptureSuccess: onCaptureSuccess == null
-          ? null
-          : (_, imageApi) => onCaptureSuccess(imageApi.impl),
-      onError: onError == null
-          ? null
-          : (_, exceptionApi) => onError(exceptionApi.impl),
+      onCaptureProcessProgressed:
+          onCaptureProcessProgressed == null
+              ? null
+              : (_, progress) => onCaptureProcessProgressed(progress),
+      onPostviewBitmapAvailable:
+          onPostviewBitmapAvailable == null
+              ? null
+              : (_, bitmapApi) async {
+                final bitmap = await _decodeImage(bitmapApi);
+                onPostviewBitmapAvailable(bitmap);
+              },
+      onCaptureSuccess:
+          onCaptureSuccess == null
+              ? null
+              : (_, imageApi) => onCaptureSuccess(imageApi.impl),
+      onError:
+          onError == null
+              ? null
+              : (_, exceptionApi) => onError(exceptionApi.impl),
     );
     return api.takePicture(callbackApi);
   }
@@ -261,8 +212,8 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
-          ResolutionSelector? resolutionSelector) =>
-      api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
+    ResolutionSelector? resolutionSelector,
+  ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
   Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy() =>
@@ -270,8 +221,8 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-          BackpressureStrategy strategy) =>
-      api.setImageAnalysisBackpressureStrategy(strategy.api);
+    BackpressureStrategy strategy,
+  ) => api.setImageAnalysisBackpressureStrategy(strategy.api);
 
   @override
   Future<int> getImageAnalysisImageQueueDepth() =>
@@ -325,8 +276,8 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setVideoCaptureQualitySelector(
-          QualitySelector qualitySelector) =>
-      throw UnimplementedError();
+    QualitySelector qualitySelector,
+  ) => throw UnimplementedError();
   // {
   //   if (qualitySelector is! QualitySelectorImpl) {
   //     throw TypeError();
@@ -365,5 +316,77 @@ final class CameraControllerImpl extends CameraController {
           ),
         )
         .then((e) => e.impl);
+  }
+
+  void _listenTorchStateChanged() async {
+    final completer = Completer<TorchStateObserverApi>();
+    try {
+      final future = _torchStateObserverApiFuture;
+      if (future != null) {
+        throw ArgumentError.value(future);
+      }
+      _torchStateObserverApiFuture = completer.future;
+      final liveDataApi = await api.getTorchState();
+      final observerApi = TorchStateObserverApi(
+        onChanged: (_, e) {
+          _torchStateChangedController.add(e.impl);
+        },
+      );
+      await liveDataApi.observe(observerApi);
+      completer.complete(observerApi);
+    } catch (e) {
+      completer.completeError(e);
+      _torchStateChangedController.addError(e);
+    }
+  }
+
+  void _cancelTorchStateChanged() async {
+    try {
+      final future = ArgumentError.checkNotNull(_torchStateObserverApiFuture);
+      _torchStateObserverApiFuture = null;
+      final liveDataApi = await api.getTorchState();
+      final observerApi = await future;
+      await liveDataApi.removeObserver(observerApi);
+    } catch (e) {
+      _torchStateChangedController.addError(e);
+    }
+  }
+
+  void _listenZoomStateChanged() async {
+    final completer = Completer<ZoomStateObserverApi>();
+    try {
+      final future = _zoomStateObserverApiFuture;
+      if (future != null) {
+        throw ArgumentError.value(future);
+      }
+      _zoomStateObserverApiFuture = completer.future;
+      final liveDataApi = await api.getZoomState();
+      final observerApi = ZoomStateObserverApi(
+        onChanged: (_, e) {
+          try {
+            _zoomStateChangedController.add(e.impl);
+          } catch (e) {
+            _zoomStateChangedController.addError(e);
+          }
+        },
+      );
+      await liveDataApi.observe(observerApi);
+      completer.complete(observerApi);
+    } catch (e) {
+      completer.completeError(e);
+      _zoomStateChangedController.addError(e);
+    }
+  }
+
+  void _cancelZoomStateChanged() async {
+    try {
+      final future = ArgumentError.checkNotNull(_zoomStateObserverApiFuture);
+      _zoomStateObserverApiFuture = null;
+      final liveDataApi = await api.getZoomState();
+      final observerApi = await future;
+      await liveDataApi.removeObserver(observerApi);
+    } catch (e) {
+      _zoomStateChangedController.addError(e);
+    }
   }
 }

@@ -9,7 +9,7 @@
 // final class QualitySelectorImpl extends QualitySelectorChannel {
 //   final QualitySelectorApi api;
 
-//   QualitySelectorImpl.impl(this.api) : super.impl();
+//   QualitySelectorImpl.internal(this.api) : super.impl();
 
 //   factory QualitySelectorImpl.from(
 //     Quality quality, {
@@ -22,7 +22,7 @@
 //       quality: quality.api,
 //       fallbackStrategy: fallbackStrategy?.api,
 //     );
-//     return QualitySelectorImpl.impl(api);
+//     return QualitySelectorImpl.internal(api);
 //   }
 
 //   factory QualitySelectorImpl.fromOrderedList(
@@ -36,7 +36,7 @@
 //       qualities: qualities.map((e) => e.api).toList(),
 //       fallbackStrategy: fallbackStrategy?.api,
 //     );
-//     return QualitySelectorImpl.impl(api);
+//     return QualitySelectorImpl.internal(api);
 //   }
 
 //   static Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) {
@@ -49,5 +49,5 @@
 // }
 
 // extension QualitySelectorApiX on QualitySelectorApi {
-//   QualitySelector get impl => QualitySelectorImpl.impl(this);
+//   QualitySelector get impl => QualitySelectorImpl.internal(this);
 // }

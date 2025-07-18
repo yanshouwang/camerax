@@ -17,7 +17,7 @@ final class QualitySelectorImpl extends QualitySelector {
 
   final QualitySelectorApi api;
 
-  QualitySelectorImpl.impl(this.api) : super.impl();
+  QualitySelectorImpl.internal(this.api) : super.impl();
 
   factory QualitySelectorImpl.from(
     Quality quality, {
@@ -30,7 +30,7 @@ final class QualitySelectorImpl extends QualitySelector {
       quality: quality.api,
       fallbackStrategy: fallbackStrategy?.api,
     );
-    return QualitySelectorImpl.impl(api);
+    return QualitySelectorImpl.internal(api);
   }
 
   factory QualitySelectorImpl.fromOrderedList(
@@ -44,10 +44,10 @@ final class QualitySelectorImpl extends QualitySelector {
       qualities: qualities.map((e) => e.api).toList(),
       fallbackStrategy: fallbackStrategy?.api,
     );
-    return QualitySelectorImpl.impl(api);
+    return QualitySelectorImpl.internal(api);
   }
 }
 
 extension QualitySelectorApiX on QualitySelectorApi {
-  QualitySelector get impl => QualitySelectorImpl.impl(this);
+  QualitySelector get impl => QualitySelectorImpl.internal(this);
 }

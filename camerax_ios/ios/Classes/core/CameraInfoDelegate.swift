@@ -16,28 +16,18 @@ class CameraInfoDelegate: PigeonApiDelegateCameraInfoApi {
         return pigeonInstance.getCameraSelector()
     }
     
-    func getCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> CameraStateApi? {
+    func getCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> CameraStateLiveData {
         throw CameraXError(code: "unimplemented-error", message: "getCameraState is not implemented", details: nil)
     }
     
-    func observeCameraState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo, observer: CameraStateObserver) throws -> NSKeyValueObservation {
-        throw CameraXError(code: "unimplemented-error", message: "observeCameraState is not implemented", details: nil)
+    func getTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> TorchStateLiveData {
+        let instance = pigeonInstance.getTorchState()
+        return TorchStateLiveData(instance)
     }
     
-    func getTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> TorchStateApi? {
-        return pigeonInstance.getTorchState()?.api
-    }
-    
-    func observeTorchState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo, observer: TorchStateObserver) throws -> NSKeyValueObservation {
-        return pigeonInstance.observeTorchState(observer.onChanged)
-    }
-    
-    func getZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> ZoomState? {
-        return pigeonInstance.getZoomState()
-    }
-    
-    func observeZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo, observer: ZoomStateObserver) throws -> NSKeyValueObservation {
-        return pigeonInstance.observeZoomState(observer.onChanged)
+    func getZoomState(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> ZoomStateLiveData {
+        let instance = pigeonInstance.getZoomState()
+        return ZoomStateLiveData(instance)
     }
     
     func getIntrinsticZoomRatio(pigeonApi: PigeonApiCameraInfoApi, pigeonInstance: any CameraInfo) throws -> Double {

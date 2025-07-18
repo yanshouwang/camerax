@@ -21,7 +21,7 @@ public class PermissionManager: NSObject {
         return self
     }
     
-    public func checkPermission(permission: Permission) -> Bool {
+    public func checkPermission(_ permission: Permission) -> Bool {
         switch permission {
         case .video:
             return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
@@ -30,20 +30,18 @@ public class PermissionManager: NSObject {
         }
     }
     
-    public func requestPermissions(permissions: [Permission], completionHandler handler: @escaping (Bool) -> Void) {
-        func recursive(index: Int, isGranted: Bool) {
-            let isCompleted = index >= permissions.count || !isGranted
-            if isCompleted { handler(isGranted) }
-            else {
-                requestPermission(permission: permissions[index]) {
-                    recursive(index: index + 1, isGranted: $0)
-                }
+    public func requestPermissions(_ permissions: [Permission], completionHandler handler: @escaping (Bool) -> Void) {
+        func recursive(_ index: Int, _ isGranted: Bool) {
+            if index < permissions.count && isGranted {
+                requestPermission(permissions[index]) { recursive(index + 1, $0) }
+            } else {
+                handler(isGranted)
             }
         }
-        recursive(index: 0, isGranted: true)
+        recursive(0, true)
     }
     
-    public func requestPermission(permission: Permission, completionHandler handler: @escaping (Bool) -> Void) {
+    public func requestPermission(_ permission: Permission, completionHandler handler: @escaping (Bool) -> Void) {
         switch permission {
         case .video:
             AVCaptureDevice.requestAccess(for: .video, completionHandler: handler)
