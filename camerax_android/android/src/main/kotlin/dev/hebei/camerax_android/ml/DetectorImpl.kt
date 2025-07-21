@@ -5,4 +5,4 @@ import dev.hebei.camerax_android.PigeonApiDetectorApi
 
 class DetectorImpl(impl: CameraXImpl) : PigeonApiDetectorApi(impl)
 
-abstract class Detector internal constructor(internal open val obj: com.google.mlkit.vision.interfaces.Detector<*>)
+abstract class Detector internal constructor(internal open val instance: com.google.mlkit.vision.interfaces.Detector<*>)

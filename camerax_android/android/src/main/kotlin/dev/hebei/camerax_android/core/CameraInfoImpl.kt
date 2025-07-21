@@ -56,7 +56,7 @@ class CameraInfoImpl(impl: CameraXImpl) : PigeonApiCameraInfoApi(impl) {
     }
 
     override fun getSupportedFrameRateRanges(pigeon_instance: CameraInfo): List<IntRange> {
-        return pigeon_instance.supportedFrameRateRanges.map { obj -> IntRange(obj) }
+        return pigeon_instance.supportedFrameRateRanges.map { IntRange(it) }
     }
 
     override fun isLogicalMultiCameraSupported(pigeon_instance: CameraInfo): Boolean {

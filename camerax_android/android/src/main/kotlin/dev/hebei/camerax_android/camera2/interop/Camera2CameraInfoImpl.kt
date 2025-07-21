@@ -15,9 +15,9 @@ class Camera2CameraInfoImpl(impl: CameraXImpl) : PigeonApiCamera2CameraInfoApi(i
     }
 
     override fun getSensorInfoExposureTimeRange(pigeon_instance: Camera2CameraInfo): LongRange? {
-        val obj = pigeon_instance.getCameraCharacteristic(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE)
-        return if (obj == null) null
-        else LongRange(obj)
+        val instance = pigeon_instance.getCameraCharacteristic(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE)
+        return if (instance == null) null
+        else LongRange(instance)
     }
 
     override fun getCameraId(pigeon_instance: Camera2CameraInfo): String {

@@ -7,40 +7,34 @@ import dev.hebei.camerax_android.PigeonApiLongRangeApi
 
 class IntRangeImpl(impl: CameraXImpl) : PigeonApiIntRangeApi(impl) {
     override fun pigeon_defaultConstructor(lower: Long, upper: Long): IntRange {
-        val obj = Range(lower.toInt(), upper.toInt())
-        return IntRange(obj)
+        val instance = Range(lower.toInt(), upper.toInt())
+        return IntRange(instance)
     }
 
     override fun lower(pigeon_instance: IntRange): Long {
-        return pigeon_instance.lower
+        return pigeon_instance.instance.lower.toLong()
     }
 
     override fun upper(pigeon_instance: IntRange): Long {
-        return pigeon_instance.upper
+        return pigeon_instance.instance.upper.toLong()
     }
 }
 
 class LongRangeImpl(impl: CameraXImpl) : PigeonApiLongRangeApi(impl) {
     override fun pigeon_defaultConstructor(lower: Long, upper: Long): LongRange {
-        val obj = Range(lower, upper)
-        return LongRange(obj)
+        val instance = Range(lower, upper)
+        return LongRange(instance)
     }
 
     override fun lower(pigeon_instance: LongRange): Long {
-        return pigeon_instance.lower
+        return pigeon_instance.instance.lower
     }
 
     override fun upper(pigeon_instance: LongRange): Long {
-        return pigeon_instance.upper
+        return pigeon_instance.instance.upper
     }
 }
 
-class IntRange(internal val obj: Range<Int>) {
-    val lower get() = obj.lower.toLong()
-    val upper get() = obj.upper.toLong()
-}
+class IntRange(internal val instance: Range<Int>)
 
-class LongRange(internal val obj: Range<Long>) {
-    val lower: Long get() = obj.lower
-    val upper: Long get() = obj.upper
-}
+class LongRange(internal val instance: Range<Long>)

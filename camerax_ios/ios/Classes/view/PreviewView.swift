@@ -56,24 +56,26 @@ public class PreviewView: UIView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func getController() -> CameraController? {
-        return controller
+    public func getController() -> CameraController? {
+        return self.controller
     }
     
-    func setController(_ controller: CameraController?) {
+    public func setController(_ controller: CameraController?) {
         if let controller {
+            self.controller = controller
             self.layer.session = controller.session
             updateVideoOrientation()
         } else {
+            self.controller = nil
             self.layer.session = nil
         }
     }
     
-    func getScaleType() -> ScaleType {
+    public func getScaleType() -> ScaleType {
         return self.videoGravity.scaleType
     }
     
-    func setScaleType(_ scaleType: ScaleType) {
+    public func setScaleType(_ scaleType: ScaleType) {
         self.videoGravity = scaleType.videoGravity
     }
     

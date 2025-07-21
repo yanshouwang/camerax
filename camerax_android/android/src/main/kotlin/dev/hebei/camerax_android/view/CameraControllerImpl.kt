@@ -331,7 +331,10 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
         }
     }
 
-    override fun setImageCaptureMode(pigeon_instance: CameraController, captureMode: CaptureModeApi, callback: (Result<Unit>) -> Unit) {
+    @ExperimentalZeroShutterLag
+    override fun setImageCaptureMode(
+        pigeon_instance: CameraController, captureMode: CaptureModeApi, callback: (Result<Unit>) -> Unit
+    ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.imageCaptureMode = captureMode.impl
@@ -594,8 +597,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val obj = pigeon_instance.videoCaptureTargetFrameRate
-                val value = IntRange(obj)
+                val value = IntRange(pigeon_instance.videoCaptureTargetFrameRate)
                 callback(Result.success(value))
             } catch (e: Exception) {
                 callback(Result.failure(e))
@@ -608,7 +610,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                pigeon_instance.videoCaptureTargetFrameRate = targetFrameRate.obj
+                pigeon_instance.videoCaptureTargetFrameRate = targetFrameRate.instance
                 callback(Result.success(Unit))
             } catch (e: Exception) {
                 callback(Result.failure(e))

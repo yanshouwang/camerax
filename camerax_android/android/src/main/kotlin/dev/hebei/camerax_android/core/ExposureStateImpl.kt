@@ -11,8 +11,7 @@ class ExposureStateImpl(impl: CameraXImpl) : PigeonApiExposureStateApi(impl) {
     }
 
     override fun exposureCompensationRange(pigeon_instance: ExposureState): IntRange {
-        val obj = pigeon_instance.exposureCompensationRange
-        return IntRange(obj)
+        return IntRange(pigeon_instance.exposureCompensationRange)
     }
 
     override fun exposureCompensationStep(pigeon_instance: ExposureState): Double {

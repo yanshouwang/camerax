@@ -19,7 +19,7 @@ class MlKitAnalyzerImpl(private val impl: CameraXImpl) : PigeonApiMlKitAnalyzerA
         detectors: List<Detector>, targetCoordinateSystem: CoordinateSystemApi, consumer: MlKitAnalyzerResultConsumer
     ): MlKitAnalyzer {
         val executor = ContextCompat.getMainExecutor(impl.context)
-        return MlKitAnalyzer(detectors.map { it.obj }, targetCoordinateSystem.impl, executor, consumer)
+        return MlKitAnalyzer(detectors.map { it.instance }, targetCoordinateSystem.impl, executor, consumer)
     }
 
     class ResultImpl(impl: CameraXImpl) : PigeonApiMlKitAnalyzerResultApi(impl) {
@@ -28,15 +28,15 @@ class MlKitAnalyzerImpl(private val impl: CameraXImpl) : PigeonApiMlKitAnalyzerA
         }
 
         override fun getThrowable(pigeon_instance: MlKitAnalyzer.Result, detector: Detector): List<Any?>? {
-            return pigeon_instance.getThrowable(detector.obj)?.api
+            return pigeon_instance.getThrowable(detector.instance)?.api
         }
 
         override fun getBarcodes(pigeon_instance: MlKitAnalyzer.Result, detector: BarcodeScanner): List<Barcode>? {
-            return pigeon_instance.getValue(detector.obj)
+            return pigeon_instance.getValue(detector.instance)
         }
 
         override fun getFaces(pigeon_instance: MlKitAnalyzer.Result, detector: FaceDetector): List<Face>? {
-            return pigeon_instance.getValue(detector.obj)
+            return pigeon_instance.getValue(detector.instance)
         }
     }
 }
