@@ -9,41 +9,59 @@ import Foundation
 import AVFoundation
 
 public class ImageProxy: NSObject, AutoCloseable {
-    public let format: ImageFormat
-    public let width: Int
-    public let height: Int
-    public let planes: [PlaneProxy]
-    public let imageInfo: ImageInfo
-    internal private(set) var isClosed: Bool
     private let onClosed: () -> Void
+    private(set) var isClosed: Bool
     
-    init(format: ImageFormat, width: Int, height: Int, planes: [PlaneProxy], imageInfo: ImageInfo, onClosed: @escaping () -> Void) {
-        self.format = format
-        self.width = width
-        self.height = height
-        self.planes = planes
-        self.imageInfo = imageInfo
+    init(onClosed: @escaping () -> Void) {
         self.isClosed = false
         self.onClosed = onClosed
     }
     
+    public func getFormat() throws -> ImageFormat {
+        fatalError("getFormat is not implemented")
+    }
+    
+    public func getWidth() throws -> Int {
+        fatalError("getWidth is not implemented")
+    }
+    
+    public func getHeight() throws -> Int {
+        fatalError("getHeight is not implemented")
+    }
+    
+    public func getPlanes() throws -> [PlaneProxy] {
+        fatalError("getPlanes is not implemented")
+    }
+    
+    public func getImageInfo() throws -> ImageInfo {
+        fatalError("getImageInfo is not implemented")
+    }
+    
+    public func getSampleBuffer() -> CMSampleBuffer? {
+        return nil
+    }
+    
+    public func getImage() -> CGImage? {
+        return nil
+    }
+    
     public func close() {
-        if isClosed {
-            return
-        }
+        if isClosed { return }
         isClosed = true
         onClosed()
     }
     
     public class PlaneProxy: NSObject {
-        public let data: Data
-        public let rowStride: Int
-        public let pixelStride: Int
+        func getValue() throws -> Data {
+            fatalError("getValue is not implemented")
+        }
         
-        init(data: Data, rowStride: Int, pixelStride: Int) {
-            self.data = data
-            self.rowStride = rowStride
-            self.pixelStride = pixelStride
+        func getPixelStride() throws -> Int {
+            fatalError("getPixelStride is not implemented")
+        }
+        
+        func getRowStride() throws -> Int {
+            fatalError("getRowStride is not implemented")
         }
     }
 }

@@ -9,29 +9,66 @@ import Foundation
 import Vision
 
 public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
-    private let requests: [VNRequest]
+    private let detectors: [VNDetector]
     private let consumer: any Consumer<VNAnalyzer.Result>
     
-    public init(requests: [VNRequest], consumer: any Consumer<VNAnalyzer.Result>) {
-        self.requests = requests
+    init(detectors: [VNDetector], consumer: any Consumer<VNAnalyzer.Result>) {
+        self.detectors = detectors
         self.consumer = consumer
     }
     
     public func analyze(_ image: ImageProxy) {
-//        do {
-//            let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image.buffer, orientation: image.orientation, options: [:])
-//            try imageRequestHandler.perform(requests)
-//        } catch {
-//            debugPrint("VNImageRequestHandler error \(error)")
-//        }
+        // Detect the image recursively, starting from index 0.
+        self.detectRecursively(image, 0, [:], [:]);
+    }
+    
+    private func detectRecursively(_ imageProxy: ImageProxy, _ index: Int, _ values: [VNDetector : [VNObservation]], _ errors: [VNDetector : Error]) {
+        guard let imageInfo = try? imageProxy.getImageInfo(), let sampleBuffer = imageProxy.getSampleBuffer(), let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            // No-op if the frame is not backed by ImageProxy.
+            debugPrint("imageInfo is nil")
+            imageProxy.close()
+            return
+        }
+        if index > self.detectors.count - 1 {
+            // Termination condition is met when the index reaches the end of the list.
+            let timestamp = imageInfo.timestamp
+            let result = Result(timestamp: timestamp, values: values, errors: errors)
+            self.consumer.accept(result)
+            imageProxy.close()
+            return
+        }
+        var newValues = values
+        var newErrors = errors
+        let detector = self.detectors[index]
+        let orientation = imageInfo.orientation
+        do {
+            try detector.process(pixelBuffer: pixelBuffer, orientation: orientation) { request, error in
+                // Record the return value / exception.
+                if let error {
+                    newErrors[detector] = error
+                } else {
+                    newValues[detector] = request.results ?? []
+                }
+                // Go to the next detector.
+                self.detectRecursively(imageProxy, index + 1, newValues, newErrors);
+            }
+        } catch {
+            // If the detector is closed, it will throw a MlKitException.UNAVAILABLE. It's not
+            // public in the "mlkit:vision-interfaces" artifact so we have to catch a generic
+            // Exception here.
+            newErrors[detector] = error
+            // This detector is closed, but the next one might still be open. Send the image to
+            // the next detector.
+            self.detectRecursively(imageProxy, index + 1, newValues, newErrors);
+        }
     }
     
     public class Result: NSObject {
         private let timestamp: CMTime
-        private let values: [VNRequest: [VNObservation]]
-        private let errors: [VNRequest: Error]
+        private let values: [VNDetector: [VNObservation]]
+        private let errors: [VNDetector: Error]
         
-        init(timestamp: CMTime, values: [VNRequest : [VNObservation]], errors: [VNRequest : Error]) {
+        init(timestamp: CMTime, values: [VNDetector : [VNObservation]], errors: [VNDetector : Error]) {
             self.timestamp = timestamp
             self.values = values
             self.errors = errors
@@ -41,30 +78,30 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
             return timestamp
         }
         
-        public func getValue(_ request: VNRequest) throws -> [VNObservation] {
-            try checkRequestExists(request)
-            guard let value = values[request] else {
+        public func getValue(_ detector: VNDetector) throws -> [VNObservation] {
+            try checkRequestExists(detector)
+            guard let value = values[detector] else {
                 throw CameraXError(code: "nil-error", message: "value is nil", details: nil)
             }
             return value
         }
         
-        public func getError(_ request: VNRequest) throws -> Error? {
-            try checkRequestExists(request)
-            return errors[request]
+        public func getError(_ detector: VNDetector) throws -> Error? {
+            try checkRequestExists(detector)
+            return errors[detector]
         }
         
-        private func checkRequestExists(_ request: VNRequest) throws {
-            guard values.keys.contains(request) || errors.keys.contains(request) else {
-                throw CameraXError(code: "nil-error", message: "The request does not exist", details: nil)
+        private func checkRequestExists(_ detector: VNDetector) throws {
+            guard values.contains(where: { $0.key === detector }) || errors.contains(where: { $0.key === detector }) else {
+                throw CameraXError(code: "nil-error", message: "The detector does not exist", details: nil)
             }
         }
     }
 }
 
-fileprivate extension ImageProxy {
+fileprivate extension ImageInfo {
     var orientation: CGImagePropertyOrientation {
-        switch self.imageInfo.rotationDegrees {
+        switch self.rotationDegrees {
         case 0:
             return .up
         case 90:

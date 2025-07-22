@@ -10,36 +10,42 @@ import Flutter
 
 class ImageProxyDelegate: PigeonApiDelegateImageProxyApi {
     func format(pigeonApi: PigeonApiImageProxyApi, pigeonInstance: ImageProxy) throws -> ImageFormatApi {
-        return pigeonInstance.format.api
+        let format = try pigeonInstance.getFormat()
+        return format.api
     }
     
     func width(pigeonApi: PigeonApiImageProxyApi, pigeonInstance: ImageProxy) throws -> Int64 {
-        return Int64(pigeonInstance.width)
+        let width = try pigeonInstance.getWidth()
+        return Int64(width)
     }
     
     func height(pigeonApi: PigeonApiImageProxyApi, pigeonInstance: ImageProxy) throws -> Int64 {
-        return Int64(pigeonInstance.height)
+        let height = try pigeonInstance.getHeight()
+        return Int64(height)
     }
     
     func planes(pigeonApi: PigeonApiImageProxyApi, pigeonInstance: ImageProxy) throws -> [ImageProxy.PlaneProxy] {
-        return pigeonInstance.planes
+        return try pigeonInstance.getPlanes()
     }
     
     func imageInfo(pigeonApi: PigeonApiImageProxyApi, pigeonInstance: ImageProxy) throws -> ImageInfo {
-        return pigeonInstance.imageInfo
+        return try pigeonInstance.getImageInfo()
     }
     
     class PlaneProxyDelegate: PigeonApiDelegatePlaneProxyApi {
         func value(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData {
-            return FlutterStandardTypedData(bytes: pigeonInstance.data)
+            let value = try pigeonInstance.getValue()
+            return FlutterStandardTypedData(bytes: value)
         }
         
         func pixelStride(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64 {
-            return Int64(pigeonInstance.pixelStride)
+            let pixelStride = try pigeonInstance.getPixelStride()
+            return Int64(pixelStride)
         }
         
         func rowStride(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64 {
-            return Int64(pigeonInstance.rowStride)
+            let rowStride = try pigeonInstance.getRowStride()
+            return Int64(rowStride)
         }
     }
 }
