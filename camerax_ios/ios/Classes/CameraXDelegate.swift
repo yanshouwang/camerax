@@ -18,14 +18,24 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
         return PigeonApiAutoCloseableApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
-    func pigeonApiLocationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiLocationApi {
-        let delegate = LocationDelegate()
-        return PigeonApiLocationApi(pigeonRegistrar: registrar, delegate: delegate)
+    func pigeonApiCLLocationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCLLocationApi {
+        let delegate = CLLocationDelegate()
+        return PigeonApiCLLocationApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiSizeApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiSizeApi {
         let delegate = SizeDelegate()
         return PigeonApiSizeApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiPointApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiPointApi {
+        let delegate = PointDelegate()
+        return PigeonApiPointApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiRectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiRectApi {
+        let delegate = RectDelegate()
+        return PigeonApiRectApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiCameraSelectorApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraSelectorApi {
@@ -146,6 +156,46 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
     func pigeonApiImageAnalyzerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiImageAnalyzerApi {
         let delegate = ImageAnalyzerDelegate()
         return PigeonApiImageAnalyzerApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNObservationApi {
+        let delegate = VNObservationDelegate()
+        return PigeonApiVNObservationApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNDetectedObjectObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNDetectedObjectObservationApi {
+        let delegate = VNDetectedObjectObservationDelegate()
+        return PigeonApiVNDetectedObjectObservationApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNRectangleObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNRectangleObservationApi {
+        let delegate = VNRectangleObservationDelegate()
+        return PigeonApiVNRectangleObservationApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNBarcodeObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNBarcodeObservationApi {
+        let delegate = VNBarcodeObservationDelegate()
+        return PigeonApiVNBarcodeObservationApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNBarcodeScannerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNBarcodeScannerApi {
+        let delegate = VNBarcodeScannerDelegate()
+        return PigeonApiVNBarcodeScannerApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNAnalyzerResultApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNAnalyzerResultApi {
+        let delegate = VNAnalyzerDelegate.ResultDelegate()
+        return PigeonApiVNAnalyzerResultApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNAnalyzerResultConsumerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNAnalyzerResultConsumerApi {
+        let delegate = VNAnalyzerResultConsumerDelegate()
+        return PigeonApiVNAnalyzerResultConsumerApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiVNAnalyzerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNAnalyzerApi {
+        let delegate = VNAnalyzerDelegate()
+        return PigeonApiVNAnalyzerApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiOutputOptionsApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiOutputOptionsApi {

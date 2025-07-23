@@ -13,6 +13,12 @@ class VideoRecordEventConsumerDelegate: PigeonApiDelegateVideoRecordEventConsume
     }
 }
 
+class VNAnalyzerResultConsumerDelegate: PigeonApiDelegateVNAnalyzerResultConsumerApi {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiVNAnalyzerResultConsumerApi) throws -> VNAnalyzerResultConsumer {
+        return VNAnalyzerResultConsumer(pigeonApi)
+    }
+}
+
 class VideoRecordEventConsumer: NSObject, Consumer {
     private let api: PigeonApiVideoRecordEventConsumerApi
     
@@ -21,6 +27,18 @@ class VideoRecordEventConsumer: NSObject, Consumer {
     }
     
     func accept(_ value: VideoRecordEvent) {
+        self.api.accept(pigeonInstance: self, value: value) { _ in }
+    }
+}
+
+class VNAnalyzerResultConsumer: NSObject, Consumer {
+    private let api: PigeonApiVNAnalyzerResultConsumerApi
+    
+    init(_ api: PigeonApiVNAnalyzerResultConsumerApi) {
+        self.api = api
+    }
+    
+    func accept(_ value: VNAnalyzer.Result) {
         self.api.accept(pigeonInstance: self, value: value) { _ in }
     }
 }

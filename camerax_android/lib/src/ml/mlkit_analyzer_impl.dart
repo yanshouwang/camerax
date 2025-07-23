@@ -14,13 +14,13 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer with AnalyzerImpl {
   factory MlKitAnalyzerImpl({
     required List<Detector> detectors,
     required CoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumer consumer,
+    required Consumer<MlKitAnalyzerResult> consumer,
   }) {
     final api = MlKitAnalyzerApi(
       detectors: detectors.cast<DetectorImpl>().map((e) => e.api).toList(),
       targetCoordinateSystem: targetCoordinateSystem.api,
       consumer: MlKitAnalyzerResultConsumerApi(
-        accept: (_, resultApi) => consumer(resultApi.impl),
+        accept: (_, e) => consumer(e.impl),
       ),
     );
     return MlKitAnalyzerImpl.internal(api);

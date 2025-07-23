@@ -8,14 +8,13 @@
 import Foundation
 
 class ResolutionStrategyDelegate: PigeonApiDelegateResolutionStrategyApi {
-    func pigeonDefaultConstructor(pigeonApi: PigeonApiResolutionStrategyApi, boundSize: IntSize?, fallbackRule: ResolutionFallbackRuleApi) throws -> ResolutionStrategy {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiResolutionStrategyApi, boundSize: Size?, fallbackRule: ResolutionFallbackRuleApi) throws -> ResolutionStrategy {
         guard let boundSize = boundSize else { return ResolutionStrategy.highestAvailableStrategy }
-        return ResolutionStrategy(boundSize: boundSize, fallbackRule: fallbackRule.delegate)
+        return ResolutionStrategy(boundSize: boundSize.cgSize, fallbackRule: fallbackRule.delegate)
     }
     
-    func boundSize(pigeonApi: PigeonApiResolutionStrategyApi, pigeonInstance: ResolutionStrategy) throws -> IntSize? {
-        guard let boundSize = pigeonInstance.boundSize else { return nil }
-        return IntSize(width: boundSize.width, height: boundSize.height)
+    func boundSize(pigeonApi: PigeonApiResolutionStrategyApi, pigeonInstance: ResolutionStrategy) throws -> Size? {
+        return pigeonInstance.boundSize?.cxSize
     }
     
     func fallbackRule(pigeonApi: PigeonApiResolutionStrategyApi, pigeonInstance: ResolutionStrategy) throws -> ResolutionFallbackRuleApi {

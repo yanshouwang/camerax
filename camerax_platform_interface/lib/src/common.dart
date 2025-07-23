@@ -1,3 +1,4 @@
+export 'common/consumer.dart';
 export 'common/location.dart';
 export 'common/permission_manager.dart';
 export 'common/permission.dart';

@@ -52,7 +52,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   MlKitAnalyzer newMlKitAnalyzer({
     required List<Detector> detectors,
     required CoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumer consumer,
+    required Consumer<MlKitAnalyzerResult> consumer,
   }) => MlKitAnalyzerImpl(
     detectors: detectors,
     targetCoordinateSystem: targetCoordinateSystem,

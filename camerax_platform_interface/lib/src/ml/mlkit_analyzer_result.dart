@@ -7,6 +7,6 @@ abstract base class MlKitAnalyzerResult {
     required this.timestamp,
   });
 
-  Future<Object?> getThrowable(Detector detector);
   Future<T?> getValue<T>(Detector<T> detector);
+  Future<Object?> getThrowable(Detector detector);
 }

@@ -9,16 +9,15 @@ import Foundation
 import Vision
 
 public class VNBarcodeScanner: VNDetector {
-    public override func process(pixelBuffer: CVPixelBuffer, orientation: CGImagePropertyOrientation, completionHandler: @escaping VNRequestCompletionHandler) throws {
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation, options: self.options)
-        let request = VNDetectBarcodesRequest(completionHandler: completionHandler)
-        try handler.perform([request])
+    private var symbologies: [VNBarcodeSymbology]?
+    
+    init(symbologies: [VNBarcodeSymbology]?) {
+        self.symbologies = symbologies
     }
     
-    @available(iOS 14.0, *)
-    public override func process(sampleBuffer: CMSampleBuffer, orientation: CGImagePropertyOrientation, completionHandler: @escaping VNRequestCompletionHandler) throws {
-        let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer, orientation: orientation, options: self.options)
+    public override func newRequest(completionHandler: @escaping VNRequestCompletionHandler) -> VNRequest {
         let request = VNDetectBarcodesRequest(completionHandler: completionHandler)
-        try handler.perform([request])
+        if let symbologies = self.symbologies { request.symbologies = symbologies }
+        return request
     }
 }

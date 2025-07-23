@@ -46,8 +46,8 @@ public class ImageProxy: NSObject, AutoCloseable {
     }
     
     public func close() {
-        if isClosed { return }
-        isClosed = true
+        if self.isClosed { return }
+        self.isClosed = true
         onClosed()
     }
     

@@ -411,23 +411,11 @@ abstract class RectApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.IntRange',
+    fullClassName: 'dev.hebei.camerax_android.common.Range',
   ),
 )
-abstract class IntRangeApi {
-  IntRangeApi();
-
-  late final int lower;
-  late final int upper;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.LongRange',
-  ),
-)
-abstract class LongRangeApi {
-  LongRangeApi();
+abstract class RangeApi {
+  RangeApi();
 
   late final int lower;
   late final int upper;
@@ -537,7 +525,7 @@ abstract class ZoomStateObserverApi {
 )
 abstract class ExposureStateApi {
   late final int exposureCompensationIndex;
-  late final IntRangeApi exposureCompensationRange;
+  late final RangeApi exposureCompensationRange;
   late final double exposureCompensationStep;
   late final bool isExposureCompensationSupported;
 }
@@ -653,7 +641,7 @@ abstract class CameraInfoApi {
   LensFacingApi getLensFacing();
   List<CameraInfoApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees();
-  List<IntRangeApi> getSupportedFrameRateRanges();
+  List<RangeApi> getSupportedFrameRateRanges();
   bool isLogicalMultiCameraSupported();
   bool isZslSupported();
   bool hasFlashUnit();
@@ -1032,20 +1020,6 @@ abstract class BarcodeScannerOptionsApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'com.google.android.odml.image.MlImage',
-  ),
-)
-abstract class MlImageApi {}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'com.google.mlkit.vision.common.InputImage',
-  ),
-)
-abstract class InputImageApi {}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.hebei.camerax_android.ml.barcode.BarcodeScanner',
   ),
 )
@@ -1053,11 +1027,6 @@ abstract class BarcodeScannerApi extends DetectorApi {
   BarcodeScannerApi({
     BarcodeScannerOptionsApi? options,
   });
-
-  @async
-  List<BarcodeApi> process0(MlImageApi image);
-  @async
-  List<BarcodeApi> process1(InputImageApi image);
 }
 
 @ProxyApi(
@@ -1126,11 +1095,6 @@ abstract class FaceDetectorApi extends DetectorApi {
   FaceDetectorApi({
     FaceDetectorOptionsApi? options,
   });
-
-  @async
-  List<FaceApi> process0(MlImageApi image);
-  @async
-  List<FaceApi> process1(InputImageApi image);
 }
 
 // @ProxyApi(
@@ -1175,9 +1139,9 @@ abstract class FaceDetectorApi extends DetectorApi {
 )
 abstract class MlKitAnalyzerResultApi {
   late final int timestamp;
-  List<Object?>? getThrowable(DetectorApi detector);
   List<BarcodeApi>? getBarcodes(BarcodeScannerApi detector);
   List<FaceApi>? getFaces(FaceDetectorApi detector);
+  List<Object?>? getThrowable(DetectorApi detector);
 }
 
 @ProxyApi(
@@ -1508,9 +1472,9 @@ abstract class CameraControllerApi {
   @async
   void setVideoCaptureQualitySelector(QualitySelectorApi qualitySelector);
   @async
-  IntRangeApi getVideoCaptureTargetFrameRate();
+  RangeApi getVideoCaptureTargetFrameRate();
   @async
-  void setVideoCaptureTargetFrameRate(IntRangeApi targetFrameRate);
+  void setVideoCaptureTargetFrameRate(RangeApi targetFrameRate);
   @async
   bool isRecording();
   @async
@@ -1578,7 +1542,7 @@ abstract class Camera2CameraControlApi {
 abstract class Camera2CameraInfoApi {
   Camera2CameraInfoApi.from(CameraInfoApi cameraInfo);
 
-  LongRangeApi? getSensorInfoExposureTimeRange();
+  RangeApi? getSensorInfoExposureTimeRange();
   String getCameraId();
 }
 

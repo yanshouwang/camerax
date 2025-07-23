@@ -27,16 +27,16 @@ class MlKitAnalyzerImpl(private val impl: CameraXImpl) : PigeonApiMlKitAnalyzerA
             return pigeon_instance.timestamp
         }
 
-        override fun getThrowable(pigeon_instance: MlKitAnalyzer.Result, detector: Detector): List<Any?>? {
-            return pigeon_instance.getThrowable(detector.instance)?.api
-        }
-
         override fun getBarcodes(pigeon_instance: MlKitAnalyzer.Result, detector: BarcodeScanner): List<Barcode>? {
             return pigeon_instance.getValue(detector.instance)
         }
 
         override fun getFaces(pigeon_instance: MlKitAnalyzer.Result, detector: FaceDetector): List<Face>? {
             return pigeon_instance.getValue(detector.instance)
+        }
+
+        override fun getThrowable(pigeon_instance: MlKitAnalyzer.Result, detector: Detector): List<Any?>? {
+            return pigeon_instance.getThrowable(detector.instance)?.api
         }
     }
 }

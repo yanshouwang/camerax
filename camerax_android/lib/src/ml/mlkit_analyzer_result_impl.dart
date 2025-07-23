@@ -15,14 +15,6 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   }) : super.impl();
 
   @override
-  Future<Object?> getThrowable(Detector detector) {
-    if (detector is! DetectorImpl) {
-      throw TypeError();
-    }
-    return api.getThrowable(detector.api).then((e) => e?.impl);
-  }
-
-  @override
   Future<T?> getValue<T>(Detector<T> detector) {
     if (detector is BarcodeScannerImpl) {
       final barcodeScanner = detector as BarcodeScannerImpl;
@@ -37,6 +29,14 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
     } else {
       throw TypeError();
     }
+  }
+
+  @override
+  Future<Object?> getThrowable(Detector detector) {
+    if (detector is! DetectorImpl) {
+      throw TypeError();
+    }
+    return api.getThrowable(detector.api).then((e) => e?.impl);
   }
 }
 

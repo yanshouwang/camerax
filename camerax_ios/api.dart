@@ -166,6 +166,42 @@ enum VideoRecordFinalizeEventErrorApi {
   recordingGarbageCollected,
 }
 
+enum VNBarcodeSymbologyApi {
+  aztec,
+  codabar,
+  code39,
+  code39Checksum,
+  code39FullASCII,
+  code39FullASCIIChecksum,
+  code93,
+  code93i,
+  code128,
+  dataMatrix,
+  ean8,
+  ean13,
+  gs1DataBar,
+  gs1DataBarExpanded,
+  gs1DataBarLimited,
+  i2of5,
+  i2of5Checksum,
+  itf14,
+  microPDF417,
+  microQR,
+  msiPlessey,
+  pdf417,
+  qr,
+  upce,
+}
+
+enum VNBarcodeCompositeTypeApi {
+  none,
+  linked,
+  gs1TypeA,
+  gs1TypeB,
+  gs1TypeC,
+}
+
+
 enum ControlModeApi {
   auto,
   off,
@@ -229,12 +265,19 @@ abstract class AutoCloseableApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
+    name: 'Closeable',
+  ),
+)
+abstract class CloseableApi extends AutoCloseableApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
     name: 'CLLocation',
     import: 'CoreLocation',
   ),
 )
-abstract class LocationApi {
-  LocationApi();
+abstract class CLLocationApi {
+  CLLocationApi();
 
   late final double latitude;
   late final double longitude;
@@ -242,7 +285,7 @@ abstract class LocationApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
-    name: 'IntSize',
+    name: 'Size',
   ),
 )
 abstract class SizeApi {
@@ -252,63 +295,39 @@ abstract class SizeApi {
   late final int height;
 }
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'Point',
-//   ),
-// )
-// abstract class PointApi {
-//   PointApi();
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'Point',
+  ),
+)
+abstract class PointApi {
+  PointApi();
 
-//   late final int x;
-//   late final int y;
-// }
+  late final int x;
+  late final int y;
+}
 
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'PointF',
-//   ),
-// )
-// abstract class PointFApi {
-//   PointFApi();
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'Rect',
+  ),
+)
+abstract class RectApi {
+  RectApi();
 
-//   late final double x;
-//   late final double y;
-// }
-
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'Rect',
-//   ),
-// )
-// abstract class RectApi {
-//   RectApi();
-
-//   late final int left;
-//   late final int top;
-//   late final int right;
-//   late final int bottom;
-// }
+  late final int left;
+  late final int top;
+  late final int right;
+  late final int bottom;
+}
 
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(
-//     name: 'IntRange',
+//     name: 'Range',
 //   ),
 // )
-// abstract class IntRangeApi {
-//   IntRangeApi();
-
-//   late final int lower;
-//   late final int upper;
-// }
-
-// @ProxyApi(
-//   swiftOptions: SwiftProxyApiOptions(
-//     name: 'LongRange',
-//   ),
-// )
-// abstract class LongRangeApi {
-//   LongRangeApi();
+// abstract class RangeApi {
+//   RangeApi();
 
 //   late final int lower;
 //   late final int upper;
@@ -418,7 +437,7 @@ abstract class ZoomStateObserverApi {
 // )
 // abstract class ExposureStateApi {
 //   late final int exposureCompensationIndex;
-//   late final IntRangeApi exposureCompensationRange;
+//   late final RangeApi exposureCompensationRange;
 //   late final double exposureCompensationStep;
 //   late final bool isExposureCompensationSupported;
 // }
@@ -534,7 +553,7 @@ abstract class CameraInfoApi {
   LensFacingApi getLensFacing();
   List<CameraInfoApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees();
-  // List<IntRangeApi> getSupportedFrameRateRanges();
+  // List<RangeApi> getSupportedFrameRateRanges();
   bool isLogicalMultiCameraSupported();
   bool isZslSupported();
   bool hasFlashUnit();
@@ -675,6 +694,109 @@ abstract class ImageAnalyzerApi implements AnalyzerApi {
 
   late final void Function(ImageProxyApi image) analyze;
 }
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNDetector',
+  ),
+)
+abstract class VNDetectorApi extends CloseableApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNObservation',
+    import: 'Vision',
+  )
+)
+abstract class VNObservationApi {
+  String getUUID();
+  double getConfidence();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNDetectedObjectObservation',
+    import: 'Vision',
+  )
+)
+abstract class VNDetectedObjectObservationApi extends VNObservationApi {
+  RectApi getBoundingBox();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNRectangleObservation',
+    import: 'Vision',
+  )
+)
+abstract class VNRectangleObservationApi extends VNDetectedObjectObservationApi {
+  PointApi getBottomLeft();
+  PointApi getBottomRight();
+  PointApi getTopLeft();
+  PointApi getTopRight();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNBarcodeObservation',
+    import: 'Vision',
+  )
+)
+abstract class VNBarcodeObservationApi extends VNRectangleObservationApi {
+  String? getPayloadStringValue();
+  Uint8List? getPayloadData();
+  String? getSupplementalPayloadString();
+  Uint8List? getSupplementalPayloadData();
+  VNBarcodeCompositeTypeApi getSupplementalCompositeType();
+  bool isGS1DataCarrier();
+  VNBarcodeSymbologyApi getSymbology();
+  bool isColorInverted();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNBarcodeScanner',
+  )
+)
+abstract class VNBarcodeScannerApi extends VNDetectorApi {
+  VNBarcodeScannerApi({
+    List<VNBarcodeSymbologyApi>? symbologies,
+  });
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNAnalyzer.Result',
+  ),
+)
+abstract class VNAnalyzerResultApi {
+  late final int timestamp;
+  List<VNBarcodeObservationApi>? getBarcodes(VNBarcodeScannerApi detector);
+  List<Object?>? getError(VNDetectorApi detector);
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNAnalyzerResultConsumer',
+  ),
+)
+abstract class VNAnalyzerResultConsumerApi {
+  VNAnalyzerResultConsumerApi();
+
+  late final void Function(VNAnalyzerResultApi value) accept;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNAnalyzer',
+  ),
+)
+abstract class VNAnalyzerApi implements AnalyzerApi {
+  VNAnalyzerApi({
+    required List<VNDetectorApi> detectors,
+    required VNAnalyzerResultConsumerApi consumer,
+  });
+}
+
 
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(
@@ -736,7 +858,7 @@ abstract class ImageAnalyzerApi implements AnalyzerApi {
 abstract class OutputOptionsApi {
   int getDurationLimitMillis();
   int getFileSizeLimit();
-  LocationApi? getLocation();
+  CLLocationApi? getLocation();
 }
 
 @ProxyApi(
@@ -749,7 +871,7 @@ abstract class FileOutputOptionsApi extends OutputOptionsApi {
     required String file,
     int? durationLimitMillis,
     int? fileSizeLimitBytes,
-    LocationApi? location,
+    CLLocationApi? location,
   });
 
   String getFile();
@@ -938,8 +1060,8 @@ abstract class CameraControllerApi {
   void setVideoCaptureMirrorMode(MirrorModeApi mirrorMode);
   // QualitySelectorApi getVideoCaptureQualitySelector();
   // void setVideoCaptureQualitySelector(QualitySelectorApi qualitySelector);
-  // IntRangeApi getVideoCaptureTargetFrameRate();
-  // void setVideoCaptureTargetFrameRate(IntRangeApi targetFrameRate);
+  // RangeApi getVideoCaptureTargetFrameRate();
+  // void setVideoCaptureTargetFrameRate(RangeApi targetFrameRate);
   bool isRecording();
   RecordingApi startRecording(
     FileOutputOptionsApi outputOptions,
@@ -984,7 +1106,7 @@ abstract class PreviewViewApi {
 // abstract class Camera2CameraInfoApi {
 //   Camera2CameraInfoApi.from(CameraInfoApi cameraInfo);
 
-//   LongRangeApi? getSensorInfoExposureTimeRange();
+//   RangeApi? getSensorInfoExposureTimeRange();
 //   String getCameraId();
 // }
 

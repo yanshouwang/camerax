@@ -294,35 +294,34 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         if let selector = selector, let resolutionStrategy = selector.resolutionStrategy, let boundSize = resolutionStrategy.boundSize {
             if #available(iOS 16.0, *) {
                 let fallbackRule = resolutionStrategy.fallbackRule
-                let ratio = CGFloat(boundSize.width) / CGFloat(boundSize.height)
+                let ratio = boundSize.width / boundSize.height
                 let width: Int, height: Int
                 switch fallbackRule {
                 case .none:
                     if ratio != deviceRatio {
                         throw CameraXError(code: "unsupported-error", message: "Video settings dimensions must maintain the source device activeFormat's aspect ratio", details: nil)
                     }
-                    width = boundSize.width
-                    height = boundSize.height
+                    width = boundSize.width.roundToEvenInt()
+                    height = boundSize.height.roundToEvenInt()
                 case .closestHigherThenLower:
                     fallthrough
                 case .closestHigher:
                     if ratio > deviceRatio {
-                        width = boundSize.width
-                        height = (CGFloat(boundSize.width) / deviceRatio).roundToEvenInt()
+                        width = boundSize.width.roundToEvenInt()
+                        height = (boundSize.width / deviceRatio).roundToEvenInt()
                     } else {
-                        width = (CGFloat(boundSize.height) * deviceRatio).roundToEvenInt()
-                        height = boundSize.height
+                        width = (boundSize.height * deviceRatio).roundToEvenInt()
+                        height = boundSize.height.roundToEvenInt()
                     }
                 case .closestLowerThenHigher:
                     fallthrough
                 case .closestLower:
-                    let ratio = CGFloat(boundSize.width) / CGFloat(boundSize.height)
                     if ratio > deviceRatio {
-                        width = (CGFloat(boundSize.height) * deviceRatio).roundToEvenInt()
-                        height = boundSize.height
+                        width = (boundSize.height * deviceRatio).roundToEvenInt()
+                        height = boundSize.height.roundToEvenInt()
                     } else {
-                        width = boundSize.width
-                        height = (CGFloat(boundSize.width) / deviceRatio).roundToEvenInt()
+                        width = boundSize.width.roundToEvenInt()
+                        height = (boundSize.width / deviceRatio).roundToEvenInt()
                     }
                 }
                 videoSettings[kCVPixelBufferWidthKey as String] = width

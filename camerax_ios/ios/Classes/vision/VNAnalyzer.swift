@@ -47,7 +47,7 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
                 if let error {
                     newErrors[detector] = error
                 } else {
-                    newValues[detector] = request.results ?? []
+                    newValues[detector] = request.results
                 }
                 // Go to the next detector.
                 self.detectRecursively(imageProxy, index + 1, newValues, newErrors);
@@ -65,10 +65,10 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
     
     public class Result: NSObject {
         private let timestamp: CMTime
-        private let values: [VNDetector: [VNObservation]]
+        private let values: [VNDetector: [VNObservation]?]
         private let errors: [VNDetector: Error]
         
-        init(timestamp: CMTime, values: [VNDetector : [VNObservation]], errors: [VNDetector : Error]) {
+        init(timestamp: CMTime, values: [VNDetector : [VNObservation]?], errors: [VNDetector : Error]) {
             self.timestamp = timestamp
             self.values = values
             self.errors = errors
@@ -78,20 +78,17 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
             return timestamp
         }
         
-        public func getValue(_ detector: VNDetector) throws -> [VNObservation] {
-            try checkRequestExists(detector)
-            guard let value = values[detector] else {
-                throw CameraXError(code: "nil-error", message: "value is nil", details: nil)
-            }
-            return value
+        public func getValue(_ detector: VNDetector) throws -> [VNObservation]? {
+            try checkDetectorExists(detector)
+            return values[detector] ?? nil
         }
         
         public func getError(_ detector: VNDetector) throws -> Error? {
-            try checkRequestExists(detector)
+            try checkDetectorExists(detector)
             return errors[detector]
         }
         
-        private func checkRequestExists(_ detector: VNDetector) throws {
+        private func checkDetectorExists(_ detector: VNDetector) throws {
             guard values.contains(where: { $0.key === detector }) || errors.contains(where: { $0.key === detector }) else {
                 throw CameraXError(code: "nil-error", message: "The detector does not exist", details: nil)
             }
