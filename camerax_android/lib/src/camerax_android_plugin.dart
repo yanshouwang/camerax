@@ -60,7 +60,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+  Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality) =>
       QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
@@ -182,4 +182,15 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     awbMode: awbMode,
     sensorExposureTime: sensorExposureTime,
   );
+
+  @override
+  VNAnalyzer newVNAnalyzer({
+    required List<VNDetector> detectors,
+    required Consumer<VNAnalyzerResult> consumer,
+  }) => throw UnimplementedError();
+
+  @override
+  VNBarcodeScanner newVNBarcodeScanner({
+    List<VNBarcodeSymbology>? symbologies,
+  }) => throw UnimplementedError();
 }

@@ -6,26 +6,26 @@ import 'fallback_strategy.dart';
 import 'quality.dart';
 
 abstract base class QualitySelector {
-  static Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
-      CameraXPlugin.instance.getResolution(cameraInfo, quality);
+  static Future<Size<int>?> getResolution(
+    CameraInfo cameraInfo,
+    Quality quality,
+  ) => CameraXPlugin.instance.getResolution(cameraInfo, quality);
 
   QualitySelector.impl();
 
   factory QualitySelector.from(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,
-  }) =>
-      CameraXPlugin.instance.newQualitySelectorFrom(
-        quality,
-        fallbackStrategy: fallbackStrategy,
-      );
+  }) => CameraXPlugin.instance.newQualitySelectorFrom(
+    quality,
+    fallbackStrategy: fallbackStrategy,
+  );
 
   factory QualitySelector.fromOrderedList(
     List<Quality> qualities, {
     FallbackStrategy? fallbackStrategy,
-  }) =>
-      CameraXPlugin.instance.newQualitySelectorFromOrderedList(
-        qualities,
-        fallbackStrategy: fallbackStrategy,
-      );
+  }) => CameraXPlugin.instance.newQualitySelectorFromOrderedList(
+    qualities,
+    fallbackStrategy: fallbackStrategy,
+  );
 }

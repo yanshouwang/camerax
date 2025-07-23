@@ -8,6 +8,7 @@ import 'core.dart';
 // import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
+import 'vision.dart';
 
 final class CameraXiOSPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -56,7 +57,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   MlKitAnalyzer newMlKitAnalyzer({
     required List<Detector> detectors,
     required CoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumer consumer,
+    required Consumer<MlKitAnalyzerResult> consumer,
   }) => throw UnimplementedError();
   // MlKitAnalyzerImpl(
   //   detectors: detectors,
@@ -65,7 +66,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   // );
 
   @override
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+  Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality) =>
       throw UnimplementedError();
   // QualitySelectorImpl.getResolution(cameraInfo, quality);
 
@@ -207,4 +208,15 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   //   awbMode: awbMode,
   //   sensorExposureTime: sensorExposureTime,
   // );
+
+  @override
+  VNAnalyzer newVNAnalyzer({
+    required List<VNDetector> detectors,
+    required Consumer<VNAnalyzerResult> consumer,
+  }) => VNAnalyzerImpl(detectors: detectors, consumer: consumer);
+
+  @override
+  VNBarcodeScanner newVNBarcodeScanner({
+    List<VNBarcodeSymbology>? symbologies,
+  }) => VNBarcodeScannerImpl(symbologies: symbologies);
 }

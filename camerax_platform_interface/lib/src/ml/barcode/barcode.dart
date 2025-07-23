@@ -16,7 +16,7 @@ import 'wifi.dart';
 
 final class Barcode {
   final BarcodeFormat format;
-  final Rect? boundingBox;
+  final Rect<int>? boundingBox;
   final List<Point<int>>? cornerPoints;
   final Uint8List? rawBytes;
   final String? rawValue;

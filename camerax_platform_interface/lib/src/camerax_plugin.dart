@@ -42,9 +42,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
   CameraSelector getFrontCameraSelector();
   CameraSelector getBackCameraSelector();
   CameraSelector getExternalCameraSelector();
-  CameraSelector newCameraSelector({
-    LensFacing? lensFacing,
-  });
+  CameraSelector newCameraSelector({LensFacing? lensFacing});
 
   FileOutputOptions newFileOutputOptions({
     required File file,
@@ -63,7 +61,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
 
-  Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality);
+  Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality);
 
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
@@ -87,9 +85,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
     Duration? autoCancelDuration,
   });
 
-  ImageAnalyzer newImageAnalyzer({
-    required ImageProxyCallback analyze,
-  });
+  ImageAnalyzer newImageAnalyzer({required ImageProxyCallback analyze});
 
   ZoomSuggestionOptions newZoomSuggestionOptions({
     required ZoomCallback zoomCallback,
@@ -102,9 +98,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
     ZoomSuggestionOptions? zoomSuggestionOptions,
   });
 
-  BarcodeScanner newBarcodeScanner({
-    BarcodeScannerOptions? options,
-  });
+  BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options});
 
   FaceDetectorOptions newFaceDetectorOptions({
     bool? enableTracking,
@@ -115,9 +109,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
     FacePerformanceMode? performanceMode,
   });
 
-  FaceDetector newFaceDetector({
-    FaceDetectorOptions? options,
-  });
+  FaceDetector newFaceDetector({FaceDetectorOptions? options});
 
   MlKitAnalyzer newMlKitAnalyzer({
     required List<Detector> detectors,
@@ -125,9 +117,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
     required Consumer<MlKitAnalyzerResult> consumer,
   });
 
-  VNBarcodeScanner newVNBarcodeScanner({
-    List<VNBarcodeSymbology>? symbologies,
-  });
+  VNBarcodeScanner newVNBarcodeScanner({List<VNBarcodeSymbology>? symbologies});
 
   VNAnalyzer newVNAnalyzer({
     required List<VNDetector> detectors,

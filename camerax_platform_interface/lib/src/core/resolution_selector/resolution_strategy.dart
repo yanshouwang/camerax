@@ -5,15 +5,15 @@ import 'resolution_fallback_rule.dart';
 final class ResolutionStrategy {
   static const highestAvailableStrategy = ResolutionStrategy._();
 
-  final Size? boundSize;
+  final Size<int>? boundSize;
   final ResolutionFallbackRule fallbackRule;
 
   const ResolutionStrategy._()
-      : boundSize = null,
-        fallbackRule = ResolutionFallbackRule.none;
+    : boundSize = null,
+      fallbackRule = ResolutionFallbackRule.none;
 
   const ResolutionStrategy({
-    required Size this.boundSize,
+    required Size<int> this.boundSize,
     required this.fallbackRule,
   });
 

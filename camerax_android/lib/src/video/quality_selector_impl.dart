@@ -7,12 +7,17 @@ import 'fallback_strategy_impl.dart';
 import 'quality_impl.dart';
 
 final class QualitySelectorImpl extends QualitySelector {
-  static Future<Size?> getResolution(CameraInfo cameraInfo, Quality quality) {
+  static Future<Size<int>?> getResolution(
+    CameraInfo cameraInfo,
+    Quality quality,
+  ) {
     if (cameraInfo is! CameraInfoImpl) {
       throw TypeError();
     }
-    return QualitySelectorApi.getResolution(cameraInfo.api, quality.api)
-        .then((e) => e?.impl);
+    return QualitySelectorApi.getResolution(
+      cameraInfo.api,
+      quality.api,
+    ).then((e) => e?.impl);
   }
 
   final QualitySelectorApi api;

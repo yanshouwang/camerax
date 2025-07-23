@@ -6,7 +6,7 @@ import 'face_landmark.dart';
 import 'face_landmark_type.dart';
 
 class Face {
-  final Rect boundingBox;
+  final Rect<int> boundingBox;
   final List<FaceContour> allContours;
   final List<FaceLandmark> allLandmarks;
   final double headEulerAngleX;
@@ -31,14 +31,16 @@ class Face {
   });
 
   FaceContour? getContour(FaceContourType contourType) {
-    final index =
-        allContours.indexWhere((contour) => contour.type == contourType);
+    final index = allContours.indexWhere(
+      (contour) => contour.type == contourType,
+    );
     return index < 0 ? null : allContours[index];
   }
 
   FaceLandmark? getLandmark(FaceLandmarkType landmarkType) {
-    final index =
-        allLandmarks.indexWhere((landmark) => landmark.type == landmarkType);
+    final index = allLandmarks.indexWhere(
+      (landmark) => landmark.type == landmarkType,
+    );
     return index < 0 ? null : allLandmarks[index];
   }
 }

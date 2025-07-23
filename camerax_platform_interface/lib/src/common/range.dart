@@ -20,10 +20,10 @@ final class Range<T> {
   Range(this.lower, this.upper);
 
   @override
-  int get hashCode => Object.hash(lower, upper);
-
-  @override
   bool operator ==(Object other) {
     return other is Range<T> && other.lower == lower && other.upper == upper;
   }
+
+  @override
+  int get hashCode => Object.hash(lower, upper);
 }
