@@ -6,10 +6,17 @@
 //
 
 import Foundation
+import AVFoundation
 
 class VideoRecordEventConsumerDelegate: PigeonApiDelegateVideoRecordEventConsumerApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiVideoRecordEventConsumerApi) throws -> VideoRecordEventConsumer {
         return VideoRecordEventConsumer(pigeonApi)
+    }
+}
+
+class AVMetadataObjectsConsumerDelegate: PigeonApiDelegateAVMetadataObjectsConsumerApi {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiAVMetadataObjectsConsumerApi) throws -> AVMetadataObjectsConsumer {
+        return AVMetadataObjectsConsumer(pigeonApi)
     }
 }
 
@@ -27,6 +34,18 @@ class VideoRecordEventConsumer: NSObject, Consumer {
     }
     
     func accept(_ value: VideoRecordEvent) {
+        self.api.accept(pigeonInstance: self, value: value) { _ in }
+    }
+}
+
+class AVMetadataObjectsConsumer: NSObject, Consumer {
+    private let api: PigeonApiAVMetadataObjectsConsumerApi
+    
+    init(_ api: PigeonApiAVMetadataObjectsConsumerApi) {
+        self.api = api
+    }
+    
+    func accept(_ value: [AVMetadataObject]) {
         self.api.accept(pigeonInstance: self, value: value) { _ in }
     }
 }

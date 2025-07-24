@@ -8,5 +8,9 @@
 import Foundation
 
 public class ImageAnalysis: NSObject {
-    public class Analyzer: NSObject {}
+    open class Analyzer: NSObject {
+        func analyze(_ image: ImageProxy) {
+            fatalError("analyze is not implemented")
+        }
+    }
 }

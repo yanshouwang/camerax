@@ -173,6 +173,51 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
         return PigeonApiImageAnalyzerApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
+    func pigeonApiAVMetadataCatBodyObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataCatBodyObjectApi {
+        let delegate = AVMetadataCatBodyObjectDelegate()
+        return PigeonApiAVMetadataCatBodyObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataDogBodyObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataDogBodyObjectApi {
+        let delegate = AVMetadataDogBodyObjectDelegate()
+        return PigeonApiAVMetadataDogBodyObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataHumanBodyObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataHumanBodyObjectApi {
+        let delegate = AVMetadataHumanBodyObjectDelegate()
+        return PigeonApiAVMetadataHumanBodyObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataHumanFullBodyObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataHumanFullBodyObjectApi {
+        let delegate = AVMetadataHumanFullBodyObjectDelegate()
+        return PigeonApiAVMetadataHumanFullBodyObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataFaceObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataFaceObjectApi {
+        let delegate = AVMetadataFaceObjectDelegate()
+        return PigeonApiAVMetadataFaceObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataMachineReadableCodeObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataMachineReadableCodeObjectApi {
+        let delegate = AVMetadataMachineReadableCodeObjectDelegate()
+        return PigeonApiAVMetadataMachineReadableCodeObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataSalientObjectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataSalientObjectApi {
+        let delegate = AVMetadataSalientObjectDelegate()
+        return PigeonApiAVMetadataSalientObjectApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVMetadataObjectsConsumerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVMetadataObjectsConsumerApi {
+        let delegate = AVMetadataObjectsConsumerDelegate()
+        return PigeonApiAVMetadataObjectsConsumerApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiAVAnalyzerApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiAVAnalyzerApi {
+        let delegate = AVAnalyzerDelegate()
+        return PigeonApiAVAnalyzerApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
     func pigeonApiVNBarcodeObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNBarcodeObservationApi {
         let delegate = VNBarcodeObservationDelegate()
         return PigeonApiVNBarcodeObservationApi(pigeonRegistrar: registrar, delegate: delegate)

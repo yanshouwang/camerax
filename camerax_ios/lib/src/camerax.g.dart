@@ -167,6 +167,17 @@ class PigeonInstanceManager {
     OnImageCapturedCallbackApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     AnalyzerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ImageAnalyzerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataBodyObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataCatBodyObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataDogBodyObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataHumanBodyObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataHumanFullBodyObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataFaceObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataMachineReadableCodeObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataSalientObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVMetadataObjectsConsumerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVAnalyzerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     VNDetectorApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     VNObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     VNDetectedObjectObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
@@ -607,6 +618,34 @@ enum VideoRecordFinalizeEventErrorApi {
   recordingGarbageCollected,
 }
 
+enum AVMetadataObjectTypeApi {
+  codabar,
+  code39,
+  code39Mod43,
+  code93,
+  code128,
+  ean8,
+  ean13,
+  gs1DataBar,
+  gs1DataBarExpanded,
+  gs1DataBarLimited,
+  interleaved2of5,
+  itf14,
+  upce,
+  aztec,
+  dataMatrix,
+  microPDF417,
+  microQR,
+  pdf417,
+  qr,
+  humanBody,
+  humanFullBody,
+  dogBody,
+  catBody,
+  face,
+  salientObject,
+}
+
 enum VNBarcodeSymbologyApi {
   aztec,
   codabar,
@@ -754,23 +793,26 @@ class _PigeonCodec extends StandardMessageCodec {
     }    else if (value is VideoRecordFinalizeEventErrorApi) {
       buffer.putUint8(150);
       writeValue(buffer, value.index);
-    }    else if (value is VNBarcodeSymbologyApi) {
+    }    else if (value is AVMetadataObjectTypeApi) {
       buffer.putUint8(151);
       writeValue(buffer, value.index);
-    }    else if (value is VNBarcodeCompositeTypeApi) {
+    }    else if (value is VNBarcodeSymbologyApi) {
       buffer.putUint8(152);
       writeValue(buffer, value.index);
-    }    else if (value is ControlModeApi) {
+    }    else if (value is VNBarcodeCompositeTypeApi) {
       buffer.putUint8(153);
       writeValue(buffer, value.index);
-    }    else if (value is ControlAeModeApi) {
+    }    else if (value is ControlModeApi) {
       buffer.putUint8(154);
       writeValue(buffer, value.index);
-    }    else if (value is ControlAfModeApi) {
+    }    else if (value is ControlAeModeApi) {
       buffer.putUint8(155);
       writeValue(buffer, value.index);
-    }    else if (value is ControlAwbModeApi) {
+    }    else if (value is ControlAfModeApi) {
       buffer.putUint8(156);
+      writeValue(buffer, value.index);
+    }    else if (value is ControlAwbModeApi) {
+      buffer.putUint8(157);
       writeValue(buffer, value.index);
     } else {
       super.writeValue(buffer, value);
@@ -848,20 +890,23 @@ class _PigeonCodec extends StandardMessageCodec {
         return value == null ? null : VideoRecordFinalizeEventErrorApi.values[value];
       case 151: 
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : VNBarcodeSymbologyApi.values[value];
+        return value == null ? null : AVMetadataObjectTypeApi.values[value];
       case 152: 
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : VNBarcodeCompositeTypeApi.values[value];
+        return value == null ? null : VNBarcodeSymbologyApi.values[value];
       case 153: 
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : ControlModeApi.values[value];
+        return value == null ? null : VNBarcodeCompositeTypeApi.values[value];
       case 154: 
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : ControlAeModeApi.values[value];
+        return value == null ? null : ControlModeApi.values[value];
       case 155: 
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : ControlAfModeApi.values[value];
+        return value == null ? null : ControlAeModeApi.values[value];
       case 156: 
+        final int? value = readValue(buffer) as int?;
+        return value == null ? null : ControlAfModeApi.values[value];
+      case 157: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : ControlAwbModeApi.values[value];
       default:
@@ -6216,6 +6261,1261 @@ class ImageAnalyzerApi extends PigeonInternalProxyApiBaseClass
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
       analyze: analyze,
+    );
+  }
+}
+
+class AVMetadataObjectApi extends PigeonInternalProxyApiBaseClass {
+  /// Constructs [AVMetadataObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+  });
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataObjectApi Function()? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call() ??
+                  AVMetadataObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataObjectApi pigeon_copy() {
+    return AVMetadataObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+    );
+  }
+}
+
+class AVMetadataBodyObjectApi extends AVMetadataObjectApi {
+  /// Constructs [AVMetadataBodyObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataBodyObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+  }) : super.pigeon_detached();
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataBodyObjectApi Function()? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataBodyObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataBodyObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call() ??
+                  AVMetadataBodyObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataBodyObjectApi pigeon_copy() {
+    return AVMetadataBodyObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+    );
+  }
+}
+
+class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {
+  /// Constructs [AVMetadataCatBodyObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataCatBodyObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.bodyID,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final int bodyID;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataCatBodyObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      int bodyID,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final int? arg_bodyID = (args[5] as int?);
+          assert(arg_bodyID != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_type!, arg_time!, arg_duration!,
+                      arg_bounds!, arg_bodyID!) ??
+                  AVMetadataCatBodyObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    bodyID: arg_bodyID!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataCatBodyObjectApi pigeon_copy() {
+    return AVMetadataCatBodyObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      bodyID: bodyID,
+    );
+  }
+}
+
+class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {
+  /// Constructs [AVMetadataDogBodyObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataDogBodyObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.bodyID,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final int bodyID;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataDogBodyObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      int bodyID,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final int? arg_bodyID = (args[5] as int?);
+          assert(arg_bodyID != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_type!, arg_time!, arg_duration!,
+                      arg_bounds!, arg_bodyID!) ??
+                  AVMetadataDogBodyObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    bodyID: arg_bodyID!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataDogBodyObjectApi pigeon_copy() {
+    return AVMetadataDogBodyObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      bodyID: bodyID,
+    );
+  }
+}
+
+class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {
+  /// Constructs [AVMetadataHumanBodyObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataHumanBodyObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.bodyID,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final int bodyID;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataHumanBodyObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      int bodyID,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final int? arg_bodyID = (args[5] as int?);
+          assert(arg_bodyID != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_type!, arg_time!, arg_duration!,
+                      arg_bounds!, arg_bodyID!) ??
+                  AVMetadataHumanBodyObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    bodyID: arg_bodyID!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataHumanBodyObjectApi pigeon_copy() {
+    return AVMetadataHumanBodyObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      bodyID: bodyID,
+    );
+  }
+}
+
+class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi {
+  /// Constructs [AVMetadataHumanFullBodyObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataHumanFullBodyObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.bodyID,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final int bodyID;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataHumanFullBodyObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      int bodyID,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final int? arg_bodyID = (args[5] as int?);
+          assert(arg_bodyID != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_type!, arg_time!, arg_duration!,
+                      arg_bounds!, arg_bodyID!) ??
+                  AVMetadataHumanFullBodyObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    bodyID: arg_bodyID!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataHumanFullBodyObjectApi pigeon_copy() {
+    return AVMetadataHumanFullBodyObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      bodyID: bodyID,
+    );
+  }
+}
+
+class AVMetadataFaceObjectApi extends AVMetadataObjectApi {
+  /// Constructs [AVMetadataFaceObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataFaceObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.faceID,
+    required this.hasRollAngle,
+    required this.rollAngle,
+    required this.hasYawAngle,
+    required this.yawAngle,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final int faceID;
+
+  final bool hasRollAngle;
+
+  final double rollAngle;
+
+  final bool hasYawAngle;
+
+  final double yawAngle;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataFaceObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      int faceID,
+      bool hasRollAngle,
+      double rollAngle,
+      bool hasYawAngle,
+      double yawAngle,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final int? arg_faceID = (args[5] as int?);
+          assert(arg_faceID != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final bool? arg_hasRollAngle = (args[6] as bool?);
+          assert(arg_hasRollAngle != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null bool.');
+          final double? arg_rollAngle = (args[7] as double?);
+          assert(arg_rollAngle != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null double.');
+          final bool? arg_hasYawAngle = (args[8] as bool?);
+          assert(arg_hasYawAngle != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null bool.');
+          final double? arg_yawAngle = (args[9] as double?);
+          assert(arg_yawAngle != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null double.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(
+                      arg_type!,
+                      arg_time!,
+                      arg_duration!,
+                      arg_bounds!,
+                      arg_faceID!,
+                      arg_hasRollAngle!,
+                      arg_rollAngle!,
+                      arg_hasYawAngle!,
+                      arg_yawAngle!) ??
+                  AVMetadataFaceObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    faceID: arg_faceID!,
+                    hasRollAngle: arg_hasRollAngle!,
+                    rollAngle: arg_rollAngle!,
+                    hasYawAngle: arg_hasYawAngle!,
+                    yawAngle: arg_yawAngle!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataFaceObjectApi pigeon_copy() {
+    return AVMetadataFaceObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      faceID: faceID,
+      hasRollAngle: hasRollAngle,
+      rollAngle: rollAngle,
+      hasYawAngle: hasYawAngle,
+      yawAngle: yawAngle,
+    );
+  }
+}
+
+class AVMetadataMachineReadableCodeObjectApi extends AVMetadataObjectApi {
+  /// Constructs [AVMetadataMachineReadableCodeObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataMachineReadableCodeObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.corners,
+    this.stringValue,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final List<PointFApi> corners;
+
+  final String? stringValue;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataMachineReadableCodeObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      List<PointFApi> corners,
+      String? stringValue,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final List<PointFApi>? arg_corners =
+              (args[5] as List<Object?>?)?.cast<PointFApi>();
+          assert(arg_corners != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null List<PointFApi>.');
+          final String? arg_stringValue = (args[6] as String?);
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_type!, arg_time!, arg_duration!,
+                      arg_bounds!, arg_corners!, arg_stringValue) ??
+                  AVMetadataMachineReadableCodeObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    corners: arg_corners!,
+                    stringValue: arg_stringValue,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataMachineReadableCodeObjectApi pigeon_copy() {
+    return AVMetadataMachineReadableCodeObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      corners: corners,
+      stringValue: stringValue,
+    );
+  }
+}
+
+class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
+  /// Constructs [AVMetadataSalientObjectApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataSalientObjectApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.type,
+    required this.time,
+    required this.duration,
+    required this.bounds,
+    required this.objectID,
+  }) : super.pigeon_detached();
+
+  final AVMetadataObjectTypeApi type;
+
+  final int time;
+
+  final int duration;
+
+  final RectApi bounds;
+
+  final int objectID;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVMetadataSalientObjectApi Function(
+      AVMetadataObjectTypeApi type,
+      int time,
+      int duration,
+      RectApi bounds,
+      int objectID,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final AVMetadataObjectTypeApi? arg_type =
+              (args[1] as AVMetadataObjectTypeApi?);
+          assert(arg_type != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null AVMetadataObjectTypeApi.');
+          final int? arg_time = (args[2] as int?);
+          assert(arg_time != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_duration = (args[3] as int?);
+          assert(arg_duration != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null int.');
+          final RectApi? arg_bounds = (args[4] as RectApi?);
+          assert(arg_bounds != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+          final int? arg_objectID = (args[5] as int?);
+          assert(arg_objectID != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_type!, arg_time!, arg_duration!,
+                      arg_bounds!, arg_objectID!) ??
+                  AVMetadataSalientObjectApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    type: arg_type!,
+                    time: arg_time!,
+                    duration: arg_duration!,
+                    bounds: arg_bounds!,
+                    objectID: arg_objectID!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataSalientObjectApi pigeon_copy() {
+    return AVMetadataSalientObjectApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      type: type,
+      time: time,
+      duration: duration,
+      bounds: bounds,
+      objectID: objectID,
+    );
+  }
+}
+
+class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
+  AVMetadataObjectsConsumerApi({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.accept,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecAVMetadataObjectsConsumerApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture =
+        pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [AVMetadataObjectsConsumerApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVMetadataObjectsConsumerApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.accept,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec
+      _pigeonVar_codecAVMetadataObjectsConsumerApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  /// Callback method.
+  ///
+  /// For the associated Native object to be automatically garbage collected,
+  /// it is required that the implementation of this `Function` doesn't have a
+  /// strong reference to the encapsulating class instance. When this `Function`
+  /// references a non-local variable, it is strongly recommended to access it
+  /// with a `WeakReference`:
+  ///
+  /// ```dart
+  /// final WeakReference weakMyVariable = WeakReference(myVariable);
+  /// final AVMetadataObjectsConsumerApi instance = AVMetadataObjectsConsumerApi(
+  ///  accept: (AVMetadataObjectsConsumerApi pigeon_instance, ...) {
+  ///    print(weakMyVariable?.target);
+  ///  },
+  /// );
+  /// ```
+  ///
+  /// Alternatively, [PigeonInstanceManager.removeWeakReference] can be used to
+  /// release the associated Native object manually.
+  final void Function(
+    AVMetadataObjectsConsumerApi pigeon_instance,
+    List<AVMetadataObjectApi> value,
+  ) accept;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    void Function(
+      AVMetadataObjectsConsumerApi pigeon_instance,
+      List<AVMetadataObjectApi> value,
+    )? accept,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final AVMetadataObjectsConsumerApi? arg_pigeon_instance =
+              (args[0] as AVMetadataObjectsConsumerApi?);
+          assert(arg_pigeon_instance != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept was null, expected non-null AVMetadataObjectsConsumerApi.');
+          final List<AVMetadataObjectApi>? arg_value =
+              (args[1] as List<Object?>?)?.cast<AVMetadataObjectApi>();
+          assert(arg_value != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept was null, expected non-null List<AVMetadataObjectApi>.');
+          try {
+            (accept ?? arg_pigeon_instance!.accept)
+                .call(arg_pigeon_instance!, arg_value!);
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVMetadataObjectsConsumerApi pigeon_copy() {
+    return AVMetadataObjectsConsumerApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      accept: accept,
+    );
+  }
+}
+
+class AVAnalyzerApi extends PigeonInternalProxyApiBaseClass {
+  AVAnalyzerApi({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required List<AVMetadataObjectTypeApi> types,
+    required AVMetadataObjectsConsumerApi consumer,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecAVAnalyzerApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_ios.AVAnalyzerApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, types, consumer]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [AVAnalyzerApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVAnalyzerApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecAVAnalyzerApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVAnalyzerApi Function()? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+              'dev.flutter.pigeon.camerax_ios.AVAnalyzerApi.pigeon_newInstance',
+              pigeonChannelCodec,
+              binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call() ??
+                  AVAnalyzerApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVAnalyzerApi pigeon_copy() {
+    return AVAnalyzerApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
     );
   }
 }

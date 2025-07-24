@@ -357,14 +357,17 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
             self.removeCaptureMetadataOutput()
             self.captureMetadataOutputObjectsDelegate = nil
         }
-        if let metadataAnalyzer = analyzer as? AVAnalyzer {
-            self.captureMetadataOutput.metadataObjectTypes = metadataAnalyzer.metadataObjectTypes
+        guard let videoPreviewLayer = self.videoPreviewLayer else {
+            throw CameraXError(code: "nil-error", message: "video preview layer is nil", details: nil)
+        }
+        if let analyzer = analyzer as? AVAnalyzer {
+            self.captureMetadataOutput.metadataObjectTypes = analyzer.types
             try self.addCaptureMetadataOutput()
-            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: metadataAnalyzer.consumer)
+            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, videoPreviewLayer: videoPreviewLayer)
             self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.captureVideoDataOutputQueue)
             self.captureMetadataOutputObjectsDelegate = delegate
         } else {
-            self.addCaptureVideoDataOutput()
+            try self.addCaptureVideoDataOutput()
             let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer, rotationProvider: self.rotationProvider)
             self.captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: self.captureVideoDataOutputQueue)
             self.captureVideoDataOutputSampleBufferDelegate = delegate

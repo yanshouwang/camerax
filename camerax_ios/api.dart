@@ -6,41 +6,18 @@ import 'package:pigeon/pigeon.dart';
     dartOut: 'lib/src/camerax.g.dart',
     dartOptions: DartOptions(),
     swiftOut: 'ios/Classes/CameraXApi.g.swift',
-    swiftOptions: SwiftOptions(
-      errorClassName: 'CameraXError',
-    ),
+    swiftOptions: SwiftOptions(errorClassName: 'CameraXError'),
   ),
 )
-enum PermissionApi {
-  video,
-  audio,
-}
+enum PermissionApi { video, audio }
 
-enum LensFacingApi {
-  unknown,
-  front,
-  back,
-  external,
-}
+enum LensFacingApi { unknown, front, back, external }
 
-enum CameraStateApi {
-  pendingOpen,
-  opening,
-  open,
-  closing,
-  closed,
-}
+enum CameraStateApi { pendingOpen, opening, open, closing, closed }
 
-enum TorchStateApi {
-  off,
-  on,
-}
+enum TorchStateApi { off, on }
 
-enum MeteringModeApi {
-  af,
-  ae,
-  awb,
-}
+enum MeteringModeApi { af, ae, awb }
 
 enum TimeUnitApi {
   nanoseconds,
@@ -52,17 +29,9 @@ enum TimeUnitApi {
   days,
 }
 
-enum AspectRatioApi {
-  ratioDefault,
-  ratio4_3,
-  ratio16_9,
-}
+enum AspectRatioApi { ratioDefault, ratio4_3, ratio16_9 }
 
-enum BitDepthApi {
-  bitDepthUnspecified,
-  bitDepth8Bit,
-  bitDepth10Bit,
-}
+enum BitDepthApi { bitDepthUnspecified, bitDepth8Bit, bitDepth10Bit }
 
 enum EncodingApi {
   unspecified,
@@ -83,21 +52,14 @@ enum ScaleTypeApi {
   fitEnd,
 }
 
-enum UseCaseApi {
-  imageCapture,
-  imageAnalysis,
-  videoCapture,
-}
+enum UseCaseApi { imageCapture, imageAnalysis, videoCapture }
 
 enum ResolutionModeApi {
   preferCaptureRateOverHigherResolution,
   preferHigherResolutionOverCaptureRate,
 }
 
-enum AspectRatioFallbackRuleApi {
-  none,
-  auto,
-}
+enum AspectRatioFallbackRuleApi { none, auto }
 
 enum ResolutionFallbackRuleApi {
   none,
@@ -107,41 +69,17 @@ enum ResolutionFallbackRuleApi {
   closestLower,
 }
 
-enum CaptureModeApi {
-  maximizeQuality,
-  minimizeLatency,
-  zeroShutterLag,
-}
+enum CaptureModeApi { maximizeQuality, minimizeLatency, zeroShutterLag }
 
-enum FlashModeApi {
-  auto,
-  on,
-  off,
-  screen,
-}
+enum FlashModeApi { auto, on, off, screen }
 
-enum BackpressureStrategyApi {
-  keepOnlyLatest,
-  blockProducer,
-}
+enum BackpressureStrategyApi { keepOnlyLatest, blockProducer }
 
-enum CoordinateSystemApi {
-  original,
-  sensor,
-  viewReferenced,
-}
+enum CoordinateSystemApi { original, sensor, viewReferenced }
 
-enum ImageFormatApi {
-  yuv420_888,
-  rgba8888,
-  jpeg,
-}
+enum ImageFormatApi { yuv420_888, rgba8888, jpeg }
 
-enum MirrorModeApi {
-  off,
-  on,
-  onFrontOnly,
-}
+enum MirrorModeApi { off, on, onFrontOnly }
 
 enum AudioStateApi {
   active,
@@ -221,14 +159,7 @@ enum VNBarcodeSymbologyApi {
   upce,
 }
 
-enum VNBarcodeCompositeTypeApi {
-  none,
-  linked,
-  gs1TypeA,
-  gs1TypeB,
-  gs1TypeC,
-}
-
+enum VNBarcodeCompositeTypeApi { none, linked, gs1TypeA, gs1TypeB, gs1TypeC }
 
 enum ControlModeApi {
   auto,
@@ -248,13 +179,7 @@ enum ControlAeModeApi {
   onLowLightBoostBrightnessPriority,
 }
 
-enum ControlAfModeApi {
-  auto,
-  continuousPicture,
-  edof,
-  macro,
-  off,
-}
+enum ControlAfModeApi { auto, continuousPicture, edof, macro, off }
 
 enum ControlAwbModeApi {
   auto,
@@ -268,11 +193,7 @@ enum ControlAwbModeApi {
   warmFluorescent,
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'PermissionManager',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PermissionManager'))
 abstract class PermissionManagerApi {
   @static
   late final PermissionManagerApi instance;
@@ -282,20 +203,12 @@ abstract class PermissionManagerApi {
   bool requestPermissions(List<PermissionApi> permissions);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'AutoCloseable',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AutoCloseable'))
 abstract class AutoCloseableApi {
   void close();
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'Closeable',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Closeable'))
 abstract class CloseableApi extends AutoCloseableApi {}
 
 @ProxyApi(
@@ -311,11 +224,7 @@ abstract class CLLocationApi {
   late final double longitude;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'Size',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Size'))
 abstract class SizeApi {
   SizeApi();
 
@@ -323,11 +232,7 @@ abstract class SizeApi {
   late final int height;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'SizeF',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'SizeF'))
 abstract class SizeFApi {
   SizeFApi();
 
@@ -335,11 +240,7 @@ abstract class SizeFApi {
   late final double height;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'Point',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Point'))
 abstract class PointApi {
   PointApi();
 
@@ -347,11 +248,7 @@ abstract class PointApi {
   late final int y;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'PointF',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PointF'))
 abstract class PointFApi {
   PointFApi();
 
@@ -359,11 +256,7 @@ abstract class PointFApi {
   late final double y;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'Rect',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Rect'))
 abstract class RectApi {
   RectApi();
 
@@ -373,11 +266,7 @@ abstract class RectApi {
   late final int bottom;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'RectF',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'RectF'))
 abstract class RectFApi {
   RectFApi();
 
@@ -399,11 +288,7 @@ abstract class RectFApi {
 //   late final int upper;
 // }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'CameraSelector',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraSelector'))
 abstract class CameraSelectorApi {
   @static
   late final CameraSelectorApi front;
@@ -415,11 +300,7 @@ abstract class CameraSelectorApi {
   CameraSelectorApi(LensFacingApi? lensFacing);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'CameraStateLiveData',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraStateLiveData'))
 abstract class CameraStateLiveDataApi {
   CameraStateApi? getValue();
 
@@ -427,22 +308,14 @@ abstract class CameraStateLiveDataApi {
   void removeObserver(CameraStateObserverApi observer);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'CameraStateObserver',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraStateObserver'))
 abstract class CameraStateObserverApi {
   CameraStateObserverApi();
 
   late final void Function(CameraStateApi value) onChanged;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'TorchStateLiveData',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'TorchStateLiveData'))
 abstract class TorchStateLiveDataApi {
   TorchStateApi? getValue();
 
@@ -450,22 +323,14 @@ abstract class TorchStateLiveDataApi {
   void removeObserver(TorchStateObserverApi observer);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'TorchStateObserver',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'TorchStateObserver'))
 abstract class TorchStateObserverApi {
   TorchStateObserverApi();
 
   late final void Function(TorchStateApi value) onChanged;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ZoomState',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ZoomState'))
 abstract class ZoomStateApi {
   late final double minZoomRatio;
   late final double maxZoomRatio;
@@ -473,11 +338,7 @@ abstract class ZoomStateApi {
   late final double linearZoom;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ZoomStateLiveData',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ZoomStateLiveData'))
 abstract class ZoomStateLiveDataApi {
   ZoomStateApi? getValue();
 
@@ -485,11 +346,7 @@ abstract class ZoomStateLiveDataApi {
   void removeObserver(ZoomStateObserverApi observer);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ZoomStateObserver',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ZoomStateObserver'))
 abstract class ZoomStateObserverApi {
   ZoomStateObserverApi();
 
@@ -508,26 +365,14 @@ abstract class ZoomStateObserverApi {
 //   late final bool isExposureCompensationSupported;
 // }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'MeteringPoint',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPoint'))
 abstract class MeteringPointApi {
   late final double size;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'MeteringPointFactory',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointFactory'))
 abstract class MeteringPointFactoryApi {
-  MeteringPointApi createPoint(
-    double x,
-    double y, {
-    double? size,
-  });
+  MeteringPointApi createPoint(double x, double y, {double? size});
 }
 
 @ProxyApi(
@@ -540,32 +385,17 @@ abstract class SurfaceOrientedMeteringPointFactoryApi
   SurfaceOrientedMeteringPointFactoryApi(double width, double height);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'MeteringPointTuple',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointTuple'))
 abstract class MeteringPointTupleApi {
-  MeteringPointTupleApi(
-    MeteringPointApi point, {
-    List<MeteringModeApi>? modes,
-  });
+  MeteringPointTupleApi(MeteringPointApi point, {List<MeteringModeApi>? modes});
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'DurationTuple',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'DurationTuple'))
 abstract class DurationTupleApi {
   DurationTupleApi(int duration, TimeUnitApi timeUnit);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'FocusMeteringAction',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FocusMeteringAction'))
 abstract class FocusMeteringActionApi {
   FocusMeteringActionApi.build(
     MeteringPointTupleApi first, {
@@ -581,11 +411,7 @@ abstract class FocusMeteringActionApi {
   bool isAutoCancelEnabled();
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'FocusMeteringResult',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FocusMeteringResult'))
 abstract class FocusMeteringResultApi {
   late final bool isFocusSuccessful;
 }
@@ -602,11 +428,7 @@ abstract class FocusMeteringResultApi {
 //   late final BitDepthApi bitDepth;
 // }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'CameraInfo',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraInfo'))
 abstract class CameraInfoApi {
   @static
   bool mustPlayShutterSound();
@@ -628,11 +450,7 @@ abstract class CameraInfoApi {
   //     List<DynamicRangeApi> candidateDynamicRanges);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'CameraControl',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraControl'))
 abstract class CameraControlApi {
   void enableTorch(bool torch);
   void setZoomRatio(double ratio);
@@ -666,11 +484,7 @@ abstract class CameraControlApi {
 //       List<SizeApi> supportedSizes, int rotationDegrees) filter;
 // }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ResolutionStrategy',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ResolutionStrategy'))
 abstract class ResolutionStrategyApi {
   ResolutionStrategyApi();
 
@@ -678,11 +492,7 @@ abstract class ResolutionStrategyApi {
   late final ResolutionFallbackRuleApi fallbackRule;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ResolutionSelector',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ResolutionSelector'))
 abstract class ResolutionSelectorApi {
   ResolutionSelectorApi();
 
@@ -692,32 +502,20 @@ abstract class ResolutionSelectorApi {
   late final ResolutionStrategyApi? resolutionStrategy;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageInfo',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageInfo'))
 abstract class ImageInfoApi {
   late final int timestamp;
   late final int rotationDegrees;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageProxy.PlaneProxy',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageProxy.PlaneProxy'))
 abstract class PlaneProxyApi {
   late final Uint8List value;
   late final int pixelStride;
   late final int rowStride;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageProxy',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageProxy'))
 abstract class ImageProxyApi extends AutoCloseableApi {
   late final ImageFormatApi format;
   late final int width;
@@ -743,18 +541,10 @@ abstract class OnImageCapturedCallbackApi {
   late final void Function(List<Object?> exception)? onError;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageAnalysis.Analyzer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageAnalysis.Analyzer'))
 abstract class AnalyzerApi {}
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageAnalyzer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageAnalyzer'))
 abstract class ImageAnalyzerApi implements AnalyzerApi {
   ImageAnalyzerApi();
 
@@ -773,6 +563,7 @@ abstract class AVMetadataObjectApi {}
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataBodyObject',
     import: 'AVFoundation',
+    minIosApi: '13.0.0',
   ),
 )
 abstract class AVMetadataBodyObjectApi extends AVMetadataObjectApi {}
@@ -781,33 +572,62 @@ abstract class AVMetadataBodyObjectApi extends AVMetadataObjectApi {}
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataCatBodyObject',
     import: 'AVFoundation',
+    minIosApi: '13.0.0',
   ),
 )
-abstract class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {}
+abstract class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final int bodyID;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataDogBodyObject',
     import: 'AVFoundation',
+    minIosApi: '13.0.0',
   ),
 )
-abstract class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {}
+abstract class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final int bodyID;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataHumanBodyObject',
     import: 'AVFoundation',
+    minIosApi: '13.0.0',
   ),
 )
-abstract class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {}
+abstract class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final int bodyID;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataHumanFullBodyObject',
     import: 'AVFoundation',
+    minIosApi: '17.0.0',
   ),
 )
-abstract class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi {}
+abstract class AVMetadataHumanFullBodyObjectApi
+    extends AVMetadataBodyObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final int bodyID;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -815,7 +635,17 @@ abstract class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi 
     import: 'AVFoundation',
   ),
 )
-abstract class AVMetadataFaceObjectApi extends AVMetadataObjectApi {}
+abstract class AVMetadataFaceObjectApi extends AVMetadataObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final int faceID;
+  late final bool hasRollAngle;
+  late final double rollAngle;
+  late final bool hasYawAngle;
+  late final double yawAngle;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -823,32 +653,39 @@ abstract class AVMetadataFaceObjectApi extends AVMetadataObjectApi {}
     import: 'AVFoundation',
   ),
 )
-abstract class AVMetadataMachineReadableCodeObjectApi extends AVMetadataObjectApi {}
+abstract class AVMetadataMachineReadableCodeObjectApi
+    extends AVMetadataObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final List<PointFApi> corners;
+  late final String? stringValue;
+}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataSalientObject',
     import: 'AVFoundation',
+    minIosApi: '13.0.0',
   ),
 )
-abstract class AVMetadataSalientObjectApi extends AVMetadataObjectApi {}
+abstract class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
+  late final AVMetadataObjectTypeApi type;
+  late final int time;
+  late final int duration;
+  late final RectApi bounds;
+  late final int objectID;
+}
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'AVMetadataObjectsConsumer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVMetadataObjectsConsumer'))
 abstract class AVMetadataObjectsConsumerApi {
   AVMetadataObjectsConsumerApi();
 
   late final void Function(List<AVMetadataObjectApi> value) accept;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'AVAnalyzer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer'))
 abstract class AVAnalyzerApi {
   AVAnalyzerApi({
     required List<AVMetadataObjectTypeApi> types,
@@ -856,18 +693,11 @@ abstract class AVAnalyzerApi {
   });
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNDetector',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNDetector'))
 abstract class VNDetectorApi extends CloseableApi {}
 
 @ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNObservation',
-    import: 'Vision',
-  )
+  swiftOptions: SwiftProxyApiOptions(name: 'VNObservation', import: 'Vision'),
 )
 abstract class VNObservationApi {}
 
@@ -875,7 +705,7 @@ abstract class VNObservationApi {}
   swiftOptions: SwiftProxyApiOptions(
     name: 'VNDetectedObjectObservation',
     import: 'Vision',
-  )
+  ),
 )
 abstract class VNDetectedObjectObservationApi extends VNObservationApi {}
 
@@ -883,15 +713,16 @@ abstract class VNDetectedObjectObservationApi extends VNObservationApi {}
   swiftOptions: SwiftProxyApiOptions(
     name: 'VNRectangleObservation',
     import: 'Vision',
-  )
+  ),
 )
-abstract class VNRectangleObservationApi extends VNDetectedObjectObservationApi {}
+abstract class VNRectangleObservationApi
+    extends VNDetectedObjectObservationApi {}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'VNBarcodeObservation',
     import: 'Vision',
-  )
+  ),
 )
 abstract class VNBarcodeObservationApi extends VNRectangleObservationApi {
   late final String uuid;
@@ -911,22 +742,12 @@ abstract class VNBarcodeObservationApi extends VNRectangleObservationApi {
   late final bool isColorInverted;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNBarcodeScanner',
-  )
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNBarcodeScanner'))
 abstract class VNBarcodeScannerApi extends VNDetectorApi {
-  VNBarcodeScannerApi({
-    List<VNBarcodeSymbologyApi>? symbologies,
-  });
+  VNBarcodeScannerApi({List<VNBarcodeSymbologyApi>? symbologies});
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNAnalyzer.Result',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNAnalyzer.Result'))
 abstract class VNAnalyzerResultApi {
   late final SizeApi size;
   late final int timestamp;
@@ -935,22 +756,14 @@ abstract class VNAnalyzerResultApi {
   List<Object?>? getError(VNDetectorApi detector);
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNAnalyzerResultConsumer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNAnalyzerResultConsumer'))
 abstract class VNAnalyzerResultConsumerApi {
   VNAnalyzerResultConsumerApi();
 
   late final void Function(VNAnalyzerResultApi value) accept;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNAnalyzer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNAnalyzer'))
 abstract class VNAnalyzerApi implements AnalyzerApi {
   VNAnalyzerApi({
     required List<VNDetectorApi> detectors,
@@ -1010,22 +823,14 @@ abstract class VNAnalyzerApi implements AnalyzerApi {
 //   SizeApi? getResolution(CameraInfoApi cameraInfo, QualityApi quality);
 // }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'OutputOptions',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'OutputOptions'))
 abstract class OutputOptionsApi {
   int getDurationLimitMillis();
   int getFileSizeLimit();
   CLLocationApi? getLocation();
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'FileOutputOptions',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FileOutputOptions'))
 abstract class FileOutputOptionsApi extends OutputOptionsApi {
   FileOutputOptionsApi.build({
     required String file,
@@ -1037,11 +842,7 @@ abstract class FileOutputOptionsApi extends OutputOptionsApi {
   String getFile();
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'AudioConfig',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AudioConfig'))
 abstract class AudioConfigApi {
   @static
   late final AudioConfigApi audioDisabled;
@@ -1051,11 +852,7 @@ abstract class AudioConfigApi {
   bool getAudioEnabled();
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'AudioStats',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AudioStats'))
 abstract class AudioStatsApi {
   late final double audioAmplitude;
   late final AudioStateApi audioState;
@@ -1064,74 +861,42 @@ abstract class AudioStatsApi {
   late final bool hasError;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'RecordingStats',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'RecordingStats'))
 abstract class RecordingStatsApi {
   late final AudioStatsApi audioStats;
   late final int numBytesRecorded;
   late final int recordedDurationNanos;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEvent',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent'))
 abstract class VideoRecordEventApi {}
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEvent.Status',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Status'))
 abstract class VideoRecordStatusEventApi extends VideoRecordEventApi {
   late final RecordingStatsApi recordingStats;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEvent.Start',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Start'))
 abstract class VideoRecordStartEventApi extends VideoRecordEventApi {
   late final RecordingStatsApi recordingStats;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEvent.Pause',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Pause'))
 abstract class VideoRecordPauseEventApi extends VideoRecordEventApi {
   late final RecordingStatsApi recordingStats;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEvent.Resume',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Resume'))
 abstract class VideoRecordResumeEventApi extends VideoRecordEventApi {
   late final RecordingStatsApi recordingStats;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'OutputResults',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'OutputResults'))
 abstract class OutputResultsApi {
   late final String? outputUri;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEvent.Finalize',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Finalize'))
 abstract class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
   late final RecordingStatsApi recordingStats;
   late final List<Object?>? cause;
@@ -1139,22 +904,14 @@ abstract class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
   late final OutputResultsApi outputResults;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VideoRecordEventConsumer',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEventConsumer'))
 abstract class VideoRecordEventConsumerApi {
   VideoRecordEventConsumerApi();
 
   late final void Function(VideoRecordEventApi value) accept;
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'Recording',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Recording'))
 abstract class RecordingApi extends AutoCloseableApi {
   bool isPersistent();
   void mute(bool muted);
@@ -1163,11 +920,7 @@ abstract class RecordingApi extends AutoCloseableApi {
   void stop();
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'CameraController',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraController'))
 abstract class CameraControllerApi {
   CameraControllerApi();
 
@@ -1204,14 +957,16 @@ abstract class CameraControllerApi {
   void takePicture(OnImageCapturedCallbackApi capturedCallback);
   ResolutionSelectorApi? getImageAnalysisResolutionSelector();
   void setImageAnalysisResolutionSelector(
-      ResolutionSelectorApi? resolutionSelector);
+    ResolutionSelectorApi? resolutionSelector,
+  );
   BackpressureStrategyApi getImageAnalysisBackpressureStrategy();
   void setImageAnalysisBackpressureStrategy(BackpressureStrategyApi strategy);
   int getImageAnalysisImageQueueDepth();
   void setImageAnalysisImageQueueDepth(int depth);
   ImageFormatApi getImageAnalysisOutputImageFormat();
   void setImageAnalysisOutputImageFormat(
-      ImageFormatApi imageAnalysisOutputImageFormat);
+    ImageFormatApi imageAnalysisOutputImageFormat,
+  );
   void setImageAnalysisAnalyzer(AnalyzerApi analyzer);
   void clearImageAnalysisAnalyzer();
   // DynamicRangeApi getVideoCaptureDynamicRange();
@@ -1230,11 +985,7 @@ abstract class CameraControllerApi {
   );
 }
 
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'PreviewView',
-  ),
-)
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewView'))
 abstract class PreviewViewApi {
   PreviewViewApi();
 

@@ -17,7 +17,7 @@ public class VNAnalyzer: ImageAnalysis.Analyzer {
         self.consumer = consumer
     }
     
-    public func analyze(_ image: ImageProxy) {
+    public override func analyze(_ image: ImageProxy) {
         // Detect the image recursively, starting from index 0.
         self.detectRecursively(image, 0, [:], [:]);
     }

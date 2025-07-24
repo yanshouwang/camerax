@@ -150,8 +150,8 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         pigeonInstance.setImageAnalysisOutputImageFormat(imageAnalysisOutputImageFormat.delegate)
     }
     
-    func setImageAnalysisAnalyzer(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, analyzer: any ImageAnalysis.Analyzer) throws {
-        pigeonInstance.setImageAnalysisAnalyzer(analyzer)
+    func setImageAnalysisAnalyzer(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController, analyzer: ImageAnalysis.Analyzer) throws {
+        try pigeonInstance.setImageAnalysisAnalyzer(analyzer)
     }
     
     func clearImageAnalysisAnalyzer(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws {
