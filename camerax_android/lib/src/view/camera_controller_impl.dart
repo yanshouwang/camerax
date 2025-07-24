@@ -276,7 +276,7 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) =>
-      api.setVideoCaptureTargetFrameRate(targetFrameRate.intRangeApi);
+      api.setVideoCaptureTargetFrameRate(targetFrameRate.api);
 
   @override
   Future<bool> isRecording() => api.isRecording();

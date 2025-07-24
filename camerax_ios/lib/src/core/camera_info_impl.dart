@@ -69,14 +69,14 @@ final class CameraInfoImpl extends CameraInfo {
   @override
   Future<Set<CameraInfo>> getPhysicalCameraInfos() => api
       .getPhysicalCameraInfos()
-      .then((e1) => e1.map((e2) => e2.impl).toSet());
+      .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<Set<Range<int>>> getSupportedFrameRateRanges() =>
       throw UnimplementedError();
   //  api
   //     .getSupportedFrameRateRanges()
-  //     .then((e1) => e1.map((e2) => e2.impl).toSet());
+  //     .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<TorchState?> getTorchState() =>
@@ -113,7 +113,7 @@ final class CameraInfoImpl extends CameraInfo {
     //     candidateDynamicRanges.map((e) => e.api).toList();
     // return api
     //     .querySupportedDynamicRanges(candidateDynamicRangeApis)
-    //     .then((e1) => e1.map((e2) => e2.impl).toSet());
+    //     .then((e) => e.map((e1) => e1.impl).toSet());
   }
 
   void _listenCameraStateChanged() async {

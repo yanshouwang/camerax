@@ -8,7 +8,5 @@
 import Foundation
 
 public class ImageAnalysis: NSObject {
-    public protocol Analyzer: NSObjectProtocol {
-        func analyze(_ image: ImageProxy)
-    }
+    public class Analyzer: NSObject {}
 }

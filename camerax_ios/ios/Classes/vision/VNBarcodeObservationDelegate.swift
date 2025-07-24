@@ -10,43 +10,70 @@ import Flutter
 import Vision
 
 class VNBarcodeObservationDelegate: PigeonApiDelegateVNBarcodeObservationApi {
-    func getPayloadStringValue(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String? {
+    func uuid(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String {
+        return pigeonInstance.uuid.uuidString
+    }
+    
+    func confidence(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> Double {
+        return Double(pigeonInstance.confidence)
+    }
+    
+    func boundingBox(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> RectF {
+        return pigeonInstance.boundingBox.cxRectF
+    }
+    
+    func bottomLeft(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF {
+        return pigeonInstance.bottomLeft.cxPointF
+    }
+    
+    func bottomRight(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF {
+        return pigeonInstance.bottomRight.cxPointF
+    }
+    
+    func topLeft(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF {
+        return pigeonInstance.topLeft.cxPointF
+    }
+    
+    func topRight(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF {
+        return pigeonInstance.topRight.cxPointF
+    }
+    
+    func payloadStringValue(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String? {
         return pigeonInstance.payloadStringValue
     }
     
-    func getPayloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData? {
-        guard #available(iOS 17.0, *) else { throw CameraXError(code: "unsupported-error", message: "payloadData is not available before iOS 17.0", details: nil) }
-        guard let bytes = pigeonInstance.payloadData else { return nil }
+    func payloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData? {
+        guard #available(iOS 17.0, *), let bytes = pigeonInstance.payloadData else { return nil }
         return FlutterStandardTypedData(bytes: bytes)
     }
     
-    func getSupplementalPayloadString(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String? {
-        guard #available(iOS 17.0, *) else { throw CameraXError(code: "unsupported-error", message: "supplementalPayloadString is not available before iOS 17.0", details: nil) }
+    func supplementalPayloadString(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String? {
+        guard #available(iOS 17.0, *) else { return nil }
         return pigeonInstance.supplementalPayloadString
     }
     
-    func getSupplementalPayloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData? {
-        guard #available(iOS 17.0, *) else { throw CameraXError(code: "unsupported-error", message: "supplementalPayloadData is not available before iOS 17.0", details: nil) }
-        guard let bytes = pigeonInstance.supplementalPayloadData else { return nil }
+    func supplementalPayloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData? {
+        guard #available(iOS 17.0, *), let bytes = pigeonInstance.supplementalPayloadData else { return nil }
         return FlutterStandardTypedData(bytes: bytes)
     }
     
-    func getSupplementalCompositeType(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeCompositeTypeApi {
-        guard #available(iOS 17.0, *) else { throw CameraXError(code: "unsupported-error", message: "supplementalCompositeType is not available before iOS 17.0", details: nil) }
+    func supplementalCompositeType(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeCompositeTypeApi {
+        guard #available(iOS 17.0, *) else { return .none }
         return pigeonInstance.supplementalCompositeType.api
     }
     
     func isGS1DataCarrier(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> Bool {
-        guard #available(iOS 17.0, *) else { throw CameraXError(code: "unsupported-error", message: "isGS1DataCarrier is not available before iOS 17.0", details: nil) }
+        guard #available(iOS 17.0, *) else { return false }
         return pigeonInstance.isGS1DataCarrier
     }
     
-    func getSymbology(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeSymbologyApi {
-        return try pigeonInstance.symbology.api
+    func symbology(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeSymbologyApi {
+        guard let api = pigeonInstance.symbology.api else { throw CameraXError(code: "nil-error", message: "symbology is nil", details: nil) }
+        return api
     }
     
     func isColorInverted(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> Bool {
-        guard #available(iOS 17.0, *) else { throw CameraXError(code: "unsupported-error", message: "isColorInverted is not available before iOS 17.0", details: nil) }
+        guard #available(iOS 17.0, *) else { return false }
         return pigeonInstance.isColorInverted
     }
 }

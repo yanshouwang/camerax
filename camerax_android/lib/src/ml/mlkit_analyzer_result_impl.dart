@@ -20,12 +20,12 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
       final barcodeScanner = detector as BarcodeScannerImpl;
       return api
           .getBarcodes(barcodeScanner.api)
-          .then((e1) => e1?.map((e2) => e2.impl).toList() as T?);
+          .then((e) => e?.map((e1) => e1.impl).toList() as T?);
     } else if (detector is FaceDetectorImpl) {
       final faceDetector = detector as FaceDetectorImpl;
       return api
           .getFaces(faceDetector.api)
-          .then((e1) => e1?.map((e2) => e2.impl).toList() as T?);
+          .then((e) => e?.map((e1) => e1.impl).toList() as T?);
     } else {
       throw TypeError();
     }

@@ -9,14 +9,14 @@ import Foundation
 
 class SizeDelegate: PigeonApiDelegateSizeApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiSizeApi, width: Int64, height: Int64) throws -> Size {
-        return Size(width: Int(width), height: Int(height))
+        return Size(width: width, height: height)
     }
     
     func width(pigeonApi: PigeonApiSizeApi, pigeonInstance: Size) throws -> Int64 {
-        return Int64(pigeonInstance.width)
+        return pigeonInstance.width
     }
     
     func height(pigeonApi: PigeonApiSizeApi, pigeonInstance: Size) throws -> Int64 {
-        return Int64(pigeonInstance.height)
+        return pigeonInstance.height
     }
 }

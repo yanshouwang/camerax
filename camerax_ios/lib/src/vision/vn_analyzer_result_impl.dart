@@ -17,7 +17,7 @@ final class VNAnalyzerResultImpl extends VNAnalyzerResult {
     if (detector is VNBarcodeScannerImpl) {
       return api
           .getBarcodes(detector.api)
-          .then((e1) => e1?.map((e2) => e2.impl).toList());
+          .then((e) => e?.map((e1) => e1.impl).toList());
     } else {
       throw TypeError();
     }

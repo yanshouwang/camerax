@@ -8,10 +8,10 @@
 import Foundation
 
 class Point: NSObject {
-    let x: Int
-    let y: Int
+    let x: Int64
+    let y: Int64
     
-    init(x: Int, y: Int) {
+    init(x: Int64, y: Int64) {
         self.x = x
         self.y = y
     }
@@ -31,12 +31,12 @@ class Point: NSObject {
 
 extension Point {
     var cgPoint: CGPoint {
-        return CGPoint(x: x, y: y)
+        return CGPoint(x: Int(x), y: Int(x))
     }
 }
 
 extension CGPoint {
     var cxPoint: Point {
-        return Point(x: Int(x), y: Int(y))
+        return Point(x: Int64(x), y: Int64(y))
     }
 }

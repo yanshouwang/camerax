@@ -8,10 +8,10 @@
 import Foundation
 
 class Size: NSObject {
-    let width: Int
-    let height: Int
+    let width: Int64
+    let height: Int64
     
-    init(width: Int, height: Int) {
+    init(width: Int64, height: Int64) {
         self.width = width
         self.height = height
     }
@@ -31,12 +31,12 @@ class Size: NSObject {
 
 extension Size {
     var cgSize: CGSize {
-        return CGSize(width: width, height: height)
+        return CGSize(width: Int(width), height: Int(height))
     }
 }
 
 extension CGSize {
     var cxSize: Size {
-        return Size(width: Int(width), height: Int(height))
+        return Size(width: Int64(width), height: Int64(height))
     }
 }

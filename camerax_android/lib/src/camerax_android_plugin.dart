@@ -8,6 +8,7 @@ import 'core.dart';
 import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
+import 'vision.dart';
 
 final class CameraXAndroidPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -187,10 +188,10 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   VNAnalyzer newVNAnalyzer({
     required List<VNDetector> detectors,
     required Consumer<VNAnalyzerResult> consumer,
-  }) => throw UnimplementedError();
+  }) => VNAnalyzerImpl(detectors: detectors, consumer: consumer);
 
   @override
   VNBarcodeScanner newVNBarcodeScanner({
     List<VNBarcodeSymbology>? symbologies,
-  }) => throw UnimplementedError();
+  }) => VNBarcodeScanner(symbologies: symbologies);
 }

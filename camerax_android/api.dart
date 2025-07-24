@@ -1138,7 +1138,9 @@ abstract class FaceDetectorApi extends DetectorApi {
   ),
 )
 abstract class MlKitAnalyzerResultApi {
+  late final SizeApi size;
   late final int timestamp;
+
   List<BarcodeApi>? getBarcodes(BarcodeScannerApi detector);
   List<FaceApi>? getFaces(FaceDetectorApi detector);
   List<Object?>? getThrowable(DetectorApi detector);

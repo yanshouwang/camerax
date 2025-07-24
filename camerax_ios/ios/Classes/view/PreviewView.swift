@@ -14,8 +14,11 @@ public class PreviewView: UIView {
         AVCaptureVideoPreviewLayer.self
     }
     
-    public override var layer: AVCaptureVideoPreviewLayer {
-        super.layer as! AVCaptureVideoPreviewLayer
+    public var videoPreviewLayer: AVCaptureVideoPreviewLayer {
+        guard let layer = layer as? AVCaptureVideoPreviewLayer else {
+            fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
+        }
+        return layer
     }
     
     private let tapGestureRecognizer: UITapGestureRecognizer
@@ -23,20 +26,20 @@ public class PreviewView: UIView {
     private var controller: CameraController?
     
     private var session: AVCaptureSession? {
-        get { layer.session }
-        set { layer.session = newValue }
+        get { self.videoPreviewLayer.session }
+        set { self.videoPreviewLayer.session = newValue }
     }
     
     private var videoGravity: AVLayerVideoGravity {
-        get { self.layer.videoGravity }
-        set { self.layer.videoGravity = newValue }
+        get { self.videoPreviewLayer.videoGravity }
+        set { self.videoPreviewLayer.videoGravity = newValue }
     }
     
     public override init(frame: CGRect) {
         self.tapGestureRecognizer = UITapGestureRecognizer()
         self.pinchGestureRecognizer = UIPinchGestureRecognizer()
         super.init(frame: frame)
-        self.layer.videoGravity = .resizeAspectFill
+        self.videoPreviewLayer.videoGravity = .resizeAspectFill
         self.tapGestureRecognizer.addTarget(self, action: .handleTapGestureRecognizer)
         self.pinchGestureRecognizer.addTarget(self, action: .handlePinchGestureRecognizer)
         self.addGestureRecognizer(self.tapGestureRecognizer)
@@ -61,13 +64,17 @@ public class PreviewView: UIView {
     }
     
     public func setController(_ controller: CameraController?) {
-        if let controller {
-            self.controller = controller
-            self.layer.session = controller.session
+        if let oldController = self.controller {
+            oldController.videoPreviewLayer = nil
+        }
+        if let newController = controller {
+            newController.videoPreviewLayer = self.videoPreviewLayer
+            self.controller = newController
+            self.session = newController.session
             updateVideoOrientation()
         } else {
             self.controller = nil
-            self.layer.session = nil
+            self.session = nil
         }
     }
     
@@ -84,7 +91,7 @@ public class PreviewView: UIView {
             return
         }
         let layerPoint = sender.location(in: self)
-        let devicePoint = self.layer.captureDevicePointConverted(fromLayerPoint: layerPoint)
+        let devicePoint = self.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
         _ = try? controller.startFocusAndMetering(devicePoint, false)
     }
     
@@ -113,9 +120,9 @@ public class PreviewView: UIView {
         let orientation = UIDevice.current.orientation
         debugPrint("ui device orientation: \(orientation)")
         guard let videoOrientation = orientation.videoOrientation else { return }
-        debugPrint("update preview layer orientation: \(videoOrientation)")
-        guard let connection = self.layer.connection else {
-            debugPrint("preview connection is nil")
+        debugPrint("update video preview layer orientation: \(videoOrientation)")
+        guard let connection = self.videoPreviewLayer.connection else {
+            debugPrint("connection is nil")
             return
         }
         connection.videoOrientation = videoOrientation

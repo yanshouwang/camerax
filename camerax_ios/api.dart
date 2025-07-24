@@ -166,6 +166,34 @@ enum VideoRecordFinalizeEventErrorApi {
   recordingGarbageCollected,
 }
 
+enum AVMetadataObjectTypeApi {
+  codabar,
+  code39,
+  code39Mod43,
+  code93,
+  code128,
+  ean8,
+  ean13,
+  gs1DataBar,
+  gs1DataBarExpanded,
+  gs1DataBarLimited,
+  interleaved2of5,
+  itf14,
+  upce,
+  aztec,
+  dataMatrix,
+  microPDF417,
+  microQR,
+  pdf417,
+  qr,
+  humanBody,
+  humanFullBody,
+  dogBody,
+  catBody,
+  face,
+  salientObject,
+}
+
 enum VNBarcodeSymbologyApi {
   aztec,
   codabar,
@@ -297,6 +325,18 @@ abstract class SizeApi {
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
+    name: 'SizeF',
+  ),
+)
+abstract class SizeFApi {
+  SizeFApi();
+
+  late final double width;
+  late final double height;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
     name: 'Point',
   ),
 )
@@ -305,6 +345,18 @@ abstract class PointApi {
 
   late final int x;
   late final int y;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'PointF',
+  ),
+)
+abstract class PointFApi {
+  PointFApi();
+
+  late final double x;
+  late final double y;
 }
 
 @ProxyApi(
@@ -319,6 +371,20 @@ abstract class RectApi {
   late final int top;
   late final int right;
   late final int bottom;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'RectF',
+  ),
+)
+abstract class RectFApi {
+  RectFApi();
+
+  late final double left;
+  late final double top;
+  late final double right;
+  late final double bottom;
 }
 
 // @ProxyApi(
@@ -686,7 +752,7 @@ abstract class AnalyzerApi {}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
-    name: 'ImageAnalysis.Analyzer',
+    name: 'ImageAnalyzer',
   ),
 )
 abstract class ImageAnalyzerApi implements AnalyzerApi {
@@ -694,6 +760,102 @@ abstract class ImageAnalyzerApi implements AnalyzerApi {
 
   late final void Function(ImageProxyApi image) analyze;
 }
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataBodyObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataBodyObjectApi extends AVMetadataObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataCatBodyObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataDogBodyObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataHumanBodyObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataHumanFullBodyObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataFaceObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataFaceObjectApi extends AVMetadataObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataMachineReadableCodeObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataMachineReadableCodeObjectApi extends AVMetadataObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataSalientObject',
+    import: 'AVFoundation',
+  ),
+)
+abstract class AVMetadataSalientObjectApi extends AVMetadataObjectApi {}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVMetadataObjectsConsumer',
+  ),
+)
+abstract class AVMetadataObjectsConsumerApi {
+  AVMetadataObjectsConsumerApi();
+
+  late final void Function(List<AVMetadataObjectApi> value) accept;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'AVAnalyzer',
+  ),
+)
+abstract class AVAnalyzerApi {
+  AVAnalyzerApi({
+    required List<AVMetadataObjectTypeApi> types,
+    required AVMetadataObjectsConsumerApi consumer,
+  });
+}
+
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'VNDetector',
@@ -707,10 +869,7 @@ abstract class VNDetectorApi extends CloseableApi {}
     import: 'Vision',
   )
 )
-abstract class VNObservationApi {
-  String getUUID();
-  double getConfidence();
-}
+abstract class VNObservationApi {}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -718,9 +877,7 @@ abstract class VNObservationApi {
     import: 'Vision',
   )
 )
-abstract class VNDetectedObjectObservationApi extends VNObservationApi {
-  RectApi getBoundingBox();
-}
+abstract class VNDetectedObjectObservationApi extends VNObservationApi {}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -728,12 +885,7 @@ abstract class VNDetectedObjectObservationApi extends VNObservationApi {
     import: 'Vision',
   )
 )
-abstract class VNRectangleObservationApi extends VNDetectedObjectObservationApi {
-  PointApi getBottomLeft();
-  PointApi getBottomRight();
-  PointApi getTopLeft();
-  PointApi getTopRight();
-}
+abstract class VNRectangleObservationApi extends VNDetectedObjectObservationApi {}
 
 @ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
@@ -742,14 +894,21 @@ abstract class VNRectangleObservationApi extends VNDetectedObjectObservationApi 
   )
 )
 abstract class VNBarcodeObservationApi extends VNRectangleObservationApi {
-  String? getPayloadStringValue();
-  Uint8List? getPayloadData();
-  String? getSupplementalPayloadString();
-  Uint8List? getSupplementalPayloadData();
-  VNBarcodeCompositeTypeApi getSupplementalCompositeType();
-  bool isGS1DataCarrier();
-  VNBarcodeSymbologyApi getSymbology();
-  bool isColorInverted();
+  late final String uuid;
+  late final double confidence;
+  late final RectFApi boundingBox;
+  late final PointFApi bottomLeft;
+  late final PointFApi bottomRight;
+  late final PointFApi topLeft;
+  late final PointFApi topRight;
+  late final String? payloadStringValue;
+  late final Uint8List? payloadData;
+  late final String? supplementalPayloadString;
+  late final Uint8List? supplementalPayloadData;
+  late final VNBarcodeCompositeTypeApi supplementalCompositeType;
+  late final bool isGS1DataCarrier;
+  late final VNBarcodeSymbologyApi symbology;
+  late final bool isColorInverted;
 }
 
 @ProxyApi(
@@ -769,7 +928,9 @@ abstract class VNBarcodeScannerApi extends VNDetectorApi {
   ),
 )
 abstract class VNAnalyzerResultApi {
+  late final SizeApi size;
   late final int timestamp;
+
   List<VNBarcodeObservationApi>? getBarcodes(VNBarcodeScannerApi detector);
   List<Object?>? getError(VNDetectorApi detector);
 }
@@ -796,7 +957,6 @@ abstract class VNAnalyzerApi implements AnalyzerApi {
     required VNAnalyzerResultConsumerApi consumer,
   });
 }
-
 
 // @ProxyApi(
 //   swiftOptions: SwiftProxyApiOptions(

@@ -377,12 +377,21 @@ protocol CameraXApiPigeonProxyApiDelegate {
   /// An implementation of [PigeonApiSizeApi] used to add a new Dart instance of
   /// `SizeApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiSizeApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiSizeApi
+  /// An implementation of [PigeonApiSizeFApi] used to add a new Dart instance of
+  /// `SizeFApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiSizeFApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiSizeFApi
   /// An implementation of [PigeonApiPointApi] used to add a new Dart instance of
   /// `PointApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiPointApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiPointApi
+  /// An implementation of [PigeonApiPointFApi] used to add a new Dart instance of
+  /// `PointFApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiPointFApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiPointFApi
   /// An implementation of [PigeonApiRectApi] used to add a new Dart instance of
   /// `RectApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiRectApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiRectApi
+  /// An implementation of [PigeonApiRectFApi] used to add a new Dart instance of
+  /// `RectFApi` to the Dart `InstanceManager` and make calls to Dart.
+  func pigeonApiRectFApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiRectFApi
   /// An implementation of [PigeonApiCameraSelectorApi] used to add a new Dart instance of
   /// `CameraSelectorApi` to the Dart `InstanceManager` and make calls to Dart.
   func pigeonApiCameraSelectorApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraSelectorApi
@@ -545,6 +554,15 @@ extension CameraXApiPigeonProxyApiDelegate {
   func pigeonApiVNDetectorApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNDetectorApi {
     return PigeonApiVNDetectorApi(pigeonRegistrar: registrar, delegate: PigeonApiDelegateVNDetectorApi())
   }
+  func pigeonApiVNObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNObservationApi {
+    return PigeonApiVNObservationApi(pigeonRegistrar: registrar, delegate: PigeonApiDelegateVNObservationApi())
+  }
+  func pigeonApiVNDetectedObjectObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNDetectedObjectObservationApi {
+    return PigeonApiVNDetectedObjectObservationApi(pigeonRegistrar: registrar, delegate: PigeonApiDelegateVNDetectedObjectObservationApi())
+  }
+  func pigeonApiVNRectangleObservationApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVNRectangleObservationApi {
+    return PigeonApiVNRectangleObservationApi(pigeonRegistrar: registrar, delegate: PigeonApiDelegateVNRectangleObservationApi())
+  }
   func pigeonApiVideoRecordEventApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiVideoRecordEventApi {
     return PigeonApiVideoRecordEventApi(pigeonRegistrar: registrar, delegate: PigeonApiDelegateVideoRecordEventApi())
   }
@@ -593,8 +611,11 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiAutoCloseableApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiAutoCloseableApi(self))
     PigeonApiCLLocationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCLLocationApi(self))
     PigeonApiSizeApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiSizeApi(self))
+    PigeonApiSizeFApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiSizeFApi(self))
     PigeonApiPointApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiPointApi(self))
+    PigeonApiPointFApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiPointFApi(self))
     PigeonApiRectApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiRectApi(self))
+    PigeonApiRectFApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiRectFApi(self))
     PigeonApiCameraSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraSelectorApi(self))
     PigeonApiCameraStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraStateLiveDataApi(self))
     PigeonApiCameraStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiCameraStateObserverApi(self))
@@ -613,10 +634,6 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiResolutionSelectorApi(self))
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiOnImageCapturedCallbackApi(self))
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiImageAnalyzerApi(self))
-    PigeonApiVNObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNObservationApi(self))
-    PigeonApiVNDetectedObjectObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNDetectedObjectObservationApi(self))
-    PigeonApiVNRectangleObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNRectangleObservationApi(self))
-    PigeonApiVNBarcodeObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNBarcodeObservationApi(self))
     PigeonApiVNBarcodeScannerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNBarcodeScannerApi(self))
     PigeonApiVNAnalyzerResultApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNAnalyzerResultApi(self))
     PigeonApiVNAnalyzerResultConsumerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: apiDelegate.pigeonApiVNAnalyzerResultConsumerApi(self))
@@ -635,8 +652,11 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiAutoCloseableApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCLLocationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiSizeApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiSizeFApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiPointApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiPointFApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiRectApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
+    PigeonApiRectFApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCameraSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCameraStateLiveDataApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiCameraStateObserverApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
@@ -655,10 +675,6 @@ open class CameraXApiPigeonProxyApiRegistrar {
     PigeonApiResolutionSelectorApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiOnImageCapturedCallbackApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiImageAnalyzerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiVNObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiVNDetectedObjectObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiVNRectangleObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
-    PigeonApiVNBarcodeObservationApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiVNBarcodeScannerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiVNAnalyzerResultApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
     PigeonApiVNAnalyzerResultConsumerApi.setUpMessageHandlers(binaryMessenger: binaryMessenger, api: nil)
@@ -747,6 +763,17 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
       }
 
 
+      if let instance = value as? SizeF {
+        pigeonRegistrar.apiDelegate.pigeonApiSizeFApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
       if let instance = value as? Point {
         pigeonRegistrar.apiDelegate.pigeonApiPointApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
@@ -758,8 +785,30 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
       }
 
 
+      if let instance = value as? PointF {
+        pigeonRegistrar.apiDelegate.pigeonApiPointFApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
       if let instance = value as? Rect {
         pigeonRegistrar.apiDelegate.pigeonApiRectApi(pigeonRegistrar).pigeonNewInstance(
+          pigeonInstance: instance
+        ) { _ in }
+        super.writeByte(128)
+        super.writeValue(
+          pigeonRegistrar.instanceManager.identifierWithStrongReference(forInstance: instance as AnyObject)!)
+        return
+      }
+
+
+      if let instance = value as? RectF {
+        pigeonRegistrar.apiDelegate.pigeonApiRectFApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
         super.writeByte(128)
@@ -1022,7 +1071,7 @@ private class CameraXApiPigeonInternalProxyApiCodecReaderWriter: FlutterStandard
       }
 
 
-      if let instance = value as? ImageAnalysis.Analyzer {
+      if let instance = value as? ImageAnalyzer {
         pigeonRegistrar.apiDelegate.pigeonApiImageAnalyzerApi(pigeonRegistrar).pigeonNewInstance(
           pigeonInstance: instance
         ) { _ in }
@@ -2261,6 +2310,84 @@ withIdentifier: pigeonIdentifierArg)
     }
   }
 }
+protocol PigeonApiDelegateSizeFApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiSizeFApi, width: Double, height: Double) throws -> SizeF
+  func width(pigeonApi: PigeonApiSizeFApi, pigeonInstance: SizeF) throws -> Double
+  func height(pigeonApi: PigeonApiSizeFApi, pigeonInstance: SizeF) throws -> Double
+}
+
+protocol PigeonApiProtocolSizeFApi {
+}
+
+final class PigeonApiSizeFApi: PigeonApiProtocolSizeFApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateSizeFApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateSizeFApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiSizeFApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.SizeFApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let widthArg = args[1] as! Double
+        let heightArg = args[2] as! Double
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, width: widthArg, height: heightArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of SizeFApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: SizeF, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let widthArg = try! pigeonDelegate.width(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let heightArg = try! pigeonDelegate.height(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.SizeFApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg, widthArg, heightArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
 protocol PigeonApiDelegatePointApi {
   func pigeonDefaultConstructor(pigeonApi: PigeonApiPointApi, x: Int64, y: Int64) throws -> Point
   func x(pigeonApi: PigeonApiPointApi, pigeonInstance: Point) throws -> Int64
@@ -2321,6 +2448,84 @@ withIdentifier: pigeonIdentifierArg)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.PointApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg, xArg, yArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegatePointFApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiPointFApi, x: Double, y: Double) throws -> PointF
+  func x(pigeonApi: PigeonApiPointFApi, pigeonInstance: PointF) throws -> Double
+  func y(pigeonApi: PigeonApiPointFApi, pigeonInstance: PointF) throws -> Double
+}
+
+protocol PigeonApiProtocolPointFApi {
+}
+
+final class PigeonApiPointFApi: PigeonApiProtocolPointFApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegatePointFApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegatePointFApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiPointFApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.PointFApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let xArg = args[1] as! Double
+        let yArg = args[2] as! Double
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, x: xArg, y: yArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of PointFApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: PointF, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let xArg = try! pigeonDelegate.x(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let yArg = try! pigeonDelegate.y(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.PointFApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
       channel.sendMessage([pigeonIdentifierArg, xArg, yArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
@@ -2405,6 +2610,90 @@ withIdentifier: pigeonIdentifierArg)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.RectApi.pigeon_newInstance"
+      let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
+      channel.sendMessage([pigeonIdentifierArg, leftArg, topArg, rightArg, bottomArg] as [Any?]) { response in
+        guard let listResponse = response as? [Any?] else {
+          completion(.failure(createConnectionError(withChannelName: channelName)))
+          return
+        }
+        if listResponse.count > 1 {
+          let code: String = listResponse[0] as! String
+          let message: String? = nilOrValue(listResponse[1])
+          let details: String? = nilOrValue(listResponse[2])
+          completion(.failure(CameraXError(code: code, message: message, details: details)))
+        } else {
+          completion(.success(()))
+        }
+      }
+    }
+  }
+}
+protocol PigeonApiDelegateRectFApi {
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiRectFApi, left: Double, top: Double, right: Double, bottom: Double) throws -> RectF
+  func left(pigeonApi: PigeonApiRectFApi, pigeonInstance: RectF) throws -> Double
+  func top(pigeonApi: PigeonApiRectFApi, pigeonInstance: RectF) throws -> Double
+  func right(pigeonApi: PigeonApiRectFApi, pigeonInstance: RectF) throws -> Double
+  func bottom(pigeonApi: PigeonApiRectFApi, pigeonInstance: RectF) throws -> Double
+}
+
+protocol PigeonApiProtocolRectFApi {
+}
+
+final class PigeonApiRectFApi: PigeonApiProtocolRectFApi  {
+  unowned let pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar
+  let pigeonDelegate: PigeonApiDelegateRectFApi
+  init(pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar, delegate: PigeonApiDelegateRectFApi) {
+    self.pigeonRegistrar = pigeonRegistrar
+    self.pigeonDelegate = delegate
+  }
+  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiRectFApi?) {
+    let codec: FlutterStandardMessageCodec =
+      api != nil
+      ? FlutterStandardMessageCodec(
+        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
+      : FlutterStandardMessageCodec.sharedInstance()
+    let pigeonDefaultConstructorChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.RectFApi.pigeon_defaultConstructor", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      pigeonDefaultConstructorChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let pigeonIdentifierArg = args[0] as! Int64
+        let leftArg = args[1] as! Double
+        let topArg = args[2] as! Double
+        let rightArg = args[3] as! Double
+        let bottomArg = args[4] as! Double
+        do {
+          api.pigeonRegistrar.instanceManager.addDartCreatedInstance(
+try api.pigeonDelegate.pigeonDefaultConstructor(pigeonApi: api, left: leftArg, top: topArg, right: rightArg, bottom: bottomArg),
+withIdentifier: pigeonIdentifierArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      pigeonDefaultConstructorChannel.setMessageHandler(nil)
+    }
+  }
+
+  ///Creates a Dart instance of RectFApi and attaches it to [pigeonInstance].
+  func pigeonNewInstance(pigeonInstance: RectF, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+    if pigeonRegistrar.ignoreCallsToDart {
+      completion(
+        .failure(
+          CameraXError(
+            code: "ignore-calls-error",
+            message: "Calls to Dart are being ignored.", details: "")))
+    }     else if pigeonRegistrar.instanceManager.containsInstance(pigeonInstance as AnyObject) {
+      completion(.success(()))
+    }     else {
+      let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let leftArg = try! pigeonDelegate.left(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let topArg = try! pigeonDelegate.top(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let rightArg = try! pigeonDelegate.right(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let bottomArg = try! pigeonDelegate.bottom(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let binaryMessenger = pigeonRegistrar.binaryMessenger
+      let codec = pigeonRegistrar.codec
+      let channelName: String = "dev.flutter.pigeon.camerax_ios.RectFApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
       channel.sendMessage([pigeonIdentifierArg, leftArg, topArg, rightArg, bottomArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
@@ -4727,11 +5016,11 @@ final class PigeonApiAnalyzerApi: PigeonApiProtocolAnalyzerApi  {
   }
 }
 protocol PigeonApiDelegateImageAnalyzerApi {
-  func pigeonDefaultConstructor(pigeonApi: PigeonApiImageAnalyzerApi) throws -> ImageAnalysis.Analyzer
+  func pigeonDefaultConstructor(pigeonApi: PigeonApiImageAnalyzerApi) throws -> ImageAnalyzer
 }
 
 protocol PigeonApiProtocolImageAnalyzerApi {
-  func analyze(pigeonInstance pigeonInstanceArg: ImageAnalysis.Analyzer, image imageArg: ImageProxy, completion: @escaping (Result<Void, CameraXError>) -> Void)
+  func analyze(pigeonInstance pigeonInstanceArg: ImageAnalyzer, image imageArg: ImageProxy, completion: @escaping (Result<Void, CameraXError>) -> Void)
 }
 
 final class PigeonApiImageAnalyzerApi: PigeonApiProtocolImageAnalyzerApi  {
@@ -4772,7 +5061,7 @@ withIdentifier: pigeonIdentifierArg)
   }
 
   ///Creates a Dart instance of ImageAnalyzerApi and attaches it to [pigeonInstance].
-  func pigeonNewInstance(pigeonInstance: ImageAnalysis.Analyzer, completion: @escaping (Result<Void, CameraXError>) -> Void) {
+  func pigeonNewInstance(pigeonInstance: ImageAnalyzer, completion: @escaping (Result<Void, CameraXError>) -> Void) {
     if pigeonRegistrar.ignoreCallsToDart {
       completion(
         .failure(
@@ -4789,7 +5078,7 @@ withIdentifier: pigeonIdentifierArg)
             message: "Error: Attempting to create a new Dart instance of ImageAnalyzerApi, but the class has a nonnull callback method.", details: "")))
     }
   }
-  func analyze(pigeonInstance pigeonInstanceArg: ImageAnalysis.Analyzer, image imageArg: ImageProxy, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
+  func analyze(pigeonInstance pigeonInstanceArg: ImageAnalyzer, image imageArg: ImageProxy, completion: @escaping (Result<Void, CameraXError>) -> Void)   {
     if pigeonRegistrar.ignoreCallsToDart {
       completion(
         .failure(
@@ -4870,9 +5159,7 @@ final class PigeonApiVNDetectorApi: PigeonApiProtocolVNDetectorApi  {
     }
   }
 }
-protocol PigeonApiDelegateVNObservationApi {
-  func getUUID(pigeonApi: PigeonApiVNObservationApi, pigeonInstance: VNObservation) throws -> String
-  func getConfidence(pigeonApi: PigeonApiVNObservationApi, pigeonInstance: VNObservation) throws -> Double
+open class PigeonApiDelegateVNObservationApi {
 }
 
 protocol PigeonApiProtocolVNObservationApi {
@@ -4885,44 +5172,6 @@ final class PigeonApiVNObservationApi: PigeonApiProtocolVNObservationApi  {
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
   }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiVNObservationApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let getUUIDChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNObservationApi.getUUID", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getUUIDChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNObservation
-        do {
-          let result = try api.pigeonDelegate.getUUID(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getUUIDChannel.setMessageHandler(nil)
-    }
-    let getConfidenceChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNObservationApi.getConfidence", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getConfidenceChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNObservation
-        do {
-          let result = try api.pigeonDelegate.getConfidence(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getConfidenceChannel.setMessageHandler(nil)
-    }
-  }
-
   ///Creates a Dart instance of VNObservationApi and attaches it to [pigeonInstance].
   func pigeonNewInstance(pigeonInstance: VNObservation, completion: @escaping (Result<Void, CameraXError>) -> Void) {
     if pigeonRegistrar.ignoreCallsToDart {
@@ -4956,8 +5205,7 @@ final class PigeonApiVNObservationApi: PigeonApiProtocolVNObservationApi  {
     }
   }
 }
-protocol PigeonApiDelegateVNDetectedObjectObservationApi {
-  func getBoundingBox(pigeonApi: PigeonApiVNDetectedObjectObservationApi, pigeonInstance: VNDetectedObjectObservation) throws -> Rect
+open class PigeonApiDelegateVNDetectedObjectObservationApi {
 }
 
 protocol PigeonApiProtocolVNDetectedObjectObservationApi {
@@ -4975,29 +5223,6 @@ final class PigeonApiVNDetectedObjectObservationApi: PigeonApiProtocolVNDetected
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
   }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiVNDetectedObjectObservationApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let getBoundingBoxChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNDetectedObjectObservationApi.getBoundingBox", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getBoundingBoxChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNDetectedObjectObservation
-        do {
-          let result = try api.pigeonDelegate.getBoundingBox(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getBoundingBoxChannel.setMessageHandler(nil)
-    }
-  }
-
   ///Creates a Dart instance of VNDetectedObjectObservationApi and attaches it to [pigeonInstance].
   func pigeonNewInstance(pigeonInstance: VNDetectedObjectObservation, completion: @escaping (Result<Void, CameraXError>) -> Void) {
     if pigeonRegistrar.ignoreCallsToDart {
@@ -5031,11 +5256,7 @@ final class PigeonApiVNDetectedObjectObservationApi: PigeonApiProtocolVNDetected
     }
   }
 }
-protocol PigeonApiDelegateVNRectangleObservationApi {
-  func getBottomLeft(pigeonApi: PigeonApiVNRectangleObservationApi, pigeonInstance: VNRectangleObservation) throws -> Point
-  func getBottomRight(pigeonApi: PigeonApiVNRectangleObservationApi, pigeonInstance: VNRectangleObservation) throws -> Point
-  func getTopLeft(pigeonApi: PigeonApiVNRectangleObservationApi, pigeonInstance: VNRectangleObservation) throws -> Point
-  func getTopRight(pigeonApi: PigeonApiVNRectangleObservationApi, pigeonInstance: VNRectangleObservation) throws -> Point
+open class PigeonApiDelegateVNRectangleObservationApi {
 }
 
 protocol PigeonApiProtocolVNRectangleObservationApi {
@@ -5053,74 +5274,6 @@ final class PigeonApiVNRectangleObservationApi: PigeonApiProtocolVNRectangleObse
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
   }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiVNRectangleObservationApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let getBottomLeftChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.getBottomLeft", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getBottomLeftChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNRectangleObservation
-        do {
-          let result = try api.pigeonDelegate.getBottomLeft(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getBottomLeftChannel.setMessageHandler(nil)
-    }
-    let getBottomRightChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.getBottomRight", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getBottomRightChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNRectangleObservation
-        do {
-          let result = try api.pigeonDelegate.getBottomRight(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getBottomRightChannel.setMessageHandler(nil)
-    }
-    let getTopLeftChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.getTopLeft", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getTopLeftChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNRectangleObservation
-        do {
-          let result = try api.pigeonDelegate.getTopLeft(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getTopLeftChannel.setMessageHandler(nil)
-    }
-    let getTopRightChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.getTopRight", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getTopRightChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNRectangleObservation
-        do {
-          let result = try api.pigeonDelegate.getTopRight(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getTopRightChannel.setMessageHandler(nil)
-    }
-  }
-
   ///Creates a Dart instance of VNRectangleObservationApi and attaches it to [pigeonInstance].
   func pigeonNewInstance(pigeonInstance: VNRectangleObservation, completion: @escaping (Result<Void, CameraXError>) -> Void) {
     if pigeonRegistrar.ignoreCallsToDart {
@@ -5155,13 +5308,20 @@ final class PigeonApiVNRectangleObservationApi: PigeonApiProtocolVNRectangleObse
   }
 }
 protocol PigeonApiDelegateVNBarcodeObservationApi {
-  func getPayloadStringValue(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String?
-  func getPayloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData?
-  func getSupplementalPayloadString(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String?
-  func getSupplementalPayloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData?
-  func getSupplementalCompositeType(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeCompositeTypeApi
+  func uuid(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String
+  func confidence(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> Double
+  func boundingBox(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> RectF
+  func bottomLeft(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF
+  func bottomRight(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF
+  func topLeft(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF
+  func topRight(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> PointF
+  func payloadStringValue(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String?
+  func payloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData?
+  func supplementalPayloadString(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> String?
+  func supplementalPayloadData(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> FlutterStandardTypedData?
+  func supplementalCompositeType(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeCompositeTypeApi
   func isGS1DataCarrier(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> Bool
-  func getSymbology(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeSymbologyApi
+  func symbology(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeSymbologyApi
   func isColorInverted(pigeonApi: PigeonApiVNBarcodeObservationApi, pigeonInstance: VNBarcodeObservation) throws -> Bool
 }
 
@@ -5180,134 +5340,6 @@ final class PigeonApiVNBarcodeObservationApi: PigeonApiProtocolVNBarcodeObservat
     self.pigeonRegistrar = pigeonRegistrar
     self.pigeonDelegate = delegate
   }
-  static func setUpMessageHandlers(binaryMessenger: FlutterBinaryMessenger, api: PigeonApiVNBarcodeObservationApi?) {
-    let codec: FlutterStandardMessageCodec =
-      api != nil
-      ? FlutterStandardMessageCodec(
-        readerWriter: CameraXApiPigeonInternalProxyApiCodecReaderWriter(pigeonRegistrar: api!.pigeonRegistrar))
-      : FlutterStandardMessageCodec.sharedInstance()
-    let getPayloadStringValueChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.getPayloadStringValue", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getPayloadStringValueChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.getPayloadStringValue(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getPayloadStringValueChannel.setMessageHandler(nil)
-    }
-    let getPayloadDataChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.getPayloadData", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getPayloadDataChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.getPayloadData(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getPayloadDataChannel.setMessageHandler(nil)
-    }
-    let getSupplementalPayloadStringChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.getSupplementalPayloadString", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getSupplementalPayloadStringChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.getSupplementalPayloadString(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getSupplementalPayloadStringChannel.setMessageHandler(nil)
-    }
-    let getSupplementalPayloadDataChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.getSupplementalPayloadData", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getSupplementalPayloadDataChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.getSupplementalPayloadData(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getSupplementalPayloadDataChannel.setMessageHandler(nil)
-    }
-    let getSupplementalCompositeTypeChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.getSupplementalCompositeType", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getSupplementalCompositeTypeChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.getSupplementalCompositeType(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getSupplementalCompositeTypeChannel.setMessageHandler(nil)
-    }
-    let isGS1DataCarrierChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.isGS1DataCarrier", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      isGS1DataCarrierChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.isGS1DataCarrier(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      isGS1DataCarrierChannel.setMessageHandler(nil)
-    }
-    let getSymbologyChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.getSymbology", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getSymbologyChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.getSymbology(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getSymbologyChannel.setMessageHandler(nil)
-    }
-    let isColorInvertedChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.isColorInverted", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      isColorInvertedChannel.setMessageHandler { message, reply in
-        let args = message as! [Any?]
-        let pigeonInstanceArg = args[0] as! VNBarcodeObservation
-        do {
-          let result = try api.pigeonDelegate.isColorInverted(pigeonApi: api, pigeonInstance: pigeonInstanceArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      isColorInvertedChannel.setMessageHandler(nil)
-    }
-  }
-
   ///Creates a Dart instance of VNBarcodeObservationApi and attaches it to [pigeonInstance].
   func pigeonNewInstance(pigeonInstance: VNBarcodeObservation, completion: @escaping (Result<Void, CameraXError>) -> Void) {
     if pigeonRegistrar.ignoreCallsToDart {
@@ -5320,11 +5352,26 @@ final class PigeonApiVNBarcodeObservationApi: PigeonApiProtocolVNBarcodeObservat
       completion(.success(()))
     }     else {
       let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let uuidArg = try! pigeonDelegate.uuid(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let confidenceArg = try! pigeonDelegate.confidence(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let boundingBoxArg = try! pigeonDelegate.boundingBox(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let bottomLeftArg = try! pigeonDelegate.bottomLeft(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let bottomRightArg = try! pigeonDelegate.bottomRight(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let topLeftArg = try! pigeonDelegate.topLeft(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let topRightArg = try! pigeonDelegate.topRight(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let payloadStringValueArg = try! pigeonDelegate.payloadStringValue(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let payloadDataArg = try! pigeonDelegate.payloadData(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let supplementalPayloadStringArg = try! pigeonDelegate.supplementalPayloadString(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let supplementalPayloadDataArg = try! pigeonDelegate.supplementalPayloadData(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let supplementalCompositeTypeArg = try! pigeonDelegate.supplementalCompositeType(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let isGS1DataCarrierArg = try! pigeonDelegate.isGS1DataCarrier(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let symbologyArg = try! pigeonDelegate.symbology(pigeonApi: self, pigeonInstance: pigeonInstance)
+      let isColorInvertedArg = try! pigeonDelegate.isColorInverted(pigeonApi: self, pigeonInstance: pigeonInstance)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg] as [Any?]) { response in
+      channel.sendMessage([pigeonIdentifierArg, uuidArg, confidenceArg, boundingBoxArg, bottomLeftArg, bottomRightArg, topLeftArg, topRightArg, payloadStringValueArg, payloadDataArg, supplementalPayloadStringArg, supplementalPayloadDataArg, supplementalCompositeTypeArg, isGS1DataCarrierArg, symbologyArg, isColorInvertedArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
           completion(.failure(createConnectionError(withChannelName: channelName)))
           return
@@ -5420,6 +5467,7 @@ withIdentifier: pigeonIdentifierArg)
   }
 }
 protocol PigeonApiDelegateVNAnalyzerResultApi {
+  func size(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result) throws -> Size
   func timestamp(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result) throws -> Int64
   func getBarcodes(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result, detector: VNBarcodeScanner) throws -> [VNBarcodeObservation]?
   func getError(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result, detector: VNDetector) throws -> [Any?]?
@@ -5487,12 +5535,13 @@ final class PigeonApiVNAnalyzerResultApi: PigeonApiProtocolVNAnalyzerResultApi  
       completion(.success(()))
     }     else {
       let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
+      let sizeArg = try! pigeonDelegate.size(pigeonApi: self, pigeonInstance: pigeonInstance)
       let timestampArg = try! pigeonDelegate.timestamp(pigeonApi: self, pigeonInstance: pigeonInstance)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg, timestampArg] as [Any?]) { response in
+      channel.sendMessage([pigeonIdentifierArg, sizeArg, timestampArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
           completion(.failure(createConnectionError(withChannelName: channelName)))
           return

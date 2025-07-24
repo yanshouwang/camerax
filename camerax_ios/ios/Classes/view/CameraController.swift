@@ -17,6 +17,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     private var imageAnalysisResolutionSelector: ResolutionSelector?
     
     let session: AVCaptureSession
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var videoDeviceInput: AVCaptureDeviceInput?
     private var audioDeviceInput: AVCaptureDeviceInput?
     private var isTorchActiveObservation: NSKeyValueObservation?
@@ -29,6 +30,8 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     private let captureVideoDataOutput: AVCaptureVideoDataOutput
     private var captureVideoDataOutputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
     private let captureVideoDataOutputQueue: DispatchQueue
+    private let captureMetadataOutput: AVCaptureMetadataOutput
+    private var captureMetadataOutputObjectsDelegate: AVCaptureMetadataOutputObjectsDelegate?
     private let rotationProvider: RotationProvider
     private lazy var rotationListener = RotationProvider.Listener { self.updateVideoOrientation($0) }
     
@@ -44,6 +47,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.captureMovieFileOutput = AVCaptureMovieFileOutput()
         self.captureVideoDataOutput = AVCaptureVideoDataOutput()
         self.captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
+        self.captureMetadataOutput = AVCaptureMetadataOutput()
         self.rotationProvider = RotationProvider()
         super.init()
         
@@ -59,7 +63,6 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         try self.addAudioDeviceInput()
         try self.addCapturePhotoOutput()
         try self.addCaptureMovieFileOutput()
-        try self.addCaptureVideoDataOutput()
         self.updateVideoOrientation()
         self.rotationProvider.addListener(self.rotationListener)
         self.rotationProvider.enable()
@@ -72,7 +75,6 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.removeAudioDeviceInput()
         self.removeCapturePhotoOutput()
         self.removeCaptureMovieFileOutput()
-        self.removeCaptureVideoDataOutput()
         self.rotationProvider.removeListener(self.rotationListener)
         self.rotationProvider.disable()
     }
@@ -346,10 +348,27 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = format.cvPixelFormat
     }
     
-    public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) {
-        let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer, rotationProvider: self.rotationProvider)
-        self.captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: self.captureVideoDataOutputQueue)
-        self.captureVideoDataOutputSampleBufferDelegate = delegate
+    public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) throws {
+        if let delegate = self.captureVideoDataOutputSampleBufferDelegate {
+            self.removeCaptureVideoDataOutput()
+            self.captureVideoDataOutputSampleBufferDelegate = nil
+        }
+        if let delegate = self.captureMetadataOutputObjectsDelegate {
+            self.removeCaptureMetadataOutput()
+            self.captureMetadataOutputObjectsDelegate = nil
+        }
+        if let metadataAnalyzer = analyzer as? AVAnalyzer {
+            self.captureMetadataOutput.metadataObjectTypes = metadataAnalyzer.metadataObjectTypes
+            try self.addCaptureMetadataOutput()
+            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: metadataAnalyzer.consumer)
+            self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.captureVideoDataOutputQueue)
+            self.captureMetadataOutputObjectsDelegate = delegate
+        } else {
+            self.addCaptureVideoDataOutput()
+            let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer, rotationProvider: self.rotationProvider)
+            self.captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: self.captureVideoDataOutputQueue)
+            self.captureVideoDataOutputSampleBufferDelegate = delegate
+        }
     }
     
     public func clearImageAnalysisAnalyzer() {
@@ -395,14 +414,10 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     
     private func addVideoDeviceInput() throws {
         guard let device = getVideoDevice(self.cameraSelector),
-              let input = try? AVCaptureDeviceInput(device: device),
-              self.session.canAddInput(input) else {
+              let input = try? AVCaptureDeviceInput(device: device) else {
             throw CameraXError(code: "nil-error", message: "video device input is nil", details: nil)
         }
-        guard self.session.canAddInput(input) else {
-            throw CameraXError(code: "add-input-error", message: "Can not add input", details: nil)
-        }
-        self.session.addInput(input)
+        try self.addInput(input)
         self.videoDeviceInput = input
         try? setZoomRatio(1.0)
         self.isTorchActiveObservation = device.observe(\.isTorchActive, options: [.initial, .new]) { device, change in
@@ -418,7 +433,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     
     private func removeVideoDeviceInput() {
         guard let input = self.videoDeviceInput else { return }
-        self.session.removeInput(input)
+        self.removeInput(input)
         self.videoDeviceInput = nil
         self.isTorchActiveObservation?.invalidate()
         self.videoZoomFactorObservation?.invalidate()
@@ -440,50 +455,68 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
               let input = try? AVCaptureDeviceInput(device: device) else {
             throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
         }
-        guard self.session.canAddInput(input) else {
-            throw CameraXError(code: "add-input-error", message: "Can not add input", details: nil)
-        }
-        self.session.addInput(input)
+        try self.addInput(input)
         self.audioDeviceInput = input
     }
     
     private func removeAudioDeviceInput() {
         guard let input = self.audioDeviceInput else { return }
-        self.session.removeInput(input)
+        self.removeInput(input)
         self.audioDeviceInput = nil
     }
     
     private func addCapturePhotoOutput() throws {
-        guard self.session.canAddOutput(self.capturePhotoOutput) else {
-            throw CameraXError(code: "add-output-error", message: "Can not add output", details: nil)
-        }
-        self.session.addOutput(self.capturePhotoOutput)
+        try self.addOutput(self.capturePhotoOutput)
     }
     
     private func removeCapturePhotoOutput() {
-        self.session.removeOutput(self.capturePhotoOutput)
+        self.removeOutput(self.capturePhotoOutput)
     }
     
     private func addCaptureMovieFileOutput() throws {
-        guard self.session.canAddOutput(self.captureMovieFileOutput) else {
-            throw CameraXError(code: "add-output-error", message: "Can not add output", details: nil)
-        }
-        self.session.addOutput(captureMovieFileOutput)
+        try self.addOutput(captureMovieFileOutput)
     }
     
     private func removeCaptureMovieFileOutput() {
-        self.session.removeOutput(self.captureMovieFileOutput)
+        self.removeOutput(self.captureMovieFileOutput)
     }
     
     private func addCaptureVideoDataOutput() throws {
-        guard self.session.canAddOutput(self.captureVideoDataOutput) else {
-            throw CameraXError(code: "add-output-error", message: "Can not add output", details: nil)
-        }
-        self.session.addOutput(self.captureVideoDataOutput)
+        try self.addOutput(self.captureVideoDataOutput)
     }
     
     private func removeCaptureVideoDataOutput() {
-        self.session.removeOutput(self.captureVideoDataOutput)
+        self.removeOutput(self.captureVideoDataOutput)
+    }
+    
+    private func addCaptureMetadataOutput() throws {
+        try self.addOutput(self.captureMetadataOutput)
+    }
+    
+    private func removeCaptureMetadataOutput() {
+        self.removeOutput(self.captureMetadataOutput)
+    }
+    
+    private func addInput(_ input: AVCaptureInput) throws {
+        guard self.session.canAddInput(input) else {
+            throw CameraXError(code: "add-input-error", message: "Can not add input", details: nil)
+        }
+        self.session.addInput(input)
+    }
+    
+    private func removeInput(_ input: AVCaptureInput) {
+        self.session.removeInput(input)
+    }
+    
+    private func addOutput(_ output: AVCaptureOutput) throws {
+        guard self.session.canAddOutput(output) else {
+            throw CameraXError(code: "add-output-error", message: "Can not add output", details: nil)
+        }
+        self.session.addOutput(output)
+    }
+    
+    private func removeOutput(_ output: AVCaptureOutput) {
+        self.session.removeOutput(output)
     }
 }
 

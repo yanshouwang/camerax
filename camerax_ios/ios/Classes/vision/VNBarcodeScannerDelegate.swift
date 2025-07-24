@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Vision
 
 class VNBarcodeScannerDelegate: PigeonApiDelegateVNBarcodeScannerApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiVNBarcodeScannerApi, symbologies: [VNBarcodeSymbologyApi]?) throws -> VNBarcodeScanner {
-        return VNBarcodeScanner(symbologies: try symbologies?.map { try $0.delegate })
+        return VNBarcodeScanner(symbologies: symbologies?.map { $0.delegate }.compactMap { $0 })
     }
 }

@@ -1,6 +1,9 @@
 abstract base class VNObservation {
-  Future<String> getUUID();
-  Future<double> getConfidence();
+  final String uuid;
+  final double confidence;
 
-  VNObservation.impl();
+  VNObservation.impl({
+    required this.uuid,
+    required this.confidence,
+  });
 }

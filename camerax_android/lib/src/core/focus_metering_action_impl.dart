@@ -31,15 +31,15 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
 
   @override
   Future<List<MeteringPoint>> getMeteringPointsAe() =>
-      api.getMeteringPointsAe().then((e1) => e1.map((e2) => e2.impl).toList());
+      api.getMeteringPointsAe().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
   Future<List<MeteringPoint>> getMeteringPointsAf() =>
-      api.getMeteringPointsAf().then((e1) => e1.map((e2) => e2.impl).toList());
+      api.getMeteringPointsAf().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
   Future<List<MeteringPoint>> getMeteringPointsAwb() =>
-      api.getMeteringPointsAwb().then((e1) => e1.map((e2) => e2.impl).toList());
+      api.getMeteringPointsAwb().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
   Future<bool> isAutoCancelEnabled() => api.isAutoCancelEnabled();

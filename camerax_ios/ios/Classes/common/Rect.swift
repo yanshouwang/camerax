@@ -8,12 +8,12 @@
 import Foundation
 
 class Rect: NSObject {
-    let left: Int
-    let top: Int
-    let right: Int
-    let bottom: Int
+    let left: Int64
+    let top: Int64
+    let right: Int64
+    let bottom: Int64
     
-    init(left: Int, top: Int, right: Int, bottom: Int) {
+    init(left: Int64, top: Int64, right: Int64, bottom: Int64) {
         self.left = left
         self.top = top
         self.right = right
@@ -36,21 +36,21 @@ class Rect: NSObject {
 }
 
 extension Rect {
-    var width: Int {
+    var width: Int64 {
         return right - left
     }
     
-    var height: Int {
+    var height: Int64 {
         return bottom - top
     }
     
     var cgRect: CGRect {
-        return CGRect(x: left, y: top, width: width, height: height)
+        return CGRect(x: Int(left), y: Int(top), width: Int(width), height: Int(height))
     }
 }
 
 extension CGRect {
     var cxRect: Rect {
-        return Rect(left: Int(minX), top: Int(minY), right: Int(maxX), bottom: Int(maxY))
+        return Rect(left: Int64(minX), top: Int64(minY), right: Int64(maxX), bottom: Int64(maxY))
     }
 }

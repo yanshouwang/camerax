@@ -8,19 +8,7 @@
 import Foundation
 
 class ImageAnalyzerDelegate: PigeonApiDelegateImageAnalyzerApi {
-    func pigeonDefaultConstructor(pigeonApi: PigeonApiImageAnalyzerApi) throws -> any ImageAnalysis.Analyzer {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiImageAnalyzerApi) throws -> ImageAnalyzer {
         return ImageAnalyzer(api: pigeonApi)
-    }
-}
-
-class ImageAnalyzer: NSObject, ImageAnalysis.Analyzer {
-    private let api: PigeonApiImageAnalyzerApi
-    
-    init(api: PigeonApiImageAnalyzerApi) {
-        self.api = api
-    }
-    
-    public func analyze(_ image: ImageProxy) {
-        api.analyze(pigeonInstance: self, image: image) { _ in }
     }
 }

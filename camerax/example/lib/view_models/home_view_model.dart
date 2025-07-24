@@ -15,7 +15,7 @@ typedef ImageModelCallback = void Function(ImageModel imageModel);
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
-  // final BarcodeScanner _barcodeScanner;
+  final BarcodeScanner _barcodeScanner;
   // final FaceDetector _faceDetector;
 
   late final StreamSubscription _torchStateChangedSubscription;
@@ -29,7 +29,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   HomeViewModel()
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
-      // _barcodeScanner = BarcodeScanner(),
+      _barcodeScanner = BarcodeScanner(),
       // _faceDetector = FaceDetector(),
       _mode = CameraMode.takePicture,
       _lensFacing = LensFacing.back,
@@ -198,12 +198,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setImageAnalyzer();
         break;
       case CameraMode.scanCode:
-        // final analyzer = MlKitAnalyzer(
-        //   detectors: [_barcodeScanner],
-        //   targetCoordinateSystem: CoordinateSystem.viewReferenced,
-        //   consumer: _extractML,
-        // );
-        // await _setMLAnalyzer(analyzer);
+        final analyzer = MlKitAnalyzer(
+          detectors: [_barcodeScanner],
+          targetCoordinateSystem: CoordinateSystem.viewReferenced,
+          consumer: _extractML,
+        );
+        await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
         // final analyzer = MlKitAnalyzer(
@@ -421,26 +421,26 @@ class HomeViewModel extends ViewModel with TypeLogger {
     this.imageModel = imageModel;
   }
 
-  // Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
-  //   await controller.unbind();
-  //   await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
-  //   await controller.setImageAnalysisAnalyzer(analyzer);
-  //   await controller.bind();
-  // }
+  Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
+    await controller.unbind();
+    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
+    await controller.setImageAnalysisAnalyzer(analyzer);
+    await controller.bind();
+  }
 
-  // void _extractML(MlKitAnalyzerResult result) async {
-  //   switch (mode) {
-  //     case CameraMode.scanCode:
-  //       final barcodes = await result.getValue(_barcodeScanner);
-  //       this.barcodes = barcodes ?? [];
-  //       break;
-  //     case CameraMode.scanFace:
-  //       final faces = await result.getValue(_faceDetector);
-  //       this.faces = faces ?? [];
-  //       break;
-  //     default:
-  //   }
-  // }
+  void _extractML(MlKitAnalyzerResult result) async {
+    switch (mode) {
+      case CameraMode.scanCode:
+        final barcodes = await result.getValue(_barcodeScanner);
+        this.barcodes = barcodes ?? [];
+        break;
+      case CameraMode.scanFace:
+        // final faces = await result.getValue(_faceDetector);
+        // this.faces = faces ?? [];
+        break;
+      default:
+    }
+  }
 
   Future<void> _clearImageAnalysisAnalyzer() async {
     await controller.clearImageAnalysisAnalyzer();

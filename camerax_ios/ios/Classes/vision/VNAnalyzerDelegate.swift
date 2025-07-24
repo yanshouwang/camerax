@@ -14,9 +14,12 @@ class VNAnalyzerDelegate: PigeonApiDelegateVNAnalyzerApi {
     }
     
     class ResultDelegate: PigeonApiDelegateVNAnalyzerResultApi {
+        func size(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result) throws -> Size {
+            return pigeonInstance.size.cxSize
+        }
+        
         func timestamp(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result) throws -> Int64 {
-            let timestamp = pigeonInstance.getTimestamp()
-            return Int64(timestamp.seconds * 1000)
+            return Int64(pigeonInstance.timestamp.seconds * 1000)
         }
         
         func getBarcodes(pigeonApi: PigeonApiVNAnalyzerResultApi, pigeonInstance: VNAnalyzer.Result, detector: VNBarcodeScanner) throws -> [VNBarcodeObservation]? {

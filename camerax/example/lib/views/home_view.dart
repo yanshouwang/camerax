@@ -98,6 +98,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
           Expanded(
             child: ClipRect(
               child: Stack(
+                fit: StackFit.expand,
                 children: [
                   PreviewWidget(controller: controller),
                   if (imageModel != null)

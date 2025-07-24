@@ -8,11 +8,11 @@
 import Foundation
 import Vision
 
-public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
+public class VNAnalyzer: ImageAnalysis.Analyzer {
     private let detectors: [VNDetector]
-    private let consumer: any Consumer<VNAnalyzer.Result>
+    private let consumer: any Consumer<Result>
     
-    init(detectors: [VNDetector], consumer: any Consumer<VNAnalyzer.Result>) {
+    init(detectors: [VNDetector], consumer: any Consumer<Result>) {
         self.detectors = detectors
         self.consumer = consumer
     }
@@ -23,16 +23,17 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
     }
     
     private func detectRecursively(_ imageProxy: ImageProxy, _ index: Int, _ values: [VNDetector : [VNObservation]], _ errors: [VNDetector : Error]) {
-        guard let imageInfo = try? imageProxy.getImageInfo(), let sampleBuffer = imageProxy.getSampleBuffer(), let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+        guard let width = try? imageProxy.getWidth(), let height = try? imageProxy.getHeight(), let imageInfo = try? imageProxy.getImageInfo(), let sampleBuffer = imageProxy.getSampleBuffer(), let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             // No-op if the frame is not backed by ImageProxy.
-            debugPrint("imageInfo is nil")
+            debugPrint("image is nil")
             imageProxy.close()
             return
         }
         if index > self.detectors.count - 1 {
             // Termination condition is met when the index reaches the end of the list.
+            let size = imageInfo.rotationDegrees % 180 == 0 ? CGSize(width: width, height: height) : CGSize(width: height, height: width)
             let timestamp = imageInfo.timestamp
-            let result = Result(timestamp: timestamp, values: values, errors: errors)
+            let result = Result(size: size, timestamp: timestamp, values: values, errors: errors)
             self.consumer.accept(result)
             imageProxy.close()
             return
@@ -64,18 +65,17 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
     }
     
     public class Result: NSObject {
-        private let timestamp: CMTime
+        public let size: CGSize
+        public let timestamp: CMTime
+        
         private let values: [VNDetector: [VNObservation]?]
         private let errors: [VNDetector: Error]
         
-        init(timestamp: CMTime, values: [VNDetector : [VNObservation]?], errors: [VNDetector : Error]) {
+        init(size: CGSize, timestamp: CMTime, values: [VNDetector : [VNObservation]?], errors: [VNDetector : Error]) {
+            self.size = size
             self.timestamp = timestamp
             self.values = values
             self.errors = errors
-        }
-        
-        public func getTimestamp() -> CMTime {
-            return timestamp
         }
         
         public func getValue(_ detector: VNDetector) throws -> [VNObservation]? {
@@ -97,16 +97,17 @@ public class VNAnalyzer: NSObject, ImageAnalysis.Analyzer {
 }
 
 fileprivate extension ImageInfo {
+    // TODO: This conversion is uncorret!
     var orientation: CGImagePropertyOrientation {
         switch self.rotationDegrees {
         case 0:
             return .up
         case 90:
-            return .right
+            return .left
         case 180:
             return .down
         case 270:
-            return .left
+            return .right
         default:
             return .up
         }

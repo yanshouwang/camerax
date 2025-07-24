@@ -5,7 +5,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 // import 'camera2.dart';
 import 'common.dart';
 import 'core.dart';
-// import 'ml.dart';
+import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
 import 'vision.dart';
@@ -58,12 +58,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     required List<Detector> detectors,
     required CoordinateSystem targetCoordinateSystem,
     required Consumer<MlKitAnalyzerResult> consumer,
-  }) => throw UnimplementedError();
-  // MlKitAnalyzerImpl(
-  //   detectors: detectors,
-  //   targetCoordinateSystem: targetCoordinateSystem,
-  //   consumer: consumer,
-  // );
+  }) => MlKitAnalyzerImpl(
+    detectors: detectors,
+    targetCoordinateSystem: targetCoordinateSystem,
+    consumer: consumer,
+  );
 
   @override
   Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality) =>
@@ -92,22 +91,18 @@ final class CameraXiOSPlugin extends CameraXPlugin {
 
   @override
   BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options}) =>
-      throw UnimplementedError();
-  // BarcodeScannerImpl(
-  //   options: options,
-  // );
+      BarcodeScannerImpl(options: options);
 
   @override
   BarcodeScannerOptions newBarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
-  }) => throw UnimplementedError();
-  // BarcodeScannerOptionsImpl(
-  //   enableAllPotentialBarcodes: enableAllPotentialBarcodes,
-  //   formats: formats,
-  //   zoomSuggestionOptions: zoomSuggestionOptions,
-  // );
+  }) => BarcodeScannerOptionsImpl(
+    enableAllPotentialBarcodes: enableAllPotentialBarcodes,
+    formats: formats,
+    zoomSuggestionOptions: zoomSuggestionOptions,
+  );
 
   @override
   FaceDetector newFaceDetector({FaceDetectorOptions? options}) =>
