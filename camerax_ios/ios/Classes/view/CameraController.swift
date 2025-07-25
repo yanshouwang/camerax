@@ -29,9 +29,9 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     private var captureFileOutputRecordingDelegate: AVCaptureFileOutputRecordingDelegate?
     private let captureVideoDataOutput: AVCaptureVideoDataOutput
     private var captureVideoDataOutputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
-    private let captureVideoDataOutputQueue: DispatchQueue
     private let captureMetadataOutput: AVCaptureMetadataOutput
     private var captureMetadataOutputObjectsDelegate: AVCaptureMetadataOutputObjectsDelegate?
+    private let imageAnalysisQueue: DispatchQueue
     private let rotationProvider: RotationProvider
     private lazy var rotationListener = RotationProvider.Listener { self.updateVideoOrientation($0) }
     
@@ -46,8 +46,8 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.capturePhotoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
         self.captureMovieFileOutput = AVCaptureMovieFileOutput()
         self.captureVideoDataOutput = AVCaptureVideoDataOutput()
-        self.captureVideoDataOutputQueue = DispatchQueue(label: "dev.hebei.camerax.CaptureVideoDataOutputQueue")
         self.captureMetadataOutput = AVCaptureMetadataOutput()
+        self.imageAnalysisQueue = DispatchQueue(label: "dev.hebei.camerax.imageAnalysisQueue")
         self.rotationProvider = RotationProvider()
         super.init()
         
@@ -349,27 +349,31 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     }
     
     public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) throws {
-        if let delegate = self.captureVideoDataOutputSampleBufferDelegate {
-            self.removeCaptureVideoDataOutput()
-            self.captureVideoDataOutputSampleBufferDelegate = nil
-        }
-        if let delegate = self.captureMetadataOutputObjectsDelegate {
+        if self.captureMetadataOutputObjectsDelegate != nil {
             self.removeCaptureMetadataOutput()
             self.captureMetadataOutputObjectsDelegate = nil
+        }
+        if self.captureVideoDataOutputSampleBufferDelegate != nil {
+            self.removeCaptureVideoDataOutput()
+            self.captureVideoDataOutputSampleBufferDelegate = nil
         }
         guard let videoPreviewLayer = self.videoPreviewLayer else {
             throw CameraXError(code: "nil-error", message: "video preview layer is nil", details: nil)
         }
         if let analyzer = analyzer as? AVAnalyzer {
-            self.captureMetadataOutput.metadataObjectTypes = analyzer.types
             try self.addCaptureMetadataOutput()
+            // TODO: Why availableMetadataObjectTypes is nil
+            let availableMetadataObjectTypes = self.captureMetadataOutput.availableMetadataObjectTypes
+            debugPrint("availableMetadataObjectTypes: \(availableMetadataObjectTypes)")
+            let types = analyzer.types?.filter { self.captureMetadataOutput.availableMetadataObjectTypes.contains($0) }
+            self.captureMetadataOutput.metadataObjectTypes = types
             let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, videoPreviewLayer: videoPreviewLayer)
-            self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.captureVideoDataOutputQueue)
+            self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.imageAnalysisQueue)
             self.captureMetadataOutputObjectsDelegate = delegate
         } else {
             try self.addCaptureVideoDataOutput()
             let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer, rotationProvider: self.rotationProvider)
-            self.captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: self.captureVideoDataOutputQueue)
+            self.captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: self.imageAnalysisQueue)
             self.captureVideoDataOutputSampleBufferDelegate = delegate
         }
     }

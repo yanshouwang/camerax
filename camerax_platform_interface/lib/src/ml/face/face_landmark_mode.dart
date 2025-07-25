@@ -1,4 +1,0 @@
-enum FaceLandmarkMode {
-  none,
-  all,
-}

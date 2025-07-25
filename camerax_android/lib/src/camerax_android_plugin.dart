@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'avfoundation.dart';
 import 'camera2.dart';
 import 'common.dart';
 import 'core.dart';
 import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
-import 'vision.dart';
 
 final class CameraXAndroidPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -185,13 +185,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  VNAnalyzer newVNAnalyzer({
-    required List<VNDetector> detectors,
-    required Consumer<VNAnalyzerResult> consumer,
-  }) => VNAnalyzerImpl(detectors: detectors, consumer: consumer);
-
-  @override
-  VNBarcodeScanner newVNBarcodeScanner({
-    List<VNBarcodeSymbology>? symbologies,
-  }) => VNBarcodeScanner(symbologies: symbologies);
+  AVAnalyzer newAVAnalyzer({
+    List<AVMetadataObjectType>? types,
+    required Consumer<AVAnalyzerResult> consumer,
+  }) => AVAnalyzerImpl(types: types, consumer: consumer);
 }

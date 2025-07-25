@@ -14,15 +14,9 @@ class VideoRecordEventConsumerDelegate: PigeonApiDelegateVideoRecordEventConsume
     }
 }
 
-class AVMetadataObjectsConsumerDelegate: PigeonApiDelegateAVMetadataObjectsConsumerApi {
-    func pigeonDefaultConstructor(pigeonApi: PigeonApiAVMetadataObjectsConsumerApi) throws -> AVMetadataObjectsConsumer {
-        return AVMetadataObjectsConsumer(pigeonApi)
-    }
-}
-
-class VNAnalyzerResultConsumerDelegate: PigeonApiDelegateVNAnalyzerResultConsumerApi {
-    func pigeonDefaultConstructor(pigeonApi: PigeonApiVNAnalyzerResultConsumerApi) throws -> VNAnalyzerResultConsumer {
-        return VNAnalyzerResultConsumer(pigeonApi)
+class AVAnalyzerResultConsumerDelegate: PigeonApiDelegateAVAnalyzerResultConsumerApi {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiAVAnalyzerResultConsumerApi) throws -> AVAnalyzerResultConsumer {
+        return AVAnalyzerResultConsumer(pigeonApi)
     }
 }
 
@@ -38,26 +32,14 @@ class VideoRecordEventConsumer: NSObject, Consumer {
     }
 }
 
-class AVMetadataObjectsConsumer: NSObject, Consumer {
-    private let api: PigeonApiAVMetadataObjectsConsumerApi
+class AVAnalyzerResultConsumer: NSObject, Consumer {
+    private let api: PigeonApiAVAnalyzerResultConsumerApi
     
-    init(_ api: PigeonApiAVMetadataObjectsConsumerApi) {
+    init(_ api: PigeonApiAVAnalyzerResultConsumerApi) {
         self.api = api
     }
     
-    func accept(_ value: [AVMetadataObject]) {
-        self.api.accept(pigeonInstance: self, value: value) { _ in }
-    }
-}
-
-class VNAnalyzerResultConsumer: NSObject, Consumer {
-    private let api: PigeonApiVNAnalyzerResultConsumerApi
-    
-    init(_ api: PigeonApiVNAnalyzerResultConsumerApi) {
-        self.api = api
-    }
-    
-    func accept(_ value: VNAnalyzer.Result) {
+    func accept(_ value: AVAnalyzer.Result) {
         self.api.accept(pigeonInstance: self, value: value) { _ in }
     }
 }

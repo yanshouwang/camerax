@@ -24,8 +24,8 @@ class AVMetadataMachineReadableCodeObjectDelegate: PigeonApiDelegateAVMetadataMa
         return Int64(pigeonInstance.duration.seconds * 1000)
     }
     
-    func bounds(pigeonApi: PigeonApiAVMetadataMachineReadableCodeObjectApi, pigeonInstance: AVMetadataMachineReadableCodeObject) throws -> Rect {
-        return pigeonInstance.bounds.cxRect
+    func bounds(pigeonApi: PigeonApiAVMetadataMachineReadableCodeObjectApi, pigeonInstance: AVMetadataMachineReadableCodeObject) throws -> RectF {
+        return pigeonInstance.bounds.cxRectF
     }
     
     func corners(pigeonApi: PigeonApiAVMetadataMachineReadableCodeObjectApi, pigeonInstance: AVMetadataMachineReadableCodeObject) throws -> [PointF] {

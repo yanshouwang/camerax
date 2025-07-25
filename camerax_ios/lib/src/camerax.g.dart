@@ -176,17 +176,9 @@ class PigeonInstanceManager {
     AVMetadataFaceObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     AVMetadataMachineReadableCodeObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     AVMetadataSalientObjectApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    AVMetadataObjectsConsumerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVAnalyzerResultApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    AVAnalyzerResultConsumerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     AVAnalyzerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNDetectorApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNDetectedObjectObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNRectangleObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNBarcodeObservationApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNBarcodeScannerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNAnalyzerResultApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNAnalyzerResultConsumerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    VNAnalyzerApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     OutputOptionsApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     FileOutputOptionsApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     AudioConfigApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
@@ -6425,7 +6417,7 @@ class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final int bodyID;
 
@@ -6437,7 +6429,7 @@ class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       int bodyID,
     )? pigeon_newInstance,
   }) {
@@ -6472,9 +6464,9 @@ class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final int? arg_bodyID = (args[5] as int?);
           assert(arg_bodyID != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataCatBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
@@ -6542,7 +6534,7 @@ class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final int bodyID;
 
@@ -6554,7 +6546,7 @@ class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       int bodyID,
     )? pigeon_newInstance,
   }) {
@@ -6589,9 +6581,9 @@ class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final int? arg_bodyID = (args[5] as int?);
           assert(arg_bodyID != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataDogBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
@@ -6659,7 +6651,7 @@ class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final int bodyID;
 
@@ -6671,7 +6663,7 @@ class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       int bodyID,
     )? pigeon_newInstance,
   }) {
@@ -6706,9 +6698,9 @@ class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final int? arg_bodyID = (args[5] as int?);
           assert(arg_bodyID != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
@@ -6776,7 +6768,7 @@ class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final int bodyID;
 
@@ -6788,7 +6780,7 @@ class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       int bodyID,
     )? pigeon_newInstance,
   }) {
@@ -6823,9 +6815,9 @@ class AVMetadataHumanFullBodyObjectApi extends AVMetadataBodyObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final int? arg_bodyID = (args[5] as int?);
           assert(arg_bodyID != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataHumanFullBodyObjectApi.pigeon_newInstance was null, expected non-null int.');
@@ -6897,7 +6889,7 @@ class AVMetadataFaceObjectApi extends AVMetadataObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final int faceID;
 
@@ -6917,7 +6909,7 @@ class AVMetadataFaceObjectApi extends AVMetadataObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       int faceID,
       bool hasRollAngle,
       double rollAngle,
@@ -6956,9 +6948,9 @@ class AVMetadataFaceObjectApi extends AVMetadataObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final int? arg_faceID = (args[5] as int?);
           assert(arg_faceID != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataFaceObjectApi.pigeon_newInstance was null, expected non-null int.');
@@ -7055,7 +7047,7 @@ class AVMetadataMachineReadableCodeObjectApi extends AVMetadataObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final List<PointFApi> corners;
 
@@ -7069,7 +7061,7 @@ class AVMetadataMachineReadableCodeObjectApi extends AVMetadataObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       List<PointFApi> corners,
       String? stringValue,
     )? pigeon_newInstance,
@@ -7105,9 +7097,9 @@ class AVMetadataMachineReadableCodeObjectApi extends AVMetadataObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataMachineReadableCodeObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final List<PointFApi>? arg_corners =
               (args[5] as List<Object?>?)?.cast<PointFApi>();
           assert(arg_corners != null,
@@ -7179,7 +7171,7 @@ class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
 
   final int duration;
 
-  final RectApi bounds;
+  final RectFApi bounds;
 
   final int objectID;
 
@@ -7191,7 +7183,7 @@ class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
       AVMetadataObjectTypeApi type,
       int time,
       int duration,
-      RectApi bounds,
+      RectFApi bounds,
       int objectID,
     )? pigeon_newInstance,
   }) {
@@ -7226,9 +7218,9 @@ class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
           final int? arg_duration = (args[3] as int?);
           assert(arg_duration != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null int.');
-          final RectApi? arg_bounds = (args[4] as RectApi?);
+          final RectFApi? arg_bounds = (args[4] as RectFApi?);
           assert(arg_bounds != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null RectApi.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null RectFApi.');
           final int? arg_objectID = (args[5] as int?);
           assert(arg_objectID != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataSalientObjectApi.pigeon_newInstance was null, expected non-null int.');
@@ -7274,8 +7266,97 @@ class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
   }
 }
 
-class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
-  AVMetadataObjectsConsumerApi({
+class AVAnalyzerResultApi extends PigeonInternalProxyApiBaseClass {
+  /// Constructs [AVAnalyzerResultApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  AVAnalyzerResultApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.size,
+    required this.objects,
+  });
+
+  final SizeApi size;
+
+  final List<AVMetadataObjectApi> objects;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    AVAnalyzerResultApi Function(
+      SizeApi size,
+      List<AVMetadataObjectApi> objects,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null, expected non-null int.');
+          final SizeApi? arg_size = (args[1] as SizeApi?);
+          assert(arg_size != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null, expected non-null SizeApi.');
+          final List<AVMetadataObjectApi>? arg_objects =
+              (args[2] as List<Object?>?)?.cast<AVMetadataObjectApi>();
+          assert(arg_objects != null,
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null, expected non-null List<AVMetadataObjectApi>.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_size!, arg_objects!) ??
+                  AVAnalyzerResultApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    size: arg_size!,
+                    objects: arg_objects!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  AVAnalyzerResultApi pigeon_copy() {
+    return AVAnalyzerResultApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      size: size,
+      objects: objects,
+    );
+  }
+}
+
+class AVAnalyzerResultConsumerApi extends PigeonInternalProxyApiBaseClass {
+  AVAnalyzerResultConsumerApi({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
     required this.accept,
@@ -7283,10 +7364,10 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
     final int pigeonVar_instanceIdentifier =
         pigeon_instanceManager.addDartCreatedInstance(this);
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecAVMetadataObjectsConsumerApi;
+        _pigeonVar_codecAVAnalyzerResultConsumerApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
     const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.pigeon_defaultConstructor';
+        'dev.flutter.pigeon.camerax_ios.AVAnalyzerResultConsumerApi.pigeon_defaultConstructor';
     final BasicMessageChannel<Object?> pigeonVar_channel =
         BasicMessageChannel<Object?>(
       pigeonVar_channelName,
@@ -7312,19 +7393,19 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
     }();
   }
 
-  /// Constructs [AVMetadataObjectsConsumerApi] without creating the associated native object.
+  /// Constructs [AVAnalyzerResultConsumerApi] without creating the associated native object.
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies for an [PigeonInstanceManager].
   @protected
-  AVMetadataObjectsConsumerApi.pigeon_detached({
+  AVAnalyzerResultConsumerApi.pigeon_detached({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
     required this.accept,
   });
 
   late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecAVMetadataObjectsConsumerApi =
+      _pigeonVar_codecAVAnalyzerResultConsumerApi =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
   /// Callback method.
@@ -7337,8 +7418,8 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
   ///
   /// ```dart
   /// final WeakReference weakMyVariable = WeakReference(myVariable);
-  /// final AVMetadataObjectsConsumerApi instance = AVMetadataObjectsConsumerApi(
-  ///  accept: (AVMetadataObjectsConsumerApi pigeon_instance, ...) {
+  /// final AVAnalyzerResultConsumerApi instance = AVAnalyzerResultConsumerApi(
+  ///  accept: (AVAnalyzerResultConsumerApi pigeon_instance, ...) {
   ///    print(weakMyVariable?.target);
   ///  },
   /// );
@@ -7347,8 +7428,8 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
   /// Alternatively, [PigeonInstanceManager.removeWeakReference] can be used to
   /// release the associated Native object manually.
   final void Function(
-    AVMetadataObjectsConsumerApi pigeon_instance,
-    List<AVMetadataObjectApi> value,
+    AVAnalyzerResultConsumerApi pigeon_instance,
+    AVAnalyzerResultApi value,
   ) accept;
 
   static void pigeon_setUpMessageHandlers({
@@ -7356,8 +7437,8 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
     void Function(
-      AVMetadataObjectsConsumerApi pigeon_instance,
-      List<AVMetadataObjectApi> value,
+      AVAnalyzerResultConsumerApi pigeon_instance,
+      AVAnalyzerResultApi value,
     )? accept,
   }) {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
@@ -7368,7 +7449,7 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
       final BasicMessageChannel<
           Object?> pigeonVar_channel = BasicMessageChannel<
               Object?>(
-          'dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept',
+          'dev.flutter.pigeon.camerax_ios.AVAnalyzerResultConsumerApi.accept',
           pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (pigeon_clearHandlers) {
@@ -7376,16 +7457,16 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept was null.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultConsumerApi.accept was null.');
           final List<Object?> args = (message as List<Object?>?)!;
-          final AVMetadataObjectsConsumerApi? arg_pigeon_instance =
-              (args[0] as AVMetadataObjectsConsumerApi?);
+          final AVAnalyzerResultConsumerApi? arg_pigeon_instance =
+              (args[0] as AVAnalyzerResultConsumerApi?);
           assert(arg_pigeon_instance != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept was null, expected non-null AVMetadataObjectsConsumerApi.');
-          final List<AVMetadataObjectApi>? arg_value =
-              (args[1] as List<Object?>?)?.cast<AVMetadataObjectApi>();
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultConsumerApi.accept was null, expected non-null AVAnalyzerResultConsumerApi.');
+          final AVAnalyzerResultApi? arg_value =
+              (args[1] as AVAnalyzerResultApi?);
           assert(arg_value != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVMetadataObjectsConsumerApi.accept was null, expected non-null List<AVMetadataObjectApi>.');
+              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultConsumerApi.accept was null, expected non-null AVAnalyzerResultApi.');
           try {
             (accept ?? arg_pigeon_instance!.accept)
                 .call(arg_pigeon_instance!, arg_value!);
@@ -7402,8 +7483,8 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
   }
 
   @override
-  AVMetadataObjectsConsumerApi pigeon_copy() {
-    return AVMetadataObjectsConsumerApi.pigeon_detached(
+  AVAnalyzerResultConsumerApi pigeon_copy() {
+    return AVAnalyzerResultConsumerApi.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
       accept: accept,
@@ -7411,12 +7492,13 @@ class AVMetadataObjectsConsumerApi extends PigeonInternalProxyApiBaseClass {
   }
 }
 
-class AVAnalyzerApi extends PigeonInternalProxyApiBaseClass {
+class AVAnalyzerApi extends PigeonInternalProxyApiBaseClass
+    implements AnalyzerApi {
   AVAnalyzerApi({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
-    required List<AVMetadataObjectTypeApi> types,
-    required AVMetadataObjectsConsumerApi consumer,
+    List<AVMetadataObjectTypeApi>? types,
+    required AVAnalyzerResultConsumerApi consumer,
   }) {
     final int pigeonVar_instanceIdentifier =
         pigeon_instanceManager.addDartCreatedInstance(this);
@@ -7514,1005 +7596,6 @@ class AVAnalyzerApi extends PigeonInternalProxyApiBaseClass {
   @override
   AVAnalyzerApi pigeon_copy() {
     return AVAnalyzerApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class VNDetectorApi extends CloseableApi {
-  /// Constructs [VNDetectorApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNDetectorApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  }) : super.pigeon_detached();
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNDetectorApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<Object?> pigeonVar_channel =
-          BasicMessageChannel<Object?>(
-              'dev.flutter.pigeon.camerax_ios.VNDetectorApi.pigeon_newInstance',
-              pigeonChannelCodec,
-              binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNDetectorApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNDetectorApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  VNDetectorApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNDetectorApi pigeon_copy() {
-    return VNDetectorApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class VNObservationApi extends PigeonInternalProxyApiBaseClass {
-  /// Constructs [VNObservationApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNObservationApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  });
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNObservationApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNObservationApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNObservationApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNObservationApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  VNObservationApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNObservationApi pigeon_copy() {
-    return VNObservationApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class VNDetectedObjectObservationApi extends VNObservationApi {
-  /// Constructs [VNDetectedObjectObservationApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNDetectedObjectObservationApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  }) : super.pigeon_detached();
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNDetectedObjectObservationApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNDetectedObjectObservationApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNDetectedObjectObservationApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNDetectedObjectObservationApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  VNDetectedObjectObservationApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNDetectedObjectObservationApi pigeon_copy() {
-    return VNDetectedObjectObservationApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class VNRectangleObservationApi extends VNDetectedObjectObservationApi {
-  /// Constructs [VNRectangleObservationApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNRectangleObservationApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  }) : super.pigeon_detached();
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNRectangleObservationApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNRectangleObservationApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  VNRectangleObservationApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNRectangleObservationApi pigeon_copy() {
-    return VNRectangleObservationApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class VNBarcodeObservationApi extends VNRectangleObservationApi {
-  /// Constructs [VNBarcodeObservationApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNBarcodeObservationApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required this.uuid,
-    required this.confidence,
-    required this.boundingBox,
-    required this.bottomLeft,
-    required this.bottomRight,
-    required this.topLeft,
-    required this.topRight,
-    this.payloadStringValue,
-    this.payloadData,
-    this.supplementalPayloadString,
-    this.supplementalPayloadData,
-    required this.supplementalCompositeType,
-    required this.isGS1DataCarrier,
-    required this.symbology,
-    required this.isColorInverted,
-  }) : super.pigeon_detached();
-
-  final String uuid;
-
-  final double confidence;
-
-  final RectFApi boundingBox;
-
-  final PointFApi bottomLeft;
-
-  final PointFApi bottomRight;
-
-  final PointFApi topLeft;
-
-  final PointFApi topRight;
-
-  final String? payloadStringValue;
-
-  final Uint8List? payloadData;
-
-  final String? supplementalPayloadString;
-
-  final Uint8List? supplementalPayloadData;
-
-  final VNBarcodeCompositeTypeApi supplementalCompositeType;
-
-  final bool isGS1DataCarrier;
-
-  final VNBarcodeSymbologyApi symbology;
-
-  final bool isColorInverted;
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNBarcodeObservationApi Function(
-      String uuid,
-      double confidence,
-      RectFApi boundingBox,
-      PointFApi bottomLeft,
-      PointFApi bottomRight,
-      PointFApi topLeft,
-      PointFApi topRight,
-      String? payloadStringValue,
-      Uint8List? payloadData,
-      String? supplementalPayloadString,
-      Uint8List? supplementalPayloadData,
-      VNBarcodeCompositeTypeApi supplementalCompositeType,
-      bool isGS1DataCarrier,
-      VNBarcodeSymbologyApi symbology,
-      bool isColorInverted,
-    )? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null int.');
-          final String? arg_uuid = (args[1] as String?);
-          assert(arg_uuid != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null String.');
-          final double? arg_confidence = (args[2] as double?);
-          assert(arg_confidence != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null double.');
-          final RectFApi? arg_boundingBox = (args[3] as RectFApi?);
-          assert(arg_boundingBox != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null RectFApi.');
-          final PointFApi? arg_bottomLeft = (args[4] as PointFApi?);
-          assert(arg_bottomLeft != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null PointFApi.');
-          final PointFApi? arg_bottomRight = (args[5] as PointFApi?);
-          assert(arg_bottomRight != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null PointFApi.');
-          final PointFApi? arg_topLeft = (args[6] as PointFApi?);
-          assert(arg_topLeft != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null PointFApi.');
-          final PointFApi? arg_topRight = (args[7] as PointFApi?);
-          assert(arg_topRight != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null PointFApi.');
-          final String? arg_payloadStringValue = (args[8] as String?);
-          final Uint8List? arg_payloadData = (args[9] as Uint8List?);
-          final String? arg_supplementalPayloadString = (args[10] as String?);
-          final Uint8List? arg_supplementalPayloadData =
-              (args[11] as Uint8List?);
-          final VNBarcodeCompositeTypeApi? arg_supplementalCompositeType =
-              (args[12] as VNBarcodeCompositeTypeApi?);
-          assert(arg_supplementalCompositeType != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null VNBarcodeCompositeTypeApi.');
-          final bool? arg_isGS1DataCarrier = (args[13] as bool?);
-          assert(arg_isGS1DataCarrier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null bool.');
-          final VNBarcodeSymbologyApi? arg_symbology =
-              (args[14] as VNBarcodeSymbologyApi?);
-          assert(arg_symbology != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null VNBarcodeSymbologyApi.');
-          final bool? arg_isColorInverted = (args[15] as bool?);
-          assert(arg_isColorInverted != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeObservationApi.pigeon_newInstance was null, expected non-null bool.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call(
-                      arg_uuid!,
-                      arg_confidence!,
-                      arg_boundingBox!,
-                      arg_bottomLeft!,
-                      arg_bottomRight!,
-                      arg_topLeft!,
-                      arg_topRight!,
-                      arg_payloadStringValue,
-                      arg_payloadData,
-                      arg_supplementalPayloadString,
-                      arg_supplementalPayloadData,
-                      arg_supplementalCompositeType!,
-                      arg_isGS1DataCarrier!,
-                      arg_symbology!,
-                      arg_isColorInverted!) ??
-                  VNBarcodeObservationApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                    uuid: arg_uuid!,
-                    confidence: arg_confidence!,
-                    boundingBox: arg_boundingBox!,
-                    bottomLeft: arg_bottomLeft!,
-                    bottomRight: arg_bottomRight!,
-                    topLeft: arg_topLeft!,
-                    topRight: arg_topRight!,
-                    payloadStringValue: arg_payloadStringValue,
-                    payloadData: arg_payloadData,
-                    supplementalPayloadString: arg_supplementalPayloadString,
-                    supplementalPayloadData: arg_supplementalPayloadData,
-                    supplementalCompositeType: arg_supplementalCompositeType!,
-                    isGS1DataCarrier: arg_isGS1DataCarrier!,
-                    symbology: arg_symbology!,
-                    isColorInverted: arg_isColorInverted!,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNBarcodeObservationApi pigeon_copy() {
-    return VNBarcodeObservationApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-      uuid: uuid,
-      confidence: confidence,
-      boundingBox: boundingBox,
-      bottomLeft: bottomLeft,
-      bottomRight: bottomRight,
-      topLeft: topLeft,
-      topRight: topRight,
-      payloadStringValue: payloadStringValue,
-      payloadData: payloadData,
-      supplementalPayloadString: supplementalPayloadString,
-      supplementalPayloadData: supplementalPayloadData,
-      supplementalCompositeType: supplementalCompositeType,
-      isGS1DataCarrier: isGS1DataCarrier,
-      symbology: symbology,
-      isColorInverted: isColorInverted,
-    );
-  }
-}
-
-class VNBarcodeScannerApi extends VNDetectorApi {
-  VNBarcodeScannerApi({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    List<VNBarcodeSymbologyApi>? symbologies,
-  }) : super.pigeon_detached() {
-    final int pigeonVar_instanceIdentifier =
-        pigeon_instanceManager.addDartCreatedInstance(this);
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecVNBarcodeScannerApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_ios.VNBarcodeScannerApi.pigeon_defaultConstructor';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
-        .send(<Object?>[pigeonVar_instanceIdentifier, symbologies]);
-    () async {
-      final List<Object?>? pigeonVar_replyList =
-          await pigeonVar_sendFuture as List<Object?>?;
-      if (pigeonVar_replyList == null) {
-        throw _createConnectionError(pigeonVar_channelName);
-      } else if (pigeonVar_replyList.length > 1) {
-        throw PlatformException(
-          code: pigeonVar_replyList[0]! as String,
-          message: pigeonVar_replyList[1] as String?,
-          details: pigeonVar_replyList[2],
-        );
-      } else {
-        return;
-      }
-    }();
-  }
-
-  /// Constructs [VNBarcodeScannerApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNBarcodeScannerApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  }) : super.pigeon_detached();
-
-  late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecVNBarcodeScannerApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNBarcodeScannerApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNBarcodeScannerApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeScannerApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNBarcodeScannerApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  VNBarcodeScannerApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNBarcodeScannerApi pigeon_copy() {
-    return VNBarcodeScannerApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class VNAnalyzerResultApi extends PigeonInternalProxyApiBaseClass {
-  /// Constructs [VNAnalyzerResultApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNAnalyzerResultApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required this.size,
-    required this.timestamp,
-  });
-
-  late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecVNAnalyzerResultApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
-
-  final SizeApi size;
-
-  final int timestamp;
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNAnalyzerResultApi Function(
-      SizeApi size,
-      int timestamp,
-    )? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.pigeon_newInstance was null, expected non-null int.');
-          final SizeApi? arg_size = (args[1] as SizeApi?);
-          assert(arg_size != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.pigeon_newInstance was null, expected non-null SizeApi.');
-          final int? arg_timestamp = (args[2] as int?);
-          assert(arg_timestamp != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call(arg_size!, arg_timestamp!) ??
-                  VNAnalyzerResultApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                    size: arg_size!,
-                    timestamp: arg_timestamp!,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  Future<List<VNBarcodeObservationApi>?> getBarcodes(
-      VNBarcodeScannerApi detector) async {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecVNAnalyzerResultApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.getBarcodes';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture =
-        pigeonVar_channel.send(<Object?>[this, detector]);
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_sendFuture as List<Object?>?;
-    if (pigeonVar_replyList == null) {
-      throw _createConnectionError(pigeonVar_channelName);
-    } else if (pigeonVar_replyList.length > 1) {
-      throw PlatformException(
-        code: pigeonVar_replyList[0]! as String,
-        message: pigeonVar_replyList[1] as String?,
-        details: pigeonVar_replyList[2],
-      );
-    } else {
-      return (pigeonVar_replyList[0] as List<Object?>?)
-          ?.cast<VNBarcodeObservationApi>();
-    }
-  }
-
-  Future<List<Object?>?> getError(VNDetectorApi detector) async {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecVNAnalyzerResultApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_ios.VNAnalyzerResultApi.getError';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture =
-        pigeonVar_channel.send(<Object?>[this, detector]);
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_sendFuture as List<Object?>?;
-    if (pigeonVar_replyList == null) {
-      throw _createConnectionError(pigeonVar_channelName);
-    } else if (pigeonVar_replyList.length > 1) {
-      throw PlatformException(
-        code: pigeonVar_replyList[0]! as String,
-        message: pigeonVar_replyList[1] as String?,
-        details: pigeonVar_replyList[2],
-      );
-    } else {
-      return (pigeonVar_replyList[0] as List<Object?>?)?.cast<Object?>();
-    }
-  }
-
-  @override
-  VNAnalyzerResultApi pigeon_copy() {
-    return VNAnalyzerResultApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-      size: size,
-      timestamp: timestamp,
-    );
-  }
-}
-
-class VNAnalyzerResultConsumerApi extends PigeonInternalProxyApiBaseClass {
-  VNAnalyzerResultConsumerApi({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required this.accept,
-  }) {
-    final int pigeonVar_instanceIdentifier =
-        pigeon_instanceManager.addDartCreatedInstance(this);
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecVNAnalyzerResultConsumerApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_ios.VNAnalyzerResultConsumerApi.pigeon_defaultConstructor';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture =
-        pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
-    () async {
-      final List<Object?>? pigeonVar_replyList =
-          await pigeonVar_sendFuture as List<Object?>?;
-      if (pigeonVar_replyList == null) {
-        throw _createConnectionError(pigeonVar_channelName);
-      } else if (pigeonVar_replyList.length > 1) {
-        throw PlatformException(
-          code: pigeonVar_replyList[0]! as String,
-          message: pigeonVar_replyList[1] as String?,
-          details: pigeonVar_replyList[2],
-        );
-      } else {
-        return;
-      }
-    }();
-  }
-
-  /// Constructs [VNAnalyzerResultConsumerApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNAnalyzerResultConsumerApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required this.accept,
-  });
-
-  late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecVNAnalyzerResultConsumerApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
-
-  /// Callback method.
-  ///
-  /// For the associated Native object to be automatically garbage collected,
-  /// it is required that the implementation of this `Function` doesn't have a
-  /// strong reference to the encapsulating class instance. When this `Function`
-  /// references a non-local variable, it is strongly recommended to access it
-  /// with a `WeakReference`:
-  ///
-  /// ```dart
-  /// final WeakReference weakMyVariable = WeakReference(myVariable);
-  /// final VNAnalyzerResultConsumerApi instance = VNAnalyzerResultConsumerApi(
-  ///  accept: (VNAnalyzerResultConsumerApi pigeon_instance, ...) {
-  ///    print(weakMyVariable?.target);
-  ///  },
-  /// );
-  /// ```
-  ///
-  /// Alternatively, [PigeonInstanceManager.removeWeakReference] can be used to
-  /// release the associated Native object manually.
-  final void Function(
-    VNAnalyzerResultConsumerApi pigeon_instance,
-    VNAnalyzerResultApi value,
-  ) accept;
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    void Function(
-      VNAnalyzerResultConsumerApi pigeon_instance,
-      VNAnalyzerResultApi value,
-    )? accept,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_ios.VNAnalyzerResultConsumerApi.accept',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultConsumerApi.accept was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final VNAnalyzerResultConsumerApi? arg_pigeon_instance =
-              (args[0] as VNAnalyzerResultConsumerApi?);
-          assert(arg_pigeon_instance != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultConsumerApi.accept was null, expected non-null VNAnalyzerResultConsumerApi.');
-          final VNAnalyzerResultApi? arg_value =
-              (args[1] as VNAnalyzerResultApi?);
-          assert(arg_value != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerResultConsumerApi.accept was null, expected non-null VNAnalyzerResultApi.');
-          try {
-            (accept ?? arg_pigeon_instance!.accept)
-                .call(arg_pigeon_instance!, arg_value!);
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNAnalyzerResultConsumerApi pigeon_copy() {
-    return VNAnalyzerResultConsumerApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-      accept: accept,
-    );
-  }
-}
-
-class VNAnalyzerApi extends PigeonInternalProxyApiBaseClass
-    implements AnalyzerApi {
-  VNAnalyzerApi({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required List<VNDetectorApi> detectors,
-    required VNAnalyzerResultConsumerApi consumer,
-  }) {
-    final int pigeonVar_instanceIdentifier =
-        pigeon_instanceManager.addDartCreatedInstance(this);
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecVNAnalyzerApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_ios.VNAnalyzerApi.pigeon_defaultConstructor';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
-        .send(<Object?>[pigeonVar_instanceIdentifier, detectors, consumer]);
-    () async {
-      final List<Object?>? pigeonVar_replyList =
-          await pigeonVar_sendFuture as List<Object?>?;
-      if (pigeonVar_replyList == null) {
-        throw _createConnectionError(pigeonVar_channelName);
-      } else if (pigeonVar_replyList.length > 1) {
-        throw PlatformException(
-          code: pigeonVar_replyList[0]! as String,
-          message: pigeonVar_replyList[1] as String?,
-          details: pigeonVar_replyList[2],
-        );
-      } else {
-        return;
-      }
-    }();
-  }
-
-  /// Constructs [VNAnalyzerApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  VNAnalyzerApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  });
-
-  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecVNAnalyzerApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    VNAnalyzerApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<Object?> pigeonVar_channel =
-          BasicMessageChannel<Object?>(
-              'dev.flutter.pigeon.camerax_ios.VNAnalyzerApi.pigeon_newInstance',
-              pigeonChannelCodec,
-              binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.VNAnalyzerApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  VNAnalyzerApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  VNAnalyzerApi pigeon_copy() {
-    return VNAnalyzerApi.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
     );

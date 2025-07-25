@@ -2,9 +2,9 @@ import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'barcode.dart';
+import 'barcode_scanner_impl.dart';
 import 'detector_impl.dart';
-import 'face.dart';
+import 'face_detector_impl.dart';
 
 final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   final MlKitAnalyzerResultApi api;

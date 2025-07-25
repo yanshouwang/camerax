@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import 'avfoundation.dart';
 import 'camera2.dart';
 import 'common.dart';
 import 'core.dart';
 import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
-import 'vision.dart';
 
 /// Platform-specific implementations should implement this class to support
 /// camerax.
@@ -117,11 +117,9 @@ abstract base class CameraXPlugin extends PlatformInterface {
     required Consumer<MlKitAnalyzerResult> consumer,
   });
 
-  VNBarcodeScanner newVNBarcodeScanner({List<VNBarcodeSymbology>? symbologies});
-
-  VNAnalyzer newVNAnalyzer({
-    required List<VNDetector> detectors,
-    required Consumer<VNAnalyzerResult> consumer,
+  AVAnalyzer newAVAnalyzer({
+    List<AVMetadataObjectType>? types,
+    required Consumer<AVAnalyzerResult> consumer,
   });
 
   PreviewView newPreviewView();

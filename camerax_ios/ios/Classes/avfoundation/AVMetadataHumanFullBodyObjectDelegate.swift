@@ -28,8 +28,8 @@ class AVMetadataHumanFullBodyObjectDelegate: PigeonApiDelegateAVMetadataHumanFul
     }
     
     @available(iOS 17.0, *)
-    func bounds(pigeonApi: PigeonApiAVMetadataHumanFullBodyObjectApi, pigeonInstance: AVMetadataHumanFullBodyObject) throws -> Rect {
-        return pigeonInstance.bounds.cxRect
+    func bounds(pigeonApi: PigeonApiAVMetadataHumanFullBodyObjectApi, pigeonInstance: AVMetadataHumanFullBodyObject) throws -> RectF {
+        return pigeonInstance.bounds.cxRectF
     }
     
     @available(iOS 17.0, *)

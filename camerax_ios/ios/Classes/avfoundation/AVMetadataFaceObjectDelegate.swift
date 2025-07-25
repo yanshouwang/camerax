@@ -24,8 +24,8 @@ class AVMetadataFaceObjectDelegate: PigeonApiDelegateAVMetadataFaceObjectApi {
         return Int64(pigeonInstance.duration.seconds * 1000)
     }
     
-    func bounds(pigeonApi: PigeonApiAVMetadataFaceObjectApi, pigeonInstance: AVMetadataFaceObject) throws -> Rect {
-        return pigeonInstance.bounds.cxRect
+    func bounds(pigeonApi: PigeonApiAVMetadataFaceObjectApi, pigeonInstance: AVMetadataFaceObject) throws -> RectF {
+        return pigeonInstance.bounds.cxRectF
     }
     
     func faceID(pigeonApi: PigeonApiAVMetadataFaceObjectApi, pigeonInstance: AVMetadataFaceObject) throws -> Int64 {

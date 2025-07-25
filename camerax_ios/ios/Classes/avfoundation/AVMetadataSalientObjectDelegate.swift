@@ -28,8 +28,8 @@ class AVMetadataSalientObjectDelegate: PigeonApiDelegateAVMetadataSalientObjectA
     }
     
     @available(iOS 13.0, *)
-    func bounds(pigeonApi: PigeonApiAVMetadataSalientObjectApi, pigeonInstance: AVMetadataSalientObject) throws -> Rect {
-        return pigeonInstance.bounds.cxRect
+    func bounds(pigeonApi: PigeonApiAVMetadataSalientObjectApi, pigeonInstance: AVMetadataSalientObject) throws -> RectF {
+        return pigeonInstance.bounds.cxRectF
     }
     
     @available(iOS 13.0, *)

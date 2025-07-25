@@ -1,4 +1,0 @@
-enum FacePerformanceMode {
-  fast,
-  accurate,
-}

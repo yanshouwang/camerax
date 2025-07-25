@@ -579,7 +579,7 @@ abstract class AVMetadataCatBodyObjectApi extends AVMetadataBodyObjectApi {
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final int bodyID;
 }
 
@@ -594,7 +594,7 @@ abstract class AVMetadataDogBodyObjectApi extends AVMetadataBodyObjectApi {
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final int bodyID;
 }
 
@@ -609,7 +609,7 @@ abstract class AVMetadataHumanBodyObjectApi extends AVMetadataBodyObjectApi {
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final int bodyID;
 }
 
@@ -625,7 +625,7 @@ abstract class AVMetadataHumanFullBodyObjectApi
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final int bodyID;
 }
 
@@ -639,7 +639,7 @@ abstract class AVMetadataFaceObjectApi extends AVMetadataObjectApi {
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final int faceID;
   late final bool hasRollAngle;
   late final double rollAngle;
@@ -658,7 +658,7 @@ abstract class AVMetadataMachineReadableCodeObjectApi
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final List<PointFApi> corners;
   late final String? stringValue;
 }
@@ -674,100 +674,28 @@ abstract class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
   late final AVMetadataObjectTypeApi type;
   late final int time;
   late final int duration;
-  late final RectApi bounds;
+  late final RectFApi bounds;
   late final int objectID;
 }
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVMetadataObjectsConsumer'))
-abstract class AVMetadataObjectsConsumerApi {
-  AVMetadataObjectsConsumerApi();
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer.Result'))
+abstract class AVAnalyzerResultApi {
+  late final SizeApi size;
+  late final List<AVMetadataObjectApi> objects;
+}
 
-  late final void Function(List<AVMetadataObjectApi> value) accept;
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzerResultConsumer'))
+abstract class AVAnalyzerResultConsumerApi {
+  AVAnalyzerResultConsumerApi();
+
+  late final void Function(AVAnalyzerResultApi value) accept;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer'))
-abstract class AVAnalyzerApi {
+abstract class AVAnalyzerApi implements AnalyzerApi {
   AVAnalyzerApi({
-    required List<AVMetadataObjectTypeApi> types,
-    required AVMetadataObjectsConsumerApi consumer,
-  });
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNDetector'))
-abstract class VNDetectorApi extends CloseableApi {}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(name: 'VNObservation', import: 'Vision'),
-)
-abstract class VNObservationApi {}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNDetectedObjectObservation',
-    import: 'Vision',
-  ),
-)
-abstract class VNDetectedObjectObservationApi extends VNObservationApi {}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNRectangleObservation',
-    import: 'Vision',
-  ),
-)
-abstract class VNRectangleObservationApi
-    extends VNDetectedObjectObservationApi {}
-
-@ProxyApi(
-  swiftOptions: SwiftProxyApiOptions(
-    name: 'VNBarcodeObservation',
-    import: 'Vision',
-  ),
-)
-abstract class VNBarcodeObservationApi extends VNRectangleObservationApi {
-  late final String uuid;
-  late final double confidence;
-  late final RectFApi boundingBox;
-  late final PointFApi bottomLeft;
-  late final PointFApi bottomRight;
-  late final PointFApi topLeft;
-  late final PointFApi topRight;
-  late final String? payloadStringValue;
-  late final Uint8List? payloadData;
-  late final String? supplementalPayloadString;
-  late final Uint8List? supplementalPayloadData;
-  late final VNBarcodeCompositeTypeApi supplementalCompositeType;
-  late final bool isGS1DataCarrier;
-  late final VNBarcodeSymbologyApi symbology;
-  late final bool isColorInverted;
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNBarcodeScanner'))
-abstract class VNBarcodeScannerApi extends VNDetectorApi {
-  VNBarcodeScannerApi({List<VNBarcodeSymbologyApi>? symbologies});
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNAnalyzer.Result'))
-abstract class VNAnalyzerResultApi {
-  late final SizeApi size;
-  late final int timestamp;
-
-  List<VNBarcodeObservationApi>? getBarcodes(VNBarcodeScannerApi detector);
-  List<Object?>? getError(VNDetectorApi detector);
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNAnalyzerResultConsumer'))
-abstract class VNAnalyzerResultConsumerApi {
-  VNAnalyzerResultConsumerApi();
-
-  late final void Function(VNAnalyzerResultApi value) accept;
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VNAnalyzer'))
-abstract class VNAnalyzerApi implements AnalyzerApi {
-  VNAnalyzerApi({
-    required List<VNDetectorApi> detectors,
-    required VNAnalyzerResultConsumerApi consumer,
+    List<AVMetadataObjectTypeApi>? types,
+    required AVAnalyzerResultConsumerApi consumer,
   });
 }
 

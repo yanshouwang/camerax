@@ -16,7 +16,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
   final BarcodeScanner _barcodeScanner;
-  // final FaceDetector _faceDetector;
+  final FaceDetector _faceDetector;
 
   late final StreamSubscription _torchStateChangedSubscription;
   late final StreamSubscription _zoomStateChangedSubscription;
@@ -30,7 +30,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
       _barcodeScanner = BarcodeScanner(),
-      // _faceDetector = FaceDetector(),
+      _faceDetector = FaceDetector(),
       _mode = CameraMode.takePicture,
       _lensFacing = LensFacing.back,
       _barcodes = [],
@@ -206,12 +206,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setMLAnalyzer(analyzer);
         break;
       case CameraMode.scanFace:
-        // final analyzer = MlKitAnalyzer(
-        //   detectors: [_faceDetector],
-        //   targetCoordinateSystem: CoordinateSystem.viewReferenced,
-        //   consumer: _extractML,
-        // );
-        // await _setMLAnalyzer(analyzer);
+        final analyzer = MlKitAnalyzer(
+          detectors: [_faceDetector],
+          targetCoordinateSystem: CoordinateSystem.viewReferenced,
+          consumer: _extractML,
+        );
+        await _setMLAnalyzer(analyzer);
         break;
     }
     this.mode = mode;
@@ -435,8 +435,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
         this.barcodes = barcodes ?? [];
         break;
       case CameraMode.scanFace:
-        // final faces = await result.getValue(_faceDetector);
-        // this.faces = faces ?? [];
+        final faces = await result.getValue(_faceDetector);
+        this.faces = faces ?? [];
         break;
       default:
     }

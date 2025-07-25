@@ -23,7 +23,6 @@ export 'core/metering_mode.dart';
 export 'core/metering_point_factory.dart';
 export 'core/metering_point.dart';
 export 'core/mirror_mode.dart';
-export 'core/plane_proxy.dart';
 export 'core/resolution_selector.dart';
 export 'core/surface_oriented_metering_point_factory.dart';
 export 'core/torch_state.dart';

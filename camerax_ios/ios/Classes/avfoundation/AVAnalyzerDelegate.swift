@@ -6,9 +6,20 @@
 //
 
 import Foundation
+import AVFoundation
 
 class AVAnalyzerDelegate: PigeonApiDelegateAVAnalyzerApi {
-    func pigeonDefaultConstructor(pigeonApi: PigeonApiAVAnalyzerApi, types: [AVMetadataObjectTypeApi], consumer: AVMetadataObjectsConsumer) throws -> AVAnalyzer {
-        return AVAnalyzer(types: types.compactMap { $0.impl }, consumer: consumer)
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiAVAnalyzerApi, types: [AVMetadataObjectTypeApi]?, consumer: AVAnalyzerResultConsumer) throws -> AVAnalyzer {
+        return AVAnalyzer(types: types?.compactMap { $0.impl }, consumer: consumer)
+    }
+    
+    class ResultDelegate: PigeonApiDelegateAVAnalyzerResultApi {
+        func size(pigeonApi: PigeonApiAVAnalyzerResultApi, pigeonInstance: AVAnalyzer.Result) throws -> Size {
+            return pigeonInstance.size.cxSize
+        }
+        
+        func objects(pigeonApi: PigeonApiAVAnalyzerResultApi, pigeonInstance: AVAnalyzer.Result) throws -> [AVMetadataObject] {
+            return pigeonInstance.objects
+        }
     }
 }
