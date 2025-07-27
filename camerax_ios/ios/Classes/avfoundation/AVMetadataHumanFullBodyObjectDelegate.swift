@@ -19,12 +19,12 @@ class AVMetadataHumanFullBodyObjectDelegate: PigeonApiDelegateAVMetadataHumanFul
     
     @available(iOS 17.0, *)
     func time(pigeonApi: PigeonApiAVMetadataHumanFullBodyObjectApi, pigeonInstance: AVMetadataHumanFullBodyObject) throws -> Int64 {
-        return Int64(pigeonInstance.time.seconds * 1000)
+        return pigeonInstance.time.api
     }
     
     @available(iOS 17.0, *)
     func duration(pigeonApi: PigeonApiAVMetadataHumanFullBodyObjectApi, pigeonInstance: AVMetadataHumanFullBodyObject) throws -> Int64 {
-        return Int64(pigeonInstance.duration.seconds * 1000)
+        return pigeonInstance.duration.api
     }
     
     @available(iOS 17.0, *)

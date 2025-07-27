@@ -10,7 +10,7 @@ import AVFoundation
 
 class ImageInfoDelegate: PigeonApiDelegateImageInfoApi {
     func timestamp(pigeonApi: PigeonApiImageInfoApi, pigeonInstance: ImageInfo) throws -> Int64 {
-        return Int64(pigeonInstance.timestamp.seconds * 1000)
+        return pigeonInstance.timestamp.api
     }
     
     func rotationDegrees(pigeonApi: PigeonApiImageInfoApi, pigeonInstance: ImageInfo) throws -> Int64 {

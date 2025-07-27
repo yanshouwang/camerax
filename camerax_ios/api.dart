@@ -963,3 +963,10 @@ abstract class PreviewViewApi {
 //     int? sensorExposureTime,
 //   });
 // }
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'UIScreen'))
+abstract class UIScreen {
+  @static
+  late final UIScreen main;
+  late final double scale;
+}

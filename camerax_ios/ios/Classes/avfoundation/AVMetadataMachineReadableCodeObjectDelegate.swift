@@ -17,11 +17,11 @@ class AVMetadataMachineReadableCodeObjectDelegate: PigeonApiDelegateAVMetadataMa
     }
     
     func time(pigeonApi: PigeonApiAVMetadataMachineReadableCodeObjectApi, pigeonInstance: AVMetadataMachineReadableCodeObject) throws -> Int64 {
-        return Int64(pigeonInstance.time.seconds * 1000)
+        return pigeonInstance.time.api
     }
     
     func duration(pigeonApi: PigeonApiAVMetadataMachineReadableCodeObjectApi, pigeonInstance: AVMetadataMachineReadableCodeObject) throws -> Int64 {
-        return Int64(pigeonInstance.duration.seconds * 1000)
+        return pigeonInstance.duration.api
     }
     
     func bounds(pigeonApi: PigeonApiAVMetadataMachineReadableCodeObjectApi, pigeonInstance: AVMetadataMachineReadableCodeObject) throws -> RectF {

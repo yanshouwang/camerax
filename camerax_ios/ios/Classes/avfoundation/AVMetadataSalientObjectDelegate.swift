@@ -19,12 +19,12 @@ class AVMetadataSalientObjectDelegate: PigeonApiDelegateAVMetadataSalientObjectA
     
     @available(iOS 13.0, *)
     func time(pigeonApi: PigeonApiAVMetadataSalientObjectApi, pigeonInstance: AVMetadataSalientObject) throws -> Int64 {
-        return Int64(pigeonInstance.time.seconds * 1000)
+        return pigeonInstance.time.api
     }
     
     @available(iOS 13.0, *)
     func duration(pigeonApi: PigeonApiAVMetadataSalientObjectApi, pigeonInstance: AVMetadataSalientObject) throws -> Int64 {
-        return Int64(pigeonInstance.duration.seconds * 1000)
+        return pigeonInstance.duration.api
     }
     
     @available(iOS 13.0, *)

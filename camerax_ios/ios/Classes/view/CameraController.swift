@@ -51,32 +51,46 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.rotationProvider = RotationProvider()
         super.init()
         
-        self.session.sessionPreset = .photo
+        // TODO: Move to configureSession
         self.captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
         var videoSettings = self.captureVideoDataOutput.videoSettings ?? [:]
         videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
         self.captureVideoDataOutput.videoSettings = videoSettings
-    }
-    
-    public func bind() throws {
-        try self.addVideoDeviceInput()
-        try self.addAudioDeviceInput()
-        try self.addCapturePhotoOutput()
-        try self.addCaptureMovieFileOutput()
+        self.session.beginConfiguration()
+        defer { self.session.commitConfiguration() }
+        self.session.sessionPreset = .photo
+        try? self.addVideoDeviceInput()
+        try? self.addAudioDeviceInput()
+        try? self.addCapturePhotoOutput()
+        try? self.addCaptureMovieFileOutput()
+        try? self.addCaptureVideoDataOutput()
+        try? self.addCaptureMetadataOutput()
         self.updateVideoOrientation()
         self.rotationProvider.addListener(self.rotationListener)
         self.rotationProvider.enable()
-        DispatchQueue.global(qos: .background).async { self.session.startRunning() }
     }
     
-    public func unbind() {
-        self.session.stopRunning()
+    deinit {
+        self.session.beginConfiguration()
+        defer { self.session.commitConfiguration() }
         self.removeVideoDeviceInput()
         self.removeAudioDeviceInput()
         self.removeCapturePhotoOutput()
         self.removeCaptureMovieFileOutput()
+        self.removeCaptureVideoDataOutput()
+        self.removeCaptureMetadataOutput()
         self.rotationProvider.removeListener(self.rotationListener)
         self.rotationProvider.disable()
+    }
+    
+    public func bind() throws {
+        // [AVCaptureSession startRunning] should be called from background thread. Calling it on the main thread can lead to UI unresponsiveness
+        DispatchSerialQueue.global(qos: .background).async { self.session.startRunning() }
+    }
+    
+    public func unbind() {
+//        DispatchSerialQueue.global(qos: .background).async { self.session.stopRunning() }
+        self.session.stopRunning()
     }
     
     public func hasCamera(cameraSelector: CameraSelector) -> Bool {
@@ -249,14 +263,14 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         } else {
             self.capturePhotoOutput.isHighResolutionCaptureEnabled = true
         }
-//        if #available(iOS 13.0, *) {
-//            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-//        }
-//        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
-//        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
-//            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
-//        }
-//        settings.flashMode = capturePhotoSettings.flashMode
+        //        if #available(iOS 13.0, *) {
+        //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
+        //        }
+        //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
+        //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
+        //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
+        //        }
+        //        settings.flashMode = capturePhotoSettings.flashMode
         let delegate = CapturePhotoCaptureDelegate(capturedCallback)
         self.capturePhotoOutput.capturePhoto(with: settings, delegate: delegate)
         self.capturePhotoCaptureDelegate = delegate
@@ -350,28 +364,23 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     
     public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) throws {
         if self.captureMetadataOutputObjectsDelegate != nil {
-            self.removeCaptureMetadataOutput()
+            self.captureMetadataOutput.setMetadataObjectsDelegate(nil, queue: nil)
             self.captureMetadataOutputObjectsDelegate = nil
         }
         if self.captureVideoDataOutputSampleBufferDelegate != nil {
-            self.removeCaptureVideoDataOutput()
+            self.captureVideoDataOutput.setSampleBufferDelegate(nil, queue: nil)
             self.captureVideoDataOutputSampleBufferDelegate = nil
         }
         guard let videoPreviewLayer = self.videoPreviewLayer else {
             throw CameraXError(code: "nil-error", message: "video preview layer is nil", details: nil)
         }
         if let analyzer = analyzer as? AVAnalyzer {
-            try self.addCaptureMetadataOutput()
-            // TODO: Why availableMetadataObjectTypes is nil
-            let availableMetadataObjectTypes = self.captureMetadataOutput.availableMetadataObjectTypes
-            debugPrint("availableMetadataObjectTypes: \(availableMetadataObjectTypes)")
             let types = analyzer.types?.filter { self.captureMetadataOutput.availableMetadataObjectTypes.contains($0) }
             self.captureMetadataOutput.metadataObjectTypes = types
             let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, videoPreviewLayer: videoPreviewLayer)
             self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.imageAnalysisQueue)
             self.captureMetadataOutputObjectsDelegate = delegate
         } else {
-            try self.addCaptureVideoDataOutput()
             let delegate = CaptureVideoDataOutputSampleBufferDelegate(analyzer: analyzer, rotationProvider: self.rotationProvider)
             self.captureVideoDataOutput.setSampleBufferDelegate(delegate, queue: self.imageAnalysisQueue)
             self.captureVideoDataOutputSampleBufferDelegate = delegate

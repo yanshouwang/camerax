@@ -19,12 +19,12 @@ class AVMetadataDogBodyObjectDelegate: PigeonApiDelegateAVMetadataDogBodyObjectA
     
     @available(iOS 13.0, *)
     func time(pigeonApi: PigeonApiAVMetadataDogBodyObjectApi, pigeonInstance: AVMetadataDogBodyObject) throws -> Int64 {
-        return Int64(pigeonInstance.time.seconds * 1000)
+        return pigeonInstance.time.api
     }
     
     @available(iOS 13.0, *)
     func duration(pigeonApi: PigeonApiAVMetadataDogBodyObjectApi, pigeonInstance: AVMetadataDogBodyObject) throws -> Int64 {
-        return Int64(pigeonInstance.duration.seconds * 1000)
+        return pigeonInstance.duration.api
     }
     
     @available(iOS 13.0, *)
