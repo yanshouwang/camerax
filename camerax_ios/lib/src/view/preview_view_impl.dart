@@ -27,7 +27,7 @@ final class PreviewViewImpl extends PreviewView {
   Widget build(BuildContext context) {
     final identifier = api.pigeon_instanceManager.getIdentifier(api);
     return UiKitView(
-      viewType: 'camerax.hebei.dev/PreviewView',
+      viewType: 'camerax.zeekr.dev/PreviewView',
       layoutDirection: TextDirection.ltr,
       creationParams: identifier,
       creationParamsCodec: const StandardMessageCodec(),

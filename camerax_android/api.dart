@@ -6,9 +6,9 @@ import 'package:pigeon/pigeon.dart';
     dartOut: 'lib/src/camerax.g.dart',
     dartOptions: DartOptions(),
     kotlinOut:
-        'android/src/main/kotlin/dev/hebei/camerax_android/CameraXApi.g.kt',
+        'android/src/main/kotlin/dev/zeekr/camerax_android/CameraXApi.g.kt',
     kotlinOptions: KotlinOptions(
-      package: 'dev.hebei.camerax_android',
+      package: 'dev.zeekr.camerax_android',
       errorClassName: 'CameraXError',
     ),
   ),
@@ -223,7 +223,7 @@ enum ControlAwbModeApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.PermissionManager',
+    fullClassName: 'dev.zeekr.camerax_android.common.PermissionManager',
   ),
 )
 abstract class PermissionManagerApi {
@@ -307,7 +307,7 @@ abstract class RectApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.IntRange',
+    fullClassName: 'dev.zeekr.camerax_android.common.IntRange',
   ),
 )
 abstract class IntRangeApi {
@@ -319,7 +319,7 @@ abstract class IntRangeApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.LongRange',
+    fullClassName: 'dev.zeekr.camerax_android.common.LongRange',
   ),
 )
 abstract class LongRangeApi {
@@ -347,7 +347,7 @@ abstract class CameraSelectorApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.CameraStateLiveData',
+    fullClassName: 'dev.zeekr.camerax_android.common.CameraStateLiveData',
   ),
 )
 abstract class CameraStateLiveDataApi {
@@ -359,7 +359,7 @@ abstract class CameraStateLiveDataApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.CameraStateObserver',
+    fullClassName: 'dev.zeekr.camerax_android.common.CameraStateObserver',
   ),
 )
 abstract class CameraStateObserverApi {
@@ -370,7 +370,7 @@ abstract class CameraStateObserverApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.TorchStateLiveData',
+    fullClassName: 'dev.zeekr.camerax_android.common.TorchStateLiveData',
   ),
 )
 abstract class TorchStateLiveDataApi {
@@ -382,7 +382,7 @@ abstract class TorchStateLiveDataApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.TorchStateObserver',
+    fullClassName: 'dev.zeekr.camerax_android.common.TorchStateObserver',
   ),
 )
 abstract class TorchStateObserverApi {
@@ -405,7 +405,7 @@ abstract class ZoomStateApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.ZoomStateLiveData',
+    fullClassName: 'dev.zeekr.camerax_android.common.ZoomStateLiveData',
   ),
 )
 abstract class ZoomStateLiveDataApi {
@@ -417,7 +417,7 @@ abstract class ZoomStateLiveDataApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.ZoomStateObserver',
+    fullClassName: 'dev.zeekr.camerax_android.common.ZoomStateObserver',
   ),
 )
 abstract class ZoomStateObserverApi {
@@ -468,7 +468,7 @@ abstract class SurfaceOrientedMeteringPointFactoryApi
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.MeteringPointTuple',
+    fullClassName: 'dev.zeekr.camerax_android.core.MeteringPointTuple',
   ),
 )
 abstract class MeteringPointTupleApi {
@@ -477,7 +477,7 @@ abstract class MeteringPointTupleApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.core.DurationTuple',
+    fullClassName: 'dev.zeekr.camerax_android.core.DurationTuple',
   ),
 )
 abstract class DurationTupleApi {
@@ -698,7 +698,7 @@ abstract class ImageAnalyzerApi implements AnalyzerApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.ml.Detector',
+    fullClassName: 'dev.zeekr.camerax_android.ml.Detector',
   ),
 )
 abstract class DetectorApi extends CloseableApi {}
@@ -925,7 +925,7 @@ abstract class BarcodeScannerOptionsApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.ml.barcode.BarcodeScanner',
+    fullClassName: 'dev.zeekr.camerax_android.ml.barcode.BarcodeScanner',
   ),
 )
 abstract class BarcodeScannerApi extends DetectorApi {
@@ -991,7 +991,7 @@ abstract class FaceApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.ml.face.FaceDetector',
+    fullClassName: 'dev.zeekr.camerax_android.ml.face.FaceDetector',
   ),
 )
 abstract class FaceDetectorApi extends DetectorApi {
@@ -1000,35 +1000,35 @@ abstract class FaceDetectorApi extends DetectorApi {
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.ml.ImageLabeler',
+//     fullClassName: 'dev.zeekr.camerax_android.ml.ImageLabeler',
 //   ),
 // )
 // abstract class ImageLabelerApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.ml.ObjectDetector',
+//     fullClassName: 'dev.zeekr.camerax_android.ml.ObjectDetector',
 //   ),
 // )
 // abstract class ObjectDetectorApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.ml.PoseDetector',
+//     fullClassName: 'dev.zeekr.camerax_android.ml.PoseDetector',
 //   ),
 // )
 // abstract class PoseDetectorApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.ml.Segmenter',
+//     fullClassName: 'dev.zeekr.camerax_android.ml.Segmenter',
 //   ),
 // )
 // abstract class SegmenterApi extends DetectorApi {}
 
 // @ProxyApi(
 //   kotlinOptions: KotlinProxyApiOptions(
-//     fullClassName: 'dev.hebei.camerax_android.ml.TextRecognizer',
+//     fullClassName: 'dev.zeekr.camerax_android.ml.TextRecognizer',
 //   ),
 // )
 // abstract class TextRecognizerApi extends DetectorApi {}
@@ -1049,7 +1049,7 @@ abstract class MlKitAnalyzerResultApi {
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.hebei.camerax_android.common.MlKitAnalyzerResultConsumer',
+        'dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer',
   ),
 )
 abstract class MlKitAnalyzerResultConsumerApi {
@@ -1254,7 +1254,7 @@ abstract class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.VideoRecordEventConsumer',
+    fullClassName: 'dev.zeekr.camerax_android.common.VideoRecordEventConsumer',
   ),
 )
 abstract class VideoRecordEventConsumerApi {

@@ -1,4 +1,4 @@
-group = "dev.hebei.camerax_android"
+group = "dev.zeekr.camerax_android"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -26,7 +26,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 android {
-    namespace = "dev.hebei.camerax_android"
+    namespace = "dev.zeekr.camerax_android"
 
     compileSdk = 35
 
@@ -84,9 +84,9 @@ android {
             useJUnitPlatform()
 
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen { false }
-               showStandardStreams = true
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
             }
         }
     }

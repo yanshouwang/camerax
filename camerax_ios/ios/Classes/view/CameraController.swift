@@ -47,7 +47,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.captureMovieFileOutput = AVCaptureMovieFileOutput()
         self.captureVideoDataOutput = AVCaptureVideoDataOutput()
         self.captureMetadataOutput = AVCaptureMetadataOutput()
-        self.imageAnalysisQueue = DispatchQueue(label: "dev.hebei.camerax.imageAnalysisQueue")
+        self.imageAnalysisQueue = DispatchQueue(label: "dev.zeekr.camerax.imageAnalysisQueue")
         self.rotationProvider = RotationProvider()
         super.init()
         

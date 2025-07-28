@@ -27,7 +27,7 @@ final class PreviewViewImpl extends PreviewView {
   @override
   Widget build(BuildContext context) {
     return PlatformViewLink(
-      viewType: 'camerax.hebei.dev/PreviewView',
+      viewType: 'camerax.zeekr.dev/PreviewView',
       surfaceFactory: (context, controller) {
         return AndroidViewSurface(
           controller: controller as AndroidViewController,

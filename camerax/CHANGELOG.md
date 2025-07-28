@@ -1,4 +1,4 @@
-## 1.0.0-dev.10
+## 1.0.0
 
 * Add common library.
 * Add core library.
