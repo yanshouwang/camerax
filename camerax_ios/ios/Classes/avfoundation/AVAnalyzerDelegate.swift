@@ -14,10 +14,6 @@ class AVAnalyzerDelegate: PigeonApiDelegateAVAnalyzerApi {
     }
     
     class ResultDelegate: PigeonApiDelegateAVAnalyzerResultApi {
-        func size(pigeonApi: PigeonApiAVAnalyzerResultApi, pigeonInstance: AVAnalyzer.Result) throws -> Size {
-            return pigeonInstance.size.cxSize
-        }
-        
         func objects(pigeonApi: PigeonApiAVAnalyzerResultApi, pigeonInstance: AVAnalyzer.Result) throws -> [AVMetadataObject] {
             return pigeonInstance.objects
         }
