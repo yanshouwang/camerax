@@ -1,0 +1,4 @@
+enum BackpressureStrategy {
+  keepOnlyLatest,
+  blockProducer,
+}

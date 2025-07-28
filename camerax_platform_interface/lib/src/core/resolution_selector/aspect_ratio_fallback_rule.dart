@@ -1,0 +1,4 @@
+enum AspectRatioFallbackRule {
+  none,
+  auto,
+}
