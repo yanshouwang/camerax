@@ -1,8 +1,9 @@
 ## 1.0.0
 
-* Add common library.
-* Add core library.
-* Add ml library.
-* Add video library.
-* Add view library.
+* Add avfoundation APIs.
 * Add camera2 APIs.
+* Add common APIs.
+* Add core APIs.
+* Add ml APIs.
+* Add video APIs.
+* Add view APIs.

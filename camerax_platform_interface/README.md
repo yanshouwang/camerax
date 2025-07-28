@@ -1,6 +1,6 @@
 # camerax_platform_interface
 
-A new Flutter plugin project.
+A common platform interface for the camerax plugin.
 
 ## Getting Started
 

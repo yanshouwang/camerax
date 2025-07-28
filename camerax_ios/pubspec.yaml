@@ -1,5 +1,5 @@
 name: camerax_ios
-description: "iOS implementation of the camerax plugin."
+description: 'iOS implementation of the camerax plugin.'
 version: 1.0.0
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
@@ -9,7 +9,7 @@ topics:
 
 environment:
   sdk: ^3.7.2
-  flutter: ">=3.3.0"
+  flutter: '>=3.3.0'
 resolution: workspace
 
 dependencies:

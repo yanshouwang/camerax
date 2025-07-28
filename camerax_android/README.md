@@ -1,6 +1,6 @@
 # camerax_android
 
-A new Flutter plugin project.
+Android implementation of the camerax plugin.
 
 ## Getting Started
 

@@ -1,8 +1,9 @@
 ## 1.0.0
 
-* Add common impls.
-* Add core impls.
-* Add ml impls.
-* Add video impls.
-* Add view impls.
+* Add avfoundation APIs.
 * Add camera2 APIs.
+* Add common APIs.
+* Add core APIs.
+* Add ml APIs.
+* Add video APIs.
+* Add view APIs.

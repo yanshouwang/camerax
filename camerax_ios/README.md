@@ -1,6 +1,6 @@
 # camerax_ios
 
-A new Flutter plugin project.
+iOS implementation of the camerax plugin.
 
 ## Getting Started
 
