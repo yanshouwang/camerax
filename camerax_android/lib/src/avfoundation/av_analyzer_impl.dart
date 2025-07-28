@@ -46,7 +46,7 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
               }
               final codeObjects =
                   barcodeApis
-                      .map((e1) => e1.implOf(e.timestamp, e.size))
+                      .map((e1) => e1.implOf(e.timestamp))
                       .whereType<AVMetadataMachineReadableCodeObject>();
               if (codeObjects.isEmpty) {
                 continue;
@@ -59,7 +59,7 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
               }
               final faceObjects =
                   faceApis
-                      .map((e1) => e1.implOf(e.timestamp, e.size))
+                      .map((e1) => e1.implOf(e.timestamp))
                       .whereType<AVMetadataFaceObject>();
               objects.addAll(faceObjects);
             }

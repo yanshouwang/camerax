@@ -15,9 +15,9 @@ final class FaceDetectorImpl extends FaceDetector with DetectorImpl {
 }
 
 extension AVMetadataFaceObjectApiX on AVMetadataFaceObjectApi {
-  Face implOfSize(SizeApi sizeApi) {
+  Face get impl {
     return Face(
-      boundingBox: bounds.implOf(sizeApi),
+      boundingBox: bounds.impl,
       allContours: [],
       allLandmarks: [],
       headEulerAngleX: rollAngle, // Roll

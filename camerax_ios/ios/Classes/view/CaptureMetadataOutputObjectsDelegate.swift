@@ -20,9 +20,8 @@ class CaptureMetadataOutputObjectsDelegate: NSObject, AVCaptureMetadataOutputObj
     private var consumer: any Consumer<AVAnalyzer.Result> { analyzer.consumer }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        let size = videoPreviewLayer.frame.size
         let objects = metadataObjects.compactMap { videoPreviewLayer.transformedMetadataObject(for: $0) }
-        let value = AVAnalyzer.Result(size: size, objects: objects)
+        let value = AVAnalyzer.Result(objects: objects)
         consumer.accept(value)
     }
 }

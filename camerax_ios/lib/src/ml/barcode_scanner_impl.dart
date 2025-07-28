@@ -148,11 +148,11 @@ extension AVMetadataObjectTypeApiX on AVMetadataObjectTypeApi {
 
 extension AVMetadataMachineReadableCodeObjectApiX
     on AVMetadataMachineReadableCodeObjectApi {
-  Barcode implOfSize(SizeApi sizeApi) {
+  Barcode get impl {
     return Barcode(
       format: type.impl,
-      boundingBox: bounds.implOf(sizeApi),
-      cornerPoints: corners.map((e) => e.implOf(sizeApi)).toList(),
+      boundingBox: bounds.impl,
+      cornerPoints: corners.map((e) => e.impl).toList(),
       rawBytes: null,
       rawValue: stringValue,
       displayValue: stringValue,

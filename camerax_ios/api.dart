@@ -680,7 +680,6 @@ abstract class AVMetadataSalientObjectApi extends AVMetadataObjectApi {
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer.Result'))
 abstract class AVAnalyzerResultApi {
-  late final SizeApi size;
   late final List<AVMetadataObjectApi> objects;
 }
 
@@ -963,10 +962,3 @@ abstract class PreviewViewApi {
 //     int? sensorExposureTime,
 //   });
 // }
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'UIScreen'))
-abstract class UIScreen {
-  @static
-  late final UIScreen main;
-  late final double scale;
-}

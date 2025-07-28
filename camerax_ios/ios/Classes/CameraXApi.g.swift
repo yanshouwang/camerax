@@ -5743,7 +5743,6 @@ final class PigeonApiAVMetadataSalientObjectApi: PigeonApiProtocolAVMetadataSali
   }
 }
 protocol PigeonApiDelegateAVAnalyzerResultApi {
-  func size(pigeonApi: PigeonApiAVAnalyzerResultApi, pigeonInstance: AVAnalyzer.Result) throws -> Size
   func objects(pigeonApi: PigeonApiAVAnalyzerResultApi, pigeonInstance: AVAnalyzer.Result) throws -> [AVMetadataObject]
 }
 
@@ -5769,13 +5768,12 @@ final class PigeonApiAVAnalyzerResultApi: PigeonApiProtocolAVAnalyzerResultApi  
       completion(.success(()))
     }     else {
       let pigeonIdentifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeonInstance as AnyObject)
-      let sizeArg = try! pigeonDelegate.size(pigeonApi: self, pigeonInstance: pigeonInstance)
       let objectsArg = try! pigeonDelegate.objects(pigeonApi: self, pigeonInstance: pigeonInstance)
       let binaryMessenger = pigeonRegistrar.binaryMessenger
       let codec = pigeonRegistrar.codec
       let channelName: String = "dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance"
       let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger, codec: codec)
-      channel.sendMessage([pigeonIdentifierArg, sizeArg, objectsArg] as [Any?]) { response in
+      channel.sendMessage([pigeonIdentifierArg, objectsArg] as [Any?]) { response in
         guard let listResponse = response as? [Any?] else {
           completion(.failure(createConnectionError(withChannelName: channelName)))
           return

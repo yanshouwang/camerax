@@ -7275,11 +7275,8 @@ class AVAnalyzerResultApi extends PigeonInternalProxyApiBaseClass {
   AVAnalyzerResultApi.pigeon_detached({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
-    required this.size,
     required this.objects,
   });
-
-  final SizeApi size;
 
   final List<AVMetadataObjectApi> objects;
 
@@ -7287,10 +7284,8 @@ class AVAnalyzerResultApi extends PigeonInternalProxyApiBaseClass {
     bool pigeon_clearHandlers = false,
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
-    AVAnalyzerResultApi Function(
-      SizeApi size,
-      List<AVMetadataObjectApi> objects,
-    )? pigeon_newInstance,
+    AVAnalyzerResultApi Function(List<AVMetadataObjectApi> objects)?
+        pigeon_newInstance,
   }) {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _PigeonInternalProxyApiBaseCodec(
@@ -7313,21 +7308,17 @@ class AVAnalyzerResultApi extends PigeonInternalProxyApiBaseClass {
           final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
           assert(arg_pigeon_instanceIdentifier != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null, expected non-null int.');
-          final SizeApi? arg_size = (args[1] as SizeApi?);
-          assert(arg_size != null,
-              'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null, expected non-null SizeApi.');
           final List<AVMetadataObjectApi>? arg_objects =
-              (args[2] as List<Object?>?)?.cast<AVMetadataObjectApi>();
+              (args[1] as List<Object?>?)?.cast<AVMetadataObjectApi>();
           assert(arg_objects != null,
               'Argument for dev.flutter.pigeon.camerax_ios.AVAnalyzerResultApi.pigeon_newInstance was null, expected non-null List<AVMetadataObjectApi>.');
           try {
             (pigeon_instanceManager ?? PigeonInstanceManager.instance)
                 .addHostCreatedInstance(
-              pigeon_newInstance?.call(arg_size!, arg_objects!) ??
+              pigeon_newInstance?.call(arg_objects!) ??
                   AVAnalyzerResultApi.pigeon_detached(
                     pigeon_binaryMessenger: pigeon_binaryMessenger,
                     pigeon_instanceManager: pigeon_instanceManager,
-                    size: arg_size!,
                     objects: arg_objects!,
                   ),
               arg_pigeon_instanceIdentifier!,
@@ -7349,7 +7340,6 @@ class AVAnalyzerResultApi extends PigeonInternalProxyApiBaseClass {
     return AVAnalyzerResultApi.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
-      size: size,
       objects: objects,
     );
   }

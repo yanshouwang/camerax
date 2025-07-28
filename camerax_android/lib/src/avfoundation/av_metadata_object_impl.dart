@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
@@ -86,7 +88,7 @@ extension BarcodeFormatApiX on BarcodeFormatApi {
 }
 
 extension BarcodeApiX on BarcodeApi {
-  AVMetadataMachineReadableCodeObject? implOf(int timestamp, SizeApi sizeApi) {
+  AVMetadataMachineReadableCodeObject? implOf(int timestamp) {
     final format = this.format;
     final boundingBox = this.boundingBox;
     final cornerPoints = this.cornerPoints;
@@ -98,15 +100,15 @@ extension BarcodeApiX on BarcodeApi {
       type: type,
       time: DateTime.fromMillisecondsSinceEpoch(timestamp),
       duration: Duration.zero,
-      bounds: boundingBox.implOf(sizeApi),
-      corners: cornerPoints.map((e) => e.implOf(sizeApi)).toList(),
+      bounds: boundingBox.impl,
+      corners: cornerPoints.map((e) => e.impl).toList(),
       stringValue: rawValue,
     );
   }
 }
 
 extension FaceApiX on FaceApi {
-  AVMetadataFaceObject? implOf(int timestamp, SizeApi sizeApi) {
+  AVMetadataFaceObject? implOf(int timestamp) {
     final trackingId = this.trackingId;
     if (trackingId == null) {
       return null;
@@ -115,7 +117,7 @@ extension FaceApiX on FaceApi {
       type: AVMetadataObjectType.face,
       time: DateTime.fromMillisecondsSinceEpoch(timestamp),
       duration: Duration.zero,
-      bounds: boundingBox.implOf(sizeApi),
+      bounds: boundingBox.impl,
       faceID: trackingId,
       hasRollAngle: true,
       rollAngle: headEulerAngleX, // X
@@ -126,19 +128,21 @@ extension FaceApiX on FaceApi {
 }
 
 extension on PointApi {
-  Point<double> implOf(SizeApi sizeApi) {
-    final x = this.x / sizeApi.width;
-    final y = this.y / sizeApi.height;
+  Point<double> get impl {
+    final ratio = ui.PlatformDispatcher.instance.views.first.devicePixelRatio;
+    final x = this.x / ratio;
+    final y = this.y / ratio;
     return Point(x, y);
   }
 }
 
 extension on RectApi {
-  Rect<double> implOf(SizeApi sizeApi) {
-    final left = this.left / sizeApi.width;
-    final top = this.top / sizeApi.height;
-    final right = this.right / sizeApi.width;
-    final bottom = this.bottom / sizeApi.height;
+  Rect<double> get impl {
+    final ratio = ui.PlatformDispatcher.instance.views.first.devicePixelRatio;
+    final left = this.left / ratio;
+    final top = this.top / ratio;
+    final right = this.right / ratio;
+    final bottom = this.bottom / ratio;
     return Rect(left, top, right, bottom);
   }
 }

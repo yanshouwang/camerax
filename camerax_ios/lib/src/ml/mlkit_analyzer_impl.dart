@@ -41,7 +41,7 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
       final impls =
           api.objects
               .whereType<AVMetadataMachineReadableCodeObjectApi>()
-              .map((e) => e.implOfSize(api.size))
+              .map((e) => e.impl)
               .toList();
       return Future.value(impls as T?);
     }
@@ -49,7 +49,7 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
       final impls =
           api.objects
               .whereType<AVMetadataFaceObjectApi>()
-              .map((e) => e.implOfSize(api.size))
+              .map((e) => e.impl)
               .toList();
       return Future.value(impls as T?);
     }

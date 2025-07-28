@@ -15,16 +15,6 @@ class FaceDetectorImpl(impl: CameraXImpl) : PigeonApiFaceDetectorApi(impl) {
         else FaceDetection.getClient(options)
         return FaceDetector(instance)
     }
-
-    override fun process0(pigeon_instance: FaceDetector, image: MlImage, callback: (Result<List<Face>>) -> Unit) {
-        pigeon_instance.instance.process(image).addOnSuccessListener { value -> callback(Result.success(value)) }
-            .addOnFailureListener { exception -> callback(Result.failure(exception)) }
-    }
-
-    override fun process1(pigeon_instance: FaceDetector, image: InputImage, callback: (Result<List<Face>>) -> Unit) {
-        pigeon_instance.instance.process(image).addOnSuccessListener { value -> callback(Result.success(value)) }
-            .addOnFailureListener { exception -> callback(Result.failure(exception)) }
-    }
 }
 
 class FaceDetector internal constructor(override val instance: com.google.mlkit.vision.face.FaceDetector) :

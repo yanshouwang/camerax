@@ -13,36 +13,15 @@ import 'package:pigeon/pigeon.dart';
     ),
   ),
 )
-enum PermissionApi {
-  video,
-  audio,
-}
+enum PermissionApi { video, audio }
 
-enum LensFacingApi {
-  unknown,
-  front,
-  back,
-  external,
-}
+enum LensFacingApi { unknown, front, back, external }
 
-enum CameraStateApi {
-  pendingOpen,
-  opening,
-  open,
-  closing,
-  closed,
-}
+enum CameraStateApi { pendingOpen, opening, open, closing, closed }
 
-enum TorchStateApi {
-  off,
-  on,
-}
+enum TorchStateApi { off, on }
 
-enum MeteringModeApi {
-  af,
-  ae,
-  awb,
-}
+enum MeteringModeApi { af, ae, awb }
 
 enum TimeUnitApi {
   nanoseconds,
@@ -54,17 +33,9 @@ enum TimeUnitApi {
   days,
 }
 
-enum AspectRatioApi {
-  ratioDefault,
-  ratio4_3,
-  ratio16_9,
-}
+enum AspectRatioApi { ratioDefault, ratio4_3, ratio16_9 }
 
-enum BitDepthApi {
-  bitDepthUnspecified,
-  bitDepth8Bit,
-  bitDepth10Bit,
-}
+enum BitDepthApi { bitDepthUnspecified, bitDepth8Bit, bitDepth10Bit }
 
 enum EncodingApi {
   unspecified,
@@ -85,21 +56,14 @@ enum ScaleTypeApi {
   fitEnd,
 }
 
-enum UseCaseApi {
-  imageCapture,
-  imageAnalysis,
-  videoCapture,
-}
+enum UseCaseApi { imageCapture, imageAnalysis, videoCapture }
 
 enum ResolutionModeApi {
   preferCaptureRateOverHigherResolution,
   preferHigherResolutionOverCaptureRate,
 }
 
-enum AspectRatioFallbackRuleApi {
-  none,
-  auto,
-}
+enum AspectRatioFallbackRuleApi { none, auto }
 
 enum ResolutionFallbackRuleApi {
   none,
@@ -109,41 +73,17 @@ enum ResolutionFallbackRuleApi {
   closestLower,
 }
 
-enum CaptureModeApi {
-  maximizeQuality,
-  minimizeLatency,
-  zeroShutterLag,
-}
+enum CaptureModeApi { maximizeQuality, minimizeLatency, zeroShutterLag }
 
-enum FlashModeApi {
-  auto,
-  on,
-  off,
-  screen,
-}
+enum FlashModeApi { auto, on, off, screen }
 
-enum BackpressureStrategyApi {
-  keepOnlyLatest,
-  blockProducer,
-}
+enum BackpressureStrategyApi { keepOnlyLatest, blockProducer }
 
-enum CoordinateSystemApi {
-  original,
-  sensor,
-  viewReferenced,
-}
+enum CoordinateSystemApi { original, sensor, viewReferenced }
 
-enum ImageFormatApi {
-  yuv420_888,
-  rgba8888,
-  jpeg,
-}
+enum ImageFormatApi { yuv420_888, rgba8888, jpeg }
 
-enum MirrorModeApi {
-  off,
-  on,
-  onFrontOnly,
-}
+enum MirrorModeApi { off, on, onFrontOnly }
 
 enum AudioStateApi {
   active,
@@ -202,51 +142,21 @@ enum BarcodeValueTypeApi {
   driverLicense,
 }
 
-enum AddressTypeApi {
-  unknown,
-  work,
-  home,
-}
+enum AddressTypeApi { unknown, work, home }
 
-enum EmailTypeApi {
-  unknown,
-  work,
-  home,
-}
+enum EmailTypeApi { unknown, work, home }
 
-enum PhoneTypeApi {
-  unknown,
-  work,
-  home,
-  fax,
-  mobile,
-}
+enum PhoneTypeApi { unknown, work, home, fax, mobile }
 
-enum WiFiEncryptionTypeApi {
-  open,
-  wpa,
-  wep,
-}
+enum WiFiEncryptionTypeApi { open, wpa, wep }
 
-enum FaceClassificationModeApi {
-  none,
-  all,
-}
+enum FaceClassificationModeApi { none, all }
 
-enum FaceContourModeApi {
-  none,
-  all,
-}
+enum FaceContourModeApi { none, all }
 
-enum FaceLandmarkModeApi {
-  none,
-  all,
-}
+enum FaceLandmarkModeApi { none, all }
 
-enum FacePerformanceModeApi {
-  fast,
-  accurate,
-}
+enum FacePerformanceModeApi { fast, accurate }
 
 enum FaceContourTypeApi {
   face,
@@ -297,13 +207,7 @@ enum ControlAeModeApi {
   onLowLightBoostBrightnessPriority,
 }
 
-enum ControlAfModeApi {
-  auto,
-  continuousPicture,
-  edof,
-  macro,
-  off,
-}
+enum ControlAfModeApi { auto, continuousPicture, edof, macro, off }
 
 enum ControlAwbModeApi {
   auto,
@@ -341,9 +245,7 @@ abstract class AutoCloseableApi {
 }
 
 @ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'java.io.Closeable',
-  ),
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'java.io.Closeable'),
 )
 abstract class CloseableApi extends AutoCloseableApi {}
 
@@ -360,9 +262,7 @@ abstract class LocationApi {
 }
 
 @ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'android.util.Size',
-  ),
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.util.Size'),
 )
 abstract class SizeApi {
   SizeApi();
@@ -372,9 +272,7 @@ abstract class SizeApi {
 }
 
 @ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'android.graphics.Point',
-  ),
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.graphics.Point'),
 )
 abstract class PointApi {
   PointApi();
@@ -396,9 +294,7 @@ abstract class PointFApi {
 }
 
 @ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'android.graphics.Rect',
-  ),
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.graphics.Rect'),
 )
 abstract class RectApi {
   RectApi();
@@ -411,11 +307,23 @@ abstract class RectApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.hebei.camerax_android.common.Range',
+    fullClassName: 'dev.hebei.camerax_android.common.IntRange',
   ),
 )
-abstract class RangeApi {
-  RangeApi();
+abstract class IntRangeApi {
+  IntRangeApi();
+
+  late final int lower;
+  late final int upper;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.hebei.camerax_android.common.LongRange',
+  ),
+)
+abstract class LongRangeApi {
+  LongRangeApi();
 
   late final int lower;
   late final int upper;
@@ -525,7 +433,7 @@ abstract class ZoomStateObserverApi {
 )
 abstract class ExposureStateApi {
   late final int exposureCompensationIndex;
-  late final RangeApi exposureCompensationRange;
+  late final IntRangeApi exposureCompensationRange;
   late final double exposureCompensationStep;
   late final bool isExposureCompensationSupported;
 }
@@ -545,11 +453,7 @@ abstract class MeteringPointApi {
   ),
 )
 abstract class MeteringPointFactoryApi {
-  MeteringPointApi createPoint(
-    double x,
-    double y, {
-    double? size,
-  });
+  MeteringPointApi createPoint(double x, double y, {double? size});
 }
 
 @ProxyApi(
@@ -568,10 +472,7 @@ abstract class SurfaceOrientedMeteringPointFactoryApi
   ),
 )
 abstract class MeteringPointTupleApi {
-  MeteringPointTupleApi(
-    MeteringPointApi point, {
-    List<MeteringModeApi>? modes,
-  });
+  MeteringPointTupleApi(MeteringPointApi point, {List<MeteringModeApi>? modes});
 }
 
 @ProxyApi(
@@ -641,13 +542,14 @@ abstract class CameraInfoApi {
   LensFacingApi getLensFacing();
   List<CameraInfoApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees();
-  List<RangeApi> getSupportedFrameRateRanges();
+  List<IntRangeApi> getSupportedFrameRateRanges();
   bool isLogicalMultiCameraSupported();
   bool isZslSupported();
   bool hasFlashUnit();
   bool isFocusMeteringSupported(FocusMeteringActionApi action);
   List<DynamicRangeApi> querySupportedDynamicRanges(
-      List<DynamicRangeApi> candidateDynamicRanges);
+    List<DynamicRangeApi> candidateDynamicRanges,
+  );
 }
 
 @ProxyApi(
@@ -692,7 +594,10 @@ abstract class ResolutionFilterApi {
   ResolutionFilterApi();
 
   late final List<SizeApi> Function(
-      List<SizeApi> supportedSizes, int rotationDegrees) filter;
+    List<SizeApi> supportedSizes,
+    int rotationDegrees,
+  )
+  filter;
 }
 
 @ProxyApi(
@@ -1024,9 +929,7 @@ abstract class BarcodeScannerOptionsApi {
   ),
 )
 abstract class BarcodeScannerApi extends DetectorApi {
-  BarcodeScannerApi({
-    BarcodeScannerOptionsApi? options,
-  });
+  BarcodeScannerApi({BarcodeScannerOptionsApi? options});
 }
 
 @ProxyApi(
@@ -1092,9 +995,7 @@ abstract class FaceApi {
   ),
 )
 abstract class FaceDetectorApi extends DetectorApi {
-  FaceDetectorApi({
-    FaceDetectorOptionsApi? options,
-  });
+  FaceDetectorApi({FaceDetectorOptionsApi? options});
 }
 
 // @ProxyApi(
@@ -1138,7 +1039,6 @@ abstract class FaceDetectorApi extends DetectorApi {
   ),
 )
 abstract class MlKitAnalyzerResultApi {
-  late final SizeApi size;
   late final int timestamp;
 
   List<BarcodeApi>? getBarcodes(BarcodeScannerApi detector);
@@ -1428,7 +1328,8 @@ abstract class CameraControllerApi {
   ResolutionSelectorApi? getImageCaptureResolutionSelector();
   @async
   void setImageCaptureResolutionSelector(
-      ResolutionSelectorApi? resolutionSelector);
+    ResolutionSelectorApi? resolutionSelector,
+  );
   @async
   CaptureModeApi getImageCaptureMode();
   @async
@@ -1443,7 +1344,8 @@ abstract class CameraControllerApi {
   ResolutionSelectorApi? getImageAnalysisResolutionSelector();
   @async
   void setImageAnalysisResolutionSelector(
-      ResolutionSelectorApi? resolutionSelector);
+    ResolutionSelectorApi? resolutionSelector,
+  );
   @async
   BackpressureStrategyApi getImageAnalysisBackpressureStrategy();
   @async
@@ -1456,7 +1358,8 @@ abstract class CameraControllerApi {
   ImageFormatApi getImageAnalysisOutputImageFormat();
   @async
   void setImageAnalysisOutputImageFormat(
-      ImageFormatApi imageAnalysisOutputImageFormat);
+    ImageFormatApi imageAnalysisOutputImageFormat,
+  );
   @async
   void setImageAnalysisAnalyzer(AnalyzerApi analyzer);
   @async
@@ -1474,9 +1377,9 @@ abstract class CameraControllerApi {
   @async
   void setVideoCaptureQualitySelector(QualitySelectorApi qualitySelector);
   @async
-  RangeApi getVideoCaptureTargetFrameRate();
+  IntRangeApi getVideoCaptureTargetFrameRate();
   @async
-  void setVideoCaptureTargetFrameRate(RangeApi targetFrameRate);
+  void setVideoCaptureTargetFrameRate(IntRangeApi targetFrameRate);
   @async
   bool isRecording();
   @async
@@ -1544,7 +1447,7 @@ abstract class Camera2CameraControlApi {
 abstract class Camera2CameraInfoApi {
   Camera2CameraInfoApi.from(CameraInfoApi cameraInfo);
 
-  RangeApi? getSensorInfoExposureTimeRange();
+  LongRangeApi? getSensorInfoExposureTimeRange();
   String getCameraId();
 }
 

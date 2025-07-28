@@ -18,11 +18,9 @@ public class AVAnalyzer: ImageAnalysis.Analyzer {
     }
     
     public class Result: NSObject {
-        let size: CGSize
         public let objects: [AVMetadataObject]
         
-        init(size: CGSize, objects: [AVMetadataObject]) {
-            self.size = size
+        init(objects: [AVMetadataObject]) {
             self.objects = objects
         }
     }
