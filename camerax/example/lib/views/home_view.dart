@@ -268,7 +268,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(
-                            CameraMode.scanCode.index,
+                            CameraMode.barcodes.index,
                             duration: pageDuration,
                             curve: pageCurve,
                           );
@@ -282,7 +282,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               context,
                             ).textTheme.textStyle.copyWith(
                               color:
-                                  mode == CameraMode.scanCode
+                                  mode == CameraMode.barcodes
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
                             ),
@@ -292,7 +292,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(
-                            CameraMode.scanFace.index,
+                            CameraMode.face.index,
                             duration: pageDuration,
                             curve: pageCurve,
                           );
@@ -306,7 +306,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               context,
                             ).textTheme.textStyle.copyWith(
                               color:
-                                  mode == CameraMode.scanFace
+                                  mode == CameraMode.face
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
                             ),

@@ -2,6 +2,6 @@ enum CameraMode {
   takePicture,
   recordVideo,
   rawValue,
-  scanCode,
-  scanFace,
+  barcodes,
+  face,
 }

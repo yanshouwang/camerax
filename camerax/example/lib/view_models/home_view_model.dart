@@ -21,9 +21,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   late final StreamSubscription _torchStateChangedSubscription;
   late final StreamSubscription _zoomStateChangedSubscription;
 
-  CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
-  Camera2CameraInfo? _camera2Info;
   Camera2CameraControl? _camera2Control;
 
   HomeViewModel()
@@ -180,15 +178,24 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> unbind() async {
     await controller.unbind();
-    _cameraInfo = null;
     _cameraControl = null;
-    _camera2Info = null;
     _camera2Control = null;
     exposureState = null;
     exposureTimeState = null;
   }
 
   Future<void> setMode(CameraMode mode) async {
+    if (Platform.isAndroid) {
+      // See https://developer.android.com/reference/kotlin/androidx/camera/view/CameraController#setEnabledUseCases(int)
+      if (mode == CameraMode.recordVideo) {
+        await controller.setEnabledUseCases([UseCase.videoCapture]);
+      } else {
+        await controller.setEnabledUseCases([
+          UseCase.imageCapture,
+          UseCase.imageAnalysis,
+        ]);
+      }
+    }
     switch (mode) {
       case CameraMode.takePicture:
       case CameraMode.recordVideo:
@@ -197,21 +204,21 @@ class HomeViewModel extends ViewModel with TypeLogger {
       case CameraMode.rawValue:
         await _setImageAnalyzer();
         break;
-      case CameraMode.scanCode:
+      case CameraMode.barcodes:
         final analyzer = MlKitAnalyzer(
           detectors: [_barcodeScanner],
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _extractML,
+          consumer: _handleMlKitAnalyzerResult,
         );
-        await _setMLAnalyzer(analyzer);
+        await _setMlKitAnalyzer(analyzer);
         break;
-      case CameraMode.scanFace:
+      case CameraMode.face:
         final analyzer = MlKitAnalyzer(
           detectors: [_faceDetector],
           targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _extractML,
+          consumer: _handleMlKitAnalyzerResult,
         );
-        await _setMLAnalyzer(analyzer);
+        await _setMlKitAnalyzer(analyzer);
         break;
     }
     this.mode = mode;
@@ -343,8 +350,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _permissionManager.checkPermission(Permission.video);
     if (!isGranted) {
       isGranted = await _permissionManager.requestPermissions([
-        Permission.audio,
         Permission.video,
+        Permission.audio,
       ]);
     }
     if (!isGranted) {
@@ -361,8 +368,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
     //   ),
     // );
     // await controller.setImageAnalysisResolutionSelector(resolutionSelector);
-    // zoomState = await controller.getZoomState();
-    // torchState = await controller.getTorchState();
     await bind();
   }
 
@@ -403,7 +408,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
             image: frame.image,
             rotationDegrees: rotationDegrees,
           );
-          _onRawPixelsAnalyzed(imageModel);
+          _handleImageModel(imageModel);
         } finally {
           await image.close();
           logger.info('${image.hashCode} closed');
@@ -414,27 +419,27 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.bind();
   }
 
-  void _onRawPixelsAnalyzed(ImageModel imageModel) {
+  void _handleImageModel(ImageModel imageModel) {
     if (mode != CameraMode.rawValue) {
       return;
     }
     this.imageModel = imageModel;
   }
 
-  Future<void> _setMLAnalyzer(MlKitAnalyzer analyzer) async {
+  Future<void> _setMlKitAnalyzer(MlKitAnalyzer analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }
 
-  void _extractML(MlKitAnalyzerResult result) async {
+  void _handleMlKitAnalyzerResult(MlKitAnalyzerResult result) async {
     switch (mode) {
-      case CameraMode.scanCode:
+      case CameraMode.barcodes:
         final barcodes = await result.getValue(_barcodeScanner);
         this.barcodes = barcodes ?? [];
         break;
-      case CameraMode.scanFace:
+      case CameraMode.face:
         final faces = await result.getValue(_faceDetector);
         this.faces = faces ?? [];
         break;
