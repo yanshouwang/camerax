@@ -153,8 +153,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
     width,
     height,
-  ) => throw UnimplementedError();
-  // SurfaceOrientedMeteringPointFactoryImpl(width, height);
+  ) => SurfaceOrientedMeteringPointFactoryImpl(width, height);
 
   @override
   FocusMeteringAction newFocusMeteringAction(
@@ -162,13 +161,12 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     List<(MeteringPoint, List<MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
-  }) => throw UnimplementedError();
-  // FocusMeteringActionImpl(
-  //   first,
-  //   others: others,
-  //   disableAutoCancel: disableAutoCancel,
-  //   autoCancelDuration: autoCancelDuration,
-  // );
+  }) => FocusMeteringActionImpl(
+    first,
+    others: others,
+    disableAutoCancel: disableAutoCancel,
+    autoCancelDuration: autoCancelDuration,
+  );
 
   @override
   ImageAnalyzer newImageAnalyzer({required ImageProxyCallback analyze}) =>
