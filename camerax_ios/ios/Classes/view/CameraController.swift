@@ -53,6 +53,10 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         
         // TODO: Move to configureSession
         self.captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
+        if #available(iOS 13.0, *) {
+            self.captureVideoDataOutput.automaticallyConfiguresOutputBufferDimensions = false
+            self.captureVideoDataOutput.deliversPreviewSizedOutputBuffers = false
+        }
         var videoSettings = self.captureVideoDataOutput.videoSettings ?? [:]
         videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
         self.captureVideoDataOutput.videoSettings = videoSettings
