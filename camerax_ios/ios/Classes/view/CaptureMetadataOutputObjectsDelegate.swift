@@ -10,16 +10,20 @@ import AVFoundation
 
 class CaptureMetadataOutputObjectsDelegate: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     private let analyzer: AVAnalyzer
-    private let videoPreviewLayer: AVCaptureVideoPreviewLayer
+    private let controller: CameraController
     
-    init(analyzer: AVAnalyzer, videoPreviewLayer: AVCaptureVideoPreviewLayer) {
+    init(analyzer: AVAnalyzer, controller: CameraController) {
         self.analyzer = analyzer
-        self.videoPreviewLayer = videoPreviewLayer
+        self.controller = controller
     }
     
     private var consumer: any Consumer<AVAnalyzer.Result> { analyzer.consumer }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        guard let videoPreviewLayer = controller.videoPreviewLayer else {
+            debugPrint("videoPreviewLayer is nil")
+            return
+        }
         let objects = metadataObjects.compactMap { videoPreviewLayer.transformedMetadataObject(for: $0) }
         let value = AVAnalyzer.Result(objects: objects)
         consumer.accept(value)

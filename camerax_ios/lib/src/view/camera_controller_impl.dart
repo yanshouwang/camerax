@@ -64,10 +64,12 @@ final class CameraControllerImpl extends CameraController {
     return api.setCameraSelector(cameraSelector.api);
   }
 
+  // TODO: Fix TypeError
   @override
   Future<CameraInfo?> getCameraInfo() =>
       api.getCameraInfo().then((e) => e?.impl);
 
+  // TODO: Fix _TypeError (type 'CameraControllerApi' is not a subtype of type 'CameraControlApi?' in type cast)
   @override
   Future<CameraControl?> getCameraControl() =>
       api.getCameraControl().then((e) => e?.impl);

@@ -371,13 +371,10 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
             self.captureVideoDataOutput.setSampleBufferDelegate(nil, queue: nil)
             self.captureVideoDataOutputSampleBufferDelegate = nil
         }
-        guard let videoPreviewLayer = self.videoPreviewLayer else {
-            throw CameraXError(code: "nil-error", message: "video preview layer is nil", details: nil)
-        }
         if let analyzer = analyzer as? AVAnalyzer {
             let types = analyzer.types?.filter { self.captureMetadataOutput.availableMetadataObjectTypes.contains($0) }
             self.captureMetadataOutput.metadataObjectTypes = types
-            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, videoPreviewLayer: videoPreviewLayer)
+            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, controller: self)
             self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.imageAnalysisQueue)
             self.captureMetadataOutputObjectsDelegate = delegate
         } else {
