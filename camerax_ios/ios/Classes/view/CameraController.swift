@@ -8,10 +8,12 @@
 import Foundation
 import AVFoundation
 
-public class CameraController: NSObject, CameraInfo, CameraControl {
-    private var cameraSelector: CameraSelector
-    private let torchState: LiveData<TorchState>
-    private let zoomState: LiveData<ZoomState>
+public class CameraController: NSObject {
+    private let torchControl: TorchControl
+    private let zoomControl: ZoomControl
+    private let focusMeteringControl: FocusMeteringControl
+    private let cameraInfo: CameraInfo
+    private let cameraControl: CameraControl
     private var _isTapToFocusEnabled: Bool
     private var _isPinchToZoomEnabled: Bool
     private var imageAnalysisResolutionSelector: ResolutionSelector?
@@ -20,8 +22,6 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var videoDeviceInput: AVCaptureDeviceInput?
     private var audioDeviceInput: AVCaptureDeviceInput?
-    private var isTorchActiveObservation: NSKeyValueObservation?
-    private var videoZoomFactorObservation: NSKeyValueObservation?
     private let capturePhotoOutput: AVCapturePhotoOutput
     private let capturePhotoSettings: AVCapturePhotoSettings
     private var capturePhotoCaptureDelegate: AVCapturePhotoCaptureDelegate?
@@ -36,9 +36,14 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     private lazy var rotationListener = RotationProvider.Listener { self.updateVideoOrientation($0) }
     
     public override init() {
-        self.cameraSelector = .back
-        self.torchState = LiveData()
-        self.zoomState = LiveData()
+        let torchControl = TorchControl()
+        let zoomControl = ZoomControl()
+        let focusMeteringControl = FocusMeteringControl()
+        self.torchControl = torchControl
+        self.zoomControl = zoomControl
+        self.focusMeteringControl = focusMeteringControl
+        self.cameraInfo = CameraInfo(cameraSelector: .back, torchControl: torchControl, zoomControl: zoomControl)
+        self.cameraControl = CameraControl(torchControl: torchControl, zoomControl: zoomControl, focusMeteringControl: focusMeteringControl)
         self._isTapToFocusEnabled = true
         self._isPinchToZoomEnabled = true
         self.session = AVCaptureSession()
@@ -50,24 +55,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
         self.imageAnalysisQueue = DispatchQueue(label: "dev.zeekr.camerax.imageAnalysisQueue")
         self.rotationProvider = RotationProvider()
         super.init()
-        
-        // TODO: Move to configureSession
-        self.captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
-        var videoSettings = self.captureVideoDataOutput.videoSettings ?? [:]
-        videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-        self.captureVideoDataOutput.videoSettings = videoSettings
-        self.session.beginConfiguration()
-        defer { self.session.commitConfiguration() }
-        self.session.sessionPreset = .photo
-        try? self.addVideoDeviceInput()
-        try? self.addAudioDeviceInput()
-        try? self.addCapturePhotoOutput()
-        try? self.addCaptureMovieFileOutput()
-        try? self.addCaptureVideoDataOutput()
-        try? self.addCaptureMetadataOutput()
-        self.updateVideoOrientation()
-        self.rotationProvider.addListener(self.rotationListener)
-        self.rotationProvider.enable()
+        self.configureSession()
     }
     
     deinit {
@@ -89,7 +77,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     }
     
     public func unbind() {
-//        DispatchSerialQueue.global(qos: .background).async { self.session.stopRunning() }
+        // DispatchSerialQueue.global(qos: .background).async { self.session.stopRunning() }
         self.session.stopRunning()
     }
     
@@ -99,39 +87,43 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     }
     
     public func getCameraSelector() -> CameraSelector {
-        return self.cameraSelector
+        return self.cameraInfo.getCameraSelector()
     }
     
     public func setCameraSelector(_ cameraSelector: CameraSelector) throws {
-        self.cameraSelector = cameraSelector
-        guard self.session.isRunning else { return }
+        self.cameraInfo.setCameraSelector(cameraSelector)
         self.session.beginConfiguration()
         defer { self.session.commitConfiguration() }
         self.removeVideoDeviceInput()
         try self.addVideoDeviceInput()
-        self.updateVideoOrientation()
+    }
+    
+    public func getCameraInfo() -> CameraInfo {
+        return self.cameraInfo
+    }
+    
+    public func getCameraControl() -> CameraControl {
+        return self.cameraControl
     }
     
     public func getTorchState() -> LiveData<TorchState> {
-        return self.torchState
-    }
-    
-    public func getZoomState() -> LiveData<ZoomState> {
-        return self.zoomState
+        return self.cameraInfo.getTorchState()
     }
     
     public func enableTorch(_ torchEnabled: Bool) throws {
-        guard let input = self.videoDeviceInput else {
-            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
-        }
-        let device = input.device
-        try device.lockForConfiguration()
-        defer { device.unlockForConfiguration() }
-        let torchMode = torchEnabled.avTorchState
-        guard device.isTorchModeSupported(torchMode) else {
-            throw CameraXError(code: "unsupported-error", message: "\(torchMode) is not supported", details: nil)
-        }
-        device.torchMode = torchMode
+        try self.cameraControl.enableTorch(torchEnabled)
+    }
+    
+    public func getZoomState() -> LiveData<ZoomState> {
+        return self.cameraInfo.getZoomState()
+    }
+    
+    public func setZoomRatio(_ zoomRatio: CGFloat) throws {
+        try self.cameraControl.setZoomRatio(zoomRatio)
+    }
+    
+    public func setLinearZoom(_ linearZoom: CGFloat) throws {
+        try self.cameraControl.setLinearZoom(linearZoom)
     }
     
     public func isPinchToZoomEnabled() -> Bool {
@@ -148,104 +140,6 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     
     public func setTapToFocusEnabled(_ enabled: Bool) -> Void {
         self._isTapToFocusEnabled = enabled
-    }
-    
-    public func setZoomRatio(_ zoomRatio: CGFloat) throws {
-        guard let input = self.videoDeviceInput else {
-            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
-        }
-        let device = input.device
-        try device.lockForConfiguration()
-        defer { device.unlockForConfiguration() }
-        device.zoomRatio = zoomRatio
-    }
-    
-    public func setLinearZoom(_ linearZoom: CGFloat) throws {
-        guard let input = self.videoDeviceInput else {
-            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
-        }
-        let device = input.device
-        try device.lockForConfiguration()
-        defer { device.unlockForConfiguration() }
-        let minZoomRatio = device.minZoomRatio
-        let maxZoomRatio = device.maxZoomRatio
-        let zoomRatio = ZoomMath.getZoomRatioFromLinearZoom(linearZoom: linearZoom, minZoomRatio: minZoomRatio, maxZoomRatio: maxZoomRatio)
-        device.zoomRatio = zoomRatio
-    }
-    
-    public func startFocusAndMetering(_ action: FocusMeteringAction) throws -> FocusMeteringResult {
-        guard let input = self.videoDeviceInput else {
-            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
-        }
-        let device = input.device
-        try device.lockForConfiguration()
-        defer { device.unlockForConfiguration() }
-        // AF
-        if let meteringPoint = action.meteringPointsAf.first {
-            guard device.isFocusPointOfInterestSupported, let focusMode = device.highestAvailableAutoFocusMode else {
-                throw CameraXError(code: "unsupported-error", message: "AF is not supported", details: nil)
-            }
-            device.focusPointOfInterest = meteringPoint.cgPoint
-            device.focusMode = focusMode
-        }
-        // AE
-        if let meteringPoint = action.meteringPointsAe.first {
-            guard device.isExposurePointOfInterestSupported, let exposureMode = device.highestAvailableAutoExposureMode else {
-                throw CameraXError(code: "unsupported-error", message: "AE is not supported", details: nil)
-            }
-            device.exposurePointOfInterest = meteringPoint.cgPoint
-            device.exposureMode = exposureMode
-        }
-        // AWB
-        if let _ = action.meteringPointsAwb.first {
-            guard let whiteBalanceMode = device.highestAvailableAutoWhiteBalanceMode else {
-                throw CameraXError(code: "unsupported-error", message: "AWB is not supported", details: nil)
-            }
-            device.whiteBalanceMode = whiteBalanceMode
-        }
-        device.isSubjectAreaChangeMonitoringEnabled = false
-        return FocusMeteringResult(true)
-    }
-    
-    public func cancelFocusAndMeteriing() throws {
-        guard let input = self.videoDeviceInput else {
-            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
-        }
-        let device = input.device
-        try device.lockForConfiguration()
-        defer { device.unlockForConfiguration() }
-        device.isSubjectAreaChangeMonitoringEnabled = true
-    }
-    
-    func startFocusAndMetering(_ devicePoint: CGPoint, _ continuous: Bool) throws -> Void {
-        guard let input = self.videoDeviceInput else {
-            throw CameraXError(code: "nil-error", message: "videoDeviceInput is nil", details: nil)
-        }
-        let device = input.device
-        try device.lockForConfiguration()
-        defer { device.unlockForConfiguration() }
-        // AF
-        let focusMode: AVCaptureDevice.FocusMode = continuous ? .continuousAutoFocus : .autoFocus
-        if device.isFocusPointOfInterestSupported, device.isFocusModeSupported(focusMode) {
-            device.focusPointOfInterest = devicePoint
-            device.focusMode = focusMode
-        }
-        // AE
-        let exposureMode: AVCaptureDevice.ExposureMode = continuous ? .continuousAutoExposure : .autoExpose
-        if device.isExposurePointOfInterestSupported, device.isExposureModeSupported(exposureMode) {
-            device.exposurePointOfInterest = devicePoint
-            device.exposureMode = exposureMode
-        }
-        // AWB
-        let whiteBalanceMode: AVCaptureDevice.WhiteBalanceMode = continuous ? .continuousAutoWhiteBalance : .autoWhiteBalance
-        if device.isWhiteBalanceModeSupported(whiteBalanceMode) {
-            device.whiteBalanceMode = whiteBalanceMode
-        }
-        device.isSubjectAreaChangeMonitoringEnabled = !continuous
-    }
-    
-    public func setExposureCompensationIndex(_ value: Int) throws -> Int {
-        throw CameraXError(code: "unimplemented-error", message: "setExposureCompensationIndex is not implemented", details: nil)
     }
     
     public func getImageCaptureFlashMode() -> ImageCapture.FlashMode {
@@ -371,13 +265,10 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
             self.captureVideoDataOutput.setSampleBufferDelegate(nil, queue: nil)
             self.captureVideoDataOutputSampleBufferDelegate = nil
         }
-        guard let videoPreviewLayer = self.videoPreviewLayer else {
-            throw CameraXError(code: "nil-error", message: "video preview layer is nil", details: nil)
-        }
         if let analyzer = analyzer as? AVAnalyzer {
             let types = analyzer.types?.filter { self.captureMetadataOutput.availableMetadataObjectTypes.contains($0) }
             self.captureMetadataOutput.metadataObjectTypes = types
-            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, videoPreviewLayer: videoPreviewLayer)
+            let delegate = CaptureMetadataOutputObjectsDelegate(analyzer: analyzer, controller: self)
             self.captureMetadataOutput.setMetadataObjectsDelegate(delegate, queue: self.imageAnalysisQueue)
             self.captureMetadataOutputObjectsDelegate = delegate
         } else {
@@ -390,6 +281,30 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     public func clearImageAnalysisAnalyzer() {
         self.captureVideoDataOutput.setSampleBufferDelegate(nil, queue: nil)
         self.captureVideoDataOutputSampleBufferDelegate = nil
+    }
+    
+    private func configureSession() {
+        self.captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
+        if #available(iOS 13.0, *) {
+            self.captureVideoDataOutput.automaticallyConfiguresOutputBufferDimensions = false
+            self.captureVideoDataOutput.deliversPreviewSizedOutputBuffers = false
+        }
+        var videoSettings = self.captureVideoDataOutput.videoSettings ?? [:]
+        videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+        self.captureVideoDataOutput.videoSettings = videoSettings
+        
+        self.session.beginConfiguration()
+        defer { self.session.commitConfiguration() }
+        self.session.sessionPreset = .photo
+        try? self.addVideoDeviceInput()
+        try? self.addAudioDeviceInput()
+        try? self.addCapturePhotoOutput()
+        try? self.addCaptureMovieFileOutput()
+        try? self.addCaptureVideoDataOutput()
+        try? self.addCaptureMetadataOutput()
+        self.updateVideoOrientation()
+        self.rotationProvider.addListener(self.rotationListener)
+        self.rotationProvider.enable()
     }
     
     private func updateVideoOrientation() {
@@ -429,31 +344,29 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     }
     
     private func addVideoDeviceInput() throws {
-        guard let device = getVideoDevice(self.cameraSelector),
+        let cameraSelector = self.getCameraSelector()
+        guard let device = getVideoDevice(cameraSelector),
               let input = try? AVCaptureDeviceInput(device: device) else {
             throw CameraXError(code: "nil-error", message: "video device input is nil", details: nil)
         }
         try self.addInput(input)
         self.videoDeviceInput = input
-        try? setZoomRatio(1.0)
-        self.isTorchActiveObservation = device.observe(\.isTorchActive, options: [.initial, .new]) { device, change in
-            guard let newValue = change.newValue else { return }
-            self.torchState.setValue(newValue.cxTorchState)
-        }
-        self.videoZoomFactorObservation = device.observe(\.videoZoomFactor, options: [.initial, .new]) { device, change in
-            guard change.newValue != nil else { return }
-            self.zoomState.setValue(device.zoomState)
-        }
-        NotificationCenter.default.addObserver(self, selector: .handleSubjectAreaDidChangeNotification, name: AVCaptureDevice.subjectAreaDidChangeNotification, object: input.device)
+        // Do not addDevice before addInput, addInput will cause zoom ratio change to the minimum, but we have change zoom ratio to 1.0 when addDevice.
+        self.torchControl.addDevice(device)
+        self.zoomControl.addDevice(device)
+        self.focusMeteringControl.addDevice(device)
+        NotificationCenter.default.addObserver(self, selector: .handleSubjectAreaDidChangeNotification, name: AVCaptureDevice.subjectAreaDidChangeNotification, object: device)
     }
     
     private func removeVideoDeviceInput() {
         guard let input = self.videoDeviceInput else { return }
+        let device = input.device
         self.removeInput(input)
         self.videoDeviceInput = nil
-        self.isTorchActiveObservation?.invalidate()
-        self.videoZoomFactorObservation?.invalidate()
-        NotificationCenter.default.removeObserver(self, name: AVCaptureDevice.subjectAreaDidChangeNotification, object: input.device)
+        self.torchControl.removeDevice()
+        self.zoomControl.removeDevice()
+        self.focusMeteringControl.removeDevice()
+        NotificationCenter.default.removeObserver(self, name: AVCaptureDevice.subjectAreaDidChangeNotification, object: device)
     }
     
     private func getAudioDevice() -> AVCaptureDevice? {
@@ -463,7 +376,7 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
     @objc fileprivate func handleSubjectAreaDidChangeNotification(_ notification: Notification) {
         debugPrint("subject area did change: \(notification)")
         let devicePoint = CGPoint(x: 0.5, y: 0.5)
-        try? self.startFocusAndMetering(devicePoint, true)
+        try? self.cameraControl.startFocusAndMetering(devicePoint, true)
     }
     
     private func addAudioDeviceInput() throws {
@@ -539,65 +452,6 @@ public class CameraController: NSObject, CameraInfo, CameraControl {
 fileprivate extension Selector {
     static var handleSubjectAreaDidChangeNotification: Selector {
         return #selector(CameraController.handleSubjectAreaDidChangeNotification(_:))
-    }
-}
-
-fileprivate extension AVCaptureDevice {
-    var highestAvailableAutoFocusMode: AVCaptureDevice.FocusMode? {
-        return if self.isFocusModeSupported(.continuousAutoFocus) { .continuousAutoFocus }
-        else if self.isFocusModeSupported(.autoFocus) { .autoFocus }
-        else { nil }
-    }
-    
-    var highestAvailableAutoExposureMode: AVCaptureDevice.ExposureMode? {
-        return if self.isExposureModeSupported(.continuousAutoExposure) { .continuousAutoExposure }
-        else if self.isExposureModeSupported(.autoExpose) { .autoExpose }
-        else { nil }
-    }
-    
-    var highestAvailableAutoWhiteBalanceMode: AVCaptureDevice.WhiteBalanceMode? {
-        return if self.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) { .continuousAutoWhiteBalance }
-        else if self.isWhiteBalanceModeSupported(.autoWhiteBalance) { .autoWhiteBalance }
-        else { nil }
-    }
-    
-    var minZoomRatio: Double {
-        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
-            return self.minAvailableVideoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
-        } else {
-            return self.minAvailableVideoZoomFactor
-        }
-    }
-    
-    var maxZoomRatio: Double {
-        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first, let lastSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.last {
-            // 5x digital zoom factor
-            return CGFloat(truncating: lastSwitchOverVideoZoomFactor) / CGFloat(truncating: firstSwitchOverVideoZoomFactor) * 5.0
-        } else {
-            return self.maxAvailableVideoZoomFactor
-        }
-    }
-    
-    var zoomRatio: Double {
-        get {
-            if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
-                return self.videoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
-            } else {
-                return self.videoZoomFactor
-            }
-        }
-        set {
-            guard newValue >= minZoomRatio && newValue <= maxZoomRatio else { return }
-            if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
-                self.videoZoomFactor = newValue * CGFloat(truncating: firstSwitchOverVideoZoomFactor)
-            } else {
-                self.videoZoomFactor = newValue
-            }
-        }
-    }
-    
-    var zoomState: ZoomState {
-        return ZoomState(minZoomRatio: minZoomRatio, maxZoomRatio: maxZoomRatio, zoomRatio: zoomRatio)
     }
 }
 

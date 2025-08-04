@@ -36,12 +36,12 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerApi {
         try pigeonInstance.setCameraSelector(cameraSelector)
     }
     
-    func getCameraInfo(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> (any CameraInfo)? {
-        return pigeonInstance
+    func getCameraInfo(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraInfo? {
+        return pigeonInstance.getCameraInfo()
     }
     
-    func getCameraControl(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> (any CameraControl)? {
-        return pigeonInstance
+    func getCameraControl(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> CameraControl? {
+        return pigeonInstance.getCameraControl()
     }
     
     func getTorchState(pigeonApi: PigeonApiCameraControllerApi, pigeonInstance: CameraController) throws -> TorchStateLiveData {
