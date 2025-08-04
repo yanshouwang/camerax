@@ -6,12 +6,40 @@
 //
 
 import Foundation
+import AVFoundation
 
-public protocol CameraControl: NSObjectProtocol {
-    func enableTorch(_ torch: Bool) throws -> Void
-    func setZoomRatio(_ ratio: CGFloat) throws -> Void
-    func setLinearZoom(_ linearZoom: CGFloat) throws -> Void
-    func startFocusAndMetering(_ action: FocusMeteringAction) throws -> FocusMeteringResult
-    func cancelFocusAndMeteriing() throws -> Void
-    func setExposureCompensationIndex(_ value: Int) throws -> Int
+public class CameraControl: NSObject {
+    private let torchControl: TorchControl
+    private let zoomControl: ZoomControl
+    private let focusMeteringControl: FocusMeteringControl
+    
+    init(torchControl: TorchControl, zoomControl: ZoomControl, focusMeteringControl: FocusMeteringControl) {
+        self.torchControl = torchControl
+        self.zoomControl = zoomControl
+        self.focusMeteringControl = focusMeteringControl
+    }
+    
+    public func enableTorch(_ torch: Bool) throws {
+        try self.torchControl.enableTorch(torch)
+    }
+    
+    public func setZoomRatio(_ ratio: CGFloat) throws {
+        try self.zoomControl.setZoomRatio(ratio)
+    }
+    
+    public func setLinearZoom(_ linearZoom: CGFloat) throws {
+        try self.zoomControl.setLinearZoom(linearZoom)
+    }
+    
+    func startFocusAndMetering(_ devicePoint: CGPoint, _ continuous: Bool) throws {
+        try self.focusMeteringControl.startFocusAndMetering(devicePoint, continuous)
+    }
+    
+    public func startFocusAndMetering(_ action: FocusMeteringAction) throws -> FocusMeteringResult {
+        try self.focusMeteringControl.startFocusAndMetering(action)
+    }
+    
+    public func cancelFocusAndMeteriing() throws {
+        try self.focusMeteringControl.cancelFocusAndMeteriing()
+    }
 }

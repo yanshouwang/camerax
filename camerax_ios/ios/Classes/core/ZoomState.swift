@@ -8,15 +8,15 @@
 import Foundation
 
 public class ZoomState: NSObject {
-    public let minZoomRatio: Double
-    public let maxZoomRatio: Double
-    public let zoomRatio: Double
+    public let minZoomRatio: CGFloat
+    public let maxZoomRatio: CGFloat
+    public let zoomRatio: CGFloat
     
-    public var linearZoom: Double {
+    public var linearZoom: CGFloat {
         return ZoomMath.getLinearZoomFromZoomRatio(zoomRatio: zoomRatio, minZoomRatio: minZoomRatio, maxZoomRatio: maxZoomRatio)
     }
     
-    init(minZoomRatio: Double, maxZoomRatio: Double, zoomRatio: Double) {
+    init(minZoomRatio: CGFloat, maxZoomRatio: CGFloat, zoomRatio: CGFloat) {
         self.minZoomRatio = minZoomRatio
         self.maxZoomRatio = maxZoomRatio
         self.zoomRatio = zoomRatio

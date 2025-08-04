@@ -90,9 +90,10 @@ public class PreviewView: UIView {
         guard let controller = self.controller , controller.isTapToFocusEnabled() else {
             return
         }
+        let control = controller.getCameraControl()
         let layerPoint = sender.location(in: self)
         let devicePoint = self.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: layerPoint)
-        _ = try? controller.startFocusAndMetering(devicePoint, false)
+        _ = try? control.startFocusAndMetering(devicePoint, false)
     }
     
     @objc fileprivate func handlePinchGestureRecognizer(_ sender: UIPinchGestureRecognizer) {

@@ -359,15 +359,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     }
     // await controller.initialize();
     // await controller.setCameraSelector(CameraSelector.front);
-    // final resolutionSelector = ResolutionSelector(
-    //   // TODO: Use resolutionFilter will cause ANR error.
-    //   // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
-    //   resolutionStrategy: ResolutionStrategy(
-    //     boundSize: Size(1024, 768),
-    //     fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
-    //   ),
-    // );
-    // await controller.setImageAnalysisResolutionSelector(resolutionSelector);
+    final resolutionSelector = ResolutionSelector(
+      // TODO: Use resolutionFilter will cause ANR error.
+      // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
+      resolutionStrategy: ResolutionStrategy(
+        boundSize: Size(1024, 768),
+        fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
+      ),
+    );
+    await controller.setImageAnalysisResolutionSelector(resolutionSelector);
+    torchState = await controller.getTorchState();
+    zoomState = await controller.getZoomState();
     await bind();
   }
 
