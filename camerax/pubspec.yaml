@@ -1,6 +1,6 @@
 name: camerax
 description: 'Work with audiovisual assets, control device cameras, process audio, and configure system audio interactions.'
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/yanshouwang/camerax
 issue_tracker: https://github.com/yanshouwang/camerax/issues
 topics:
