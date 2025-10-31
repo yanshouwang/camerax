@@ -6,10 +6,7 @@ import 'package:flutter/cupertino.dart';
 class BarcodesView extends StatelessWidget {
   final List<Barcode> barcodes;
 
-  const BarcodesView({
-    super.key,
-    required this.barcodes,
-  });
+  const BarcodesView({super.key, required this.barcodes});
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +48,12 @@ class _BarcodesPainter extends CustomPainter {
         continue;
       }
       final corners = cornerPoints
-          .map((point) => ui.Offset(
-                point.x / devicePixelRatio,
-                point.y / devicePixelRatio,
-              ))
+          .map(
+            (point) => ui.Offset(
+              point.x / devicePixelRatio,
+              point.y / devicePixelRatio,
+            ),
+          )
           .toList();
       final path = Path()..addPolygon(corners, true);
       canvas.drawPath(path, paint);

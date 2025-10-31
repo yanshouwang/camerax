@@ -13,16 +13,12 @@ import 'output_results.dart';
 abstract base class VideoRecordEvent {
   final RecordingStats recordingStats;
 
-  VideoRecordEvent({
-    required this.recordingStats,
-  });
+  VideoRecordEvent({required this.recordingStats});
 }
 
 /// The status report of the recording in progress.
 final class VideoRecordStatusEvent extends VideoRecordEvent {
-  VideoRecordStatusEvent({
-    required super.recordingStats,
-  });
+  VideoRecordStatusEvent({required super.recordingStats});
 }
 
 /// Indicates the start of recording.
@@ -30,27 +26,21 @@ final class VideoRecordStatusEvent extends VideoRecordEvent {
 /// When a video recording is successfully requested by start, a Start event will
 /// be the first event.
 final class VideoRecordStartEvent extends VideoRecordEvent {
-  VideoRecordStartEvent({
-    required super.recordingStats,
-  });
+  VideoRecordStartEvent({required super.recordingStats});
 }
 
 /// Indicates the pause event of recording.
 ///
 /// A Pause event will be triggered after calling pause.
 final class VideoRecordPauseEvent extends VideoRecordEvent {
-  VideoRecordPauseEvent({
-    required super.recordingStats,
-  });
+  VideoRecordPauseEvent({required super.recordingStats});
 }
 
 /// Indicates the resume event of recording.
 ///
 /// A Resume event will be triggered after calling resume.
 final class VideoRecordResumeEvent extends VideoRecordEvent {
-  VideoRecordResumeEvent({
-    required super.recordingStats,
-  });
+  VideoRecordResumeEvent({required super.recordingStats});
 }
 
 /// Indicates the finalization of recording.

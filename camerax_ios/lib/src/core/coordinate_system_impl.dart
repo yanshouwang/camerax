@@ -1,14 +1,14 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension CoordinateSystemX on CoordinateSystem {
+extension CoordinateSystemX on ImageAnalysisCoordinateSystem {
   CoordinateSystemApi get api {
     switch (this) {
-      case CoordinateSystem.original:
+      case ImageAnalysisCoordinateSystem.original:
         return CoordinateSystemApi.original;
-      case CoordinateSystem.sensor:
+      case ImageAnalysisCoordinateSystem.sensor:
         return CoordinateSystemApi.sensor;
-      case CoordinateSystem.viewReferenced:
+      case ImageAnalysisCoordinateSystem.viewReferenced:
         return CoordinateSystemApi.viewReferenced;
     }
   }

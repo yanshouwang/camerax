@@ -120,7 +120,7 @@ final class CameraControllerImpl extends CameraController {
   Future<bool> isVideoCaptureEnabled() => api.isVideoCaptureEnabled();
 
   @override
-  Future<void> setEnabledUseCases(List<UseCase> useCases) {
+  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases) {
     final useCaseApis = useCases.map((e) => e.api).toList();
     return api.setEnabledUseCases(useCaseApis);
   }
@@ -148,19 +148,19 @@ final class CameraControllerImpl extends CameraController {
   // api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<CaptureMode> getImageCaptureMode() =>
+  Future<ImageCaptureCaptureMode> getImageCaptureMode() =>
       api.getImageCaptureMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureMode(CaptureMode captureMode) =>
+  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode) =>
       api.setImageCaptureMode(captureMode.api);
 
   @override
-  Future<FlashMode> getImageCaptureFlashMode() =>
+  Future<ImageCaptureFlashMode> getImageCaptureFlashMode() =>
       api.getImageCaptureFlashMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureFlashMode(FlashMode flashMode) =>
+  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode) =>
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
@@ -172,27 +172,24 @@ final class CameraControllerImpl extends CameraController {
     CaptureErrorCallback? onError,
   }) {
     final callbackApi = OnImageCapturedCallbackApi(
-      onCaptureStarted:
-          onCaptureStarted == null ? null : (_) => onCaptureStarted(),
-      onCaptureProcessProgressed:
-          onCaptureProcessProgressed == null
-              ? null
-              : (_, progress) => onCaptureProcessProgressed(progress),
-      onPostviewBitmapAvailable:
-          onPostviewBitmapAvailable == null
-              ? null
-              : (_, bitmapApi) async {
-                final bitmap = await _decodeImage(bitmapApi);
-                onPostviewBitmapAvailable(bitmap);
-              },
-      onCaptureSuccess:
-          onCaptureSuccess == null
-              ? null
-              : (_, imageApi) => onCaptureSuccess(imageApi.impl),
-      onError:
-          onError == null
-              ? null
-              : (_, exceptionApi) => onError(exceptionApi.impl),
+      onCaptureStarted: onCaptureStarted == null
+          ? null
+          : (_) => onCaptureStarted(),
+      onCaptureProcessProgressed: onCaptureProcessProgressed == null
+          ? null
+          : (_, progress) => onCaptureProcessProgressed(progress),
+      onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
+          ? null
+          : (_, bitmapApi) async {
+              final bitmap = await _decodeImage(bitmapApi);
+              onPostviewBitmapAvailable(bitmap);
+            },
+      onCaptureSuccess: onCaptureSuccess == null
+          ? null
+          : (_, imageApi) => onCaptureSuccess(imageApi.impl),
+      onError: onError == null
+          ? null
+          : (_, exceptionApi) => onError(exceptionApi.impl),
     );
     return api.takePicture(callbackApi);
   }
@@ -216,12 +213,12 @@ final class CameraControllerImpl extends CameraController {
   ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy() =>
+  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy() =>
       api.getImageAnalysisBackpressureStrategy().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-    BackpressureStrategy strategy,
+    ImageAnalysisStrategy strategy,
   ) => api.setImageAnalysisBackpressureStrategy(strategy.api);
 
   @override
@@ -241,7 +238,7 @@ final class CameraControllerImpl extends CameraController {
       api.setImageAnalysisOutputImageFormat(format.api);
 
   @override
-  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) {
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer) {
     if (analyzer is! AnalyzerImpl) {
       throw TypeError();
     }

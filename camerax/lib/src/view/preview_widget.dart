@@ -1,15 +1,10 @@
+import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/widgets.dart';
-
-import 'camera_controller.dart';
-import 'preview_view.dart';
 
 class PreviewWidget extends StatefulWidget {
   final CameraController controller;
 
-  const PreviewWidget({
-    super.key,
-    required this.controller,
-  });
+  const PreviewWidget({super.key, required this.controller});
 
   @override
   State<PreviewWidget> createState() => _PreviewWidgetState();

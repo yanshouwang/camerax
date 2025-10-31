@@ -42,31 +42,18 @@ enum FaceLandmarkType {
 
 enum FacePerformanceMode { fast, accurate }
 
-abstract base class FaceDetector extends Detector<List<Face>> {
-  FaceDetector.impl() : super.impl();
+final class FaceContour {
+  final FaceContourType type;
+  final List<Point<double>> points;
 
-  factory FaceDetector({FaceDetectorOptions? options}) =>
-      CameraXPlugin.instance.newFaceDetector(options: options);
+  const FaceContour({required this.type, required this.points});
 }
 
-abstract base class FaceDetectorOptions {
-  FaceDetectorOptions.impl();
+final class FaceLandmark {
+  final FaceLandmarkType type;
+  final Point<double> position;
 
-  factory FaceDetectorOptions({
-    bool? enableTracking,
-    FaceClassificationMode? classificationMode,
-    FaceContourMode? contourMode,
-    FaceLandmarkMode? landmarkMode,
-    double? minFaceSize,
-    FacePerformanceMode? performanceMode,
-  }) => CameraXPlugin.instance.newFaceDetectorOptions(
-    enableTracking: enableTracking,
-    classificationMode: classificationMode,
-    contourMode: contourMode,
-    landmarkMode: landmarkMode,
-    minFaceSize: minFaceSize,
-    performanceMode: performanceMode,
-  );
+  const FaceLandmark({required this.type, required this.position});
 }
 
 final class Face {
@@ -109,16 +96,29 @@ final class Face {
   }
 }
 
-final class FaceContour {
-  final FaceContourType type;
-  final List<Point<double>> points;
+abstract base class FaceDetectorOptions {
+  FaceDetectorOptions.impl();
 
-  const FaceContour({required this.type, required this.points});
+  factory FaceDetectorOptions({
+    bool? enableTracking,
+    FaceClassificationMode? classificationMode,
+    FaceContourMode? contourMode,
+    FaceLandmarkMode? landmarkMode,
+    double? minFaceSize,
+    FacePerformanceMode? performanceMode,
+  }) => CameraXPlugin.instance.newFaceDetectorOptions(
+    enableTracking: enableTracking,
+    classificationMode: classificationMode,
+    contourMode: contourMode,
+    landmarkMode: landmarkMode,
+    minFaceSize: minFaceSize,
+    performanceMode: performanceMode,
+  );
 }
 
-final class FaceLandmark {
-  final FaceLandmarkType type;
-  final Point<double> position;
+abstract base class FaceDetector extends Detector<List<Face>> {
+  FaceDetector.impl() : super.impl();
 
-  const FaceLandmark({required this.type, required this.position});
+  factory FaceDetector({FaceDetectorOptions? options}) =>
+      CameraXPlugin.instance.newFaceDetector(options: options);
 }

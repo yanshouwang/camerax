@@ -1,4 +1,3 @@
-export 'video/audio_state.dart';
 export 'video/audio_stats.dart';
 export 'video/fallback_strategy.dart';
 export 'video/file_output_options.dart';

@@ -5,7 +5,7 @@ import androidx.camera.core.ZoomState
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import dev.zeekr.camerax_android.CameraStateApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiCameraStateLiveDataApi
 import dev.zeekr.camerax_android.PigeonApiTorchStateLiveDataApi
 import dev.zeekr.camerax_android.PigeonApiZoomStateLiveDataApi
@@ -13,7 +13,7 @@ import dev.zeekr.camerax_android.TorchStateApi
 import dev.zeekr.camerax_android.core.api
 import dev.zeekr.camerax_android.core.torchStateApi
 
-class CameraStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiCameraStateLiveDataApi(impl) {
+class CameraStateLiveDataImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCameraStateLiveDataApi(impl) {
     override fun getValue(pigeon_instance: CameraStateLiveData): CameraStateApi? {
         return pigeon_instance.instance.value?.api
     }
@@ -28,7 +28,7 @@ class CameraStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiCameraSt
     }
 }
 
-class TorchStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiTorchStateLiveDataApi(impl) {
+class TorchStateLiveDataImpl(private val impl: CameraXRegistrarImpl) : PigeonApiTorchStateLiveDataApi(impl) {
     override fun getValue(pigeon_instance: TorchStateLiveData): TorchStateApi? {
         return pigeon_instance.instance.value?.torchStateApi
     }
@@ -43,7 +43,7 @@ class TorchStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiTorchStat
     }
 }
 
-class ZoomStateLiveDataImpl(private val impl: CameraXImpl) : PigeonApiZoomStateLiveDataApi(impl) {
+class ZoomStateLiveDataImpl(private val impl: CameraXRegistrarImpl) : PigeonApiZoomStateLiveDataApi(impl) {
     override fun getValue(pigeon_instance: ZoomStateLiveData): ZoomState? {
         return pigeon_instance.instance.value
     }

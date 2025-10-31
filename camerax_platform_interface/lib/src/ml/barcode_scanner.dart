@@ -5,8 +5,6 @@ import 'package:camerax_platform_interface/src/common.dart';
 
 import 'detector.dart';
 
-typedef ZoomCallback = bool Function(double zoomRatio);
-
 enum BarcodeFormat {
   unknown,
   all,
@@ -48,39 +46,6 @@ enum EmailType { unknown, work, home }
 enum PhoneType { unknown, work, home, fax, mobile }
 
 enum WiFiEncryptionType { open, wpa, wep }
-
-abstract base class BarcodeScanner extends Detector<List<Barcode>> {
-  BarcodeScanner.impl() : super.impl();
-
-  factory BarcodeScanner({BarcodeScannerOptions? options}) =>
-      CameraXPlugin.instance.newBarcodeScanner(options: options);
-}
-
-abstract base class BarcodeScannerOptions {
-  BarcodeScannerOptions.impl();
-
-  factory BarcodeScannerOptions({
-    bool? enableAllPotentialBarcodes,
-    List<BarcodeFormat>? formats,
-    ZoomSuggestionOptions? zoomSuggestionOptions,
-  }) => CameraXPlugin.instance.newBarcodeScannerOptions(
-    enableAllPotentialBarcodes: enableAllPotentialBarcodes,
-    formats: formats,
-    zoomSuggestionOptions: zoomSuggestionOptions,
-  );
-}
-
-abstract base class ZoomSuggestionOptions {
-  ZoomSuggestionOptions.impl();
-
-  factory ZoomSuggestionOptions({
-    required ZoomCallback zoomCallback,
-    double? maxSupportedZoomRatio,
-  }) => CameraXPlugin.instance.newZoomSuggestionOptions(
-    zoomCallback: zoomCallback,
-    maxSupportedZoomRatio: maxSupportedZoomRatio,
-  );
-}
 
 final class Barcode {
   final BarcodeFormat format;
@@ -273,4 +238,47 @@ final class WiFi {
     required this.ssid,
     required this.password,
   });
+}
+
+abstract base class ZoomSuggestionOptionsZoomCallback {
+  ZoomSuggestionOptionsZoomCallback.impl();
+
+  factory ZoomSuggestionOptionsZoomCallback({
+    required bool Function(double zoomRatio) setZoom,
+  }) => CameraXPlugin.instance.newZoomSuggestionOptionsZoomCallback(
+    setZoom: setZoom,
+  );
+}
+
+abstract base class ZoomSuggestionOptions {
+  ZoomSuggestionOptions.impl();
+
+  factory ZoomSuggestionOptions({
+    required ZoomSuggestionOptionsZoomCallback zoomCallback,
+    double? maxSupportedZoomRatio,
+  }) => CameraXPlugin.instance.newZoomSuggestionOptions(
+    zoomCallback: zoomCallback,
+    maxSupportedZoomRatio: maxSupportedZoomRatio,
+  );
+}
+
+abstract base class BarcodeScannerOptions {
+  BarcodeScannerOptions.impl();
+
+  factory BarcodeScannerOptions({
+    bool? enableAllPotentialBarcodes,
+    List<BarcodeFormat>? formats,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
+  }) => CameraXPlugin.instance.newBarcodeScannerOptions(
+    enableAllPotentialBarcodes: enableAllPotentialBarcodes,
+    formats: formats,
+    zoomSuggestionOptions: zoomSuggestionOptions,
+  );
+}
+
+abstract base class BarcodeScanner extends Detector<List<Barcode>> {
+  BarcodeScanner.impl() : super.impl();
+
+  factory BarcodeScanner({BarcodeScannerOptions? options}) =>
+      CameraXPlugin.instance.newBarcodeScanner(options: options);
 }

@@ -7,10 +7,8 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 final class FileOutputOptionsImpl extends FileOutputOptions {
   final FileOutputOptionsApi api;
 
-  FileOutputOptionsImpl.internal(
-    this.api, {
-    required super.file,
-  }) : super.impl();
+  FileOutputOptionsImpl.internal(this.api, {required super.file})
+    : super.impl();
 
   factory FileOutputOptionsImpl({
     required File file,
@@ -24,9 +22,6 @@ final class FileOutputOptionsImpl extends FileOutputOptions {
       fileSizeLimitBytes: fileSizeLimitBytes,
       location: location?.api,
     );
-    return FileOutputOptionsImpl.internal(
-      api,
-      file: file,
-    );
+    return FileOutputOptionsImpl.internal(api, file: file);
   }
 }

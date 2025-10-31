@@ -1,11 +1,11 @@
 package dev.zeekr.camerax_android.ml.face
 
 import com.google.mlkit.vision.face.FaceLandmark
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.FaceLandmarkTypeApi
 import dev.zeekr.camerax_android.PigeonApiFaceLandmarkApi
 
-class FaceLandmarkImpl(impl: CameraXImpl) : PigeonApiFaceLandmarkApi(impl) {
+class FaceLandmarkImpl(impl: CameraXRegistrarImpl) : PigeonApiFaceLandmarkApi(impl) {
     override fun type(pigeon_instance: FaceLandmark): FaceLandmarkTypeApi {
         return pigeon_instance.landmarkType.faceLandmarkTypeApi
     }

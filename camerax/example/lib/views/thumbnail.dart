@@ -7,25 +7,15 @@ import 'package:video_player/video_player.dart';
 class Thumbnail extends StatelessWidget {
   final Uri uri;
 
-  const Thumbnail({
-    super.key,
-    required this.uri,
-  });
+  const Thumbnail({super.key, required this.uri});
 
   @override
   Widget build(BuildContext context) {
     final file = File.fromUri(uri);
     if (file.isVideo) {
-      return Video.file(
-        key: ValueKey(uri),
-        file: file,
-        fit: BoxFit.cover,
-      );
+      return Video.file(key: ValueKey(uri), file: file, fit: BoxFit.cover);
     } else {
-      return Image.file(
-        file,
-        fit: BoxFit.cover,
-      );
+      return Image.file(file, fit: BoxFit.cover);
     }
   }
 }
@@ -34,11 +24,7 @@ class Video extends StatefulWidget {
   final File file;
   final BoxFit? fit;
 
-  const Video.file({
-    super.key,
-    required this.file,
-    this.fit,
-  });
+  const Video.file({super.key, required this.file, this.fit});
 
   @override
   State<Video> createState() => _VideoState();
@@ -50,9 +36,7 @@ class _VideoState extends State<Video> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.file(
-      widget.file,
-    )..initialize();
+    _controller = VideoPlayerController.file(widget.file)..initialize();
   }
 
   @override

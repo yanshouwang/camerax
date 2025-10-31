@@ -1,28 +1,28 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension CaptureModeX on CaptureMode {
+extension CaptureModeX on ImageCaptureCaptureMode {
   CaptureModeApi get api {
     switch (this) {
-      case CaptureMode.maximizeQuality:
+      case ImageCaptureCaptureMode.maximizeQuality:
         return CaptureModeApi.maximizeQuality;
-      case CaptureMode.minimizeLatency:
+      case ImageCaptureCaptureMode.minimizeLatency:
         return CaptureModeApi.minimizeLatency;
-      case CaptureMode.zeroShutterLag:
+      case ImageCaptureCaptureMode.zeroShutterLag:
         return CaptureModeApi.zeroShutterLag;
     }
   }
 }
 
 extension CaptureModeApiX on CaptureModeApi {
-  CaptureMode get impl {
+  ImageCaptureCaptureMode get impl {
     switch (this) {
       case CaptureModeApi.maximizeQuality:
-        return CaptureMode.maximizeQuality;
+        return ImageCaptureCaptureMode.maximizeQuality;
       case CaptureModeApi.minimizeLatency:
-        return CaptureMode.minimizeLatency;
+        return ImageCaptureCaptureMode.minimizeLatency;
       case CaptureModeApi.zeroShutterLag:
-        return CaptureMode.zeroShutterLag;
+        return ImageCaptureCaptureMode.zeroShutterLag;
     }
   }
 }

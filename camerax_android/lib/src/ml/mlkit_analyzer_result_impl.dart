@@ -9,10 +9,8 @@ import 'face_detector_impl.dart';
 final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   final MlKitAnalyzerResultApi api;
 
-  MlKitAnalyzerResultImpl.internal(
-    this.api, {
-    required super.timestamp,
-  }) : super.impl();
+  MlKitAnalyzerResultImpl.internal(this.api, {required super.timestamp})
+    : super.impl();
 
   @override
   Future<T?> getValue<T>(Detector<T> detector) {
@@ -33,7 +31,7 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
 
   @override
   Future<Object?> getThrowable(Detector detector) {
-    if (detector is! DetectorImpl) {
+    if (detector is! DetectorMixin) {
       throw TypeError();
     }
     return api.getThrowable(detector.api).then((e) => e?.impl);
@@ -42,9 +40,6 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
 
 extension MlKitAnalyzerResultApiX on MlKitAnalyzerResultApi {
   MlKitAnalyzerResult get impl {
-    return MlKitAnalyzerResultImpl.internal(
-      this,
-      timestamp: timestamp,
-    );
+    return MlKitAnalyzerResultImpl.internal(this, timestamp: timestamp);
   }
 }

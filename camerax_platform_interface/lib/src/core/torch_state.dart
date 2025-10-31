@@ -1,4 +1,1 @@
-enum TorchState {
-  off,
-  on,
-}
+enum TorchState { off, on }

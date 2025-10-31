@@ -19,13 +19,13 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PermissionManager newPermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector getFrontCameraSelector() => CameraSelectorImpl.front;
+  CameraSelector getFront$CameraSelector() => CameraSelectorImpl.front;
   @override
-  CameraSelector getBackCameraSelector() => CameraSelectorImpl.back;
+  CameraSelector getBack$CameraSelector() => CameraSelectorImpl.back;
   @override
-  CameraSelector getExternalCameraSelector() => CameraSelectorImpl.external;
+  CameraSelector getExternal$CameraSelector() => CameraSelectorImpl.external;
   @override
-  CameraSelector newCameraSelector({LensFacing? lensFacing}) =>
+  CameraSelector newCameraSelector({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);
 
   @override
@@ -56,7 +56,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   @override
   MlKitAnalyzer newMlKitAnalyzer({
     required List<Detector> detectors,
-    required CoordinateSystem targetCoordinateSystem,
+    required ImageAnalysisCoordinateSystem targetCoordinateSystem,
     required Consumer<MlKitAnalyzerResult> consumer,
   }) => MlKitAnalyzerImpl(
     detectors: detectors,
@@ -65,7 +65,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+  Future<Size<int>?> getResolution$QualitySelector(CameraInfo cameraInfo, Quality quality) =>
       throw UnimplementedError();
   // QualitySelectorImpl.getResolution(cameraInfo, quality);
 
@@ -169,7 +169,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  ImageAnalyzer newImageAnalyzer({required ImageProxyCallback analyze}) =>
+  ImageAnalyzer newImageAnalyzer({required ImageAnalyzerCallback analyze}) =>
       ImageAnalyzerImpl(analyze: analyze);
 
   @override
@@ -185,10 +185,10 @@ final class CameraXiOSPlugin extends CameraXPlugin {
 
   @override
   CaptureRequestOptions newCaptureRequestOptions({
-    ControlMode? mode,
-    ControlAeMode? aeMode,
-    ControlAfMode? afMode,
-    ControlAwbMode? awbMode,
+    CameraMetadataControlMode? mode,
+    CameraMetadataControlAeMode? aeMode,
+    CameraMetadataControlAfMode? afMode,
+    CameraMetadataControlAwbMode? awbMode,
     int? sensorExposureTime,
   }) => throw UnimplementedError();
   // CaptureRequestOptionsImpl(

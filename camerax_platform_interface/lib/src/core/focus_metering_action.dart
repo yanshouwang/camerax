@@ -11,13 +11,12 @@ abstract base class FocusMeteringAction {
     List<(MeteringPoint, List<MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
-  }) =>
-      CameraXPlugin.instance.newFocusMeteringAction(
-        first,
-        others: others,
-        disableAutoCancel: disableAutoCancel,
-        autoCancelDuration: autoCancelDuration,
-      );
+  }) => CameraXPlugin.instance.newFocusMeteringAction(
+    first,
+    others: others,
+    disableAutoCancel: disableAutoCancel,
+    autoCancelDuration: autoCancelDuration,
+  );
 
   /// Returns auto-cancel duration. Returns 0 if auto-cancel is disabled.
   Future<Duration> getAutoCancelDuration();

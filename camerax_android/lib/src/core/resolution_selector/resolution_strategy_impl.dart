@@ -2,7 +2,16 @@ import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'resolutioin_fallback_rule_impl.dart';
+extension ResolutionStrategyFallbackRuleX on ResolutionStrategyFallbackRule {
+  ResolutionStrategyFallbackRuleApi get api =>
+      ResolutionStrategyFallbackRuleApi.values[index];
+}
+
+extension ResolutionStrategyFallbackRuleApiX
+    on ResolutionStrategyFallbackRuleApi {
+  ResolutionStrategyFallbackRule get impl =>
+      ResolutionStrategyFallbackRule.values[index];
+}
 
 extension ResolutionStrategyX on ResolutionStrategy {
   ResolutionStrategyApi get api {

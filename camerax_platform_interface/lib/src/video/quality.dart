@@ -1,8 +1,1 @@
-enum Quality {
-  sd,
-  hd,
-  fhd,
-  uhd,
-  lowest,
-  highest,
-}
+enum Quality { sd, hd, fhd, uhd, lowest, highest }

@@ -8,10 +8,10 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
   CaptureRequestOptionsImpl.internal(this.api) : super.impl();
 
   factory CaptureRequestOptionsImpl({
-    ControlMode? mode,
-    ControlAeMode? aeMode,
-    ControlAfMode? afMode,
-    ControlAwbMode? awbMode,
+    CameraMetadataControlMode? mode,
+    CameraMetadataControlAeMode? aeMode,
+    CameraMetadataControlAfMode? afMode,
+    CameraMetadataControlAwbMode? awbMode,
     int? sensorExposureTime,
   }) {
     final api = CaptureRequestOptionsApi.build(
@@ -21,10 +21,10 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
       awbMode: awbMode?.api,
       sensorExposureTime: sensorExposureTime,
     );
-    return CaptureRequestOptionsImpl.internal(api);
+    return CaptureRequestOptionsImpl.api(api);
   }
 }
 
 extension CaptureRequestOptioinsApiX on CaptureRequestOptionsApi {
-  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.internal(this);
+  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.api(this);
 }

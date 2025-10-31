@@ -1,10 +1,10 @@
 package dev.zeekr.camerax_android.view.video
 
 import androidx.camera.view.video.AudioConfig
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiAudioConfigApi
 
-class AudioConfigImpl(impl: CameraXImpl) : PigeonApiAudioConfigApi(impl) {
+class AudioConfigImpl(impl: CameraXRegistrarImpl) : PigeonApiAudioConfigApi(impl) {
     override fun create(enableAudio: Boolean): AudioConfig {
         return AudioConfig.create(enableAudio)
     }

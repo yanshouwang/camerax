@@ -1,8 +1,15 @@
-import 'audio_state.dart';
+enum AudioStatsAudioState {
+  active,
+  disabled,
+  sourceSilenced,
+  encoderError,
+  sourceError,
+  muted,
+}
 
 final class AudioStats {
   final double audioAmplitude;
-  final AudioState audioState;
+  final AudioStatsAudioState audioState;
   final Object? errorCause;
   final bool hasAudio;
   final bool hasError;
@@ -16,13 +23,8 @@ final class AudioStats {
   });
 
   @override
-  int get hashCode => Object.hash(
-        audioAmplitude,
-        audioState,
-        errorCause,
-        hasAudio,
-        hasError,
-      );
+  int get hashCode =>
+      Object.hash(audioAmplitude, audioState, errorCause, hasAudio, hasError);
 
   @override
   bool operator ==(Object other) {

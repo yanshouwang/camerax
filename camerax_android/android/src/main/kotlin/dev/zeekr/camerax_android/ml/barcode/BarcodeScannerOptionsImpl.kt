@@ -3,10 +3,10 @@ package dev.zeekr.camerax_android.ml.barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
 import dev.zeekr.camerax_android.BarcodeFormatApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiBarcodeScannerOptionsApi
 
-class BarcodeScannerOptionsImpl(impl: CameraXImpl) : PigeonApiBarcodeScannerOptionsApi(impl) {
+class BarcodeScannerOptionsImpl(impl: CameraXRegistrarImpl) : PigeonApiBarcodeScannerOptionsApi(impl) {
     override fun build(
         enableAllPotentialBarcodes: Boolean?,
         formats: List<BarcodeFormatApi>?,

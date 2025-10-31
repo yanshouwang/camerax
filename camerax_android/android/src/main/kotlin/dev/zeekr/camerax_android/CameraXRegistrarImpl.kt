@@ -72,11 +72,11 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
 
-class CameraXImpl(binaryMessenger: BinaryMessenger, val context: Context) :
+class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Context) :
     CameraXApiPigeonProxyApiRegistrar(binaryMessenger), ActivityAware {
     var binding: ActivityPluginBinding? = null
 
-    val activity: Activity get() = binding?.activity ?: throw NullPointerException("Activity binding is null")
+    val activity: Activity get() = binding?.activity ?: throw NullPointerException("binding is null")
 
     override fun getPigeonApiPermissionManagerApi(): PigeonApiPermissionManagerApi {
         return PermissionManagerImpl(this)

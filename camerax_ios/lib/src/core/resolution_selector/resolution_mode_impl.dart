@@ -1,24 +1,24 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension ResolutionModeX on ResolutionMode {
+extension ResolutionModeX on ResolutionSelectorMode {
   ResolutionModeApi get api {
     switch (this) {
-      case ResolutionMode.preferCaptureRateOverHigherResolution:
+      case ResolutionSelectorMode.preferCaptureRateOverHigherResolution:
         return ResolutionModeApi.preferCaptureRateOverHigherResolution;
-      case ResolutionMode.preferHigherResolutionOverCaptureRate:
+      case ResolutionSelectorMode.preferHigherResolutionOverCaptureRate:
         return ResolutionModeApi.preferHigherResolutionOverCaptureRate;
     }
   }
 }
 
 extension ResolutionModeApiX on ResolutionModeApi {
-  ResolutionMode get impl {
+  ResolutionSelectorMode get impl {
     switch (this) {
       case ResolutionModeApi.preferCaptureRateOverHigherResolution:
-        return ResolutionMode.preferCaptureRateOverHigherResolution;
+        return ResolutionSelectorMode.preferCaptureRateOverHigherResolution;
       case ResolutionModeApi.preferHigherResolutionOverCaptureRate:
-        return ResolutionMode.preferHigherResolutionOverCaptureRate;
+        return ResolutionSelectorMode.preferHigherResolutionOverCaptureRate;
     }
   }
 }

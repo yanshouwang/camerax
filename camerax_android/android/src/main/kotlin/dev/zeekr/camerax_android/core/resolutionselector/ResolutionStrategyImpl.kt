@@ -2,11 +2,11 @@ package dev.zeekr.camerax_android.core.resolutionselector
 
 import android.util.Size
 import androidx.camera.core.resolutionselector.ResolutionStrategy
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiResolutionStrategyApi
 import dev.zeekr.camerax_android.ResolutionFallbackRuleApi
 
-class ResolutionStrategyImpl(impl: CameraXImpl) : PigeonApiResolutionStrategyApi(impl) {
+class ResolutionStrategyImpl(impl: CameraXRegistrarImpl) : PigeonApiResolutionStrategyApi(impl) {
     override fun pigeon_defaultConstructor(
         boundSize: Size?, fallbackRule: ResolutionFallbackRuleApi
     ): ResolutionStrategy {

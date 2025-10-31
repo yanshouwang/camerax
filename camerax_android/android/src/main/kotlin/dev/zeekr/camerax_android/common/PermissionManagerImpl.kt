@@ -1,13 +1,13 @@
 package dev.zeekr.camerax_android.common
 
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PermissionApi
 import dev.zeekr.camerax_android.PigeonApiPermissionManagerApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PermissionManagerImpl(impl: CameraXImpl) : PigeonApiPermissionManagerApi(impl) {
+class PermissionManagerImpl(impl: CameraXRegistrarImpl) : PigeonApiPermissionManagerApi(impl) {
     override fun instance(): PermissionManager {
         return PermissionManager
     }

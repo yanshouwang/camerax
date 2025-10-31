@@ -8,37 +8,14 @@ import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'use_case_impl.dart';
-
 final class CameraControllerImpl extends CameraController {
   final LifecycleCameraControllerApi api;
 
-  late final StreamController<TorchState> _torchStateChangedController;
-  late final StreamController<ZoomState> _zoomStateChangedController;
-
-  Future<TorchStateObserverApi>? _torchStateObserverApiFuture;
-  Future<ZoomStateObserverApi>? _zoomStateObserverApiFuture;
-
-  CameraControllerImpl.internal(this.api) : super.impl() {
-    _torchStateChangedController = StreamController.broadcast(
-      onListen: _listenTorchStateChanged,
-      onCancel: _cancelTorchStateChanged,
-    );
-    _zoomStateChangedController = StreamController.broadcast(
-      onListen: _listenZoomStateChanged,
-      onCancel: _cancelZoomStateChanged,
-    );
-  }
-
-  @override
-  Stream<TorchState> get torchStateChanged =>
-      _torchStateChangedController.stream;
-  @override
-  Stream<ZoomState> get zoomStateChanged => _zoomStateChangedController.stream;
+  CameraControllerImpl.internal(this.api) : super.impl();
 
   factory CameraControllerImpl() {
     final api = LifecycleCameraControllerApi();
-    return CameraControllerImpl.internal(api);
+    return CameraControllerImpl.api(api);
   }
 
   @override
@@ -120,7 +97,7 @@ final class CameraControllerImpl extends CameraController {
   Future<bool> isVideoCaptureEnabled() => api.isVideoCaptureEnabled();
 
   @override
-  Future<void> setEnabledUseCases(List<UseCase> useCases) {
+  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases) {
     final useCaseApis = useCases.map((e) => e.api).toList();
     return api.setEnabledUseCases(useCaseApis);
   }
@@ -131,8 +108,8 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setPreviewResolutionSelector(
-          ResolutionSelector? resolutionSelector) =>
-      api.setPreviewResolutionSelector(resolutionSelector?.api);
+    ResolutionSelector? resolutionSelector,
+  ) => api.setPreviewResolutionSelector(resolutionSelector?.api);
 
   @override
   Future<ResolutionSelector?> getImageCaptureResolutionSelector() =>
@@ -140,23 +117,23 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-          ResolutionSelector? resolutionSelector) =>
-      api.setImageCaptureResolutionSelector(resolutionSelector?.api);
+    ResolutionSelector? resolutionSelector,
+  ) => api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<CaptureMode> getImageCaptureMode() =>
+  Future<ImageCaptureCaptureMode> getImageCaptureMode() =>
       api.getImageCaptureMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureMode(CaptureMode captureMode) =>
+  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode) =>
       api.setImageCaptureMode(captureMode.api);
 
   @override
-  Future<FlashMode> getImageCaptureFlashMode() =>
+  Future<ImageCaptureFlashMode> getImageCaptureFlashMode() =>
       api.getImageCaptureFlashMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureFlashMode(FlashMode flashMode) =>
+  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode) =>
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
@@ -168,8 +145,9 @@ final class CameraControllerImpl extends CameraController {
     CaptureErrorCallback? onError,
   }) {
     final callbackApi = OnImageCapturedCallbackApi(
-      onCaptureStarted:
-          onCaptureStarted == null ? null : (_) => onCaptureStarted(),
+      onCaptureStarted: onCaptureStarted == null
+          ? null
+          : (_) => onCaptureStarted(),
       onCaptureProcessProgressed: onCaptureProcessProgressed == null
           ? null
           : (_, progress) => onCaptureProcessProgressed(progress),
@@ -179,8 +157,9 @@ final class CameraControllerImpl extends CameraController {
               final bitmap = await _decodeImage(bitmapApi);
               onPostviewBitmapAvailable(bitmap);
             },
-      onCaptureSuccess:
-          onCaptureSuccess == null ? null : (_, e) => onCaptureSuccess(e.impl),
+      onCaptureSuccess: onCaptureSuccess == null
+          ? null
+          : (_, e) => onCaptureSuccess(e.impl),
       onError: onError == null
           ? null
           : (_, exceptionApi) => onError(exceptionApi.impl),
@@ -203,17 +182,17 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
-          ResolutionSelector? resolutionSelector) =>
-      api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
+    ResolutionSelector? resolutionSelector,
+  ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy() =>
+  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy() =>
       api.getImageAnalysisBackpressureStrategy().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-          BackpressureStrategy strategy) =>
-      api.setImageAnalysisBackpressureStrategy(strategy.api);
+    ImageAnalysisStrategy strategy,
+  ) => api.setImageAnalysisBackpressureStrategy(strategy.api);
 
   @override
   Future<int> getImageAnalysisImageQueueDepth() =>
@@ -232,8 +211,8 @@ final class CameraControllerImpl extends CameraController {
       api.setImageAnalysisOutputImageFormat(format.api);
 
   @override
-  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) {
-    if (analyzer is! AnalyzerImpl) {
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer) {
+    if (analyzer is! ImageAnalysisAnalyzerMixin) {
       throw TypeError();
     }
     return api.setImageAnalysisAnalyzer(analyzer.api);
@@ -370,6 +349,19 @@ final class CameraControllerImpl extends CameraController {
       await liveDataApi.removeObserver(observerApi);
     } catch (e) {
       _zoomStateChangedController.addError(e);
+    }
+  }
+}
+
+extension CameraControllerUseCaseX on CameraControllerUseCase {
+  CameraControllerUseCaseApi get api {
+    switch (this) {
+      case CameraControllerUseCase.imageCapture:
+        return CameraControllerUseCaseApi.imageCapture;
+      case CameraControllerUseCase.imageAnalysis:
+        return CameraControllerUseCaseApi.imageAnalysis;
+      case CameraControllerUseCase.videoCapture:
+        return CameraControllerUseCaseApi.videoCapture;
     }
   }
 }

@@ -6,10 +6,10 @@ import androidx.camera.core.FocusMeteringResult
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiCameraControlApi
 
-class CameraControlImpl(private val impl: CameraXImpl) : PigeonApiCameraControlApi(impl) {
+class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCameraControlApi(impl) {
     override fun enableTorch(pigeon_instance: CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.enableTorch(torch)
         val executor = ContextCompat.getMainExecutor(impl.context)

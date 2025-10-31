@@ -21,7 +21,7 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
       disableAutoCancel: disableAutoCancel,
       autoCancelDuration: autoCancelDuration?.api,
     );
-    return FocusMeteringActionImpl.internal(api);
+    return FocusMeteringActionImpl.api(api);
   }
 
   @override

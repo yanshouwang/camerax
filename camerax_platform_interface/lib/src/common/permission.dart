@@ -1,4 +1,1 @@
-enum Permission {
-  video,
-  audio,
-}
+enum Permission { video, audio }

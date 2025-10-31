@@ -1,40 +1,40 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension AudioStateX on AudioState {
+extension AudioStateX on AudioStatsAudioState {
   AudioStateApi get api {
     switch (this) {
-      case AudioState.active:
+      case AudioStatsAudioState.active:
         return AudioStateApi.active;
-      case AudioState.disabled:
+      case AudioStatsAudioState.disabled:
         return AudioStateApi.disabled;
-      case AudioState.sourceSilenced:
+      case AudioStatsAudioState.sourceSilenced:
         return AudioStateApi.sourceSilenced;
-      case AudioState.encoderError:
+      case AudioStatsAudioState.encoderError:
         return AudioStateApi.encoderError;
-      case AudioState.sourceError:
+      case AudioStatsAudioState.sourceError:
         return AudioStateApi.sourceError;
-      case AudioState.muted:
+      case AudioStatsAudioState.muted:
         return AudioStateApi.muted;
     }
   }
 }
 
 extension AudioStateApiX on AudioStateApi {
-  AudioState get impl {
+  AudioStatsAudioState get impl {
     switch (this) {
       case AudioStateApi.active:
-        return AudioState.active;
+        return AudioStatsAudioState.active;
       case AudioStateApi.disabled:
-        return AudioState.disabled;
+        return AudioStatsAudioState.disabled;
       case AudioStateApi.sourceSilenced:
-        return AudioState.sourceSilenced;
+        return AudioStatsAudioState.sourceSilenced;
       case AudioStateApi.encoderError:
-        return AudioState.encoderError;
+        return AudioStatsAudioState.encoderError;
       case AudioStateApi.sourceError:
-        return AudioState.sourceError;
+        return AudioStatsAudioState.sourceError;
       case AudioStateApi.muted:
-        return AudioState.muted;
+        return AudioStatsAudioState.muted;
     }
   }
 }

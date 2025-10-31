@@ -1,15 +1,12 @@
 package dev.zeekr.camerax_android.ml.barcode
 
-import com.google.android.odml.image.MlImage
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.google.mlkit.vision.barcode.common.Barcode
-import com.google.mlkit.vision.common.InputImage
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiBarcodeScannerApi
 import dev.zeekr.camerax_android.ml.Detector
 
-class BarcodeScannerImpl(impl: CameraXImpl) : PigeonApiBarcodeScannerApi(impl) {
+class BarcodeScannerImpl(impl: CameraXRegistrarImpl) : PigeonApiBarcodeScannerApi(impl) {
     override fun pigeon_defaultConstructor(options: BarcodeScannerOptions?): BarcodeScanner {
         val instance = if (options == null) BarcodeScanning.getClient()
         else BarcodeScanning.getClient(options)

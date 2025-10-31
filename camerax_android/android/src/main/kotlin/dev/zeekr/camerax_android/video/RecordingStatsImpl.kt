@@ -2,10 +2,10 @@ package dev.zeekr.camerax_android.video
 
 import androidx.camera.video.AudioStats
 import androidx.camera.video.RecordingStats
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiRecordingStatsApi
 
-class RecordingStatsImpl(impl: CameraXImpl) : PigeonApiRecordingStatsApi(impl) {
+class RecordingStatsImpl(impl: CameraXRegistrarImpl) : PigeonApiRecordingStatsApi(impl) {
     override fun audioStats(pigeon_instance: RecordingStats): AudioStats {
         return pigeon_instance.audioStats
     }

@@ -3,14 +3,14 @@ package dev.zeekr.camerax_android.core
 import android.graphics.Rect
 import androidx.camera.core.ImageInfo
 import androidx.camera.core.ImageProxy
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.ImageFormatApi
 import dev.zeekr.camerax_android.PigeonApiImageProxyApi
 import dev.zeekr.camerax_android.PigeonApiPlaneProxyApi
 import dev.zeekr.camerax_android.common.imageFormatApi
 import java.nio.ByteBuffer
 
-class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
+class ImageProxyImpl(impl: CameraXRegistrarImpl) : PigeonApiImageProxyApi(impl) {
     override fun format(pigeon_instance: ImageProxy): ImageFormatApi {
         return pigeon_instance.format.imageFormatApi
     }
@@ -41,7 +41,7 @@ class ImageProxyImpl(impl: CameraXImpl) : PigeonApiImageProxyApi(impl) {
         pigeon_instance.setCropRect(rect)
     }
 
-    class PlaneProxyImpl(impl: CameraXImpl) : PigeonApiPlaneProxyApi(impl) {
+    class PlaneProxyImpl(impl: CameraXRegistrarImpl) : PigeonApiPlaneProxyApi(impl) {
         override fun value(pigeon_instance: ImageProxy.PlaneProxy): ByteArray {
             if (pigeon_instance !is PlaneProxyWrapper) throw TypeCastException()
             return pigeon_instance.getValue()

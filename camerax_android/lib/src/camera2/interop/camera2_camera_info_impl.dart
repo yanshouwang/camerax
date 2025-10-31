@@ -12,10 +12,8 @@ final class Camera2CameraInfoImpl extends Camera2CameraInfo {
     if (cameraInfo is! CameraInfoImpl) {
       throw TypeError();
     }
-    final api = Camera2CameraInfoApi.from(
-      cameraInfo: cameraInfo.api,
-    );
-    return Camera2CameraInfoImpl.internal(api);
+    final api = Camera2CameraInfoApi.from(cameraInfo: cameraInfo.api);
+    return Camera2CameraInfoImpl.api(api);
   }
 
   @override

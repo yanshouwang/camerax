@@ -19,10 +19,7 @@ class RawPixelsView extends StatelessWidget {
       quarterTurns: quarterTurns,
       child: ColoredBox(
         color: CupertinoColors.black,
-        child: RawImage(
-          image: image,
-          fit: BoxFit.cover,
-        ),
+        child: RawImage(image: image, fit: BoxFit.cover),
       ),
     );
   }

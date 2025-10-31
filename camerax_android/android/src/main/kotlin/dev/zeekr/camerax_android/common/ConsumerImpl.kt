@@ -3,17 +3,17 @@ package dev.zeekr.camerax_android.common
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.util.Consumer
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiMlKitAnalyzerResultConsumerApi
 import dev.zeekr.camerax_android.PigeonApiVideoRecordEventConsumerApi
 
-class VideoRecordEventConsumerImpl(impl: CameraXImpl) : PigeonApiVideoRecordEventConsumerApi(impl) {
+class VideoRecordEventConsumerImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordEventConsumerApi(impl) {
     override fun pigeon_defaultConstructor(): VideoRecordEventConsumer {
         return VideoRecordEventConsumer(this)
     }
 }
 
-class MlKitAnalyzerResultConsumerImpl(impl: CameraXImpl) : PigeonApiMlKitAnalyzerResultConsumerApi(impl) {
+class MlKitAnalyzerResultConsumerImpl(impl: CameraXRegistrarImpl) : PigeonApiMlKitAnalyzerResultConsumerApi(impl) {
     override fun pigeon_defaultConstructor(): MlKitAnalyzerResultConsumer {
         return MlKitAnalyzerResultConsumer(this)
     }

@@ -1,13 +1,13 @@
 package dev.zeekr.camerax_android.ml.barcode
 
 import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiZoomCallbackApi
 import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsApi
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.suspendCoroutine
 
-class ZoomSuggestionOptionsImpl(impl: CameraXImpl) : PigeonApiZoomSuggestionOptionsApi(impl) {
+class ZoomSuggestionOptionsImpl(impl: CameraXRegistrarImpl) : PigeonApiZoomSuggestionOptionsApi(impl) {
     override fun build(
         zoomCallback: ZoomSuggestionOptions.ZoomCallback, maxSupportedZoomRatio: Double?
     ): ZoomSuggestionOptions {
@@ -18,7 +18,7 @@ class ZoomSuggestionOptionsImpl(impl: CameraXImpl) : PigeonApiZoomSuggestionOpti
         return builder.build()
     }
 
-    class ZoomCallbackImpl(impl: CameraXImpl) : PigeonApiZoomCallbackApi(impl) {
+    class ZoomCallbackImpl(impl: CameraXRegistrarImpl) : PigeonApiZoomCallbackApi(impl) {
         override fun pigeon_defaultConstructor(): ZoomSuggestionOptions.ZoomCallback {
             return object : ZoomSuggestionOptions.ZoomCallback {
                 override fun setZoom(zoomRatio: Float): Boolean {

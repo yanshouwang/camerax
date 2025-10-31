@@ -1,16 +1,22 @@
 import 'package:camerax_platform_interface/src/common.dart';
 
-import 'resolution_fallback_rule.dart';
+enum ResolutionStrategyFallbackRule {
+  none,
+  closestHigherThenLower,
+  closestHigher,
+  closestLowerThenHigher,
+  closestLower,
+}
 
 final class ResolutionStrategy {
   static const highestAvailableStrategy = ResolutionStrategy._();
 
   final Size<int>? boundSize;
-  final ResolutionFallbackRule fallbackRule;
+  final ResolutionStrategyFallbackRule fallbackRule;
 
   const ResolutionStrategy._()
     : boundSize = null,
-      fallbackRule = ResolutionFallbackRule.none;
+      fallbackRule = ResolutionStrategyFallbackRule.none;
 
   const ResolutionStrategy({
     required Size<int> this.boundSize,

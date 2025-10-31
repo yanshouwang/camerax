@@ -12,11 +12,8 @@ final class RecordingStats {
   });
 
   @override
-  int get hashCode => Object.hash(
-        audioStats,
-        numBytesRecorded,
-        recordedDurationNanos,
-      );
+  int get hashCode =>
+      Object.hash(audioStats, numBytesRecorded, recordedDurationNanos);
 
   @override
   bool operator ==(Object other) {

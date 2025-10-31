@@ -1,4 +1,4 @@
-export 'core/analyzer_impl.dart';
+export 'core/image_analysis_impl.dart';
 export 'core/aspect_ratio_impl.dart';
 export 'core/backpressure_strategy_impl.dart';
 export 'core/bit_depth_impl.dart';

@@ -6,7 +6,7 @@ import androidx.camera.core.DynamicRange
 import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ExposureState
 import androidx.camera.core.FocusMeteringAction
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.LensFacingApi
 import dev.zeekr.camerax_android.PigeonApiCameraInfoApi
 import dev.zeekr.camerax_android.common.CameraStateLiveData
@@ -14,7 +14,7 @@ import dev.zeekr.camerax_android.common.IntRange
 import dev.zeekr.camerax_android.common.TorchStateLiveData
 import dev.zeekr.camerax_android.common.ZoomStateLiveData
 
-class CameraInfoImpl(impl: CameraXImpl) : PigeonApiCameraInfoApi(impl) {
+class CameraInfoImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraInfoApi(impl) {
     override fun mustPlayShutterSound(): Boolean {
         return CameraInfo.mustPlayShutterSound()
     }

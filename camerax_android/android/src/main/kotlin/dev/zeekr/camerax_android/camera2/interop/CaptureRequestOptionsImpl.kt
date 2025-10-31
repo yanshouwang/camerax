@@ -3,7 +3,7 @@ package dev.zeekr.camerax_android.camera2.interop
 import android.hardware.camera2.CaptureRequest
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.ControlAeModeApi
 import dev.zeekr.camerax_android.ControlAfModeApi
 import dev.zeekr.camerax_android.ControlAwbModeApi
@@ -12,7 +12,7 @@ import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsApi
 import dev.zeekr.camerax_android.camera2.impl
 
 @ExperimentalCamera2Interop
-class CaptureRequestOptionsImpl(impl: CameraXImpl) : PigeonApiCaptureRequestOptionsApi(impl) {
+class CaptureRequestOptionsImpl(impl: CameraXRegistrarImpl) : PigeonApiCaptureRequestOptionsApi(impl) {
     override fun build(
         mode: ControlModeApi?,
         aeMode: ControlAeModeApi?,

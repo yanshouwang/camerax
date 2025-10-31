@@ -5,14 +5,14 @@ import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.CaptureModeApi
 import dev.zeekr.camerax_android.FlashModeApi
 import dev.zeekr.camerax_android.PigeonApiOnImageCapturedCallbackApi
 import dev.zeekr.camerax_android.common.api
 
 class ImageCaptureImpl {
-    class OnImageCapturedCallbackImpl(impl: CameraXImpl) : PigeonApiOnImageCapturedCallbackApi(impl) {
+    class OnImageCapturedCallbackImpl(impl: CameraXRegistrarImpl) : PigeonApiOnImageCapturedCallbackApi(impl) {
         override fun pigeon_defaultConstructor(): ImageCapture.OnImageCapturedCallback {
             return object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureStarted() {

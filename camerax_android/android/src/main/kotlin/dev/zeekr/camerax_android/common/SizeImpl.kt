@@ -1,10 +1,10 @@
 package dev.zeekr.camerax_android.common
 
 import android.util.Size
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiSizeApi
 
-class SizeImpl(impl: CameraXImpl) : PigeonApiSizeApi(impl) {
+class SizeImpl(impl: CameraXRegistrarImpl) : PigeonApiSizeApi(impl) {
     override fun pigeon_defaultConstructor(width: Long, height: Long): Size {
         return Size(width.toInt(), height.toInt())
     }

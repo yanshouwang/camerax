@@ -1,10 +1,10 @@
 package dev.zeekr.camerax_android.video
 
 import androidx.camera.video.Recording
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiRecordingApi
 
-class RecordingImpl(impl: CameraXImpl) : PigeonApiRecordingApi(impl) {
+class RecordingImpl(impl: CameraXRegistrarImpl) : PigeonApiRecordingApi(impl) {
     @androidx.camera.video.ExperimentalPersistentRecording
     override fun isPersistent(pigeon_instance: Recording): Boolean {
         return pigeon_instance.isPersistent

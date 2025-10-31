@@ -1,32 +1,32 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension LensFacingX on LensFacing {
+extension LensFacingX on CameraSelectorLensFacing {
   LensFacingApi get api {
     switch (this) {
-      case LensFacing.unknown:
+      case CameraSelectorLensFacing.unknown:
         return LensFacingApi.unknown;
-      case LensFacing.front:
+      case CameraSelectorLensFacing.front:
         return LensFacingApi.front;
-      case LensFacing.back:
+      case CameraSelectorLensFacing.back:
         return LensFacingApi.back;
-      case LensFacing.external:
+      case CameraSelectorLensFacing.external:
         return LensFacingApi.external;
     }
   }
 }
 
 extension LensFacingApiX on LensFacingApi {
-  LensFacing get impl {
+  CameraSelectorLensFacing get impl {
     switch (this) {
       case LensFacingApi.unknown:
-        return LensFacing.unknown;
+        return CameraSelectorLensFacing.unknown;
       case LensFacingApi.front:
-        return LensFacing.front;
+        return CameraSelectorLensFacing.front;
       case LensFacingApi.back:
-        return LensFacing.back;
+        return CameraSelectorLensFacing.back;
       case LensFacingApi.external:
-        return LensFacing.external;
+        return CameraSelectorLensFacing.external;
     }
   }
 }

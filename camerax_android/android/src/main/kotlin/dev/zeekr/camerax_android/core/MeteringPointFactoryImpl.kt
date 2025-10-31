@@ -2,10 +2,10 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.MeteringPoint
 import androidx.camera.core.MeteringPointFactory
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiMeteringPointFactoryApi
 
-class MeteringPointFactoryImpl(impl: CameraXImpl) : PigeonApiMeteringPointFactoryApi(impl) {
+class MeteringPointFactoryImpl(impl: CameraXRegistrarImpl) : PigeonApiMeteringPointFactoryApi(impl) {
     override fun createPoint(
         pigeon_instance: MeteringPointFactory, x: Double, y: Double, size: Double?
     ): MeteringPoint {

@@ -2,11 +2,11 @@ package dev.zeekr.camerax_android.video
 
 import androidx.camera.video.AudioStats
 import dev.zeekr.camerax_android.AudioStateApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiAudioStatsApi
 import dev.zeekr.camerax_android.common.api
 
-class AudioStatsImpl(impl: CameraXImpl) : PigeonApiAudioStatsApi(impl) {
+class AudioStatsImpl(impl: CameraXRegistrarImpl) : PigeonApiAudioStatsApi(impl) {
     override fun audioAmplitude(pigeon_instance: AudioStats): Double {
         return pigeon_instance.audioAmplitude
     }

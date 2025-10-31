@@ -13,10 +13,8 @@ final class Camera2CameraControlImpl extends Camera2CameraControl {
     if (cameraControl is! CameraControlImpl) {
       throw TypeError();
     }
-    final api = Camera2CameraControlApi.from(
-      cameraControl: cameraControl.api,
-    );
-    return Camera2CameraControlImpl.internal(api);
+    final api = Camera2CameraControlApi.from(cameraControl: cameraControl.api);
+    return Camera2CameraControlImpl.api(api);
   }
 
   @override

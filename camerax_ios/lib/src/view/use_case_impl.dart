@@ -1,14 +1,14 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension UseCaseX on UseCase {
+extension UseCaseX on CameraControllerUseCase {
   UseCaseApi get api {
     switch (this) {
-      case UseCase.imageCapture:
+      case CameraControllerUseCase.imageCapture:
         return UseCaseApi.imageCapture;
-      case UseCase.imageAnalysis:
+      case CameraControllerUseCase.imageAnalysis:
         return UseCaseApi.imageAnalysis;
-      case UseCase.videoCapture:
+      case CameraControllerUseCase.videoCapture:
         return UseCaseApi.videoCapture;
     }
   }

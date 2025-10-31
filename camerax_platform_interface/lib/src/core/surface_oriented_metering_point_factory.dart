@@ -7,6 +7,8 @@ abstract base class SurfaceOrientedMeteringPointFactory
   SurfaceOrientedMeteringPointFactory.impl() : super.impl();
 
   factory SurfaceOrientedMeteringPointFactory(double width, double height) =>
-      CameraXPlugin.instance
-          .newSurfaceOrientedMeteringPointFactory(width, height);
+      CameraXPlugin.instance.newSurfaceOrientedMeteringPointFactory(
+        width,
+        height,
+      );
 }

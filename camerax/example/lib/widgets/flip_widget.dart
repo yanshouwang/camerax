@@ -27,10 +27,7 @@ class _FlipWidgetState extends State<FlipWidget>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
+    controller = AnimationController(vsync: this, duration: widget.duration);
     if (widget.flip) {
       controller.forward();
     }
@@ -38,10 +35,7 @@ class _FlipWidgetState extends State<FlipWidget>
 
   @override
   Widget build(BuildContext context) {
-    final animation = Tween(
-      begin: 0.0,
-      end: math.pi,
-    ).animate(controller);
+    final animation = Tween(begin: 0.0, end: math.pi).animate(controller);
     return AnimatedBuilder(
       animation: animation,
       builder: (context, child) {

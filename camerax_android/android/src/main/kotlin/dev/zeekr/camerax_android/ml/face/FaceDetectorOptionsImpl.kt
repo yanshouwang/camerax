@@ -1,14 +1,14 @@
 package dev.zeekr.camerax_android.ml.face
 
 import com.google.mlkit.vision.face.FaceDetectorOptions
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.FaceClassificationModeApi
 import dev.zeekr.camerax_android.FaceContourModeApi
 import dev.zeekr.camerax_android.FaceLandmarkModeApi
 import dev.zeekr.camerax_android.FacePerformanceModeApi
 import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsApi
 
-class FaceDetectorOptionsImpl(impl: CameraXImpl) : PigeonApiFaceDetectorOptionsApi(impl) {
+class FaceDetectorOptionsImpl(impl: CameraXRegistrarImpl) : PigeonApiFaceDetectorOptionsApi(impl) {
     override fun build(
         enableTracking: Boolean?,
         classificationMode: FaceClassificationModeApi?,

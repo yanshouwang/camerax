@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -37,69 +38,75 @@ abstract base class CameraXPlugin extends PlatformInterface {
     _instance = instance;
   }
 
+  // avfoundation
+  AVAnalyzer newAVAnalyzer({
+    List<AVMetadataObjectType>? types,
+    required Consumer<AVAnalyzerResult> consumer,
+  });
+
+  // camera2
+  Camera2CameraControl newCamera2CameraControlFrom(CameraControl cameraControl);
+  Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo);
+  CaptureRequestOptions newCaptureRequestOptions({
+    CameraMetadataControlMode? mode,
+    CameraMetadataControlAeMode? aeMode,
+    CameraMetadataControlAfMode? afMode,
+    CameraMetadataControlAwbMode? awbMode,
+    int? sensorExposureTime,
+  });
+
+  // common
+  Consumer<T> newConsumer<T>({required void Function(T value) accept});
+  Observer<T> newObserver<T>({required void Function(T value) onChanged});
   PermissionManager newPermissionManager();
 
-  CameraSelector getFrontCameraSelector();
-  CameraSelector getBackCameraSelector();
-  CameraSelector getExternalCameraSelector();
-  CameraSelector newCameraSelector({LensFacing? lensFacing});
-
-  FileOutputOptions newFileOutputOptions({
-    required File file,
-    Duration? durationLimit,
-    int? fileSizeLimitBytes,
-    Location? location,
+  // core
+  ResolutionFilter newResolutionFilter({
+    required List<Size<int>> Function(
+      List<Size<int>> supportedSizes,
+      int rotationDegrees,
+    )
+    filter,
   });
-
-  CameraController newCameraController();
-
-  FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(Quality quality);
-
-  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality);
-
-  FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(Quality quality);
-
-  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
-
-  Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality);
-
-  QualitySelector newQualitySelectorFrom(
-    Quality quality, {
-    FallbackStrategy? fallbackStrategy,
+  CameraSelector getFront$CameraSelector();
+  CameraSelector getBack$CameraSelector();
+  CameraSelector getExternal$CameraSelector();
+  CameraSelector newCameraSelector({CameraSelectorLensFacing? lensFacing});
+  ImageAnalyzer newImageAnalyzer({
+    required void Function(ImageProxy image) analyze,
   });
-
-  QualitySelector newQualitySelectorFromOrderedList(
-    List<Quality> qualities, {
-    FallbackStrategy? fallbackStrategy,
-  });
-
-  SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
-    double width,
-    double height,
-  );
-
   FocusMeteringAction newFocusMeteringAction(
     (MeteringPoint, List<MeteringMode>) first, {
     List<(MeteringPoint, List<MeteringMode>)>? others,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   });
+  ImageCaptureOnImageCapturedCallback newImageCaptureOnImageCapturedCallback({
+    void Function()? onCaptureStarted,
+    void Function(int progress)? onCaptureProcessProgressed,
+    void Function(ui.Image bitmap)? onPostviewBitmapAvailable,
+    void Function(ImageProxy image)? onCaptureSuccess,
+    void Function(Object exception)? onError,
+  });
+  SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
+    double width,
+    double height,
+  );
 
-  ImageAnalyzer newImageAnalyzer({required ImageProxyCallback analyze});
-
+  // ml
+  ZoomSuggestionOptionsZoomCallback newZoomSuggestionOptionsZoomCallback({
+    required bool Function(double zoomRatio) setZoom,
+  });
   ZoomSuggestionOptions newZoomSuggestionOptions({
-    required ZoomCallback zoomCallback,
+    required ZoomSuggestionOptionsZoomCallback zoomCallback,
     double? maxSupportedZoomRatio,
   });
-
   BarcodeScannerOptions newBarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
   });
-
   BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options});
-
   FaceDetectorOptions newFaceDetectorOptions({
     bool? enableTracking,
     FaceClassificationMode? classificationMode,
@@ -108,29 +115,42 @@ abstract base class CameraXPlugin extends PlatformInterface {
     double? minFaceSize,
     FacePerformanceMode? performanceMode,
   });
-
   FaceDetector newFaceDetector({FaceDetectorOptions? options});
-
   MlKitAnalyzer newMlKitAnalyzer({
     required List<Detector> detectors,
-    required CoordinateSystem targetCoordinateSystem,
+    required ImageAnalysisCoordinateSystem targetCoordinateSystem,
     required Consumer<MlKitAnalyzerResult> consumer,
   });
 
-  AVAnalyzer newAVAnalyzer({
-    List<AVMetadataObjectType>? types,
-    required Consumer<AVAnalyzerResult> consumer,
+  // video
+  FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(Quality quality);
+  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality);
+  FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(Quality quality);
+  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
+  FileOutputOptions newFileOutputOptions({
+    required File file,
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    Location? location,
+  });
+  Future<Size<int>?> getResolution$QualitySelector(
+    CameraInfo cameraInfo,
+    Quality quality,
+  );
+  QualitySelector newQualitySelectorFrom(
+    Quality quality, {
+    FallbackStrategy? fallbackStrategy,
+  });
+  QualitySelector newQualitySelectorFromOrderedList(
+    List<Quality> qualities, {
+    FallbackStrategy? fallbackStrategy,
   });
 
+  // view
+  CameraController newCameraController();
   PreviewView newPreviewView();
-
-  Camera2CameraControl newCamera2CameraControlFrom(CameraControl cameraControl);
-  Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo);
-  CaptureRequestOptions newCaptureRequestOptions({
-    ControlMode? mode,
-    ControlAeMode? aeMode,
-    ControlAfMode? afMode,
-    ControlAwbMode? awbMode,
-    int? sensorExposureTime,
+  RotationProviderListener newRotationProviderListener({
+    required void Function(int rotation) onRotationChanged,
   });
+  RotationProvider newRotationProvider();
 }

@@ -1,24 +1,24 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension BackpressureStrategyX on BackpressureStrategy {
+extension BackpressureStrategyX on ImageAnalysisStrategy {
   BackpressureStrategyApi get api {
     switch (this) {
-      case BackpressureStrategy.keepOnlyLatest:
+      case ImageAnalysisStrategy.keepOnlyLatest:
         return BackpressureStrategyApi.keepOnlyLatest;
-      case BackpressureStrategy.blockProducer:
+      case ImageAnalysisStrategy.blockProducer:
         return BackpressureStrategyApi.blockProducer;
     }
   }
 }
 
 extension BackpressureStrategyApiX on BackpressureStrategyApi {
-  BackpressureStrategy get impl {
+  ImageAnalysisStrategy get impl {
     switch (this) {
       case BackpressureStrategyApi.keepOnlyLatest:
-        return BackpressureStrategy.keepOnlyLatest;
+        return ImageAnalysisStrategy.keepOnlyLatest;
       case BackpressureStrategyApi.blockProducer:
-        return BackpressureStrategy.blockProducer;
+        return ImageAnalysisStrategy.blockProducer;
     }
   }
 }

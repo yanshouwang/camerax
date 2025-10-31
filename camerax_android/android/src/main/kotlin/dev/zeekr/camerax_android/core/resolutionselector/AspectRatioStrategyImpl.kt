@@ -3,12 +3,12 @@ package dev.zeekr.camerax_android.core.resolutionselector
 import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import dev.zeekr.camerax_android.AspectRatioApi
 import dev.zeekr.camerax_android.AspectRatioFallbackRuleApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiAspectRatioStrategyApi
 import dev.zeekr.camerax_android.core.aspectRatioApi
 import dev.zeekr.camerax_android.core.impl
 
-class AspectRatioStrategyImpl(impl: CameraXImpl) : PigeonApiAspectRatioStrategyApi(impl) {
+class AspectRatioStrategyImpl(impl: CameraXRegistrarImpl) : PigeonApiAspectRatioStrategyApi(impl) {
     override fun pigeon_defaultConstructor(
         preferredAspectRatio: AspectRatioApi, fallbackRule: AspectRatioFallbackRuleApi
     ): AspectRatioStrategy {

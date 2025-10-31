@@ -1,4 +1,0 @@
-enum BackpressureStrategy {
-  keepOnlyLatest,
-  blockProducer,
-}

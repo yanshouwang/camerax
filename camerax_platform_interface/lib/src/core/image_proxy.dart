@@ -1,14 +1,27 @@
 import 'dart:typed_data';
 
-import 'image_format.dart';
+import 'package:camerax_platform_interface/src/common.dart';
+
 import 'image_info.dart';
+
+final class ImageProxyPlaneProxy {
+  final Uint8List value;
+  final int pixelStride;
+  final int rowStride;
+
+  ImageProxyPlaneProxy({
+    required this.value,
+    required this.pixelStride,
+    required this.rowStride,
+  });
+}
 
 abstract base class ImageProxy {
   final ImageFormat format;
   final int width;
   final int height;
   final ImageInfo imageInfo;
-  final List<PlaneProxy> planes;
+  final List<ImageProxyPlaneProxy> planes;
 
   ImageProxy.impl({
     required this.format,
@@ -19,16 +32,4 @@ abstract base class ImageProxy {
   });
 
   Future<void> close();
-}
-
-final class PlaneProxy {
-  final Uint8List value;
-  final int pixelStride;
-  final int rowStride;
-
-  PlaneProxy({
-    required this.value,
-    required this.pixelStride,
-    required this.rowStride,
-  });
 }

@@ -27,8 +27,11 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
   }) {
-    final typeApis =
-        formats?.map((e) => e.api).expand((e) => e).toSet().toList();
+    final typeApis = formats
+        ?.map((e) => e.api)
+        .expand((e) => e)
+        .toSet()
+        .toList();
     return BarcodeScannerOptionsImpl.internal(typeApis);
   }
 }

@@ -10,9 +10,7 @@ final class ImageAnalyzerImpl extends ImageAnalyzer with AnalyzerImpl {
 
   ImageAnalyzerImpl.internal(this.api) : super.impl();
 
-  factory ImageAnalyzerImpl({
-    required ImageProxyCallback analyze,
-  }) {
+  factory ImageAnalyzerImpl({required ImageAnalyzerCallback analyze}) {
     final api = ImageAnalyzerApi(
       analyze: (_, imageApi) => analyze(imageApi.impl),
     );

@@ -5,17 +5,16 @@ abstract base class CaptureRequestOptions {
   CaptureRequestOptions.impl();
 
   factory CaptureRequestOptions({
-    ControlMode? mode,
-    ControlAeMode? aeMode,
-    ControlAfMode? afMode,
-    ControlAwbMode? awbMode,
+    CameraMetadataControlMode? mode,
+    CameraMetadataControlAeMode? aeMode,
+    CameraMetadataControlAfMode? afMode,
+    CameraMetadataControlAwbMode? awbMode,
     int? sensorExposureTime,
-  }) =>
-      CameraXPlugin.instance.newCaptureRequestOptions(
-        mode: mode,
-        aeMode: aeMode,
-        afMode: afMode,
-        awbMode: awbMode,
-        sensorExposureTime: sensorExposureTime,
-      );
+  }) => CameraXPlugin.instance.newCaptureRequestOptions(
+    mode: mode,
+    aeMode: aeMode,
+    afMode: afMode,
+    awbMode: awbMode,
+    sensorExposureTime: sensorExposureTime,
+  );
 }

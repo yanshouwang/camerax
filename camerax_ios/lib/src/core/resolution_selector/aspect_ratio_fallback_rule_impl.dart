@@ -1,24 +1,24 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension AspectRatioFallbackRuleX on AspectRatioFallbackRule {
+extension AspectRatioFallbackRuleX on AspectRatioStrategyFallbackRule {
   AspectRatioFallbackRuleApi get api {
     switch (this) {
-      case AspectRatioFallbackRule.none:
+      case AspectRatioStrategyFallbackRule.none:
         return AspectRatioFallbackRuleApi.none;
-      case AspectRatioFallbackRule.auto:
+      case AspectRatioStrategyFallbackRule.auto:
         return AspectRatioFallbackRuleApi.auto;
     }
   }
 }
 
 extension AspectRatioFallbackRuleApiX on AspectRatioFallbackRuleApi {
-  AspectRatioFallbackRule get impl {
+  AspectRatioStrategyFallbackRule get impl {
     switch (this) {
       case AspectRatioFallbackRuleApi.none:
-        return AspectRatioFallbackRule.none;
+        return AspectRatioStrategyFallbackRule.none;
       case AspectRatioFallbackRuleApi.auto:
-        return AspectRatioFallbackRule.auto;
+        return AspectRatioStrategyFallbackRule.auto;
     }
   }
 }

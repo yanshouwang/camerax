@@ -1,7 +1,1 @@
-enum CameraState {
-  pendingOpen,
-  opening,
-  open,
-  closing,
-  closed,
-}
+enum CameraState { pendingOpen, opening, open, closing, closed }

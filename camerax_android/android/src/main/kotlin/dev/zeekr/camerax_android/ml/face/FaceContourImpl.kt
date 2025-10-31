@@ -2,11 +2,11 @@ package dev.zeekr.camerax_android.ml.face
 
 import android.graphics.PointF
 import com.google.mlkit.vision.face.FaceContour
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.FaceContourTypeApi
 import dev.zeekr.camerax_android.PigeonApiFaceContourApi
 
-class FaceContourImpl(impl: CameraXImpl) : PigeonApiFaceContourApi(impl) {
+class FaceContourImpl(impl: CameraXRegistrarImpl) : PigeonApiFaceContourApi(impl) {
     override fun type(pigeon_instance: FaceContour): FaceContourTypeApi {
         return pigeon_instance.faceContourType.faceContourTypeApi
     }

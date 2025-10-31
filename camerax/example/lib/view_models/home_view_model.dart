@@ -18,8 +18,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
   final BarcodeScanner _barcodeScanner;
   final FaceDetector _faceDetector;
 
-  late final StreamSubscription _torchStateChangedSubscription;
-  late final StreamSubscription _zoomStateChangedSubscription;
+  Observer<TorchState>? _torchStateObserver;
+  Observer<ZoomState>? _zoomStateObserver;
 
   CameraControl? _cameraControl;
   Camera2CameraControl? _camera2Control;
@@ -30,15 +30,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
       _barcodeScanner = BarcodeScanner(),
       _faceDetector = FaceDetector(),
       _mode = CameraMode.takePicture,
-      _lensFacing = LensFacing.back,
+      _lensFacing = CameraSelectorLensFacing.back,
       _barcodes = [],
       _faces = [] {
-    _torchStateChangedSubscription = _controller.torchStateChanged.listen(
-      (e) => torchState = e,
-    );
-    _zoomStateChangedSubscription = _controller.zoomStateChanged.listen(
-      (e) => zoomState = e,
-    );
     _setUp();
   }
 
@@ -52,17 +46,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  LensFacing _lensFacing;
-  LensFacing get lensFacing => _lensFacing;
-  set lensFacing(LensFacing value) {
+  CameraSelectorLensFacing _lensFacing;
+  CameraSelectorLensFacing get lensFacing => _lensFacing;
+  set lensFacing(CameraSelectorLensFacing value) {
     if (_lensFacing == value) return;
     _lensFacing = value;
     notifyListeners();
   }
 
-  FlashMode? _flashMode;
-  FlashMode? get flashMode => _flashMode;
-  set flashMode(FlashMode? value) {
+  ImageCaptureFlashMode? _flashMode;
+  ImageCaptureFlashMode? get flashMode => _flashMode;
+  set flashMode(ImageCaptureFlashMode? value) {
     if (_flashMode == value) return;
     _flashMode = value;
     notifyListeners();
@@ -188,11 +182,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
     if (Platform.isAndroid) {
       // See https://developer.android.com/reference/kotlin/androidx/camera/view/CameraController#setEnabledUseCases(int)
       if (mode == CameraMode.recordVideo) {
-        await controller.setEnabledUseCases([UseCase.videoCapture]);
+        await controller.setEnabledUseCases([
+          CameraControllerUseCase.videoCapture,
+        ]);
       } else {
         await controller.setEnabledUseCases([
-          UseCase.imageCapture,
-          UseCase.imageAnalysis,
+          CameraControllerUseCase.imageCapture,
+          CameraControllerUseCase.imageAnalysis,
         ]);
       }
     }
@@ -207,16 +203,16 @@ class HomeViewModel extends ViewModel with TypeLogger {
       case CameraMode.barcodes:
         final analyzer = MlKitAnalyzer(
           detectors: [_barcodeScanner],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _handleMlKitAnalyzerResult,
+          targetCoordinateSystem: ImageAnalysisCoordinateSystem.viewReferenced,
+          consumer: Consumer(accept: _handleMlKitAnalyzerResult),
         );
         await _setMlKitAnalyzer(analyzer);
         break;
       case CameraMode.face:
         final analyzer = MlKitAnalyzer(
           detectors: [_faceDetector],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _handleMlKitAnalyzerResult,
+          targetCoordinateSystem: ImageAnalysisCoordinateSystem.viewReferenced,
+          consumer: Consumer(accept: _handleMlKitAnalyzerResult),
         );
         await _setMlKitAnalyzer(analyzer);
         break;
@@ -228,12 +224,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> toggleLensFacing() async {
-    if (lensFacing == LensFacing.back) {
+    if (lensFacing == CameraSelectorLensFacing.back) {
       await _setCameraSelector(CameraSelector.front);
-      lensFacing = LensFacing.front;
+      lensFacing = CameraSelectorLensFacing.front;
     } else {
       await _setCameraSelector(CameraSelector.back);
-      lensFacing = LensFacing.back;
+      lensFacing = CameraSelectorLensFacing.back;
     }
   }
 
@@ -258,23 +254,22 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> setExposureTime(int? value) async {
     final control = ArgumentError.checkNotNull(_camera2Control);
-    final bundle =
-        value == null
-            ? CaptureRequestOptions(aeMode: ControlAeMode.on)
-            : CaptureRequestOptions(
-              aeMode: ControlAeMode.off,
-              sensorExposureTime: value,
-            );
+    final bundle = value == null
+        ? CaptureRequestOptions(aeMode: CameraMetadataControlAeMode.on)
+        : CaptureRequestOptions(
+            aeMode: CameraMetadataControlAeMode.off,
+            sensorExposureTime: value,
+          );
     await control.setCaptureRequestOptions(bundle);
   }
 
-  Future<void> setFlashMode(FlashMode flashMode) async {
+  Future<void> setFlashMode(ImageCaptureFlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
     flashMode = await controller.getImageCaptureFlashMode();
   }
 
   Future<void> takePicture() async {
-    await controller.takePicture(
+    final callback = ImageCaptureOnImageCapturedCallback(
       onCaptureStarted: () {
         logger.info('onCaptureStarted');
       },
@@ -310,6 +305,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
         logger.warning('onError', exception);
       },
     );
+    await controller.takePicture(callback);
   }
 
   Future<void> startRecording() async {
@@ -320,10 +316,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
     );
     final file = File(filePath);
     final options = FileOutputOptions(file: file);
-    recording = await controller.startRecording(
-      options,
-      audioConfig: AudioConfig.audioDisabled,
-      listener: (event) {
+    final listener = Consumer<VideoRecordEvent>(
+      accept: (event) {
         logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
           return;
@@ -337,6 +331,11 @@ class HomeViewModel extends ViewModel with TypeLogger {
         }
         recording = null;
       },
+    );
+    recording = await controller.startRecording(
+      options,
+      audioConfig: AudioConfig.audioDisabled,
+      listener: listener,
     );
   }
 
@@ -364,12 +363,24 @@ class HomeViewModel extends ViewModel with TypeLogger {
       // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
       resolutionStrategy: ResolutionStrategy(
         boundSize: Size(1024, 768),
-        fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
+        fallbackRule: ResolutionStrategyFallbackRule.closestHigherThenLower,
       ),
     );
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
-    torchState = await controller.getTorchState();
-    zoomState = await controller.getZoomState();
+    final torchState = await controller.getTorchState();
+    final zoomState = await controller.getZoomState();
+    this.torchState = torchState;
+    this.zoomState = zoomState;
+    final torchStateObserver = Observer<TorchState>(
+      onChanged: (e) => this.torchState = e,
+    );
+    final zoomStateObserver = Observer<ZoomState>(
+      onChanged: (e) => this.zoomState = e,
+    );
+    await controller.observeTorchState(torchStateObserver);
+    await controller.observeZoomState(zoomStateObserver);
+    _torchStateObserver = torchStateObserver;
+    _zoomStateObserver = zoomStateObserver;
     await bind();
   }
 
@@ -383,7 +394,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> _setImageAnalyzer() async {
     await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba8888);
+    await controller.setImageAnalysisOutputImageFormat(
+      ImageAnalysisOutputImageFormat.rgba8888,
+    );
     final analyzer = ImageAnalyzer(
       analyze: (image) async {
         try {
@@ -430,7 +443,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> _setMlKitAnalyzer(MlKitAnalyzer analyzer) async {
     await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
+    await controller.setImageAnalysisOutputImageFormat(
+      ImageAnalysisOutputImageFormat.yuv420_888,
+    );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
   }
@@ -455,10 +470,16 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   @override
   void dispose() {
+    final torchStateObserver = _torchStateObserver;
+    final zoomStateObserver = _zoomStateObserver;
+    if (torchStateObserver != null) {
+      controller.removeTorchStateObserver(torchStateObserver);
+    }
+    if (zoomStateObserver != null) {
+      controller.removeZoomStateObserver(zoomStateObserver);
+    }
     _clearImageAnalysisAnalyzer();
     unbind();
-    _torchStateChangedSubscription.cancel();
-    _zoomStateChangedSubscription.cancel();
     super.dispose();
   }
 }

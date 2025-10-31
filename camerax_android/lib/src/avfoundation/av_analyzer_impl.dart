@@ -1,10 +1,11 @@
 import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/common/consumer.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'av_metadata_object_impl.dart';
 
-final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
+final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerMixin {
   @override
   final MlKitAnalyzerApi api;
 
@@ -16,11 +17,10 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
   }) {
     final detectorApis = <DetectorApi>[];
     if (types != null) {
-      final formatApis =
-          types
-              .map((e) => e.barcodeFormatApi)
-              .where((e) => e != BarcodeFormatApi.unknown)
-              .toList();
+      final formatApis = types
+          .map((e) => e.barcodeFormatApi)
+          .where((e) => e != BarcodeFormatApi.unknown)
+          .toList();
       if (formatApis.isNotEmpty) {
         final barcodeScannerApi = BarcodeScannerApi(
           options: BarcodeScannerOptionsApi.build(formats: formatApis),
@@ -34,7 +34,7 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
     }
     final api = MlKitAnalyzerApi(
       detectors: detectorApis,
-      targetCoordinateSystem: CoordinateSystemApi.viewReferenced,
+      targetCoordinateSystem: ImageAnalysisCoordinateSystemApi.viewReferenced,
       consumer: MlKitAnalyzerResultConsumerApi(
         accept: (_, e) async {
           final objects = <AVMetadataObject>[];
@@ -44,10 +44,9 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
               if (barcodeApis == null || barcodeApis.isEmpty) {
                 continue;
               }
-              final codeObjects =
-                  barcodeApis
-                      .map((e1) => e1.implOf(e.timestamp))
-                      .whereType<AVMetadataMachineReadableCodeObject>();
+              final codeObjects = barcodeApis
+                  .map((e1) => e1.implOf(e.timestamp))
+                  .whereType<AVMetadataMachineReadableCodeObject>();
               if (codeObjects.isEmpty) {
                 continue;
               }
@@ -57,10 +56,9 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
               if (faceApis == null || faceApis.isEmpty) {
                 continue;
               }
-              final faceObjects =
-                  faceApis
-                      .map((e1) => e1.implOf(e.timestamp))
-                      .whereType<AVMetadataFaceObject>();
+              final faceObjects = faceApis
+                  .map((e1) => e1.implOf(e.timestamp))
+                  .whereType<AVMetadataFaceObject>();
               objects.addAll(faceObjects);
             }
           }

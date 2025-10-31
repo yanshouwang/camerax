@@ -3,6 +3,15 @@ import 'package:flutter/widgets.dart';
 
 import 'camera_controller.dart';
 
+enum PreviewViewScaleType {
+  fillCenter,
+  fillEnd,
+  fillStart,
+  fitCenter,
+  fitEnd,
+  fitStart,
+}
+
 abstract base class PreviewView {
   PreviewView.impl();
 

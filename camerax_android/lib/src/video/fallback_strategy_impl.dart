@@ -12,27 +12,23 @@ final class FallbackStrategyImpl extends FallbackStrategy {
     final api = FallbackStrategyApi.higherQualityOrLowerThan(
       quality: quality.api,
     );
-    return FallbackStrategyImpl.internal(api);
+    return FallbackStrategyImpl.api(api);
   }
 
   factory FallbackStrategyImpl.higherQualityThan(Quality quality) {
-    final api = FallbackStrategyApi.higherQualityThan(
-      quality: quality.api,
-    );
-    return FallbackStrategyImpl.internal(api);
+    final api = FallbackStrategyApi.higherQualityThan(quality: quality.api);
+    return FallbackStrategyImpl.api(api);
   }
 
   factory FallbackStrategyImpl.lowerQualityOrHigherThan(Quality quality) {
     final api = FallbackStrategyApi.lowerQualityOrHigherThan(
       quality: quality.api,
     );
-    return FallbackStrategyImpl.internal(api);
+    return FallbackStrategyImpl.api(api);
   }
 
   factory FallbackStrategyImpl.lowerQualityThan(Quality quality) {
-    final api = FallbackStrategyApi.lowerQualityThan(
-      quality: quality.api,
-    );
-    return FallbackStrategyImpl.internal(api);
+    final api = FallbackStrategyApi.lowerQualityThan(quality: quality.api);
+    return FallbackStrategyImpl.api(api);
   }
 }

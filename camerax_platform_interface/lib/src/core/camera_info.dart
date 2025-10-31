@@ -5,24 +5,25 @@ import 'camera_state.dart';
 import 'dynamic_range.dart';
 import 'exposure_state.dart';
 import 'focus_metering_action.dart';
-import 'lens_facing.dart';
 import 'torch_state.dart';
 import 'zoom_state.dart';
 
 abstract base class CameraInfo {
   CameraInfo.impl();
 
-  Stream<CameraState> get cameraStateChanged;
-  Stream<TorchState> get torchStateChanged;
-  Stream<ZoomState> get zoomStateChanged;
-
   Future<CameraSelector> getCameraSelector();
   Future<CameraState?> getCameraState();
+  Future<void> observeCameraState(Observer<CameraState> observer);
+  Future<void> removeCameraStateObserver(Observer<CameraState> observer);
   Future<TorchState?> getTorchState();
+  Future<void> observeTorchState(Observer<TorchState> observer);
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer);
   Future<ZoomState?> getZoomState();
+  Future<void> observeZoomState(Observer<ZoomState> observer);
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer);
   Future<ExposureState> getExposureState();
   Future<double> getIntrinsicZoomRatio();
-  Future<LensFacing> getLensFacing();
+  Future<CameraSelectorLensFacing> getLensFacing();
   Future<Set<CameraInfo>> getPhysicalCameraInfos();
   Future<Set<Range<int>>> getSupportedFrameRateRanges();
   Future<bool> hasFlashUnit();
@@ -30,5 +31,6 @@ abstract base class CameraInfo {
   Future<bool> isLogicalMultiCameraSupported();
   Future<bool> isZslSupported();
   Future<Set<DynamicRange>> querySupportedDynamicRanges(
-      Set<DynamicRange> candidateDynamicRanges);
+    Set<DynamicRange> candidateDynamicRanges,
+  );
 }

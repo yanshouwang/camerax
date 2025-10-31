@@ -2,10 +2,6 @@ import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 extension ImageInfoApiX on ImageInfoApi {
-  ImageInfo get impl {
-    return ImageInfo(
-      timestamp: timestamp,
-      rotationDegrees: rotationDegrees,
-    );
-  }
+  ImageInfo get impl =>
+      ImageInfo(timestamp: timestamp, rotationDegrees: rotationDegrees);
 }

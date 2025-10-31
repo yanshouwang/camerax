@@ -15,12 +15,8 @@ final class CameraSelectorImpl extends CameraSelector {
 
   CameraSelectorImpl.internal(this.api) : super.impl();
 
-  factory CameraSelectorImpl({
-    LensFacing? lensFacing,
-  }) {
-    final api = CameraSelectorApi(
-      lensFacing: lensFacing?.api,
-    );
+  factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
+    final api = CameraSelectorApi(lensFacing: lensFacing?.api);
     return CameraSelectorImpl.internal(api);
   }
 

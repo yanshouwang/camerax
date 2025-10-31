@@ -47,11 +47,11 @@ final class ExposureState {
 
   @override
   int get hashCode => Object.hash(
-        exposureCompensationIndex,
-        exposureCompensationRange,
-        exposureCompensationStep,
-        isExposureCompensationSupported,
-      );
+    exposureCompensationIndex,
+    exposureCompensationRange,
+    exposureCompensationStep,
+    isExposureCompensationSupported,
+  );
 
   @override
   bool operator ==(Object other) {

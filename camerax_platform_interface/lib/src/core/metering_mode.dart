@@ -1,5 +1,1 @@
-enum MeteringMode {
-  af,
-  ae,
-  awb,
-}
+enum MeteringMode { af, ae, awb }

@@ -3,8 +3,15 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'aspect_ratio_startegy_impl.dart';
-import 'resolution_mode_impl.dart';
 import 'resolution_strategy_impl.dart';
+
+extension ResolutionSelectorModeX on ResolutionSelectorMode {
+  ResolutionSelectorModeApi get api => ResolutionSelectorModeApi.values[index];
+}
+
+extension ResolutionSelectorModeApiX on ResolutionSelectorModeApi {
+  ResolutionSelectorMode get impl => ResolutionSelectorMode.values[index];
+}
 
 extension ResolutionSelectorX on ResolutionSelector {
   ResolutionSelectorApi get api {
@@ -16,8 +23,9 @@ extension ResolutionSelectorX on ResolutionSelector {
           ? null
           : ResolutionFilterApi(
               filter: (_, supportedSizeApis, rotationDegrees) {
-                final supportedSizes =
-                    supportedSizeApis.map((e) => e.impl).toList();
+                final supportedSizes = supportedSizeApis
+                    .map((e) => e.impl)
+                    .toList();
                 final sizes = resolutionFilter(supportedSizes, rotationDegrees);
                 return sizes.map((e) => e.api).toList();
               },
@@ -36,10 +44,14 @@ extension ResolutionSelectorApiX on ResolutionSelectorApi {
       resolutionFilter: resolutionFilter == null
           ? null
           : (supportedSizes, rotationDegrees) {
-              final supportedSizeApis =
-                  supportedSizes.map((e) => e.api).toList();
+              final supportedSizeApis = supportedSizes
+                  .map((e) => e.api)
+                  .toList();
               final sizeApis = resolutionFilter.filter(
-                  resolutionFilter, supportedSizeApis, rotationDegrees);
+                resolutionFilter,
+                supportedSizeApis,
+                rotationDegrees,
+              );
               return sizeApis.map((e) => e.impl).toList();
             },
       resolutionStrategy: resolutionStrategy?.impl,

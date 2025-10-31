@@ -4,21 +4,6 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'detector_impl.dart';
 
-final class FaceDetectorImpl extends FaceDetector with DetectorImpl {
-  @override
-  final FaceDetectorApi api;
-
-  FaceDetectorImpl.internal(this.api) : super.impl();
-
-  factory FaceDetectorImpl({FaceDetectorOptions? options}) {
-    if (options is! FaceDetectorOptionsImpl?) {
-      throw TypeError();
-    }
-    final api = FaceDetectorApi(options: options?.api);
-    return FaceDetectorImpl.internal(api);
-  }
-}
-
 final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
   final FaceDetectorOptionsApi api;
 
@@ -40,7 +25,27 @@ final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
       minFaceSize: minFaceSize,
       performanceMode: performanceMode?.api,
     );
-    return FaceDetectorOptionsImpl.internal(api);
+    return FaceDetectorOptionsImpl.api(api);
+  }
+}
+
+final class FaceDetectorImpl extends FaceDetector with DetectorMixin {
+  @override
+  final FaceDetectorApi api;
+
+  FaceDetectorImpl.internal(this.api) : super.impl();
+
+  factory FaceDetectorImpl({FaceDetectorOptions? options}) {
+    final api = FaceDetectorApi(options: options?.api);
+    return FaceDetectorImpl.api(api);
+  }
+}
+
+extension FaceDetectorOptionsX on FaceDetectorOptions {
+  FaceDetectorOptionsApi get api {
+    final impl = this;
+    if (impl is! FaceDetectorOptionsImpl) throw TypeError();
+    return impl.api;
   }
 }
 

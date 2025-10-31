@@ -2,13 +2,13 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.ImageAnalysis
 import dev.zeekr.camerax_android.BackpressureStrategyApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.CoordinateSystemApi
 import dev.zeekr.camerax_android.ImageFormatApi
 import dev.zeekr.camerax_android.PigeonApiAnalyzerApi
 
 class ImageAnalysisImpl {
-    class AnalyzerImpl(impl: CameraXImpl) : PigeonApiAnalyzerApi(impl)
+    class AnalyzerImpl(impl: CameraXRegistrarImpl) : PigeonApiAnalyzerApi(impl)
 }
 
 val BackpressureStrategyApi.impl

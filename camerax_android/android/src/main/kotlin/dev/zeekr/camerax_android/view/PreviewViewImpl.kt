@@ -2,14 +2,14 @@ package dev.zeekr.camerax_android.view
 
 import androidx.camera.view.CameraController
 import androidx.camera.view.PreviewView
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiPreviewViewApi
 import dev.zeekr.camerax_android.ScaleTypeApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PreviewViewImpl(private val impl: CameraXImpl) : PigeonApiPreviewViewApi(impl) {
+class PreviewViewImpl(private val impl: CameraXRegistrarImpl) : PigeonApiPreviewViewApi(impl) {
     override fun pigeon_defaultConstructor(): PreviewView {
         val context = impl.activity ?: impl.context
         return PreviewView(context).apply {

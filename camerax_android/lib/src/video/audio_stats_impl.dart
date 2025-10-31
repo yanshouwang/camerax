@@ -2,7 +2,13 @@ import 'package:camerax_android/src/camerax.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'audio_state_impl.dart';
+extension AudioStatsAudioStateX on AudioStatsAudioState {
+  AudioStatsAudioStateApi get api => AudioStatsAudioStateApi.values[index];
+}
+
+extension AudioStatsAudioStateApiX on AudioStatsAudioStateApi {
+  AudioStatsAudioState get impl => AudioStatsAudioState.values[index];
+}
 
 extension AudioStatsApiX on AudioStatsApi {
   AudioStats get impl {

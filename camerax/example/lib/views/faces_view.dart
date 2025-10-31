@@ -6,10 +6,7 @@ import 'package:flutter/cupertino.dart';
 class FacesView extends StatelessWidget {
   final List<Face> faces;
 
-  const FacesView({
-    super.key,
-    required this.faces,
-  });
+  const FacesView({super.key, required this.faces});
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +53,7 @@ class _FacesPainter extends CustomPainter {
       final idPainter = TextPainter(
         text: TextSpan(
           text: '${face.trackingId}',
-          style: TextStyle(
-            color: color,
-          ),
+          style: TextStyle(color: color),
         ),
         textDirection: TextDirection.ltr,
       )..layout();

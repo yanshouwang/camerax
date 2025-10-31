@@ -4,11 +4,11 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionFilter
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.core.resolutionselector.ResolutionStrategy
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiResolutionSelectorApi
 import dev.zeekr.camerax_android.ResolutionModeApi
 
-class ResolutionSelectorImpl(impl: CameraXImpl) : PigeonApiResolutionSelectorApi(impl) {
+class ResolutionSelectorImpl(impl: CameraXRegistrarImpl) : PigeonApiResolutionSelectorApi(impl) {
     override fun pigeon_defaultConstructor(
         allowedResolutionMode: ResolutionModeApi,
         aspectRatioStrategy: AspectRatioStrategy,

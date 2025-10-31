@@ -6,20 +6,17 @@ import 'package:camerax_platform_interface/src/common.dart';
 abstract base class FileOutputOptions {
   final File file;
 
-  FileOutputOptions.impl({
-    required this.file,
-  });
+  FileOutputOptions.impl({required this.file});
 
   factory FileOutputOptions({
     required File file,
     Duration? durationLimit,
     int? fileSizeLimitBytes,
     Location? location,
-  }) =>
-      CameraXPlugin.instance.newFileOutputOptions(
-        file: file,
-        durationLimit: durationLimit,
-        fileSizeLimitBytes: fileSizeLimitBytes,
-        location: location,
-      );
+  }) => CameraXPlugin.instance.newFileOutputOptions(
+    file: file,
+    durationLimit: durationLimit,
+    fileSizeLimitBytes: fileSizeLimitBytes,
+    location: location,
+  );
 }

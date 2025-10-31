@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import dev.zeekr.camerax_android.BackpressureStrategyApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.CaptureModeApi
 import dev.zeekr.camerax_android.FlashModeApi
 import dev.zeekr.camerax_android.ImageFormatApi
@@ -40,10 +40,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 
-class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraControllerApi(impl) {
+class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : PigeonApiCameraControllerApi(registrar) {
     override fun initialize(pigeon_instance: CameraController, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.initializationFuture
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -376,7 +376,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val executor = ContextCompat.getMainExecutor(impl.context)
+                val executor = ContextCompat.getMainExecutor(registrar.context)
                 pigeon_instance.takePicture(executor, capturedCallback)
                 callback(Result.success(Unit))
             } catch (e: Exception) {
@@ -494,7 +494,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val executor = ContextCompat.getMainExecutor(impl.context)
+                val executor = ContextCompat.getMainExecutor(registrar.context)
                 pigeon_instance.setImageAnalysisAnalyzer(executor, analyzer)
                 callback(Result.success(Unit))
             } catch (e: Exception) {
@@ -638,7 +638,7 @@ class CameraControllerImpl(private val impl: CameraXImpl) : PigeonApiCameraContr
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val executor = ContextCompat.getMainExecutor(impl.context)
+                val executor = ContextCompat.getMainExecutor(registrar.context)
                 val recording = pigeon_instance.startRecording(outputOptions, audioConfig, executor, listener)
                 callback(Result.success(recording))
             } catch (e: Exception) {

@@ -1,32 +1,32 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension FlashModeX on FlashMode {
+extension FlashModeX on ImageCaptureFlashMode {
   FlashModeApi get api {
     switch (this) {
-      case FlashMode.auto:
+      case ImageCaptureFlashMode.auto:
         return FlashModeApi.auto;
-      case FlashMode.on:
+      case ImageCaptureFlashMode.on:
         return FlashModeApi.on;
-      case FlashMode.off:
+      case ImageCaptureFlashMode.off:
         return FlashModeApi.off;
-      case FlashMode.screen:
+      case ImageCaptureFlashMode.screen:
         return FlashModeApi.screen;
     }
   }
 }
 
 extension FlashModeApiX on FlashModeApi {
-  FlashMode get impl {
+  ImageCaptureFlashMode get impl {
     switch (this) {
       case FlashModeApi.auto:
-        return FlashMode.auto;
+        return ImageCaptureFlashMode.auto;
       case FlashModeApi.on:
-        return FlashMode.on;
+        return ImageCaptureFlashMode.on;
       case FlashModeApi.off:
-        return FlashMode.off;
+        return ImageCaptureFlashMode.off;
       case FlashModeApi.screen:
-        return FlashMode.screen;
+        return ImageCaptureFlashMode.screen;
     }
   }
 }

@@ -104,8 +104,10 @@ class _ZoomWidgetState extends State<ZoomWidget> {
                       if (!dialVisible) {
                         return;
                       }
-                      final beginAngle =
-                          math.atan2(beginPoint.dy, beginPoint.dx);
+                      final beginAngle = math.atan2(
+                        beginPoint.dy,
+                        beginPoint.dx,
+                      );
                       final endAngle = math.atan2(endPoint.dy, endPoint.dx);
                       final sweepAngle = endAngle - beginAngle;
                       // debugPrint('ZoomWidget sweepAngle $sweepAngle');
@@ -190,9 +192,8 @@ class _ZoomWidgetState extends State<ZoomWidget> {
           child: Text(
             text,
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color:
-                      selected ? CupertinoTheme.of(context).primaryColor : null,
-                ),
+              color: selected ? CupertinoTheme.of(context).primaryColor : null,
+            ),
           ),
         ),
       ),
@@ -200,12 +201,9 @@ class _ZoomWidgetState extends State<ZoomWidget> {
   }
 
   void _hideZoomDialWhenTimeout() {
-    _hideZoomSliderTimer = Timer(
-      const Duration(seconds: 1),
-      () {
-        _dialVisible.value = false;
-      },
-    );
+    _hideZoomSliderTimer = Timer(const Duration(seconds: 1), () {
+      _dialVisible.value = false;
+    });
   }
 
   void _cancelHideZoomDial() {
@@ -223,10 +221,7 @@ class _ZoomDialClipper extends CustomClipper<Path> {
     final c = a - b;
     final radius = width / 2.0 / math.cos(c);
     final center = Offset(width / 2.0, radius);
-    final oval = Rect.fromCircle(
-      center: center,
-      radius: radius,
-    );
+    final oval = Rect.fromCircle(center: center, radius: radius);
     final startAngle = math.pi + c;
     final sweepAngle = math.pi - c * 2.0;
     return Path()

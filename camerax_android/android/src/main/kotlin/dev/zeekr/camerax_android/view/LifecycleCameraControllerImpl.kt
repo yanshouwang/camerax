@@ -2,13 +2,13 @@ package dev.zeekr.camerax_android.view
 
 import androidx.camera.view.LifecycleCameraController
 import androidx.lifecycle.LifecycleOwner
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.PigeonApiLifecycleCameraControllerApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LifecycleCameraControllerImpl(private val impl: CameraXImpl) : PigeonApiLifecycleCameraControllerApi(impl) {
+class LifecycleCameraControllerImpl(private val impl: CameraXRegistrarImpl) : PigeonApiLifecycleCameraControllerApi(impl) {
     override fun pigeon_defaultConstructor(): LifecycleCameraController {
         return LifecycleCameraController(impl.context)
     }

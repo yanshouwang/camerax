@@ -4,8 +4,5 @@ class ImageModel {
   final ui.Image image;
   final int rotationDegrees;
 
-  ImageModel({
-    required this.image,
-    required this.rotationDegrees,
-  });
+  ImageModel({required this.image, required this.rotationDegrees});
 }

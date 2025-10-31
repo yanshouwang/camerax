@@ -14,14 +14,10 @@ final class SurfaceOrientedMeteringPointFactoryImpl
       width: width,
       height: height,
     );
-    return SurfaceOrientedMeteringPointFactoryImpl.internal(api);
+    return SurfaceOrientedMeteringPointFactoryImpl.api(api);
   }
 
   @override
-  Future<MeteringPoint> createPoint(
-    double x,
-    double y, {
-    double? size,
-  }) =>
+  Future<MeteringPoint> createPoint(double x, double y, {double? size}) =>
       api.createPoint(x, y, size).then((e) => e.impl);
 }

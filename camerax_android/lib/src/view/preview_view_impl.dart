@@ -13,7 +13,7 @@ final class PreviewViewImpl extends PreviewView {
 
   factory PreviewViewImpl() {
     final api = PreviewViewApi();
-    return PreviewViewImpl.internal(api);
+    return PreviewViewImpl.api(api);
   }
 
   @override
@@ -38,11 +38,11 @@ final class PreviewViewImpl extends PreviewView {
       onCreatePlatformView: (params) {
         final identifier = api.pigeon_instanceManager.getIdentifier(api);
         return _initAndroidView(
-          params,
-          hybridComposition: false,
-          creationParams: identifier,
-          creationParamsCodec: const StandardMessageCodec(),
-        )
+            params,
+            hybridComposition: false,
+            creationParams: identifier,
+            creationParamsCodec: const StandardMessageCodec(),
+          )
           ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
           ..create();
       },

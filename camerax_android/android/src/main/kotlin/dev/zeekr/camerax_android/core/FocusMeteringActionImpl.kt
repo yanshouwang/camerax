@@ -2,7 +2,7 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.MeteringPoint
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.MeteringModeApi
 import dev.zeekr.camerax_android.PigeonApiDurationTupleApi
 import dev.zeekr.camerax_android.PigeonApiFocusMeteringActionApi
@@ -10,7 +10,7 @@ import dev.zeekr.camerax_android.PigeonApiMeteringPointTupleApi
 import dev.zeekr.camerax_android.TimeUnitApi
 import java.util.concurrent.TimeUnit
 
-class FocusMeteringActionImpl(impl: CameraXImpl) : PigeonApiFocusMeteringActionApi(impl) {
+class FocusMeteringActionImpl(impl: CameraXRegistrarImpl) : PigeonApiFocusMeteringActionApi(impl) {
     override fun build(
         first: MeteringPointTuple,
         others: List<MeteringPointTuple>?,
@@ -54,7 +54,7 @@ class FocusMeteringActionImpl(impl: CameraXImpl) : PigeonApiFocusMeteringActionA
         return pigeon_instance.isAutoCancelEnabled
     }
 
-    class MeteringPointTupleImpl(impl: CameraXImpl) : PigeonApiMeteringPointTupleApi(impl) {
+    class MeteringPointTupleImpl(impl: CameraXRegistrarImpl) : PigeonApiMeteringPointTupleApi(impl) {
         override fun pigeon_defaultConstructor(
             point: MeteringPoint, modes: List<MeteringModeApi>?
         ): MeteringPointTuple {
@@ -64,7 +64,7 @@ class FocusMeteringActionImpl(impl: CameraXImpl) : PigeonApiFocusMeteringActionA
         }
     }
 
-    class DurationTupleImpl(impl: CameraXImpl) : PigeonApiDurationTupleApi(impl) {
+    class DurationTupleImpl(impl: CameraXRegistrarImpl) : PigeonApiDurationTupleApi(impl) {
         override fun pigeon_defaultConstructor(duration: Long, timeUnit: TimeUnitApi): DurationTuple {
             return DurationTuple(duration, timeUnit.impl)
         }

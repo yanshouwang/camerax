@@ -1,4 +1,5 @@
 export 'common/location_impl.dart';
+export 'common/permission_impl.dart';
 export 'common/permission_manager_impl.dart';
 export 'common/point_impl.dart';
 export 'common/range_impl.dart';

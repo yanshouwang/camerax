@@ -12,12 +12,8 @@ final class ZoomState {
   });
 
   @override
-  int get hashCode => Object.hash(
-        minZoomRatio,
-        maxZoomRatio,
-        zoomRatio,
-        linearZoom,
-      );
+  int get hashCode =>
+      Object.hash(minZoomRatio, maxZoomRatio, zoomRatio, linearZoom);
 
   @override
   bool operator ==(Object other) {

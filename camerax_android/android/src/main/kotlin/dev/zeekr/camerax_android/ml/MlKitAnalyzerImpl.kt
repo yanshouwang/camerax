@@ -4,7 +4,7 @@ import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.face.Face
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.CoordinateSystemApi
 import dev.zeekr.camerax_android.PigeonApiMlKitAnalyzerApi
 import dev.zeekr.camerax_android.PigeonApiMlKitAnalyzerResultApi
@@ -14,7 +14,7 @@ import dev.zeekr.camerax_android.core.impl
 import dev.zeekr.camerax_android.ml.barcode.BarcodeScanner
 import dev.zeekr.camerax_android.ml.face.FaceDetector
 
-class MlKitAnalyzerImpl(private val impl: CameraXImpl) : PigeonApiMlKitAnalyzerApi(impl) {
+class MlKitAnalyzerImpl(private val impl: CameraXRegistrarImpl) : PigeonApiMlKitAnalyzerApi(impl) {
     override fun pigeon_defaultConstructor(
         detectors: List<Detector>, targetCoordinateSystem: CoordinateSystemApi, consumer: MlKitAnalyzerResultConsumer
     ): MlKitAnalyzer {
@@ -22,7 +22,7 @@ class MlKitAnalyzerImpl(private val impl: CameraXImpl) : PigeonApiMlKitAnalyzerA
         return MlKitAnalyzer(detectors.map { it.instance }, targetCoordinateSystem.impl, executor, consumer)
     }
 
-    class ResultImpl(impl: CameraXImpl) : PigeonApiMlKitAnalyzerResultApi(impl) {
+    class ResultImpl(impl: CameraXRegistrarImpl) : PigeonApiMlKitAnalyzerResultApi(impl) {
         override fun timestamp(pigeon_instance: MlKitAnalyzer.Result): Long {
             return pigeon_instance.timestamp
         }

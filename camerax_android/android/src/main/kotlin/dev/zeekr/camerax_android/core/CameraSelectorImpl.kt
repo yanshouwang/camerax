@@ -2,11 +2,11 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalLensFacing
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.LensFacingApi
 import dev.zeekr.camerax_android.PigeonApiCameraSelectorApi
 
-class CameraSelectorImpl(impl: CameraXImpl) : PigeonApiCameraSelectorApi(impl) {
+class CameraSelectorImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraSelectorApi(impl) {
     override fun pigeon_defaultConstructor(lensFacing: LensFacingApi?): CameraSelector {
         val builder = CameraSelector.Builder()
         if (lensFacing != null) {

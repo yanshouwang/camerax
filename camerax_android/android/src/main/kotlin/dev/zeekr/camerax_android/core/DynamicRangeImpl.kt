@@ -2,11 +2,11 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.DynamicRange
 import dev.zeekr.camerax_android.BitDepthApi
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXRegistrarImpl
 import dev.zeekr.camerax_android.EncodingApi
 import dev.zeekr.camerax_android.PigeonApiDynamicRangeApi
 
-class DynamicRangeImpl(impl: CameraXImpl) : PigeonApiDynamicRangeApi(impl) {
+class DynamicRangeImpl(impl: CameraXRegistrarImpl) : PigeonApiDynamicRangeApi(impl) {
     override fun pigeon_defaultConstructor(encoding: EncodingApi, bitDepth: BitDepthApi): DynamicRange {
         return DynamicRange(encoding.impl, bitDepth.impl)
     }

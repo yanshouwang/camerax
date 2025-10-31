@@ -63,14 +63,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       duration: const Duration(milliseconds: 100),
                       onTap: () {
                         switch (flashMode) {
-                          case FlashMode.auto:
-                            viewModel.setFlashMode(FlashMode.on);
-                          case FlashMode.on:
-                            viewModel.setFlashMode(FlashMode.off);
-                          case FlashMode.off:
-                            viewModel.setFlashMode(FlashMode.auto);
-                          case FlashMode.screen:
-                            viewModel.setFlashMode(FlashMode.screen);
+                          case ImageCaptureFlashMode.auto:
+                            viewModel.setFlashMode(ImageCaptureFlashMode.on);
+                          case ImageCaptureFlashMode.on:
+                            viewModel.setFlashMode(ImageCaptureFlashMode.off);
+                          case ImageCaptureFlashMode.off:
+                            viewModel.setFlashMode(ImageCaptureFlashMode.auto);
+                          case ImageCaptureFlashMode.screen:
+                            viewModel.setFlashMode(ImageCaptureFlashMode.screen);
                         }
                       },
                       child: Container(
@@ -82,9 +82,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               .resolveFrom(context),
                         ),
                         child: Icon(
-                          flashMode == FlashMode.auto
+                          flashMode == ImageCaptureFlashMode.auto
                               ? Symbols.flash_auto
-                              : flashMode == FlashMode.on
+                              : flashMode == ImageCaptureFlashMode.on
                               ? Symbols.flash_on
                               : Symbols.flash_off,
                           color: CupertinoColors.label.resolveFrom(context),
@@ -151,8 +151,8 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                   } else {
                     _onPanUpdateDx = dx;
                     final updatePosition = details.localPosition;
-                    final distance =
-                        (updatePosition.dx - startPosition.dx).abs();
+                    final distance = (updatePosition.dx - startPosition.dx)
+                        .abs();
                     if (distance > 20.0) {
                       final page = _pageController.page;
                       if (page == null) {
@@ -206,14 +206,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Picture',
-                            style: CupertinoTheme.of(
-                              context,
-                            ).textTheme.textStyle.copyWith(
-                              color:
-                                  mode == CameraMode.takePicture
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.takePicture
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                            ),
+                                ),
                           ),
                         ),
                       ),
@@ -230,14 +230,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Video',
-                            style: CupertinoTheme.of(
-                              context,
-                            ).textTheme.textStyle.copyWith(
-                              color:
-                                  mode == CameraMode.recordVideo
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.recordVideo
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                            ),
+                                ),
                           ),
                         ),
                       ),
@@ -254,14 +254,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Raw',
-                            style: CupertinoTheme.of(
-                              context,
-                            ).textTheme.textStyle.copyWith(
-                              color:
-                                  mode == CameraMode.rawValue
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.rawValue
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                            ),
+                                ),
                           ),
                         ),
                       ),
@@ -278,14 +278,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Code',
-                            style: CupertinoTheme.of(
-                              context,
-                            ).textTheme.textStyle.copyWith(
-                              color:
-                                  mode == CameraMode.barcodes
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.barcodes
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                            ),
+                                ),
                           ),
                         ),
                       ),
@@ -302,14 +302,14 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           alignment: Alignment.center,
                           child: Text(
                             'Face',
-                            style: CupertinoTheme.of(
-                              context,
-                            ).textTheme.textStyle.copyWith(
-                              color:
-                                  mode == CameraMode.face
+                            style: CupertinoTheme.of(context)
+                                .textTheme
+                                .textStyle
+                                .copyWith(
+                                  color: mode == CameraMode.face
                                       ? CupertinoTheme.of(context).primaryColor
                                       : null,
-                            ),
+                                ),
                           ),
                         ),
                       ),
@@ -322,28 +322,22 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                 children: [
                   AnimatedTapWidget(
                     duration: const Duration(milliseconds: 100),
-                    onTap:
-                        savedUri == null
-                            ? null
-                            : () {
-                              context.go(
-                                '/viewer?uri=${savedUri.toFilePath()}',
-                              );
-                            },
+                    onTap: savedUri == null
+                        ? null
+                        : () {
+                            context.go('/viewer?uri=${savedUri.toFilePath()}');
+                          },
                     child: Container(
                       width: 48.0,
                       height: 48.0,
                       clipBehavior: Clip.antiAlias,
                       decoration: const BoxDecoration(shape: BoxShape.circle),
-                      child:
-                          savedUri == null
-                              ? Icon(
-                                Symbols.image,
-                                color: CupertinoColors.label.resolveFrom(
-                                  context,
-                                ),
-                              )
-                              : Thumbnail(uri: savedUri),
+                      child: savedUri == null
+                          ? Icon(
+                              Symbols.image,
+                              color: CupertinoColors.label.resolveFrom(context),
+                            )
+                          : Thumbnail(uri: savedUri),
                     ),
                   ),
                   Container(
@@ -360,17 +354,17 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       duration: const Duration(milliseconds: 100),
                       onTap:
                           mode == CameraMode.takePicture ||
-                                  mode == CameraMode.recordVideo
-                              ? () {
-                                if (mode == CameraMode.takePicture) {
-                                  viewModel.takePicture();
-                                } else if (isRecording) {
-                                  viewModel.stopRecording();
-                                } else {
-                                  viewModel.startRecording();
-                                }
+                              mode == CameraMode.recordVideo
+                          ? () {
+                              if (mode == CameraMode.takePicture) {
+                                viewModel.takePicture();
+                              } else if (isRecording) {
+                                viewModel.stopRecording();
+                              } else {
+                                viewModel.startRecording();
                               }
-                              : null,
+                            }
+                          : null,
                       // onTap: () async {
                       //   final exposureTime = _exposureTime;
                       //   final newValue =
@@ -383,12 +377,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         margin: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color:
-                              isRecording
-                                  ? CupertinoColors.systemRed.resolveFrom(
-                                    context,
-                                  )
-                                  : CupertinoColors.label.resolveFrom(context),
+                          color: isRecording
+                              ? CupertinoColors.systemRed.resolveFrom(context)
+                              : CupertinoColors.label.resolveFrom(context),
                         ),
                       ),
                     ),
@@ -420,7 +411,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             color: CupertinoColors.label.resolveFrom(context),
                           ),
                         ),
-                        flip: viewModel.lensFacing == LensFacing.back,
+                        flip: viewModel.lensFacing == CameraSelectorLensFacing.back,
                       ),
                     ),
                   ),

@@ -1,21 +1,17 @@
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 
-import 'lens_facing.dart';
+enum CameraSelectorLensFacing { unknown, front, back, external }
 
 abstract base class CameraSelector {
   static CameraSelector get front =>
-      CameraXPlugin.instance.getFrontCameraSelector();
+      CameraXPlugin.instance.getFront$CameraSelector();
   static CameraSelector get back =>
-      CameraXPlugin.instance.getBackCameraSelector();
+      CameraXPlugin.instance.getBack$CameraSelector();
   static CameraSelector get external =>
-      CameraXPlugin.instance.getExternalCameraSelector();
+      CameraXPlugin.instance.getExternal$CameraSelector();
 
   CameraSelector.impl();
 
-  factory CameraSelector({
-    LensFacing? lensFacing,
-  }) =>
-      CameraXPlugin.instance.newCameraSelector(
-        lensFacing: lensFacing,
-      );
+  factory CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
+      CameraXPlugin.instance.newCameraSelector(lensFacing: lensFacing);
 }

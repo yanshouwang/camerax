@@ -1,28 +1,28 @@
 import 'package:camerax_ios/src/camerax.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension BitDepthX on BitDepth {
+extension BitDepthX on DynamicRangeBitDepth {
   BitDepthApi get api {
     switch (this) {
-      case BitDepth.bitDepthUnspecified:
+      case DynamicRangeBitDepth.unspecified:
         return BitDepthApi.bitDepthUnspecified;
-      case BitDepth.bitDepth8Bit:
+      case DynamicRangeBitDepth.eightBit:
         return BitDepthApi.bitDepth8Bit;
-      case BitDepth.bitDepth10Bit:
+      case DynamicRangeBitDepth.tenBit:
         return BitDepthApi.bitDepth10Bit;
     }
   }
 }
 
 extension BitDepthApiX on BitDepthApi {
-  BitDepth get impl {
+  DynamicRangeBitDepth get impl {
     switch (this) {
       case BitDepthApi.bitDepthUnspecified:
-        return BitDepth.bitDepthUnspecified;
+        return DynamicRangeBitDepth.unspecified;
       case BitDepthApi.bitDepth8Bit:
-        return BitDepth.bitDepth8Bit;
+        return DynamicRangeBitDepth.eightBit;
       case BitDepthApi.bitDepth10Bit:
-        return BitDepth.bitDepth10Bit;
+        return DynamicRangeBitDepth.tenBit;
     }
   }
 }

@@ -64,12 +64,11 @@ final class CameraInfoImpl extends CameraInfo {
   Future<double> getIntrinsicZoomRatio() => api.getIntrinsticZoomRatio();
 
   @override
-  Future<LensFacing> getLensFacing() => api.getLensFacing().then((e) => e.impl);
+  Future<CameraSelectorLensFacing> getLensFacing() => api.getLensFacing().then((e) => e.impl);
 
   @override
-  Future<Set<CameraInfo>> getPhysicalCameraInfos() => api
-      .getPhysicalCameraInfos()
-      .then((e) => e.map((e1) => e1.impl).toSet());
+  Future<Set<CameraInfo>> getPhysicalCameraInfos() =>
+      api.getPhysicalCameraInfos().then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<Set<Range<int>>> getSupportedFrameRateRanges() =>
