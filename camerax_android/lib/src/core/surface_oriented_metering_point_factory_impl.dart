@@ -14,7 +14,7 @@ final class SurfaceOrientedMeteringPointFactoryImpl
       width: width,
       height: height,
     );
-    return SurfaceOrientedMeteringPointFactoryImpl.api(api);
+    return SurfaceOrientedMeteringPointFactoryImpl.internal(api);
   }
 
   @override

@@ -13,41 +13,35 @@ final class PreviewViewImpl extends PreviewView {
 
   factory PreviewViewImpl() {
     final api = PreviewViewApi();
-    return PreviewViewImpl.api(api);
+    return PreviewViewImpl.internal(api);
   }
 
   @override
-  Future<void> setController(CameraController controller) async {
-    if (controller is! CameraControllerImpl) {
-      throw TypeError();
-    }
-    await api.setController(controller.api);
-  }
+  Future<void> setController(CameraController controller) =>
+      api.setController(controller.api);
 
   @override
-  Widget build(BuildContext context) {
-    return PlatformViewLink(
-      viewType: 'camerax.zeekr.dev/PreviewView',
-      surfaceFactory: (context, controller) {
-        return AndroidViewSurface(
-          controller: controller as AndroidViewController,
-          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-          gestureRecognizers: const {},
-        );
-      },
-      onCreatePlatformView: (params) {
-        final identifier = api.pigeon_instanceManager.getIdentifier(api);
-        return _initAndroidView(
-            params,
-            hybridComposition: false,
-            creationParams: identifier,
-            creationParamsCodec: const StandardMessageCodec(),
-          )
-          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-          ..create();
-      },
-    );
-  }
+  Widget build(BuildContext context) => PlatformViewLink(
+    viewType: 'camerax.zeekr.dev/PreviewView',
+    surfaceFactory: (context, controller) {
+      return AndroidViewSurface(
+        controller: controller as AndroidViewController,
+        hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+        gestureRecognizers: const {},
+      );
+    },
+    onCreatePlatformView: (params) {
+      final identifier = api.pigeon_instanceManager.getIdentifier(api);
+      return _initAndroidView(
+          params,
+          hybridComposition: false,
+          creationParams: identifier,
+          creationParamsCodec: const StandardMessageCodec(),
+        )
+        ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+        ..create();
+    },
+  );
 
   AndroidViewController _initAndroidView(
     PlatformViewCreationParams params, {

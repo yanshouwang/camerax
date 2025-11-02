@@ -25,7 +25,7 @@ final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
       minFaceSize: minFaceSize,
       performanceMode: performanceMode?.api,
     );
-    return FaceDetectorOptionsImpl.api(api);
+    return FaceDetectorOptionsImpl.internal(api);
   }
 }
 
@@ -37,7 +37,7 @@ final class FaceDetectorImpl extends FaceDetector with DetectorMixin {
 
   factory FaceDetectorImpl({FaceDetectorOptions? options}) {
     final api = FaceDetectorApi(options: options?.api);
-    return FaceDetectorImpl.api(api);
+    return FaceDetectorImpl.internal(api);
   }
 }
 
@@ -82,109 +82,25 @@ extension FaceLandmarkApiX on FaceLandmarkApi {
 }
 
 extension FaceClassificationModeX on FaceClassificationMode {
-  FaceClassificationModeApi get api {
-    switch (this) {
-      case FaceClassificationMode.none:
-        return FaceClassificationModeApi.none;
-      case FaceClassificationMode.all:
-        return FaceClassificationModeApi.all;
-    }
-  }
+  FaceClassificationModeApi get api => FaceClassificationModeApi.values[index];
 }
 
 extension FaceContourModeX on FaceContourMode {
-  FaceContourModeApi get api {
-    switch (this) {
-      case FaceContourMode.none:
-        return FaceContourModeApi.none;
-      case FaceContourMode.all:
-        return FaceContourModeApi.all;
-    }
-  }
+  FaceContourModeApi get api => FaceContourModeApi.values[index];
 }
 
 extension FaceContourTypeApiX on FaceContourTypeApi {
-  FaceContourType get impl {
-    switch (this) {
-      case FaceContourTypeApi.face:
-        return FaceContourType.face;
-      case FaceContourTypeApi.leftCheek:
-        return FaceContourType.leftCheek;
-      case FaceContourTypeApi.leftEye:
-        return FaceContourType.leftEye;
-      case FaceContourTypeApi.leftEyebrowBottom:
-        return FaceContourType.leftEyebrowBottom;
-      case FaceContourTypeApi.leftEyebrowTop:
-        return FaceContourType.leftEyebrowTop;
-      case FaceContourTypeApi.lowerLipBottom:
-        return FaceContourType.lowerLipBottom;
-      case FaceContourTypeApi.lowerLipTop:
-        return FaceContourType.lowerLipTop;
-      case FaceContourTypeApi.noseBottom:
-        return FaceContourType.noseBottom;
-      case FaceContourTypeApi.noseBridge:
-        return FaceContourType.noseBridge;
-      case FaceContourTypeApi.rightCheek:
-        return FaceContourType.rightCheek;
-      case FaceContourTypeApi.rightEye:
-        return FaceContourType.rightEye;
-      case FaceContourTypeApi.rightEyebrowBottom:
-        return FaceContourType.rightEyebrowBottom;
-      case FaceContourTypeApi.rightEyebrowTop:
-        return FaceContourType.rightEyebrowTop;
-      case FaceContourTypeApi.upperLipBottom:
-        return FaceContourType.upperLipBottom;
-      case FaceContourTypeApi.upperLipTop:
-        return FaceContourType.upperLipTop;
-    }
-  }
+  FaceContourType get impl => FaceContourType.values[index];
 }
 
 extension FaceLandmarkModeX on FaceLandmarkMode {
-  FaceLandmarkModeApi get api {
-    switch (this) {
-      case FaceLandmarkMode.none:
-        return FaceLandmarkModeApi.none;
-      case FaceLandmarkMode.all:
-        return FaceLandmarkModeApi.all;
-    }
-  }
+  FaceLandmarkModeApi get api => FaceLandmarkModeApi.values[index];
 }
 
 extension FaceLandmarkTypeApiX on FaceLandmarkTypeApi {
-  FaceLandmarkType get impl {
-    switch (this) {
-      case FaceLandmarkTypeApi.leftCheek:
-        return FaceLandmarkType.leftCheek;
-      case FaceLandmarkTypeApi.leftEar:
-        return FaceLandmarkType.leftEar;
-      case FaceLandmarkTypeApi.leftEye:
-        return FaceLandmarkType.leftEye;
-      case FaceLandmarkTypeApi.mouthBottom:
-        return FaceLandmarkType.mouthBottom;
-      case FaceLandmarkTypeApi.mouthLeft:
-        return FaceLandmarkType.mouthLeft;
-      case FaceLandmarkTypeApi.mouthRight:
-        return FaceLandmarkType.mouthRight;
-      case FaceLandmarkTypeApi.noseBase:
-        return FaceLandmarkType.noseBase;
-      case FaceLandmarkTypeApi.rightCheek:
-        return FaceLandmarkType.rightCheek;
-      case FaceLandmarkTypeApi.rightEar:
-        return FaceLandmarkType.rightEar;
-      case FaceLandmarkTypeApi.rightEye:
-        return FaceLandmarkType.rightEye;
-    }
-  }
+  FaceLandmarkType get impl => FaceLandmarkType.values[index];
 }
 
 extension FacePerformanceModeX on FacePerformanceMode {
-  FacePerformanceModeApi get api {
-    switch (this) {
-      case FacePerformanceMode.fast:
-        return FacePerformanceModeApi.fast;
-      case FacePerformanceMode.accurate:
-        return FacePerformanceModeApi.accurate;
-    }
-  }
+  FacePerformanceModeApi get api => FacePerformanceModeApi.values[index];
 }

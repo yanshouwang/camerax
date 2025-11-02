@@ -10,20 +10,13 @@ final class Camera2CameraControlImpl extends Camera2CameraControl {
   Camera2CameraControlImpl.internal(this.api) : super.impl();
 
   factory Camera2CameraControlImpl.from(CameraControl cameraControl) {
-    if (cameraControl is! CameraControlImpl) {
-      throw TypeError();
-    }
     final api = Camera2CameraControlApi.from(cameraControl: cameraControl.api);
-    return Camera2CameraControlImpl.api(api);
+    return Camera2CameraControlImpl.internal(api);
   }
 
   @override
-  Future<void> addCaptureRequestOptions(CaptureRequestOptions bundle) {
-    if (bundle is! CaptureRequestOptionsImpl) {
-      throw TypeError();
-    }
-    return api.addCaptureRequestOptions(bundle.api);
-  }
+  Future<void> addCaptureRequestOptions(CaptureRequestOptions bundle) =>
+      api.addCaptureRequestOptions(bundle.api);
 
   @override
   Future<void> clearCaptureRequestOptions() => api.clearCaptureRequestOptions();
@@ -33,10 +26,6 @@ final class Camera2CameraControlImpl extends Camera2CameraControl {
       api.getCaptureRequestOptions().then((e) => e.impl);
 
   @override
-  Future<void> setCaptureRequestOptions(CaptureRequestOptions bundle) {
-    if (bundle is! CaptureRequestOptionsImpl) {
-      throw TypeError();
-    }
-    return api.setCaptureRequestOptions(bundle.api);
-  }
+  Future<void> setCaptureRequestOptions(CaptureRequestOptions bundle) =>
+      api.setCaptureRequestOptions(bundle.api);
 }

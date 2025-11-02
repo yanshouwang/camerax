@@ -9,7 +9,6 @@ import 'camera_state_impl.dart';
 import 'dynamic_range_impl.dart';
 import 'exposure_state_impl.dart';
 import 'focus_metering_action_impl.dart';
-import 'lens_facing_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
@@ -24,7 +23,7 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<CameraState?> getCameraState() =>
-      api.getCameraState().then((e) => e.getValue()).then((e) => e?.impl);
+      api.getCameraState().then((e) => e?.impl);
 
   @override
   Future<ExposureState> getExposureState() =>
@@ -48,22 +47,17 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e.getValue()).then((e) => e?.impl);
+      api.getTorchState().then((e) => e?.impl);
 
   @override
-  Future<ZoomState?> getZoomState() =>
-      api.getZoomState().then((e) => e.getValue()).then((e) => e?.impl);
+  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
 
   @override
   Future<bool> hasFlashUnit() => api.hasFlashUnit();
 
   @override
-  Future<bool> isFocusMeteringSupported(FocusMeteringAction action) {
-    if (action is! FocusMeteringActionImpl) {
-      throw TypeError();
-    }
-    return api.isFocusMeteringSupported(action.api);
-  }
+  Future<bool> isFocusMeteringSupported(FocusMeteringAction action) =>
+      api.isFocusMeteringSupported(action.api);
 
   @override
   Future<bool> isLogicalMultiCameraSupported() =>
@@ -75,13 +69,42 @@ final class CameraInfoImpl extends CameraInfo {
   @override
   Future<Set<DynamicRange>> querySupportedDynamicRanges(
     Set<DynamicRange> candidateDynamicRanges,
-  ) {
-    final candidateDynamicRangeApis = candidateDynamicRanges
-        .map((e) => e.api)
-        .toList();
-    return api
-        .querySupportedDynamicRanges(candidateDynamicRangeApis)
-        .then((e) => e.map((e1) => e1.impl).toSet());
+  ) => api
+      .querySupportedDynamicRanges(
+        candidateDynamicRanges.map((e) => e.api).toList(),
+      )
+      .then((e) => e.map((e1) => e1.impl).toSet());
+
+  @override
+  Future<void> observeCameraState(Observer<CameraState> observer) =>
+      api.observeCameraState(observer.cameraStateObserverApi);
+
+  @override
+  Future<void> observeTorchState(Observer<TorchState> observer) =>
+      api.observeTorchState(observer.torchStateObserverApi);
+
+  @override
+  Future<void> observeZoomState(Observer<ZoomState> observer) =>
+      api.observeZoomState(observer.zoomStateObserverApi);
+
+  @override
+  Future<void> removeCameraStateObserver(Observer<CameraState> observer) =>
+      api.removeCameraStateObserver(observer.cameraStateObserverApi);
+
+  @override
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
+      api.removeTorchStateObserver(observer.torchStateObserverApi);
+
+  @override
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
+      api.removeZoomStateObserver(observer.zoomStateObserverApi);
+}
+
+extension CameraInfoX on CameraInfo {
+  CameraInfoApi get api {
+    final impl = this;
+    if (impl is! CameraInfoImpl) throw TypeError();
+    return impl.api;
   }
 }
 

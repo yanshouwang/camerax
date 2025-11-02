@@ -1,9 +1,9 @@
 import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'detector_impl.dart';
-import 'mlkit_analyzer_result_impl.dart';
 
 final class MlKitAnalyzerImpl extends MlKitAnalyzer
     with ImageAnalysisAnalyzerMixin {
@@ -20,10 +20,8 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
     final api = MlKitAnalyzerApi(
       detectors: detectors.cast<DetectorMixin>().map((e) => e.api).toList(),
       targetCoordinateSystem: targetCoordinateSystem.api,
-      consumer: MlKitAnalyzerResultConsumerApi(
-        accept: (_, e) => consumer(e.impl),
-      ),
+      consumer: consumer.mlKitAnalyzerResultConsumerApi,
     );
-    return MlKitAnalyzerImpl.api(api);
+    return MlKitAnalyzerImpl.internal(api);
   }
 }

@@ -28,3 +28,11 @@ extension ImageAnalysisOutputImageFormatApiX
   ImageAnalysisOutputImageFormat get impl =>
       ImageAnalysisOutputImageFormat.values[index];
 }
+
+extension ImageAnalysisAnalyzerX on ImageAnalysisAnalyzer {
+  ImageAnalysisAnalyzerApi get api {
+    final impl = this;
+    if (impl is! ImageAnalysisAnalyzerMixin) throw TypeError();
+    return impl.api;
+  }
+}

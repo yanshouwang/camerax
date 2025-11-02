@@ -16,7 +16,7 @@ final class ZoomSuggestionOptionsZoomCallbackImpl
     final api = ZoomSuggestionOptionsZoomCallbackApi(
       setZoom: (_, e) => setZoom(e),
     );
-    return ZoomSuggestionOptionsZoomCallbackImpl.api(api);
+    return ZoomSuggestionOptionsZoomCallbackImpl.internal(api);
   }
 }
 
@@ -33,7 +33,7 @@ final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptions {
       zoomCallback: zoomCallback.api,
       maxSupportedZoomRatio: maxSupportedZoomRatio,
     );
-    return ZoomSuggestionOptionsImpl.api(api);
+    return ZoomSuggestionOptionsImpl.internal(api);
   }
 }
 
@@ -52,7 +52,7 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
       formats: formats?.map((e) => e.api).toList(),
       zoomSuggestionOptions: zoomSuggestionOptions?.api,
     );
-    return BarcodeScannerOptionsImpl.api(api);
+    return BarcodeScannerOptionsImpl.internal(api);
   }
 }
 
@@ -64,7 +64,7 @@ final class BarcodeScannerImpl extends BarcodeScanner with DetectorMixin {
 
   factory BarcodeScannerImpl({BarcodeScannerOptions? options}) {
     final api = BarcodeScannerApi(options: options?.api);
-    return BarcodeScannerImpl.api(api);
+    return BarcodeScannerImpl.internal(api);
   }
 }
 

@@ -56,11 +56,28 @@ abstract base class CameraXPlugin extends PlatformInterface {
   });
 
   // common
-  Consumer<T> newConsumer<T>({required void Function(T value) accept});
-  Observer<T> newObserver<T>({required void Function(T value) onChanged});
+  Consumer<VideoRecordEvent> newVideoRecordEventConsumer({
+    required void Function(VideoRecordEvent value) accept,
+  });
+  Consumer<MlKitAnalyzerResult> newMlKitAnalyzerResultConsumer({
+    required void Function(MlKitAnalyzerResult value) accept,
+  });
+  Observer<CameraState> newCameraStateObserver({
+    required void Function(CameraState value) onChanged,
+  });
+  Observer<TorchState> newTorchStateObserver({
+    required void Function(TorchState value) onChanged,
+  });
+  Observer<ZoomState> newZoomStateObserver({
+    required void Function(ZoomState value) onChanged,
+  });
   PermissionManager newPermissionManager();
 
   // core
+  CameraSelector get $CameraSelectorFront;
+  CameraSelector get $CameraSelectorBack;
+  CameraSelector get $CameraSelectorExternal;
+
   ResolutionFilter newResolutionFilter({
     required List<Size<int>> Function(
       List<Size<int>> supportedSizes,
@@ -68,9 +85,6 @@ abstract base class CameraXPlugin extends PlatformInterface {
     )
     filter,
   });
-  CameraSelector getFront$CameraSelector();
-  CameraSelector getBack$CameraSelector();
-  CameraSelector getExternal$CameraSelector();
   CameraSelector newCameraSelector({CameraSelectorLensFacing? lensFacing});
   ImageAnalyzer newImageAnalyzer({
     required void Function(ImageProxy image) analyze,
@@ -133,7 +147,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
     int? fileSizeLimitBytes,
     Location? location,
   });
-  Future<Size<int>?> getResolution$QualitySelector(
+  Future<Size<int>?> $QualitySelectorGetResolution(
     CameraInfo cameraInfo,
     Quality quality,
   );

@@ -25,3 +25,11 @@ final class FileOutputOptionsImpl extends FileOutputOptions {
     return FileOutputOptionsImpl.internal(api, file: file);
   }
 }
+
+extension FileOutputOptionsX on FileOutputOptions {
+  FileOutputOptionsApi get api {
+    final impl = this;
+    if (impl is! FileOutputOptionsImpl) throw TypeError();
+    return impl.api;
+  }
+}

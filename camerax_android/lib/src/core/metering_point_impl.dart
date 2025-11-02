@@ -7,6 +7,14 @@ final class MeteringPointImpl extends MeteringPoint {
   MeteringPointImpl.internal(this.api) : super.impl(size: api.size);
 }
 
+extension MeteringPointX on MeteringPoint {
+  MeteringPointApi get api {
+    final impl = this;
+    if (impl is! MeteringPointImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
 extension MeteringPointApiX on MeteringPointApi {
-  MeteringPointImpl get impl => MeteringPointImpl.api(this);
+  MeteringPointImpl get impl => MeteringPointImpl.internal(this);
 }

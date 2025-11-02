@@ -1,17 +1,14 @@
-import 'package:camerax_android/src/camerax.g.dart';
-import 'package:camerax_android/src/common/consumer.dart';
-import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'av_metadata_object_impl.dart';
+import 'vision_object.dart';
 
-final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerMixin {
+final class VisionAnalyzer extends ImageAnalysisAnalyzer {
   @override
   final MlKitAnalyzerApi api;
 
-  AVAnalyzerImpl.internal(this.api) : super.impl();
+  VisionAnalyzer.internal(this.api) : super.impl();
 
-  factory AVAnalyzerImpl({
+  factory VisionAnalyzer({
     List<AVMetadataObjectType>? types,
     required Consumer<AVAnalyzerResult> consumer,
   }) {
@@ -67,6 +64,6 @@ final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerMixin {
         },
       ),
     );
-    return AVAnalyzerImpl.internal(api);
+    return VisionAnalyzer.internal(api);
   }
 }

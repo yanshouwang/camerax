@@ -21,10 +21,18 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
       awbMode: awbMode?.api,
       sensorExposureTime: sensorExposureTime,
     );
-    return CaptureRequestOptionsImpl.api(api);
+    return CaptureRequestOptionsImpl.internal(api);
+  }
+}
+
+extension CaptureRequestOptionsX on CaptureRequestOptions {
+  CaptureRequestOptionsApi get api {
+    final impl = this;
+    if (impl is! CaptureRequestOptionsImpl) throw TypeError();
+    return impl.api;
   }
 }
 
 extension CaptureRequestOptioinsApiX on CaptureRequestOptionsApi {
-  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.api(this);
+  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.internal(this);
 }

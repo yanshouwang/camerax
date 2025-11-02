@@ -15,6 +15,6 @@ final class ImageAnalyzerImpl extends ImageAnalyzer
     required void Function(ImageProxy image) analyze,
   }) {
     final api = ImageAnalyzerApi(analyze: (_, e) => analyze(e.impl));
-    return ImageAnalyzerImpl.api(api);
+    return ImageAnalyzerImpl.internal(api);
   }
 }

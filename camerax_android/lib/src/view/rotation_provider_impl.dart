@@ -12,7 +12,7 @@ final class RotationProviderListenerImpl extends RotationProviderListener {
     final api = RotationProviderListenerApi(
       onRotationChanged: (_, e) => onRotationChanged(e),
     );
-    return RotationProviderListenerImpl.api(api);
+    return RotationProviderListenerImpl.internal(api);
   }
 }
 
@@ -23,7 +23,7 @@ final class RotationProviderImpl extends RotationProvider {
 
   factory RotationProviderImpl() {
     final api = RotationProviderApi();
-    return RotationProviderImpl.api(api);
+    return RotationProviderImpl.internal(api);
   }
 
   @override

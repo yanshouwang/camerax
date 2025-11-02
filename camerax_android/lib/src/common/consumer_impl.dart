@@ -3,25 +3,7 @@ import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-abstract base class ConsumerImpl<T> extends Consumer<T> {
-  ConsumerImpl.impl() : super.impl();
-
-  factory ConsumerImpl({required void Function(T value) accept}) {
-    switch (T) {
-      case const (VideoRecordEvent):
-        return VideoRecordEventConsumerImpl(accept: (e) => accept(e as T))
-            as ConsumerImpl<T>;
-      case const (MlKitAnalyzerResult):
-        return MlKitAnalyzerResultConsumerImpl(accept: (e) => accept(e as T))
-            as ConsumerImpl<T>;
-      default:
-        throw UnimplementedError();
-    }
-  }
-}
-
-final class VideoRecordEventConsumerImpl
-    extends ConsumerImpl<VideoRecordEvent> {
+final class VideoRecordEventConsumerImpl extends Consumer<VideoRecordEvent> {
   final VideoRecordEventConsumerApi api;
 
   VideoRecordEventConsumerImpl.internal(this.api) : super.impl();
@@ -50,13 +32,6 @@ final class MlKitAnalyzerResultConsumerImpl
   }
 }
 
-final class AVAnalyzerResultConsumerImpl
-    extends ConsumerImpl<AVAnalyzerResult> {
-  final void Function(AVAnalyzerResult value) accept;
-
-  AVAnalyzerResultConsumerImpl({required this.accept}) : super.impl();
-}
-
 extension ConsumerX on Consumer {
   VideoRecordEventConsumerApi get videoRecordEventConsumerApi {
     final impl = this;
@@ -70,8 +45,9 @@ extension ConsumerX on Consumer {
     return impl.api;
   }
 
-  void acceptAVAnalyzerResult(AVAnalyzerResult value) {
+  void accept<T>(T value) {
     final impl = this;
-    if (impl is! AVAnalyzerResultConsumerImpl) throw TypeError();
+    if (impl is! ConsumerImpl<T>) throw TypeError();
+    impl.accept(value);
   }
 }

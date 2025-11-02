@@ -1,8 +1,8 @@
 import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_info_impl.dart';
-import 'plane_proxy_impl.dart';
 
 final class ImageProxyImpl extends ImageProxy {
   final ImageProxyApi api;
@@ -30,6 +30,6 @@ extension ImageProxyPlaneProxyApiX on ImageProxyPlaneProxyApi {
 
 extension ImageProxyApiX on ImageProxyApi {
   ImageProxy get impl {
-    return ImageProxyImpl.api(this);
+    return ImageProxyImpl.internal(this);
   }
 }

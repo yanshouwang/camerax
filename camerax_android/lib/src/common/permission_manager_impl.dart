@@ -10,7 +10,7 @@ final class PermissionManagerImpl extends PermissionManager {
 
   factory PermissionManagerImpl() {
     final api = PermissionManagerApi.instance;
-    return PermissionManagerImpl.api(api);
+    return PermissionManagerImpl.internal(api);
   }
 
   @override

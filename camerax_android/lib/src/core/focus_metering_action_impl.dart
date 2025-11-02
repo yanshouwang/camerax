@@ -21,7 +21,7 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
       disableAutoCancel: disableAutoCancel,
       autoCancelDuration: autoCancelDuration?.api,
     );
-    return FocusMeteringActionImpl.api(api);
+    return FocusMeteringActionImpl.internal(api);
   }
 
   @override
@@ -46,16 +46,10 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
 }
 
 extension MeteringPointTupleX on (MeteringPoint, List<MeteringMode>) {
-  MeteringPointTupleApi get api {
-    final point = this.$1;
-    if (point is! MeteringPointImpl) {
-      throw TypeError();
-    }
-    return MeteringPointTupleApi(
-      point: point.api,
-      modes: $2.map((e) => e.api).toList(),
-    );
-  }
+  MeteringPointTupleApi get api => MeteringPointTupleApi(
+    point: $1.api,
+    modes: $2.map((e) => e.api).toList(),
+  );
 }
 
 extension DurationX on Duration {
@@ -64,5 +58,13 @@ extension DurationX on Duration {
       duration: inMilliseconds,
       timeUnit: TimeUnitApi.milliseconds,
     );
+  }
+}
+
+extension FocusMeteringActionX on FocusMeteringAction {
+  FocusMeteringActionApi get api {
+    final impl = this;
+    if (impl is! FocusMeteringActionImpl) throw TypeError();
+    return impl.api;
   }
 }
