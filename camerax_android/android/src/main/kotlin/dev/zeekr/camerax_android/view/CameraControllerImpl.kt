@@ -7,6 +7,7 @@ import androidx.camera.core.DynamicRange
 import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
+import androidx.camera.core.ZoomState
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.video.FileOutputOptions
 import androidx.camera.video.QualitySelector
@@ -14,33 +15,38 @@ import androidx.camera.video.Recording
 import androidx.camera.view.CameraController
 import androidx.camera.view.video.AudioConfig
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
-import dev.zeekr.camerax_android.BackpressureStrategyApi
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
-import dev.zeekr.camerax_android.CaptureModeApi
-import dev.zeekr.camerax_android.FlashModeApi
-import dev.zeekr.camerax_android.ImageFormatApi
+import dev.zeekr.camerax_android.CameraControllerUseCaseApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.ImageAnalysisOutputImageFormatApi
+import dev.zeekr.camerax_android.ImageAnalysisStrategyApi
+import dev.zeekr.camerax_android.ImageCaptureCaptureModeApi
+import dev.zeekr.camerax_android.ImageCaptureFlashModeApi
 import dev.zeekr.camerax_android.MirrorModeApi
 import dev.zeekr.camerax_android.PigeonApiCameraControllerApi
-import dev.zeekr.camerax_android.UseCaseApi
+import dev.zeekr.camerax_android.TorchStateApi
+import dev.zeekr.camerax_android.activity
 import dev.zeekr.camerax_android.common.IntRange
-import dev.zeekr.camerax_android.common.TorchStateLiveData
+import dev.zeekr.camerax_android.common.TorchStateObserver
 import dev.zeekr.camerax_android.common.VideoRecordEventConsumer
-import dev.zeekr.camerax_android.common.ZoomStateLiveData
-import dev.zeekr.camerax_android.core.backpressureStrategyApi
-import dev.zeekr.camerax_android.core.captureModeApi
+import dev.zeekr.camerax_android.common.ZoomStateObserver
+import dev.zeekr.camerax_android.context
 import dev.zeekr.camerax_android.core.flashModeApi
-import dev.zeekr.camerax_android.core.imageAnalysisImageFormatApi
-import dev.zeekr.camerax_android.core.imageAnalysisImpl
+import dev.zeekr.camerax_android.core.imageAnalysisOutputImageFormatApi
+import dev.zeekr.camerax_android.core.imageAnalysisStrategyApi
+import dev.zeekr.camerax_android.core.imageCaptureCaptureModeApi
 import dev.zeekr.camerax_android.core.impl
 import dev.zeekr.camerax_android.core.mirrorModeApi
+import dev.zeekr.camerax_android.core.torchStateApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 
-class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : PigeonApiCameraControllerApi(registrar) {
+class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCameraControllerApi(registrar) {
     override fun initialize(pigeon_instance: CameraController, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.initializationFuture
         val executor = ContextCompat.getMainExecutor(registrar.context)
@@ -114,12 +120,42 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
         }
     }
 
-    override fun getTorchState(pigeon_instance: CameraController, callback: (Result<TorchStateLiveData>) -> Unit) {
+    override fun getTorchState(pigeon_instance: CameraController, callback: (Result<TorchStateApi?>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val value = TorchStateLiveData(pigeon_instance.torchState)
-                callback(Result.success(value))
-            } catch (e: Exception) {
+                callback(Result.success(pigeon_instance.torchState.value?.torchStateApi))
+            } catch (e: Throwable) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun observeTorchState(
+        pigeon_instance: CameraController,
+        observer: TorchStateObserver,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val owner = registrar.activity as LifecycleOwner
+                pigeon_instance.torchState.observe(owner, observer)
+                callback(Result.success(Unit))
+            } catch (e: Throwable) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun removeTorchStateObserver(
+        pigeon_instance: CameraController,
+        observer: TorchStateObserver,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.torchState.removeObserver(observer)
+                callback(Result.success(Unit))
+            } catch (e: Throwable) {
                 callback(Result.failure(e))
             }
         }
@@ -138,12 +174,42 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
         }
     }
 
-    override fun getZoomState(pigeon_instance: CameraController, callback: (Result<ZoomStateLiveData>) -> Unit) {
+    override fun getZoomState(pigeon_instance: CameraController, callback: (Result<ZoomState?>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val value = ZoomStateLiveData(pigeon_instance.zoomState)
-                callback(Result.success(value))
+                callback(Result.success(pigeon_instance.zoomState.value))
             } catch (e: Exception) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun observeZoomState(
+        pigeon_instance: CameraController,
+        observer: ZoomStateObserver,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val owner = registrar.activity as LifecycleOwner
+                pigeon_instance.zoomState.observe(owner, observer)
+                callback(Result.success(Unit))
+            } catch (e: Throwable) {
+                callback(Result.failure(e))
+            }
+        }
+    }
+
+    override fun removeZoomStateObserver(
+        pigeon_instance: CameraController,
+        observer: ZoomStateObserver,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.zoomState.removeObserver(observer)
+                callback(Result.success(Unit))
+            } catch (e: Throwable) {
                 callback(Result.failure(e))
             }
         }
@@ -255,12 +321,15 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
     }
 
     override fun setEnabledUseCases(
-        pigeon_instance: CameraController, enabledUseCases: List<UseCaseApi>, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController,
+        enabledUseCases: List<CameraControllerUseCaseApi>,
+        callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
+
                 pigeon_instance.setEnabledUseCases(
-                    enabledUseCases.fold(0) { total, next -> total or next.impl })
+                    enabledUseCases.map { it.impl }.reduce { acc, unit -> acc or unit })
                 callback(Result.success(Unit))
             } catch (e: Exception) {
                 callback(Result.failure(e))
@@ -320,11 +389,13 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
         }
     }
 
-    override fun getImageCaptureMode(pigeon_instance: CameraController, callback: (Result<CaptureModeApi>) -> Unit) {
+    override fun getImageCaptureMode(
+        pigeon_instance: CameraController,
+        callback: (Result<ImageCaptureCaptureModeApi>) -> Unit
+    ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val value = pigeon_instance.imageCaptureMode.captureModeApi
-                callback(Result.success(value))
+                callback(Result.success(pigeon_instance.imageCaptureMode.imageCaptureCaptureModeApi))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }
@@ -333,7 +404,9 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
 
     @ExperimentalZeroShutterLag
     override fun setImageCaptureMode(
-        pigeon_instance: CameraController, captureMode: CaptureModeApi, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController,
+        captureMode: ImageCaptureCaptureModeApi,
+        callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -345,11 +418,13 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
         }
     }
 
-    override fun getImageCaptureFlashMode(pigeon_instance: CameraController, callback: (Result<FlashModeApi>) -> Unit) {
+    override fun getImageCaptureFlashMode(
+        pigeon_instance: CameraController,
+        callback: (Result<ImageCaptureFlashModeApi>) -> Unit
+    ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val value = pigeon_instance.imageCaptureFlashMode.flashModeApi
-                callback(Result.success(value))
+                callback(Result.success(pigeon_instance.imageCaptureFlashMode.flashModeApi))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }
@@ -357,7 +432,9 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
     }
 
     override fun setImageCaptureFlashMode(
-        pigeon_instance: CameraController, flashMode: FlashModeApi, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController,
+        flashMode: ImageCaptureFlashModeApi,
+        callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -412,12 +489,12 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
     }
 
     override fun getImageAnalysisBackpressureStrategy(
-        pigeon_instance: CameraController, callback: (Result<BackpressureStrategyApi>) -> Unit
+        pigeon_instance: CameraController,
+        callback: (Result<ImageAnalysisStrategyApi>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val value = pigeon_instance.imageAnalysisBackpressureStrategy.backpressureStrategyApi
-                callback(Result.success(value))
+                callback(Result.success(pigeon_instance.imageAnalysisBackpressureStrategy.imageAnalysisStrategyApi))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }
@@ -425,7 +502,9 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
     }
 
     override fun setImageAnalysisBackpressureStrategy(
-        pigeon_instance: CameraController, strategy: BackpressureStrategyApi, callback: (Result<Unit>) -> Unit
+        pigeon_instance: CameraController,
+        strategy: ImageAnalysisStrategyApi,
+        callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
@@ -462,12 +541,12 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
     }
 
     override fun getImageAnalysisOutputImageFormat(
-        pigeon_instance: CameraController, callback: (Result<ImageFormatApi>) -> Unit
+        pigeon_instance: CameraController,
+        callback: (Result<ImageAnalysisOutputImageFormatApi>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val value = pigeon_instance.imageAnalysisOutputImageFormat.imageAnalysisImageFormatApi
-                callback(Result.success(value))
+                callback(Result.success(pigeon_instance.imageAnalysisOutputImageFormat.imageAnalysisOutputImageFormatApi))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }
@@ -476,12 +555,12 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
 
     override fun setImageAnalysisOutputImageFormat(
         pigeon_instance: CameraController,
-        imageAnalysisOutputImageFormat: ImageFormatApi,
+        imageAnalysisOutputImageFormat: ImageAnalysisOutputImageFormatApi,
         callback: (Result<Unit>) -> Unit
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                pigeon_instance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.imageAnalysisImpl
+                pigeon_instance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.impl
                 callback(Result.success(Unit))
             } catch (e: Exception) {
                 callback(Result.failure(e))
@@ -648,9 +727,9 @@ class CameraControllerImpl(private val registrar: CameraXRegistrarImpl) : Pigeon
     }
 }
 
-val UseCaseApi.impl
+val CameraControllerUseCaseApi.impl: Int
     get() = when (this) {
-        UseCaseApi.IMAGE_CAPTURE -> CameraController.IMAGE_CAPTURE
-        UseCaseApi.IMAGE_ANALYSIS -> CameraController.IMAGE_ANALYSIS
-        UseCaseApi.VIDEO_CAPTURE -> CameraController.VIDEO_CAPTURE
+        CameraControllerUseCaseApi.IMAGE_CAPTURE -> CameraController.IMAGE_CAPTURE
+        CameraControllerUseCaseApi.IMAGE_ANALYSIS -> CameraController.IMAGE_ANALYSIS
+        CameraControllerUseCaseApi.VIDEO_CAPTURE -> CameraController.VIDEO_CAPTURE
     }

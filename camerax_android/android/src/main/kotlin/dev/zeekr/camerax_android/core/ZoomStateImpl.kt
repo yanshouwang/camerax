@@ -1,10 +1,10 @@
 package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.ZoomState
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiZoomStateApi
 
-class ZoomStateImpl(impl: CameraXRegistrarImpl) : PigeonApiZoomStateApi(impl) {
+class ZoomStateImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiZoomStateApi(registrar) {
     override fun minZoomRatio(pigeon_instance: ZoomState): Double {
         return pigeon_instance.minZoomRatio.toDouble()
     }

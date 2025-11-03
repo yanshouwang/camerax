@@ -62,6 +62,10 @@ abstract base class CameraXPlugin extends PlatformInterface {
   Consumer<MlKitAnalyzerResult> newMlKitAnalyzerResultConsumer({
     required void Function(MlKitAnalyzerResult value) accept,
   });
+  Consumer<AVAnalyzerResult> newAVAnalyzerResultConsumer({
+    required void Function(AVAnalyzerResult value) accept,
+  });
+  Location newLocation(double latitude, double longitude);
   Observer<CameraState> newCameraStateObserver({
     required void Function(CameraState value) onChanged,
   });
@@ -90,8 +94,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
     required void Function(ImageProxy image) analyze,
   });
   FocusMeteringAction newFocusMeteringAction(
-    (MeteringPoint, List<MeteringMode>) first, {
-    List<(MeteringPoint, List<MeteringMode>)>? others,
+    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   });
@@ -108,11 +112,16 @@ abstract base class CameraXPlugin extends PlatformInterface {
   );
 
   // ml
+  Future<BarcodeScanner> $BarcodeScanningGetClient([
+    BarcodeScannerOptions? options,
+  ]);
+  Future<FaceDetector> $FaceDetectionGetClient([FaceDetectorOptions? options]);
+
   ZoomSuggestionOptionsZoomCallback newZoomSuggestionOptionsZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   });
-  ZoomSuggestionOptions newZoomSuggestionOptions({
-    required ZoomSuggestionOptionsZoomCallback zoomCallback,
+  ZoomSuggestionOptions newZoomSuggestionOptions(
+    ZoomSuggestionOptionsZoomCallback zoomCallback, {
     double? maxSupportedZoomRatio,
   });
   BarcodeScannerOptions newBarcodeScannerOptions({
@@ -120,16 +129,14 @@ abstract base class CameraXPlugin extends PlatformInterface {
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
   });
-  BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options});
   FaceDetectorOptions newFaceDetectorOptions({
     bool? enableTracking,
-    FaceClassificationMode? classificationMode,
-    FaceContourMode? contourMode,
-    FaceLandmarkMode? landmarkMode,
+    FaceDetectorOptionsClassificationMode? classificationMode,
+    FaceDetectorOptionsContourMode? contourMode,
+    FaceDetectorOptionsLandmarkMode? landmarkMode,
     double? minFaceSize,
-    FacePerformanceMode? performanceMode,
+    FaceDetectorOptionsPerformanceMode? performanceMode,
   });
-  FaceDetector newFaceDetector({FaceDetectorOptions? options});
   MlKitAnalyzer newMlKitAnalyzer({
     required List<Detector> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
@@ -137,20 +144,21 @@ abstract base class CameraXPlugin extends PlatformInterface {
   });
 
   // video
-  FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(Quality quality);
-  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality);
-  FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(Quality quality);
-  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
-  FileOutputOptions newFileOutputOptions({
-    required File file,
-    Duration? durationLimit,
-    int? fileSizeLimitBytes,
-    Location? location,
-  });
   Future<Size<int>?> $QualitySelectorGetResolution(
     CameraInfo cameraInfo,
     Quality quality,
   );
+
+  FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(Quality quality);
+  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality);
+  FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(Quality quality);
+  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality);
+  FileOutputOptions newFileOutputOptions(
+    File file, {
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    Location? location,
+  });
   QualitySelector newQualitySelectorFrom(
     Quality quality, {
     FallbackStrategy? fallbackStrategy,

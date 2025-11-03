@@ -2,13 +2,13 @@ package dev.zeekr.camerax_android.core.resolutionselector
 
 import android.util.Size
 import androidx.camera.core.resolutionselector.ResolutionStrategy
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiResolutionStrategyApi
-import dev.zeekr.camerax_android.ResolutionFallbackRuleApi
+import dev.zeekr.camerax_android.ResolutionStrategyFallbackRuleApi
 
-class ResolutionStrategyImpl(impl: CameraXRegistrarImpl) : PigeonApiResolutionStrategyApi(impl) {
+class ResolutionStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiResolutionStrategyApi(registrar) {
     override fun pigeon_defaultConstructor(
-        boundSize: Size?, fallbackRule: ResolutionFallbackRuleApi
+        boundSize: Size?, fallbackRule: ResolutionStrategyFallbackRuleApi
     ): ResolutionStrategy {
         return if (boundSize == null) ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY
         else ResolutionStrategy(boundSize, fallbackRule.impl)
@@ -18,26 +18,26 @@ class ResolutionStrategyImpl(impl: CameraXRegistrarImpl) : PigeonApiResolutionSt
         return pigeon_instance.boundSize
     }
 
-    override fun fallbackRule(pigeon_instance: ResolutionStrategy): ResolutionFallbackRuleApi {
-        return pigeon_instance.fallbackRule.resolutionFallbackRuleApi
+    override fun fallbackRule(pigeon_instance: ResolutionStrategy): ResolutionStrategyFallbackRuleApi {
+        return pigeon_instance.fallbackRule.resolutionStrategyFallbackRuleApi
     }
 }
 
-val ResolutionFallbackRuleApi.impl
+val ResolutionStrategyFallbackRuleApi.impl: Int
     get() = when (this) {
-        ResolutionFallbackRuleApi.NONE -> ResolutionStrategy.FALLBACK_RULE_NONE
-        ResolutionFallbackRuleApi.CLOSEST_HIGHER_THEN_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
-        ResolutionFallbackRuleApi.CLOSEST_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER
-        ResolutionFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER
-        ResolutionFallbackRuleApi.CLOSEST_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER
+        ResolutionStrategyFallbackRuleApi.NONE -> ResolutionStrategy.FALLBACK_RULE_NONE
+        ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER_THEN_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
+        ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER
+        ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER
+        ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER
     }
 
-val Int.resolutionFallbackRuleApi
+val Int.resolutionStrategyFallbackRuleApi: ResolutionStrategyFallbackRuleApi
     get() = when (this) {
-        ResolutionStrategy.FALLBACK_RULE_NONE -> ResolutionFallbackRuleApi.NONE
-        ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER -> ResolutionFallbackRuleApi.CLOSEST_HIGHER_THEN_LOWER
-        ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER -> ResolutionFallbackRuleApi.CLOSEST_HIGHER
-        ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER -> ResolutionFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER
-        ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER -> ResolutionFallbackRuleApi.CLOSEST_LOWER
-        else -> throw IllegalArgumentException()
+        ResolutionStrategy.FALLBACK_RULE_NONE -> ResolutionStrategyFallbackRuleApi.NONE
+        ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER -> ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER_THEN_LOWER
+        ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER -> ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER
+        ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER -> ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER
+        ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER -> ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

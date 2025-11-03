@@ -1,10 +1,11 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_info_impl.dart';
 
-final class ImageProxyImpl extends ImageProxy {
+final class ImageProxyImpl extends ImageProxy with AutoCloseableImpl {
+  @override
   final ImageProxyApi api;
 
   ImageProxyImpl.internal(this.api)
@@ -15,9 +16,6 @@ final class ImageProxyImpl extends ImageProxy {
         imageInfo: api.imageInfo.impl,
         planes: api.planes.map((e) => e.impl).toList(),
       );
-
-  @override
-  Future<void> close() => api.close();
 }
 
 extension ImageProxyPlaneProxyApiX on ImageProxyPlaneProxyApi {

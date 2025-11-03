@@ -3,7 +3,7 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/camerax.g.dart',
+    dartOut: 'lib/src/camerax_api.g.dart',
     dartOptions: DartOptions(),
     swiftOut: 'ios/Classes/CameraXApi.g.swift',
     swiftOptions: SwiftOptions(errorClassName: 'CameraXError'),
@@ -430,17 +430,13 @@ enum DynamicRangeEncodingApi {
   dolbyVision,
 }
 
-enum DynamicRangeBitDepthApi {
-  bitDepthUnspecified,
-  bitDepth8Bit,
-  bitDepth10Bit,
-}
+enum DynamicRangeBitDepthApi { unspecified, eightBit, tenBit }
 
 enum ImageAnalysisStrategyApi { keepOnlyLatest, blockProducer }
 
 enum ImageAnalysisCoordinateSystemApi { original, sensor, viewReferenced }
 
-enum ImageAnalysisOutputImageFormatApi { yuv_420_888, rgba_8888, nv21 }
+enum ImageAnalysisOutputImageFormatApi { yuv420_888, rgba8888, nv21 }
 
 enum ImageCaptureCaptureModeApi {
   maximizeQuality,
@@ -450,7 +446,7 @@ enum ImageCaptureCaptureModeApi {
 
 enum ImageCaptureFlashModeApi { auto, on, off, screen }
 
-enum MeteringModeApi { af, ae, awb }
+enum FocusMeteringActionMeteringModeApi { af, ae, awb }
 
 enum MirrorModeApi { off, on, onFrontOnly }
 
@@ -466,7 +462,7 @@ abstract class ResolutionStrategyApi {
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ResolutionSelector'))
 abstract class ResolutionSelectorApi {
-  ResolutionSelectorApi();
+  ResolutionSelectorApi.build();
 
   // late final ResolutionSelectorModeApi allowedResolutionMode;
   // late final AspectRatioStrategyApi aspectRatioStrategy;
@@ -521,12 +517,15 @@ abstract class CameraSelectorApi {
   @static
   late final CameraSelectorApi external;
 
-  CameraSelectorApi(CameraSelectorLensFacingApi? lensFacing);
+  CameraSelectorApi.build({CameraSelectorLensFacingApi? lensFacing});
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointTuple'))
 abstract class MeteringPointTupleApi {
-  MeteringPointTupleApi(MeteringPointApi point, {List<MeteringModeApi>? modes});
+  MeteringPointTupleApi(
+    MeteringPointApi point, {
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  });
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'DurationTuple'))
@@ -537,8 +536,8 @@ abstract class DurationTupleApi {
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FocusMeteringAction'))
 abstract class FocusMeteringActionApi {
   FocusMeteringActionApi.build(
-    MeteringPointTupleApi first, {
-    List<MeteringPointTupleApi>? others,
+    MeteringPointTupleApi point, {
+    List<MeteringPointTupleApi>? morePoints,
     bool? disableAutoCancel,
     DurationTupleApi? autoCancelDuration,
   });
@@ -674,8 +673,8 @@ abstract class OutputOptionsApi {
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FileOutputOptions'))
 abstract class FileOutputOptionsApi extends OutputOptionsApi {
-  FileOutputOptionsApi.build({
-    required String file,
+  FileOutputOptionsApi.build(
+    String file, {
     int? durationLimitMillis,
     int? fileSizeLimitBytes,
     CLLocationApi? location,

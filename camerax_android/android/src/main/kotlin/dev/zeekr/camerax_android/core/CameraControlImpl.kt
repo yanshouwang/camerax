@@ -6,13 +6,14 @@ import androidx.camera.core.FocusMeteringResult
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraControlApi
+import dev.zeekr.camerax_android.context
 
-class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCameraControlApi(impl) {
+class CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraControlApi(registrar) {
     override fun enableTorch(pigeon_instance: CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.enableTorch(torch)
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -26,7 +27,7 @@ class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCamer
 
     override fun setZoomRatio(pigeon_instance: CameraControl, ratio: Double, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.setZoomRatio(ratio.toFloat())
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -42,7 +43,7 @@ class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCamer
         pigeon_instance: CameraControl, linearZoom: Double, callback: (Result<Unit>) -> Unit
     ) {
         val future = pigeon_instance.setLinearZoom(linearZoom.toFloat())
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -58,7 +59,7 @@ class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCamer
         pigeon_instance: CameraControl, action: FocusMeteringAction, callback: (Result<FocusMeteringResult>) -> Unit
     ) {
         val future = pigeon_instance.startFocusAndMetering(action)
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(
             future, object : FutureCallback<FocusMeteringResult> {
                 override fun onSuccess(result: FocusMeteringResult) {
@@ -74,7 +75,7 @@ class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCamer
 
     override fun cancelFocusAndMetering(pigeon_instance: CameraControl, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.cancelFocusAndMetering()
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -90,7 +91,7 @@ class CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCamer
         pigeon_instance: CameraControl, value: Long, callback: (Result<Long>) -> Unit
     ) {
         val future = pigeon_instance.setExposureCompensationIndex(value.toInt())
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Int> {
             override fun onSuccess(result: Int) {
                 callback(Result.success(result.toLong()))

@@ -1,3 +1,4 @@
+import 'package:camerax_platform_interface/src/avfoundation.dart';
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/ml.dart';
 import 'package:camerax_platform_interface/src/video.dart';
@@ -14,6 +15,11 @@ abstract base class Consumer<T> {
             as Consumer<T>;
       case const (MlKitAnalyzerResult):
         return CameraXPlugin.instance.newMlKitAnalyzerResultConsumer(
+              accept: (e) => accept(e as T),
+            )
+            as Consumer<T>;
+      case const (AVAnalyzerResult):
+        return CameraXPlugin.instance.newAVAnalyzerResultConsumer(
               accept: (e) => accept(e as T),
             )
             as Consumer<T>;

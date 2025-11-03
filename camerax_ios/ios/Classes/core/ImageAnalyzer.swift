@@ -15,6 +15,6 @@ class ImageAnalyzer: ImageAnalysis.Analyzer {
     }
     
     public override func analyze(_ image: ImageProxy) {
-        api.analyze(pigeonInstance: self, image: image) { _ in }
+        self.api.analyze(pigeonInstance: self, image: image) { _ in }
     }
 }

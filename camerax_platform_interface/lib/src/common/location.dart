@@ -1,16 +1,8 @@
-final class Location {
-  final double latitude;
-  final double longitude;
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 
-  const Location({required this.latitude, required this.longitude});
+abstract base class Location {
+  Location.impl();
 
-  @override
-  bool operator ==(Object other) {
-    return other is Location &&
-        other.latitude == latitude &&
-        other.longitude == longitude;
-  }
-
-  @override
-  int get hashCode => Object.hash(latitude, longitude);
+  factory Location(double latitude, double longitude) =>
+      CameraXPlugin.instance.newLocation(latitude, longitude);
 }

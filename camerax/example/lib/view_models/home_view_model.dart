@@ -15,8 +15,9 @@ typedef ImageModelCallback = void Function(ImageModel imageModel);
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
-  final BarcodeScanner _barcodeScanner;
-  final FaceDetector _faceDetector;
+
+  late final BarcodeScanner _barcodeScanner;
+  late final FaceDetector _faceDetector;
 
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
@@ -27,8 +28,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   HomeViewModel()
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
-      _barcodeScanner = BarcodeScanner(),
-      _faceDetector = FaceDetector(),
       _mode = CameraMode.takePicture,
       _lensFacing = CameraSelectorLensFacing.back,
       _barcodes = [],
@@ -315,7 +314,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
       'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
     );
     final file = File(filePath);
-    final options = FileOutputOptions(file: file);
+    final options = FileOutputOptions(file);
     final listener = Consumer<VideoRecordEvent>(
       accept: (event) {
         logger.info('${event.runtimeType}');
@@ -344,6 +343,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   void _setUp() async {
+    final barcodeScanner = await BarcodeScanning.getClient();
+    final faceDetector = await FaceDetection.getClient();
+    _barcodeScanner = barcodeScanner;
+    _faceDetector = faceDetector;
     var isGranted =
         await _permissionManager.checkPermission(Permission.audio) &&
         await _permissionManager.checkPermission(Permission.video);

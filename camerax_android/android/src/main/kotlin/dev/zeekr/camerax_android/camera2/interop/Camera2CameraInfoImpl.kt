@@ -4,12 +4,12 @@ import android.hardware.camera2.CameraCharacteristics
 import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.CameraInfo
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCamera2CameraInfoApi
 import dev.zeekr.camerax_android.common.LongRange
 
 @ExperimentalCamera2Interop
-class Camera2CameraInfoImpl(impl: CameraXRegistrarImpl) : PigeonApiCamera2CameraInfoApi(impl) {
+class Camera2CameraInfoImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCamera2CameraInfoApi(registrar) {
     override fun from(cameraInfo: CameraInfo): Camera2CameraInfo {
         return Camera2CameraInfo.from(cameraInfo)
     }

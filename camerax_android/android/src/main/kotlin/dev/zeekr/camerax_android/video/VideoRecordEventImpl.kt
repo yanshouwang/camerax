@@ -3,7 +3,7 @@ package dev.zeekr.camerax_android.video
 import androidx.camera.video.OutputResults
 import androidx.camera.video.RecordingStats
 import androidx.camera.video.VideoRecordEvent
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiVideoRecordEventApi
 import dev.zeekr.camerax_android.PigeonApiVideoRecordFinalizeEventApi
 import dev.zeekr.camerax_android.PigeonApiVideoRecordPauseEventApi
@@ -13,32 +13,32 @@ import dev.zeekr.camerax_android.PigeonApiVideoRecordStatusEventApi
 import dev.zeekr.camerax_android.VideoRecordFinalizeEventErrorApi
 import dev.zeekr.camerax_android.common.api
 
-class VideoRecordEventImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordEventApi(impl) {
-    class StatusImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordStatusEventApi(impl) {
+class VideoRecordEventImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordEventApi(registrar) {
+    class StatusImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordStatusEventApi(registrar) {
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Status): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class StartImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordStartEventApi(impl) {
+    class StartImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordStartEventApi(registrar) {
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Start): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class PauseImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordPauseEventApi(impl) {
+    class PauseImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordPauseEventApi(registrar) {
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Pause): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class ResumeImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordResumeEventApi(impl) {
+    class ResumeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordResumeEventApi(registrar) {
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Resume): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class FinalizeImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordFinalizeEventApi(impl) {
+    class FinalizeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordFinalizeEventApi(registrar) {
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Finalize): RecordingStats {
             return pigeon_instance.recordingStats
         }
@@ -48,7 +48,7 @@ class VideoRecordEventImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordEve
         }
 
         override fun error(pigeon_instance: VideoRecordEvent.Finalize): VideoRecordFinalizeEventErrorApi {
-            return pigeon_instance.error.finalizeErrorApi
+            return pigeon_instance.error.videoRecordFinalizeEventErrorApi
         }
 
         override fun outputResults(pigeon_instance: VideoRecordEvent.Finalize): OutputResults {
@@ -57,7 +57,7 @@ class VideoRecordEventImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordEve
     }
 }
 
-val Int.finalizeErrorApi
+val Int.videoRecordFinalizeEventErrorApi: VideoRecordFinalizeEventErrorApi
     get() = when (this) {
         VideoRecordEvent.Finalize.ERROR_NONE -> VideoRecordFinalizeEventErrorApi.NONE
         VideoRecordEvent.Finalize.ERROR_UNKNOWN -> VideoRecordFinalizeEventErrorApi.UNKNOWN
@@ -70,5 +70,5 @@ val Int.finalizeErrorApi
         VideoRecordEvent.Finalize.ERROR_NO_VALID_DATA -> VideoRecordFinalizeEventErrorApi.NO_VALID_DATA
         VideoRecordEvent.Finalize.ERROR_DURATION_LIMIT_REACHED -> VideoRecordFinalizeEventErrorApi.DURATION_LIMIT_REACHED
         VideoRecordEvent.Finalize.ERROR_RECORDING_GARBAGE_COLLECTED -> VideoRecordFinalizeEventErrorApi.RECORDING_GARBAGE_COLLECTED
-        else -> throw IllegalArgumentException()
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

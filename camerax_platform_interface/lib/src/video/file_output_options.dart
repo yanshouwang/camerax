@@ -8,13 +8,13 @@ abstract base class FileOutputOptions {
 
   FileOutputOptions.impl({required this.file});
 
-  factory FileOutputOptions({
-    required File file,
+  factory FileOutputOptions(
+    File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
     Location? location,
   }) => CameraXPlugin.instance.newFileOutputOptions(
-    file: file,
+    file,
     durationLimit: durationLimit,
     fileSizeLimitBytes: fileSizeLimitBytes,
     location: location,

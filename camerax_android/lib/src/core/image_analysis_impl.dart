@@ -1,7 +1,7 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin ImageAnalysisAnalyzerMixin on ImageAnalysisAnalyzer {
+base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
   ImageAnalysisAnalyzerApi get api;
 }
 
@@ -32,7 +32,7 @@ extension ImageAnalysisOutputImageFormatApiX
 extension ImageAnalysisAnalyzerX on ImageAnalysisAnalyzer {
   ImageAnalysisAnalyzerApi get api {
     final impl = this;
-    if (impl is! ImageAnalysisAnalyzerMixin) throw TypeError();
+    if (impl is! ImageAnalysisAnalyzerImpl) throw TypeError();
     return impl.api;
   }
 }

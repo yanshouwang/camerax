@@ -7,11 +7,13 @@ import androidx.camera.core.CameraControl
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCamera2CameraControlApi
+import dev.zeekr.camerax_android.context
 
 @ExperimentalCamera2Interop
-class Camera2CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonApiCamera2CameraControlApi(impl) {
+class Camera2CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCamera2CameraControlApi(registrar) {
     override fun from(cameraControl: CameraControl): Camera2CameraControl {
         return Camera2CameraControl.from(cameraControl)
     }
@@ -20,7 +22,7 @@ class Camera2CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonA
         pigeon_instance: Camera2CameraControl, bundle: CaptureRequestOptions, callback: (Result<Unit>) -> Unit
     ) {
         val future = pigeon_instance.addCaptureRequestOptions(bundle)
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -34,7 +36,7 @@ class Camera2CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonA
 
     override fun clearCaptureRequestOptions(pigeon_instance: Camera2CameraControl, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.clearCaptureRequestOptions()
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))
@@ -54,7 +56,7 @@ class Camera2CameraControlImpl(private val impl: CameraXRegistrarImpl) : PigeonA
         pigeon_instance: Camera2CameraControl, bundle: CaptureRequestOptions, callback: (Result<Unit>) -> Unit
     ) {
         val future = pigeon_instance.setCaptureRequestOptions(bundle)
-        val executor = ContextCompat.getMainExecutor(impl.context)
+        val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
                 callback(Result.success(Unit))

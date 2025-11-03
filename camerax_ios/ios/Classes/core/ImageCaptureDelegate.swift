@@ -9,44 +9,44 @@ import Foundation
 import CoreLocation
 
 class ImageCaptureDelegate {
-    class OnImageCapturedCallbackDelegate: PigeonApiDelegateOnImageCapturedCallbackApi {
-        func pigeonDefaultConstructor(pigeonApi: PigeonApiOnImageCapturedCallbackApi) throws -> any ImageCapture.OnImageCapturedCallback {
-            return OnImageCapturedCallback(pigeonApi)
+    class OnImageCapturedCallbackDelegate: PigeonApiDelegateImageCaptureOnImageCapturedCallbackApi {
+        func pigeonDefaultConstructor(pigeonApi: PigeonApiImageCaptureOnImageCapturedCallbackApi) throws -> any ImageCapture.OnImageCapturedCallback {
+            return ImageCaptureOnImageCapturedCallback(pigeonApi)
         }
     }
 }
 
-class OnImageCapturedCallback: NSObject, ImageCapture.OnImageCapturedCallback {
-    private let api: PigeonApiOnImageCapturedCallbackApi
+class ImageCaptureOnImageCapturedCallback: NSObject, ImageCapture.OnImageCapturedCallback {
+    private let api: PigeonApiImageCaptureOnImageCapturedCallbackApi
     
-    init(_ api: PigeonApiOnImageCapturedCallbackApi) {
+    init(_ api: PigeonApiImageCaptureOnImageCapturedCallbackApi) {
         self.api = api
     }
     
     func onCaptureStarted() {
-        api.onCaptureStarted(pigeonInstance: self) { _ in }
+        self.api.onCaptureStarted(pigeonInstance: self) { _ in }
     }
     
     func onCaptureProcessProgressed(_ progress: Int) {
-        api.onCaptureProcessProgressed(pigeonInstance: self, progress: Int64(progress)) { _ in }
+        self.api.onCaptureProcessProgressed(pigeonInstance: self, progress: Int64(progress)) { _ in }
     }
     
     func onPostviewBitmapAvailable(_ bitmap: Data) {
-        api.onPostviewBitmapAvailable(pigeonInstance: self, bitmap: bitmap.api) { _ in }
+        self.api.onPostviewBitmapAvailable(pigeonInstance: self, bitmap: bitmap.api) { _ in }
     }
     
     func onCaptureSuccess(_ image: ImageProxy) {
-        api.onCaptureSuccess(pigeonInstance: self, image: image) { _ in }
+        self.api.onCaptureSuccess(pigeonInstance: self, image: image) { _ in }
     }
     
     func onError(_ error: any Error) {
         let exception = wrap(error)
-        api.onError(pigeonInstance: self, exception: exception) { _ in }
+        self.api.onError(pigeonInstance: self, exception: exception) { _ in }
     }
 }
 
 extension ImageCapture.FlashMode {
-    var api: FlashModeApi {
+    var api: ImageCaptureFlashModeApi {
         switch self {
         case .auto:
             return .auto
@@ -58,7 +58,7 @@ extension ImageCapture.FlashMode {
     }
 }
 
-extension FlashModeApi {
+extension ImageCaptureFlashModeApi {
     var delegate: ImageCapture.FlashMode {
         switch self {
         case .auto:

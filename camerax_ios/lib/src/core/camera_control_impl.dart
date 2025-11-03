@@ -1,4 +1,4 @@
-import 'package:camerax_ios/src/camerax.g.dart';
+import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'focus_metering_action_impl.dart';
@@ -26,13 +26,15 @@ final class CameraControlImpl extends CameraControl {
   Future<void> setZoomRatio(double ratio) => api.setZoomRatio(ratio);
 
   @override
-  Future<bool> startFocusAndMetering(FocusMeteringAction action) {
-    if (action is! FocusMeteringActionImpl) {
-      throw TypeError();
-    }
-    return api
-        .startFocusAndMetering(action.api)
-        .then((e) => e.isFocusSuccessful);
+  Future<bool> startFocusAndMetering(FocusMeteringAction action) =>
+      api.startFocusAndMetering(action.api).then((e) => e.isFocusSuccessful);
+}
+
+extension CameraControlX on CameraControl {
+  CameraControlApi get api {
+    final impl = this;
+    if (impl is! CameraControlImpl) throw TypeError();
+    return impl.api;
   }
 }
 

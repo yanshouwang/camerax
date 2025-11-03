@@ -1,10 +1,10 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 extension RangeX on Range<int> {
-  IntRangeApi get intApi => IntRangeApi(lower: lower, upper: upper);
+  IntRangeApi get intRangeApi => IntRangeApi(lower: lower, upper: upper);
 
-  LongRangeApi get longApi => LongRangeApi(lower: lower, upper: upper);
+  LongRangeApi get longRangeApi => LongRangeApi(lower: lower, upper: upper);
 }
 
 extension IntRangeApiX on IntRangeApi {

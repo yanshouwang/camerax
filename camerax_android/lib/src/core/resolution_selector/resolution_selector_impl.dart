@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'aspect_ratio_startegy_impl.dart';
@@ -15,7 +15,7 @@ extension ResolutionSelectorModeApiX on ResolutionSelectorModeApi {
 
 extension ResolutionSelectorX on ResolutionSelector {
   ResolutionSelectorApi get api {
-    return ResolutionSelectorApi(
+    return ResolutionSelectorApi.build(
       allowedResolutionMode: allowedResolutionMode.api,
       aspectRatioStrategy: aspectRatioStrategy.api,
       resolutionFilter: resolutionFilter?.api,

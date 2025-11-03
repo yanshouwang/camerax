@@ -82,10 +82,6 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  BarcodeScanner newBarcodeScanner({BarcodeScannerOptions? options}) =>
-      BarcodeScannerImpl(options: options);
-
-  @override
   BarcodeScannerOptions newBarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
@@ -97,17 +93,13 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  FaceDetector newFaceDetector({FaceDetectorOptions? options}) =>
-      FaceDetectorImpl(options: options);
-
-  @override
   FaceDetectorOptions newFaceDetectorOptions({
     bool? enableTracking,
-    FaceClassificationMode? classificationMode,
-    FaceContourMode? contourMode,
-    FaceLandmarkMode? landmarkMode,
+    FaceDetectorOptionsClassificationMode? classificationMode,
+    FaceDetectorOptionsContourMode? contourMode,
+    FaceDetectorOptionsLandmarkMode? landmarkMode,
     double? minFaceSize,
-    FacePerformanceMode? performanceMode,
+    FaceDetectorOptionsPerformanceMode? performanceMode,
   }) => FaceDetectorOptionsImpl(
     enableTracking: enableTracking,
     classificationMode: classificationMode,
@@ -118,22 +110,22 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  ZoomSuggestionOptions newZoomSuggestionOptions({
-    required ZoomSuggestionOptionsZoomCallback zoomCallback,
+  ZoomSuggestionOptions newZoomSuggestionOptions(
+    ZoomSuggestionOptionsZoomCallback zoomCallback, {
     double? maxSupportedZoomRatio,
   }) => ZoomSuggestionOptionsImpl(
-    zoomCallback: zoomCallback,
+    zoomCallback,
     maxSupportedZoomRatio: maxSupportedZoomRatio,
   );
 
   @override
-  FileOutputOptions newFileOutputOptions({
-    required File file,
+  FileOutputOptions newFileOutputOptions(
+    File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
     Location? location,
   }) => FileOutputOptionsImpl(
-    file: file,
+    file,
     durationLimit: durationLimit,
     fileSizeLimitBytes: fileSizeLimitBytes,
     location: location,
@@ -147,13 +139,13 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
 
   @override
   FocusMeteringAction newFocusMeteringAction(
-    (MeteringPoint, List<MeteringMode>) first, {
-    List<(MeteringPoint, List<MeteringMode>)>? others,
+    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) => FocusMeteringActionImpl(
-    first,
-    others: others,
+    point,
+    morePoints: morePoints,
     disableAutoCancel: disableAutoCancel,
     autoCancelDuration: autoCancelDuration,
   );
@@ -205,7 +197,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     void Function(Image bitmap)? onPostviewBitmapAvailable,
     void Function(ImageProxy image)? onCaptureSuccess,
     void Function(Object exception)? onError,
-  }) => ImageCaptureOnImageCapturedCallback(
+  }) => ImageCaptureOnImageCapturedCallbackImpl(
     onCaptureStarted: onCaptureStarted,
     onCaptureProcessProgressed: onCaptureProcessProgressed,
     onPostviewBitmapAvailable: onPostviewBitmapAvailable,
@@ -254,4 +246,23 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   ZoomSuggestionOptionsZoomCallback newZoomSuggestionOptionsZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   }) => ZoomSuggestionOptionsZoomCallbackImpl(setZoom: setZoom);
+
+  @override
+  Future<BarcodeScanner> $BarcodeScanningGetClient([
+    BarcodeScannerOptions? options,
+  ]) => BarcodeScanningImpl.getClient(options);
+
+  @override
+  Future<FaceDetector> $FaceDetectionGetClient([
+    FaceDetectorOptions? options,
+  ]) => FaceDetectionImpl.getClient(options);
+
+  @override
+  Location newLocation(double latitude, double longitude) =>
+      LocationImpl(latitude, longitude);
+
+  @override
+  Consumer<AVAnalyzerResult> newAVAnalyzerResultConsumer({
+    required void Function(AVAnalyzerResult value) accept,
+  }) => throw UnimplementedError();
 }

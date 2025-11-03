@@ -1,9 +1,9 @@
-// import 'package:camerax_ios/src/camerax.g.dart';
+// import 'package:camerax_ios/src/camerax_api.g.dart';
 // import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 // import 'quality_impl.dart';
 
-// final class FallbackStrategyImpl extends FallbackStrategyChannel {
+// final class FallbackStrategyImpl extends FallbackStrategy {
 //   final FallbackStrategyApi api;
 
 //   FallbackStrategyImpl.internal(this.api) : super.impl();
@@ -16,9 +16,7 @@
 //   }
 
 //   factory FallbackStrategyImpl.higherQualityThan(Quality quality) {
-//     final api = FallbackStrategyApi.higherQualityThan(
-//       quality: quality.api,
-//     );
+//     final api = FallbackStrategyApi.higherQualityThan(quality: quality.api);
 //     return FallbackStrategyImpl.internal(api);
 //   }
 
@@ -30,9 +28,15 @@
 //   }
 
 //   factory FallbackStrategyImpl.lowerQualityThan(Quality quality) {
-//     final api = FallbackStrategyApi.lowerQualityThan(
-//       quality: quality.api,
-//     );
+//     final api = FallbackStrategyApi.lowerQualityThan(quality: quality.api);
 //     return FallbackStrategyImpl.internal(api);
+//   }
+// }
+
+// extension FallbackStrategyX on FallbackStrategy {
+//   FallbackStrategyApi get api {
+//     final impl = this;
+//     if (impl is! FallbackStrategyImpl) throw TypeError();
+//     return impl.api;
 //   }
 // }

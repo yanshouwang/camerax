@@ -1,18 +1,18 @@
 package dev.zeekr.camerax_android.video
 
 import androidx.camera.video.AudioStats
-import dev.zeekr.camerax_android.AudioStateApi
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.AudioStatsAudioStateApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiAudioStatsApi
 import dev.zeekr.camerax_android.common.api
 
-class AudioStatsImpl(impl: CameraXRegistrarImpl) : PigeonApiAudioStatsApi(impl) {
+class AudioStatsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiAudioStatsApi(registrar) {
     override fun audioAmplitude(pigeon_instance: AudioStats): Double {
         return pigeon_instance.audioAmplitude
     }
 
-    override fun audioState(pigeon_instance: AudioStats): AudioStateApi {
-        return pigeon_instance.audioState.audioStateApi
+    override fun audioState(pigeon_instance: AudioStats): AudioStatsAudioStateApi {
+        return pigeon_instance.audioState.audioStatsAudioStateApi
     }
 
     override fun errorCause(pigeon_instance: AudioStats): List<Any?>? {
@@ -28,13 +28,13 @@ class AudioStatsImpl(impl: CameraXRegistrarImpl) : PigeonApiAudioStatsApi(impl) 
     }
 }
 
-val Int.audioStateApi
+val Int.audioStatsAudioStateApi: AudioStatsAudioStateApi
     get() = when (this) {
-        AudioStats.AUDIO_STATE_ACTIVE -> AudioStateApi.ACTIVE
-        AudioStats.AUDIO_STATE_DISABLED -> AudioStateApi.DISABLED
-        AudioStats.AUDIO_STATE_SOURCE_SILENCED -> AudioStateApi.SOURCE_SILENCED
-        AudioStats.AUDIO_STATE_ENCODER_ERROR -> AudioStateApi.ENCODER_ERROR
-        AudioStats.AUDIO_STATE_SOURCE_ERROR -> AudioStateApi.SOURCE_ERROR
-        AudioStats.AUDIO_STATE_MUTED -> AudioStateApi.MUTED
-        else -> throw IllegalArgumentException()
+        AudioStats.AUDIO_STATE_ACTIVE -> AudioStatsAudioStateApi.ACTIVE
+        AudioStats.AUDIO_STATE_DISABLED -> AudioStatsAudioStateApi.DISABLED
+        AudioStats.AUDIO_STATE_SOURCE_SILENCED -> AudioStatsAudioStateApi.SOURCE_SILENCED
+        AudioStats.AUDIO_STATE_ENCODER_ERROR -> AudioStatsAudioStateApi.ENCODER_ERROR
+        AudioStats.AUDIO_STATE_SOURCE_ERROR -> AudioStatsAudioStateApi.SOURCE_ERROR
+        AudioStats.AUDIO_STATE_MUTED -> AudioStatsAudioStateApi.MUTED
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

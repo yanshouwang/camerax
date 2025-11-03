@@ -1,11 +1,11 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_analysis_impl.dart';
 import 'image_proxy_impl.dart';
 
 final class ImageAnalyzerImpl extends ImageAnalyzer
-    with ImageAnalysisAnalyzerMixin {
+    with ImageAnalysisAnalyzerImpl {
   @override
   final ImageAnalyzerApi api;
 

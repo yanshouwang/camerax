@@ -45,7 +45,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
         // Keeping the classes from being removed by proguard.
         consumerProguardFiles 'consumer-rules.pro'
     }

@@ -3,17 +3,19 @@ package dev.zeekr.camerax_android.common
 import androidx.camera.mlkit.vision.MlKitAnalyzer
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.util.Consumer
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiMlKitAnalyzerResultConsumerApi
 import dev.zeekr.camerax_android.PigeonApiVideoRecordEventConsumerApi
 
-class VideoRecordEventConsumerImpl(impl: CameraXRegistrarImpl) : PigeonApiVideoRecordEventConsumerApi(impl) {
+class VideoRecordEventConsumerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiVideoRecordEventConsumerApi(registrar) {
     override fun pigeon_defaultConstructor(): VideoRecordEventConsumer {
         return VideoRecordEventConsumer(this)
     }
 }
 
-class MlKitAnalyzerResultConsumerImpl(impl: CameraXRegistrarImpl) : PigeonApiMlKitAnalyzerResultConsumerApi(impl) {
+class MlKitAnalyzerResultConsumerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiMlKitAnalyzerResultConsumerApi(registrar) {
     override fun pigeon_defaultConstructor(): MlKitAnalyzerResultConsumer {
         return MlKitAnalyzerResultConsumer(this)
     }
@@ -25,7 +27,8 @@ class VideoRecordEventConsumer(private val impl: VideoRecordEventConsumerImpl) :
     }
 }
 
-class MlKitAnalyzerResultConsumer(private val impl: MlKitAnalyzerResultConsumerImpl) : Consumer<MlKitAnalyzer.Result> {
+class MlKitAnalyzerResultConsumer(private val impl: MlKitAnalyzerResultConsumerImpl) :
+    Consumer<MlKitAnalyzer.Result> {
     override fun accept(value: MlKitAnalyzer.Result) {
         impl.accept(this, value) {}
     }

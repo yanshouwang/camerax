@@ -2,12 +2,12 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalLensFacing
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
-import dev.zeekr.camerax_android.LensFacingApi
+import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraSelectorApi
 
-class CameraSelectorImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraSelectorApi(impl) {
-    override fun pigeon_defaultConstructor(lensFacing: LensFacingApi?): CameraSelector {
+class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorApi(registrar) {
+    override fun build(lensFacing: CameraSelectorLensFacingApi?): CameraSelector {
         val builder = CameraSelector.Builder()
         if (lensFacing != null) {
             builder.requireLensFacing(lensFacing.impl)
@@ -29,19 +29,19 @@ class CameraSelectorImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraSelectorAp
     }
 }
 
-val LensFacingApi.impl
+val CameraSelectorLensFacingApi.impl: Int
     @ExperimentalLensFacing get() = when (this) {
-        LensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
-        LensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
-        LensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
-        LensFacingApi.EXTERNAL -> CameraSelector.LENS_FACING_EXTERNAL
+        CameraSelectorLensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
+        CameraSelectorLensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
+        CameraSelectorLensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
+        CameraSelectorLensFacingApi.EXTERNAL -> CameraSelector.LENS_FACING_EXTERNAL
     }
 
-val Int.lensFacingApi
+val Int.cameraSelectorLensFacingApi: CameraSelectorLensFacingApi
     @ExperimentalLensFacing get() = when (this) {
-        CameraSelector.LENS_FACING_UNKNOWN -> LensFacingApi.UNKNOWN
-        CameraSelector.LENS_FACING_FRONT -> LensFacingApi.FRONT
-        CameraSelector.LENS_FACING_BACK -> LensFacingApi.BACK
-        CameraSelector.LENS_FACING_EXTERNAL -> LensFacingApi.EXTERNAL
-        else -> throw IllegalArgumentException()
+        CameraSelector.LENS_FACING_UNKNOWN -> CameraSelectorLensFacingApi.UNKNOWN
+        CameraSelector.LENS_FACING_FRONT -> CameraSelectorLensFacingApi.FRONT
+        CameraSelector.LENS_FACING_BACK -> CameraSelectorLensFacingApi.BACK
+        CameraSelector.LENS_FACING_EXTERNAL -> CameraSelectorLensFacingApi.EXTERNAL
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

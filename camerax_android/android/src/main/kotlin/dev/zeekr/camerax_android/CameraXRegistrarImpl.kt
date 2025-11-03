@@ -7,7 +7,6 @@ import dev.zeekr.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraInfoImpl
 import dev.zeekr.camerax_android.camera2.interop.CaptureRequestOptionsImpl
 import dev.zeekr.camerax_android.common.AutoCloseableImpl
-import dev.zeekr.camerax_android.common.CameraStateLiveDataImpl
 import dev.zeekr.camerax_android.common.CameraStateObserverImpl
 import dev.zeekr.camerax_android.common.IntRangeImpl
 import dev.zeekr.camerax_android.common.LocationImpl
@@ -18,10 +17,8 @@ import dev.zeekr.camerax_android.common.PointFImpl
 import dev.zeekr.camerax_android.common.PointImpl
 import dev.zeekr.camerax_android.common.RectImpl
 import dev.zeekr.camerax_android.common.SizeImpl
-import dev.zeekr.camerax_android.common.TorchStateLiveDataImpl
 import dev.zeekr.camerax_android.common.TorchStateObserverImpl
 import dev.zeekr.camerax_android.common.VideoRecordEventConsumerImpl
-import dev.zeekr.camerax_android.common.ZoomStateLiveDataImpl
 import dev.zeekr.camerax_android.common.ZoomStateObserverImpl
 import dev.zeekr.camerax_android.core.CameraControlImpl
 import dev.zeekr.camerax_android.core.CameraInfoImpl
@@ -43,14 +40,13 @@ import dev.zeekr.camerax_android.core.resolutionselector.AspectRatioStrategyImpl
 import dev.zeekr.camerax_android.core.resolutionselector.ResolutionFilterImpl
 import dev.zeekr.camerax_android.core.resolutionselector.ResolutionSelectorImpl
 import dev.zeekr.camerax_android.core.resolutionselector.ResolutionStrategyImpl
-import dev.zeekr.camerax_android.ml.DetectorImpl
 import dev.zeekr.camerax_android.ml.MlKitAnalyzerImpl
 import dev.zeekr.camerax_android.ml.barcode.BarcodeImpl
-import dev.zeekr.camerax_android.ml.barcode.BarcodeScannerImpl
 import dev.zeekr.camerax_android.ml.barcode.BarcodeScannerOptionsImpl
+import dev.zeekr.camerax_android.ml.barcode.BarcodeScanningImpl
 import dev.zeekr.camerax_android.ml.barcode.ZoomSuggestionOptionsImpl
 import dev.zeekr.camerax_android.ml.face.FaceContourImpl
-import dev.zeekr.camerax_android.ml.face.FaceDetectorImpl
+import dev.zeekr.camerax_android.ml.face.FaceDetectionImpl
 import dev.zeekr.camerax_android.ml.face.FaceDetectorOptionsImpl
 import dev.zeekr.camerax_android.ml.face.FaceImpl
 import dev.zeekr.camerax_android.ml.face.FaceLandmarkImpl
@@ -67,6 +63,7 @@ import dev.zeekr.camerax_android.video.VideoRecordEventImpl
 import dev.zeekr.camerax_android.view.CameraControllerImpl
 import dev.zeekr.camerax_android.view.LifecycleCameraControllerImpl
 import dev.zeekr.camerax_android.view.PreviewViewImpl
+import dev.zeekr.camerax_android.view.RotationProviderImpl
 import dev.zeekr.camerax_android.view.video.AudioConfigImpl
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -118,16 +115,8 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return CameraSelectorImpl(this)
     }
 
-    override fun getPigeonApiCameraStateLiveDataApi(): PigeonApiCameraStateLiveDataApi {
-        return CameraStateLiveDataImpl(this)
-    }
-
     override fun getPigeonApiCameraStateObserverApi(): PigeonApiCameraStateObserverApi {
         return CameraStateObserverImpl(this)
-    }
-
-    override fun getPigeonApiTorchStateLiveDataApi(): PigeonApiTorchStateLiveDataApi {
-        return TorchStateLiveDataImpl(this)
     }
 
     override fun getPigeonApiTorchStateObserverApi(): PigeonApiTorchStateObserverApi {
@@ -136,10 +125,6 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiZoomStateApi(): PigeonApiZoomStateApi {
         return ZoomStateImpl(this)
-    }
-
-    override fun getPigeonApiZoomStateLiveDataApi(): PigeonApiZoomStateLiveDataApi {
-        return ZoomStateLiveDataImpl(this)
     }
 
     override fun getPigeonApiZoomStateObserverApi(): PigeonApiZoomStateObserverApi {
@@ -210,7 +195,7 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ImageInfoImpl(this)
     }
 
-    override fun getPigeonApiPlaneProxyApi(): PigeonApiPlaneProxyApi {
+    override fun getPigeonApiImageProxyPlaneProxyApi(): PigeonApiImageProxyPlaneProxyApi {
         return ImageProxyImpl.PlaneProxyImpl(this)
     }
 
@@ -218,11 +203,11 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ImageProxyImpl(this)
     }
 
-    override fun getPigeonApiOnImageCapturedCallbackApi(): PigeonApiOnImageCapturedCallbackApi {
+    override fun getPigeonApiImageCaptureOnImageCapturedCallbackApi(): PigeonApiImageCaptureOnImageCapturedCallbackApi {
         return ImageCaptureImpl.OnImageCapturedCallbackImpl(this)
     }
 
-    override fun getPigeonApiAnalyzerApi(): PigeonApiAnalyzerApi {
+    override fun getPigeonApiImageAnalysisAnalyzerApi(): PigeonApiImageAnalysisAnalyzerApi {
         return ImageAnalysisImpl.AnalyzerImpl(this)
     }
 
@@ -230,55 +215,51 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ImageAnalyzerImpl(this)
     }
 
-    override fun getPigeonApiDetectorApi(): PigeonApiDetectorApi {
-        return DetectorImpl(this)
-    }
-
-    override fun getPigeonApiAddressApi(): PigeonApiAddressApi {
+    override fun getPigeonApiBarcodeAddressApi(): PigeonApiBarcodeAddressApi {
         return BarcodeImpl.AddressImpl(this)
     }
 
-    override fun getPigeonApiCalendarDateTimeApi(): PigeonApiCalendarDateTimeApi {
+    override fun getPigeonApiBarcodeCalendarDateTimeApi(): PigeonApiBarcodeCalendarDateTimeApi {
         return BarcodeImpl.CalendarDateTimeImpl(this)
     }
 
-    override fun getPigeonApiCalendarEventApi(): PigeonApiCalendarEventApi {
+    override fun getPigeonApiBarcodeCalendarEventApi(): PigeonApiBarcodeCalendarEventApi {
         return BarcodeImpl.CalendarEventImpl(this)
     }
 
-    override fun getPigeonApiContactInfoApi(): PigeonApiContactInfoApi {
+    override fun getPigeonApiBarcodeContactInfoApi(): PigeonApiBarcodeContactInfoApi {
         return BarcodeImpl.ContactInfoImpl(this)
     }
 
-    override fun getPigeonApiDriverLicenseApi(): PigeonApiDriverLicenseApi {
+    override fun getPigeonApiBarcodeDriverLicenseApi(): PigeonApiBarcodeDriverLicenseApi {
         return BarcodeImpl.DriverLicenseImpl(this)
     }
 
-    override fun getPigeonApiEmailApi(): PigeonApiEmailApi {
+    override fun getPigeonApiBarcodeEmailApi(): PigeonApiBarcodeEmailApi {
         return BarcodeImpl.EmailImpl(this)
     }
 
-    override fun getPigeonApiGeoPointApi(): PigeonApiGeoPointApi {
+    override fun getPigeonApiBarcodeGeoPointApi(): PigeonApiBarcodeGeoPointApi {
         return BarcodeImpl.GeoPointImpl(this)
     }
 
-    override fun getPigeonApiPersonNameApi(): PigeonApiPersonNameApi {
+    override fun getPigeonApiBarcodePersonNameApi(): PigeonApiBarcodePersonNameApi {
         return BarcodeImpl.PersonNameImpl(this)
     }
 
-    override fun getPigeonApiPhoneApi(): PigeonApiPhoneApi {
+    override fun getPigeonApiBarcodePhoneApi(): PigeonApiBarcodePhoneApi {
         return BarcodeImpl.PhoneImpl(this)
     }
 
-    override fun getPigeonApiSmsApi(): PigeonApiSmsApi {
+    override fun getPigeonApiBarcodeSmsApi(): PigeonApiBarcodeSmsApi {
         return BarcodeImpl.SmsImpl(this)
     }
 
-    override fun getPigeonApiUrlBookmarkApi(): PigeonApiUrlBookmarkApi {
+    override fun getPigeonApiBarcodeUrlBookmarkApi(): PigeonApiBarcodeUrlBookmarkApi {
         return BarcodeImpl.UrlBookmarkImpl(this)
     }
 
-    override fun getPigeonApiWiFiApi(): PigeonApiWiFiApi {
+    override fun getPigeonApiBarcodeWiFiApi(): PigeonApiBarcodeWiFiApi {
         return BarcodeImpl.WiFiImpl(this)
     }
 
@@ -286,7 +267,7 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return BarcodeImpl(this)
     }
 
-    override fun getPigeonApiZoomCallbackApi(): PigeonApiZoomCallbackApi {
+    override fun getPigeonApiZoomSuggestionOptionsZoomCallbackApi(): PigeonApiZoomSuggestionOptionsZoomCallbackApi {
         return ZoomSuggestionOptionsImpl.ZoomCallbackImpl(this)
     }
 
@@ -298,12 +279,16 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return BarcodeScannerOptionsImpl(this)
     }
 
-    override fun getPigeonApiBarcodeScannerApi(): PigeonApiBarcodeScannerApi {
-        return BarcodeScannerImpl(this)
+    override fun getPigeonApiBarcodeScanningApi(): PigeonApiBarcodeScanningApi {
+        return BarcodeScanningImpl(this)
     }
 
     override fun getPigeonApiFaceDetectorOptionsApi(): PigeonApiFaceDetectorOptionsApi {
         return FaceDetectorOptionsImpl(this)
+    }
+
+    override fun getPigeonApiFaceDetectionApi(): PigeonApiFaceDetectionApi {
+        return FaceDetectionImpl(this)
     }
 
     override fun getPigeonApiFaceContourApi(): PigeonApiFaceContourApi {
@@ -316,10 +301,6 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiFaceApi(): PigeonApiFaceApi {
         return FaceImpl(this)
-    }
-
-    override fun getPigeonApiFaceDetectorApi(): PigeonApiFaceDetectorApi {
-        return FaceDetectorImpl(this)
     }
 
     override fun getPigeonApiMlKitAnalyzerResultApi(): PigeonApiMlKitAnalyzerResultApi {
@@ -414,6 +395,14 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return PreviewViewImpl(this)
     }
 
+    override fun getPigeonApiRotationProviderListenerApi(): PigeonApiRotationProviderListenerApi {
+        return RotationProviderImpl.ListenerImpl(this)
+    }
+
+    override fun getPigeonApiRotationProviderApi(): PigeonApiRotationProviderApi {
+        return RotationProviderImpl(this)
+    }
+
     @ExperimentalCamera2Interop
     override fun getPigeonApiCamera2CameraControlApi(): PigeonApiCamera2CameraControlApi {
         return Camera2CameraControlImpl(this)
@@ -445,3 +434,26 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         this.binding = null
     }
 }
+
+val CameraXApiPigeonProxyApiRegistrar.impl: CameraXRegistrarImpl
+    get() {
+        val impl = this
+        if (impl !is CameraXRegistrarImpl) throw TypeCastException("impl is not CameraXRegistrarImpl")
+        return impl
+    }
+
+val CameraXApiPigeonProxyApiRegistrar.context: Context get() = impl.context
+
+val CameraXApiPigeonProxyApiRegistrar.activity: Activity get() = impl.activity
+
+fun CameraXApiPigeonProxyApiRegistrar.onAttachedToActivity(binding: ActivityPluginBinding) =
+    impl.onAttachedToActivity(binding)
+
+fun CameraXApiPigeonProxyApiRegistrar.onDetachedFromActivityForConfigChanges() =
+    impl.onDetachedFromActivityForConfigChanges()
+
+fun CameraXApiPigeonProxyApiRegistrar.onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) =
+    impl.onReattachedToActivityForConfigChanges(binding)
+
+fun CameraXApiPigeonProxyApiRegistrar.onDetachedFromActivity() =
+    impl.onDetachedFromActivity()

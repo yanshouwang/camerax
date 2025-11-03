@@ -11,7 +11,7 @@ export 'core/image_analyzer_impl.dart';
 export 'core/image_capture_impl.dart';
 export 'core/image_info_impl.dart';
 export 'core/image_proxy_impl.dart';
-export 'core/metering_mode_impl.dart';
+export 'core/metering_point_factory_impl.dart';
 export 'core/metering_point_impl.dart';
 export 'core/mirror_mode_impl.dart';
 export 'core/resolution_selector.dart';

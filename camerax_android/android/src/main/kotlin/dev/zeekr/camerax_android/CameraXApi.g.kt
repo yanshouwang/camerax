@@ -661,85 +661,76 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
   abstract fun getPigeonApiMlKitAnalyzerApi(): PigeonApiMlKitAnalyzerApi
 
   /**
-   * An implementation of [PigeonApiDetectorApi] used to add a new Dart instance of
-   * `DetectorApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeAddressApi] used to add a new Dart instance of
+   * `BarcodeAddressApi` to the Dart `InstanceManager`.
    */
-  open fun getPigeonApiDetectorApi(): PigeonApiDetectorApi
-  {
-    return PigeonApiDetectorApi(this)
-  }
+  abstract fun getPigeonApiBarcodeAddressApi(): PigeonApiBarcodeAddressApi
 
   /**
-   * An implementation of [PigeonApiAddressApi] used to add a new Dart instance of
-   * `AddressApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeCalendarDateTimeApi] used to add a new Dart instance of
+   * `BarcodeCalendarDateTimeApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiAddressApi(): PigeonApiAddressApi
+  abstract fun getPigeonApiBarcodeCalendarDateTimeApi(): PigeonApiBarcodeCalendarDateTimeApi
 
   /**
-   * An implementation of [PigeonApiCalendarDateTimeApi] used to add a new Dart instance of
-   * `CalendarDateTimeApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeCalendarEventApi] used to add a new Dart instance of
+   * `BarcodeCalendarEventApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiCalendarDateTimeApi(): PigeonApiCalendarDateTimeApi
+  abstract fun getPigeonApiBarcodeCalendarEventApi(): PigeonApiBarcodeCalendarEventApi
 
   /**
-   * An implementation of [PigeonApiCalendarEventApi] used to add a new Dart instance of
-   * `CalendarEventApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeContactInfoApi] used to add a new Dart instance of
+   * `BarcodeContactInfoApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiCalendarEventApi(): PigeonApiCalendarEventApi
+  abstract fun getPigeonApiBarcodeContactInfoApi(): PigeonApiBarcodeContactInfoApi
 
   /**
-   * An implementation of [PigeonApiContactInfoApi] used to add a new Dart instance of
-   * `ContactInfoApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeDriverLicenseApi] used to add a new Dart instance of
+   * `BarcodeDriverLicenseApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiContactInfoApi(): PigeonApiContactInfoApi
+  abstract fun getPigeonApiBarcodeDriverLicenseApi(): PigeonApiBarcodeDriverLicenseApi
 
   /**
-   * An implementation of [PigeonApiDriverLicenseApi] used to add a new Dart instance of
-   * `DriverLicenseApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeEmailApi] used to add a new Dart instance of
+   * `BarcodeEmailApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiDriverLicenseApi(): PigeonApiDriverLicenseApi
+  abstract fun getPigeonApiBarcodeEmailApi(): PigeonApiBarcodeEmailApi
 
   /**
-   * An implementation of [PigeonApiEmailApi] used to add a new Dart instance of
-   * `EmailApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeGeoPointApi] used to add a new Dart instance of
+   * `BarcodeGeoPointApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiEmailApi(): PigeonApiEmailApi
+  abstract fun getPigeonApiBarcodeGeoPointApi(): PigeonApiBarcodeGeoPointApi
 
   /**
-   * An implementation of [PigeonApiGeoPointApi] used to add a new Dart instance of
-   * `GeoPointApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodePersonNameApi] used to add a new Dart instance of
+   * `BarcodePersonNameApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiGeoPointApi(): PigeonApiGeoPointApi
+  abstract fun getPigeonApiBarcodePersonNameApi(): PigeonApiBarcodePersonNameApi
 
   /**
-   * An implementation of [PigeonApiPersonNameApi] used to add a new Dart instance of
-   * `PersonNameApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodePhoneApi] used to add a new Dart instance of
+   * `BarcodePhoneApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiPersonNameApi(): PigeonApiPersonNameApi
+  abstract fun getPigeonApiBarcodePhoneApi(): PigeonApiBarcodePhoneApi
 
   /**
-   * An implementation of [PigeonApiPhoneApi] used to add a new Dart instance of
-   * `PhoneApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeSmsApi] used to add a new Dart instance of
+   * `BarcodeSmsApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiPhoneApi(): PigeonApiPhoneApi
+  abstract fun getPigeonApiBarcodeSmsApi(): PigeonApiBarcodeSmsApi
 
   /**
-   * An implementation of [PigeonApiSmsApi] used to add a new Dart instance of
-   * `SmsApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeUrlBookmarkApi] used to add a new Dart instance of
+   * `BarcodeUrlBookmarkApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiSmsApi(): PigeonApiSmsApi
+  abstract fun getPigeonApiBarcodeUrlBookmarkApi(): PigeonApiBarcodeUrlBookmarkApi
 
   /**
-   * An implementation of [PigeonApiUrlBookmarkApi] used to add a new Dart instance of
-   * `UrlBookmarkApi` to the Dart `InstanceManager`.
+   * An implementation of [PigeonApiBarcodeWiFiApi] used to add a new Dart instance of
+   * `BarcodeWiFiApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiUrlBookmarkApi(): PigeonApiUrlBookmarkApi
-
-  /**
-   * An implementation of [PigeonApiWiFiApi] used to add a new Dart instance of
-   * `WiFiApi` to the Dart `InstanceManager`.
-   */
-  abstract fun getPigeonApiWiFiApi(): PigeonApiWiFiApi
+  abstract fun getPigeonApiBarcodeWiFiApi(): PigeonApiBarcodeWiFiApi
 
   /**
    * An implementation of [PigeonApiBarcodeApi] used to add a new Dart instance of
@@ -769,7 +760,16 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
    * An implementation of [PigeonApiBarcodeScannerApi] used to add a new Dart instance of
    * `BarcodeScannerApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiBarcodeScannerApi(): PigeonApiBarcodeScannerApi
+  open fun getPigeonApiBarcodeScannerApi(): PigeonApiBarcodeScannerApi
+  {
+    return PigeonApiBarcodeScannerApi(this)
+  }
+
+  /**
+   * An implementation of [PigeonApiBarcodeScanningApi] used to add a new Dart instance of
+   * `BarcodeScanningApi` to the Dart `InstanceManager`.
+   */
+  abstract fun getPigeonApiBarcodeScanningApi(): PigeonApiBarcodeScanningApi
 
   /**
    * An implementation of [PigeonApiFaceContourApi] used to add a new Dart instance of
@@ -799,7 +799,16 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
    * An implementation of [PigeonApiFaceDetectorApi] used to add a new Dart instance of
    * `FaceDetectorApi` to the Dart `InstanceManager`.
    */
-  abstract fun getPigeonApiFaceDetectorApi(): PigeonApiFaceDetectorApi
+  open fun getPigeonApiFaceDetectorApi(): PigeonApiFaceDetectorApi
+  {
+    return PigeonApiFaceDetectorApi(this)
+  }
+
+  /**
+   * An implementation of [PigeonApiFaceDetectionApi] used to add a new Dart instance of
+   * `FaceDetectionApi` to the Dart `InstanceManager`.
+   */
+  abstract fun getPigeonApiFaceDetectionApi(): PigeonApiFaceDetectionApi
 
   /**
    * An implementation of [PigeonApiAudioStatsApi] used to add a new Dart instance of
@@ -970,10 +979,10 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
     PigeonApiZoomSuggestionOptionsZoomCallbackApi.setUpMessageHandlers(binaryMessenger, getPigeonApiZoomSuggestionOptionsZoomCallbackApi())
     PigeonApiZoomSuggestionOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiZoomSuggestionOptionsApi())
     PigeonApiBarcodeScannerOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiBarcodeScannerOptionsApi())
-    PigeonApiBarcodeScannerApi.setUpMessageHandlers(binaryMessenger, getPigeonApiBarcodeScannerApi())
+    PigeonApiBarcodeScanningApi.setUpMessageHandlers(binaryMessenger, getPigeonApiBarcodeScanningApi())
     PigeonApiFaceApi.setUpMessageHandlers(binaryMessenger, getPigeonApiFaceApi())
     PigeonApiFaceDetectorOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiFaceDetectorOptionsApi())
-    PigeonApiFaceDetectorApi.setUpMessageHandlers(binaryMessenger, getPigeonApiFaceDetectorApi())
+    PigeonApiFaceDetectionApi.setUpMessageHandlers(binaryMessenger, getPigeonApiFaceDetectionApi())
     PigeonApiFallbackStrategyApi.setUpMessageHandlers(binaryMessenger, getPigeonApiFallbackStrategyApi())
     PigeonApiOutputOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiOutputOptionsApi())
     PigeonApiFileOutputOptionsApi.setUpMessageHandlers(binaryMessenger, getPigeonApiFileOutputOptionsApi())
@@ -1027,10 +1036,10 @@ abstract class CameraXApiPigeonProxyApiRegistrar(val binaryMessenger: BinaryMess
     PigeonApiZoomSuggestionOptionsZoomCallbackApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiZoomSuggestionOptionsApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiBarcodeScannerOptionsApi.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiBarcodeScannerApi.setUpMessageHandlers(binaryMessenger, null)
+    PigeonApiBarcodeScanningApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiFaceApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiFaceDetectorOptionsApi.setUpMessageHandlers(binaryMessenger, null)
-    PigeonApiFaceDetectorApi.setUpMessageHandlers(binaryMessenger, null)
+    PigeonApiFaceDetectionApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiFallbackStrategyApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiOutputOptionsApi.setUpMessageHandlers(binaryMessenger, null)
     PigeonApiFileOutputOptionsApi.setUpMessageHandlers(binaryMessenger, null)
@@ -1064,7 +1073,7 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
   }
 
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?) {
-    if (value is Boolean || value is ByteArray || value is Double || value is DoubleArray || value is FloatArray || value is Int || value is IntArray || value is List<*> || value is Long || value is LongArray || value is Map<*, *> || value is String || value is CameraMetadataControlModeApi || value is CameraMetadataControlAeModeApi || value is CameraMetadataControlAfModeApi || value is CameraMetadataControlAwbModeApi || value is TimeUnitApi || value is ImageFormatApi || value is PermissionApi || value is AspectRatioStrategyFallbackRuleApi || value is ResolutionSelectorModeApi || value is ResolutionStrategyFallbackRuleApi || value is AspectRatioApi || value is CameraSelectorLensFacingApi || value is CameraStateApi || value is DynamicRangeEncodingApi || value is DynamicRangeBitDepthApi || value is ImageAnalysisStrategyApi || value is ImageAnalysisCoordinateSystemApi || value is ImageAnalysisOutputImageFormatApi || value is ImageCaptureCaptureModeApi || value is ImageCaptureFlashModeApi || value is MeteringModeApi || value is MirrorModeApi || value is TorchStateApi || value is BarcodeFormatApi || value is BarcodeValueTypeApi || value is AddressTypeApi || value is EmailTypeApi || value is PhoneTypeApi || value is WiFiEncryptionTypeApi || value is FaceClassificationModeApi || value is FaceContourModeApi || value is FaceLandmarkModeApi || value is FacePerformanceModeApi || value is FaceContourTypeApi || value is FaceLandmarkTypeApi || value is AudioStatsAudioStateApi || value is VideoRecordFinalizeEventErrorApi || value is CameraControllerUseCaseApi || value is PreviewViewScaleTypeApi || value == null) {
+    if (value is Boolean || value is ByteArray || value is Double || value is DoubleArray || value is FloatArray || value is Int || value is IntArray || value is List<*> || value is Long || value is LongArray || value is Map<*, *> || value is String || value is CameraMetadataControlModeApi || value is CameraMetadataControlAeModeApi || value is CameraMetadataControlAfModeApi || value is CameraMetadataControlAwbModeApi || value is TimeUnitApi || value is ImageFormatApi || value is PermissionApi || value is AspectRatioStrategyFallbackRuleApi || value is ResolutionSelectorModeApi || value is ResolutionStrategyFallbackRuleApi || value is AspectRatioApi || value is CameraSelectorLensFacingApi || value is CameraStateApi || value is DynamicRangeEncodingApi || value is DynamicRangeBitDepthApi || value is ImageAnalysisStrategyApi || value is ImageAnalysisCoordinateSystemApi || value is ImageAnalysisOutputImageFormatApi || value is ImageCaptureCaptureModeApi || value is ImageCaptureFlashModeApi || value is FocusMeteringActionMeteringModeApi || value is MirrorModeApi || value is TorchStateApi || value is BarcodeFormatApi || value is BarcodeTypeApi || value is BarcodeAddressTypeApi || value is BarcodeEmailTypeApi || value is BarcodePhoneTypeApi || value is BarcodeWiFiTypeApi || value is FaceDetectorOptionsClassificationModeApi || value is FaceDetectorOptionsContourModeApi || value is FaceDetectorOptionsLandmarkModeApi || value is FaceDetectorOptionsPerformanceModeApi || value is FaceContourTypeApi || value is FaceLandmarkTypeApi || value is AudioStatsAudioStateApi || value is VideoRecordFinalizeEventErrorApi || value is CameraControllerUseCaseApi || value is PreviewViewScaleTypeApi || value == null) {
       super.writeValue(stream, value)
       return
     }
@@ -1364,86 +1373,86 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.Address) {
-      registrar.getPigeonApiAddressApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeAddressApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("AddressApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeAddressApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime) {
-      registrar.getPigeonApiCalendarDateTimeApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeCalendarDateTimeApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("CalendarDateTimeApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeCalendarDateTimeApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent) {
-      registrar.getPigeonApiCalendarEventApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeCalendarEventApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("CalendarEventApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeCalendarEventApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.ContactInfo) {
-      registrar.getPigeonApiContactInfoApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeContactInfoApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("ContactInfoApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeContactInfoApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.DriverLicense) {
-      registrar.getPigeonApiDriverLicenseApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeDriverLicenseApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("DriverLicenseApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeDriverLicenseApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.Email) {
-      registrar.getPigeonApiEmailApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeEmailApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("EmailApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeEmailApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.GeoPoint) {
-      registrar.getPigeonApiGeoPointApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeGeoPointApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("GeoPointApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeGeoPointApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.PersonName) {
-      registrar.getPigeonApiPersonNameApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodePersonNameApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("PersonNameApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodePersonNameApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.Phone) {
-      registrar.getPigeonApiPhoneApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodePhoneApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("PhoneApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodePhoneApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.Sms) {
-      registrar.getPigeonApiSmsApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeSmsApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("SmsApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeSmsApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark) {
-      registrar.getPigeonApiUrlBookmarkApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeUrlBookmarkApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("UrlBookmarkApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeUrlBookmarkApi", value, it.exceptionOrNull())
         }
       }
     }
      else if (value is com.google.mlkit.vision.barcode.common.Barcode.WiFi) {
-      registrar.getPigeonApiWiFiApi().pigeon_newInstance(value) {
+      registrar.getPigeonApiBarcodeWiFiApi().pigeon_newInstance(value) {
         if (it.isFailure) {
-          logNewInstanceFailure("WiFiApi", value, it.exceptionOrNull())
+          logNewInstanceFailure("BarcodeWiFiApi", value, it.exceptionOrNull())
         }
       }
     }
@@ -1475,10 +1484,17 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
         }
       }
     }
-     else if (value is dev.zeekr.camerax_android.ml.barcode.BarcodeScanner) {
+     else if (value is com.google.mlkit.vision.barcode.BarcodeScanner) {
       registrar.getPigeonApiBarcodeScannerApi().pigeon_newInstance(value) {
         if (it.isFailure) {
           logNewInstanceFailure("BarcodeScannerApi", value, it.exceptionOrNull())
+        }
+      }
+    }
+     else if (value is com.google.mlkit.vision.barcode.BarcodeScanning) {
+      registrar.getPigeonApiBarcodeScanningApi().pigeon_newInstance(value) {
+        if (it.isFailure) {
+          logNewInstanceFailure("BarcodeScanningApi", value, it.exceptionOrNull())
         }
       }
     }
@@ -1510,17 +1526,10 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
         }
       }
     }
-     else if (value is dev.zeekr.camerax_android.ml.face.FaceDetector) {
+     else if (value is com.google.mlkit.vision.face.FaceDetector) {
       registrar.getPigeonApiFaceDetectorApi().pigeon_newInstance(value) {
         if (it.isFailure) {
           logNewInstanceFailure("FaceDetectorApi", value, it.exceptionOrNull())
-        }
-      }
-    }
-     else if (value is dev.zeekr.camerax_android.ml.Detector) {
-      registrar.getPigeonApiDetectorApi().pigeon_newInstance(value) {
-        if (it.isFailure) {
-          logNewInstanceFailure("DetectorApi", value, it.exceptionOrNull())
         }
       }
     }
@@ -1528,6 +1537,13 @@ private class CameraXApiPigeonProxyApiBaseCodec(val registrar: CameraXApiPigeonP
       registrar.getPigeonApiCloseableApi().pigeon_newInstance(value) {
         if (it.isFailure) {
           logNewInstanceFailure("CloseableApi", value, it.exceptionOrNull())
+        }
+      }
+    }
+     else if (value is com.google.mlkit.vision.face.FaceDetection) {
+      registrar.getPigeonApiFaceDetectionApi().pigeon_newInstance(value) {
+        if (it.isFailure) {
+          logNewInstanceFailure("FaceDetectionApi", value, it.exceptionOrNull())
         }
       }
     }
@@ -1814,10 +1830,7 @@ enum class ImageFormatApi(val raw: Int) {
   RGB565(36),
   RGB888(37),
   TRANSLUCENT(38),
-  TRANSPARENT(39),
-  Y_CB_CR420SP(40),
-  Y_CB_CR422I(41),
-  Y_CB_CR422SP(42);
+  TRANSPARENT(39);
 
   companion object {
     fun ofRaw(raw: Int): ImageFormatApi? {
@@ -1929,9 +1942,9 @@ enum class DynamicRangeEncodingApi(val raw: Int) {
 }
 
 enum class DynamicRangeBitDepthApi(val raw: Int) {
-  BIT_DEPTH_UNSPECIFIED(0),
-  BIT_DEPTH8BIT(1),
-  BIT_DEPTH10BIT(2);
+  UNSPECIFIED(0),
+  EIGHT_BIT(1),
+  TEN_BIT(2);
 
   companion object {
     fun ofRaw(raw: Int): DynamicRangeBitDepthApi? {
@@ -1964,8 +1977,8 @@ enum class ImageAnalysisCoordinateSystemApi(val raw: Int) {
 }
 
 enum class ImageAnalysisOutputImageFormatApi(val raw: Int) {
-  YUV_420_888(0),
-  RGBA_8888(1),
+  YUV420_888(0),
+  RGBA8888(1),
   NV21(2);
 
   companion object {
@@ -2000,13 +2013,13 @@ enum class ImageCaptureFlashModeApi(val raw: Int) {
   }
 }
 
-enum class MeteringModeApi(val raw: Int) {
+enum class FocusMeteringActionMeteringModeApi(val raw: Int) {
   AF(0),
   AE(1),
   AWB(2);
 
   companion object {
-    fun ofRaw(raw: Int): MeteringModeApi? {
+    fun ofRaw(raw: Int): FocusMeteringActionMeteringModeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
@@ -2059,7 +2072,7 @@ enum class BarcodeFormatApi(val raw: Int) {
   }
 }
 
-enum class BarcodeValueTypeApi(val raw: Int) {
+enum class BarcodeTypeApi(val raw: Int) {
   UNKNOWN(0),
   CONTACT_INFO(1),
   EMAIL(2),
@@ -2075,37 +2088,37 @@ enum class BarcodeValueTypeApi(val raw: Int) {
   DRIVER_LICENSE(12);
 
   companion object {
-    fun ofRaw(raw: Int): BarcodeValueTypeApi? {
+    fun ofRaw(raw: Int): BarcodeTypeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class AddressTypeApi(val raw: Int) {
+enum class BarcodeAddressTypeApi(val raw: Int) {
   UNKNOWN(0),
   WORK(1),
   HOME(2);
 
   companion object {
-    fun ofRaw(raw: Int): AddressTypeApi? {
+    fun ofRaw(raw: Int): BarcodeAddressTypeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class EmailTypeApi(val raw: Int) {
+enum class BarcodeEmailTypeApi(val raw: Int) {
   UNKNOWN(0),
   WORK(1),
   HOME(2);
 
   companion object {
-    fun ofRaw(raw: Int): EmailTypeApi? {
+    fun ofRaw(raw: Int): BarcodeEmailTypeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class PhoneTypeApi(val raw: Int) {
+enum class BarcodePhoneTypeApi(val raw: Int) {
   UNKNOWN(0),
   WORK(1),
   HOME(2),
@@ -2113,63 +2126,63 @@ enum class PhoneTypeApi(val raw: Int) {
   MOBILE(4);
 
   companion object {
-    fun ofRaw(raw: Int): PhoneTypeApi? {
+    fun ofRaw(raw: Int): BarcodePhoneTypeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class WiFiEncryptionTypeApi(val raw: Int) {
+enum class BarcodeWiFiTypeApi(val raw: Int) {
   OPEN(0),
   WPA(1),
   WEP(2);
 
   companion object {
-    fun ofRaw(raw: Int): WiFiEncryptionTypeApi? {
+    fun ofRaw(raw: Int): BarcodeWiFiTypeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class FaceClassificationModeApi(val raw: Int) {
+enum class FaceDetectorOptionsClassificationModeApi(val raw: Int) {
   NONE(0),
   ALL(1);
 
   companion object {
-    fun ofRaw(raw: Int): FaceClassificationModeApi? {
+    fun ofRaw(raw: Int): FaceDetectorOptionsClassificationModeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class FaceContourModeApi(val raw: Int) {
+enum class FaceDetectorOptionsContourModeApi(val raw: Int) {
   NONE(0),
   ALL(1);
 
   companion object {
-    fun ofRaw(raw: Int): FaceContourModeApi? {
+    fun ofRaw(raw: Int): FaceDetectorOptionsContourModeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class FaceLandmarkModeApi(val raw: Int) {
+enum class FaceDetectorOptionsLandmarkModeApi(val raw: Int) {
   NONE(0),
   ALL(1);
 
   companion object {
-    fun ofRaw(raw: Int): FaceLandmarkModeApi? {
+    fun ofRaw(raw: Int): FaceDetectorOptionsLandmarkModeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
 }
 
-enum class FacePerformanceModeApi(val raw: Int) {
+enum class FaceDetectorOptionsPerformanceModeApi(val raw: Int) {
   FAST(0),
   ACCURATE(1);
 
   companion object {
-    fun ofRaw(raw: Int): FacePerformanceModeApi? {
+    fun ofRaw(raw: Int): FaceDetectorOptionsPerformanceModeApi? {
       return values().firstOrNull { it.raw == raw }
     }
   }
@@ -2384,7 +2397,7 @@ private open class CameraXApiPigeonCodec : StandardMessageCodec() {
       }
       149.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          MeteringModeApi.ofRaw(it.toInt())
+          FocusMeteringActionMeteringModeApi.ofRaw(it.toInt())
         }
       }
       150.toByte() -> {
@@ -2404,47 +2417,47 @@ private open class CameraXApiPigeonCodec : StandardMessageCodec() {
       }
       153.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          BarcodeValueTypeApi.ofRaw(it.toInt())
+          BarcodeTypeApi.ofRaw(it.toInt())
         }
       }
       154.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          AddressTypeApi.ofRaw(it.toInt())
+          BarcodeAddressTypeApi.ofRaw(it.toInt())
         }
       }
       155.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          EmailTypeApi.ofRaw(it.toInt())
+          BarcodeEmailTypeApi.ofRaw(it.toInt())
         }
       }
       156.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          PhoneTypeApi.ofRaw(it.toInt())
+          BarcodePhoneTypeApi.ofRaw(it.toInt())
         }
       }
       157.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          WiFiEncryptionTypeApi.ofRaw(it.toInt())
+          BarcodeWiFiTypeApi.ofRaw(it.toInt())
         }
       }
       158.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          FaceClassificationModeApi.ofRaw(it.toInt())
+          FaceDetectorOptionsClassificationModeApi.ofRaw(it.toInt())
         }
       }
       159.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          FaceContourModeApi.ofRaw(it.toInt())
+          FaceDetectorOptionsContourModeApi.ofRaw(it.toInt())
         }
       }
       160.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          FaceLandmarkModeApi.ofRaw(it.toInt())
+          FaceDetectorOptionsLandmarkModeApi.ofRaw(it.toInt())
         }
       }
       161.toByte() -> {
         return (readValue(buffer) as Long?)?.let {
-          FacePerformanceModeApi.ofRaw(it.toInt())
+          FaceDetectorOptionsPerformanceModeApi.ofRaw(it.toInt())
         }
       }
       162.toByte() -> {
@@ -2562,7 +2575,7 @@ private open class CameraXApiPigeonCodec : StandardMessageCodec() {
         stream.write(148)
         writeValue(stream, value.raw)
       }
-      is MeteringModeApi -> {
+      is FocusMeteringActionMeteringModeApi -> {
         stream.write(149)
         writeValue(stream, value.raw)
       }
@@ -2578,39 +2591,39 @@ private open class CameraXApiPigeonCodec : StandardMessageCodec() {
         stream.write(152)
         writeValue(stream, value.raw)
       }
-      is BarcodeValueTypeApi -> {
+      is BarcodeTypeApi -> {
         stream.write(153)
         writeValue(stream, value.raw)
       }
-      is AddressTypeApi -> {
+      is BarcodeAddressTypeApi -> {
         stream.write(154)
         writeValue(stream, value.raw)
       }
-      is EmailTypeApi -> {
+      is BarcodeEmailTypeApi -> {
         stream.write(155)
         writeValue(stream, value.raw)
       }
-      is PhoneTypeApi -> {
+      is BarcodePhoneTypeApi -> {
         stream.write(156)
         writeValue(stream, value.raw)
       }
-      is WiFiEncryptionTypeApi -> {
+      is BarcodeWiFiTypeApi -> {
         stream.write(157)
         writeValue(stream, value.raw)
       }
-      is FaceClassificationModeApi -> {
+      is FaceDetectorOptionsClassificationModeApi -> {
         stream.write(158)
         writeValue(stream, value.raw)
       }
-      is FaceContourModeApi -> {
+      is FaceDetectorOptionsContourModeApi -> {
         stream.write(159)
         writeValue(stream, value.raw)
       }
-      is FaceLandmarkModeApi -> {
+      is FaceDetectorOptionsLandmarkModeApi -> {
         stream.write(160)
         writeValue(stream, value.raw)
       }
-      is FacePerformanceModeApi -> {
+      is FaceDetectorOptionsPerformanceModeApi -> {
         stream.write(161)
         writeValue(stream, value.raw)
       }
@@ -4212,7 +4225,7 @@ abstract class PigeonApiResolutionStrategyApi(open val pigeonRegistrar: CameraXA
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiResolutionSelectorApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(allowedResolutionMode: ResolutionSelectorModeApi, aspectRatioStrategy: androidx.camera.core.resolutionselector.AspectRatioStrategy, resolutionFilter: androidx.camera.core.resolutionselector.ResolutionFilter?, resolutionStrategy: androidx.camera.core.resolutionselector.ResolutionStrategy?): androidx.camera.core.resolutionselector.ResolutionSelector
+  abstract fun build(allowedResolutionMode: ResolutionSelectorModeApi, aspectRatioStrategy: androidx.camera.core.resolutionselector.AspectRatioStrategy, resolutionFilter: androidx.camera.core.resolutionselector.ResolutionFilter?, resolutionStrategy: androidx.camera.core.resolutionselector.ResolutionStrategy?): androidx.camera.core.resolutionselector.ResolutionSelector
 
   abstract fun allowedResolutionMode(pigeon_instance: androidx.camera.core.resolutionselector.ResolutionSelector): ResolutionSelectorModeApi
 
@@ -4227,7 +4240,7 @@ abstract class PigeonApiResolutionSelectorApi(open val pigeonRegistrar: CameraXA
     fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiResolutionSelectorApi?) {
       val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.ResolutionSelectorApi.pigeon_defaultConstructor", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.ResolutionSelectorApi.build", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
@@ -4237,7 +4250,7 @@ abstract class PigeonApiResolutionSelectorApi(open val pigeonRegistrar: CameraXA
             val resolutionFilterArg = args[3] as androidx.camera.core.resolutionselector.ResolutionFilter?
             val resolutionStrategyArg = args[4] as androidx.camera.core.resolutionselector.ResolutionStrategy?
             val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(allowedResolutionModeArg,aspectRatioStrategyArg,resolutionFilterArg,resolutionStrategyArg), pigeon_identifierArg)
+              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.build(allowedResolutionModeArg,aspectRatioStrategyArg,resolutionFilterArg,resolutionStrategyArg), pigeon_identifierArg)
               listOf(null)
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
@@ -4931,7 +4944,7 @@ abstract class PigeonApiCameraInfoApi(open val pigeonRegistrar: CameraXApiPigeon
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiCameraSelectorApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(lensFacing: CameraSelectorLensFacingApi?): androidx.camera.core.CameraSelector
+  abstract fun build(lensFacing: CameraSelectorLensFacingApi?): androidx.camera.core.CameraSelector
 
   abstract fun front(): androidx.camera.core.CameraSelector
 
@@ -4944,14 +4957,14 @@ abstract class PigeonApiCameraSelectorApi(open val pigeonRegistrar: CameraXApiPi
     fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiCameraSelectorApi?) {
       val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraSelectorApi.pigeon_defaultConstructor", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.CameraSelectorApi.build", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_identifierArg = args[0] as Long
             val lensFacingArg = args[1] as CameraSelectorLensFacingApi?
             val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(lensFacingArg), pigeon_identifierArg)
+              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.build(lensFacingArg), pigeon_identifierArg)
               listOf(null)
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
@@ -5165,7 +5178,7 @@ abstract class PigeonApiExposureStateApi(open val pigeonRegistrar: CameraXApiPig
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiMeteringPointTupleApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(point: androidx.camera.core.MeteringPoint, modes: List<MeteringModeApi>?): dev.zeekr.camerax_android.core.MeteringPointTuple
+  abstract fun pigeon_defaultConstructor(point: androidx.camera.core.MeteringPoint, modes: List<FocusMeteringActionMeteringModeApi>?): dev.zeekr.camerax_android.core.MeteringPointTuple
 
   companion object {
     @Suppress("LocalVariableName")
@@ -5178,7 +5191,7 @@ abstract class PigeonApiMeteringPointTupleApi(open val pigeonRegistrar: CameraXA
             val args = message as List<Any?>
             val pigeon_identifierArg = args[0] as Long
             val pointArg = args[1] as androidx.camera.core.MeteringPoint
-            val modesArg = args[2] as List<MeteringModeApi>?
+            val modesArg = args[2] as List<FocusMeteringActionMeteringModeApi>?
             val wrapped: List<Any?> = try {
               api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(pointArg,modesArg), pigeon_identifierArg)
               listOf(null)
@@ -5289,7 +5302,7 @@ abstract class PigeonApiDurationTupleApi(open val pigeonRegistrar: CameraXApiPig
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiFocusMeteringActionApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun build(first: dev.zeekr.camerax_android.core.MeteringPointTuple, others: List<dev.zeekr.camerax_android.core.MeteringPointTuple>?, disableAutoCancel: Boolean?, autoCancelDuration: dev.zeekr.camerax_android.core.DurationTuple?): androidx.camera.core.FocusMeteringAction
+  abstract fun build(point: dev.zeekr.camerax_android.core.MeteringPointTuple, morePoints: List<dev.zeekr.camerax_android.core.MeteringPointTuple>?, disableAutoCancel: Boolean?, autoCancelDuration: dev.zeekr.camerax_android.core.DurationTuple?): androidx.camera.core.FocusMeteringAction
 
   abstract fun getAutoCancelDurationInMillis(pigeon_instance: androidx.camera.core.FocusMeteringAction): Long
 
@@ -5311,12 +5324,12 @@ abstract class PigeonApiFocusMeteringActionApi(open val pigeonRegistrar: CameraX
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_identifierArg = args[0] as Long
-            val firstArg = args[1] as dev.zeekr.camerax_android.core.MeteringPointTuple
-            val othersArg = args[2] as List<dev.zeekr.camerax_android.core.MeteringPointTuple>?
+            val pointArg = args[1] as dev.zeekr.camerax_android.core.MeteringPointTuple
+            val morePointsArg = args[2] as List<dev.zeekr.camerax_android.core.MeteringPointTuple>?
             val disableAutoCancelArg = args[3] as Boolean?
             val autoCancelDurationArg = args[4] as dev.zeekr.camerax_android.core.DurationTuple?
             val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.build(firstArg,othersArg,disableAutoCancelArg,autoCancelDurationArg), pigeon_identifierArg)
+              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.build(pointArg,morePointsArg,disableAutoCancelArg,autoCancelDurationArg), pigeon_identifierArg)
               listOf(null)
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
@@ -6178,25 +6191,27 @@ abstract class PigeonApiZoomStateApi(open val pigeonRegistrar: CameraXApiPigeonP
 abstract class PigeonApiMlKitAnalyzerResultApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun timestamp(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result): Long
 
-  abstract fun getBarcodes(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: dev.zeekr.camerax_android.ml.barcode.BarcodeScanner): List<com.google.mlkit.vision.barcode.common.Barcode>?
+  abstract fun getValue1(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: com.google.mlkit.vision.barcode.BarcodeScanner): List<com.google.mlkit.vision.barcode.common.Barcode>?
 
-  abstract fun getFaces(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: dev.zeekr.camerax_android.ml.face.FaceDetector): List<com.google.mlkit.vision.face.Face>?
+  abstract fun getValue2(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: com.google.mlkit.vision.face.FaceDetector): List<com.google.mlkit.vision.face.Face>?
 
-  abstract fun getThrowable(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: dev.zeekr.camerax_android.ml.Detector): List<Any?>?
+  abstract fun getThrowable1(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: com.google.mlkit.vision.barcode.BarcodeScanner): List<Any?>?
+
+  abstract fun getThrowable2(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: com.google.mlkit.vision.face.FaceDetector): List<Any?>?
 
   companion object {
     @Suppress("LocalVariableName")
     fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiMlKitAnalyzerResultApi?) {
       val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getBarcodes", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getValue1", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_instanceArg = args[0] as androidx.camera.mlkit.vision.MlKitAnalyzer.Result
-            val detectorArg = args[1] as dev.zeekr.camerax_android.ml.barcode.BarcodeScanner
+            val detectorArg = args[1] as com.google.mlkit.vision.barcode.BarcodeScanner
             val wrapped: List<Any?> = try {
-              listOf(api.getBarcodes(pigeon_instanceArg, detectorArg))
+              listOf(api.getValue1(pigeon_instanceArg, detectorArg))
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
             }
@@ -6207,14 +6222,14 @@ abstract class PigeonApiMlKitAnalyzerResultApi(open val pigeonRegistrar: CameraX
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getFaces", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getValue2", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_instanceArg = args[0] as androidx.camera.mlkit.vision.MlKitAnalyzer.Result
-            val detectorArg = args[1] as dev.zeekr.camerax_android.ml.face.FaceDetector
+            val detectorArg = args[1] as com.google.mlkit.vision.face.FaceDetector
             val wrapped: List<Any?> = try {
-              listOf(api.getFaces(pigeon_instanceArg, detectorArg))
+              listOf(api.getValue2(pigeon_instanceArg, detectorArg))
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
             }
@@ -6225,14 +6240,32 @@ abstract class PigeonApiMlKitAnalyzerResultApi(open val pigeonRegistrar: CameraX
         }
       }
       run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getThrowable", codec)
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getThrowable1", codec)
         if (api != null) {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_instanceArg = args[0] as androidx.camera.mlkit.vision.MlKitAnalyzer.Result
-            val detectorArg = args[1] as dev.zeekr.camerax_android.ml.Detector
+            val detectorArg = args[1] as com.google.mlkit.vision.barcode.BarcodeScanner
             val wrapped: List<Any?> = try {
-              listOf(api.getThrowable(pigeon_instanceArg, detectorArg))
+              listOf(api.getThrowable1(pigeon_instanceArg, detectorArg))
+            } catch (exception: Throwable) {
+              CameraXApiPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultApi.getThrowable2", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val pigeon_instanceArg = args[0] as androidx.camera.mlkit.vision.MlKitAnalyzer.Result
+            val detectorArg = args[1] as com.google.mlkit.vision.face.FaceDetector
+            val wrapped: List<Any?> = try {
+              listOf(api.getThrowable2(pigeon_instanceArg, detectorArg))
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
             }
@@ -6279,7 +6312,7 @@ abstract class PigeonApiMlKitAnalyzerResultApi(open val pigeonRegistrar: CameraX
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiMlKitAnalyzerApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(detectors: List<dev.zeekr.camerax_android.ml.Detector>, targetCoordinateSystem: ImageAnalysisCoordinateSystemApi, consumer: dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer): androidx.camera.mlkit.vision.MlKitAnalyzer
+  abstract fun pigeon_defaultConstructor(detectors1: List<com.google.mlkit.vision.barcode.BarcodeScanner>, detectors2: List<com.google.mlkit.vision.face.FaceDetector>, targetCoordinateSystem: ImageAnalysisCoordinateSystemApi, consumer: dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer): androidx.camera.mlkit.vision.MlKitAnalyzer
 
   companion object {
     @Suppress("LocalVariableName")
@@ -6291,11 +6324,12 @@ abstract class PigeonApiMlKitAnalyzerApi(open val pigeonRegistrar: CameraXApiPig
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val pigeon_identifierArg = args[0] as Long
-            val detectorsArg = args[1] as List<dev.zeekr.camerax_android.ml.Detector>
-            val targetCoordinateSystemArg = args[2] as ImageAnalysisCoordinateSystemApi
-            val consumerArg = args[3] as dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer
+            val detectors1Arg = args[1] as List<com.google.mlkit.vision.barcode.BarcodeScanner>
+            val detectors2Arg = args[2] as List<com.google.mlkit.vision.face.FaceDetector>
+            val targetCoordinateSystemArg = args[3] as ImageAnalysisCoordinateSystemApi
+            val consumerArg = args[4] as dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer
             val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(detectorsArg,targetCoordinateSystemArg,consumerArg), pigeon_identifierArg)
+              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(detectors1Arg,detectors2Arg,targetCoordinateSystemArg,consumerArg), pigeon_identifierArg)
               listOf(null)
             } catch (exception: Throwable) {
               CameraXApiPigeonUtils.wrapError(exception)
@@ -6348,53 +6382,13 @@ abstract class PigeonApiMlKitAnalyzerApi(open val pigeonRegistrar: CameraXApiPig
 
 }
 @Suppress("UNCHECKED_CAST")
-open class PigeonApiDetectorApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of DetectorApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: dev.zeekr.camerax_android.ml.Detector, callback: (Result<Unit>) -> Unit)
-{
-    if (pigeonRegistrar.ignoreCallsToDart) {
-      callback(
-          Result.failure(
-              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
-    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
-      callback(Result.success(Unit))
-    }     else {
-      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val binaryMessenger = pigeonRegistrar.binaryMessenger
-      val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.DetectorApi.pigeon_newInstance"
-      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg)) {
-        if (it is List<*>) {
-          if (it.size > 1) {
-            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
-          } else {
-            callback(Result.success(Unit))
-          }
-        } else {
-          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
-        } 
-      }
-    }
-  }
-
-  @Suppress("FunctionName")
-  /** An implementation of [PigeonApiCloseableApi] used to access callback methods */
-  fun pigeon_getPigeonApiCloseableApi(): PigeonApiCloseableApi
-  {
-    return pigeonRegistrar.getPigeonApiCloseableApi()
-  }
-
-}
-@Suppress("UNCHECKED_CAST")
-abstract class PigeonApiAddressApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Address): AddressTypeApi
+abstract class PigeonApiBarcodeAddressApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+  abstract fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Address): BarcodeAddressTypeApi
 
   abstract fun addressLines(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Address): List<String>
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of AddressApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeAddressApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.Address, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6409,7 +6403,7 @@ abstract class PigeonApiAddressApi(open val pigeonRegistrar: CameraXApiPigeonPro
       val addressLinesArg = addressLines(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.AddressApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeAddressApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, typeArg, addressLinesArg)) {
         if (it is List<*>) {
@@ -6427,7 +6421,7 @@ abstract class PigeonApiAddressApi(open val pigeonRegistrar: CameraXApiPigeonPro
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiCalendarDateTimeApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeCalendarDateTimeApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun rawValue(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime): String?
 
   abstract fun year(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime): Long
@@ -6445,7 +6439,7 @@ abstract class PigeonApiCalendarDateTimeApi(open val pigeonRegistrar: CameraXApi
   abstract fun isUtc(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime): Boolean
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of CalendarDateTimeApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeCalendarDateTimeApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6466,7 +6460,7 @@ abstract class PigeonApiCalendarDateTimeApi(open val pigeonRegistrar: CameraXApi
       val isUtcArg = isUtc(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.CalendarDateTimeApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeCalendarDateTimeApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, rawValueArg, yearArg, monthArg, dayArg, hoursArg, minutesArg, secondsArg, isUtcArg)) {
         if (it is List<*>) {
@@ -6484,7 +6478,7 @@ abstract class PigeonApiCalendarDateTimeApi(open val pigeonRegistrar: CameraXApi
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiCalendarEventApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeCalendarEventApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun start(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent): com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime?
 
   abstract fun end(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent): com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime?
@@ -6500,7 +6494,7 @@ abstract class PigeonApiCalendarEventApi(open val pigeonRegistrar: CameraXApiPig
   abstract fun status(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of CalendarEventApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeCalendarEventApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6520,7 +6514,7 @@ abstract class PigeonApiCalendarEventApi(open val pigeonRegistrar: CameraXApiPig
       val statusArg = status(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.CalendarEventApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeCalendarEventApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, startArg, endArg, locationArg, organizerArg, summaryArg, descriptionArg, statusArg)) {
         if (it is List<*>) {
@@ -6538,7 +6532,7 @@ abstract class PigeonApiCalendarEventApi(open val pigeonRegistrar: CameraXApiPig
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiContactInfoApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeContactInfoApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun addresses(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.ContactInfo): List<com.google.mlkit.vision.barcode.common.Barcode.Address>
 
   abstract fun emails(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.ContactInfo): List<com.google.mlkit.vision.barcode.common.Barcode.Email>
@@ -6554,7 +6548,7 @@ abstract class PigeonApiContactInfoApi(open val pigeonRegistrar: CameraXApiPigeo
   abstract fun urls(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.ContactInfo): List<String>
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of ContactInfoApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeContactInfoApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.ContactInfo, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6574,7 +6568,7 @@ abstract class PigeonApiContactInfoApi(open val pigeonRegistrar: CameraXApiPigeo
       val urlsArg = urls(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.ContactInfoApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeContactInfoApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, addressesArg, emailsArg, nameArg, organizationArg, phonesArg, titleArg, urlsArg)) {
         if (it is List<*>) {
@@ -6592,7 +6586,7 @@ abstract class PigeonApiContactInfoApi(open val pigeonRegistrar: CameraXApiPigeo
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiDriverLicenseApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeDriverLicenseApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun licenseNumber(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.DriverLicense): String?
 
   abstract fun documentType(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.DriverLicense): String?
@@ -6622,7 +6616,7 @@ abstract class PigeonApiDriverLicenseApi(open val pigeonRegistrar: CameraXApiPig
   abstract fun addressZip(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.DriverLicense): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of DriverLicenseApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeDriverLicenseApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.DriverLicense, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6649,7 +6643,7 @@ abstract class PigeonApiDriverLicenseApi(open val pigeonRegistrar: CameraXApiPig
       val addressZipArg = addressZip(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.DriverLicenseApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeDriverLicenseApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, licenseNumberArg, documentTypeArg, expiryDateArg, firstNameArg, middleNameArg, lastNameArg, genderArg, birthDateArg, issueDateArg, issuingCountryArg, addressStateArg, addressCityArg, addressStreetArg, addressZipArg)) {
         if (it is List<*>) {
@@ -6667,8 +6661,8 @@ abstract class PigeonApiDriverLicenseApi(open val pigeonRegistrar: CameraXApiPig
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiEmailApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Email): EmailTypeApi
+abstract class PigeonApiBarcodeEmailApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+  abstract fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Email): BarcodeEmailTypeApi
 
   abstract fun address(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Email): String?
 
@@ -6677,7 +6671,7 @@ abstract class PigeonApiEmailApi(open val pigeonRegistrar: CameraXApiPigeonProxy
   abstract fun body(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Email): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of EmailApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeEmailApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.Email, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6694,7 +6688,7 @@ abstract class PigeonApiEmailApi(open val pigeonRegistrar: CameraXApiPigeonProxy
       val bodyArg = body(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.EmailApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeEmailApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, typeArg, addressArg, subjectArg, bodyArg)) {
         if (it is List<*>) {
@@ -6712,13 +6706,13 @@ abstract class PigeonApiEmailApi(open val pigeonRegistrar: CameraXApiPigeonProxy
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiGeoPointApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeGeoPointApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun lat(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.GeoPoint): Double
 
   abstract fun lng(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.GeoPoint): Double
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of GeoPointApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeGeoPointApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.GeoPoint, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6733,7 +6727,7 @@ abstract class PigeonApiGeoPointApi(open val pigeonRegistrar: CameraXApiPigeonPr
       val lngArg = lng(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.GeoPointApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeGeoPointApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, latArg, lngArg)) {
         if (it is List<*>) {
@@ -6751,7 +6745,7 @@ abstract class PigeonApiGeoPointApi(open val pigeonRegistrar: CameraXApiPigeonPr
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiPersonNameApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodePersonNameApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun formattedName(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.PersonName): String?
 
   abstract fun pronunciation(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.PersonName): String?
@@ -6767,7 +6761,7 @@ abstract class PigeonApiPersonNameApi(open val pigeonRegistrar: CameraXApiPigeon
   abstract fun suffix(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.PersonName): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of PersonNameApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodePersonNameApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.PersonName, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6787,7 +6781,7 @@ abstract class PigeonApiPersonNameApi(open val pigeonRegistrar: CameraXApiPigeon
       val suffixArg = suffix(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.PersonNameApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodePersonNameApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, formattedNameArg, pronunciationArg, prefixArg, firstArg, middleArg, lastArg, suffixArg)) {
         if (it is List<*>) {
@@ -6805,13 +6799,13 @@ abstract class PigeonApiPersonNameApi(open val pigeonRegistrar: CameraXApiPigeon
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiPhoneApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Phone): PhoneTypeApi
+abstract class PigeonApiBarcodePhoneApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+  abstract fun type(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Phone): BarcodePhoneTypeApi
 
   abstract fun number(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Phone): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of PhoneApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodePhoneApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.Phone, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6826,7 +6820,7 @@ abstract class PigeonApiPhoneApi(open val pigeonRegistrar: CameraXApiPigeonProxy
       val numberArg = number(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.PhoneApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodePhoneApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, typeArg, numberArg)) {
         if (it is List<*>) {
@@ -6844,13 +6838,13 @@ abstract class PigeonApiPhoneApi(open val pigeonRegistrar: CameraXApiPigeonProxy
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiSmsApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeSmsApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun phoneNumber(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Sms): String?
 
   abstract fun message(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.Sms): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of SmsApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeSmsApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.Sms, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6865,7 +6859,7 @@ abstract class PigeonApiSmsApi(open val pigeonRegistrar: CameraXApiPigeonProxyAp
       val messageArg = message(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.SmsApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeSmsApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, phoneNumberArg, messageArg)) {
         if (it is List<*>) {
@@ -6883,13 +6877,13 @@ abstract class PigeonApiSmsApi(open val pigeonRegistrar: CameraXApiPigeonProxyAp
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiUrlBookmarkApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+abstract class PigeonApiBarcodeUrlBookmarkApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   abstract fun title(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark): String?
 
   abstract fun url(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of UrlBookmarkApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeUrlBookmarkApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6904,7 +6898,7 @@ abstract class PigeonApiUrlBookmarkApi(open val pigeonRegistrar: CameraXApiPigeo
       val urlArg = url(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.UrlBookmarkApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeUrlBookmarkApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, titleArg, urlArg)) {
         if (it is List<*>) {
@@ -6922,15 +6916,15 @@ abstract class PigeonApiUrlBookmarkApi(open val pigeonRegistrar: CameraXApiPigeo
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiWiFiApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun encryptionType(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.WiFi): WiFiEncryptionTypeApi
+abstract class PigeonApiBarcodeWiFiApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+  abstract fun encryptionType(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.WiFi): BarcodeWiFiTypeApi
 
   abstract fun ssid(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.WiFi): String?
 
   abstract fun password(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode.WiFi): String?
 
   @Suppress("LocalVariableName", "FunctionName")
-  /** Creates a Dart instance of WiFiApi and attaches it to [pigeon_instanceArg]. */
+  /** Creates a Dart instance of BarcodeWiFiApi and attaches it to [pigeon_instanceArg]. */
   fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.common.Barcode.WiFi, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
@@ -6946,7 +6940,7 @@ abstract class PigeonApiWiFiApi(open val pigeonRegistrar: CameraXApiPigeonProxyA
       val passwordArg = password(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
-      val channelName = "dev.flutter.pigeon.camerax_android.WiFiApi.pigeon_newInstance"
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeWiFiApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
       channel.send(listOf(pigeon_identifierArg, encryptionTypeArg, ssidArg, passwordArg)) {
         if (it is List<*>) {
@@ -6971,7 +6965,7 @@ abstract class PigeonApiBarcodeApi(open val pigeonRegistrar: CameraXApiPigeonPro
 
   abstract fun format(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode): BarcodeFormatApi
 
-  abstract fun valueType(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode): BarcodeValueTypeApi
+  abstract fun valueType(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode): BarcodeTypeApi
 
   abstract fun rawBytes(pigeon_instance: com.google.mlkit.vision.barcode.common.Barcode): ByteArray?
 
@@ -7245,38 +7239,10 @@ abstract class PigeonApiBarcodeScannerOptionsApi(open val pigeonRegistrar: Camer
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiBarcodeScannerApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(options: com.google.mlkit.vision.barcode.BarcodeScannerOptions?): dev.zeekr.camerax_android.ml.barcode.BarcodeScanner
-
-  companion object {
-    @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiBarcodeScannerApi?) {
-      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.BarcodeScannerApi.pigeon_defaultConstructor", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_identifierArg = args[0] as Long
-            val optionsArg = args[1] as com.google.mlkit.vision.barcode.BarcodeScannerOptions?
-            val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(optionsArg), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              CameraXApiPigeonUtils.wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-
+open class PigeonApiBarcodeScannerApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   @Suppress("LocalVariableName", "FunctionName")
   /** Creates a Dart instance of BarcodeScannerApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: dev.zeekr.camerax_android.ml.barcode.BarcodeScanner, callback: (Result<Unit>) -> Unit)
+  fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.BarcodeScanner, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
       callback(
@@ -7305,10 +7271,86 @@ abstract class PigeonApiBarcodeScannerApi(open val pigeonRegistrar: CameraXApiPi
   }
 
   @Suppress("FunctionName")
-  /** An implementation of [PigeonApiDetectorApi] used to access callback methods */
-  fun pigeon_getPigeonApiDetectorApi(): PigeonApiDetectorApi
+  /** An implementation of [PigeonApiCloseableApi] used to access callback methods */
+  fun pigeon_getPigeonApiCloseableApi(): PigeonApiCloseableApi
   {
-    return pigeonRegistrar.getPigeonApiDetectorApi()
+    return pigeonRegistrar.getPigeonApiCloseableApi()
+  }
+
+}
+@Suppress("UNCHECKED_CAST")
+abstract class PigeonApiBarcodeScanningApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+  abstract fun getClient1(): com.google.mlkit.vision.barcode.BarcodeScanner
+
+  abstract fun getClient2(options: com.google.mlkit.vision.barcode.BarcodeScannerOptions): com.google.mlkit.vision.barcode.BarcodeScanner
+
+  companion object {
+    @Suppress("LocalVariableName")
+    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiBarcodeScanningApi?) {
+      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.BarcodeScanningApi.getClient1", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            val wrapped: List<Any?> = try {
+              listOf(api.getClient1())
+            } catch (exception: Throwable) {
+              CameraXApiPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.BarcodeScanningApi.getClient2", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val optionsArg = args[0] as com.google.mlkit.vision.barcode.BarcodeScannerOptions
+            val wrapped: List<Any?> = try {
+              listOf(api.getClient2(optionsArg))
+            } catch (exception: Throwable) {
+              CameraXApiPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+    }
+  }
+
+  @Suppress("LocalVariableName", "FunctionName")
+  /** Creates a Dart instance of BarcodeScanningApi and attaches it to [pigeon_instanceArg]. */
+  fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.barcode.BarcodeScanning, callback: (Result<Unit>) -> Unit)
+{
+    if (pigeonRegistrar.ignoreCallsToDart) {
+      callback(
+          Result.failure(
+              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
+    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
+      callback(Result.success(Unit))
+    }     else {
+      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
+      val binaryMessenger = pigeonRegistrar.binaryMessenger
+      val codec = pigeonRegistrar.codec
+      val channelName = "dev.flutter.pigeon.camerax_android.BarcodeScanningApi.pigeon_newInstance"
+      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+      channel.send(listOf(pigeon_identifierArg)) {
+        if (it is List<*>) {
+          if (it.size > 1) {
+            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
+          } else {
+            callback(Result.success(Unit))
+          }
+        } else {
+          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
+        } 
+      }
+    }
   }
 
 }
@@ -7502,7 +7544,7 @@ abstract class PigeonApiFaceApi(open val pigeonRegistrar: CameraXApiPigeonProxyA
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiFaceDetectorOptionsApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun build(enableTracking: Boolean?, classificationMode: FaceClassificationModeApi?, contourMode: FaceContourModeApi?, landmarkMode: FaceLandmarkModeApi?, minFaceSize: Double?, performanceMode: FacePerformanceModeApi?): com.google.mlkit.vision.face.FaceDetectorOptions
+  abstract fun build(enableTracking: Boolean?, classificationMode: FaceDetectorOptionsClassificationModeApi?, contourMode: FaceDetectorOptionsContourModeApi?, landmarkMode: FaceDetectorOptionsLandmarkModeApi?, minFaceSize: Double?, performanceMode: FaceDetectorOptionsPerformanceModeApi?): com.google.mlkit.vision.face.FaceDetectorOptions
 
   companion object {
     @Suppress("LocalVariableName")
@@ -7515,11 +7557,11 @@ abstract class PigeonApiFaceDetectorOptionsApi(open val pigeonRegistrar: CameraX
             val args = message as List<Any?>
             val pigeon_identifierArg = args[0] as Long
             val enableTrackingArg = args[1] as Boolean?
-            val classificationModeArg = args[2] as FaceClassificationModeApi?
-            val contourModeArg = args[3] as FaceContourModeApi?
-            val landmarkModeArg = args[4] as FaceLandmarkModeApi?
+            val classificationModeArg = args[2] as FaceDetectorOptionsClassificationModeApi?
+            val contourModeArg = args[3] as FaceDetectorOptionsContourModeApi?
+            val landmarkModeArg = args[4] as FaceDetectorOptionsLandmarkModeApi?
             val minFaceSizeArg = args[5] as Double?
-            val performanceModeArg = args[6] as FacePerformanceModeApi?
+            val performanceModeArg = args[6] as FaceDetectorOptionsPerformanceModeApi?
             val wrapped: List<Any?> = try {
               api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.build(enableTrackingArg,classificationModeArg,contourModeArg,landmarkModeArg,minFaceSizeArg,performanceModeArg), pigeon_identifierArg)
               listOf(null)
@@ -7567,38 +7609,10 @@ abstract class PigeonApiFaceDetectorOptionsApi(open val pigeonRegistrar: CameraX
 
 }
 @Suppress("UNCHECKED_CAST")
-abstract class PigeonApiFaceDetectorApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun pigeon_defaultConstructor(options: com.google.mlkit.vision.face.FaceDetectorOptions?): dev.zeekr.camerax_android.ml.face.FaceDetector
-
-  companion object {
-    @Suppress("LocalVariableName")
-    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiFaceDetectorApi?) {
-      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.FaceDetectorApi.pigeon_defaultConstructor", codec)
-        if (api != null) {
-          channel.setMessageHandler { message, reply ->
-            val args = message as List<Any?>
-            val pigeon_identifierArg = args[0] as Long
-            val optionsArg = args[1] as com.google.mlkit.vision.face.FaceDetectorOptions?
-            val wrapped: List<Any?> = try {
-              api.pigeonRegistrar.instanceManager.addDartCreatedInstance(api.pigeon_defaultConstructor(optionsArg), pigeon_identifierArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              CameraXApiPigeonUtils.wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
-    }
-  }
-
+open class PigeonApiFaceDetectorApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
   @Suppress("LocalVariableName", "FunctionName")
   /** Creates a Dart instance of FaceDetectorApi and attaches it to [pigeon_instanceArg]. */
-  fun pigeon_newInstance(pigeon_instanceArg: dev.zeekr.camerax_android.ml.face.FaceDetector, callback: (Result<Unit>) -> Unit)
+  fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.face.FaceDetector, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
       callback(
@@ -7627,10 +7641,86 @@ abstract class PigeonApiFaceDetectorApi(open val pigeonRegistrar: CameraXApiPige
   }
 
   @Suppress("FunctionName")
-  /** An implementation of [PigeonApiDetectorApi] used to access callback methods */
-  fun pigeon_getPigeonApiDetectorApi(): PigeonApiDetectorApi
+  /** An implementation of [PigeonApiCloseableApi] used to access callback methods */
+  fun pigeon_getPigeonApiCloseableApi(): PigeonApiCloseableApi
   {
-    return pigeonRegistrar.getPigeonApiDetectorApi()
+    return pigeonRegistrar.getPigeonApiCloseableApi()
+  }
+
+}
+@Suppress("UNCHECKED_CAST")
+abstract class PigeonApiFaceDetectionApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
+  abstract fun getClient1(): com.google.mlkit.vision.face.FaceDetector
+
+  abstract fun getClient2(options: com.google.mlkit.vision.face.FaceDetectorOptions): com.google.mlkit.vision.face.FaceDetector
+
+  companion object {
+    @Suppress("LocalVariableName")
+    fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiFaceDetectionApi?) {
+      val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.FaceDetectionApi.getClient1", codec)
+        if (api != null) {
+          channel.setMessageHandler { _, reply ->
+            val wrapped: List<Any?> = try {
+              listOf(api.getClient1())
+            } catch (exception: Throwable) {
+              CameraXApiPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.FaceDetectionApi.getClient2", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val optionsArg = args[0] as com.google.mlkit.vision.face.FaceDetectorOptions
+            val wrapped: List<Any?> = try {
+              listOf(api.getClient2(optionsArg))
+            } catch (exception: Throwable) {
+              CameraXApiPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+    }
+  }
+
+  @Suppress("LocalVariableName", "FunctionName")
+  /** Creates a Dart instance of FaceDetectionApi and attaches it to [pigeon_instanceArg]. */
+  fun pigeon_newInstance(pigeon_instanceArg: com.google.mlkit.vision.face.FaceDetection, callback: (Result<Unit>) -> Unit)
+{
+    if (pigeonRegistrar.ignoreCallsToDart) {
+      callback(
+          Result.failure(
+              CameraXError("ignore-calls-error", "Calls to Dart are being ignored.", "")))
+    }     else if (pigeonRegistrar.instanceManager.containsInstance(pigeon_instanceArg)) {
+      callback(Result.success(Unit))
+    }     else {
+      val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
+      val binaryMessenger = pigeonRegistrar.binaryMessenger
+      val codec = pigeonRegistrar.codec
+      val channelName = "dev.flutter.pigeon.camerax_android.FaceDetectionApi.pigeon_newInstance"
+      val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
+      channel.send(listOf(pigeon_identifierArg)) {
+        if (it is List<*>) {
+          if (it.size > 1) {
+            callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))
+          } else {
+            callback(Result.success(Unit))
+          }
+        } else {
+          callback(Result.failure(CameraXApiPigeonUtils.createConnectionError(channelName)))
+        } 
+      }
+    }
   }
 
 }

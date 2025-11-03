@@ -2,17 +2,17 @@ package dev.zeekr.camerax_android.view
 
 import androidx.camera.view.CameraController
 import androidx.camera.view.PreviewView
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiPreviewViewApi
-import dev.zeekr.camerax_android.ScaleTypeApi
+import dev.zeekr.camerax_android.PreviewViewScaleTypeApi
+import dev.zeekr.camerax_android.activity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PreviewViewImpl(private val impl: CameraXRegistrarImpl) : PigeonApiPreviewViewApi(impl) {
+class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiPreviewViewApi(registrar) {
     override fun pigeon_defaultConstructor(): PreviewView {
-        val context = impl.activity ?: impl.context
-        return PreviewView(context).apply {
+        return PreviewView(registrar.activity).apply {
             this.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
         }
     }
@@ -41,18 +41,21 @@ class PreviewViewImpl(private val impl: CameraXRegistrarImpl) : PigeonApiPreview
         }
     }
 
-    override fun getScaleType(pigeon_instance: PreviewView, callback: (Result<ScaleTypeApi>) -> Unit) {
+    override fun getScaleType(pigeon_instance: PreviewView, callback: (Result<PreviewViewScaleTypeApi>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val scaleType = pigeon_instance.scaleType
-                callback(Result.success(scaleType.api))
+                callback(Result.success(pigeon_instance.scaleType.api))
             } catch (e: Exception) {
                 callback(Result.failure(e))
             }
         }
     }
 
-    override fun setScaleType(pigeon_instance: PreviewView, scaleType: ScaleTypeApi, callback: (Result<Unit>) -> Unit) {
+    override fun setScaleType(
+        pigeon_instance: PreviewView,
+        scaleType: PreviewViewScaleTypeApi,
+        callback: (Result<Unit>) -> Unit
+    ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 pigeon_instance.scaleType = scaleType.impl
@@ -64,22 +67,22 @@ class PreviewViewImpl(private val impl: CameraXRegistrarImpl) : PigeonApiPreview
     }
 }
 
-val ScaleTypeApi.impl
+val PreviewViewScaleTypeApi.impl: PreviewView.ScaleType
     get() = when (this) {
-        ScaleTypeApi.FILL_START -> PreviewView.ScaleType.FILL_START
-        ScaleTypeApi.FILL_CENTER -> PreviewView.ScaleType.FILL_CENTER
-        ScaleTypeApi.FILL_END -> PreviewView.ScaleType.FILL_END
-        ScaleTypeApi.FIT_START -> PreviewView.ScaleType.FIT_START
-        ScaleTypeApi.FIT_CENTER -> PreviewView.ScaleType.FIT_CENTER
-        ScaleTypeApi.FIT_END -> PreviewView.ScaleType.FIT_END
+        PreviewViewScaleTypeApi.FILL_START -> PreviewView.ScaleType.FILL_START
+        PreviewViewScaleTypeApi.FILL_CENTER -> PreviewView.ScaleType.FILL_CENTER
+        PreviewViewScaleTypeApi.FILL_END -> PreviewView.ScaleType.FILL_END
+        PreviewViewScaleTypeApi.FIT_START -> PreviewView.ScaleType.FIT_START
+        PreviewViewScaleTypeApi.FIT_CENTER -> PreviewView.ScaleType.FIT_CENTER
+        PreviewViewScaleTypeApi.FIT_END -> PreviewView.ScaleType.FIT_END
     }
 
-val PreviewView.ScaleType.api
+val PreviewView.ScaleType.api: PreviewViewScaleTypeApi
     get() = when (this) {
-        PreviewView.ScaleType.FILL_START -> ScaleTypeApi.FILL_START
-        PreviewView.ScaleType.FILL_CENTER -> ScaleTypeApi.FILL_CENTER
-        PreviewView.ScaleType.FILL_END -> ScaleTypeApi.FILL_END
-        PreviewView.ScaleType.FIT_START -> ScaleTypeApi.FIT_START
-        PreviewView.ScaleType.FIT_CENTER -> ScaleTypeApi.FIT_CENTER
-        PreviewView.ScaleType.FIT_END -> ScaleTypeApi.FIT_END
+        PreviewView.ScaleType.FILL_START -> PreviewViewScaleTypeApi.FILL_START
+        PreviewView.ScaleType.FILL_CENTER -> PreviewViewScaleTypeApi.FILL_CENTER
+        PreviewView.ScaleType.FILL_END -> PreviewViewScaleTypeApi.FILL_END
+        PreviewView.ScaleType.FIT_START -> PreviewViewScaleTypeApi.FIT_START
+        PreviewView.ScaleType.FIT_CENTER -> PreviewViewScaleTypeApi.FIT_CENTER
+        PreviewView.ScaleType.FIT_END -> PreviewViewScaleTypeApi.FIT_END
     }

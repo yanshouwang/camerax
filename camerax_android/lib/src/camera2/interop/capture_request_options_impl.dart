@@ -1,5 +1,5 @@
 import 'package:camerax_android/src/camera2.dart';
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CaptureRequestOptionsImpl extends CaptureRequestOptions {

@@ -3,27 +3,27 @@ package dev.zeekr.camerax_android.common
 import androidx.camera.core.CameraState
 import androidx.camera.core.ZoomState
 import androidx.lifecycle.Observer
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraStateObserverApi
 import dev.zeekr.camerax_android.PigeonApiTorchStateObserverApi
 import dev.zeekr.camerax_android.PigeonApiZoomStateObserverApi
 import dev.zeekr.camerax_android.core.api
 import dev.zeekr.camerax_android.core.torchStateApi
 
-
-class CameraStateObserverImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraStateObserverApi(impl) {
+class CameraStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCameraStateObserverApi(registrar) {
     override fun pigeon_defaultConstructor(): CameraStateObserver {
         return CameraStateObserver(this)
     }
 }
 
-class TorchStateObserverImpl(impl: CameraXRegistrarImpl) : PigeonApiTorchStateObserverApi(impl) {
+class TorchStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiTorchStateObserverApi(registrar) {
     override fun pigeon_defaultConstructor(): TorchStateObserver {
         return TorchStateObserver(this)
     }
 }
 
-class ZoomStateObserverImpl(impl: CameraXRegistrarImpl) : PigeonApiZoomStateObserverApi(impl) {
+class ZoomStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiZoomStateObserverApi(registrar) {
     override fun pigeon_defaultConstructor(): ZoomStateObserver {
         return ZoomStateObserver(this)
     }

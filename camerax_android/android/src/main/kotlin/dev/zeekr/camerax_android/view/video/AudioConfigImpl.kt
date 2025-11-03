@@ -1,10 +1,13 @@
 package dev.zeekr.camerax_android.view.video
 
+import android.Manifest
+import androidx.annotation.RequiresPermission
 import androidx.camera.view.video.AudioConfig
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiAudioConfigApi
 
-class AudioConfigImpl(impl: CameraXRegistrarImpl) : PigeonApiAudioConfigApi(impl) {
+class AudioConfigImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiAudioConfigApi(registrar) {
+    @RequiresPermission(Manifest.permission.RECORD_AUDIO)
     override fun create(enableAudio: Boolean): AudioConfig {
         return AudioConfig.create(enableAudio)
     }

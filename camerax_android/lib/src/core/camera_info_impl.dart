@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 

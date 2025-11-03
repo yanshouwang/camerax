@@ -2,11 +2,11 @@ package dev.zeekr.camerax_android.ml.face
 
 import android.graphics.PointF
 import com.google.mlkit.vision.face.FaceContour
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.FaceContourTypeApi
 import dev.zeekr.camerax_android.PigeonApiFaceContourApi
 
-class FaceContourImpl(impl: CameraXRegistrarImpl) : PigeonApiFaceContourApi(impl) {
+class FaceContourImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceContourApi(registrar) {
     override fun type(pigeon_instance: FaceContour): FaceContourTypeApi {
         return pigeon_instance.faceContourType.faceContourTypeApi
     }
@@ -16,7 +16,7 @@ class FaceContourImpl(impl: CameraXRegistrarImpl) : PigeonApiFaceContourApi(impl
     }
 }
 
-val FaceContourTypeApi.impl
+val FaceContourTypeApi.impl: Int
     get() = when (this) {
         FaceContourTypeApi.FACE -> FaceContour.FACE
         FaceContourTypeApi.LEFT_CHEEK -> FaceContour.LEFT_CHEEK
@@ -35,7 +35,7 @@ val FaceContourTypeApi.impl
         FaceContourTypeApi.UPPER_LIP_TOP -> FaceContour.UPPER_LIP_TOP
     }
 
-val Int.faceContourTypeApi
+val Int.faceContourTypeApi: FaceContourTypeApi
     get() = when (this) {
         FaceContour.FACE -> FaceContourTypeApi.FACE
         FaceContour.LEFT_CHEEK -> FaceContourTypeApi.LEFT_CHEEK
@@ -52,5 +52,5 @@ val Int.faceContourTypeApi
         FaceContour.RIGHT_EYEBROW_TOP -> FaceContourTypeApi.RIGHT_EYEBROW_TOP
         FaceContour.UPPER_LIP_BOTTOM -> FaceContourTypeApi.UPPER_LIP_BOTTOM
         FaceContour.UPPER_LIP_TOP -> FaceContourTypeApi.UPPER_LIP_TOP
-        else -> throw IllegalArgumentException()
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

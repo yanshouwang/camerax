@@ -8,7 +8,7 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
 /** CameraXAndroidPlugin */
 class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
-    private lateinit var registrar: CameraXRegistrarImpl
+    private lateinit var registrar: CameraXApiPigeonProxyApiRegistrar
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         val binaryMessenger = binding.binaryMessenger

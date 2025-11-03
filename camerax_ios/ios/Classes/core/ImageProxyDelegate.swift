@@ -32,18 +32,18 @@ class ImageProxyDelegate: PigeonApiDelegateImageProxyApi {
         return try pigeonInstance.getImageInfo()
     }
     
-    class PlaneProxyDelegate: PigeonApiDelegatePlaneProxyApi {
-        func value(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData {
+    class PlaneProxyDelegate: PigeonApiDelegateImageProxyPlaneProxyApi {
+        func value(pigeonApi: PigeonApiImageProxyPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> FlutterStandardTypedData {
             let value = try pigeonInstance.getValue()
             return FlutterStandardTypedData(bytes: value)
         }
         
-        func pixelStride(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64 {
+        func pixelStride(pigeonApi: PigeonApiImageProxyPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64 {
             let pixelStride = try pigeonInstance.getPixelStride()
             return Int64(pixelStride)
         }
         
-        func rowStride(pigeonApi: PigeonApiPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64 {
+        func rowStride(pigeonApi: PigeonApiImageProxyPlaneProxyApi, pigeonInstance: ImageProxy.PlaneProxy) throws -> Int64 {
             let rowStride = try pigeonInstance.getRowStride()
             return Int64(rowStride)
         }

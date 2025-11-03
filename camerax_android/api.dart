@@ -3,7 +3,7 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/camerax.g.dart',
+    dartOut: 'lib/src/camerax_api.g.dart',
     dartOptions: DartOptions(),
     kotlinOut:
         'android/src/main/kotlin/dev/zeekr/camerax_android/CameraXApi.g.kt',
@@ -152,9 +152,9 @@ enum ImageFormatApi {
   translucent,
   transparent,
   // unknown,
-  yCbCr420Sp,
-  yCbCr422I,
-  yCbCr422Sp,
+  // yCbCr420Sp,  // NV21
+  // yCbCr422I,   // YUY2
+  // yCbCr422Sp,  // NV16
 }
 
 enum PermissionApi { video, audio }
@@ -355,17 +355,13 @@ enum DynamicRangeEncodingApi {
   dolbyVision,
 }
 
-enum DynamicRangeBitDepthApi {
-  bitDepthUnspecified,
-  bitDepth8Bit,
-  bitDepth10Bit,
-}
+enum DynamicRangeBitDepthApi { unspecified, eightBit, tenBit }
 
 enum ImageAnalysisStrategyApi { keepOnlyLatest, blockProducer }
 
 enum ImageAnalysisCoordinateSystemApi { original, sensor, viewReferenced }
 
-enum ImageAnalysisOutputImageFormatApi { yuv_420_888, rgba_8888, nv21 }
+enum ImageAnalysisOutputImageFormatApi { yuv420_888, rgba8888, nv21 }
 
 enum ImageCaptureCaptureModeApi {
   maximizeQuality,
@@ -375,7 +371,7 @@ enum ImageCaptureCaptureModeApi {
 
 enum ImageCaptureFlashModeApi { auto, on, off, screen }
 
-enum MeteringModeApi { af, ae, awb }
+enum FocusMeteringActionMeteringModeApi { af, ae, awb }
 
 enum MirrorModeApi { off, on, onFrontOnly }
 
@@ -427,7 +423,7 @@ abstract class ResolutionStrategyApi {
   ),
 )
 abstract class ResolutionSelectorApi {
-  ResolutionSelectorApi();
+  ResolutionSelectorApi.build();
 
   late final ResolutionSelectorModeApi allowedResolutionMode;
   late final AspectRatioStrategyApi aspectRatioStrategy;
@@ -501,7 +497,7 @@ abstract class CameraSelectorApi {
   @static
   late final CameraSelectorApi external;
 
-  CameraSelectorApi(CameraSelectorLensFacingApi? lensFacing);
+  CameraSelectorApi.build({CameraSelectorLensFacingApi? lensFacing});
 }
 
 @ProxyApi(
@@ -534,7 +530,10 @@ abstract class ExposureStateApi {
   ),
 )
 abstract class MeteringPointTupleApi {
-  MeteringPointTupleApi(MeteringPointApi point, {List<MeteringModeApi>? modes});
+  MeteringPointTupleApi(
+    MeteringPointApi point, {
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  });
 }
 
 @ProxyApi(
@@ -553,8 +552,8 @@ abstract class DurationTupleApi {
 )
 abstract class FocusMeteringActionApi {
   FocusMeteringActionApi.build(
-    MeteringPointTupleApi first, {
-    List<MeteringPointTupleApi>? others,
+    MeteringPointTupleApi point, {
+    List<MeteringPointTupleApi>? morePoints,
     bool? disableAutoCancel,
     DurationTupleApi? autoCancelDuration,
   });
@@ -704,7 +703,7 @@ enum BarcodeFormatApi {
   aztec,
 }
 
-enum BarcodeValueTypeApi {
+enum BarcodeTypeApi {
   unknown,
   contactInfo,
   email,
@@ -720,21 +719,21 @@ enum BarcodeValueTypeApi {
   driverLicense,
 }
 
-enum AddressTypeApi { unknown, work, home }
+enum BarcodeAddressTypeApi { unknown, work, home }
 
-enum EmailTypeApi { unknown, work, home }
+enum BarcodeEmailTypeApi { unknown, work, home }
 
-enum PhoneTypeApi { unknown, work, home, fax, mobile }
+enum BarcodePhoneTypeApi { unknown, work, home, fax, mobile }
 
-enum WiFiEncryptionTypeApi { open, wpa, wep }
+enum BarcodeWiFiTypeApi { open, wpa, wep }
 
-enum FaceClassificationModeApi { none, all }
+enum FaceDetectorOptionsClassificationModeApi { none, all }
 
-enum FaceContourModeApi { none, all }
+enum FaceDetectorOptionsContourModeApi { none, all }
 
-enum FaceLandmarkModeApi { none, all }
+enum FaceDetectorOptionsLandmarkModeApi { none, all }
 
-enum FacePerformanceModeApi { fast, accurate }
+enum FaceDetectorOptionsPerformanceModeApi { fast, accurate }
 
 enum FaceContourTypeApi {
   face,
@@ -775,9 +774,10 @@ enum FaceLandmarkTypeApi {
 abstract class MlKitAnalyzerResultApi {
   late final int timestamp;
 
-  List<BarcodeApi>? getBarcodes(BarcodeScannerApi detector);
-  List<FaceApi>? getFaces(FaceDetectorApi detector);
-  List<Object?>? getThrowable(DetectorApi detector);
+  List<BarcodeApi>? getValue1(BarcodeScannerApi detector);
+  List<FaceApi>? getValue2(FaceDetectorApi detector);
+  List<Object?>? getThrowable1(BarcodeScannerApi detector);
+  List<Object?>? getThrowable2(FaceDetectorApi detector);
 }
 
 @ProxyApi(
@@ -787,7 +787,8 @@ abstract class MlKitAnalyzerResultApi {
 )
 abstract class MlKitAnalyzerApi implements ImageAnalysisAnalyzerApi {
   MlKitAnalyzerApi({
-    required List<DetectorApi> detectors,
+    required List<BarcodeScannerApi> detectors1,
+    required List<FaceDetectorApi> detectors2,
     required ImageAnalysisCoordinateSystemApi targetCoordinateSystem,
     required MlKitAnalyzerResultConsumerApi consumer,
   });
@@ -795,18 +796,11 @@ abstract class MlKitAnalyzerApi implements ImageAnalysisAnalyzerApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.ml.Detector',
-  ),
-)
-abstract class DetectorApi extends CloseableApi {}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Address',
   ),
 )
-abstract class AddressApi {
-  late final AddressTypeApi type;
+abstract class BarcodeAddressApi {
+  late final BarcodeAddressTypeApi type;
   late final List<String> addressLines;
 }
 
@@ -816,7 +810,7 @@ abstract class AddressApi {
         'com.google.mlkit.vision.barcode.common.Barcode.CalendarDateTime',
   ),
 )
-abstract class CalendarDateTimeApi {
+abstract class BarcodeCalendarDateTimeApi {
   late final String? rawValue;
   late final int year;
   late final int month;
@@ -833,9 +827,9 @@ abstract class CalendarDateTimeApi {
         'com.google.mlkit.vision.barcode.common.Barcode.CalendarEvent',
   ),
 )
-abstract class CalendarEventApi {
-  late final CalendarDateTimeApi? start;
-  late final CalendarDateTimeApi? end;
+abstract class BarcodeCalendarEventApi {
+  late final BarcodeCalendarDateTimeApi? start;
+  late final BarcodeCalendarDateTimeApi? end;
   late final String? location;
   late final String? organizer;
   late final String? summary;
@@ -848,12 +842,12 @@ abstract class CalendarEventApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.ContactInfo',
   ),
 )
-abstract class ContactInfoApi {
-  late final List<AddressApi> addresses;
-  late final List<EmailApi> emails;
-  late final PersonNameApi? name;
+abstract class BarcodeContactInfoApi {
+  late final List<BarcodeAddressApi> addresses;
+  late final List<BarcodeEmailApi> emails;
+  late final BarcodePersonNameApi? name;
   late final String? organization;
-  late final List<PhoneApi> phones;
+  late final List<BarcodePhoneApi> phones;
   late final String? title;
   late final List<String> urls;
 }
@@ -864,7 +858,7 @@ abstract class ContactInfoApi {
         'com.google.mlkit.vision.barcode.common.Barcode.DriverLicense',
   ),
 )
-abstract class DriverLicenseApi {
+abstract class BarcodeDriverLicenseApi {
   late final String? licenseNumber;
   late final String? documentType;
   late final String? expiryDate;
@@ -886,8 +880,8 @@ abstract class DriverLicenseApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Email',
   ),
 )
-abstract class EmailApi {
-  late final EmailTypeApi type;
+abstract class BarcodeEmailApi {
+  late final BarcodeEmailTypeApi type;
   late final String? address;
   late final String? subject;
   late final String? body;
@@ -898,7 +892,7 @@ abstract class EmailApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.GeoPoint',
   ),
 )
-abstract class GeoPointApi {
+abstract class BarcodeGeoPointApi {
   late final double lat;
   late final double lng;
 }
@@ -908,7 +902,7 @@ abstract class GeoPointApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.PersonName',
   ),
 )
-abstract class PersonNameApi {
+abstract class BarcodePersonNameApi {
   late final String? formattedName;
   late final String? pronunciation;
   late final String? prefix;
@@ -923,8 +917,8 @@ abstract class PersonNameApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Phone',
   ),
 )
-abstract class PhoneApi {
-  late final PhoneTypeApi type;
+abstract class BarcodePhoneApi {
+  late final BarcodePhoneTypeApi type;
   late final String? number;
 }
 
@@ -933,7 +927,7 @@ abstract class PhoneApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Sms',
   ),
 )
-abstract class SmsApi {
+abstract class BarcodeSmsApi {
   late final String? phoneNumber;
   late final String? message;
 }
@@ -943,7 +937,7 @@ abstract class SmsApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.UrlBookmark',
   ),
 )
-abstract class UrlBookmarkApi {
+abstract class BarcodeUrlBookmarkApi {
   late final String? title;
   late final String? url;
 }
@@ -953,8 +947,8 @@ abstract class UrlBookmarkApi {
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.WiFi',
   ),
 )
-abstract class WiFiApi {
-  late final WiFiEncryptionTypeApi encryptionType;
+abstract class BarcodeWiFiApi {
+  late final BarcodeWiFiTypeApi encryptionType;
   late final String? ssid;
   late final String? password;
 }
@@ -968,19 +962,19 @@ abstract class BarcodeApi {
   late final RectApi? boundingBox;
   late final List<PointApi>? cornerPoints;
   late final BarcodeFormatApi format;
-  late final BarcodeValueTypeApi valueType;
+  late final BarcodeTypeApi valueType;
   late final Uint8List? rawBytes;
   late final String? rawValue;
   late final String? displayValue;
-  late final CalendarEventApi? calendarEvent;
-  late final ContactInfoApi? contactInfo;
-  late final DriverLicenseApi? driverLicense;
-  late final EmailApi? email;
-  late final GeoPointApi? geoPoint;
-  late final PhoneApi? phone;
-  late final SmsApi? sms;
-  late final UrlBookmarkApi? url;
-  late final WiFiApi? wifi;
+  late final BarcodeCalendarEventApi? calendarEvent;
+  late final BarcodeContactInfoApi? contactInfo;
+  late final BarcodeDriverLicenseApi? driverLicense;
+  late final BarcodeEmailApi? email;
+  late final BarcodeGeoPointApi? geoPoint;
+  late final BarcodePhoneApi? phone;
+  late final BarcodeSmsApi? sms;
+  late final BarcodeUrlBookmarkApi? url;
+  late final BarcodeWiFiApi? wifi;
 }
 
 @ProxyApi(
@@ -1001,8 +995,8 @@ abstract class ZoomSuggestionOptionsZoomCallbackApi {
   ),
 )
 abstract class ZoomSuggestionOptionsApi {
-  ZoomSuggestionOptionsApi.build({
-    required ZoomSuggestionOptionsZoomCallbackApi zoomCallback,
+  ZoomSuggestionOptionsApi.build(
+    ZoomSuggestionOptionsZoomCallbackApi zoomCallback, {
     double? maxSupportedZoomRatio,
   });
 }
@@ -1022,11 +1016,21 @@ abstract class BarcodeScannerOptionsApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.ml.barcode.BarcodeScanner',
+    fullClassName: 'com.google.mlkit.vision.barcode.BarcodeScanner',
   ),
 )
-abstract class BarcodeScannerApi extends DetectorApi {
-  BarcodeScannerApi({BarcodeScannerOptionsApi? options});
+abstract class BarcodeScannerApi extends CloseableApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.barcode.BarcodeScanning',
+  ),
+)
+abstract class BarcodeScanningApi {
+  @static
+  BarcodeScannerApi getClient1();
+  @static
+  BarcodeScannerApi getClient2(BarcodeScannerOptionsApi options);
 }
 
 @ProxyApi(
@@ -1078,21 +1082,31 @@ abstract class FaceApi {
 abstract class FaceDetectorOptionsApi {
   FaceDetectorOptionsApi.build({
     bool? enableTracking,
-    FaceClassificationModeApi? classificationMode,
-    FaceContourModeApi? contourMode,
-    FaceLandmarkModeApi? landmarkMode,
+    FaceDetectorOptionsClassificationModeApi? classificationMode,
+    FaceDetectorOptionsContourModeApi? contourMode,
+    FaceDetectorOptionsLandmarkModeApi? landmarkMode,
     double? minFaceSize,
-    FacePerformanceModeApi? performanceMode,
+    FaceDetectorOptionsPerformanceModeApi? performanceMode,
   });
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.ml.face.FaceDetector',
+    fullClassName: 'com.google.mlkit.vision.face.FaceDetector',
   ),
 )
-abstract class FaceDetectorApi extends DetectorApi {
-  FaceDetectorApi({FaceDetectorOptionsApi? options});
+abstract class FaceDetectorApi extends CloseableApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.face.FaceDetection',
+  ),
+)
+abstract class FaceDetectionApi {
+  @static
+  FaceDetectorApi getClient1();
+  @static
+  FaceDetectorApi getClient2(FaceDetectorOptionsApi options);
 }
 
 // @ProxyApi(
@@ -1196,8 +1210,8 @@ abstract class OutputOptionsApi {
   ),
 )
 abstract class FileOutputOptionsApi extends OutputOptionsApi {
-  FileOutputOptionsApi.build({
-    required String file,
+  FileOutputOptionsApi.build(
+    String file, {
     int? durationLimitMillis,
     int? fileSizeLimitBytes,
     LocationApi? location,

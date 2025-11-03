@@ -4,8 +4,10 @@ import 'package:camerax_platform_interface/src/core.dart';
 
 import 'av_metadata_object.dart';
 
-abstract base class AVAnalyzerResult {
-  List<AVMetadataObject> get objects;
+final class AVAnalyzerResult {
+  final List<AVMetadataObject> objects;
+
+  const AVAnalyzerResult(this.objects);
 }
 
 abstract base class AVAnalyzer extends ImageAnalysisAnalyzer {

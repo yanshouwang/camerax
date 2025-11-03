@@ -3,21 +3,22 @@ package dev.zeekr.camerax_android.camera2.interop
 import android.hardware.camera2.CaptureRequest
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
-import dev.zeekr.camerax_android.ControlAeModeApi
-import dev.zeekr.camerax_android.ControlAfModeApi
-import dev.zeekr.camerax_android.ControlAwbModeApi
-import dev.zeekr.camerax_android.ControlModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAeModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAfModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAwbModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlModeApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsApi
 import dev.zeekr.camerax_android.camera2.impl
 
 @ExperimentalCamera2Interop
-class CaptureRequestOptionsImpl(impl: CameraXRegistrarImpl) : PigeonApiCaptureRequestOptionsApi(impl) {
+class CaptureRequestOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCaptureRequestOptionsApi(registrar) {
     override fun build(
-        mode: ControlModeApi?,
-        aeMode: ControlAeModeApi?,
-        afMode: ControlAfModeApi?,
-        awbMode: ControlAwbModeApi?,
+        mode: CameraMetadataControlModeApi?,
+        aeMode: CameraMetadataControlAeModeApi?,
+        afMode: CameraMetadataControlAfModeApi?,
+        awbMode: CameraMetadataControlAwbModeApi?,
         sensorExposureTime: Long?
     ): CaptureRequestOptions {
         val builder = CaptureRequestOptions.Builder()

@@ -1,4 +1,7 @@
+export 'common/auto_closeable_impl.dart';
+export 'common/closeable_impl.dart';
 export 'common/consumer_impl.dart';
+export 'common/exception_impl.dart';
 export 'common/image_format_impl.dart';
 export 'common/location_impl.dart';
 export 'common/observer_impl.dart';
@@ -8,4 +11,3 @@ export 'common/point_impl.dart';
 export 'common/range_impl.dart';
 export 'common/rect_impl.dart';
 export 'common/size_impl.dart';
-export 'common/throwable_impl.dart';

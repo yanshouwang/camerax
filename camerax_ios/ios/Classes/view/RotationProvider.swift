@@ -47,9 +47,10 @@ public class RotationProvider: NSObject {
         return rotation
     }
     
-    public func addListener(_ listener: Listener) {
-        guard orientationListener.canDetectOrientation() && !listeners.contains(where: { $0 === listener }) else { return }
+    public func addListener(_ listener: Listener) -> Bool {
+        guard orientationListener.canDetectOrientation() && !listeners.contains(where: { $0 === listener }) else { return false }
         listeners.append(listener)
+        return true
     }
     
     public func removeListener(_ listener: Listener) {
@@ -68,11 +69,7 @@ public class RotationProvider: NSObject {
         }
     }
     
-    public class Listener: NSObject {
-        fileprivate let onRotationChanged: (Int) -> Void
-        
-        init(onRotationChanged: @escaping (Int) -> Void) {
-            self.onRotationChanged = onRotationChanged
-        }
+    public protocol Listener: NSObjectProtocol {
+        func onRotationChanged(_ rotation: Int) -> Void
     }
 }

@@ -6,15 +6,20 @@ import androidx.camera.core.DynamicRange
 import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ExposureState
 import androidx.camera.core.FocusMeteringAction
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
-import dev.zeekr.camerax_android.LensFacingApi
+import androidx.camera.core.ZoomState
+import androidx.lifecycle.LifecycleOwner
+import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
+import dev.zeekr.camerax_android.CameraStateApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraInfoApi
-import dev.zeekr.camerax_android.common.CameraStateLiveData
+import dev.zeekr.camerax_android.TorchStateApi
+import dev.zeekr.camerax_android.activity
+import dev.zeekr.camerax_android.common.CameraStateObserver
 import dev.zeekr.camerax_android.common.IntRange
-import dev.zeekr.camerax_android.common.TorchStateLiveData
-import dev.zeekr.camerax_android.common.ZoomStateLiveData
+import dev.zeekr.camerax_android.common.TorchStateObserver
+import dev.zeekr.camerax_android.common.ZoomStateObserver
 
-class CameraInfoImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraInfoApi(impl) {
+class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraInfoApi(registrar) {
     override fun mustPlayShutterSound(): Boolean {
         return CameraInfo.mustPlayShutterSound()
     }
@@ -23,16 +28,43 @@ class CameraInfoImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraInfoApi(impl) 
         return pigeon_instance.cameraSelector
     }
 
-    override fun getCameraState(pigeon_instance: CameraInfo): CameraStateLiveData {
-        return CameraStateLiveData(pigeon_instance.cameraState)
+    override fun getCameraState(pigeon_instance: CameraInfo): CameraStateApi? {
+        return pigeon_instance.cameraState.value?.api
     }
 
-    override fun getTorchState(pigeon_instance: CameraInfo): TorchStateLiveData {
-        return TorchStateLiveData(pigeon_instance.torchState)
+    override fun observeCameraState(pigeon_instance: CameraInfo, observer: CameraStateObserver) {
+        val owner = registrar.activity as LifecycleOwner
+        pigeon_instance.cameraState.observe(owner, observer)
     }
 
-    override fun getZoomState(pigeon_instance: CameraInfo): ZoomStateLiveData {
-        return ZoomStateLiveData(pigeon_instance.zoomState)
+    override fun removeCameraStateObserver(pigeon_instance: CameraInfo, observer: CameraStateObserver) {
+        pigeon_instance.cameraState.removeObserver(observer)
+    }
+
+    override fun getTorchState(pigeon_instance: CameraInfo): TorchStateApi? {
+        return pigeon_instance.torchState.value?.torchStateApi
+    }
+
+    override fun observeTorchState(pigeon_instance: CameraInfo, observer: TorchStateObserver) {
+        val owner = registrar.activity as LifecycleOwner
+        pigeon_instance.torchState.observe(owner, observer)
+    }
+
+    override fun removeTorchStateObserver(pigeon_instance: CameraInfo, observer: TorchStateObserver) {
+        pigeon_instance.torchState.removeObserver(observer)
+    }
+
+    override fun getZoomState(pigeon_instance: CameraInfo): ZoomState? {
+        return pigeon_instance.zoomState.value
+    }
+
+    override fun observeZoomState(pigeon_instance: CameraInfo, observer: ZoomStateObserver) {
+        val owner = registrar.activity as LifecycleOwner
+        pigeon_instance.zoomState.observe(owner, observer)
+    }
+
+    override fun removeZoomStateObserver(pigeon_instance: CameraInfo, observer: ZoomStateObserver) {
+        pigeon_instance.zoomState.removeObserver(observer)
     }
 
     override fun getExposureState(pigeon_instance: CameraInfo): ExposureState {
@@ -43,8 +75,8 @@ class CameraInfoImpl(impl: CameraXRegistrarImpl) : PigeonApiCameraInfoApi(impl) 
         return pigeon_instance.intrinsicZoomRatio.toDouble()
     }
 
-    override fun getLensFacing(pigeon_instance: CameraInfo): LensFacingApi {
-        return pigeon_instance.lensFacing.lensFacingApi
+    override fun getLensFacing(pigeon_instance: CameraInfo): CameraSelectorLensFacingApi {
+        return pigeon_instance.lensFacing.cameraSelectorLensFacingApi
     }
 
     override fun getPhysicalCameraInfos(pigeon_instance: CameraInfo): List<CameraInfo> {

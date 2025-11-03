@@ -16,7 +16,7 @@ final class ImageProxyPlaneProxy {
   });
 }
 
-abstract base class ImageProxy {
+abstract base class ImageProxy extends AutoCloseable {
   final ImageFormat format;
   final int width;
   final int height;
@@ -29,7 +29,5 @@ abstract base class ImageProxy {
     required this.height,
     required this.imageInfo,
     required this.planes,
-  });
-
-  Future<void> close();
+  }) : super.impl();
 }

@@ -2,25 +2,26 @@ package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.MeteringPoint
-import dev.zeekr.camerax_android.CameraXRegistrarImpl
-import dev.zeekr.camerax_android.MeteringModeApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.FocusMeteringActionMeteringModeApi
 import dev.zeekr.camerax_android.PigeonApiDurationTupleApi
 import dev.zeekr.camerax_android.PigeonApiFocusMeteringActionApi
 import dev.zeekr.camerax_android.PigeonApiMeteringPointTupleApi
 import dev.zeekr.camerax_android.TimeUnitApi
+import dev.zeekr.camerax_android.common.impl
 import java.util.concurrent.TimeUnit
 
-class FocusMeteringActionImpl(impl: CameraXRegistrarImpl) : PigeonApiFocusMeteringActionApi(impl) {
+class FocusMeteringActionImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFocusMeteringActionApi(registrar) {
     override fun build(
-        first: MeteringPointTuple,
-        others: List<MeteringPointTuple>?,
+        point: MeteringPointTuple,
+        morePoints: List<MeteringPointTuple>?,
         disableAutoCancel: Boolean?,
         autoCancelDuration: DurationTuple?
     ): FocusMeteringAction {
-        val builder = if (first.mode == null) FocusMeteringAction.Builder(first.point)
-        else FocusMeteringAction.Builder(first.point, first.mode)
-        if (others != null) {
-            for (other in others) {
+        val builder = if (point.mode == null) FocusMeteringAction.Builder(point.point)
+        else FocusMeteringAction.Builder(point.point, point.mode)
+        if (morePoints != null) {
+            for (other in morePoints) {
                 if (other.mode == null) builder.addPoint(other.point)
                 else builder.addPoint(other.point, other.mode)
             }
@@ -54,41 +55,31 @@ class FocusMeteringActionImpl(impl: CameraXRegistrarImpl) : PigeonApiFocusMeteri
         return pigeon_instance.isAutoCancelEnabled
     }
 
-    class MeteringPointTupleImpl(impl: CameraXRegistrarImpl) : PigeonApiMeteringPointTupleApi(impl) {
+    class MeteringPointTupleImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiMeteringPointTupleApi(registrar) {
         override fun pigeon_defaultConstructor(
-            point: MeteringPoint, modes: List<MeteringModeApi>?
+            point: MeteringPoint,
+            modes: List<FocusMeteringActionMeteringModeApi>?
         ): MeteringPointTuple {
             val mode = if (modes.isNullOrEmpty()) null
-            else modes.fold(0) { total, next -> total or next.impl }
+            else modes.map { it.impl }.reduce { acc, i -> acc or i }
             return MeteringPointTuple(point, mode)
         }
     }
 
-    class DurationTupleImpl(impl: CameraXRegistrarImpl) : PigeonApiDurationTupleApi(impl) {
+    class DurationTupleImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiDurationTupleApi(registrar) {
         override fun pigeon_defaultConstructor(duration: Long, timeUnit: TimeUnitApi): DurationTuple {
             return DurationTuple(duration, timeUnit.impl)
         }
     }
 }
 
-data class MeteringPointTuple(val point: MeteringPoint, @FocusMeteringAction.MeteringMode val mode: Int?)
+data class MeteringPointTuple(val point: MeteringPoint, @param:FocusMeteringAction.MeteringMode val mode: Int?)
 
 data class DurationTuple(val duration: Long, val timeUnit: TimeUnit)
 
-val MeteringModeApi.impl
+val FocusMeteringActionMeteringModeApi.impl: Int
     get() = when (this) {
-        MeteringModeApi.AF -> FocusMeteringAction.FLAG_AF
-        MeteringModeApi.AE -> FocusMeteringAction.FLAG_AE
-        MeteringModeApi.AWB -> FocusMeteringAction.FLAG_AWB
-    }
-
-val TimeUnitApi.impl
-    get() = when (this) {
-        TimeUnitApi.NANOSECONDS -> TimeUnit.NANOSECONDS
-        TimeUnitApi.MICROSECONDS -> TimeUnit.MICROSECONDS
-        TimeUnitApi.MILLISECONDS -> TimeUnit.MILLISECONDS
-        TimeUnitApi.SECONDS -> TimeUnit.SECONDS
-        TimeUnitApi.MINUTES -> TimeUnit.MINUTES
-        TimeUnitApi.HOURS -> TimeUnit.HOURS
-        TimeUnitApi.DAYS -> TimeUnit.DAYS
+        FocusMeteringActionMeteringModeApi.AF -> FocusMeteringAction.FLAG_AF
+        FocusMeteringActionMeteringModeApi.AE -> FocusMeteringAction.FLAG_AE
+        FocusMeteringActionMeteringModeApi.AWB -> FocusMeteringAction.FLAG_AWB
     }

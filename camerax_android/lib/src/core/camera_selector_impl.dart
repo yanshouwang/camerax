@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CameraSelectorImpl extends CameraSelector {
@@ -14,7 +14,7 @@ final class CameraSelectorImpl extends CameraSelector {
   CameraSelectorImpl.internal(this.api) : super.impl();
 
   factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
-    final api = CameraSelectorApi(lensFacing: lensFacing?.api);
+    final api = CameraSelectorApi.build(lensFacing: lensFacing?.api);
     return CameraSelectorImpl.internal(api);
   }
 

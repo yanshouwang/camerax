@@ -1,9 +1,9 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'recording_stats_impl.dart';
-import 'video_output_results_impl.dart';
+import 'output_results_impl.dart';
 
 extension VideoRecordEventApiX on VideoRecordEventApi {
   VideoRecordEvent get impl {
