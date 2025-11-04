@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'quality_impl.dart';
 
-final class FallbackStrategyImpl extends FallbackStrategy {
+final class FallbackStrategyImpl extends FallbackStrategyApi {
   final FallbackStrategyApi api;
 
   FallbackStrategyImpl.internal(this.api) : super.impl();
@@ -33,7 +33,7 @@ final class FallbackStrategyImpl extends FallbackStrategy {
   }
 }
 
-extension FallbackStrategyX on FallbackStrategy {
+extension FallbackStrategyX on FallbackStrategyApi {
   FallbackStrategyApi get api {
     final impl = this;
     if (impl is! FallbackStrategyImpl) throw TypeError();

@@ -1,16 +1,22 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension RangeX on Range<int> {
-  IntRangeApi get intRangeApi => IntRangeApi(lower: lower, upper: upper);
+final class RangeImpl extends RangeApi {
+  final RangeProxyApi api;
 
-  LongRangeApi get longRangeApi => LongRangeApi(lower: lower, upper: upper);
+  RangeImpl.internal(this.api) : super.impl();
+
+  factory RangeImpl(int lower, int upper) {
+    final api = RangeProxyApi(lower: lower, upper: upper);
+    return RangeImpl.internal(api);
+  }
+
+  @override
+  int get lower => api.lower;
+  @override
+  int get upper => api.upper;
 }
 
-extension IntRangeApiX on IntRangeApi {
-  Range<int> get impl => Range(lower, upper);
-}
-
-extension LongRangeApiX on LongRangeApi {
-  Range<int> get impl => Range(lower, upper);
+extension RangeProxyApiX on RangeProxyApi {
+  RangeApi get impl => RangeImpl(lower, upper);
 }

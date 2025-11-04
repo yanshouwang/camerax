@@ -6,8 +6,8 @@ import 'face_contour_impl.dart';
 import 'face_landmark_impl.dart';
 
 extension FaceApiX on FaceApi {
-  Face get impl {
-    return Face(
+  FaceApi get impl {
+    return FaceApi(
       boundingBox: boundingBox.impl,
       allContours: allContours.map((e) => e.impl).toList(),
       allLandmarks: allLandmarks.map((e) => e.impl).toList(),

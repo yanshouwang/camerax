@@ -1,9 +1,0 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
-import 'package:camerax_platform_interface/camerax_platform_interface.dart';
-
-base mixin AutoCloseableImpl on AutoCloseable {
-  AutoCloseableApi get api;
-
-  @override
-  Future<void> close() => api.close();
-}

@@ -4,9 +4,9 @@ import 'package:camerax_android/src/ml/barcode.dart';
 import 'package:camerax_android/src/ml/face.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin DetectorImpl<T> on Detector<T>, AutoCloseableImpl, CloseableImpl {}
+base mixin DetectorImpl<T> on DetectorApi<T>, AutoCloseableImpl, CloseableImpl {}
 
-extension DetectorX on Detector {
+extension DetectorX on DetectorApi {
   BarcodeScannerApi get barcodeScannerApi {
     final impl = this;
     if (impl is! BarcodeScannerImpl) throw TypeError();

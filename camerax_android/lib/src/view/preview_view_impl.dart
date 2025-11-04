@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'camera_controller_impl.dart';
 
-final class PreviewViewImpl extends PreviewView {
+final class PreviewViewImpl extends PreviewViewApi {
   final PreviewViewApi api;
 
   PreviewViewImpl.internal(this.api) : super.impl();
@@ -17,7 +17,7 @@ final class PreviewViewImpl extends PreviewView {
   }
 
   @override
-  Future<void> setController(CameraController controller) =>
+  Future<void> setController(CameraControllerApi controller) =>
       api.setController(controller.api);
 
   @override

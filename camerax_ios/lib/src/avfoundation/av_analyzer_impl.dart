@@ -5,7 +5,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'av_metadata_object_impl.dart';
 
-final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerImpl {
+final class AVAnalyzerImpl extends AVAnalyzerApi with ImageAnalysisAnalyzerImpl {
   @override
   final AVAnalyzerApi api;
 
@@ -13,7 +13,7 @@ final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerImpl {
 
   factory AVAnalyzerImpl({
     List<AVMetadataObjectType>? types,
-    required Consumer<AVAnalyzerResult> consumer,
+    required ConsumerApi<AVAnalyzerResultApi> consumer,
   }) {
     final api = AVAnalyzerApi(
       types: types?.map((e) => e.api).toList(),
@@ -24,6 +24,6 @@ final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerImpl {
 }
 
 extension AVAnalyzerResultApiX on AVAnalyzerResultApi {
-  AVAnalyzerResult get impl =>
-      AVAnalyzerResult(objects.map((e) => e.impl).toList());
+  AVAnalyzerResultApi get impl =>
+      AVAnalyzerResultApi(objects.map((e) => e.impl).toList());
 }

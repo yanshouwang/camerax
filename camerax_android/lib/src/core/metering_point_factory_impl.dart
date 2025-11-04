@@ -3,10 +3,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'metering_point_impl.dart';
 
-base mixin MeteringPointFactoryImpl on MeteringPointFactory {
+base mixin MeteringPointFactoryImpl on MeteringPointFactoryApi {
   MeteringPointFactoryApi get api;
 
   @override
-  Future<MeteringPoint> createPoint(double x, double y, {double? size}) =>
+  Future<MeteringPointApi> createPoint(double x, double y, {double? size}) =>
       api.createPoint(x, y, size).then((e) => e.impl);
 }

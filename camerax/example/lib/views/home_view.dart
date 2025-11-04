@@ -100,7 +100,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  PreviewWidget(controller: controller),
+                  PreviewView(controller: controller),
                   if (imageModel != null)
                     Container(
                       alignment: Alignment.topRight,

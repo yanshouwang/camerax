@@ -11,8 +11,8 @@ extension AudioStatsAudioStateApiX on AudioStatsAudioStateApi {
 }
 
 extension AudioStatsApiX on AudioStatsApi {
-  AudioStats get impl {
-    return AudioStats(
+  AudioStatsApi get impl {
+    return AudioStatsApi(
       audioAmplitude: audioAmplitude,
       audioState: audioState.impl,
       errorCause: errorCause?.impl,

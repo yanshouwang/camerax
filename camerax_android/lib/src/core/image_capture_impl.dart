@@ -17,8 +17,8 @@ Future<ui.Image> _decodeImage(Uint8List value) async {
 }
 
 final class ImageCaptureOnImageCapturedCallbackImpl
-    extends ImageCaptureOnImageCapturedCallback {
-  final ImageCaptureOnImageCapturedCallbackApi api;
+    extends ImageCaptureOnImageCapturedCallbackApi {
+  final ImageCaptureOnImageCapturedCallbackProxyApi api;
 
   ImageCaptureOnImageCapturedCallbackImpl.internal(this.api) : super.impl();
 
@@ -26,10 +26,10 @@ final class ImageCaptureOnImageCapturedCallbackImpl
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
     void Function(ui.Image bitmap)? onPostviewBitmapAvailable,
-    void Function(ImageProxy image)? onCaptureSuccess,
+    void Function(ImageProxyApi image)? onCaptureSuccess,
     void Function(Object exception)? onError,
   }) {
-    final api = ImageCaptureOnImageCapturedCallbackApi(
+    final api = ImageCaptureOnImageCapturedCallbackProxyApi(
       onCaptureStarted: onCaptureStarted == null
           ? null
           : (_) => onCaptureStarted(),
@@ -70,9 +70,9 @@ extension ImageCaptureFlashModeApiX on ImageCaptureFlashModeApi {
   ImageCaptureFlashMode get impl => ImageCaptureFlashMode.values[index];
 }
 
-extension ImageCaptureOnImageCapturedCallbackX
-    on ImageCaptureOnImageCapturedCallback {
-  ImageCaptureOnImageCapturedCallbackApi get api {
+extension ImageCaptureOnImageCapturedCallbackApiX
+    on ImageCaptureOnImageCapturedCallbackApi {
+  ImageCaptureOnImageCapturedCallbackProxyApi get api {
     final impl = this;
     if (impl is! ImageCaptureOnImageCapturedCallbackImpl) throw TypeError();
     return impl.api;

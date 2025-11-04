@@ -3,8 +3,8 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'focus_metering_action_impl.dart';
 
-final class CameraControlImpl extends CameraControl {
-  final CameraControlApi api;
+final class CameraControlImpl extends CameraControlApi {
+  final CameraControlProxyApi api;
 
   CameraControlImpl.internal(this.api) : super.impl();
 
@@ -26,18 +26,18 @@ final class CameraControlImpl extends CameraControl {
   Future<void> setZoomRatio(double ratio) => api.setZoomRatio(ratio);
 
   @override
-  Future<bool> startFocusAndMetering(FocusMeteringAction action) =>
+  Future<bool> startFocusAndMetering(FocusMeteringActionApi action) =>
       api.startFocusAndMetering(action.api).then((e) => e.isFocusSuccessful);
 }
 
-extension CameraControlX on CameraControl {
-  CameraControlApi get api {
+extension CameraControlApiX on CameraControlApi {
+  CameraControlProxyApi get api {
     final impl = this;
     if (impl is! CameraControlImpl) throw TypeError();
     return impl.api;
   }
 }
 
-extension CameraControlApiX on CameraControlApi {
-  CameraControl get impl => CameraControlImpl.internal(this);
+extension CameraControlProxyApiX on CameraControlProxyApi {
+  CameraControlApi get impl => CameraControlImpl.internal(this);
 }

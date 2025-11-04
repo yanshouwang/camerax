@@ -7,14 +7,14 @@ import 'barcode.dart';
 import 'face.dart';
 import 'interfaces.dart';
 
-final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
+final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResultApi {
   final MlKitAnalyzerResultApi api;
 
   MlKitAnalyzerResultImpl.internal(this.api, {required super.timestamp})
     : super.impl();
 
   @override
-  Future<T?> getValue<T>(Detector<T> detector) {
+  Future<T?> getValue<T>(DetectorApi<T> detector) {
     if (detector is BarcodeScannerImpl) {
       return api
           .getValue1(detector.barcodeScannerApi)
@@ -29,7 +29,7 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   }
 
   @override
-  Future<Object?> getThrowable<T>(Detector<T> detector) {
+  Future<Object?> getThrowable<T>(DetectorApi<T> detector) {
     if (detector is BarcodeScannerImpl) {
       return api.getThrowable1(detector.barcodeScannerApi).then((e) => e?.impl);
     } else if (detector is FaceDetectionImpl) {
@@ -40,7 +40,7 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   }
 }
 
-final class MlKitAnalyzerImpl extends MlKitAnalyzer
+final class MlKitAnalyzerImpl extends MlKitAnalyzerApi
     with ImageAnalysisAnalyzerImpl {
   @override
   final MlKitAnalyzerApi api;
@@ -48,17 +48,17 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
   MlKitAnalyzerImpl.internal(this.api) : super.impl();
 
   factory MlKitAnalyzerImpl({
-    required List<Detector> detectors,
+    required List<DetectorApi> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required Consumer<MlKitAnalyzerResult> consumer,
+    required ConsumerApi<MlKitAnalyzerResultApi> consumer,
   }) {
     final api = MlKitAnalyzerApi(
       detectors1: detectors
-          .whereType<BarcodeScanner>()
+          .whereType<BarcodeScannerApi>()
           .map((e) => e.api)
           .toList(),
       detectors2: detectors
-          .whereType<FaceDetector>()
+          .whereType<FaceDetectorApi>()
           .map((e) => e.api)
           .toList(),
       targetCoordinateSystem: targetCoordinateSystem.api,
@@ -69,7 +69,7 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
 }
 
 extension MlKitAnalyzerResultApiX on MlKitAnalyzerResultApi {
-  MlKitAnalyzerResult get impl {
+  MlKitAnalyzerResultApi get impl {
     return MlKitAnalyzerResultImpl.internal(this, timestamp: timestamp);
   }
 }

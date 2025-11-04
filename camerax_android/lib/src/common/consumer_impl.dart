@@ -3,51 +3,49 @@ import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class VideoRecordEventConsumerImpl extends Consumer<VideoRecordEvent> {
-  final VideoRecordEventConsumerApi api;
+final class VideoRecordEventConsumerImpl extends VideoRecordEventConsumerApi {
+  final VideoRecordEventConsumerProxyApi api;
 
   VideoRecordEventConsumerImpl.internal(this.api) : super.impl();
 
   factory VideoRecordEventConsumerImpl({
-    required void Function(VideoRecordEvent value) accept,
+    required void Function(VideoRecordEventApi value) accept,
   }) {
-    final api = VideoRecordEventConsumerApi(accept: (_, e) => accept(e.impl));
+    final api = VideoRecordEventConsumerProxyApi(
+      accept: (_, e) => accept(e.impl),
+    );
     return VideoRecordEventConsumerImpl.internal(api);
   }
 }
 
 final class MlKitAnalyzerResultConsumerImpl
-    extends Consumer<MlKitAnalyzerResult> {
-  final MlKitAnalyzerResultConsumerApi api;
+    extends MlKitAnalyzerResultConsumerApi {
+  final MlKitAnalyzerResultConsumerProxyApi api;
 
   MlKitAnalyzerResultConsumerImpl.internal(this.api) : super.impl();
 
   factory MlKitAnalyzerResultConsumerImpl({
-    required void Function(MlKitAnalyzerResult value) accept,
+    required void Function(MlKitAnalyzerResultApi value) accept,
   }) {
-    final api = MlKitAnalyzerResultConsumerApi(
+    final api = MlKitAnalyzerResultConsumerProxyApi(
       accept: (_, e) => accept(e.impl),
     );
     return MlKitAnalyzerResultConsumerImpl.internal(api);
   }
 }
 
-extension ConsumerX on Consumer {
-  VideoRecordEventConsumerApi get videoRecordEventConsumerApi {
+extension VideoRecordEventConsumerApiX on VideoRecordEventConsumerApi {
+  VideoRecordEventConsumerProxyApi get api {
     final impl = this;
     if (impl is! VideoRecordEventConsumerImpl) throw TypeError();
     return impl.api;
   }
+}
 
-  MlKitAnalyzerResultConsumerApi get mlKitAnalyzerResultConsumerApi {
+extension MlKitAnalyzerResultConsumerApiX on MlKitAnalyzerResultConsumerApi {
+  MlKitAnalyzerResultConsumerProxyApi get api {
     final impl = this;
     if (impl is! MlKitAnalyzerResultConsumerImpl) throw TypeError();
     return impl.api;
-  }
-
-  void accept<T>(T value) {
-    final impl = this;
-    if (impl is! ConsumerImpl<T>) throw TypeError();
-    impl.accept(value);
   }
 }

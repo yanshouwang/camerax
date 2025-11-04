@@ -4,9 +4,9 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'barcode_scanner_impl.dart';
 import 'barcode_scanner_options_impl.dart';
 
-final class BarcodeScanningImpl extends BarcodeScanning {
-  static Future<BarcodeScanner> getClient([
-    BarcodeScannerOptions? options,
+final class BarcodeScanningImpl extends BarcodeScanningApi {
+  static Future<BarcodeScannerApi> getClient([
+    BarcodeScannerOptionsApi? options,
   ]) async {
     final api = options == null
         ? await BarcodeScanningApi.getClient1()

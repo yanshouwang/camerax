@@ -4,8 +4,8 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'face_detector_impl.dart';
 import 'face_detector_options_impl.dart';
 
-final class FaceDetectionImpl extends FaceDetection {
-  static Future<FaceDetector> getClient([FaceDetectorOptions? options]) async {
+final class FaceDetectionImpl extends FaceDetectionApi {
+  static Future<FaceDetectorApi> getClient([FaceDetectorOptionsApi? options]) async {
     final api = options == null
         ? await FaceDetectionApi.getClient1()
         : await FaceDetectionApi.getClient2(options.api);

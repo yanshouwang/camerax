@@ -1,8 +1,25 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
-  ImageAnalysisAnalyzerApi get api;
+final class ImageAnalysisImageAnalyzerImplImpl extends ImageAnalysisAnalyzerApi
+    with ImageAnalysisAnalyzerImpl {
+  @override
+  final ImageAnalysisAnalyzerImplProxyApi api;
+
+  ImageAnalysisImageAnalyzerImplImpl.internal(this.api) : super.impl();
+
+  factory ImageAnalysisImageAnalyzerImplImpl({
+    required void Function(ImageProxyApi image) analyze,
+  }) {
+    final api = ImageAnalysisAnalyzerImplProxyApi(
+      analyze: (_, e) => analyze(e.impl),
+    );
+    return ImageAnalysisImageAnalyzerImplImpl.internal(api);
+  }
+}
+
+base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzerApi {
+  ImageAnalysisAnalyzerProxyApi get api;
 }
 
 extension ImageAnalysisStrategyX on ImageAnalysisStrategy {
@@ -29,8 +46,8 @@ extension ImageAnalysisOutputImageFormatApiX
       ImageAnalysisOutputImageFormat.values[index];
 }
 
-extension ImageAnalysisAnalyzerX on ImageAnalysisAnalyzer {
-  ImageAnalysisAnalyzerApi get api {
+extension ImageAnalysisAnalyzerApiX on ImageAnalysisAnalyzerApi {
+  ImageAnalysisAnalyzerProxyApi get api {
     final impl = this;
     if (impl is! ImageAnalysisAnalyzerImpl) throw TypeError();
     return impl.api;

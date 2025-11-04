@@ -3,7 +3,7 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/ml/interfaces.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class BarcodeScannerImpl extends BarcodeScanner
+final class BarcodeScannerImpl extends BarcodeScannerApi
     with AutoCloseableImpl, CloseableImpl, DetectorImpl {
   @override
   final BarcodeScannerApi api;
@@ -11,7 +11,7 @@ final class BarcodeScannerImpl extends BarcodeScanner
   BarcodeScannerImpl.internal(this.api) : super.impl();
 }
 
-extension BarcodeScannerX on BarcodeScanner {
+extension BarcodeScannerX on BarcodeScannerApi {
   BarcodeScannerApi get api {
     final impl = this;
     if (impl is! BarcodeScannerImpl) throw TypeError();

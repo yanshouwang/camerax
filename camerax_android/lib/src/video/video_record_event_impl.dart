@@ -6,18 +6,18 @@ import 'recording_stats_impl.dart';
 import 'output_results_impl.dart';
 
 extension VideoRecordEventApiX on VideoRecordEventApi {
-  VideoRecordEvent get impl {
+  VideoRecordEventApi get impl {
     final api = this;
     if (api is VideoRecordStatusEventApi) {
-      return VideoRecordStatusEvent(recordingStats: api.recordingStats.impl);
+      return VideoRecordStatusEventApi(recordingStats: api.recordingStats.impl);
     } else if (api is VideoRecordStartEventApi) {
-      return VideoRecordStartEvent(recordingStats: api.recordingStats.impl);
+      return VideoRecordStartEventApi(recordingStats: api.recordingStats.impl);
     } else if (api is VideoRecordPauseEventApi) {
-      return VideoRecordPauseEvent(recordingStats: api.recordingStats.impl);
+      return VideoRecordPauseEventApi(recordingStats: api.recordingStats.impl);
     } else if (api is VideoRecordResumeEventApi) {
-      return VideoRecordResumeEvent(recordingStats: api.recordingStats.impl);
+      return VideoRecordResumeEventApi(recordingStats: api.recordingStats.impl);
     } else if (api is VideoRecordFinalizeEventApi) {
-      return VideoRecordFinalizeEvent(
+      return VideoRecordFinalizeEventApi(
         recordingStats: api.recordingStats.impl,
         outputResults: api.outputResults.impl,
         cause: api.cause?.impl,

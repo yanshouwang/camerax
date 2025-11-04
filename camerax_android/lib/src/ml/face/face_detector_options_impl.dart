@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
+final class FaceDetectorOptionsImpl extends FaceDetectorOptionsApi {
   final FaceDetectorOptionsApi api;
 
   FaceDetectorOptionsImpl.internal(this.api) : super.impl();
@@ -48,7 +48,7 @@ extension FaceDetectorOptioinsPerformanceModeX
       FaceDetectorOptionsPerformanceModeApi.values[index];
 }
 
-extension FaceDetectorOptionsX on FaceDetectorOptions {
+extension FaceDetectorOptionsX on FaceDetectorOptionsApi {
   FaceDetectorOptionsApi get api {
     final impl = this;
     if (impl is! FaceDetectorOptionsImpl) throw TypeError();

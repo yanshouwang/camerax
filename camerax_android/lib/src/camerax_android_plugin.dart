@@ -16,44 +16,44 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }
 
   @override
-  PermissionManager newPermissionManager() => PermissionManagerImpl();
+  PermissionManagerApi $PermissionManagerApi() => PermissionManagerImpl();
 
   @override
-  CameraSelector get $CameraSelectorFront => CameraSelectorImpl.front;
+  CameraSelectorApi get $CameraSelectorApiFront => CameraSelectorImpl.front;
   @override
-  CameraSelector get $CameraSelectorBack => CameraSelectorImpl.back;
+  CameraSelectorApi get $CameraSelectorApiBack => CameraSelectorImpl.back;
   @override
-  CameraSelector get $CameraSelectorExternal => CameraSelectorImpl.external;
+  CameraSelectorApi get $CameraSelectorApiExternal => CameraSelectorImpl.external;
   @override
-  CameraSelector newCameraSelector({CameraSelectorLensFacing? lensFacing}) =>
+  CameraSelectorApi $CameraSelectorApi({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);
 
   @override
-  CameraController newCameraController() => CameraControllerImpl();
+  CameraControllerApi $CameraControllerApi() => CameraControllerImpl();
 
   @override
-  PreviewView newPreviewView() => PreviewViewImpl();
+  PreviewViewApi $PreviewViewApi() => PreviewViewImpl();
 
   @override
-  FallbackStrategy newFallbackStrategyHigherQualityOrLowerThan(
+  FallbackStrategyApi $FallbackStrategyApiHigherQualityOrLowerThan(
     Quality quality,
   ) => FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
-  FallbackStrategy newFallbackStrategyHigherQualityThan(Quality quality) =>
+  FallbackStrategyApi $FallbackStrategyApiHigherQualityThan(Quality quality) =>
       FallbackStrategyImpl.higherQualityThan(quality);
   @override
-  FallbackStrategy newFallbackStrategyLowerQualityOrHigherThan(
+  FallbackStrategyApi $FallbackStrategyApiLowerQualityOrHigherThan(
     Quality quality,
   ) => FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
   @override
-  FallbackStrategy newFallbackStrategyLowerQualityThan(Quality quality) =>
+  FallbackStrategyApi $FallbackStrategyApiLowerQualityThan(Quality quality) =>
       FallbackStrategyImpl.lowerQualityThan(quality);
 
   @override
-  MlKitAnalyzer newMlKitAnalyzer({
-    required List<Detector> detectors,
+  MlKitAnalyzerApi $MlKitAnalyzerApi({
+    required List<DetectorApi> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required Consumer<MlKitAnalyzerResult> consumer,
+    required ConsumerApi<MlKitAnalyzerResultApi> consumer,
   }) => MlKitAnalyzerImpl(
     detectors: detectors,
     targetCoordinateSystem: targetCoordinateSystem,
@@ -61,31 +61,31 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  Future<Size<int>?> $QualitySelectorGetResolution(
-    CameraInfo cameraInfo,
+  Future<SizeApi<int>?> $QualitySelectorApiGetResolution(
+    CameraInfoApi cameraInfo,
     Quality quality,
   ) => QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
-  QualitySelector newQualitySelectorFrom(
+  QualitySelectorApi $QualitySelectorApiFrom(
     Quality quality, {
-    FallbackStrategy? fallbackStrategy,
+    FallbackStrategyApi? fallbackStrategy,
   }) => QualitySelectorImpl.from(quality, fallbackStrategy: fallbackStrategy);
 
   @override
-  QualitySelector newQualitySelectorFromOrderedList(
+  QualitySelectorApi $QualitySelectorApiFromOrderedList(
     List<Quality> qualities, {
-    FallbackStrategy? fallbackStrategy,
+    FallbackStrategyApi? fallbackStrategy,
   }) => QualitySelectorImpl.fromOrderedList(
     qualities,
     fallbackStrategy: fallbackStrategy,
   );
 
   @override
-  BarcodeScannerOptions newBarcodeScannerOptions({
+  BarcodeScannerOptionsApi $BarcodeScannerOptionsApi({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
-    ZoomSuggestionOptions? zoomSuggestionOptions,
+    ZoomSuggestionOptionsApi? zoomSuggestionOptions,
   }) => BarcodeScannerOptionsImpl(
     enableAllPotentialBarcodes: enableAllPotentialBarcodes,
     formats: formats,
@@ -93,7 +93,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  FaceDetectorOptions newFaceDetectorOptions({
+  FaceDetectorOptionsApi $FaceDetectorOptionsApi({
     bool? enableTracking,
     FaceDetectorOptionsClassificationMode? classificationMode,
     FaceDetectorOptionsContourMode? contourMode,
@@ -110,8 +110,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  ZoomSuggestionOptions newZoomSuggestionOptions(
-    ZoomSuggestionOptionsZoomCallback zoomCallback, {
+  ZoomSuggestionOptionsApi $ZoomSuggestionOptionsApi(
+    ZoomSuggestionOptionsZoomCallbackApi zoomCallback, {
     double? maxSupportedZoomRatio,
   }) => ZoomSuggestionOptionsImpl(
     zoomCallback,
@@ -119,11 +119,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  FileOutputOptions newFileOutputOptions(
+  FileOutputOptionsApi $FileOutputOptionsApi(
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
-    Location? location,
+    LocationApi? location,
   }) => FileOutputOptionsImpl(
     file,
     durationLimit: durationLimit,
@@ -132,15 +132,15 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  SurfaceOrientedMeteringPointFactory newSurfaceOrientedMeteringPointFactory(
+  SurfaceOrientedMeteringPointFactoryApi $SurfaceOrientedMeteringPointFactoryApi(
     width,
     height,
   ) => SurfaceOrientedMeteringPointFactoryImpl(width, height);
 
   @override
-  FocusMeteringAction newFocusMeteringAction(
-    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
+  FocusMeteringActionApi $FocusMeteringActionApi(
+    (MeteringPointApi, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPointApi, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) => FocusMeteringActionImpl(
@@ -151,21 +151,21 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  ImageAnalyzer newImageAnalyzer({
-    required void Function(ImageProxy image) analyze,
-  }) => ImageAnalyzerImpl(analyze: analyze);
+  ImageAnalysisImageAnalyzerApi $ImageAnalysisAnalyzerApi({
+    required void Function(ImageProxyApi image) analyze,
+  }) => ImageAnalysisImageAnalyzerImplImpl(analyze: analyze);
 
   @override
-  Camera2CameraControl newCamera2CameraControlFrom(
-    CameraControl cameraControl,
+  Camera2CameraControlApi $Camera2CameraControlApiFrom(
+    CameraControlApi cameraControl,
   ) => Camera2CameraControlImpl.from(cameraControl);
 
   @override
-  Camera2CameraInfo newCamera2CameraInfoFrom(CameraInfo cameraInfo) =>
+  Camera2CameraInfoApi $Camera2CameraInfoApiFrom(CameraInfoApi cameraInfo) =>
       Camera2CameraInfoImpl.from(cameraInfo);
 
   @override
-  CaptureRequestOptions newCaptureRequestOptions({
+  CaptureRequestOptionsApi $CaptureRequestOptionsApi({
     CameraMetadataControlMode? mode,
     CameraMetadataControlAeMode? aeMode,
     CameraMetadataControlAfMode? afMode,
@@ -180,22 +180,22 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  AVAnalyzer newAVAnalyzer({
+  AVAnalyzerApi $AVAnalyzerApi({
     List<AVMetadataObjectType>? types,
-    required Consumer<AVAnalyzerResult> consumer,
+    required ConsumerApi<AVAnalyzerResultApi> consumer,
   }) => throw UnimplementedError();
 
   @override
-  Observer<CameraState> newCameraStateObserver({
+  ObserverApi<CameraState> $CameraStateObserverApi({
     required void Function(CameraState value) onChanged,
   }) => CameraStateObserverImpl(onChanged: onChanged);
 
   @override
-  ImageCaptureOnImageCapturedCallback newImageCaptureOnImageCapturedCallback({
+  ImageCaptureOnImageCapturedCallbackApi $ImageCaptureOnImageCapturedCallbackApi({
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
     void Function(Image bitmap)? onPostviewBitmapAvailable,
-    void Function(ImageProxy image)? onCaptureSuccess,
+    void Function(ImageProxyApi image)? onCaptureSuccess,
     void Function(Object exception)? onError,
   }) => ImageCaptureOnImageCapturedCallbackImpl(
     onCaptureStarted: onCaptureStarted,
@@ -206,63 +206,63 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  Consumer<MlKitAnalyzerResult> newMlKitAnalyzerResultConsumer({
-    required void Function(MlKitAnalyzerResult value) accept,
+  ConsumerApi<MlKitAnalyzerResultApi> $MlKitAnalyzerResultConsumerApi({
+    required void Function(MlKitAnalyzerResultApi value) accept,
   }) => MlKitAnalyzerResultConsumerImpl(accept: accept);
 
   @override
-  ResolutionFilter newResolutionFilter({
-    required List<Size<int>> Function(
-      List<Size<int>> supportedSizes,
+  ResolutionFilterApi $ResolutionFilterApi({
+    required List<SizeApi<int>> Function(
+      List<SizeApi<int>> supportedSizes,
       int rotationDegrees,
     )
     filter,
   }) => ResolutionFilterImpl(filter: filter);
 
   @override
-  RotationProvider newRotationProvider() => RotationProviderImpl();
+  RotationProviderApi $RotationProviderApi() => RotationProviderImpl();
 
   @override
-  RotationProviderListener newRotationProviderListener({
+  RotationProviderListenerApi $RotationProviderListenerApi({
     required void Function(int rotation) onRotationChanged,
   }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
 
   @override
-  Observer<TorchState> newTorchStateObserver({
+  ObserverApi<TorchState> $TorchStateObserverApi({
     required void Function(TorchState value) onChanged,
   }) => TorchStateObserverImpl(onChanged: onChanged);
 
   @override
-  Consumer<VideoRecordEvent> newVideoRecordEventConsumer({
-    required void Function(VideoRecordEvent value) accept,
+  ConsumerApi<VideoRecordEventApi> $VideoRecordEventConsumerApi({
+    required void Function(VideoRecordEventApi value) accept,
   }) => VideoRecordEventConsumerImpl(accept: accept);
 
   @override
-  Observer<ZoomState> newZoomStateObserver({
-    required void Function(ZoomState value) onChanged,
+  ObserverApi<ZoomStateApi> $ZoomStateObserverApi({
+    required void Function(ZoomStateApi value) onChanged,
   }) => ZoomStateObserverImpl(onChanged: onChanged);
 
   @override
-  ZoomSuggestionOptionsZoomCallback newZoomSuggestionOptionsZoomCallback({
+  ZoomSuggestionOptionsZoomCallbackApi $ZoomSuggestionOptionsZoomCallbackApi({
     required bool Function(double zoomRatio) setZoom,
   }) => ZoomSuggestionOptionsZoomCallbackImpl(setZoom: setZoom);
 
   @override
-  Future<BarcodeScanner> $BarcodeScanningGetClient([
-    BarcodeScannerOptions? options,
+  Future<BarcodeScannerApi> $BarcodeScanningApiGetClient([
+    BarcodeScannerOptionsApi? options,
   ]) => BarcodeScanningImpl.getClient(options);
 
   @override
-  Future<FaceDetector> $FaceDetectionGetClient([
-    FaceDetectorOptions? options,
+  Future<FaceDetectorApi> $FaceDetectionApiGetClient([
+    FaceDetectorOptionsApi? options,
   ]) => FaceDetectionImpl.getClient(options);
 
   @override
-  Location newLocation(double latitude, double longitude) =>
+  LocationApi $LocationApi(double latitude, double longitude) =>
       LocationImpl(latitude, longitude);
 
   @override
-  Consumer<AVAnalyzerResult> newAVAnalyzerResultConsumer({
-    required void Function(AVAnalyzerResult value) accept,
+  ConsumerApi<AVAnalyzerResultApi> $AVAnalyzerResultConsumerApi({
+    required void Function(AVAnalyzerResultApi value) accept,
   }) => throw UnimplementedError();
 }

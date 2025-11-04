@@ -13,21 +13,21 @@ import 'package:path_provider/path_provider.dart';
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
 class HomeViewModel extends ViewModel with TypeLogger {
-  final PermissionManager _permissionManager;
-  final CameraController _controller;
+  final PermissionManagerApi _permissionManager;
+  final CameraControllerApi _controller;
 
-  late final BarcodeScanner _barcodeScanner;
-  late final FaceDetector _faceDetector;
+  late final BarcodeScannerApi _barcodeScanner;
+  late final FaceDetectorApi _faceDetector;
 
-  Observer<TorchState>? _torchStateObserver;
-  Observer<ZoomState>? _zoomStateObserver;
+  ObserverApi<TorchState>? _torchStateObserver;
+  ObserverApi<ZoomStateApi>? _zoomStateObserver;
 
-  CameraControl? _cameraControl;
-  Camera2CameraControl? _camera2Control;
+  CameraControlApi? _cameraControl;
+  Camera2CameraControlApi? _camera2Control;
 
   HomeViewModel()
-    : _permissionManager = PermissionManager(),
-      _controller = CameraController(),
+    : _permissionManager = PermissionManagerApi(),
+      _controller = CameraControllerApi(),
       _mode = CameraMode.takePicture,
       _lensFacing = CameraSelectorLensFacing.back,
       _barcodes = [],
@@ -35,7 +35,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _setUp();
   }
 
-  CameraController get controller => _controller;
+  CameraControllerApi get controller => _controller;
 
   CameraMode _mode;
   CameraMode get mode => _mode;
@@ -70,18 +70,18 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  ZoomState? _zoomState;
-  ZoomState? get zoomState => _zoomState;
-  set zoomState(ZoomState? value) {
+  ZoomStateApi? _zoomState;
+  ZoomStateApi? get zoomState => _zoomState;
+  set zoomState(ZoomStateApi? value) {
     if (_zoomState == value) return;
     logger.info('zoomState changed: $value');
     _zoomState = value;
     notifyListeners();
   }
 
-  ExposureState? _exposureState;
-  ExposureState? get exposureState => _exposureState;
-  set exposureState(ExposureState? value) {
+  ExposureStateApi? _exposureState;
+  ExposureStateApi? get exposureState => _exposureState;
+  set exposureState(ExposureStateApi? value) {
     if (_exposureState == value) return;
     _exposureState = value;
     notifyListeners();
@@ -103,9 +103,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  Recording? _recording;
-  Recording? get recording => _recording;
-  set recording(Recording? value) {
+  RecordingApi? _recording;
+  RecordingApi? get recording => _recording;
+  set recording(RecordingApi? value) {
     if (_recording == value) return;
     _recording = value;
     notifyListeners();
@@ -121,17 +121,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  List<Barcode> _barcodes;
-  List<Barcode> get barcodes => _barcodes;
-  set barcodes(List<Barcode> value) {
+  List<BarcodeApi> _barcodes;
+  List<BarcodeApi> get barcodes => _barcodes;
+  set barcodes(List<BarcodeApi> value) {
     if (_barcodes == value) return;
     _barcodes = value;
     notifyListeners();
   }
 
-  List<Face> _faces;
-  List<Face> get faces => _faces;
-  set faces(List<Face> value) {
+  List<FaceApi> _faces;
+  List<FaceApi> get faces => _faces;
+  set faces(List<FaceApi> value) {
     if (_faces == value) return;
     _faces = value;
     notifyListeners();
@@ -200,18 +200,18 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setImageAnalyzer();
         break;
       case CameraMode.barcodes:
-        final analyzer = MlKitAnalyzer(
+        final analyzer = MlKitAnalyzerApi(
           detectors: [_barcodeScanner],
           targetCoordinateSystem: ImageAnalysisCoordinateSystem.viewReferenced,
-          consumer: Consumer(accept: _handleMlKitAnalyzerResult),
+          consumer: ConsumerApi(accept: _handleMlKitAnalyzerResult),
         );
         await _setMlKitAnalyzer(analyzer);
         break;
       case CameraMode.face:
-        final analyzer = MlKitAnalyzer(
+        final analyzer = MlKitAnalyzerApi(
           detectors: [_faceDetector],
           targetCoordinateSystem: ImageAnalysisCoordinateSystem.viewReferenced,
-          consumer: Consumer(accept: _handleMlKitAnalyzerResult),
+          consumer: ConsumerApi(accept: _handleMlKitAnalyzerResult),
         );
         await _setMlKitAnalyzer(analyzer);
         break;
@@ -224,10 +224,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> toggleLensFacing() async {
     if (lensFacing == CameraSelectorLensFacing.back) {
-      await _setCameraSelector(CameraSelector.front);
+      await _setCameraSelector(CameraSelectorApi.front);
       lensFacing = CameraSelectorLensFacing.front;
     } else {
-      await _setCameraSelector(CameraSelector.back);
+      await _setCameraSelector(CameraSelectorApi.back);
       lensFacing = CameraSelectorLensFacing.back;
     }
   }
@@ -254,8 +254,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Future<void> setExposureTime(int? value) async {
     final control = ArgumentError.checkNotNull(_camera2Control);
     final bundle = value == null
-        ? CaptureRequestOptions(aeMode: CameraMetadataControlAeMode.on)
-        : CaptureRequestOptions(
+        ? CaptureRequestOptionsApi(aeMode: CameraMetadataControlAeMode.on)
+        : CaptureRequestOptionsApi(
             aeMode: CameraMetadataControlAeMode.off,
             sensorExposureTime: value,
           );
@@ -268,7 +268,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> takePicture() async {
-    final callback = ImageCaptureOnImageCapturedCallback(
+    final callback = ImageCaptureOnImageCapturedCallbackApi(
       onCaptureStarted: () {
         logger.info('onCaptureStarted');
       },
@@ -314,11 +314,11 @@ class HomeViewModel extends ViewModel with TypeLogger {
       'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
     );
     final file = File(filePath);
-    final options = FileOutputOptions(file);
-    final listener = Consumer<VideoRecordEvent>(
+    final options = FileOutputOptionsApi(file);
+    final listener = ConsumerApi<VideoRecordEventApi>(
       accept: (event) {
         logger.info('${event.runtimeType}');
-        if (event is! VideoRecordFinalizeEvent) {
+        if (event is! VideoRecordFinalizeEventApi) {
           return;
         }
         final error = event.cause;
@@ -333,7 +333,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     );
     recording = await controller.startRecording(
       options,
-      audioConfig: AudioConfig.audioDisabled,
+      audioConfig: AudioConfigApi.audioDisabled,
       listener: listener,
     );
   }
@@ -343,8 +343,8 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   void _setUp() async {
-    final barcodeScanner = await BarcodeScanning.getClient();
-    final faceDetector = await FaceDetection.getClient();
+    final barcodeScanner = await BarcodeScanningApi.getClient();
+    final faceDetector = await FaceDetectionApi.getClient();
     _barcodeScanner = barcodeScanner;
     _faceDetector = faceDetector;
     var isGranted =
@@ -361,10 +361,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
     }
     // await controller.initialize();
     // await controller.setCameraSelector(CameraSelector.front);
-    final resolutionSelector = ResolutionSelector(
+    final resolutionSelector = ResolutionSelectorApi(
       // TODO: Use resolutionFilter will cause ANR error.
       // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
-      resolutionStrategy: ResolutionStrategy(
+      resolutionStrategy: ResolutionStrategyApi(
         boundSize: Size(1024, 768),
         fallbackRule: ResolutionStrategyFallbackRule.closestHigherThenLower,
       ),
@@ -374,10 +374,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
     final zoomState = await controller.getZoomState();
     this.torchState = torchState;
     this.zoomState = zoomState;
-    final torchStateObserver = Observer<TorchState>(
+    final torchStateObserver = ObserverApi<TorchState>(
       onChanged: (e) => this.torchState = e,
     );
-    final zoomStateObserver = Observer<ZoomState>(
+    final zoomStateObserver = ObserverApi<ZoomStateApi>(
       onChanged: (e) => this.zoomState = e,
     );
     await controller.observeTorchState(torchStateObserver);
@@ -387,7 +387,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await bind();
   }
 
-  Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
+  Future<void> _setCameraSelector(CameraSelectorApi cameraSelector) async {
     final hasCamera = await controller.hasCamera(cameraSelector);
     if (!hasCamera) {
       return;
@@ -400,7 +400,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.setImageAnalysisOutputImageFormat(
       ImageAnalysisOutputImageFormat.rgba8888,
     );
-    final analyzer = ImageAnalyzer(
+    final analyzer = ImageAnalysisImageAnalyzerApi(
       analyze: (image) async {
         try {
           final format = image.format;
@@ -444,7 +444,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     this.imageModel = imageModel;
   }
 
-  Future<void> _setMlKitAnalyzer(MlKitAnalyzer analyzer) async {
+  Future<void> _setMlKitAnalyzer(MlKitAnalyzerApi analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(
       ImageAnalysisOutputImageFormat.yuv420_888,
@@ -453,7 +453,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.bind();
   }
 
-  void _handleMlKitAnalyzerResult(MlKitAnalyzerResult result) async {
+  void _handleMlKitAnalyzerResult(MlKitAnalyzerResultApi result) async {
     switch (mode) {
       case CameraMode.barcodes:
         final barcodes = await result.getValue(_barcodeScanner);

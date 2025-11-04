@@ -3,7 +3,7 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/ml/interfaces.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FaceDetectorImpl extends FaceDetector
+final class FaceDetectorImpl extends FaceDetectorApi
     with AutoCloseableImpl, CloseableImpl, DetectorImpl {
   @override
   final FaceDetectorApi api;
@@ -11,7 +11,7 @@ final class FaceDetectorImpl extends FaceDetector
   FaceDetectorImpl.internal(this.api) : super.impl();
 }
 
-extension FaceDetectorX on FaceDetector {
+extension FaceDetectorX on FaceDetectorApi {
   FaceDetectorApi get api {
     final impl = this;
     if (impl is! FaceDetectorImpl) throw TypeError();

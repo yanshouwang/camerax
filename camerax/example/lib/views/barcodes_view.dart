@@ -4,7 +4,7 @@ import 'package:camerax/camerax.dart';
 import 'package:flutter/cupertino.dart';
 
 class BarcodesView extends StatelessWidget {
-  final List<Barcode> barcodes;
+  final List<BarcodeApi> barcodes;
 
   const BarcodesView({super.key, required this.barcodes});
 
@@ -23,7 +23,7 @@ class BarcodesView extends StatelessWidget {
 
 class _BarcodesPainter extends CustomPainter {
   final double devicePixelRatio;
-  final List<Barcode> barcodes;
+  final List<BarcodeApi> barcodes;
   final double strokeWidth;
   final Color color;
 

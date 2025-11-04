@@ -7,6 +7,6 @@ extension FaceLandmarkTypeApiX on FaceLandmarkTypeApi {
 }
 
 extension FaceLandmarkApiX on FaceLandmarkApi {
-  FaceLandmark get impl =>
-      FaceLandmark(type: type.impl, position: position.impl);
+  FaceLandmarkApi get impl =>
+      FaceLandmarkApi(type: type.impl, position: position.impl);
 }

@@ -2,8 +2,8 @@ import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
-  final CaptureRequestOptionsApi api;
+final class CaptureRequestOptionsImpl extends CaptureRequestOptionsApi {
+  final CaptureRequestOptionsProxyApi api;
 
   CaptureRequestOptionsImpl.internal(this.api) : super.impl();
 
@@ -14,7 +14,7 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
     CameraMetadataControlAwbMode? awbMode,
     int? sensorExposureTime,
   }) {
-    final api = CaptureRequestOptionsApi.build(
+    final api = CaptureRequestOptionsProxyApi.build(
       mode: mode?.api,
       aeMode: aeMode?.api,
       afMode: afMode?.api,
@@ -25,14 +25,14 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
   }
 }
 
-extension CaptureRequestOptionsX on CaptureRequestOptions {
-  CaptureRequestOptionsApi get api {
+extension CaptureRequestOptionsApiX on CaptureRequestOptionsApi {
+  CaptureRequestOptionsProxyApi get api {
     final impl = this;
     if (impl is! CaptureRequestOptionsImpl) throw TypeError();
     return impl.api;
   }
 }
 
-extension CaptureRequestOptioinsApiX on CaptureRequestOptionsApi {
-  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.internal(this);
+extension CaptureRequestOptionsProxyApiX on CaptureRequestOptionsProxyApi {
+  CaptureRequestOptionsApi get impl => CaptureRequestOptionsImpl.internal(this);
 }

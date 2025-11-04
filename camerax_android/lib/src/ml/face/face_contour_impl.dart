@@ -7,6 +7,6 @@ extension FaceContourTypeApiX on FaceContourTypeApi {
 }
 
 extension FaceContourApiX on FaceContourApi {
-  FaceContour get impl =>
-      FaceContour(type: type.impl, points: points.map((e) => e.impl).toList());
+  FaceContourApi get impl =>
+      FaceContourApi(type: type.impl, points: points.map((e) => e.impl).toList());
 }

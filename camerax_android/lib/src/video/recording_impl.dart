@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class RecordingImpl extends Recording with AutoCloseableImpl {
+final class RecordingImpl extends RecordingApi with AutoCloseableImpl {
   @override
   final RecordingApi api;
 

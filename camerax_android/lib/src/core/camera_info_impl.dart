@@ -12,13 +12,13 @@ import 'focus_metering_action_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
-final class CameraInfoImpl extends CameraInfo {
-  final CameraInfoApi api;
+final class CameraInfoImpl extends CameraInfoApi {
+  final CameraInfoProxyApi api;
 
   CameraInfoImpl.internal(this.api) : super.impl();
 
   @override
-  Future<CameraSelector> getCameraSelector() =>
+  Future<CameraSelectorApi> getCameraSelector() =>
       api.getCameraSelector().then((e) => e.impl);
 
   @override
@@ -26,7 +26,7 @@ final class CameraInfoImpl extends CameraInfo {
       api.getCameraState().then((e) => e?.impl);
 
   @override
-  Future<ExposureState> getExposureState() =>
+  Future<ExposureStateApi> getExposureState() =>
       api.getExposureState().then((e) => e.impl);
 
   @override
@@ -37,7 +37,7 @@ final class CameraInfoImpl extends CameraInfo {
       api.getLensFacing().then((e) => e.impl);
 
   @override
-  Future<Set<CameraInfo>> getPhysicalCameraInfos() =>
+  Future<Set<CameraInfoApi>> getPhysicalCameraInfos() =>
       api.getPhysicalCameraInfos().then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
@@ -50,13 +50,14 @@ final class CameraInfoImpl extends CameraInfo {
       api.getTorchState().then((e) => e?.impl);
 
   @override
-  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
+  Future<ZoomStateApi?> getZoomState() =>
+      api.getZoomState().then((e) => e?.impl);
 
   @override
   Future<bool> hasFlashUnit() => api.hasFlashUnit();
 
   @override
-  Future<bool> isFocusMeteringSupported(FocusMeteringAction action) =>
+  Future<bool> isFocusMeteringSupported(FocusMeteringActionApi action) =>
       api.isFocusMeteringSupported(action.api);
 
   @override
@@ -67,8 +68,8 @@ final class CameraInfoImpl extends CameraInfo {
   Future<bool> isZslSupported() => api.isZslSupported();
 
   @override
-  Future<Set<DynamicRange>> querySupportedDynamicRanges(
-    Set<DynamicRange> candidateDynamicRanges,
+  Future<Set<DynamicRangeApi>> querySupportedDynamicRanges(
+    Set<DynamicRangeApi> candidateDynamicRanges,
   ) => api
       .querySupportedDynamicRanges(
         candidateDynamicRanges.map((e) => e.api).toList(),
@@ -76,38 +77,38 @@ final class CameraInfoImpl extends CameraInfo {
       .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<void> observeCameraState(Observer<CameraState> observer) =>
+  Future<void> observeCameraState(ObserverApi<CameraState> observer) =>
       api.observeCameraState(observer.cameraStateObserverApi);
 
   @override
-  Future<void> observeTorchState(Observer<TorchState> observer) =>
+  Future<void> observeTorchState(ObserverApi<TorchState> observer) =>
       api.observeTorchState(observer.torchStateObserverApi);
 
   @override
-  Future<void> observeZoomState(Observer<ZoomState> observer) =>
+  Future<void> observeZoomState(ObserverApi<ZoomStateApi> observer) =>
       api.observeZoomState(observer.zoomStateObserverApi);
 
   @override
-  Future<void> removeCameraStateObserver(Observer<CameraState> observer) =>
+  Future<void> removeCameraStateObserver(ObserverApi<CameraState> observer) =>
       api.removeCameraStateObserver(observer.cameraStateObserverApi);
 
   @override
-  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
+  Future<void> removeTorchStateObserver(ObserverApi<TorchState> observer) =>
       api.removeTorchStateObserver(observer.torchStateObserverApi);
 
   @override
-  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
+  Future<void> removeZoomStateObserver(ObserverApi<ZoomStateApi> observer) =>
       api.removeZoomStateObserver(observer.zoomStateObserverApi);
 }
 
-extension CameraInfoX on CameraInfo {
-  CameraInfoApi get api {
+extension CameraInfoApiX on CameraInfoApi {
+  CameraInfoProxyApi get api {
     final impl = this;
     if (impl is! CameraInfoImpl) throw TypeError();
     return impl.api;
   }
 }
 
-extension CameraInfoApiX on CameraInfoApi {
-  CameraInfo get impl => CameraInfoImpl.internal(this);
+extension CameraInfoProxyApiX on CameraInfoProxyApi {
+  CameraInfoApi get impl => CameraInfoImpl.internal(this);
 }

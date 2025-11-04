@@ -3,15 +3,15 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'permission_impl.dart';
 
-final class PermissionManagerImpl extends PermissionManager {
-  final PermissionManagerApi api;
-
-  PermissionManagerImpl.internal(this.api) : super.impl();
-
-  factory PermissionManagerImpl() {
-    final api = PermissionManagerApi.instance;
+final class PermissionManagerImpl extends PermissionManagerApi {
+  static PermissionManagerImpl get instance {
+    final api = PermissionManagerProxyApi.instance;
     return PermissionManagerImpl.internal(api);
   }
+
+  final PermissionManagerProxyApi api;
+
+  PermissionManagerImpl.internal(this.api) : super.impl();
 
   @override
   Future<bool> checkPermission(Permission permission) =>

@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_info_impl.dart';
 
-final class ImageProxyImpl extends ImageProxy with AutoCloseableImpl {
+final class ImageProxyImpl extends ImageProxyApi with AutoCloseableImpl {
   @override
   final ImageProxyApi api;
 
@@ -19,7 +19,7 @@ final class ImageProxyImpl extends ImageProxy with AutoCloseableImpl {
 }
 
 extension ImageProxyPlaneProxyApiX on ImageProxyPlaneProxyApi {
-  ImageProxyPlaneProxy get impl => ImageProxyPlaneProxy(
+  ImageProxyPlaneProxyApi get impl => ImageProxyPlaneProxyApi(
     value: value,
     pixelStride: pixelStride,
     rowStride: rowStride,
@@ -27,7 +27,7 @@ extension ImageProxyPlaneProxyApiX on ImageProxyPlaneProxyApi {
 }
 
 extension ImageProxyApiX on ImageProxyApi {
-  ImageProxy get impl {
+  ImageProxyApi get impl {
     return ImageProxyImpl.internal(this);
   }
 }

@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'barcode_impl.dart';
 import 'zoom_suggestion_options_impl.dart';
 
-final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
+final class BarcodeScannerOptionsImpl extends BarcodeScannerOptionsApi {
   final BarcodeScannerOptionsApi api;
 
   BarcodeScannerOptionsImpl.internal(this.api) : super.impl();
@@ -12,7 +12,7 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
   factory BarcodeScannerOptionsImpl({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
-    ZoomSuggestionOptions? zoomSuggestionOptions,
+    ZoomSuggestionOptionsApi? zoomSuggestionOptions,
   }) {
     final api = BarcodeScannerOptionsApi.build(
       enableAllPotentialBarcodes: enableAllPotentialBarcodes,
@@ -23,7 +23,7 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
   }
 }
 
-extension BarcodeScannerOptionsX on BarcodeScannerOptions {
+extension BarcodeScannerOptionsX on BarcodeScannerOptionsApi {
   BarcodeScannerOptionsApi get api {
     final impl = this;
     if (impl is! BarcodeScannerOptionsImpl) throw TypeError();

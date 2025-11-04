@@ -3,18 +3,18 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'metering_point_impl.dart';
 
-final class FocusMeteringActionImpl extends FocusMeteringAction {
-  final FocusMeteringActionApi api;
+final class FocusMeteringActionImpl extends FocusMeteringActionApi {
+  final FocusMeteringActionProxyApi api;
 
   FocusMeteringActionImpl.internal(this.api) : super.impl();
 
   factory FocusMeteringActionImpl(
-    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
+    (MeteringPointApi, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPointApi, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) {
-    final api = FocusMeteringActionApi.build(
+    final api = FocusMeteringActionProxyApi.build(
       point: point.api,
       morePoints: morePoints?.map((e) => e.api).toList(),
       disableAutoCancel: disableAutoCancel,
@@ -29,32 +29,32 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
       .then((e) => Duration(milliseconds: e));
 
   @override
-  Future<List<MeteringPoint>> getMeteringPointsAe() =>
+  Future<List<MeteringPointApi>> getMeteringPointsAe() =>
       api.getMeteringPointsAe().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
-  Future<List<MeteringPoint>> getMeteringPointsAf() =>
+  Future<List<MeteringPointApi>> getMeteringPointsAf() =>
       api.getMeteringPointsAf().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
-  Future<List<MeteringPoint>> getMeteringPointsAwb() =>
+  Future<List<MeteringPointApi>> getMeteringPointsAwb() =>
       api.getMeteringPointsAwb().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
   Future<bool> isAutoCancelEnabled() => api.isAutoCancelEnabled();
 }
 
-extension MeteringPointTupleX
-    on (MeteringPoint, List<FocusMeteringActionMeteringMode>) {
-  MeteringPointTupleApi get api => MeteringPointTupleApi(
+extension MeteringPointApiTupleX
+    on (MeteringPointApi, List<FocusMeteringActionMeteringMode>) {
+  MeteringPointTupleProxyApi get api => MeteringPointTupleProxyApi(
     point: $1.api,
     modes: $2.map((e) => e.api).toList(),
   );
 }
 
 extension DurationX on Duration {
-  DurationTupleApi get api {
-    return DurationTupleApi(
+  DurationTupleProxyApi get api {
+    return DurationTupleProxyApi(
       duration: inMilliseconds,
       timeUnit: TimeUnitApi.milliseconds,
     );
@@ -66,8 +66,8 @@ extension FocusMeteringActionMeteringModeX on FocusMeteringActionMeteringMode {
       FocusMeteringActionMeteringModeApi.values[index];
 }
 
-extension FocusMeteringActionX on FocusMeteringAction {
-  FocusMeteringActionApi get api {
+extension FocusMeteringActionApiX on FocusMeteringActionApi {
+  FocusMeteringActionProxyApi get api {
     final impl = this;
     if (impl is! FocusMeteringActionImpl) throw TypeError();
     return impl.api;

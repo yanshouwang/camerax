@@ -11,10 +11,10 @@ extension AVMetadataObjectTypeApiX on AVMetadataObjectTypeApi {
 }
 
 extension AVMetadataObjectApiX on AVMetadataObjectApi {
-  AVMetadataObject get impl {
+  AVMetadataObjectApi get impl {
     final api = this;
     if (api is AVMetadataCatBodyObjectApi) {
-      return AVMetadataCatBodyObject(
+      return AVMetadataCatBodyObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -23,7 +23,7 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
       );
     }
     if (api is AVMetadataDogBodyObjectApi) {
-      return AVMetadataDogBodyObject(
+      return AVMetadataDogBodyObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -32,7 +32,7 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
       );
     }
     if (api is AVMetadataHumanBodyObjectApi) {
-      return AVMetadataHumanBodyObject(
+      return AVMetadataHumanBodyObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -41,7 +41,7 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
       );
     }
     if (api is AVMetadataHumanFullBodyObjectApi) {
-      return AVMetadataHumanFullBodyObject(
+      return AVMetadataHumanFullBodyObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -50,7 +50,7 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
       );
     }
     if (api is AVMetadataFaceObjectApi) {
-      return AVMetadataFaceObject(
+      return AVMetadataFaceObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -63,7 +63,7 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
       );
     }
     if (api is AVMetadataMachineReadableCodeObjectApi) {
-      return AVMetadataMachineReadableCodeObject(
+      return AVMetadataMachineReadableCodeObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -73,7 +73,7 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
       );
     }
     if (api is AVMetadataSalientObjectApi) {
-      return AVMetadataSalientObject(
+      return AVMetadataSalientObjectApi(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),

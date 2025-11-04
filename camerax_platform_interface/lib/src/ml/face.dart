@@ -1,6 +1,6 @@
-export 'face/face_contour.dart';
-export 'face/face_detection.dart';
-export 'face/face_detector_options.dart';
-export 'face/face_detector.dart';
-export 'face/face_landmark.dart';
-export 'face/face.dart';
+export 'face/face_api.dart';
+export 'face/face_contour_api.dart';
+export 'face/face_detection_api.dart';
+export 'face/face_detector_api.dart';
+export 'face/face_detector_options_api.dart';
+export 'face/face_landmark_api.dart';

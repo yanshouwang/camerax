@@ -6,9 +6,9 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'fallback_strategy_impl.dart';
 import 'quality_impl.dart';
 
-final class QualitySelectorImpl extends QualitySelector {
-  static Future<Size<int>?> getResolution(
-    CameraInfo cameraInfo,
+final class QualitySelectorImpl extends QualitySelectorApi {
+  static Future<SizeApi<int>?> getResolution(
+    CameraInfoApi cameraInfo,
     Quality quality,
   ) => QualitySelectorApi.getResolution(
     cameraInfo.api,
@@ -21,7 +21,7 @@ final class QualitySelectorImpl extends QualitySelector {
 
   factory QualitySelectorImpl.from(
     Quality quality, {
-    FallbackStrategy? fallbackStrategy,
+    FallbackStrategyApi? fallbackStrategy,
   }) {
     final api = QualitySelectorApi.from(
       quality: quality.api,
@@ -32,7 +32,7 @@ final class QualitySelectorImpl extends QualitySelector {
 
   factory QualitySelectorImpl.fromOrderedList(
     List<Quality> qualities, {
-    FallbackStrategy? fallbackStrategy,
+    FallbackStrategyApi? fallbackStrategy,
   }) {
     final api = QualitySelectorApi.fromOrderedList(
       qualities: qualities.map((e) => e.api).toList(),
@@ -42,7 +42,7 @@ final class QualitySelectorImpl extends QualitySelector {
   }
 }
 
-extension QualitySelectorX on QualitySelector {
+extension QualitySelectorX on QualitySelectorApi {
   QualitySelectorApi get api {
     final impl = this;
     if (impl is! QualitySelectorImpl) throw TypeError();
@@ -51,5 +51,5 @@ extension QualitySelectorX on QualitySelector {
 }
 
 extension QualitySelectorApiX on QualitySelectorApi {
-  QualitySelector get impl => QualitySelectorImpl.internal(this);
+  QualitySelectorApi get impl => QualitySelectorImpl.internal(this);
 }

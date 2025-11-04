@@ -31,7 +31,7 @@ extension BarcodeWiFiTypeApiX on BarcodeWiFiTypeApi {
 }
 
 extension BarcodeApiX on BarcodeApi {
-  Barcode get impl => Barcode(
+  BarcodeApi get impl => BarcodeApi(
     format: format.impl,
     boundingBox: boundingBox?.impl,
     cornerPoints: cornerPoints?.map((e) => e.impl).toList(),
@@ -52,12 +52,12 @@ extension BarcodeApiX on BarcodeApi {
 }
 
 extension BarcodeAddressApiX on BarcodeAddressApi {
-  BarcodeAddress get impl =>
-      BarcodeAddress(type: type.impl, addressLines: addressLines);
+  BarcodeAddressApi get impl =>
+      BarcodeAddressApi(type: type.impl, addressLines: addressLines);
 }
 
 extension BarcodeCalendarEventApiX on BarcodeCalendarEventApi {
-  BarcodeCalendarEvent get impl => BarcodeCalendarEvent(
+  BarcodeCalendarEventApi get impl => BarcodeCalendarEventApi(
     start: start?.impl,
     end: end?.impl,
     location: location,
@@ -75,7 +75,7 @@ extension BarcodeCalendarDateTimeApiX on BarcodeCalendarDateTimeApi {
 }
 
 extension BarcodeContactInfoApiX on BarcodeContactInfoApi {
-  BarcodeContactInfo get impl => BarcodeContactInfo(
+  BarcodeContactInfoApi get impl => BarcodeContactInfoApi(
     addresses: addresses.map((address) => address.impl).toList(),
     emails: emails.map((email) => email.impl).toList(),
     name: name?.impl,
@@ -87,7 +87,7 @@ extension BarcodeContactInfoApiX on BarcodeContactInfoApi {
 }
 
 extension BarcodeDriverLicenseApiX on BarcodeDriverLicenseApi {
-  BarcodeDriverLicense get impl => BarcodeDriverLicense(
+  BarcodeDriverLicenseApi get impl => BarcodeDriverLicenseApi(
     licenseNumber: licenseNumber,
     documentType: documentType,
     expiryDate: expiryDate,
@@ -106,7 +106,7 @@ extension BarcodeDriverLicenseApiX on BarcodeDriverLicenseApi {
 }
 
 extension BarcodeEmailApiX on BarcodeEmailApi {
-  BarcodeEmail get impl => BarcodeEmail(
+  BarcodeEmailApi get impl => BarcodeEmailApi(
     type: type.impl,
     address: address,
     subject: subject,
@@ -115,11 +115,11 @@ extension BarcodeEmailApiX on BarcodeEmailApi {
 }
 
 extension BarcodeGeoPointApiX on BarcodeGeoPointApi {
-  BarcodeGeoPoint get impl => BarcodeGeoPoint(lat, lng);
+  BarcodeGeoPointApi get impl => BarcodeGeoPointApi(lat, lng);
 }
 
 extension BarcodePersonNameApiX on BarcodePersonNameApi {
-  BarcodePersonName get impl => BarcodePersonName(
+  BarcodePersonNameApi get impl => BarcodePersonNameApi(
     formattedName: formattedName,
     pronunciation: pronunciation,
     prefix: prefix,
@@ -131,19 +131,19 @@ extension BarcodePersonNameApiX on BarcodePersonNameApi {
 }
 
 extension BarcodePhoneApiX on BarcodePhoneApi {
-  BarcodePhone get impl => BarcodePhone(type: type.impl, number: number);
+  BarcodePhoneApi get impl => BarcodePhoneApi(type: type.impl, number: number);
 }
 
 extension BarcodeSmsApiX on BarcodeSmsApi {
-  BarcodeSms get impl => BarcodeSms(phoneNumber: phoneNumber, message: message);
+  BarcodeSmsApi get impl => BarcodeSmsApi(phoneNumber: phoneNumber, message: message);
 }
 
 extension BarcodeUrlBookmarkApiX on BarcodeUrlBookmarkApi {
-  BarcodeUrlBookmark get impl => BarcodeUrlBookmark(title: title, url: url);
+  BarcodeUrlBookmarkApi get impl => BarcodeUrlBookmarkApi(title: title, url: url);
 }
 
 extension BarcodeWiFiApiX on BarcodeWiFiApi {
-  BarcodeWiFi get impl => BarcodeWiFi(
+  BarcodeWiFiApi get impl => BarcodeWiFiApi(
     encryptionType: encryptionType.impl,
     ssid: ssid,
     password: password,

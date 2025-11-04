@@ -1,29 +1,22 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CameraSelectorImpl extends CameraSelector {
+final class CameraSelectorImpl extends CameraSelectorApi {
   static CameraSelectorImpl get front =>
-      CameraSelectorImpl.internal(CameraSelectorApi.front);
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
   static CameraSelectorImpl get back =>
-      CameraSelectorImpl.internal(CameraSelectorApi.back);
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
   static CameraSelectorImpl get external =>
-      CameraSelectorImpl.internal(CameraSelectorApi.external);
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
 
-  final CameraSelectorApi api;
+  final CameraSelectorProxyApi api;
 
   CameraSelectorImpl.internal(this.api) : super.impl();
 
   factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
-    final api = CameraSelectorApi.build(lensFacing: lensFacing?.api);
+    final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
     return CameraSelectorImpl.internal(api);
   }
-
-  @override
-  int get hashCode => api.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      other is CameraSelectorImpl && api == other.api;
 }
 
 extension CameraSelectorLensFacingX on CameraSelectorLensFacing {
@@ -35,14 +28,14 @@ extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
   CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
 }
 
-extension CameraSelectorX on CameraSelector {
-  CameraSelectorApi get api {
+extension CameraSelectorApiX on CameraSelectorApi {
+  CameraSelectorProxyApi get api {
     final impl = this;
     if (impl is! CameraSelectorImpl) throw TypeError();
     return impl.api;
   }
 }
 
-extension CameraSelectorApiX on CameraSelectorApi {
-  CameraSelector get impl => CameraSelectorImpl.internal(this);
+extension CameraSelectorProxyApiX on CameraSelectorProxyApi {
+  CameraSelectorApi get impl => CameraSelectorImpl.internal(this);
 }
