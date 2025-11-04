@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'metering_point_impl.dart';
 
 base mixin MeteringPointFactoryImpl on MeteringPointFactoryApi {
-  MeteringPointFactoryApi get api;
+  MeteringPointFactoryProxyApi get api;
 
   @override
   Future<MeteringPointApi> createPoint(double x, double y, {double? size}) =>

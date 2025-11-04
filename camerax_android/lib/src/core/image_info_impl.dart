@@ -1,7 +1,17 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-extension ImageInfoApiX on ImageInfoApi {
-  ImageInfoApi get impl =>
-      ImageInfoApi(timestamp: timestamp, rotationDegrees: rotationDegrees);
+final class ImageInfoImpl extends ImageInfoApi {
+  final ImageInfoProxyApi api;
+
+  ImageInfoImpl.internal(this.api) : super.impl();
+
+  @override
+  int get rotationDegrees => api.rotationDegrees;
+  @override
+  int get timestamp => api.timestamp;
+}
+
+extension ImageInfoProxyApiX on ImageInfoProxyApi {
+  ImageInfoApi get impl => ImageInfoImpl.internal(this);
 }

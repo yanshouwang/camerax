@@ -777,8 +777,7 @@ enum FaceLandmarkTypeApi {
   ),
 )
 abstract class MlKitAnalyzerResultProxyApi {
-  late final int timestamp;
-
+  int getTimestamp();
   List<BarcodeProxyApi>? getValue1(BarcodeScannerProxyApi detector);
   List<FaceProxyApi>? getValue2(FaceDetectorProxyApi detector);
   List<Object?>? getThrowable1(BarcodeScannerProxyApi detector);

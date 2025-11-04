@@ -41,7 +41,7 @@ final class CameraInfoImpl extends CameraInfoApi {
       api.getPhysicalCameraInfos().then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<Set<Range<int>>> getSupportedFrameRateRanges() => api
+  Future<Set<RangeApi>> getSupportedFrameRateRanges() => api
       .getSupportedFrameRateRanges()
       .then((e) => e.map((e1) => e1.impl).toSet());
 
@@ -77,28 +77,28 @@ final class CameraInfoImpl extends CameraInfoApi {
       .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<void> observeCameraState(ObserverApi<CameraState> observer) =>
-      api.observeCameraState(observer.cameraStateObserverApi);
+  Future<void> observeCameraState(CameraStateObserverApi observer) =>
+      api.observeCameraState(observer.api);
 
   @override
-  Future<void> observeTorchState(ObserverApi<TorchState> observer) =>
-      api.observeTorchState(observer.torchStateObserverApi);
+  Future<void> observeTorchState(TorchStateObserverApi observer) =>
+      api.observeTorchState(observer.api);
 
   @override
-  Future<void> observeZoomState(ObserverApi<ZoomStateApi> observer) =>
-      api.observeZoomState(observer.zoomStateObserverApi);
+  Future<void> observeZoomState(ZoomStateObserverApi observer) =>
+      api.observeZoomState(observer.api);
 
   @override
-  Future<void> removeCameraStateObserver(ObserverApi<CameraState> observer) =>
-      api.removeCameraStateObserver(observer.cameraStateObserverApi);
+  Future<void> removeCameraStateObserver(CameraStateObserverApi observer) =>
+      api.removeCameraStateObserver(observer.api);
 
   @override
-  Future<void> removeTorchStateObserver(ObserverApi<TorchState> observer) =>
-      api.removeTorchStateObserver(observer.torchStateObserverApi);
+  Future<void> removeTorchStateObserver(TorchStateObserverApi observer) =>
+      api.removeTorchStateObserver(observer.api);
 
   @override
-  Future<void> removeZoomStateObserver(ObserverApi<ZoomStateApi> observer) =>
-      api.removeZoomStateObserver(observer.zoomStateObserverApi);
+  Future<void> removeZoomStateObserver(ZoomStateObserverApi observer) =>
+      api.removeZoomStateObserver(observer.api);
 }
 
 extension CameraInfoApiX on CameraInfoApi {

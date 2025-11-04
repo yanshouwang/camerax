@@ -5,7 +5,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'face_contour_impl.dart';
 import 'face_landmark_impl.dart';
 
-extension FaceApiX on FaceApi {
+extension FaceProxyApiX on FaceProxyApi {
   FaceApi get impl {
     return FaceApi(
       boundingBox: boundingBox.impl,

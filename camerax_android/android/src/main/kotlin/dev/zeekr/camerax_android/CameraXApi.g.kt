@@ -6266,7 +6266,7 @@ abstract class PigeonApiZoomStateProxyApi(open val pigeonRegistrar: CameraXApiPi
 }
 @Suppress("UNCHECKED_CAST")
 abstract class PigeonApiMlKitAnalyzerResultProxyApi(open val pigeonRegistrar: CameraXApiPigeonProxyApiRegistrar) {
-  abstract fun timestamp(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result): Long
+  abstract fun getTimestamp(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result): Long
 
   abstract fun getValue1(pigeon_instance: androidx.camera.mlkit.vision.MlKitAnalyzer.Result, detector: com.google.mlkit.vision.barcode.BarcodeScanner): List<com.google.mlkit.vision.barcode.common.Barcode>?
 
@@ -6280,6 +6280,23 @@ abstract class PigeonApiMlKitAnalyzerResultProxyApi(open val pigeonRegistrar: Ca
     @Suppress("LocalVariableName")
     fun setUpMessageHandlers(binaryMessenger: BinaryMessenger, api: PigeonApiMlKitAnalyzerResultProxyApi?) {
       val codec = api?.pigeonRegistrar?.codec ?: CameraXApiPigeonCodec()
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultProxyApi.getTimestamp", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val pigeon_instanceArg = args[0] as androidx.camera.mlkit.vision.MlKitAnalyzer.Result
+            val wrapped: List<Any?> = try {
+              listOf(api.getTimestamp(pigeon_instanceArg))
+            } catch (exception: Throwable) {
+              CameraXApiPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
       run {
         val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultProxyApi.getValue1", codec)
         if (api != null) {
@@ -6367,12 +6384,11 @@ abstract class PigeonApiMlKitAnalyzerResultProxyApi(open val pigeonRegistrar: Ca
       callback(Result.success(Unit))
     }     else {
       val pigeon_identifierArg = pigeonRegistrar.instanceManager.addHostCreatedInstance(pigeon_instanceArg)
-      val timestampArg = timestamp(pigeon_instanceArg)
       val binaryMessenger = pigeonRegistrar.binaryMessenger
       val codec = pigeonRegistrar.codec
       val channelName = "dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultProxyApi.pigeon_newInstance"
       val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-      channel.send(listOf(pigeon_identifierArg, timestampArg)) {
+      channel.send(listOf(pigeon_identifierArg)) {
         if (it is List<*>) {
           if (it.size > 1) {
             callback(Result.failure(CameraXError(it[0] as String, it[1] as String, it[2] as String?)))

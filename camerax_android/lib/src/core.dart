@@ -7,7 +7,6 @@ export 'core/dynamic_range_impl.dart';
 export 'core/exposure_state_impl.dart';
 export 'core/focus_metering_action_impl.dart';
 export 'core/image_analysis_impl.dart';
-export 'core/image_analyzer_impl.dart';
 export 'core/image_capture_impl.dart';
 export 'core/image_info_impl.dart';
 export 'core/image_proxy_impl.dart';

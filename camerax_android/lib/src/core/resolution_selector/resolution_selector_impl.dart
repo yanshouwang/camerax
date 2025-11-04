@@ -1,5 +1,4 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
-import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'aspect_ratio_strategy_impl.dart';

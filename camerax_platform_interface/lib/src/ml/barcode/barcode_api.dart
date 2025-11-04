@@ -75,13 +75,24 @@ abstract base class BarcodeAddressApi {
 abstract base class BarcodeCalendarEventApi {
   BarcodeCalendarEventApi.impl();
 
-  DateTime? get start;
-  DateTime? get end;
+  BarcodeCalendarDateTimeApi? get start;
+  BarcodeCalendarDateTimeApi? get end;
   String? get location;
   String? get organizer;
   String? get summary;
   String? get description;
   String? get status;
+}
+
+abstract base class BarcodeCalendarDateTimeApi {
+  String? get rawValue;
+  int get year;
+  int get month;
+  int get day;
+  int get hours;
+  int get minutes;
+  int get seconds;
+  bool get isUtc;
 }
 
 abstract base class BarcodeContactInfoApi {

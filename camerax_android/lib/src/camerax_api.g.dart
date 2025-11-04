@@ -8779,20 +8779,17 @@ class MlKitAnalyzerResultProxyApi extends PigeonInternalProxyApiBaseClass {
   MlKitAnalyzerResultProxyApi.pigeon_detached({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
-    required this.timestamp,
   });
 
   late final _PigeonInternalProxyApiBaseCodec
       _pigeonVar_codecMlKitAnalyzerResultProxyApi =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
-  final int timestamp;
-
   static void pigeon_setUpMessageHandlers({
     bool pigeon_clearHandlers = false,
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
-    MlKitAnalyzerResultProxyApi Function(int timestamp)? pigeon_newInstance,
+    MlKitAnalyzerResultProxyApi Function()? pigeon_newInstance,
   }) {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _PigeonInternalProxyApiBaseCodec(
@@ -8815,17 +8812,13 @@ class MlKitAnalyzerResultProxyApi extends PigeonInternalProxyApiBaseClass {
           final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
           assert(arg_pigeon_instanceIdentifier != null,
               'Argument for dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultProxyApi.pigeon_newInstance was null, expected non-null int.');
-          final int? arg_timestamp = (args[1] as int?);
-          assert(arg_timestamp != null,
-              'Argument for dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultProxyApi.pigeon_newInstance was null, expected non-null int.');
           try {
             (pigeon_instanceManager ?? PigeonInstanceManager.instance)
                 .addHostCreatedInstance(
-              pigeon_newInstance?.call(arg_timestamp!) ??
+              pigeon_newInstance?.call() ??
                   MlKitAnalyzerResultProxyApi.pigeon_detached(
                     pigeon_binaryMessenger: pigeon_binaryMessenger,
                     pigeon_instanceManager: pigeon_instanceManager,
-                    timestamp: arg_timestamp!,
                   ),
               arg_pigeon_instanceIdentifier!,
             );
@@ -8838,6 +8831,40 @@ class MlKitAnalyzerResultProxyApi extends PigeonInternalProxyApiBaseClass {
           }
         });
       }
+    }
+  }
+
+  Future<int> getTimestamp() async {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecMlKitAnalyzerResultProxyApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_android.MlKitAnalyzerResultProxyApi.getTimestamp';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture =
+        pigeonVar_channel.send(<Object?>[this]);
+    final List<Object?>? pigeonVar_replyList =
+        await pigeonVar_sendFuture as List<Object?>?;
+    if (pigeonVar_replyList == null) {
+      throw _createConnectionError(pigeonVar_channelName);
+    } else if (pigeonVar_replyList.length > 1) {
+      throw PlatformException(
+        code: pigeonVar_replyList[0]! as String,
+        message: pigeonVar_replyList[1] as String?,
+        details: pigeonVar_replyList[2],
+      );
+    } else if (pigeonVar_replyList[0] == null) {
+      throw PlatformException(
+        code: 'null-error',
+        message: 'Host platform returned null value for non-null return value.',
+      );
+    } else {
+      return (pigeonVar_replyList[0] as int?)!;
     }
   }
 
@@ -8964,7 +8991,6 @@ class MlKitAnalyzerResultProxyApi extends PigeonInternalProxyApiBaseClass {
     return MlKitAnalyzerResultProxyApi.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
-      timestamp: timestamp,
     );
   }
 }

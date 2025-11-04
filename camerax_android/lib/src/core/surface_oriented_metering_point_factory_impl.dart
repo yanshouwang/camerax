@@ -7,12 +7,12 @@ final class SurfaceOrientedMeteringPointFactoryImpl
     extends SurfaceOrientedMeteringPointFactoryApi
     with MeteringPointFactoryImpl {
   @override
-  final SurfaceOrientedMeteringPointFactoryApi api;
+  final SurfaceOrientedMeteringPointFactoryProxyApi api;
 
   SurfaceOrientedMeteringPointFactoryImpl.internal(this.api) : super.impl();
 
   factory SurfaceOrientedMeteringPointFactoryImpl(double width, double height) {
-    final api = SurfaceOrientedMeteringPointFactoryApi(
+    final api = SurfaceOrientedMeteringPointFactoryProxyApi(
       width: width,
       height: height,
     );

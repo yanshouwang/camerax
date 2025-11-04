@@ -30,7 +30,7 @@ extension BarcodeWiFiTypeApiX on BarcodeWiFiTypeApi {
   BarcodeWiFiType get impl => BarcodeWiFiType.values[index];
 }
 
-extension BarcodeApiX on BarcodeApi {
+extension BarcodeProxyApiX on BarcodeProxyApi {
   BarcodeApi get impl => BarcodeApi(
     format: format.impl,
     boundingBox: boundingBox?.impl,
@@ -51,12 +51,12 @@ extension BarcodeApiX on BarcodeApi {
   );
 }
 
-extension BarcodeAddressApiX on BarcodeAddressApi {
+extension BarcodeAddressProxyApiX on BarcodeAddressProxyApi {
   BarcodeAddressApi get impl =>
       BarcodeAddressApi(type: type.impl, addressLines: addressLines);
 }
 
-extension BarcodeCalendarEventApiX on BarcodeCalendarEventApi {
+extension BarcodeCalendarEventProxyApiX on BarcodeCalendarEventProxyApi {
   BarcodeCalendarEventApi get impl => BarcodeCalendarEventApi(
     start: start?.impl,
     end: end?.impl,
@@ -68,13 +68,13 @@ extension BarcodeCalendarEventApiX on BarcodeCalendarEventApi {
   );
 }
 
-extension BarcodeCalendarDateTimeApiX on BarcodeCalendarDateTimeApi {
-  DateTime get impl => isUtc
+extension BarcodeCalendarDateTimeProxyApiX on BarcodeCalendarDateTimeProxyApi {
+  BarcodeCalendarDateTimeApi get impl => isUtc
       ? DateTime.utc(year, month, day, hours, minutes, seconds)
       : DateTime(year, month, day, hours, minutes, seconds);
 }
 
-extension BarcodeContactInfoApiX on BarcodeContactInfoApi {
+extension BarcodeContactInfoProxyApiX on BarcodeContactInfoProxyApi {
   BarcodeContactInfoApi get impl => BarcodeContactInfoApi(
     addresses: addresses.map((address) => address.impl).toList(),
     emails: emails.map((email) => email.impl).toList(),
@@ -86,7 +86,7 @@ extension BarcodeContactInfoApiX on BarcodeContactInfoApi {
   );
 }
 
-extension BarcodeDriverLicenseApiX on BarcodeDriverLicenseApi {
+extension BarcodeDriverLicenseProxyApiX on BarcodeDriverLicenseProxyApi {
   BarcodeDriverLicenseApi get impl => BarcodeDriverLicenseApi(
     licenseNumber: licenseNumber,
     documentType: documentType,
@@ -105,7 +105,7 @@ extension BarcodeDriverLicenseApiX on BarcodeDriverLicenseApi {
   );
 }
 
-extension BarcodeEmailApiX on BarcodeEmailApi {
+extension BarcodeEmailProxyApiX on BarcodeEmailProxyApi {
   BarcodeEmailApi get impl => BarcodeEmailApi(
     type: type.impl,
     address: address,
@@ -114,11 +114,11 @@ extension BarcodeEmailApiX on BarcodeEmailApi {
   );
 }
 
-extension BarcodeGeoPointApiX on BarcodeGeoPointApi {
+extension BarcodeGeoPointProxyApiX on BarcodeGeoPointProxyApi {
   BarcodeGeoPointApi get impl => BarcodeGeoPointApi(lat, lng);
 }
 
-extension BarcodePersonNameApiX on BarcodePersonNameApi {
+extension BarcodePersonNameProxyApiX on BarcodePersonNameProxyApi {
   BarcodePersonNameApi get impl => BarcodePersonNameApi(
     formattedName: formattedName,
     pronunciation: pronunciation,
@@ -130,19 +130,21 @@ extension BarcodePersonNameApiX on BarcodePersonNameApi {
   );
 }
 
-extension BarcodePhoneApiX on BarcodePhoneApi {
+extension BarcodePhoneProxyApiX on BarcodePhoneProxyApi {
   BarcodePhoneApi get impl => BarcodePhoneApi(type: type.impl, number: number);
 }
 
-extension BarcodeSmsApiX on BarcodeSmsApi {
-  BarcodeSmsApi get impl => BarcodeSmsApi(phoneNumber: phoneNumber, message: message);
+extension BarcodeSmsProxyApiX on BarcodeSmsProxyApi {
+  BarcodeSmsApi get impl =>
+      BarcodeSmsApi(phoneNumber: phoneNumber, message: message);
 }
 
-extension BarcodeUrlBookmarkApiX on BarcodeUrlBookmarkApi {
-  BarcodeUrlBookmarkApi get impl => BarcodeUrlBookmarkApi(title: title, url: url);
+extension BarcodeUrlBookmarkProxyApiX on BarcodeUrlBookmarkProxyApi {
+  BarcodeUrlBookmarkApi get impl =>
+      BarcodeUrlBookmarkApi(title: title, url: url);
 }
 
-extension BarcodeWiFiApiX on BarcodeWiFiApi {
+extension BarcodeWiFiProxyApiX on BarcodeWiFiProxyApi {
   BarcodeWiFiApi get impl => BarcodeWiFiApi(
     encryptionType: encryptionType.impl,
     ssid: ssid,
