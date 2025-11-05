@@ -16,18 +16,24 @@ abstract base class QualitySelectorApi {
 
   QualitySelectorApi.impl();
 
-  factory QualitySelectorApi.from(
-    QualityApi quality, {
-    FallbackStrategyApi? fallbackStrategy,
-  }) => CameraXPlugin.instance.$QualitySelectorApiFrom(
+  factory QualitySelectorApi.from1(QualityApi quality) =>
+      CameraXPlugin.instance.$QualitySelectorApiFrom1(quality);
+
+  factory QualitySelectorApi.from2(
+    QualityApi quality,
+    FallbackStrategyApi fallbackStrategy,
+  ) => CameraXPlugin.instance.$QualitySelectorApiFrom2(
     quality,
     fallbackStrategy: fallbackStrategy,
   );
 
-  factory QualitySelectorApi.fromOrderedList(
-    List<QualityApi> qualities, {
-    FallbackStrategyApi? fallbackStrategy,
-  }) => CameraXPlugin.instance.$QualitySelectorApiFromOrderedList(
+  factory QualitySelectorApi.fromOrderedList1(List<QualityApi> qualities) =>
+      CameraXPlugin.instance.$QualitySelectorApiFromOrderedList1(qualities);
+
+  factory QualitySelectorApi.fromOrderedList2(
+    List<QualityApi> qualities,
+    FallbackStrategyApi fallbackStrategy,
+  ) => CameraXPlugin.instance.$QualitySelectorApiFromOrderedList2(
     qualities,
     fallbackStrategy: fallbackStrategy,
   );

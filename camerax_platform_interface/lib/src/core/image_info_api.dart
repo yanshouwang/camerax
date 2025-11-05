@@ -1,6 +1,9 @@
+import 'flash_state_api.dart';
+
 abstract base class ImageInfoApi {
   ImageInfoApi.impl();
 
-  int get timestamp;
+  FlashState get flashState;
   int get rotationDegrees;
+  int get timestamp;
 }

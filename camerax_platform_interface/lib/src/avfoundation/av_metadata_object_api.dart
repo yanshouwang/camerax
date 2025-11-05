@@ -72,7 +72,7 @@ abstract base class AVMetadataObjectApi {
   AVMetadataObjectType get type;
   DateTime get time;
   Duration get duration;
-  RectApi<double> get bounds;
+  RectFApi get bounds;
 }
 
 abstract base class AVMetadataBodyObjectApi extends AVMetadataObjectApi {
@@ -113,7 +113,7 @@ abstract base class AVMetadataMachineReadableCodeObjectApi
     extends AVMetadataObjectApi {
   AVMetadataMachineReadableCodeObjectApi.impl() : super.impl();
 
-  List<PointApi<double>> get corners;
+  List<PointFApi> get corners;
   String? get stringValue;
 }
 

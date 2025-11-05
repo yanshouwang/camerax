@@ -4,7 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class RecordingImpl extends RecordingApi with AutoCloseableImpl {
   @override
-  final RecordingApi api;
+  final RecordingProxyApi api;
 
   RecordingImpl.internal(this.api) : super.impl();
 
@@ -21,8 +21,6 @@ final class RecordingImpl extends RecordingApi with AutoCloseableImpl {
   Future<void> stop() => api.stop();
 }
 
-extension RecordingApiX on RecordingApi {
-  RecordingImpl get impl {
-    return RecordingImpl.internal(this);
-  }
+extension RecordingProxyApiX on RecordingProxyApi {
+  RecordingImpl get impl => RecordingImpl.internal(this);
 }

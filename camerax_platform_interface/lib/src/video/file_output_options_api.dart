@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
 
-abstract base class FileOutputOptionsApi {
-  FileOutputOptionsApi.impl();
+import 'output_options_api.dart';
+
+abstract base class FileOutputOptionsApi extends OutputOptionsApi {
+  FileOutputOptionsApi.impl() : super.impl();
 
   factory FileOutputOptionsApi(
     File file, {
@@ -18,5 +20,5 @@ abstract base class FileOutputOptionsApi {
     location: location,
   );
 
-  File get file;
+  Future<File> getFile();
 }

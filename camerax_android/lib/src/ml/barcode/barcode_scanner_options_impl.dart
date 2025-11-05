@@ -5,7 +5,7 @@ import 'barcode_impl.dart';
 import 'zoom_suggestion_options_impl.dart';
 
 final class BarcodeScannerOptionsImpl extends BarcodeScannerOptionsApi {
-  final BarcodeScannerOptionsApi api;
+  final BarcodeScannerOptionsProxyApi api;
 
   BarcodeScannerOptionsImpl.internal(this.api) : super.impl();
 
@@ -14,7 +14,7 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptionsApi {
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptionsApi? zoomSuggestionOptions,
   }) {
-    final api = BarcodeScannerOptionsApi.build(
+    final api = BarcodeScannerOptionsProxyApi.build(
       enableAllPotentialBarcodes: enableAllPotentialBarcodes,
       formats: formats?.map((e) => e.api).toList(),
       zoomSuggestionOptions: zoomSuggestionOptions?.api,
@@ -23,8 +23,8 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptionsApi {
   }
 }
 
-extension BarcodeScannerOptionsX on BarcodeScannerOptionsApi {
-  BarcodeScannerOptionsApi get api {
+extension BarcodeScannerOptionsApiX on BarcodeScannerOptionsApi {
+  BarcodeScannerOptionsProxyApi get api {
     final impl = this;
     if (impl is! BarcodeScannerOptionsImpl) throw TypeError();
     return impl.api;

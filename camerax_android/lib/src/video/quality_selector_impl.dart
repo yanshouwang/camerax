@@ -7,23 +7,23 @@ import 'fallback_strategy_impl.dart';
 import 'quality_impl.dart';
 
 final class QualitySelectorImpl extends QualitySelectorApi {
-  static Future<SizeApi<int>?> getResolution(
+  static Future<SizeApi?> getResolution(
     CameraInfoApi cameraInfo,
-    Quality quality,
-  ) => QualitySelectorApi.getResolution(
+    QualityApi quality,
+  ) => QualitySelectorProxyApi.getResolution(
     cameraInfo.api,
     quality.api,
   ).then((e) => e?.impl);
 
-  final QualitySelectorApi api;
+  final QualitySelectorProxyApi api;
 
   QualitySelectorImpl.internal(this.api) : super.impl();
 
   factory QualitySelectorImpl.from(
-    Quality quality, {
+    QualityApi quality, {
     FallbackStrategyApi? fallbackStrategy,
   }) {
-    final api = QualitySelectorApi.from(
+    final api = QualitySelectorProxyApi.from(
       quality: quality.api,
       fallbackStrategy: fallbackStrategy?.api,
     );
@@ -31,10 +31,10 @@ final class QualitySelectorImpl extends QualitySelectorApi {
   }
 
   factory QualitySelectorImpl.fromOrderedList(
-    List<Quality> qualities, {
+    List<QualityApi> qualities, {
     FallbackStrategyApi? fallbackStrategy,
   }) {
-    final api = QualitySelectorApi.fromOrderedList(
+    final api = QualitySelectorProxyApi.fromOrderedList(
       qualities: qualities.map((e) => e.api).toList(),
       fallbackStrategy: fallbackStrategy?.api,
     );
@@ -42,14 +42,14 @@ final class QualitySelectorImpl extends QualitySelectorApi {
   }
 }
 
-extension QualitySelectorX on QualitySelectorApi {
-  QualitySelectorApi get api {
+extension QualitySelectorApiX on QualitySelectorApi {
+  QualitySelectorProxyApi get api {
     final impl = this;
     if (impl is! QualitySelectorImpl) throw TypeError();
     return impl.api;
   }
 }
 
-extension QualitySelectorApiX on QualitySelectorApi {
+extension QualitySelectorProxyApiX on QualitySelectorProxyApi {
   QualitySelectorApi get impl => QualitySelectorImpl.internal(this);
 }

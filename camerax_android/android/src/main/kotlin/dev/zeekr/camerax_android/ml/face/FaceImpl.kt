@@ -6,9 +6,9 @@ import com.google.mlkit.vision.face.FaceLandmark
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.FaceContourTypeApi
 import dev.zeekr.camerax_android.FaceLandmarkTypeApi
-import dev.zeekr.camerax_android.PigeonApiFaceApi
+import dev.zeekr.camerax_android.PigeonApiFaceProxyApi
 
-class FaceImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceApi(registrar) {
+class FaceImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceProxyApi(registrar) {
     override fun boundingBox(pigeon_instance: Face): android.graphics.Rect {
         return pigeon_instance.boundingBox
     }

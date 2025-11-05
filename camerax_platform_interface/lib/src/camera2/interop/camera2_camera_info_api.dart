@@ -9,5 +9,6 @@ abstract base class Camera2CameraInfoApi {
     return CameraXPlugin.instance.$Camera2CameraInfoApiFrom(cameraInfo);
   }
 
+  Future<String> getCameraId();
   Future<RangeApi?> getSensorInfoExposureTimeRange();
 }

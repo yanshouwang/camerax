@@ -1,6 +1,7 @@
 export 'video/audio_stats_api.dart';
 export 'video/fallback_strategy_api.dart';
 export 'video/file_output_options_api.dart';
+export 'video/output_options_api.dart';
 export 'video/output_results_api.dart';
 export 'video/quality_api.dart';
 export 'video/quality_selector_api.dart';

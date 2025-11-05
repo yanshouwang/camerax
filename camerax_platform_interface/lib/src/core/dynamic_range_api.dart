@@ -34,11 +34,11 @@ abstract base class DynamicRangeApi {
   factory DynamicRangeApi({
     required DynamicRangeEncoding encoding,
     required DynamicRangeBitDepth bitDepth,
-  }) => CameraXPlugin.instance.DynamicRangeApi(
+  }) => CameraXPlugin.instance.$DynamicRangeApi(
     encoding: encoding,
     bitDepth: bitDepth,
   );
 
-  Future<DynamicRangeEncoding> getEncoding();
-  Future<DynamicRangeBitDepth> getBitDepth();
+  DynamicRangeBitDepth get bitDepth;
+  DynamicRangeEncoding get encoding;
 }

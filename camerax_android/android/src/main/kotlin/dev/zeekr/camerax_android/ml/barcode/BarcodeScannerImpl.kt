@@ -4,14 +4,14 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiBarcodeScanningApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeScannerProxyApi
 
-class BarcodeScanningImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeScanningApi(registrar) {
-    override fun getClient1(): BarcodeScanner {
+class BarcodeScannerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeScannerProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): BarcodeScanner {
         return BarcodeScanning.getClient()
     }
 
-    override fun getClient2(options: BarcodeScannerOptions): BarcodeScanner {
+    override fun options(options: BarcodeScannerOptions): BarcodeScanner {
         return BarcodeScanning.getClient(options)
     }
 }

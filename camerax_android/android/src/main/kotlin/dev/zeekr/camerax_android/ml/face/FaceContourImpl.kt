@@ -4,9 +4,9 @@ import android.graphics.PointF
 import com.google.mlkit.vision.face.FaceContour
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.FaceContourTypeApi
-import dev.zeekr.camerax_android.PigeonApiFaceContourApi
+import dev.zeekr.camerax_android.PigeonApiFaceContourProxyApi
 
-class FaceContourImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceContourApi(registrar) {
+class FaceContourImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceContourProxyApi(registrar) {
     override fun type(pigeon_instance: FaceContour): FaceContourTypeApi {
         return pigeon_instance.faceContourType.faceContourTypeApi
     }

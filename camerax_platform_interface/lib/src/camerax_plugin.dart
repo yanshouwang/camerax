@@ -60,18 +60,25 @@ abstract base class CameraXPlugin extends PlatformInterface {
   // common
   PermissionManagerApi get $PermissionManagerApiInstance;
 
-  VideoRecordEventConsumerApi $VideoRecordEventConsumerApi({
-    required void Function(VideoRecordEventApi value) accept,
+  AVAnalyzerResultConsumerApi $AVAnalyzerResultConsumerApi({
+    required void Function(AVAnalyzerResultApi value) accept,
+  });
+  ImageProxyConsumerApi $ImageProxyConsumerApi({
+    required void Function(ImageProxyApi value) accept,
   });
   MlKitAnalyzerResultConsumerApi $MlKitAnalyzerResultConsumerApi({
     required void Function(MlKitAnalyzerResultApi value) accept,
   });
-  AVAnalyzerResultConsumerApi $AVAnalyzerResultConsumerApi({
-    required void Function(AVAnalyzerResultApi value) accept,
+  VideoRecordEventConsumerApi $VideoRecordEventConsumerApi({
+    required void Function(VideoRecordEventApi value) accept,
   });
   LocationApi $LocationApi(double latitude, double longitude);
   CameraStateObserverApi $CameraStateObserverApi({
     required void Function(CameraState value) onChanged,
+  });
+  IntObserverApi $IntObserverApi({required void Function(int value) onChanged});
+  LowLightBoostStateObserverApi $LowLightBoostStateObserverApi({
+    required void Function(LowLightBoostState value) onChanged,
   });
   TorchStateObserverApi $TorchStateObserverApi({
     required void Function(TorchState value) onChanged,
@@ -81,8 +88,9 @@ abstract base class CameraXPlugin extends PlatformInterface {
   });
   PointApi $PointApi(int x, int y);
   PointFApi $PointFApi(double x, double y);
-  RangeApi $RangeApi(int x, int y);
+  RangeApi $RangeApi(int lower, int upper);
   RectApi $RectApi(int left, int top, int right, int bottom);
+  RectFApi $RectFApi(double left, double top, double right, double bottom);
   SizeApi $SizeApi(int width, int height);
 
   // core
@@ -91,9 +99,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
   AspectRatioStrategyApi
   get $AspectRatioStrategyApiRatio16_9FallbackAutoStrategy;
   ResolutionStrategyApi get $ResolutionStrategyApiHighestAvailableStrategy;
-  CameraSelectorApi get $CameraSelectorApiFront;
-  CameraSelectorApi get $CameraSelectorApiBack;
-  CameraSelectorApi get $CameraSelectorApiExternal;
+  CameraSelectorApi get $CameraSelectorApiDefaultBackCamera;
+  CameraSelectorApi get $CameraSelectorApiDefaultFrontCamera;
   DynamicRangeApi get $DynamicRangeApiUnspecifid;
   DynamicRangeApi get $DynamicRangeApiSdr;
   DynamicRangeApi get $DynamicRangeApiHdrUnspecified10Bit;
@@ -103,6 +110,10 @@ abstract base class CameraXPlugin extends PlatformInterface {
   DynamicRangeApi get $DynamicRangeApiDolbyVision8Bit;
   DynamicRangeApi get $DynamicRangeApiDolbyVision10Bit;
 
+  AspectRatioStrategyApi $AspectRatioStrategyApi({
+    required AspectRatio preferredAspectRatio,
+    required AspectRatioStrategyFallbackRule fallbackRule,
+  });
   ResolutionFilterApi $ResolutionFilterApi({
     required List<SizeApi> Function(
       List<SizeApi> supportedSizes,
@@ -110,9 +121,24 @@ abstract base class CameraXPlugin extends PlatformInterface {
     )
     filter,
   });
+  ResolutionStrategyApi $ResolutionStrategyApi({
+    required SizeApi boundSize,
+    required ResolutionStrategyFallbackRule fallbackRule,
+  });
+  ResolutionSelectorApi $ResolutionSelectorApi({
+    ResolutionSelectorMode? mode,
+    AspectRatioStrategyApi? aspectRatioStrategy,
+    ResolutionFilterApi? resolutionFilter,
+    ResolutionStrategyApi? resolutionStrategy,
+  });
+  Future<bool> $CameraInfoApiMustPlayShutterSound();
   CameraSelectorApi $CameraSelectorApi({CameraSelectorLensFacing? lensFacing});
+  DynamicRangeApi $DynamicRangeApi({
+    required DynamicRangeEncoding encoding,
+    required DynamicRangeBitDepth bitDepth,
+  });
   ImageAnalysisAnalyzerApi $ImageAnalysisAnalyzerApi({
-    required void Function(ImageProxyApi image) analyze,
+    required ImageProxyConsumerApi consumer,
   });
   FocusMeteringActionApi $FocusMeteringActionApi(
     (MeteringPointApi, List<FocusMeteringActionMeteringMode>) point, {
@@ -128,10 +154,17 @@ abstract base class CameraXPlugin extends PlatformInterface {
     void Function(ImageProxyApi image)? onCaptureSuccess,
     void Function(Object exception)? onError,
   });
+  Future<double> $MeteringPointFactoryApiGetDefaultPointSize();
   SurfaceOrientedMeteringPointFactoryApi
   $SurfaceOrientedMeteringPointFactoryApi(double width, double height);
 
   // ml
+  MlKitAnalyzerApi $MlKitAnalyzerApi({
+    required List<BarcodeScannerApi> detectors1,
+    required List<FaceDetectorApi> detectors2,
+    required ImageAnalysisCoordinateSystem targetCoordinateSystem,
+    required MlKitAnalyzerResultConsumerApi consumer,
+  });
   ZoomSuggestionOptionsZoomCallbackApi $ZoomSuggestionOptionsZoomCallbackApi({
     required bool Function(double zoomRatio) setZoom,
   });
@@ -144,9 +177,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
     List<BarcodeFormat>? formats,
     ZoomSuggestionOptionsApi? zoomSuggestionOptions,
   });
-  Future<BarcodeScannerApi> $BarcodeScanningApiGetClient([
-    BarcodeScannerOptionsApi? options,
-  ]);
+  BarcodeScannerApi $BarcodeScannerApi();
+  BarcodeScannerApi $BarcodeScannerApiOptions(BarcodeScannerOptionsApi options);
   FaceDetectorOptionsApi $FaceDetectorOptionsApi({
     bool? enableTracking,
     FaceDetectorOptionsClassificationMode? classificationMode,
@@ -155,15 +187,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
     double? minFaceSize,
     FaceDetectorOptionsPerformanceMode? performanceMode,
   });
-  Future<FaceDetectorApi> $FaceDetectionApiGetClient([
-    FaceDetectorOptionsApi? options,
-  ]);
-  MlKitAnalyzerApi $MlKitAnalyzerApi({
-    required List<BarcodeScannerApi> detectors1,
-    required List<FaceDetectorApi> detectors2,
-    required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumerApi consumer,
-  });
+  FaceDetectorApi $FaceDetectorApi();
+  FaceDetectorApi $FaceDetectorApiOptions(FaceDetectorOptionsApi options);
 
   // video
   QualityApi get $QualityApiSd;

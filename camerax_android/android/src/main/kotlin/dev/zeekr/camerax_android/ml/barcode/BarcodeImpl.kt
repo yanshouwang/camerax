@@ -10,21 +10,21 @@ import dev.zeekr.camerax_android.BarcodePhoneTypeApi
 import dev.zeekr.camerax_android.BarcodeTypeApi
 import dev.zeekr.camerax_android.BarcodeWiFiTypeApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiBarcodeAddressApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeCalendarDateTimeApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeCalendarEventApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeContactInfoApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeDriverLicenseApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeEmailApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeGeoPointApi
-import dev.zeekr.camerax_android.PigeonApiBarcodePersonNameApi
-import dev.zeekr.camerax_android.PigeonApiBarcodePhoneApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeSmsApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeUrlBookmarkApi
-import dev.zeekr.camerax_android.PigeonApiBarcodeWiFiApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeAddressProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeCalendarDateTimeProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeCalendarEventProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeContactInfoProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeDriverLicenseProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeEmailProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeGeoPointProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodePersonNameProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodePhoneProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeSmsProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeUrlBookmarkProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeWiFiProxyApi
 
-class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeApi(registrar) {
+class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeProxyApi(registrar) {
     override fun boundingBox(pigeon_instance: Barcode): Rect? {
         return pigeon_instance.boundingBox
     }
@@ -89,7 +89,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         return pigeon_instance.wifi
     }
 
-    class AddressImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeAddressApi(registrar) {
+    class AddressImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeAddressProxyApi(registrar) {
         override fun type(pigeon_instance: Barcode.Address): BarcodeAddressTypeApi {
             return pigeon_instance.type.barcodeAddressTypeApi
         }
@@ -100,7 +100,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
     }
 
     class CalendarDateTimeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-        PigeonApiBarcodeCalendarDateTimeApi(registrar) {
+        PigeonApiBarcodeCalendarDateTimeProxyApi(registrar) {
         override fun rawValue(pigeon_instance: Barcode.CalendarDateTime): String? {
             return pigeon_instance.rawValue
         }
@@ -135,7 +135,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
     }
 
     class CalendarEventImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-        PigeonApiBarcodeCalendarEventApi(registrar) {
+        PigeonApiBarcodeCalendarEventProxyApi(registrar) {
         override fun start(pigeon_instance: Barcode.CalendarEvent): Barcode.CalendarDateTime? {
             return pigeon_instance.start
         }
@@ -165,7 +165,8 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class ContactInfoImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeContactInfoApi(registrar) {
+    class ContactInfoImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiBarcodeContactInfoProxyApi(registrar) {
         override fun addresses(pigeon_instance: Barcode.ContactInfo): List<Barcode.Address> {
             return pigeon_instance.addresses
         }
@@ -196,7 +197,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
     }
 
     class DriverLicenseImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-        PigeonApiBarcodeDriverLicenseApi(registrar) {
+        PigeonApiBarcodeDriverLicenseProxyApi(registrar) {
         override fun licenseNumber(pigeon_instance: Barcode.DriverLicense): String? {
             return pigeon_instance.licenseNumber
         }
@@ -254,7 +255,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class EmailImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeEmailApi(registrar) {
+    class EmailImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeEmailProxyApi(registrar) {
         override fun type(pigeon_instance: Barcode.Email): BarcodeEmailTypeApi {
             return pigeon_instance.type.barcodeEmailTypeApi
         }
@@ -272,7 +273,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class GeoPointImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeGeoPointApi(registrar) {
+    class GeoPointImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeGeoPointProxyApi(registrar) {
         override fun lat(pigeon_instance: Barcode.GeoPoint): Double {
             return pigeon_instance.lat
         }
@@ -282,7 +283,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class PersonNameImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodePersonNameApi(registrar) {
+    class PersonNameImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodePersonNameProxyApi(registrar) {
         override fun formattedName(pigeon_instance: Barcode.PersonName): String? {
             return pigeon_instance.formattedName
         }
@@ -312,7 +313,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class PhoneImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodePhoneApi(registrar) {
+    class PhoneImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodePhoneProxyApi(registrar) {
         override fun type(pigeon_instance: Barcode.Phone): BarcodePhoneTypeApi {
             return pigeon_instance.type.barcodePhoneTypeApi
         }
@@ -322,7 +323,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class SmsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeSmsApi(registrar) {
+    class SmsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeSmsProxyApi(registrar) {
         override fun phoneNumber(pigeon_instance: Barcode.Sms): String? {
             return pigeon_instance.phoneNumber
         }
@@ -332,7 +333,8 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class UrlBookmarkImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeUrlBookmarkApi(registrar) {
+    class UrlBookmarkImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiBarcodeUrlBookmarkProxyApi(registrar) {
         override fun title(pigeon_instance: Barcode.UrlBookmark): String? {
             return pigeon_instance.title
         }
@@ -342,7 +344,7 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
         }
     }
 
-    class WiFiImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeWiFiApi(registrar) {
+    class WiFiImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeWiFiProxyApi(registrar) {
         override fun encryptionType(pigeon_instance: Barcode.WiFi): BarcodeWiFiTypeApi {
             return pigeon_instance.encryptionType.barcodeWiFiTypeApi
         }

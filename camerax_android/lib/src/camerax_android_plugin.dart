@@ -19,9 +19,9 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   PermissionManagerApi $PermissionManagerApi() => PermissionManagerImpl();
 
   @override
-  CameraSelectorApi get $CameraSelectorApiFront => CameraSelectorImpl.front;
+  CameraSelectorApi get $CameraSelectorApiDefaultFrontCamera => CameraSelectorImpl.front;
   @override
-  CameraSelectorApi get $CameraSelectorApiBack => CameraSelectorImpl.back;
+  CameraSelectorApi get $CameraSelectorApiDefaultBackCamera => CameraSelectorImpl.back;
   @override
   CameraSelectorApi get $CameraSelectorApiExternal => CameraSelectorImpl.external;
   @override

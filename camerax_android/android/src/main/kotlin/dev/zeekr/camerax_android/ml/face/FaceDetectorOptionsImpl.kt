@@ -6,10 +6,10 @@ import dev.zeekr.camerax_android.FaceDetectorOptionsClassificationModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsContourModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsLandmarkModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsPerformanceModeApi
-import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsApi
+import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsProxyApi
 
 class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiFaceDetectorOptionsApi(registrar) {
+    PigeonApiFaceDetectorOptionsProxyApi(registrar) {
     override fun build(
         enableTracking: Boolean?,
         classificationMode: FaceDetectorOptionsClassificationModeApi?,

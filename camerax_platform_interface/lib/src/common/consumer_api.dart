@@ -1,14 +1,23 @@
 import 'package:camerax_platform_interface/src/avfoundation.dart';
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/core.dart';
 import 'package:camerax_platform_interface/src/ml.dart';
 import 'package:camerax_platform_interface/src/video.dart';
 
-abstract base class VideoRecordEventConsumerApi {
-  VideoRecordEventConsumerApi.impl();
+abstract base class AVAnalyzerResultConsumerApi {
+  AVAnalyzerResultConsumerApi.impl();
 
-  factory VideoRecordEventConsumerApi({
-    required void Function(VideoRecordEventApi value) accept,
-  }) => CameraXPlugin.instance.$VideoRecordEventConsumerApi(accept: accept);
+  factory AVAnalyzerResultConsumerApi({
+    required void Function(AVAnalyzerResultApi value) accept,
+  }) => CameraXPlugin.instance.$AVAnalyzerResultConsumerApi(accept: accept);
+}
+
+abstract base class ImageProxyConsumerApi {
+  ImageProxyConsumerApi.impl();
+
+  factory ImageProxyConsumerApi({
+    required void Function(ImageProxyApi value) accept,
+  }) => CameraXPlugin.instance.$ImageProxyConsumerApi(accept: accept);
 }
 
 abstract base class MlKitAnalyzerResultConsumerApi {
@@ -19,10 +28,10 @@ abstract base class MlKitAnalyzerResultConsumerApi {
   }) => CameraXPlugin.instance.$MlKitAnalyzerResultConsumerApi(accept: accept);
 }
 
-abstract base class AVAnalyzerResultConsumerApi {
-  AVAnalyzerResultConsumerApi.impl();
+abstract base class VideoRecordEventConsumerApi {
+  VideoRecordEventConsumerApi.impl();
 
-  factory AVAnalyzerResultConsumerApi({
-    required void Function(AVAnalyzerResultApi value) accept,
-  }) => CameraXPlugin.instance.$AVAnalyzerResultConsumerApi(accept: accept);
+  factory VideoRecordEventConsumerApi({
+    required void Function(VideoRecordEventApi value) accept,
+  }) => CameraXPlugin.instance.$VideoRecordEventConsumerApi(accept: accept);
 }

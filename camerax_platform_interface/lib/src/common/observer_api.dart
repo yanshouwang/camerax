@@ -9,6 +9,23 @@ abstract base class CameraStateObserverApi {
   }) => CameraXPlugin.instance.$CameraStateObserverApi(onChanged: onChanged);
 }
 
+abstract base class IntObserverApi {
+  IntObserverApi.impl();
+
+  factory IntObserverApi({required void Function(int value) onChanged}) =>
+      CameraXPlugin.instance.$IntObserverApi(onChanged: onChanged);
+}
+
+abstract base class LowLightBoostStateObserverApi {
+  LowLightBoostStateObserverApi.impl();
+
+  factory LowLightBoostStateObserverApi({
+    required void Function(LowLightBoostState value) onChanged,
+  }) => CameraXPlugin.instance.$LowLightBoostStateObserverApi(
+    onChanged: onChanged,
+  );
+}
+
 abstract base class TorchStateObserverApi {
   TorchStateObserverApi.impl();
 

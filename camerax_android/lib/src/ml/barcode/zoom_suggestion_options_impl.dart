@@ -3,14 +3,14 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class ZoomSuggestionOptionsZoomCallbackImpl
     extends ZoomSuggestionOptionsZoomCallbackApi {
-  final ZoomSuggestionOptionsZoomCallbackApi api;
+  final ZoomSuggestionOptionsZoomCallbackProxyApi api;
 
   ZoomSuggestionOptionsZoomCallbackImpl.internal(this.api) : super.impl();
 
   factory ZoomSuggestionOptionsZoomCallbackImpl({
     required bool Function(double zoomRatio) setZoom,
   }) {
-    final api = ZoomSuggestionOptionsZoomCallbackApi(
+    final api = ZoomSuggestionOptionsZoomCallbackProxyApi(
       setZoom: (_, e) => setZoom(e),
     );
     return ZoomSuggestionOptionsZoomCallbackImpl.internal(api);
@@ -18,7 +18,7 @@ final class ZoomSuggestionOptionsZoomCallbackImpl
 }
 
 final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptionsApi {
-  final ZoomSuggestionOptionsApi api;
+  final ZoomSuggestionOptionsProxyApi api;
 
   ZoomSuggestionOptionsImpl.internal(this.api) : super.impl();
 
@@ -26,7 +26,7 @@ final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptionsApi {
     ZoomSuggestionOptionsZoomCallbackApi zoomCallback, {
     double? maxSupportedZoomRatio,
   }) {
-    final api = ZoomSuggestionOptionsApi.build(
+    final api = ZoomSuggestionOptionsProxyApi.build(
       zoomCallback: zoomCallback.api,
       maxSupportedZoomRatio: maxSupportedZoomRatio,
     );
@@ -34,17 +34,17 @@ final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptionsApi {
   }
 }
 
-extension ZoomSuggestionOptionsZoomCallbackX
+extension ZoomSuggestionOptionsZoomCallbackApiX
     on ZoomSuggestionOptionsZoomCallbackApi {
-  ZoomSuggestionOptionsZoomCallbackApi get api {
+  ZoomSuggestionOptionsZoomCallbackProxyApi get api {
     final impl = this;
     if (impl is! ZoomSuggestionOptionsZoomCallbackImpl) throw TypeError();
     return impl.api;
   }
 }
 
-extension ZoomSuggestionOptionsX on ZoomSuggestionOptionsApi {
-  ZoomSuggestionOptionsApi get api {
+extension ZoomSuggestionOptionsApiX on ZoomSuggestionOptionsApi {
+  ZoomSuggestionOptionsProxyApi get api {
     final impl = this;
     if (impl is! ZoomSuggestionOptionsImpl) throw TypeError();
     return impl.api;

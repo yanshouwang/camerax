@@ -1,5 +1,20 @@
+import 'output_options_api.dart';
 import 'recording_stats_api.dart';
 import 'output_results_api.dart';
+
+enum VideoRecordFinalizeEventError {
+  none,
+  unknown,
+  fileSizeLimitReached,
+  insufficientStorage,
+  sourceInactive,
+  invalidOuputOptions,
+  encodingFailed,
+  recorderError,
+  noValidData,
+  durationLimitReached,
+  recordingGarbageCollected,
+}
 
 /// VideoRecordEvent is used to report video recording events and status.
 ///
@@ -13,6 +28,7 @@ import 'output_results_api.dart';
 abstract base class VideoRecordEventApi {
   VideoRecordEventApi.impl();
 
+  OutputOptionsApi get outputOptions;
   RecordingStatsApi get recordingStats;
 }
 
@@ -58,13 +74,6 @@ abstract base class VideoRecordResumeEventApi extends VideoRecordEventApi {
 abstract base class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
   VideoRecordFinalizeEventApi.impl() : super.impl();
 
-  /// Gets the Uri of the output.
-  ///
-  /// Returns the actual Uri of the output destination if the OutputOptions is
-  /// implemented by MediaStoreOutputOptions or FileOutputOptions, otherwise
-  /// returns EMPTY.
-  OutputResultsApi? get outputResults;
-
   /// Gets the error cause.
   ///
   /// Returns the error cause if any, otherwise returns null.
@@ -73,4 +82,13 @@ abstract base class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
   /// the file may still be generated successfully with no error cause. For example,
   /// ERROR_FILE_SIZE_LIMIT_REACHED, ERROR_DURATION_LIMIT_REACHED and ERROR_SOURCE_INACTIVE.
   Object? get cause;
+  VideoRecordFinalizeEventError get error;
+
+  /// Gets the Uri of the output.
+  ///
+  /// Returns the actual Uri of the output destination if the OutputOptions is
+  /// implemented by MediaStoreOutputOptions or FileOutputOptions, otherwise
+  /// returns EMPTY.
+  OutputResultsApi get outputResults;
+  bool get hasError;
 }

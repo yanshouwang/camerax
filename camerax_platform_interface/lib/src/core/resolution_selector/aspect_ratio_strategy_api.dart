@@ -24,6 +24,6 @@ abstract base class AspectRatioStrategyApi {
     fallbackRule: fallbackRule,
   );
 
-  Future<AspectRatio> getPreferredAspectRatio();
   Future<AspectRatioStrategyFallbackRule> getFallbackRule();
+  Future<AspectRatio> getPreferredAspectRatio();
 }

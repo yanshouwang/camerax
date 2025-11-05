@@ -10,4 +10,5 @@ export 'common/point_api.dart';
 export 'common/range_api.dart';
 export 'common/rect_api.dart';
 export 'common/size_api.dart';
+export 'common/surface_api.dart';
 export 'common/view_api.dart';

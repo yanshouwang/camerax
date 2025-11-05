@@ -3,9 +3,9 @@ package dev.zeekr.camerax_android.ml.face
 import com.google.mlkit.vision.face.FaceLandmark
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.FaceLandmarkTypeApi
-import dev.zeekr.camerax_android.PigeonApiFaceLandmarkApi
+import dev.zeekr.camerax_android.PigeonApiFaceLandmarkProxyApi
 
-class FaceLandmarkImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceLandmarkApi(registrar) {
+class FaceLandmarkImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceLandmarkProxyApi(registrar) {
     override fun type(pigeon_instance: FaceLandmark): FaceLandmarkTypeApi {
         return pigeon_instance.landmarkType.faceLandmarkTypeApi
     }

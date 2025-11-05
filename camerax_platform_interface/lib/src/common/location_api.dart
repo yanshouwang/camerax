@@ -5,4 +5,9 @@ abstract base class LocationApi {
 
   factory LocationApi(double latitude, double longitude) =>
       CameraXPlugin.instance.$LocationApi(latitude, longitude);
+
+  Future<double> getLatitude();
+  Future<double> getLongitude();
+  Future<void> setLatitude(double latitudeDegrees);
+  Future<void> setLongitude(double latitudeDegrees);
 }

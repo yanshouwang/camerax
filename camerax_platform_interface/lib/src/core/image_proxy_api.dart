@@ -16,8 +16,11 @@ abstract base class ImageProxyApi extends AutoCloseableApi {
   ImageProxyApi.impl() : super.impl();
 
   ImageFormat get format;
-  int get width;
   int get height;
   ImageInfoApi get imageInfo;
   List<ImageProxyPlaneProxyApi> get planes;
+  int get width;
+
+  Future<RectApi> getCropRect();
+  Future<void> setCropRect(RectApi? rect);
 }

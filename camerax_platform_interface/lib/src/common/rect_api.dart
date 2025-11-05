@@ -11,3 +11,15 @@ abstract base class RectApi {
   int get right;
   int get bottom;
 }
+
+abstract base class RectFApi {
+  RectFApi.impl();
+
+  factory RectFApi(double left, double top, double right, double bottom) =>
+      CameraXPlugin.instance.$RectFApi(left, top, right, bottom);
+
+  double get left;
+  double get top;
+  double get right;
+  double get bottom;
+}

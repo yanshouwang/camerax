@@ -5,6 +5,27 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'recording_stats_impl.dart';
 import 'output_results_impl.dart';
 
+base mixin VideoRecordEventImpl on VideoRecordEventApi {
+  VideoRecordEventProxyApi get api;
+
+  @override
+  RecordingStatsApi get recordingStats => api.recordingStats;
+}
+
+final class VideoRecordStatusEventImpl extends VideoRecordStatusEventApi {
+  final VideoRecordStatusEventProxyApi api;
+
+  VideoRecordStatusEventImpl.internal(this.api) : super.impl();
+}
+
+final class VideoRecordStartEventImpl extends VideoRecordStartEventApi {}
+
+final class VideoRecordPauseEventImpl extends VideoRecordPauseEventApi {}
+
+final class VideoRecordResumeEventImpl extends VideoRecordResumeEventApi {}
+
+final class VideoRecordFinalizeEventImpl extends VideoRecordFinalizeEventApi {}
+
 extension VideoRecordEventApiX on VideoRecordEventApi {
   VideoRecordEventApi get impl {
     final api = this;
