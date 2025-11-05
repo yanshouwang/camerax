@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/core/aspect_ratio_impl.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class AspectRatioStrategyImpl extends AspectRatioStrategyApi {
+final class AspectRatioStrategyImpl extends AspectRatioStrategy {
   final AspectRatioStrategyProxyApi api;
 
   AspectRatioStrategyImpl.internal(this.api) : super.impl();
@@ -38,7 +38,7 @@ extension AspectRatioStrategyFallbackRuleApiX
       AspectRatioStrategyFallbackRule.values[index];
 }
 
-extension AspectRatioStrategyApiX on AspectRatioStrategyApi {
+extension AspectRatioStrategyApiX on AspectRatioStrategy {
   AspectRatioStrategyProxyApi get api {
     final impl = this;
     if (impl is! AspectRatioStrategyImpl) throw TypeError();
@@ -47,5 +47,5 @@ extension AspectRatioStrategyApiX on AspectRatioStrategyApi {
 }
 
 extension AspectRatioStrategyProxyApiX on AspectRatioStrategyProxyApi {
-  AspectRatioStrategyApi get impl => AspectRatioStrategyImpl.internal(this);
+  AspectRatioStrategy get impl => AspectRatioStrategyImpl.internal(this);
 }

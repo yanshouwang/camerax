@@ -3,14 +3,14 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'metering_point_impl.dart';
 
-final class FocusMeteringActionImpl extends FocusMeteringActionApi {
+final class FocusMeteringActionImpl extends FocusMeteringAction {
   final FocusMeteringActionProxyApi api;
 
   FocusMeteringActionImpl.internal(this.api) : super.impl();
 
   factory FocusMeteringActionImpl(
-    (MeteringPointApi, List<FocusMeteringActionMeteringMode>) point, {
-    List<(MeteringPointApi, List<FocusMeteringActionMeteringMode>)>? morePoints,
+    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) {
@@ -29,15 +29,15 @@ final class FocusMeteringActionImpl extends FocusMeteringActionApi {
       .then((e) => Duration(milliseconds: e));
 
   @override
-  Future<List<MeteringPointApi>> getMeteringPointsAe() =>
+  Future<List<MeteringPoint>> getMeteringPointsAe() =>
       api.getMeteringPointsAe().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
-  Future<List<MeteringPointApi>> getMeteringPointsAf() =>
+  Future<List<MeteringPoint>> getMeteringPointsAf() =>
       api.getMeteringPointsAf().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
-  Future<List<MeteringPointApi>> getMeteringPointsAwb() =>
+  Future<List<MeteringPoint>> getMeteringPointsAwb() =>
       api.getMeteringPointsAwb().then((e) => e.map((e1) => e1.impl).toList());
 
   @override
@@ -45,7 +45,7 @@ final class FocusMeteringActionImpl extends FocusMeteringActionApi {
 }
 
 extension MeteringPointApiTupleX
-    on (MeteringPointApi, List<FocusMeteringActionMeteringMode>) {
+    on (MeteringPoint, List<FocusMeteringActionMeteringMode>) {
   MeteringPointTupleProxyApi get api => MeteringPointTupleProxyApi(
     point: $1.api,
     modes: $2.map((e) => e.api).toList(),
@@ -66,7 +66,7 @@ extension FocusMeteringActionMeteringModeX on FocusMeteringActionMeteringMode {
       FocusMeteringActionMeteringModeApi.values[index];
 }
 
-extension FocusMeteringActionApiX on FocusMeteringActionApi {
+extension FocusMeteringActionApiX on FocusMeteringAction {
   FocusMeteringActionProxyApi get api {
     final impl = this;
     if (impl is! FocusMeteringActionImpl) throw TypeError();

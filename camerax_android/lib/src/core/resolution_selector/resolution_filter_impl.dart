@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ResolutionFilterImpl extends ResolutionFilterApi {
+final class ResolutionFilterImpl extends ResolutionFilter {
   final ResolutionFilterProxyApi api;
 
   ResolutionFilterImpl.internal(this.api) : super.impl();
@@ -22,7 +22,7 @@ final class ResolutionFilterImpl extends ResolutionFilterApi {
   }
 }
 
-extension ResolutionFilterApiX on ResolutionFilterApi {
+extension ResolutionFilterApiX on ResolutionFilter {
   ResolutionFilterProxyApi get api {
     final impl = this;
     if (impl is! ResolutionFilterImpl) throw TypeError();
@@ -31,5 +31,5 @@ extension ResolutionFilterApiX on ResolutionFilterApi {
 }
 
 extension ResolutionFilterProxyApiX on ResolutionFilterProxyApi {
-  ResolutionFilterApi get impl => ResolutionFilterImpl.internal(this);
+  ResolutionFilter get impl => ResolutionFilterImpl.internal(this);
 }

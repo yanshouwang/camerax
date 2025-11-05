@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class DynamicRangeImpl extends DynamicRangeApi {
+final class DynamicRangeImpl extends DynamicRange {
   final DynamicRangeProxyApi api;
 
   DynamicRangeImpl.internal(this.api) : super.impl();
@@ -42,7 +42,7 @@ extension DynamicRangeBitDepthApiX on DynamicRangeBitDepthApi {
   DynamicRangeBitDepth get impl => DynamicRangeBitDepth.values[index];
 }
 
-extension DynamicRangeApiX on DynamicRangeApi {
+extension DynamicRangeApiX on DynamicRange {
   DynamicRangeProxyApi get api {
     final impl = this;
     if (impl is! DynamicRangeImpl) throw TypeError();
@@ -51,5 +51,5 @@ extension DynamicRangeApiX on DynamicRangeApi {
 }
 
 extension DynamicRangeProxyApiX on DynamicRangeProxyApi {
-  DynamicRangeApi get impl => DynamicRangeImpl.internal(this);
+  DynamicRange get impl => DynamicRangeImpl.internal(this);
 }

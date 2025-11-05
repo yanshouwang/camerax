@@ -179,6 +179,40 @@ abstract class CloseableProxyApi extends AutoCloseableProxyApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.ImageProxyConsumer',
+  ),
+)
+abstract class ImageProxyConsumerProxyApi {
+  ImageProxyConsumerProxyApi();
+
+  late final void Function(ImageProxyProxyApi value) accept;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer',
+  ),
+)
+abstract class MlKitAnalyzerResultConsumerProxyApi {
+  MlKitAnalyzerResultConsumerProxyApi();
+
+  late final void Function(MlKitAnalyzerResultProxyApi value) accept;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.VideoRecordEventConsumer',
+  ),
+)
+abstract class VideoRecordEventConsumerProxyApi {
+  VideoRecordEventConsumerProxyApi();
+
+  late final void Function(VideoRecordEventProxyApi value) accept;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.location.Location',
   ),
 )
@@ -301,6 +335,29 @@ abstract class LowLightBoostStateObserverProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.common.PreviewViewStreamStateObserver',
+  ),
+)
+abstract class PreviewViewStreamStateObserverProxyApi {
+  PreviewViewStreamStateObserverProxyApi();
+
+  late final void Function(PreviewViewStreamStateApi value) onChanged;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.TapToFocusInfoObserver',
+  ),
+)
+abstract class TapToFocusInfoObserverProxyApi {
+  TapToFocusInfoObserverProxyApi();
+
+  late final void Function(TapToFocusInfoProxyApi value) onChanged;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.zeekr.camerax_android.common.TorchStateObserver',
   ),
 )
@@ -319,63 +376,6 @@ abstract class ZoomStateObserverProxyApi {
   ZoomStateObserverProxyApi();
 
   late final void Function(ZoomStateProxyApi value) onChanged;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.common.TapToFocusInfoObserver',
-  ),
-)
-abstract class TapToFocusInfoObserverProxyApi {
-  TapToFocusInfoObserverProxyApi();
-
-  late final void Function(TapToFocusInfoProxyApi value) onChanged;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.zeekr.camerax_android.common.PreviewViewStreamStateObserver',
-  ),
-)
-abstract class PreviewViewStreamStateObserverProxyApi {
-  PreviewViewStreamStateObserverProxyApi();
-
-  late final void Function(PreviewViewStreamStateApi value) onChanged;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.common.ImageProxyConsumer',
-  ),
-)
-abstract class ImageProxyConsumerProxyApi {
-  ImageProxyConsumerProxyApi();
-
-  late final void Function(ImageProxyProxyApi value) accept;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumer',
-  ),
-)
-abstract class MlKitAnalyzerResultConsumerProxyApi {
-  MlKitAnalyzerResultConsumerProxyApi();
-
-  late final void Function(MlKitAnalyzerResultProxyApi value) accept;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.common.VideoRecordEventConsumer',
-  ),
-)
-abstract class VideoRecordEventConsumerProxyApi {
-  VideoRecordEventConsumerProxyApi();
-
-  late final void Function(VideoRecordEventProxyApi value) accept;
 }
 
 @ProxyApi(
@@ -447,10 +447,10 @@ abstract class RectProxyApi {
   RectProxyApi.r(RectProxyApi? r);
   RectProxyApi.ltrb(int left, int top, int right, int bottom);
 
-  int left();
-  int top();
-  int right();
   int bottom();
+  int left();
+  int right();
+  int top();
 
   int centerX();
   int centerY();
@@ -844,7 +844,7 @@ abstract class ImageCaptureOnImageCapturedCallbackProxyApi {
   late final void Function()? onCaptureStarted;
   late final void Function(ImageProxyProxyApi image)? onCaptureSuccess;
   late final void Function(List<Object?> exception)? onError;
-  late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
+  late final void Function(BitmapProxyApi bitmap)? onPostviewBitmapAvailable;
 }
 
 @ProxyApi(

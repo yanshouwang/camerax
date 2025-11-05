@@ -13,7 +13,7 @@ final class FileOutputOptionsImpl extends FileOutputOptionsApi {
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
-    LocationApi? location,
+    Location? location,
   }) {
     final api = FileOutputOptionsProxyApi.build(
       file: file.api,

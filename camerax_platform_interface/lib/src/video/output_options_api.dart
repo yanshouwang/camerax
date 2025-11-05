@@ -5,5 +5,5 @@ abstract base class OutputOptionsApi {
 
   Future<int> getDurationLimitMillis();
   Future<int> getFileSizeLimit();
-  Future<LocationApi?> getLocation();
+  Future<Location?> getLocation();
 }

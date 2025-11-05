@@ -21,6 +21,6 @@ enum FaceContourType {
 abstract base class FaceContourApi {
   FaceContourApi.impl();
 
-  FaceContourType get type;
-  List<PointFApi> get points;
+  Future<FaceContourType> getFaceContourType();
+  Future<List<PointFApi>> getPoints();
 }

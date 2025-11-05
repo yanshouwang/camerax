@@ -12,7 +12,7 @@ abstract base class FileOutputOptionsApi extends OutputOptionsApi {
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
-    LocationApi? location,
+    Location? location,
   }) => CameraXPlugin.instance.$FileOutputOptionsApi(
     file,
     durationLimit: durationLimit,

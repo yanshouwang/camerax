@@ -7,7 +7,7 @@ import 'quality_api.dart';
 
 abstract base class QualitySelectorApi {
   static Future<SizeApi?> getResolution(
-    CameraInfoApi cameraInfo,
+    CameraInfo cameraInfo,
     QualityApi quality,
   ) => CameraXPlugin.instance.$QualitySelectorApiGetResolution(
     cameraInfo,

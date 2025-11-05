@@ -6,7 +6,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_info_impl.dart';
 
-final class ImageProxyPlaneProxyImpl extends ImageProxyPlaneProxyApi {
+final class ImageProxyPlaneProxyImpl extends ImageProxyPlaneProxy {
   final ImageProxyPlaneProxyProxyApi api;
 
   ImageProxyPlaneProxyImpl.internal(this.api) : super.impl();
@@ -19,7 +19,7 @@ final class ImageProxyPlaneProxyImpl extends ImageProxyPlaneProxyApi {
   Uint8List get value => api.value;
 }
 
-final class ImageProxyImpl extends ImageProxyApi with AutoCloseableImpl {
+final class ImageProxyImpl extends ImageProxy with AutoCloseableImpl {
   @override
   final ImageProxyProxyApi api;
 
@@ -30,18 +30,18 @@ final class ImageProxyImpl extends ImageProxyApi with AutoCloseableImpl {
   @override
   int get height => api.height;
   @override
-  ImageInfoApi get imageInfo => api.imageInfo.impl;
+  ImageInfo get imageInfo => api.imageInfo.impl;
   @override
-  List<ImageProxyPlaneProxyApi> get planes =>
+  List<ImageProxyPlaneProxy> get planes =>
       api.planes.map((e) => e.impl).toList();
   @override
   int get width => api.width;
 }
 
 extension ImageProxyPlaneProxyProxyApiX on ImageProxyPlaneProxyProxyApi {
-  ImageProxyPlaneProxyApi get impl => ImageProxyPlaneProxyImpl.internal(this);
+  ImageProxyPlaneProxy get impl => ImageProxyPlaneProxyImpl.internal(this);
 }
 
 extension ImageProxyProxyApiX on ImageProxyProxyApi {
-  ImageProxyApi get impl => ImageProxyImpl.internal(this);
+  ImageProxy get impl => ImageProxyImpl.internal(this);
 }

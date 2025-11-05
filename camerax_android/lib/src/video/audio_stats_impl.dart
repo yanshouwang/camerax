@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class AudioStatsImpl extends AudioStatsApi {
+final class AudioStatsImpl extends AudioStats {
   final AudioStatsProxyApi api;
 
   AudioStatsImpl.internal(this.api) : super.impl();
@@ -28,5 +28,5 @@ extension AudioStatsAudioStateApiX on AudioStatsAudioStateApi {
 }
 
 extension AudioStatsProxyApiX on AudioStatsProxyApi {
-  AudioStatsApi get impl => AudioStatsImpl.internal(this);
+  AudioStats get impl => AudioStatsImpl.internal(this);
 }

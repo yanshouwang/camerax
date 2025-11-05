@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class MeteringPointImpl extends MeteringPointApi {
+final class MeteringPointImpl extends MeteringPoint {
   final MeteringPointProxyApi api;
 
   MeteringPointImpl.internal(this.api) : super.impl();
@@ -10,7 +10,7 @@ final class MeteringPointImpl extends MeteringPointApi {
   double get size => api.size;
 }
 
-extension MeteringPointApiX on MeteringPointApi {
+extension MeteringPointApiX on MeteringPoint {
   MeteringPointProxyApi get api {
     final impl = this;
     if (impl is! MeteringPointImpl) throw TypeError();
@@ -19,5 +19,5 @@ extension MeteringPointApiX on MeteringPointApi {
 }
 
 extension MeteringPointProxyApiX on MeteringPointProxyApi {
-  MeteringPointApi get impl => MeteringPointImpl.internal(this);
+  MeteringPoint get impl => MeteringPointImpl.internal(this);
 }

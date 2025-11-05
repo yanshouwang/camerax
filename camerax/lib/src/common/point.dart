@@ -14,12 +14,12 @@ abstract base class Point<T extends num> {
 }
 
 final class PointImpl extends Point<int> {
-  final PointApi api;
+  final Point api;
 
   PointImpl.internal(this.api) : super.impl();
 
   factory PointImpl(int x, int y) {
-    final api = PointApi(x, y);
+    final api = Point(x, y);
     return PointImpl.internal(api);
   }
 
@@ -31,12 +31,12 @@ final class PointImpl extends Point<int> {
 }
 
 final class PointFImpl extends Point<double> {
-  final PointApi api;
+  final Point api;
 
   PointFImpl.internal(this.api) : super.impl();
 
   factory PointFImpl(double x, double y) {
-    final api = PointApi(x, y);
+    final api = Point(x, y);
     return PointImpl.internal(api);
   }
 

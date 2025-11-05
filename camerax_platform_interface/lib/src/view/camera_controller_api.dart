@@ -16,16 +16,16 @@ abstract base class CameraControllerApi {
   Future<void> initialize();
   Future<void> bind();
   Future<void> unbind();
-  Future<bool> hasCamera(CameraSelectorApi cameraSelector);
-  Future<CameraSelectorApi> getCameraSelector();
-  Future<void> setCameraSelector(CameraSelectorApi cameraSelector);
-  Future<CameraInfoApi?> getCameraInfo();
-  Future<CameraControlApi?> getCameraControl();
+  Future<bool> hasCamera(CameraSelector cameraSelector);
+  Future<CameraSelector> getCameraSelector();
+  Future<void> setCameraSelector(CameraSelector cameraSelector);
+  Future<CameraInfo?> getCameraInfo();
+  Future<CameraControl?> getCameraControl();
   Future<TorchState?> getTorchState();
   Future<void> observeTorchState(TorchStateObserverApi observer);
   Future<void> removeTorchStateObserver(TorchStateObserverApi observer);
   Future<void> enableTorch(bool enabled);
-  Future<ZoomStateApi?> getZoomState();
+  Future<ZoomState?> getZoomState();
   Future<void> observeZoomState(ZoomStateObserverApi observer);
   Future<void> removeZoomStateObserver(ZoomStateObserverApi observer);
   Future<void> setZoomRatio(double zoomRatio);
@@ -38,19 +38,19 @@ abstract base class CameraControllerApi {
   Future<bool> isImageCaptureEnabled();
   Future<bool> isVideoCaptureEnabled();
   Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases);
-  Future<ResolutionSelectorApi?> getPreviewResolutionSelector();
+  Future<ResolutionSelector?> getPreviewResolutionSelector();
   Future<void> setPreviewResolutionSelector(
-    ResolutionSelectorApi? resolutionSelector,
+    ResolutionSelector? resolutionSelector,
   );
   Future<ImageCaptureFlashMode> getImageCaptureFlashMode();
   Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode);
   Future<ImageCaptureCaptureMode> getImageCaptureMode();
   Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode);
-  Future<ResolutionSelectorApi?> getImageCaptureResolutionSelector();
+  Future<ResolutionSelector?> getImageCaptureResolutionSelector();
   Future<void> setImageCaptureResolutionSelector(
-    ResolutionSelectorApi? resolutionSelector,
+    ResolutionSelector? resolutionSelector,
   );
-  Future<void> takePicture(ImageCaptureOnImageCapturedCallbackApi callback);
+  Future<void> takePicture(ImageCaptureOnImageCapturedCallback callback);
   Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy();
   Future<void> setImageAnalysisBackpressureStrategy(
     ImageAnalysisStrategy strategy,
@@ -61,14 +61,14 @@ abstract base class CameraControllerApi {
   Future<void> setImageAnalysisOutputImageFormat(
     ImageAnalysisOutputImageFormat format,
   );
-  Future<ResolutionSelectorApi?> getImageAnalysisResolutionSelector();
+  Future<ResolutionSelector?> getImageAnalysisResolutionSelector();
   Future<void> setImageAnalysisResolutionSelector(
-    ResolutionSelectorApi? resolutionSelector,
+    ResolutionSelector? resolutionSelector,
   );
-  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzerApi analyzer);
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer);
   Future<void> clearImageAnalysisAnalyzer();
-  Future<DynamicRangeApi> getVideoCaptureDynamicRange();
-  Future<void> setVideoCaptureDynamicRange(DynamicRangeApi dynamicRange);
+  Future<DynamicRange> getVideoCaptureDynamicRange();
+  Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange);
   Future<MirrorMode> getVideoCaptureMirrorMode();
   Future<void> setVideoCaptureMirrorMode(MirrorMode mirrorMode);
   Future<QualitySelectorApi> getVideoCaptureQualitySelector();

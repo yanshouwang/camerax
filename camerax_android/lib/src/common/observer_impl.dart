@@ -38,7 +38,7 @@ final class ZoomStateObserverImpl extends ZoomStateObserverApi {
   ZoomStateObserverImpl.internal(this.api) : super.impl();
 
   factory ZoomStateObserverImpl({
-    required void Function(ZoomStateApi value) onChanged,
+    required void Function(ZoomState value) onChanged,
   }) {
     final api = ZoomStateObserverProxyApi(
       onChanged: (_, e) => onChanged(e.impl),

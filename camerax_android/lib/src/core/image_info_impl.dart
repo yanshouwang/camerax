@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ImageInfoImpl extends ImageInfoApi {
+final class ImageInfoImpl extends ImageInfo {
   final ImageInfoProxyApi api;
 
   ImageInfoImpl.internal(this.api) : super.impl();
@@ -13,5 +13,5 @@ final class ImageInfoImpl extends ImageInfoApi {
 }
 
 extension ImageInfoProxyApiX on ImageInfoProxyApi {
-  ImageInfoApi get impl => ImageInfoImpl.internal(this);
+  ImageInfo get impl => ImageInfoImpl.internal(this);
 }

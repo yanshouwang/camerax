@@ -4,12 +4,12 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'vision_object.dart';
 
-final class VisionAnalyzer extends ImageAnalysisAnalyzerApi {
+final class VisionAnalyzer extends ImageAnalysisAnalyzer {
   VisionAnalyzer.impl() : super.impl();
 
   factory VisionAnalyzer({
     List<AVMetadataObjectType>? types,
-    required ConsumerApi<AVAnalyzerResultApi> consumer,
+    required ConsumerApi<AVAnalyzerResult> consumer,
   }) {
     if (Platform.isAndroid) return MlVisionAnalyzer(types, consumer);
     if (Platform.isIOS) return AVisionAnalyzer(types, consumer);
@@ -61,7 +61,7 @@ final class VisionAnalyzer extends ImageAnalysisAnalyzerApi {
               objects.addAll(faceObjects);
             }
           }
-          final value = AVAnalyzerResultApi(objects: objects);
+          final value = AVAnalyzerResult(objects: objects);
           consumer(value);
         },
       ),

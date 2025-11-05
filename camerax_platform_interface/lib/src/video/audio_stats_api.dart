@@ -7,8 +7,8 @@ enum AudioStatsAudioState {
   muted,
 }
 
-abstract base class AudioStatsApi {
-  AudioStatsApi.impl();
+abstract base class AudioStats {
+  AudioStats.impl();
 
   double get audioAmplitude;
   AudioStatsAudioState get audioState;

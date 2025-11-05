@@ -22,23 +22,23 @@ final class CameraControllerImpl extends CameraControllerApi {
   Future<void> initialize() => api.initialize();
 
   @override
-  Future<bool> hasCamera(CameraSelectorApi cameraSelector) =>
+  Future<bool> hasCamera(CameraSelector cameraSelector) =>
       api.hasCamera(cameraSelector.api);
 
   @override
-  Future<CameraSelectorApi> getCameraSelector() =>
+  Future<CameraSelector> getCameraSelector() =>
       api.getCameraSelector().then((e) => e.impl);
 
   @override
-  Future<void> setCameraSelector(CameraSelectorApi cameraSelector) =>
+  Future<void> setCameraSelector(CameraSelector cameraSelector) =>
       api.setCameraSelector(cameraSelector.api);
 
   @override
-  Future<CameraInfoApi?> getCameraInfo() =>
+  Future<CameraInfo?> getCameraInfo() =>
       api.getCameraInfo().then((e) => e?.impl);
 
   @override
-  Future<CameraControlApi?> getCameraControl() =>
+  Future<CameraControl?> getCameraControl() =>
       api.getCameraControl().then((e) => e?.impl);
 
   @override
@@ -55,7 +55,7 @@ final class CameraControllerImpl extends CameraControllerApi {
   Future<void> enableTorch(bool enabled) => api.enableTorch(enabled);
 
   @override
-  Future<ZoomStateApi?> getZoomState() => api.getZoomState().then((e) => e?.impl);
+  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
 
   @override
   Future<void> setZoomRatio(double zoomRatio) => api.setZoomRatio(zoomRatio);
@@ -94,21 +94,21 @@ final class CameraControllerImpl extends CameraControllerApi {
   }
 
   @override
-  Future<ResolutionSelectorApi?> getPreviewResolutionSelector() =>
+  Future<ResolutionSelector?> getPreviewResolutionSelector() =>
       api.getPreviewResolutionSelector().then((e) => e?.impl);
 
   @override
   Future<void> setPreviewResolutionSelector(
-    ResolutionSelectorApi? resolutionSelector,
+    ResolutionSelector? resolutionSelector,
   ) => api.setPreviewResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<ResolutionSelectorApi?> getImageCaptureResolutionSelector() =>
+  Future<ResolutionSelector?> getImageCaptureResolutionSelector() =>
       api.getImageCaptureResolutionSelector().then((e) => e?.impl);
 
   @override
   Future<void> setImageCaptureResolutionSelector(
-    ResolutionSelectorApi? resolutionSelector,
+    ResolutionSelector? resolutionSelector,
   ) => api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
@@ -128,16 +128,16 @@ final class CameraControllerImpl extends CameraControllerApi {
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
-  Future<void> takePicture(ImageCaptureOnImageCapturedCallbackApi callback) =>
+  Future<void> takePicture(ImageCaptureOnImageCapturedCallback callback) =>
       api.takePicture(callback.api);
 
   @override
-  Future<ResolutionSelectorApi?> getImageAnalysisResolutionSelector() =>
+  Future<ResolutionSelector?> getImageAnalysisResolutionSelector() =>
       api.getImageAnalysisResolutionSelector().then((e) => e?.impl);
 
   @override
   Future<void> setImageAnalysisResolutionSelector(
-    ResolutionSelectorApi? resolutionSelector,
+    ResolutionSelector? resolutionSelector,
   ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
@@ -167,18 +167,18 @@ final class CameraControllerImpl extends CameraControllerApi {
   ) => api.setImageAnalysisOutputImageFormat(format.api);
 
   @override
-  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzerApi analyzer) =>
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer) =>
       api.setImageAnalysisAnalyzer(analyzer.api);
 
   @override
   Future<void> clearImageAnalysisAnalyzer() => api.clearImageAnalysisAnalyzer();
 
   @override
-  Future<DynamicRangeApi> getVideoCaptureDynamicRange() =>
+  Future<DynamicRange> getVideoCaptureDynamicRange() =>
       api.getVideoCaptureDynamicRange().then((e) => e.impl);
 
   @override
-  Future<void> setVideoCaptureDynamicRange(DynamicRangeApi dynamicRange) =>
+  Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange) =>
       api.setVideoCaptureDynamicRange(dynamicRange.api);
 
   @override
@@ -227,7 +227,7 @@ final class CameraControllerImpl extends CameraControllerApi {
       api.observeTorchState(observer.torchStateObserverApi);
 
   @override
-  Future<void> observeZoomState(ObserverApi<ZoomStateApi> observer) =>
+  Future<void> observeZoomState(ObserverApi<ZoomState> observer) =>
       api.observeZoomState(observer.zoomStateObserverApi);
 
   @override
@@ -235,7 +235,7 @@ final class CameraControllerImpl extends CameraControllerApi {
       api.removeTorchStateObserver(observer.torchStateObserverApi);
 
   @override
-  Future<void> removeZoomStateObserver(ObserverApi<ZoomStateApi> observer) =>
+  Future<void> removeZoomStateObserver(ObserverApi<ZoomState> observer) =>
       api.removeZoomStateObserver(observer.zoomStateObserverApi);
 }
 

@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class LocationImpl extends LocationApi {
+final class LocationImpl extends Location {
   final LocationProxyApi api;
 
   LocationImpl.internal(this.api) : super.impl();
@@ -12,7 +12,7 @@ final class LocationImpl extends LocationApi {
   }
 }
 
-extension LocationApiX on LocationApi {
+extension LocationApiX on Location {
   LocationProxyApi get api {
     final impl = this;
     if (impl is! LocationImpl) throw TypeError();

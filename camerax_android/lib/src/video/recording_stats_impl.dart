@@ -9,7 +9,7 @@ final class RecordingStatsImpl extends RecordingStatsApi {
   RecordingStatsImpl.internal(this.api) : super.impl();
 
   @override
-  AudioStatsApi get audioStats => api.audioStats.impl;
+  AudioStats get audioStats => api.audioStats.impl;
   @override
   int get numBytesRecorded => api.numBytesRecorded;
   @override

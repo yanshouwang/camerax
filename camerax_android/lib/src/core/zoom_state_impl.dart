@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ZoomStateImpl extends ZoomStateApi {
+final class ZoomStateImpl extends ZoomState {
   final ZoomStateProxyApi api;
 
   ZoomStateImpl.internal(this.api) : super.impl();
@@ -17,5 +17,5 @@ final class ZoomStateImpl extends ZoomStateApi {
 }
 
 extension ZoomStateProxyApiX on ZoomStateProxyApi {
-  ZoomStateApi get impl => ZoomStateImpl.internal(this);
+  ZoomState get impl => ZoomStateImpl.internal(this);
 }

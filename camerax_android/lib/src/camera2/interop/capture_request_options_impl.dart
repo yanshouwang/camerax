@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CaptureRequestOptionsImpl extends CaptureRequestOptionsApi {
+final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
   final CaptureRequestOptionsProxyApi api;
 
   CaptureRequestOptionsImpl.internal(this.api) : super.impl();
@@ -25,7 +25,7 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptionsApi {
   }
 }
 
-extension CaptureRequestOptionsApiX on CaptureRequestOptionsApi {
+extension CaptureRequestOptionsApiX on CaptureRequestOptions {
   CaptureRequestOptionsProxyApi get api {
     final impl = this;
     if (impl is! CaptureRequestOptionsImpl) throw TypeError();
@@ -34,5 +34,5 @@ extension CaptureRequestOptionsApiX on CaptureRequestOptionsApi {
 }
 
 extension CaptureRequestOptionsProxyApiX on CaptureRequestOptionsProxyApi {
-  CaptureRequestOptionsApi get impl => CaptureRequestOptionsImpl.internal(this);
+  CaptureRequestOptions get impl => CaptureRequestOptionsImpl.internal(this);
 }

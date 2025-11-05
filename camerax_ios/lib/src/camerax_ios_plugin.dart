@@ -16,16 +16,18 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }
 
   @override
-  PermissionManagerApi $PermissionManagerApi() => PermissionManagerImpl();
+  PermissionManager $PermissionManagerApi() => PermissionManagerImpl();
 
   @override
-  CameraSelectorApi get $CameraSelectorApiDefaultFrontCamera => CameraSelectorImpl.front;
+  CameraSelector get $CameraSelectorDefaultFrontCamera =>
+      CameraSelectorImpl.front;
   @override
-  CameraSelectorApi get $CameraSelectorApiDefaultBackCamera => CameraSelectorImpl.back;
+  CameraSelector get $CameraSelectorDefaultBackCamera =>
+      CameraSelectorImpl.back;
   @override
-  CameraSelectorApi get $CameraSelectorApiExternal => CameraSelectorImpl.external;
+  CameraSelector get $CameraSelectorApiExternal => CameraSelectorImpl.external;
   @override
-  CameraSelectorApi $CameraSelectorApi({CameraSelectorLensFacing? lensFacing}) =>
+  CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);
 
   @override
@@ -58,7 +60,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
 
   @override
   Future<SizeApi<int>?> $QualitySelectorApiGetResolution(
-    CameraInfoApi cameraInfo,
+    CameraInfo cameraInfo,
     Quality quality,
   ) => throw UnimplementedError();
 
@@ -102,7 +104,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
-    LocationApi? location,
+    Location? location,
   }) => FileOutputOptionsImpl(
     file,
     durationLimit: durationLimit,
@@ -111,15 +113,15 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  SurfaceOrientedMeteringPointFactoryApi $SurfaceOrientedMeteringPointFactoryApi(
+  SurfaceOrientedMeteringPointFactory $SurfaceOrientedMeteringPointFactory(
     width,
     height,
   ) => SurfaceOrientedMeteringPointFactoryImpl(width, height);
 
   @override
-  FocusMeteringActionApi $FocusMeteringActionApi(
-    (MeteringPointApi, List<FocusMeteringActionMeteringMode>) point, {
-    List<(MeteringPointApi, List<FocusMeteringActionMeteringMode>)>? morePoints,
+  FocusMeteringAction $FocusMeteringAction(
+    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) => FocusMeteringActionImpl(
@@ -130,21 +132,20 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  ImageAnalysisImageAnalyzerApi $ImageAnalysisAnalyzerApi({
-    required void Function(ImageProxyApi image) analyze,
+  ImageAnalysisImageAnalyzerApi $ImageAnalysisAnalyzer({
+    required void Function(ImageProxy image) analyze,
   }) => ImageAnalyzerImpl(analyze: analyze);
 
   @override
-  Camera2CameraControlApi $Camera2CameraControlApiFrom(
-    CameraControlApi cameraControl,
-  ) => throw UnimplementedError();
-
-  @override
-  Camera2CameraInfoApi $Camera2CameraInfoApiFrom(CameraInfoApi cameraInfo) =>
+  Camera2CameraControl $Camera2CameraControlFrom(CameraControl cameraControl) =>
       throw UnimplementedError();
 
   @override
-  CaptureRequestOptionsApi $CaptureRequestOptionsApi({
+  Camera2CameraInfo $Camera2CameraInfoFrom(CameraInfo cameraInfo) =>
+      throw UnimplementedError();
+
+  @override
+  CaptureRequestOptions $CaptureRequestOptions({
     CameraMetadataControlMode? mode,
     CameraMetadataControlAeMode? aeMode,
     CameraMetadataControlAfMode? afMode,
@@ -153,9 +154,9 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => throw UnimplementedError();
 
   @override
-  AVAnalyzerApi $AVAnalyzerApi({
+  AVAnalyzer $AVAnalyzer({
     List<AVMetadataObjectType>? types,
-    required ConsumerApi<AVAnalyzerResultApi> consumer,
+    required ConsumerApi<AVAnalyzerResult> consumer,
   }) => AVAnalyzerImpl(types: types, consumer: consumer);
 
   @override
@@ -164,11 +165,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => CameraStateObserverImpl(onChanged: onChanged);
 
   @override
-  ImageCaptureOnImageCapturedCallbackApi $ImageCaptureOnImageCapturedCallbackApi({
+  ImageCaptureOnImageCapturedCallback $ImageCaptureOnImageCapturedCallback({
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
     void Function(Image bitmap)? onPostviewBitmapAvailable,
-    void Function(ImageProxyApi image)? onCaptureSuccess,
+    void Function(ImageProxy image)? onCaptureSuccess,
     void Function(Object exception)? onError,
   }) => ImageCaptureOnImageCapturedCallbackImpl(
     onCaptureStarted: onCaptureStarted,
@@ -184,7 +185,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => throw UnimplementedError();
 
   @override
-  ResolutionFilterApi $ResolutionFilterApi({
+  ResolutionFilter $ResolutionFilter({
     required List<SizeApi<int>> Function(
       List<SizeApi<int>> supportedSizes,
       int rotationDegrees,
@@ -211,8 +212,8 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => VideoRecordEventConsumerImpl(accept: accept);
 
   @override
-  ObserverApi<ZoomStateApi> $ZoomStateObserverApi({
-    required void Function(ZoomStateApi value) onChanged,
+  ObserverApi<ZoomState> $ZoomStateObserverApi({
+    required void Function(ZoomState value) onChanged,
   }) => ZoomStateObserverImpl(onChanged: onChanged);
 
   @override
@@ -231,11 +232,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   ]) => throw UnimplementedError();
 
   @override
-  LocationApi $LocationApi(double latitude, double longitude) =>
+  Location $Location(double latitude, double longitude) =>
       LocationImpl(latitude, longitude);
 
   @override
-  ConsumerApi<AVAnalyzerResultApi> $AVAnalyzerResultConsumerApi({
-    required void Function(AVAnalyzerResultApi value) accept,
+  ConsumerApi<AVAnalyzerResult> $AVAnalyzerResultConsumer({
+    required void Function(AVAnalyzerResult value) accept,
   }) => AVAnalyzerResultConsumerImpl(accept: accept);
 }

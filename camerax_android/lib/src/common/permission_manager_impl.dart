@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'permission_impl.dart';
 
-final class PermissionManagerImpl extends PermissionManagerApi {
+final class PermissionManagerImpl extends PermissionManager {
   static PermissionManagerImpl get instance {
     final api = PermissionManagerProxyApi.instance;
     return PermissionManagerImpl.internal(api);

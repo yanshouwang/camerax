@@ -12,13 +12,13 @@ import 'focus_metering_action_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
-final class CameraInfoImpl extends CameraInfoApi {
+final class CameraInfoImpl extends CameraInfo {
   final CameraInfoProxyApi api;
 
   CameraInfoImpl.internal(this.api) : super.impl();
 
   @override
-  Future<CameraSelectorApi> getCameraSelector() =>
+  Future<CameraSelector> getCameraSelector() =>
       api.getCameraSelector().then((e) => e.impl);
 
   @override
@@ -26,7 +26,7 @@ final class CameraInfoImpl extends CameraInfoApi {
       api.getCameraState().then((e) => e?.impl);
 
   @override
-  Future<ExposureStateApi> getExposureState() =>
+  Future<ExposureState> getExposureState() =>
       api.getExposureState().then((e) => e.impl);
 
   @override
@@ -37,7 +37,7 @@ final class CameraInfoImpl extends CameraInfoApi {
       api.getLensFacing().then((e) => e.impl);
 
   @override
-  Future<Set<CameraInfoApi>> getPhysicalCameraInfos() =>
+  Future<Set<CameraInfo>> getPhysicalCameraInfos() =>
       api.getPhysicalCameraInfos().then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
@@ -50,14 +50,13 @@ final class CameraInfoImpl extends CameraInfoApi {
       api.getTorchState().then((e) => e?.impl);
 
   @override
-  Future<ZoomStateApi?> getZoomState() =>
-      api.getZoomState().then((e) => e?.impl);
+  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
 
   @override
   Future<bool> hasFlashUnit() => api.hasFlashUnit();
 
   @override
-  Future<bool> isFocusMeteringSupported(FocusMeteringActionApi action) =>
+  Future<bool> isFocusMeteringSupported(FocusMeteringAction action) =>
       api.isFocusMeteringSupported(action.api);
 
   @override
@@ -68,8 +67,8 @@ final class CameraInfoImpl extends CameraInfoApi {
   Future<bool> isZslSupported() => api.isZslSupported();
 
   @override
-  Future<Set<DynamicRangeApi>> querySupportedDynamicRanges(
-    Set<DynamicRangeApi> candidateDynamicRanges,
+  Future<Set<DynamicRange>> querySupportedDynamicRanges(
+    Set<DynamicRange> candidateDynamicRanges,
   ) => api
       .querySupportedDynamicRanges(
         candidateDynamicRanges.map((e) => e.api).toList(),
@@ -101,7 +100,7 @@ final class CameraInfoImpl extends CameraInfoApi {
       api.removeZoomStateObserver(observer.api);
 }
 
-extension CameraInfoApiX on CameraInfoApi {
+extension CameraInfoApiX on CameraInfo {
   CameraInfoProxyApi get api {
     final impl = this;
     if (impl is! CameraInfoImpl) throw TypeError();
@@ -110,5 +109,5 @@ extension CameraInfoApiX on CameraInfoApi {
 }
 
 extension CameraInfoProxyApiX on CameraInfoProxyApi {
-  CameraInfoApi get impl => CameraInfoImpl.internal(this);
+  CameraInfo get impl => CameraInfoImpl.internal(this);
 }

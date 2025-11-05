@@ -224,7 +224,7 @@ final class BarcodeImpl extends BarcodeApi {
   @override
   BarcodeContactInfoApi? get contactInfo => api.contactInfo?.impl;
   @override
-  List<PointApi>? get cornerPoints =>
+  List<Point>? get cornerPoints =>
       api.cornerPoints?.map((e) => e.impl).toList();
   @override
   String? get displayValue => api.displayValue;

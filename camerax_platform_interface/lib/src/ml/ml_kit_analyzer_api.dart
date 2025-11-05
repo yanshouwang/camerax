@@ -15,7 +15,7 @@ abstract base class MlKitAnalyzerResultApi {
   Future<Object?> getThrowable2(FaceDetectorApi detector);
 }
 
-abstract base class MlKitAnalyzerApi extends ImageAnalysisAnalyzerApi {
+abstract base class MlKitAnalyzerApi extends ImageAnalysisAnalyzer {
   MlKitAnalyzerApi.impl() : super.impl();
 
   factory MlKitAnalyzerApi({

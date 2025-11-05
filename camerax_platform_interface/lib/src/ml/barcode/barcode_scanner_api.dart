@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/src/common.dart';
 
 import 'barcode_scanner_options_api.dart';
 
-abstract base class BarcodeScannerApi extends CloseableApi {
+abstract base class BarcodeScannerApi extends Closeable {
   BarcodeScannerApi.impl() : super.impl();
 
   factory BarcodeScannerApi() => CameraXPlugin.instance.$BarcodeScannerApi();

@@ -1,7 +1,7 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CameraSelectorImpl extends CameraSelectorApi {
+final class CameraSelectorImpl extends CameraSelector {
   static CameraSelectorImpl get front =>
       CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
   static CameraSelectorImpl get back =>
@@ -28,7 +28,7 @@ extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
   CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
 }
 
-extension CameraSelectorApiX on CameraSelectorApi {
+extension CameraSelectorApiX on CameraSelector {
   CameraSelectorProxyApi get api {
     final impl = this;
     if (impl is! CameraSelectorImpl) throw TypeError();
@@ -37,5 +37,5 @@ extension CameraSelectorApiX on CameraSelectorApi {
 }
 
 extension CameraSelectorProxyApiX on CameraSelectorProxyApi {
-  CameraSelectorApi get impl => CameraSelectorImpl.internal(this);
+  CameraSelector get impl => CameraSelectorImpl.internal(this);
 }

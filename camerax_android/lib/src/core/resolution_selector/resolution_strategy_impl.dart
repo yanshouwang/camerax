@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ResolutionStrategyImpl extends ResolutionStrategyApi {
+final class ResolutionStrategyImpl extends ResolutionStrategy {
   final ResolutionStrategyProxyApi api;
 
   ResolutionStrategyImpl.internal(this.api) : super.impl();
@@ -37,7 +37,7 @@ extension ResolutionStrategyFallbackRuleApiX
       ResolutionStrategyFallbackRule.values[index];
 }
 
-extension ResolutionStrategyApiX on ResolutionStrategyApi {
+extension ResolutionStrategyApiX on ResolutionStrategy {
   ResolutionStrategyProxyApi get api {
     final impl = this;
     if (impl is! ResolutionStrategyImpl) throw TypeError();
@@ -46,5 +46,5 @@ extension ResolutionStrategyApiX on ResolutionStrategyApi {
 }
 
 extension ResolutionStrategyProxyApiX on ResolutionStrategyProxyApi {
-  ResolutionStrategyApi get impl => ResolutionStrategyImpl.internal(this);
+  ResolutionStrategy get impl => ResolutionStrategyImpl.internal(this);
 }

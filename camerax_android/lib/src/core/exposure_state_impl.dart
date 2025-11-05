@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ExposureStateImpl extends ExposureStateApi {
+final class ExposureStateImpl extends ExposureState {
   final ExposureStateProxyApi api;
 
   ExposureStateImpl.internal(this.api) : super.impl();
@@ -19,5 +19,5 @@ final class ExposureStateImpl extends ExposureStateApi {
 }
 
 extension ExposureStateProxyApiX on ExposureStateProxyApi {
-  ExposureStateApi get impl => ExposureStateImpl.internal(this);
+  ExposureState get impl => ExposureStateImpl.internal(this);
 }

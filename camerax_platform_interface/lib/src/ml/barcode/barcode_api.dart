@@ -44,141 +44,143 @@ enum BarcodePhoneType { unknown, work, home, fax, mobile }
 
 enum BarcodeWiFiType { open, wpa, wep }
 
-abstract base class BarcodeApi {
-  BarcodeApi.impl();
-
-  BarcodeFormat get format;
-  RectApi? get boundingBox;
-  List<PointApi>? get cornerPoints;
-  Uint8List? get rawBytes;
-  String? get rawValue;
-  String? get displayValue;
-  BarcodeType get valueType;
-  BarcodeCalendarEventApi? get calendarEvent;
-  BarcodeContactInfoApi? get contactInfo;
-  BarcodeDriverLicenseApi? get driverLicense;
-  BarcodeEmailApi? get email;
-  BarcodeGeoPointApi? get geoPoint;
-  BarcodePhoneApi? get phone;
-  BarcodeSmsApi? get sms;
-  BarcodeUrlBookmarkApi? get url;
-  BarcodeWiFiApi? get wifi;
-}
-
 abstract base class BarcodeAddressApi {
   BarcodeAddressApi.impl();
 
-  BarcodeAddressType get type;
-  List<String> get addressLines;
+  Future<List<String>> getAddressLines();
+  Future<BarcodeAddressType> getType();
+}
+
+abstract base class BarcodeCalendarDateTimeApi {
+  BarcodeCalendarDateTimeApi.impl();
+
+  Future<int> getDay();
+  Future<int> getHours();
+  Future<int> getMinutes();
+  Future<int> getMonth();
+  Future<String?> getRawValue();
+  Future<int> getSeconds();
+  Future<int> getYear();
+  Future<bool> isUtc();
 }
 
 abstract base class BarcodeCalendarEventApi {
   BarcodeCalendarEventApi.impl();
 
-  BarcodeCalendarDateTimeApi? get start;
-  BarcodeCalendarDateTimeApi? get end;
-  String? get location;
-  String? get organizer;
-  String? get summary;
-  String? get description;
-  String? get status;
-}
-
-abstract base class BarcodeCalendarDateTimeApi {
-  String? get rawValue;
-  int get year;
-  int get month;
-  int get day;
-  int get hours;
-  int get minutes;
-  int get seconds;
-  bool get isUtc;
+  Future<String?> getDescription();
+  Future<BarcodeCalendarDateTimeApi?> getEnd();
+  Future<String?> getLocation();
+  Future<String?> getOrganizer();
+  Future<BarcodeCalendarDateTimeApi?> getStart();
+  Future<String?> getStatus();
+  Future<String?> getSummary();
 }
 
 abstract base class BarcodeContactInfoApi {
   BarcodeContactInfoApi.impl();
 
-  List<BarcodeAddressApi> get addresses;
-  List<BarcodeEmailApi> get emails;
-  BarcodePersonNameApi? get name;
-  String? get organization;
-  List<BarcodePhoneApi> get phones;
-  String? get title;
-  List<String> get urls;
+  Future<List<BarcodeAddressApi>> getAddresses();
+  Future<List<BarcodeEmailApi>> getEmails();
+  Future<BarcodePersonNameApi?> getName();
+  Future<String?> getOrganization();
+  Future<List<BarcodePhoneApi>> getPhones();
+  Future<String?> getTitle();
+  Future<List<String>> getUrls();
 }
 
 abstract base class BarcodeDriverLicenseApi {
   BarcodeDriverLicenseApi.impl();
 
-  String? get licenseNumber;
-  String? get documentType;
-  String? get expiryDate;
-  String? get firstName;
-  String? get middleName;
-  String? get lastName;
-  String? get gender;
-  String? get birthDate;
-  String? get issueDate;
-  String? get issuingCountry;
-  String? get addressState;
-  String? get addressCity;
-  String? get addressStreet;
-  String? get addressZip;
+  Future<String?> getAddressCity();
+  Future<String?> getAddressState();
+  Future<String?> getAddressStreet();
+  Future<String?> getAddressZip();
+  Future<String?> getBirthDate();
+  Future<String?> getDocumentType();
+  Future<String?> getExpiryDate();
+  Future<String?> getFirstName();
+  Future<String?> getGender();
+  Future<String?> getIssueDate();
+  Future<String?> getIssuingCountry();
+  Future<String?> getLastName();
+  Future<String?> getLicenseNumber();
+  Future<String?> getMiddleName();
 }
 
 abstract base class BarcodeEmailApi {
   BarcodeEmailApi.impl();
 
-  BarcodeEmailType get type;
-  String? get address;
-  String? get subject;
-  String? get body;
+  Future<String?> getAddress();
+  Future<String?> getBody();
+  Future<String?> getSubject();
+  Future<BarcodeEmailType> getType();
 }
 
 abstract base class BarcodeGeoPointApi {
   BarcodeGeoPointApi.impl();
 
-  double get lat;
-  double get lng;
+  Future<double> getLat();
+  Future<double> getLng();
 }
 
 abstract base class BarcodePersonNameApi {
   BarcodePersonNameApi.impl();
 
-  String? get formattedName;
-  String? get pronunciation;
-  String? get prefix;
-  String? get first;
-  String? get middle;
-  String? get last;
-  String? get suffix;
+  Future<String?> getFirst();
+  Future<String?> getFormattedName();
+  Future<String?> getLast();
+  Future<String?> getMiddle();
+  Future<String?> getPrefix();
+  Future<String?> getPronunciation();
+  Future<String?> getSuffix();
 }
 
 abstract base class BarcodePhoneApi {
   BarcodePhoneApi.impl();
 
-  BarcodePhoneType get type;
-  String? get number;
+  Future<String?> getNumber();
+  Future<BarcodePhoneApi> getType();
 }
 
 abstract base class BarcodeSmsApi {
   BarcodeSmsApi.impl();
 
-  String? get phoneNumber;
-  String? get message;
+  Future<String?> getMessage();
+  Future<String?> getPhoneNumber();
 }
 
 abstract base class BarcodeUrlBookmarkApi {
   BarcodeUrlBookmarkApi.impl();
 
-  String? get title;
-  String? get url;
+  Future<String?> getTitle();
+  Future<String?> getUrl();
 }
 
 abstract base class BarcodeWiFiApi {
   BarcodeWiFiApi.impl();
 
-  BarcodeWiFiType get encryptionType;
-  String? get ssid;
-  String? get password;
+  Future<BarcodeWiFiType> getEncryptionType();
+  Future<String?> getPassword();
+  Future<String?> getSsid();
+}
+
+abstract base class BarcodeApi {
+  BarcodeApi.impl();
+
+  Future<RectApi?> getBoundingBox();
+  Future<BarcodeCalendarEventApi?> getCalendarEvent();
+  Future<BarcodeContactInfoApi?> getContactInfo();
+  Future<List<Point>?> getCornerPoints();
+  Future<String?> getDisplayValue();
+  Future<BarcodeDriverLicenseApi?> getDriverLicense();
+  Future<BarcodeEmailApi?> getEmail();
+  Future<BarcodeFormat> getFormat();
+  Future<BarcodeGeoPointApi?> getGeoPoint();
+  Future<BarcodePhoneApi?> getPhone();
+  Future<Uint8List?> getRawBytes();
+  Future<String?> getRawValue();
+  Future<BarcodeSmsApi?> getSms();
+  Future<BarcodeUrlBookmarkApi?> getUrl();
+  Future<BarcodeType> getValueType();
+  Future<BarcodeWiFiApi?> getWifi();
 }

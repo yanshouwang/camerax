@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/src/common.dart';
 
 import 'face_detector_options_api.dart';
 
-abstract base class FaceDetectorApi extends CloseableApi {
+abstract base class FaceDetectorApi extends Closeable {
   FaceDetectorApi.impl() : super.impl();
 
   factory FaceDetectorApi() => CameraXPlugin.instance.$FaceDetectorApi();

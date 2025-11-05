@@ -8,7 +8,7 @@ import 'quality_impl.dart';
 
 final class QualitySelectorImpl extends QualitySelectorApi {
   static Future<SizeApi?> getResolution(
-    CameraInfoApi cameraInfo,
+    CameraInfo cameraInfo,
     QualityApi quality,
   ) => QualitySelectorProxyApi.getResolution(
     cameraInfo.api,
