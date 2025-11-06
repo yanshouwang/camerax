@@ -1,5 +1,4 @@
 export 'common/auto_closeable.dart';
-export 'common/bitmap.dart';
 export 'common/closeable.dart';
 export 'common/consumer.dart';
 export 'common/image_format.dart';

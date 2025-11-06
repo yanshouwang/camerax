@@ -18,9 +18,9 @@ enum FaceContourType {
   upperLipTop,
 }
 
-abstract base class FaceContourApi {
-  FaceContourApi.impl();
+abstract base class FaceContour {
+  FaceContour.impl();
 
-  Future<FaceContourType> getFaceContourType();
-  Future<List<PointFApi>> getPoints();
+  FaceContourType get type;
+  List<Point<double>> get points;
 }

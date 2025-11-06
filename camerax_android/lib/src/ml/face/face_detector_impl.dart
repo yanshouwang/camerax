@@ -4,8 +4,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'face_detector_options_impl.dart';
 
-final class FaceDetectorImpl extends FaceDetectorApi
-    with AutoCloseableImpl, CloseableImpl {
+final class FaceDetectorImpl extends FaceDetector with DetectorImpl {
   @override
   final FaceDetectorProxyApi api;
 
@@ -16,13 +15,13 @@ final class FaceDetectorImpl extends FaceDetectorApi
     return FaceDetectorImpl.internal(api);
   }
 
-  factory FaceDetectorImpl.options(FaceDetectorOptionsApi options) {
+  factory FaceDetectorImpl.options(FaceDetectorOptions options) {
     final api = FaceDetectorProxyApi.options(options: options.api);
     return FaceDetectorImpl.internal(api);
   }
 }
 
-extension FaceDetectorApiX on FaceDetectorApi {
+extension FaceDetectorX on FaceDetector {
   FaceDetectorProxyApi get api {
     final impl = this;
     if (impl is! FaceDetectorImpl) throw TypeError();

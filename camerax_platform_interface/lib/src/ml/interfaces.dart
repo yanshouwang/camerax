@@ -1,0 +1,1 @@
+export 'interfaces/detector.dart';

@@ -7,15 +7,6 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_proxy_impl.dart';
 
-Future<ui.Image> _decodeImage(Uint8List value) async {
-  final buffer = await ui.ImmutableBuffer.fromUint8List(value);
-  final descriptor = await ui.ImageDescriptor.encoded(buffer);
-  final codec = await descriptor.instantiateCodec();
-  final frame = await codec.getNextFrame();
-  final image = frame.image;
-  return image;
-}
-
 final class ImageCaptureOnImageCapturedCallbackImpl
     extends ImageCaptureOnImageCapturedCallback {
   final ImageCaptureOnImageCapturedCallbackProxyApi api;
@@ -35,19 +26,17 @@ final class ImageCaptureOnImageCapturedCallbackImpl
           : (_) => onCaptureStarted(),
       onCaptureProcessProgressed: onCaptureProcessProgressed == null
           ? null
-          : (_, progress) => onCaptureProcessProgressed(progress),
+          : (_, e) => onCaptureProcessProgressed(e),
       onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
           ? null
-          : (_, bitmapApi) async {
-              final bitmap = await _decodeImage(bitmapApi);
-              onPostviewBitmapAvailable(bitmap);
+          : (_, e) async {
+              final image = await e.impl();
+              onPostviewBitmapAvailable(image);
             },
       onCaptureSuccess: onCaptureSuccess == null
           ? null
           : (_, e) => onCaptureSuccess(e.impl),
-      onError: onError == null
-          ? null
-          : (_, exceptionApi) => onError(exceptionApi.impl),
+      onError: onError == null ? null : (_, e) => onError(e.impl),
     );
     return ImageCaptureOnImageCapturedCallbackImpl.internal(api);
   }
@@ -70,7 +59,7 @@ extension ImageCaptureFlashModeApiX on ImageCaptureFlashModeApi {
   ImageCaptureFlashMode get impl => ImageCaptureFlashMode.values[index];
 }
 
-extension ImageCaptureOnImageCapturedCallbackApiX
+extension ImageCaptureOnImageCapturedCallbackX
     on ImageCaptureOnImageCapturedCallback {
   ImageCaptureOnImageCapturedCallbackProxyApi get api {
     final impl = this;

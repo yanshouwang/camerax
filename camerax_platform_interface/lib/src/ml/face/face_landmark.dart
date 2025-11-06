@@ -13,9 +13,9 @@ enum FaceLandmarkType {
   rightEye,
 }
 
-abstract base class FaceLandmarkApi {
-  FaceLandmarkApi.impl();
+abstract base class FaceLandmark {
+  FaceLandmark.impl();
 
-  Future<FaceLandmarkType> getLandmarkType();
-  Future<PointFApi> getPosition();
+  FaceLandmarkType get type;
+  Point<double> get position;
 }

@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
@@ -36,10 +37,27 @@ final class ImageProxyImpl extends ImageProxy with AutoCloseableImpl {
       api.planes.map((e) => e.impl).toList();
   @override
   int get width => api.width;
+
+  @override
+  Future<Rect<int>> getCropRect() => api.getCropRect().then((e) => e.impl);
+
+  @override
+  Future<void> setCropRect(Rect<int>? rect) => api.setCropRect(rect?.api);
+
+  @override
+  Future<ui.Image> toBitmap() => api.toBitmap().then((e) => e.impl());
 }
 
 extension ImageProxyPlaneProxyProxyApiX on ImageProxyPlaneProxyProxyApi {
   ImageProxyPlaneProxy get impl => ImageProxyPlaneProxyImpl.internal(this);
+}
+
+extension ImageProxyX on ImageProxy {
+  ImageProxyProxyApi get api {
+    final impl = this;
+    if (impl is! ImageProxyImpl) throw TypeError();
+    return impl.api;
+  }
 }
 
 extension ImageProxyProxyApiX on ImageProxyProxyApi {

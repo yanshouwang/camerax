@@ -1,13 +1,13 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'camera_info_impl.dart';
+
 final class CameraSelectorImpl extends CameraSelector {
-  static CameraSelectorImpl get front =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
-  static CameraSelectorImpl get back =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
-  static CameraSelectorImpl get external =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
+  static CameraSelectorImpl get defaultFrontCamera =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.defaultFrontCamera);
+  static CameraSelectorImpl get defaultBackCamera =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.defaultBackCamera);
 
   final CameraSelectorProxyApi api;
 
@@ -17,6 +17,14 @@ final class CameraSelectorImpl extends CameraSelector {
     final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
     return CameraSelectorImpl.internal(api);
   }
+
+  @override
+  Future<List<CameraInfo>> filter(List<CameraInfo> cameraInfos) => api
+      .filter(cameraInfos.map((e) => e.api).toList())
+      .then((e) => e.map((e1) => e1.impl).toList());
+
+  @override
+  Future<String?> getPhysicalCameraId() => api.getPhysicalCameraId();
 }
 
 extension CameraSelectorLensFacingX on CameraSelectorLensFacing {
@@ -28,7 +36,7 @@ extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
   CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
 }
 
-extension CameraSelectorApiX on CameraSelector {
+extension CameraSelectorX on CameraSelector {
   CameraSelectorProxyApi get api {
     final impl = this;
     if (impl is! CameraSelectorImpl) throw TypeError();

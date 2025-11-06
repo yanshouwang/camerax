@@ -50,7 +50,7 @@ extension ResolutionSelectorModeApiX on ResolutionSelectorModeApi {
   ResolutionSelectorMode get impl => ResolutionSelectorMode.values[index];
 }
 
-extension ResolutionSelectorApiX on ResolutionSelector {
+extension ResolutionSelectorX on ResolutionSelector {
   ResolutionSelectorProxyApi get api {
     final impl = this;
     if (impl is! ResolutionSelectorImpl) throw TypeError();

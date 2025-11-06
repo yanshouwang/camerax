@@ -6,9 +6,9 @@ enum CameraSelectorLensFacing { unknown, front, back, external }
 
 abstract base class CameraSelector {
   static CameraSelector get defaultBackCamera =>
-      CameraXPlugin.instance.$CameraSelectorDefaultBackCamera;
+      CameraXPlugin.instance.$CameraSelector$DefaultBackCamera;
   static CameraSelector get defaultFrontCamera =>
-      CameraXPlugin.instance.$CameraSelectorDefaultFrontCamera;
+      CameraXPlugin.instance.$CameraSelector$DefaultFrontCamera;
 
   CameraSelector.impl();
 

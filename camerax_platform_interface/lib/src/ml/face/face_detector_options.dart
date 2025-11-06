@@ -8,17 +8,17 @@ enum FaceDetectorOptionsLandmarkMode { none, all }
 
 enum FaceDetectorOptionsPerformanceMode { fast, accurate }
 
-abstract base class FaceDetectorOptionsApi {
-  FaceDetectorOptionsApi.impl();
+abstract base class FaceDetectorOptions {
+  FaceDetectorOptions.impl();
 
-  factory FaceDetectorOptionsApi({
+  factory FaceDetectorOptions({
     bool? enableTracking,
     FaceDetectorOptionsClassificationMode? classificationMode,
     FaceDetectorOptionsContourMode? contourMode,
     FaceDetectorOptionsLandmarkMode? landmarkMode,
     double? minFaceSize,
     FaceDetectorOptionsPerformanceMode? performanceMode,
-  }) => CameraXPlugin.instance.$FaceDetectorOptionsApi(
+  }) => CameraXPlugin.instance.$FaceDetectorOptions(
     enableTracking: enableTracking,
     classificationMode: classificationMode,
     contourMode: contourMode,

@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CameraStateObserverImpl extends CameraStateObserverApi {
+final class CameraStateObserverImpl extends Observer<CameraState> {
   final CameraStateObserverProxyApi api;
 
   CameraStateObserverImpl.internal(this.api) : super.impl();
@@ -17,7 +17,7 @@ final class CameraStateObserverImpl extends CameraStateObserverApi {
   }
 }
 
-final class TorchStateObserverImpl extends TorchStateObserverApi {
+final class TorchStateObserverImpl extends Observer<TorchState> {
   final TorchStateObserverProxyApi api;
 
   TorchStateObserverImpl.internal(this.api) : super.impl();
@@ -32,7 +32,7 @@ final class TorchStateObserverImpl extends TorchStateObserverApi {
   }
 }
 
-final class ZoomStateObserverImpl extends ZoomStateObserverApi {
+final class ZoomStateObserverImpl extends Observer<ZoomState> {
   final ZoomStateObserverProxyApi api;
 
   ZoomStateObserverImpl.internal(this.api) : super.impl();
@@ -47,7 +47,7 @@ final class ZoomStateObserverImpl extends ZoomStateObserverApi {
   }
 }
 
-extension CameraStateObserverApiX on CameraStateObserverApi {
+extension CameraStateObserverX on Observer<CameraState> {
   CameraStateObserverProxyApi get api {
     final impl = this;
     if (impl is! CameraStateObserverImpl) throw TypeError();
@@ -55,7 +55,7 @@ extension CameraStateObserverApiX on CameraStateObserverApi {
   }
 }
 
-extension TorchStateObserverApiX on TorchStateObserverApi {
+extension TorchStateObserverX on Observer<TorchState> {
   TorchStateObserverProxyApi get api {
     final impl = this;
     if (impl is! TorchStateObserverImpl) throw TypeError();
@@ -63,7 +63,7 @@ extension TorchStateObserverApiX on TorchStateObserverApi {
   }
 }
 
-extension ZoomStateObserverApiX on ZoomStateObserverApi {
+extension ZoomStateObserverX on Observer<ZoomState> {
   ZoomStateObserverProxyApi get api {
     final impl = this;
     if (impl is! ZoomStateObserverImpl) throw TypeError();

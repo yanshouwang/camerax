@@ -10,11 +10,11 @@ extension AVMetadataObjectTypeApiX on AVMetadataObjectTypeApi {
   AVMetadataObjectType get impl => AVMetadataObjectType.values[index];
 }
 
-extension AVMetadataObjectApiX on AVMetadataObjectApi {
-  AVMetadataObjectApi get impl {
+extension AVMetadataObjectApiX on AVMetadataObject {
+  AVMetadataObject get impl {
     final api = this;
-    if (api is AVMetadataCatBodyObjectApi) {
-      return AVMetadataCatBodyObjectApi(
+    if (api is AVMetadataCatBodyObject) {
+      return AVMetadataCatBodyObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -22,8 +22,8 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
         bodyID: api.bodyID,
       );
     }
-    if (api is AVMetadataDogBodyObjectApi) {
-      return AVMetadataDogBodyObjectApi(
+    if (api is AVMetadataDogBodyObject) {
+      return AVMetadataDogBodyObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -31,8 +31,8 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
         bodyID: api.bodyID,
       );
     }
-    if (api is AVMetadataHumanBodyObjectApi) {
-      return AVMetadataHumanBodyObjectApi(
+    if (api is AVMetadataHumanBodyObject) {
+      return AVMetadataHumanBodyObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -40,8 +40,8 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
         bodyID: api.bodyID,
       );
     }
-    if (api is AVMetadataHumanFullBodyObjectApi) {
-      return AVMetadataHumanFullBodyObjectApi(
+    if (api is AVMetadataHumanFullBodyObject) {
+      return AVMetadataHumanFullBodyObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -49,8 +49,8 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
         bodyID: api.bodyID,
       );
     }
-    if (api is AVMetadataFaceObjectApi) {
-      return AVMetadataFaceObjectApi(
+    if (api is AVMetadataFaceObject) {
+      return AVMetadataFaceObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -62,8 +62,8 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
         yawAngle: api.yawAngle,
       );
     }
-    if (api is AVMetadataMachineReadableCodeObjectApi) {
-      return AVMetadataMachineReadableCodeObjectApi(
+    if (api is AVMetadataMachineReadableCodeObject) {
+      return AVMetadataMachineReadableCodeObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),
@@ -72,8 +72,8 @@ extension AVMetadataObjectApiX on AVMetadataObjectApi {
         stringValue: api.stringValue,
       );
     }
-    if (api is AVMetadataSalientObjectApi) {
-      return AVMetadataSalientObjectApi(
+    if (api is AVMetadataSalientObject) {
+      return AVMetadataSalientObject(
         type: api.type.impl,
         time: DateTime.fromMillisecondsSinceEpoch(api.time),
         duration: Duration(milliseconds: api.time),

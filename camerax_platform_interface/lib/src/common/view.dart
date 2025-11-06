@@ -1,6 +1,7 @@
-abstract base class ViewApi {
-  ViewApi.impl();
+import 'package:flutter/widgets.dart';
 
-  String get viewType;
-  int get id;
+abstract base class View {
+  View.impl();
+
+  Widget build(BuildContext context);
 }

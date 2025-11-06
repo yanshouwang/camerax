@@ -11,14 +11,14 @@ enum ResolutionStrategyFallbackRule {
 
 abstract base class ResolutionStrategy {
   static ResolutionStrategy get highestAvailableStrategy =>
-      CameraXPlugin.instance.$ResolutionStrategyHighestAvailableStrategy;
+      CameraXPlugin.instance.$ResolutionStrategy$HighestAvailableStrategy;
 
   ResolutionStrategy.impl();
 
   factory ResolutionStrategy({
     required Size<int> boundSize,
     required ResolutionStrategyFallbackRule fallbackRule,
-  }) => CameraXPlugin.instance.$ResolutionStrategyApi(
+  }) => CameraXPlugin.instance.$ResolutionStrategy(
     boundSize: boundSize,
     fallbackRule: fallbackRule,
   );

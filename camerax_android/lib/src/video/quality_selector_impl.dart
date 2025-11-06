@@ -6,10 +6,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'fallback_strategy_impl.dart';
 import 'quality_impl.dart';
 
-final class QualitySelectorImpl extends QualitySelectorApi {
-  static Future<SizeApi?> getResolution(
+final class QualitySelectorImpl extends QualitySelector {
+  static Future<Size<int>?> getResolution(
     CameraInfo cameraInfo,
-    QualityApi quality,
+    Quality quality,
   ) => QualitySelectorProxyApi.getResolution(
     cameraInfo.api,
     quality.api,
@@ -20,29 +20,35 @@ final class QualitySelectorImpl extends QualitySelectorApi {
   QualitySelectorImpl.internal(this.api) : super.impl();
 
   factory QualitySelectorImpl.from(
-    QualityApi quality, {
-    FallbackStrategyApi? fallbackStrategy,
+    Quality quality, {
+    FallbackStrategy? fallbackStrategy,
   }) {
-    final api = QualitySelectorProxyApi.from(
-      quality: quality.api,
-      fallbackStrategy: fallbackStrategy?.api,
-    );
+    final api = fallbackStrategy == null
+        ? QualitySelectorProxyApi.from1(quality: quality.api)
+        : QualitySelectorProxyApi.from2(
+            quality: quality.api,
+            fallbackStrategy: fallbackStrategy.api,
+          );
     return QualitySelectorImpl.internal(api);
   }
 
   factory QualitySelectorImpl.fromOrderedList(
-    List<QualityApi> qualities, {
-    FallbackStrategyApi? fallbackStrategy,
+    List<Quality> qualities, {
+    FallbackStrategy? fallbackStrategy,
   }) {
-    final api = QualitySelectorProxyApi.fromOrderedList(
-      qualities: qualities.map((e) => e.api).toList(),
-      fallbackStrategy: fallbackStrategy?.api,
-    );
+    final api = fallbackStrategy == null
+        ? QualitySelectorProxyApi.fromOrderedList1(
+            qualities: qualities.map((e) => e.api).toList(),
+          )
+        : QualitySelectorProxyApi.fromOrderedList2(
+            qualities: qualities.map((e) => e.api).toList(),
+            fallbackStrategy: fallbackStrategy.api,
+          );
     return QualitySelectorImpl.internal(api);
   }
 }
 
-extension QualitySelectorApiX on QualitySelectorApi {
+extension QualitySelectorX on QualitySelector {
   QualitySelectorProxyApi get api {
     final impl = this;
     if (impl is! QualitySelectorImpl) throw TypeError();
@@ -51,5 +57,5 @@ extension QualitySelectorApiX on QualitySelectorApi {
 }
 
 extension QualitySelectorProxyApiX on QualitySelectorProxyApi {
-  QualitySelectorApi get impl => QualitySelectorImpl.internal(this);
+  QualitySelector get impl => QualitySelectorImpl.internal(this);
 }

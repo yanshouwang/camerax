@@ -7,6 +7,8 @@ final class ImageInfoImpl extends ImageInfo {
   ImageInfoImpl.internal(this.api) : super.impl();
 
   @override
+  FlashState get flashState => api.flashState.impl;
+  @override
   int get rotationDegrees => api.rotationDegrees;
   @override
   int get timestamp => api.timestamp;

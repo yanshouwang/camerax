@@ -30,7 +30,7 @@ final class CameraInfoImpl extends CameraInfo {
       api.getExposureState().then((e) => e.impl);
 
   @override
-  Future<double> getIntrinsicZoomRatio() => api.getIntrinsticZoomRatio();
+  Future<double> getIntrinsicZoomRatio() => api.getIntrinsicZoomRatio();
 
   @override
   Future<CameraSelectorLensFacing> getLensFacing() =>
@@ -41,7 +41,7 @@ final class CameraInfoImpl extends CameraInfo {
       api.getPhysicalCameraInfos().then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<Set<RangeApi>> getSupportedFrameRateRanges() => api
+  Future<Set<Range<int>>> getSupportedFrameRateRanges() => api
       .getSupportedFrameRateRanges()
       .then((e) => e.map((e1) => e1.impl).toSet());
 
@@ -76,31 +76,71 @@ final class CameraInfoImpl extends CameraInfo {
       .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<void> observeCameraState(CameraStateObserverApi observer) =>
+  Future<void> observeCameraState(Observer<CameraState> observer) =>
       api.observeCameraState(observer.api);
 
   @override
-  Future<void> observeTorchState(TorchStateObserverApi observer) =>
+  Future<void> observeTorchState(Observer<TorchState> observer) =>
       api.observeTorchState(observer.api);
 
   @override
-  Future<void> observeZoomState(ZoomStateObserverApi observer) =>
+  Future<void> observeZoomState(Observer<ZoomState> observer) =>
       api.observeZoomState(observer.api);
 
   @override
-  Future<void> removeCameraStateObserver(CameraStateObserverApi observer) =>
+  Future<void> removeCameraStateObserver(Observer<CameraState> observer) =>
       api.removeCameraStateObserver(observer.api);
 
   @override
-  Future<void> removeTorchStateObserver(TorchStateObserverApi observer) =>
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
       api.removeTorchStateObserver(observer.api);
 
   @override
-  Future<void> removeZoomStateObserver(ZoomStateObserverApi observer) =>
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
       api.removeZoomStateObserver(observer.api);
+
+  @override
+  Future<LowLightBoostState> getLowLightBoostState() =>
+      api.getLowLightBoostState().then((e) => e.impl);
+
+  @override
+  Future<int> getMaxTorchStrengthLevel() => api.getMaxTorchStrengthLevel();
+
+  @override
+  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRatation]) =>
+      relativeRatation == null
+      ? api.getSensorRotationDegrees1()
+      : api.getSensorRotationDegrees2(relativeRotation.api);
+
+  @override
+  Future<int> getTorchStrengthLevel() => api.getTorchStrengthLevel();
+
+  @override
+  Future<bool> isLowLightBoostSupported() => api.isLowLightBoostSupported();
+
+  @override
+  Future<bool> isTorchStrengthSupported() => api.isTorchStrengthSupported();
+
+  @override
+  Future<void> observeLowLightBoostState(
+    Observer<LowLightBoostState> observer,
+  ) => api.observeLowLightBoostState(observer.api);
+
+  @override
+  Future<void> observeTorchStrengthLevel(Observer<int> observer) =>
+      api.observeTorchStrengthLevel(observer.api);
+
+  @override
+  Future<void> removeLowLightBoostStateObserver(
+    Observer<LowLightBoostState> observer,
+  ) => api.removeLowLightBoostStateObserver(observer.api);
+
+  @override
+  Future<void> removeTorchStrengthLevelObserver(Observer<int> observer) =>
+      api.removeTorchStrengthLevelObserver(observer.api);
 }
 
-extension CameraInfoApiX on CameraInfo {
+extension CameraInfoX on CameraInfo {
   CameraInfoProxyApi get api {
     final impl = this;
     if (impl is! CameraInfoImpl) throw TypeError();

@@ -1,6 +1,13 @@
 final class Range<T extends num> {
-  final T minimum;
-  final T maximum;
+  const Range(this.lower, this.upper);
 
-  const Range(this.minimum, this.maximum);
+  final T lower;
+  final T upper;
+
+  @override
+  int get hashCode => Object.hash(lower, upper);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Range<T> && other.lower == lower && other.upper == upper;
 }

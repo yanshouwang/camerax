@@ -2,11 +2,14 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class RecordingImpl extends RecordingApi with AutoCloseableImpl {
+final class RecordingImpl extends Recording with AutoCloseableImpl {
   @override
   final RecordingProxyApi api;
 
   RecordingImpl.internal(this.api) : super.impl();
+
+  @override
+  Future<bool> isPersistent() => api.isPersistent();
 
   @override
   Future<void> mute(bool muted) => api.mute(muted);

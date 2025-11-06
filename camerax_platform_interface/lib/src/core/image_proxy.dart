@@ -1,37 +1,28 @@
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:camerax_platform_interface/src/common.dart';
 
 import 'image_info.dart';
 
 abstract base class ImageProxyPlaneProxy {
-  ImageProxyPlaneProxy.impl({
-    required this.pixelStride,
-    required this.rowStride,
-    required this.value,
-  });
+  ImageProxyPlaneProxy.impl();
 
-  final int pixelStride;
-  final int rowStride;
-  final Uint8List value;
+  int get pixelStride;
+  int get rowStride;
+  Uint8List get value;
 }
 
 abstract base class ImageProxy extends AutoCloseable {
-  ImageProxy.impl({
-    required this.format,
-    required this.width,
-    required this.height,
-    required this.imageInfo,
-    required this.planes,
-  }) : super.impl();
+  ImageProxy.impl() : super.impl();
 
-  final ImageFormat format;
-  final int width;
-  final int height;
-  final ImageInfo imageInfo;
-  final List<ImageProxyPlaneProxy> planes;
+  ImageFormat get format;
+  int get width;
+  int get height;
+  ImageInfo get imageInfo;
+  List<ImageProxyPlaneProxy> get planes;
 
   Future<Rect<int>> getCropRect();
   Future<void> setCropRect(Rect<int>? rect);
-  Future<Bitmap> toBitmap();
+  Future<ui.Image> toBitmap();
 }

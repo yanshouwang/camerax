@@ -10,7 +10,8 @@ final class ExposureStateImpl extends ExposureState {
   @override
   int get exposureCompensationIndex => api.exposureCompensationIndex;
   @override
-  RangeApi get exposureCompensationRange => api.exposureCompensationRange.impl;
+  Range<int> get exposureCompensationRange =>
+      api.exposureCompensationRange.impl;
   @override
   double get exposureCompensationStep => api.exposureCompensationStep;
   @override

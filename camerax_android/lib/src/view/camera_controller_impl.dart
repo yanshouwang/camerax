@@ -8,18 +8,15 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'video.dart';
 
-final class CameraControllerImpl extends CameraControllerApi {
-  final LifecycleCameraControllerApi api;
+final class CameraControllerImpl extends CameraController {
+  final LifecycleCameraControllerProxyApi api;
 
   CameraControllerImpl.internal(this.api) : super.impl();
 
   factory CameraControllerImpl() {
-    final api = LifecycleCameraControllerApi();
+    final api = LifecycleCameraControllerProxyApi();
     return CameraControllerImpl.internal(api);
   }
-
-  @override
-  Future<void> initialize() => api.initialize();
 
   @override
   Future<bool> hasCamera(CameraSelector cameraSelector) =>
@@ -190,12 +187,12 @@ final class CameraControllerImpl extends CameraControllerApi {
       api.setVideoCaptureMirrorMode(mirrorMode.api);
 
   @override
-  Future<QualitySelectorApi> getVideoCaptureQualitySelector() =>
+  Future<QualitySelector> getVideoCaptureQualitySelector() =>
       api.getVideoCaptureQualitySelector().then((e) => e.impl);
 
   @override
   Future<void> setVideoCaptureQualitySelector(
-    QualitySelectorApi qualitySelector,
+    QualitySelector qualitySelector,
   ) => api.setVideoCaptureQualitySelector(qualitySelector.api);
 
   @override
@@ -204,39 +201,52 @@ final class CameraControllerImpl extends CameraControllerApi {
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) =>
-      api.setVideoCaptureTargetFrameRate(targetFrameRate.intRangeApi);
+      api.setVideoCaptureTargetFrameRate(targetFrameRate.api);
 
   @override
   Future<bool> isRecording() => api.isRecording();
 
   @override
-  Future<RecordingApi> startRecording(
-    FileOutputOptionsApi outputOptions, {
-    required AudioConfigApi audioConfig,
-    required ConsumerApi<VideoRecordEventApi> listener,
+  Future<Recording> startRecording(
+    FileOutputOptions outputOptions, {
+    required AudioConfig audioConfig,
+    required Consumer<VideoRecordEvent> listener,
   }) => api
-      .startRecording(
-        outputOptions.api,
-        audioConfig.api,
-        listener.videoRecordEventConsumerApi,
-      )
+      .startRecording(outputOptions.api, audioConfig.api, listener.api)
       .then((e) => e.impl);
 
   @override
-  Future<void> observeTorchState(ObserverApi<TorchState> observer) =>
-      api.observeTorchState(observer.torchStateObserverApi);
+  Future<void> observeTorchState(Observer<TorchState> observer) =>
+      api.observeTorchState(observer.api);
 
   @override
-  Future<void> observeZoomState(ObserverApi<ZoomState> observer) =>
-      api.observeZoomState(observer.zoomStateObserverApi);
+  Future<void> observeZoomState(Observer<ZoomState> observer) =>
+      api.observeZoomState(observer.api);
 
   @override
-  Future<void> removeTorchStateObserver(ObserverApi<TorchState> observer) =>
-      api.removeTorchStateObserver(observer.torchStateObserverApi);
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
+      api.removeTorchStateObserver(observer.api);
 
   @override
-  Future<void> removeZoomStateObserver(ObserverApi<ZoomState> observer) =>
-      api.removeZoomStateObserver(observer.zoomStateObserverApi);
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
+      api.removeZoomStateObserver(observer.api);
+
+  @override
+  Future<TapToFocusInfo> getTapToFocusInfoState() =>
+      api.getTapToFocusInfoState().then((e) => e.impl);
+
+  @override
+  Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer) =>
+      api.observeTapToFocusInfoState(observer.api);
+
+  @override
+  Future<void> removeTapToFocusInfoStateObserver(
+    Observer<TapToFocusInfo> observer,
+  ) => api.removeTapToFocusInfoStateObserver(observer.api);
+
+  @override
+  Future<void> setTapToFocusAutoCancelDuration(Duration duration) =>
+      api.setTapToFocusAutoCancelDuration(duration.api);
 }
 
 extension CameraControllerUseCaseX on CameraControllerUseCase {
@@ -244,8 +254,8 @@ extension CameraControllerUseCaseX on CameraControllerUseCase {
       CameraControllerUseCaseApi.values[index];
 }
 
-extension CameraControllerX on CameraControllerApi {
-  CameraControllerApi get api {
+extension CameraControllerX on CameraController {
+  CameraControllerProxyApi get api {
     final impl = this;
     if (impl is! CameraControllerImpl) throw TypeError();
     return impl.api;

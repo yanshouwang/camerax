@@ -4,7 +4,11 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FileOutputOptionsImpl extends FileOutputOptionsApi {
+import 'output_options_impl.dart';
+
+final class FileOutputOptionsImpl extends FileOutputOptions
+    with OutputOptionsImpl {
+  @override
   final FileOutputOptionsProxyApi api;
 
   FileOutputOptionsImpl.internal(this.api) : super.impl();
@@ -28,7 +32,7 @@ final class FileOutputOptionsImpl extends FileOutputOptionsApi {
   Future<File> getFile() => api.getFile().then((e) => e.fileImpl);
 }
 
-extension FileOutputOptionsApiX on FileOutputOptionsApi {
+extension FileOutputOptionsX on FileOutputOptions {
   FileOutputOptionsProxyApi get api {
     final impl = this;
     if (impl is! FileOutputOptionsImpl) throw TypeError();

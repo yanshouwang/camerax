@@ -38,7 +38,7 @@ extension AspectRatioStrategyFallbackRuleApiX
       AspectRatioStrategyFallbackRule.values[index];
 }
 
-extension AspectRatioStrategyApiX on AspectRatioStrategy {
+extension AspectRatioStrategyX on AspectRatioStrategy {
   AspectRatioStrategyProxyApi get api {
     final impl = this;
     if (impl is! AspectRatioStrategyImpl) throw TypeError();

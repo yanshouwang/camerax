@@ -5,7 +5,7 @@ import 'package:camerax_platform_interface/src/core.dart';
 import 'av_metadata_object.dart';
 
 abstract base class AVAnalyzerResult {
-  List<AVMetadataObjectApi> get objects;
+  List<AVMetadataObject> get objects;
 
   AVAnalyzerResult.impl();
 }

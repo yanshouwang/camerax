@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -44,8 +45,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
   });
 
   // camera2
-  Camera2CameraControl $Camera2CameraControlFrom(CameraControl cameraControl);
-  Camera2CameraInfo $Camera2CameraInfoFrom(CameraInfo cameraInfo);
+  Camera2CameraControl $Camera2CameraControl$From(CameraControl cameraControl);
+  Camera2CameraInfo $Camera2CameraInfo$From(CameraInfo cameraInfo);
   CaptureRequestOptions $CaptureRequestOptions({
     CameraMetadataControlMode? mode,
     CameraMetadataControlAeMode? aeMode,
@@ -55,56 +56,56 @@ abstract base class CameraXPlugin extends PlatformInterface {
   });
 
   // common
-  PermissionManager get $PermissionManagerApiInstance;
+  PermissionManager get $PermissionManager$Instance;
 
   Consumer<T> $Consumer<T>({required void Function(T value) accept});
   Location $Location();
   Observer<T> $Observer<T>({required void Function(T value) onChanged});
 
   // core
-  AspectRatioStrategy get $AspectRatioStrategyRatio4_3FallbackAutoStrategy;
-  AspectRatioStrategy get $AspectRatioStrategyRatio16_9FallbackAutoStrategy;
-  ResolutionStrategy get $ResolutionStrategyHighestAvailableStrategy;
-  CameraSelector get $CameraSelectorDefaultBackCamera;
-  CameraSelector get $CameraSelectorDefaultFrontCamera;
-  DynamicRange get $DynamicRangeUnspecifid;
-  DynamicRange get $DynamicRangeSdr;
-  DynamicRange get $DynamicRangeHdrUnspecified10Bit;
-  DynamicRange get $DynamicRangeHlg10Bit;
-  DynamicRange get $DynamicRangeHdr10_10Bit;
-  DynamicRange get $DynamicRangeHdr10Plus10Bit;
-  DynamicRange get $DynamicRangeDolbyVision8Bit;
-  DynamicRange get $DynamicRangeDolbyVision10Bit;
+  AspectRatioStrategy get $AspectRatioStrategy$Ratio4_3FallbackAutoStrategy;
+  AspectRatioStrategy get $AspectRatioStrategy$Ratio16_9FallbackAutoStrategy;
+  ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy;
+  CameraSelector get $CameraSelector$DefaultBackCamera;
+  CameraSelector get $CameraSelector$DefaultFrontCamera;
+  DynamicRange get $DynamicRange$Unspecifid;
+  DynamicRange get $DynamicRange$Sdr;
+  DynamicRange get $DynamicRange$HdrUnspecified10Bit;
+  DynamicRange get $DynamicRange$Hlg10Bit;
+  DynamicRange get $DynamicRange$Hdr10_10Bit;
+  DynamicRange get $DynamicRange$Hdr10Plus10Bit;
+  DynamicRange get $DynamicRange$DolbyVision8Bit;
+  DynamicRange get $DynamicRange$DolbyVision10Bit;
 
-  AspectRatioStrategy $AspectRatioStrategyApi({
+  AspectRatioStrategy $AspectRatioStrategy({
     required AspectRatio preferredAspectRatio,
     required AspectRatioStrategyFallbackRule fallbackRule,
   });
   ResolutionFilter $ResolutionFilter({
-    required List<SizeApi> Function(
-      List<SizeApi> supportedSizes,
+    required List<Size<int>> Function(
+      List<Size<int>> supportedSizes,
       int rotationDegrees,
     )
     filter,
   });
-  ResolutionStrategy $ResolutionStrategyApi({
-    required SizeApi boundSize,
+  ResolutionStrategy $ResolutionStrategy({
+    required Size<int> boundSize,
     required ResolutionStrategyFallbackRule fallbackRule,
   });
-  ResolutionSelector $ResolutionSelectorApi({
+  ResolutionSelector $ResolutionSelector({
     ResolutionSelectorMode? mode,
     AspectRatioStrategy? aspectRatioStrategy,
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
   });
-  Future<bool> $CameraInfoMustPlayShutterSound();
+  Future<bool> $CameraInfo$MustPlayShutterSound();
   CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing});
   DynamicRange $DynamicRange({
     required DynamicRangeEncoding encoding,
     required DynamicRangeBitDepth bitDepth,
   });
   ImageAnalysisAnalyzer $ImageAnalysisAnalyzer({
-    required ImageProxyConsumerApi consumer,
+    required Consumer<ImageProxy> consumer,
   });
   FocusMeteringAction $FocusMeteringAction(
     (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
@@ -115,38 +116,37 @@ abstract base class CameraXPlugin extends PlatformInterface {
   ImageCaptureOnImageCapturedCallback $ImageCaptureOnImageCapturedCallback({
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
-    void Function(Bitmap bitmap)? onPostviewBitmapAvailable,
+    void Function(ui.Image bitmap)? onPostviewBitmapAvailable,
     void Function(ImageProxy image)? onCaptureSuccess,
     void Function(Object exception)? onError,
   });
-  Future<double> $MeteringPointFactoryGetDefaultPointSize();
+  Future<double> $MeteringPointFactory$GetDefaultPointSize();
   SurfaceOrientedMeteringPointFactory $SurfaceOrientedMeteringPointFactory(
     double width,
     double height,
   );
 
   // ml
-  MlKitAnalyzerApi $MlKitAnalyzerApi({
-    required List<BarcodeScannerApi> detectors1,
-    required List<FaceDetectorApi> detectors2,
+  MlKitAnalyzer $MlKitAnalyzer({
+    required List<Detector> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumerApi consumer,
+    required Consumer<MlKitAnalyzerResult> consumer,
   });
-  ZoomSuggestionOptionsZoomCallbackApi $ZoomSuggestionOptionsZoomCallbackApi({
+  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptions$ZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   });
-  ZoomSuggestionOptionsApi $ZoomSuggestionOptionsApi(
-    ZoomSuggestionOptionsZoomCallbackApi zoomCallback, {
+  ZoomSuggestionOptions $ZoomSuggestionOptions(
+    ZoomSuggestionOptionsZoomCallback zoomCallback, {
     double? maxSupportedZoomRatio,
   });
-  BarcodeScannerOptionsApi $BarcodeScannerOptionsApi({
+  BarcodeScannerOptions $BarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
-    ZoomSuggestionOptionsApi? zoomSuggestionOptions,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
   });
-  BarcodeScannerApi $BarcodeScannerApi();
-  BarcodeScannerApi $BarcodeScannerApiOptions(BarcodeScannerOptionsApi options);
-  FaceDetectorOptionsApi $FaceDetectorOptionsApi({
+  BarcodeScanner $BarcodeScanner();
+  BarcodeScanner $BarcodeScanner$Options(BarcodeScannerOptions options);
+  FaceDetectorOptions $FaceDetectorOptions({
     bool? enableTracking,
     FaceDetectorOptionsClassificationMode? classificationMode,
     FaceDetectorOptionsContourMode? contourMode,
@@ -154,52 +154,48 @@ abstract base class CameraXPlugin extends PlatformInterface {
     double? minFaceSize,
     FaceDetectorOptionsPerformanceMode? performanceMode,
   });
-  FaceDetectorApi $FaceDetectorApi();
-  FaceDetectorApi $FaceDetectorApiOptions(FaceDetectorOptionsApi options);
+  FaceDetector $FaceDetector();
+  FaceDetector $FaceDetector$Options(FaceDetectorOptions options);
 
   // video
-  QualityApi get $QualityApiSd;
-  QualityApi get $QualityApiHd;
-  QualityApi get $QualityApiFhd;
-  QualityApi get $QualityApiUhd;
-  QualityApi get $QualityApiLowest;
-  QualityApi get $QualityApiHighest;
+  Quality get $Quality$Sd;
+  Quality get $Quality$Hd;
+  Quality get $Quality$Fhd;
+  Quality get $Quality$Uhd;
+  Quality get $Quality$Lowest;
+  Quality get $Quality$Highest;
 
-  FallbackStrategyApi $FallbackStrategyApiHigherQualityOrLowerThan(
-    QualityApi quality,
-  );
-  FallbackStrategyApi $FallbackStrategyApiHigherQualityThan(QualityApi quality);
-  FallbackStrategyApi $FallbackStrategyApiLowerQualityOrHigherThan(
-    QualityApi quality,
-  );
-  FallbackStrategyApi $FallbackStrategyApiLowerQualityThan(QualityApi quality);
-  FileOutputOptionsApi $FileOutputOptionsApi(
+  FallbackStrategy $FallbackStrategy$HigherQualityOrLowerThan(Quality quality);
+  FallbackStrategy $FallbackStrategy$HigherQualityThan(Quality quality);
+  FallbackStrategy $FallbackStrategy$LowerQualityOrHigherThan(Quality quality);
+  FallbackStrategy $FallbackStrategy$LowerQualityThan(Quality quality);
+  FileOutputOptions $FileOutputOptions(
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
     Location? location,
   });
-  QualitySelectorApi $QualitySelectorApiFrom(
-    QualityApi quality, {
-    FallbackStrategyApi? fallbackStrategy,
-  });
-  QualitySelectorApi $QualitySelectorApiFromOrderedList(
-    List<QualityApi> qualities, {
-    FallbackStrategyApi? fallbackStrategy,
-  });
-  Future<SizeApi?> $QualitySelectorApiGetResolution(
+  QualitySelector $QualitySelector$From(
+    Quality quality, [
+    FallbackStrategy? fallbackStrategy,
+  ]);
+  QualitySelector $QualitySelector$FromOrderedList(
+    List<Quality> qualities, [
+    FallbackStrategy? fallbackStrategy,
+  ]);
+  Future<Size<int>?> $QualitySelector$GetResolution(
     CameraInfo cameraInfo,
-    QualityApi quality,
+    Quality quality,
   );
 
   // view
-  AudioConfigApi get $AudioConfigApiAudioDisabled;
+  AudioConfig get $AudioConfig$AudioDisabled;
 
-  AudioConfigApi $AudioConfigApiCreate(bool enableAudio);
-  CameraControllerApi $CameraControllerApi();
-  PreviewViewApi $PreviewViewApi();
-  RotationProviderListenerApi $RotationProviderListenerApi({
+  AudioConfig $AudioConfig$Create(bool enableAudio);
+  CameraController $CameraController();
+  PreviewView $PreviewView();
+  RotationProviderListener $RotationProviderListener({
     required void Function(int rotation) onRotationChanged,
   });
-  RotationProviderApi $RotationProviderApi();
+  RotationProvider $RotationProvider();
 }

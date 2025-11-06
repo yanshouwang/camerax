@@ -42,7 +42,7 @@ extension DynamicRangeBitDepthApiX on DynamicRangeBitDepthApi {
   DynamicRangeBitDepth get impl => DynamicRangeBitDepth.values[index];
 }
 
-extension DynamicRangeApiX on DynamicRange {
+extension DynamicRangeX on DynamicRange {
   DynamicRangeProxyApi get api {
     final impl = this;
     if (impl is! DynamicRangeImpl) throw TypeError();

@@ -5,32 +5,32 @@ import 'package:camerax_android/src/ml/barcode.dart';
 import 'package:camerax_android/src/ml/face.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResultApi {
+final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   final MlKitAnalyzerResultProxyApi api;
 
   MlKitAnalyzerResultImpl.internal(this.api) : super.impl();
 
   @override
-  Future<Object?> getThrowable1(BarcodeScannerApi detector) =>
+  Future<Object?> getThrowable1(BarcodeScanner detector) =>
       api.getThrowable1(detector.api).then((e) => e?.impl);
 
   @override
-  Future<Object?> getThrowable2(FaceDetectorApi detector) =>
+  Future<Object?> getThrowable2(FaceDetector detector) =>
       api.getThrowable2(detector.api).then((e) => e?.impl);
 
   @override
   Future<int> getTimestamp() => api.getTimestamp();
 
   @override
-  Future<List<BarcodeApi>?> getValue1(BarcodeScannerApi detector) =>
+  Future<List<Barcode>?> getValue1(BarcodeScanner detector) =>
       api.getValue1(detector.api).then((e) => e?.map((e1) => e1.impl).toList());
 
   @override
-  Future<List<FaceApi>?> getValue2(FaceDetectorApi detector) =>
+  Future<List<Face>?> getValue2(FaceDetector detector) =>
       api.getValue2(detector.api).then((e) => e?.map((e1) => e1.impl).toList());
 }
 
-final class MlKitAnalyzerImpl extends MlKitAnalyzerApi
+final class MlKitAnalyzerImpl extends MlKitAnalyzer
     with ImageAnalysisAnalyzerImpl {
   @override
   final MlKitAnalyzerProxyApi api;
@@ -38,8 +38,8 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzerApi
   MlKitAnalyzerImpl.internal(this.api) : super.impl();
 
   factory MlKitAnalyzerImpl({
-    required List<BarcodeScannerApi> detectors1,
-    required List<FaceDetectorApi> detectors2,
+    required List<BarcodeScanner> detectors1,
+    required List<FaceDetector> detectors2,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
     required MlKitAnalyzerResultConsumerApi consumer,
   }) {
@@ -54,5 +54,5 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzerApi
 }
 
 extension MlKitAnalyzerResultProxyApiX on MlKitAnalyzerResultProxyApi {
-  MlKitAnalyzerResultApi get impl => MlKitAnalyzerResultImpl.internal(this);
+  MlKitAnalyzerResult get impl => MlKitAnalyzerResultImpl.internal(this);
 }

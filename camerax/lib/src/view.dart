@@ -1,2 +1,1 @@
-export 'view/preview_view_api.dart';
-export 'view/preview_view.dart';
+export '../../../camerax_platform_interface/lib/src/view/preview_view.dart';

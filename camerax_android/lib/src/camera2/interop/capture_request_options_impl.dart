@@ -25,7 +25,7 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
   }
 }
 
-extension CaptureRequestOptionsApiX on CaptureRequestOptions {
+extension CaptureRequestOptionsX on CaptureRequestOptions {
   CaptureRequestOptionsProxyApi get api {
     final impl = this;
     if (impl is! CaptureRequestOptionsImpl) throw TypeError();

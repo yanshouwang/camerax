@@ -19,10 +19,10 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PermissionManager $PermissionManagerApi() => PermissionManagerImpl();
 
   @override
-  CameraSelector get $CameraSelectorDefaultFrontCamera =>
+  CameraSelector get $CameraSelector$DefaultFrontCamera =>
       CameraSelectorImpl.front;
   @override
-  CameraSelector get $CameraSelectorDefaultBackCamera =>
+  CameraSelector get $CameraSelector$DefaultBackCamera =>
       CameraSelectorImpl.back;
   @override
   CameraSelector get $CameraSelectorApiExternal => CameraSelectorImpl.external;
@@ -31,60 +31,60 @@ final class CameraXiOSPlugin extends CameraXPlugin {
       CameraSelectorImpl(lensFacing: lensFacing);
 
   @override
-  CameraControllerApi $CameraControllerApi() => CameraControllerImpl();
+  CameraController $CameraController() => CameraControllerImpl();
 
   @override
-  PreviewViewApi $PreviewViewApi() => PreviewViewImpl();
+  PreviewViewApi $PreviewView() => PreviewViewImpl();
 
   @override
-  FallbackStrategyApi $FallbackStrategyApiHigherQualityOrLowerThan(
+  FallbackStrategy $FallbackStrategy$HigherQualityOrLowerThan(
     Quality quality,
   ) => throw UnimplementedError();
   @override
-  FallbackStrategyApi $FallbackStrategyApiHigherQualityThan(Quality quality) =>
+  FallbackStrategy $FallbackStrategy$HigherQualityThan(Quality quality) =>
       throw UnimplementedError();
   @override
-  FallbackStrategyApi $FallbackStrategyApiLowerQualityOrHigherThan(
+  FallbackStrategy $FallbackStrategy$LowerQualityOrHigherThan(
     Quality quality,
   ) => throw UnimplementedError();
   @override
-  FallbackStrategyApi $FallbackStrategyApiLowerQualityThan(Quality quality) =>
+  FallbackStrategy $FallbackStrategy$LowerQualityThan(Quality quality) =>
       throw UnimplementedError();
 
   @override
-  MlKitAnalyzerApi $MlKitAnalyzerApi({
+  MlKitAnalyzer $MlKitAnalyzer({
     required List<DetectorApi> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required ConsumerApi<MlKitAnalyzerResultApi> consumer,
+    required ConsumerApi<MlKitAnalyzerResult> consumer,
   }) => throw UnimplementedError();
 
   @override
-  Future<SizeApi<int>?> $QualitySelectorApiGetResolution(
+  Future<SizeApi<int>?> $QualitySelector$GetResolution(
     CameraInfo cameraInfo,
     Quality quality,
   ) => throw UnimplementedError();
 
   @override
-  QualitySelectorApi $QualitySelectorApiFrom(
+  QualitySelector $QualitySelector$From(
     Quality quality, {
-    FallbackStrategyApi? fallbackStrategy,
+    FallbackStrategy? fallbackStrategy,
   }) => throw UnimplementedError();
 
   @override
-  QualitySelectorApi $QualitySelectorApiFromOrderedList(
+  QualitySelector $QualitySelector$FromOrderedList(
     List<Quality> qualities, {
-    FallbackStrategyApi? fallbackStrategy,
+    FallbackStrategy? fallbackStrategy,
   }) => throw UnimplementedError();
 
   @override
-  BarcodeScannerOptionsApi $BarcodeScannerOptionsApi({
+  BarcodeScannerOptions $BarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
     List<BarcodeFormat>? formats,
-    ZoomSuggestionOptionsApi? zoomSuggestionOptions,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
   }) => throw UnimplementedError();
 
   @override
-  FaceDetectorOptionsApi $FaceDetectorOptionsApi({
+  FaceDetectorOptions $FaceDetectorOptions({
     bool? enableTracking,
     FaceDetectorOptionsClassificationMode? classificationMode,
     FaceDetectorOptionsContourMode? contourMode,
@@ -94,13 +94,13 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => throw UnimplementedError();
 
   @override
-  ZoomSuggestionOptionsApi $ZoomSuggestionOptionsApi(
-    ZoomSuggestionOptionsZoomCallbackApi zoomCallback, {
+  ZoomSuggestionOptions $ZoomSuggestionOptions(
+    ZoomSuggestionOptionsZoomCallback zoomCallback, {
     double? maxSupportedZoomRatio,
   }) => throw UnimplementedError();
 
   @override
-  FileOutputOptionsApi $FileOutputOptionsApi(
+  FileOutputOptions $FileOutputOptions(
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
@@ -137,11 +137,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => ImageAnalyzerImpl(analyze: analyze);
 
   @override
-  Camera2CameraControl $Camera2CameraControlFrom(CameraControl cameraControl) =>
+  Camera2CameraControl $Camera2CameraControl$From(CameraControl cameraControl) =>
       throw UnimplementedError();
 
   @override
-  Camera2CameraInfo $Camera2CameraInfoFrom(CameraInfo cameraInfo) =>
+  Camera2CameraInfo $Camera2CameraInfo$From(CameraInfo cameraInfo) =>
       throw UnimplementedError();
 
   @override
@@ -180,8 +180,8 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  ConsumerApi<MlKitAnalyzerResultApi> $MlKitAnalyzerResultConsumerApi({
-    required void Function(MlKitAnalyzerResultApi value) accept,
+  ConsumerApi<MlKitAnalyzerResult> $MlKitAnalyzerResultConsumerApi({
+    required void Function(MlKitAnalyzerResult value) accept,
   }) => throw UnimplementedError();
 
   @override
@@ -194,10 +194,10 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => throw UnimplementedError();
 
   @override
-  RotationProviderApi $RotationProviderApi() => RotationProviderImpl();
+  RotationProvider $RotationProvider() => RotationProviderImpl();
 
   @override
-  RotationProviderListenerApi $RotationProviderListenerApi({
+  RotationProviderListener $RotationProviderListener({
     required void Function(int rotation) onRotationChanged,
   }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
 
@@ -207,8 +207,8 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => TorchStateObserverImpl(onChanged: onChanged);
 
   @override
-  ConsumerApi<VideoRecordEventApi> $VideoRecordEventConsumerApi({
-    required void Function(VideoRecordEventApi value) accept,
+  ConsumerApi<VideoRecordEvent> $VideoRecordEventConsumerApi({
+    required void Function(VideoRecordEvent value) accept,
   }) => VideoRecordEventConsumerImpl(accept: accept);
 
   @override
@@ -217,18 +217,18 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => ZoomStateObserverImpl(onChanged: onChanged);
 
   @override
-  ZoomSuggestionOptionsZoomCallbackApi $ZoomSuggestionOptionsZoomCallbackApi({
+  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptions$ZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   }) => throw UnimplementedError();
 
   @override
-  Future<BarcodeScannerApi> $BarcodeScanningApiGetClient([
-    BarcodeScannerOptionsApi? options,
+  Future<BarcodeScanner> $BarcodeScanningApiGetClient([
+    BarcodeScannerOptions? options,
   ]) => throw UnimplementedError();
 
   @override
-  Future<FaceDetectorApi> $FaceDetectionApiGetClient([
-    FaceDetectorOptionsApi? options,
+  Future<FaceDetector> $FaceDetectionApiGetClient([
+    FaceDetectorOptions? options,
   ]) => throw UnimplementedError();
 
   @override

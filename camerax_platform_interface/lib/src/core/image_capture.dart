@@ -1,5 +1,6 @@
+import 'dart:ui' as ui;
+
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
-import 'package:camerax_platform_interface/src/common.dart';
 
 import 'image_proxy.dart';
 
@@ -17,7 +18,7 @@ abstract base class ImageCaptureOnImageCapturedCallback {
   factory ImageCaptureOnImageCapturedCallback({
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
-    void Function(Bitmap bitmap)? onPostviewBitmapAvailable,
+    void Function(ui.Image bitmap)? onPostviewBitmapAvailable,
     void Function(ImageProxy image)? onCaptureSuccess,
     void Function(Object exception)? onError,
   }) => CameraXPlugin.instance.$ImageCaptureOnImageCapturedCallback(

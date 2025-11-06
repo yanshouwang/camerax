@@ -1,1 +1,1 @@
-export 'video/audio_config_api.dart';
+export 'video/audio_config.dart';

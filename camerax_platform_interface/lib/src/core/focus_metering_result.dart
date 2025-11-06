@@ -1,5 +1,5 @@
-final class FocusMeteringResult {
-  final bool isFocusSuccessful;
+abstract base class FocusMeteringResult {
+  FocusMeteringResult.impl();
 
-  const FocusMeteringResult(this.isFocusSuccessful);
+  bool get isFocusSuccessful;
 }

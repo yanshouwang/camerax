@@ -4,12 +4,7 @@ import 'package:camerax_platform_interface/src/common.dart';
 ///
 /// Applications can retrieve an instance via getExposureState.
 abstract base class ExposureState {
-  ExposureState.impl({
-    required this.exposureCompensationIndex,
-    required this.exposureCompensationRange,
-    required this.exposureCompensationStep,
-    required this.isExposureCompensationSupported,
-  });
+  ExposureState.impl();
 
   /// Get the current exposure compensation index.
   ///
@@ -25,7 +20,7 @@ abstract base class ExposureState {
   /// The exposure value resets to default when there is no UseCase associated
   /// with the camera. For example, unbind all use cases from the camera or when
   /// the lifecycle changed that all the use case stopping data from the camera.
-  final int exposureCompensationIndex;
+  int get exposureCompensationIndex;
 
   /// Get the maximum and minimum exposure compensation values for setExposureCompensationIndex
   ///
@@ -37,11 +32,11 @@ abstract base class ExposureState {
   /// Min.exposure compensation * getExposureCompensationStep <= minimum supported EV
   /// Max.exposure compensation * getExposureCompensationStep >= maximum supported EV
   /// ```
-  final Range<int> exposureCompensationRange;
+  Range<int> get exposureCompensationRange;
 
   /// Get the smallest step by which the exposure compensation can be changed.
-  final double exposureCompensationStep;
+  double get exposureCompensationStep;
 
   /// Whether exposure compensation is supported for this camera.
-  final bool isExposureCompensationSupported;
+  bool get isExposureCompensationSupported;
 }

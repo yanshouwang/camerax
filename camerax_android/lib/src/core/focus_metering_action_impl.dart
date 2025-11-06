@@ -66,7 +66,7 @@ extension FocusMeteringActionMeteringModeX on FocusMeteringActionMeteringMode {
       FocusMeteringActionMeteringModeApi.values[index];
 }
 
-extension FocusMeteringActionApiX on FocusMeteringAction {
+extension FocusMeteringActionX on FocusMeteringAction {
   FocusMeteringActionProxyApi get api {
     final impl = this;
     if (impl is! FocusMeteringActionImpl) throw TypeError();

@@ -3,7 +3,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'audio_stats_impl.dart';
 
-final class RecordingStatsImpl extends RecordingStatsApi {
+final class RecordingStatsImpl extends RecordingStats {
   final RecordingStatsProxyApi api;
 
   RecordingStatsImpl.internal(this.api) : super.impl();
@@ -17,5 +17,5 @@ final class RecordingStatsImpl extends RecordingStatsApi {
 }
 
 extension RecordingStatsProxyApiX on RecordingStatsProxyApi {
-  RecordingStatsApi get impl => RecordingStatsImpl.internal(this);
+  RecordingStats get impl => RecordingStatsImpl.internal(this);
 }

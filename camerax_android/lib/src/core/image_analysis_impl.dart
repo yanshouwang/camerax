@@ -1,4 +1,5 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_proxy_impl.dart';
@@ -11,17 +12,26 @@ final class ImageAnalysisImageAnalyzerImplImpl extends ImageAnalysisAnalyzer
   ImageAnalysisImageAnalyzerImplImpl.internal(this.api) : super.impl();
 
   factory ImageAnalysisImageAnalyzerImplImpl({
-    required void Function(ImageProxy image) analyze,
+    required Consumer<ImageProxy> consumer,
   }) {
-    final api = ImageAnalysisAnalyzerImplProxyApi(
-      analyze: (_, e) => analyze(e.impl),
-    );
+    final api = ImageAnalysisAnalyzerImplProxyApi(consumer: consumer.api);
     return ImageAnalysisImageAnalyzerImplImpl.internal(api);
   }
 }
 
 base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
   ImageAnalysisAnalyzerProxyApi get api;
+
+  @override
+  Future<void> analyze(ImageProxy image) => api.analyze(image.api);
+
+  @override
+  Future<Size<int>?> getDefaultTargetResolution() =>
+      api.getDefaultTargetResolution().then((e) => e?.impl);
+
+  @override
+  Future<ImageAnalysisCoordinateSystem> getTargetCoordinateSystem() =>
+      api.getTargetCoordinateSystem().then((e) => e.impl);
 }
 
 extension ImageAnalysisStrategyX on ImageAnalysisStrategy {
@@ -37,6 +47,12 @@ extension ImageAnalysisCoordinateSystemX on ImageAnalysisCoordinateSystem {
       ImageAnalysisCoordinateSystemApi.values[index];
 }
 
+extension ImageAnalysisCoordinateSystemApiX
+    on ImageAnalysisCoordinateSystemApi {
+  ImageAnalysisCoordinateSystem get impl =>
+      ImageAnalysisCoordinateSystem.values[index];
+}
+
 extension ImageAnalysisOutputImageFormatX on ImageAnalysisOutputImageFormat {
   ImageAnalysisOutputImageFormatApi get api =>
       ImageAnalysisOutputImageFormatApi.values[index];
@@ -48,7 +64,7 @@ extension ImageAnalysisOutputImageFormatApiX
       ImageAnalysisOutputImageFormat.values[index];
 }
 
-extension ImageAnalysisAnalyzerApiX on ImageAnalysisAnalyzer {
+extension ImageAnalysisAnalyzerX on ImageAnalysisAnalyzer {
   ImageAnalysisAnalyzerProxyApi get api {
     final impl = this;
     if (impl is! ImageAnalysisAnalyzerImpl) throw TypeError();

@@ -4,7 +4,7 @@ import 'permission.dart';
 
 abstract base class PermissionManager {
   static PermissionManager get instance =>
-      CameraXPlugin.instance.$PermissionManagerApiInstance;
+      CameraXPlugin.instance.$PermissionManager$Instance;
 
   PermissionManager.impl();
 

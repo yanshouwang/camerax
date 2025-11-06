@@ -12,7 +12,7 @@ import 'zoom_state.dart';
 
 abstract base class CameraInfo {
   static Future<bool> mustPlayShutterSound() =>
-      CameraXPlugin.instance.$CameraInfoMustPlayShutterSound();
+      CameraXPlugin.instance.$CameraInfo$MustPlayShutterSound();
 
   CameraInfo.impl();
 
@@ -30,8 +30,7 @@ abstract base class CameraInfo {
   );
   Future<int> getMaxTorchStrengthLevel();
   Future<Set<CameraInfo>> getPhysicalCameraInfos();
-  Future<int> getSensorRotationDegrees1();
-  Future<int> getSensorRotationDegrees2(SurfaceRotation relativeRatation);
+  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRatation]);
   Future<Set<Range<int>>> getSupportedFrameRateRanges();
   Future<TorchState?> getTorchState();
   Future<void> observeTorchState(Observer<TorchState> observer);
@@ -45,8 +44,8 @@ abstract base class CameraInfo {
   Future<bool> hasFlashUnit();
   Future<bool> isFocusMeteringSupported(FocusMeteringAction action);
   Future<bool> isLogicalMultiCameraSupported();
-  bool isLowLightBoostSupported();
-  bool isTorchStrengthSupported();
+  Future<bool> isLowLightBoostSupported();
+  Future<bool> isTorchStrengthSupported();
   Future<bool> isZslSupported();
   Future<Set<DynamicRange>> querySupportedDynamicRanges(
     Set<DynamicRange> candidateDynamicRanges,

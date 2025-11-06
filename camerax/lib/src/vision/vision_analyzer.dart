@@ -21,43 +21,43 @@ final class VisionAnalyzer extends ImageAnalysisAnalyzer {
           .where((e) => e != BarcodeFormatApi.unknown)
           .toList();
       if (formatApis.isNotEmpty) {
-        final barcodeScannerApi = BarcodeScannerApi(
-          options: BarcodeScannerOptionsApi.build(formats: formatApis),
+        final barcodeScannerApi = BarcodeScanner(
+          options: BarcodeScannerOptions.build(formats: formatApis),
         );
         detectorApis.add(barcodeScannerApi);
       }
       if (types.contains(AVMetadataObjectType.face)) {
-        final faceDetectorApi = FaceDetectorApi();
+        final faceDetectorApi = FaceDetector();
         detectorApis.add(faceDetectorApi);
       }
     }
-    final api = MlKitAnalyzerApi(
+    final api = MlKitAnalyzer(
       detectors: detectorApis,
       targetCoordinateSystem: ImageAnalysisCoordinateSystemApi.viewReferenced,
       consumer: MlKitAnalyzerResultConsumerApi(
         accept: (_, e) async {
-          final objects = <AVMetadataObjectApi>[];
+          final objects = <AVMetadataObject>[];
           for (var detectorApi in detectorApis) {
-            if (detectorApi is BarcodeScannerApi) {
+            if (detectorApi is BarcodeScanner) {
               final barcodeApis = await e.getBarcodes(detectorApi);
               if (barcodeApis == null || barcodeApis.isEmpty) {
                 continue;
               }
               final codeObjects = barcodeApis
                   .map((e1) => e1.implOf(e.timestamp))
-                  .whereType<AVMetadataMachineReadableCodeObjectApi>();
+                  .whereType<AVMetadataMachineReadableCodeObject>();
               if (codeObjects.isEmpty) {
                 continue;
               }
               objects.addAll(codeObjects);
-            } else if (detectorApi is FaceDetectorApi) {
+            } else if (detectorApi is FaceDetector) {
               final faceApis = await e.getFaces(detectorApi);
               if (faceApis == null || faceApis.isEmpty) {
                 continue;
               }
               final faceObjects = faceApis
                   .map((e1) => e1.implOf(e.timestamp))
-                  .whereType<AVMetadataFaceObjectApi>();
+                  .whereType<AVMetadataFaceObject>();
               objects.addAll(faceObjects);
             }
           }

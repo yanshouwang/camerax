@@ -4,7 +4,7 @@ import 'metering_point.dart';
 
 abstract base class MeteringPointFactory {
   static Future<double> getDefaultPointSize() =>
-      CameraXPlugin.instance.$MeteringPointFactoryGetDefaultPointSize();
+      CameraXPlugin.instance.$MeteringPointFactory$GetDefaultPointSize();
 
   MeteringPointFactory.impl();
 

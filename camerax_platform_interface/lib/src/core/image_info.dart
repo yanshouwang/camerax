@@ -1,13 +1,9 @@
 import 'flash_state.dart';
 
 abstract base class ImageInfo {
-  ImageInfo.impl({
-    required this.flashState,
-    required this.rotationDegrees,
-    required this.timestamp,
-  });
+  ImageInfo.impl();
 
-  final FlashState flashState;
-  final int rotationDegrees;
-  final int timestamp;
+  FlashState get flashState;
+  int get rotationDegrees;
+  int get timestamp;
 }

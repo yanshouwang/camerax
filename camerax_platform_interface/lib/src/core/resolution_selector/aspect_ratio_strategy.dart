@@ -5,17 +5,17 @@ enum AspectRatioStrategyFallbackRule { none, auto }
 
 abstract base class AspectRatioStrategy {
   static AspectRatioStrategy get ratio4_3FallbackAutoStrategy =>
-      CameraXPlugin.instance.$AspectRatioStrategyRatio4_3FallbackAutoStrategy;
+      CameraXPlugin.instance.$AspectRatioStrategy$Ratio4_3FallbackAutoStrategy;
 
   static AspectRatioStrategy get ratio16_9FallbackAutoStrategy =>
-      CameraXPlugin.instance.$AspectRatioStrategyRatio16_9FallbackAutoStrategy;
+      CameraXPlugin.instance.$AspectRatioStrategy$Ratio16_9FallbackAutoStrategy;
 
   AspectRatioStrategy.impl();
 
   factory AspectRatioStrategy({
     required AspectRatio preferredAspectRatio,
     required AspectRatioStrategyFallbackRule fallbackRule,
-  }) => CameraXPlugin.instance.$AspectRatioStrategyApi(
+  }) => CameraXPlugin.instance.$AspectRatioStrategy(
     preferredAspectRatio: preferredAspectRatio,
     fallbackRule: fallbackRule,
   );

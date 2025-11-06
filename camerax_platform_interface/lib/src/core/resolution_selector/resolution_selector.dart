@@ -17,7 +17,7 @@ abstract base class ResolutionSelector {
     AspectRatioStrategy? aspectRatioStrategy,
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
-  }) => CameraXPlugin.instance.$ResolutionSelectorApi(
+  }) => CameraXPlugin.instance.$ResolutionSelector(
     mode: mode,
     aspectRatioStrategy: aspectRatioStrategy,
     resolutionFilter: resolutionFilter,

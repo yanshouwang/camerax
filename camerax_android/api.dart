@@ -97,6 +97,18 @@ abstract class CaptureRequestOptionsProxyApi {
 }
 
 // common
+enum BitmapCompressFormatApi { jpeg, png, webp, webpLossless, webpLossy }
+
+enum BitmapConfigApi {
+  alpha8,
+  argb4444,
+  argb8888,
+  hardware,
+  rgba1010102,
+  rgbaF16,
+  rgb565,
+}
+
 enum LocationFormatApi { formatDegrees, formatMinutes, formatSeconds }
 
 enum TimeUnitApi {
@@ -170,6 +182,319 @@ enum SurfaceRotationApi { rotation0, rotation90, rotation180, rotation270 }
 )
 abstract class AutoCloseableProxyApi {
   void close();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.graphics.Bitmap',
+  ),
+)
+abstract class BitmapProxyApi {
+  BitmapProxyApi.createBitmap1(
+    BitmapProxyApi source,
+    int x,
+    int y,
+    int width,
+    int height,
+  );
+  BitmapProxyApi.createBitmap2(
+    List<int> colors,
+    int width,
+    int height,
+    BitmapConfigApi config,
+  );
+  // BitmapProxyApi.createBitmap3(
+  //   BitmapProxyApi source,
+  //   int x,
+  //   int y,
+  //   int width,
+  //   int height,
+  //   MatrixProxyApi m,
+  //   bool filter,
+  // );
+  // BitmapProxyApi.createBitmap4(
+  //   DisplayMetricsProxyApi display,
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  //   bool hasAlpha,
+  //   ColorSpaceProxyApi colorSpace,
+  // );
+  BitmapProxyApi.createBitmap5(BitmapProxyApi src);
+  // BitmapProxyApi.createBitmap6(PictureProxyApi source);
+  // BitmapProxyApi.createBitmap7(
+  //   DisplayMetricsProxyApi display,
+  //   List<int> colors,
+  //   int offset,
+  //   int stride,
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  // );
+  // BitmapProxyApi.createBitmap8(
+  //   DisplayMetricsProxyApi display,
+  //   List<int> colors,
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  // );
+  // BitmapProxyApi.createBitmap9(
+  //   DisplayMetricsProxyApi display,
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  // );
+  BitmapProxyApi.createBitmap10(
+    List<int> colors,
+    int offset,
+    int stride,
+    int width,
+    int height,
+    BitmapConfigApi config,
+  );
+  // BitmapProxyApi.createBitmap11(
+  //   PictureProxyApi source,
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  // );
+  // BitmapProxyApi.createBitmap12(
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  //   bool hasAlpha,
+  //   ColorSpaceProxyApi colorSpace,
+  // );
+  // BitmapProxyApi.createBitmap13(
+  //   DisplayMetricsProxyApi display,
+  //   int width,
+  //   int height,
+  //   BitmapConfigApi config,
+  //   bool hasAlpha,
+  // );
+  BitmapProxyApi.createBitmap14(int width, int height, BitmapConfigApi config);
+  BitmapProxyApi.createBitmap15(
+    int width,
+    int height,
+    BitmapConfigApi config,
+    bool hasAlpha,
+  );
+  BitmapProxyApi.createScaledBitmap(
+    BitmapProxyApi src,
+    int dstWidth,
+    int dstHeight,
+    bool filter,
+  );
+  // BitmapProxyApi.writeHardwareBuffer(
+  //   HardwareBufferProxyApi hardwareBuffer,
+  //   ColorSpaceProxyApi colorSpace,
+  // );
+
+  BitmapProxyApi asShared();
+  bool compress(
+    BitmapCompressFormatApi format,
+    int quality,
+    OutputStreamProxyApi stream,
+  );
+  BitmapProxyApi copy(BitmapConfigApi config, bool isMutalbe);
+  void copyPixelsFromBuffer(BufferProxyApi src);
+  void copyPixelsToBuffer(BufferProxyApi dst);
+  void eraseColor(int color);
+  BitmapProxyApi extractAlpha1();
+  // BitmapProxyApi extractAlpha2(PaintProxyApi paint, List<int> offsetXY);
+  int getAllocationByteCount();
+  int getByteCount();
+  // ColorProxyApi getColor(int x, int y);
+  // ColorSpaceProxyApi getColorSpace();
+  BitmapConfigApi getConfig();
+  int getDensity();
+  // GainmapProxyApi getGainmap();
+  int getGenerationId();
+  // HardwareBufferProxyApi getHardwareBuffer();
+  int getHeight();
+  Uint8List getNinePatchChunk();
+  int getPixel(int x, int y);
+  // void getPixels(
+  //   List<int> pixels,
+  //   int offset,
+  //   int stride,
+  //   int x,
+  //   int y,
+  //   int width,
+  //   int height,
+  // );
+  int getRowBytes();
+  int getScaledHeight1(int targetDensity);
+  // int getScaledHeight2(CanvasProxyApi canvas);
+  // int getScaledHeight3(DisplayMetricsProxyApi metrics);
+  int getScaledWidth1(int targetDensity);
+  // int getScaledWidth2(CanvasProxyApi canvas);
+  // int getScaledWidth3(DisplayMetricsProxyApi metrics);
+  int getWidth();
+  bool hasAlpha();
+  bool hasGainmap();
+  bool hasMipMap();
+  bool isMutable();
+  bool isPremultiplied();
+  bool isRecycled();
+  void prepareToDraw();
+  void reconfigure(int width, int height, BitmapConfigApi config);
+  void recycle();
+  bool sameAs(BitmapProxyApi other);
+  // void setColorSpace(ColorSpaceProxyApi colorSpace);
+  void setConfig(BitmapConfigApi config);
+  void setDensity(int density);
+  // void setGainmap(Gainmap gainmap);
+  void setHasAlpha(bool hasAlpha);
+  void sethasMipMap(bool hasMipMap);
+  void setHeight(int height);
+  void setPixel(int x, int y, int color);
+  // void setPixels(
+  //   List<int> pixels,
+  //   int offset,
+  //   int stride,
+  //   int x,
+  //   int y,
+  //   int width,
+  //   int height,
+  // );
+  void setPremultiplied(bool premultiplied);
+  void setWidth(int width);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'java.nio.Buffer'),
+)
+abstract class BufferProxyApi {
+  // ObjectProxyApi array();
+  int arrayOffset();
+  int capacity();
+  BufferProxyApi clear();
+  BufferProxyApi duplicate();
+  BufferProxyApi flip();
+  bool hasArray();
+  bool hasRemaining();
+  bool isDirect();
+  bool isReadOnly();
+  int limit1();
+  BufferProxyApi limit2(int newLimit);
+  BufferProxyApi mark();
+  BufferProxyApi position1(int newPosition);
+  int position2();
+  int remaining();
+  BufferProxyApi reset();
+  BufferProxyApi rewind();
+  BufferProxyApi slice1(int index, int length);
+  BufferProxyApi slice2();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'java.nio.ByteBuffer'),
+)
+abstract class ByteBufferProxyApi extends BufferProxyApi {
+  ByteBufferProxyApi.allocate(int capacity);
+  ByteBufferProxyApi.allocateDirect(int capacity);
+  ByteBufferProxyApi.wrap1(Uint8List array);
+  ByteBufferProxyApi.wrap2(Uint8List array, int offset, int length);
+
+  ByteBufferProxyApi alignedSlice(int unitSize);
+  int alignmentOffset(int index, int unitSize);
+  Uint8List array();
+  // CharBufferProxyApi asCharBuffer();
+  // DoubleBuffer asDoubleBuffer();
+  // FloatBufferProxyAPi asFloatBuffer();
+  // IntBuffer asIntBuffer();
+  // LongBuffer asLongBuffer();
+  ByteBufferProxyApi asReadOnlyBuffer();
+  // ShortBufferProxyApi asShortBuffer();
+  ByteBufferProxyApi compact();
+  int compareTo(ByteBufferProxyApi that);
+  @override
+  ByteBufferProxyApi duplicate();
+  int get1();
+  ByteBufferProxyApi get2(int index, Uint8List dst);
+  ByteBufferProxyApi get3(Uint8List dst, int offset, int length);
+  ByteBufferProxyApi get4(int index, Uint8List dst, int offset, int length);
+  int get5(int index);
+  ByteBufferProxyApi get6(Uint8List dst);
+  // CharProxyApi getChar1();
+  // CharProxyApi getChar2(int index);
+  double getDouble1(int index);
+  double getDouble2();
+  double getFloat1();
+  double getFloat2(int index);
+  int getInt1(int index);
+  int getInt2();
+  int getLong1(int index);
+  int getLong2();
+  int getShort1(int index);
+  int getShort2();
+  int mismatch(BufferProxyApi that);
+  ByteBufferProxyApi order1();
+  // ByteBufferProxyApi order2(ByteOrderProxyApi bo);
+  ByteBufferProxyApi put1(Uint8List src);
+  ByteBufferProxyApi put2(int index, Uint8List src, int offset, int length);
+  ByteBufferProxyApi put3(int b);
+  ByteBufferProxyApi put4(Uint8List src, int offset, int length);
+  ByteBufferProxyApi put5(
+    int index,
+    ByteBufferProxyApi src,
+    int offset,
+    int length,
+  );
+  ByteBufferProxyApi put6(int index, Uint8List src);
+  ByteBufferProxyApi put7(int index, int b);
+  ByteBufferProxyApi put8(ByteBufferProxyApi src);
+  // ByteBufferProxyApi putChar1(int index, CharProxyApi value);
+  // ByteBufferProxyApi putChar2(CharProxyApi value);
+  ByteBufferProxyApi putDouble1(double value);
+  ByteBufferProxyApi putDouble2(int index, double value);
+  ByteBufferProxyApi putFloat1(int index, double value);
+  ByteBufferProxyApi putFloat2(double value);
+  ByteBufferProxyApi putInt1(int index, int value);
+  ByteBufferProxyApi putInt2(int value);
+  ByteBufferProxyApi putLong1(int value);
+  ByteBufferProxyApi putLong2(int index, int value);
+  ByteBufferProxyApi putShort1(int value);
+  ByteBufferProxyApi putShort2(int index, int value);
+  @override
+  ByteBufferProxyApi slice1(int index, int length);
+  @override
+  ByteBufferProxyApi slice2();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'java.io.OutputStream'),
+)
+abstract class OutputStreamProxyApi {
+  OutputStreamProxyApi();
+  OutputStreamProxyApi.nullOutputStream();
+
+  void close();
+  void flush();
+  void write1(Uint8List b);
+  void write2(Uint8List b, int off, int len);
+  void write3(int b);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'java.io.ByteArrayOutputStream',
+  ),
+)
+abstract class ByteArrayOutputStreamProxyApi extends OutputStreamProxyApi {
+  ByteArrayOutputStreamProxyApi();
+  ByteArrayOutputStreamProxyApi.size(int size);
+
+  void reset();
+  int size();
+  Uint8List toByteArray();
+  String toString1(String charsetName);
+  // String toString2(CharsetProxyApi charset);
+  String toString3();
+  String toString4(int hibyte);
+  void writeBytes(Uint8List b);
+  void writeTo(OutputStreamProxyApi out);
 }
 
 @ProxyApi(
@@ -397,16 +722,9 @@ abstract class PermissionManagerProxyApi {
 )
 abstract class PointProxyApi {
   PointProxyApi();
-  PointProxyApi.src(PointProxyApi src);
-  PointProxyApi.xy(int x, int y);
 
-  int x();
-  int y();
-
-  bool equals(int x, int y);
-  void negate();
-  void offset(int dx, int dy);
-  void set(int x, int y);
+  late final int x;
+  late final int y;
 }
 
 @ProxyApi(
@@ -415,82 +733,32 @@ abstract class PointProxyApi {
   ),
 )
 abstract class PointFProxyApi {
-  @static
-  double length2(double x, double y);
-
   PointFProxyApi();
-  PointFProxyApi.p1(PointProxyApi p);
-  PointFProxyApi.p2(PointFProxyApi p);
-  PointFProxyApi.xy(double x, double y);
 
-  double x();
-  double y();
-
-  bool equals(double x, double y);
-  double length1();
-  void negate();
-  void offset(double dx, double dy);
-  void set1(PointFProxyApi p);
-  void set2(double x, double y);
+  late final double x;
+  late final double y;
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.graphics.Rect'),
 )
 abstract class RectProxyApi {
-  @static
-  bool intersects2(RectProxyApi a, RectProxyApi b);
-  @static
-  RectProxyApi? unflattenFromString(String? str);
-
   RectProxyApi();
-  RectProxyApi.r(RectProxyApi? r);
-  RectProxyApi.ltrb(int left, int top, int right, int bottom);
 
-  int bottom();
-  int left();
-  int right();
-  int top();
-
-  int centerX();
-  int centerY();
-  bool contains1(RectProxyApi r);
-  bool contains2(int x, int y);
-  bool contains3(int left, int top, int right, int bottom);
-  double exactCenterX();
-  double exactCenterY();
-  String flattenToString();
-  int height();
-  // void inset1(InsetsProxyApi insets);
-  void inset2(int dx, int dy);
-  void inset3(int left, int top, int right, int bottom);
-  bool intersect1(RectProxyApi r);
-  bool intersect2(int left, int top, int right, int bottom);
-  bool intersects1(int left, int top, int right, int bottom);
-  bool isEmpty();
-  void offset(int dx, int dy);
-  void offsetTo(int newLeft, int newTop);
-  void set1(RectProxyApi src);
-  void set2(int left, int top, int right, int bottom);
-  void setEmpty();
-  bool setIntersect(RectProxyApi a, RectProxyApi b);
-  void sort();
-  String toShortString();
-  void union1(RectProxyApi r);
-  void union2(int x, int y);
-  void union3(int left, int top, int right, int bottom);
-  int width();
+  late final int left;
+  late final int top;
+  late final int right;
+  late final int bottom;
 }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.util.Size'),
 )
 abstract class SizeProxyApi {
-  SizeProxyApi(int width, int height);
-  SizeProxyApi.parseSize(String stirng);
+  SizeProxyApi();
 
-  int getHeight();
-  int getWidth();
+  late final int width;
+  late final int height;
 }
 
 @ProxyApi(
@@ -499,19 +767,10 @@ abstract class SizeProxyApi {
   ),
 )
 abstract class RangeProxyApi {
-  RangeProxyApi(int lower, int upper);
-  // RangeProxyApi.create(int lower, int upper);
+  RangeProxyApi();
 
-  int clamp(int value);
-  bool contains1(RangeProxyApi range);
-  bool contains2(int value);
-  RangeProxyApi extend1(RangeProxyApi range);
-  RangeProxyApi extend2(int value);
-  RangeProxyApi extend3(int lower, int upper);
-  int getLower();
-  int getUpper();
-  RangeProxyApi intersect1(RangeProxyApi range);
-  RangeProxyApi intersect2(int lower, int upper);
+  late final int lower;
+  late final int upper;
 }
 
 // core
@@ -752,10 +1011,10 @@ abstract class DynamicRangeProxyApi {
   ),
 )
 abstract class ExposureStateProxyApi {
-  int getExposureCompensationIndex();
-  RangeProxyApi getExposureCompensationRange();
-  double getExposureCompensationStep();
-  bool isExposureCompensationSupported();
+  late final int exposureCompensationIndex;
+  late final RangeProxyApi exposureCompensationRange;
+  late final double exposureCompensationStep;
+  late final bool isExposureCompensationSupported;
 }
 
 @ProxyApi(
@@ -805,7 +1064,7 @@ abstract class FocusMeteringActionProxyApi {
   ),
 )
 abstract class FocusMeteringResultProxyApi {
-  bool isFocusSuccessful();
+  late final bool isFocusSuccessful;
 }
 
 @ProxyApi(
@@ -853,9 +1112,9 @@ abstract class ImageCaptureOnImageCapturedCallbackProxyApi {
   ),
 )
 abstract class ImageInfoProxyApi {
-  FlashStateApi getFlashState();
-  int getRotationDegrees();
-  int getTimestamp();
+  late final FlashStateApi flashState;
+  late final int rotationDegrees;
+  late final int timestamp;
 }
 
 @ProxyApi(
@@ -864,10 +1123,9 @@ abstract class ImageInfoProxyApi {
   ),
 )
 abstract class ImageProxyPlaneProxyProxyApi {
-  // ByteBufferProxyApi getBuffer();
-  Uint8List getValue();
-  int getPixelStride();
-  int getRowStride();
+  late final Uint8List value;
+  late final int pixelStride;
+  late final int rowStride;
 }
 
 @ProxyApi(
@@ -876,15 +1134,16 @@ abstract class ImageProxyPlaneProxyProxyApi {
   ),
 )
 abstract class ImageProxyProxyApi extends AutoCloseableProxyApi {
+  late final ImageFormatApi format;
+  late final int width;
+  late final int height;
+  late final ImageInfoProxyApi imageInfo;
+  late final List<ImageProxyPlaneProxyProxyApi> planes;
+
   RectProxyApi getCropRect();
-  ImageFormatApi getFormat();
-  int getHeight();
   // ImageProxyApi? getImage();
-  ImageInfoProxyApi getImageInfo();
-  List<ImageProxyPlaneProxyProxyApi> getPlanes();
-  int getWidth();
   void setCropRect(RectProxyApi? rect);
-  // BitmapProxyApi toBitmap();
+  BitmapProxyApi toBitmap();
 }
 
 @ProxyApi(
@@ -893,7 +1152,7 @@ abstract class ImageProxyProxyApi extends AutoCloseableProxyApi {
   ),
 )
 abstract class MeteringPointProxyApi {
-  double getSize();
+  late final double size;
 }
 
 @ProxyApi(
@@ -930,10 +1189,10 @@ abstract class SurfaceOrientedMeteringPointFactoryProxyApi
   ),
 )
 abstract class ZoomStateProxyApi {
-  double getLinearZoom();
-  double getMaxZoomRatio();
-  double getMinZoomRatio();
-  double getZoomRatio();
+  late final double minZoomRatio;
+  late final double maxZoomRatio;
+  late final double zoomRatio;
+  late final double linearZoom;
 }
 
 // ml
@@ -1024,8 +1283,8 @@ enum FaceLandmarkTypeApi {
   ),
 )
 abstract class BarcodeAddressProxyApi {
-  List<String> getAddressLines();
-  BarcodeAddressTypeApi getType();
+  late final BarcodeAddressTypeApi type;
+  late final List<String> addressLines;
 }
 
 @ProxyApi(
@@ -1035,14 +1294,14 @@ abstract class BarcodeAddressProxyApi {
   ),
 )
 abstract class BarcodeCalendarDateTimeProxyApi {
-  int getDay();
-  int getHours();
-  int getMinutes();
-  int getMonth();
-  String? getRawValue();
-  int getSeconds();
-  int getYear();
-  bool isUtc();
+  late final String? rawValue;
+  late final int year;
+  late final int month;
+  late final int day;
+  late final int hours;
+  late final int minutes;
+  late final int seconds;
+  late final bool isUtc;
 }
 
 @ProxyApi(
@@ -1052,13 +1311,13 @@ abstract class BarcodeCalendarDateTimeProxyApi {
   ),
 )
 abstract class BarcodeCalendarEventProxyApi {
-  String? getDescription();
-  BarcodeCalendarDateTimeProxyApi? getEnd();
-  String? getLocation();
-  String? getOrganizer();
-  BarcodeCalendarDateTimeProxyApi? getStart();
-  String? getStatus();
-  String? getSummary();
+  late final BarcodeCalendarDateTimeProxyApi? start;
+  late final BarcodeCalendarDateTimeProxyApi? end;
+  late final String? location;
+  late final String? organizer;
+  late final String? summary;
+  late final String? description;
+  late final String? status;
 }
 
 @ProxyApi(
@@ -1067,13 +1326,13 @@ abstract class BarcodeCalendarEventProxyApi {
   ),
 )
 abstract class BarcodeContactInfoProxyApi {
-  List<BarcodeAddressProxyApi> getAddresses();
-  List<BarcodeEmailProxyApi> getEmails();
-  BarcodePersonNameProxyApi? getName();
-  String? getOrganization();
-  List<BarcodePhoneProxyApi> getPhones();
-  String? getTitle();
-  List<String> getUrls();
+  late final BarcodePersonNameProxyApi? name;
+  late final String? organization;
+  late final String? title;
+  late final List<BarcodePhoneProxyApi> phones;
+  late final List<BarcodeEmailProxyApi> emails;
+  late final List<BarcodeAddressProxyApi> addresses;
+  late final List<String> urls;
 }
 
 @ProxyApi(
@@ -1083,20 +1342,20 @@ abstract class BarcodeContactInfoProxyApi {
   ),
 )
 abstract class BarcodeDriverLicenseProxyApi {
-  String? getAddressCity();
-  String? getAddressState();
-  String? getAddressStreet();
-  String? getAddressZip();
-  String? getBirthDate();
-  String? getDocumentType();
-  String? getExpiryDate();
-  String? getFirstName();
-  String? getGender();
-  String? getIssueDate();
-  String? getIssuingCountry();
-  String? getLastName();
-  String? getLicenseNumber();
-  String? getMiddleName();
+  late final String? licenseNumber;
+  late final String? documentType;
+  late final String? firstName;
+  late final String? middleName;
+  late final String? lastName;
+  late final String? gender;
+  late final String? birthDate;
+  late final String? addressState;
+  late final String? addressCity;
+  late final String? addressStreet;
+  late final String? addressZip;
+  late final String? issuingCountry;
+  late final String? issueDate;
+  late final String? expiryDate;
 }
 
 @ProxyApi(
@@ -1105,10 +1364,10 @@ abstract class BarcodeDriverLicenseProxyApi {
   ),
 )
 abstract class BarcodeEmailProxyApi {
-  String? getAddress();
-  String? getBody();
-  String? getSubject();
-  BarcodeEmailTypeApi getType();
+  late final BarcodeEmailTypeApi type;
+  late final String? address;
+  late final String? subject;
+  late final String? body;
 }
 
 @ProxyApi(
@@ -1117,8 +1376,8 @@ abstract class BarcodeEmailProxyApi {
   ),
 )
 abstract class BarcodeGeoPointProxyApi {
-  double getLat();
-  double getLng();
+  late final double lat;
+  late final double lng;
 }
 
 @ProxyApi(
@@ -1127,13 +1386,13 @@ abstract class BarcodeGeoPointProxyApi {
   ),
 )
 abstract class BarcodePersonNameProxyApi {
-  String? getFirst();
-  String? getFormattedName();
-  String? getLast();
-  String? getMiddle();
-  String? getPrefix();
-  String? getPronunciation();
-  String? getSuffix();
+  late final String? prefix;
+  late final String? first;
+  late final String? middle;
+  late final String? last;
+  late final String? suffix;
+  late final String? formattedName;
+  late final String? pronunciation;
 }
 
 @ProxyApi(
@@ -1142,8 +1401,8 @@ abstract class BarcodePersonNameProxyApi {
   ),
 )
 abstract class BarcodePhoneProxyApi {
-  String? getNumber();
-  BarcodePhoneTypeApi getType();
+  late final BarcodePhoneTypeApi type;
+  late final String? number;
 }
 
 @ProxyApi(
@@ -1152,8 +1411,8 @@ abstract class BarcodePhoneProxyApi {
   ),
 )
 abstract class BarcodeSmsProxyApi {
-  String? getMessage();
-  String? getPhoneNumber();
+  late final String? phoneNumber;
+  late final String? message;
 }
 
 @ProxyApi(
@@ -1162,8 +1421,8 @@ abstract class BarcodeSmsProxyApi {
   ),
 )
 abstract class BarcodeUrlBookmarkProxyApi {
-  String? getTitle();
-  String? getUrl();
+  late final String? title;
+  late final String? url;
 }
 
 @ProxyApi(
@@ -1172,9 +1431,9 @@ abstract class BarcodeUrlBookmarkProxyApi {
   ),
 )
 abstract class BarcodeWiFiProxyApi {
-  BarcodeWiFiTypeApi getEncryptionType();
-  String? getPassword();
-  String? getSsid();
+  late final BarcodeWiFiTypeApi encryptionType;
+  late final String? ssid;
+  late final String? password;
 }
 
 @ProxyApi(
@@ -1183,22 +1442,22 @@ abstract class BarcodeWiFiProxyApi {
   ),
 )
 abstract class BarcodeProxyApi {
-  RectProxyApi? getBoundingBox();
-  BarcodeCalendarEventProxyApi? getCalendarEvent();
-  BarcodeContactInfoProxyApi? getContactInfo();
-  List<PointProxyApi>? getCornerPoints();
-  String? getDisplayValue();
-  BarcodeDriverLicenseProxyApi? getDriverLicense();
-  BarcodeEmailProxyApi? getEmail();
-  BarcodeFormatApi getFormat();
-  BarcodeGeoPointProxyApi? getGeoPoint();
-  BarcodePhoneProxyApi? getPhone();
-  Uint8List? getRawBytes();
-  String? getRawValue();
-  BarcodeSmsProxyApi? getSms();
-  BarcodeUrlBookmarkProxyApi? getUrl();
-  BarcodeTypeApi getValueType();
-  BarcodeWiFiProxyApi? getWifi();
+  late final BarcodeFormatApi format;
+  late final RectProxyApi? boundingBox;
+  late final List<PointProxyApi>? cornerPoints;
+  late final Uint8List? rawBytes;
+  late final String? rawValue;
+  late final String? displayValue;
+  late final BarcodeTypeApi valueType;
+  late final BarcodeCalendarEventProxyApi? calendarEvent;
+  late final BarcodeContactInfoProxyApi? contactInfo;
+  late final BarcodeDriverLicenseProxyApi? driverLicense;
+  late final BarcodeEmailProxyApi? email;
+  late final BarcodeGeoPointProxyApi? geoPoint;
+  late final BarcodePhoneProxyApi? phone;
+  late final BarcodeSmsProxyApi? sms;
+  late final BarcodeUrlBookmarkProxyApi? url;
+  late final BarcodeWiFiProxyApi? wifi;
 }
 
 @ProxyApi(
@@ -1254,8 +1513,8 @@ abstract class BarcodeScannerProxyApi extends CloseableProxyApi {
   ),
 )
 abstract class FaceContourProxyApi {
-  FaceContourTypeApi getFaceContourType();
-  List<PointFProxyApi> getPoints();
+  late final FaceContourTypeApi type;
+  late final List<PointFProxyApi> points;
 }
 
 @ProxyApi(
@@ -1264,8 +1523,8 @@ abstract class FaceContourProxyApi {
   ),
 )
 abstract class FaceLandmarkProxyApi {
-  FaceLandmarkTypeApi getLandmarkType();
-  PointFProxyApi getPosition();
+  late final FaceLandmarkTypeApi type;
+  late final PointFProxyApi position;
 }
 
 @ProxyApi(
@@ -1274,18 +1533,19 @@ abstract class FaceLandmarkProxyApi {
   ),
 )
 abstract class FaceProxyApi {
-  List<FaceContourProxyApi> getAllContours();
-  List<FaceLandmarkProxyApi> getAllLandmarks();
-  RectProxyApi getBoundingBox();
+  late final RectProxyApi boundingBox;
+  late final List<FaceContourProxyApi> allContours;
+  late final List<FaceLandmarkProxyApi> allLandmarks;
+  late final double headEulerAngleX;
+  late final double headEulerAngleY;
+  late final double headEulerAngleZ;
+  late final double? leftEyeOpenProbability;
+  late final double? rightEyeOpenProbability;
+  late final double? smilingProbability;
+  late final int? trackingId;
+
   FaceContourProxyApi? getContour(FaceContourTypeApi contourType);
-  double getHeadEulerAngleX();
-  double getHeadEulerAngleY();
-  double getHeadEulerAngleZ();
   FaceLandmarkProxyApi? getLandmark(FaceLandmarkTypeApi landmarkType);
-  double? getLeftEyeOpenProbability();
-  double? getRightEyeOpenProbability();
-  double? getSmilingProbability();
-  int? getTrackingId();
 }
 
 @ProxyApi(
@@ -1320,7 +1580,8 @@ abstract class FaceDetectorProxyApi extends CloseableProxyApi {
   ),
 )
 abstract class MlKitAnalyzerResultProxyApi {
-  int getTimestamp();
+  late final int timestamp;
+
   List<BarcodeProxyApi>? getValue1(BarcodeScannerProxyApi detector);
   List<FaceProxyApi>? getValue2(FaceDetectorProxyApi detector);
   List<Object?>? getThrowable1(BarcodeScannerProxyApi detector);
@@ -1371,11 +1632,11 @@ enum VideoRecordFinalizeEventErrorApi {
   ),
 )
 abstract class AudioStatsProxyApi {
-  double getAudioAmplitude();
-  AudioStatsAudioStateApi getAudioState();
-  List<Object?>? getErrorCause();
-  bool hasAudio();
-  bool hasError();
+  late final double audioAmplitude;
+  late final AudioStatsAudioStateApi audioState;
+  late final List<Object?>? errorCause;
+  late final bool hasAudio;
+  late final bool hasError;
 }
 
 @ProxyApi(
@@ -1425,7 +1686,7 @@ abstract class FileOutputOptionsProxyApi extends OutputOptionsProxyApi {
 abstract class OutputResultsProxyApi {
   OutputResultsProxyApi();
 
-  String? getOutputUri();
+  late final String? outputUri;
 }
 
 @ProxyApi(
@@ -1478,9 +1739,9 @@ abstract class QualitySelectorProxyApi {
   ),
 )
 abstract class RecordingStatsProxyApi {
-  AudioStatsProxyApi getAudioStats();
-  int getNumBytesRecorded();
-  int getRecordedDurationNanos();
+  late final AudioStatsProxyApi audioStats;
+  late final int numBytesRecorded;
+  late final int recordedDurationNanos;
 }
 
 @ProxyApi(
@@ -1501,40 +1762,47 @@ abstract class RecordingProxyApi extends AutoCloseableProxyApi {
     fullClassName: 'androidx.camera.video.VideoRecordEvent',
   ),
 )
-abstract class VideoRecordEventProxyApi {
-  OutputOptionsProxyApi getOutputOptions();
-  RecordingStatsProxyApi getRecordingStats();
-}
+abstract class VideoRecordEventProxyApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Status',
   ),
 )
-abstract class VideoRecordStatusEventProxyApi
-    extends VideoRecordEventProxyApi {}
+abstract class VideoRecordStatusEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
+  late final RecordingStatsProxyApi recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Start',
   ),
 )
-abstract class VideoRecordStartEventProxyApi extends VideoRecordEventProxyApi {}
+abstract class VideoRecordStartEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
+  late final RecordingStatsProxyApi recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Pause',
   ),
 )
-abstract class VideoRecordPauseEventProxyApi extends VideoRecordEventProxyApi {}
+abstract class VideoRecordPauseEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
+  late final RecordingStatsProxyApi recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.VideoRecordEvent.Resume',
   ),
 )
-abstract class VideoRecordResumeEventProxyApi
-    extends VideoRecordEventProxyApi {}
+abstract class VideoRecordResumeEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
+  late final RecordingStatsProxyApi recordingStats;
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -1543,19 +1811,21 @@ abstract class VideoRecordResumeEventProxyApi
 )
 abstract class VideoRecordFinalizeEventProxyApi
     extends VideoRecordEventProxyApi {
-  List<Object?>? getCause();
-  VideoRecordFinalizeEventErrorApi getError();
-  OutputResultsProxyApi getOutputResults();
-  bool hasError();
+  late final OutputOptionsProxyApi outputOptions;
+  late final RecordingStatsProxyApi recordingStats;
+  late final List<Object?>? cause;
+  late final VideoRecordFinalizeEventErrorApi error;
+  late final OutputResultsProxyApi outputResults;
+  late final bool hasError;
 }
 
 // view
 enum CameraControllerTapToFocusApi {
-  tapToFocusNotStarted,
-  tapToFocusStarted,
-  tapToFocusFocused,
-  tapToFocusNotFocused,
-  tapToFocusFailed,
+  notStarted,
+  started,
+  focused,
+  notFocused,
+  failed,
 }
 
 enum CameraControllerUseCaseApi { imageCapture, imageAnalysis, videoCapture }
@@ -1775,8 +2045,8 @@ abstract class LifecycleCameraControllerProxyApi
 abstract class PreviewViewProxyApi {
   PreviewViewProxyApi();
 
-  // @async
-  // BitmapProxyApi? getBitmap();
+  @async
+  BitmapProxyApi? getBitmap();
   @async
   CameraControllerProxyApi? getController();
   @async
@@ -1847,11 +2117,8 @@ abstract class RotationProviderProxyApi {
   ),
 )
 abstract class TapToFocusInfoProxyApi {
-  TapToFocusInfoProxyApi(
-    CameraControllerTapToFocusApi focusState,
-    PointFProxyApi? tapPoint,
-  );
+  TapToFocusInfoProxyApi();
 
-  CameraControllerTapToFocusApi getFocusState();
-  PointFProxyApi? getTapPoint();
+  late final CameraControllerTapToFocusApi focusState;
+  late final PointFProxyApi? tapPoint;
 }

@@ -8,8 +8,8 @@ final class ResolutionFilterImpl extends ResolutionFilter {
   ResolutionFilterImpl.internal(this.api) : super.impl();
 
   factory ResolutionFilterImpl({
-    required List<SizeApi> Function(
-      List<SizeApi> supportedSizes,
+    required List<Size<int>> Function(
+      List<Size<int>> supportedSizes,
       int rotationDegrees,
     )
     filter,
@@ -22,7 +22,7 @@ final class ResolutionFilterImpl extends ResolutionFilter {
   }
 }
 
-extension ResolutionFilterApiX on ResolutionFilter {
+extension ResolutionFilterX on ResolutionFilter {
   ResolutionFilterProxyApi get api {
     final impl = this;
     if (impl is! ResolutionFilterImpl) throw TypeError();

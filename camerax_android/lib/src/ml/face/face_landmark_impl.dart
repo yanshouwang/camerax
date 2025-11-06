@@ -2,13 +2,13 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FaceLandmarkImpl extends FaceLandmarkApi {
+final class FaceLandmarkImpl extends FaceLandmark {
   final FaceLandmarkProxyApi api;
 
   FaceLandmarkImpl.internal(this.api) : super.impl();
 
   @override
-  PointFApi get position => api.position.impl;
+  Point<double> get position => api.position.impl;
   @override
   FaceLandmarkType get type => api.type.impl;
 }
@@ -22,5 +22,5 @@ extension FaceLandmarkTypeApiX on FaceLandmarkTypeApi {
 }
 
 extension FaceLandmarkProxyApiX on FaceLandmarkProxyApi {
-  FaceLandmarkApi get impl => FaceLandmarkImpl.internal(this);
+  FaceLandmark get impl => FaceLandmarkImpl.internal(this);
 }

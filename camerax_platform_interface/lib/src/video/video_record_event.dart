@@ -1,6 +1,6 @@
-import 'output_options_api.dart';
-import 'recording_stats_api.dart';
-import 'output_results_api.dart';
+import 'output_options.dart';
+import 'recording_stats.dart';
+import 'output_results.dart';
 
 enum VideoRecordFinalizeEventError {
   none,
@@ -25,38 +25,38 @@ enum VideoRecordFinalizeEventError {
 ///
 /// Example: Below is the typical way to determine the event type and cast to the
 /// event class, if needed.
-abstract base class VideoRecordEventApi {
-  VideoRecordEventApi.impl();
+abstract base class VideoRecordEvent {
+  VideoRecordEvent.impl();
 
-  OutputOptionsApi get outputOptions;
-  RecordingStatsApi get recordingStats;
+  OutputOptions get outputOptions;
+  RecordingStats get recordingStats;
 }
 
 /// The status report of the recording in progress.
-abstract base class VideoRecordStatusEventApi extends VideoRecordEventApi {
-  VideoRecordStatusEventApi.impl() : super.impl();
+abstract base class VideoRecordStatusEvent extends VideoRecordEvent {
+  VideoRecordStatusEvent.impl() : super.impl();
 }
 
 /// Indicates the start of recording.
 ///
 /// When a video recording is successfully requested by start, a Start event will
 /// be the first event.
-abstract base class VideoRecordStartEventApi extends VideoRecordEventApi {
-  VideoRecordStartEventApi.impl() : super.impl();
+abstract base class VideoRecordStartEvent extends VideoRecordEvent {
+  VideoRecordStartEvent.impl() : super.impl();
 }
 
 /// Indicates the pause event of recording.
 ///
 /// A Pause event will be triggered after calling pause.
-abstract base class VideoRecordPauseEventApi extends VideoRecordEventApi {
-  VideoRecordPauseEventApi.impl() : super.impl();
+abstract base class VideoRecordPauseEvent extends VideoRecordEvent {
+  VideoRecordPauseEvent.impl() : super.impl();
 }
 
 /// Indicates the resume event of recording.
 ///
 /// A Resume event will be triggered after calling resume.
-abstract base class VideoRecordResumeEventApi extends VideoRecordEventApi {
-  VideoRecordResumeEventApi.impl() : super.impl();
+abstract base class VideoRecordResumeEvent extends VideoRecordEvent {
+  VideoRecordResumeEvent.impl() : super.impl();
 }
 
 /// Indicates the finalization of recording.
@@ -71,8 +71,8 @@ abstract base class VideoRecordResumeEventApi extends VideoRecordEventApi {
 /// example, a file will still be generated when the recording is finalized with
 /// ERROR_FILE_SIZE_LIMIT_REACHED. A file may or may not be generated when the
 /// recording is finalized with ERROR_INSUFFICIENT_STORAGE.
-abstract base class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
-  VideoRecordFinalizeEventApi.impl() : super.impl();
+abstract base class VideoRecordFinalizeEvent extends VideoRecordEvent {
+  VideoRecordFinalizeEvent.impl() : super.impl();
 
   /// Gets the error cause.
   ///
@@ -89,6 +89,6 @@ abstract base class VideoRecordFinalizeEventApi extends VideoRecordEventApi {
   /// Returns the actual Uri of the output destination if the OutputOptions is
   /// implemented by MediaStoreOutputOptions or FileOutputOptions, otherwise
   /// returns EMPTY.
-  OutputResultsApi get outputResults;
+  OutputResults get outputResults;
   bool get hasError;
 }
