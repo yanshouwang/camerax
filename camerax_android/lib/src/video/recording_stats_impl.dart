@@ -13,7 +13,8 @@ final class RecordingStatsImpl extends RecordingStats {
   @override
   int get numBytesRecorded => api.numBytesRecorded;
   @override
-  int get recordedDurationNanos => api.recordedDurationNanos;
+  Duration get recordedDuration =>
+      Duration(microseconds: api.recordedDurationNanos ~/ 1000);
 }
 
 extension RecordingStatsProxyApiX on RecordingStatsProxyApi {

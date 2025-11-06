@@ -1,10 +1,12 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
+import 'package:camerax_android/src/ml/interfaces.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'face_detector_options_impl.dart';
 
-final class FaceDetectorImpl extends FaceDetector with DetectorImpl {
+final class FaceDetectorImpl extends FaceDetector
+    with AutoCloseableImpl, CloseableImpl, DetectorImpl {
   @override
   final FaceDetectorProxyApi api;
 

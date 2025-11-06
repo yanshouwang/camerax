@@ -5,10 +5,9 @@ import 'camera_info.dart';
 enum CameraSelectorLensFacing { unknown, front, back, external }
 
 abstract base class CameraSelector {
-  static CameraSelector get defaultBackCamera =>
-      CameraXPlugin.instance.$CameraSelector$DefaultBackCamera;
-  static CameraSelector get defaultFrontCamera =>
-      CameraXPlugin.instance.$CameraSelector$DefaultFrontCamera;
+  static CameraSelector get back => CameraXPlugin.instance.$CameraSelector$Back;
+  static CameraSelector get front =>
+      CameraXPlugin.instance.$CameraSelector$Front;
 
   CameraSelector.impl();
 

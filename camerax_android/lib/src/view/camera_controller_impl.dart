@@ -6,6 +6,7 @@ import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'tap_to_focus_info_impl.dart';
 import 'video.dart';
 
 final class CameraControllerImpl extends CameraController {
@@ -247,6 +248,11 @@ final class CameraControllerImpl extends CameraController {
   @override
   Future<void> setTapToFocusAutoCancelDuration(Duration duration) =>
       api.setTapToFocusAutoCancelDuration(duration.api);
+}
+
+extension CameraControllerTapToFocusApiX on CameraControllerTapToFocusApi {
+  CameraControllerTapToFocus get impl =>
+      CameraControllerTapToFocus.values[index];
 }
 
 extension CameraControllerUseCaseX on CameraControllerUseCase {

@@ -30,7 +30,7 @@ abstract base class CameraInfo {
   );
   Future<int> getMaxTorchStrengthLevel();
   Future<Set<CameraInfo>> getPhysicalCameraInfos();
-  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRatation]);
+  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]);
   Future<Set<Range<int>>> getSupportedFrameRateRanges();
   Future<TorchState?> getTorchState();
   Future<void> observeTorchState(Observer<TorchState> observer);

@@ -1924,9 +1924,9 @@ enum class BitmapConfigApi(val raw: Int) {
 }
 
 enum class LocationFormatApi(val raw: Int) {
-  FORMAT_DEGREES(0),
-  FORMAT_MINUTES(1),
-  FORMAT_SECONDS(2);
+  DEGREES(0),
+  MINUTES(1),
+  SECONDS(2);
 
   companion object {
     fun ofRaw(raw: Int): LocationFormatApi? {

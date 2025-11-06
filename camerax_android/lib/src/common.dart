@@ -13,5 +13,6 @@ export 'common/point_impl.dart';
 export 'common/range_impl.dart';
 export 'common/rect_impl.dart';
 export 'common/size_impl.dart';
+export 'common/surface_impl.dart';
 export 'common/uri_impl.dart';
 export 'common/view_impl.dart';

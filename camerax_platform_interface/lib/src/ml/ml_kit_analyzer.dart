@@ -7,7 +7,8 @@ import 'interfaces.dart';
 abstract base class MlKitAnalyzerResult {
   MlKitAnalyzerResult.impl();
 
-  Future<int> getTimestamp();
+  int get timestamp;
+
   Future<T?> getValue<T>(Detector<T> detector);
   Future<Object?> getThrowable(Detector detector);
 }

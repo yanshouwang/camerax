@@ -1,6 +1,8 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+import 'flash_state_impl.dart';
+
 final class ImageInfoImpl extends ImageInfo {
   final ImageInfoProxyApi api;
 

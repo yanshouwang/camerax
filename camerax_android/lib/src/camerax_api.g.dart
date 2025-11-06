@@ -1144,9 +1144,9 @@ enum BitmapConfigApi {
 }
 
 enum LocationFormatApi {
-  formatDegrees,
-  formatMinutes,
-  formatSeconds,
+  degrees,
+  minutes,
+  seconds,
 }
 
 enum TimeUnitApi {

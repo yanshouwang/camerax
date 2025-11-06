@@ -19,11 +19,9 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PermissionManager $PermissionManagerApi() => PermissionManagerImpl();
 
   @override
-  CameraSelector get $CameraSelector$DefaultFrontCamera =>
-      CameraSelectorImpl.front;
+  CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
   @override
-  CameraSelector get $CameraSelector$DefaultBackCamera =>
-      CameraSelectorImpl.back;
+  CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
   @override
   CameraSelector get $CameraSelectorApiExternal => CameraSelectorImpl.external;
   @override
@@ -137,8 +135,9 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => ImageAnalyzerImpl(analyze: analyze);
 
   @override
-  Camera2CameraControl $Camera2CameraControl$From(CameraControl cameraControl) =>
-      throw UnimplementedError();
+  Camera2CameraControl $Camera2CameraControl$From(
+    CameraControl cameraControl,
+  ) => throw UnimplementedError();
 
   @override
   Camera2CameraInfo $Camera2CameraInfo$From(CameraInfo cameraInfo) =>

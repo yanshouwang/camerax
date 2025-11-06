@@ -9,6 +9,7 @@ import 'camera_state_impl.dart';
 import 'dynamic_range_impl.dart';
 import 'exposure_state_impl.dart';
 import 'focus_metering_action_impl.dart';
+import 'low_light_boost_state_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
@@ -107,8 +108,8 @@ final class CameraInfoImpl extends CameraInfo {
   Future<int> getMaxTorchStrengthLevel() => api.getMaxTorchStrengthLevel();
 
   @override
-  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRatation]) =>
-      relativeRatation == null
+  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]) =>
+      relativeRotation == null
       ? api.getSensorRotationDegrees1()
       : api.getSensorRotationDegrees2(relativeRotation.api);
 

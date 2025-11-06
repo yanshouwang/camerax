@@ -18,5 +18,5 @@ final class Camera2CameraInfoImpl extends Camera2CameraInfo {
 
   @override
   Future<Range<int>?> getSensorInfoExposureTimeRange() =>
-      api.getSensorInfoExposureTimeRange().then((e) => e.impl);
+      api.getSensorInfoExposureTimeRange().then((e) => e?.impl);
 }

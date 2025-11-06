@@ -4,21 +4,6 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'image_proxy_impl.dart';
 
-final class ImageAnalysisImageAnalyzerImplImpl extends ImageAnalysisAnalyzer
-    with ImageAnalysisAnalyzerImpl {
-  @override
-  final ImageAnalysisAnalyzerImplProxyApi api;
-
-  ImageAnalysisImageAnalyzerImplImpl.internal(this.api) : super.impl();
-
-  factory ImageAnalysisImageAnalyzerImplImpl({
-    required Consumer<ImageProxy> consumer,
-  }) {
-    final api = ImageAnalysisAnalyzerImplProxyApi(consumer: consumer.api);
-    return ImageAnalysisImageAnalyzerImplImpl.internal(api);
-  }
-}
-
 base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
   ImageAnalysisAnalyzerProxyApi get api;
 
@@ -32,6 +17,21 @@ base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
   @override
   Future<ImageAnalysisCoordinateSystem> getTargetCoordinateSystem() =>
       api.getTargetCoordinateSystem().then((e) => e.impl);
+}
+
+final class ImageAnalysisImageAnalyzerImplImpl extends ImageAnalysisAnalyzer
+    with ImageAnalysisAnalyzerImpl {
+  @override
+  final ImageAnalysisAnalyzerImplProxyApi api;
+
+  ImageAnalysisImageAnalyzerImplImpl.internal(this.api) : super.impl();
+
+  factory ImageAnalysisImageAnalyzerImplImpl({
+    required Consumer<ImageProxy> consumer,
+  }) {
+    final api = ImageAnalysisAnalyzerImplProxyApi(consumer: consumer.api);
+    return ImageAnalysisImageAnalyzerImplImpl.internal(api);
+  }
 }
 
 extension ImageAnalysisStrategyX on ImageAnalysisStrategy {

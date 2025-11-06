@@ -66,8 +66,8 @@ abstract base class CameraXPlugin extends PlatformInterface {
   AspectRatioStrategy get $AspectRatioStrategy$Ratio4_3FallbackAutoStrategy;
   AspectRatioStrategy get $AspectRatioStrategy$Ratio16_9FallbackAutoStrategy;
   ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy;
-  CameraSelector get $CameraSelector$DefaultBackCamera;
-  CameraSelector get $CameraSelector$DefaultFrontCamera;
+  CameraSelector get $CameraSelector$Back;
+  CameraSelector get $CameraSelector$Front;
   DynamicRange get $DynamicRange$Unspecifid;
   DynamicRange get $DynamicRange$Sdr;
   DynamicRange get $DynamicRange$HdrUnspecified10Bit;
@@ -175,6 +175,10 @@ abstract base class CameraXPlugin extends PlatformInterface {
     int? fileSizeLimitBytes,
     Location? location,
   });
+  Future<Size<int>?> $QualitySelector$GetResolution(
+    CameraInfo cameraInfo,
+    Quality quality,
+  );
   QualitySelector $QualitySelector$From(
     Quality quality, [
     FallbackStrategy? fallbackStrategy,
@@ -183,10 +187,6 @@ abstract base class CameraXPlugin extends PlatformInterface {
     List<Quality> qualities, [
     FallbackStrategy? fallbackStrategy,
   ]);
-  Future<Size<int>?> $QualitySelector$GetResolution(
-    CameraInfo cameraInfo,
-    Quality quality,
-  );
 
   // view
   AudioConfig get $AudioConfig$AudioDisabled;

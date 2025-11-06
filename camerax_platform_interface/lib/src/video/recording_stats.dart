@@ -5,5 +5,5 @@ abstract base class RecordingStats {
 
   AudioStats get audioStats;
   int get numBytesRecorded;
-  int get recordedDurationNanos;
+  Duration get recordedDuration;
 }

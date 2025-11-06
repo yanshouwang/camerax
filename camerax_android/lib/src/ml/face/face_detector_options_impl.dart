@@ -48,7 +48,7 @@ extension FaceDetectorOptioinsPerformanceModeX
       FaceDetectorOptionsPerformanceModeApi.values[index];
 }
 
-extension FaceDetectorOptionsApiX on FaceDetectorOptions {
+extension FaceDetectorOptionsX on FaceDetectorOptions {
   FaceDetectorOptionsProxyApi get api {
     final impl = this;
     if (impl is! FaceDetectorOptionsImpl) throw TypeError();

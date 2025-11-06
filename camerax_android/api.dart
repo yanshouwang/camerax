@@ -109,7 +109,7 @@ enum BitmapConfigApi {
   rgb565,
 }
 
-enum LocationFormatApi { formatDegrees, formatMinutes, formatSeconds }
+enum LocationFormatApi { degrees, minutes, seconds }
 
 enum TimeUnitApi {
   nanoseconds,

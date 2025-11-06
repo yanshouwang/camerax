@@ -10,7 +10,7 @@ final class MeteringPointImpl extends MeteringPoint {
   double get size => api.size;
 }
 
-extension MeteringPointApiX on MeteringPoint {
+extension MeteringPointX on MeteringPoint {
   MeteringPointProxyApi get api {
     final impl = this;
     if (impl is! MeteringPointImpl) throw TypeError();

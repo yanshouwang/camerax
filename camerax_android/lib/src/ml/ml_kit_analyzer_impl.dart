@@ -11,23 +11,35 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   MlKitAnalyzerResultImpl.internal(this.api) : super.impl();
 
   @override
-  Future<Object?> getThrowable1(BarcodeScanner detector) =>
-      api.getThrowable1(detector.api).then((e) => e?.impl);
+  int get timestamp => api.timestamp;
 
   @override
-  Future<Object?> getThrowable2(FaceDetector detector) =>
-      api.getThrowable2(detector.api).then((e) => e?.impl);
+  Future<Object?> getThrowable(Detector detector) {
+    if (detector is BarcodeScanner) {
+      return api.getThrowable1(detector.api).then((e) => e?.impl);
+    } else if (detector is FaceDetector) {
+      return api.getThrowable2(detector.api).then((e) => e?.impl);
+    } else {
+      throw TypeError();
+    }
+  }
 
   @override
-  Future<int> getTimestamp() => api.getTimestamp();
-
-  @override
-  Future<List<Barcode>?> getValue1(BarcodeScanner detector) =>
-      api.getValue1(detector.api).then((e) => e?.map((e1) => e1.impl).toList());
-
-  @override
-  Future<List<Face>?> getValue2(FaceDetector detector) =>
-      api.getValue2(detector.api).then((e) => e?.map((e1) => e1.impl).toList());
+  Future<T?> getValue<T>(Detector<T> detector) {
+    if (detector is BarcodeScanner) {
+      final barcodeScanner = detector as BarcodeScanner;
+      return api
+          .getValue1(barcodeScanner.api)
+          .then((e) => e?.map((e1) => e1.impl).toList() as T?);
+    } else if (detector is FaceDetector) {
+      final faceDetector = detector as FaceDetector;
+      return api
+          .getValue2(faceDetector.api)
+          .then((e) => e?.map((e1) => e1.impl).toList() as T?);
+    } else {
+      throw TypeError();
+    }
+  }
 }
 
 final class MlKitAnalyzerImpl extends MlKitAnalyzer
@@ -38,14 +50,19 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
   MlKitAnalyzerImpl.internal(this.api) : super.impl();
 
   factory MlKitAnalyzerImpl({
-    required List<BarcodeScanner> detectors1,
-    required List<FaceDetector> detectors2,
+    required List<Detector> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required MlKitAnalyzerResultConsumerApi consumer,
+    required Consumer<MlKitAnalyzerResult> consumer,
   }) {
     final api = MlKitAnalyzerProxyApi(
-      detectors1: detectors1.map((e) => e.api).toList(),
-      detectors2: detectors2.map((e) => e.api).toList(),
+      detectors1: detectors
+          .whereType<BarcodeScanner>()
+          .map((e) => e.api)
+          .toList(),
+      detectors2: detectors
+          .whereType<FaceDetector>()
+          .map((e) => e.api)
+          .toList(),
       targetCoordinateSystem: targetCoordinateSystem.api,
       consumer: consumer.api,
     );

@@ -8,5 +8,7 @@ base mixin MeteringPointFactoryImpl on MeteringPointFactory {
 
   @override
   Future<MeteringPoint> createPoint(double x, double y, {double? size}) =>
-      api.createPoint(x, y, size).then((e) => e.impl);
+      size == null
+      ? api.createPoint1(x, y).then((e) => e.impl)
+      : api.createPoint2(x, y, size).then((e) => e.impl);
 }

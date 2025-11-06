@@ -1,5 +1,6 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/core.dart';
+import 'package:camerax_android/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CameraStateObserverImpl extends Observer<CameraState> {
@@ -14,6 +15,48 @@ final class CameraStateObserverImpl extends Observer<CameraState> {
       onChanged: (_, e) => onChanged(e.impl),
     );
     return CameraStateObserverImpl.internal(api);
+  }
+}
+
+final class IntObserverImpl extends Observer<int> {
+  final IntObserverProxyApi api;
+
+  IntObserverImpl.internal(this.api) : super.impl();
+
+  factory IntObserverImpl({required void Function(int value) onChanged}) {
+    final api = IntObserverProxyApi(onChanged: (_, e) => onChanged(e));
+    return IntObserverImpl.internal(api);
+  }
+}
+
+final class LowLightBoostStateObserverImpl
+    extends Observer<LowLightBoostState> {
+  final LowLightBoostStateObserverProxyApi api;
+
+  LowLightBoostStateObserverImpl.internal(this.api) : super.impl();
+
+  factory LowLightBoostStateObserverImpl({
+    required void Function(LowLightBoostState value) onChanged,
+  }) {
+    final api = LowLightBoostStateObserverProxyApi(
+      onChanged: (_, e) => onChanged(e.impl),
+    );
+    return LowLightBoostStateObserverImpl.internal(api);
+  }
+}
+
+final class TapToFocusInfoObserverImpl extends Observer<TapToFocusInfo> {
+  final TapToFocusInfoObserverProxyApi api;
+
+  TapToFocusInfoObserverImpl.internal(this.api) : super.impl();
+
+  factory TapToFocusInfoObserverImpl({
+    required void Function(TapToFocusInfo value) onChanged,
+  }) {
+    final api = TapToFocusInfoObserverProxyApi(
+      onChanged: (_, e) => onChanged(e.impl),
+    );
+    return TapToFocusInfoObserverImpl.internal(api);
   }
 }
 
@@ -51,6 +94,30 @@ extension CameraStateObserverX on Observer<CameraState> {
   CameraStateObserverProxyApi get api {
     final impl = this;
     if (impl is! CameraStateObserverImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension IntObserverX on Observer<int> {
+  IntObserverProxyApi get api {
+    final impl = this;
+    if (impl is! IntObserverImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension LowLightBoostStateObserverX on Observer<LowLightBoostState> {
+  LowLightBoostStateObserverProxyApi get api {
+    final impl = this;
+    if (impl is! LowLightBoostStateObserverImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension TapToFocusInfoObserverX on Observer<TapToFocusInfo> {
+  TapToFocusInfoObserverProxyApi get api {
+    final impl = this;
+    if (impl is! TapToFocusInfoObserverImpl) throw TypeError();
     return impl.api;
   }
 }

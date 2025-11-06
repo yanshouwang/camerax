@@ -1,13 +1,8 @@
 abstract base class ZoomState {
-  ZoomState.impl({
-    required this.minZoomRatio,
-    required this.maxZoomRatio,
-    required this.zoomRatio,
-    required this.linearZoom,
-  });
+  ZoomState.impl();
 
-  final double minZoomRatio;
-  final double maxZoomRatio;
-  final double zoomRatio;
-  final double linearZoom;
+  double get minZoomRatio;
+  double get maxZoomRatio;
+  double get zoomRatio;
+  double get linearZoom;
 }

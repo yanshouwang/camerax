@@ -8,7 +8,8 @@ base mixin OutputOptionsImpl on OutputOptions {
   OutputOptionsProxyApi get api;
 
   @override
-  Future<int> getDurationLimitMillis() => api.getDurationLimitMillis();
+  Future<Duration> getDurationLimit() =>
+      api.getDurationLimitMillis().then((e) => Duration(milliseconds: e));
 
   @override
   Future<int> getFileSizeLimit() => api.getFileSizeLimit();
