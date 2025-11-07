@@ -7,10 +7,11 @@ import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiCameraControlApi
+import dev.zeekr.camerax_android.PigeonApiCameraControlProxyApi
 import dev.zeekr.camerax_android.context
 
-class CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraControlApi(registrar) {
+class CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCameraControlProxyApi(registrar) {
     override fun enableTorch(pigeon_instance: CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.enableTorch(torch)
         val executor = ContextCompat.getMainExecutor(registrar.context)
@@ -39,10 +40,26 @@ class CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar
         }, executor)
     }
 
-    override fun setLinearZoom(
-        pigeon_instance: CameraControl, linearZoom: Double, callback: (Result<Unit>) -> Unit
-    ) {
+    override fun setLinearZoom(pigeon_instance: CameraControl, linearZoom: Double, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.setLinearZoom(linearZoom.toFloat())
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Void> {
+            override fun onSuccess(result: Void?) {
+                callback(Result.success(Unit))
+            }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
+    }
+
+    override fun setTorchStrengthLevel(
+        pigeon_instance: CameraControl,
+        torchStrengthLevel: Long,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val future = pigeon_instance.setTorchStrengthLevel(torchStrengthLevel.toInt())
         val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {
@@ -75,6 +92,24 @@ class CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar
 
     override fun cancelFocusAndMetering(pigeon_instance: CameraControl, callback: (Result<Unit>) -> Unit) {
         val future = pigeon_instance.cancelFocusAndMetering()
+        val executor = ContextCompat.getMainExecutor(registrar.context)
+        Futures.addCallback(future, object : FutureCallback<Void> {
+            override fun onSuccess(result: Void?) {
+                callback(Result.success(Unit))
+            }
+
+            override fun onFailure(t: Throwable) {
+                callback(Result.failure(t))
+            }
+        }, executor)
+    }
+
+    override fun enableLowLightBoostAsync(
+        pigeon_instance: CameraControl,
+        lowLightBoost: Boolean,
+        callback: (Result<Unit>) -> Unit
+    ) {
+        val future = pigeon_instance.enableLowLightBoostAsync(lowLightBoost)
         val executor = ContextCompat.getMainExecutor(registrar.context)
         Futures.addCallback(future, object : FutureCallback<Void> {
             override fun onSuccess(result: Void?) {

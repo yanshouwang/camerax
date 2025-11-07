@@ -2,12 +2,12 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class QualityImpl extends Quality {
-  static Quality get sd => QualityImpl.internal(QualityProxyApi.sd);
-  static Quality get hd => QualityImpl.internal(QualityProxyApi.hd);
-  static Quality get fhd => QualityImpl.internal(QualityProxyApi.fhd);
-  static Quality get uhd => QualityImpl.internal(QualityProxyApi.uhd);
-  static Quality get lowest => QualityImpl.internal(QualityProxyApi.lowest);
-  static Quality get highest => QualityImpl.internal(QualityProxyApi.highest);
+  static QualityImpl get sd => QualityImpl.internal(QualityProxyApi.sd);
+  static QualityImpl get hd => QualityImpl.internal(QualityProxyApi.hd);
+  static QualityImpl get fhd => QualityImpl.internal(QualityProxyApi.fhd);
+  static QualityImpl get uhd => QualityImpl.internal(QualityProxyApi.uhd);
+  static QualityImpl get lowest => QualityImpl.internal(QualityProxyApi.lowest);
+  static QualityImpl get highest => QualityImpl.internal(QualityProxyApi.highest);
 
   final QualityProxyApi api;
 

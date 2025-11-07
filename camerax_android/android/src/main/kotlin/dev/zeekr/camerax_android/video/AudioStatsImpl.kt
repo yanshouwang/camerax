@@ -3,10 +3,10 @@ package dev.zeekr.camerax_android.video
 import androidx.camera.video.AudioStats
 import dev.zeekr.camerax_android.AudioStatsAudioStateApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiAudioStatsApi
+import dev.zeekr.camerax_android.PigeonApiAudioStatsProxyApi
 import dev.zeekr.camerax_android.common.api
 
-class AudioStatsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiAudioStatsApi(registrar) {
+class AudioStatsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiAudioStatsProxyApi(registrar) {
     override fun audioAmplitude(pigeon_instance: AudioStats): Double {
         return pigeon_instance.audioAmplitude
     }

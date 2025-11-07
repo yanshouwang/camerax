@@ -126,8 +126,9 @@ final class CameraControllerImpl extends CameraController {
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
-  Future<void> takePicture(ImageCaptureOnImageCapturedCallback callback) =>
-      api.takePicture(callback.api);
+  Future<void> takePicture(
+    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+  ) => api.takePicture(imageCapturedCallback.api);
 
   @override
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector() =>
@@ -202,7 +203,7 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) =>
-      api.setVideoCaptureTargetFrameRate(targetFrameRate.api);
+      api.setVideoCaptureTargetFrameRate(targetFrameRate.intApi);
 
   @override
   Future<bool> isRecording() => api.isRecording();
@@ -233,8 +234,8 @@ final class CameraControllerImpl extends CameraController {
       api.removeZoomStateObserver(observer.api);
 
   @override
-  Future<TapToFocusInfo> getTapToFocusInfoState() =>
-      api.getTapToFocusInfoState().then((e) => e.impl);
+  Future<TapToFocusInfo?> getTapToFocusInfoState() =>
+      api.getTapToFocusInfoState().then((e) => e?.impl);
 
   @override
   Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer) =>

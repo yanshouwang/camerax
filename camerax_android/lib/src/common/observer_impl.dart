@@ -3,90 +3,92 @@ import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class CameraStateObserverImpl extends Observer<CameraState> {
+abstract base class ObserverImpl<T> extends Observer<T> {
+  ObserverImpl.impl() : super.impl();
+
+  factory ObserverImpl({required void Function(T value) onChanged}) {
+    if (T == CameraState) {
+      final api = CameraStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
+      );
+      return CameraStateObserverImpl.internal(api) as ObserverImpl<T>;
+    } else if (T == int) {
+      final api = IntObserverProxyApi(onChanged: (_, e) => onChanged(e as T));
+      return IntObserverImpl.internal(api) as ObserverImpl<T>;
+    } else if (T == LowLightBoostState) {
+      final api = LowLightBoostStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
+      );
+      return LowLightBoostStateObserverImpl.internal(api) as ObserverImpl<T>;
+    } else if (T == TapToFocusInfo) {
+      final api = TapToFocusInfoObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
+      );
+      return TapToFocusInfoObserverImpl.internal(api) as ObserverImpl<T>;
+    } else if (T == TorchState) {
+      final api = TorchStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
+      );
+      return TorchStateObserverImpl.internal(api) as ObserverImpl<T>;
+    } else if (T == ZoomState) {
+      final api = ZoomStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
+      );
+      return ZoomStateObserverImpl.internal(api) as ObserverImpl<T>;
+    } else {
+      return TObserverImpl(onChanged: onChanged);
+    }
+  }
+}
+
+final class TObserverImpl<T> extends ObserverImpl<T> {
+  final void Function(T value) onChanged;
+
+  TObserverImpl({required this.onChanged}) : super.impl();
+}
+
+final class CameraStateObserverImpl extends ObserverImpl<CameraState> {
   final CameraStateObserverProxyApi api;
 
   CameraStateObserverImpl.internal(this.api) : super.impl();
-
-  factory CameraStateObserverImpl({
-    required void Function(CameraState value) onChanged,
-  }) {
-    final api = CameraStateObserverProxyApi(
-      onChanged: (_, e) => onChanged(e.impl),
-    );
-    return CameraStateObserverImpl.internal(api);
-  }
 }
 
-final class IntObserverImpl extends Observer<int> {
+final class IntObserverImpl extends ObserverImpl<int> {
   final IntObserverProxyApi api;
 
   IntObserverImpl.internal(this.api) : super.impl();
-
-  factory IntObserverImpl({required void Function(int value) onChanged}) {
-    final api = IntObserverProxyApi(onChanged: (_, e) => onChanged(e));
-    return IntObserverImpl.internal(api);
-  }
 }
 
 final class LowLightBoostStateObserverImpl
-    extends Observer<LowLightBoostState> {
+    extends ObserverImpl<LowLightBoostState> {
   final LowLightBoostStateObserverProxyApi api;
 
   LowLightBoostStateObserverImpl.internal(this.api) : super.impl();
-
-  factory LowLightBoostStateObserverImpl({
-    required void Function(LowLightBoostState value) onChanged,
-  }) {
-    final api = LowLightBoostStateObserverProxyApi(
-      onChanged: (_, e) => onChanged(e.impl),
-    );
-    return LowLightBoostStateObserverImpl.internal(api);
-  }
 }
 
-final class TapToFocusInfoObserverImpl extends Observer<TapToFocusInfo> {
+final class TapToFocusInfoObserverImpl extends ObserverImpl<TapToFocusInfo> {
   final TapToFocusInfoObserverProxyApi api;
 
   TapToFocusInfoObserverImpl.internal(this.api) : super.impl();
-
-  factory TapToFocusInfoObserverImpl({
-    required void Function(TapToFocusInfo value) onChanged,
-  }) {
-    final api = TapToFocusInfoObserverProxyApi(
-      onChanged: (_, e) => onChanged(e.impl),
-    );
-    return TapToFocusInfoObserverImpl.internal(api);
-  }
 }
 
-final class TorchStateObserverImpl extends Observer<TorchState> {
+final class TorchStateObserverImpl extends ObserverImpl<TorchState> {
   final TorchStateObserverProxyApi api;
 
   TorchStateObserverImpl.internal(this.api) : super.impl();
-
-  factory TorchStateObserverImpl({
-    required void Function(TorchState value) onChanged,
-  }) {
-    final api = TorchStateObserverProxyApi(
-      onChanged: (_, e) => onChanged(e.impl),
-    );
-    return TorchStateObserverImpl.internal(api);
-  }
 }
 
-final class ZoomStateObserverImpl extends Observer<ZoomState> {
+final class ZoomStateObserverImpl extends ObserverImpl<ZoomState> {
   final ZoomStateObserverProxyApi api;
 
   ZoomStateObserverImpl.internal(this.api) : super.impl();
+}
 
-  factory ZoomStateObserverImpl({
-    required void Function(ZoomState value) onChanged,
-  }) {
-    final api = ZoomStateObserverProxyApi(
-      onChanged: (_, e) => onChanged(e.impl),
-    );
-    return ZoomStateObserverImpl.internal(api);
+extension ObserverX<T> on Observer<T> {
+  void onChanged(T value) {
+    final impl = this;
+    if (impl is! TObserverImpl<T>) throw TypeError();
+    impl.onChanged(value);
   }
 }
 

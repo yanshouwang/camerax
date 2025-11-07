@@ -2,6 +2,9 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class AudioConfigImpl extends AudioConfig {
+  static AudioConfigImpl get audioDisabled =>
+      AudioConfigImpl.internal(AudioConfigProxyApi.audioDisabled);
+
   final AudioConfigProxyApi api;
 
   AudioConfigImpl.internal(this.api) : super.impl();

@@ -1,5 +1,6 @@
 package dev.zeekr.camerax_android.core
 
+import androidx.annotation.OptIn
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.DynamicRange
@@ -11,15 +12,21 @@ import androidx.lifecycle.LifecycleOwner
 import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
 import dev.zeekr.camerax_android.CameraStateApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiCameraInfoApi
+import dev.zeekr.camerax_android.LowLightBoostStateApi
+import dev.zeekr.camerax_android.PigeonApiCameraInfoProxyApi
+import dev.zeekr.camerax_android.SurfaceRotationApi
 import dev.zeekr.camerax_android.TorchStateApi
 import dev.zeekr.camerax_android.activity
 import dev.zeekr.camerax_android.common.CameraStateObserver
+import dev.zeekr.camerax_android.common.IntObserver
 import dev.zeekr.camerax_android.common.IntRange
+import dev.zeekr.camerax_android.common.LowLightBoostStateObserver
 import dev.zeekr.camerax_android.common.TorchStateObserver
 import dev.zeekr.camerax_android.common.ZoomStateObserver
+import dev.zeekr.camerax_android.common.impl
 
-class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraInfoApi(registrar) {
+class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCameraInfoProxyApi(registrar) {
     override fun mustPlayShutterSound(): Boolean {
         return CameraInfo.mustPlayShutterSound()
     }
@@ -54,6 +61,19 @@ class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
         pigeon_instance.torchState.removeObserver(observer)
     }
 
+    override fun getTorchStrengthLevel(pigeon_instance: CameraInfo): Long? {
+        return pigeon_instance.torchStrengthLevel.value?.toLong()
+    }
+
+    override fun observeTorchStrengthLevel(pigeon_instance: CameraInfo, observer: IntObserver) {
+        val owner = registrar.activity as LifecycleOwner
+        pigeon_instance.torchStrengthLevel.observe(owner, observer)
+    }
+
+    override fun removeTorchStrengthLevelObserver(pigeon_instance: CameraInfo, observer: IntObserver) {
+        pigeon_instance.torchStrengthLevel.removeObserver(observer)
+    }
+
     override fun getZoomState(pigeon_instance: CameraInfo): ZoomState? {
         return pigeon_instance.zoomState.value
     }
@@ -71,7 +91,7 @@ class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
         return pigeon_instance.exposureState
     }
 
-    override fun getIntrinsticZoomRatio(pigeon_instance: CameraInfo): Double {
+    override fun getIntrinsicZoomRatio(pigeon_instance: CameraInfo): Double {
         return pigeon_instance.intrinsicZoomRatio.toDouble()
     }
 
@@ -79,12 +99,33 @@ class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
         return pigeon_instance.lensFacing.cameraSelectorLensFacingApi
     }
 
+    override fun getLowLightBoostState(pigeon_instance: CameraInfo): LowLightBoostStateApi? {
+        return pigeon_instance.lowLightBoostState.value?.lowLightBoostStateApi
+    }
+
+    override fun observeLowLightBoostState(pigeon_instance: CameraInfo, observer: LowLightBoostStateObserver) {
+        val owner = registrar.activity as LifecycleOwner
+        pigeon_instance.lowLightBoostState.observe(owner, observer)
+    }
+
+    override fun removeLowLightBoostStateObserver(pigeon_instance: CameraInfo, observer: LowLightBoostStateObserver) {
+        pigeon_instance.lowLightBoostState.removeObserver(observer)
+    }
+
+    override fun getMaxTorchStrengthLevel(pigeon_instance: CameraInfo): Long {
+        return pigeon_instance.maxTorchStrengthLevel.toLong()
+    }
+
     override fun getPhysicalCameraInfos(pigeon_instance: CameraInfo): List<CameraInfo> {
         return pigeon_instance.physicalCameraInfos.toList()
     }
 
-    override fun getSensorRotationDegrees(pigeon_instance: CameraInfo): Long {
+    override fun getSensorRotationDegrees1(pigeon_instance: CameraInfo): Long {
         return pigeon_instance.sensorRotationDegrees.toLong()
+    }
+
+    override fun getSensorRotationDegrees2(pigeon_instance: CameraInfo, relativeRotation: SurfaceRotationApi): Long {
+        return pigeon_instance.getSensorRotationDegrees(relativeRotation.impl).toLong()
     }
 
     override fun getSupportedFrameRateRanges(pigeon_instance: CameraInfo): List<IntRange> {
@@ -95,7 +136,15 @@ class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
         return pigeon_instance.isLogicalMultiCameraSupported
     }
 
-    @ExperimentalZeroShutterLag
+    override fun isLowLightBoostSupported(pigeon_instance: CameraInfo): Boolean {
+        return pigeon_instance.isLowLightBoostSupported
+    }
+
+    override fun isTorchStrengthSupported(pigeon_instance: CameraInfo): Boolean {
+        return pigeon_instance.isTorchStrengthSupported
+    }
+
+    @OptIn(ExperimentalZeroShutterLag::class)
     override fun isZslSupported(pigeon_instance: CameraInfo): Boolean {
         return pigeon_instance.isZslSupported
     }

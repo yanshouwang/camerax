@@ -244,11 +244,29 @@ class PigeonOverrides {
     required int height,
   })? sizeProxyApi_new;
 
-  /// Overrides [RangeProxyApi.new].
-  static RangeProxyApi Function({
+  /// Overrides [IntRangeProxyApi.new].
+  static IntRangeProxyApi Function({
     required int lower,
     required int upper,
-  })? rangeProxyApi_new;
+  })? intRangeProxyApi_new;
+
+  /// Overrides [LongRangeProxyApi.new].
+  static LongRangeProxyApi Function({
+    required int lower,
+    required int upper,
+  })? longRangeProxyApi_new;
+
+  /// Overrides [MeteringPointTupleProxyApi.new].
+  static MeteringPointTupleProxyApi Function({
+    required MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  })? meteringPointTupleProxyApi_new;
+
+  /// Overrides [DurationTupleProxyApi.new].
+  static DurationTupleProxyApi Function({
+    required int duration,
+    required TimeUnitApi timeUnit,
+  })? durationTupleProxyApi_new;
 
   /// Overrides [AspectRatioStrategyProxyApi.new].
   static AspectRatioStrategyProxyApi Function({
@@ -287,18 +305,6 @@ class PigeonOverrides {
     required DynamicRangeEncodingApi encoding,
     required DynamicRangeBitDepthApi bitDepth,
   })? dynamicRangeProxyApi_new;
-
-  /// Overrides [MeteringPointTupleProxyApi.new].
-  static MeteringPointTupleProxyApi Function({
-    required MeteringPointProxyApi point,
-    List<FocusMeteringActionMeteringModeApi>? modes,
-  })? meteringPointTupleProxyApi_new;
-
-  /// Overrides [DurationTupleProxyApi.new].
-  static DurationTupleProxyApi Function({
-    required int duration,
-    required TimeUnitApi timeUnit,
-  })? durationTupleProxyApi_new;
 
   /// Overrides [FocusMeteringActionProxyApi.build].
   static FocusMeteringActionProxyApi Function({
@@ -419,10 +425,6 @@ class PigeonOverrides {
     LocationProxyApi? location,
   })? fileOutputOptionsProxyApi_build;
 
-  /// Overrides [OutputResultsProxyApi.new].
-  static OutputResultsProxyApi Function({String? outputUri})?
-      outputResultsProxyApi_new;
-
   /// Overrides [QualitySelectorProxyApi.from1].
   static QualitySelectorProxyApi Function({required QualityProxyApi quality})?
       qualitySelectorProxyApi_from1;
@@ -474,11 +476,47 @@ class PigeonOverrides {
   /// Overrides [PermissionManagerProxyApi.instance].
   static PermissionManagerProxyApi? permissionManagerProxyApi_instance;
 
+  /// Overrides [AspectRatioStrategyProxyApi.ratio4_3FallbackAutoStrategy].
+  static AspectRatioStrategyProxyApi?
+      aspectRatioStrategyProxyApi_ratio4_3FallbackAutoStrategy;
+
+  /// Overrides [AspectRatioStrategyProxyApi.ratio16_9FallbackAutoStrategy].
+  static AspectRatioStrategyProxyApi?
+      aspectRatioStrategyProxyApi_ratio16_9FallbackAutoStrategy;
+
+  /// Overrides [ResolutionStrategyProxyApi.highestAvailableStrategy].
+  static ResolutionStrategyProxyApi?
+      resolutionStrategyProxyApi_highestAvailableStrategy;
+
   /// Overrides [CameraSelectorProxyApi.defaultBackCamera].
   static CameraSelectorProxyApi? cameraSelectorProxyApi_defaultBackCamera;
 
   /// Overrides [CameraSelectorProxyApi.defaultFrontCamera].
   static CameraSelectorProxyApi? cameraSelectorProxyApi_defaultFrontCamera;
+
+  /// Overrides [DynamicRangeProxyApi.unspecifid].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_unspecifid;
+
+  /// Overrides [DynamicRangeProxyApi.sdr].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_sdr;
+
+  /// Overrides [DynamicRangeProxyApi.hdrUnspecified10Bit].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_hdrUnspecified10Bit;
+
+  /// Overrides [DynamicRangeProxyApi.hdr10_10Bit].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_hdr10_10Bit;
+
+  /// Overrides [DynamicRangeProxyApi.hdr10Plus10Bit].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_hdr10Plus10Bit;
+
+  /// Overrides [DynamicRangeProxyApi.hlg10Bit].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_hlg10Bit;
+
+  /// Overrides [DynamicRangeProxyApi.dolbyVision8Bit].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_dolbyVision8Bit;
+
+  /// Overrides [DynamicRangeProxyApi.dolbyVision10Bit].
+  static DynamicRangeProxyApi? dynamicRangeProxyApi_dolbyVision10Bit;
 
   /// Overrides [QualityProxyApi.fhd].
   static QualityProxyApi? qualityProxyApi_fhd;
@@ -508,16 +546,7 @@ class PigeonOverrides {
   )? locationProxyApi_convert1;
 
   /// Overrides [LocationProxyApi.convert2].
-  static Future<String> Function(String)? locationProxyApi_convert2;
-
-  /// Overrides [LocationProxyApi.distanceBetween].
-  static Future<void> Function(
-    double,
-    double,
-    double,
-    double,
-    List<double>,
-  )? locationProxyApi_distanceBetween;
+  static Future<double> Function(String)? locationProxyApi_convert2;
 
   /// Overrides [CameraInfoProxyApi.mustPlayShutterSound].
   static Future<bool> Function()? cameraInfoProxyApi_mustPlayShutterSound;
@@ -559,7 +588,6 @@ class PigeonOverrides {
     locationProxyApi_provider = null;
     locationProxyApi_convert1 = null;
     locationProxyApi_convert2 = null;
-    locationProxyApi_distanceBetween = null;
     cameraStateObserverProxyApi_new = null;
     intObserverProxyApi_new = null;
     lowLightBoostStateObserverProxyApi_new = null;
@@ -572,18 +600,30 @@ class PigeonOverrides {
     pointFProxyApi_new = null;
     rectProxyApi_new = null;
     sizeProxyApi_new = null;
-    rangeProxyApi_new = null;
+    intRangeProxyApi_new = null;
+    longRangeProxyApi_new = null;
+    meteringPointTupleProxyApi_new = null;
+    durationTupleProxyApi_new = null;
     aspectRatioStrategyProxyApi_new = null;
+    aspectRatioStrategyProxyApi_ratio4_3FallbackAutoStrategy = null;
+    aspectRatioStrategyProxyApi_ratio16_9FallbackAutoStrategy = null;
     resolutionFilterProxyApi_new = null;
     resolutionStrategyProxyApi_new = null;
+    resolutionStrategyProxyApi_highestAvailableStrategy = null;
     resolutionSelectorProxyApi_build = null;
     cameraInfoProxyApi_mustPlayShutterSound = null;
     cameraSelectorProxyApi_build = null;
     cameraSelectorProxyApi_defaultBackCamera = null;
     cameraSelectorProxyApi_defaultFrontCamera = null;
     dynamicRangeProxyApi_new = null;
-    meteringPointTupleProxyApi_new = null;
-    durationTupleProxyApi_new = null;
+    dynamicRangeProxyApi_unspecifid = null;
+    dynamicRangeProxyApi_sdr = null;
+    dynamicRangeProxyApi_hdrUnspecified10Bit = null;
+    dynamicRangeProxyApi_hdr10_10Bit = null;
+    dynamicRangeProxyApi_hdr10Plus10Bit = null;
+    dynamicRangeProxyApi_hlg10Bit = null;
+    dynamicRangeProxyApi_dolbyVision8Bit = null;
+    dynamicRangeProxyApi_dolbyVision10Bit = null;
     focusMeteringActionProxyApi_build = null;
     imageAnalysisAnalyzerImplProxyApi_new = null;
     imageCaptureOnImageCapturedCallbackProxyApi_new = null;
@@ -603,7 +643,6 @@ class PigeonOverrides {
     fallbackStrategyProxyApi_lowerQualityOrHigherThan = null;
     fallbackStrategyProxyApi_lowerQualityThan = null;
     fileOutputOptionsProxyApi_build = null;
-    outputResultsProxyApi_new = null;
     qualityProxyApi_fhd = null;
     qualityProxyApi_hd = null;
     qualityProxyApi_highest = null;
@@ -757,7 +796,10 @@ class PigeonInstanceManager {
     PointFProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     RectProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     SizeProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    RangeProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    IntRangeProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    LongRangeProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    MeteringPointTupleProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
+    DurationTupleProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     AspectRatioStrategyProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ResolutionFilterProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ResolutionStrategyProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
@@ -767,8 +809,6 @@ class PigeonInstanceManager {
     CameraSelectorProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     DynamicRangeProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ExposureStateProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    MeteringPointTupleProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
-    DurationTupleProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     FocusMeteringActionProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     FocusMeteringResultProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
     ImageAnalysisAnalyzerProxyApi.pigeon_setUpMessageHandlers(pigeon_instanceManager: instanceManager);
@@ -1202,7 +1242,7 @@ enum ImageFormatApi {
   transparent,
 }
 
-enum PermissionApi {
+enum PermissionManagerPermissionApi {
   video,
   audio,
 }
@@ -1531,7 +1571,7 @@ class _PigeonCodec extends StandardMessageCodec {
     }    else if (value is ImageFormatApi) {
       buffer.putUint8(137);
       writeValue(buffer, value.index);
-    }    else if (value is PermissionApi) {
+    }    else if (value is PermissionManagerPermissionApi) {
       buffer.putUint8(138);
       writeValue(buffer, value.index);
     }    else if (value is SurfaceRotationApi) {
@@ -1685,7 +1725,7 @@ class _PigeonCodec extends StandardMessageCodec {
         return value == null ? null : ImageFormatApi.values[value];
       case 138: 
         final int? value = readValue(buffer) as int?;
-        return value == null ? null : PermissionApi.values[value];
+        return value == null ? null : PermissionManagerPermissionApi.values[value];
       case 139: 
         final int? value = readValue(buffer) as int?;
         return value == null ? null : SurfaceRotationApi.values[value];
@@ -2207,7 +2247,7 @@ class Camera2CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<RangeProxyApi?> getSensorInfoExposureTimeRange() async {
+  Future<LongRangeProxyApi?> getSensorInfoExposureTimeRange() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCamera2CameraInfoProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -2232,7 +2272,7 @@ class Camera2CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
         details: pigeonVar_replyList[2],
       );
     } else {
-      return (pigeonVar_replyList[0] as RangeProxyApi?);
+      return (pigeonVar_replyList[0] as LongRangeProxyApi?);
     }
   }
 
@@ -3342,7 +3382,7 @@ class BitmapProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<BitmapConfigApi> getConfig() async {
+  Future<BitmapConfigApi?> getConfig() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecBitmapProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -3366,13 +3406,8 @@ class BitmapProxyApi extends PigeonInternalProxyApiBaseClass {
         message: pigeonVar_replyList[1] as String?,
         details: pigeonVar_replyList[2],
       );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
     } else {
-      return (pigeonVar_replyList[0] as BitmapConfigApi?)!;
+      return (pigeonVar_replyList[0] as BitmapConfigApi?);
     }
   }
 
@@ -3478,7 +3513,7 @@ class BitmapProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<Uint8List> getNinePatchChunk() async {
+  Future<Uint8List?> getNinePatchChunk() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecBitmapProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -3502,13 +3537,8 @@ class BitmapProxyApi extends PigeonInternalProxyApiBaseClass {
         message: pigeonVar_replyList[1] as String?,
         details: pigeonVar_replyList[2],
       );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
     } else {
-      return (pigeonVar_replyList[0] as Uint8List?)!;
+      return (pigeonVar_replyList[0] as Uint8List?);
     }
   }
 
@@ -8369,7 +8399,7 @@ class LocationProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  static Future<String> convert2(
+  static Future<double> convert2(
     String coordinate, {
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
@@ -8407,60 +8437,7 @@ class LocationProxyApi extends PigeonInternalProxyApiBaseClass {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (pigeonVar_replyList[0] as String?)!;
-    }
-  }
-
-  static Future<void> distanceBetween(
-    double startLatitude,
-    double startLongitude,
-    double endLatitude,
-    double endLongitude,
-    List<double> result, {
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-  }) async {
-    if (PigeonOverrides.locationProxyApi_distanceBetween != null) {
-      return PigeonOverrides.locationProxyApi_distanceBetween!(
-        startLatitude,
-        startLongitude,
-        endLatitude,
-        endLongitude,
-        result,
-      );
-    }
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.LocationProxyApi.distanceBetween';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
-        .send(<Object?>[
-      startLatitude,
-      startLongitude,
-      endLatitude,
-      endLongitude,
-      result
-    ]);
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_sendFuture as List<Object?>?;
-    if (pigeonVar_replyList == null) {
-      throw _createConnectionError(pigeonVar_channelName);
-    } else if (pigeonVar_replyList.length > 1) {
-      throw PlatformException(
-        code: pigeonVar_replyList[0]! as String,
-        message: pigeonVar_replyList[1] as String?,
-        details: pigeonVar_replyList[2],
-      );
-    } else {
-      return;
+      return (pigeonVar_replyList[0] as double?)!;
     }
   }
 
@@ -10133,7 +10110,7 @@ class LocationProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<void> setLongitude(double latitudeDegrees) async {
+  Future<void> setLongitude(double longitudeDegrees) async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecLocationProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -10146,7 +10123,7 @@ class LocationProxyApi extends PigeonInternalProxyApiBaseClass {
       binaryMessenger: pigeonVar_binaryMessenger,
     );
     final Future<Object?> pigeonVar_sendFuture =
-        pigeonVar_channel.send(<Object?>[this, latitudeDegrees]);
+        pigeonVar_channel.send(<Object?>[this, longitudeDegrees]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
@@ -11607,7 +11584,8 @@ class PermissionManagerProxyApi extends PigeonInternalProxyApiBaseClass {
     return pigeonVar_instance;
   }
 
-  Future<bool> checkPermissioin(PermissionApi permission) async {
+  Future<bool> checkPermissioin(
+      PermissionManagerPermissionApi permission) async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecPermissionManagerProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -11641,7 +11619,8 @@ class PermissionManagerProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<bool> requestPermissions(List<PermissionApi> permissions) async {
+  Future<bool> requestPermissions(
+      List<PermissionManagerPermissionApi> permissions) async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecPermissionManagerProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -12311,20 +12290,20 @@ class SizeProxyApi extends PigeonInternalProxyApiBaseClass {
   }
 }
 
-class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
-  factory RangeProxyApi({
+class IntRangeProxyApi extends PigeonInternalProxyApiBaseClass {
+  factory IntRangeProxyApi({
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
     required int lower,
     required int upper,
   }) {
-    if (PigeonOverrides.rangeProxyApi_new != null) {
-      return PigeonOverrides.rangeProxyApi_new!(
+    if (PigeonOverrides.intRangeProxyApi_new != null) {
+      return PigeonOverrides.intRangeProxyApi_new!(
         lower: lower,
         upper: upper,
       );
     }
-    return RangeProxyApi.pigeon_new(
+    return IntRangeProxyApi.pigeon_new(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
       lower: lower,
@@ -12333,7 +12312,7 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
   }
 
   @protected
-  RangeProxyApi.pigeon_new({
+  IntRangeProxyApi.pigeon_new({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
     required this.lower,
@@ -12342,10 +12321,10 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
     final int pigeonVar_instanceIdentifier =
         pigeon_instanceManager.addDartCreatedInstance(this);
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecRangeProxyApi;
+        _pigeonVar_codecIntRangeProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
     const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.RangeProxyApi.pigeon_defaultConstructor';
+        'dev.flutter.pigeon.camerax_android.IntRangeProxyApi.pigeon_defaultConstructor';
     final BasicMessageChannel<Object?> pigeonVar_channel =
         BasicMessageChannel<Object?>(
       pigeonVar_channelName,
@@ -12371,19 +12350,19 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
     }();
   }
 
-  /// Constructs [RangeProxyApi] without creating the associated native object.
+  /// Constructs [IntRangeProxyApi] without creating the associated native object.
   ///
   /// This should only be used by subclasses created by this library or to
   /// create copies for an [PigeonInstanceManager].
   @protected
-  RangeProxyApi.pigeon_detached({
+  IntRangeProxyApi.pigeon_detached({
     super.pigeon_binaryMessenger,
     super.pigeon_instanceManager,
     required this.lower,
     required this.upper,
   });
 
-  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecRangeProxyApi =
+  late final _PigeonInternalProxyApiBaseCodec _pigeonVar_codecIntRangeProxyApi =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
   final int lower;
@@ -12394,7 +12373,7 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
     bool pigeon_clearHandlers = false,
     BinaryMessenger? pigeon_binaryMessenger,
     PigeonInstanceManager? pigeon_instanceManager,
-    RangeProxyApi Function(
+    IntRangeProxyApi Function(
       int lower,
       int upper,
     )? pigeon_newInstance,
@@ -12407,7 +12386,7 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
       final BasicMessageChannel<
           Object?> pigeonVar_channel = BasicMessageChannel<
               Object?>(
-          'dev.flutter.pigeon.camerax_android.RangeProxyApi.pigeon_newInstance',
+          'dev.flutter.pigeon.camerax_android.IntRangeProxyApi.pigeon_newInstance',
           pigeonChannelCodec,
           binaryMessenger: binaryMessenger);
       if (pigeon_clearHandlers) {
@@ -12415,22 +12394,22 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
       } else {
         pigeonVar_channel.setMessageHandler((Object? message) async {
           assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RangeProxyApi.pigeon_newInstance was null.');
+              'Argument for dev.flutter.pigeon.camerax_android.IntRangeProxyApi.pigeon_newInstance was null.');
           final List<Object?> args = (message as List<Object?>?)!;
           final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
           assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RangeProxyApi.pigeon_newInstance was null, expected non-null int.');
+              'Argument for dev.flutter.pigeon.camerax_android.IntRangeProxyApi.pigeon_newInstance was null, expected non-null int.');
           final int? arg_lower = (args[1] as int?);
           assert(arg_lower != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RangeProxyApi.pigeon_newInstance was null, expected non-null int.');
+              'Argument for dev.flutter.pigeon.camerax_android.IntRangeProxyApi.pigeon_newInstance was null, expected non-null int.');
           final int? arg_upper = (args[2] as int?);
           assert(arg_upper != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RangeProxyApi.pigeon_newInstance was null, expected non-null int.');
+              'Argument for dev.flutter.pigeon.camerax_android.IntRangeProxyApi.pigeon_newInstance was null, expected non-null int.');
           try {
             (pigeon_instanceManager ?? PigeonInstanceManager.instance)
                 .addHostCreatedInstance(
               pigeon_newInstance?.call(arg_lower!, arg_upper!) ??
-                  RangeProxyApi.pigeon_detached(
+                  IntRangeProxyApi.pigeon_detached(
                     pigeon_binaryMessenger: pigeon_binaryMessenger,
                     pigeon_instanceManager: pigeon_instanceManager,
                     lower: arg_lower!,
@@ -12451,12 +12430,427 @@ class RangeProxyApi extends PigeonInternalProxyApiBaseClass {
   }
 
   @override
-  RangeProxyApi pigeon_copy() {
-    return RangeProxyApi.pigeon_detached(
+  IntRangeProxyApi pigeon_copy() {
+    return IntRangeProxyApi.pigeon_detached(
       pigeon_binaryMessenger: pigeon_binaryMessenger,
       pigeon_instanceManager: pigeon_instanceManager,
       lower: lower,
       upper: upper,
+    );
+  }
+}
+
+class LongRangeProxyApi extends PigeonInternalProxyApiBaseClass {
+  factory LongRangeProxyApi({
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    required int lower,
+    required int upper,
+  }) {
+    if (PigeonOverrides.longRangeProxyApi_new != null) {
+      return PigeonOverrides.longRangeProxyApi_new!(
+        lower: lower,
+        upper: upper,
+      );
+    }
+    return LongRangeProxyApi.pigeon_new(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      lower: lower,
+      upper: upper,
+    );
+  }
+
+  @protected
+  LongRangeProxyApi.pigeon_new({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.lower,
+    required this.upper,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecLongRangeProxyApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_android.LongRangeProxyApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, lower, upper]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [LongRangeProxyApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  LongRangeProxyApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required this.lower,
+    required this.upper,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec
+      _pigeonVar_codecLongRangeProxyApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  final int lower;
+
+  final int upper;
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    LongRangeProxyApi Function(
+      int lower,
+      int upper,
+    )? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_android.LongRangeProxyApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_android.LongRangeProxyApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.LongRangeProxyApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_lower = (args[1] as int?);
+          assert(arg_lower != null,
+              'Argument for dev.flutter.pigeon.camerax_android.LongRangeProxyApi.pigeon_newInstance was null, expected non-null int.');
+          final int? arg_upper = (args[2] as int?);
+          assert(arg_upper != null,
+              'Argument for dev.flutter.pigeon.camerax_android.LongRangeProxyApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call(arg_lower!, arg_upper!) ??
+                  LongRangeProxyApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                    lower: arg_lower!,
+                    upper: arg_upper!,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  LongRangeProxyApi pigeon_copy() {
+    return LongRangeProxyApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      lower: lower,
+      upper: upper,
+    );
+  }
+}
+
+class MeteringPointTupleProxyApi extends PigeonInternalProxyApiBaseClass {
+  factory MeteringPointTupleProxyApi({
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    required MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  }) {
+    if (PigeonOverrides.meteringPointTupleProxyApi_new != null) {
+      return PigeonOverrides.meteringPointTupleProxyApi_new!(
+        point: point,
+        modes: modes,
+      );
+    }
+    return MeteringPointTupleProxyApi.pigeon_new(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      point: point,
+      modes: modes,
+    );
+  }
+
+  @protected
+  MeteringPointTupleProxyApi.pigeon_new({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecMeteringPointTupleProxyApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, point, modes]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [MeteringPointTupleProxyApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  MeteringPointTupleProxyApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec
+      _pigeonVar_codecMeteringPointTupleProxyApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    MeteringPointTupleProxyApi Function()? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call() ??
+                  MeteringPointTupleProxyApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  MeteringPointTupleProxyApi pigeon_copy() {
+    return MeteringPointTupleProxyApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+    );
+  }
+}
+
+class DurationTupleProxyApi extends PigeonInternalProxyApiBaseClass {
+  factory DurationTupleProxyApi({
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    required int duration,
+    required TimeUnitApi timeUnit,
+  }) {
+    if (PigeonOverrides.durationTupleProxyApi_new != null) {
+      return PigeonOverrides.durationTupleProxyApi_new!(
+        duration: duration,
+        timeUnit: timeUnit,
+      );
+    }
+    return DurationTupleProxyApi.pigeon_new(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
+      duration: duration,
+      timeUnit: timeUnit,
+    );
+  }
+
+  @protected
+  DurationTupleProxyApi.pigeon_new({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+    required int duration,
+    required TimeUnitApi timeUnit,
+  }) {
+    final int pigeonVar_instanceIdentifier =
+        pigeon_instanceManager.addDartCreatedInstance(this);
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _pigeonVar_codecDurationTupleProxyApi;
+    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
+    const String pigeonVar_channelName =
+        'dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_defaultConstructor';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+      pigeonVar_channelName,
+      pigeonChannelCodec,
+      binaryMessenger: pigeonVar_binaryMessenger,
+    );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
+        .send(<Object?>[pigeonVar_instanceIdentifier, duration, timeUnit]);
+    () async {
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+  }
+
+  /// Constructs [DurationTupleProxyApi] without creating the associated native object.
+  ///
+  /// This should only be used by subclasses created by this library or to
+  /// create copies for an [PigeonInstanceManager].
+  @protected
+  DurationTupleProxyApi.pigeon_detached({
+    super.pigeon_binaryMessenger,
+    super.pigeon_instanceManager,
+  });
+
+  late final _PigeonInternalProxyApiBaseCodec
+      _pigeonVar_codecDurationTupleProxyApi =
+      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
+
+  static void pigeon_setUpMessageHandlers({
+    bool pigeon_clearHandlers = false,
+    BinaryMessenger? pigeon_binaryMessenger,
+    PigeonInstanceManager? pigeon_instanceManager,
+    DurationTupleProxyApi Function()? pigeon_newInstance,
+  }) {
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(
+            pigeon_instanceManager ?? PigeonInstanceManager.instance);
+    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
+    {
+      final BasicMessageChannel<
+          Object?> pigeonVar_channel = BasicMessageChannel<
+              Object?>(
+          'dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_newInstance',
+          pigeonChannelCodec,
+          binaryMessenger: binaryMessenger);
+      if (pigeon_clearHandlers) {
+        pigeonVar_channel.setMessageHandler(null);
+      } else {
+        pigeonVar_channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+              'Argument for dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_newInstance was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
+          assert(arg_pigeon_instanceIdentifier != null,
+              'Argument for dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_newInstance was null, expected non-null int.');
+          try {
+            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
+                .addHostCreatedInstance(
+              pigeon_newInstance?.call() ??
+                  DurationTupleProxyApi.pigeon_detached(
+                    pigeon_binaryMessenger: pigeon_binaryMessenger,
+                    pigeon_instanceManager: pigeon_instanceManager,
+                  ),
+              arg_pigeon_instanceIdentifier!,
+            );
+            return wrapResponse(empty: true);
+          } on PlatformException catch (e) {
+            return wrapResponse(error: e);
+          } catch (e) {
+            return wrapResponse(
+                error: PlatformException(code: 'error', message: e.toString()));
+          }
+        });
+      }
+    }
+  }
+
+  @override
+  DurationTupleProxyApi pigeon_copy() {
+    return DurationTupleProxyApi.pigeon_detached(
+      pigeon_binaryMessenger: pigeon_binaryMessenger,
+      pigeon_instanceManager: pigeon_instanceManager,
     );
   }
 }
@@ -12539,6 +12933,22 @@ class AspectRatioStrategyProxyApi extends PigeonInternalProxyApiBaseClass {
       _pigeonVar_codecAspectRatioStrategyProxyApi =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
+  static final AspectRatioStrategyProxyApi _ratio4_3FallbackAutoStrategy =
+      pigeonVar_ratio4_3FallbackAutoStrategy();
+
+  static final AspectRatioStrategyProxyApi _ratio16_9FallbackAutoStrategy =
+      pigeonVar_ratio16_9FallbackAutoStrategy();
+
+  static AspectRatioStrategyProxyApi get ratio4_3FallbackAutoStrategy =>
+      PigeonOverrides
+          .aspectRatioStrategyProxyApi_ratio4_3FallbackAutoStrategy ??
+      _ratio4_3FallbackAutoStrategy;
+
+  static AspectRatioStrategyProxyApi get ratio16_9FallbackAutoStrategy =>
+      PigeonOverrides
+          .aspectRatioStrategyProxyApi_ratio16_9FallbackAutoStrategy ??
+      _ratio16_9FallbackAutoStrategy;
+
   static void pigeon_setUpMessageHandlers({
     bool pigeon_clearHandlers = false,
     BinaryMessenger? pigeon_binaryMessenger,
@@ -12586,6 +12996,80 @@ class AspectRatioStrategyProxyApi extends PigeonInternalProxyApiBaseClass {
         });
       }
     }
+  }
+
+  static AspectRatioStrategyProxyApi pigeonVar_ratio4_3FallbackAutoStrategy() {
+    final AspectRatioStrategyProxyApi pigeonVar_instance =
+        AspectRatioStrategyProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.AspectRatioStrategyProxyApi.ratio4_3FallbackAutoStrategy';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static AspectRatioStrategyProxyApi pigeonVar_ratio16_9FallbackAutoStrategy() {
+    final AspectRatioStrategyProxyApi pigeonVar_instance =
+        AspectRatioStrategyProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.AspectRatioStrategyProxyApi.ratio16_9FallbackAutoStrategy';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
   }
 
   Future<AspectRatioStrategyFallbackRuleApi> getFallbackRule() async {
@@ -12904,6 +13388,13 @@ class ResolutionStrategyProxyApi extends PigeonInternalProxyApiBaseClass {
       _pigeonVar_codecResolutionStrategyProxyApi =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
+  static final ResolutionStrategyProxyApi _highestAvailableStrategy =
+      pigeonVar_highestAvailableStrategy();
+
+  static ResolutionStrategyProxyApi get highestAvailableStrategy =>
+      PigeonOverrides.resolutionStrategyProxyApi_highestAvailableStrategy ??
+      _highestAvailableStrategy;
+
   static void pigeon_setUpMessageHandlers({
     bool pigeon_clearHandlers = false,
     BinaryMessenger? pigeon_binaryMessenger,
@@ -12951,6 +13442,43 @@ class ResolutionStrategyProxyApi extends PigeonInternalProxyApiBaseClass {
         });
       }
     }
+  }
+
+  static ResolutionStrategyProxyApi pigeonVar_highestAvailableStrategy() {
+    final ResolutionStrategyProxyApi pigeonVar_instance =
+        ResolutionStrategyProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.ResolutionStrategyProxyApi.highestAvailableStrategy';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
   }
 
   Future<SizeProxyApi?> getBoundSize() async {
@@ -13941,7 +14469,7 @@ class CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<LowLightBoostStateApi> getLowLightBoostState() async {
+  Future<LowLightBoostStateApi?> getLowLightBoostState() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraInfoProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -13965,13 +14493,8 @@ class CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
         message: pigeonVar_replyList[1] as String?,
         details: pigeonVar_replyList[2],
       );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
     } else {
-      return (pigeonVar_replyList[0] as LowLightBoostStateApi?)!;
+      return (pigeonVar_replyList[0] as LowLightBoostStateApi?);
     }
   }
 
@@ -14173,7 +14696,7 @@ class CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<List<RangeProxyApi>> getSupportedFrameRateRanges() async {
+  Future<List<IntRangeProxyApi>> getSupportedFrameRateRanges() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraInfoProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -14203,7 +14726,8 @@ class CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (pigeonVar_replyList[0] as List<Object?>?)!.cast<RangeProxyApi>();
+      return (pigeonVar_replyList[0] as List<Object?>?)!
+          .cast<IntRangeProxyApi>();
     }
   }
 
@@ -14295,7 +14819,7 @@ class CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<int> getTorchStrengthLevel() async {
+  Future<int?> getTorchStrengthLevel() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraInfoProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -14319,13 +14843,8 @@ class CameraInfoProxyApi extends PigeonInternalProxyApiBaseClass {
         message: pigeonVar_replyList[1] as String?,
         details: pigeonVar_replyList[2],
       );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
     } else {
-      return (pigeonVar_replyList[0] as int?)!;
+      return (pigeonVar_replyList[0] as int?);
     }
   }
 
@@ -15080,6 +15599,52 @@ class DynamicRangeProxyApi extends PigeonInternalProxyApiBaseClass {
       _pigeonVar_codecDynamicRangeProxyApi =
       _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
+  static final DynamicRangeProxyApi _unspecifid = pigeonVar_unspecifid();
+
+  static final DynamicRangeProxyApi _sdr = pigeonVar_sdr();
+
+  static final DynamicRangeProxyApi _hdrUnspecified10Bit =
+      pigeonVar_hdrUnspecified10Bit();
+
+  static final DynamicRangeProxyApi _hdr10_10Bit = pigeonVar_hdr10_10Bit();
+
+  static final DynamicRangeProxyApi _hdr10Plus10Bit =
+      pigeonVar_hdr10Plus10Bit();
+
+  static final DynamicRangeProxyApi _hlg10Bit = pigeonVar_hlg10Bit();
+
+  static final DynamicRangeProxyApi _dolbyVision8Bit =
+      pigeonVar_dolbyVision8Bit();
+
+  static final DynamicRangeProxyApi _dolbyVision10Bit =
+      pigeonVar_dolbyVision10Bit();
+
+  static DynamicRangeProxyApi get unspecifid =>
+      PigeonOverrides.dynamicRangeProxyApi_unspecifid ?? _unspecifid;
+
+  static DynamicRangeProxyApi get sdr =>
+      PigeonOverrides.dynamicRangeProxyApi_sdr ?? _sdr;
+
+  static DynamicRangeProxyApi get hdrUnspecified10Bit =>
+      PigeonOverrides.dynamicRangeProxyApi_hdrUnspecified10Bit ??
+      _hdrUnspecified10Bit;
+
+  static DynamicRangeProxyApi get hdr10_10Bit =>
+      PigeonOverrides.dynamicRangeProxyApi_hdr10_10Bit ?? _hdr10_10Bit;
+
+  static DynamicRangeProxyApi get hdr10Plus10Bit =>
+      PigeonOverrides.dynamicRangeProxyApi_hdr10Plus10Bit ?? _hdr10Plus10Bit;
+
+  static DynamicRangeProxyApi get hlg10Bit =>
+      PigeonOverrides.dynamicRangeProxyApi_hlg10Bit ?? _hlg10Bit;
+
+  static DynamicRangeProxyApi get dolbyVision8Bit =>
+      PigeonOverrides.dynamicRangeProxyApi_dolbyVision8Bit ?? _dolbyVision8Bit;
+
+  static DynamicRangeProxyApi get dolbyVision10Bit =>
+      PigeonOverrides.dynamicRangeProxyApi_dolbyVision10Bit ??
+      _dolbyVision10Bit;
+
   static void pigeon_setUpMessageHandlers({
     bool pigeon_clearHandlers = false,
     BinaryMessenger? pigeon_binaryMessenger,
@@ -15127,6 +15692,302 @@ class DynamicRangeProxyApi extends PigeonInternalProxyApiBaseClass {
         });
       }
     }
+  }
+
+  static DynamicRangeProxyApi pigeonVar_unspecifid() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.unspecifid';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_sdr() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.sdr';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_hdrUnspecified10Bit() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.hdrUnspecified10Bit';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_hdr10_10Bit() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.hdr10_10Bit';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_hdr10Plus10Bit() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.hdr10Plus10Bit';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_hlg10Bit() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.hlg10Bit';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_dolbyVision8Bit() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.dolbyVision8Bit';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
+  }
+
+  static DynamicRangeProxyApi pigeonVar_dolbyVision10Bit() {
+    final DynamicRangeProxyApi pigeonVar_instance =
+        DynamicRangeProxyApi.pigeon_detached();
+    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
+        _PigeonInternalProxyApiBaseCodec(PigeonInstanceManager.instance);
+    final BinaryMessenger pigeonVar_binaryMessenger =
+        ServicesBinding.instance.defaultBinaryMessenger;
+    final int pigeonVar_instanceIdentifier = PigeonInstanceManager.instance
+        .addDartCreatedInstance(pigeonVar_instance);
+    () async {
+      const String pigeonVar_channelName =
+          'dev.flutter.pigeon.camerax_android.DynamicRangeProxyApi.dolbyVision10Bit';
+      final BasicMessageChannel<Object?> pigeonVar_channel =
+          BasicMessageChannel<Object?>(
+        pigeonVar_channelName,
+        pigeonChannelCodec,
+        binaryMessenger: pigeonVar_binaryMessenger,
+      );
+      final Future<Object?> pigeonVar_sendFuture =
+          pigeonVar_channel.send(<Object?>[pigeonVar_instanceIdentifier]);
+      final List<Object?>? pigeonVar_replyList =
+          await pigeonVar_sendFuture as List<Object?>?;
+      if (pigeonVar_replyList == null) {
+        throw _createConnectionError(pigeonVar_channelName);
+      } else if (pigeonVar_replyList.length > 1) {
+        throw PlatformException(
+          code: pigeonVar_replyList[0]! as String,
+          message: pigeonVar_replyList[1] as String?,
+          details: pigeonVar_replyList[2],
+        );
+      } else {
+        return;
+      }
+    }();
+    return pigeonVar_instance;
   }
 
   Future<DynamicRangeBitDepthApi> getBitDepth() async {
@@ -15223,7 +16084,7 @@ class ExposureStateProxyApi extends PigeonInternalProxyApiBaseClass {
 
   final int exposureCompensationIndex;
 
-  final RangeProxyApi exposureCompensationRange;
+  final IntRangeProxyApi exposureCompensationRange;
 
   final double exposureCompensationStep;
 
@@ -15235,7 +16096,7 @@ class ExposureStateProxyApi extends PigeonInternalProxyApiBaseClass {
     PigeonInstanceManager? pigeon_instanceManager,
     ExposureStateProxyApi Function(
       int exposureCompensationIndex,
-      RangeProxyApi exposureCompensationRange,
+      IntRangeProxyApi exposureCompensationRange,
       double exposureCompensationStep,
       bool isExposureCompensationSupported,
     )? pigeon_newInstance,
@@ -15264,10 +16125,10 @@ class ExposureStateProxyApi extends PigeonInternalProxyApiBaseClass {
           final int? arg_exposureCompensationIndex = (args[1] as int?);
           assert(arg_exposureCompensationIndex != null,
               'Argument for dev.flutter.pigeon.camerax_android.ExposureStateProxyApi.pigeon_newInstance was null, expected non-null int.');
-          final RangeProxyApi? arg_exposureCompensationRange =
-              (args[2] as RangeProxyApi?);
+          final IntRangeProxyApi? arg_exposureCompensationRange =
+              (args[2] as IntRangeProxyApi?);
           assert(arg_exposureCompensationRange != null,
-              'Argument for dev.flutter.pigeon.camerax_android.ExposureStateProxyApi.pigeon_newInstance was null, expected non-null RangeProxyApi.');
+              'Argument for dev.flutter.pigeon.camerax_android.ExposureStateProxyApi.pigeon_newInstance was null, expected non-null IntRangeProxyApi.');
           final double? arg_exposureCompensationStep = (args[3] as double?);
           assert(arg_exposureCompensationStep != null,
               'Argument for dev.flutter.pigeon.camerax_android.ExposureStateProxyApi.pigeon_newInstance was null, expected non-null double.');
@@ -15314,270 +16175,6 @@ class ExposureStateProxyApi extends PigeonInternalProxyApiBaseClass {
       exposureCompensationRange: exposureCompensationRange,
       exposureCompensationStep: exposureCompensationStep,
       isExposureCompensationSupported: isExposureCompensationSupported,
-    );
-  }
-}
-
-class MeteringPointTupleProxyApi extends PigeonInternalProxyApiBaseClass {
-  factory MeteringPointTupleProxyApi({
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    required MeteringPointProxyApi point,
-    List<FocusMeteringActionMeteringModeApi>? modes,
-  }) {
-    if (PigeonOverrides.meteringPointTupleProxyApi_new != null) {
-      return PigeonOverrides.meteringPointTupleProxyApi_new!(
-        point: point,
-        modes: modes,
-      );
-    }
-    return MeteringPointTupleProxyApi.pigeon_new(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-      point: point,
-      modes: modes,
-    );
-  }
-
-  @protected
-  MeteringPointTupleProxyApi.pigeon_new({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required MeteringPointProxyApi point,
-    List<FocusMeteringActionMeteringModeApi>? modes,
-  }) {
-    final int pigeonVar_instanceIdentifier =
-        pigeon_instanceManager.addDartCreatedInstance(this);
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecMeteringPointTupleProxyApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_defaultConstructor';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
-        .send(<Object?>[pigeonVar_instanceIdentifier, point, modes]);
-    () async {
-      final List<Object?>? pigeonVar_replyList =
-          await pigeonVar_sendFuture as List<Object?>?;
-      if (pigeonVar_replyList == null) {
-        throw _createConnectionError(pigeonVar_channelName);
-      } else if (pigeonVar_replyList.length > 1) {
-        throw PlatformException(
-          code: pigeonVar_replyList[0]! as String,
-          message: pigeonVar_replyList[1] as String?,
-          details: pigeonVar_replyList[2],
-        );
-      } else {
-        return;
-      }
-    }();
-  }
-
-  /// Constructs [MeteringPointTupleProxyApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  MeteringPointTupleProxyApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  });
-
-  late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecMeteringPointTupleProxyApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    MeteringPointTupleProxyApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.MeteringPointTupleProxyApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  MeteringPointTupleProxyApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  MeteringPointTupleProxyApi pigeon_copy() {
-    return MeteringPointTupleProxyApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-    );
-  }
-}
-
-class DurationTupleProxyApi extends PigeonInternalProxyApiBaseClass {
-  factory DurationTupleProxyApi({
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    required int duration,
-    required TimeUnitApi timeUnit,
-  }) {
-    if (PigeonOverrides.durationTupleProxyApi_new != null) {
-      return PigeonOverrides.durationTupleProxyApi_new!(
-        duration: duration,
-        timeUnit: timeUnit,
-      );
-    }
-    return DurationTupleProxyApi.pigeon_new(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-      duration: duration,
-      timeUnit: timeUnit,
-    );
-  }
-
-  @protected
-  DurationTupleProxyApi.pigeon_new({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    required int duration,
-    required TimeUnitApi timeUnit,
-  }) {
-    final int pigeonVar_instanceIdentifier =
-        pigeon_instanceManager.addDartCreatedInstance(this);
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecDurationTupleProxyApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_defaultConstructor';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
-        .send(<Object?>[pigeonVar_instanceIdentifier, duration, timeUnit]);
-    () async {
-      final List<Object?>? pigeonVar_replyList =
-          await pigeonVar_sendFuture as List<Object?>?;
-      if (pigeonVar_replyList == null) {
-        throw _createConnectionError(pigeonVar_channelName);
-      } else if (pigeonVar_replyList.length > 1) {
-        throw PlatformException(
-          code: pigeonVar_replyList[0]! as String,
-          message: pigeonVar_replyList[1] as String?,
-          details: pigeonVar_replyList[2],
-        );
-      } else {
-        return;
-      }
-    }();
-  }
-
-  /// Constructs [DurationTupleProxyApi] without creating the associated native object.
-  ///
-  /// This should only be used by subclasses created by this library or to
-  /// create copies for an [PigeonInstanceManager].
-  @protected
-  DurationTupleProxyApi.pigeon_detached({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-  });
-
-  late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecDurationTupleProxyApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
-
-  static void pigeon_setUpMessageHandlers({
-    bool pigeon_clearHandlers = false,
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    DurationTupleProxyApi Function()? pigeon_newInstance,
-  }) {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _PigeonInternalProxyApiBaseCodec(
-            pigeon_instanceManager ?? PigeonInstanceManager.instance);
-    final BinaryMessenger? binaryMessenger = pigeon_binaryMessenger;
-    {
-      final BasicMessageChannel<
-          Object?> pigeonVar_channel = BasicMessageChannel<
-              Object?>(
-          'dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_newInstance',
-          pigeonChannelCodec,
-          binaryMessenger: binaryMessenger);
-      if (pigeon_clearHandlers) {
-        pigeonVar_channel.setMessageHandler(null);
-      } else {
-        pigeonVar_channel.setMessageHandler((Object? message) async {
-          assert(message != null,
-              'Argument for dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_newInstance was null.');
-          final List<Object?> args = (message as List<Object?>?)!;
-          final int? arg_pigeon_instanceIdentifier = (args[0] as int?);
-          assert(arg_pigeon_instanceIdentifier != null,
-              'Argument for dev.flutter.pigeon.camerax_android.DurationTupleProxyApi.pigeon_newInstance was null, expected non-null int.');
-          try {
-            (pigeon_instanceManager ?? PigeonInstanceManager.instance)
-                .addHostCreatedInstance(
-              pigeon_newInstance?.call() ??
-                  DurationTupleProxyApi.pigeon_detached(
-                    pigeon_binaryMessenger: pigeon_binaryMessenger,
-                    pigeon_instanceManager: pigeon_instanceManager,
-                  ),
-              arg_pigeon_instanceIdentifier!,
-            );
-            return wrapResponse(empty: true);
-          } on PlatformException catch (e) {
-            return wrapResponse(error: e);
-          } catch (e) {
-            return wrapResponse(
-                error: PlatformException(code: 'error', message: e.toString()));
-          }
-        });
-      }
-    }
-  }
-
-  @override
-  DurationTupleProxyApi pigeon_copy() {
-    return DurationTupleProxyApi.pigeon_detached(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
     );
   }
 }
@@ -21689,59 +22286,6 @@ class FileOutputOptionsProxyApi extends OutputOptionsProxyApi {
 }
 
 class OutputResultsProxyApi extends PigeonInternalProxyApiBaseClass {
-  factory OutputResultsProxyApi({
-    BinaryMessenger? pigeon_binaryMessenger,
-    PigeonInstanceManager? pigeon_instanceManager,
-    String? outputUri,
-  }) {
-    if (PigeonOverrides.outputResultsProxyApi_new != null) {
-      return PigeonOverrides.outputResultsProxyApi_new!(outputUri: outputUri);
-    }
-    return OutputResultsProxyApi.pigeon_new(
-      pigeon_binaryMessenger: pigeon_binaryMessenger,
-      pigeon_instanceManager: pigeon_instanceManager,
-      outputUri: outputUri,
-    );
-  }
-
-  @protected
-  OutputResultsProxyApi.pigeon_new({
-    super.pigeon_binaryMessenger,
-    super.pigeon_instanceManager,
-    this.outputUri,
-  }) {
-    final int pigeonVar_instanceIdentifier =
-        pigeon_instanceManager.addDartCreatedInstance(this);
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecOutputResultsProxyApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.OutputResultsProxyApi.pigeon_defaultConstructor';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel
-        .send(<Object?>[pigeonVar_instanceIdentifier, outputUri]);
-    () async {
-      final List<Object?>? pigeonVar_replyList =
-          await pigeonVar_sendFuture as List<Object?>?;
-      if (pigeonVar_replyList == null) {
-        throw _createConnectionError(pigeonVar_channelName);
-      } else if (pigeonVar_replyList.length > 1) {
-        throw PlatformException(
-          code: pigeonVar_replyList[0]! as String,
-          message: pigeonVar_replyList[1] as String?,
-          details: pigeonVar_replyList[2],
-        );
-      } else {
-        return;
-      }
-    }();
-  }
-
   /// Constructs [OutputResultsProxyApi] without creating the associated native object.
   ///
   /// This should only be used by subclasses created by this library or to
@@ -21752,10 +22296,6 @@ class OutputResultsProxyApi extends PigeonInternalProxyApiBaseClass {
     super.pigeon_instanceManager,
     this.outputUri,
   });
-
-  late final _PigeonInternalProxyApiBaseCodec
-      _pigeonVar_codecOutputResultsProxyApi =
-      _PigeonInternalProxyApiBaseCodec(pigeon_instanceManager);
 
   final String? outputUri;
 
@@ -24042,7 +24582,7 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<TapToFocusInfoProxyApi> getTapToFocusInfoState() async {
+  Future<TapToFocusInfoProxyApi?> getTapToFocusInfoState() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraControllerProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -24066,13 +24606,8 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
         message: pigeonVar_replyList[1] as String?,
         details: pigeonVar_replyList[2],
       );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
     } else {
-      return (pigeonVar_replyList[0] as TapToFocusInfoProxyApi?)!;
+      return (pigeonVar_replyList[0] as TapToFocusInfoProxyApi?);
     }
   }
 
@@ -24326,7 +24861,7 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<RangeProxyApi> getVideoCaptureTargetFrameRate() async {
+  Future<IntRangeProxyApi> getVideoCaptureTargetFrameRate() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraControllerProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -24356,7 +24891,7 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
         message: 'Host platform returned null value for non-null return value.',
       );
     } else {
-      return (pigeonVar_replyList[0] as RangeProxyApi?)!;
+      return (pigeonVar_replyList[0] as IntRangeProxyApi?)!;
     }
   }
 
@@ -25221,7 +25756,7 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
   }
 
   Future<void> setVideoCaptureTargetFrameRate(
-      RangeProxyApi targetFrameRate) async {
+      IntRangeProxyApi targetFrameRate) async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraControllerProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -25318,7 +25853,7 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
   }
 
   Future<void> takePicture(
-      ImageCaptureOnImageCapturedCallbackProxyApi callback) async {
+      ImageCaptureOnImageCapturedCallbackProxyApi imageCapturedCallback) async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecCameraControllerProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -25331,7 +25866,7 @@ class CameraControllerProxyApi extends PigeonInternalProxyApiBaseClass {
       binaryMessenger: pigeonVar_binaryMessenger,
     );
     final Future<Object?> pigeonVar_sendFuture =
-        pigeonVar_channel.send(<Object?>[this, callback]);
+        pigeonVar_channel.send(<Object?>[this, imageCapturedCallback]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
@@ -25777,7 +26312,7 @@ class PreviewViewProxyApi extends PigeonInternalProxyApiBaseClass {
     }
   }
 
-  Future<PreviewViewStreamStateApi> getPreviewStreamState() async {
+  Future<PreviewViewStreamStateApi?> getPreviewStreamState() async {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
         _pigeonVar_codecPreviewViewProxyApi;
     final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
@@ -25801,13 +26336,8 @@ class PreviewViewProxyApi extends PigeonInternalProxyApiBaseClass {
         message: pigeonVar_replyList[1] as String?,
         details: pigeonVar_replyList[2],
       );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
     } else {
-      return (pigeonVar_replyList[0] as PreviewViewStreamStateApi?)!;
+      return (pigeonVar_replyList[0] as PreviewViewStreamStateApi?);
     }
   }
 
@@ -25902,40 +26432,6 @@ class PreviewViewProxyApi extends PigeonInternalProxyApiBaseClass {
       );
     } else {
       return (pigeonVar_replyList[0] as PreviewViewScaleTypeApi?)!;
-    }
-  }
-
-  Future<bool> performClick() async {
-    final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
-        _pigeonVar_codecPreviewViewProxyApi;
-    final BinaryMessenger? pigeonVar_binaryMessenger = pigeon_binaryMessenger;
-    const String pigeonVar_channelName =
-        'dev.flutter.pigeon.camerax_android.PreviewViewProxyApi.performClick';
-    final BasicMessageChannel<Object?> pigeonVar_channel =
-        BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
-    );
-    final Future<Object?> pigeonVar_sendFuture =
-        pigeonVar_channel.send(<Object?>[this]);
-    final List<Object?>? pigeonVar_replyList =
-        await pigeonVar_sendFuture as List<Object?>?;
-    if (pigeonVar_replyList == null) {
-      throw _createConnectionError(pigeonVar_channelName);
-    } else if (pigeonVar_replyList.length > 1) {
-      throw PlatformException(
-        code: pigeonVar_replyList[0]! as String,
-        message: pigeonVar_replyList[1] as String?,
-        details: pigeonVar_replyList[2],
-      );
-    } else if (pigeonVar_replyList[0] == null) {
-      throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
-      );
-    } else {
-      return (pigeonVar_replyList[0] as bool?)!;
     }
   }
 

@@ -78,7 +78,7 @@ abstract class Camera2CameraInfoProxyApi {
   Camera2CameraInfoProxyApi.from(CameraInfoProxyApi cameraInfo);
 
   String getCameraId();
-  RangeProxyApi? getSensorInfoExposureTimeRange();
+  LongRangeProxyApi? getSensorInfoExposureTimeRange();
 }
 
 @ProxyApi(
@@ -171,7 +171,7 @@ enum ImageFormatApi {
   // yCbCr422Sp,  // NV16
 }
 
-enum PermissionApi { video, audio }
+enum PermissionManagerPermissionApi { video, audio }
 
 enum SurfaceRotationApi { rotation0, rotation90, rotation180, rotation270 }
 
@@ -306,13 +306,13 @@ abstract class BitmapProxyApi {
   int getByteCount();
   // ColorProxyApi getColor(int x, int y);
   // ColorSpaceProxyApi getColorSpace();
-  BitmapConfigApi getConfig();
+  BitmapConfigApi? getConfig();
   int getDensity();
   // GainmapProxyApi getGainmap();
   int getGenerationId();
   // HardwareBufferProxyApi getHardwareBuffer();
   int getHeight();
-  Uint8List getNinePatchChunk();
+  Uint8List? getNinePatchChunk();
   int getPixel(int x, int y);
   // void getPixels(
   //   List<int> pixels,
@@ -545,15 +545,15 @@ abstract class LocationProxyApi {
   @static
   String convert1(double coordinate, LocationFormatApi outputType);
   @static
-  String convert2(String coordinate);
-  @static
-  void distanceBetween(
-    double startLatitude,
-    double startLongitude,
-    double endLatitude,
-    double endLongitude,
-    List<double> result,
-  );
+  double convert2(String coordinate);
+  // @static
+  // void distanceBetween(
+  //   double startLatitude,
+  //   double startLongitude,
+  //   double endLatitude,
+  //   double endLongitude,
+  //   List<double> result,
+  // );
 
   LocationProxyApi.location(LocationProxyApi location);
   LocationProxyApi.provider(String? provider);
@@ -613,7 +613,7 @@ abstract class LocationProxyApi {
   void setElapsedRealtimeUncertaintyNanos(double elapsedRealtimeUncertaintyNs);
   // void setExtras(BundleProxyApi? extras);
   void setLatitude(double latitudeDegrees);
-  void setLongitude(double latitudeDegrees);
+  void setLongitude(double longitudeDegrees);
   void setMock(bool mock);
   void setMslAltitudeAccuracyMeters(double mslAltitudeAccuracyMeters);
   void setMslAltitudeMeters(double mslAltitudeMeters);
@@ -712,9 +712,9 @@ abstract class PermissionManagerProxyApi {
   @static
   late final PermissionManagerProxyApi instance;
 
-  bool checkPermissioin(PermissionApi permission);
+  bool checkPermissioin(PermissionManagerPermissionApi permission);
   @async
-  bool requestPermissions(List<PermissionApi> permissions);
+  bool requestPermissions(List<PermissionManagerPermissionApi> permissions);
 }
 
 @ProxyApi(
@@ -763,14 +763,47 @@ abstract class SizeProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.common.Range',
+    fullClassName: 'dev.zeekr.camerax_android.common.IntRange',
   ),
 )
-abstract class RangeProxyApi {
-  RangeProxyApi();
+abstract class IntRangeProxyApi {
+  IntRangeProxyApi();
 
   late final int lower;
   late final int upper;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.LongRange',
+  ),
+)
+abstract class LongRangeProxyApi {
+  LongRangeProxyApi();
+
+  late final int lower;
+  late final int upper;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.MeteringPointTuple',
+  ),
+)
+abstract class MeteringPointTupleProxyApi {
+  MeteringPointTupleProxyApi(
+    MeteringPointProxyApi point, {
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  });
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.DurationTuple',
+  ),
+)
+abstract class DurationTupleProxyApi {
+  DurationTupleProxyApi(int duration, TimeUnitApi timeUnit);
 }
 
 // core
@@ -838,6 +871,11 @@ enum TorchStateApi { off, on }
   ),
 )
 abstract class AspectRatioStrategyProxyApi {
+  @static
+  late final AspectRatioStrategyProxyApi ratio4_3FallbackAutoStrategy;
+  @static
+  late final AspectRatioStrategyProxyApi ratio16_9FallbackAutoStrategy;
+
   AspectRatioStrategyProxyApi(
     AspectRatioApi preferredAspectRatio,
     AspectRatioStrategyFallbackRuleApi fallbackRule,
@@ -868,6 +906,9 @@ abstract class ResolutionFilterProxyApi {
   ),
 )
 abstract class ResolutionStrategyProxyApi {
+  @static
+  late final ResolutionStrategyProxyApi highestAvailableStrategy;
+
   ResolutionStrategyProxyApi(
     SizeProxyApi boundSize,
     ResolutionStrategyFallbackRuleApi fallbackRule,
@@ -938,7 +979,7 @@ abstract class CameraInfoProxyApi {
   ExposureStateProxyApi getExposureState();
   double getIntrinsicZoomRatio();
   CameraSelectorLensFacingApi getLensFacing();
-  LowLightBoostStateApi getLowLightBoostState();
+  LowLightBoostStateApi? getLowLightBoostState();
   void observeLowLightBoostState(LowLightBoostStateObserverProxyApi observer);
   void removeLowLightBoostStateObserver(
     LowLightBoostStateObserverProxyApi observer,
@@ -947,14 +988,14 @@ abstract class CameraInfoProxyApi {
   List<CameraInfoProxyApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees1();
   int getSensorRotationDegrees2(SurfaceRotationApi relativeRotation);
-  List<RangeProxyApi> getSupportedFrameRateRanges();
+  List<IntRangeProxyApi> getSupportedFrameRateRanges();
   // List<RangeProxyApi> getSupportedFrameRateRanges(
   //   SessionConfigProxyApi sessionConfig,
   // );
   TorchStateApi? getTorchState();
   void observeTorchState(TorchStateObserverProxyApi observer);
   void removeTorchStateObserver(TorchStateObserverProxyApi observer);
-  int getTorchStrengthLevel();
+  int? getTorchStrengthLevel();
   void observeTorchStrengthLevel(IntObserverProxyApi observer);
   void removeTorchStrengthLevelObserver(IntObserverProxyApi observer);
   ZoomStateProxyApi? getZoomState();
@@ -996,6 +1037,23 @@ abstract class CameraSelectorProxyApi {
   ),
 )
 abstract class DynamicRangeProxyApi {
+  @static
+  late final DynamicRangeProxyApi unspecifid;
+  @static
+  late final DynamicRangeProxyApi sdr;
+  @static
+  late final DynamicRangeProxyApi hdrUnspecified10Bit;
+  @static
+  late final DynamicRangeProxyApi hdr10_10Bit;
+  @static
+  late final DynamicRangeProxyApi hdr10Plus10Bit;
+  @static
+  late final DynamicRangeProxyApi hlg10Bit;
+  @static
+  late final DynamicRangeProxyApi dolbyVision8Bit;
+  @static
+  late final DynamicRangeProxyApi dolbyVision10Bit;
+
   DynamicRangeProxyApi(
     DynamicRangeEncodingApi encoding,
     DynamicRangeBitDepthApi bitDepth,
@@ -1012,30 +1070,9 @@ abstract class DynamicRangeProxyApi {
 )
 abstract class ExposureStateProxyApi {
   late final int exposureCompensationIndex;
-  late final RangeProxyApi exposureCompensationRange;
+  late final IntRangeProxyApi exposureCompensationRange;
   late final double exposureCompensationStep;
   late final bool isExposureCompensationSupported;
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.MeteringPointTuple',
-  ),
-)
-abstract class MeteringPointTupleProxyApi {
-  MeteringPointTupleProxyApi(
-    MeteringPointProxyApi point, {
-    List<FocusMeteringActionMeteringModeApi>? modes,
-  });
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.DurationTuple',
-  ),
-)
-abstract class DurationTupleProxyApi {
-  DurationTupleProxyApi(int duration, TimeUnitApi timeUnit);
 }
 
 @ProxyApi(
@@ -1684,8 +1721,6 @@ abstract class FileOutputOptionsProxyApi extends OutputOptionsProxyApi {
   ),
 )
 abstract class OutputResultsProxyApi {
-  OutputResultsProxyApi();
-
   late final String? outputUri;
 }
 
@@ -1898,7 +1933,7 @@ abstract class CameraControllerProxyApi {
   @async
   ResolutionSelectorProxyApi? getPreviewResolutionSelector();
   @async
-  TapToFocusInfoProxyApi getTapToFocusInfoState();
+  TapToFocusInfoProxyApi? getTapToFocusInfoState();
   @async
   void observeTapToFocusInfoState(TapToFocusInfoObserverProxyApi observer);
   @async
@@ -1918,7 +1953,7 @@ abstract class CameraControllerProxyApi {
   @async
   QualitySelectorProxyApi getVideoCaptureQualitySelector();
   @async
-  RangeProxyApi getVideoCaptureTargetFrameRate();
+  IntRangeProxyApi getVideoCaptureTargetFrameRate();
   @async
   ZoomStateProxyApi? getZoomState();
   @async
@@ -1990,7 +2025,7 @@ abstract class CameraControllerProxyApi {
   @async
   void setVideoCaptureQualitySelector(QualitySelectorProxyApi qualitySelector);
   @async
-  void setVideoCaptureTargetFrameRate(RangeProxyApi targetFrameRate);
+  void setVideoCaptureTargetFrameRate(IntRangeProxyApi targetFrameRate);
   @async
   void setZoomRatio(double zoomRatio);
   // @async
@@ -2013,7 +2048,7 @@ abstract class CameraControllerProxyApi {
   // );
   @async
   void takePicture({
-    required ImageCaptureOnImageCapturedCallbackProxyApi callback,
+    required ImageCaptureOnImageCapturedCallbackProxyApi imageCapturedCallback,
   });
   // @async
   // void takePicture({
@@ -2054,7 +2089,7 @@ abstract class PreviewViewProxyApi {
   @async
   MeteringPointFactoryProxyApi getMeteringPointFactory();
   // OutputTransformProxyApi? getOutputTransform();
-  PreviewViewStreamStateApi getPreviewStreamState();
+  PreviewViewStreamStateApi? getPreviewStreamState();
   void observePreviewStreamState(
     PreviewViewStreamStateObserverProxyApi observer,
   );
@@ -2074,7 +2109,6 @@ abstract class PreviewViewProxyApi {
   // @async
   // VidePortProxyApi? getViewPort2(SurfaceRotationApi targetRotation);
   // bool onTouchEvent(MotionEventProxyApi event);
-  bool performClick();
   @async
   void setController(CameraControllerProxyApi? controller);
   @async

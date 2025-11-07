@@ -4,7 +4,7 @@ import 'package:camerax/camerax.dart';
 import 'package:flutter/cupertino.dart';
 
 class FacesView extends StatelessWidget {
-  final List<FaceApi> faces;
+  final List<Face> faces;
 
   const FacesView({super.key, required this.faces});
 
@@ -23,7 +23,7 @@ class FacesView extends StatelessWidget {
 
 class _FacesPainter extends CustomPainter {
   final double devicePixelRatio;
-  final List<FaceApi> faces;
+  final List<Face> faces;
   final double strokeWidth;
   final Color color;
 

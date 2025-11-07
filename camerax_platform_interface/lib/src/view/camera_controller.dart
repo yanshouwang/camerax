@@ -47,7 +47,7 @@ abstract base class CameraController {
   Future<bool> isTapToFocusEnabled();
   Future<void> setTapToFocusEnabled(bool enabled);
   Future<void> setTapToFocusAutoCancelDuration(Duration duration);
-  Future<TapToFocusInfo> getTapToFocusInfoState();
+  Future<TapToFocusInfo?> getTapToFocusInfoState();
   Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer);
   Future<void> removeTapToFocusInfoStateObserver(
     Observer<TapToFocusInfo> observer,
@@ -71,7 +71,9 @@ abstract base class CameraController {
   Future<void> setImageCaptureResolutionSelector(
     ResolutionSelector? resolutionSelector,
   );
-  Future<void> takePicture(ImageCaptureOnImageCapturedCallback callback);
+  Future<void> takePicture(
+    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+  );
   Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy();
 
   Future<void> setImageAnalysisBackpressureStrategy(

@@ -23,7 +23,7 @@ abstract base class CameraInfo {
   Future<ExposureState> getExposureState();
   Future<double> getIntrinsicZoomRatio();
   Future<CameraSelectorLensFacing> getLensFacing();
-  Future<LowLightBoostState> getLowLightBoostState();
+  Future<LowLightBoostState?> getLowLightBoostState();
   Future<void> observeLowLightBoostState(Observer<LowLightBoostState> observer);
   Future<void> removeLowLightBoostStateObserver(
     Observer<LowLightBoostState> observer,
@@ -35,7 +35,7 @@ abstract base class CameraInfo {
   Future<TorchState?> getTorchState();
   Future<void> observeTorchState(Observer<TorchState> observer);
   Future<void> removeTorchStateObserver(Observer<TorchState> observer);
-  Future<int> getTorchStrengthLevel();
+  Future<int?> getTorchStrengthLevel();
   Future<void> observeTorchStrengthLevel(Observer<int> observer);
   Future<void> removeTorchStrengthLevelObserver(Observer<int> observer);
   Future<ZoomState?> getZoomState();

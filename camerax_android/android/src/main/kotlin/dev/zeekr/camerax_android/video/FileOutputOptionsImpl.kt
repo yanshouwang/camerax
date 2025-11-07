@@ -3,11 +3,12 @@ package dev.zeekr.camerax_android.video
 import android.location.Location
 import androidx.camera.video.FileOutputOptions
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiFileOutputOptionsApi
+import dev.zeekr.camerax_android.PigeonApiFileOutputOptionsProxyApi
 import dev.zeekr.camerax_android.common.api
 import dev.zeekr.camerax_android.common.fileImpl
 
-class FileOutputOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFileOutputOptionsApi(registrar) {
+class FileOutputOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiFileOutputOptionsProxyApi(registrar) {
     override fun build(
         file: String, durationLimitMillis: Long?, fileSizeLimitBytes: Long?, location: Location?
     ): FileOutputOptions {

@@ -2,10 +2,10 @@ package dev.zeekr.camerax_android.common
 
 import android.util.Range
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiIntRangeApi
-import dev.zeekr.camerax_android.PigeonApiLongRangeApi
+import dev.zeekr.camerax_android.PigeonApiIntRangeProxyApi
+import dev.zeekr.camerax_android.PigeonApiLongRangeProxyApi
 
-class IntRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIntRangeApi(registrar) {
+class IntRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIntRangeProxyApi(registrar) {
     override fun pigeon_defaultConstructor(lower: Long, upper: Long): IntRange {
         val instance = Range(lower.toInt(), upper.toInt())
         return IntRange(instance)
@@ -20,7 +20,7 @@ class IntRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIntR
     }
 }
 
-class LongRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiLongRangeApi(registrar) {
+class LongRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiLongRangeProxyApi(registrar) {
     override fun pigeon_defaultConstructor(lower: Long, upper: Long): LongRange {
         val instance = Range(lower, upper)
         return LongRange(instance)

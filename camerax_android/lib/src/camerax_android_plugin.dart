@@ -16,8 +16,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }
 
   @override
-  PermissionManager get $PermissionManager$Instance =>
-      PermissionManagerImpl.instance;
+  PermissionManager $PermissionManager() => PermissionManagerImpl();
 
   @override
   CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
@@ -260,10 +259,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
       CameraInfoImpl.mustPlayShutterSound();
 
   @override
-  Consumer<T> $Consumer<T>({required void Function(T value) accept}) {
-    // TODO: implement $Consumer
-    throw UnimplementedError();
-  }
+  Consumer<T> $Consumer<T>({required void Function(T value) accept}) =>
+      ConsumerImpl(accept: accept);
 
   @override
   DynamicRange $DynamicRange({
@@ -311,10 +308,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
       MeteringPointFactoryImpl.getDefaultPointSize();
 
   @override
-  Observer<T> $Observer<T>({required void Function(T value) onChanged}) {
-    // TODO: implement $Observer
-    throw UnimplementedError();
-  }
+  Observer<T> $Observer<T>({required void Function(T value) onChanged}) =>
+      ObserverImpl(onChanged: onChanged);
 
   @override
   Quality get $Quality$Fhd => QualityImpl.fhd;

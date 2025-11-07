@@ -2,9 +2,9 @@ package dev.zeekr.camerax_android.video
 
 import androidx.camera.video.Quality
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiQualityApi
+import dev.zeekr.camerax_android.PigeonApiQualityProxyApi
 
-class QualityImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiQualityApi(registrar) {
+class QualityImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiQualityProxyApi(registrar) {
     override fun fhd(): Quality {
         return Quality.FHD
     }

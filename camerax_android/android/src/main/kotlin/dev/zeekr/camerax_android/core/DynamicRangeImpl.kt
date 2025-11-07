@@ -4,9 +4,9 @@ import androidx.camera.core.DynamicRange
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.DynamicRangeBitDepthApi
 import dev.zeekr.camerax_android.DynamicRangeEncodingApi
-import dev.zeekr.camerax_android.PigeonApiDynamicRangeApi
+import dev.zeekr.camerax_android.PigeonApiDynamicRangeProxyApi
 
-class DynamicRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiDynamicRangeApi(registrar) {
+class DynamicRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiDynamicRangeProxyApi(registrar) {
     override fun pigeon_defaultConstructor(
         encoding: DynamicRangeEncodingApi,
         bitDepth: DynamicRangeBitDepthApi
@@ -14,12 +14,44 @@ class DynamicRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApi
         return DynamicRange(encoding.impl, bitDepth.impl)
     }
 
-    override fun encoding(pigeon_instance: DynamicRange): DynamicRangeEncodingApi {
-        return pigeon_instance.encoding.dynamicRangeEncodingApi
+    override fun unspecifid(): DynamicRange {
+        return DynamicRange.UNSPECIFIED
     }
 
-    override fun bitDepth(pigeon_instance: DynamicRange): DynamicRangeBitDepthApi {
+    override fun sdr(): DynamicRange {
+        return DynamicRange.SDR
+    }
+
+    override fun hdrUnspecified10Bit(): DynamicRange {
+        return DynamicRange.HDR_UNSPECIFIED_10_BIT
+    }
+
+    override fun hdr10_10Bit(): DynamicRange {
+        return DynamicRange.HDR10_10_BIT
+    }
+
+    override fun hdr10Plus10Bit(): DynamicRange {
+        return DynamicRange.HDR10_PLUS_10_BIT
+    }
+
+    override fun hlg10Bit(): DynamicRange {
+        return DynamicRange.HLG_10_BIT
+    }
+
+    override fun dolbyVision8Bit(): DynamicRange {
+        return DynamicRange.DOLBY_VISION_8_BIT
+    }
+
+    override fun dolbyVision10Bit(): DynamicRange {
+        return DynamicRange.DOLBY_VISION_10_BIT
+    }
+
+    override fun getBitDepth(pigeon_instance: DynamicRange): DynamicRangeBitDepthApi {
         return pigeon_instance.bitDepth.dynamicRangeBitDepthApi
+    }
+
+    override fun getEncoding(pigeon_instance: DynamicRange): DynamicRangeEncodingApi {
+        return pigeon_instance.encoding.dynamicRangeEncodingApi
     }
 }
 

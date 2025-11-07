@@ -5,18 +5,24 @@ import androidx.camera.core.resolutionselector.ResolutionFilter
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.core.resolutionselector.ResolutionStrategy
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiResolutionSelectorApi
+import dev.zeekr.camerax_android.PigeonApiResolutionSelectorProxyApi
 import dev.zeekr.camerax_android.ResolutionSelectorModeApi
 
-class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiResolutionSelectorApi(registrar) {
+class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiResolutionSelectorProxyApi(registrar) {
     override fun build(
-        allowedResolutionMode: ResolutionSelectorModeApi,
-        aspectRatioStrategy: AspectRatioStrategy,
+        mode: ResolutionSelectorModeApi?,
+        aspectRatioStrategy: AspectRatioStrategy?,
         resolutionFilter: ResolutionFilter?,
         resolutionStrategy: ResolutionStrategy?
     ): ResolutionSelector {
-        val builder = ResolutionSelector.Builder().setAllowedResolutionMode(allowedResolutionMode.impl)
-            .setAspectRatioStrategy(aspectRatioStrategy)
+        val builder = ResolutionSelector.Builder()
+        if (mode != null) {
+            builder.setAllowedResolutionMode(mode.impl)
+        }
+        if (aspectRatioStrategy != null) {
+            builder.setAspectRatioStrategy(aspectRatioStrategy)
+        }
         if (resolutionFilter != null) {
             builder.setResolutionFilter(resolutionFilter)
         }
@@ -26,19 +32,19 @@ class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : Pig
         return builder.build()
     }
 
-    override fun allowedResolutionMode(pigeon_instance: ResolutionSelector): ResolutionSelectorModeApi {
+    override fun getAllowedResolutionMode(pigeon_instance: ResolutionSelector): ResolutionSelectorModeApi {
         return pigeon_instance.allowedResolutionMode.resolutionSelectorModeApi
     }
 
-    override fun aspectRatioStrategy(pigeon_instance: ResolutionSelector): AspectRatioStrategy {
+    override fun getAspectRatioStrategy(pigeon_instance: ResolutionSelector): AspectRatioStrategy {
         return pigeon_instance.aspectRatioStrategy
     }
 
-    override fun resolutionFilter(pigeon_instance: ResolutionSelector): ResolutionFilter? {
+    override fun getResolutionFilter(pigeon_instance: ResolutionSelector): ResolutionFilter? {
         return pigeon_instance.resolutionFilter
     }
 
-    override fun resolutionStrategy(pigeon_instance: ResolutionSelector): ResolutionStrategy? {
+    override fun getResolutionStrategy(pigeon_instance: ResolutionSelector): ResolutionStrategy? {
         return pigeon_instance.resolutionStrategy
     }
 }

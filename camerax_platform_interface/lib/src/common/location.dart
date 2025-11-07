@@ -8,5 +8,5 @@ abstract base class Location {
   Future<double> getLatitude();
   Future<double> getLongitude();
   Future<void> setLatitude(double latitudeDegrees);
-  Future<void> setLongitude(double latitudeDegrees);
+  Future<void> setLongitude(double longitudeDegrees);
 }

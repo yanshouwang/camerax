@@ -56,11 +56,10 @@ abstract base class CameraXPlugin extends PlatformInterface {
   });
 
   // common
-  PermissionManager get $PermissionManager$Instance;
-
   Consumer<T> $Consumer<T>({required void Function(T value) accept});
   Location $Location();
   Observer<T> $Observer<T>({required void Function(T value) onChanged});
+  PermissionManager $PermissionManager();
 
   // core
   AspectRatioStrategy get $AspectRatioStrategy$Ratio4_3FallbackAutoStrategy;
@@ -71,9 +70,9 @@ abstract base class CameraXPlugin extends PlatformInterface {
   DynamicRange get $DynamicRange$Unspecifid;
   DynamicRange get $DynamicRange$Sdr;
   DynamicRange get $DynamicRange$HdrUnspecified10Bit;
-  DynamicRange get $DynamicRange$Hlg10Bit;
   DynamicRange get $DynamicRange$Hdr10_10Bit;
   DynamicRange get $DynamicRange$Hdr10Plus10Bit;
+  DynamicRange get $DynamicRange$Hlg10Bit;
   DynamicRange get $DynamicRange$DolbyVision8Bit;
   DynamicRange get $DynamicRange$DolbyVision10Bit;
 

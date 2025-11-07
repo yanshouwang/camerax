@@ -1,14 +1,38 @@
 package dev.zeekr.camerax_android.core
 
+import android.util.Size
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.ImageAnalysisCoordinateSystemApi
 import dev.zeekr.camerax_android.ImageAnalysisOutputImageFormatApi
 import dev.zeekr.camerax_android.ImageAnalysisStrategyApi
-import dev.zeekr.camerax_android.PigeonApiImageAnalysisAnalyzerApi
+import dev.zeekr.camerax_android.PigeonApiImageAnalysisAnalyzerImplProxyApi
+import dev.zeekr.camerax_android.PigeonApiImageAnalysisAnalyzerProxyApi
+import dev.zeekr.camerax_android.common.ImageProxyConsumer
 
 class ImageAnalysisImpl {
-    class AnalyzerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiImageAnalysisAnalyzerApi(registrar)
+    class AnalyzerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiImageAnalysisAnalyzerProxyApi(registrar) {
+        override fun analyze(pigeon_instance: ImageAnalysis.Analyzer, image: ImageProxy) {
+            return pigeon_instance.analyze(image)
+        }
+
+        override fun getDefaultTargetResolution(pigeon_instance: ImageAnalysis.Analyzer): Size? {
+            return pigeon_instance.defaultTargetResolution
+        }
+
+        override fun getTargetCoordinateSystem(pigeon_instance: ImageAnalysis.Analyzer): ImageAnalysisCoordinateSystemApi {
+            return pigeon_instance.targetCoordinateSystem.imageAnalysisCoordinateSystemApi
+        }
+    }
+
+    class AnalyzerImplImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiImageAnalysisAnalyzerImplProxyApi(registrar) {
+        override fun pigeon_defaultConstructor(consumer: ImageProxyConsumer): ImageAnalysis.Analyzer {
+            return ImageAnalysis.Analyzer { image -> consumer.accept(image) }
+        }
+    }
 }
 
 val ImageAnalysisStrategyApi.impl: Int
@@ -44,4 +68,12 @@ val ImageAnalysisCoordinateSystemApi.impl: Int
         ImageAnalysisCoordinateSystemApi.ORIGINAL -> ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL
         ImageAnalysisCoordinateSystemApi.SENSOR -> ImageAnalysis.COORDINATE_SYSTEM_SENSOR
         ImageAnalysisCoordinateSystemApi.VIEW_REFERENCED -> ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED
+    }
+
+val Int.imageAnalysisCoordinateSystemApi: ImageAnalysisCoordinateSystemApi
+    get() = when (this) {
+        ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL -> ImageAnalysisCoordinateSystemApi.ORIGINAL
+        ImageAnalysis.COORDINATE_SYSTEM_SENSOR -> ImageAnalysisCoordinateSystemApi.SENSOR
+        ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED -> ImageAnalysisCoordinateSystemApi.VIEW_REFERENCED
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

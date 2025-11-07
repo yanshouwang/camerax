@@ -1,13 +1,14 @@
 import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 
-import 'permission.dart';
+enum PermissionManagerPermission { video, audio }
 
 abstract base class PermissionManager {
-  static PermissionManager get instance =>
-      CameraXPlugin.instance.$PermissionManager$Instance;
-
   PermissionManager.impl();
 
-  Future<bool> checkPermission(Permission permission);
-  Future<bool> requestPermissions(List<Permission> permissions);
+  factory PermissionManager() => CameraXPlugin.instance.$PermissionManager();
+
+  Future<bool> checkPermission(PermissionManagerPermission permission);
+  Future<bool> requestPermissions(
+    List<PermissionManagerPermission> permissions,
+  );
 }

@@ -1,12 +1,14 @@
 package dev.zeekr.camerax_android.core
 
+import androidx.annotation.OptIn
+import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalLensFacing
 import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiCameraSelectorApi
+import dev.zeekr.camerax_android.PigeonApiCameraSelectorProxyApi
 
-class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorApi(registrar) {
+class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorProxyApi(registrar) {
     override fun build(lensFacing: CameraSelectorLensFacingApi?): CameraSelector {
         val builder = CameraSelector.Builder()
         if (lensFacing != null) {
@@ -15,22 +17,26 @@ class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         return builder.build()
     }
 
-    override fun front(): CameraSelector {
-        return CameraSelector.DEFAULT_FRONT_CAMERA
-    }
-
-    override fun back(): CameraSelector {
+    override fun defaultBackCamera(): CameraSelector {
         return CameraSelector.DEFAULT_BACK_CAMERA
     }
 
-    @ExperimentalLensFacing
-    override fun external(): CameraSelector {
-        return CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_EXTERNAL).build()
+    override fun defaultFrontCamera(): CameraSelector {
+        return CameraSelector.DEFAULT_FRONT_CAMERA
+    }
+
+    override fun filter(pigeon_instance: CameraSelector, cameraInfos: List<CameraInfo>): List<CameraInfo> {
+        return pigeon_instance.filter(cameraInfos)
+    }
+
+    override fun getPhysicalCameraId(pigeon_instance: CameraSelector): String? {
+        return pigeon_instance.physicalCameraId
     }
 }
 
 val CameraSelectorLensFacingApi.impl: Int
-    @ExperimentalLensFacing get() = when (this) {
+    @OptIn(ExperimentalLensFacing::class)
+    get() = when (this) {
         CameraSelectorLensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
         CameraSelectorLensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
         CameraSelectorLensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
@@ -38,7 +44,8 @@ val CameraSelectorLensFacingApi.impl: Int
     }
 
 val Int.cameraSelectorLensFacingApi: CameraSelectorLensFacingApi
-    @ExperimentalLensFacing get() = when (this) {
+    @OptIn(ExperimentalLensFacing::class)
+    get() = when (this) {
         CameraSelector.LENS_FACING_UNKNOWN -> CameraSelectorLensFacingApi.UNKNOWN
         CameraSelector.LENS_FACING_FRONT -> CameraSelectorLensFacingApi.FRONT
         CameraSelector.LENS_FACING_BACK -> CameraSelectorLensFacingApi.BACK

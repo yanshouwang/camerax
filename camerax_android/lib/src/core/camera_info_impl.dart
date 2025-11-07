@@ -14,6 +14,9 @@ import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
 final class CameraInfoImpl extends CameraInfo {
+  static Future<bool> mustPlayShutterSound() =>
+      CameraInfoProxyApi.mustPlayShutterSound();
+
   final CameraInfoProxyApi api;
 
   CameraInfoImpl.internal(this.api) : super.impl();
@@ -101,8 +104,8 @@ final class CameraInfoImpl extends CameraInfo {
       api.removeZoomStateObserver(observer.api);
 
   @override
-  Future<LowLightBoostState> getLowLightBoostState() =>
-      api.getLowLightBoostState().then((e) => e.impl);
+  Future<LowLightBoostState?> getLowLightBoostState() =>
+      api.getLowLightBoostState().then((e) => e?.impl);
 
   @override
   Future<int> getMaxTorchStrengthLevel() => api.getMaxTorchStrengthLevel();
@@ -114,7 +117,7 @@ final class CameraInfoImpl extends CameraInfo {
       : api.getSensorRotationDegrees2(relativeRotation.api);
 
   @override
-  Future<int> getTorchStrengthLevel() => api.getTorchStrengthLevel();
+  Future<int?> getTorchStrengthLevel() => api.getTorchStrengthLevel();
 
   @override
   Future<bool> isLowLightBoostSupported() => api.isLowLightBoostSupported();

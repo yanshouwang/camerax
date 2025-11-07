@@ -3,6 +3,11 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class ResolutionStrategyImpl extends ResolutionStrategy {
+  static ResolutionStrategyImpl get highestAvailableStrategy =>
+      ResolutionStrategyImpl.internal(
+        ResolutionStrategyProxyApi.highestAvailableStrategy,
+      );
+
   final ResolutionStrategyProxyApi api;
 
   ResolutionStrategyImpl.internal(this.api) : super.impl();

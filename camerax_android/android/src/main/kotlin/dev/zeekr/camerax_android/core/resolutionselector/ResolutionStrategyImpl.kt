@@ -3,22 +3,27 @@ package dev.zeekr.camerax_android.core.resolutionselector
 import android.util.Size
 import androidx.camera.core.resolutionselector.ResolutionStrategy
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiResolutionStrategyApi
+import dev.zeekr.camerax_android.PigeonApiResolutionStrategyProxyApi
 import dev.zeekr.camerax_android.ResolutionStrategyFallbackRuleApi
 
-class ResolutionStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiResolutionStrategyApi(registrar) {
+class ResolutionStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiResolutionStrategyProxyApi(registrar) {
     override fun pigeon_defaultConstructor(
-        boundSize: Size?, fallbackRule: ResolutionStrategyFallbackRuleApi
+        boundSize: Size,
+        fallbackRule: ResolutionStrategyFallbackRuleApi
     ): ResolutionStrategy {
-        return if (boundSize == null) ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY
-        else ResolutionStrategy(boundSize, fallbackRule.impl)
+        return ResolutionStrategy(boundSize, fallbackRule.impl)
     }
 
-    override fun boundSize(pigeon_instance: ResolutionStrategy): Size? {
+    override fun highestAvailableStrategy(): ResolutionStrategy {
+        return ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY
+    }
+
+    override fun getBoundSize(pigeon_instance: ResolutionStrategy): Size? {
         return pigeon_instance.boundSize
     }
 
-    override fun fallbackRule(pigeon_instance: ResolutionStrategy): ResolutionStrategyFallbackRuleApi {
+    override fun getFallbackRule(pigeon_instance: ResolutionStrategy): ResolutionStrategyFallbackRuleApi {
         return pigeon_instance.fallbackRule.resolutionStrategyFallbackRuleApi
     }
 }

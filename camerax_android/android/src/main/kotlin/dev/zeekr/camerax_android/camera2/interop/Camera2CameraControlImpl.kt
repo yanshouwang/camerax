@@ -1,5 +1,6 @@
 package dev.zeekr.camerax_android.camera2.interop
 
+import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraControl
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
@@ -8,12 +9,12 @@ import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiCamera2CameraControlApi
+import dev.zeekr.camerax_android.PigeonApiCamera2CameraControlProxyApi
 import dev.zeekr.camerax_android.context
 
-@ExperimentalCamera2Interop
+@OptIn(ExperimentalCamera2Interop::class)
 class Camera2CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiCamera2CameraControlApi(registrar) {
+    PigeonApiCamera2CameraControlProxyApi(registrar) {
     override fun from(cameraControl: CameraControl): Camera2CameraControl {
         return Camera2CameraControl.from(cameraControl)
     }

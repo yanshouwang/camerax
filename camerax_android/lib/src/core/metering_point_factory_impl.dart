@@ -4,6 +4,9 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'metering_point_impl.dart';
 
 base mixin MeteringPointFactoryImpl on MeteringPointFactory {
+  static Future<double> getDefaultPointSize() =>
+      MeteringPointFactoryProxyApi.getDefaultPointSize();
+
   MeteringPointFactoryProxyApi get api;
 
   @override

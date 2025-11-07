@@ -22,8 +22,8 @@ final class LocationImpl extends Location {
       api.setLatitude(latitudeDegrees);
 
   @override
-  Future<void> setLongitude(double latitudeDegrees) =>
-      api.setLongitude(latitudeDegrees);
+  Future<void> setLongitude(double longitudeDegrees) =>
+      api.setLongitude(longitudeDegrees);
 }
 
 extension LocationX on Location {

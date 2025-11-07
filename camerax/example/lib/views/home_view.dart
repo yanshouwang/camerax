@@ -70,7 +70,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           case ImageCaptureFlashMode.off:
                             viewModel.setFlashMode(ImageCaptureFlashMode.auto);
                           case ImageCaptureFlashMode.screen:
-                            viewModel.setFlashMode(ImageCaptureFlashMode.screen);
+                            viewModel.setFlashMode(
+                              ImageCaptureFlashMode.screen,
+                            );
                         }
                       },
                       child: Container(
@@ -100,7 +102,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  PreviewView(controller: controller),
+                  PreviewWidget(controller: controller),
                   if (imageModel != null)
                     Container(
                       alignment: Alignment.topRight,
@@ -411,7 +413,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                             color: CupertinoColors.label.resolveFrom(context),
                           ),
                         ),
-                        flip: viewModel.lensFacing == CameraSelectorLensFacing.back,
+                        flip:
+                            viewModel.lensFacing ==
+                            CameraSelectorLensFacing.back,
                       ),
                     ),
                   ),

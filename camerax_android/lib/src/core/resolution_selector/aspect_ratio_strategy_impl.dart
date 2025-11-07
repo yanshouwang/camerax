@@ -3,6 +3,16 @@ import 'package:camerax_android/src/core/aspect_ratio_impl.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class AspectRatioStrategyImpl extends AspectRatioStrategy {
+  static AspectRatioStrategyImpl get ratio4_3FallbackAutoStrategy =>
+      AspectRatioStrategyImpl.internal(
+        AspectRatioStrategyProxyApi.ratio4_3FallbackAutoStrategy,
+      );
+
+  static AspectRatioStrategyImpl get ratio16_9FallbackAutoStrategy =>
+      AspectRatioStrategyImpl.internal(
+        AspectRatioStrategyProxyApi.ratio16_9FallbackAutoStrategy,
+      );
+
   final AspectRatioStrategyProxyApi api;
 
   AspectRatioStrategyImpl.internal(this.api) : super.impl();
