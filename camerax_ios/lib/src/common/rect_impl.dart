@@ -9,3 +9,7 @@ extension IntRectX on Rect<int> {
 extension RectProxyApiX on RectProxyApi {
   Rect<int> get impl => Rect(left, top, right, bottom);
 }
+
+extension RectFProxyApiX on RectFProxyApi {
+  Rect<double> get impl => Rect(left, top, right, bottom);
+}

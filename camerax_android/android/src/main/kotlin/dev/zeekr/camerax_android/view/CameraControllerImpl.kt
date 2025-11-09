@@ -492,7 +492,7 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         }
     }
 
-    override fun takePicture(
+    override fun takePicture1(
         pigeon_instance: CameraController,
         imageCapturedCallback: ImageCapture.OnImageCapturedCallback,
         callback: (Result<Unit>) -> Unit
@@ -754,7 +754,7 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         }
     }
 
-    override fun startRecording(
+    override fun startRecording1(
         pigeon_instance: CameraController,
         outputOptions: FileOutputOptions,
         audioConfig: AudioConfig,

@@ -25,6 +25,7 @@ class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         return CameraSelector.DEFAULT_FRONT_CAMERA
     }
 
+    @OptIn(ExperimentalLensFacing::class)
     override fun external(): CameraSelector {
         return CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_EXTERNAL).build()
     }

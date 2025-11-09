@@ -109,8 +109,6 @@ enum BitmapConfigApi {
   rgb565,
 }
 
-enum LocationFormatApi { degrees, minutes, seconds }
-
 enum TimeUnitApi {
   nanoseconds,
   microseconds,
@@ -546,86 +544,10 @@ abstract class VideoRecordEventConsumerProxyApi {
   ),
 )
 abstract class LocationProxyApi {
-  @static
-  String convert1(double coordinate, LocationFormatApi outputType);
-  @static
-  double convert2(String coordinate);
-  // @static
-  // void distanceBetween(
-  //   double startLatitude,
-  //   double startLongitude,
-  //   double endLatitude,
-  //   double endLongitude,
-  //   List<double> result,
-  // );
+  LocationProxyApi();
 
-  LocationProxyApi.location(LocationProxyApi location);
-  LocationProxyApi.provider(String? provider);
-
-  double bearingTo(LocationProxyApi dest);
-  double distanceTo(LocationProxyApi dest);
-  // void dump(PrinterProxyApi pw, String? prefix);
-  double getAccuracy();
-  double getAltitude();
-  double getBearing();
-  double getBearingAccuracyDegrees();
-  int getElapsedRealtimeAgeMillis1();
-  int getElapsedRealtimeAgeMillis2(int referenceRealtimeMs);
-  int getElapsedRealtimeMillis();
-  int getElapsedRealtimeNanos();
-  double getElapsedRealtimeUncertaintyNanos();
-  // BundleProxyApi? getExtras();
-  double getLatitude();
-  double getLongitude();
-  double getMslAltitudeAccuracyMeters();
-  double getMslAltitudeMeters();
-  String? getProvider();
-  double getSpeed();
-  double getSpeedAccuracyMetersPerSecond();
-  int getTime();
-  double getVerticalAccuracyMeters();
-  bool hasAccuracy();
-  bool hasAltitude();
-  bool hasBearing();
-  bool hasBearingAccuracy();
-  bool hasElapsedRealtimeUncertaintyNanos();
-  bool hasMslAltitude();
-  bool hasMslAltitudeAccuracy();
-  bool hasSpeed();
-  bool hasSpeedAccuracy();
-  bool hasVerticalAccuracy();
-  bool isComplete();
-  bool isFromMockProvider();
-  bool isMock();
-  void removeAccuracy();
-  void removeAltitude();
-  void removeBearing();
-  void removeBearingAccuracy();
-  void removeElapsedRealtimeUncertaintyNanos();
-  void removeMslAltitude();
-  void removeMslAltitudeAccuracy();
-  void removeSpeed();
-  void removeSpeedAccuracy();
-  void removeVerticalAccuracy();
-  void reset();
-  void set(LocationProxyApi location);
-  void setAccuracy(double horizontalAccuracyMeters);
-  void setAltitude(double altitudeMeters);
-  void setBearing(double bearingDegrees);
-  void setBearingAccuracyDegrees(double bearingAccuracyDegrees);
-  void setElapsedRealtimeNanos(int elapsedRealtimeNs);
-  void setElapsedRealtimeUncertaintyNanos(double elapsedRealtimeUncertaintyNs);
-  // void setExtras(BundleProxyApi? extras);
-  void setLatitude(double latitudeDegrees);
-  void setLongitude(double longitudeDegrees);
-  void setMock(bool mock);
-  void setMslAltitudeAccuracyMeters(double mslAltitudeAccuracyMeters);
-  void setMslAltitudeMeters(double mslAltitudeMeters);
-  void setProvider(String? provider);
-  void setSpeed(double speedMetersPerSecond);
-  void setSpeedAccuracyMetersPerSecond(double speedAccuracyMeterPerSecond);
-  void setTime(int timeMs);
-  void setVerticalAccuracyMeters(double altitudeAccuracyMeters);
+  late final double latitude;
+  late final double longitude;
 }
 
 @ProxyApi(

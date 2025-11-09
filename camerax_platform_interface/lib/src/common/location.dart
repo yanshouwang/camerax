@@ -3,10 +3,9 @@ import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 abstract base class Location {
   Location.impl();
 
-  factory Location() => CameraXPlugin.instance.$Location();
+  factory Location(double latitude, double longitude) =>
+      CameraXPlugin.instance.$Location(latitude, longitude);
 
-  Future<double> getLatitude();
-  Future<double> getLongitude();
-  Future<void> setLatitude(double latitudeDegrees);
-  Future<void> setLongitude(double longitudeDegrees);
+  double get latitude;
+  double get longitude;
 }

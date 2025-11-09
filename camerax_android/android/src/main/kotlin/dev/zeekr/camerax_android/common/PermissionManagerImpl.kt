@@ -14,8 +14,7 @@ class PermissionManagerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 
     override fun checkPermissioin(
-        pigeon_instance: PermissionManager,
-        permission: PermissionManagerPermissionApi
+        pigeon_instance: PermissionManager, permission: PermissionManagerPermissionApi
     ): Boolean {
         return PermissionManager.checkPermission(permission.impl)
     }
@@ -27,8 +26,7 @@ class PermissionManagerImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     ) {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val permissionImpls = permissions.map { permission -> permission.impl }
-                val isGranted = PermissionManager.requestPermissions(permissionImpls)
+                val isGranted = PermissionManager.requestPermissions(permissions.map { permission -> permission.impl })
                 callback(Result.success(isGranted))
             } catch (e: Exception) {
                 callback(Result.failure(e))

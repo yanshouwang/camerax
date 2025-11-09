@@ -254,6 +254,11 @@ abstract class AutoCloseableProxyApi {
 abstract class CloseableProxyApi extends AutoCloseableProxyApi {}
 
 @ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'CGImage', import: 'ImageIO'),
+)
+abstract class CGImageProxyApi {}
+
+@ProxyApi(
   swiftOptions: SwiftProxyApiOptions(
     name: 'CLLocation',
     import: 'CoreLocation',
@@ -588,7 +593,7 @@ abstract class ImageCaptureOnImageCapturedCallbackProxyApi {
 
   late final void Function()? onCaptureStarted;
   late final void Function(int progress)? onCaptureProcessProgressed;
-  late final void Function(Uint8List bitmap)? onPostviewBitmapAvailable;
+  late final void Function(CGImageProxyApi bitmap)? onPostviewBitmapAvailable;
   late final void Function(ImageProxyProxyApi image)? onCaptureSuccess;
   late final void Function(List<Object?> exception)? onError;
 }

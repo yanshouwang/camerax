@@ -295,7 +295,7 @@ val Bitmap.Config.api: BitmapConfigApi
             Bitmap.Config.RGB_565 -> BitmapConfigApi.RGB565
             Bitmap.Config.ARGB_4444 -> BitmapConfigApi.ARGB4444
             Bitmap.Config.ARGB_8888 -> BitmapConfigApi.ARGB8888
-            else -> throw NotImplementedError("Not impelemented value: $this")
+            else -> throw NotImplementedError("Not implemented value: $this")
         }
     }
 

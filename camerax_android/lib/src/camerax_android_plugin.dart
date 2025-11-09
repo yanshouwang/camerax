@@ -223,7 +223,8 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }) => ZoomSuggestionOptionsZoomCallbackImpl(setZoom: setZoom);
 
   @override
-  Location $Location() => LocationImpl();
+  Location $Location(double latitude, double longitude) =>
+      LocationImpl(latitude, longitude);
 
   @override
   AspectRatioStrategy $AspectRatioStrategy({

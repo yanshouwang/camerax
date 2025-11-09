@@ -6,24 +6,16 @@ final class LocationImpl extends Location {
 
   LocationImpl.internal(this.api) : super.impl();
 
-  factory LocationImpl() {
-    final api = CLLocationProxyApi();
+  factory LocationImpl(double latitude, double longitude) {
+    final api = CLLocationProxyApi(latitude: latitude, longitude: longitude);
     return LocationImpl.internal(api);
   }
 
   @override
-  Future<double> getLatitude() => api.getLatitude();
+  double get latitude => api.latitude;
 
   @override
-  Future<double> getLongitude() => api.getLongitude();
-
-  @override
-  Future<void> setLatitude(double latitudeDegrees) =>
-      api.setLatitude(latitudeDegrees);
-
-  @override
-  Future<void> setLongitude(double longitudeDegrees) =>
-      api.setLongitude(longitudeDegrees);
+  double get longitude => api.longitude;
 }
 
 extension LocationX on Location {

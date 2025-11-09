@@ -1,5 +1,6 @@
 package dev.zeekr.camerax_android.core
 
+import android.os.Build
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiByteBufferProxyApi
 import java.nio.ByteBuffer
@@ -22,11 +23,16 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     }
 
     override fun alignedSlice(pigeon_instance: ByteBuffer, unitSize: Long): ByteBuffer {
-        return pigeon_instance.alignedSlice(unitSize.toInt())
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) pigeon_instance.alignedSlice(unitSize.toInt())
+        else throw UnsupportedOperationException("Call requires API level 33")
     }
 
     override fun alignmentOffset(pigeon_instance: ByteBuffer, index: Long, unitSize: Long): Long {
-        return pigeon_instance.alignmentOffset(index.toInt(), unitSize.toInt()).toLong()
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            pigeon_instance.alignmentOffset(index.toInt(), unitSize.toInt()).toLong()
+        } else {
+            throw UnsupportedOperationException("Call requires API level 33")
+        }
     }
 
     override fun array(pigeon_instance: ByteBuffer): ByteArray {
@@ -62,7 +68,11 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     }
 
     override fun get4(pigeon_instance: ByteBuffer, index: Long, dst: ByteArray): ByteBuffer {
-        return pigeon_instance.get(index.toInt(), dst)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            pigeon_instance.get(index.toInt(), dst)
+        } else {
+            throw UnsupportedOperationException("Call requires API level 35")
+        }
     }
 
     override fun get5(pigeon_instance: ByteBuffer, dst: ByteArray, offset: Long, length: Long): ByteBuffer {
@@ -72,7 +82,11 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     override fun get6(
         pigeon_instance: ByteBuffer, index: Long, dst: ByteArray, offset: Long, length: Long
     ): ByteBuffer {
-        return pigeon_instance.get(index.toInt(), dst, offset.toInt(), length.toInt())
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            pigeon_instance.get(index.toInt(), dst, offset.toInt(), length.toInt())
+        } else {
+            throw UnsupportedOperationException("Call requires API level 35")
+        }
     }
 
     override fun getDouble1(pigeon_instance: ByteBuffer): Double {
@@ -116,7 +130,11 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     }
 
     override fun mismatch(pigeon_instance: ByteBuffer, that: ByteBuffer): Long {
-        return pigeon_instance.mismatch(that).toLong()
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            pigeon_instance.mismatch(that).toLong()
+        } else {
+            throw UnsupportedOperationException("Call requires API level 34")
+        }
     }
 
     override fun put1(pigeon_instance: ByteBuffer, b: Long): ByteBuffer {
@@ -132,7 +150,11 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     }
 
     override fun put4(pigeon_instance: ByteBuffer, index: Long, src: ByteArray): ByteBuffer {
-        return pigeon_instance.put(index.toInt(), src)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            pigeon_instance.put(index.toInt(), src)
+        } else {
+            throw UnsupportedOperationException("Call requires API level 35")
+        }
     }
 
     override fun put5(pigeon_instance: ByteBuffer, src: ByteArray, offset: Long, length: Long): ByteBuffer {
@@ -142,7 +164,11 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     override fun put6(
         pigeon_instance: ByteBuffer, index: Long, src: ByteArray, offset: Long, length: Long
     ): ByteBuffer {
-        return pigeon_instance.put(index.toInt(), src, offset.toInt(), length.toInt())
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            pigeon_instance.put(index.toInt(), src, offset.toInt(), length.toInt())
+        } else {
+            throw UnsupportedOperationException("Call requires API level 35")
+        }
     }
 
     override fun put7(pigeon_instance: ByteBuffer, src: ByteBuffer): ByteBuffer {
@@ -152,7 +178,11 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     override fun put8(
         pigeon_instance: ByteBuffer, index: Long, src: ByteBuffer, offset: Long, length: Long
     ): ByteBuffer {
-        return pigeon_instance.put(index.toInt(), src, offset.toInt(), length.toInt())
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            pigeon_instance.put(index.toInt(), src, offset.toInt(), length.toInt())
+        } else {
+            throw UnsupportedOperationException("Call requires API level 35")
+        }
     }
 
     override fun putDouble1(pigeon_instance: ByteBuffer, value: Double): ByteBuffer {
@@ -200,6 +230,10 @@ class ByteBufferImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBy
     }
 
     override fun slice2(pigeon_instance: ByteBuffer, index: Long, length: Long): ByteBuffer {
-        return pigeon_instance.slice(index.toInt(), length.toInt())
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            pigeon_instance.slice(index.toInt(), length.toInt())
+        } else {
+            throw UnsupportedOperationException("Call requires API level 34")
+        }
     }
 }

@@ -1,10 +1,10 @@
 export 'common/auto_closeable_impl.dart';
-export 'common/bitmap_impl.dart';
 export 'common/closeable_impl.dart';
 export 'common/consumer_impl.dart';
 export 'common/exception_impl.dart';
 export 'common/file_impl.dart';
 export 'common/image_format_impl.dart';
+export 'common/image_impl.dart';
 export 'common/location_impl.dart';
 export 'common/observer_impl.dart';
 export 'common/permission_manager_impl.dart';

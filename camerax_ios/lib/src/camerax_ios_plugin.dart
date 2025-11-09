@@ -19,9 +19,9 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PermissionManager $PermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
-  @override
   CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
+  @override
+  CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
   @override
   CameraSelector get $CameraSelector$External => CameraSelectorImpl.external;
   @override
@@ -38,16 +38,20 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   FallbackStrategy $FallbackStrategy$HigherQualityOrLowerThan(
     Quality quality,
   ) => throw UnimplementedError();
+  // FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
   FallbackStrategy $FallbackStrategy$HigherQualityThan(Quality quality) =>
       throw UnimplementedError();
+  // FallbackStrategyImpl.higherQualityThan(quality);
   @override
   FallbackStrategy $FallbackStrategy$LowerQualityOrHigherThan(
     Quality quality,
   ) => throw UnimplementedError();
+  // FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
   @override
   FallbackStrategy $FallbackStrategy$LowerQualityThan(Quality quality) =>
       throw UnimplementedError();
+  // FallbackStrategyImpl.lowerQualityThan(quality);
 
   @override
   MlKitAnalyzer $MlKitAnalyzer({
@@ -61,18 +65,24 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     CameraInfo cameraInfo,
     Quality quality,
   ) => throw UnimplementedError();
+  // QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
   QualitySelector $QualitySelector$From(
-    Quality quality, {
+    Quality quality, [
     FallbackStrategy? fallbackStrategy,
-  }) => throw UnimplementedError();
+  ]) => throw UnimplementedError();
+  // QualitySelectorImpl.from(quality, fallbackStrategy: fallbackStrategy);
 
   @override
   QualitySelector $QualitySelector$FromOrderedList(
-    List<Quality> qualities, {
+    List<Quality> qualities, [
     FallbackStrategy? fallbackStrategy,
-  }) => throw UnimplementedError();
+  ]) => throw UnimplementedError();
+  // QualitySelectorImpl.fromOrderedList(
+  //   qualities,
+  //   fallbackStrategy: fallbackStrategy,
+  // );
 
   @override
   BarcodeScannerOptions $BarcodeScannerOptions({
@@ -131,8 +141,8 @@ final class CameraXiOSPlugin extends CameraXPlugin {
 
   @override
   ImageAnalysisAnalyzer $ImageAnalysisAnalyzer({
-    required void Function(ImageProxy image) analyze,
-  }) => ImageAnalysisAnalyzerImpl(analyze: analyze);
+    required Consumer<ImageProxy> consumer,
+  }) => ImageAnalysisImageAnalyzerImplImpl(consumer: consumer);
 
   @override
   Camera2CameraControl $Camera2CameraControl$From(
@@ -159,11 +169,6 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => AVAnalyzerImpl(types: types, consumer: consumer);
 
   @override
-  Observer<CameraState> $CameraStateObserver({
-    required void Function(CameraState value) onChanged,
-  }) => CameraStateObserverImpl(onChanged: onChanged);
-
-  @override
   ImageCaptureOnImageCapturedCallback $ImageCaptureOnImageCapturedCallback({
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
@@ -179,18 +184,14 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  ConsumerApi<MlKitAnalyzerResult> $MlKitAnalyzerResultConsumerApi({
-    required void Function(MlKitAnalyzerResult value) accept,
-  }) => throw UnimplementedError();
-
-  @override
   ResolutionFilter $ResolutionFilter({
-    required List<SizeApi<int>> Function(
-      List<SizeApi<int>> supportedSizes,
+    required List<Size<int>> Function(
+      List<Size<int>> supportedSizes,
       int rotationDegrees,
     )
     filter,
   }) => throw UnimplementedError();
+  // ResolutionFilterImpl(filter: filter);
 
   @override
   RotationProvider $RotationProvider() => RotationProviderImpl();
@@ -201,40 +202,156 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
 
   @override
-  ObserverApi<TorchState> $TorchStateObserverApi({
-    required void Function(TorchState value) onChanged,
-  }) => TorchStateObserverImpl(onChanged: onChanged);
-
-  @override
-  ConsumerApi<VideoRecordEvent> $VideoRecordEventConsumerApi({
-    required void Function(VideoRecordEvent value) accept,
-  }) => VideoRecordEventConsumerImpl(accept: accept);
-
-  @override
-  ObserverApi<ZoomState> $ZoomStateObserverApi({
-    required void Function(ZoomState value) onChanged,
-  }) => ZoomStateObserverImpl(onChanged: onChanged);
-
-  @override
   ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptions$ZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   }) => throw UnimplementedError();
 
   @override
-  Future<BarcodeScanner> $BarcodeScanningApiGetClient([
-    BarcodeScannerOptions? options,
-  ]) => throw UnimplementedError();
+  Location $Location(double latitude, double longitude) =>
+      LocationImpl(latitude, longitude);
 
   @override
-  Future<FaceDetector> $FaceDetectionApiGetClient([
-    FaceDetectorOptions? options,
-  ]) => throw UnimplementedError();
+  AspectRatioStrategy $AspectRatioStrategy({
+    required AspectRatio preferredAspectRatio,
+    required AspectRatioStrategyFallbackRule fallbackRule,
+  }) => throw UnimplementedError();
+  // AspectRatioStrategyImpl(
+  //   preferredAspectRatio: preferredAspectRatio,
+  //   fallbackRule: fallbackRule,
+  // );
 
   @override
-  Location $Location() => LocationImpl();
+  AspectRatioStrategy get $AspectRatioStrategy$Ratio16_9FallbackAutoStrategy =>
+      throw UnimplementedError();
+  // AspectRatioStrategyImpl.ratio16_9FallbackAutoStrategy;
 
   @override
-  ConsumerApi<AVAnalyzerResult> $AVAnalyzerResultConsumer({
-    required void Function(AVAnalyzerResult value) accept,
-  }) => AVAnalyzerResultConsumerImpl(accept: accept);
+  AspectRatioStrategy get $AspectRatioStrategy$Ratio4_3FallbackAutoStrategy =>
+      throw UnimplementedError();
+  // AspectRatioStrategyImpl.ratio4_3FallbackAutoStrategy;
+
+  @override
+  AudioConfig get $AudioConfig$AudioDisabled => AudioConfigImpl.audioDisabled;
+
+  @override
+  AudioConfig $AudioConfig$Create(bool enableAudio) =>
+      AudioConfigImpl.create(enableAudio);
+
+  @override
+  BarcodeScanner $BarcodeScanner() => throw UnimplementedError();
+
+  @override
+  BarcodeScanner $BarcodeScanner$Options(BarcodeScannerOptions options) =>
+      throw UnimplementedError();
+
+  @override
+  Future<bool> $CameraInfo$MustPlayShutterSound() =>
+      CameraInfoImpl.mustPlayShutterSound();
+
+  @override
+  Consumer<T> $Consumer<T>({required void Function(T value) accept}) =>
+      ConsumerImpl(accept: accept);
+
+  @override
+  DynamicRange $DynamicRange({
+    required DynamicRangeEncoding encoding,
+    required DynamicRangeBitDepth bitDepth,
+  }) => throw UnimplementedError();
+  // DynamicRangeImpl(encoding: encoding, bitDepth: bitDepth);
+
+  @override
+  DynamicRange get $DynamicRange$DolbyVision10Bit => throw UnimplementedError();
+  // DynamicRangeImpl.dolbyVision10Bit;
+
+  @override
+  DynamicRange get $DynamicRange$DolbyVision8Bit => throw UnimplementedError();
+  // DynamicRangeImpl.dolbyVision8Bit;
+
+  @override
+  DynamicRange get $DynamicRange$Hdr10Plus10Bit => throw UnimplementedError();
+  // DynamicRangeImpl.hdr10Plus10Bit;
+
+  @override
+  DynamicRange get $DynamicRange$Hdr10_10Bit => throw UnimplementedError();
+  // DynamicRangeImpl.hdr10_10Bit;
+
+  @override
+  DynamicRange get $DynamicRange$HdrUnspecified10Bit =>
+      throw UnimplementedError();
+  // DynamicRangeImpl.hdrUnspecified10Bit;
+
+  @override
+  DynamicRange get $DynamicRange$Hlg10Bit => throw UnimplementedError();
+  // DynamicRangeImpl.hlg10Bit;
+
+  @override
+  DynamicRange get $DynamicRange$Sdr => throw UnimplementedError();
+  // DynamicRangeImpl.sdr;
+
+  @override
+  DynamicRange get $DynamicRange$Unspecifid => throw UnimplementedError();
+  // DynamicRangeImpl.unspecifid;
+
+  @override
+  FaceDetector $FaceDetector() => throw UnimplementedError();
+
+  @override
+  FaceDetector $FaceDetector$Options(FaceDetectorOptions options) =>
+      throw UnimplementedError();
+
+  @override
+  Future<double> $MeteringPointFactory$GetDefaultPointSize() =>
+      MeteringPointFactoryImpl.getDefaultPointSize();
+
+  @override
+  Observer<T> $Observer<T>({required void Function(T value) onChanged}) =>
+      ObserverImpl(onChanged: onChanged);
+
+  @override
+  Quality get $Quality$Fhd => throw UnimplementedError();
+  // QualityImpl.fhd;
+
+  @override
+  Quality get $Quality$Hd => throw UnimplementedError();
+  // QualityImpl.hd;
+
+  @override
+  Quality get $Quality$Highest => throw UnimplementedError();
+  // QualityImpl.highest;
+
+  @override
+  Quality get $Quality$Lowest => throw UnimplementedError();
+  // QualityImpl.lowest;
+
+  @override
+  Quality get $Quality$Sd => throw UnimplementedError();
+  // QualityImpl.sd;
+
+  @override
+  Quality get $Quality$Uhd => throw UnimplementedError();
+  // QualityImpl.uhd;
+
+  @override
+  ResolutionSelector $ResolutionSelector({
+    ResolutionSelectorMode? mode,
+    AspectRatioStrategy? aspectRatioStrategy,
+    ResolutionFilter? resolutionFilter,
+    ResolutionStrategy? resolutionStrategy,
+  }) => ResolutionSelectorImpl(
+    mode: mode,
+    aspectRatioStrategy: aspectRatioStrategy,
+    resolutionFilter: resolutionFilter,
+    resolutionStrategy: resolutionStrategy,
+  );
+
+  @override
+  ResolutionStrategy $ResolutionStrategy({
+    required Size<int> boundSize,
+    required ResolutionStrategyFallbackRule fallbackRule,
+  }) =>
+      ResolutionStrategyImpl(boundSize: boundSize, fallbackRule: fallbackRule);
+
+  @override
+  ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy =>
+      ResolutionStrategyImpl.highestAvailableStrategy;
 }

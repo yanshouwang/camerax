@@ -57,7 +57,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
 
   // common
   Consumer<T> $Consumer<T>({required void Function(T value) accept});
-  Location $Location();
+  Location $Location(double latitude, double longitude);
   Observer<T> $Observer<T>({required void Function(T value) onChanged});
   PermissionManager $PermissionManager();
 

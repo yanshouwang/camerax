@@ -1,5 +1,6 @@
 package dev.zeekr.camerax_android.core
 
+import android.os.Build
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiNullOutputStreamProxyApi
 import dev.zeekr.camerax_android.PigeonApiOutputStreamProxyApi
@@ -30,6 +31,7 @@ class OutputStreamImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApi
 class NullOutputStreamImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiNullOutputStreamProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): OutputStream {
-        return OutputStream.nullOutputStream()
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) OutputStream.nullOutputStream()
+        else throw UnsupportedOperationException("Call requires API level 33")
     }
 }

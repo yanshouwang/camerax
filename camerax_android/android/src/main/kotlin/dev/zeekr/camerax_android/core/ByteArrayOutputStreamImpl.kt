@@ -1,5 +1,6 @@
 package dev.zeekr.camerax_android.core
 
+import android.os.Build
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiByteArrayOutputStreamProxyApi
 import java.io.ByteArrayOutputStream
@@ -40,7 +41,8 @@ class ByteArrayOutputStreamImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 
     override fun writeBytes(pigeon_instance: ByteArrayOutputStream, b: ByteArray) {
-        return pigeon_instance.writeBytes(b)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) pigeon_instance.writeBytes(b)
+        else throw UnsupportedOperationException("Call requires API level 33")
     }
 
     override fun writeTo(pigeon_instance: ByteArrayOutputStream, out: OutputStream) {
