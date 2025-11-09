@@ -101,8 +101,8 @@ abstract base class CameraController {
   Future<Range<int>> getVideoCaptureTargetFrameRate();
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate);
   Future<bool> isRecording();
-  Future<Recording> startRecording(
-    FileOutputOptions outputOptions, {
+  Future<Recording> startRecording({
+    required FileOutputOptions outputOptions,
     required AudioConfig audioConfig,
     required Consumer<VideoRecordEvent> listener,
   });

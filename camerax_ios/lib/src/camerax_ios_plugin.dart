@@ -16,14 +16,14 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }
 
   @override
-  PermissionManager $PermissionManagerApi() => PermissionManagerImpl();
+  PermissionManager $PermissionManager() => PermissionManagerImpl();
 
   @override
   CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
   @override
   CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
   @override
-  CameraSelector get $CameraSelectorApiExternal => CameraSelectorImpl.external;
+  CameraSelector get $CameraSelector$External => CameraSelectorImpl.external;
   @override
   CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);
@@ -32,7 +32,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   CameraController $CameraController() => CameraControllerImpl();
 
   @override
-  PreviewViewApi $PreviewView() => PreviewViewImpl();
+  PreviewView $PreviewView() => PreviewViewImpl();
 
   @override
   FallbackStrategy $FallbackStrategy$HigherQualityOrLowerThan(
@@ -51,13 +51,13 @@ final class CameraXiOSPlugin extends CameraXPlugin {
 
   @override
   MlKitAnalyzer $MlKitAnalyzer({
-    required List<DetectorApi> detectors,
+    required List<Detector> detectors,
     required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required ConsumerApi<MlKitAnalyzerResult> consumer,
+    required Consumer<MlKitAnalyzerResult> consumer,
   }) => throw UnimplementedError();
 
   @override
-  Future<SizeApi<int>?> $QualitySelector$GetResolution(
+  Future<Size<int>?> $QualitySelector$GetResolution(
     CameraInfo cameraInfo,
     Quality quality,
   ) => throw UnimplementedError();
@@ -130,9 +130,9 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   );
 
   @override
-  ImageAnalysisImageAnalyzerApi $ImageAnalysisAnalyzer({
+  ImageAnalysisAnalyzer $ImageAnalysisAnalyzer({
     required void Function(ImageProxy image) analyze,
-  }) => ImageAnalyzerImpl(analyze: analyze);
+  }) => ImageAnalysisAnalyzerImpl(analyze: analyze);
 
   @override
   Camera2CameraControl $Camera2CameraControl$From(
@@ -155,11 +155,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   @override
   AVAnalyzer $AVAnalyzer({
     List<AVMetadataObjectType>? types,
-    required ConsumerApi<AVAnalyzerResult> consumer,
+    required Consumer<AVAnalyzerResult> consumer,
   }) => AVAnalyzerImpl(types: types, consumer: consumer);
 
   @override
-  ObserverApi<CameraState> $CameraStateObserverApi({
+  Observer<CameraState> $CameraStateObserver({
     required void Function(CameraState value) onChanged,
   }) => CameraStateObserverImpl(onChanged: onChanged);
 
@@ -231,8 +231,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   ]) => throw UnimplementedError();
 
   @override
-  Location $Location(double latitude, double longitude) =>
-      LocationImpl(latitude, longitude);
+  Location $Location() => LocationImpl();
 
   @override
   ConsumerApi<AVAnalyzerResult> $AVAnalyzerResultConsumer({

@@ -128,7 +128,7 @@ final class CameraControllerImpl extends CameraController {
   @override
   Future<void> takePicture(
     ImageCaptureOnImageCapturedCallback imageCapturedCallback,
-  ) => api.takePicture(imageCapturedCallback.api);
+  ) => api.takePicture1(imageCapturedCallback.api);
 
   @override
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector() =>
@@ -209,12 +209,12 @@ final class CameraControllerImpl extends CameraController {
   Future<bool> isRecording() => api.isRecording();
 
   @override
-  Future<Recording> startRecording(
-    FileOutputOptions outputOptions, {
+  Future<Recording> startRecording({
+    required FileOutputOptions outputOptions,
     required AudioConfig audioConfig,
     required Consumer<VideoRecordEvent> listener,
   }) => api
-      .startRecording(outputOptions.api, audioConfig.api, listener.api)
+      .startRecording1(outputOptions.api, audioConfig.api, listener.api)
       .then((e) => e.impl);
 
   @override

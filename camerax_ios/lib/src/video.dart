@@ -1,0 +1,9 @@
+export 'video/audio_stats_impl.dart';
+export 'video/fallback_strategy_impl.dart';
+export 'video/file_output_options_impl.dart';
+export 'video/output_results_impl.dart';
+export 'video/quality_impl.dart';
+export 'video/quality_selector_impl.dart';
+export 'video/recording_impl.dart';
+export 'video/recording_stats_impl.dart';
+export 'video/video_record_event_impl.dart';

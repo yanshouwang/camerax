@@ -46,7 +46,7 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<Set<Range<int>>> getSupportedFrameRateRanges() => api
-      .getSupportedFrameRateRanges()
+      .getSupportedFrameRateRanges1()
       .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override

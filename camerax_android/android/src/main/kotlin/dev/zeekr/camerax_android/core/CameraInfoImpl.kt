@@ -128,7 +128,7 @@ class CameraInfoImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
         return pigeon_instance.getSensorRotationDegrees(relativeRotation.impl).toLong()
     }
 
-    override fun getSupportedFrameRateRanges(pigeon_instance: CameraInfo): List<IntRange> {
+    override fun getSupportedFrameRateRanges1(pigeon_instance: CameraInfo): List<IntRange> {
         return pigeon_instance.supportedFrameRateRanges.map { IntRange(it) }
     }
 

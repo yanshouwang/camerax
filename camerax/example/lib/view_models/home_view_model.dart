@@ -315,7 +315,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
       'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
     );
     final file = File(filePath);
-    final options = FileOutputOptions(file);
+    final outputOptions = FileOutputOptions(file);
     final listener = Consumer<VideoRecordEvent>(
       accept: (event) {
         logger.info('${event.runtimeType}');
@@ -331,7 +331,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
       },
     );
     recording = await controller.startRecording(
-      options,
+      outputOptions: outputOptions,
       audioConfig: AudioConfig.audioDisabled,
       listener: listener,
     );

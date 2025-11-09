@@ -27,7 +27,7 @@ class ImageProxyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIm
     override fun planes(pigeon_instance: ImageProxy): List<ImageProxy.PlaneProxy> {
         val width = pigeon_instance.width
         val height = pigeon_instance.height
-        return pigeon_instance.planes.map { SizedPlaneProxy(it, width, height) }
+        return pigeon_instance.planes.map { FixedPlaneProxy(it, width, height) }
     }
 
     override fun imageInfo(pigeon_instance: ImageProxy): ImageInfo {
@@ -49,22 +49,22 @@ class ImageProxyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIm
     class PlaneProxyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         PigeonApiImageProxyPlaneProxyProxyApi(registrar) {
         override fun value(pigeon_instance: ImageProxy.PlaneProxy): ByteArray {
-            if (pigeon_instance !is SizedPlaneProxy) throw TypeCastException()
+            if (pigeon_instance !is FixedPlaneProxy) throw TypeCastException()
             return pigeon_instance.value
         }
 
         override fun pixelStride(pigeon_instance: ImageProxy.PlaneProxy): Long {
-            if (pigeon_instance !is SizedPlaneProxy) throw TypeCastException()
+            if (pigeon_instance !is FixedPlaneProxy) throw TypeCastException()
             return pigeon_instance.pixelStride.toLong()
         }
 
         override fun rowStride(pigeon_instance: ImageProxy.PlaneProxy): Long {
-            if (pigeon_instance !is SizedPlaneProxy) throw TypeCastException()
+            if (pigeon_instance !is FixedPlaneProxy) throw TypeCastException()
             return pigeon_instance.rowStride.toLong()
         }
     }
 
-    class SizedPlaneProxy(private val plane: ImageProxy.PlaneProxy, private val width: Int, private val height: Int) :
+    class FixedPlaneProxy(private val plane: ImageProxy.PlaneProxy, private val width: Int, private val height: Int) :
         ImageProxy.PlaneProxy {
         override fun getPixelStride(): Int = plane.pixelStride
 

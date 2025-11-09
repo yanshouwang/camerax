@@ -67,6 +67,7 @@ abstract base class CameraXPlugin extends PlatformInterface {
   ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy;
   CameraSelector get $CameraSelector$Back;
   CameraSelector get $CameraSelector$Front;
+  CameraSelector get $CameraSelector$External;
   DynamicRange get $DynamicRange$Unspecifid;
   DynamicRange get $DynamicRange$Sdr;
   DynamicRange get $DynamicRange$HdrUnspecified10Bit;

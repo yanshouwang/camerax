@@ -175,7 +175,7 @@ abstract class AVAnalyzerResultProxyApi {
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer'))
-abstract class AVAnalyzerProxyApi implements ImageAnalysisAnalyzerProxyApi {
+abstract class AVAnalyzerProxyApi extends ImageAnalysisAnalyzerProxyApi {
   AVAnalyzerProxyApi({
     List<AVMetadataObjectTypeApi>? types,
     required AVAnalyzerResultConsumerProxyApi consumer,
@@ -243,7 +243,7 @@ enum ImageFormatApi {
   yCbCr422Sp,
 }
 
-enum PermissionApi { video, audio }
+enum PermissionManagerPermissionApi { video, audio }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AutoCloseable'))
 abstract class AutoCloseableProxyApi {
@@ -264,6 +264,27 @@ abstract class CLLocationProxyApi {
 
   late final double latitude;
   late final double longitude;
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzerResultConsumer'))
+abstract class AVAnalyzerResultConsumerProxyApi {
+  AVAnalyzerResultConsumerProxyApi();
+
+  late final void Function(AVAnalyzerResultProxyApi value) accept;
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageProxyConsumer'))
+abstract class ImageProxyConsumerProxyApi {
+  ImageProxyConsumerProxyApi();
+
+  late final void Function(ImageProxyProxyApi value) accept;
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEventConsumer'))
+abstract class VideoRecordEventConsumerProxyApi {
+  VideoRecordEventConsumerProxyApi();
+
+  late final void Function(VideoRecordEventProxyApi value) accept;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraStateObserver'))
@@ -287,28 +308,14 @@ abstract class ZoomStateObserverProxyApi {
   late final void Function(ZoomStateProxyApi value) onChanged;
 }
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEventConsumer'))
-abstract class VideoRecordEventConsumerProxyApi {
-  VideoRecordEventConsumerProxyApi();
-
-  late final void Function(VideoRecordEventProxyApi value) accept;
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzerResultConsumer'))
-abstract class AVAnalyzerResultConsumerProxyApi {
-  AVAnalyzerResultConsumerProxyApi();
-
-  late final void Function(AVAnalyzerResultProxyApi value) accept;
-}
-
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PermissionManager'))
 abstract class PermissionManagerProxyApi {
   @static
   late final PermissionManagerProxyApi instance;
 
-  bool checkPermissioin(PermissionApi permission);
+  bool checkPermissioin(PermissionManagerPermissionApi permission);
   @async
-  bool requestPermissions(List<PermissionApi> permissions);
+  bool requestPermissions(List<PermissionManagerPermissionApi> permissions);
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Point'))
@@ -361,6 +368,19 @@ abstract class SizeFProxyApi {
 
   late final double width;
   late final double height;
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'DurationTuple'))
+abstract class DurationTupleProxyApi {
+  DurationTupleProxyApi(int duration, TimeUnitApi timeUnit);
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointTuple'))
+abstract class MeteringPointTupleProxyApi {
+  MeteringPointTupleProxyApi(
+    MeteringPointProxyApi point, {
+    List<FocusMeteringActionMeteringModeApi>? modes,
+  });
 }
 
 // core
@@ -419,10 +439,16 @@ enum TorchStateApi { off, on }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ResolutionStrategy'))
 abstract class ResolutionStrategyProxyApi {
-  ResolutionStrategyProxyApi();
+  @static
+  late final ResolutionStrategyProxyApi highestAvailableStrategy;
 
-  late final SizeProxyApi? boundSize;
-  late final ResolutionStrategyFallbackRuleApi fallbackRule;
+  ResolutionStrategyProxyApi(
+    SizeProxyApi boundSize,
+    ResolutionStrategyFallbackRuleApi fallbackRule,
+  );
+
+  SizeProxyApi? getBoundSize();
+  ResolutionStrategyFallbackRuleApi getFallbackRule();
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ResolutionSelector'))
@@ -443,6 +469,7 @@ abstract class ResolutionSelectorProxyApi {
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraControl'))
 abstract class CameraControlProxyApi {
   void enableTorch(bool torch);
+  // void setTorchStrengthLevel(int torchStrengthLevel);
   void setZoomRatio(double ratio);
   void setLinearZoom(double linearZoom);
   FocusMeteringResultProxyApi startFocusAndMetering(
@@ -450,32 +477,50 @@ abstract class CameraControlProxyApi {
   );
   void cancelFocusAndMetering();
   int setExposureCompensationIndex(int value);
+  // void enableLowLightBoostAsync(bool lowLightBoost);
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraInfo'))
-abstract class CameraInfoPorxyApi {
+abstract class CameraInfoProxyApi {
   @static
   bool mustPlayShutterSound();
+
   CameraSelectorProxyApi getCameraSelector();
   CameraStateApi? getCameraState();
   void observeCameraState(CameraStateObserverProxyApi observer);
   void removeCameraStateObserver(CameraStateObserverProxyApi observer);
+  // ExposureStateApi getExposureState();
+  double getIntrinsicZoomRatio();
+  CameraSelectorLensFacingApi getLensFacing();
+  // LowLightBoostStateApi? getLowLightBoostState();
+  // void observeLowLightBoostState(LowLightBoostStateObserverProxyApi observer);
+  // void removeLowLightBoostStateObserver(
+  //   LowLightBoostStateObserverProxyApi observer,
+  // );
+  // int getMaxTorchStrengthLevel();
+  List<CameraInfoProxyApi> getPhysicalCameraInfos();
+  // int getSensorRotationDegrees1();
+  // int getSensorRotationDegrees2(SurfaceRotationApi relativeRotation);
+  // List<IntRangeProxyApi> getSupportedFrameRateRanges1();
+  // List<IntRangeProxyApi> getSupportedFrameRateRanges2(
+  //   SessionConfigProxyApi sessionConfig,
+  // );
   TorchStateApi? getTorchState();
   void observeTorchState(TorchStateObserverProxyApi observer);
   void removeTorchStateObserver(TorchStateObserverProxyApi observer);
+  // int? getTorchStrengthLevel();
+  // void observeTorchStrengthLevel(IntObserverProxyApi observer);
+  // void removeTorchStrengthLevelObserver(IntObserverProxyApi observer);
   ZoomStateProxyApi? getZoomState();
   void observeZoomState(ZoomStateObserverProxyApi observer);
   void removeZoomStateObserver(ZoomStateObserverProxyApi observer);
-  // ExposureStateApi getExposureState();
-  double getIntrinsticZoomRatio();
-  CameraSelectorLensFacingApi getLensFacing();
-  List<CameraInfoPorxyApi> getPhysicalCameraInfos();
-  int getSensorRotationDegrees();
-  // List<RangeApi> getSupportedFrameRateRanges();
-  bool isLogicalMultiCameraSupported();
-  bool isZslSupported();
   bool hasFlashUnit();
+  // bool isFeatureGroupSupported(SessionConfigProxyApi sessionConfig);
   bool isFocusMeteringSupported(FocusMeteringActionProxyApi action);
+  bool isLogicalMultiCameraSupported();
+  bool isLowLightBoostSupported();
+  bool isTorchStrengthSupported();
+  bool isZslSupported();
   // List<DynamicRangeApi> querySupportedDynamicRanges(
   //     List<DynamicRangeApi> candidateDynamicRanges);
 }
@@ -483,26 +528,17 @@ abstract class CameraInfoPorxyApi {
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraSelector'))
 abstract class CameraSelectorProxyApi {
   @static
-  late final CameraSelectorProxyApi front;
-  @static
   late final CameraSelectorProxyApi back;
+  @static
+  late final CameraSelectorProxyApi front;
   @static
   late final CameraSelectorProxyApi external;
 
   CameraSelectorProxyApi.build({CameraSelectorLensFacingApi? lensFacing});
-}
+  // CameraSelectorProxyApi.of(List<CameraIdentifierProxyApi> cameraIdentifiers);
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointTuple'))
-abstract class MeteringPointTupleProxyApi {
-  MeteringPointTupleProxyApi(
-    MeteringPointProxyApi point, {
-    List<FocusMeteringActionMeteringModeApi>? modes,
-  });
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'DurationTuple'))
-abstract class DurationTupleProxyApi {
-  DurationTupleProxyApi(int duration, TimeUnitApi timeUnit);
+  // List<CameraInfoProxyApi> filter(List<CameraInfoProxyApi> cameraInfos);
+  // String? getPhysicalCameraId();
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FocusMeteringAction'))
@@ -527,13 +563,19 @@ abstract class FocusMeteringResultProxyApi {
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageAnalysis.Analyzer'))
-abstract class ImageAnalysisAnalyzerProxyApi {}
+abstract class ImageAnalysisAnalyzerProxyApi {
+  void analyze(ImageProxyProxyApi image);
+  // SizeProxyApi? getDefaultTargetResolution();
+  // ImageAnalysisCoordinateSystemApi getTargetCoordinateSystem();
+  // void updateTransform(MatrixProxyApi? matrix);
+}
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageAnalyzer'))
-abstract class ImageAnalyzerProxyApi implements ImageAnalysisAnalyzerProxyApi {
-  ImageAnalyzerProxyApi();
-
-  late final void Function(ImageProxyProxyApi image) analyze;
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageAnalysis.Analyzer'))
+abstract class ImageAnalysisAnalyzerImplProxyApi
+    extends ImageAnalysisAnalyzerProxyApi {
+  ImageAnalysisAnalyzerImplProxyApi({
+    required ImageProxyConsumerProxyApi consumer,
+  });
 }
 
 @ProxyApi(
@@ -555,6 +597,7 @@ abstract class ImageCaptureOnImageCapturedCallbackProxyApi {
 abstract class ImageInfoProxyApi {
   late final int timestamp;
   late final int rotationDegrees;
+  // late final FlashStateApi flashState;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ImageProxy.PlaneProxy'))
@@ -569,10 +612,13 @@ abstract class ImageProxyProxyApi extends AutoCloseableProxyApi {
   late final ImageFormatApi format;
   late final int width;
   late final int height;
-  late final List<ImageProxyPlaneProxyProxyApi> planes;
   late final ImageInfoProxyApi imageInfo;
+  late final List<ImageProxyPlaneProxyProxyApi> planes;
+
   // RectApi getCropRect();
+  // ImageProxyApi? getImage();
   // void setCropRect(RectApi? rect);
+  // BitmapProxyApi toBitmap();
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPoint'))
@@ -582,7 +628,11 @@ abstract class MeteringPointProxyApi {
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointFactory'))
 abstract class MeteringPointFactoryProxyApi {
-  MeteringPointProxyApi createPoint(double x, double y, {double? size});
+  @static
+  double getDefaultPointSize();
+
+  MeteringPointProxyApi createPoint1(double x, double y);
+  MeteringPointProxyApi createPoint2(double x, double y, double size);
 }
 
 @ProxyApi(
@@ -593,6 +643,11 @@ abstract class MeteringPointFactoryProxyApi {
 abstract class SurfaceOrientedMeteringPointFactoryProxyApi
     extends MeteringPointFactoryProxyApi {
   SurfaceOrientedMeteringPointFactoryProxyApi(double width, double height);
+  // SurfaceOrientedMeteringPointFactoryProxyApi.useCase(
+  //   double width,
+  //   double height,
+  //   UseCaseProxyApi useCaseForAspectRatio,
+  // );
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ZoomState'))
@@ -681,31 +736,37 @@ abstract class VideoRecordEventProxyApi {}
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Status'))
 abstract class VideoRecordStatusEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Start'))
 abstract class VideoRecordStartEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Pause'))
 abstract class VideoRecordPauseEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Resume'))
 abstract class VideoRecordResumeEventProxyApi extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Finalize'))
 abstract class VideoRecordFinalizeEventProxyApi
     extends VideoRecordEventProxyApi {
+  late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
   late final List<Object?>? cause;
   late final VideoRecordFinalizeEventErrorApi error;
   late final OutputResultsProxyApi outputResults;
+  late final bool hasError;
 }
 
 // view
@@ -734,13 +795,13 @@ abstract class AudioConfigProxyApi {
 abstract class CameraControllerProxyApi {
   CameraControllerProxyApi();
 
-  void initialize();
+  // void getInitializeFuture();
   void bind();
   void unbind();
   bool hasCamera(CameraSelectorProxyApi cameraSelector);
   CameraSelectorProxyApi getCameraSelector();
   void setCameraSelector(CameraSelectorProxyApi cameraSelector);
-  CameraInfoPorxyApi? getCameraInfo();
+  CameraInfoProxyApi? getCameraInfo();
   CameraControlProxyApi? getCameraControl();
   TorchStateApi? getTorchState();
   void observeTorchState(TorchStateObserverProxyApi observer);
@@ -753,8 +814,14 @@ abstract class CameraControllerProxyApi {
   void setLinearZoom(double linearZoom);
   bool isPinchToZoomEnabled();
   void setPinchToZoomEnabled(bool enabled);
+  // TapToFocusInfoProxyApi? getTapToFocusInfoState();
+  // void observeTapToFocusInfoState(TapToFocusInfoObserverProxyApi observer);
+  // void removeTapToFocusInfoStateObserver(
+  //   TapToFocusInfoObserverProxyApi observer,
+  // );
   bool isTapToFocusEnabled();
   void setTapToFocusEnabled(bool enabled);
+  // void setTapToFocusAutoCancelDuration(DurationTupleProxyApi duration);
   bool isImageCaptureEnabled();
   bool isImageAnalysisEnabled();
   bool isVideoCaptureEnabled();
@@ -768,9 +835,15 @@ abstract class CameraControllerProxyApi {
   void setImageCaptureMode(ImageCaptureCaptureModeApi captureMode);
   ImageCaptureFlashModeApi getImageCaptureFlashMode();
   void setImageCaptureFlashMode(ImageCaptureFlashModeApi flashMode);
-  void takePicture(
-    ImageCaptureOnImageCapturedCallbackProxyApi capturedCallback,
+  // ExecutorProxyApi? getImageCaptureIoExecutor();
+  // void setImageCaptureIoExecutor(ExecutorProxyApi executor);
+  void takePicture1(
+    ImageCaptureOnImageCapturedCallbackProxyApi imageCapturedCallback,
   );
+  // void takePicture2(
+  //   ImageCaptureOutputFileOptionsProxyApi outputFileOptions,
+  //   ImageCaptureOnImageSavedCallbackProxyApi imageSavedCallback,
+  // );
   ResolutionSelectorProxyApi? getImageAnalysisResolutionSelector();
   void setImageAnalysisResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
@@ -783,22 +856,36 @@ abstract class CameraControllerProxyApi {
   void setImageAnalysisOutputImageFormat(
     ImageAnalysisOutputImageFormatApi imageAnalysisOutputImageFormat,
   );
+  // ExecutorProxyApi? getImageAnalysisBackgroundExecutor();
+  // void setImageAnalysisBackgroundExecutor(ExecutorProxyApi? executor);
   void setImageAnalysisAnalyzer(ImageAnalysisAnalyzerProxyApi analyzer);
   void clearImageAnalysisAnalyzer();
+  // QualitySelectorApi getVideoCaptureQualitySelector();
+  // void setVideoCaptureQualitySelector(QualitySelectorApi qualitySelector);
   // DynamicRangeApi getVideoCaptureDynamicRange();
   // void setVideoCaptureDynamicRange(DynamicRangeApi dynamicRange);
   MirrorModeApi getVideoCaptureMirrorMode();
   void setVideoCaptureMirrorMode(MirrorModeApi mirrorMode);
-  // QualitySelectorApi getVideoCaptureQualitySelector();
-  // void setVideoCaptureQualitySelector(QualitySelectorApi qualitySelector);
   // RangeApi getVideoCaptureTargetFrameRate();
   // void setVideoCaptureTargetFrameRate(RangeApi targetFrameRate);
   bool isRecording();
-  RecordingProxyApi startRecording(
+  RecordingProxyApi startRecording1(
     FileOutputOptionsProxyApi outputOptions,
     AudioConfigProxyApi audioConfig,
     VideoRecordEventConsumerProxyApi listener,
   );
+  // RecordingProxyApi startRecording2(
+  //   FileDescriptorOutputOptionsProxyApi outputOptions,
+  //   AudioConfigProxyApi audioConfig,
+  //   VideoRecordEventConsumerProxyApi listener,
+  // );
+  // RecordingProxyApi startRecording3(
+  //   MediaStoreOutputOptionsProxyApi outputOptions,
+  //   AudioConfigProxyApi audioConfig,
+  //   VideoRecordEventConsumerProxyApi listener,
+  // );
+  // void setEffects(List<CameraEffectProxyApi> effects);
+  // void clearEffects();
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewView'))
@@ -809,6 +896,27 @@ abstract class PreviewViewProxyApi {
   void setController(CameraControllerProxyApi? controller);
   PreviewViewScaleTypeApi getScaleType();
   void setScaleType(PreviewViewScaleTypeApi scaleType);
+  // PreviewViewImplementationModeApi getImplementationMode();
+  // void setImplementationMode(
+  //   PreviewViewImplementationModeApi implementationMode,
+  // );
+  // MeteringPointFactoryProxyApi getMeteringPointFactory();
+  // OutputTransformProxyApi? getOutputTransform();
+  // PreviewViewStreamStateApi? getPreviewStreamState();
+  // void observePreviewStreamState(
+  //   PreviewViewStreamStateObserverProxyApi observer,
+  // );
+  // void removePreviewStreamStateObserver(
+  //   PreviewViewStreamStateObserverProxyApi observer,
+  // );
+  // ImageCaptureScreenFalshProxyApi? getScreenFlash();
+  // void setScreenFlashWindow(WindowProxyApi? screenFlashWindow);
+  // void setScreenFlashOverlayColor(int color);
+  // MatrixProxyApi? getSensorToViewTransform();
+  // PreviewSurfaceProviderProxyApi getSurfaceProvider();
+  // VidePortProxyApi? getViewPort1();
+  // VidePortProxyApi? getViewPort2(SurfaceRotationApi targetRotation);
+  // bool onTouchEvent(MotionEventProxyApi event);
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'RotationProvider.Listener'))

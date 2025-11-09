@@ -1,0 +1,39 @@
+import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_platform_interface/camerax_platform_interface.dart';
+
+final class LocationImpl extends Location {
+  final CLLocationProxyApi api;
+
+  LocationImpl.internal(this.api) : super.impl();
+
+  factory LocationImpl() {
+    final api = CLLocationProxyApi();
+    return LocationImpl.internal(api);
+  }
+
+  @override
+  Future<double> getLatitude() => api.getLatitude();
+
+  @override
+  Future<double> getLongitude() => api.getLongitude();
+
+  @override
+  Future<void> setLatitude(double latitudeDegrees) =>
+      api.setLatitude(latitudeDegrees);
+
+  @override
+  Future<void> setLongitude(double longitudeDegrees) =>
+      api.setLongitude(longitudeDegrees);
+}
+
+extension LocationX on Location {
+  CLLocationProxyApi get api {
+    final impl = this;
+    if (impl is! LocationImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension CLLocationProxyApiX on CLLocationProxyApi {
+  Location get impl => LocationImpl.internal(this);
+}

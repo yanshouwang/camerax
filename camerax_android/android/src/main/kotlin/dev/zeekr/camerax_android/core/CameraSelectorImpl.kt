@@ -17,12 +17,16 @@ class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         return builder.build()
     }
 
-    override fun defaultBackCamera(): CameraSelector {
+    override fun back(): CameraSelector {
         return CameraSelector.DEFAULT_BACK_CAMERA
     }
 
-    override fun defaultFrontCamera(): CameraSelector {
+    override fun front(): CameraSelector {
         return CameraSelector.DEFAULT_FRONT_CAMERA
+    }
+
+    override fun external(): CameraSelector {
+        return CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_EXTERNAL).build()
     }
 
     override fun filter(pigeon_instance: CameraSelector, cameraInfos: List<CameraInfo>): List<CameraInfo> {

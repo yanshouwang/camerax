@@ -19,9 +19,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   PermissionManager $PermissionManager() => PermissionManagerImpl();
 
   @override
+  CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
+  @override
   CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
   @override
-  CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
+  CameraSelector get $CameraSelector$External => CameraSelectorImpl.external;
   @override
   CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);

@@ -8,6 +8,8 @@ abstract base class CameraSelector {
   static CameraSelector get back => CameraXPlugin.instance.$CameraSelector$Back;
   static CameraSelector get front =>
       CameraXPlugin.instance.$CameraSelector$Front;
+  static CameraSelector get external =>
+      CameraXPlugin.instance.$CameraSelector$External;
 
   CameraSelector.impl();
 

@@ -10,7 +10,7 @@ extension AVMetadataObjectTypeApiX on AVMetadataObjectTypeApi {
   AVMetadataObjectType get impl => AVMetadataObjectType.values[index];
 }
 
-extension AVMetadataObjectApiX on AVMetadataObject {
+extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
   AVMetadataObject get impl {
     final api = this;
     if (api is AVMetadataCatBodyObject) {

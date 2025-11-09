@@ -4,10 +4,12 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'camera_info_impl.dart';
 
 final class CameraSelectorImpl extends CameraSelector {
-  static CameraSelectorImpl get front =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.defaultFrontCamera);
   static CameraSelectorImpl get back =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.defaultBackCamera);
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
+  static CameraSelectorImpl get front =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
+  static CameraSelectorImpl get external =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
 
   final CameraSelectorProxyApi api;
 

@@ -27,6 +27,9 @@ import dev.zeekr.camerax_android.common.TapToFocusInfoObserverImpl
 import dev.zeekr.camerax_android.common.TorchStateObserverImpl
 import dev.zeekr.camerax_android.common.VideoRecordEventConsumerImpl
 import dev.zeekr.camerax_android.common.ZoomStateObserverImpl
+import dev.zeekr.camerax_android.core.BufferImpl
+import dev.zeekr.camerax_android.core.ByteArrayOutputStreamImpl
+import dev.zeekr.camerax_android.core.ByteBufferImpl
 import dev.zeekr.camerax_android.core.CameraControlImpl
 import dev.zeekr.camerax_android.core.CameraInfoImpl
 import dev.zeekr.camerax_android.core.CameraSelectorImpl
@@ -40,6 +43,8 @@ import dev.zeekr.camerax_android.core.ImageInfoImpl
 import dev.zeekr.camerax_android.core.ImageProxyImpl
 import dev.zeekr.camerax_android.core.MeteringPointFactoryImpl
 import dev.zeekr.camerax_android.core.MeteringPointImpl
+import dev.zeekr.camerax_android.core.NullOutputStreamImpl
+import dev.zeekr.camerax_android.core.OutputStreamImpl
 import dev.zeekr.camerax_android.core.SurfaceOrientedMeteringPointFactoryImpl
 import dev.zeekr.camerax_android.core.ZoomStateImpl
 import dev.zeekr.camerax_android.core.resolutionselector.AspectRatioStrategyImpl
@@ -128,6 +133,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiOutputStreamProxyApi(): PigeonApiOutputStreamProxyApi {
         return OutputStreamImpl(this)
+    }
+
+    override fun getPigeonApiNullOutputStreamProxyApi(): PigeonApiNullOutputStreamProxyApi {
+        return NullOutputStreamImpl(this)
     }
 
     override fun getPigeonApiByteArrayOutputStreamProxyApi(): PigeonApiByteArrayOutputStreamProxyApi {
@@ -499,5 +508,4 @@ fun CameraXApiPigeonProxyApiRegistrar.onDetachedFromActivityForConfigChanges() =
 fun CameraXApiPigeonProxyApiRegistrar.onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) =
     impl.onReattachedToActivityForConfigChanges(binding)
 
-fun CameraXApiPigeonProxyApiRegistrar.onDetachedFromActivity() =
-    impl.onDetachedFromActivity()
+fun CameraXApiPigeonProxyApiRegistrar.onDetachedFromActivity() = impl.onDetachedFromActivity()
