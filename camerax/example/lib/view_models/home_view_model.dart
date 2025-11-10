@@ -15,18 +15,23 @@ typedef ImageModelCallback = void Function(ImageModel imageModel);
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
+  final RotationProvider _rotationProvider;
   final BarcodeScanner _barcodeScanner;
   final FaceDetector _faceDetector;
 
+  RotationProviderListener? _rotationProviderListener;
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
 
+  CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
-  Camera2CameraControl? _camera2Control;
+  Camera2CameraInfo? _camera2CameraInfo;
+  Camera2CameraControl? _camera2CameraControl;
 
   HomeViewModel()
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
+      _rotationProvider = RotationProvider(),
       _barcodeScanner = BarcodeScanner(),
       _faceDetector = FaceDetector(),
       _mode = CameraMode.takePicture,
@@ -141,20 +146,21 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Future<void> bind() async {
     await controller.bind();
     // TODO: How to wait until camera really opened.
-    // const duration = Duration(seconds: 1);
-    // await Future.delayed(duration);
-    // final cameraInfo = await controller.getCameraInfo();
-    // final cameraControl = await controller.getCameraControl();
-    // if (cameraInfo == null || cameraControl == null) {
-    //   return;
-    // }
+    const duration = Duration(seconds: 1);
+    await Future.delayed(duration);
+    final cameraInfo = await controller.getCameraInfo();
+    final cameraControl = await controller.getCameraControl();
+    if (cameraInfo == null || cameraControl == null) {
+      return;
+    }
     // final camera2Info = Camera2CameraInfo.from(cameraInfo);
     // final camera2Control = Camera2CameraControl.from(cameraControl);
     // final exposureState = await cameraInfo.getExposureState();
-    // final exposureTimeRange =
-    //     await camera2Info.getSensorInfoExposureTimeRange();
+    // final exposureTimeRange = await camera2Info
+    //     .getSensorInfoExposureTimeRange();
     // logger.info(
-    //     'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}');
+    //   'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}',
+    // );
     // final exposureTimeState = exposureTimeRange == null
     //     ? null
     //     : LimitedValue(
@@ -162,18 +168,19 @@ class HomeViewModel extends ViewModel with TypeLogger {
     //         maximum: exposureTimeRange.upper,
     //         value: exposureTimeRange.lower,
     //       );
-    // _cameraInfo = cameraInfo;
-    // _cameraControl = cameraControl;
-    // _camera2Info = camera2Info;
-    // _camera2Control = camera2Control;
+    _cameraInfo = cameraInfo;
+    _cameraControl = cameraControl;
+    // _camera2CameraInfo = camera2Info;
+    // _camera2CameraControl = camera2Control;
     // this.exposureState = exposureState;
     // this.exposureTimeState = exposureTimeState;
   }
 
   Future<void> unbind() async {
     await controller.unbind();
+    _cameraInfo = null;
     _cameraControl = null;
-    _camera2Control = null;
+    _camera2CameraControl = null;
     exposureState = null;
     exposureTimeState = null;
   }
@@ -253,7 +260,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> setExposureTime(int? value) async {
-    final control = ArgumentError.checkNotNull(_camera2Control);
+    final control = ArgumentError.checkNotNull(_camera2CameraControl);
     final bundle = value == null
         ? CaptureRequestOptions(aeMode: CameraMetadataControlAeMode.on)
         : CaptureRequestOptions(
@@ -269,6 +276,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> takePicture() async {
+    final info = ArgumentError.checkNotNull(_cameraInfo);
+    final degrees1 = await info.getSensorRotationDegrees();
+    final degrees2 = await info.getSensorRotationDegrees(
+      SurfaceRotation.rotation0,
+    );
+    logger.info('degrees: $degrees1, $degrees2');
     final callback = ImageCaptureOnImageCapturedCallback(
       onCaptureStarted: () {
         logger.info('onCaptureStarted');
@@ -291,7 +304,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
           );
           final file = File(filePath);
           final value = image.planes[0].value;
-          final exif = readExifFromBytes(value);
+          final exif = await readExifFromBytes(value);
           logger.info(exif);
           await file.writeAsBytes(value, flush: true);
           savedUri = file.uri;
@@ -383,6 +396,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.observeZoomState(zoomStateObserver);
     _torchStateObserver = torchStateObserver;
     _zoomStateObserver = zoomStateObserver;
+    final rotationProviderListener = RotationProviderListener(
+      onRotationChanged: (rotation) {
+        logger.info('RotationProviderListener.onRotationChanged: $rotation');
+      },
+    );
+    await _rotationProvider.addListener(rotationProviderListener);
+    _rotationProviderListener = rotationProviderListener;
     await bind();
   }
 
@@ -476,6 +496,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   @override
   void dispose() {
+    final rotationProviderListener = _rotationProviderListener;
+    if (rotationProviderListener != null) {
+      _rotationProvider.removeListener(rotationProviderListener);
+    }
     final torchStateObserver = _torchStateObserver;
     final zoomStateObserver = _zoomStateObserver;
     if (torchStateObserver != null) {
