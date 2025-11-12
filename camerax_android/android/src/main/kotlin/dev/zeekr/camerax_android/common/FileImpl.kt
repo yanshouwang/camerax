@@ -4,4 +4,4 @@ import java.io.File
 
 val File.api: String get() = path
 
-val String.fileImpl get() = File(this)
+val String.fileImpl: File get() = File(this)

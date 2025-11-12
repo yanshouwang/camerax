@@ -7,10 +7,7 @@ import 'package:video_player/video_player.dart';
 class InteractiveView extends StatelessWidget {
   final Uri uri;
 
-  const InteractiveView({
-    super.key,
-    required this.uri,
-  });
+  const InteractiveView({super.key, required this.uri});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +15,9 @@ class InteractiveView extends StatelessWidget {
     return CupertinoPageScaffold(
       child: file.isVideo
           ? Center(
-              child: InteractiveVideo.file(
-                key: ValueKey(uri),
-                file: file,
-              ),
+              child: InteractiveVideo.file(key: ValueKey(uri), file: file),
             )
-          : InteractiveViewer(
-              child: Center(
-                child: Image.file(file),
-              ),
-            ),
+          : InteractiveViewer(child: Center(child: Image.file(file))),
     );
   }
 }
@@ -35,10 +25,7 @@ class InteractiveView extends StatelessWidget {
 class InteractiveVideo extends StatefulWidget {
   final File file;
 
-  const InteractiveVideo.file({
-    super.key,
-    required this.file,
-  });
+  const InteractiveVideo.file({super.key, required this.file});
 
   @override
   State<InteractiveVideo> createState() => _InteractiveVideoState();
@@ -50,9 +37,7 @@ class _InteractiveVideoState extends State<InteractiveVideo> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.file(
-      widget.file,
-    )..initialize();
+    _controller = VideoPlayerController.file(widget.file)..initialize();
   }
 
   @override
@@ -92,9 +77,9 @@ class _InteractiveVideoState extends State<InteractiveVideo> {
                         allowScrubbing: true,
                         colors: VideoProgressColors(
                           playedColor: CupertinoTheme.of(context).primaryColor,
-                          bufferedColor: CupertinoTheme.of(context)
-                              .primaryColor
-                              .withValues(alpha: 0.3),
+                          bufferedColor: CupertinoTheme.of(
+                            context,
+                          ).primaryColor.withValues(alpha: 0.3),
                         ),
                         padding: const EdgeInsets.only(
                           top: 20.0,

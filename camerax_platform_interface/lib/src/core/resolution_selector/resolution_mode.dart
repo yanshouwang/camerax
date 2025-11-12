@@ -1,4 +1,0 @@
-enum ResolutionMode {
-  preferCaptureRateOverHigherResolution,
-  preferHigherResolutionOverCaptureRate,
-}

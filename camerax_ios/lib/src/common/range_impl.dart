@@ -1,30 +1,16 @@
-// import 'package:camerax_ios/src/camerax.g.dart';
+// import 'package:camerax_ios/src/camerax_api.g.dart';
 // import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 // extension IntRangeX on Range<int> {
-//   IntRangeApi get intRangeApi {
-//     return IntRangeApi(
-//       lower: lower,
-//       upper: upper,
-//     );
-//   }
-
-//   LongRangeApi get longRangeApi {
-//     return LongRangeApi(
-//       lower: lower,
-//       upper: upper,
-//     );
-//   }
+//   IntRangeProxyApi get intApi => IntRangeProxyApi(lower: lower, upper: upper);
+//   LongRangeProxyApi get longApi =>
+//       LongRangeProxyApi(lower: lower, upper: upper);
 // }
 
-// extension IntRangeApiX on IntRangeApi {
-//   Range<int> get impl {
-//     return Range(lower, upper);
-//   }
+// extension IntRangeProxyApiX on IntRangeProxyApi {
+//   Range<int> get impl => Range(lower, upper);
 // }
 
-// extension LongRangeApiX on LongRangeApi {
-//   Range<int> get impl {
-//     return Range(lower, upper);
-//   }
+// extension LongRangeProxyApiX on LongRangeProxyApi {
+//   Range<int> get impl => Range(lower, upper);
 // }

@@ -1,68 +1,35 @@
 import 'dart:async';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 
-import 'package:camerax_ios/src/camerax.g.dart';
+import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_ios/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'use_case_impl.dart';
+// import 'tap_to_focus_info_impl.dart';
+import 'video.dart';
 
 final class CameraControllerImpl extends CameraController {
-  final CameraControllerApi api;
+  final CameraControllerProxyApi api;
 
-  late final StreamController<TorchState> _torchStateChangedController;
-  late final StreamController<ZoomState> _zoomStateChangedController;
-
-  Future<TorchStateObserverApi>? _torchStateObserverApiFuture;
-  Future<ZoomStateObserverApi>? _zoomStateObserverApiFuture;
-
-  CameraControllerImpl.internal(this.api) : super.impl() {
-    _torchStateChangedController = StreamController.broadcast(
-      onListen: _listenTorchStateChanged,
-      onCancel: _cancelTorchStateChanged,
-    );
-    _zoomStateChangedController = StreamController.broadcast(
-      onListen: _listenZoomStateChanged,
-      onCancel: _cancelZoomStateChanged,
-    );
-  }
-
-  @override
-  Stream<TorchState> get torchStateChanged =>
-      _torchStateChangedController.stream;
-  @override
-  Stream<ZoomState> get zoomStateChanged => _zoomStateChangedController.stream;
+  CameraControllerImpl.internal(this.api) : super.impl();
 
   factory CameraControllerImpl() {
-    final api = CameraControllerApi();
+    final api = CameraControllerProxyApi();
     return CameraControllerImpl.internal(api);
   }
 
   @override
-  Future<void> initialize() => api.initialize();
-
-  @override
-  Future<bool> hasCamera(CameraSelector cameraSelector) {
-    if (cameraSelector is! CameraSelectorImpl) {
-      throw TypeError();
-    }
-    return api.hasCamera(cameraSelector.api);
-  }
+  Future<bool> hasCamera(CameraSelector cameraSelector) =>
+      api.hasCamera(cameraSelector.api);
 
   @override
   Future<CameraSelector> getCameraSelector() =>
       api.getCameraSelector().then((e) => e.impl);
 
   @override
-  Future<void> setCameraSelector(CameraSelector cameraSelector) {
-    if (cameraSelector is! CameraSelectorImpl) {
-      throw TypeError();
-    }
-    return api.setCameraSelector(cameraSelector.api);
-  }
+  Future<void> setCameraSelector(CameraSelector cameraSelector) =>
+      api.setCameraSelector(cameraSelector.api);
 
   @override
   Future<CameraInfo?> getCameraInfo() =>
@@ -80,14 +47,13 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e.getValue()).then((e) => e?.impl);
+      api.getTorchState().then((e) => e?.impl);
 
   @override
   Future<void> enableTorch(bool enabled) => api.enableTorch(enabled);
 
   @override
-  Future<ZoomState?> getZoomState() =>
-      api.getZoomState().then((e) => e.getValue()).then((e) => e?.impl);
+  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
 
   @override
   Future<void> setZoomRatio(double zoomRatio) => api.setZoomRatio(zoomRatio);
@@ -120,7 +86,7 @@ final class CameraControllerImpl extends CameraController {
   Future<bool> isVideoCaptureEnabled() => api.isVideoCaptureEnabled();
 
   @override
-  Future<void> setEnabledUseCases(List<UseCase> useCases) {
+  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases) {
     final useCaseApis = useCases.map((e) => e.api).toList();
     return api.setEnabledUseCases(useCaseApis);
   }
@@ -148,63 +114,25 @@ final class CameraControllerImpl extends CameraController {
   // api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<CaptureMode> getImageCaptureMode() =>
+  Future<ImageCaptureCaptureMode> getImageCaptureMode() =>
       api.getImageCaptureMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureMode(CaptureMode captureMode) =>
+  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode) =>
       api.setImageCaptureMode(captureMode.api);
 
   @override
-  Future<FlashMode> getImageCaptureFlashMode() =>
+  Future<ImageCaptureFlashMode> getImageCaptureFlashMode() =>
       api.getImageCaptureFlashMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureFlashMode(FlashMode flashMode) =>
+  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode) =>
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
-  Future<void> takePicture({
-    CaptureStartedCallback? onCaptureStarted,
-    CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    CaptureSuccessCallback? onCaptureSuccess,
-    CaptureErrorCallback? onError,
-  }) {
-    final callbackApi = OnImageCapturedCallbackApi(
-      onCaptureStarted:
-          onCaptureStarted == null ? null : (_) => onCaptureStarted(),
-      onCaptureProcessProgressed:
-          onCaptureProcessProgressed == null
-              ? null
-              : (_, progress) => onCaptureProcessProgressed(progress),
-      onPostviewBitmapAvailable:
-          onPostviewBitmapAvailable == null
-              ? null
-              : (_, bitmapApi) async {
-                final bitmap = await _decodeImage(bitmapApi);
-                onPostviewBitmapAvailable(bitmap);
-              },
-      onCaptureSuccess:
-          onCaptureSuccess == null
-              ? null
-              : (_, imageApi) => onCaptureSuccess(imageApi.impl),
-      onError:
-          onError == null
-              ? null
-              : (_, exceptionApi) => onError(exceptionApi.impl),
-    );
-    return api.takePicture(callbackApi);
-  }
-
-  Future<ui.Image> _decodeImage(Uint8List value) async {
-    final buffer = await ui.ImmutableBuffer.fromUint8List(value);
-    final descriptor = await ui.ImageDescriptor.encoded(buffer);
-    final codec = await descriptor.instantiateCodec();
-    final frame = await codec.getNextFrame();
-    final image = frame.image;
-    return image;
-  }
+  Future<void> takePicture(
+    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+  ) => api.takePicture1(imageCapturedCallback.api);
 
   @override
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector() =>
@@ -216,12 +144,12 @@ final class CameraControllerImpl extends CameraController {
   ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy() =>
+  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy() =>
       api.getImageAnalysisBackpressureStrategy().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-    BackpressureStrategy strategy,
+    ImageAnalysisStrategy strategy,
   ) => api.setImageAnalysisBackpressureStrategy(strategy.api);
 
   @override
@@ -233,20 +161,17 @@ final class CameraControllerImpl extends CameraController {
       api.setImageAnalysisImageQueueDepth(depth);
 
   @override
-  Future<ImageFormat> getImageAnalysisOutputImageFormat() =>
+  Future<ImageAnalysisOutputImageFormat> getImageAnalysisOutputImageFormat() =>
       api.getImageAnalysisOutputImageFormat().then((e) => e.impl);
 
   @override
-  Future<void> setImageAnalysisOutputImageFormat(ImageFormat format) =>
-      api.setImageAnalysisOutputImageFormat(format.api);
+  Future<void> setImageAnalysisOutputImageFormat(
+    ImageAnalysisOutputImageFormat format,
+  ) => api.setImageAnalysisOutputImageFormat(format.api);
 
   @override
-  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer) {
-    if (analyzer is! AnalyzerImpl) {
-      throw TypeError();
-    }
-    return api.setImageAnalysisAnalyzer(analyzer.api);
-  }
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer) =>
+      api.setImageAnalysisAnalyzer(analyzer.api);
 
   @override
   Future<void> clearImageAnalysisAnalyzer() => api.clearImageAnalysisAnalyzer();
@@ -278,12 +203,7 @@ final class CameraControllerImpl extends CameraController {
   Future<void> setVideoCaptureQualitySelector(
     QualitySelector qualitySelector,
   ) => throw UnimplementedError();
-  // {
-  //   if (qualitySelector is! QualitySelectorImpl) {
-  //     throw TypeError();
-  //   }
-  //   return api.setVideoCaptureQualitySelector(qualitySelector.api);
-  // }
+  // api.setVideoCaptureQualitySelector(qualitySelector.api);
 
   @override
   Future<Range<int>> getVideoCaptureTargetFrameRate() =>
@@ -293,100 +213,72 @@ final class CameraControllerImpl extends CameraController {
   @override
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) =>
       throw UnimplementedError();
-  // api.setVideoCaptureTargetFrameRate(targetFrameRate.intRangeApi);
+  // api.setVideoCaptureTargetFrameRate(targetFrameRate.intApi);
 
   @override
   Future<bool> isRecording() => api.isRecording();
 
   @override
-  Future<Recording> startRecording(
-    FileOutputOptions outputOptions, {
+  Future<Recording> startRecording({
+    required FileOutputOptions outputOptions,
     required AudioConfig audioConfig,
-    required VideoRecordEventConsumer listener,
-  }) {
-    if (outputOptions is! FileOutputOptionsImpl) {
-      throw TypeError();
-    }
-    return api
-        .startRecording(
-          outputOptions.api,
-          audioConfig.api,
-          VideoRecordEventConsumerApi(
-            accept: (_, eventApi) => listener(eventApi.impl),
-          ),
-        )
-        .then((e) => e.impl);
-  }
+    required Consumer<VideoRecordEvent> listener,
+  }) => api
+      .startRecording1(outputOptions.api, audioConfig.api, listener.api)
+      .then((e) => e.impl);
 
-  void _listenTorchStateChanged() async {
-    final completer = Completer<TorchStateObserverApi>();
-    try {
-      final future = _torchStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _torchStateObserverApiFuture = completer.future;
-      final liveDataApi = await api.getTorchState();
-      final observerApi = TorchStateObserverApi(
-        onChanged: (_, e) {
-          _torchStateChangedController.add(e.impl);
-        },
-      );
-      await liveDataApi.observe(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _torchStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> observeTorchState(Observer<TorchState> observer) =>
+      api.observeTorchState(observer.api);
 
-  void _cancelTorchStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_torchStateObserverApiFuture);
-      _torchStateObserverApiFuture = null;
-      final liveDataApi = await api.getTorchState();
-      final observerApi = await future;
-      await liveDataApi.removeObserver(observerApi);
-    } catch (e) {
-      _torchStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> observeZoomState(Observer<ZoomState> observer) =>
+      api.observeZoomState(observer.api);
 
-  void _listenZoomStateChanged() async {
-    final completer = Completer<ZoomStateObserverApi>();
-    try {
-      final future = _zoomStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _zoomStateObserverApiFuture = completer.future;
-      final liveDataApi = await api.getZoomState();
-      final observerApi = ZoomStateObserverApi(
-        onChanged: (_, e) {
-          try {
-            _zoomStateChangedController.add(e.impl);
-          } catch (e) {
-            _zoomStateChangedController.addError(e);
-          }
-        },
-      );
-      await liveDataApi.observe(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _zoomStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
+      api.removeTorchStateObserver(observer.api);
 
-  void _cancelZoomStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_zoomStateObserverApiFuture);
-      _zoomStateObserverApiFuture = null;
-      final liveDataApi = await api.getZoomState();
-      final observerApi = await future;
-      await liveDataApi.removeObserver(observerApi);
-    } catch (e) {
-      _zoomStateChangedController.addError(e);
-    }
+  @override
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
+      api.removeZoomStateObserver(observer.api);
+
+  @override
+  Future<TapToFocusInfo?> getTapToFocusInfoState() =>
+      throw UnimplementedError();
+  // api.getTapToFocusInfoState().then((e) => e?.impl);
+
+  @override
+  Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer) =>
+      throw UnimplementedError();
+  // api.observeTapToFocusInfoState(observer.api);
+
+  @override
+  Future<void> removeTapToFocusInfoStateObserver(
+    Observer<TapToFocusInfo> observer,
+  ) => throw UnimplementedError();
+  // api.removeTapToFocusInfoStateObserver(observer.api);
+
+  @override
+  Future<void> setTapToFocusAutoCancelDuration(Duration duration) =>
+      throw UnimplementedError();
+  // api.setTapToFocusAutoCancelDuration(duration.api);
+}
+
+// extension CameraControllerTapToFocusApiX on CameraControllerTapToFocusApi {
+//   CameraControllerTapToFocus get impl =>
+//       CameraControllerTapToFocus.values[index];
+// }
+
+extension CameraControllerUseCaseX on CameraControllerUseCase {
+  CameraControllerUseCaseApi get api =>
+      CameraControllerUseCaseApi.values[index];
+}
+
+extension CameraControllerX on CameraController {
+  CameraControllerProxyApi get api {
+    final impl = this;
+    if (impl is! CameraControllerImpl) throw TypeError();
+    return impl.api;
   }
 }

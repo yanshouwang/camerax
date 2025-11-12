@@ -1,20 +1,20 @@
 import 'package:camerax_android/src/camera2.dart';
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
-  final CaptureRequestOptionsApi api;
+  final CaptureRequestOptionsProxyApi api;
 
   CaptureRequestOptionsImpl.internal(this.api) : super.impl();
 
   factory CaptureRequestOptionsImpl({
-    ControlMode? mode,
-    ControlAeMode? aeMode,
-    ControlAfMode? afMode,
-    ControlAwbMode? awbMode,
+    CameraMetadataControlMode? mode,
+    CameraMetadataControlAeMode? aeMode,
+    CameraMetadataControlAfMode? afMode,
+    CameraMetadataControlAwbMode? awbMode,
     int? sensorExposureTime,
   }) {
-    final api = CaptureRequestOptionsApi.build(
+    final api = CaptureRequestOptionsProxyApi.build(
       mode: mode?.api,
       aeMode: aeMode?.api,
       afMode: afMode?.api,
@@ -25,6 +25,14 @@ final class CaptureRequestOptionsImpl extends CaptureRequestOptions {
   }
 }
 
-extension CaptureRequestOptioinsApiX on CaptureRequestOptionsApi {
+extension CaptureRequestOptionsX on CaptureRequestOptions {
+  CaptureRequestOptionsProxyApi get api {
+    final impl = this;
+    if (impl is! CaptureRequestOptionsImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension CaptureRequestOptionsProxyApiX on CaptureRequestOptionsProxyApi {
   CaptureRequestOptions get impl => CaptureRequestOptionsImpl.internal(this);
 }

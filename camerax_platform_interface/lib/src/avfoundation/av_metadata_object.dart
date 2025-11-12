@@ -1,5 +1,7 @@
 import 'package:camerax_platform_interface/src/common.dart';
 
+import 'av_capture_device.dart';
+
 enum AVMetadataObjectType {
   codabar,
   code39,
@@ -22,7 +24,9 @@ enum AVMetadataObjectType {
   qr,
   humanBody,
   humanFullBody,
+  dogHead,
   dogBody,
+  catHead,
   catBody,
   face,
   salientObject;
@@ -55,7 +59,9 @@ enum AVMetadataObjectType {
   static List<AVMetadataObjectType> get bodies => [
     AVMetadataObjectType.humanBody,
     AVMetadataObjectType.humanFullBody,
+    AVMetadataObjectType.dogHead,
     AVMetadataObjectType.dogBody,
+    AVMetadataObjectType.catHead,
     AVMetadataObjectType.catBody,
   ];
 
@@ -67,113 +73,66 @@ enum AVMetadataObjectType {
 }
 
 abstract base class AVMetadataObject {
-  final AVMetadataObjectType type;
-  final DateTime time;
-  final Duration duration;
-  final Rect<double> bounds;
+  AVMetadataObject.impl();
 
-  const AVMetadataObject.impl({
-    required this.type,
-    required this.time,
-    required this.duration,
-    required this.bounds,
-  });
+  Future<AVMetadataObjectType> getType();
+  Future<DateTime> getTime();
+  Future<Duration> getDuration();
+  Future<Rect<double>> getBounds();
+  Future<bool> isFixedFocus();
+  Future<AVCaptureDeviceCinematicVideoFocusMode> getCinematicVideoFocusMode();
+  Future<int> getGroupID();
+  Future<int> getObjectID();
+}
+
+abstract base class AVMetadataCatHeadObject extends AVMetadataObject {
+  AVMetadataCatHeadObject.impl() : super.impl();
+}
+
+abstract base class AVMetadataDogHeadObject extends AVMetadataObject {
+  AVMetadataDogHeadObject.impl() : super.impl();
 }
 
 abstract base class AVMetadataBodyObject extends AVMetadataObject {
-  final int bodyID;
+  AVMetadataBodyObject.impl() : super.impl();
 
-  const AVMetadataBodyObject.impl({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required this.bodyID,
-  }) : super.impl();
+  Future<int> getBodyID();
 }
 
-final class AVMetadataCatBodyObject extends AVMetadataBodyObject {
-  const AVMetadataCatBodyObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required super.bodyID,
-  }) : super.impl();
+abstract base class AVMetadataCatBodyObject extends AVMetadataBodyObject {
+  AVMetadataCatBodyObject.impl() : super.impl();
 }
 
-final class AVMetadataDogBodyObject extends AVMetadataBodyObject {
-  const AVMetadataDogBodyObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required super.bodyID,
-  }) : super.impl();
+abstract base class AVMetadataDogBodyObject extends AVMetadataBodyObject {
+  AVMetadataDogBodyObject.impl() : super.impl();
 }
 
-final class AVMetadataHumanBodyObject extends AVMetadataBodyObject {
-  const AVMetadataHumanBodyObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required super.bodyID,
-  }) : super.impl();
+abstract base class AVMetadataHumanBodyObject extends AVMetadataBodyObject {
+  AVMetadataHumanBodyObject.impl() : super.impl();
 }
 
-final class AVMetadataHumanFullBodyObject extends AVMetadataBodyObject {
-  const AVMetadataHumanFullBodyObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required super.bodyID,
-  }) : super.impl();
+abstract base class AVMetadataHumanFullBodyObject extends AVMetadataBodyObject {
+  AVMetadataHumanFullBodyObject.impl() : super.impl();
 }
 
-final class AVMetadataFaceObject extends AVMetadataObject {
-  final int faceID;
-  final bool hasRollAngle;
-  final double rollAngle;
-  final bool hasYawAngle;
-  final double yawAngle;
+abstract base class AVMetadataFaceObject extends AVMetadataObject {
+  AVMetadataFaceObject.impl() : super.impl();
 
-  const AVMetadataFaceObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required this.faceID,
-    required this.hasRollAngle,
-    required this.rollAngle,
-    required this.hasYawAngle,
-    required this.yawAngle,
-  }) : super.impl();
+  Future<int> getFaceID();
+  Future<bool> hasRollAngle();
+  Future<double> getRollAngle();
+  Future<bool> hasYawAngle();
+  Future<double> getYawAngle();
 }
 
-final class AVMetadataMachineReadableCodeObject extends AVMetadataObject {
-  final List<Point<double>> corners;
-  final String? stringValue;
+abstract base class AVMetadataMachineReadableCodeObject
+    extends AVMetadataObject {
+  AVMetadataMachineReadableCodeObject.impl() : super.impl();
 
-  const AVMetadataMachineReadableCodeObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required this.corners,
-    required this.stringValue,
-  }) : super.impl();
+  Future<List<Point<double>>> getCorners();
+  Future<String?> getStringValue();
 }
 
-final class AVMetadataSalientObject extends AVMetadataObject {
-  final int objectID;
-
-  const AVMetadataSalientObject({
-    required super.type,
-    required super.time,
-    required super.duration,
-    required super.bounds,
-    required this.objectID,
-  }) : super.impl();
+abstract base class AVMetadataSalientObject extends AVMetadataObject {
+  AVMetadataSalientObject.impl() : super.impl();
 }

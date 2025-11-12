@@ -1,37 +1,27 @@
-import 'package:camerax_ios/src/camerax.g.dart';
+import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class PermissionManagerImpl extends PermissionManager {
-  final PermissionManagerApi api;
+  final PermissionManagerProxyApi api;
 
   PermissionManagerImpl.internal(this.api) : super.impl();
 
   factory PermissionManagerImpl() {
-    final api = PermissionManagerApi.instance;
+    final api = PermissionManagerProxyApi.instance;
     return PermissionManagerImpl.internal(api);
   }
 
   @override
-  Future<bool> checkPermission(Permission permission) async {
-    final isGranted = await api.checkPermissioin(permission.api);
-    return isGranted;
-  }
+  Future<bool> checkPermission(PermissionManagerPermission permission) =>
+      api.checkPermissioin(permission.api);
 
   @override
-  Future<bool> requestPermissions(List<Permission> permissions) async {
-    final permissionApis = permissions.map((e) => e.api).toList();
-    final isGranted = await api.requestPermissions(permissionApis);
-    return isGranted;
-  }
+  Future<bool> requestPermissions(
+    List<PermissionManagerPermission> permissions,
+  ) => api.requestPermissions(permissions.map((e) => e.api).toList());
 }
 
-extension PermissionX on Permission {
-  PermissionApi get api {
-    switch (this) {
-      case Permission.video:
-        return PermissionApi.video;
-      case Permission.audio:
-        return PermissionApi.audio;
-    }
-  }
+extension PermissionManagerPermissionX on PermissionManagerPermission {
+  PermissionManagerPermissionApi get api =>
+      PermissionManagerPermissionApi.values[index];
 }

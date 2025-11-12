@@ -1,7 +1,5 @@
-final class OutputResults {
-  final Uri? outputUri;
+abstract base class OutputResults {
+  OutputResults.impl();
 
-  const OutputResults({
-    required this.outputUri,
-  });
+  Uri? get outputUri;
 }

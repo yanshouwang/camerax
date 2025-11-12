@@ -1,33 +1,25 @@
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/core/aspect_ratio.dart';
 
-import 'aspect_ratio_fallback_rule.dart';
+enum AspectRatioStrategyFallbackRule { none, auto }
 
-final class AspectRatioStrategy {
-  static const ratio4_3FallbackAutoStrategy = AspectRatioStrategy(
-    preferredAspectRatio: AspectRatio.ratio4_3,
-    fallbackRule: AspectRatioFallbackRule.auto,
+abstract base class AspectRatioStrategy {
+  static AspectRatioStrategy get ratio4_3FallbackAutoStrategy =>
+      CameraXPlugin.instance.$AspectRatioStrategy$Ratio4_3FallbackAutoStrategy;
+
+  static AspectRatioStrategy get ratio16_9FallbackAutoStrategy =>
+      CameraXPlugin.instance.$AspectRatioStrategy$Ratio16_9FallbackAutoStrategy;
+
+  AspectRatioStrategy.impl();
+
+  factory AspectRatioStrategy({
+    required AspectRatio preferredAspectRatio,
+    required AspectRatioStrategyFallbackRule fallbackRule,
+  }) => CameraXPlugin.instance.$AspectRatioStrategy(
+    preferredAspectRatio: preferredAspectRatio,
+    fallbackRule: fallbackRule,
   );
 
-  static const ratio16_9FallbackAutoStrategy = AspectRatioStrategy(
-    preferredAspectRatio: AspectRatio.ratio16_9,
-    fallbackRule: AspectRatioFallbackRule.auto,
-  );
-
-  final AspectRatio preferredAspectRatio;
-  final AspectRatioFallbackRule fallbackRule;
-
-  const AspectRatioStrategy({
-    required this.preferredAspectRatio,
-    required this.fallbackRule,
-  });
-
-  @override
-  int get hashCode => Object.hash(preferredAspectRatio, fallbackRule);
-
-  @override
-  bool operator ==(Object other) {
-    return other is AspectRatioStrategy &&
-        other.preferredAspectRatio == preferredAspectRatio &&
-        other.fallbackRule == fallbackRule;
-  }
+  Future<AspectRatioStrategyFallbackRule> getFallbackRule();
+  Future<AspectRatio> getPreferredAspectRatio();
 }

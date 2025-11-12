@@ -1,3 +1,8 @@
+## 1.0.2
+
+* Add `RotationProvider` API.
+* Add vision APIs.
+
 ## 1.0.1
 
 * Bump version.

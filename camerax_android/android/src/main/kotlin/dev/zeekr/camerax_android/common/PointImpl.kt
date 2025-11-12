@@ -1,10 +1,10 @@
 package dev.zeekr.camerax_android.common
 
 import android.graphics.Point
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiPointApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiPointProxyApi
 
-class PointImpl(impl: CameraXImpl) : PigeonApiPointApi(impl) {
+class PointImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiPointProxyApi(registrar) {
     override fun pigeon_defaultConstructor(x: Long, y: Long): Point {
         return Point(x.toInt(), y.toInt())
     }

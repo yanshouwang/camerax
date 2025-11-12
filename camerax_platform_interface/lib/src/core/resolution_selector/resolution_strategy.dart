@@ -1,29 +1,28 @@
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
 
-import 'resolution_fallback_rule.dart';
+enum ResolutionStrategyFallbackRule {
+  none,
+  closestHigherThenLower,
+  closestHigher,
+  closestLowerThenHigher,
+  closestLower,
+}
 
-final class ResolutionStrategy {
-  static const highestAvailableStrategy = ResolutionStrategy._();
+abstract base class ResolutionStrategy {
+  static ResolutionStrategy get highestAvailableStrategy =>
+      CameraXPlugin.instance.$ResolutionStrategy$HighestAvailableStrategy;
 
-  final Size<int>? boundSize;
-  final ResolutionFallbackRule fallbackRule;
+  ResolutionStrategy.impl();
 
-  const ResolutionStrategy._()
-    : boundSize = null,
-      fallbackRule = ResolutionFallbackRule.none;
+  factory ResolutionStrategy({
+    required Size<int> boundSize,
+    required ResolutionStrategyFallbackRule fallbackRule,
+  }) => CameraXPlugin.instance.$ResolutionStrategy(
+    boundSize: boundSize,
+    fallbackRule: fallbackRule,
+  );
 
-  const ResolutionStrategy({
-    required Size<int> this.boundSize,
-    required this.fallbackRule,
-  });
-
-  @override
-  int get hashCode => Object.hash(boundSize, fallbackRule);
-
-  @override
-  bool operator ==(Object other) {
-    return other is ResolutionStrategy &&
-        other.boundSize == boundSize &&
-        other.fallbackRule == fallbackRule;
-  }
+  Future<Size<int>?> getBoundSize();
+  Future<ResolutionStrategyFallbackRule> getFallbackRule();
 }

@@ -1,5 +1,1 @@
-enum MirrorMode {
-  off,
-  on,
-  onFrontOnly,
-}
+enum MirrorMode { off, on, onFrontOnly }

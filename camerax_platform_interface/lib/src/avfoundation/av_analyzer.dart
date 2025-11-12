@@ -4,17 +4,17 @@ import 'package:camerax_platform_interface/src/core.dart';
 
 import 'av_metadata_object.dart';
 
-abstract base class AVAnalyzer extends Analyzer {
+abstract base class AVAnalyzerResult {
+  List<AVMetadataObject> get objects;
+
+  AVAnalyzerResult.impl();
+}
+
+abstract base class AVAnalyzer extends ImageAnalysisAnalyzer {
   AVAnalyzer.impl() : super.impl();
 
   factory AVAnalyzer({
     List<AVMetadataObjectType>? types,
     required Consumer<AVAnalyzerResult> consumer,
-  }) => CameraXPlugin.instance.newAVAnalyzer(types: types, consumer: consumer);
-}
-
-final class AVAnalyzerResult {
-  final List<AVMetadataObject> objects;
-
-  const AVAnalyzerResult({required this.objects});
+  }) => CameraXPlugin.instance.$AVAnalyzer(types: types, consumer: consumer);
 }

@@ -1,7 +1,5 @@
 abstract base class MeteringPoint {
-  final double size;
+  MeteringPoint.impl();
 
-  MeteringPoint.impl({
-    required this.size,
-  });
+  double get size;
 }

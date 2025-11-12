@@ -6,16 +6,18 @@ abstract base class FallbackStrategy {
   FallbackStrategy.impl();
 
   factory FallbackStrategy.higherQualityOrLowerThan(Quality quality) =>
-      CameraXPlugin.instance
-          .newFallbackStrategyHigherQualityOrLowerThan(quality);
+      CameraXPlugin.instance.$FallbackStrategy$HigherQualityOrLowerThan(
+        quality,
+      );
 
   factory FallbackStrategy.higherQualityThan(Quality quality) =>
-      CameraXPlugin.instance.newFallbackStrategyHigherQualityThan(quality);
+      CameraXPlugin.instance.$FallbackStrategy$HigherQualityThan(quality);
 
   factory FallbackStrategy.lowerQualityOrHigherThan(Quality quality) =>
-      CameraXPlugin.instance
-          .newFallbackStrategyLowerQualityOrHigherThan(quality);
+      CameraXPlugin.instance.$FallbackStrategy$LowerQualityOrHigherThan(
+        quality,
+      );
 
   factory FallbackStrategy.lowerQualityThan(Quality quality) =>
-      CameraXPlugin.instance.newFallbackStrategyLowerQualityThan(quality);
+      CameraXPlugin.instance.$FallbackStrategy$LowerQualityThan(quality);
 }

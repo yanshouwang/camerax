@@ -1,55 +1,44 @@
-import 'bit_depth.dart';
-import 'encoding.dart';
+import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 
-final class DynamicRange {
-  final Encoding encoding;
-  final BitDepth bitDepth;
+enum DynamicRangeEncoding {
+  unspecified,
+  sdr,
+  hdrUnspecified,
+  hlg,
+  hdr10,
+  hdr10Plus,
+  dolbyVision,
+}
 
-  const DynamicRange({
-    required this.encoding,
-    required this.bitDepth,
-  });
+enum DynamicRangeBitDepth { unspecified, eightBit, tenBit }
 
-  static const unspecifid = DynamicRange(
-    encoding: Encoding.unspecified,
-    bitDepth: BitDepth.bitDepthUnspecified,
-  );
-  static const sdr = DynamicRange(
-    encoding: Encoding.sdr,
-    bitDepth: BitDepth.bitDepth8Bit,
-  );
-  static const hdrUnspecified10Bit = DynamicRange(
-    encoding: Encoding.hdrUnspecified,
-    bitDepth: BitDepth.bitDepth10Bit,
-  );
-  static const hlg10Bit = DynamicRange(
-    encoding: Encoding.hlg,
-    bitDepth: BitDepth.bitDepth10Bit,
-  );
-  static const hdr10_10Bit = DynamicRange(
-    encoding: Encoding.hdr10,
-    bitDepth: BitDepth.bitDepth10Bit,
-  );
-  static const hdr10Plus10Bit = DynamicRange(
-    encoding: Encoding.hdr10Plus,
-    bitDepth: BitDepth.bitDepth10Bit,
-  );
-  static const dolbyVision8Bit = DynamicRange(
-    encoding: Encoding.dolbyVision,
-    bitDepth: BitDepth.bitDepth8Bit,
-  );
-  static const dolbyVision10Bit = DynamicRange(
-    encoding: Encoding.dolbyVision,
-    bitDepth: BitDepth.bitDepth10Bit,
+abstract base class DynamicRange {
+  static DynamicRange get unspecifid =>
+      CameraXPlugin.instance.$DynamicRange$Unspecifid;
+  static DynamicRange get sdr => CameraXPlugin.instance.$DynamicRange$Sdr;
+  static DynamicRange get hdrUnspecified10Bit =>
+      CameraXPlugin.instance.$DynamicRange$HdrUnspecified10Bit;
+  static DynamicRange get hdr10_10Bit =>
+      CameraXPlugin.instance.$DynamicRange$Hdr10_10Bit;
+  static DynamicRange get hdr10Plus10Bit =>
+      CameraXPlugin.instance.$DynamicRange$Hdr10Plus10Bit;
+  static DynamicRange get hlg10Bit =>
+      CameraXPlugin.instance.$DynamicRange$Hlg10Bit;
+  static DynamicRange get dolbyVision8Bit =>
+      CameraXPlugin.instance.$DynamicRange$DolbyVision8Bit;
+  static DynamicRange get dolbyVision10Bit =>
+      CameraXPlugin.instance.$DynamicRange$DolbyVision10Bit;
+
+  DynamicRange.impl();
+
+  factory DynamicRange({
+    required DynamicRangeEncoding encoding,
+    required DynamicRangeBitDepth bitDepth,
+  }) => CameraXPlugin.instance.$DynamicRange(
+    encoding: encoding,
+    bitDepth: bitDepth,
   );
 
-  @override
-  int get hashCode => Object.hash(encoding, bitDepth);
-
-  @override
-  bool operator ==(Object other) {
-    return other is DynamicRange &&
-        other.encoding == encoding &&
-        other.bitDepth == bitDepth;
-  }
+  Future<DynamicRangeBitDepth> getBitDepth();
+  Future<DynamicRangeEncoding> getEncoding();
 }

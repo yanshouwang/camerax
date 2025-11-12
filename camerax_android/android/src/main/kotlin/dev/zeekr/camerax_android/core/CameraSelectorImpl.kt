@@ -1,13 +1,15 @@
 package dev.zeekr.camerax_android.core
 
+import androidx.annotation.OptIn
+import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalLensFacing
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.LensFacingApi
-import dev.zeekr.camerax_android.PigeonApiCameraSelectorApi
+import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiCameraSelectorProxyApi
 
-class CameraSelectorImpl(impl: CameraXImpl) : PigeonApiCameraSelectorApi(impl) {
-    override fun pigeon_defaultConstructor(lensFacing: LensFacingApi?): CameraSelector {
+class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorProxyApi(registrar) {
+    override fun build(lensFacing: CameraSelectorLensFacingApi?): CameraSelector {
         val builder = CameraSelector.Builder()
         if (lensFacing != null) {
             builder.requireLensFacing(lensFacing.impl)
@@ -15,33 +17,43 @@ class CameraSelectorImpl(impl: CameraXImpl) : PigeonApiCameraSelectorApi(impl) {
         return builder.build()
     }
 
-    override fun front(): CameraSelector {
-        return CameraSelector.DEFAULT_FRONT_CAMERA
-    }
-
     override fun back(): CameraSelector {
         return CameraSelector.DEFAULT_BACK_CAMERA
     }
 
-    @ExperimentalLensFacing
+    override fun front(): CameraSelector {
+        return CameraSelector.DEFAULT_FRONT_CAMERA
+    }
+
+    @OptIn(ExperimentalLensFacing::class)
     override fun external(): CameraSelector {
         return CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_EXTERNAL).build()
     }
-}
 
-val LensFacingApi.impl
-    @ExperimentalLensFacing get() = when (this) {
-        LensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
-        LensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
-        LensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
-        LensFacingApi.EXTERNAL -> CameraSelector.LENS_FACING_EXTERNAL
+    override fun filter(pigeon_instance: CameraSelector, cameraInfos: List<CameraInfo>): List<CameraInfo> {
+        return pigeon_instance.filter(cameraInfos)
     }
 
-val Int.lensFacingApi
-    @ExperimentalLensFacing get() = when (this) {
-        CameraSelector.LENS_FACING_UNKNOWN -> LensFacingApi.UNKNOWN
-        CameraSelector.LENS_FACING_FRONT -> LensFacingApi.FRONT
-        CameraSelector.LENS_FACING_BACK -> LensFacingApi.BACK
-        CameraSelector.LENS_FACING_EXTERNAL -> LensFacingApi.EXTERNAL
-        else -> throw IllegalArgumentException()
+    override fun getPhysicalCameraId(pigeon_instance: CameraSelector): String? {
+        return pigeon_instance.physicalCameraId
+    }
+}
+
+val CameraSelectorLensFacingApi.impl: Int
+    @OptIn(ExperimentalLensFacing::class)
+    get() = when (this) {
+        CameraSelectorLensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
+        CameraSelectorLensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
+        CameraSelectorLensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
+        CameraSelectorLensFacingApi.EXTERNAL -> CameraSelector.LENS_FACING_EXTERNAL
+    }
+
+val Int.cameraSelectorLensFacingApi: CameraSelectorLensFacingApi
+    @OptIn(ExperimentalLensFacing::class)
+    get() = when (this) {
+        CameraSelector.LENS_FACING_UNKNOWN -> CameraSelectorLensFacingApi.UNKNOWN
+        CameraSelector.LENS_FACING_FRONT -> CameraSelectorLensFacingApi.FRONT
+        CameraSelector.LENS_FACING_BACK -> CameraSelectorLensFacingApi.BACK
+        CameraSelector.LENS_FACING_EXTERNAL -> CameraSelectorLensFacingApi.EXTERNAL
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

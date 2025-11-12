@@ -1,10 +1,10 @@
 package dev.zeekr.camerax_android.common
 
 import android.graphics.Rect
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiRectApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiRectProxyApi
 
-class RectImpl(impl: CameraXImpl) : PigeonApiRectApi(impl) {
+class RectImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiRectProxyApi(registrar) {
     override fun pigeon_defaultConstructor(left: Long, top: Long, right: Long, bottom: Long): Rect {
         return Rect(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
     }

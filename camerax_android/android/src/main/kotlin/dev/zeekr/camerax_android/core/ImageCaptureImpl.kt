@@ -1,18 +1,20 @@
 package dev.zeekr.camerax_android.core
 
 import android.graphics.Bitmap
+import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalZeroShutterLag
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.CaptureModeApi
-import dev.zeekr.camerax_android.FlashModeApi
-import dev.zeekr.camerax_android.PigeonApiOnImageCapturedCallbackApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.ImageCaptureCaptureModeApi
+import dev.zeekr.camerax_android.ImageCaptureFlashModeApi
+import dev.zeekr.camerax_android.PigeonApiImageCaptureOnImageCapturedCallbackProxyApi
 import dev.zeekr.camerax_android.common.api
 
 class ImageCaptureImpl {
-    class OnImageCapturedCallbackImpl(impl: CameraXImpl) : PigeonApiOnImageCapturedCallbackApi(impl) {
+    class OnImageCapturedCallbackImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiImageCaptureOnImageCapturedCallbackProxyApi(registrar) {
         override fun pigeon_defaultConstructor(): ImageCapture.OnImageCapturedCallback {
             return object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureStarted() {
@@ -27,7 +29,7 @@ class ImageCaptureImpl {
 
                 override fun onPostviewBitmapAvailable(bitmap: Bitmap) {
                     super.onPostviewBitmapAvailable(bitmap)
-                    onPostviewBitmapAvailable(this, bitmap.api) {}
+                    onPostviewBitmapAvailable(this, bitmap) {}
                 }
 
                 override fun onCaptureSuccess(image: ImageProxy) {
@@ -44,34 +46,36 @@ class ImageCaptureImpl {
     }
 }
 
-val CaptureModeApi.impl
-    @ExperimentalZeroShutterLag get() = when (this) {
-        CaptureModeApi.MAXIMIZE_QUALITY -> ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
-        CaptureModeApi.MINIMIZE_LATENCY -> ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
-        CaptureModeApi.ZERO_SHUTTER_LAG -> ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
+val ImageCaptureCaptureModeApi.impl: Int
+    @OptIn(ExperimentalZeroShutterLag::class)
+    get() = when (this) {
+        ImageCaptureCaptureModeApi.MAXIMIZE_QUALITY -> ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
+        ImageCaptureCaptureModeApi.MINIMIZE_LATENCY -> ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
+        ImageCaptureCaptureModeApi.ZERO_SHUTTER_LAG -> ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
     }
 
-val Int.captureModeApi
-    @ExperimentalZeroShutterLag get() = when (this) {
-        ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY -> CaptureModeApi.MINIMIZE_LATENCY
-        ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY -> CaptureModeApi.MINIMIZE_LATENCY
-        ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG -> CaptureModeApi.MINIMIZE_LATENCY
+val Int.imageCaptureCaptureModeApi: ImageCaptureCaptureModeApi
+    @OptIn(ExperimentalZeroShutterLag::class)
+    get() = when (this) {
+        ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY -> ImageCaptureCaptureModeApi.MINIMIZE_LATENCY
+        ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY -> ImageCaptureCaptureModeApi.MINIMIZE_LATENCY
+        ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG -> ImageCaptureCaptureModeApi.MINIMIZE_LATENCY
         else -> throw IllegalArgumentException()
     }
 
-val FlashModeApi.impl
+val ImageCaptureFlashModeApi.impl: Int
     get() = when (this) {
-        FlashModeApi.AUTO -> ImageCapture.FLASH_MODE_AUTO
-        FlashModeApi.ON -> ImageCapture.FLASH_MODE_ON
-        FlashModeApi.OFF -> ImageCapture.FLASH_MODE_OFF
-        FlashModeApi.SCREEN -> ImageCapture.FLASH_MODE_SCREEN
+        ImageCaptureFlashModeApi.AUTO -> ImageCapture.FLASH_MODE_AUTO
+        ImageCaptureFlashModeApi.ON -> ImageCapture.FLASH_MODE_ON
+        ImageCaptureFlashModeApi.OFF -> ImageCapture.FLASH_MODE_OFF
+        ImageCaptureFlashModeApi.SCREEN -> ImageCapture.FLASH_MODE_SCREEN
     }
 
-val Int.flashModeApi
+val Int.flashModeApi: ImageCaptureFlashModeApi
     get() = when (this) {
-        ImageCapture.FLASH_MODE_AUTO -> FlashModeApi.AUTO
-        ImageCapture.FLASH_MODE_ON -> FlashModeApi.ON
-        ImageCapture.FLASH_MODE_OFF -> FlashModeApi.OFF
-        ImageCapture.FLASH_MODE_SCREEN -> FlashModeApi.SCREEN
+        ImageCapture.FLASH_MODE_AUTO -> ImageCaptureFlashModeApi.AUTO
+        ImageCapture.FLASH_MODE_ON -> ImageCaptureFlashModeApi.ON
+        ImageCapture.FLASH_MODE_OFF -> ImageCaptureFlashModeApi.OFF
+        ImageCapture.FLASH_MODE_SCREEN -> ImageCaptureFlashModeApi.SCREEN
         else -> throw IllegalArgumentException()
     }

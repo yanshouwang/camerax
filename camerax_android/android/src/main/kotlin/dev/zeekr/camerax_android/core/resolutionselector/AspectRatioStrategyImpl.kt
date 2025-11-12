@@ -2,38 +2,46 @@ package dev.zeekr.camerax_android.core.resolutionselector
 
 import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import dev.zeekr.camerax_android.AspectRatioApi
-import dev.zeekr.camerax_android.AspectRatioFallbackRuleApi
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiAspectRatioStrategyApi
+import dev.zeekr.camerax_android.AspectRatioStrategyFallbackRuleApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiAspectRatioStrategyProxyApi
 import dev.zeekr.camerax_android.core.aspectRatioApi
 import dev.zeekr.camerax_android.core.impl
 
-class AspectRatioStrategyImpl(impl: CameraXImpl) : PigeonApiAspectRatioStrategyApi(impl) {
+class AspectRatioStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiAspectRatioStrategyProxyApi(registrar) {
     override fun pigeon_defaultConstructor(
-        preferredAspectRatio: AspectRatioApi, fallbackRule: AspectRatioFallbackRuleApi
+        preferredAspectRatio: AspectRatioApi, fallbackRule: AspectRatioStrategyFallbackRuleApi
     ): AspectRatioStrategy {
         return AspectRatioStrategy(preferredAspectRatio.impl, fallbackRule.impl)
     }
 
-    override fun preferredAspectRatio(pigeon_instance: AspectRatioStrategy): AspectRatioApi {
+    override fun ratio4_3FallbackAutoStrategy(): AspectRatioStrategy {
+        return AspectRatioStrategy.RATIO_4_3_FALLBACK_AUTO_STRATEGY
+    }
+
+    override fun ratio16_9FallbackAutoStrategy(): AspectRatioStrategy {
+        return AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY
+    }
+
+    override fun getFallbackRule(pigeon_instance: AspectRatioStrategy): AspectRatioStrategyFallbackRuleApi {
+        return pigeon_instance.fallbackRule.aspectRatioStrategyFallbackRuleApi
+    }
+
+    override fun getPreferredAspectRatio(pigeon_instance: AspectRatioStrategy): AspectRatioApi {
         return pigeon_instance.preferredAspectRatio.aspectRatioApi
     }
-
-    override fun fallbackRule(pigeon_instance: AspectRatioStrategy): AspectRatioFallbackRuleApi {
-        return pigeon_instance.fallbackRule.aspectRatioFallbackRuleApi
-    }
-
 }
 
-val AspectRatioFallbackRuleApi.impl
+val AspectRatioStrategyFallbackRuleApi.impl: Int
     get() = when (this) {
-        AspectRatioFallbackRuleApi.NONE -> AspectRatioStrategy.FALLBACK_RULE_NONE
-        AspectRatioFallbackRuleApi.AUTO -> AspectRatioStrategy.FALLBACK_RULE_AUTO
+        AspectRatioStrategyFallbackRuleApi.NONE -> AspectRatioStrategy.FALLBACK_RULE_NONE
+        AspectRatioStrategyFallbackRuleApi.AUTO -> AspectRatioStrategy.FALLBACK_RULE_AUTO
     }
 
-val Int.aspectRatioFallbackRuleApi
+val Int.aspectRatioStrategyFallbackRuleApi: AspectRatioStrategyFallbackRuleApi
     get() = when (this) {
-        AspectRatioStrategy.FALLBACK_RULE_NONE -> AspectRatioFallbackRuleApi.NONE
-        AspectRatioStrategy.FALLBACK_RULE_AUTO -> AspectRatioFallbackRuleApi.AUTO
-        else -> throw IllegalArgumentException()
+        AspectRatioStrategy.FALLBACK_RULE_NONE -> AspectRatioStrategyFallbackRuleApi.NONE
+        AspectRatioStrategy.FALLBACK_RULE_AUTO -> AspectRatioStrategyFallbackRuleApi.AUTO
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

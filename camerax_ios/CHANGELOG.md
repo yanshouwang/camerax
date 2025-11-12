@@ -1,3 +1,10 @@
+## 1.0.2
+
+* Add `RotationProvider` API.
+* Add vision APIs.
+* Migrate to Swift Package Manager.
+* No longer support `MlKitAnalyzer`, use `VisionAnalyzer` instead.
+
 ## 1.0.1
 
 * Fix UnimplementedError when create SurfaceOrientedMeteringPointFactory and FocusMeteringAction.

@@ -8,40 +8,41 @@ import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
 /** CameraXAndroidPlugin */
 class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
-    private lateinit var impl: CameraXImpl
+    private lateinit var registrar: CameraXApiPigeonProxyApiRegistrar
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         val binaryMessenger = binding.binaryMessenger
         val context = binding.applicationContext
-        impl = CameraXImpl(binaryMessenger, context)
-        impl.setUp()
+        registrar = CameraXRegistrarImpl(binaryMessenger, context)
+        registrar.setUp()
+        val viewRegistry = binding.platformViewRegistry
         val viewTypeId = "camerax.zeekr.dev/PreviewView"
-        val viewFactory = ViewFactory(impl.instanceManager)
-        binding.platformViewRegistry.registerViewFactory(viewTypeId, viewFactory)
+        val viewFactory = ViewFactory(registrar.instanceManager)
+        viewRegistry.registerViewFactory(viewTypeId, viewFactory)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        impl.tearDown()
-        impl.instanceManager.stopFinalizationListener()
+        registrar.tearDown()
+        registrar.instanceManager.stopFinalizationListener()
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         PermissionManager.onAttachedToActivity(binding)
-        impl.onAttachedToActivity(binding)
+        registrar.onAttachedToActivity(binding)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
         PermissionManager.onDetachedFromActivityForConfigChanges()
-        impl.onDetachedFromActivityForConfigChanges()
+        registrar.onDetachedFromActivityForConfigChanges()
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         PermissionManager.onReattachedToActivityForConfigChanges(binding)
-        impl.onReattachedToActivityForConfigChanges(binding)
+        registrar.onReattachedToActivityForConfigChanges(binding)
     }
 
     override fun onDetachedFromActivity() {
         PermissionManager.onDetachedFromActivity()
-        impl.onDetachedFromActivity()
+        registrar.onDetachedFromActivity()
     }
 }

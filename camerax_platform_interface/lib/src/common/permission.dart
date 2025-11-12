@@ -1,4 +1,0 @@
-enum Permission {
-  video,
-  audio,
-}

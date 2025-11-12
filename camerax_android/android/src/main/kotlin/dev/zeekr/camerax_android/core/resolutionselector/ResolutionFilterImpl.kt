@@ -2,12 +2,13 @@ package dev.zeekr.camerax_android.core.resolutionselector
 
 import android.util.Size
 import androidx.camera.core.resolutionselector.ResolutionFilter
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiResolutionFilterApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiResolutionFilterProxyApi
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.suspendCoroutine
 
-class ResolutionFilterImpl(impl: CameraXImpl) : PigeonApiResolutionFilterApi(impl) {
+class ResolutionFilterImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiResolutionFilterProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): ResolutionFilter {
         return object : ResolutionFilter {
             override fun filter(supportedSizes: MutableList<Size>, rotationDegrees: Int): MutableList<Size> {

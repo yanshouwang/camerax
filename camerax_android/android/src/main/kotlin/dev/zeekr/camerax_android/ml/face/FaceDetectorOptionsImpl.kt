@@ -1,21 +1,22 @@
 package dev.zeekr.camerax_android.ml.face
 
 import com.google.mlkit.vision.face.FaceDetectorOptions
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.FaceClassificationModeApi
-import dev.zeekr.camerax_android.FaceContourModeApi
-import dev.zeekr.camerax_android.FaceLandmarkModeApi
-import dev.zeekr.camerax_android.FacePerformanceModeApi
-import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.FaceDetectorOptionsClassificationModeApi
+import dev.zeekr.camerax_android.FaceDetectorOptionsContourModeApi
+import dev.zeekr.camerax_android.FaceDetectorOptionsLandmarkModeApi
+import dev.zeekr.camerax_android.FaceDetectorOptionsPerformanceModeApi
+import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsProxyApi
 
-class FaceDetectorOptionsImpl(impl: CameraXImpl) : PigeonApiFaceDetectorOptionsApi(impl) {
+class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiFaceDetectorOptionsProxyApi(registrar) {
     override fun build(
         enableTracking: Boolean?,
-        classificationMode: FaceClassificationModeApi?,
-        contourMode: FaceContourModeApi?,
-        landmarkMode: FaceLandmarkModeApi?,
+        classificationMode: FaceDetectorOptionsClassificationModeApi?,
+        contourMode: FaceDetectorOptionsContourModeApi?,
+        landmarkMode: FaceDetectorOptionsLandmarkModeApi?,
         minFaceSize: Double?,
-        performanceMode: FacePerformanceModeApi?
+        performanceMode: FaceDetectorOptionsPerformanceModeApi?
     ): FaceDetectorOptions {
         val builder = FaceDetectorOptions.Builder()
         if (enableTracking == true) {
@@ -40,26 +41,26 @@ class FaceDetectorOptionsImpl(impl: CameraXImpl) : PigeonApiFaceDetectorOptionsA
     }
 }
 
-val FaceClassificationModeApi.impl
+val FaceDetectorOptionsClassificationModeApi.impl: Int
     get() = when (this) {
-        FaceClassificationModeApi.NONE -> FaceDetectorOptions.CLASSIFICATION_MODE_NONE
-        FaceClassificationModeApi.ALL -> FaceDetectorOptions.CLASSIFICATION_MODE_ALL
+        FaceDetectorOptionsClassificationModeApi.NONE -> FaceDetectorOptions.CLASSIFICATION_MODE_NONE
+        FaceDetectorOptionsClassificationModeApi.ALL -> FaceDetectorOptions.CLASSIFICATION_MODE_ALL
     }
 
-val FaceContourModeApi.impl
+val FaceDetectorOptionsContourModeApi.impl: Int
     get() = when (this) {
-        FaceContourModeApi.NONE -> FaceDetectorOptions.CONTOUR_MODE_NONE
-        FaceContourModeApi.ALL -> FaceDetectorOptions.CONTOUR_MODE_ALL
+        FaceDetectorOptionsContourModeApi.NONE -> FaceDetectorOptions.CONTOUR_MODE_NONE
+        FaceDetectorOptionsContourModeApi.ALL -> FaceDetectorOptions.CONTOUR_MODE_ALL
     }
 
-val FaceLandmarkModeApi.impl
+val FaceDetectorOptionsLandmarkModeApi.impl: Int
     get() = when (this) {
-        FaceLandmarkModeApi.NONE -> FaceDetectorOptions.LANDMARK_MODE_NONE
-        FaceLandmarkModeApi.ALL -> FaceDetectorOptions.LANDMARK_MODE_ALL
+        FaceDetectorOptionsLandmarkModeApi.NONE -> FaceDetectorOptions.LANDMARK_MODE_NONE
+        FaceDetectorOptionsLandmarkModeApi.ALL -> FaceDetectorOptions.LANDMARK_MODE_ALL
     }
 
-val FacePerformanceModeApi.impl
+val FaceDetectorOptionsPerformanceModeApi.impl: Int
     get() = when (this) {
-        FacePerformanceModeApi.FAST -> FaceDetectorOptions.PERFORMANCE_MODE_FAST
-        FacePerformanceModeApi.ACCURATE -> FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE
+        FaceDetectorOptionsPerformanceModeApi.FAST -> FaceDetectorOptions.PERFORMANCE_MODE_FAST
+        FaceDetectorOptionsPerformanceModeApi.ACCURATE -> FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE
     }

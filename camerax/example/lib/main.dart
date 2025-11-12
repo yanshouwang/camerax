@@ -14,7 +14,7 @@ final routeObserver = RouteObserver<ModalRoute>();
 
 void main() {
   Logger.root.onRecord.listen(onLogRecorded);
-  runZonedGuarded(onStartUp, onUncaughtError);
+  runZonedGuarded(body, onError);
 }
 
 void onLogRecorded(LogRecord record) {
@@ -30,21 +30,19 @@ void onLogRecorded(LogRecord record) {
   );
 }
 
-void onStartUp() {
+void body() {
   WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   // ]);
-  const style = SystemUiOverlayStyle(
-    statusBarColor: Color(0x00000000),
-  );
+  const style = SystemUiOverlayStyle(statusBarColor: Color(0x00000000));
   SystemChrome.setSystemUIOverlayStyle(style);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   const app = MyApp();
   runApp(app);
 }
 
-void onUncaughtError(Object error, StackTrace stackTrace) {
+void onError(Object error, StackTrace stackTrace) {
   Logger.root.shout(error, stackTrace);
 }
 
@@ -62,9 +60,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     routerConfig = GoRouter(
-      observers: [
-        routeObserver,
-      ],
+      observers: [routeObserver],
       routes: [
         GoRoute(
           path: '/',
@@ -83,9 +79,7 @@ class _MyAppState extends State<MyApp> {
                   throw ArgumentError.notNull('uri');
                 }
                 final uri = Uri.file(filePath);
-                return InteractiveView(
-                  uri: uri,
-                );
+                return InteractiveView(uri: uri);
               },
             ),
           ],
@@ -101,11 +95,7 @@ class _MyAppState extends State<MyApp> {
       theme: const CupertinoThemeData(
         brightness: Brightness.dark,
         primaryColor: CupertinoColors.systemYellow,
-        textTheme: CupertinoTextThemeData(
-          textStyle: TextStyle(
-            fontSize: 12.0,
-          ),
-        ),
+        textTheme: CupertinoTextThemeData(textStyle: TextStyle(fontSize: 12.0)),
       ),
     );
   }

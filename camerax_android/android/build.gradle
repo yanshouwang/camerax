@@ -2,15 +2,15 @@ group = "dev.zeekr.camerax_android"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "1.8.22"
-    ext.camerax_version = "1.4.2"
+    ext.kotlin_version = "2.1.0"
+    ext.camerax_version = "1.5.1"
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.7.0")
+        classpath("com.android.tools.build:gradle:8.7.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
@@ -45,7 +45,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
         // Keeping the classes from being removed by proguard.
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -73,7 +73,7 @@ android {
         // implementation "com.google.mlkit:segmentation-selfie:16.0.0-beta5"
         // implementation "com.google.mlkit:text-recognition:16.0.0"
 
-        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.7.3"
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.10.2"
 
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")

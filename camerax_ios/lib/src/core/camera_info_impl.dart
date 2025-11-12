@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:camerax_ios/src/camerax.g.dart';
-// import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'camera_selector_impl.dart';
@@ -9,44 +9,17 @@ import 'camera_state_impl.dart';
 // import 'dynamic_range_impl.dart';
 // import 'exposure_state_impl.dart';
 import 'focus_metering_action_impl.dart';
-import 'lens_facing_impl.dart';
+// import 'low_light_boost_state_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
 final class CameraInfoImpl extends CameraInfo {
-  final CameraInfoApi api;
+  static Future<bool> mustPlayShutterSound() =>
+      CameraInfoProxyApi.mustPlayShutterSound();
 
-  late final StreamController<CameraState> _cameraStateChangedController;
-  late final StreamController<TorchState> _torchStateChangedController;
-  late final StreamController<ZoomState> _zoomStateChangedController;
+  final CameraInfoProxyApi api;
 
-  Future<CameraStateObserverApi>? _cameraStateObserverApiFuture;
-  Future<TorchStateObserverApi>? _torchStateObserverApiFuture;
-  Future<ZoomStateObserverApi>? _zoomStateObserverApiFuture;
-
-  CameraInfoImpl.internal(this.api) : super.impl() {
-    _cameraStateChangedController = StreamController.broadcast(
-      onListen: _listenCameraStateChanged,
-      onCancel: _cancelCameraStateChanged,
-    );
-    _torchStateChangedController = StreamController.broadcast(
-      onListen: _listenTorchStateChanged,
-      onCancel: _cancelTorchStateChanged,
-    );
-    _zoomStateChangedController = StreamController.broadcast(
-      onListen: _listenZoomStateChanged,
-      onCancel: _cancelZoomStateChanged,
-    );
-  }
-
-  @override
-  Stream<CameraState> get cameraStateChanged =>
-      _cameraStateChangedController.stream;
-  @override
-  Stream<TorchState> get torchStateChanged =>
-      _torchStateChangedController.stream;
-  @override
-  Stream<ZoomState> get zoomStateChanged => _zoomStateChangedController.stream;
+  CameraInfoImpl.internal(this.api) : super.impl();
 
   @override
   Future<CameraSelector> getCameraSelector() =>
@@ -54,48 +27,43 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<CameraState?> getCameraState() =>
-      api.getCameraState().then((e) => e.getValue()).then((e) => e?.impl);
+      api.getCameraState().then((e) => e?.impl);
 
   @override
   Future<ExposureState> getExposureState() => throw UnimplementedError();
   // api.getExposureState().then((e) => e.impl);
 
   @override
-  Future<double> getIntrinsicZoomRatio() => api.getIntrinsticZoomRatio();
+  Future<double> getIntrinsicZoomRatio() => api.getIntrinsicZoomRatio();
 
   @override
-  Future<LensFacing> getLensFacing() => api.getLensFacing().then((e) => e.impl);
+  Future<CameraSelectorLensFacing> getLensFacing() =>
+      api.getLensFacing().then((e) => e.impl);
 
   @override
-  Future<Set<CameraInfo>> getPhysicalCameraInfos() => api
-      .getPhysicalCameraInfos()
-      .then((e) => e.map((e1) => e1.impl).toSet());
+  Future<Set<CameraInfo>> getPhysicalCameraInfos() =>
+      api.getPhysicalCameraInfos().then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<Set<Range<int>>> getSupportedFrameRateRanges() =>
       throw UnimplementedError();
   //  api
-  //     .getSupportedFrameRateRanges()
+  //     .getSupportedFrameRateRanges1()
   //     .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e.getValue()).then((e) => e?.impl);
+      api.getTorchState().then((e) => e?.impl);
 
   @override
-  Future<ZoomState?> getZoomState() =>
-      api.getZoomState().then((e) => e.getValue()).then((e) => e?.impl);
+  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
 
   @override
   Future<bool> hasFlashUnit() => api.hasFlashUnit();
 
   @override
-  Future<bool> isFocusMeteringSupported(FocusMeteringAction action) {
-    if (action is! FocusMeteringActionImpl) {
-      throw TypeError();
-    }
-    return api.isFocusMeteringSupported(action.api);
-  }
+  Future<bool> isFocusMeteringSupported(FocusMeteringAction action) =>
+      api.isFocusMeteringSupported(action.api);
 
   @override
   Future<bool> isLogicalMultiCameraSupported() =>
@@ -107,122 +75,93 @@ final class CameraInfoImpl extends CameraInfo {
   @override
   Future<Set<DynamicRange>> querySupportedDynamicRanges(
     Set<DynamicRange> candidateDynamicRanges,
-  ) {
-    throw UnimplementedError();
-    // final candidateDynamicRangeApis =
-    //     candidateDynamicRanges.map((e) => e.api).toList();
-    // return api
-    //     .querySupportedDynamicRanges(candidateDynamicRangeApis)
-    //     .then((e) => e.map((e1) => e1.impl).toSet());
-  }
+  ) => throw UnimplementedError();
+  // api
+  //     .querySupportedDynamicRanges(
+  //       candidateDynamicRanges.map((e) => e.api).toList(),
+  //     )
+  //     .then((e) => e.map((e1) => e1.impl).toSet());
 
-  void _listenCameraStateChanged() async {
-    final completer = Completer<CameraStateObserverApi>();
-    try {
-      final future = _cameraStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _cameraStateObserverApiFuture = completer.future;
-      final liveDataApi = await api.getCameraState();
-      final observerApi = CameraStateObserverApi(
-        onChanged: (_, e) {
-          _cameraStateChangedController.add(e.impl);
-        },
-      );
-      await liveDataApi.observe(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _cameraStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> observeCameraState(Observer<CameraState> observer) =>
+      api.observeCameraState(observer.api);
 
-  void _cancelCameraStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_cameraStateObserverApiFuture);
-      _cameraStateObserverApiFuture = null;
-      final liveDataApi = await api.getCameraState();
-      final observerApi = await future;
-      await liveDataApi.removeObserver(observerApi);
-    } catch (e) {
-      _cameraStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> observeTorchState(Observer<TorchState> observer) =>
+      api.observeTorchState(observer.api);
 
-  void _listenTorchStateChanged() async {
-    final completer = Completer<TorchStateObserverApi>();
-    try {
-      final future = _torchStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _torchStateObserverApiFuture = completer.future;
-      final liveDataApi = await api.getTorchState();
-      final observerApi = TorchStateObserverApi(
-        onChanged: (_, e) {
-          _torchStateChangedController.add(e.impl);
-        },
-      );
-      await liveDataApi.observe(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _torchStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> observeZoomState(Observer<ZoomState> observer) =>
+      api.observeZoomState(observer.api);
 
-  void _cancelTorchStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_torchStateObserverApiFuture);
-      _torchStateObserverApiFuture = null;
-      final liveDataApi = await api.getTorchState();
-      final observerApi = await future;
-      await liveDataApi.removeObserver(observerApi);
-    } catch (e) {
-      _torchStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> removeCameraStateObserver(Observer<CameraState> observer) =>
+      api.removeCameraStateObserver(observer.api);
 
-  void _listenZoomStateChanged() async {
-    final completer = Completer<ZoomStateObserverApi>();
-    try {
-      final future = _zoomStateObserverApiFuture;
-      if (future != null) {
-        throw ArgumentError.value(future);
-      }
-      _zoomStateObserverApiFuture = completer.future;
-      final liveDataApi = await api.getZoomState();
-      final observerApi = ZoomStateObserverApi(
-        onChanged: (_, e) {
-          try {
-            _zoomStateChangedController.add(e.impl);
-          } catch (e) {
-            _zoomStateChangedController.addError(e);
-          }
-        },
-      );
-      await liveDataApi.observe(observerApi);
-      completer.complete(observerApi);
-    } catch (e) {
-      completer.completeError(e);
-      _zoomStateChangedController.addError(e);
-    }
-  }
+  @override
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
+      api.removeTorchStateObserver(observer.api);
 
-  void _cancelZoomStateChanged() async {
-    try {
-      final future = ArgumentError.checkNotNull(_zoomStateObserverApiFuture);
-      _zoomStateObserverApiFuture = null;
-      final liveDataApi = await api.getZoomState();
-      final observerApi = await future;
-      await liveDataApi.removeObserver(observerApi);
-    } catch (e) {
-      _zoomStateChangedController.addError(e);
-    }
+  @override
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
+      api.removeZoomStateObserver(observer.api);
+
+  @override
+  Future<LowLightBoostState?> getLowLightBoostState() =>
+      throw UnimplementedError();
+  // api.getLowLightBoostState().then((e) => e?.impl);
+
+  @override
+  Future<int> getMaxTorchStrengthLevel() => throw UnimplementedError();
+  //  api.getMaxTorchStrengthLevel();
+
+  @override
+  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]) =>
+      relativeRotation == null
+      ? api.getSensorRotationDegrees1()
+      : api.getSensorRotationDegrees2(relativeRotation.api);
+
+  @override
+  Future<int?> getTorchStrengthLevel() => throw UnimplementedError();
+  //  api.getTorchStrengthLevel();
+
+  @override
+  Future<bool> isLowLightBoostSupported() => api.isLowLightBoostSupported();
+
+  @override
+  Future<bool> isTorchStrengthSupported() => api.isTorchStrengthSupported();
+
+  @override
+  Future<void> observeLowLightBoostState(
+    Observer<LowLightBoostState> observer,
+  ) => throw UnimplementedError();
+  // api.observeLowLightBoostState(observer.api);
+
+  @override
+  Future<void> observeTorchStrengthLevel(Observer<int> observer) =>
+      throw UnimplementedError();
+  // api.observeTorchStrengthLevel(observer.api);
+
+  @override
+  Future<void> removeLowLightBoostStateObserver(
+    Observer<LowLightBoostState> observer,
+  ) => throw UnimplementedError();
+  //  api.removeLowLightBoostStateObserver(observer.api);
+
+  @override
+  Future<void> removeTorchStrengthLevelObserver(Observer<int> observer) =>
+      throw UnimplementedError();
+  // api.removeTorchStrengthLevelObserver(observer.api);
+}
+
+extension CameraInfoX on CameraInfo {
+  CameraInfoProxyApi get api {
+    final impl = this;
+    if (impl is! CameraInfoImpl) throw TypeError();
+    return impl.api;
   }
 }
 
-extension CameraInfoApiX on CameraInfoApi {
+extension CameraInfoProxyApiX on CameraInfoProxyApi {
   CameraInfo get impl => CameraInfoImpl.internal(this);
 }

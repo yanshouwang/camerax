@@ -3,70 +3,95 @@ import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/core.dart';
 import 'package:camerax_platform_interface/src/video.dart';
 
-import 'use_case.dart';
+import 'tap_to_focus_info.dart';
 import 'video.dart';
 
-typedef VideoRecordEventConsumer = void Function(VideoRecordEvent event);
+enum CameraControllerTapToFocus {
+  notStarted,
+  started,
+  focused,
+  notFocused,
+  failed,
+}
+
+enum CameraControllerUseCase { imageCapture, imageAnalysis, videoCapture }
 
 abstract base class CameraController {
   CameraController.impl();
 
-  factory CameraController() => CameraXPlugin.instance.newCameraController();
+  factory CameraController() => CameraXPlugin.instance.$CameraController();
 
-  Stream<ZoomState> get zoomStateChanged;
-  Stream<TorchState> get torchStateChanged;
-
-  Future<void> initialize();
-
-  Future<void> bind();
-  Future<void> unbind();
   Future<bool> hasCamera(CameraSelector cameraSelector);
   Future<CameraSelector> getCameraSelector();
   Future<void> setCameraSelector(CameraSelector cameraSelector);
+
+  Future<void> bind();
+  Future<void> unbind();
+
   Future<CameraInfo?> getCameraInfo();
   Future<CameraControl?> getCameraControl();
+
   Future<TorchState?> getTorchState();
+  Future<void> observeTorchState(Observer<TorchState> observer);
+  Future<void> removeTorchStateObserver(Observer<TorchState> observer);
   Future<void> enableTorch(bool enabled);
-  Future<ZoomState?> getZoomState();
-  Future<void> setZoomRatio(double zoomRatio);
-  Future<void> setLinearZoom(double linearZoom);
+
   Future<bool> isPinchToZoomEnabled();
   Future<void> setPinchToZoomEnabled(bool enabled);
+  Future<ZoomState?> getZoomState();
+  Future<void> observeZoomState(Observer<ZoomState> observer);
+  Future<void> removeZoomStateObserver(Observer<ZoomState> observer);
+  Future<void> setZoomRatio(double zoomRatio);
+  Future<void> setLinearZoom(double linearZoom);
+
   Future<bool> isTapToFocusEnabled();
   Future<void> setTapToFocusEnabled(bool enabled);
+  Future<void> setTapToFocusAutoCancelDuration(Duration duration);
+  Future<TapToFocusInfo?> getTapToFocusInfoState();
+  Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer);
+  Future<void> removeTapToFocusInfoStateObserver(
+    Observer<TapToFocusInfo> observer,
+  );
+
   Future<bool> isImageAnalysisEnabled();
   Future<bool> isImageCaptureEnabled();
   Future<bool> isVideoCaptureEnabled();
-  Future<void> setEnabledUseCases(List<UseCase> useCases);
+  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases);
+
   Future<ResolutionSelector?> getPreviewResolutionSelector();
   Future<void> setPreviewResolutionSelector(
-      ResolutionSelector? resolutionSelector);
-  Future<FlashMode> getImageCaptureFlashMode();
-  Future<void> setImageCaptureFlashMode(FlashMode flashMode);
-  Future<CaptureMode> getImageCaptureMode();
-  Future<void> setImageCaptureMode(CaptureMode captureMode);
+    ResolutionSelector? resolutionSelector,
+  );
+
+  Future<ImageCaptureFlashMode> getImageCaptureFlashMode();
+  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode);
+  Future<ImageCaptureCaptureMode> getImageCaptureMode();
+  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode);
   Future<ResolutionSelector?> getImageCaptureResolutionSelector();
   Future<void> setImageCaptureResolutionSelector(
-      ResolutionSelector? resolutionSelector);
-  Future<void> takePicture({
-    CaptureStartedCallback? onCaptureStarted,
-    CaptureProcessProgressedCallback? onCaptureProcessProgressed,
-    PostviewBitmapAvailableCallback? onPostviewBitmapAvailable,
-    CaptureSuccessCallback? onCaptureSuccess,
-    CaptureErrorCallback? onError,
-  });
-  Future<BackpressureStrategy> getImageAnalysisBackpressureStrategy();
+    ResolutionSelector? resolutionSelector,
+  );
+  Future<void> takePicture(
+    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+  );
+  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy();
+
   Future<void> setImageAnalysisBackpressureStrategy(
-      BackpressureStrategy strategy);
+    ImageAnalysisStrategy strategy,
+  );
   Future<int> getImageAnalysisImageQueueDepth();
   Future<void> setImageAnalysisImageQueueDepth(int depth);
-  Future<ImageFormat> getImageAnalysisOutputImageFormat();
-  Future<void> setImageAnalysisOutputImageFormat(ImageFormat format);
+  Future<ImageAnalysisOutputImageFormat> getImageAnalysisOutputImageFormat();
+  Future<void> setImageAnalysisOutputImageFormat(
+    ImageAnalysisOutputImageFormat format,
+  );
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector();
   Future<void> setImageAnalysisResolutionSelector(
-      ResolutionSelector? resolutionSelector);
-  Future<void> setImageAnalysisAnalyzer(Analyzer analyzer);
+    ResolutionSelector? resolutionSelector,
+  );
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer);
   Future<void> clearImageAnalysisAnalyzer();
+
   Future<DynamicRange> getVideoCaptureDynamicRange();
   Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange);
   Future<MirrorMode> getVideoCaptureMirrorMode();
@@ -76,9 +101,9 @@ abstract base class CameraController {
   Future<Range<int>> getVideoCaptureTargetFrameRate();
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate);
   Future<bool> isRecording();
-  Future<Recording> startRecording(
-    FileOutputOptions outputOptions, {
+  Future<Recording> startRecording({
+    required FileOutputOptions outputOptions,
     required AudioConfig audioConfig,
-    required VideoRecordEventConsumer listener,
+    required Consumer<VideoRecordEvent> listener,
   });
 }

@@ -15,30 +15,25 @@ typedef ImageModelCallback = void Function(ImageModel imageModel);
 class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
-  final BarcodeScanner _barcodeScanner;
-  final FaceDetector _faceDetector;
+  final RotationProvider _rotationProvider;
 
-  late final StreamSubscription _torchStateChangedSubscription;
-  late final StreamSubscription _zoomStateChangedSubscription;
+  RotationProviderListener? _rotationProviderListener;
+  Observer<TorchState>? _torchStateObserver;
+  Observer<ZoomState>? _zoomStateObserver;
 
+  // CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
-  Camera2CameraControl? _camera2Control;
+  // Camera2CameraInfo? _camera2CameraInfo;
+  Camera2CameraControl? _camera2CameraControl;
 
   HomeViewModel()
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
-      _barcodeScanner = BarcodeScanner(),
-      _faceDetector = FaceDetector(),
+      _rotationProvider = RotationProvider(),
       _mode = CameraMode.takePicture,
-      _lensFacing = LensFacing.back,
-      _barcodes = [],
+      _lensFacing = CameraSelectorLensFacing.back,
+      _codes = [],
       _faces = [] {
-    _torchStateChangedSubscription = _controller.torchStateChanged.listen(
-      (e) => torchState = e,
-    );
-    _zoomStateChangedSubscription = _controller.zoomStateChanged.listen(
-      (e) => zoomState = e,
-    );
     _setUp();
   }
 
@@ -52,17 +47,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  LensFacing _lensFacing;
-  LensFacing get lensFacing => _lensFacing;
-  set lensFacing(LensFacing value) {
+  CameraSelectorLensFacing _lensFacing;
+  CameraSelectorLensFacing get lensFacing => _lensFacing;
+  set lensFacing(CameraSelectorLensFacing value) {
     if (_lensFacing == value) return;
     _lensFacing = value;
     notifyListeners();
   }
 
-  FlashMode? _flashMode;
-  FlashMode? get flashMode => _flashMode;
-  set flashMode(FlashMode? value) {
+  ImageCaptureFlashMode? _flashMode;
+  ImageCaptureFlashMode? get flashMode => _flashMode;
+  set flashMode(ImageCaptureFlashMode? value) {
     if (_flashMode == value) return;
     _flashMode = value;
     notifyListeners();
@@ -72,7 +67,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   TorchState? get torchState => _torchState;
   set torchState(TorchState? value) {
     if (_torchState == value) return;
-    logger.info('torchState changed: $value');
     _torchState = value;
     notifyListeners();
   }
@@ -81,7 +75,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   ZoomState? get zoomState => _zoomState;
   set zoomState(ZoomState? value) {
     if (_zoomState == value) return;
-    logger.info('zoomState changed: $value');
     _zoomState = value;
     notifyListeners();
   }
@@ -128,17 +121,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  List<Barcode> _barcodes;
-  List<Barcode> get barcodes => _barcodes;
-  set barcodes(List<Barcode> value) {
-    if (_barcodes == value) return;
-    _barcodes = value;
+  List<VisionMachineReadableCodeObject> _codes;
+  List<VisionMachineReadableCodeObject> get codes => _codes;
+  set codes(List<VisionMachineReadableCodeObject> value) {
+    if (_codes == value) return;
+    _codes = value;
     notifyListeners();
   }
 
-  List<Face> _faces;
-  List<Face> get faces => _faces;
-  set faces(List<Face> value) {
+  List<VisionFaceObject> _faces;
+  List<VisionFaceObject> get faces => _faces;
+  set faces(List<VisionFaceObject> value) {
     if (_faces == value) return;
     _faces = value;
     notifyListeners();
@@ -147,20 +140,21 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Future<void> bind() async {
     await controller.bind();
     // TODO: How to wait until camera really opened.
-    // const duration = Duration(seconds: 1);
-    // await Future.delayed(duration);
-    // final cameraInfo = await controller.getCameraInfo();
-    // final cameraControl = await controller.getCameraControl();
-    // if (cameraInfo == null || cameraControl == null) {
-    //   return;
-    // }
+    const duration = Duration(seconds: 1);
+    await Future.delayed(duration);
+    final cameraInfo = await controller.getCameraInfo();
+    final cameraControl = await controller.getCameraControl();
+    if (cameraInfo == null || cameraControl == null) {
+      return;
+    }
     // final camera2Info = Camera2CameraInfo.from(cameraInfo);
     // final camera2Control = Camera2CameraControl.from(cameraControl);
     // final exposureState = await cameraInfo.getExposureState();
-    // final exposureTimeRange =
-    //     await camera2Info.getSensorInfoExposureTimeRange();
+    // final exposureTimeRange = await camera2Info
+    //     .getSensorInfoExposureTimeRange();
     // logger.info(
-    //     'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}');
+    //   'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}',
+    // );
     // final exposureTimeState = exposureTimeRange == null
     //     ? null
     //     : LimitedValue(
@@ -169,17 +163,19 @@ class HomeViewModel extends ViewModel with TypeLogger {
     //         value: exposureTimeRange.lower,
     //       );
     // _cameraInfo = cameraInfo;
-    // _cameraControl = cameraControl;
-    // _camera2Info = camera2Info;
-    // _camera2Control = camera2Control;
+    _cameraControl = cameraControl;
+    // _camera2CameraInfo = camera2Info;
+    // _camera2CameraControl = camera2Control;
     // this.exposureState = exposureState;
     // this.exposureTimeState = exposureTimeState;
   }
 
   Future<void> unbind() async {
     await controller.unbind();
+    // _cameraInfo = null;
     _cameraControl = null;
-    _camera2Control = null;
+    // _camera2CameraInfo = null;
+    _camera2CameraControl = null;
     exposureState = null;
     exposureTimeState = null;
   }
@@ -188,11 +184,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
     if (Platform.isAndroid) {
       // See https://developer.android.com/reference/kotlin/androidx/camera/view/CameraController#setEnabledUseCases(int)
       if (mode == CameraMode.recordVideo) {
-        await controller.setEnabledUseCases([UseCase.videoCapture]);
+        await controller.setEnabledUseCases([
+          CameraControllerUseCase.videoCapture,
+        ]);
       } else {
         await controller.setEnabledUseCases([
-          UseCase.imageCapture,
-          UseCase.imageAnalysis,
+          CameraControllerUseCase.imageCapture,
+          CameraControllerUseCase.imageAnalysis,
         ]);
       }
     }
@@ -205,35 +203,43 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setImageAnalyzer();
         break;
       case CameraMode.barcodes:
-        final analyzer = MlKitAnalyzer(
-          detectors: [_barcodeScanner],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _handleMlKitAnalyzerResult,
+        final analyzer = VisionAnalyzer(
+          types: [
+            ...VisionObjectType.towDimensionalCodes,
+            ...VisionObjectType.barcodes,
+          ],
+          consumer: Consumer(
+            accept: (res) => codes = res.objects
+                .whereType<VisionMachineReadableCodeObject>()
+                .toList(),
+          ),
         );
-        await _setMlKitAnalyzer(analyzer);
+        await _setVisionAnalyzer(analyzer);
         break;
       case CameraMode.face:
-        final analyzer = MlKitAnalyzer(
-          detectors: [_faceDetector],
-          targetCoordinateSystem: CoordinateSystem.viewReferenced,
-          consumer: _handleMlKitAnalyzerResult,
+        final analyzer = VisionAnalyzer(
+          types: VisionObjectType.faces,
+          consumer: Consumer(
+            accept: (res) =>
+                faces = res.objects.whereType<VisionFaceObject>().toList(),
+          ),
         );
-        await _setMlKitAnalyzer(analyzer);
+        await _setVisionAnalyzer(analyzer);
         break;
     }
     this.mode = mode;
     imageModel = null;
-    barcodes = [];
+    codes = [];
     faces = [];
   }
 
   Future<void> toggleLensFacing() async {
-    if (lensFacing == LensFacing.back) {
+    if (lensFacing == CameraSelectorLensFacing.back) {
       await _setCameraSelector(CameraSelector.front);
-      lensFacing = LensFacing.front;
+      lensFacing = CameraSelectorLensFacing.front;
     } else {
       await _setCameraSelector(CameraSelector.back);
-      lensFacing = LensFacing.back;
+      lensFacing = CameraSelectorLensFacing.back;
     }
   }
 
@@ -257,24 +263,23 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> setExposureTime(int? value) async {
-    final control = ArgumentError.checkNotNull(_camera2Control);
-    final bundle =
-        value == null
-            ? CaptureRequestOptions(aeMode: ControlAeMode.on)
-            : CaptureRequestOptions(
-              aeMode: ControlAeMode.off,
-              sensorExposureTime: value,
-            );
+    final control = ArgumentError.checkNotNull(_camera2CameraControl);
+    final bundle = value == null
+        ? CaptureRequestOptions(aeMode: CameraMetadataControlAeMode.on)
+        : CaptureRequestOptions(
+            aeMode: CameraMetadataControlAeMode.off,
+            sensorExposureTime: value,
+          );
     await control.setCaptureRequestOptions(bundle);
   }
 
-  Future<void> setFlashMode(FlashMode flashMode) async {
+  Future<void> setFlashMode(ImageCaptureFlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
     flashMode = await controller.getImageCaptureFlashMode();
   }
 
   Future<void> takePicture() async {
-    await controller.takePicture(
+    final callback = ImageCaptureOnImageCapturedCallback(
       onCaptureStarted: () {
         logger.info('onCaptureStarted');
       },
@@ -296,7 +301,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
           );
           final file = File(filePath);
           final value = image.planes[0].value;
-          final exif = readExifFromBytes(value);
+          final exif = await readExifFromBytes(value);
           logger.info(exif);
           await file.writeAsBytes(value, flush: true);
           savedUri = file.uri;
@@ -310,6 +315,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
         logger.warning('onError', exception);
       },
     );
+    await controller.takePicture(callback);
   }
 
   Future<void> startRecording() async {
@@ -319,24 +325,25 @@ class HomeViewModel extends ViewModel with TypeLogger {
       'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
     );
     final file = File(filePath);
-    final options = FileOutputOptions(file: file);
-    recording = await controller.startRecording(
-      options,
-      audioConfig: AudioConfig.audioDisabled,
-      listener: (event) {
+    final outputOptions = FileOutputOptions(file);
+    final listener = Consumer<VideoRecordEvent>(
+      accept: (event) {
         logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
           return;
         }
-        final error = event.cause;
-        final results = event.outputResults;
-        if (error == null) {
-          savedUri = results?.outputUri;
+        if (event.hasError) {
+          logger.warning('startRecording failed, ${event.error}');
         } else {
-          logger.warning('startRecording failed, $error');
+          savedUri = event.outputResults.outputUri;
         }
         recording = null;
       },
+    );
+    recording = await controller.startRecording(
+      outputOptions: outputOptions,
+      audioConfig: AudioConfig.audioDisabled,
+      listener: listener,
     );
   }
 
@@ -346,12 +353,16 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   void _setUp() async {
     var isGranted =
-        await _permissionManager.checkPermission(Permission.audio) &&
-        await _permissionManager.checkPermission(Permission.video);
+        await _permissionManager.checkPermission(
+          PermissionManagerPermission.audio,
+        ) &&
+        await _permissionManager.checkPermission(
+          PermissionManagerPermission.video,
+        );
     if (!isGranted) {
       isGranted = await _permissionManager.requestPermissions([
-        Permission.video,
-        Permission.audio,
+        PermissionManagerPermission.video,
+        PermissionManagerPermission.audio,
       ]);
     }
     if (!isGranted) {
@@ -364,12 +375,33 @@ class HomeViewModel extends ViewModel with TypeLogger {
       // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
       resolutionStrategy: ResolutionStrategy(
         boundSize: Size(1024, 768),
-        fallbackRule: ResolutionFallbackRule.closestHigherThenLower,
+        fallbackRule: ResolutionStrategyFallbackRule.closestHigherThenLower,
       ),
     );
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
-    torchState = await controller.getTorchState();
-    zoomState = await controller.getZoomState();
+    final torchState = await controller.getTorchState();
+    final zoomState = await controller.getZoomState();
+    this.torchState = torchState;
+    this.zoomState = zoomState;
+    final torchStateObserver = Observer<TorchState>(
+      onChanged: (e) => this.torchState = e,
+    );
+    final zoomStateObserver = Observer<ZoomState>(
+      onChanged: (e) => this.zoomState = e,
+    );
+    await controller.observeTorchState(torchStateObserver);
+    await controller.observeZoomState(zoomStateObserver);
+    _torchStateObserver = torchStateObserver;
+    _zoomStateObserver = zoomStateObserver;
+    final rotationProviderListener = RotationProviderListener(
+      onRotationChanged: (rotation) {
+        logger.info(
+          'RotationProviderListener.onRotationChanged: ${rotation.name}',
+        );
+      },
+    );
+    await _rotationProvider.addListener(rotationProviderListener);
+    _rotationProviderListener = rotationProviderListener;
     await bind();
   }
 
@@ -383,39 +415,45 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> _setImageAnalyzer() async {
     await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.rgba8888);
-    final analyzer = ImageAnalyzer(
-      analyze: (image) async {
-        try {
-          final format = image.format;
-          final width = image.width;
-          final height = image.height;
-          final plane = image.planes.first;
-          // final width = plane.rowStride ~/ plane.pixelStride;
-          final rotationDegrees = image.imageInfo.rotationDegrees;
-          logger.info('${image.hashCode}: $width * $height, $rotationDegrees°');
-          if (format != ImageFormat.rgba8888) {
-            throw ArgumentError.value(format);
+    await controller.setImageAnalysisOutputImageFormat(
+      ImageAnalysisOutputImageFormat.rgba8888,
+    );
+    final analyzer = ImageAnalysisAnalyzer(
+      consumer: Consumer(
+        accept: (image) async {
+          try {
+            final format = image.format;
+            final width = image.width;
+            final height = image.height;
+            final plane = image.planes.first;
+            // final width = plane.rowStride ~/ plane.pixelStride;
+            final rotationDegrees = image.imageInfo.rotationDegrees;
+            logger.info(
+              '${image.hashCode}: $width * $height, $rotationDegrees°',
+            );
+            if (format != ImageFormat.rgba8888) {
+              throw ArgumentError.value(format.name);
+            }
+            final buffer = await ui.ImmutableBuffer.fromUint8List(plane.value);
+            final descriptor = ui.ImageDescriptor.raw(
+              buffer,
+              width: width,
+              height: height,
+              pixelFormat: ui.PixelFormat.rgba8888,
+            );
+            final codec = await descriptor.instantiateCodec();
+            final frame = await codec.getNextFrame();
+            final imageModel = ImageModel(
+              image: frame.image,
+              rotationDegrees: rotationDegrees,
+            );
+            _handleImageModel(imageModel);
+          } finally {
+            await image.close();
+            logger.info('${image.hashCode} closed');
           }
-          final buffer = await ui.ImmutableBuffer.fromUint8List(plane.value);
-          final descriptor = ui.ImageDescriptor.raw(
-            buffer,
-            width: width,
-            height: height,
-            pixelFormat: ui.PixelFormat.rgba8888,
-          );
-          final codec = await descriptor.instantiateCodec();
-          final frame = await codec.getNextFrame();
-          final imageModel = ImageModel(
-            image: frame.image,
-            rotationDegrees: rotationDegrees,
-          );
-          _handleImageModel(imageModel);
-        } finally {
-          await image.close();
-          logger.info('${image.hashCode} closed');
-        }
-      },
+        },
+      ),
     );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
@@ -428,25 +466,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
     this.imageModel = imageModel;
   }
 
-  Future<void> _setMlKitAnalyzer(MlKitAnalyzer analyzer) async {
+  Future<void> _setVisionAnalyzer(VisionAnalyzer analyzer) async {
     await controller.unbind();
-    await controller.setImageAnalysisOutputImageFormat(ImageFormat.yuv420_888);
+    await controller.setImageAnalysisOutputImageFormat(
+      ImageAnalysisOutputImageFormat.yuv420_888,
+    );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
-  }
-
-  void _handleMlKitAnalyzerResult(MlKitAnalyzerResult result) async {
-    switch (mode) {
-      case CameraMode.barcodes:
-        final barcodes = await result.getValue(_barcodeScanner);
-        this.barcodes = barcodes ?? [];
-        break;
-      case CameraMode.face:
-        final faces = await result.getValue(_faceDetector);
-        this.faces = faces ?? [];
-        break;
-      default:
-    }
   }
 
   Future<void> _clearImageAnalysisAnalyzer() async {
@@ -455,10 +481,20 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   @override
   void dispose() {
+    final rotationProviderListener = _rotationProviderListener;
+    if (rotationProviderListener != null) {
+      _rotationProvider.removeListener(rotationProviderListener);
+    }
+    final torchStateObserver = _torchStateObserver;
+    final zoomStateObserver = _zoomStateObserver;
+    if (torchStateObserver != null) {
+      controller.removeTorchStateObserver(torchStateObserver);
+    }
+    if (zoomStateObserver != null) {
+      controller.removeZoomStateObserver(zoomStateObserver);
+    }
     _clearImageAnalysisAnalyzer();
     unbind();
-    _torchStateChangedSubscription.cancel();
-    _zoomStateChangedSubscription.cancel();
     super.dispose();
   }
 }

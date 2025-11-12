@@ -6,8 +6,9 @@ abstract base class Camera2CameraInfo {
   Camera2CameraInfo.impl();
 
   factory Camera2CameraInfo.from(CameraInfo cameraInfo) {
-    return CameraXPlugin.instance.newCamera2CameraInfoFrom(cameraInfo);
+    return CameraXPlugin.instance.$Camera2CameraInfo$From(cameraInfo);
   }
 
+  Future<String> getCameraId();
   Future<Range<int>?> getSensorInfoExposureTimeRange();
 }

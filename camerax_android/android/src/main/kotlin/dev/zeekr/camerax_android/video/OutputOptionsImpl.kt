@@ -2,10 +2,10 @@ package dev.zeekr.camerax_android.video
 
 import android.location.Location
 import androidx.camera.video.OutputOptions
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiOutputOptionsApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiOutputOptionsProxyApi
 
-class OutputOptionsImpl(impl: CameraXImpl): PigeonApiOutputOptionsApi(impl) {
+class OutputOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiOutputOptionsProxyApi(registrar) {
     override fun getDurationLimitMillis(pigeon_instance: OutputOptions): Long {
         return pigeon_instance.durationLimitMillis
     }

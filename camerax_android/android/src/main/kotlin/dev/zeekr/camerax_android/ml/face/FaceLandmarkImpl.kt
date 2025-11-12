@@ -1,11 +1,11 @@
 package dev.zeekr.camerax_android.ml.face
 
 import com.google.mlkit.vision.face.FaceLandmark
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.FaceLandmarkTypeApi
-import dev.zeekr.camerax_android.PigeonApiFaceLandmarkApi
+import dev.zeekr.camerax_android.PigeonApiFaceLandmarkProxyApi
 
-class FaceLandmarkImpl(impl: CameraXImpl) : PigeonApiFaceLandmarkApi(impl) {
+class FaceLandmarkImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceLandmarkProxyApi(registrar) {
     override fun type(pigeon_instance: FaceLandmark): FaceLandmarkTypeApi {
         return pigeon_instance.landmarkType.faceLandmarkTypeApi
     }
@@ -15,7 +15,7 @@ class FaceLandmarkImpl(impl: CameraXImpl) : PigeonApiFaceLandmarkApi(impl) {
     }
 }
 
-val FaceLandmarkTypeApi.impl
+val FaceLandmarkTypeApi.impl: Int
     get() = when (this) {
         FaceLandmarkTypeApi.LEFT_CHEEK -> FaceLandmark.LEFT_CHEEK
         FaceLandmarkTypeApi.LEFT_EAR -> FaceLandmark.LEFT_EAR
@@ -29,7 +29,7 @@ val FaceLandmarkTypeApi.impl
         FaceLandmarkTypeApi.RIGHT_EYE -> FaceLandmark.RIGHT_EYE
     }
 
-val Int.faceLandmarkTypeApi
+val Int.faceLandmarkTypeApi: FaceLandmarkTypeApi
     get() = when (this) {
         FaceLandmark.LEFT_CHEEK -> FaceLandmarkTypeApi.LEFT_CHEEK
         FaceLandmark.LEFT_EAR -> FaceLandmarkTypeApi.LEFT_EAR
@@ -41,5 +41,5 @@ val Int.faceLandmarkTypeApi
         FaceLandmark.RIGHT_CHEEK -> FaceLandmarkTypeApi.RIGHT_CHEEK
         FaceLandmark.RIGHT_EAR -> FaceLandmarkTypeApi.RIGHT_EAR
         FaceLandmark.RIGHT_EYE -> FaceLandmarkTypeApi.RIGHT_EYE
-        else -> throw IllegalArgumentException()
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

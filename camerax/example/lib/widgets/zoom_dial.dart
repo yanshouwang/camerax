@@ -15,10 +15,12 @@ class ZoomDial extends StatelessWidget {
     required this.minimum,
     required this.maximum,
     required this.value,
-  }) : assert(minimum > 0.0 &&
-            minimum < maximum &&
-            value >= minimum &&
-            value <= maximum);
+  }) : assert(
+         minimum > 0.0 &&
+             minimum < maximum &&
+             value >= minimum &&
+             value <= maximum,
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +77,7 @@ class _ZoomDialPainter extends CustomPainter {
     final paint = Paint()
       ..style = PaintingStyle.fill
       ..color = backgroundColor;
-    canvas.drawCircle(
-      Offset.zero,
-      r0,
-      paint,
-    );
+    canvas.drawCircle(Offset.zero, r0, paint);
     canvas.save();
     // Clip canvas.
     const clipAngle = standardAngle;
@@ -101,11 +99,7 @@ class _ZoomDialPainter extends CustomPainter {
     final clipPath = Path()
       ..moveTo(clipBottomRightX, clipBottomY)
       ..lineTo(clipTopRight.dx, clipTopRight.dy)
-      ..arcToPoint(
-        clipTopLeft,
-        radius: Radius.circular(r1),
-        largeArc: true,
-      )
+      ..arcToPoint(clipTopLeft, radius: Radius.circular(r1), largeArc: true)
       ..lineTo(clipBottomLeftX, clipBottomY)
       ..close();
     canvas.clipPath(clipPath);
@@ -168,10 +162,7 @@ class _ZoomDialPainter extends CustomPainter {
     final indicatorPath = Path()
       ..moveTo(0.0, b1)
       ..lineTo(indicatorTopLeft.dx, indicatorTopLeft.dy)
-      ..arcToPoint(
-        indicatorTopRight,
-        radius: Radius.circular(r1),
-      )
+      ..arcToPoint(indicatorTopRight, radius: Radius.circular(r1))
       ..close();
     paint
       ..style = PaintingStyle.fill
@@ -181,9 +172,7 @@ class _ZoomDialPainter extends CustomPainter {
     final valuePainter = TextPainter(
       text: TextSpan(
         text: '${value.trancateStringAsFixed(1).replaceAll('.0', '')}x',
-        style: textStyle.copyWith(
-          color: indicatorColor,
-        ),
+        style: textStyle.copyWith(color: indicatorColor),
       ),
       textDirection: TextDirection.ltr,
     )..layout();

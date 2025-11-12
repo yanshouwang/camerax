@@ -1,44 +1,69 @@
 package dev.zeekr.camerax_android.video
 
+import androidx.camera.video.OutputOptions
 import androidx.camera.video.OutputResults
 import androidx.camera.video.RecordingStats
 import androidx.camera.video.VideoRecordEvent
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiVideoRecordEventApi
-import dev.zeekr.camerax_android.PigeonApiVideoRecordFinalizeEventApi
-import dev.zeekr.camerax_android.PigeonApiVideoRecordPauseEventApi
-import dev.zeekr.camerax_android.PigeonApiVideoRecordResumeEventApi
-import dev.zeekr.camerax_android.PigeonApiVideoRecordStartEventApi
-import dev.zeekr.camerax_android.PigeonApiVideoRecordStatusEventApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiVideoRecordEventProxyApi
+import dev.zeekr.camerax_android.PigeonApiVideoRecordFinalizeEventProxyApi
+import dev.zeekr.camerax_android.PigeonApiVideoRecordPauseEventProxyApi
+import dev.zeekr.camerax_android.PigeonApiVideoRecordResumeEventProxyApi
+import dev.zeekr.camerax_android.PigeonApiVideoRecordStartEventProxyApi
+import dev.zeekr.camerax_android.PigeonApiVideoRecordStatusEventProxyApi
 import dev.zeekr.camerax_android.VideoRecordFinalizeEventErrorApi
 import dev.zeekr.camerax_android.common.api
 
-class VideoRecordEventImpl(impl: CameraXImpl) : PigeonApiVideoRecordEventApi(impl) {
-    class StatusImpl(impl: CameraXImpl) : PigeonApiVideoRecordStatusEventApi(impl) {
+class VideoRecordEventImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiVideoRecordEventProxyApi(registrar) {
+    class StatusImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiVideoRecordStatusEventProxyApi(registrar) {
+        override fun outputOptions(pigeon_instance: VideoRecordEvent.Status): OutputOptions {
+            return pigeon_instance.outputOptions
+        }
+
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Status): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class StartImpl(impl: CameraXImpl) : PigeonApiVideoRecordStartEventApi(impl) {
+    class StartImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordStartEventProxyApi(registrar) {
+        override fun outputOptions(pigeon_instance: VideoRecordEvent.Start): OutputOptions {
+            return pigeon_instance.outputOptions
+        }
+
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Start): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class PauseImpl(impl: CameraXImpl) : PigeonApiVideoRecordPauseEventApi(impl) {
+    class PauseImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiVideoRecordPauseEventProxyApi(registrar) {
+        override fun outputOptions(pigeon_instance: VideoRecordEvent.Pause): OutputOptions {
+            return pigeon_instance.outputOptions
+        }
+
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Pause): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class ResumeImpl(impl: CameraXImpl) : PigeonApiVideoRecordResumeEventApi(impl) {
+    class ResumeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiVideoRecordResumeEventProxyApi(registrar) {
+        override fun outputOptions(pigeon_instance: VideoRecordEvent.Resume): OutputOptions {
+            return pigeon_instance.outputOptions
+        }
+
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Resume): RecordingStats {
             return pigeon_instance.recordingStats
         }
     }
 
-    class FinalizeImpl(impl: CameraXImpl) : PigeonApiVideoRecordFinalizeEventApi(impl) {
+    class FinalizeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiVideoRecordFinalizeEventProxyApi(registrar) {
+        override fun outputOptions(pigeon_instance: VideoRecordEvent.Finalize): OutputOptions {
+            return pigeon_instance.outputOptions
+        }
+
         override fun recordingStats(pigeon_instance: VideoRecordEvent.Finalize): RecordingStats {
             return pigeon_instance.recordingStats
         }
@@ -48,16 +73,20 @@ class VideoRecordEventImpl(impl: CameraXImpl) : PigeonApiVideoRecordEventApi(imp
         }
 
         override fun error(pigeon_instance: VideoRecordEvent.Finalize): VideoRecordFinalizeEventErrorApi {
-            return pigeon_instance.error.finalizeErrorApi
+            return pigeon_instance.error.videoRecordFinalizeEventErrorApi
         }
 
         override fun outputResults(pigeon_instance: VideoRecordEvent.Finalize): OutputResults {
             return pigeon_instance.outputResults
         }
+
+        override fun hasError(pigeon_instance: VideoRecordEvent.Finalize): Boolean {
+            return pigeon_instance.hasError()
+        }
     }
 }
 
-val Int.finalizeErrorApi
+val Int.videoRecordFinalizeEventErrorApi: VideoRecordFinalizeEventErrorApi
     get() = when (this) {
         VideoRecordEvent.Finalize.ERROR_NONE -> VideoRecordFinalizeEventErrorApi.NONE
         VideoRecordEvent.Finalize.ERROR_UNKNOWN -> VideoRecordFinalizeEventErrorApi.UNKNOWN
@@ -70,5 +99,5 @@ val Int.finalizeErrorApi
         VideoRecordEvent.Finalize.ERROR_NO_VALID_DATA -> VideoRecordFinalizeEventErrorApi.NO_VALID_DATA
         VideoRecordEvent.Finalize.ERROR_DURATION_LIMIT_REACHED -> VideoRecordFinalizeEventErrorApi.DURATION_LIMIT_REACHED
         VideoRecordEvent.Finalize.ERROR_RECORDING_GARBAGE_COLLECTED -> VideoRecordFinalizeEventErrorApi.RECORDING_GARBAGE_COLLECTED
-        else -> throw IllegalArgumentException()
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

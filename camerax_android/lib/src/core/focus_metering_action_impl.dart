@@ -1,23 +1,22 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'metering_mode_impl.dart';
 import 'metering_point_impl.dart';
 
 final class FocusMeteringActionImpl extends FocusMeteringAction {
-  final FocusMeteringActionApi api;
+  final FocusMeteringActionProxyApi api;
 
   FocusMeteringActionImpl.internal(this.api) : super.impl();
 
   factory FocusMeteringActionImpl(
-    (MeteringPoint, List<MeteringMode>) first, {
-    List<(MeteringPoint, List<MeteringMode>)>? others,
+    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
+    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) {
-    final api = FocusMeteringActionApi.build(
-      first: first.api,
-      others: others?.map((e) => e.api).toList(),
+    final api = FocusMeteringActionProxyApi.build(
+      point: point.api,
+      morePoints: morePoints?.map((e) => e.api).toList(),
       disableAutoCancel: disableAutoCancel,
       autoCancelDuration: autoCancelDuration?.api,
     );
@@ -45,24 +44,32 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
   Future<bool> isAutoCancelEnabled() => api.isAutoCancelEnabled();
 }
 
-extension MeteringPointTupleX on (MeteringPoint, List<MeteringMode>) {
-  MeteringPointTupleApi get api {
-    final point = this.$1;
-    if (point is! MeteringPointImpl) {
-      throw TypeError();
-    }
-    return MeteringPointTupleApi(
-      point: point.api,
-      modes: $2.map((e) => e.api).toList(),
+extension MeteringPointApiTupleX
+    on (MeteringPoint, List<FocusMeteringActionMeteringMode>) {
+  MeteringPointTupleProxyApi get api => MeteringPointTupleProxyApi(
+    point: $1.api,
+    modes: $2.map((e) => e.api).toList(),
+  );
+}
+
+extension DurationX on Duration {
+  DurationTupleProxyApi get api {
+    return DurationTupleProxyApi(
+      duration: inMilliseconds,
+      timeUnit: TimeUnitApi.milliseconds,
     );
   }
 }
 
-extension DurationX on Duration {
-  DurationTupleApi get api {
-    return DurationTupleApi(
-      duration: inMilliseconds,
-      timeUnit: TimeUnitApi.milliseconds,
-    );
+extension FocusMeteringActionMeteringModeX on FocusMeteringActionMeteringMode {
+  FocusMeteringActionMeteringModeApi get api =>
+      FocusMeteringActionMeteringModeApi.values[index];
+}
+
+extension FocusMeteringActionX on FocusMeteringAction {
+  FocusMeteringActionProxyApi get api {
+    final impl = this;
+    if (impl is! FocusMeteringActionImpl) throw TypeError();
+    return impl.api;
   }
 }

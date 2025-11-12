@@ -1,3 +1,9 @@
+## 1.0.2
+
+* Add `RotationProvider` API.
+* Add vision APIs.
+* No longer support `AVAnalyzer`, use `VisionAnalyzer` instead.
+
 ## 1.0.1
 
 * Bump version.

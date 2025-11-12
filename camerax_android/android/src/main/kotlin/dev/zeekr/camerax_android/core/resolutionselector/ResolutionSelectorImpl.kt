@@ -4,19 +4,25 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionFilter
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.core.resolutionselector.ResolutionStrategy
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiResolutionSelectorApi
-import dev.zeekr.camerax_android.ResolutionModeApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiResolutionSelectorProxyApi
+import dev.zeekr.camerax_android.ResolutionSelectorModeApi
 
-class ResolutionSelectorImpl(impl: CameraXImpl) : PigeonApiResolutionSelectorApi(impl) {
-    override fun pigeon_defaultConstructor(
-        allowedResolutionMode: ResolutionModeApi,
-        aspectRatioStrategy: AspectRatioStrategy,
+class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiResolutionSelectorProxyApi(registrar) {
+    override fun build(
+        mode: ResolutionSelectorModeApi?,
+        aspectRatioStrategy: AspectRatioStrategy?,
         resolutionFilter: ResolutionFilter?,
         resolutionStrategy: ResolutionStrategy?
     ): ResolutionSelector {
-        val builder = ResolutionSelector.Builder().setAllowedResolutionMode(allowedResolutionMode.impl)
-            .setAspectRatioStrategy(aspectRatioStrategy)
+        val builder = ResolutionSelector.Builder()
+        if (mode != null) {
+            builder.setAllowedResolutionMode(mode.impl)
+        }
+        if (aspectRatioStrategy != null) {
+            builder.setAspectRatioStrategy(aspectRatioStrategy)
+        }
         if (resolutionFilter != null) {
             builder.setResolutionFilter(resolutionFilter)
         }
@@ -26,32 +32,32 @@ class ResolutionSelectorImpl(impl: CameraXImpl) : PigeonApiResolutionSelectorApi
         return builder.build()
     }
 
-    override fun allowedResolutionMode(pigeon_instance: ResolutionSelector): ResolutionModeApi {
-        return pigeon_instance.allowedResolutionMode.resolutionModeApi
+    override fun getAllowedResolutionMode(pigeon_instance: ResolutionSelector): ResolutionSelectorModeApi {
+        return pigeon_instance.allowedResolutionMode.resolutionSelectorModeApi
     }
 
-    override fun aspectRatioStrategy(pigeon_instance: ResolutionSelector): AspectRatioStrategy {
+    override fun getAspectRatioStrategy(pigeon_instance: ResolutionSelector): AspectRatioStrategy {
         return pigeon_instance.aspectRatioStrategy
     }
 
-    override fun resolutionFilter(pigeon_instance: ResolutionSelector): ResolutionFilter? {
+    override fun getResolutionFilter(pigeon_instance: ResolutionSelector): ResolutionFilter? {
         return pigeon_instance.resolutionFilter
     }
 
-    override fun resolutionStrategy(pigeon_instance: ResolutionSelector): ResolutionStrategy? {
+    override fun getResolutionStrategy(pigeon_instance: ResolutionSelector): ResolutionStrategy? {
         return pigeon_instance.resolutionStrategy
     }
 }
 
-val ResolutionModeApi.impl
+val ResolutionSelectorModeApi.impl: Int
     get() = when (this) {
-        ResolutionModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-        ResolutionModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+        ResolutionSelectorModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+        ResolutionSelectorModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
     }
 
-val Int.resolutionModeApi
+val Int.resolutionSelectorModeApi: ResolutionSelectorModeApi
     get() = when (this) {
-        ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-        ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
-        else -> throw IllegalArgumentException()
+        ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelectorModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+        ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelectorModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+        else -> throw NotImplementedError("Not implemented value: $this")
     }

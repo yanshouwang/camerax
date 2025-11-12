@@ -1,12 +1,23 @@
-import 'package:camerax_ios/src/camerax.g.dart';
+import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/core.dart';
+import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'av_metadata_object_impl.dart';
 
-final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
+final class AVAnalyzerResultImpl extends AVAnalyzerResult {
+  final AVAnalyzerResultProxyApi api;
+
+  AVAnalyzerResultImpl.internal(this.api) : super.impl();
+
   @override
-  final AVAnalyzerApi api;
+  List<AVMetadataObject> get objects => api.objects.map((e) => e.impl).toList();
+}
+
+final class AVAnalyzerImpl extends AVAnalyzer with ImageAnalysisAnalyzerImpl {
+  @override
+  final AVAnalyzerProxyApi api;
 
   AVAnalyzerImpl.internal(this.api) : super.impl();
 
@@ -14,15 +25,19 @@ final class AVAnalyzerImpl extends AVAnalyzer with AnalyzerImpl {
     List<AVMetadataObjectType>? types,
     required Consumer<AVAnalyzerResult> consumer,
   }) {
-    final api = AVAnalyzerApi(
+    final api = AVAnalyzerProxyApi(
       types: types?.map((e) => e.api).toList(),
-      consumer: AVAnalyzerResultConsumerApi(accept: (_, e) => consumer(e.impl)),
+      consumer: consumer.api,
     );
     return AVAnalyzerImpl.internal(api);
   }
 }
 
-extension AVAnalyzerResultApiX on AVAnalyzerResultApi {
-  AVAnalyzerResult get impl =>
-      AVAnalyzerResult(objects: objects.map((e) => e.impl).toList());
+extension AVAnalyzerResultProxyApiX on AVAnalyzerResultProxyApi {
+  AVAnalyzerResult get impl => AVAnalyzerResultImpl.internal(this);
+
+  Future<VisionAnalyzerResult> vimpl() async {
+    final objects = await Future.wait(this.objects.map((e) => e.vimpl()));
+    return VisionAnalyzerResultImpl.internal(this, objects);
+  }
 }

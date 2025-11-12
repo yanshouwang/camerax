@@ -13,13 +13,13 @@ What's more, We provide MlKitAnalyzer and AVAnalyzer for you to recognize barcod
 * Control the camera devices with [CameraController](https://developer.android.com/reference/kotlin/androidx/camera/view/CameraController), take picture, record video and so on.
 * Preview with PreviewWidget.
 * Predefined analyzers with MlKit on Android and AVCaptureMetadataOutput on iOS.
-* Custom analyzers with ImageAnalyzer. 
+* Custom analyzers with ImageAnalysisAnalyzer. 
 
 ## Getting Started
 
 ### Android
 
-Make sure you have a miniSdk with 21 or higher in the `android/app/build.gradle`.
+Make sure you have a miniSdk with 23 or higher in the `android/app/build.gradle`.
 
 Note: You can run the example on a device emulator with Android 11 or higher and physical devices, CameraX doesn't work when running on emulators with Android 10 or lower. See https://developer.android.google.cn/codelabs/camerax-getting-started#5
 

@@ -1,37 +1,51 @@
-import 'package:camerax_android/src/camerax.g.dart';
+import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'lens_facing_impl.dart';
+import 'camera_info_impl.dart';
 
 final class CameraSelectorImpl extends CameraSelector {
-  static CameraSelectorImpl get front =>
-      CameraSelectorImpl.internal(CameraSelectorApi.front);
   static CameraSelectorImpl get back =>
-      CameraSelectorImpl.internal(CameraSelectorApi.back);
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
+  static CameraSelectorImpl get front =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
   static CameraSelectorImpl get external =>
-      CameraSelectorImpl.internal(CameraSelectorApi.external);
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
 
-  final CameraSelectorApi api;
+  final CameraSelectorProxyApi api;
 
   CameraSelectorImpl.internal(this.api) : super.impl();
 
-  factory CameraSelectorImpl({
-    LensFacing? lensFacing,
-  }) {
-    final api = CameraSelectorApi(
-      lensFacing: lensFacing?.api,
-    );
+  factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
+    final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
     return CameraSelectorImpl.internal(api);
   }
 
   @override
-  int get hashCode => api.hashCode;
+  Future<List<CameraInfo>> filter(List<CameraInfo> cameraInfos) => api
+      .filter(cameraInfos.map((e) => e.api).toList())
+      .then((e) => e.map((e1) => e1.impl).toList());
 
   @override
-  bool operator ==(Object other) =>
-      other is CameraSelectorImpl && api == other.api;
+  Future<String?> getPhysicalCameraId() => api.getPhysicalCameraId();
 }
 
-extension CameraSelectorApiX on CameraSelectorApi {
+extension CameraSelectorLensFacingX on CameraSelectorLensFacing {
+  CameraSelectorLensFacingApi get api =>
+      CameraSelectorLensFacingApi.values[index];
+}
+
+extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
+  CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
+}
+
+extension CameraSelectorX on CameraSelector {
+  CameraSelectorProxyApi get api {
+    final impl = this;
+    if (impl is! CameraSelectorImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension CameraSelectorProxyApiX on CameraSelectorProxyApi {
   CameraSelector get impl => CameraSelectorImpl.internal(this);
 }

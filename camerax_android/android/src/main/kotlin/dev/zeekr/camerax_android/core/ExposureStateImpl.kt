@@ -1,11 +1,11 @@
 package dev.zeekr.camerax_android.core
 
 import androidx.camera.core.ExposureState
-import dev.zeekr.camerax_android.CameraXImpl
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiExposureStateProxyApi
 import dev.zeekr.camerax_android.common.IntRange
-import dev.zeekr.camerax_android.PigeonApiExposureStateApi
 
-class ExposureStateImpl(impl: CameraXImpl) : PigeonApiExposureStateApi(impl) {
+class ExposureStateImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiExposureStateProxyApi(registrar) {
     override fun exposureCompensationIndex(pigeon_instance: ExposureState): Long {
         return pigeon_instance.exposureCompensationIndex.toLong()
     }

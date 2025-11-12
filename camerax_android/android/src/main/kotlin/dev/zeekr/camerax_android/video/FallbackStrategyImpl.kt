@@ -2,10 +2,11 @@ package dev.zeekr.camerax_android.video
 
 import androidx.camera.video.FallbackStrategy
 import androidx.camera.video.Quality
-import dev.zeekr.camerax_android.CameraXImpl
-import dev.zeekr.camerax_android.PigeonApiFallbackStrategyApi
+import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiFallbackStrategyProxyApi
 
-class FallbackStrategyImpl(impl: CameraXImpl) : PigeonApiFallbackStrategyApi(impl) {
+class FallbackStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiFallbackStrategyProxyApi(registrar) {
     override fun higherQualityOrLowerThan(quality: Quality): FallbackStrategy {
         return FallbackStrategy.higherQualityOrLowerThan(quality)
     }

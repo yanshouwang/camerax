@@ -1,4 +1,4 @@
-enum ControlMode {
+enum CameraMetadataControlMode {
   auto,
   off,
   offKeepState,
@@ -6,7 +6,7 @@ enum ControlMode {
   useSceneMode,
 }
 
-enum ControlAeMode {
+enum CameraMetadataControlAeMode {
   off,
   on,
   onAlwaysFlash,
@@ -16,15 +16,9 @@ enum ControlAeMode {
   onLowLightBoostBrightnessPriority,
 }
 
-enum ControlAfMode {
-  auto,
-  continuousPicture,
-  edof,
-  macro,
-  off,
-}
+enum CameraMetadataControlAfMode { auto, continuousPicture, edof, macro, off }
 
-enum ControlAwbMode {
+enum CameraMetadataControlAwbMode {
   auto,
   cloudyDaylight,
   daylight,

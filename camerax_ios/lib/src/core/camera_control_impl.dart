@@ -1,10 +1,11 @@
-import 'package:camerax_ios/src/camerax.g.dart';
+import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'focus_metering_action_impl.dart';
+import 'focus_metering_result_impl.dart';
 
 final class CameraControlImpl extends CameraControl {
-  final CameraControlApi api;
+  final CameraControlProxyApi api;
 
   CameraControlImpl.internal(this.api) : super.impl();
 
@@ -26,16 +27,29 @@ final class CameraControlImpl extends CameraControl {
   Future<void> setZoomRatio(double ratio) => api.setZoomRatio(ratio);
 
   @override
-  Future<bool> startFocusAndMetering(FocusMeteringAction action) {
-    if (action is! FocusMeteringActionImpl) {
-      throw TypeError();
-    }
-    return api
-        .startFocusAndMetering(action.api)
-        .then((e) => e.isFocusSuccessful);
+  Future<FocusMeteringResult> startFocusAndMetering(
+    FocusMeteringAction action,
+  ) => api.startFocusAndMetering(action.api).then((e) => e.impl);
+
+  @override
+  Future<void> enableLowLightBoostAsync(bool lowLightBoost) =>
+      throw UnimplementedError();
+  // api.enableLowLightBoostAsync(lowLightBoost);
+
+  @override
+  Future<void> setTorchStrengthLevel(int torchStrengthLevel) =>
+      throw UnimplementedError();
+  // api.setTorchStrengthLevel(torchStrengthLevel);
+}
+
+extension CameraControlX on CameraControl {
+  CameraControlProxyApi get api {
+    final impl = this;
+    if (impl is! CameraControlImpl) throw TypeError();
+    return impl.api;
   }
 }
 
-extension CameraControlApiX on CameraControlApi {
+extension CameraControlProxyApiX on CameraControlProxyApi {
   CameraControl get impl => CameraControlImpl.internal(this);
 }

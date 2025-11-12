@@ -1,5 +1,4 @@
-export 'ml/barcode_scanner_impl.dart';
-export 'ml/detector_impl.dart';
-export 'ml/face_detector_impl.dart';
-export 'ml/mlkit_analyzer_result_impl.dart';
-export 'ml/mlkit_analyzer_impl.dart';
+export 'ml/barcode.dart';
+export 'ml/face.dart';
+export 'ml/interfaces.dart';
+export 'ml/ml_kit_analyzer_impl.dart';
