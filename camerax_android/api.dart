@@ -2058,7 +2058,7 @@ abstract class PreviewViewProxyApi {
 abstract class RotationProviderListenerProxyApi {
   RotationProviderListenerProxyApi();
 
-  late final void Function(int rotation) onRotationChanged;
+  late final void Function(SurfaceRotationApi rotation) onRotationChanged;
 }
 
 @ProxyApi(

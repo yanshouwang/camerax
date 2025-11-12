@@ -1,15 +1,13 @@
-import 'dart:ui' as ui;
+// import 'dart:typed_data';
+// import 'dart:ui' as ui;
 
-import 'package:camerax_ios/src/camerax_api.g.dart';
-
-extension BitmapProxyApiX on CGImageProxyApi {
-  Future<ui.Image> impl() => throw UnimplementedError();
-  //  async {
-  //   final buffer = await ui.ImmutableBuffer.fromUint8List(value);
-  //   final descriptor = await ui.ImageDescriptor.encoded(buffer);
-  //   final codec = await descriptor.instantiateCodec();
-  //   final frame = await codec.getNextFrame();
-  //   final image = frame.image;
-  //   return image;
-  // }
-}
+// extension ImageApiX on CGImageProxyApi {
+//   Future<ui.Image> impl() async {
+//     final buffer = await ui.ImmutableBuffer.fromUint8List(this);
+//     final descriptor = await ui.ImageDescriptor.encoded(buffer);
+//     final codec = await descriptor.instantiateCodec();
+//     final frame = await codec.getNextFrame();
+//     final image = frame.image;
+//     return image;
+//   }
+// }

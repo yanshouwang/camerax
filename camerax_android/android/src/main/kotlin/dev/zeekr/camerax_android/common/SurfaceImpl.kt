@@ -10,3 +10,12 @@ val SurfaceRotationApi.impl: Int
         SurfaceRotationApi.ROTATION180 -> Surface.ROTATION_180
         SurfaceRotationApi.ROTATION270 -> Surface.ROTATION_270
     }
+
+val Int.surfaceRotationApi: SurfaceRotationApi
+    get() = when (this) {
+        Surface.ROTATION_0 -> SurfaceRotationApi.ROTATION0
+        Surface.ROTATION_90 -> SurfaceRotationApi.ROTATION90
+        Surface.ROTATION_180 -> SurfaceRotationApi.ROTATION180
+        Surface.ROTATION_270 -> SurfaceRotationApi.ROTATION270
+        else -> throw NotImplementedError("Not implemented value: $this")
+    }

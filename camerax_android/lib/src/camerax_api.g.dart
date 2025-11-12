@@ -456,7 +456,7 @@ class PigeonOverrides {
   static RotationProviderListenerProxyApi Function(
       {required void Function(
         RotationProviderListenerProxyApi pigeon_instance,
-        int rotation,
+        SurfaceRotationApi rotation,
       ) onRotationChanged})? rotationProviderListenerProxyApi_new;
 
   /// Overrides [RotationProviderProxyApi.new].
@@ -24521,7 +24521,7 @@ class RotationProviderListenerProxyApi extends PigeonInternalProxyApiBaseClass {
     PigeonInstanceManager? pigeon_instanceManager,
     required void Function(
       RotationProviderListenerProxyApi pigeon_instance,
-      int rotation,
+      SurfaceRotationApi rotation,
     ) onRotationChanged,
   }) {
     if (PigeonOverrides.rotationProviderListenerProxyApi_new != null) {
@@ -24609,7 +24609,7 @@ class RotationProviderListenerProxyApi extends PigeonInternalProxyApiBaseClass {
   /// release the associated Native object manually.
   final void Function(
     RotationProviderListenerProxyApi pigeon_instance,
-    int rotation,
+    SurfaceRotationApi rotation,
   ) onRotationChanged;
 
   static void pigeon_setUpMessageHandlers({
@@ -24618,7 +24618,7 @@ class RotationProviderListenerProxyApi extends PigeonInternalProxyApiBaseClass {
     PigeonInstanceManager? pigeon_instanceManager,
     void Function(
       RotationProviderListenerProxyApi pigeon_instance,
-      int rotation,
+      SurfaceRotationApi rotation,
     )? onRotationChanged,
   }) {
     final _PigeonInternalProxyApiBaseCodec pigeonChannelCodec =
@@ -24643,9 +24643,10 @@ class RotationProviderListenerProxyApi extends PigeonInternalProxyApiBaseClass {
               (args[0] as RotationProviderListenerProxyApi?);
           assert(arg_pigeon_instance != null,
               'Argument for dev.flutter.pigeon.camerax_android.RotationProviderListenerProxyApi.onRotationChanged was null, expected non-null RotationProviderListenerProxyApi.');
-          final int? arg_rotation = (args[1] as int?);
+          final SurfaceRotationApi? arg_rotation =
+              (args[1] as SurfaceRotationApi?);
           assert(arg_rotation != null,
-              'Argument for dev.flutter.pigeon.camerax_android.RotationProviderListenerProxyApi.onRotationChanged was null, expected non-null int.');
+              'Argument for dev.flutter.pigeon.camerax_android.RotationProviderListenerProxyApi.onRotationChanged was null, expected non-null SurfaceRotationApi.');
           try {
             (onRotationChanged ?? arg_pigeon_instance!.onRotationChanged)
                 .call(arg_pigeon_instance!, arg_rotation!);

@@ -9,6 +9,7 @@ import 'common.dart';
 import 'core.dart';
 import 'video.dart';
 import 'view.dart';
+import 'vision.dart';
 
 final class CameraXiOSPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -198,7 +199,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
 
   @override
   RotationProviderListener $RotationProviderListener({
-    required void Function(int rotation) onRotationChanged,
+    required void Function(SurfaceRotation rotation) onRotationChanged,
   }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
 
   @override
@@ -354,4 +355,10 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   @override
   ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy =>
       ResolutionStrategyImpl.highestAvailableStrategy;
+
+  @override
+  VisionAnalyzer $VisionAnalyzer({
+    List<VisionObjectType>? types,
+    required Consumer<VisionAnalyzerResult> consumer,
+  }) => VisionAnalyzerImpl(types: types, consumer: consumer);
 }

@@ -4,7 +4,7 @@ import 'package:camerax/camerax.dart';
 import 'package:flutter/cupertino.dart';
 
 class FacesView extends StatelessWidget {
-  final List<Face> faces;
+  final List<VisionFaceObject> faces;
 
   const FacesView({super.key, required this.faces});
 
@@ -12,7 +12,8 @@ class FacesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: _FacesPainter(
-        devicePixelRatio: MediaQuery.devicePixelRatioOf(context),
+        // devicePixelRatio: MediaQuery.devicePixelRatioOf(context),
+        devicePixelRatio: 1.0,
         faces: faces,
         strokeWidth: 2.0,
         color: CupertinoTheme.of(context).primaryColor,
@@ -23,7 +24,7 @@ class FacesView extends StatelessWidget {
 
 class _FacesPainter extends CustomPainter {
   final double devicePixelRatio;
-  final List<Face> faces;
+  final List<VisionFaceObject> faces;
   final double strokeWidth;
   final Color color;
 
@@ -44,15 +45,15 @@ class _FacesPainter extends CustomPainter {
       ..color = color;
     for (var face in faces) {
       final rect = ui.Rect.fromLTRB(
-        face.boundingBox.left / devicePixelRatio,
-        face.boundingBox.top / devicePixelRatio,
-        face.boundingBox.right / devicePixelRatio,
-        face.boundingBox.bottom / devicePixelRatio,
+        face.bounds.left / devicePixelRatio,
+        face.bounds.top / devicePixelRatio,
+        face.bounds.right / devicePixelRatio,
+        face.bounds.bottom / devicePixelRatio,
       );
       canvas.drawRect(rect, paint);
       final idPainter = TextPainter(
         text: TextSpan(
-          text: '${face.trackingId}',
+          text: '${face.id}',
           style: TextStyle(color: color),
         ),
         textDirection: TextDirection.ltr,

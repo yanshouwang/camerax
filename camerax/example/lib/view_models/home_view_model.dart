@@ -16,27 +16,23 @@ class HomeViewModel extends ViewModel with TypeLogger {
   final PermissionManager _permissionManager;
   final CameraController _controller;
   final RotationProvider _rotationProvider;
-  final BarcodeScanner _barcodeScanner;
-  final FaceDetector _faceDetector;
 
   RotationProviderListener? _rotationProviderListener;
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
 
-  CameraInfo? _cameraInfo;
+  // CameraInfo? _cameraInfo;
   CameraControl? _cameraControl;
-  Camera2CameraInfo? _camera2CameraInfo;
+  // Camera2CameraInfo? _camera2CameraInfo;
   Camera2CameraControl? _camera2CameraControl;
 
   HomeViewModel()
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
       _rotationProvider = RotationProvider(),
-      _barcodeScanner = BarcodeScanner(),
-      _faceDetector = FaceDetector(),
       _mode = CameraMode.takePicture,
       _lensFacing = CameraSelectorLensFacing.back,
-      _barcodes = [],
+      _codes = [],
       _faces = [] {
     _setUp();
   }
@@ -71,7 +67,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   TorchState? get torchState => _torchState;
   set torchState(TorchState? value) {
     if (_torchState == value) return;
-    logger.info('torchState changed: $value');
     _torchState = value;
     notifyListeners();
   }
@@ -80,7 +75,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   ZoomState? get zoomState => _zoomState;
   set zoomState(ZoomState? value) {
     if (_zoomState == value) return;
-    logger.info('zoomState changed: $value');
     _zoomState = value;
     notifyListeners();
   }
@@ -127,17 +121,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  List<Barcode> _barcodes;
-  List<Barcode> get barcodes => _barcodes;
-  set barcodes(List<Barcode> value) {
-    if (_barcodes == value) return;
-    _barcodes = value;
+  List<VisionMachineReadableCodeObject> _codes;
+  List<VisionMachineReadableCodeObject> get codes => _codes;
+  set codes(List<VisionMachineReadableCodeObject> value) {
+    if (_codes == value) return;
+    _codes = value;
     notifyListeners();
   }
 
-  List<Face> _faces;
-  List<Face> get faces => _faces;
-  set faces(List<Face> value) {
+  List<VisionFaceObject> _faces;
+  List<VisionFaceObject> get faces => _faces;
+  set faces(List<VisionFaceObject> value) {
     if (_faces == value) return;
     _faces = value;
     notifyListeners();
@@ -168,7 +162,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     //         maximum: exposureTimeRange.upper,
     //         value: exposureTimeRange.lower,
     //       );
-    _cameraInfo = cameraInfo;
+    // _cameraInfo = cameraInfo;
     _cameraControl = cameraControl;
     // _camera2CameraInfo = camera2Info;
     // _camera2CameraControl = camera2Control;
@@ -178,8 +172,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> unbind() async {
     await controller.unbind();
-    _cameraInfo = null;
+    // _cameraInfo = null;
     _cameraControl = null;
+    // _camera2CameraInfo = null;
     _camera2CameraControl = null;
     exposureState = null;
     exposureTimeState = null;
@@ -208,25 +203,33 @@ class HomeViewModel extends ViewModel with TypeLogger {
         await _setImageAnalyzer();
         break;
       case CameraMode.barcodes:
-        final analyzer = MlKitAnalyzer(
-          detectors: [_barcodeScanner],
-          targetCoordinateSystem: ImageAnalysisCoordinateSystem.viewReferenced,
-          consumer: Consumer(accept: _handleMlKitAnalyzerResult),
+        final analyzer = VisionAnalyzer(
+          types: [
+            ...VisionObjectType.towDimensionalCodes,
+            ...VisionObjectType.barcodes,
+          ],
+          consumer: Consumer(
+            accept: (res) => codes = res.objects
+                .whereType<VisionMachineReadableCodeObject>()
+                .toList(),
+          ),
         );
-        await _setMlKitAnalyzer(analyzer);
+        await _setVisionAnalyzer(analyzer);
         break;
       case CameraMode.face:
-        final analyzer = MlKitAnalyzer(
-          detectors: [_faceDetector],
-          targetCoordinateSystem: ImageAnalysisCoordinateSystem.viewReferenced,
-          consumer: Consumer(accept: _handleMlKitAnalyzerResult),
+        final analyzer = VisionAnalyzer(
+          types: VisionObjectType.faces,
+          consumer: Consumer(
+            accept: (res) =>
+                faces = res.objects.whereType<VisionFaceObject>().toList(),
+          ),
         );
-        await _setMlKitAnalyzer(analyzer);
+        await _setVisionAnalyzer(analyzer);
         break;
     }
     this.mode = mode;
     imageModel = null;
-    barcodes = [];
+    codes = [];
     faces = [];
   }
 
@@ -276,12 +279,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   }
 
   Future<void> takePicture() async {
-    final info = ArgumentError.checkNotNull(_cameraInfo);
-    final degrees1 = await info.getSensorRotationDegrees();
-    final degrees2 = await info.getSensorRotationDegrees(
-      SurfaceRotation.rotation0,
-    );
-    logger.info('degrees: $degrees1, $degrees2');
     final callback = ImageCaptureOnImageCapturedCallback(
       onCaptureStarted: () {
         logger.info('onCaptureStarted');
@@ -398,7 +395,9 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _zoomStateObserver = zoomStateObserver;
     final rotationProviderListener = RotationProviderListener(
       onRotationChanged: (rotation) {
-        logger.info('RotationProviderListener.onRotationChanged: $rotation');
+        logger.info(
+          'RotationProviderListener.onRotationChanged: ${rotation.name}',
+        );
       },
     );
     await _rotationProvider.addListener(rotationProviderListener);
@@ -433,7 +432,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
               '${image.hashCode}: $width * $height, $rotationDegrees°',
             );
             if (format != ImageFormat.rgba8888) {
-              throw ArgumentError.value(format);
+              throw ArgumentError.value(format.name);
             }
             final buffer = await ui.ImmutableBuffer.fromUint8List(plane.value);
             final descriptor = ui.ImageDescriptor.raw(
@@ -467,27 +466,13 @@ class HomeViewModel extends ViewModel with TypeLogger {
     this.imageModel = imageModel;
   }
 
-  Future<void> _setMlKitAnalyzer(MlKitAnalyzer analyzer) async {
+  Future<void> _setVisionAnalyzer(VisionAnalyzer analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(
       ImageAnalysisOutputImageFormat.yuv420_888,
     );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
-  }
-
-  void _handleMlKitAnalyzerResult(MlKitAnalyzerResult result) async {
-    switch (mode) {
-      case CameraMode.barcodes:
-        final barcodes = await result.getValue(_barcodeScanner);
-        this.barcodes = barcodes ?? [];
-        break;
-      case CameraMode.face:
-        final faces = await result.getValue(_faceDetector);
-        this.faces = faces ?? [];
-        break;
-      default:
-    }
   }
 
   Future<void> _clearImageAnalysisAnalyzer() async {

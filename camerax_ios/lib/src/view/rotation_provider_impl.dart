@@ -1,4 +1,5 @@
 import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class RotationProviderListenerImpl extends RotationProviderListener {
@@ -7,10 +8,10 @@ final class RotationProviderListenerImpl extends RotationProviderListener {
   RotationProviderListenerImpl.internal(this.api) : super.impl();
 
   factory RotationProviderListenerImpl({
-    required void Function(int rotation) onRotationChanged,
+    required void Function(SurfaceRotation rotation) onRotationChanged,
   }) {
     final api = RotationProviderListenerProxyApi(
-      onRotationChanged: (_, e) => onRotationChanged(e),
+      onRotationChanged: (_, e) => onRotationChanged(e.impl),
     );
     return RotationProviderListenerImpl.internal(api);
   }

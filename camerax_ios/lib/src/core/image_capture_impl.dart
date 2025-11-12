@@ -26,12 +26,12 @@ final class ImageCaptureOnImageCapturedCallbackImpl
       onCaptureProcessProgressed: onCaptureProcessProgressed == null
           ? null
           : (_, e) => onCaptureProcessProgressed(e),
-      onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
-          ? null
-          : (_, e) async {
-              final image = await e.impl();
-              onPostviewBitmapAvailable(image);
-            },
+      // onPostviewBitmapAvailable: onPostviewBitmapAvailable == null
+      //     ? null
+      //     : (_, e) async {
+      //         final image = await e.impl();
+      //         onPostviewBitmapAvailable(image);
+      //       },
       onCaptureSuccess: onCaptureSuccess == null
           ? null
           : (_, e) => onCaptureSuccess(e.impl),

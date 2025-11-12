@@ -1,3 +1,4 @@
+import 'package:camerax_android/src/vision.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/core.dart';
@@ -72,4 +73,28 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
 
 extension MlKitAnalyzerResultProxyApiX on MlKitAnalyzerResultProxyApi {
   MlKitAnalyzerResult get impl => MlKitAnalyzerResultImpl.internal(this);
+
+  Future<VisionAnalyzerResult> vimpl(
+    List<BarcodeScannerProxyApi> detectors1,
+    List<FaceDetectorProxyApi> detectors2,
+  ) async {
+    final objects = <VisionObject>[];
+    for (var detector in detectors1) {
+      final codeObjects = await getValue1(
+        detector,
+      ).then((e) => e?.map((e1) => e1.vimpl).toList());
+      if (codeObjects == null || codeObjects.isEmpty) {
+        continue;
+      }
+      objects.addAll(codeObjects);
+    }
+    for (var detector in detectors2) {
+      final faceObjects = await getValue2(
+        detector,
+      ).then((e) => e?.map((e1) => e1.vimpl).toList());
+      if (faceObjects == null || faceObjects.isEmpty) continue;
+      objects.addAll(faceObjects);
+    }
+    return VisionAnalyzerResultImpl.internal(this, objects);
+  }
 }

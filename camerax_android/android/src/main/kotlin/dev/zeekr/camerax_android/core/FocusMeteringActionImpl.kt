@@ -19,9 +19,9 @@ class FocusMeteringActionImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         val builder = if (point.mode == null) FocusMeteringAction.Builder(point.point)
         else FocusMeteringAction.Builder(point.point, point.mode)
         if (morePoints != null) {
-            for (other in morePoints) {
-                if (other.mode == null) builder.addPoint(other.point)
-                else builder.addPoint(other.point, other.mode)
+            for (morePoint in morePoints) {
+                if (morePoint.mode == null) builder.addPoint(morePoint.point)
+                else builder.addPoint(morePoint.point, morePoint.mode)
             }
         }
         if (disableAutoCancel != null) {

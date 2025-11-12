@@ -1,7 +1,7 @@
 import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'camera_info_impl.dart';
+// import 'camera_info_impl.dart';
 
 final class CameraSelectorImpl extends CameraSelector {
   static CameraSelectorImpl get back =>

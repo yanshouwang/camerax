@@ -6,10 +6,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'camera_selector_impl.dart';
 import 'camera_state_impl.dart';
-import 'dynamic_range_impl.dart';
-import 'exposure_state_impl.dart';
+// import 'dynamic_range_impl.dart';
+// import 'exposure_state_impl.dart';
 import 'focus_metering_action_impl.dart';
-import 'low_light_boost_state_impl.dart';
+// import 'low_light_boost_state_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
@@ -117,10 +117,9 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]) =>
-      throw UnimplementedError();
-  // relativeRotation == null
-  // ? api.getSensorRotationDegrees1()
-  // : api.getSensorRotationDegrees2(relativeRotation.api);
+      relativeRotation == null
+      ? api.getSensorRotationDegrees1()
+      : api.getSensorRotationDegrees2(relativeRotation.api);
 
   @override
   Future<int?> getTorchStrengthLevel() => throw UnimplementedError();

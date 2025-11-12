@@ -1,6 +1,6 @@
 import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_ios/src/core.dart';
-import 'package:camerax_ios/src/view.dart';
+// import 'package:camerax_ios/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 abstract base class ObserverImpl<T> extends Observer<T> {

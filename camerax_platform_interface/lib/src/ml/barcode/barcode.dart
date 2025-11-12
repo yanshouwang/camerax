@@ -169,7 +169,7 @@ abstract base class Barcode {
 
   BarcodeFormat get format;
   Rect<int>? get boundingBox;
-  List<Point>? get cornerPoints;
+  List<Point<int>>? get cornerPoints;
   Uint8List? get rawBytes;
   String? get rawValue;
   String? get displayValue;

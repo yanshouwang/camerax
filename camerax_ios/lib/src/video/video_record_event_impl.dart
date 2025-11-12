@@ -2,7 +2,7 @@ import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'output_options_impl.dart';
+// import 'output_options_impl.dart';
 import 'output_results_impl.dart';
 import 'recording_stats_impl.dart';
 
@@ -18,7 +18,8 @@ final class VideoRecordStatusEventImpl extends VideoRecordStatusEvent
   VideoRecordStatusEventImpl.internal(this.api) : super.impl();
 
   @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
+  OutputOptions get outputOptions => throw UnimplementedError();
+  // api.outputOptions.impl;
   @override
   RecordingStats get recordingStats => api.recordingStats.impl;
 }
@@ -31,7 +32,8 @@ final class VideoRecordStartEventImpl extends VideoRecordStartEvent
   VideoRecordStartEventImpl.internal(this.api) : super.impl();
 
   @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
+  OutputOptions get outputOptions => throw UnimplementedError();
+  // api.outputOptions.impl;
   @override
   RecordingStats get recordingStats => api.recordingStats.impl;
 }
@@ -44,7 +46,8 @@ final class VideoRecordPauseEventImpl extends VideoRecordPauseEvent
   VideoRecordPauseEventImpl.internal(this.api) : super.impl();
 
   @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
+  OutputOptions get outputOptions => throw UnimplementedError();
+  // api.outputOptions.impl;
   @override
   RecordingStats get recordingStats => api.recordingStats.impl;
 }
@@ -57,7 +60,8 @@ final class VideoRecordResumeEventImpl extends VideoRecordResumeEvent
   VideoRecordResumeEventImpl.internal(this.api) : super.impl();
 
   @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
+  OutputOptions get outputOptions => throw UnimplementedError();
+  // api.outputOptions.impl;
   @override
   RecordingStats get recordingStats => api.recordingStats.impl;
 }
@@ -70,7 +74,8 @@ final class VideoRecordFinalizeEventImpl extends VideoRecordFinalizeEvent
   VideoRecordFinalizeEventImpl.internal(this.api) : super.impl();
 
   @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
+  OutputOptions get outputOptions => throw UnimplementedError();
+  // api.outputOptions.impl;
   @override
   RecordingStats get recordingStats => api.recordingStats.impl;
   @override

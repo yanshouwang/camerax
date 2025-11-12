@@ -10,6 +10,7 @@ import 'core.dart';
 import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
+import 'vision.dart';
 
 /// Platform-specific implementations should implement this class to support
 /// camerax.
@@ -195,7 +196,13 @@ abstract base class CameraXPlugin extends PlatformInterface {
   CameraController $CameraController();
   PreviewView $PreviewView();
   RotationProviderListener $RotationProviderListener({
-    required void Function(int rotation) onRotationChanged,
+    required void Function(SurfaceRotation rotation) onRotationChanged,
   });
   RotationProvider $RotationProvider();
+
+  // vision
+  VisionAnalyzer $VisionAnalyzer({
+    List<VisionObjectType>? types,
+    required Consumer<VisionAnalyzerResult> consumer,
+  });
 }

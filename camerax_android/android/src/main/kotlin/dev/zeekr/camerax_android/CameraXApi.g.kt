@@ -14958,7 +14958,7 @@ abstract class PigeonApiRotationProviderListenerProxyApi(open val pigeonRegistra
     }
   }
 
-  fun onRotationChanged(pigeon_instanceArg: androidx.camera.view.RotationProvider.Listener, rotationArg: Long, callback: (Result<Unit>) -> Unit)
+  fun onRotationChanged(pigeon_instanceArg: androidx.camera.view.RotationProvider.Listener, rotationArg: SurfaceRotationApi, callback: (Result<Unit>) -> Unit)
 {
     if (pigeonRegistrar.ignoreCallsToDart) {
       callback(

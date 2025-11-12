@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-import 'barcodes_view.dart';
+import 'codes_view.dart';
 import 'faces_view.dart';
 import 'raw_pixels_view.dart';
 import 'thumbnail.dart';
@@ -44,7 +44,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final savedUri = viewModel.savedUri;
     final isRecording = viewModel.isRecording;
     final imageModel = viewModel.imageModel;
-    final barcodes = viewModel.barcodes;
+    final codes = viewModel.codes;
     final faces = viewModel.faces;
     const pageDuration = Duration(milliseconds: 300);
     const pageCurve = Curves.ease;
@@ -115,7 +115,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         ),
                       ),
                     ),
-                  if (barcodes.isNotEmpty) BarcodesView(barcodes: barcodes),
+                  if (codes.isNotEmpty) CodesView(codes: codes),
                   if (faces.isNotEmpty) FacesView(faces: faces),
                   if (zoomState != null)
                     Container(

@@ -1,5 +1,7 @@
 import 'package:camerax_platform_interface/src/common.dart';
 
+import 'av_capture_device.dart';
+
 enum AVMetadataObjectType {
   codabar,
   code39,
@@ -22,7 +24,9 @@ enum AVMetadataObjectType {
   qr,
   humanBody,
   humanFullBody,
+  dogHead,
   dogBody,
+  catHead,
   catBody,
   face,
   salientObject;
@@ -55,7 +59,9 @@ enum AVMetadataObjectType {
   static List<AVMetadataObjectType> get bodies => [
     AVMetadataObjectType.humanBody,
     AVMetadataObjectType.humanFullBody,
+    AVMetadataObjectType.dogHead,
     AVMetadataObjectType.dogBody,
+    AVMetadataObjectType.catHead,
     AVMetadataObjectType.catBody,
   ];
 
@@ -69,16 +75,28 @@ enum AVMetadataObjectType {
 abstract base class AVMetadataObject {
   AVMetadataObject.impl();
 
-  AVMetadataObjectType get type;
-  DateTime get time;
-  Duration get duration;
-  Rect<double> get bounds;
+  Future<AVMetadataObjectType> getType();
+  Future<DateTime> getTime();
+  Future<Duration> getDuration();
+  Future<Rect<double>> getBounds();
+  Future<bool> isFixedFocus();
+  Future<AVCaptureDeviceCinematicVideoFocusMode> getCinematicVideoFocusMode();
+  Future<int> getGroupID();
+  Future<int> getObjectID();
+}
+
+abstract base class AVMetadataCatHeadObject extends AVMetadataObject {
+  AVMetadataCatHeadObject.impl() : super.impl();
+}
+
+abstract base class AVMetadataDogHeadObject extends AVMetadataObject {
+  AVMetadataDogHeadObject.impl() : super.impl();
 }
 
 abstract base class AVMetadataBodyObject extends AVMetadataObject {
   AVMetadataBodyObject.impl() : super.impl();
 
-  int get bodyID;
+  Future<int> getBodyID();
 }
 
 abstract base class AVMetadataCatBodyObject extends AVMetadataBodyObject {
@@ -100,23 +118,21 @@ abstract base class AVMetadataHumanFullBodyObject extends AVMetadataBodyObject {
 abstract base class AVMetadataFaceObject extends AVMetadataObject {
   AVMetadataFaceObject.impl() : super.impl();
 
-  int get faceID;
-  bool get hasRollAngle;
-  double get rollAngle;
-  bool get hasYawAngle;
-  double get yawAngle;
+  Future<int> getFaceID();
+  Future<bool> hasRollAngle();
+  Future<double> getRollAngle();
+  Future<bool> hasYawAngle();
+  Future<double> getYawAngle();
 }
 
 abstract base class AVMetadataMachineReadableCodeObject
     extends AVMetadataObject {
   AVMetadataMachineReadableCodeObject.impl() : super.impl();
 
-  List<Point<double>> get corners;
-  String? get stringValue;
+  Future<List<Point<double>>> getCorners();
+  Future<String?> getStringValue();
 }
 
 abstract base class AVMetadataSalientObject extends AVMetadataObject {
   AVMetadataSalientObject.impl() : super.impl();
-
-  int get objectID;
 }

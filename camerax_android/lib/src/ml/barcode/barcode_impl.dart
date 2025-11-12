@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:camerax_android/src/vision.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -224,7 +225,7 @@ final class BarcodeImpl extends Barcode {
   @override
   BarcodeContactInfo? get contactInfo => api.contactInfo?.impl;
   @override
-  List<Point>? get cornerPoints =>
+  List<Point<int>>? get cornerPoints =>
       api.cornerPoints?.map((e) => e.impl).toList();
   @override
   String? get displayValue => api.displayValue;
@@ -258,6 +259,40 @@ extension BarcodeFormatX on BarcodeFormat {
 
 extension BarcodeFormatApiX on BarcodeFormatApi {
   BarcodeFormat get impl => BarcodeFormat.values[index];
+
+  VisionObjectType get vimpl {
+    switch (this) {
+      case BarcodeFormatApi.unknown:
+      case BarcodeFormatApi.all:
+        throw ArgumentError.value(this);
+      case BarcodeFormatApi.code128:
+        return VisionObjectType.code128;
+      case BarcodeFormatApi.code39:
+        return VisionObjectType.code39;
+      case BarcodeFormatApi.code93:
+        return VisionObjectType.code93;
+      case BarcodeFormatApi.codabar:
+        return VisionObjectType.codabar;
+      case BarcodeFormatApi.dataMatrix:
+        return VisionObjectType.dataMatrix;
+      case BarcodeFormatApi.ean13:
+        return VisionObjectType.ean13;
+      case BarcodeFormatApi.ean8:
+        return VisionObjectType.ean8;
+      case BarcodeFormatApi.itf:
+        return VisionObjectType.itf14;
+      case BarcodeFormatApi.qrCode:
+        return VisionObjectType.qr;
+      case BarcodeFormatApi.upcA:
+        throw ArgumentError.value(this);
+      case BarcodeFormatApi.upcE:
+        return VisionObjectType.upce;
+      case BarcodeFormatApi.pdf417:
+        return VisionObjectType.pdf417;
+      case BarcodeFormatApi.aztec:
+        return VisionObjectType.aztec;
+    }
+  }
 }
 
 extension BarcodeTypeApiX on BarcodeTypeApi {
@@ -331,4 +366,7 @@ extension BarcodeWiFiProxyApiX on BarcodeWiFiProxyApi {
 
 extension BarcodeProxyApiX on BarcodeProxyApi {
   Barcode get impl => BarcodeImpl.internal(this);
+
+  VisionMachineReadableCodeObject get vimpl =>
+      VisionMachineReadableCodeObjectImpl.internal(this);
 }
