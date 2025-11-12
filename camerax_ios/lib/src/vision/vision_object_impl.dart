@@ -1,6 +1,4 @@
-import 'package:camerax_ios/src/avfoundation.dart';
 import 'package:camerax_ios/src/camerax_api.g.dart';
-import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 base mixin VisionObjectImpl on VisionObject {}
