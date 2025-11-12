@@ -7,7 +7,8 @@ final class QualityImpl extends Quality {
   static QualityImpl get fhd => QualityImpl.internal(QualityProxyApi.fhd);
   static QualityImpl get uhd => QualityImpl.internal(QualityProxyApi.uhd);
   static QualityImpl get lowest => QualityImpl.internal(QualityProxyApi.lowest);
-  static QualityImpl get highest => QualityImpl.internal(QualityProxyApi.highest);
+  static QualityImpl get highest =>
+      QualityImpl.internal(QualityProxyApi.highest);
 
   final QualityProxyApi api;
 

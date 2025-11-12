@@ -9,8 +9,10 @@ abstract base class QualitySelector {
   static Future<Size<int>?> getResolution(
     CameraInfo cameraInfo,
     Quality quality,
-  ) =>
-      CameraXPlugin.instance.$QualitySelector$GetResolution(cameraInfo, quality);
+  ) => CameraXPlugin.instance.$QualitySelector$GetResolution(
+    cameraInfo,
+    quality,
+  );
 
   QualitySelector.impl();
 
