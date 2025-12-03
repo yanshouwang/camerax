@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "camerax_ios",
     platforms: [
-        .iOS("12.0")
+        .iOS("13.0")
     ],
     products: [
         .library(name: "camerax-ios", targets: ["camerax_ios"])

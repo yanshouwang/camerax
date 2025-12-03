@@ -5,7 +5,7 @@ abstract base class ZoomSuggestionOptionsZoomCallback {
 
   factory ZoomSuggestionOptionsZoomCallback({
     required bool Function(double zoomRatio) setZoom,
-  }) => CameraXPlugin.instance.$ZoomSuggestionOptions$ZoomCallback(
+  }) => CameraXPlugin.instance.$ZoomSuggestionOptionsZoomCallback(
     setZoom: setZoom,
   );
 }

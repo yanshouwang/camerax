@@ -1,3 +1,11 @@
+## 1.1.0
+
+* fvm use 3.35.7
+* Make avfoundation.AVMetadataObjects async methods to sync properties.
+* Add ml.Detector#process method.
+* Add vision APIs.
+* Add visionx APIs.
+
 ## 1.0.2
 
 * Add `RotationProvider` API.

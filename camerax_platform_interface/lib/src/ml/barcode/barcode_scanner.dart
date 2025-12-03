@@ -10,5 +10,5 @@ abstract base class BarcodeScanner extends Detector<List<Barcode>> {
   factory BarcodeScanner() => CameraXPlugin.instance.$BarcodeScanner();
 
   factory BarcodeScanner.options(BarcodeScannerOptions options) =>
-      CameraXPlugin.instance.$BarcodeScanner$Options(options);
+      CameraXPlugin.instance.$BarcodeScanner$options(options);
 }

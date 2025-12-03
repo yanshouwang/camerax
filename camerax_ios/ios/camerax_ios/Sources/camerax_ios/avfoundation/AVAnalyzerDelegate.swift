@@ -14,7 +14,7 @@ class AVAnalyzerDelegate: PigeonApiDelegateAVAnalyzerProxyApi {
     }
     
     class ResultDelegate: PigeonApiDelegateAVAnalyzerResultProxyApi {
-        func objects(pigeonApi: PigeonApiAVAnalyzerResultProxyApi, pigeonInstance: AVAnalyzer.Result) throws -> [AVMetadataObject] {
+        func getObjects(pigeonApi: PigeonApiAVAnalyzerResultProxyApi, pigeonInstance: AVAnalyzer.Result) throws -> [AVMetadataObject] {
             return pigeonInstance.objects
         }
     }

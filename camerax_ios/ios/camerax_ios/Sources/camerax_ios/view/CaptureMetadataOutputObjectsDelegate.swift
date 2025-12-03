@@ -26,6 +26,6 @@ class CaptureMetadataOutputObjectsDelegate: NSObject, AVCaptureMetadataOutputObj
         }
         let objects = metadataObjects.compactMap { videoPreviewLayer.transformedMetadataObject(for: $0) }
         let value = AVAnalyzer.Result(objects: objects)
-        consumer.accept(value)
+        DispatchQueue.main.async { self.consumer.accept(value) }
     }
 }

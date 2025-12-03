@@ -14,20 +14,20 @@ enum DynamicRangeBitDepth { unspecified, eightBit, tenBit }
 
 abstract base class DynamicRange {
   static DynamicRange get unspecifid =>
-      CameraXPlugin.instance.$DynamicRange$Unspecifid;
-  static DynamicRange get sdr => CameraXPlugin.instance.$DynamicRange$Sdr;
+      CameraXPlugin.instance.$DynamicRange$unspecifid;
+  static DynamicRange get sdr => CameraXPlugin.instance.$DynamicRange$sdr;
   static DynamicRange get hdrUnspecified10Bit =>
-      CameraXPlugin.instance.$DynamicRange$HdrUnspecified10Bit;
+      CameraXPlugin.instance.$DynamicRange$hdrUnspecified10Bit;
   static DynamicRange get hdr10_10Bit =>
-      CameraXPlugin.instance.$DynamicRange$Hdr10_10Bit;
+      CameraXPlugin.instance.$DynamicRange$hdr10_10Bit;
   static DynamicRange get hdr10Plus10Bit =>
-      CameraXPlugin.instance.$DynamicRange$Hdr10Plus10Bit;
+      CameraXPlugin.instance.$DynamicRange$hdr10Plus10Bit;
   static DynamicRange get hlg10Bit =>
-      CameraXPlugin.instance.$DynamicRange$Hlg10Bit;
+      CameraXPlugin.instance.$DynamicRange$hlg10Bit;
   static DynamicRange get dolbyVision8Bit =>
-      CameraXPlugin.instance.$DynamicRange$DolbyVision8Bit;
+      CameraXPlugin.instance.$DynamicRange$dolbyVision8Bit;
   static DynamicRange get dolbyVision10Bit =>
-      CameraXPlugin.instance.$DynamicRange$DolbyVision10Bit;
+      CameraXPlugin.instance.$DynamicRange$dolbyVision10Bit;
 
   DynamicRange.impl();
 

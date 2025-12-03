@@ -1427,6 +1427,18 @@ abstract class BarcodeProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'com.google.mlkit.vision.common.InputImage',
+  ),
+)
+abstract class InputImageProxyApi {
+  InputImageProxyApi.fromFilePath(String imageUri);
+
+  int getWidth();
+  int getHeight();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
         'com.google.mlkit.vision.barcode.ZoomSuggestionOptions.ZoomCallback',
   ),
@@ -1470,6 +1482,9 @@ abstract class BarcodeScannerOptionsProxyApi {
 abstract class BarcodeScannerProxyApi extends CloseableProxyApi {
   BarcodeScannerProxyApi();
   BarcodeScannerProxyApi.options(BarcodeScannerOptionsProxyApi options);
+
+  @async
+  List<BarcodeProxyApi> process(InputImageProxyApi image);
 }
 
 @ProxyApi(
@@ -1537,6 +1552,9 @@ abstract class FaceDetectorOptionsProxyApi {
 abstract class FaceDetectorProxyApi extends CloseableProxyApi {
   FaceDetectorProxyApi();
   FaceDetectorProxyApi.options(FaceDetectorOptionsProxyApi options);
+
+  @async
+  List<FaceProxyApi> process(InputImageProxyApi image);
 }
 
 @ProxyApi(
@@ -1826,162 +1844,100 @@ abstract class AudioConfigProxyApi {
   ),
 )
 abstract class CameraControllerProxyApi {
-  // @async
   // void getInitializeFuture();
-  @async
   bool hasCamera(CameraSelectorProxyApi cameraSelector);
-  @async
   CameraSelectorProxyApi getCameraSelector();
-  @async
   void setCameraSelector(CameraSelectorProxyApi cameraSelector);
-  @async
   CameraInfoProxyApi? getCameraInfo();
-  @async
   CameraControlProxyApi? getCameraControl();
-  @async
   TorchStateApi? getTorchState();
-  @async
   void observeTorchState(TorchStateObserverProxyApi observer);
-  @async
   void removeTorchStateObserver(TorchStateObserverProxyApi observer);
   @async
   void enableTorch(bool torchEnabled);
-  @async
   ZoomStateProxyApi? getZoomState();
-  @async
   void observeZoomState(ZoomStateObserverProxyApi observer);
-  @async
   void removeZoomStateObserver(ZoomStateObserverProxyApi observer);
   @async
   void setZoomRatio(double zoomRatio);
   @async
   void setLinearZoom(double linearZoom);
-  @async
   bool isPinchToZoomEnabled();
-  @async
   void setPinchToZoomEnabled(bool enabled);
-  @async
   TapToFocusInfoProxyApi? getTapToFocusInfoState();
-  @async
   void observeTapToFocusInfoState(TapToFocusInfoObserverProxyApi observer);
-  @async
   void removeTapToFocusInfoStateObserver(
     TapToFocusInfoObserverProxyApi observer,
   );
-  @async
   bool isTapToFocusEnabled();
-  @async
   void setTapToFocusEnabled(bool enabled);
-  @async
   void setTapToFocusAutoCancelDuration(DurationTupleProxyApi duration);
-  @async
   bool isImageCaptureEnabled();
-  @async
   bool isImageAnalysisEnabled();
-  @async
   bool isVideoCaptureEnabled();
-  @async
   void setEnabledUseCases(List<CameraControllerUseCaseApi> enabledUseCases);
-  @async
   ResolutionSelectorProxyApi? getPreviewResolutionSelector();
-  @async
   void setPreviewResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
   );
-  @async
   ResolutionSelectorProxyApi? getImageCaptureResolutionSelector();
-  @async
   void setImageCaptureResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
   );
-  @async
   ImageCaptureCaptureModeApi getImageCaptureMode();
-  @async
   void setImageCaptureMode(ImageCaptureCaptureModeApi captureMode);
-  @async
   ImageCaptureFlashModeApi getImageCaptureFlashMode();
-  @async
   void setImageCaptureFlashMode(ImageCaptureFlashModeApi flashMode);
-  // @async
   // ExecutorProxyApi? getImageCaptureIoExecutor();
-  // @async
   // void setImageCaptureIoExecutor(ExecutorProxyApi executor);
-  @async
   void takePicture1(
     ImageCaptureOnImageCapturedCallbackProxyApi imageCapturedCallback,
   );
-  // @async
   // void takePicture2(
   //   ImageCaptureOutputFileOptionsProxyApi outputFileOptions,
   //   ImageCaptureOnImageSavedCallbackProxyApi imageSavedCallback,
   // );
-  @async
   ResolutionSelectorProxyApi? getImageAnalysisResolutionSelector();
-  @async
   void setImageAnalysisResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
   );
-  @async
   ImageAnalysisStrategyApi getImageAnalysisBackpressureStrategy();
-  @async
   void setImageAnalysisBackpressureStrategy(ImageAnalysisStrategyApi strategy);
-  @async
   int getImageAnalysisImageQueueDepth();
-  @async
   void setImageAnalysisImageQueueDepth(int depth);
-  @async
   ImageAnalysisOutputImageFormatApi getImageAnalysisOutputImageFormat();
-  @async
   void setImageAnalysisOutputImageFormat(
     ImageAnalysisOutputImageFormatApi imageAnalysisOutputImageFormat,
   );
-  // @async
   // ExecutorProxyApi? getImageAnalysisBackgroundExecutor();
-  // @async
   // void setImageAnalysisBackgroundExecutor(ExecutorProxyApi? executor);
-  @async
   void setImageAnalysisAnalyzer(ImageAnalysisAnalyzerProxyApi analyzer);
-  @async
   void clearImageAnalysisAnalyzer();
-  @async
   QualitySelectorProxyApi getVideoCaptureQualitySelector();
-  @async
   void setVideoCaptureQualitySelector(QualitySelectorProxyApi qualitySelector);
-  @async
   DynamicRangeProxyApi getVideoCaptureDynamicRange();
-  @async
   void setVideoCaptureDynamicRange(DynamicRangeProxyApi dynamicRange);
-  @async
   MirrorModeApi getVideoCaptureMirrorMode();
-  @async
   void setVideoCaptureMirrorMode(MirrorModeApi mirrorMode);
-  @async
   IntRangeProxyApi getVideoCaptureTargetFrameRate();
-  @async
   void setVideoCaptureTargetFrameRate(IntRangeProxyApi targetFrameRate);
-  @async
   bool isRecording();
-  @async
   RecordingProxyApi startRecording1(
     FileOutputOptionsProxyApi outputOptions,
     AudioConfigProxyApi audioConfig,
     VideoRecordEventConsumerProxyApi listener,
   );
-  // @async
   // RecordingProxyApi startRecording2(
   //   FileDescriptorOutputOptionsProxyApi outputOptions,
   //   AudioConfigProxyApi audioConfig,
   //   VideoRecordEventConsumerProxyApi listener,
   // );
-  // @async
   // RecordingProxyApi startRecording3(
   //   MediaStoreOutputOptionsProxyApi outputOptions,
   //   AudioConfigProxyApi audioConfig,
   //   VideoRecordEventConsumerProxyApi listener,
   // );
-  // @async
   // void setEffects(List<CameraEffectProxyApi> effects);
-  // @async
   // void clearEffects();
 }
 
@@ -1994,9 +1950,7 @@ abstract class LifecycleCameraControllerProxyApi
     extends CameraControllerProxyApi {
   LifecycleCameraControllerProxyApi();
 
-  @async
   void bindToLifecycle();
-  @async
   void unbind();
 }
 
@@ -2008,23 +1962,15 @@ abstract class LifecycleCameraControllerProxyApi
 abstract class PreviewViewProxyApi {
   PreviewViewProxyApi();
 
-  @async
   BitmapProxyApi? getBitmap();
-  @async
   CameraControllerProxyApi? getController();
-  @async
   void setController(CameraControllerProxyApi? controller);
-  @async
   PreviewViewScaleTypeApi getScaleType();
-  @async
   void setScaleType(PreviewViewScaleTypeApi scaleType);
-  @async
   PreviewViewImplementationModeApi getImplementationMode();
-  @async
   void setImplementationMode(
     PreviewViewImplementationModeApi implementationMode,
   );
-  @async
   MeteringPointFactoryProxyApi getMeteringPointFactory();
   // OutputTransformProxyApi? getOutputTransform();
   PreviewViewStreamStateApi? getPreviewStreamState();
@@ -2034,18 +1980,12 @@ abstract class PreviewViewProxyApi {
   void removePreviewStreamStateObserver(
     PreviewViewStreamStateObserverProxyApi observer,
   );
-  // @async
   // ImageCaptureScreenFalshProxyApi? getScreenFlash();
-  // @async
   // void setScreenFlashWindow(WindowProxyApi? screenFlashWindow);
   void setScreenFlashOverlayColor(int color);
-  // @async
   // MatrixProxyApi? getSensorToViewTransform();
-  // @async
   // PreviewSurfaceProviderProxyApi getSurfaceProvider();
-  // @async
   // VidePortProxyApi? getViewPort1();
-  // @async
   // VidePortProxyApi? getViewPort2(SurfaceRotationApi targetRotation);
   // bool onTouchEvent(MotionEventProxyApi event);
 }

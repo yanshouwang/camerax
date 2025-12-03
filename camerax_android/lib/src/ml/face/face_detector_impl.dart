@@ -1,9 +1,11 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
+import 'package:camerax_android/src/ml/common.dart';
 import 'package:camerax_android/src/ml/interfaces.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'face_detector_options_impl.dart';
+import 'face_impl.dart';
 
 final class FaceDetectorImpl extends FaceDetector
     with AutoCloseableImpl, CloseableImpl, DetectorImpl {
@@ -21,6 +23,10 @@ final class FaceDetectorImpl extends FaceDetector
     final api = FaceDetectorProxyApi.options(options: options.api);
     return FaceDetectorImpl.internal(api);
   }
+
+  @override
+  Future<List<Face>> process(InputImage image) =>
+      api.process(image.api).then((e) => e.map((e1) => e1.impl).toList());
 }
 
 extension FaceDetectorX on FaceDetector {

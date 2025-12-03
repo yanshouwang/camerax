@@ -25,4 +25,9 @@ final class Rect<T extends num> {
       other.top == top &&
       other.right == right &&
       other.bottom == bottom;
+
+  @override
+  String toString() {
+    return '$left, $top - $width, $height';
+  }
 }

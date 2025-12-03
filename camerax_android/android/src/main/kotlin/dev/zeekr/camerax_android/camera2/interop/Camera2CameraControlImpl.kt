@@ -5,12 +5,12 @@ import androidx.camera.camera2.interop.Camera2CameraControl
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.CameraControl
-import androidx.core.content.ContextCompat
-import com.google.common.util.concurrent.FutureCallback
-import com.google.common.util.concurrent.Futures
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCamera2CameraControlProxyApi
-import dev.zeekr.camerax_android.context
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.guava.await
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCamera2Interop::class)
 class Camera2CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
@@ -22,31 +22,25 @@ class Camera2CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRe
     override fun addCaptureRequestOptions(
         pigeon_instance: Camera2CameraControl, bundle: CaptureRequestOptions, callback: (Result<Unit>) -> Unit
     ) {
-        val future = pigeon_instance.addCaptureRequestOptions(bundle)
-        val executor = ContextCompat.getMainExecutor(registrar.context)
-        Futures.addCallback(future, object : FutureCallback<Void> {
-            override fun onSuccess(result: Void?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.addCaptureRequestOptions(bundle).await()
                 callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
             }
-
-            override fun onFailure(t: Throwable) {
-                callback(Result.failure(t))
-            }
-        }, executor)
+        }
     }
 
     override fun clearCaptureRequestOptions(pigeon_instance: Camera2CameraControl, callback: (Result<Unit>) -> Unit) {
-        val future = pigeon_instance.clearCaptureRequestOptions()
-        val executor = ContextCompat.getMainExecutor(registrar.context)
-        Futures.addCallback(future, object : FutureCallback<Void> {
-            override fun onSuccess(result: Void?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.clearCaptureRequestOptions().await()
                 callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
             }
-
-            override fun onFailure(t: Throwable) {
-                callback(Result.failure(t))
-            }
-        }, executor)
+        }
     }
 
     override fun getCaptureRequestOptions(pigeon_instance: Camera2CameraControl): CaptureRequestOptions {
@@ -56,16 +50,13 @@ class Camera2CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRe
     override fun setCaptureRequestOptions(
         pigeon_instance: Camera2CameraControl, bundle: CaptureRequestOptions, callback: (Result<Unit>) -> Unit
     ) {
-        val future = pigeon_instance.setCaptureRequestOptions(bundle)
-        val executor = ContextCompat.getMainExecutor(registrar.context)
-        Futures.addCallback(future, object : FutureCallback<Void> {
-            override fun onSuccess(result: Void?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                pigeon_instance.setCaptureRequestOptions(bundle).await()
                 callback(Result.success(Unit))
+            } catch (e: Exception) {
+                callback(Result.failure(e))
             }
-
-            override fun onFailure(t: Throwable) {
-                callback(Result.failure(t))
-            }
-        }, executor)
+        }
     }
 }

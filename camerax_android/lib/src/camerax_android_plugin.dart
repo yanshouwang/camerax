@@ -9,7 +9,7 @@ import 'core.dart';
 import 'ml.dart';
 import 'video.dart';
 import 'view.dart';
-import 'vision.dart';
+import 'visionx.dart';
 
 final class CameraXAndroidPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -20,11 +20,11 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   PermissionManager $PermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
+  CameraSelector get $CameraSelector$back => CameraSelectorImpl.back;
   @override
-  CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
+  CameraSelector get $CameraSelector$front => CameraSelectorImpl.front;
   @override
-  CameraSelector get $CameraSelector$External => CameraSelectorImpl.external;
+  CameraSelector get $CameraSelector$external => CameraSelectorImpl.external;
   @override
   CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);
@@ -36,18 +36,18 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   PreviewView $PreviewView() => PreviewViewImpl();
 
   @override
-  FallbackStrategy $FallbackStrategy$HigherQualityOrLowerThan(
+  FallbackStrategy $FallbackStrategy$higherQualityOrLowerThan(
     Quality quality,
   ) => FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
-  FallbackStrategy $FallbackStrategy$HigherQualityThan(Quality quality) =>
+  FallbackStrategy $FallbackStrategy$higherQualityThan(Quality quality) =>
       FallbackStrategyImpl.higherQualityThan(quality);
   @override
-  FallbackStrategy $FallbackStrategy$LowerQualityOrHigherThan(
+  FallbackStrategy $FallbackStrategy$lowerQualityOrHigherThan(
     Quality quality,
   ) => FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
   @override
-  FallbackStrategy $FallbackStrategy$LowerQualityThan(Quality quality) =>
+  FallbackStrategy $FallbackStrategy$lowerQualityThan(Quality quality) =>
       FallbackStrategyImpl.lowerQualityThan(quality);
 
   @override
@@ -62,19 +62,19 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  Future<Size<int>?> $QualitySelector$GetResolution(
+  Future<Size<int>?> $QualitySelector$getResolution(
     CameraInfo cameraInfo,
     Quality quality,
   ) => QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
-  QualitySelector $QualitySelector$From(
+  QualitySelector $QualitySelector$from(
     Quality quality, [
     FallbackStrategy? fallbackStrategy,
   ]) => QualitySelectorImpl.from(quality, fallbackStrategy: fallbackStrategy);
 
   @override
-  QualitySelector $QualitySelector$FromOrderedList(
+  QualitySelector $QualitySelector$fromOrderedList(
     List<Quality> qualities, [
     FallbackStrategy? fallbackStrategy,
   ]) => QualitySelectorImpl.fromOrderedList(
@@ -157,12 +157,12 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }) => ImageAnalysisImageAnalyzerImplImpl(consumer: consumer);
 
   @override
-  Camera2CameraControl $Camera2CameraControl$From(
+  Camera2CameraControl $Camera2CameraControl$from(
     CameraControl cameraControl,
   ) => Camera2CameraControlImpl.from(cameraControl);
 
   @override
-  Camera2CameraInfo $Camera2CameraInfo$From(CameraInfo cameraInfo) =>
+  Camera2CameraInfo $Camera2CameraInfo$from(CameraInfo cameraInfo) =>
       Camera2CameraInfoImpl.from(cameraInfo);
 
   @override
@@ -219,7 +219,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
 
   @override
-  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptions$ZoomCallback({
+  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptionsZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   }) => ZoomSuggestionOptionsZoomCallbackImpl(setZoom: setZoom);
 
@@ -237,29 +237,29 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   );
 
   @override
-  AspectRatioStrategy get $AspectRatioStrategy$Ratio16_9FallbackAutoStrategy =>
+  AspectRatioStrategy get $AspectRatioStrategy$ratio16_9FallbackAutoStrategy =>
       AspectRatioStrategyImpl.ratio16_9FallbackAutoStrategy;
 
   @override
-  AspectRatioStrategy get $AspectRatioStrategy$Ratio4_3FallbackAutoStrategy =>
+  AspectRatioStrategy get $AspectRatioStrategy$ratio4_3FallbackAutoStrategy =>
       AspectRatioStrategyImpl.ratio4_3FallbackAutoStrategy;
 
   @override
-  AudioConfig get $AudioConfig$AudioDisabled => AudioConfigImpl.audioDisabled;
+  AudioConfig get $AudioConfig$audioDisabled => AudioConfigImpl.audioDisabled;
 
   @override
-  AudioConfig $AudioConfig$Create(bool enableAudio) =>
+  AudioConfig $AudioConfig$create(bool enableAudio) =>
       AudioConfigImpl.create(enableAudio);
 
   @override
   BarcodeScanner $BarcodeScanner() => BarcodeScannerImpl();
 
   @override
-  BarcodeScanner $BarcodeScanner$Options(BarcodeScannerOptions options) =>
+  BarcodeScanner $BarcodeScanner$options(BarcodeScannerOptions options) =>
       BarcodeScannerImpl.options(options);
 
   @override
-  Future<bool> $CameraInfo$MustPlayShutterSound() =>
+  Future<bool> $CameraInfo$mustPlayShutterSound() =>
       CameraInfoImpl.mustPlayShutterSound();
 
   @override
@@ -273,42 +273,42 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
   }) => DynamicRangeImpl(encoding: encoding, bitDepth: bitDepth);
 
   @override
-  DynamicRange get $DynamicRange$DolbyVision10Bit =>
+  DynamicRange get $DynamicRange$dolbyVision10Bit =>
       DynamicRangeImpl.dolbyVision10Bit;
 
   @override
-  DynamicRange get $DynamicRange$DolbyVision8Bit =>
+  DynamicRange get $DynamicRange$dolbyVision8Bit =>
       DynamicRangeImpl.dolbyVision8Bit;
 
   @override
-  DynamicRange get $DynamicRange$Hdr10Plus10Bit =>
+  DynamicRange get $DynamicRange$hdr10Plus10Bit =>
       DynamicRangeImpl.hdr10Plus10Bit;
 
   @override
-  DynamicRange get $DynamicRange$Hdr10_10Bit => DynamicRangeImpl.hdr10_10Bit;
+  DynamicRange get $DynamicRange$hdr10_10Bit => DynamicRangeImpl.hdr10_10Bit;
 
   @override
-  DynamicRange get $DynamicRange$HdrUnspecified10Bit =>
+  DynamicRange get $DynamicRange$hdrUnspecified10Bit =>
       DynamicRangeImpl.hdrUnspecified10Bit;
 
   @override
-  DynamicRange get $DynamicRange$Hlg10Bit => DynamicRangeImpl.hlg10Bit;
+  DynamicRange get $DynamicRange$hlg10Bit => DynamicRangeImpl.hlg10Bit;
 
   @override
-  DynamicRange get $DynamicRange$Sdr => DynamicRangeImpl.sdr;
+  DynamicRange get $DynamicRange$sdr => DynamicRangeImpl.sdr;
 
   @override
-  DynamicRange get $DynamicRange$Unspecifid => DynamicRangeImpl.unspecifid;
+  DynamicRange get $DynamicRange$unspecifid => DynamicRangeImpl.unspecifid;
 
   @override
   FaceDetector $FaceDetector() => FaceDetectorImpl();
 
   @override
-  FaceDetector $FaceDetector$Options(FaceDetectorOptions options) =>
+  FaceDetector $FaceDetector$options(FaceDetectorOptions options) =>
       FaceDetectorImpl.options(options);
 
   @override
-  Future<double> $MeteringPointFactory$GetDefaultPointSize() =>
+  Future<double> $MeteringPointFactory$getDefaultPointSize() =>
       MeteringPointFactoryImpl.getDefaultPointSize();
 
   @override
@@ -316,22 +316,22 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
       ObserverImpl(onChanged: onChanged);
 
   @override
-  Quality get $Quality$Fhd => QualityImpl.fhd;
+  Quality get $Quality$fhd => QualityImpl.fhd;
 
   @override
-  Quality get $Quality$Hd => QualityImpl.hd;
+  Quality get $Quality$hd => QualityImpl.hd;
 
   @override
-  Quality get $Quality$Highest => QualityImpl.highest;
+  Quality get $Quality$highest => QualityImpl.highest;
 
   @override
-  Quality get $Quality$Lowest => QualityImpl.lowest;
+  Quality get $Quality$lowest => QualityImpl.lowest;
 
   @override
-  Quality get $Quality$Sd => QualityImpl.sd;
+  Quality get $Quality$sd => QualityImpl.sd;
 
   @override
-  Quality get $Quality$Uhd => QualityImpl.uhd;
+  Quality get $Quality$uhd => QualityImpl.uhd;
 
   @override
   ResolutionSelector $ResolutionSelector({
@@ -354,7 +354,7 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
       ResolutionStrategyImpl(boundSize: boundSize, fallbackRule: fallbackRule);
 
   @override
-  ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy =>
+  ResolutionStrategy get $ResolutionStrategy$highestAvailableStrategy =>
       ResolutionStrategyImpl.highestAvailableStrategy;
 
   @override
@@ -362,4 +362,32 @@ final class CameraXAndroidPlugin extends CameraXPlugin {
     List<VisionObjectType>? types,
     required Consumer<VisionAnalyzerResult> consumer,
   }) => VisionAnalyzerImpl(types: types, consumer: consumer);
+
+  @override
+  InputImage $InputImage$fromFilePath(Uri imageUri) =>
+      InputImageImpl.fromFilePath(imageUri);
+
+  @override
+  VNImageRequestHandler $VNImageRequestHandler$uri(Uri uri) =>
+      throw UnimplementedError();
+
+  @override
+  VNDetectBarcodesRequest $VNDetectBarcodesRequest({
+    required VNRequestCompletionHandler completionHandler,
+  }) => throw UnimplementedError();
+
+  @override
+  VNDetectFaceRectanglesRequest $VNDetectFaceRectanglesRequest({
+    required VNRequestCompletionHandler completionHandler,
+  }) => throw UnimplementedError();
+
+  @override
+  VisionImage $VisionImage$file(File file) => VisionImageImpl.file(file);
+
+  @override
+  VisionImage $VisionImage$uri(Uri uri) => VisionImageImpl.uri(uri);
+
+  @override
+  VisionDetector $VisionDetector({List<VisionObjectType>? types}) =>
+      VisionDetectorImpl(types: types);
 }

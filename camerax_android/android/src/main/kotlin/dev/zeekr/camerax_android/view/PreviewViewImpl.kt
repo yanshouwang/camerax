@@ -24,54 +24,20 @@ class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) 
         }
     }
 
-    override fun getBitmap(pigeon_instance: PreviewView, callback: (Result<Bitmap?>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val value = pigeon_instance.bitmap
-                callback(Result.success(value))
-            } catch (exception: Exception) {
-                callback(Result.failure(exception))
-            }
-        }
+    override fun getBitmap(pigeon_instance: PreviewView): Bitmap? {
+        return pigeon_instance.bitmap
     }
 
-    override fun getController(pigeon_instance: PreviewView, callback: (Result<CameraController?>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val value = pigeon_instance.controller
-                callback(Result.success(value))
-            } catch (exception: Exception) {
-                callback(Result.failure(exception))
-            }
-        }
+    override fun getController(pigeon_instance: PreviewView): CameraController? {
+        return pigeon_instance.controller
     }
 
-    override fun getImplementationMode(
-        pigeon_instance: PreviewView,
-        callback: (Result<PreviewViewImplementationModeApi>) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val value = pigeon_instance.implementationMode.api
-                callback(Result.success(value))
-            } catch (exception: Exception) {
-                callback(Result.failure(exception))
-            }
-        }
+    override fun getImplementationMode(pigeon_instance: PreviewView): PreviewViewImplementationModeApi {
+        return pigeon_instance.implementationMode.api
     }
 
-    override fun getMeteringPointFactory(
-        pigeon_instance: PreviewView,
-        callback: (Result<MeteringPointFactory>) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val value = pigeon_instance.meteringPointFactory
-                callback(Result.success(value))
-            } catch (exception: Exception) {
-                callback(Result.failure(exception))
-            }
-        }
+    override fun getMeteringPointFactory(pigeon_instance: PreviewView): MeteringPointFactory {
+        return pigeon_instance.meteringPointFactory
     }
 
     override fun getPreviewStreamState(pigeon_instance: PreviewView): PreviewViewStreamStateApi? {
@@ -84,63 +50,27 @@ class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) 
     }
 
     override fun removePreviewStreamStateObserver(
-        pigeon_instance: PreviewView,
-        observer: PreviewViewStreamStateObserver
+        pigeon_instance: PreviewView, observer: PreviewViewStreamStateObserver
     ) {
         pigeon_instance.previewStreamState.removeObserver(observer)
     }
 
-    override fun setController(
-        pigeon_instance: PreviewView, controller: CameraController?, callback: (Result<Unit>) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                pigeon_instance.controller = controller
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
+    override fun setController(pigeon_instance: PreviewView, controller: CameraController?) {
+        pigeon_instance.controller = controller
     }
 
     override fun setImplementationMode(
-        pigeon_instance: PreviewView,
-        implementationMode: PreviewViewImplementationModeApi,
-        callback: (Result<Unit>) -> Unit
+        pigeon_instance: PreviewView, implementationMode: PreviewViewImplementationModeApi
     ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                pigeon_instance.implementationMode = implementationMode.impl
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
+        pigeon_instance.implementationMode = implementationMode.impl
     }
 
-    override fun getScaleType(pigeon_instance: PreviewView, callback: (Result<PreviewViewScaleTypeApi>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                callback(Result.success(pigeon_instance.scaleType.api))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
+    override fun getScaleType(pigeon_instance: PreviewView): PreviewViewScaleTypeApi {
+        return pigeon_instance.scaleType.api
     }
 
-    override fun setScaleType(
-        pigeon_instance: PreviewView,
-        scaleType: PreviewViewScaleTypeApi,
-        callback: (Result<Unit>) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                pigeon_instance.scaleType = scaleType.impl
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
+    override fun setScaleType(pigeon_instance: PreviewView, scaleType: PreviewViewScaleTypeApi) {
+        pigeon_instance.scaleType = scaleType.impl
     }
 
     override fun setScreenFlashOverlayColor(pigeon_instance: PreviewView, color: Long) {

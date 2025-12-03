@@ -10,6 +10,7 @@ import 'core.dart';
 import 'video.dart';
 import 'view.dart';
 import 'vision.dart';
+import 'visionx.dart';
 
 final class CameraXiOSPlugin extends CameraXPlugin {
   static void registerWith() {
@@ -20,11 +21,11 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PermissionManager $PermissionManager() => PermissionManagerImpl();
 
   @override
-  CameraSelector get $CameraSelector$Back => CameraSelectorImpl.back;
+  CameraSelector get $CameraSelector$back => CameraSelectorImpl.back;
   @override
-  CameraSelector get $CameraSelector$Front => CameraSelectorImpl.front;
+  CameraSelector get $CameraSelector$front => CameraSelectorImpl.front;
   @override
-  CameraSelector get $CameraSelector$External => CameraSelectorImpl.external;
+  CameraSelector get $CameraSelector$external => CameraSelectorImpl.external;
   @override
   CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
       CameraSelectorImpl(lensFacing: lensFacing);
@@ -36,21 +37,21 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   PreviewView $PreviewView() => PreviewViewImpl();
 
   @override
-  FallbackStrategy $FallbackStrategy$HigherQualityOrLowerThan(
+  FallbackStrategy $FallbackStrategy$higherQualityOrLowerThan(
     Quality quality,
   ) => throw UnimplementedError();
   // FallbackStrategyImpl.higherQualityOrLowerThan(quality);
   @override
-  FallbackStrategy $FallbackStrategy$HigherQualityThan(Quality quality) =>
+  FallbackStrategy $FallbackStrategy$higherQualityThan(Quality quality) =>
       throw UnimplementedError();
   // FallbackStrategyImpl.higherQualityThan(quality);
   @override
-  FallbackStrategy $FallbackStrategy$LowerQualityOrHigherThan(
+  FallbackStrategy $FallbackStrategy$lowerQualityOrHigherThan(
     Quality quality,
   ) => throw UnimplementedError();
   // FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
   @override
-  FallbackStrategy $FallbackStrategy$LowerQualityThan(Quality quality) =>
+  FallbackStrategy $FallbackStrategy$lowerQualityThan(Quality quality) =>
       throw UnimplementedError();
   // FallbackStrategyImpl.lowerQualityThan(quality);
 
@@ -62,21 +63,21 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => throw UnimplementedError();
 
   @override
-  Future<Size<int>?> $QualitySelector$GetResolution(
+  Future<Size<int>?> $QualitySelector$getResolution(
     CameraInfo cameraInfo,
     Quality quality,
   ) => throw UnimplementedError();
   // QualitySelectorImpl.getResolution(cameraInfo, quality);
 
   @override
-  QualitySelector $QualitySelector$From(
+  QualitySelector $QualitySelector$from(
     Quality quality, [
     FallbackStrategy? fallbackStrategy,
   ]) => throw UnimplementedError();
   // QualitySelectorImpl.from(quality, fallbackStrategy: fallbackStrategy);
 
   @override
-  QualitySelector $QualitySelector$FromOrderedList(
+  QualitySelector $QualitySelector$fromOrderedList(
     List<Quality> qualities, [
     FallbackStrategy? fallbackStrategy,
   ]) => throw UnimplementedError();
@@ -146,12 +147,12 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => ImageAnalysisImageAnalyzerImplImpl(consumer: consumer);
 
   @override
-  Camera2CameraControl $Camera2CameraControl$From(
+  Camera2CameraControl $Camera2CameraControl$from(
     CameraControl cameraControl,
   ) => throw UnimplementedError();
 
   @override
-  Camera2CameraInfo $Camera2CameraInfo$From(CameraInfo cameraInfo) =>
+  Camera2CameraInfo $Camera2CameraInfo$from(CameraInfo cameraInfo) =>
       throw UnimplementedError();
 
   @override
@@ -203,7 +204,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
 
   @override
-  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptions$ZoomCallback({
+  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptionsZoomCallback({
     required bool Function(double zoomRatio) setZoom,
   }) => throw UnimplementedError();
 
@@ -222,31 +223,31 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   // );
 
   @override
-  AspectRatioStrategy get $AspectRatioStrategy$Ratio16_9FallbackAutoStrategy =>
+  AspectRatioStrategy get $AspectRatioStrategy$ratio16_9FallbackAutoStrategy =>
       throw UnimplementedError();
   // AspectRatioStrategyImpl.ratio16_9FallbackAutoStrategy;
 
   @override
-  AspectRatioStrategy get $AspectRatioStrategy$Ratio4_3FallbackAutoStrategy =>
+  AspectRatioStrategy get $AspectRatioStrategy$ratio4_3FallbackAutoStrategy =>
       throw UnimplementedError();
   // AspectRatioStrategyImpl.ratio4_3FallbackAutoStrategy;
 
   @override
-  AudioConfig get $AudioConfig$AudioDisabled => AudioConfigImpl.audioDisabled;
+  AudioConfig get $AudioConfig$audioDisabled => AudioConfigImpl.audioDisabled;
 
   @override
-  AudioConfig $AudioConfig$Create(bool enableAudio) =>
+  AudioConfig $AudioConfig$create(bool enableAudio) =>
       AudioConfigImpl.create(enableAudio);
 
   @override
   BarcodeScanner $BarcodeScanner() => throw UnimplementedError();
 
   @override
-  BarcodeScanner $BarcodeScanner$Options(BarcodeScannerOptions options) =>
+  BarcodeScanner $BarcodeScanner$options(BarcodeScannerOptions options) =>
       throw UnimplementedError();
 
   @override
-  Future<bool> $CameraInfo$MustPlayShutterSound() =>
+  Future<bool> $CameraInfo$mustPlayShutterSound() =>
       CameraInfoImpl.mustPlayShutterSound();
 
   @override
@@ -261,47 +262,47 @@ final class CameraXiOSPlugin extends CameraXPlugin {
   // DynamicRangeImpl(encoding: encoding, bitDepth: bitDepth);
 
   @override
-  DynamicRange get $DynamicRange$DolbyVision10Bit => throw UnimplementedError();
+  DynamicRange get $DynamicRange$dolbyVision10Bit => throw UnimplementedError();
   // DynamicRangeImpl.dolbyVision10Bit;
 
   @override
-  DynamicRange get $DynamicRange$DolbyVision8Bit => throw UnimplementedError();
+  DynamicRange get $DynamicRange$dolbyVision8Bit => throw UnimplementedError();
   // DynamicRangeImpl.dolbyVision8Bit;
 
   @override
-  DynamicRange get $DynamicRange$Hdr10Plus10Bit => throw UnimplementedError();
+  DynamicRange get $DynamicRange$hdr10Plus10Bit => throw UnimplementedError();
   // DynamicRangeImpl.hdr10Plus10Bit;
 
   @override
-  DynamicRange get $DynamicRange$Hdr10_10Bit => throw UnimplementedError();
+  DynamicRange get $DynamicRange$hdr10_10Bit => throw UnimplementedError();
   // DynamicRangeImpl.hdr10_10Bit;
 
   @override
-  DynamicRange get $DynamicRange$HdrUnspecified10Bit =>
+  DynamicRange get $DynamicRange$hdrUnspecified10Bit =>
       throw UnimplementedError();
   // DynamicRangeImpl.hdrUnspecified10Bit;
 
   @override
-  DynamicRange get $DynamicRange$Hlg10Bit => throw UnimplementedError();
+  DynamicRange get $DynamicRange$hlg10Bit => throw UnimplementedError();
   // DynamicRangeImpl.hlg10Bit;
 
   @override
-  DynamicRange get $DynamicRange$Sdr => throw UnimplementedError();
+  DynamicRange get $DynamicRange$sdr => throw UnimplementedError();
   // DynamicRangeImpl.sdr;
 
   @override
-  DynamicRange get $DynamicRange$Unspecifid => throw UnimplementedError();
+  DynamicRange get $DynamicRange$unspecifid => throw UnimplementedError();
   // DynamicRangeImpl.unspecifid;
 
   @override
   FaceDetector $FaceDetector() => throw UnimplementedError();
 
   @override
-  FaceDetector $FaceDetector$Options(FaceDetectorOptions options) =>
+  FaceDetector $FaceDetector$options(FaceDetectorOptions options) =>
       throw UnimplementedError();
 
   @override
-  Future<double> $MeteringPointFactory$GetDefaultPointSize() =>
+  Future<double> $MeteringPointFactory$getDefaultPointSize() =>
       MeteringPointFactoryImpl.getDefaultPointSize();
 
   @override
@@ -309,27 +310,27 @@ final class CameraXiOSPlugin extends CameraXPlugin {
       ObserverImpl(onChanged: onChanged);
 
   @override
-  Quality get $Quality$Fhd => throw UnimplementedError();
+  Quality get $Quality$fhd => throw UnimplementedError();
   // QualityImpl.fhd;
 
   @override
-  Quality get $Quality$Hd => throw UnimplementedError();
+  Quality get $Quality$hd => throw UnimplementedError();
   // QualityImpl.hd;
 
   @override
-  Quality get $Quality$Highest => throw UnimplementedError();
+  Quality get $Quality$highest => throw UnimplementedError();
   // QualityImpl.highest;
 
   @override
-  Quality get $Quality$Lowest => throw UnimplementedError();
+  Quality get $Quality$lowest => throw UnimplementedError();
   // QualityImpl.lowest;
 
   @override
-  Quality get $Quality$Sd => throw UnimplementedError();
+  Quality get $Quality$sd => throw UnimplementedError();
   // QualityImpl.sd;
 
   @override
-  Quality get $Quality$Uhd => throw UnimplementedError();
+  Quality get $Quality$uhd => throw UnimplementedError();
   // QualityImpl.uhd;
 
   @override
@@ -353,7 +354,7 @@ final class CameraXiOSPlugin extends CameraXPlugin {
       ResolutionStrategyImpl(boundSize: boundSize, fallbackRule: fallbackRule);
 
   @override
-  ResolutionStrategy get $ResolutionStrategy$HighestAvailableStrategy =>
+  ResolutionStrategy get $ResolutionStrategy$highestAvailableStrategy =>
       ResolutionStrategyImpl.highestAvailableStrategy;
 
   @override
@@ -361,4 +362,32 @@ final class CameraXiOSPlugin extends CameraXPlugin {
     List<VisionObjectType>? types,
     required Consumer<VisionAnalyzerResult> consumer,
   }) => VisionAnalyzerImpl(types: types, consumer: consumer);
+
+  @override
+  InputImage $InputImage$fromFilePath(Uri imageUri) =>
+      throw UnimplementedError();
+
+  @override
+  VNImageRequestHandler $VNImageRequestHandler$uri(Uri uri) =>
+      VNImageRequestHandlerImpl.uri(uri);
+
+  @override
+  VNDetectBarcodesRequest $VNDetectBarcodesRequest({
+    required VNRequestCompletionHandler completionHandler,
+  }) => VNDetectBarcodesRequestImpl(completionHandler: completionHandler);
+
+  @override
+  VNDetectFaceRectanglesRequest $VNDetectFaceRectanglesRequest({
+    required VNRequestCompletionHandler completionHandler,
+  }) => VNDetectFaceRectanglesRequestImpl(completionHandler: completionHandler);
+
+  @override
+  VisionImage $VisionImage$file(File file) => VisionImageImpl.file(file);
+
+  @override
+  VisionImage $VisionImage$uri(Uri uri) => VisionImageImpl.uri(uri);
+
+  @override
+  VisionDetector $VisionDetector({List<VisionObjectType>? types}) =>
+      VisionDetectorImpl(types: types);
 }

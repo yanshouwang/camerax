@@ -63,7 +63,7 @@ class ZoomControl: NSObject {
 
 fileprivate extension AVCaptureDevice {
     var minZoomRatio: CGFloat {
-        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
+        if let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
             return self.minAvailableVideoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
         } else {
             return self.minAvailableVideoZoomFactor
@@ -71,7 +71,7 @@ fileprivate extension AVCaptureDevice {
     }
     
     var maxZoomRatio: CGFloat {
-        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first, let lastSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.last {
+        if let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first, let lastSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.last {
             // 5x digital zoom factor
             return CGFloat(truncating: lastSwitchOverVideoZoomFactor) / CGFloat(truncating: firstSwitchOverVideoZoomFactor) * 5.0
         } else {
@@ -85,7 +85,7 @@ fileprivate extension AVCaptureDevice {
     }
     
     func getZoomRatio(_ videoZoomFactor: CGFloat) -> CGFloat {
-        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
+        if let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
             return videoZoomFactor / CGFloat(truncating: firstSwitchOverVideoZoomFactor)
         } else {
             return videoZoomFactor
@@ -94,7 +94,7 @@ fileprivate extension AVCaptureDevice {
     
     func setZoomRatio(_ ratio: CGFloat) throws {
         guard ratio >= self.minZoomRatio && ratio <= self.maxZoomRatio else { throw CameraXError(code: "argument-error", message: "ratio is out of range", details: nil) }
-        if #available(iOS 13.0, *), let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
+        if let firstSwitchOverVideoZoomFactor = self.virtualDeviceSwitchOverVideoZoomFactors.first {
             self.videoZoomFactor = ratio * CGFloat(truncating: firstSwitchOverVideoZoomFactor)
         } else {
             self.videoZoomFactor = ratio

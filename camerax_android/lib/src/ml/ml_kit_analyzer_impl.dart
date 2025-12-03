@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/vision.dart';
+import 'package:camerax_android/src/visionx.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/core.dart';
@@ -71,30 +71,33 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
   }
 }
 
-extension MlKitAnalyzerResultProxyApiX on MlKitAnalyzerResultProxyApi {
-  MlKitAnalyzerResult get impl => MlKitAnalyzerResultImpl.internal(this);
-
-  Future<VisionAnalyzerResult> vimpl(
-    List<BarcodeScannerProxyApi> detectors1,
-    List<FaceDetectorProxyApi> detectors2,
+extension MlKitAnalyzerResultX on MlKitAnalyzerResult {
+  Future<VisionAnalyzerResult> visionAnalyzerResult(
+    List<Detector> detectors,
   ) async {
     final objects = <VisionObject>[];
-    for (var detector in detectors1) {
-      final codeObjects = await getValue1(
-        detector,
-      ).then((e) => e?.map((e1) => e1.vimpl).toList());
-      if (codeObjects == null || codeObjects.isEmpty) {
-        continue;
-      }
+    final barcodeScanners = detectors.whereType<BarcodeScanner>();
+    final faceDetectors = detectors.whereType<FaceDetector>();
+    for (var detector in barcodeScanners) {
+      final codeObjects = await getValue(detector).then(
+        (e) => e
+            ?.map((e1) => e1.visionMachineReadableCodeObject(imageSize: null))
+            .toList(),
+      );
+      if (codeObjects == null) continue;
       objects.addAll(codeObjects);
     }
-    for (var detector in detectors2) {
-      final faceObjects = await getValue2(
-        detector,
-      ).then((e) => e?.map((e1) => e1.vimpl).toList());
-      if (faceObjects == null || faceObjects.isEmpty) continue;
+    for (var detector in faceDetectors) {
+      final faceObjects = await getValue(detector).then(
+        (e) => e?.map((e1) => e1.visionFaceObject(imageSize: null)).toList(),
+      );
+      if (faceObjects == null) continue;
       objects.addAll(faceObjects);
     }
     return VisionAnalyzerResultImpl.internal(this, objects);
   }
+}
+
+extension MlKitAnalyzerResultProxyApiX on MlKitAnalyzerResultProxyApi {
+  MlKitAnalyzerResult get impl => MlKitAnalyzerResultImpl.internal(this);
 }

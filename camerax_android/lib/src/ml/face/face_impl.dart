@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/vision.dart';
+import 'package:camerax_android/src/visionx.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -35,8 +35,11 @@ final class FaceImpl extends Face {
   int? get trackingId => api.trackingId;
 }
 
+extension FaceX on Face {
+  VisionFaceObject visionFaceObject({required Size<int>? imageSize}) =>
+      VisionFaceObjectImpl.internal(this, imageSize: imageSize);
+}
+
 extension FaceProxyApiX on FaceProxyApi {
   Face get impl => FaceImpl.internal(this);
-
-  VisionFaceObject get vimpl => VisionFaceObjectImpl.internal(this);
 }

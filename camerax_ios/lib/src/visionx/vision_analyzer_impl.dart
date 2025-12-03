@@ -7,35 +7,35 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'vision_object_impl.dart';
 
 final class VisionAnalyzerResultImpl extends VisionAnalyzerResult {
-  final AVAnalyzerResultProxyApi api;
+  final AVAnalyzerResult result;
+
+  VisionAnalyzerResultImpl.internal(this.result) : super.impl();
 
   @override
-  final List<VisionObject> objects;
-
-  VisionAnalyzerResultImpl.internal(this.api, this.objects) : super.impl();
+  List<VisionObject> get objects =>
+      result.objects.map((e) => e.visionObjectOrNull).nonNulls.toList();
 }
 
 final class VisionAnalyzerImpl extends VisionAnalyzer
     with ImageAnalysisAnalyzerImpl {
-  VisionAnalyzerImpl.internal(this.api) : super.impl();
+  final AVAnalyzer analyzer;
+
+  VisionAnalyzerImpl.internal(this.analyzer) : super.impl();
 
   factory VisionAnalyzerImpl({
     List<VisionObjectType>? types,
     required Consumer<VisionAnalyzerResult> consumer,
   }) {
     types ??= VisionObjectType.values;
-    final api = AVAnalyzerProxyApi(
-      types: types.map((e) => e.api).toList(),
-      consumer: AVAnalyzerResultConsumerProxyApi(
-        accept: (_, e) async {
-          final res = await e.vimpl();
-          consumer.accept(res);
-        },
+    final analyzer = AVAnalyzer(
+      types: types.map((e) => e.avMetadataObjectType).toList(),
+      consumer: Consumer(
+        accept: (e) => consumer.accept(e.visionAnalyzerResult),
       ),
     );
-    return VisionAnalyzerImpl.internal(api);
+    return VisionAnalyzerImpl.internal(analyzer);
   }
 
   @override
-  final AVAnalyzerProxyApi api;
+  ImageAnalysisAnalyzerProxyApi get api => analyzer.api;
 }

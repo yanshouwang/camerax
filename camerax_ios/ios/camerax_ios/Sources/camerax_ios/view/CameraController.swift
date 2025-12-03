@@ -169,9 +169,7 @@ public class CameraController: NSObject {
         } else {
             self.capturePhotoOutput.isHighResolutionCaptureEnabled = true
         }
-        //        if #available(iOS 13.0, *) {
-        //            settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
-        //        }
+        //        settings.photoQualityPrioritization = capturePhotoOutput.maxPhotoQualityPrioritization
         //        let settings = capturePhotoOutput.availablePhotoCodecTypes.contains(.hevc) ? AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc]) : AVCapturePhotoSettings()
         //        if let previewPhotoFormat = settings.availablePreviewPhotoPixelFormatTypes.first {
         //            settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoFormat]
@@ -297,10 +295,8 @@ public class CameraController: NSObject {
     
     private func configureSession() {
         self.captureVideoDataOutput.alwaysDiscardsLateVideoFrames = true
-        if #available(iOS 13.0, *) {
-            self.captureVideoDataOutput.automaticallyConfiguresOutputBufferDimensions = false
-            self.captureVideoDataOutput.deliversPreviewSizedOutputBuffers = false
-        }
+        self.captureVideoDataOutput.automaticallyConfiguresOutputBufferDimensions = false
+        self.captureVideoDataOutput.deliversPreviewSizedOutputBuffers = false
         var videoSettings = self.captureVideoDataOutput.videoSettings ?? [:]
         videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
         self.captureVideoDataOutput.videoSettings = videoSettings
@@ -346,7 +342,7 @@ public class CameraController: NSObject {
         case .front:
             return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
         case .back:
-            if #available(iOS 13.0, *), let device = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) { return device }
+            if let device = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) { return device }
             else if let device = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) { return device }
             else { return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) }
         case .external:

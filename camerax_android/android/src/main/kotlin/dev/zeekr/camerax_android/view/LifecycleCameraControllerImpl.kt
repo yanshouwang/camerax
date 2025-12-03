@@ -6,9 +6,6 @@ import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiLifecycleCameraControllerProxyApi
 import dev.zeekr.camerax_android.activity
 import dev.zeekr.camerax_android.context
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class LifecycleCameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiLifecycleCameraControllerProxyApi(registrar) {
@@ -16,26 +13,12 @@ class LifecycleCameraControllerImpl(private val registrar: CameraXApiPigeonProxy
         return LifecycleCameraController(registrar.context)
     }
 
-    override fun bindToLifecycle(pigeon_instance: LifecycleCameraController, callback: (Result<Unit>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val lifecycleOwner = registrar.activity as LifecycleOwner
-                pigeon_instance.bindToLifecycle(lifecycleOwner)
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
+    override fun bindToLifecycle(pigeon_instance: LifecycleCameraController) {
+        val lifecycleOwner = registrar.activity as LifecycleOwner
+        pigeon_instance.bindToLifecycle(lifecycleOwner)
     }
 
-    override fun unbind(pigeon_instance: LifecycleCameraController, callback: (Result<Unit>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                pigeon_instance.unbind()
-                callback(Result.success(Unit))
-            } catch (e: Exception) {
-                callback(Result.failure(e))
-            }
-        }
+    override fun unbind(pigeon_instance: LifecycleCameraController) {
+        pigeon_instance.unbind()
     }
 }
