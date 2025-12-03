@@ -10,14 +10,12 @@ import AVFoundation
 
 @available(iOS 26.0, *)
 extension AVCaptureDevice.CinematicVideoFocusMode {
-    var api: AVCaptureDeviceCinematicVideoFocusModeApi {
-        switch self {
-        case .none:
-            return .none
-        case .strong:
-            return .strong
-        case .weak:
-            return .weak
+    var api: AVCaptureDeviceCinematicVideoFocusModeApi? {
+        return switch self {
+        case .none: AVCaptureDeviceCinematicVideoFocusModeApi.none
+        case .strong: .strong
+        case .weak: .weak
+        @unknown default: nil
         }
     }
 }

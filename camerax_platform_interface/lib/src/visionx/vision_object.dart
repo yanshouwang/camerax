@@ -24,6 +24,8 @@ enum VisionObjectType {
   // humanFullBody,
   // dogBody,
   // catBody,
+  // catHead,
+  // catBody,
   face;
   // salientObject;
 
@@ -57,6 +59,8 @@ enum VisionObjectType {
   //   VisionObjectType.humanFullBody,
   //   VisionObjectType.dogBody,
   //   VisionObjectType.catBody,
+  //   VisionObjectType.catHead,
+  //   VisionObjectType.catBody,
   // ];
 
   static List<VisionObjectType> get faces => [VisionObjectType.face];
@@ -73,34 +77,13 @@ abstract base class VisionObject {
   Rect<double> get bounds;
 }
 
-// abstract base class VisionBodyObject extends VisionObject {
-//   VisionBodyObject.impl() : super.impl();
-
-//   int get id;
-// }
-
-// abstract base class VisionCatBodyObject extends VisionBodyObject {
-//   VisionCatBodyObject.impl() : super.impl();
-// }
-
-// abstract base class VisionDogBodyObject extends VisionBodyObject {
-//   VisionDogBodyObject.impl() : super.impl();
-// }
-
-// abstract base class VisionHumanBodyObject extends VisionBodyObject {
-//   VisionHumanBodyObject.impl() : super.impl();
-// }
-
-// abstract base class VisionHumanFullBodyObject extends VisionBodyObject {
-//   VisionHumanFullBodyObject.impl() : super.impl();
-// }
-
 abstract base class VisionFaceObject extends VisionObject {
   VisionFaceObject.impl() : super.impl();
 
-  int get id;
-  double? get rollAngle;
-  double? get yawAngle;
+  int? get id;
+  double? get roll;
+  double? get yaw;
+  double? get pitch;
 }
 
 abstract base class VisionMachineReadableCodeObject extends VisionObject {
@@ -109,9 +92,3 @@ abstract base class VisionMachineReadableCodeObject extends VisionObject {
   List<Point<double>> get corners;
   String? get value;
 }
-
-// abstract base class VisionSalientObject extends VisionObject {
-//   VisionSalientObject.impl() : super.impl();
-
-//   int get id;
-// }

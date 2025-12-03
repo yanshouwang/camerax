@@ -10,7 +10,10 @@ abstract base class ConsumerImpl<T> extends Consumer<T> {
   factory ConsumerImpl({required void Function(T value) accept}) {
     if (T == AVAnalyzerResult) {
       final api = AVAnalyzerResultConsumerProxyApi(
-        accept: (_, e) => accept(e.impl as T),
+        accept: (_, e) async {
+          final res = await e.impl();
+          accept(res as T);
+        },
       );
       return AVAnalyzerResultConsumerImpl.internal(api) as ConsumerImpl<T>;
     } else if (T == ImageProxy) {

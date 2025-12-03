@@ -83,7 +83,6 @@ abstract class AVMetadataDogHeadObjectProxyApi
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataBodyObject',
     import: 'AVFoundation',
-    minIosApi: '13.0.0',
   ),
 )
 abstract class AVMetadataBodyObjectProxyApi extends AVMetadataObjectProxyApi {
@@ -94,7 +93,6 @@ abstract class AVMetadataBodyObjectProxyApi extends AVMetadataObjectProxyApi {
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataCatBodyObject',
     import: 'AVFoundation',
-    minIosApi: '13.0.0',
   ),
 )
 abstract class AVMetadataCatBodyObjectProxyApi
@@ -104,7 +102,6 @@ abstract class AVMetadataCatBodyObjectProxyApi
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataDogBodyObject',
     import: 'AVFoundation',
-    minIosApi: '13.0.0',
   ),
 )
 abstract class AVMetadataDogBodyObjectProxyApi
@@ -114,7 +111,6 @@ abstract class AVMetadataDogBodyObjectProxyApi
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataHumanBodyObject',
     import: 'AVFoundation',
-    minIosApi: '13.0.0',
   ),
 )
 abstract class AVMetadataHumanBodyObjectProxyApi
@@ -160,7 +156,6 @@ abstract class AVMetadataMachineReadableCodeObjectProxyApi
   swiftOptions: SwiftProxyApiOptions(
     name: 'AVMetadataSalientObject',
     import: 'AVFoundation',
-    minIosApi: '13.0.0',
   ),
 )
 abstract class AVMetadataSalientObjectProxyApi
@@ -168,7 +163,7 @@ abstract class AVMetadataSalientObjectProxyApi
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer.Result'))
 abstract class AVAnalyzerResultProxyApi {
-  late final List<AVMetadataObjectProxyApi> objects;
+  List<AVMetadataObjectProxyApi> getObjects();
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AVAnalyzer'))
@@ -936,4 +931,209 @@ abstract class RotationProviderProxyApi {
 
   bool addListener(RotationProviderListenerProxyApi listener);
   void removeListener(RotationProviderListenerProxyApi listener);
+}
+
+// vision
+enum VNBarcodeSymbologyApi {
+  aztec,
+  codabar,
+  code39,
+  code39Checksum,
+  code39FullASCII,
+  code39FullASCIIChecksum,
+  code93,
+  code93i,
+  code128,
+  dataMatrix,
+  ean8,
+  ean13,
+  gs1DataBar,
+  gs1DataBarExpanded,
+  gs1DataBarLimited,
+  i2of5,
+  i2of5Checksum,
+  itf14,
+  microPDF417,
+  microQR,
+  msiPlessey,
+  pdf417,
+  qr,
+  upce,
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNImageRequestHandler',
+    import: 'Vision',
+  ),
+)
+abstract class VNImageRequestHandlerProxyApi {
+  VNImageRequestHandlerProxyApi.url(String url);
+
+  void perform(List<VNRequestProxyApi> requests);
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'VNRequest', import: 'Vision'),
+)
+abstract class VNRequestProxyApi {
+  late final void Function(List<Object?>?) completionHandler;
+
+  bool getPreferBackgroundProcessing();
+  void setPreferBackgroundProcessing(bool value);
+  List<VNObservationProxyApi>? getResults();
+  void cancel();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNImageBasedRequest',
+    import: 'Vision',
+  ),
+)
+abstract class VNImageBasedRequestProxyApi extends VNRequestProxyApi {
+  RectFProxyApi getRegionOfInterest();
+  void setRegionOfInterest(RectFProxyApi value);
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'VNObservation', import: 'Vision'),
+)
+abstract class VNObservationProxyApi {
+  double getConfidence();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNDetectedObjectObservation',
+    import: 'Vision',
+  ),
+)
+abstract class VNDetectedObjectObservationProxyApi
+    extends VNObservationProxyApi {
+  RectFProxyApi getBoundingBox();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNRectangleObservation',
+    import: 'Vision',
+  ),
+)
+abstract class VNRectangleObservationProxyApi
+    extends VNDetectedObjectObservationProxyApi {
+  PointFProxyApi getBottomLeft();
+  PointFProxyApi getBottomRight();
+  PointFProxyApi getTopLeft();
+  PointFProxyApi getTopRight();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNDetectBarcodesRequest',
+    import: 'Vision',
+  ),
+)
+abstract class VNDetectBarcodesRequestProxyApi
+    extends VNImageBasedRequestProxyApi {
+  VNDetectBarcodesRequestProxyApi();
+
+  List<VNBarcodeSymbologyApi> getSupportedSymbologies();
+  List<VNBarcodeSymbologyApi> getSymbologies();
+  void setSymbologies(List<VNBarcodeSymbologyApi> value);
+  @override
+  List<VNBarcodeObservationProxyApi>? getResults();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNBarcodeObservation',
+    import: 'Vision',
+  ),
+)
+abstract class VNBarcodeObservationProxyApi
+    extends VNRectangleObservationProxyApi {
+  String? getPayloadStringValue();
+  VNBarcodeSymbologyApi getSymbology();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNDetectFaceRectanglesRequest',
+    import: 'Vision',
+  ),
+)
+abstract class VNDetectFaceRectanglesRequestProxyApi
+    extends VNImageBasedRequestProxyApi {
+  VNDetectFaceRectanglesRequestProxyApi();
+
+  @override
+  List<VNFaceObservationProxyApi>? getResults();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNFaceLandmarkRegion',
+    import: 'Vision',
+  ),
+)
+abstract class VNFaceLandmarkRegionProxyApi {
+  int getPointCount();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNFaceLandmarkRegion2D',
+    import: 'Vision',
+  ),
+)
+abstract class VNFaceLandmarkRegion2DProxyApi
+    extends VNFaceLandmarkRegionProxyApi {
+  List<PointFProxyApi> getNormalizedPoints();
+  List<double>? getPrecisionEstimatesPerPoint();
+
+  List<PointFProxyApi> pointsInImage(SizeProxyApi imageSize);
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'VNFaceLandmarks', import: 'Vision'),
+)
+abstract class VNFaceLandmarksProxyApi {
+  double getConfidence();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNFaceLandmarks2D',
+    import: 'Vision',
+  ),
+)
+abstract class VNFaceLandmarks2DProxyApi extends VNFaceLandmarksProxyApi {
+  VNFaceLandmarkRegion2DProxyApi? getAllPoints();
+  VNFaceLandmarkRegion2DProxyApi? getFaceContour();
+  VNFaceLandmarkRegion2DProxyApi? getLeftEye();
+  VNFaceLandmarkRegion2DProxyApi? getRightEye();
+  VNFaceLandmarkRegion2DProxyApi? getLeftEyebrow();
+  VNFaceLandmarkRegion2DProxyApi? getRightEyebrow();
+  VNFaceLandmarkRegion2DProxyApi? getNose();
+  VNFaceLandmarkRegion2DProxyApi? getNoseCrest();
+  VNFaceLandmarkRegion2DProxyApi? getMedianLine();
+  VNFaceLandmarkRegion2DProxyApi? getOuterLips();
+  VNFaceLandmarkRegion2DProxyApi? getInnerLips();
+  VNFaceLandmarkRegion2DProxyApi? getLeftPupil();
+  VNFaceLandmarkRegion2DProxyApi? getRightPupil();
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(
+    name: 'VNFaceObservation',
+    import: 'Vision',
+  ),
+)
+abstract class VNFaceObservationProxyApi
+    extends VNDetectedObjectObservationProxyApi {
+  VNFaceLandmarks2DProxyApi? getLandmarks();
+  double? getRoll();
+  double? getYaw();
+  double? getPitch();
 }

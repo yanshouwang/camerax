@@ -56,6 +56,7 @@ import dev.zeekr.camerax_android.ml.barcode.BarcodeImpl
 import dev.zeekr.camerax_android.ml.barcode.BarcodeScannerImpl
 import dev.zeekr.camerax_android.ml.barcode.BarcodeScannerOptionsImpl
 import dev.zeekr.camerax_android.ml.barcode.ZoomSuggestionOptionsImpl
+import dev.zeekr.camerax_android.ml.common.InputImageImpl
 import dev.zeekr.camerax_android.ml.face.FaceContourImpl
 import dev.zeekr.camerax_android.ml.face.FaceDetectorImpl
 import dev.zeekr.camerax_android.ml.face.FaceDetectorOptionsImpl
@@ -357,6 +358,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiBarcodeProxyApi(): PigeonApiBarcodeProxyApi {
         return BarcodeImpl(this)
+    }
+
+    override fun getPigeonApiInputImageProxyApi(): PigeonApiInputImageProxyApi {
+        return InputImageImpl(this)
     }
 
     override fun getPigeonApiZoomSuggestionOptionsZoomCallbackProxyApi(): PigeonApiZoomSuggestionOptionsZoomCallbackProxyApi {

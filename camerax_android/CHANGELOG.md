@@ -1,3 +1,10 @@
+## 1.1.0
+
+* fvm use 3.35.7
+* Add ml.Detector#process method.
+* Add visionx APIs.
+* Migrate flutter thread model changes.
+
 ## 1.0.2
 
 * Add `RotationProvider` API.

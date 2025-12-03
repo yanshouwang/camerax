@@ -38,7 +38,10 @@ class AVMetadataObjectDelegate: PigeonApiDelegateAVMetadataObjectProxyApi {
     
     func getCinematicVideoFocusMode(pigeonApi: PigeonApiAVMetadataObjectProxyApi, pigeonInstance: AVMetadataObject) throws -> AVCaptureDeviceCinematicVideoFocusModeApi {
         if #available(iOS 26.0, *) {
-            return pigeonInstance.cinematicVideoFocusMode.api
+            guard let mode = pigeonInstance.cinematicVideoFocusMode.api else {
+                throw CameraXError(code: "nil-error", message: "cinematicVideoFocusMode is nil", details: nil)
+            }
+            return mode
         } else {
             throw CameraXError(code: "unsupported-error", message: "cinematicVideoFocusMode is only available in iOS 26.0 or newer", details: nil)
         }
@@ -53,8 +56,8 @@ class AVMetadataObjectDelegate: PigeonApiDelegateAVMetadataObjectProxyApi {
     }
     
     func getObjectID(pigeonApi: PigeonApiAVMetadataObjectProxyApi, pigeonInstance: AVMetadataObject) throws -> Int64 {
-        if #available(iOS 13.0, *), let instance = pigeonInstance as? AVMetadataSalientObject {
-            return Int64(instance.objectID)
+        if let salientObject = pigeonInstance as? AVMetadataSalientObject {
+            return Int64(salientObject.objectID)
         } else if #available(iOS 26.0, *) {
             return Int64(pigeonInstance.objectID)
         } else {
@@ -67,85 +70,48 @@ extension AVMetadataObject.ObjectType {
     var api: AVMetadataObjectTypeApi? {
         if #available(iOS 26.0, *) {
             switch self {
-            case .dogHead:
-                return .dogHead
-            case .catHead:
-                return .catHead
-            default:
-                break
+            case .dogHead: return .dogHead
+            case .catHead: return .catHead
+            default: break
             }
         }
         if #available(iOS 17.0, *) {
             switch self {
-            case .humanFullBody:
-                return .humanFullBody
-            default:
-                break
+            case .humanFullBody: return .humanFullBody
+            default: break
             }
         }
         if #available(iOS 15.4, *) {
             switch self {
-            case .codabar:
-                return .codabar
-            case .gs1DataBar:
-                return .gs1DataBar
-            case .gs1DataBarExpanded:
-                return .gs1DataBarExpanded
-            case .gs1DataBarLimited:
-                return .gs1DataBarLimited
-            case .microPDF417:
-                return .microPDF417
-            case .microQR:
-                return .microQR
-            default:
-                break
+            case .codabar: return .codabar
+            case .gs1DataBar: return .gs1DataBar
+            case .gs1DataBarExpanded: return .gs1DataBarExpanded
+            case .gs1DataBarLimited: return .gs1DataBarLimited
+            case .microPDF417: return .microPDF417
+            case .microQR: return .microQR
+            default: break
             }
         }
-        if #available(iOS 13.0, *) {
-            switch self {
-            case .humanBody:
-                return .humanBody
-            case .dogBody:
-                return .dogBody
-            case .catBody:
-                return .catBody
-            case .salientObject:
-                return .salientObject
-            default:
-                break
-            }
-        }
-        switch self {
-        case .code39:
-            return .code39
-        case .code39Mod43:
-            return .code39Mod43
-        case .code93:
-            return .code93
-        case .code128:
-            return .code128
-        case .ean8:
-            return .ean8
-        case .ean13:
-            return .ean13
-        case .interleaved2of5:
-            return .interleaved2of5
-        case .itf14:
-            return .itf14
-        case .upce:
-            return .upce
-        case .aztec:
-            return .aztec
-        case .dataMatrix:
-            return .dataMatrix
-        case .pdf417:
-            return .pdf417
-        case .qr:
-            return .qr
-        case .face:
-            return .face
-        default:
-            return nil
+        return switch self {
+        case .humanBody: .humanBody
+        case .dogBody: .dogBody
+        case .catBody: .catBody
+        case .salientObject: .salientObject
+        case .code39: .code39
+        case .code39Mod43: .code39Mod43
+        case .code93: .code93
+        case .code128: .code128
+        case .ean8: .ean8
+        case .ean13: .ean13
+        case .interleaved2of5: .interleaved2of5
+        case .itf14: .itf14
+        case .upce:.upce
+        case .aztec: .aztec
+        case .dataMatrix: .dataMatrix
+        case .pdf417: .pdf417
+        case .qr: .qr
+        case .face: .face
+        default: nil
         }
     }
 }
@@ -154,85 +120,48 @@ extension AVMetadataObjectTypeApi {
     var impl: AVMetadataObject.ObjectType? {
         if #available(iOS 26.0, *) {
             switch self {
-            case .dogHead:
-                return .dogHead
-            case .catHead:
-                return .catHead
-            default:
-                break
+            case .dogHead: return .dogHead
+            case .catHead: return .catHead
+            default: break
             }
         }
         if #available(iOS 17.0, *) {
             switch self {
-            case .humanFullBody:
-                return .humanFullBody
-            default:
-                break
+            case .humanFullBody: return .humanFullBody
+            default: break
             }
         }
         if #available(iOS 15.4, *) {
             switch self {
-            case .codabar:
-                return .codabar
-            case .gs1DataBar:
-                return .gs1DataBar
-            case .gs1DataBarExpanded:
-                return .gs1DataBarExpanded
-            case .gs1DataBarLimited:
-                return .gs1DataBarLimited
-            case .microPDF417:
-                return .microPDF417
-            case .microQR:
-                return .microQR
-            default:
-                break
+            case .codabar: return .codabar
+            case .gs1DataBar: return .gs1DataBar
+            case .gs1DataBarExpanded: return .gs1DataBarExpanded
+            case .gs1DataBarLimited: return .gs1DataBarLimited
+            case .microPDF417: return .microPDF417
+            case .microQR: return .microQR
+            default: break
             }
         }
-        if #available(iOS 13.0, *) {
-            switch self {
-            case .humanBody:
-                return .humanBody
-            case .dogBody:
-                return .dogBody
-            case .catBody:
-                return .catBody
-            case .salientObject:
-                return .salientObject
-            default:
-                break
-            }
-        }
-        switch self {
-        case .code39:
-            return .code39
-        case .code39Mod43:
-            return .code39Mod43
-        case .code93:
-            return .code93
-        case .code128:
-            return .code128
-        case .ean8:
-            return .ean8
-        case .ean13:
-            return .ean13
-        case .interleaved2of5:
-            return .interleaved2of5
-        case .itf14:
-            return .itf14
-        case .upce:
-            return .upce
-        case .aztec:
-            return .aztec
-        case .dataMatrix:
-            return .dataMatrix
-        case .pdf417:
-            return .pdf417
-        case .qr:
-            return .qr
-        case .face:
-            return .face
-        default:
-            return nil
+        return switch self {
+        case .humanBody: .humanBody
+        case .dogBody: .dogBody
+        case .catBody: .catBody
+        case .salientObject: .salientObject
+        case .code39: .code39
+        case .code39Mod43: .code39Mod43
+        case .code93: .code93
+        case .code128: .code128
+        case .ean8: .ean8
+        case .ean13: .ean13
+        case .interleaved2of5: .interleaved2of5
+        case .itf14: .itf14
+        case .upce: .upce
+        case .aztec: .aztec
+        case .dataMatrix: .dataMatrix
+        case .pdf417: .pdf417
+        case .qr: .qr
+        case .face: .face
+        default: nil
         }
     }
 }

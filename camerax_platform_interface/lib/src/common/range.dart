@@ -10,4 +10,9 @@ final class Range<T extends num> {
   @override
   bool operator ==(Object other) =>
       other is Range<T> && other.lower == lower && other.upper == upper;
+
+  @override
+  String toString() {
+    return '$lower, $upper';
+  }
 }

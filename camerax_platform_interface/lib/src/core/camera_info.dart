@@ -12,7 +12,7 @@ import 'zoom_state.dart';
 
 abstract base class CameraInfo {
   static Future<bool> mustPlayShutterSound() =>
-      CameraXPlugin.instance.$CameraInfo$MustPlayShutterSound();
+      CameraXPlugin.instance.$CameraInfo$mustPlayShutterSound();
 
   CameraInfo.impl();
 

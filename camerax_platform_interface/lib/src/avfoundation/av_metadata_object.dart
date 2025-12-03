@@ -75,14 +75,14 @@ enum AVMetadataObjectType {
 abstract base class AVMetadataObject {
   AVMetadataObject.impl();
 
-  Future<AVMetadataObjectType> getType();
-  Future<DateTime> getTime();
-  Future<Duration> getDuration();
-  Future<Rect<double>> getBounds();
-  Future<bool> isFixedFocus();
-  Future<AVCaptureDeviceCinematicVideoFocusMode> getCinematicVideoFocusMode();
-  Future<int> getGroupID();
-  Future<int> getObjectID();
+  AVMetadataObjectType get type;
+  DateTime get time;
+  Duration get duration;
+  Rect<double> get bounds;
+  bool get isFixedFocus;
+  AVCaptureDeviceCinematicVideoFocusMode get cinematicVideoFocusMode;
+  int get groupID;
+  int get objectID;
 }
 
 abstract base class AVMetadataCatHeadObject extends AVMetadataObject {
@@ -96,7 +96,7 @@ abstract base class AVMetadataDogHeadObject extends AVMetadataObject {
 abstract base class AVMetadataBodyObject extends AVMetadataObject {
   AVMetadataBodyObject.impl() : super.impl();
 
-  Future<int> getBodyID();
+  int get bodyID;
 }
 
 abstract base class AVMetadataCatBodyObject extends AVMetadataBodyObject {
@@ -118,19 +118,19 @@ abstract base class AVMetadataHumanFullBodyObject extends AVMetadataBodyObject {
 abstract base class AVMetadataFaceObject extends AVMetadataObject {
   AVMetadataFaceObject.impl() : super.impl();
 
-  Future<int> getFaceID();
-  Future<bool> hasRollAngle();
-  Future<double> getRollAngle();
-  Future<bool> hasYawAngle();
-  Future<double> getYawAngle();
+  int get faceID;
+  bool get hasRollAngle;
+  double get rollAngle;
+  bool get hasYawAngle;
+  double get yawAngle;
 }
 
 abstract base class AVMetadataMachineReadableCodeObject
     extends AVMetadataObject {
   AVMetadataMachineReadableCodeObject.impl() : super.impl();
 
-  Future<List<Point<double>>> getCorners();
-  Future<String?> getStringValue();
+  List<Point<double>> get corners;
+  String? get stringValue;
 }
 
 abstract base class AVMetadataSalientObject extends AVMetadataObject {

@@ -9,7 +9,7 @@ abstract base class QualitySelector {
   static Future<Size<int>?> getResolution(
     CameraInfo cameraInfo,
     Quality quality,
-  ) => CameraXPlugin.instance.$QualitySelector$GetResolution(
+  ) => CameraXPlugin.instance.$QualitySelector$getResolution(
     cameraInfo,
     quality,
   );
@@ -19,12 +19,12 @@ abstract base class QualitySelector {
   factory QualitySelector.from(
     Quality quality, [
     FallbackStrategy? fallbackStrategy,
-  ]) => CameraXPlugin.instance.$QualitySelector$From(quality, fallbackStrategy);
+  ]) => CameraXPlugin.instance.$QualitySelector$from(quality, fallbackStrategy);
 
   factory QualitySelector.fromOrderedList(
     List<Quality> qualities, [
     FallbackStrategy? fallbackStrategy,
-  ]) => CameraXPlugin.instance.$QualitySelector$FromOrderedList(
+  ]) => CameraXPlugin.instance.$QualitySelector$fromOrderedList(
     qualities,
     fallbackStrategy,
   );

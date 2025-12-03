@@ -1,2 +1,10 @@
-export 'vision/vision_analyzer_impl.dart';
-export 'vision/vision_object_impl.dart';
+export 'vision/vn_barcode_observation_impl.dart';
+export 'vision/vn_detect_barcodes_request_impl.dart';
+export 'vision/vn_detect_face_rectangles_request_impl.dart';
+export 'vision/vn_detected_object_observation_impl.dart';
+export 'vision/vn_face_observation_impl.dart';
+export 'vision/vn_image_based_request_impl.dart';
+export 'vision/vn_image_request_handler_impl.dart';
+export 'vision/vn_observation_impl.dart';
+export 'vision/vn_rectangle_observation_impl.dart';
+export 'vision/vn_request_impl.dart';

@@ -79,7 +79,10 @@ class _MyAppState extends State<MyApp> {
                   throw ArgumentError.notNull('uri');
                 }
                 final uri = Uri.file(filePath);
-                return InteractiveView(uri: uri);
+                return ViewModelBinding(
+                  viewBuilder: () => InteractiveView(),
+                  viewModelBuilder: () => InteractiveViewModel(uri),
+                );
               },
             ),
           ],

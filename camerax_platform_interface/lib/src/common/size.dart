@@ -10,4 +10,9 @@ final class Size<T extends num> {
   @override
   bool operator ==(Object other) =>
       other is Size && other.width == width && other.height == height;
+
+  @override
+  String toString() {
+    return '$width, $height';
+  }
 }

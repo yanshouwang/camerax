@@ -7,7 +7,7 @@ abstract base class Camera2CameraControl {
   Camera2CameraControl.impl();
 
   factory Camera2CameraControl.from(CameraControl cameraControl) =>
-      CameraXPlugin.instance.$Camera2CameraControl$From(cameraControl);
+      CameraXPlugin.instance.$Camera2CameraControl$from(cameraControl);
 
   Future<void> addCaptureRequestOptions(CaptureRequestOptions bundle);
   Future<void> clearCaptureRequestOptions();

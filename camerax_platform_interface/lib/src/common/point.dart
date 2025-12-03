@@ -10,4 +10,9 @@ final class Point<T extends num> {
   @override
   bool operator ==(Object other) =>
       other is Point<T> && other.x == x && other.y == y;
+
+  @override
+  String toString() {
+    return '$x, $y';
+  }
 }

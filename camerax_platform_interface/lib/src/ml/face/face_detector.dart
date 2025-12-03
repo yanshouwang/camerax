@@ -10,5 +10,5 @@ abstract base class FaceDetector extends Detector<List<Face>> {
   factory FaceDetector() => CameraXPlugin.instance.$FaceDetector();
 
   factory FaceDetector.options(FaceDetectorOptions options) =>
-      CameraXPlugin.instance.$FaceDetector$Options(options);
+      CameraXPlugin.instance.$FaceDetector$options(options);
 }
