@@ -32,6 +32,9 @@ public class CameraController: NSObject {
     
     let session: AVCaptureSession
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    private let backDiscoverySession: AVCaptureDevice.DiscoverySession
+    private let frontDiscoverySession: AVCaptureDevice.DiscoverySession
+    private let externalDiscoverySession: AVCaptureDevice.DiscoverySession?
     private var videoDeviceInput: AVCaptureDeviceInput?
     private var audioDeviceInput: AVCaptureDeviceInput?
     private let capturePhotoOutput: AVCapturePhotoOutput
@@ -59,6 +62,9 @@ public class CameraController: NSObject {
         self._isTapToFocusEnabled = true
         self._isPinchToZoomEnabled = true
         self.session = AVCaptureSession()
+        self.backDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTripleCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .back)
+        self.frontDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInWideAngleCamera], mediaType: .video, position: .front)
+        self.externalDiscoverySession = if #available(iOS 17.0, *) { AVCaptureDevice.DiscoverySession(deviceTypes: [.external], mediaType: .video, position: .unspecified) } else { nil }
         self.capturePhotoOutput = AVCapturePhotoOutput()
         self.capturePhotoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
         self.captureMovieFileOutput = AVCaptureMovieFileOutput()
@@ -154,8 +160,11 @@ public class CameraController: NSObject {
         self._isTapToFocusEnabled = enabled
     }
     
-    public func getImageCaptureFlashMode() -> ImageCapture.FlashMode {
-        return self.capturePhotoSettings.flashMode.cxFlashMode
+    public func getImageCaptureFlashMode() throws -> ImageCapture.FlashMode {
+        guard let mode = self.capturePhotoSettings.flashMode.cxFlashModeOrNil else {
+            throw CameraXError(code: "nil-error", message: "mode is nil", details: nil)
+        }
+        return mode
     }
     
     public func setImageCaptureFlashMode(_ flashMode: ImageCapture.FlashMode) -> Void {
@@ -257,13 +266,16 @@ public class CameraController: NSObject {
         self.imageAnalysisResolutionSelector = selector
     }
     
-    public func getImageAnalysisOutputImageFormat() -> ImageAnalysis.OutputImageFormat {
-        guard let format = self.captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] as? Int else { return .yuv420_888 }
-        return format.imageAnalysisOutputImageFormat
+    public func getImageAnalysisOutputImageFormat() throws -> ImageAnalysis.OutputImageFormat {
+        guard let value = self.captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] as? Int else { return .yuv420_888 }
+        guard let format = value.imageAnalysisOutputImageFormatOrNil else {
+            throw CameraXError(code: "nil-error", message: "format is nil", details: nil)
+        }
+        return format
     }
     
     public func setImageAnalysisOutputImageFormat(_ format: ImageAnalysis.OutputImageFormat) {
-        self.captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = format.cvPixelFormat
+        self.captureVideoDataOutput.videoSettings[kCVPixelBufferPixelFormatTypeKey as String] = format.cvPixelFormatOrNil
     }
     
     public func setImageAnalysisAnalyzer(_ analyzer: ImageAnalysis.Analyzer) throws {
@@ -303,7 +315,8 @@ public class CameraController: NSObject {
         
         self.session.beginConfiguration()
         defer { self.session.commitConfiguration() }
-        self.session.sessionPreset = .photo
+        // Warning: Preset.photo with MovieFileOutput will cause front camera stretched
+        self.session.sessionPreset = .high
         try? self.addVideoDeviceInput()
         try? self.addAudioDeviceInput()
         try? self.addCapturePhotoOutput()
@@ -336,18 +349,11 @@ public class CameraController: NSObject {
     }
     
     private func getVideoDevice(_ cameraSelector: CameraSelector) -> AVCaptureDevice? {
-        switch cameraSelector.lensFacing {
-        case .unknown:
-            return nil
-        case .front:
-            return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-        case .back:
-            if let device = AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back) { return device }
-            else if let device = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) { return device }
-            else { return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) }
-        case .external:
-            if #available(iOS 17.0, *) { return AVCaptureDevice.default(.external, for: .video, position: .unspecified) }
-            else { return nil }
+        return switch cameraSelector.lensFacing {
+        case .unknown: nil
+        case .back: backDiscoverySession.devices.first
+        case .front: frontDiscoverySession.devices.first
+        case .external: externalDiscoverySession?.devices.first
         }
     }
     

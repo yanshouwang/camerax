@@ -27,30 +27,22 @@ class CameraSelectorDelegate: PigeonApiDelegateCameraSelectorProxyApi {
 
 extension CameraSelectorLensFacingApi {
     var delegate: CameraSelector.LensFacing {
-        switch self {
-        case .unknown:
-            return .unknown
-        case .front:
-            return .front
-        case .back:
-            return .back
-        case .external:
-            return .external
+        return switch self {
+        case .unknown: .unknown
+        case .front: .front
+        case .back: .back
+        case .external: .external
         }
     }
 }
 
 extension CameraSelector.LensFacing {
     var api: CameraSelectorLensFacingApi {
-        switch self {
-        case .unknown:
-            return .unknown
-        case .front:
-            return .front
-        case .back:
-            return .back
-        case .external:
-            return .external
+        return switch self {
+        case .unknown: .unknown
+        case .front: .front
+        case .back: .back
+        case .external: .external
         }
     }
 }

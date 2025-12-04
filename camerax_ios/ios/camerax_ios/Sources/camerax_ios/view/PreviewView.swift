@@ -48,7 +48,7 @@ public class PreviewView: UIView {
     }
     
     public required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) is not implemented")
     }
     
     deinit {
@@ -78,12 +78,18 @@ public class PreviewView: UIView {
         }
     }
     
-    public func getScaleType() -> ScaleType {
-        return self.videoGravity.scaleType
+    public func getScaleType() throws -> ScaleType {
+        guard let scaleType = self.videoGravity.scaleTypeOrNil else {
+            throw CameraXError(code: "nil-error", message: "scaleType is nil", details: nil)
+        }
+        return scaleType
     }
     
-    public func setScaleType(_ scaleType: ScaleType) {
-        self.videoGravity = scaleType.videoGravity
+    public func setScaleType(_ scaleType: ScaleType) throws {
+        guard let videoGravity = scaleType.videoGravityOrNil else {
+            throw CameraXError(code: "nil-error", message: "videoGravity is nil", details: nil)
+        }
+        self.videoGravity = videoGravity
     }
     
     @objc fileprivate func handleTapGestureRecognizer(_ sender: UITapGestureRecognizer) {
@@ -120,7 +126,7 @@ public class PreviewView: UIView {
     private func updateVideoOrientation() {
         let orientation = UIDevice.current.orientation
         debugPrint("ui device orientation: \(orientation)")
-        guard let videoOrientation = orientation.videoOrientation else { return }
+        guard let videoOrientation = orientation.videoOrientationOrNil else { return }
         debugPrint("update video preview layer orientation: \(videoOrientation)")
         guard let connection = self.videoPreviewLayer.connection else {
             debugPrint("connection is nil")
@@ -149,50 +155,36 @@ fileprivate extension Selector {
 }
 
 fileprivate extension PreviewView.ScaleType {
-    var videoGravity: AVLayerVideoGravity {
-        switch self {
-        case .fillCenter:
-            return .resizeAspectFill
-        case .fillEnd:
-            fatalError()
-        case .fillStart:
-            fatalError()
-        case .fitCenter:
-            return .resizeAspect
-        case .fitEnd:
-            fatalError()
-        case .fitStart:
-            fatalError()
+    var videoGravityOrNil: AVLayerVideoGravity? {
+        return switch self {
+        case .fillCenter: .resizeAspectFill
+        case .fillEnd: nil
+        case .fillStart: nil
+        case .fitCenter: .resizeAspect
+        case .fitEnd: nil
+        case .fitStart: nil
         }
     }
 }
 
 fileprivate extension AVLayerVideoGravity {
-    var scaleType: PreviewView.ScaleType {
-        switch self {
-        case .resizeAspectFill:
-            return .fillCenter
-        case .resizeAspect:
-            return .fitCenter
-        case .resize:
-            fatalError()
-        default:
-            fatalError()
+    var scaleTypeOrNil: PreviewView.ScaleType? {
+        return switch self {
+        case .resizeAspectFill: .fillCenter
+        case .resizeAspect: .fitCenter
+        case .resize: nil
+        default: nil
         }
     }
 }
 
 fileprivate extension UIDeviceOrientation {
-    var videoOrientation: AVCaptureVideoOrientation? {
-        switch self {
-        case .portrait, .portraitUpsideDown:
-            return .portrait
-        case .landscapeLeft:
-            return .landscapeRight
-        case .landscapeRight:
-            return .landscapeLeft
-        default:
-            return nil
+    var videoOrientationOrNil: AVCaptureVideoOrientation? {
+        return switch self {
+        case .portrait, .portraitUpsideDown: .portrait
+        case .landscapeLeft: .landscapeRight
+        case .landscapeRight: .landscapeLeft
+        default: nil
         }
     }
 }

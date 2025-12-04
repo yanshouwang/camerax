@@ -49,13 +49,10 @@ class FocusMeteringActionDelegate: PigeonApiDelegateFocusMeteringActionProxyApi 
 
 extension FocusMeteringActionMeteringModeApi {
     var delegate: FocusMeteringAction.MeteringMode {
-        switch self {
-        case .af:
-            return .af
-        case .ae:
-            return .ae
-        case .awb:
-            return .awb
+        return switch self {
+        case .af: .af
+        case .ae: .ae
+        case .awb: .awb
         }
     }
 }

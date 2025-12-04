@@ -9,17 +9,12 @@ import Foundation
 
 extension CameraState {
     var api: CameraStateApi {
-        switch self {
-        case .pendingOpen:
-            return .pendingOpen
-        case .opening:
-            return .opening
-        case .open:
-            return .open
-        case .closing:
-            return .closing
-        case .closed:
-            return .closed
+        return switch self {
+        case .pendingOpen: .pendingOpen
+        case .opening: .opening
+        case .open: .open
+        case .closing: .closing
+        case .closed: .closed
         }
     }
 }

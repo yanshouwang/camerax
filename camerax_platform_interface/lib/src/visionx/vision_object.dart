@@ -16,8 +16,8 @@ enum VisionObjectType {
   upce,
   aztec,
   dataMatrix,
-  // microPDF417,
-  // microQR,
+  // microPdf417,
+  // microQr,
   pdf417,
   qr,
   // humanBody,
@@ -48,8 +48,8 @@ enum VisionObjectType {
   static List<VisionObjectType> get towDimensionalCodes => [
     VisionObjectType.aztec,
     VisionObjectType.dataMatrix,
-    // VisionObjectType.microPDF417,
-    // VisionObjectType.microQR,
+    // VisionObjectType.microPdf417,
+    // VisionObjectType.microQr,
     VisionObjectType.pdf417,
     VisionObjectType.qr,
   ];

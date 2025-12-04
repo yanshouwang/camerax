@@ -10,7 +10,7 @@ import AVFoundation
 
 class AVAnalyzerDelegate: PigeonApiDelegateAVAnalyzerProxyApi {
     func pigeonDefaultConstructor(pigeonApi: PigeonApiAVAnalyzerProxyApi, types: [AVMetadataObjectTypeApi]?, consumer: AVAnalyzerResultConsumer) throws -> AVAnalyzer {
-        return AVAnalyzer(types: types?.compactMap { $0.impl }, consumer: consumer)
+        return AVAnalyzer(types: types?.compactMap { $0.delegateOrNil }, consumer: consumer)
     }
     
     class ResultDelegate: PigeonApiDelegateAVAnalyzerResultProxyApi {

@@ -4,25 +4,23 @@ import android.util.Size
 import androidx.camera.core.resolutionselector.ResolutionFilter
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiResolutionFilterProxyApi
-import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.suspendCoroutine
 
 class ResolutionFilterImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiResolutionFilterProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): ResolutionFilter {
         return object : ResolutionFilter {
             override fun filter(supportedSizes: MutableList<Size>, rotationDegrees: Int): MutableList<Size> {
-                return runBlocking { filterAsync(supportedSizes, rotationDegrees) }
-            }
-
-            private suspend fun filterAsync(
-                supportedSizes: MutableList<Size>, rotationDegrees: Int
-            ): MutableList<Size> {
-                return suspendCoroutine { continuation ->
-                    filter(this, supportedSizes, rotationDegrees.toLong()) { result ->
-                        continuation.resumeWith(result.map { sizes -> sizes.toMutableList() })
+                // TODO: It is impossible to convert async api to sync api
+                val tcs = com.google.android.gms.tasks.TaskCompletionSource<List<Size>>()
+                this@ResolutionFilterImpl.filter(this, supportedSizes, rotationDegrees.toLong()) { res ->
+                    try {
+                        val sizes = res.getOrThrow()
+                        tcs.setResult(sizes)
+                    } catch (e: Exception) {
+                        tcs.setException(e)
                     }
                 }
+                return tcs.task.result.toMutableList()
             }
         }
     }

@@ -35,15 +35,11 @@ public class CameraOrientationUtil: NSObject {
     /// - Parameter rotation: One of the rotation constant values from {@link Surface}.
     /// - Returns: The equivalent rotation value in degrees.
     public static func surfaceRotationToDegrees(_ rotation: Surface.Rotation) -> Int {
-        switch rotation {
-        case .rotation0:
-            return 0
-        case .rotation90:
-            return 90
-        case .rotation180:
-            return 180
-        case .rotation270:
-            return 270
+        return switch rotation {
+        case .rotation0: 0
+        case .rotation90: 90
+        case .rotation180: 180
+        case .rotation270: 270
         }
     }
     
@@ -52,30 +48,21 @@ public class CameraOrientationUtil: NSObject {
     /// - Returns: One of the constant rotation values defined in {@link Surface}.
     /// - Throws: IllegalArgumentException If the provided rotation degrees doesn't fall into any one of those defined in {@link Surface}.
     public static func degreesToSurfaceRotation(_ degrees: Int) throws -> Surface.Rotation {
-        switch degrees {
-        case 0:
-            return .rotation0
-        case 90:
-            return .rotation90
-        case 180:
-            return .rotation180
-        case 270:
-            return .rotation270
-        default:
-            throw CameraXError(code: "illegal-argument-error", message: "Invalid sensor rotation: \(degrees)", details: nil)
+        return switch degrees {
+        case 0: .rotation0
+        case 90: .rotation90
+        case 180: .rotation180
+        case 270: .rotation270
+        default: throw CameraXError(code: "illegal-argument-error", message: "Invalid sensor rotation: \(degrees)", details: nil)
         }
     }
     
     public static func getVideoOrientation(_ rotation: Surface.Rotation) -> AVCaptureVideoOrientation {
-        switch rotation {
-        case .rotation0:
-            return .portrait
-        case .rotation90:
-            return .landscapeRight
-        case .rotation180:
-            return .portraitUpsideDown
-        case .rotation270:
-            return .landscapeLeft
+        return switch rotation {
+        case .rotation0: .portrait
+        case .rotation90: .landscapeRight
+        case .rotation180: .portraitUpsideDown
+        case .rotation270: .landscapeLeft
         }
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    var urlDelegate: URL? {
+    var urlDelegateOrNil: URL? {
         return URL(string: self)
     }
 }

@@ -48,28 +48,21 @@ class ImageCaptureOnImageCapturedCallback: NSObject, ImageCapture.OnImageCapture
 
 extension ImageCapture.FlashMode {
     var api: ImageCaptureFlashModeApi {
-        switch self {
-        case .auto:
-            return .auto
-        case .on:
-            return .on
-        case .off:
-            return .off
+        return switch self {
+        case .auto: .auto
+        case .on: .on
+        case .off: .off
         }
     }
 }
 
 extension ImageCaptureFlashModeApi {
-    var delegate: ImageCapture.FlashMode {
-        switch self {
-        case .auto:
-            return .auto
-        case .on:
-            return .on
-        case .off:
-            return .off
-        case .screen:
-            fatalError()
+    var delegateOrNil: ImageCapture.FlashMode? {
+        return switch self {
+        case .auto: .auto
+        case .on: .on
+        case .off: .off
+        case .screen: nil
         }
     }
 }

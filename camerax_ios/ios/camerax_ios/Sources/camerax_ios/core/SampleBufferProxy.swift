@@ -21,8 +21,10 @@ class SampleBufferProxy: ImageProxy {
     
     override func getFormat() throws -> ImageFormat {
         let pixelBuffer = try self.sampleBuffer.getPixelBuffer()
-        let type = CVPixelBufferGetPixelFormatType(pixelBuffer)
-        return type.imageFormat
+        guard let format = CVPixelBufferGetPixelFormatType(pixelBuffer).imageFormatOrNil else {
+            throw CameraXError(code: "nil-error", message: "format is nil", details: nil)
+        }
+        return format
     }
     
     override func getWidth() throws -> Int {

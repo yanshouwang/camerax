@@ -1,3 +1,9 @@
+## 1.1.1
+
+* Android: Fix the ANR crash caused by PermissionManager.requestPermissions.
+* iOS: Fix PreviewView is stretched when using front camera on iPhone 17 Pro.
+* iOS: Fix incorrect PlatformViewLink with UiKitView.
+
 ## 1.1.0
 
 * fvm use 3.35.7

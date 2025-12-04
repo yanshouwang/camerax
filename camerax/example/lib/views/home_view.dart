@@ -373,7 +373,6 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       //       exposureTime == null ? 50 * 1000 * 1000 : null;
                       //   await viewModel.setExposureTime(newValue);
                       //   _exposureTime = newValue;
-                      //   debugPrint('exposureTime: $newValue');
                       // },
                       child: Container(
                         margin: const EdgeInsets.all(2.0),

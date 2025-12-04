@@ -54,7 +54,7 @@ class FocusMeteringControl: NSObject {
         defer { device.unlockForConfiguration() }
         // AF
         if let meteringPoint = action.meteringPointsAf.first {
-            guard device.isFocusPointOfInterestSupported, let focusMode = device.highestAvailableAutoFocusMode else {
+            guard device.isFocusPointOfInterestSupported, let focusMode = device.highestAvailableAutoFocusModeOrNil else {
                 throw CameraXError(code: "unsupported-error", message: "AF is not supported", details: nil)
             }
             device.focusPointOfInterest = meteringPoint.cgPoint
@@ -62,7 +62,7 @@ class FocusMeteringControl: NSObject {
         }
         // AE
         if let meteringPoint = action.meteringPointsAe.first {
-            guard device.isExposurePointOfInterestSupported, let exposureMode = device.highestAvailableAutoExposureMode else {
+            guard device.isExposurePointOfInterestSupported, let exposureMode = device.highestAvailableAutoExposureModeOrNil else {
                 throw CameraXError(code: "unsupported-error", message: "AE is not supported", details: nil)
             }
             device.exposurePointOfInterest = meteringPoint.cgPoint
@@ -70,7 +70,7 @@ class FocusMeteringControl: NSObject {
         }
         // AWB
         if let _ = action.meteringPointsAwb.first {
-            guard let whiteBalanceMode = device.highestAvailableAutoWhiteBalanceMode else {
+            guard let whiteBalanceMode = device.highestAvailableAutoWhiteBalanceModeOrNil else {
                 throw CameraXError(code: "unsupported-error", message: "AWB is not supported", details: nil)
             }
             device.whiteBalanceMode = whiteBalanceMode
@@ -88,19 +88,19 @@ class FocusMeteringControl: NSObject {
 }
 
 fileprivate extension AVCaptureDevice {
-    var highestAvailableAutoFocusMode: AVCaptureDevice.FocusMode? {
+    var highestAvailableAutoFocusModeOrNil: AVCaptureDevice.FocusMode? {
         return if self.isFocusModeSupported(.continuousAutoFocus) { .continuousAutoFocus }
         else if self.isFocusModeSupported(.autoFocus) { .autoFocus }
         else { nil }
     }
     
-    var highestAvailableAutoExposureMode: AVCaptureDevice.ExposureMode? {
+    var highestAvailableAutoExposureModeOrNil: AVCaptureDevice.ExposureMode? {
         return if self.isExposureModeSupported(.continuousAutoExposure) { .continuousAutoExposure }
         else if self.isExposureModeSupported(.autoExpose) { .autoExpose }
         else { nil }
     }
     
-    var highestAvailableAutoWhiteBalanceMode: AVCaptureDevice.WhiteBalanceMode? {
+    var highestAvailableAutoWhiteBalanceModeOrNil: AVCaptureDevice.WhiteBalanceMode? {
         return if self.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) { .continuousAutoWhiteBalance }
         else if self.isWhiteBalanceModeSupported(.autoWhiteBalance) { .autoWhiteBalance }
         else { nil }

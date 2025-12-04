@@ -27,44 +27,47 @@ class InteractiveView extends StatelessWidget {
                 child: Icon(CupertinoIcons.eye),
               ),
             ),
-      child: file.isVideo
-          ? Center(
-              child: InteractiveVideo.file(key: ValueKey(uri), file: file),
-            )
-          : InteractiveViewer(
-              child: Center(
-                child: Stack(
-                  children: [
-                    Image.file(file),
-                    FutureBuilder(
-                      future: Future(() async {
-                        final path = uri.toFilePath();
-                        final buffer = await ui.ImmutableBuffer.fromFilePath(
-                          path,
-                        );
-                        final descriptor = await ui.ImageDescriptor.encoded(
-                          buffer,
-                        );
-                        final width = descriptor.width / ratio;
-                        final height = descriptor.height / ratio;
-                        return Size(width, height);
-                      }),
-                      builder: (context, snapshot) {
-                        final size = snapshot.data;
-                        if (size == null) return Offstage();
-                        return FittedBox(
-                          fit: BoxFit.contain,
-                          child: CustomPaint(
-                            painter: VisionObjectsPainter(visionObjects),
-                            size: ui.Size(size.width, size.height),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+      child: SafeArea(
+        child: file.isVideo
+            ? Center(
+                child: InteractiveVideo.file(key: ValueKey(uri), file: file),
+              )
+            : InteractiveViewer(
+                child: Center(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.file(file),
+                      FutureBuilder(
+                        future: Future(() async {
+                          final path = uri.toFilePath();
+                          final buffer = await ui.ImmutableBuffer.fromFilePath(
+                            path,
+                          );
+                          final descriptor = await ui.ImageDescriptor.encoded(
+                            buffer,
+                          );
+                          final width = descriptor.width / ratio;
+                          final height = descriptor.height / ratio;
+                          return Size(width, height);
+                        }),
+                        builder: (context, snapshot) {
+                          final size = snapshot.data;
+                          if (size == null) return Offstage();
+                          return FittedBox(
+                            fit: BoxFit.contain,
+                            child: CustomPaint(
+                              painter: VisionObjectsPainter(visionObjects),
+                              size: ui.Size(size.width, size.height),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }
@@ -163,12 +166,13 @@ class VisionObjectsPainter extends CustomPainter {
   void paint(ui.Canvas canvas, ui.Size size) {
     final paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 12.0
+      ..strokeWidth = 4.0
       ..color = CupertinoColors.systemOrange;
-    canvas.drawRect(Offset.zero & size, paint);
     for (var visionObject in visionObjects) {
       final corners = visionObject.$uiCorners(size.width, size.height);
-      canvas.drawPoints(ui.PointMode.points, corners, paint);
+      // canvas.drawPoints(ui.PointMode.polygon, corners, paint);
+      final path = Path()..addPolygon(corners, true);
+      canvas.drawPath(path, paint);
     }
   }
 

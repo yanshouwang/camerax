@@ -32,19 +32,13 @@ class AudioStatsDelegate: PigeonApiDelegateAudioStatsProxyApi {
 
 extension AudioStats.AudioState {
     var api: AudioStatsAudioStateApi {
-        switch self {
-        case .active:
-            return .active
-        case .disabled:
-            return .disabled
-        case .sourceSilenced:
-            return .sourceSilenced
-        case .encoderError:
-            return .encoderError
-        case .sourceError:
-            return .sourceError
-        case .muted:
-            return .muted
+        return switch self {
+        case .active: .active
+        case .disabled: .disabled
+        case .sourceSilenced: .sourceSilenced
+        case .encoderError: .encoderError
+        case .sourceError: .sourceError
+        case .muted: .muted
         }
     }
 }

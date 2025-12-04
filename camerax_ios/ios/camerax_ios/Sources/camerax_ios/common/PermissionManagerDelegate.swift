@@ -23,11 +23,9 @@ class PermissionManagerDelegate: PigeonApiDelegatePermissionManagerProxyApi {
 
 extension PermissionManagerPermissionApi {
     var delegate: PermissionManager.Permission {
-        switch self {
-        case .video:
-            return .video
-        case .audio:
-            return .audio
+        return switch self {
+        case .video: .video
+        case .audio: .audio
         }
     }
 }

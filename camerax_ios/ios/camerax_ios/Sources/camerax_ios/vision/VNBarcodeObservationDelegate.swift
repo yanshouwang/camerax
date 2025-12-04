@@ -13,15 +13,15 @@ class VNBarcodeObservationDelegate: PigeonApiDelegateVNBarcodeObservationProxyAp
     }
     
     func getSymbology(pigeonApi: PigeonApiVNBarcodeObservationProxyApi, pigeonInstance: VNBarcodeObservation) throws -> VNBarcodeSymbologyApi {
-        guard let api = pigeonInstance.symbology.api else {
+        guard let symbology = pigeonInstance.symbology.apiOrNil else {
             throw CameraXError(code: "nil-error", message: "symbology is nil", details: nil)
         }
-        return api
+        return symbology
     }
 }
 
 extension VNBarcodeSymbology {
-    var api: VNBarcodeSymbologyApi? {
+    var apiOrNil: VNBarcodeSymbologyApi? {
         if #available(iOS 17.0, *) {
             switch self {
             case .msiPlessey: return .msiPlessey
@@ -63,7 +63,7 @@ extension VNBarcodeSymbology {
 }
 
 extension VNBarcodeSymbologyApi {
-    var delegate: VNBarcodeSymbology? {
+    var delegateOrNil: VNBarcodeSymbology? {
         return switch self {
         case .aztec: .aztec
         case .codabar: if #available(iOS 15.0, *) { .codabar } else { nil }

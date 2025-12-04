@@ -26,28 +26,21 @@ public class ImageCapture: NSObject {
 
 extension ImageCapture.FlashMode {
     var avFlashMode: AVCaptureDevice.FlashMode {
-        switch self {
-        case .auto:
-            return .auto
-        case .on:
-            return .on
-        case .off:
-            return .off
+        return switch self {
+        case .auto: .auto
+        case .on: .on
+        case .off: .off
         }
     }
 }
 
 extension AVCaptureDevice.FlashMode {
-    var cxFlashMode: ImageCapture.FlashMode {
-        switch self {
-        case .auto:
-            return .auto
-        case .on:
-            return .on
-        case .off:
-            return .off
-        @unknown default:
-            fatalError()
+    var cxFlashModeOrNil: ImageCapture.FlashMode? {
+        return switch self {
+        case .auto: .auto
+        case .on: .on
+        case .off: .off
+        @unknown default: nil
         }
     }
 }

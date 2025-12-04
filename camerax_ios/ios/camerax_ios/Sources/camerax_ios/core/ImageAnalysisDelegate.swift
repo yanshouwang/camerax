@@ -23,26 +23,20 @@ class ImageAnalysisDelegate {
 
 extension ImageAnalysisOutputImageFormatApi {
     var delegate: ImageAnalysis.OutputImageFormat {
-        switch self {
-        case .yuv420888:
-            return .yuv420_888
-        case .rgba8888:
-            return .rgba8888
-        case .nv21:
-            return .nv21
+        return switch self {
+        case .yuv420888: .yuv420_888
+        case .rgba8888: .rgba8888
+        case .nv21: .nv21
         }
     }
 }
 
 extension ImageAnalysis.OutputImageFormat {
     var api: ImageAnalysisOutputImageFormatApi {
-        switch self {
-        case .yuv420_888:
-            return .yuv420888
-        case .rgba8888:
-            return .rgba8888
-        case .nv21:
-            return .nv21
+        return switch self {
+        case .yuv420_888: .yuv420888
+        case .rgba8888: .rgba8888
+        case .nv21: .nv21
         }
     }
 }
