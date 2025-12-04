@@ -15,15 +15,11 @@ public class Surface: NSObject {
 
 extension Surface.Rotation {
     var api: SurfaceRotationApi {
-        switch self {
-        case .rotation0:
-            return .rotation0
-        case .rotation90:
-            return .rotation90
-        case .rotation180:
-            return .rotation180
-        case .rotation270:
-            return .rotation270
+        return switch self {
+        case .rotation0: .rotation0
+        case .rotation90: .rotation90
+        case .rotation180: .rotation180
+        case .rotation270: .rotation270
         }
     }
 }

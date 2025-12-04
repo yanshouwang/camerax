@@ -6,13 +6,15 @@ import 'package:camerax/camerax.dart';
 import 'package:camerax_example/models.dart';
 import 'package:clover/clover.dart';
 import 'package:exif/exif.dart';
-import 'package:hybrid_logging/hybrid_logging.dart';
+import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
+Logger get _logger => Logger('HomeViewModel');
+
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
-class HomeViewModel extends ViewModel with TypeLogger {
+class HomeViewModel extends ViewModel {
   final PermissionManager _permissionManager;
   final CameraController _controller;
   final RotationProvider _rotationProvider;
@@ -20,11 +22,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
   RotationProviderListener? _rotationProviderListener;
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
-
-  // CameraInfo? _cameraInfo;
-  CameraControl? _cameraControl;
-  // Camera2CameraInfo? _camera2CameraInfo;
-  Camera2CameraControl? _camera2CameraControl;
 
   HomeViewModel()
     : _permissionManager = PermissionManager(),
@@ -79,22 +76,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
     notifyListeners();
   }
 
-  ExposureState? _exposureState;
-  ExposureState? get exposureState => _exposureState;
-  set exposureState(ExposureState? value) {
-    if (_exposureState == value) return;
-    _exposureState = value;
-    notifyListeners();
-  }
-
-  LimitedValue<int>? _exposureTimeState;
-  LimitedValue<int>? get exposureTimeState => _exposureTimeState;
-  set exposureTimeState(LimitedValue<int>? value) {
-    if (_exposureTimeState == value) return;
-    _exposureTimeState = value;
-    notifyListeners();
-  }
-
   Uri? _savedUri;
   Uri? get savedUri => _savedUri;
   set savedUri(Uri? value) {
@@ -139,45 +120,10 @@ class HomeViewModel extends ViewModel with TypeLogger {
 
   Future<void> bind() async {
     await controller.bind();
-    // TODO: How to wait until camera really opened.
-    const duration = Duration(seconds: 1);
-    await Future.delayed(duration);
-    final cameraInfo = await controller.getCameraInfo();
-    final cameraControl = await controller.getCameraControl();
-    if (cameraInfo == null || cameraControl == null) {
-      return;
-    }
-    // final camera2Info = Camera2CameraInfo.from(cameraInfo);
-    // final camera2Control = Camera2CameraControl.from(cameraControl);
-    // final exposureState = await cameraInfo.getExposureState();
-    // final exposureTimeRange = await camera2Info
-    //     .getSensorInfoExposureTimeRange();
-    // logger.info(
-    //   'exposureTimeRange: ${exposureTimeRange?.lower}, ${exposureTimeRange?.upper}',
-    // );
-    // final exposureTimeState = exposureTimeRange == null
-    //     ? null
-    //     : LimitedValue(
-    //         minimum: exposureTimeRange.lower,
-    //         maximum: exposureTimeRange.upper,
-    //         value: exposureTimeRange.lower,
-    //       );
-    // _cameraInfo = cameraInfo;
-    _cameraControl = cameraControl;
-    // _camera2CameraInfo = camera2Info;
-    // _camera2CameraControl = camera2Control;
-    // this.exposureState = exposureState;
-    // this.exposureTimeState = exposureTimeState;
   }
 
   Future<void> unbind() async {
     await controller.unbind();
-    // _cameraInfo = null;
-    _cameraControl = null;
-    // _camera2CameraInfo = null;
-    _camera2CameraControl = null;
-    exposureState = null;
-    exposureTimeState = null;
   }
 
   Future<void> setMode(CameraMode mode) async {
@@ -256,23 +202,6 @@ class HomeViewModel extends ViewModel with TypeLogger {
     await controller.setZoomRatio(zoomRatio);
   }
 
-  Future<void> setExposureCompensationIndex(int value) async {
-    final control = ArgumentError.checkNotNull(_cameraControl);
-    final exposureIndex = await control.setExposureCompensationIndex(value);
-    logger.info('New exposure compensation index: $exposureIndex');
-  }
-
-  Future<void> setExposureTime(int? value) async {
-    final control = ArgumentError.checkNotNull(_camera2CameraControl);
-    final bundle = value == null
-        ? CaptureRequestOptions(aeMode: CameraMetadataControlAeMode.on)
-        : CaptureRequestOptions(
-            aeMode: CameraMetadataControlAeMode.off,
-            sensorExposureTime: value,
-          );
-    await control.setCaptureRequestOptions(bundle);
-  }
-
   Future<void> setFlashMode(ImageCaptureFlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
     flashMode = await controller.getImageCaptureFlashMode();
@@ -281,16 +210,16 @@ class HomeViewModel extends ViewModel with TypeLogger {
   Future<void> takePicture() async {
     final callback = ImageCaptureOnImageCapturedCallback(
       onCaptureStarted: () {
-        logger.info('onCaptureStarted');
+        _logger.info('onCaptureStarted');
       },
       onCaptureProcessProgressed: (progress) {
-        logger.info('onCaptureProcessProgressed: $progress');
+        _logger.info('onCaptureProcessProgressed: $progress');
       },
       onPostviewBitmapAvailable: (bitmap) {
-        logger.info('onPostviewBitmapAvailable');
+        _logger.info('onPostviewBitmapAvailable');
       },
       onCaptureSuccess: (image) async {
-        logger.info(
+        _logger.info(
           'onCaptureSuccess: ${image.format}, ${image.width}, ${image.height}, ${image.imageInfo.rotationDegrees}',
         );
         try {
@@ -302,17 +231,17 @@ class HomeViewModel extends ViewModel with TypeLogger {
           final file = File(filePath);
           final value = image.planes[0].value;
           final exif = await readExifFromBytes(value);
-          logger.info(exif);
+          _logger.info(exif);
           await file.writeAsBytes(value, flush: true);
           savedUri = file.uri;
         } catch (e) {
-          logger.warning('save image failed', e);
+          _logger.warning('save image failed', e);
         } finally {
           await image.close();
         }
       },
       onError: (exception) {
-        logger.warning('onError', exception);
+        _logger.warning('onError', exception);
       },
     );
     await controller.takePicture(callback);
@@ -328,12 +257,12 @@ class HomeViewModel extends ViewModel with TypeLogger {
     final outputOptions = FileOutputOptions(file);
     final listener = Consumer<VideoRecordEvent>(
       accept: (event) {
-        logger.info('${event.runtimeType}');
+        _logger.info('${event.runtimeType}');
         if (event is! VideoRecordFinalizeEvent) {
           return;
         }
         if (event.hasError) {
-          logger.warning('startRecording failed, ${event.error}');
+          _logger.warning('startRecording failed, ${event.error}');
         } else {
           savedUri = event.outputResults.outputUri;
         }
@@ -368,11 +297,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     if (!isGranted) {
       throw StateError('requestPermissions failed.');
     }
-    // await controller.initialize();
-    // await controller.setCameraSelector(CameraSelector.front);
     final resolutionSelector = ResolutionSelector(
-      // TODO: Use resolutionFilter will cause ANR error.
-      // resolutionFilter: (supportedSizes, rotationDegrees) => supportedSizes,
       resolutionStrategy: ResolutionStrategy(
         boundSize: Size(1024, 768),
         fallbackRule: ResolutionStrategyFallbackRule.closestHigherThenLower,
@@ -395,7 +320,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
     _zoomStateObserver = zoomStateObserver;
     final rotationProviderListener = RotationProviderListener(
       onRotationChanged: (rotation) {
-        logger.info(
+        _logger.info(
           'RotationProviderListener.onRotationChanged: ${rotation.name}',
         );
       },
@@ -428,7 +353,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
             final plane = image.planes.first;
             // final width = plane.rowStride ~/ plane.pixelStride;
             final rotationDegrees = image.imageInfo.rotationDegrees;
-            logger.info(
+            _logger.info(
               '${image.hashCode}: $width * $height, $rotationDegrees°',
             );
             if (format != ImageFormat.rgba8888) {
@@ -450,7 +375,7 @@ class HomeViewModel extends ViewModel with TypeLogger {
             _handleImageModel(imageModel);
           } finally {
             await image.close();
-            logger.info('${image.hashCode} closed');
+            _logger.info('${image.hashCode} closed');
           }
         },
       ),

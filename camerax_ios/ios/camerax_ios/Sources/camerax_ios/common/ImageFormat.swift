@@ -59,15 +59,11 @@ public enum ImageFormat: Int {
 }
 
 extension OSType {
-    var imageFormat: ImageFormat {
-        let value = Int(self)
-        switch value {
-        case Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange):
-            return .yuv420_888
-        case Int(kCVPixelFormatType_32BGRA):
-            return .rgba8888
-        default:
-            fatalError()
+    var imageFormatOrNil: ImageFormat? {
+        return switch Int(self) {
+        case Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange): .yuv420_888
+        case Int(kCVPixelFormatType_32BGRA): .rgba8888
+        default: nil
         }
     }
 }

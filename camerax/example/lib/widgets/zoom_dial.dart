@@ -17,7 +17,7 @@ class ZoomDial extends StatelessWidget {
     required this.value,
   }) : assert(
          minimum > 0.0 &&
-             minimum < maximum &&
+             minimum <= maximum &&
              value >= minimum &&
              value <= maximum,
        );

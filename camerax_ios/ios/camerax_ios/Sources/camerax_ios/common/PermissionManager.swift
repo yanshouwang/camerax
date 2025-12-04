@@ -22,11 +22,9 @@ public class PermissionManager: NSObject {
     }
     
     public func checkPermission(_ permission: Permission) -> Bool {
-        switch permission {
-        case .video:
-            return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
-        case .audio:
-            return AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
+        return switch permission {
+        case .video: AVCaptureDevice.authorizationStatus(for: .video) == .authorized
+        case .audio: AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
         }
     }
     

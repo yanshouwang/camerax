@@ -1,3 +1,8 @@
+## 1.1.1
+
+* Fix PreviewView is stretched when using front camera on iPhone 17 Pro.
+* Fix incorrect PlatformViewLink with UiKitView.
+
 ## 1.1.0
 
 * fvm use 3.35.7

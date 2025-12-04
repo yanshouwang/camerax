@@ -21,48 +21,36 @@ class PreviewViewDelegate: PigeonApiDelegatePreviewViewProxyApi {
     }
     
     func getScaleType(pigeonApi: PigeonApiPreviewViewProxyApi, pigeonInstance: PreviewView) throws -> PreviewViewScaleTypeApi {
-        return pigeonInstance.getScaleType().api
+        return try pigeonInstance.getScaleType().api
     }
     
     func setScaleType(pigeonApi: PigeonApiPreviewViewProxyApi, pigeonInstance: PreviewView, scaleType: PreviewViewScaleTypeApi) throws {
-        pigeonInstance.setScaleType(scaleType.delegate)
+        try pigeonInstance.setScaleType(scaleType.delegate)
     }
 }
 
 extension PreviewView.ScaleType {
     var api: PreviewViewScaleTypeApi {
-        switch self {
-        case .fillCenter:
-            return .fillCenter
-        case .fillEnd:
-            return .fillEnd
-        case .fillStart:
-            return .fillStart
-        case .fitCenter:
-            return .fitCenter
-        case .fitEnd:
-            return .fitEnd
-        case .fitStart:
-            return .fitStart
+        return switch self {
+        case .fillCenter: .fillCenter
+        case .fillEnd: .fillEnd
+        case .fillStart: .fillStart
+        case .fitCenter: .fitCenter
+        case .fitEnd: .fitEnd
+        case .fitStart: .fitStart
         }
     }
 }
 
 extension PreviewViewScaleTypeApi {
     var delegate: PreviewView.ScaleType {
-        switch self {
-        case .fillCenter:
-            return .fillCenter
-        case .fillEnd:
-            return .fillEnd
-        case .fillStart:
-            return .fillStart
-        case .fitCenter:
-            return .fitCenter
-        case .fitEnd:
-            return .fitEnd
-        case .fitStart:
-            return .fitStart
+        return switch self {
+        case .fillCenter: .fillCenter
+        case .fillEnd: .fillEnd
+        case .fillStart: .fillStart
+        case .fitCenter: .fitCenter
+        case .fitEnd: .fitEnd
+        case .fitStart: .fitStart
         }
     }
 }

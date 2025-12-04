@@ -9,11 +9,9 @@ import Foundation
 
 extension TorchState {
     var api: TorchStateApi {
-        switch self {
-        case .off:
-            return .off
-        case .on:
-            return .on
+        return switch self {
+        case .off: .off
+        case .on: .on
         }
     }
 }

@@ -1,11 +1,10 @@
 package dev.zeekr.camerax_android.ml.barcode
 
+import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsProxyApi
 import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsZoomCallbackProxyApi
-import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.suspendCoroutine
 
 class ZoomSuggestionOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiZoomSuggestionOptionsProxyApi(registrar) {
@@ -24,15 +23,17 @@ class ZoomSuggestionOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         override fun pigeon_defaultConstructor(): ZoomSuggestionOptions.ZoomCallback {
             return object : ZoomSuggestionOptions.ZoomCallback {
                 override fun setZoom(zoomRatio: Float): Boolean {
-                    return runBlocking { setZoomAsync(zoomRatio) }
-                }
-
-                private suspend fun setZoomAsync(zoomRatio: Float): Boolean {
-                    return suspendCoroutine { continuation ->
-                        setZoom(this, zoomRatio.toDouble()) { result ->
-                            continuation.resumeWith(result)
+                    // TODO: It is impossible to convert async api to sync api
+                    val tcs = TaskCompletionSource<Boolean>()
+                    this@ZoomCallbackImpl.setZoom(this, zoomRatio.toDouble()) { res ->
+                        try {
+                            val ok = res.getOrThrow()
+                            tcs.setResult(ok)
+                        } catch (e: Exception) {
+                            tcs.setException(e)
                         }
                     }
+                    return tcs.task.result
                 }
             }
         }

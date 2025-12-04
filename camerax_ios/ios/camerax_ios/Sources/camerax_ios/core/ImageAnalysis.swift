@@ -33,27 +33,21 @@ public class ImageAnalysis: NSObject {
 }
 
 extension ImageAnalysis.OutputImageFormat {
-    var cvPixelFormat: Int {
-        switch self {
-        case .yuv420_888:
-            return Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-        case .rgba8888:
-            return Int(kCVPixelFormatType_32BGRA)
-        default:
-            fatalError()
+    var cvPixelFormatOrNil: Int? {
+        return switch self {
+        case .yuv420_888: Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+        case .rgba8888: Int(kCVPixelFormatType_32BGRA)
+        default: nil
         }
     }
 }
 
 extension Int {
-    var imageAnalysisOutputImageFormat: ImageAnalysis.OutputImageFormat {
-        switch self {
-        case Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange):
-            return .yuv420_888
-        case Int(kCVPixelFormatType_32BGRA):
-            return .rgba8888
-        default:
-            fatalError()
+    var imageAnalysisOutputImageFormatOrNil: ImageAnalysis.OutputImageFormat? {
+        return switch self {
+        case Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange): .yuv420_888
+        case Int(kCVPixelFormatType_32BGRA): .rgba8888
+        default: nil
         }
     }
 }

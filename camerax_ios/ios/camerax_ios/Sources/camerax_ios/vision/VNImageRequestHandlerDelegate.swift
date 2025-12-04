@@ -9,7 +9,7 @@ import Vision
 
 class VNImageRequestHandlerDelegate: PigeonApiDelegateVNImageRequestHandlerProxyApi {
     func url(pigeonApi: PigeonApiVNImageRequestHandlerProxyApi, url: String) throws -> VNImageRequestHandler {
-        guard let imageUrl = url.urlDelegate else {
+        guard let imageUrl = url.urlDelegateOrNil else {
             throw CameraXError(code: "nil-error", message: "url is nil", details: nil)
         }
         return VNImageRequestHandler(url: imageUrl)

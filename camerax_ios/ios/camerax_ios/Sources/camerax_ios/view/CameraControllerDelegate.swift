@@ -117,11 +117,14 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerProxyApi {
     }
     
     func getImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController) throws -> ImageCaptureFlashModeApi {
-        return pigeonInstance.getImageCaptureFlashMode().api
+        return try pigeonInstance.getImageCaptureFlashMode().api
     }
     
     func setImageCaptureFlashMode(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, flashMode: ImageCaptureFlashModeApi) throws {
-        pigeonInstance.setImageCaptureFlashMode(flashMode.delegate)
+        guard let mode = flashMode.delegateOrNil else {
+            throw CameraXError(code: "nil-error", message: "mode is nil", details: nil)
+        }
+        pigeonInstance.setImageCaptureFlashMode(mode)
     }
     
     func takePicture1(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, imageCapturedCallback: any ImageCapture.OnImageCapturedCallback) throws {
@@ -153,7 +156,7 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerProxyApi {
     }
     
     func getImageAnalysisOutputImageFormat(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController) throws -> ImageAnalysisOutputImageFormatApi {
-        return pigeonInstance.getImageAnalysisOutputImageFormat().api
+        return try pigeonInstance.getImageAnalysisOutputImageFormat().api
     }
     
     func setImageAnalysisOutputImageFormat(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, imageAnalysisOutputImageFormat: ImageAnalysisOutputImageFormatApi) throws {

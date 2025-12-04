@@ -27,34 +27,24 @@ class ResolutionStrategyDelegate: PigeonApiDelegateResolutionStrategyProxyApi {
 
 extension ResolutionStrategy.FallbackRule {
     var api: ResolutionStrategyFallbackRuleApi {
-        switch self {
-        case .none:
-            return .none
-        case .closestHigherThenLower:
-            return .closestHigherThenLower
-        case .closestHigher:
-            return .closestHigher
-        case .closestLowerThenHigher:
-            return .closestLowerThenHigher
-        case .closestLower:
-            return .closestLower
+        return switch self {
+        case .none: .none
+        case .closestHigherThenLower: .closestHigherThenLower
+        case .closestHigher: .closestHigher
+        case .closestLowerThenHigher: .closestLowerThenHigher
+        case .closestLower: .closestLower
         }
     }
 }
 
 extension ResolutionStrategyFallbackRuleApi {
     var delegate: ResolutionStrategy.FallbackRule {
-        switch self {
-        case .none:
-            return .none
-        case .closestHigherThenLower:
-            return .closestHigherThenLower
-        case .closestHigher:
-            return .closestHigher
-        case .closestLowerThenHigher:
-            return .closestLowerThenHigher
-        case .closestLower:
-            return .closestLower
+        return switch self {
+        case .none: .none
+        case .closestHigherThenLower: .closestHigherThenLower
+        case .closestHigher: .closestHigher
+        case .closestLowerThenHigher: .closestLowerThenHigher
+        case .closestLower: .closestLower
         }
     }
 }

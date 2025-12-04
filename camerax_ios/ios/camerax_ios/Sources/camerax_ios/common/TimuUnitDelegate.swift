@@ -9,21 +9,14 @@ import Foundation
 
 extension TimeUnitApi {
     var delegate: TimeUnit {
-        switch self {
-        case .days:
-            return .days
-        case .hours:
-            return .hours
-        case .minutes:
-            return .minutes
-        case .seconds:
-            return .seconds
-        case .milliseconds:
-            return .milliseconds
-        case .microseconds:
-            return .microseconds
-        case .nanoseconds:
-            return .nanoseconds
+        return switch self {
+        case .days: .days
+        case .hours: .hours
+        case .minutes: .minutes
+        case .seconds: .seconds
+        case .milliseconds: .milliseconds
+        case .microseconds: .microseconds
+        case .nanoseconds: .nanoseconds
         }
     }
 }

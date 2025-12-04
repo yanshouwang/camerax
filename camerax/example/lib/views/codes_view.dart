@@ -37,7 +37,6 @@ class _CodesPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, ui.Size size) {
-    debugPrint('DRAW ON $size');
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeJoin = StrokeJoin.bevel

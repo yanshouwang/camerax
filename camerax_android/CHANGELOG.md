@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Fix the ANR crash caused by PermissionManager.requestPermissions.
+
 ## 1.1.0
 
 * fvm use 3.35.7

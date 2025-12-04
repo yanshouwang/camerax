@@ -88,15 +88,11 @@ fileprivate extension AVCapturePhoto {
 
 fileprivate extension CGImagePropertyOrientation {
     var degrees: Int {
-        switch self {
-        case .up, .upMirrored:
-            return 0
-        case .down, .downMirrored:
-            return 180
-        case .leftMirrored, .right:
-            return 90
-        case .rightMirrored, .left:
-            return 270
+        return switch self {
+        case .up, .upMirrored: 0
+        case .down, .downMirrored: 180
+        case .leftMirrored, .right: 90
+        case .rightMirrored, .left: 270
         }
     }
 }

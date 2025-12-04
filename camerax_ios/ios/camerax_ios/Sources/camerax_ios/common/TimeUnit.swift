@@ -37,39 +37,39 @@ public class TimeUnit: NSObject, TimeUnitProtocol {
     }
     
     public func convert(_ sourceDuration: Int64, _ sourceUnit: any TimeUnit & TimeUnitProtocol) -> Int64 {
-        fatalError()
+        fatalError("convert is not implemented")
     }
     
     public func toNanos(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toNanos is not implemented")
     }
     
     public func toMicros(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toMicros is not implemented")
     }
     
     public func toMillis(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toMillis is not implemented")
     }
     
     public func toSeconds(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toSeconds is not implemented")
     }
     
     public func toMinutes(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toMinutes is not implemented")
     }
     
     public func toHours(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toHours is not implemented")
     }
     
     public func toDays(_ duration: Int64) -> Int64 {
-        fatalError()
+        fatalError("toDays is not implemented")
     }
     
     public func excessNanos(_ d: Int64, _ m: Int64) -> Int64 {
-        fatalError()
+        fatalError("excessNanos is not implemented")
     }
     
     public class Nanoseconds: TimeUnit {

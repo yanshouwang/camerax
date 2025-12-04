@@ -19,18 +19,18 @@ class VNDetectBarcodesRequestDelegate: PigeonApiDelegateVNDetectBarcodesRequestP
     
     func getSupportedSymbologies(pigeonApi: PigeonApiVNDetectBarcodesRequestProxyApi, pigeonInstance: VNDetectBarcodesRequest) throws -> [VNBarcodeSymbologyApi] {
         return if #available(iOS 15.0, *) {
-            try pigeonInstance.supportedSymbologies().compactMap() { $0.api }
+            try pigeonInstance.supportedSymbologies().compactMap() { $0.apiOrNil }
         } else {
-            VNDetectBarcodesRequest.supportedSymbologies.compactMap() { $0.api }
+            VNDetectBarcodesRequest.supportedSymbologies.compactMap() { $0.apiOrNil }
         }
     }
     
     func getSymbologies(pigeonApi: PigeonApiVNDetectBarcodesRequestProxyApi, pigeonInstance: VNDetectBarcodesRequest) throws -> [VNBarcodeSymbologyApi] {
-        return pigeonInstance.symbologies.compactMap() { $0.api }
+        return pigeonInstance.symbologies.compactMap() { $0.apiOrNil }
     }
     
     func setSymbologies(pigeonApi: PigeonApiVNDetectBarcodesRequestProxyApi, pigeonInstance: VNDetectBarcodesRequest, value: [VNBarcodeSymbologyApi]) throws {
-        pigeonInstance.symbologies = value.compactMap() { $0.delegate }
+        pigeonInstance.symbologies = value.compactMap() { $0.delegateOrNil }
     }
     
     func getResults(pigeonApi: PigeonApiVNDetectBarcodesRequestProxyApi, pigeonInstance: VNDetectBarcodesRequest) throws -> [VNBarcodeObservation]? {
