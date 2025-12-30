@@ -10,7 +10,7 @@ final class TapToFocusInfoImpl extends TapToFocusInfo {
   TapToFocusInfoImpl.internal(this.api) : super.impl();
 
   @override
-  CameraControllerTapToFocus get focusState => api.focusState.impl;
+  CameraController$TapToFocus get focusState => api.focusState.impl;
 
   @override
   Point<double>? get tapPoint => api.tapPoint?.impl;

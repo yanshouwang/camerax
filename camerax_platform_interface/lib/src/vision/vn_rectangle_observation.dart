@@ -1,10 +1,8 @@
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
 
-import 'vn_detected_object_observation.dart';
-
-abstract base class VNRectangleObservation extends VNDetectedObjectObservation {
-  VNRectangleObservation.impl() : super.impl();
-
+abstract interface class VNRectangleObservation
+    implements VNDetectedObjectObservation {
   Point<double> get bottomLeft;
   Point<double> get bottomRight;
   Point<double> get topLeft;

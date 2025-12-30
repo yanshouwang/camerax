@@ -1,14 +1,30 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-enum PermissionManagerPermission { video, audio }
+enum PermissionManager$Permission { video, audio }
 
-abstract base class PermissionManager {
-  PermissionManager.impl();
+abstract interface class PermissionManager {
+  factory PermissionManager() => PermissionManagerChannel.instance.create();
 
-  factory PermissionManager() => CameraXPlugin.instance.$PermissionManager();
-
-  Future<bool> checkPermission(PermissionManagerPermission permission);
+  Future<bool> checkPermission(PermissionManager$Permission permission);
   Future<bool> requestPermissions(
-    List<PermissionManagerPermission> permissions,
+    List<PermissionManager$Permission> permissions,
   );
+}
+
+abstract base class PermissionManagerChannel extends PlatformInterface {
+  PermissionManagerChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static PermissionManagerChannel? _instance;
+
+  static PermissionManagerChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(PermissionManagerChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  PermissionManager create();
 }

@@ -1,10 +1,7 @@
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/view.dart';
 
-import 'camera_controller.dart';
-
-abstract base class TapToFocusInfo {
-  TapToFocusInfo.impl();
-
-  CameraControllerTapToFocus get focusState;
+abstract interface class TapToFocusInfo {
+  CameraController$TapToFocus get focusState;
   Point<double>? get tapPoint;
 }

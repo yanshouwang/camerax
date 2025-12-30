@@ -86,7 +86,7 @@ final class CameraControllerImpl extends CameraController {
   Future<bool> isVideoCaptureEnabled() => api.isVideoCaptureEnabled();
 
   @override
-  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases) {
+  Future<void> setEnabledUseCases(List<CameraController$UseCase> useCases) {
     final useCaseApis = useCases.map((e) => e.api).toList();
     return api.setEnabledUseCases(useCaseApis);
   }
@@ -110,24 +110,24 @@ final class CameraControllerImpl extends CameraController {
   ) => api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<ImageCaptureCaptureMode> getImageCaptureMode() =>
+  Future<ImageCapture$CaptureMode> getImageCaptureMode() =>
       api.getImageCaptureMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode) =>
+  Future<void> setImageCaptureMode(ImageCapture$CaptureMode captureMode) =>
       api.setImageCaptureMode(captureMode.api);
 
   @override
-  Future<ImageCaptureFlashMode> getImageCaptureFlashMode() =>
+  Future<ImageCapture$FlashMode> getImageCaptureFlashMode() =>
       api.getImageCaptureFlashMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode) =>
+  Future<void> setImageCaptureFlashMode(ImageCapture$FlashMode flashMode) =>
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
   Future<void> takePicture(
-    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+    ImageCapture$OnImageCapturedCallback imageCapturedCallback,
   ) => api.takePicture1(imageCapturedCallback.api);
 
   @override
@@ -140,12 +140,12 @@ final class CameraControllerImpl extends CameraController {
   ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy() =>
+  Future<ImageAnalysis$Strategy> getImageAnalysisBackpressureStrategy() =>
       api.getImageAnalysisBackpressureStrategy().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-    ImageAnalysisStrategy strategy,
+    ImageAnalysis$Strategy strategy,
   ) => api.setImageAnalysisBackpressureStrategy(strategy.api);
 
   @override
@@ -157,16 +157,16 @@ final class CameraControllerImpl extends CameraController {
       api.setImageAnalysisImageQueueDepth(depth);
 
   @override
-  Future<ImageAnalysisOutputImageFormat> getImageAnalysisOutputImageFormat() =>
+  Future<ImageAnalysis$OutputImageFormat> getImageAnalysisOutputImageFormat() =>
       api.getImageAnalysisOutputImageFormat().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-    ImageAnalysisOutputImageFormat format,
+    ImageAnalysis$OutputImageFormat format,
   ) => api.setImageAnalysisOutputImageFormat(format.api);
 
   @override
-  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer) =>
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysis$Analyzer analyzer) =>
       api.setImageAnalysisAnalyzer(analyzer.api);
 
   @override
@@ -252,11 +252,11 @@ final class CameraControllerImpl extends CameraController {
 }
 
 extension CameraControllerTapToFocusApiX on CameraControllerTapToFocusApi {
-  CameraControllerTapToFocus get impl =>
-      CameraControllerTapToFocus.values[index];
+  CameraController$TapToFocus get impl =>
+      CameraController$TapToFocus.values[index];
 }
 
-extension CameraControllerUseCaseX on CameraControllerUseCase {
+extension CameraControllerUseCaseX on CameraController$UseCase {
   CameraControllerUseCaseApi get api =>
       CameraControllerUseCaseApi.values[index];
 }

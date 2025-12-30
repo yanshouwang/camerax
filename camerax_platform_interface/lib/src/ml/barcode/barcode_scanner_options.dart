@@ -1,18 +1,36 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/ml.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'barcode.dart';
-import 'zoom_suggestion_options.dart';
-
-abstract base class BarcodeScannerOptions {
-  BarcodeScannerOptions.impl();
-
+abstract interface class BarcodeScannerOptions {
   factory BarcodeScannerOptions({
     bool? enableAllPotentialBarcodes,
-    List<BarcodeFormat>? formats,
+    List<Barcode$Format>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
-  }) => CameraXPlugin.instance.$BarcodeScannerOptions(
+  }) => BarcodeScannerOptionsChannel.instance.create(
     enableAllPotentialBarcodes: enableAllPotentialBarcodes,
     formats: formats,
     zoomSuggestionOptions: zoomSuggestionOptions,
   );
+}
+
+abstract base class BarcodeScannerOptionsChannel extends PlatformInterface {
+  BarcodeScannerOptionsChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static BarcodeScannerOptionsChannel? _instance;
+
+  static BarcodeScannerOptionsChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(BarcodeScannerOptionsChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  BarcodeScannerOptions create({
+    bool? enableAllPotentialBarcodes,
+    List<Barcode$Format>? formats,
+    ZoomSuggestionOptions? zoomSuggestionOptions,
+  });
 }

@@ -14,7 +14,7 @@ final class ResolutionStrategyImpl extends ResolutionStrategy {
 
   factory ResolutionStrategyImpl({
     required Size<int> boundSize,
-    required ResolutionStrategyFallbackRule fallbackRule,
+    required ResolutionStrategy$FallbackRule fallbackRule,
   }) {
     final api = ResolutionStrategyProxyApi(
       boundSize: boundSize.api,
@@ -27,19 +27,19 @@ final class ResolutionStrategyImpl extends ResolutionStrategy {
   Future<Size<int>?> getBoundSize() => api.getBoundSize().then((e) => e?.impl);
 
   @override
-  Future<ResolutionStrategyFallbackRule> getFallbackRule() =>
+  Future<ResolutionStrategy$FallbackRule> getFallbackRule() =>
       api.getFallbackRule().then((e) => e.impl);
 }
 
-extension ResolutionStrategyFallbackRuleX on ResolutionStrategyFallbackRule {
+extension ResolutionStrategyFallbackRuleX on ResolutionStrategy$FallbackRule {
   ResolutionStrategyFallbackRuleApi get api =>
       ResolutionStrategyFallbackRuleApi.values[index];
 }
 
 extension ResolutionStrategyFallbackRuleApiX
     on ResolutionStrategyFallbackRuleApi {
-  ResolutionStrategyFallbackRule get impl =>
-      ResolutionStrategyFallbackRule.values[index];
+  ResolutionStrategy$FallbackRule get impl =>
+      ResolutionStrategy$FallbackRule.values[index];
 }
 
 extension ResolutionStrategyX on ResolutionStrategy {

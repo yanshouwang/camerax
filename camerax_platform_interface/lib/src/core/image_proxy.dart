@@ -2,20 +2,15 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/core.dart';
 
-import 'image_info.dart';
-
-abstract base class ImageProxyPlaneProxy {
-  ImageProxyPlaneProxy.impl();
-
+abstract interface class ImageProxyPlaneProxy {
   int get pixelStride;
   int get rowStride;
   Uint8List get value;
 }
 
-abstract base class ImageProxy extends AutoCloseable {
-  ImageProxy.impl() : super.impl();
-
+abstract interface class ImageProxy implements AutoCloseable {
   ImageFormat get format;
   int get width;
   int get height;

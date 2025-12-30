@@ -8,11 +8,11 @@ final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
 
   factory FaceDetectorOptionsImpl({
     bool? enableTracking,
-    FaceDetectorOptionsClassificationMode? classificationMode,
-    FaceDetectorOptionsContourMode? contourMode,
-    FaceDetectorOptionsLandmarkMode? landmarkMode,
+    FaceDetectorOptions$ClassificationMode? classificationMode,
+    FaceDetectorOptions$ContourMode? contourMode,
+    FaceDetectorOptions$LandmarkMode? landmarkMode,
     double? minFaceSize,
-    FaceDetectorOptionsPerformanceMode? performanceMode,
+    FaceDetectorOptions$PerformanceMode? performanceMode,
   }) {
     final api = FaceDetectorOptionsProxyApi.build(
       enableTracking: enableTracking,
@@ -27,23 +27,23 @@ final class FaceDetectorOptionsImpl extends FaceDetectorOptions {
 }
 
 extension FaceDetectorOptionsClassificationModeX
-    on FaceDetectorOptionsClassificationMode {
+    on FaceDetectorOptions$ClassificationMode {
   FaceDetectorOptionsClassificationModeApi get api =>
       FaceDetectorOptionsClassificationModeApi.values[index];
 }
 
-extension FaceDetectorOptionsContourModeX on FaceDetectorOptionsContourMode {
+extension FaceDetectorOptionsContourModeX on FaceDetectorOptions$ContourMode {
   FaceDetectorOptionsContourModeApi get api =>
       FaceDetectorOptionsContourModeApi.values[index];
 }
 
-extension FaceDetectorOptionsLandmarkModeX on FaceDetectorOptionsLandmarkMode {
+extension FaceDetectorOptionsLandmarkModeX on FaceDetectorOptions$LandmarkMode {
   FaceDetectorOptionsLandmarkModeApi get api =>
       FaceDetectorOptionsLandmarkModeApi.values[index];
 }
 
 extension FaceDetectorOptioinsPerformanceModeX
-    on FaceDetectorOptionsPerformanceMode {
+    on FaceDetectorOptions$PerformanceMode {
   FaceDetectorOptionsPerformanceModeApi get api =>
       FaceDetectorOptionsPerformanceModeApi.values[index];
 }

@@ -4,61 +4,63 @@ import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-abstract base class ConsumerImpl<T> extends Consumer<T> {
-  ConsumerImpl.impl() : super.impl();
-
-  factory ConsumerImpl({required void Function(T value) accept}) {
-    if (T == ImageProxy) {
-      final api = ImageProxyConsumerProxyApi(
-        accept: (_, e) => accept(e.impl as T),
-      );
-      return ImageProxyConsumerImpl.internal(api) as ConsumerImpl<T>;
-    } else if (T == MlKitAnalyzerResult) {
-      final api = MlKitAnalyzerResultConsumerProxyApi(
-        accept: (_, e) => accept(e.impl as T),
-      );
-      return MlKitAnalyzerResultConsumerImpl.internal(api) as ConsumerImpl<T>;
-    } else if (T == VideoRecordEvent) {
-      final api = VideoRecordEventConsumerProxyApi(
-        accept: (_, e) => accept(e.impl as T),
-      );
-      return VideoRecordEventConsumerImpl.internal(api) as ConsumerImpl<T>;
-    } else {
-      return TConsumerImpl(accept: accept);
-    }
-  }
-}
-
-final class TConsumerImpl<T> extends ConsumerImpl<T> {
-  final void Function(T value) accept;
-
-  TConsumerImpl({required this.accept}) : super.impl();
-}
+abstract base class ConsumerImpl<T> implements Consumer<T> {}
 
 final class ImageProxyConsumerImpl extends ConsumerImpl<ImageProxy> {
   ImageProxyConsumerProxyApi api;
 
-  ImageProxyConsumerImpl.internal(this.api) : super.impl();
+  ImageProxyConsumerImpl.internal(this.api);
 }
 
 final class MlKitAnalyzerResultConsumerImpl
-    extends ConsumerImpl<MlKitAnalyzerResult> {
+    extends ConsumerImpl<MlKitAnalyzer$Result> {
   final MlKitAnalyzerResultConsumerProxyApi api;
 
-  MlKitAnalyzerResultConsumerImpl.internal(this.api) : super.impl();
+  MlKitAnalyzerResultConsumerImpl.internal(this.api);
 }
 
 final class VideoRecordEventConsumerImpl
     extends ConsumerImpl<VideoRecordEvent> {
   final VideoRecordEventConsumerProxyApi api;
 
-  VideoRecordEventConsumerImpl.internal(this.api) : super.impl();
+  VideoRecordEventConsumerImpl.internal(this.api);
+}
+
+final class OtherConsumerImpl<T> extends ConsumerImpl<T> {
+  final void Function(T value) accept;
+
+  OtherConsumerImpl({required this.accept});
+}
+
+final class ConsumerChannelImpl extends ConsumerChannel {
+  @override
+  Consumer<T> create<T>({required void Function(T value) accept}) {
+    if (T == ImageProxy) {
+      final api = ImageProxyConsumerProxyApi(
+        accept: (_, e) => accept(e.impl as T),
+      );
+      return ImageProxyConsumerImpl.internal(api) as ConsumerImpl<T>;
+    }
+    if (T == MlKitAnalyzer$Result) {
+      final api = MlKitAnalyzerResultConsumerProxyApi(
+        accept: (_, e) => accept(e.impl as T),
+      );
+      return MlKitAnalyzerResultConsumerImpl.internal(api) as ConsumerImpl<T>;
+    }
+    if (T == VideoRecordEvent) {
+      final api = VideoRecordEventConsumerProxyApi(
+        accept: (_, e) => accept(e.impl as T),
+      );
+      return VideoRecordEventConsumerImpl.internal(api) as ConsumerImpl<T>;
+    }
+    return OtherConsumerImpl(accept: accept);
+  }
 }
 
 extension ConsumerX<T> on Consumer<T> {
   void accept(T value) {
     final impl = this;
-    if (impl is! TConsumerImpl<T>) throw TypeError();
+    if (impl is! OtherConsumerImpl<T>) throw TypeError();
     impl.accept(value);
   }
 }
@@ -71,7 +73,7 @@ extension ImageProxyConsumerX on Consumer<ImageProxy> {
   }
 }
 
-extension MlKitAnalyzerResultConsumerX on Consumer<MlKitAnalyzerResult> {
+extension MlKitAnalyzer$ResultConsumerX on Consumer<MlKitAnalyzer$Result> {
   MlKitAnalyzerResultConsumerProxyApi get api {
     final impl = this;
     if (impl is! MlKitAnalyzerResultConsumerImpl) throw TypeError();

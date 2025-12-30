@@ -72,9 +72,7 @@ enum AVMetadataObjectType {
   ];
 }
 
-abstract base class AVMetadataObject {
-  AVMetadataObject.impl();
-
+abstract interface class AVMetadataObject {
   AVMetadataObjectType get type;
   DateTime get time;
   Duration get duration;
@@ -85,39 +83,27 @@ abstract base class AVMetadataObject {
   int get objectID;
 }
 
-abstract base class AVMetadataCatHeadObject extends AVMetadataObject {
-  AVMetadataCatHeadObject.impl() : super.impl();
-}
+abstract interface class AVMetadataCatHeadObject implements AVMetadataObject {}
 
-abstract base class AVMetadataDogHeadObject extends AVMetadataObject {
-  AVMetadataDogHeadObject.impl() : super.impl();
-}
+abstract interface class AVMetadataDogHeadObject implements AVMetadataObject {}
 
-abstract base class AVMetadataBodyObject extends AVMetadataObject {
-  AVMetadataBodyObject.impl() : super.impl();
-
+abstract interface class AVMetadataBodyObject implements AVMetadataObject {
   int get bodyID;
 }
 
-abstract base class AVMetadataCatBodyObject extends AVMetadataBodyObject {
-  AVMetadataCatBodyObject.impl() : super.impl();
-}
+abstract interface class AVMetadataCatBodyObject
+    implements AVMetadataBodyObject {}
 
-abstract base class AVMetadataDogBodyObject extends AVMetadataBodyObject {
-  AVMetadataDogBodyObject.impl() : super.impl();
-}
+abstract interface class AVMetadataDogBodyObject
+    implements AVMetadataBodyObject {}
 
-abstract base class AVMetadataHumanBodyObject extends AVMetadataBodyObject {
-  AVMetadataHumanBodyObject.impl() : super.impl();
-}
+abstract interface class AVMetadataHumanBodyObject
+    implements AVMetadataBodyObject {}
 
-abstract base class AVMetadataHumanFullBodyObject extends AVMetadataBodyObject {
-  AVMetadataHumanFullBodyObject.impl() : super.impl();
-}
+abstract interface class AVMetadataHumanFullBodyObject
+    implements AVMetadataBodyObject {}
 
-abstract base class AVMetadataFaceObject extends AVMetadataObject {
-  AVMetadataFaceObject.impl() : super.impl();
-
+abstract interface class AVMetadataFaceObject implements AVMetadataObject {
   int get faceID;
   bool get hasRollAngle;
   double get rollAngle;
@@ -125,14 +111,10 @@ abstract base class AVMetadataFaceObject extends AVMetadataObject {
   double get yawAngle;
 }
 
-abstract base class AVMetadataMachineReadableCodeObject
-    extends AVMetadataObject {
-  AVMetadataMachineReadableCodeObject.impl() : super.impl();
-
+abstract interface class AVMetadataMachineReadableCodeObject
+    implements AVMetadataObject {
   List<Point<double>> get corners;
   String? get stringValue;
 }
 
-abstract base class AVMetadataSalientObject extends AVMetadataObject {
-  AVMetadataSalientObject.impl() : super.impl();
-}
+abstract interface class AVMetadataSalientObject implements AVMetadataObject {}

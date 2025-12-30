@@ -2,13 +2,13 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class RotationProviderListenerImpl extends RotationProviderListener {
+final class RotationProviderListenerImpl extends RotationProvider$Listener {
   final RotationProviderListenerProxyApi api;
 
   RotationProviderListenerImpl.internal(this.api) : super.impl();
 
   factory RotationProviderListenerImpl({
-    required void Function(SurfaceRotation rotation) onRotationChanged,
+    required void Function(Surface$Rotation rotation) onRotationChanged,
   }) {
     final api = RotationProviderListenerProxyApi(
       onRotationChanged: (_, e) => onRotationChanged(e.impl),
@@ -28,15 +28,15 @@ final class RotationProviderImpl extends RotationProvider {
   }
 
   @override
-  Future<void> addListener(RotationProviderListener listener) =>
+  Future<void> addListener(RotationProvider$Listener listener) =>
       api.addListener(listener.api);
 
   @override
-  Future<void> removeListener(RotationProviderListener listener) =>
+  Future<void> removeListener(RotationProvider$Listener listener) =>
       api.removeListener(listener.api);
 }
 
-extension RotationProviderListenerX on RotationProviderListener {
+extension RotationProviderListenerX on RotationProvider$Listener {
   RotationProviderListenerProxyApi get api {
     final impl = this;
     if (impl is! RotationProviderListenerImpl) throw TypeError();

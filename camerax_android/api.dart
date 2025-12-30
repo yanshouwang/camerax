@@ -14,42 +14,51 @@ import 'package:pigeon/pigeon.dart';
   ),
 )
 // camera2
+enum CameraMetadataInfoSupportedHardwareLevelApi {
+  limited, // 0
+  full, // 1
+  legacy, // 2
+  level3, // 3
+  external, // 4
+}
+
 enum CameraMetadataControlModeApi {
-  auto,
-  off,
-  offKeepState,
-  useExtendedSceneMode,
-  useSceneMode,
+  off, // 0
+  auto, // 1
+  useSceneMode, // 2
+  offKeepState, // 3
+  useExtendedSceneMode, // 4
 }
 
 enum CameraMetadataControlAeModeApi {
-  off,
-  on,
-  onAlwaysFlash,
-  onAutoFlash,
-  onAutoFlashRedeye,
-  onExternalFlash,
-  onLowLightBoostBrightnessPriority,
+  off, // 0
+  on, // 1
+  onAutoFlash, // 2
+  onAlwaysFlash, // 3
+  onAutoFlashRedeye, // 4
+  onExternalFlash, // 5
+  onLowLightBoostBrightnessPriority, // 6
 }
 
 enum CameraMetadataControlAfModeApi {
-  auto,
-  continuousPicture,
-  edof,
-  macro,
-  off,
+  off, // 0
+  auto, // 1
+  macro, // 2
+  continuousVideo, // 3
+  continuousPicture, // 4
+  edof, // 5
 }
 
 enum CameraMetadataControlAwbModeApi {
-  auto,
-  cloudyDaylight,
-  daylight,
-  fluorescent,
-  incandesecent,
-  off,
-  shade,
-  twilight,
-  warmFluorescent,
+  off, // 0
+  auto, // 1
+  incandesecent, // 2
+  fluorescent, // 3
+  warmFluorescent, // 4
+  daylight, // 5
+  cloudyDaylight, // 6
+  twilight, // 7
+  shade, // 8
 }
 
 @ProxyApi(
@@ -78,7 +87,25 @@ abstract class Camera2CameraInfoProxyApi {
   Camera2CameraInfoProxyApi.from(CameraInfoProxyApi cameraInfo);
 
   String getCameraId();
-  LongRangeProxyApi? getSensorInfoExposureTimeRange();
+  String? getStringCameraCharacteristic(
+    CameraCharacteristicsStringKeyProxyApi key,
+  );
+  int? getIntCameraCharacteristic(CameraCharacteristicsIntKeyProxyApi key);
+  bool? getBooleanCameraCharacteristic(
+    CameraCharacteristicsBooleanKeyProxyApi key,
+  );
+  List<int>? getIntArrayCameraCharacteristic(
+    CameraCharacteristicsIntArrayKeyProxyApi key,
+  );
+  List<double>? getFloatArrayCameraCharacteristic(
+    CameraCharacteristicsFloatArrayKeyProxyApi key,
+  );
+  IntRangeProxyApi? getIntRangeCameraCharacteristic(
+    CameraCharacteristicsIntRangeKeyProxyApi key,
+  );
+  LongRangeProxyApi? getLongRangeCameraCharacteristic(
+    CameraCharacteristicsLongRangeKeyProxyApi key,
+  );
 }
 
 @ProxyApi(
@@ -86,14 +113,245 @@ abstract class Camera2CameraInfoProxyApi {
     fullClassName: 'androidx.camera.camera2.interop.CaptureRequestOptions',
   ),
 )
-abstract class CaptureRequestOptionsProxyApi {
-  CaptureRequestOptionsProxyApi.build({
-    CameraMetadataControlModeApi? mode,
-    CameraMetadataControlAeModeApi? aeMode,
-    CameraMetadataControlAfModeApi? afMode,
-    CameraMetadataControlAwbModeApi? awbMode,
-    int? sensorExposureTime,
-  });
+abstract class CaptureRequestOptionsProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'androidx.camera.camera2.interop.CaptureRequestOptions.Builder',
+  ),
+)
+abstract class CaptureRequestOptionsBuilderProxyApi {
+  CaptureRequestOptionsBuilderProxyApi();
+
+  CaptureRequestOptionsBuilderProxyApi setIntCaptureRequestOption(
+    CaptureRequestIntKeyProxyApi key,
+    int value,
+  );
+  CaptureRequestOptionsBuilderProxyApi setLongCaptureRequestOption(
+    CaptureRequestLongKeyProxyApi key,
+    int value,
+  );
+  CaptureRequestOptionsBuilderProxyApi setFloatCaptureRequestOption(
+    CaptureRequestFloatKeyProxyApi key,
+    double value,
+  );
+  CaptureRequestOptionsBuilderProxyApi setBooleanCaptureRequestOption(
+    CaptureRequestBooleanKeyProxyApi key,
+    bool value,
+  );
+  CaptureRequestOptionsProxyApi build();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.Key',
+  ),
+)
+abstract class CameraCharacteristicsKeyProxyApi {
+  String getName();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.StringKey',
+  ),
+)
+abstract class CameraCharacteristicsStringKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.IntKey',
+  ),
+)
+abstract class CameraCharacteristicsIntKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.BooleanKey',
+  ),
+)
+abstract class CameraCharacteristicsBooleanKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.IntArrayKey',
+  ),
+)
+abstract class CameraCharacteristicsIntArrayKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.FloatArrayKey',
+  ),
+)
+abstract class CameraCharacteristicsFloatArrayKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.IntRangeKey',
+  ),
+)
+abstract class CameraCharacteristicsIntRangeKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.LongRangeKey',
+  ),
+)
+abstract class CameraCharacteristicsLongRangeKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.CameraCharacteristics',
+  ),
+)
+abstract class CameraCharacteristicsProxyApi {
+  @static
+  late final CameraCharacteristicsIntArrayKeyProxyApi controlAeAvailableModes;
+  @static
+  late final CameraCharacteristicsBooleanKeyProxyApi controlAeLockAvailable;
+  @static
+  late final CameraCharacteristicsIntArrayKeyProxyApi controlAfAvailableModes;
+  @static
+  late final CameraCharacteristicsIntArrayKeyProxyApi controlAvailableModes;
+  @static
+  late final CameraCharacteristicsIntArrayKeyProxyApi controlAwbAvailableModes;
+  @static
+  late final CameraCharacteristicsBooleanKeyProxyApi controlAwbLockAvailable;
+  @static
+  late final CameraCharacteristicsIntKeyProxyApi infoSupportedHardwareLevel;
+  @static
+  late final CameraCharacteristicsStringKeyProxyApi infoVersion;
+  @static
+  late final CameraCharacteristicsFloatArrayKeyProxyApi
+  lensInfoAvailableApertures;
+  @static
+  late final CameraCharacteristicsLongRangeKeyProxyApi
+  sensorInfoExposureTimeRange;
+  @static
+  late final CameraCharacteristicsIntRangeKeyProxyApi
+  sensorInfoSensitivityRange;
+  @static
+  late final CameraCharacteristicsIntKeyProxyApi sensorOrientation;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.CameraMetatata',
+  ),
+)
+abstract class CameraMetadataProxyApi {
+  @static
+  CameraMetadataInfoSupportedHardwareLevelApi fromInfoSupportedHardwareLevel(
+    int value,
+  );
+  @static
+  CameraMetadataControlModeApi fromControlMode(int value);
+  @static
+  CameraMetadataControlAeModeApi fromControlAeMode(int value);
+  @static
+  CameraMetadataControlAfModeApi fromControlAfMode(int value);
+  @static
+  CameraMetadataControlAwbModeApi fromControlAwbMode(int value);
+
+  @static
+  int toInfoSupportedHardwareLevel(
+    CameraMetadataInfoSupportedHardwareLevelApi level,
+  );
+  @static
+  int toControlMode(CameraMetadataControlModeApi mode);
+  @static
+  int toControlAeMode(CameraMetadataControlAeModeApi mode);
+  @static
+  int toControlAfMode(CameraMetadataControlAfModeApi mode);
+  @static
+  int toControlAwbMode(CameraMetadataControlAwbModeApi mode);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.Key',
+  ),
+)
+abstract class CaptureRequestKeyProxyApi {
+  String getName();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.IntKey',
+  ),
+)
+abstract class CaptureRequestIntKeyProxyApi extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.LongKey',
+  ),
+)
+abstract class CaptureRequestLongKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.FloatKey',
+  ),
+)
+abstract class CaptureRequestFloatKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.BooleanKey',
+  ),
+)
+abstract class CaptureRequestBooleanKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.CaptureRequest',
+  ),
+)
+abstract class CaptureRequestProxyApi {
+  @static
+  late final CaptureRequestBooleanKeyProxyApi controlAeLock;
+  @static
+  late final CaptureRequestIntKeyProxyApi controlAeMode;
+  @static
+  late final CaptureRequestIntKeyProxyApi controlAfMode;
+  @static
+  late final CaptureRequestBooleanKeyProxyApi controlAwbLock;
+  @static
+  late final CaptureRequestIntKeyProxyApi controlAwbMode;
+  @static
+  late final CaptureRequestIntKeyProxyApi controlMode;
+  @static
+  late final CaptureRequestFloatKeyProxyApi lensAperture;
+  @static
+  late final CaptureRequestLongKeyProxyApi sensorExposureTime;
+  @static
+  late final CaptureRequestIntKeyProxyApi sensorSensitivity;
 }
 
 // common

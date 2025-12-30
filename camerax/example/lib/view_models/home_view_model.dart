@@ -19,7 +19,7 @@ class HomeViewModel extends ViewModel {
   final CameraController _controller;
   final RotationProvider _rotationProvider;
 
-  RotationProviderListener? _rotationProviderListener;
+  RotationProvider$Listener? _rotationProviderListener;
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
 
@@ -28,7 +28,7 @@ class HomeViewModel extends ViewModel {
       _controller = CameraController(),
       _rotationProvider = RotationProvider(),
       _mode = CameraMode.takePicture,
-      _lensFacing = CameraSelectorLensFacing.back,
+      _lensFacing = CameraSelector$LensFacing.back,
       _codes = [],
       _faces = [] {
     _setUp();
@@ -44,17 +44,17 @@ class HomeViewModel extends ViewModel {
     notifyListeners();
   }
 
-  CameraSelectorLensFacing _lensFacing;
-  CameraSelectorLensFacing get lensFacing => _lensFacing;
-  set lensFacing(CameraSelectorLensFacing value) {
+  CameraSelector$LensFacing _lensFacing;
+  CameraSelector$LensFacing get lensFacing => _lensFacing;
+  set lensFacing(CameraSelector$LensFacing value) {
     if (_lensFacing == value) return;
     _lensFacing = value;
     notifyListeners();
   }
 
-  ImageCaptureFlashMode? _flashMode;
-  ImageCaptureFlashMode? get flashMode => _flashMode;
-  set flashMode(ImageCaptureFlashMode? value) {
+  ImageCapture$FlashMode? _flashMode;
+  ImageCapture$FlashMode? get flashMode => _flashMode;
+  set flashMode(ImageCapture$FlashMode? value) {
     if (_flashMode == value) return;
     _flashMode = value;
     notifyListeners();
@@ -131,12 +131,12 @@ class HomeViewModel extends ViewModel {
       // See https://developer.android.com/reference/kotlin/androidx/camera/view/CameraController#setEnabledUseCases(int)
       if (mode == CameraMode.recordVideo) {
         await controller.setEnabledUseCases([
-          CameraControllerUseCase.videoCapture,
+          CameraController$UseCase.videoCapture,
         ]);
       } else {
         await controller.setEnabledUseCases([
-          CameraControllerUseCase.imageCapture,
-          CameraControllerUseCase.imageAnalysis,
+          CameraController$UseCase.imageCapture,
+          CameraController$UseCase.imageAnalysis,
         ]);
       }
     }
@@ -180,12 +180,12 @@ class HomeViewModel extends ViewModel {
   }
 
   Future<void> toggleLensFacing() async {
-    if (lensFacing == CameraSelectorLensFacing.back) {
+    if (lensFacing == CameraSelector$LensFacing.back) {
       await _setCameraSelector(CameraSelector.front);
-      lensFacing = CameraSelectorLensFacing.front;
+      lensFacing = CameraSelector$LensFacing.front;
     } else {
       await _setCameraSelector(CameraSelector.back);
-      lensFacing = CameraSelectorLensFacing.back;
+      lensFacing = CameraSelector$LensFacing.back;
     }
   }
 
@@ -202,13 +202,13 @@ class HomeViewModel extends ViewModel {
     await controller.setZoomRatio(zoomRatio);
   }
 
-  Future<void> setFlashMode(ImageCaptureFlashMode flashMode) async {
+  Future<void> setFlashMode(ImageCapture$FlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
     flashMode = await controller.getImageCaptureFlashMode();
   }
 
   Future<void> takePicture() async {
-    final callback = ImageCaptureOnImageCapturedCallback(
+    final callback = ImageCapture$OnImageCapturedCallback(
       onCaptureStarted: () {
         _logger.info('onCaptureStarted');
       },
@@ -283,15 +283,15 @@ class HomeViewModel extends ViewModel {
   void _setUp() async {
     var isGranted =
         await _permissionManager.checkPermission(
-          PermissionManagerPermission.audio,
+          PermissionManager$Permission.audio,
         ) &&
         await _permissionManager.checkPermission(
-          PermissionManagerPermission.video,
+          PermissionManager$Permission.video,
         );
     if (!isGranted) {
       isGranted = await _permissionManager.requestPermissions([
-        PermissionManagerPermission.video,
-        PermissionManagerPermission.audio,
+        PermissionManager$Permission.video,
+        PermissionManager$Permission.audio,
       ]);
     }
     if (!isGranted) {
@@ -300,7 +300,7 @@ class HomeViewModel extends ViewModel {
     final resolutionSelector = ResolutionSelector(
       resolutionStrategy: ResolutionStrategy(
         boundSize: Size(1024, 768),
-        fallbackRule: ResolutionStrategyFallbackRule.closestHigherThenLower,
+        fallbackRule: ResolutionStrategy$FallbackRule.closestHigherThenLower,
       ),
     );
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
@@ -318,7 +318,7 @@ class HomeViewModel extends ViewModel {
     await controller.observeZoomState(zoomStateObserver);
     _torchStateObserver = torchStateObserver;
     _zoomStateObserver = zoomStateObserver;
-    final rotationProviderListener = RotationProviderListener(
+    final rotationProviderListener = RotationProvider$Listener(
       onRotationChanged: (rotation) {
         _logger.info(
           'RotationProviderListener.onRotationChanged: ${rotation.name}',
@@ -341,9 +341,9 @@ class HomeViewModel extends ViewModel {
   Future<void> _setImageAnalyzer() async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(
-      ImageAnalysisOutputImageFormat.rgba8888,
+      ImageAnalysis$OutputImageFormat.rgba8888,
     );
-    final analyzer = ImageAnalysisAnalyzer(
+    final analyzer = ImageAnalysis$Analyzer(
       consumer: Consumer(
         accept: (image) async {
           try {
@@ -394,7 +394,7 @@ class HomeViewModel extends ViewModel {
   Future<void> _setVisionAnalyzer(VisionAnalyzer analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(
-      ImageAnalysisOutputImageFormat.yuv420_888,
+      ImageAnalysis$OutputImageFormat.yuv420_888,
     );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();

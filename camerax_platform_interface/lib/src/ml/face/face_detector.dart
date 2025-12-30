@@ -1,14 +1,28 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
-import 'package:camerax_platform_interface/src/ml/interfaces.dart';
+import 'package:camerax_platform_interface/src/ml.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'face.dart';
-import 'face_detector_options.dart';
-
-abstract base class FaceDetector extends Detector<List<Face>> {
-  FaceDetector.impl() : super.impl();
-
-  factory FaceDetector() => CameraXPlugin.instance.$FaceDetector();
+abstract interface class FaceDetector implements Detector<List<Face>> {
+  factory FaceDetector() => FaceDetectorChannel.instance.create();
 
   factory FaceDetector.options(FaceDetectorOptions options) =>
-      CameraXPlugin.instance.$FaceDetector$options(options);
+      FaceDetectorChannel.instance.createWithOptions(options);
+}
+
+abstract base class FaceDetectorChannel extends PlatformInterface {
+  FaceDetectorChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static FaceDetectorChannel? _instance;
+
+  static FaceDetectorChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(FaceDetectorChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  FaceDetector create();
+  FaceDetector createWithOptions(FaceDetectorOptions options);
 }

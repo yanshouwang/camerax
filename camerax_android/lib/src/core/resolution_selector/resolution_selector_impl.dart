@@ -5,28 +5,13 @@ import 'aspect_ratio_strategy_impl.dart';
 import 'resolution_filter_impl.dart';
 import 'resolution_strategy_impl.dart';
 
-final class ResolutionSelectorImpl extends ResolutionSelector {
+final class ResolutionSelectorImpl implements ResolutionSelector {
   final ResolutionSelectorProxyApi api;
 
-  ResolutionSelectorImpl.internal(this.api) : super.impl();
-
-  factory ResolutionSelectorImpl({
-    ResolutionSelectorMode? mode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  }) {
-    final api = ResolutionSelectorProxyApi.build(
-      mode: mode?.api,
-      aspectRatioStrategy: aspectRatioStrategy?.api,
-      resolutionFilter: resolutionFilter?.api,
-      resolutionStrategy: resolutionStrategy?.api,
-    );
-    return ResolutionSelectorImpl.internal(api);
-  }
+  ResolutionSelectorImpl.internal(this.api);
 
   @override
-  Future<ResolutionSelectorMode> getAllowedResolutionMode() =>
+  Future<ResolutionSelector$Mode> getAllowedResolutionMode() =>
       api.getAllowedResolutionMode().then((e) => e.impl);
 
   @override
@@ -42,12 +27,30 @@ final class ResolutionSelectorImpl extends ResolutionSelector {
       api.getResolutionStrategy().then((e) => e?.impl);
 }
 
-extension ResolutionSelectorModeX on ResolutionSelectorMode {
+final class ResolutionSelectorChannelImpl extends ResolutionSelectorChannel {
+  @override
+  ResolutionSelector create({
+    ResolutionSelector$Mode? mode,
+    AspectRatioStrategy? aspectRatioStrategy,
+    ResolutionFilter? resolutionFilter,
+    ResolutionStrategy? resolutionStrategy,
+  }) {
+    final api = ResolutionSelectorProxyApi.build(
+      mode: mode?.api,
+      aspectRatioStrategy: aspectRatioStrategy?.api,
+      resolutionFilter: resolutionFilter?.api,
+      resolutionStrategy: resolutionStrategy?.api,
+    );
+    return ResolutionSelectorImpl.internal(api);
+  }
+}
+
+extension ResolutionSelector$ModeX on ResolutionSelector$Mode {
   ResolutionSelectorModeApi get api => ResolutionSelectorModeApi.values[index];
 }
 
 extension ResolutionSelectorModeApiX on ResolutionSelectorModeApi {
-  ResolutionSelectorMode get impl => ResolutionSelectorMode.values[index];
+  ResolutionSelector$Mode get impl => ResolutionSelector$Mode.values[index];
 }
 
 extension ResolutionSelectorX on ResolutionSelector {

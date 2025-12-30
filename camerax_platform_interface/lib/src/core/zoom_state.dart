@@ -1,6 +1,4 @@
-abstract base class ZoomState {
-  ZoomState.impl();
-
+abstract interface class ZoomState {
   double get minZoomRatio;
   double get maxZoomRatio;
   double get zoomRatio;

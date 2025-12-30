@@ -70,25 +70,20 @@ enum VisionObjectType {
   // ];
 }
 
-abstract base class VisionObject {
-  VisionObject.impl();
-
+abstract interface class VisionObject {
   VisionObjectType get type;
   Rect<double> get bounds;
 }
 
-abstract base class VisionFaceObject extends VisionObject {
-  VisionFaceObject.impl() : super.impl();
-
+abstract interface class VisionFaceObject implements VisionObject {
   int? get id;
   double? get roll;
   double? get yaw;
   double? get pitch;
 }
 
-abstract base class VisionMachineReadableCodeObject extends VisionObject {
-  VisionMachineReadableCodeObject.impl() : super.impl();
-
+abstract interface class VisionMachineReadableCodeObject
+    implements VisionObject {
   List<Point<double>> get corners;
   String? get value;
 }

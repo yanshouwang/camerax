@@ -1,10 +1,9 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/view.dart';
 import 'package:flutter/widgets.dart' hide View;
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'camera_controller.dart';
-
-enum PreviewViewScaleType {
+enum PreviewView$ScaleType {
   fillCenter,
   fillEnd,
   fillStart,
@@ -13,12 +12,28 @@ enum PreviewViewScaleType {
   fitStart,
 }
 
-abstract base class PreviewView extends View {
-  PreviewView.impl() : super.impl();
-
-  factory PreviewView() => CameraXPlugin.instance.$PreviewView();
+abstract interface class PreviewView implements View {
+  factory PreviewView() => PreviewViewChannel.instance.create();
 
   Future<void> setController(CameraController controller);
+}
+
+abstract base class PreviewViewChannel extends PlatformInterface {
+  PreviewViewChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static PreviewViewChannel? _instance;
+
+  static PreviewViewChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(PreviewViewChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  PreviewView create();
 }
 
 class PreviewWidget extends StatefulWidget {

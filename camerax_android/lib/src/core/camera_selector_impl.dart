@@ -3,22 +3,10 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'camera_info_impl.dart';
 
-final class CameraSelectorImpl extends CameraSelector {
-  static CameraSelectorImpl get back =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
-  static CameraSelectorImpl get front =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
-  static CameraSelectorImpl get external =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
-
+final class CameraSelectorImpl implements CameraSelector {
   final CameraSelectorProxyApi api;
 
-  CameraSelectorImpl.internal(this.api) : super.impl();
-
-  factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
-    final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
-    return CameraSelectorImpl.internal(api);
-  }
+  CameraSelectorImpl.internal(this.api);
 
   @override
   Future<List<CameraInfo>> filter(List<CameraInfo> cameraInfos) => api
@@ -29,13 +17,31 @@ final class CameraSelectorImpl extends CameraSelector {
   Future<String?> getPhysicalCameraId() => api.getPhysicalCameraId();
 }
 
-extension CameraSelectorLensFacingX on CameraSelectorLensFacing {
+final class CameraSelectorChannelImpl extends CameraSelectorChannel {
+  @override
+  CameraSelector get back =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
+  @override
+  CameraSelector get front =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
+  @override
+  CameraSelector get external =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
+
+  @override
+  CameraSelector create({CameraSelector$LensFacing? lensFacing}) {
+    final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
+    return CameraSelectorImpl.internal(api);
+  }
+}
+
+extension CameraSelectorLensFacingX on CameraSelector$LensFacing {
   CameraSelectorLensFacingApi get api =>
       CameraSelectorLensFacingApi.values[index];
 }
 
 extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
-  CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
+  CameraSelector$LensFacing get impl => CameraSelector$LensFacing.values[index];
 }
 
 extension CameraSelectorX on CameraSelector {

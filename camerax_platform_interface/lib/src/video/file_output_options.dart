@@ -1,19 +1,16 @@
 import 'dart:io';
 
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/video.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'output_options.dart';
-
-abstract base class FileOutputOptions extends OutputOptions {
-  FileOutputOptions.impl() : super.impl();
-
+abstract interface class FileOutputOptions implements OutputOptions {
   factory FileOutputOptions(
     File file, {
     Duration? durationLimit,
     int? fileSizeLimitBytes,
     Location? location,
-  }) => CameraXPlugin.instance.$FileOutputOptions(
+  }) => FileOutputOptionsChannel.instance.create(
     file,
     durationLimit: durationLimit,
     fileSizeLimitBytes: fileSizeLimitBytes,
@@ -21,4 +18,27 @@ abstract base class FileOutputOptions extends OutputOptions {
   );
 
   Future<File> getFile();
+}
+
+abstract base class FileOutputOptionsChannel extends PlatformInterface {
+  FileOutputOptionsChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static FileOutputOptionsChannel? _instance;
+
+  static FileOutputOptionsChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(FileOutputOptionsChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  FileOutputOptions create(
+    File file, {
+    Duration? durationLimit,
+    int? fileSizeLimitBytes,
+    Location? location,
+  });
 }

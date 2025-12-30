@@ -1,8 +1,6 @@
-import 'flash_state.dart';
+import 'package:camerax_platform_interface/src/core.dart';
 
-abstract base class ImageInfo {
-  ImageInfo.impl();
-
+abstract interface class ImageInfo {
   FlashState get flashState;
   int get rotationDegrees;
   int get timestamp;

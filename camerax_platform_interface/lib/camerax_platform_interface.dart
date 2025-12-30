@@ -1,4 +1,3 @@
-export 'src/camerax_plugin.dart';
 export 'src/avfoundation.dart';
 export 'src/camera2.dart';
 export 'src/common.dart';

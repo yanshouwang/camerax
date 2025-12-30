@@ -1,8 +1,6 @@
-import 'output_options.dart';
-import 'recording_stats.dart';
-import 'output_results.dart';
+import 'package:camerax_platform_interface/src/video.dart';
 
-enum VideoRecordFinalizeEventError {
+enum VideoRecordFinalizeEvent$Error {
   none,
   unknown,
   fileSizeLimitReached,
@@ -25,39 +23,29 @@ enum VideoRecordFinalizeEventError {
 ///
 /// Example: Below is the typical way to determine the event type and cast to the
 /// event class, if needed.
-abstract base class VideoRecordEvent {
-  VideoRecordEvent.impl();
-
+abstract interface class VideoRecordEvent {
   OutputOptions get outputOptions;
   RecordingStats get recordingStats;
 }
 
 /// The status report of the recording in progress.
-abstract base class VideoRecordStatusEvent extends VideoRecordEvent {
-  VideoRecordStatusEvent.impl() : super.impl();
-}
+abstract interface class VideoRecordStatusEvent implements VideoRecordEvent {}
 
 /// Indicates the start of recording.
 ///
 /// When a video recording is successfully requested by start, a Start event will
 /// be the first event.
-abstract base class VideoRecordStartEvent extends VideoRecordEvent {
-  VideoRecordStartEvent.impl() : super.impl();
-}
+abstract interface class VideoRecordStartEvent implements VideoRecordEvent {}
 
 /// Indicates the pause event of recording.
 ///
 /// A Pause event will be triggered after calling pause.
-abstract base class VideoRecordPauseEvent extends VideoRecordEvent {
-  VideoRecordPauseEvent.impl() : super.impl();
-}
+abstract interface class VideoRecordPauseEvent implements VideoRecordEvent {}
 
 /// Indicates the resume event of recording.
 ///
 /// A Resume event will be triggered after calling resume.
-abstract base class VideoRecordResumeEvent extends VideoRecordEvent {
-  VideoRecordResumeEvent.impl() : super.impl();
-}
+abstract interface class VideoRecordResumeEvent implements VideoRecordEvent {}
 
 /// Indicates the finalization of recording.
 ///
@@ -71,9 +59,7 @@ abstract base class VideoRecordResumeEvent extends VideoRecordEvent {
 /// example, a file will still be generated when the recording is finalized with
 /// ERROR_FILE_SIZE_LIMIT_REACHED. A file may or may not be generated when the
 /// recording is finalized with ERROR_INSUFFICIENT_STORAGE.
-abstract base class VideoRecordFinalizeEvent extends VideoRecordEvent {
-  VideoRecordFinalizeEvent.impl() : super.impl();
-
+abstract interface class VideoRecordFinalizeEvent implements VideoRecordEvent {
   /// Gets the error cause.
   ///
   /// Returns the error cause if any, otherwise returns null.
@@ -82,7 +68,7 @@ abstract base class VideoRecordFinalizeEvent extends VideoRecordEvent {
   /// the file may still be generated successfully with no error cause. For example,
   /// ERROR_FILE_SIZE_LIMIT_REACHED, ERROR_DURATION_LIMIT_REACHED and ERROR_SOURCE_INACTIVE.
   Object? get cause;
-  VideoRecordFinalizeEventError get error;
+  VideoRecordFinalizeEvent$Error get error;
 
   /// Gets the Uri of the output.
   ///

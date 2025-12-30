@@ -1,31 +1,49 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/core.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'aspect_ratio_strategy.dart';
-import 'resolution_filter.dart';
-import 'resolution_strategy.dart';
-
-enum ResolutionSelectorMode {
+enum ResolutionSelector$Mode {
   preferCaptureRateOverHigherResolution,
   preferHigherResolutionOverCaptureRate,
 }
 
-abstract base class ResolutionSelector {
-  ResolutionSelector.impl();
-
+abstract interface class ResolutionSelector {
   factory ResolutionSelector({
-    ResolutionSelectorMode? mode,
+    ResolutionSelector$Mode? mode,
     AspectRatioStrategy? aspectRatioStrategy,
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
-  }) => CameraXPlugin.instance.$ResolutionSelector(
+  }) => ResolutionSelectorChannel.instance.create(
     mode: mode,
     aspectRatioStrategy: aspectRatioStrategy,
     resolutionFilter: resolutionFilter,
     resolutionStrategy: resolutionStrategy,
   );
 
-  Future<ResolutionSelectorMode> getAllowedResolutionMode();
+  Future<ResolutionSelector$Mode> getAllowedResolutionMode();
   Future<AspectRatioStrategy> getAspectRatioStrategy();
   Future<ResolutionFilter?> getResolutionFilter();
   Future<ResolutionStrategy?> getResolutionStrategy();
+}
+
+abstract base class ResolutionSelectorChannel extends PlatformInterface {
+  ResolutionSelectorChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static ResolutionSelectorChannel? _instance;
+
+  static ResolutionSelectorChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(ResolutionSelectorChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  ResolutionSelector create({
+    ResolutionSelector$Mode? mode,
+    AspectRatioStrategy? aspectRatioStrategy,
+    ResolutionFilter? resolutionFilter,
+    ResolutionStrategy? resolutionStrategy,
+  });
 }

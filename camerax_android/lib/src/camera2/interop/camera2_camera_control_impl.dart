@@ -1,20 +1,12 @@
+import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'capture_request_options_impl.dart';
-
-final class Camera2CameraControlImpl extends Camera2CameraControl {
+final class Camera2CameraControlImpl implements Camera2CameraControl {
   final Camera2CameraControlProxyApi api;
 
-  Camera2CameraControlImpl.internal(this.api) : super.impl();
-
-  factory Camera2CameraControlImpl.from(CameraControl cameraControl) {
-    final api = Camera2CameraControlProxyApi.from(
-      cameraControl: cameraControl.api,
-    );
-    return Camera2CameraControlImpl.internal(api);
-  }
+  Camera2CameraControlImpl.internal(this.api);
 
   @override
   Future<void> addCaptureRequestOptions(CaptureRequestOptions bundle) =>
@@ -30,4 +22,15 @@ final class Camera2CameraControlImpl extends Camera2CameraControl {
   @override
   Future<void> setCaptureRequestOptions(CaptureRequestOptions bundle) =>
       api.setCaptureRequestOptions(bundle.api);
+}
+
+final class Camera2CameraControlChannelImpl
+    extends Camera2CameraControlChannel {
+  @override
+  Camera2CameraControl from(CameraControl cameraControl) {
+    final api = Camera2CameraControlProxyApi.from(
+      cameraControl: cameraControl.api,
+    );
+    return Camera2CameraControlImpl.internal(api);
+  }
 }

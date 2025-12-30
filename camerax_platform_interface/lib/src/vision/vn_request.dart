@@ -1,11 +1,9 @@
-import 'vn_observation.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
 
 typedef VNRequestCompletionHandler =
     void Function(VNRequest request, Object? error);
 
-abstract base class VNRequest {
-  VNRequest.impl();
-
+abstract interface class VNRequest {
   Future<bool> getPreferBackgroundProcessing();
   Future<void> setPreferBackgroundProcessing(bool value);
   Future<List<VNObservation>?> getResults();

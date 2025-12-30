@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'avfoundation.dart';
-// import 'camera2.dart';
 import 'common.dart';
 import 'core.dart';
 import 'video.dart';
@@ -12,382 +11,49 @@ import 'view.dart';
 import 'vision.dart';
 import 'visionx.dart';
 
-final class CameraXiOSPlugin extends CameraXPlugin {
+abstract final class CameraXiOSPlugin {
   static void registerWith() {
-    CameraXPlugin.instance = CameraXiOSPlugin();
+    // avfoundation
+    AVAnalyzerChannel.instance = AVAnalyzerChannelImpl();
+    // common
+    ConsumerChannel.instance = ConsumerChannelImpl();
+    LocationChannel.instance = LocationChannelImpl();
+    ObserverChannel.instance = ObserverChannelImpl();
+    PermissionManagerChannel.instance = PermissionManagerChannelImpl();
+    // core.resolution_selector
+    AspectRatioStrategyChannel.instance = AspectRatioStrategyChannelImpl();
+    ResolutionFilterChannel.instance = ResolutionFilterChannelImpl();
+    ResolutionSelectorChannel.instance = ResolutionSelectorChannelImpl();
+    ResolutionStrategyChannel.instance = ResolutionStrategyChannelImpl();
+    // core
+    CameraInfoChannel.instance = CameraInfoChannelImpl();
+    CameraSelectorChannel.instance = CameraSelectorChannelImpl();
+    DynamicRangeChannel.instance = DynamicRangeChannelImpl();
+    FocusMeteringActionChannel.instance = FocusMeteringActionChannelImpl();
+    ImageAnalysisChannel.instance = ImageAnalysisChannelImpl();
+    ImageCaptureChannel.instance = ImageCaptureChannelImpl();
+    MeteringPointFactoryChannel.instance = MeteringPointFactoryChannelImpl();
+    SurfaceOrientedMeteringPointFactoryChannel.instance =
+        SurfaceOrientedMeteringPointFactoryChannelImpl();
+    // video
+    FallbackStrategyChannel.instance = FallbackStrategyChannelImpl();
+    FileOutputOptionsChannel.instance = FileOutputOptionsChannelImpl();
+    QualityChannel.instance = QualityChannelImpl();
+    QualitySelectorChannel.instance = QualitySelectorChannelImpl();
+    // view
+    AudioConfigChannel.instance = AudioConfigChannelImpl();
+    CameraControllerChannel.instance = CameraControllerChannelImpl();
+    PreviewViewChannel.instance = PreviewViewChannelImpl();
+    RotationProviderChannel.instance = RotationProviderChannelImpl();
+    // vision
+    VNImageRequestHandlerChannel.instance = VNImageRequestHandlerChannelImpl();
+    VNDetectBarcodesRequestChannel.instance =
+        VNDetectBarcodesRequestChannelImpl();
+    VNDetectFaceRectanglesRequestChannel.instance =
+        VNDetectFaceRectanglesRequestChannelImpl();
+    // visionx
+    VisionAnalyzerChannel.instance = VisionAnalyzerChannelImpl();
+    VisionDetectorChannel.instance = VisionDetectorChannelImpl();
+    VisionImageChannel.instance = VisionImageChannelImpl();
   }
-
-  @override
-  PermissionManager $PermissionManager() => PermissionManagerImpl();
-
-  @override
-  CameraSelector get $CameraSelector$back => CameraSelectorImpl.back;
-  @override
-  CameraSelector get $CameraSelector$front => CameraSelectorImpl.front;
-  @override
-  CameraSelector get $CameraSelector$external => CameraSelectorImpl.external;
-  @override
-  CameraSelector $CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
-      CameraSelectorImpl(lensFacing: lensFacing);
-
-  @override
-  CameraController $CameraController() => CameraControllerImpl();
-
-  @override
-  PreviewView $PreviewView() => PreviewViewImpl();
-
-  @override
-  FallbackStrategy $FallbackStrategy$higherQualityOrLowerThan(
-    Quality quality,
-  ) => throw UnimplementedError();
-  // FallbackStrategyImpl.higherQualityOrLowerThan(quality);
-  @override
-  FallbackStrategy $FallbackStrategy$higherQualityThan(Quality quality) =>
-      throw UnimplementedError();
-  // FallbackStrategyImpl.higherQualityThan(quality);
-  @override
-  FallbackStrategy $FallbackStrategy$lowerQualityOrHigherThan(
-    Quality quality,
-  ) => throw UnimplementedError();
-  // FallbackStrategyImpl.lowerQualityOrHigherThan(quality);
-  @override
-  FallbackStrategy $FallbackStrategy$lowerQualityThan(Quality quality) =>
-      throw UnimplementedError();
-  // FallbackStrategyImpl.lowerQualityThan(quality);
-
-  @override
-  MlKitAnalyzer $MlKitAnalyzer({
-    required List<Detector> detectors,
-    required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required Consumer<MlKitAnalyzerResult> consumer,
-  }) => throw UnimplementedError();
-
-  @override
-  Future<Size<int>?> $QualitySelector$getResolution(
-    CameraInfo cameraInfo,
-    Quality quality,
-  ) => throw UnimplementedError();
-  // QualitySelectorImpl.getResolution(cameraInfo, quality);
-
-  @override
-  QualitySelector $QualitySelector$from(
-    Quality quality, [
-    FallbackStrategy? fallbackStrategy,
-  ]) => throw UnimplementedError();
-  // QualitySelectorImpl.from(quality, fallbackStrategy: fallbackStrategy);
-
-  @override
-  QualitySelector $QualitySelector$fromOrderedList(
-    List<Quality> qualities, [
-    FallbackStrategy? fallbackStrategy,
-  ]) => throw UnimplementedError();
-  // QualitySelectorImpl.fromOrderedList(
-  //   qualities,
-  //   fallbackStrategy: fallbackStrategy,
-  // );
-
-  @override
-  BarcodeScannerOptions $BarcodeScannerOptions({
-    bool? enableAllPotentialBarcodes,
-    List<BarcodeFormat>? formats,
-    ZoomSuggestionOptions? zoomSuggestionOptions,
-  }) => throw UnimplementedError();
-
-  @override
-  FaceDetectorOptions $FaceDetectorOptions({
-    bool? enableTracking,
-    FaceDetectorOptionsClassificationMode? classificationMode,
-    FaceDetectorOptionsContourMode? contourMode,
-    FaceDetectorOptionsLandmarkMode? landmarkMode,
-    double? minFaceSize,
-    FaceDetectorOptionsPerformanceMode? performanceMode,
-  }) => throw UnimplementedError();
-
-  @override
-  ZoomSuggestionOptions $ZoomSuggestionOptions(
-    ZoomSuggestionOptionsZoomCallback zoomCallback, {
-    double? maxSupportedZoomRatio,
-  }) => throw UnimplementedError();
-
-  @override
-  FileOutputOptions $FileOutputOptions(
-    File file, {
-    Duration? durationLimit,
-    int? fileSizeLimitBytes,
-    Location? location,
-  }) => FileOutputOptionsImpl(
-    file,
-    durationLimit: durationLimit,
-    fileSizeLimitBytes: fileSizeLimitBytes,
-    location: location,
-  );
-
-  @override
-  SurfaceOrientedMeteringPointFactory $SurfaceOrientedMeteringPointFactory(
-    width,
-    height,
-  ) => SurfaceOrientedMeteringPointFactoryImpl(width, height);
-
-  @override
-  FocusMeteringAction $FocusMeteringAction(
-    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
-    bool? disableAutoCancel,
-    Duration? autoCancelDuration,
-  }) => FocusMeteringActionImpl(
-    point,
-    morePoints: morePoints,
-    disableAutoCancel: disableAutoCancel,
-    autoCancelDuration: autoCancelDuration,
-  );
-
-  @override
-  ImageAnalysisAnalyzer $ImageAnalysisAnalyzer({
-    required Consumer<ImageProxy> consumer,
-  }) => ImageAnalysisImageAnalyzerImplImpl(consumer: consumer);
-
-  @override
-  Camera2CameraControl $Camera2CameraControl$from(
-    CameraControl cameraControl,
-  ) => throw UnimplementedError();
-
-  @override
-  Camera2CameraInfo $Camera2CameraInfo$from(CameraInfo cameraInfo) =>
-      throw UnimplementedError();
-
-  @override
-  CaptureRequestOptions $CaptureRequestOptions({
-    CameraMetadataControlMode? mode,
-    CameraMetadataControlAeMode? aeMode,
-    CameraMetadataControlAfMode? afMode,
-    CameraMetadataControlAwbMode? awbMode,
-    int? sensorExposureTime,
-  }) => throw UnimplementedError();
-
-  @override
-  AVAnalyzer $AVAnalyzer({
-    List<AVMetadataObjectType>? types,
-    required Consumer<AVAnalyzerResult> consumer,
-  }) => AVAnalyzerImpl(types: types, consumer: consumer);
-
-  @override
-  ImageCaptureOnImageCapturedCallback $ImageCaptureOnImageCapturedCallback({
-    void Function()? onCaptureStarted,
-    void Function(int progress)? onCaptureProcessProgressed,
-    void Function(Image bitmap)? onPostviewBitmapAvailable,
-    void Function(ImageProxy image)? onCaptureSuccess,
-    void Function(Object exception)? onError,
-  }) => ImageCaptureOnImageCapturedCallbackImpl(
-    onCaptureStarted: onCaptureStarted,
-    onCaptureProcessProgressed: onCaptureProcessProgressed,
-    onPostviewBitmapAvailable: onPostviewBitmapAvailable,
-    onCaptureSuccess: onCaptureSuccess,
-    onError: onError,
-  );
-
-  @override
-  ResolutionFilter $ResolutionFilter({
-    required List<Size<int>> Function(
-      List<Size<int>> supportedSizes,
-      int rotationDegrees,
-    )
-    filter,
-  }) => throw UnimplementedError();
-  // ResolutionFilterImpl(filter: filter);
-
-  @override
-  RotationProvider $RotationProvider() => RotationProviderImpl();
-
-  @override
-  RotationProviderListener $RotationProviderListener({
-    required void Function(SurfaceRotation rotation) onRotationChanged,
-  }) => RotationProviderListenerImpl(onRotationChanged: onRotationChanged);
-
-  @override
-  ZoomSuggestionOptionsZoomCallback $ZoomSuggestionOptionsZoomCallback({
-    required bool Function(double zoomRatio) setZoom,
-  }) => throw UnimplementedError();
-
-  @override
-  Location $Location(double latitude, double longitude) =>
-      LocationImpl(latitude, longitude);
-
-  @override
-  AspectRatioStrategy $AspectRatioStrategy({
-    required AspectRatio preferredAspectRatio,
-    required AspectRatioStrategyFallbackRule fallbackRule,
-  }) => throw UnimplementedError();
-  // AspectRatioStrategyImpl(
-  //   preferredAspectRatio: preferredAspectRatio,
-  //   fallbackRule: fallbackRule,
-  // );
-
-  @override
-  AspectRatioStrategy get $AspectRatioStrategy$ratio16_9FallbackAutoStrategy =>
-      throw UnimplementedError();
-  // AspectRatioStrategyImpl.ratio16_9FallbackAutoStrategy;
-
-  @override
-  AspectRatioStrategy get $AspectRatioStrategy$ratio4_3FallbackAutoStrategy =>
-      throw UnimplementedError();
-  // AspectRatioStrategyImpl.ratio4_3FallbackAutoStrategy;
-
-  @override
-  AudioConfig get $AudioConfig$audioDisabled => AudioConfigImpl.audioDisabled;
-
-  @override
-  AudioConfig $AudioConfig$create(bool enableAudio) =>
-      AudioConfigImpl.create(enableAudio);
-
-  @override
-  BarcodeScanner $BarcodeScanner() => throw UnimplementedError();
-
-  @override
-  BarcodeScanner $BarcodeScanner$options(BarcodeScannerOptions options) =>
-      throw UnimplementedError();
-
-  @override
-  Future<bool> $CameraInfo$mustPlayShutterSound() =>
-      CameraInfoImpl.mustPlayShutterSound();
-
-  @override
-  Consumer<T> $Consumer<T>({required void Function(T value) accept}) =>
-      ConsumerImpl(accept: accept);
-
-  @override
-  DynamicRange $DynamicRange({
-    required DynamicRangeEncoding encoding,
-    required DynamicRangeBitDepth bitDepth,
-  }) => throw UnimplementedError();
-  // DynamicRangeImpl(encoding: encoding, bitDepth: bitDepth);
-
-  @override
-  DynamicRange get $DynamicRange$dolbyVision10Bit => throw UnimplementedError();
-  // DynamicRangeImpl.dolbyVision10Bit;
-
-  @override
-  DynamicRange get $DynamicRange$dolbyVision8Bit => throw UnimplementedError();
-  // DynamicRangeImpl.dolbyVision8Bit;
-
-  @override
-  DynamicRange get $DynamicRange$hdr10Plus10Bit => throw UnimplementedError();
-  // DynamicRangeImpl.hdr10Plus10Bit;
-
-  @override
-  DynamicRange get $DynamicRange$hdr10_10Bit => throw UnimplementedError();
-  // DynamicRangeImpl.hdr10_10Bit;
-
-  @override
-  DynamicRange get $DynamicRange$hdrUnspecified10Bit =>
-      throw UnimplementedError();
-  // DynamicRangeImpl.hdrUnspecified10Bit;
-
-  @override
-  DynamicRange get $DynamicRange$hlg10Bit => throw UnimplementedError();
-  // DynamicRangeImpl.hlg10Bit;
-
-  @override
-  DynamicRange get $DynamicRange$sdr => throw UnimplementedError();
-  // DynamicRangeImpl.sdr;
-
-  @override
-  DynamicRange get $DynamicRange$unspecifid => throw UnimplementedError();
-  // DynamicRangeImpl.unspecifid;
-
-  @override
-  FaceDetector $FaceDetector() => throw UnimplementedError();
-
-  @override
-  FaceDetector $FaceDetector$options(FaceDetectorOptions options) =>
-      throw UnimplementedError();
-
-  @override
-  Future<double> $MeteringPointFactory$getDefaultPointSize() =>
-      MeteringPointFactoryImpl.getDefaultPointSize();
-
-  @override
-  Observer<T> $Observer<T>({required void Function(T value) onChanged}) =>
-      ObserverImpl(onChanged: onChanged);
-
-  @override
-  Quality get $Quality$fhd => throw UnimplementedError();
-  // QualityImpl.fhd;
-
-  @override
-  Quality get $Quality$hd => throw UnimplementedError();
-  // QualityImpl.hd;
-
-  @override
-  Quality get $Quality$highest => throw UnimplementedError();
-  // QualityImpl.highest;
-
-  @override
-  Quality get $Quality$lowest => throw UnimplementedError();
-  // QualityImpl.lowest;
-
-  @override
-  Quality get $Quality$sd => throw UnimplementedError();
-  // QualityImpl.sd;
-
-  @override
-  Quality get $Quality$uhd => throw UnimplementedError();
-  // QualityImpl.uhd;
-
-  @override
-  ResolutionSelector $ResolutionSelector({
-    ResolutionSelectorMode? mode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  }) => ResolutionSelectorImpl(
-    mode: mode,
-    aspectRatioStrategy: aspectRatioStrategy,
-    resolutionFilter: resolutionFilter,
-    resolutionStrategy: resolutionStrategy,
-  );
-
-  @override
-  ResolutionStrategy $ResolutionStrategy({
-    required Size<int> boundSize,
-    required ResolutionStrategyFallbackRule fallbackRule,
-  }) =>
-      ResolutionStrategyImpl(boundSize: boundSize, fallbackRule: fallbackRule);
-
-  @override
-  ResolutionStrategy get $ResolutionStrategy$highestAvailableStrategy =>
-      ResolutionStrategyImpl.highestAvailableStrategy;
-
-  @override
-  VisionAnalyzer $VisionAnalyzer({
-    List<VisionObjectType>? types,
-    required Consumer<VisionAnalyzerResult> consumer,
-  }) => VisionAnalyzerImpl(types: types, consumer: consumer);
-
-  @override
-  InputImage $InputImage$fromFilePath(Uri imageUri) =>
-      throw UnimplementedError();
-
-  @override
-  VNImageRequestHandler $VNImageRequestHandler$uri(Uri uri) =>
-      VNImageRequestHandlerImpl.uri(uri);
-
-  @override
-  VNDetectBarcodesRequest $VNDetectBarcodesRequest({
-    required VNRequestCompletionHandler completionHandler,
-  }) => VNDetectBarcodesRequestImpl(completionHandler: completionHandler);
-
-  @override
-  VNDetectFaceRectanglesRequest $VNDetectFaceRectanglesRequest({
-    required VNRequestCompletionHandler completionHandler,
-  }) => VNDetectFaceRectanglesRequestImpl(completionHandler: completionHandler);
-
-  @override
-  VisionImage $VisionImage$file(File file) => VisionImageImpl.file(file);
-
-  @override
-  VisionImage $VisionImage$uri(Uri uri) => VisionImageImpl.uri(uri);
-
-  @override
-  VisionDetector $VisionDetector({List<VisionObjectType>? types}) =>
-      VisionDetectorImpl(types: types);
 }

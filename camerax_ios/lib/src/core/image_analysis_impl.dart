@@ -1,10 +1,10 @@
 import 'package:camerax_ios/src/camerax_api.g.dart';
 import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'image_proxy_impl.dart';
-
-base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
+abstract base class ImageAnalysis$AnalyzerImpl
+    implements ImageAnalysis$Analyzer {
   ImageAnalysisAnalyzerProxyApi get api;
 
   @override
@@ -12,63 +12,63 @@ base mixin ImageAnalysisAnalyzerImpl on ImageAnalysisAnalyzer {
 
   @override
   Future<Size<int>?> getDefaultTargetResolution() => throw UnimplementedError();
-  // api.getDefaultTargetResolution().then((e) => e?.impl);
 
   @override
-  Future<ImageAnalysisCoordinateSystem> getTargetCoordinateSystem() =>
+  Future<ImageAnalysis$CoordinateSystem> getTargetCoordinateSystem() =>
       throw UnimplementedError();
-  // api.getTargetCoordinateSystem().then((e) => e.impl);
 }
 
-final class ImageAnalysisImageAnalyzerImplImpl extends ImageAnalysisAnalyzer
-    with ImageAnalysisAnalyzerImpl {
+final class ImageAnalysis$AnalyzerImplImpl extends ImageAnalysis$AnalyzerImpl {
   @override
   final ImageAnalysisAnalyzerImplProxyApi api;
 
-  ImageAnalysisImageAnalyzerImplImpl.internal(this.api) : super.impl();
+  ImageAnalysis$AnalyzerImplImpl.internal(this.api);
+}
 
-  factory ImageAnalysisImageAnalyzerImplImpl({
+final class ImageAnalysisChannelImpl extends ImageAnalysisChannel {
+  @override
+  ImageAnalysis$Analyzer createAnalyzer({
     required Consumer<ImageProxy> consumer,
   }) {
     final api = ImageAnalysisAnalyzerImplProxyApi(consumer: consumer.api);
-    return ImageAnalysisImageAnalyzerImplImpl.internal(api);
+    return ImageAnalysis$AnalyzerImplImpl.internal(api);
   }
 }
 
-extension ImageAnalysisStrategyX on ImageAnalysisStrategy {
+extension ImageAnalysis$StrategyX on ImageAnalysis$Strategy {
   ImageAnalysisStrategyApi get api => ImageAnalysisStrategyApi.values[index];
 }
 
 extension ImageAnalysisStrategyApiX on ImageAnalysisStrategyApi {
-  ImageAnalysisStrategy get impl => ImageAnalysisStrategy.values[index];
+  ImageAnalysis$Strategy get impl => ImageAnalysis$Strategy.values[index];
 }
 
-extension ImageAnalysisCoordinateSystemX on ImageAnalysisCoordinateSystem {
+extension ImageAnalysis$CoordinateSystemX on ImageAnalysis$CoordinateSystem {
   ImageAnalysisCoordinateSystemApi get api =>
       ImageAnalysisCoordinateSystemApi.values[index];
 }
 
 extension ImageAnalysisCoordinateSystemApiX
     on ImageAnalysisCoordinateSystemApi {
-  ImageAnalysisCoordinateSystem get impl =>
-      ImageAnalysisCoordinateSystem.values[index];
+  ImageAnalysis$CoordinateSystem get impl =>
+      ImageAnalysis$CoordinateSystem.values[index];
 }
 
-extension ImageAnalysisOutputImageFormatX on ImageAnalysisOutputImageFormat {
+extension ImageAnalysis$OutputImageFormatX on ImageAnalysis$OutputImageFormat {
   ImageAnalysisOutputImageFormatApi get api =>
       ImageAnalysisOutputImageFormatApi.values[index];
 }
 
 extension ImageAnalysisOutputImageFormatApiX
     on ImageAnalysisOutputImageFormatApi {
-  ImageAnalysisOutputImageFormat get impl =>
-      ImageAnalysisOutputImageFormat.values[index];
+  ImageAnalysis$OutputImageFormat get impl =>
+      ImageAnalysis$OutputImageFormat.values[index];
 }
 
-extension ImageAnalysisAnalyzerX on ImageAnalysisAnalyzer {
+extension ImageAnalysis$AnalyzerX on ImageAnalysis$Analyzer {
   ImageAnalysisAnalyzerProxyApi get api {
     final impl = this;
-    if (impl is! ImageAnalysisAnalyzerImpl) throw TypeError();
+    if (impl is! ImageAnalysis$AnalyzerImpl) throw TypeError();
     return impl.api;
   }
 }

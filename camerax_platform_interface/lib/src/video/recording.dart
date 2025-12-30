@@ -1,8 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
 
-abstract base class Recording extends AutoCloseable {
-  Recording.impl() : super.impl();
-
+abstract interface class Recording implements AutoCloseable {
   Future<bool> isPersistent();
   Future<void> mute(bool muted);
   Future<void> pause();

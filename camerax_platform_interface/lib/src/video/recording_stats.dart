@@ -1,8 +1,6 @@
-import 'audio_stats.dart';
+import 'package:camerax_platform_interface/src/video.dart';
 
-abstract base class RecordingStats {
-  RecordingStats.impl();
-
+abstract interface class RecordingStats {
   AudioStats get audioStats;
   int get numBytesRecorded;
   Duration get recordedDuration;

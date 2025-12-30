@@ -1,31 +1,49 @@
 import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class DynamicRangeImpl extends DynamicRange {
-  static DynamicRangeImpl get unspecifid =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.unspecifid);
-  static DynamicRangeImpl get sdr =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.sdr);
-  static DynamicRangeImpl get hdrUnspecified10Bit =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.hdrUnspecified10Bit);
-  static DynamicRangeImpl get hdr10_10Bit =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.hdr10_10Bit);
-  static DynamicRangeImpl get hdr10Plus10Bit =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.hdr10Plus10Bit);
-  static DynamicRangeImpl get hlg10Bit =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.hlg10Bit);
-  static DynamicRangeImpl get dolbyVision8Bit =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.dolbyVision8Bit);
-  static DynamicRangeImpl get dolbyVision10Bit =>
-      DynamicRangeImpl.internal(DynamicRangeProxyApi.dolbyVision10Bit);
-
+final class DynamicRangeImpl implements DynamicRange {
   final DynamicRangeProxyApi api;
 
-  DynamicRangeImpl.internal(this.api) : super.impl();
+  DynamicRangeImpl.internal(this.api);
 
-  factory DynamicRangeImpl({
-    required DynamicRangeEncoding encoding,
-    required DynamicRangeBitDepth bitDepth,
+  @override
+  Future<DynamicRange$BitDepth> getBitDepth() =>
+      api.getBitDepth().then((e) => e.impl);
+
+  @override
+  Future<DynamicRange$Encoding> getEncoding() =>
+      api.getEncoding().then((e) => e.impl);
+}
+
+final class DynamicRangeChannelImpl extends DynamicRangeChannel {
+  @override
+  DynamicRange get unspecifid =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.unspecifid);
+  @override
+  DynamicRange get sdr => DynamicRangeImpl.internal(DynamicRangeProxyApi.sdr);
+  @override
+  DynamicRange get hdrUnspecified10Bit =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.hdrUnspecified10Bit);
+  @override
+  DynamicRange get hdr10_10Bit =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.hdr10_10Bit);
+  @override
+  DynamicRange get hdr10Plus10Bit =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.hdr10Plus10Bit);
+  @override
+  DynamicRange get hlg10Bit =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.hlg10Bit);
+  @override
+  DynamicRange get dolbyVision8Bit =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.dolbyVision8Bit);
+  @override
+  DynamicRange get dolbyVision10Bit =>
+      DynamicRangeImpl.internal(DynamicRangeProxyApi.dolbyVision10Bit);
+
+  @override
+  DynamicRange create({
+    required DynamicRange$Encoding encoding,
+    required DynamicRange$BitDepth bitDepth,
   }) {
     final api = DynamicRangeProxyApi(
       encoding: encoding.api,
@@ -33,30 +51,22 @@ final class DynamicRangeImpl extends DynamicRange {
     );
     return DynamicRangeImpl.internal(api);
   }
-
-  @override
-  Future<DynamicRangeBitDepth> getBitDepth() =>
-      api.getBitDepth().then((e) => e.impl);
-
-  @override
-  Future<DynamicRangeEncoding> getEncoding() =>
-      api.getEncoding().then((e) => e.impl);
 }
 
-extension DynamicRangeEncodingX on DynamicRangeEncoding {
+extension DynamicRangeEncodingX on DynamicRange$Encoding {
   DynamicRangeEncodingApi get api => DynamicRangeEncodingApi.values[index];
 }
 
 extension DynamicRangeEncodingApiX on DynamicRangeEncodingApi {
-  DynamicRangeEncoding get impl => DynamicRangeEncoding.values[index];
+  DynamicRange$Encoding get impl => DynamicRange$Encoding.values[index];
 }
 
-extension DynamicRangeBitDepthX on DynamicRangeBitDepth {
+extension DynamicRangeBitDepthX on DynamicRange$BitDepth {
   DynamicRangeBitDepthApi get api => DynamicRangeBitDepthApi.values[index];
 }
 
 extension DynamicRangeBitDepthApiX on DynamicRangeBitDepthApi {
-  DynamicRangeBitDepth get impl => DynamicRangeBitDepth.values[index];
+  DynamicRange$BitDepth get impl => DynamicRange$BitDepth.values[index];
 }
 
 extension DynamicRangeX on DynamicRange {

@@ -1,21 +1,38 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/core.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'camera_info.dart';
+enum CameraSelector$LensFacing { unknown, front, back, external }
 
-enum CameraSelectorLensFacing { unknown, front, back, external }
+abstract interface class CameraSelector {
+  static CameraSelector get back => CameraSelectorChannel.instance.back;
+  static CameraSelector get front => CameraSelectorChannel.instance.front;
+  static CameraSelector get external => CameraSelectorChannel.instance.external;
 
-abstract base class CameraSelector {
-  static CameraSelector get back => CameraXPlugin.instance.$CameraSelector$back;
-  static CameraSelector get front =>
-      CameraXPlugin.instance.$CameraSelector$front;
-  static CameraSelector get external =>
-      CameraXPlugin.instance.$CameraSelector$external;
-
-  CameraSelector.impl();
-
-  factory CameraSelector({CameraSelectorLensFacing? lensFacing}) =>
-      CameraXPlugin.instance.$CameraSelector(lensFacing: lensFacing);
+  factory CameraSelector({CameraSelector$LensFacing? lensFacing}) =>
+      CameraSelectorChannel.instance.create(lensFacing: lensFacing);
 
   Future<List<CameraInfo>> filter(List<CameraInfo> cameraInfos);
   Future<String?> getPhysicalCameraId();
+}
+
+abstract base class CameraSelectorChannel extends PlatformInterface {
+  CameraSelectorChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static CameraSelectorChannel? _instance;
+
+  static CameraSelectorChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(CameraSelectorChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  CameraSelector get back;
+  CameraSelector get front;
+  CameraSelector get external;
+
+  CameraSelector create({CameraSelector$LensFacing? lensFacing});
 }

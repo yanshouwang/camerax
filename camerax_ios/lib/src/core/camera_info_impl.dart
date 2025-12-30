@@ -37,7 +37,7 @@ final class CameraInfoImpl extends CameraInfo {
   Future<double> getIntrinsicZoomRatio() => api.getIntrinsicZoomRatio();
 
   @override
-  Future<CameraSelectorLensFacing> getLensFacing() =>
+  Future<CameraSelector$LensFacing> getLensFacing() =>
       api.getLensFacing().then((e) => e.impl);
 
   @override
@@ -116,7 +116,7 @@ final class CameraInfoImpl extends CameraInfo {
   //  api.getMaxTorchStrengthLevel();
 
   @override
-  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]) =>
+  Future<int> getSensorRotationDegrees([Surface$Rotation? relativeRotation]) =>
       relativeRotation == null
       ? api.getSensorRotationDegrees1()
       : api.getSensorRotationDegrees2(relativeRotation.api);

@@ -1,43 +1,43 @@
 package dev.zeekr.camerax_android.camera2.interop
 
-import android.hardware.camera2.CaptureRequest
-import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.CaptureRequestOptions
-import androidx.camera.camera2.interop.ExperimentalCamera2Interop
-import dev.zeekr.camerax_android.CameraMetadataControlAeModeApi
-import dev.zeekr.camerax_android.CameraMetadataControlAfModeApi
-import dev.zeekr.camerax_android.CameraMetadataControlAwbModeApi
-import dev.zeekr.camerax_android.CameraMetadataControlModeApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsProxyApi
-import dev.zeekr.camerax_android.camera2.impl
+import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsBuilderProxyApi
+import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
 
-@OptIn(ExperimentalCamera2Interop::class)
-class CaptureRequestOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiCaptureRequestOptionsProxyApi(registrar) {
-    override fun build(
-        mode: CameraMetadataControlModeApi?,
-        aeMode: CameraMetadataControlAeModeApi?,
-        afMode: CameraMetadataControlAfModeApi?,
-        awbMode: CameraMetadataControlAwbModeApi?,
-        sensorExposureTime: Long?
-    ): CaptureRequestOptions {
-        val builder = CaptureRequestOptions.Builder()
-        if (mode != null) {
-            builder.setCaptureRequestOption(CaptureRequest.CONTROL_MODE, mode.impl)
+class CaptureRequestOptionsImpl {
+    class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiCaptureRequestOptionsBuilderProxyApi(registrar) {
+        override fun pigeon_defaultConstructor(): CaptureRequestOptions.Builder {
+            return CaptureRequestOptions.Builder()
         }
-        if (aeMode != null) {
-            builder.setCaptureRequestOption(CaptureRequest.CONTROL_AE_MODE, aeMode.impl)
+
+        override fun setIntCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder, key: CaptureRequestImpl.IntKey, value: Long
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.setCaptureRequestOption(key.instance, value.toInt())
         }
-        if (afMode != null) {
-            builder.setCaptureRequestOption(CaptureRequest.CONTROL_AF_MODE, afMode.impl)
+
+        override fun setLongCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder, key: CaptureRequestImpl.LongKey, value: Long
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.setCaptureRequestOption(key.instance, value)
         }
-        if (awbMode != null) {
-            builder.setCaptureRequestOption(CaptureRequest.CONTROL_AWB_MODE, awbMode.impl)
+
+        override fun setFloatCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder, key: CaptureRequestImpl.FloatKey, value: Double
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.setCaptureRequestOption(key.instance, value.toFloat())
         }
-        if (sensorExposureTime != null) {
-            builder.setCaptureRequestOption(CaptureRequest.SENSOR_EXPOSURE_TIME, sensorExposureTime)
+
+        override fun setBooleanCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder, key: CaptureRequestImpl.BooleanKey, value: Boolean
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.setCaptureRequestOption(key.instance, value)
         }
-        return builder.build()
+
+        override fun build(pigeon_instance: CaptureRequestOptions.Builder): CaptureRequestOptions {
+            return pigeon_instance.build()
+        }
     }
 }

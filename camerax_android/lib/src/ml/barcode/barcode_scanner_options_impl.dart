@@ -11,7 +11,7 @@ final class BarcodeScannerOptionsImpl extends BarcodeScannerOptions {
 
   factory BarcodeScannerOptionsImpl({
     bool? enableAllPotentialBarcodes,
-    List<BarcodeFormat>? formats,
+    List<Barcode$Format>? formats,
     ZoomSuggestionOptions? zoomSuggestionOptions,
   }) {
     final api = BarcodeScannerOptionsProxyApi.build(

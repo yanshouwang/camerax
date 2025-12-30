@@ -9,8 +9,8 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
   FocusMeteringActionImpl.internal(this.api) : super.impl();
 
   factory FocusMeteringActionImpl(
-    (MeteringPoint, List<FocusMeteringActionMeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringActionMeteringMode>)>? morePoints,
+    (MeteringPoint, List<FocusMeteringAction$MeteringMode>) point, {
+    List<(MeteringPoint, List<FocusMeteringAction$MeteringMode>)>? morePoints,
     bool? disableAutoCancel,
     Duration? autoCancelDuration,
   }) {
@@ -45,7 +45,7 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
 }
 
 extension MeteringPointApiTupleX
-    on (MeteringPoint, List<FocusMeteringActionMeteringMode>) {
+    on (MeteringPoint, List<FocusMeteringAction$MeteringMode>) {
   MeteringPointTupleProxyApi get api => MeteringPointTupleProxyApi(
     point: $1.api,
     modes: $2.map((e) => e.api).toList(),
@@ -61,7 +61,7 @@ extension DurationX on Duration {
   }
 }
 
-extension FocusMeteringActionMeteringModeX on FocusMeteringActionMeteringMode {
+extension FocusMeteringActionMeteringModeX on FocusMeteringAction$MeteringMode {
   FocusMeteringActionMeteringModeApi get api =>
       FocusMeteringActionMeteringModeApi.values[index];
 }

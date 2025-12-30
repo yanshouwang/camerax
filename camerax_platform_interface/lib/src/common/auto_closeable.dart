@@ -1,5 +1,3 @@
-abstract base class AutoCloseable {
-  AutoCloseable.impl();
-
+abstract interface class AutoCloseable {
   Future<void> close();
 }

@@ -1,13 +1,31 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-abstract base class AudioConfig {
+abstract interface class AudioConfig {
   static AudioConfig get audioDisabled =>
-      CameraXPlugin.instance.$AudioConfig$audioDisabled;
-
-  AudioConfig.impl();
+      AudioConfigChannel.instance.audioDisabled;
 
   factory AudioConfig.create(bool enableAudio) =>
-      CameraXPlugin.instance.$AudioConfig$create(enableAudio);
+      AudioConfigChannel.instance.create(enableAudio);
 
   Future<bool> getAudioEnabled();
+}
+
+abstract base class AudioConfigChannel extends PlatformInterface {
+  AudioConfigChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static AudioConfigChannel? _instance;
+
+  static AudioConfigChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(AudioConfigChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  AudioConfig get audioDisabled;
+
+  AudioConfig create(bool enableAudio);
 }

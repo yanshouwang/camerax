@@ -2,6 +2,9 @@ package dev.zeekr.camerax_android
 
 import android.app.Activity
 import android.content.Context
+import dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl
+import dev.zeekr.camerax_android.camera2.CameraMetadataImpl
+import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraInfoImpl
 import dev.zeekr.camerax_android.camera2.interop.CaptureRequestOptionsImpl
@@ -112,8 +115,28 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return Camera2CameraInfoImpl(this)
     }
 
-    override fun getPigeonApiCaptureRequestOptionsProxyApi(): PigeonApiCaptureRequestOptionsProxyApi {
-        return CaptureRequestOptionsImpl(this)
+    override fun getPigeonApiCaptureRequestOptionsBuilderProxyApi(): PigeonApiCaptureRequestOptionsBuilderProxyApi {
+        return CaptureRequestOptionsImpl.BuilderImpl(this)
+    }
+
+    override fun getPigeonApiCameraCharacteristicsKeyProxyApi(): PigeonApiCameraCharacteristicsKeyProxyApi {
+        return CameraCharacteristicsImpl.KeyImpl(this)
+    }
+
+    override fun getPigeonApiCameraCharacteristicsProxyApi(): PigeonApiCameraCharacteristicsProxyApi {
+        return CameraCharacteristicsImpl(this)
+    }
+
+    override fun getPigeonApiCameraMetadataProxyApi(): PigeonApiCameraMetadataProxyApi {
+        return CameraMetadataImpl(this)
+    }
+
+    override fun getPigeonApiCaptureRequestKeyProxyApi(): PigeonApiCaptureRequestKeyProxyApi {
+        return CaptureRequestImpl.KeyImpl(this)
+    }
+
+    override fun getPigeonApiCaptureRequestProxyApi(): PigeonApiCaptureRequestProxyApi {
+        return CaptureRequestImpl(this)
     }
 
     override fun getPigeonApiAutoCloseableProxyApi(): PigeonApiAutoCloseableProxyApi {

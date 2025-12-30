@@ -1,12 +1,33 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-abstract base class Quality {
-  static Quality get sd => CameraXPlugin.instance.$Quality$sd;
-  static Quality get hd => CameraXPlugin.instance.$Quality$hd;
-  static Quality get fhd => CameraXPlugin.instance.$Quality$fhd;
-  static Quality get uhd => CameraXPlugin.instance.$Quality$uhd;
-  static Quality get lowest => CameraXPlugin.instance.$Quality$lowest;
-  static Quality get highest => CameraXPlugin.instance.$Quality$highest;
+abstract interface class Quality {
+  static Quality get sd => QualityChannel.instance.sd;
+  static Quality get hd => QualityChannel.instance.hd;
+  static Quality get fhd => QualityChannel.instance.fhd;
+  static Quality get uhd => QualityChannel.instance.uhd;
+  static Quality get lowest => QualityChannel.instance.lowest;
+  static Quality get highest => QualityChannel.instance.highest;
+}
 
-  Quality.impl();
+abstract base class QualityChannel extends PlatformInterface {
+  QualityChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static QualityChannel? _instance;
+
+  static QualityChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(QualityChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  Quality get sd;
+  Quality get hd;
+  Quality get fhd;
+  Quality get uhd;
+  Quality get lowest;
+  Quality get highest;
 }

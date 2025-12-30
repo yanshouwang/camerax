@@ -11,7 +11,7 @@ final class ResolutionSelectorImpl extends ResolutionSelector {
   ResolutionSelectorImpl.internal(this.api) : super.impl();
 
   factory ResolutionSelectorImpl({
-    ResolutionSelectorMode? mode,
+    ResolutionSelector$Mode? mode,
     AspectRatioStrategy? aspectRatioStrategy,
     ResolutionFilter? resolutionFilter,
     ResolutionStrategy? resolutionStrategy,
@@ -26,7 +26,7 @@ final class ResolutionSelectorImpl extends ResolutionSelector {
   }
 
   @override
-  Future<ResolutionSelectorMode> getAllowedResolutionMode() =>
+  Future<ResolutionSelector$Mode> getAllowedResolutionMode() =>
       throw UnimplementedError();
   // api.getAllowedResolutionMode().then((e) => e.impl);
 
@@ -44,12 +44,12 @@ final class ResolutionSelectorImpl extends ResolutionSelector {
       api.getResolutionStrategy().then((e) => e?.impl);
 }
 
-extension ResolutionSelectorModeX on ResolutionSelectorMode {
+extension ResolutionSelectorModeX on ResolutionSelector$Mode {
   ResolutionSelectorModeApi get api => ResolutionSelectorModeApi.values[index];
 }
 
 extension ResolutionSelectorModeApiX on ResolutionSelectorModeApi {
-  ResolutionSelectorMode get impl => ResolutionSelectorMode.values[index];
+  ResolutionSelector$Mode get impl => ResolutionSelector$Mode.values[index];
 }
 
 extension ResolutionSelectorX on ResolutionSelector {

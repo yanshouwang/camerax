@@ -1,20 +1,10 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/core.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'camera_selector.dart';
-import 'camera_state.dart';
-import 'dynamic_range.dart';
-import 'exposure_state.dart';
-import 'focus_metering_action.dart';
-import 'low_light_boost_state.dart';
-import 'torch_state.dart';
-import 'zoom_state.dart';
-
-abstract base class CameraInfo {
+abstract interface class CameraInfo {
   static Future<bool> mustPlayShutterSound() =>
-      CameraXPlugin.instance.$CameraInfo$mustPlayShutterSound();
-
-  CameraInfo.impl();
+      CameraInfoChannel.instance.mustPlayShutterSound();
 
   Future<CameraSelector> getCameraSelector();
   Future<CameraState?> getCameraState();
@@ -22,7 +12,7 @@ abstract base class CameraInfo {
   Future<void> removeCameraStateObserver(Observer<CameraState> observer);
   Future<ExposureState> getExposureState();
   Future<double> getIntrinsicZoomRatio();
-  Future<CameraSelectorLensFacing> getLensFacing();
+  Future<CameraSelector$LensFacing> getLensFacing();
   Future<LowLightBoostState?> getLowLightBoostState();
   Future<void> observeLowLightBoostState(Observer<LowLightBoostState> observer);
   Future<void> removeLowLightBoostStateObserver(
@@ -30,7 +20,7 @@ abstract base class CameraInfo {
   );
   Future<int> getMaxTorchStrengthLevel();
   Future<Set<CameraInfo>> getPhysicalCameraInfos();
-  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]);
+  Future<int> getSensorRotationDegrees([Surface$Rotation? relativeRotation]);
   Future<Set<Range<int>>> getSupportedFrameRateRanges();
   Future<TorchState?> getTorchState();
   Future<void> observeTorchState(Observer<TorchState> observer);
@@ -50,4 +40,22 @@ abstract base class CameraInfo {
   Future<Set<DynamicRange>> querySupportedDynamicRanges(
     Set<DynamicRange> candidateDynamicRanges,
   );
+}
+
+abstract base class CameraInfoChannel extends PlatformInterface {
+  CameraInfoChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static CameraInfoChannel? _instance;
+
+  static CameraInfoChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(CameraInfoChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  Future<bool> mustPlayShutterSound();
 }

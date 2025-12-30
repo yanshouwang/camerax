@@ -13,13 +13,10 @@ import 'low_light_boost_state_impl.dart';
 import 'torch_state_impl.dart';
 import 'zoom_state_impl.dart';
 
-final class CameraInfoImpl extends CameraInfo {
-  static Future<bool> mustPlayShutterSound() =>
-      CameraInfoProxyApi.mustPlayShutterSound();
-
+final class CameraInfoImpl implements CameraInfo {
   final CameraInfoProxyApi api;
 
-  CameraInfoImpl.internal(this.api) : super.impl();
+  CameraInfoImpl.internal(this.api);
 
   @override
   Future<CameraSelector> getCameraSelector() =>
@@ -37,7 +34,7 @@ final class CameraInfoImpl extends CameraInfo {
   Future<double> getIntrinsicZoomRatio() => api.getIntrinsicZoomRatio();
 
   @override
-  Future<CameraSelectorLensFacing> getLensFacing() =>
+  Future<CameraSelector$LensFacing> getLensFacing() =>
       api.getLensFacing().then((e) => e.impl);
 
   @override
@@ -111,7 +108,7 @@ final class CameraInfoImpl extends CameraInfo {
   Future<int> getMaxTorchStrengthLevel() => api.getMaxTorchStrengthLevel();
 
   @override
-  Future<int> getSensorRotationDegrees([SurfaceRotation? relativeRotation]) =>
+  Future<int> getSensorRotationDegrees([Surface$Rotation? relativeRotation]) =>
       relativeRotation == null
       ? api.getSensorRotationDegrees1()
       : api.getSensorRotationDegrees2(relativeRotation.api);
@@ -142,6 +139,12 @@ final class CameraInfoImpl extends CameraInfo {
   @override
   Future<void> removeTorchStrengthLevelObserver(Observer<int> observer) =>
       api.removeTorchStrengthLevelObserver(observer.api);
+}
+
+final class CameraInfoChannelImpl extends CameraInfoChannel {
+  @override
+  Future<bool> mustPlayShutterSound() =>
+      CameraInfoProxyApi.mustPlayShutterSound();
 }
 
 extension CameraInfoX on CameraInfo {

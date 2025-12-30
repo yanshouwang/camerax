@@ -2,7 +2,7 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class ZoomSuggestionOptionsZoomCallbackImpl
-    extends ZoomSuggestionOptionsZoomCallback {
+    extends ZoomSuggestionOptions$ZoomCallback {
   final ZoomSuggestionOptionsZoomCallbackProxyApi api;
 
   ZoomSuggestionOptionsZoomCallbackImpl.internal(this.api) : super.impl();
@@ -23,7 +23,7 @@ final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptions {
   ZoomSuggestionOptionsImpl.internal(this.api) : super.impl();
 
   factory ZoomSuggestionOptionsImpl(
-    ZoomSuggestionOptionsZoomCallback zoomCallback, {
+    ZoomSuggestionOptions$ZoomCallback zoomCallback, {
     double? maxSupportedZoomRatio,
   }) {
     final api = ZoomSuggestionOptionsProxyApi.build(
@@ -35,7 +35,7 @@ final class ZoomSuggestionOptionsImpl extends ZoomSuggestionOptions {
 }
 
 extension ZoomSuggestionOptionsZoomCallbackX
-    on ZoomSuggestionOptionsZoomCallback {
+    on ZoomSuggestionOptions$ZoomCallback {
   ZoomSuggestionOptionsZoomCallbackProxyApi get api {
     final impl = this;
     if (impl is! ZoomSuggestionOptionsZoomCallbackImpl) throw TypeError();

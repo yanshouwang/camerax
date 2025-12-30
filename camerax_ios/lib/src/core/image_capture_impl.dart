@@ -7,7 +7,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'image_proxy_impl.dart';
 
 final class ImageCaptureOnImageCapturedCallbackImpl
-    extends ImageCaptureOnImageCapturedCallback {
+    extends ImageCapture$OnImageCapturedCallback {
   final ImageCaptureOnImageCapturedCallbackProxyApi api;
 
   ImageCaptureOnImageCapturedCallbackImpl.internal(this.api) : super.impl();
@@ -41,25 +41,25 @@ final class ImageCaptureOnImageCapturedCallbackImpl
   }
 }
 
-extension ImageCaptureCaptureModeX on ImageCaptureCaptureMode {
+extension ImageCaptureCaptureModeX on ImageCapture$CaptureMode {
   ImageCaptureCaptureModeApi get api =>
       ImageCaptureCaptureModeApi.values[index];
 }
 
 extension ImageCaptureCaptureModeApiX on ImageCaptureCaptureModeApi {
-  ImageCaptureCaptureMode get impl => ImageCaptureCaptureMode.values[index];
+  ImageCapture$CaptureMode get impl => ImageCapture$CaptureMode.values[index];
 }
 
-extension ImageCaptureFlashModeX on ImageCaptureFlashMode {
+extension ImageCaptureFlashModeX on ImageCapture$FlashMode {
   ImageCaptureFlashModeApi get api => ImageCaptureFlashModeApi.values[index];
 }
 
 extension ImageCaptureFlashModeApiX on ImageCaptureFlashModeApi {
-  ImageCaptureFlashMode get impl => ImageCaptureFlashMode.values[index];
+  ImageCapture$FlashMode get impl => ImageCapture$FlashMode.values[index];
 }
 
 extension ImageCaptureOnImageCapturedCallbackX
-    on ImageCaptureOnImageCapturedCallback {
+    on ImageCapture$OnImageCapturedCallback {
   ImageCaptureOnImageCapturedCallbackProxyApi get api {
     final impl = this;
     if (impl is! ImageCaptureOnImageCapturedCallbackImpl) throw TypeError();

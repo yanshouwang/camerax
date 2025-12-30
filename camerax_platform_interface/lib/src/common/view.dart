@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-abstract base class View {
-  View.impl();
-
+abstract interface class View {
   Widget build(BuildContext context);
 }

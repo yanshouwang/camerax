@@ -10,15 +10,15 @@ final class FaceLandmarkImpl extends FaceLandmark {
   @override
   Point<double> get position => api.position.impl;
   @override
-  FaceLandmarkType get type => api.type.impl;
+  FaceLandmark$Type get type => api.type.impl;
 }
 
-extension FaceLandmarkTypeX on FaceLandmarkType {
+extension FaceLandmarkTypeX on FaceLandmark$Type {
   FaceLandmarkTypeApi get api => FaceLandmarkTypeApi.values[index];
 }
 
 extension FaceLandmarkTypeApiX on FaceLandmarkTypeApi {
-  FaceLandmarkType get impl => FaceLandmarkType.values[index];
+  FaceLandmark$Type get impl => FaceLandmark$Type.values[index];
 }
 
 extension FaceLandmarkProxyApiX on FaceLandmarkProxyApi {

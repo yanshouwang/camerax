@@ -2,19 +2,30 @@ import 'package:camerax_android/src/camerax_api.g.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ResolutionStrategyImpl extends ResolutionStrategy {
-  static ResolutionStrategyImpl get highestAvailableStrategy =>
+final class ResolutionStrategyImpl implements ResolutionStrategy {
+  final ResolutionStrategyProxyApi api;
+
+  ResolutionStrategyImpl.internal(this.api);
+
+  @override
+  Future<Size<int>?> getBoundSize() => api.getBoundSize().then((e) => e?.impl);
+
+  @override
+  Future<ResolutionStrategy$FallbackRule> getFallbackRule() =>
+      api.getFallbackRule().then((e) => e.impl);
+}
+
+final class ResolutionStrategyChannelImpl extends ResolutionStrategyChannel {
+  @override
+  ResolutionStrategy get highestAvailableStrategy =>
       ResolutionStrategyImpl.internal(
         ResolutionStrategyProxyApi.highestAvailableStrategy,
       );
 
-  final ResolutionStrategyProxyApi api;
-
-  ResolutionStrategyImpl.internal(this.api) : super.impl();
-
-  factory ResolutionStrategyImpl({
+  @override
+  ResolutionStrategy create({
     required Size<int> boundSize,
-    required ResolutionStrategyFallbackRule fallbackRule,
+    required ResolutionStrategy$FallbackRule fallbackRule,
   }) {
     final api = ResolutionStrategyProxyApi(
       boundSize: boundSize.api,
@@ -22,24 +33,17 @@ final class ResolutionStrategyImpl extends ResolutionStrategy {
     );
     return ResolutionStrategyImpl.internal(api);
   }
-
-  @override
-  Future<Size<int>?> getBoundSize() => api.getBoundSize().then((e) => e?.impl);
-
-  @override
-  Future<ResolutionStrategyFallbackRule> getFallbackRule() =>
-      api.getFallbackRule().then((e) => e.impl);
 }
 
-extension ResolutionStrategyFallbackRuleX on ResolutionStrategyFallbackRule {
+extension ResolutionStrategy$FallbackRuleX on ResolutionStrategy$FallbackRule {
   ResolutionStrategyFallbackRuleApi get api =>
       ResolutionStrategyFallbackRuleApi.values[index];
 }
 
 extension ResolutionStrategyFallbackRuleApiX
     on ResolutionStrategyFallbackRuleApi {
-  ResolutionStrategyFallbackRule get impl =>
-      ResolutionStrategyFallbackRule.values[index];
+  ResolutionStrategy$FallbackRule get impl =>
+      ResolutionStrategy$FallbackRule.values[index];
 }
 
 extension ResolutionStrategyX on ResolutionStrategy {

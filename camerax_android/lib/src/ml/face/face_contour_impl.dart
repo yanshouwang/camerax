@@ -10,15 +10,15 @@ final class FaceContourImpl extends FaceContour {
   @override
   List<Point<double>> get points => api.points.map((e) => e.impl).toList();
   @override
-  FaceContourType get type => api.type.impl;
+  FaceContour$Type get type => api.type.impl;
 }
 
-extension FaceContourTypeX on FaceContourType {
+extension FaceContourTypeX on FaceContour$Type {
   FaceContourTypeApi get api => FaceContourTypeApi.values[index];
 }
 
 extension FaceContourTypeApiX on FaceContourTypeApi {
-  FaceContourType get impl => FaceContourType.values[index];
+  FaceContour$Type get impl => FaceContour$Type.values[index];
 }
 
 extension FaceContourProxyApiX on FaceContourProxyApi {

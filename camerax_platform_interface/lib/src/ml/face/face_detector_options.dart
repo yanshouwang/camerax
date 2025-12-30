@@ -1,24 +1,22 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-enum FaceDetectorOptionsClassificationMode { none, all }
+enum FaceDetectorOptions$ClassificationMode { none, all }
 
-enum FaceDetectorOptionsContourMode { none, all }
+enum FaceDetectorOptions$ContourMode { none, all }
 
-enum FaceDetectorOptionsLandmarkMode { none, all }
+enum FaceDetectorOptions$LandmarkMode { none, all }
 
-enum FaceDetectorOptionsPerformanceMode { fast, accurate }
+enum FaceDetectorOptions$PerformanceMode { fast, accurate }
 
-abstract base class FaceDetectorOptions {
-  FaceDetectorOptions.impl();
-
+abstract interface class FaceDetectorOptions {
   factory FaceDetectorOptions({
     bool? enableTracking,
-    FaceDetectorOptionsClassificationMode? classificationMode,
-    FaceDetectorOptionsContourMode? contourMode,
-    FaceDetectorOptionsLandmarkMode? landmarkMode,
+    FaceDetectorOptions$ClassificationMode? classificationMode,
+    FaceDetectorOptions$ContourMode? contourMode,
+    FaceDetectorOptions$LandmarkMode? landmarkMode,
     double? minFaceSize,
-    FaceDetectorOptionsPerformanceMode? performanceMode,
-  }) => CameraXPlugin.instance.$FaceDetectorOptions(
+    FaceDetectorOptions$PerformanceMode? performanceMode,
+  }) => FaceDetectorOptionsChannel.instance.create(
     enableTracking: enableTracking,
     classificationMode: classificationMode,
     contourMode: contourMode,
@@ -26,4 +24,29 @@ abstract base class FaceDetectorOptions {
     minFaceSize: minFaceSize,
     performanceMode: performanceMode,
   );
+}
+
+abstract base class FaceDetectorOptionsChannel extends PlatformInterface {
+  FaceDetectorOptionsChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static FaceDetectorOptionsChannel? _instance;
+
+  static FaceDetectorOptionsChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(FaceDetectorOptionsChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  FaceDetectorOptions create({
+    bool? enableTracking,
+    FaceDetectorOptions$ClassificationMode? classificationMode,
+    FaceDetectorOptions$ContourMode? contourMode,
+    FaceDetectorOptions$LandmarkMode? landmarkMode,
+    double? minFaceSize,
+    FaceDetectorOptions$PerformanceMode? performanceMode,
+  });
 }

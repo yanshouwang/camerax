@@ -76,7 +76,7 @@ final class VideoRecordFinalizeEventImpl extends VideoRecordFinalizeEvent
   @override
   Object? get cause => api.cause?.impl;
   @override
-  VideoRecordFinalizeEventError get error => api.error.impl;
+  VideoRecordFinalizeEvent$Error get error => api.error.impl;
   @override
   bool get hasError => api.hasError;
   @override
@@ -85,8 +85,8 @@ final class VideoRecordFinalizeEventImpl extends VideoRecordFinalizeEvent
 
 extension VideoRecordFinalizeEventErrorApiX
     on VideoRecordFinalizeEventErrorApi {
-  VideoRecordFinalizeEventError get impl =>
-      VideoRecordFinalizeEventError.values[index];
+  VideoRecordFinalizeEvent$Error get impl =>
+      VideoRecordFinalizeEvent$Error.values[index];
 }
 
 extension VideoRecordEventProxyApiX on VideoRecordEventProxyApi {

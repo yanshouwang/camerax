@@ -15,7 +15,7 @@ final class CameraSelectorImpl extends CameraSelector {
 
   CameraSelectorImpl.internal(this.api) : super.impl();
 
-  factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
+  factory CameraSelectorImpl({CameraSelector$LensFacing? lensFacing}) {
     final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
     return CameraSelectorImpl.internal(api);
   }
@@ -32,13 +32,13 @@ final class CameraSelectorImpl extends CameraSelector {
   //  api.getPhysicalCameraId();
 }
 
-extension CameraSelectorLensFacingX on CameraSelectorLensFacing {
+extension CameraSelectorLensFacingX on CameraSelector$LensFacing {
   CameraSelectorLensFacingApi get api =>
       CameraSelectorLensFacingApi.values[index];
 }
 
 extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
-  CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
+  CameraSelector$LensFacing get impl => CameraSelector$LensFacing.values[index];
 }
 
 extension CameraSelectorX on CameraSelector {

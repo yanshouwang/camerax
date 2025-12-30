@@ -1,12 +1,10 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/core.dart';
 import 'package:camerax_platform_interface/src/video.dart';
+import 'package:camerax_platform_interface/src/view.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'tap_to_focus_info.dart';
-import 'video.dart';
-
-enum CameraControllerTapToFocus {
+enum CameraController$TapToFocus {
   notStarted,
   started,
   focused,
@@ -14,12 +12,10 @@ enum CameraControllerTapToFocus {
   failed,
 }
 
-enum CameraControllerUseCase { imageCapture, imageAnalysis, videoCapture }
+enum CameraController$UseCase { imageCapture, imageAnalysis, videoCapture }
 
-abstract base class CameraController {
-  CameraController.impl();
-
-  factory CameraController() => CameraXPlugin.instance.$CameraController();
+abstract interface class CameraController {
+  factory CameraController() => CameraControllerChannel.instance.create();
 
   Future<bool> hasCamera(CameraSelector cameraSelector);
   Future<CameraSelector> getCameraSelector();
@@ -56,40 +52,40 @@ abstract base class CameraController {
   Future<bool> isImageAnalysisEnabled();
   Future<bool> isImageCaptureEnabled();
   Future<bool> isVideoCaptureEnabled();
-  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases);
+  Future<void> setEnabledUseCases(List<CameraController$UseCase> useCases);
 
   Future<ResolutionSelector?> getPreviewResolutionSelector();
   Future<void> setPreviewResolutionSelector(
     ResolutionSelector? resolutionSelector,
   );
 
-  Future<ImageCaptureFlashMode> getImageCaptureFlashMode();
-  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode);
-  Future<ImageCaptureCaptureMode> getImageCaptureMode();
-  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode);
+  Future<ImageCapture$FlashMode> getImageCaptureFlashMode();
+  Future<void> setImageCaptureFlashMode(ImageCapture$FlashMode flashMode);
+  Future<ImageCapture$CaptureMode> getImageCaptureMode();
+  Future<void> setImageCaptureMode(ImageCapture$CaptureMode captureMode);
   Future<ResolutionSelector?> getImageCaptureResolutionSelector();
   Future<void> setImageCaptureResolutionSelector(
     ResolutionSelector? resolutionSelector,
   );
   Future<void> takePicture(
-    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+    ImageCapture$OnImageCapturedCallback imageCapturedCallback,
   );
-  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy();
+  Future<ImageAnalysis$Strategy> getImageAnalysisBackpressureStrategy();
 
   Future<void> setImageAnalysisBackpressureStrategy(
-    ImageAnalysisStrategy strategy,
+    ImageAnalysis$Strategy strategy,
   );
   Future<int> getImageAnalysisImageQueueDepth();
   Future<void> setImageAnalysisImageQueueDepth(int depth);
-  Future<ImageAnalysisOutputImageFormat> getImageAnalysisOutputImageFormat();
+  Future<ImageAnalysis$OutputImageFormat> getImageAnalysisOutputImageFormat();
   Future<void> setImageAnalysisOutputImageFormat(
-    ImageAnalysisOutputImageFormat format,
+    ImageAnalysis$OutputImageFormat format,
   );
   Future<ResolutionSelector?> getImageAnalysisResolutionSelector();
   Future<void> setImageAnalysisResolutionSelector(
     ResolutionSelector? resolutionSelector,
   );
-  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer);
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysis$Analyzer analyzer);
   Future<void> clearImageAnalysisAnalyzer();
 
   Future<DynamicRange> getVideoCaptureDynamicRange();
@@ -106,4 +102,22 @@ abstract base class CameraController {
     required AudioConfig audioConfig,
     required Consumer<VideoRecordEvent> listener,
   });
+}
+
+abstract base class CameraControllerChannel extends PlatformInterface {
+  CameraControllerChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static CameraControllerChannel? _instance;
+
+  static CameraControllerChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(CameraControllerChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  CameraController create();
 }

@@ -3,7 +3,7 @@ import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/visionx.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin AVMetadataObjectImpl on AVMetadataObject {
+abstract base class AVMetadataObjectImpl implements AVMetadataObject {
   AVMetadataObjectProxyApi get api;
 
   @override
@@ -17,14 +17,14 @@ base mixin AVMetadataObjectImpl on AVMetadataObject {
   int get objectID => throw UnimplementedError();
 }
 
-base mixin AVMetadataBodyObjectImpl
-    on AVMetadataBodyObject, AVMetadataObjectImpl {
+abstract base class AVMetadataBodyObjectImpl extends AVMetadataObjectImpl
+    implements AVMetadataBodyObject {
   @override
   AVMetadataBodyObjectProxyApi get api;
 }
 
-final class AVMetadataCatHeadObjectImpl extends AVMetadataCatHeadObject
-    with AVMetadataObjectImpl {
+final class AVMetadataCatHeadObjectImpl extends AVMetadataObjectImpl
+    implements AVMetadataCatHeadObject {
   @override
   final AVMetadataCatHeadObjectProxyApi api;
   @override
@@ -42,11 +42,11 @@ final class AVMetadataCatHeadObjectImpl extends AVMetadataCatHeadObject
     required this.time,
     required this.duration,
     required this.bounds,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataDogHeadObjectImpl extends AVMetadataDogHeadObject
-    with AVMetadataObjectImpl {
+final class AVMetadataDogHeadObjectImpl extends AVMetadataObjectImpl
+    implements AVMetadataDogHeadObject {
   @override
   final AVMetadataDogHeadObjectProxyApi api;
   @override
@@ -64,11 +64,11 @@ final class AVMetadataDogHeadObjectImpl extends AVMetadataDogHeadObject
     required this.time,
     required this.duration,
     required this.bounds,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataCatBodyObjectImpl extends AVMetadataCatBodyObject
-    with AVMetadataObjectImpl, AVMetadataBodyObjectImpl {
+final class AVMetadataCatBodyObjectImpl extends AVMetadataBodyObjectImpl
+    implements AVMetadataCatBodyObject {
   @override
   final AVMetadataCatBodyObjectProxyApi api;
   @override
@@ -89,11 +89,11 @@ final class AVMetadataCatBodyObjectImpl extends AVMetadataCatBodyObject
     required this.duration,
     required this.bounds,
     required this.bodyID,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataDogBodyObjectImpl extends AVMetadataDogBodyObject
-    with AVMetadataObjectImpl, AVMetadataBodyObjectImpl {
+final class AVMetadataDogBodyObjectImpl extends AVMetadataBodyObjectImpl
+    implements AVMetadataDogBodyObject {
   @override
   final AVMetadataDogBodyObjectProxyApi api;
   @override
@@ -114,11 +114,11 @@ final class AVMetadataDogBodyObjectImpl extends AVMetadataDogBodyObject
     required this.duration,
     required this.bounds,
     required this.bodyID,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataHumanBodyObjectImpl extends AVMetadataHumanBodyObject
-    with AVMetadataObjectImpl, AVMetadataBodyObjectImpl {
+final class AVMetadataHumanBodyObjectImpl extends AVMetadataBodyObjectImpl
+    implements AVMetadataHumanBodyObject {
   @override
   final AVMetadataHumanBodyObjectProxyApi api;
   @override
@@ -139,12 +139,11 @@ final class AVMetadataHumanBodyObjectImpl extends AVMetadataHumanBodyObject
     required this.duration,
     required this.bounds,
     required this.bodyID,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataHumanFullBodyObjectImpl
-    extends AVMetadataHumanFullBodyObject
-    with AVMetadataObjectImpl, AVMetadataBodyObjectImpl {
+final class AVMetadataHumanFullBodyObjectImpl extends AVMetadataBodyObjectImpl
+    implements AVMetadataHumanFullBodyObject {
   @override
   final AVMetadataHumanFullBodyObjectProxyApi api;
   @override
@@ -165,11 +164,11 @@ final class AVMetadataHumanFullBodyObjectImpl
     required this.duration,
     required this.bounds,
     required this.bodyID,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataFaceObjectImpl extends AVMetadataFaceObject
-    with AVMetadataObjectImpl {
+final class AVMetadataFaceObjectImpl extends AVMetadataObjectImpl
+    implements AVMetadataFaceObject {
   @override
   final AVMetadataFaceObjectProxyApi api;
   @override
@@ -202,12 +201,11 @@ final class AVMetadataFaceObjectImpl extends AVMetadataFaceObject
     required this.rollAngle,
     required this.hasYawAngle,
     required this.yawAngle,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataMachineReadableCodeObjectImpl
-    extends AVMetadataMachineReadableCodeObject
-    with AVMetadataObjectImpl {
+final class AVMetadataMachineReadableCodeObjectImpl extends AVMetadataObjectImpl
+    implements AVMetadataMachineReadableCodeObject {
   @override
   final AVMetadataMachineReadableCodeObjectProxyApi api;
   @override
@@ -231,11 +229,11 @@ final class AVMetadataMachineReadableCodeObjectImpl
     required this.bounds,
     required this.corners,
     required this.stringValue,
-  }) : super.impl();
+  });
 }
 
-final class AVMetadataSalientObjectImpl extends AVMetadataSalientObject
-    with AVMetadataObjectImpl {
+final class AVMetadataSalientObjectImpl extends AVMetadataObjectImpl
+    implements AVMetadataSalientObject {
   @override
   final AVMetadataSalientObjectProxyApi api;
   @override
@@ -256,7 +254,7 @@ final class AVMetadataSalientObjectImpl extends AVMetadataSalientObject
     required this.duration,
     required this.bounds,
     required this.objectID,
-  }) : super.impl();
+  });
 }
 
 extension AVMetadataObjectTypeX on AVMetadataObjectType {

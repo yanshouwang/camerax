@@ -10,7 +10,7 @@ final class AudioStatsImpl extends AudioStats {
   @override
   double get audioAmplitude => api.audioAmplitude;
   @override
-  AudioStatsAudioState get audioState => api.audioState.impl;
+  AudioStats$AudioState get audioState => api.audioState.impl;
   @override
   Object? get errorCause => api.errorCause?.impl;
   @override
@@ -19,12 +19,12 @@ final class AudioStatsImpl extends AudioStats {
   bool get hasError => api.hasError;
 }
 
-extension AudioStatsAudioStateX on AudioStatsAudioState {
+extension AudioStatsAudioStateX on AudioStats$AudioState {
   AudioStatsAudioStateApi get api => AudioStatsAudioStateApi.values[index];
 }
 
 extension AudioStatsAudioStateApiX on AudioStatsAudioStateApi {
-  AudioStatsAudioState get impl => AudioStatsAudioState.values[index];
+  AudioStats$AudioState get impl => AudioStats$AudioState.values[index];
 }
 
 extension AudioStatsProxyApiX on AudioStatsProxyApi {

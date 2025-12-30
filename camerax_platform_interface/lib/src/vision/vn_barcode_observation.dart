@@ -1,4 +1,4 @@
-import 'vn_rectangle_observation.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
 
 enum VNBarcodeSymbology {
   aztec,
@@ -27,9 +27,8 @@ enum VNBarcodeSymbology {
   upce,
 }
 
-abstract base class VNBarcodeObservation extends VNRectangleObservation {
-  VNBarcodeObservation.impl() : super.impl();
-
+abstract interface class VNBarcodeObservation
+    implements VNRectangleObservation {
   String? get payloadStringValue;
   VNBarcodeSymbology get symbology;
 }
