@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' hide View;
 
-base mixin ViewImpl on View {
+abstract base class ViewImpl implements View {
   String get viewType;
   int? get identifier;
 

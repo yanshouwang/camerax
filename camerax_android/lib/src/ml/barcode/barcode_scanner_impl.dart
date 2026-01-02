@@ -1,32 +1,31 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
-import 'package:camerax_android/src/common.dart';
-import 'package:camerax_android/src/ml/common.dart';
-import 'package:camerax_android/src/ml/interfaces.dart';
+import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'barcode_impl.dart';
-import 'barcode_scanner_options_impl.dart';
-
-final class BarcodeScannerImpl extends BarcodeScanner
-    with AutoCloseableImpl, CloseableImpl, DetectorImpl {
+final class BarcodeScannerImpl extends DetectorImpl<List<Barcode>>
+    implements BarcodeScanner {
   @override
   final BarcodeScannerProxyApi api;
 
-  BarcodeScannerImpl.internal(this.api) : super.impl();
-
-  factory BarcodeScannerImpl() {
-    final api = BarcodeScannerProxyApi();
-    return BarcodeScannerImpl.internal(api);
-  }
-
-  factory BarcodeScannerImpl.options(BarcodeScannerOptions options) {
-    final api = BarcodeScannerProxyApi.options(options: options.api);
-    return BarcodeScannerImpl.internal(api);
-  }
+  BarcodeScannerImpl.internal(this.api);
 
   @override
   Future<List<Barcode>> process(InputImage image) =>
       api.process(image.api).then((e) => e.map((e1) => e1.impl).toList());
+}
+
+final class BarcodeScannerChannelImpl extends BarcodeScannerChannel {
+  @override
+  BarcodeScanner create() {
+    final api = BarcodeScannerProxyApi();
+    return BarcodeScannerImpl.internal(api);
+  }
+
+  @override
+  BarcodeScanner createWithOptions(BarcodeScannerOptions options) {
+    final api = BarcodeScannerProxyApi.options(options: options.api);
+    return BarcodeScannerImpl.internal(api);
+  }
 }
 
 extension BarcodeScannerX on BarcodeScanner {

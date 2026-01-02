@@ -8,15 +8,18 @@ abstract interface class ZoomSuggestionOptions$ZoomCallback {
   );
 }
 
-abstract interface class ZoomSuggestionOptions {
-  factory ZoomSuggestionOptions(
-    ZoomSuggestionOptions$ZoomCallback zoomCallback, {
-    double? maxSupportedZoomRatio,
-  }) => ZoomSuggestionOptionsChannel.instance.create(
-    zoomCallback,
-    maxSupportedZoomRatio: maxSupportedZoomRatio,
+abstract interface class ZoomSuggestionOptions$Builder {
+  factory ZoomSuggestionOptions$Builder(
+    ZoomSuggestionOptions$ZoomCallback zoomCallback,
+  ) => ZoomSuggestionOptionsChannel.instance.createBuilder(zoomCallback);
+
+  Future<ZoomSuggestionOptions$Builder> setMaxSupportedZoomRatio(
+    double maxSupportedZoomRatio,
   );
+  Future<ZoomSuggestionOptions> build();
 }
+
+abstract interface class ZoomSuggestionOptions {}
 
 abstract base class ZoomSuggestionOptionsChannel extends PlatformInterface {
   ZoomSuggestionOptionsChannel() : super(token: _token);
@@ -37,8 +40,7 @@ abstract base class ZoomSuggestionOptionsChannel extends PlatformInterface {
     required bool Function(double zoomRatio) setZoom,
   });
 
-  ZoomSuggestionOptions create(
-    ZoomSuggestionOptions$ZoomCallback zoomCallback, {
-    double? maxSupportedZoomRatio,
-  });
+  ZoomSuggestionOptions$Builder createBuilder(
+    ZoomSuggestionOptions$ZoomCallback zoomCallback,
+  );
 }

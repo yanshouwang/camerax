@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';

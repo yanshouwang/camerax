@@ -4,19 +4,19 @@ import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/video.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-abstract interface class FileOutputOptions implements OutputOptions {
-  factory FileOutputOptions(
-    File file, {
-    Duration? durationLimit,
-    int? fileSizeLimitBytes,
-    Location? location,
-  }) => FileOutputOptionsChannel.instance.create(
-    file,
-    durationLimit: durationLimit,
-    fileSizeLimitBytes: fileSizeLimitBytes,
-    location: location,
-  );
+abstract interface class FileOutputOptions$Builder {
+  factory FileOutputOptions$Builder(File file) =>
+      FileOutputOptionsChannel.instance.createBuilder(file);
 
+  Future<FileOutputOptions$Builder> setDurationLimitMillis(
+    int durationLimitMillis,
+  );
+  Future<FileOutputOptions$Builder> setFileSizeLimit(int fileSizeLimitBytes);
+  Future<FileOutputOptions$Builder> setLocation(Location? location);
+  Future<FileOutputOptions> build();
+}
+
+abstract interface class FileOutputOptions implements OutputOptions {
   Future<File> getFile();
 }
 
@@ -35,10 +35,5 @@ abstract base class FileOutputOptionsChannel extends PlatformInterface {
     _instance = instance;
   }
 
-  FileOutputOptions create(
-    File file, {
-    Duration? durationLimit,
-    int? fileSizeLimitBytes,
-    Location? location,
-  });
+  FileOutputOptions$Builder createBuilder(File file);
 }

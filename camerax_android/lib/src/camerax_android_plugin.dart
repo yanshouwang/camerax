@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:ui';
-
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'camera2.dart';

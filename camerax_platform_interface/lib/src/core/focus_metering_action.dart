@@ -3,19 +3,22 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 enum FocusMeteringAction$MeteringMode { af, ae, awb }
 
-abstract interface class FocusMeteringAction {
-  factory FocusMeteringAction(
-    (MeteringPoint, List<FocusMeteringAction$MeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringAction$MeteringMode>)>? morePoints,
-    bool? disableAutoCancel,
-    Duration? autoCancelDuration,
-  }) => FocusMeteringActionChannel.instance.create(
-    point,
-    morePoints: morePoints,
-    disableAutoCancel: disableAutoCancel,
-    autoCancelDuration: autoCancelDuration,
-  );
+abstract interface class FocusMeteringAction$Builder {
+  factory FocusMeteringAction$Builder(
+    MeteringPoint point, [
+    List<FocusMeteringAction$MeteringMode>? meteringModes,
+  ]) => FocusMeteringActionChannel.instance.createBuilder(point, meteringModes);
 
+  Future<FocusMeteringAction$Builder> addPoint(
+    MeteringPoint point, [
+    List<FocusMeteringAction$MeteringMode>? meteringModes,
+  ]);
+  Future<FocusMeteringAction$Builder> disableAutoCancel();
+  Future<FocusMeteringAction$Builder> setAutoCancelDuration(Duration duration);
+  Future<FocusMeteringAction> build();
+}
+
+abstract interface class FocusMeteringAction {
   /// Returns auto-cancel duration. Returns 0 if auto-cancel is disabled.
   Future<Duration> getAutoCancelDuration();
 
@@ -47,10 +50,8 @@ abstract base class FocusMeteringActionChannel extends PlatformInterface {
     _instance = instance;
   }
 
-  FocusMeteringAction create(
-    (MeteringPoint, List<FocusMeteringAction$MeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringAction$MeteringMode>)>? morePoints,
-    bool? disableAutoCancel,
-    Duration? autoCancelDuration,
-  });
+  FocusMeteringAction$Builder createBuilder(
+    MeteringPoint point, [
+    List<FocusMeteringAction$MeteringMode>? meteringModes,
+  ]);
 }

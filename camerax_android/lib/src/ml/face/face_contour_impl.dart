@@ -1,11 +1,11 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class FaceContourImpl extends FaceContour {
+final class FaceContourImpl implements FaceContour {
   final FaceContourProxyApi api;
 
-  FaceContourImpl.internal(this.api) : super.impl();
+  FaceContourImpl.internal(this.api);
 
   @override
   List<Point<double>> get points => api.points.map((e) => e.impl).toList();
@@ -13,7 +13,7 @@ final class FaceContourImpl extends FaceContour {
   FaceContour$Type get type => api.type.impl;
 }
 
-extension FaceContourTypeX on FaceContour$Type {
+extension FaceContour$TypeX on FaceContour$Type {
   FaceContourTypeApi get api => FaceContourTypeApi.values[index];
 }
 

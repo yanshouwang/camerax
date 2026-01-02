@@ -1,15 +1,13 @@
+import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_android/src/visionx.dart';
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'face_contour_impl.dart';
-import 'face_landmark_impl.dart';
-
-final class FaceImpl extends Face {
+final class FaceImpl implements Face {
   final FaceProxyApi api;
 
-  FaceImpl.internal(this.api) : super.impl();
+  FaceImpl.internal(this.api);
 
   @override
   List<FaceContour> get allContours =>
@@ -33,6 +31,18 @@ final class FaceImpl extends Face {
   double? get smilingProbability => api.smilingProbability;
   @override
   int? get trackingId => api.trackingId;
+
+  @override
+  Future<FaceContour?> getContour(FaceContour$Type type) {
+    // TODO: implement getContour
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<FaceLandmark?> getLandmark(FaceLandmark$Type type) {
+    // TODO: implement getLandmark
+    throw UnimplementedError();
+  }
 }
 
 extension FaceX on Face {

@@ -1,8 +1,6 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
-
-import 'focus_metering_action_impl.dart';
-import 'focus_metering_result_impl.dart';
 
 final class CameraControlImpl implements CameraControl {
   final CameraControlProxyApi api;

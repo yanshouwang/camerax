@@ -1,10 +1,10 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class MeteringPointImpl extends MeteringPoint {
+final class MeteringPointImpl implements MeteringPoint {
   final MeteringPointProxyApi api;
 
-  MeteringPointImpl.internal(this.api) : super.impl();
+  MeteringPointImpl.internal(this.api);
 
   @override
   double get size => api.size;

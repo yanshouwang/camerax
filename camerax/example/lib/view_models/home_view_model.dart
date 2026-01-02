@@ -254,11 +254,11 @@ class HomeViewModel extends ViewModel {
       'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
     );
     final file = File(filePath);
-    final outputOptions = FileOutputOptions(file);
+    final outputOptions = await FileOutputOptions$Builder(file).build();
     final listener = Consumer<VideoRecordEvent>(
       accept: (event) {
         _logger.info('${event.runtimeType}');
-        if (event is! VideoRecordFinalizeEvent) {
+        if (event is! VideoRecordEvent$Finalize) {
           return;
         }
         if (event.hasError) {
@@ -297,12 +297,13 @@ class HomeViewModel extends ViewModel {
     if (!isGranted) {
       throw StateError('requestPermissions failed.');
     }
-    final resolutionSelector = ResolutionSelector(
-      resolutionStrategy: ResolutionStrategy(
-        boundSize: Size(1024, 768),
-        fallbackRule: ResolutionStrategy$FallbackRule.closestHigherThenLower,
-      ),
+    final resolutionStrategy = ResolutionStrategy(
+      boundSize: Size(1024, 768),
+      fallbackRule: ResolutionStrategy$FallbackRule.closestHigherThenLower,
     );
+    final resolutionSelector = await ResolutionSelector$Builder()
+        .setResolutionStrategy(resolutionStrategy)
+        .then((e) => e.build());
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
     final torchState = await controller.getTorchState();
     final zoomState = await controller.getZoomState();

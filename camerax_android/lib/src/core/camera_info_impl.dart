@@ -1,17 +1,9 @@
 import 'dart:async';
 
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
+import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
-
-import 'camera_selector_impl.dart';
-import 'camera_state_impl.dart';
-import 'dynamic_range_impl.dart';
-import 'exposure_state_impl.dart';
-import 'focus_metering_action_impl.dart';
-import 'low_light_boost_state_impl.dart';
-import 'torch_state_impl.dart';
-import 'zoom_state_impl.dart';
 
 final class CameraInfoImpl implements CameraInfo {
   final CameraInfoProxyApi api;

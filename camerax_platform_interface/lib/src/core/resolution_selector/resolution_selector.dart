@@ -6,19 +6,26 @@ enum ResolutionSelector$Mode {
   preferHigherResolutionOverCaptureRate,
 }
 
-abstract interface class ResolutionSelector {
-  factory ResolutionSelector({
-    ResolutionSelector$Mode? mode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  }) => ResolutionSelectorChannel.instance.create(
-    mode: mode,
-    aspectRatioStrategy: aspectRatioStrategy,
-    resolutionFilter: resolutionFilter,
-    resolutionStrategy: resolutionStrategy,
-  );
+abstract interface class ResolutionSelector$Builder {
+  factory ResolutionSelector$Builder() =>
+      ResolutionSelectorChannel.instance.createBuilder();
 
+  Future<ResolutionSelector$Builder> setAllowedResolutionMode(
+    ResolutionSelector$Mode mode,
+  );
+  Future<ResolutionSelector$Builder> setAspectRatioStrategy(
+    AspectRatioStrategy aspectRatioStrategy,
+  );
+  Future<ResolutionSelector$Builder> setResolutionFilter(
+    ResolutionFilter resolutionFilter,
+  );
+  Future<ResolutionSelector$Builder> setResolutionStrategy(
+    ResolutionStrategy resolutionStrategy,
+  );
+  Future<ResolutionSelector> build();
+}
+
+abstract interface class ResolutionSelector {
   Future<ResolutionSelector$Mode> getAllowedResolutionMode();
   Future<AspectRatioStrategy> getAspectRatioStrategy();
   Future<ResolutionFilter?> getResolutionFilter();
@@ -40,10 +47,5 @@ abstract base class ResolutionSelectorChannel extends PlatformInterface {
     _instance = instance;
   }
 
-  ResolutionSelector create({
-    ResolutionSelector$Mode? mode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  });
+  ResolutionSelector$Builder createBuilder();
 }

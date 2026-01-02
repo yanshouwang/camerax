@@ -1,11 +1,11 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ExposureStateImpl extends ExposureState {
+final class ExposureStateImpl implements ExposureState {
   final ExposureStateProxyApi api;
 
-  ExposureStateImpl.internal(this.api) : super.impl();
+  ExposureStateImpl.internal(this.api);
 
   @override
   int get exposureCompensationIndex => api.exposureCompensationIndex;

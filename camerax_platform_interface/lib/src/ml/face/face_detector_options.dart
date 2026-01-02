@@ -8,23 +8,29 @@ enum FaceDetectorOptions$LandmarkMode { none, all }
 
 enum FaceDetectorOptions$PerformanceMode { fast, accurate }
 
-abstract interface class FaceDetectorOptions {
-  factory FaceDetectorOptions({
-    bool? enableTracking,
-    FaceDetectorOptions$ClassificationMode? classificationMode,
-    FaceDetectorOptions$ContourMode? contourMode,
-    FaceDetectorOptions$LandmarkMode? landmarkMode,
-    double? minFaceSize,
-    FaceDetectorOptions$PerformanceMode? performanceMode,
-  }) => FaceDetectorOptionsChannel.instance.create(
-    enableTracking: enableTracking,
-    classificationMode: classificationMode,
-    contourMode: contourMode,
-    landmarkMode: landmarkMode,
-    minFaceSize: minFaceSize,
-    performanceMode: performanceMode,
+abstract interface class FaceDetectorOptions$Builder {
+  factory FaceDetectorOptions$Builder() =>
+      FaceDetectorOptionsChannel.instance.createBuilder();
+
+  Future<FaceDetectorOptions$Builder> enableTracking();
+  Future<FaceDetectorOptions$Builder> setClassificationMode(
+    FaceDetectorOptions$ClassificationMode classificationMode,
   );
+  Future<FaceDetectorOptions$Builder> setContourMode(
+    FaceDetectorOptions$ContourMode contourMode,
+  );
+  // Future<FaceDetectorOptions$Builder> setExecutor(Executor executor);
+  Future<FaceDetectorOptions$Builder> setLandmarkMode(
+    FaceDetectorOptions$LandmarkMode landmarkMode,
+  );
+  Future<FaceDetectorOptions$Builder> setMinFaceSize(double minFaceSize);
+  Future<FaceDetectorOptions$Builder> setPerformanceMode(
+    FaceDetectorOptions$PerformanceMode performanceMode,
+  );
+  Future<FaceDetectorOptions> build();
 }
+
+abstract interface class FaceDetectorOptions {}
 
 abstract base class FaceDetectorOptionsChannel extends PlatformInterface {
   FaceDetectorOptionsChannel() : super(token: _token);
@@ -41,12 +47,5 @@ abstract base class FaceDetectorOptionsChannel extends PlatformInterface {
     _instance = instance;
   }
 
-  FaceDetectorOptions create({
-    bool? enableTracking,
-    FaceDetectorOptions$ClassificationMode? classificationMode,
-    FaceDetectorOptions$ContourMode? contourMode,
-    FaceDetectorOptions$LandmarkMode? landmarkMode,
-    double? minFaceSize,
-    FaceDetectorOptions$PerformanceMode? performanceMode,
-  });
+  FaceDetectorOptions$Builder createBuilder();
 }

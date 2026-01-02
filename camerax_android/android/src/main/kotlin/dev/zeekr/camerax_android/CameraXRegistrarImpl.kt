@@ -467,23 +467,23 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return RecordingImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordStatusEventProxyApi(): PigeonApiVideoRecordStatusEventProxyApi {
+    override fun getPigeonApiVideoRecordEventStatusProxyApi(): PigeonApiVideoRecordEventStatusProxyApi {
         return VideoRecordEventImpl.StatusImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordStartEventProxyApi(): PigeonApiVideoRecordStartEventProxyApi {
+    override fun getPigeonApiVideoRecordEventStartProxyApi(): PigeonApiVideoRecordEventStartProxyApi {
         return VideoRecordEventImpl.StartImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordPauseEventProxyApi(): PigeonApiVideoRecordPauseEventProxyApi {
+    override fun getPigeonApiVideoRecordEventPauseProxyApi(): PigeonApiVideoRecordEventPauseProxyApi {
         return VideoRecordEventImpl.PauseImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordResumeEventProxyApi(): PigeonApiVideoRecordResumeEventProxyApi {
+    override fun getPigeonApiVideoRecordEventResumeProxyApi(): PigeonApiVideoRecordEventResumeProxyApi {
         return VideoRecordEventImpl.ResumeImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordFinalizeEventProxyApi(): PigeonApiVideoRecordFinalizeEventProxyApi {
+    override fun getPigeonApiVideoRecordEventFinalizeProxyApi(): PigeonApiVideoRecordEventFinalizeProxyApi {
         return VideoRecordEventImpl.FinalizeImpl(this)
     }
 

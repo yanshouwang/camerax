@@ -1,23 +1,16 @@
 import 'dart:async';
 
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/video.dart';
+import 'package:camerax_android/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'tap_to_focus_info_impl.dart';
-import 'video.dart';
-
-final class CameraControllerImpl extends CameraController {
+final class CameraControllerImpl implements CameraController {
   final LifecycleCameraControllerProxyApi api;
 
-  CameraControllerImpl.internal(this.api) : super.impl();
-
-  factory CameraControllerImpl() {
-    final api = LifecycleCameraControllerProxyApi();
-    return CameraControllerImpl.internal(api);
-  }
+  CameraControllerImpl.internal(this.api);
 
   @override
   Future<bool> hasCamera(CameraSelector cameraSelector) =>
@@ -248,7 +241,18 @@ final class CameraControllerImpl extends CameraController {
 
   @override
   Future<void> setTapToFocusAutoCancelDuration(Duration duration) =>
-      api.setTapToFocusAutoCancelDuration(duration.api);
+      api.setTapToFocusAutoCancelDuration(
+        duration.inMicroseconds,
+        TimeUnitApi.microseconds,
+      );
+}
+
+final class CameraControllerChannelImpl extends CameraControllerChannel {
+  @override
+  CameraController create() {
+    final api = LifecycleCameraControllerProxyApi();
+    return CameraControllerImpl.internal(api);
+  }
 }
 
 extension CameraControllerTapToFocusApiX on CameraControllerTapToFocusApi {
@@ -256,7 +260,7 @@ extension CameraControllerTapToFocusApiX on CameraControllerTapToFocusApi {
       CameraController$TapToFocus.values[index];
 }
 
-extension CameraControllerUseCaseX on CameraController$UseCase {
+extension CameraController$UseCaseX on CameraController$UseCase {
   CameraControllerUseCaseApi get api =>
       CameraControllerUseCaseApi.values[index];
 }

@@ -1,6 +1,7 @@
 export 'core/resolution_selector.dart';
 export 'core/aspect_ratio.dart';
 export 'core/camera_control.dart';
+export 'core/camera_filter.dart';
 export 'core/camera_info.dart';
 export 'core/camera_selector.dart';
 export 'core/camera_state.dart';

@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/core.dart';
 import 'package:camerax_android/src/ml.dart';
@@ -33,9 +33,19 @@ final class VisionAnalyzerChannelImpl extends VisionAnalyzerChannel {
     final formats = types.map((e) => e.formatOrNull).nonNulls.toList();
     final detectors = <Detector>[
       if (formats.isNotEmpty)
-        BarcodeScanner.options(BarcodeScannerOptions(formats: formats)),
+        BarcodeScanner.options(
+          BarcodeScannerOptionsImpl.internal(
+            BarcodeScannerOptionsProxyApi.build(
+              formats: formats.map((e) => e.api).toList(),
+            ),
+          ),
+        ),
       if (types.contains(VisionObjectType.face))
-        FaceDetector.options(FaceDetectorOptions(enableTracking: true)),
+        FaceDetector.options(
+          FaceDetectorOptionsImpl.internal(
+            FaceDetectorOptionsProxyApi.build(enableTracking: true),
+          ),
+        ),
     ];
     final analyzer = MlKitAnalyzer(
       detectors: detectors,

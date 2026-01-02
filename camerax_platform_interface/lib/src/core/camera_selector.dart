@@ -3,13 +3,19 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 enum CameraSelector$LensFacing { unknown, front, back, external }
 
+abstract interface class CameraSelector$Builder {
+  Future<CameraSelector$Builder> addCameraFilter(CameraFilter cameraFilter);
+  Future<CameraSelector$Builder> requireLensFacing(
+    CameraSelector$LensFacing lensFacing,
+  );
+  Future<CameraSelector$Builder> setPhysicalCameraId(String physicalCameraId);
+  Future<CameraSelector> build();
+}
+
 abstract interface class CameraSelector {
   static CameraSelector get back => CameraSelectorChannel.instance.back;
   static CameraSelector get front => CameraSelectorChannel.instance.front;
   static CameraSelector get external => CameraSelectorChannel.instance.external;
-
-  factory CameraSelector({CameraSelector$LensFacing? lensFacing}) =>
-      CameraSelectorChannel.instance.create(lensFacing: lensFacing);
 
   Future<List<CameraInfo>> filter(List<CameraInfo> cameraInfos);
   Future<String?> getPhysicalCameraId();
@@ -34,5 +40,5 @@ abstract base class CameraSelectorChannel extends PlatformInterface {
   CameraSelector get front;
   CameraSelector get external;
 
-  CameraSelector create({CameraSelector$LensFacing? lensFacing});
+  CameraSelector$Builder createBuilder();
 }

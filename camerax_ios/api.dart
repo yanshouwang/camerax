@@ -3,7 +3,7 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/camerax_api.g.dart',
+    dartOut: 'lib/src/api.g.dart',
     dartOptions: DartOptions(),
     swiftOut: 'ios/camerax_ios/Sources/camerax_ios/CameraXApi.g.swift',
     swiftOptions: SwiftOptions(errorClassName: 'CameraXError'),

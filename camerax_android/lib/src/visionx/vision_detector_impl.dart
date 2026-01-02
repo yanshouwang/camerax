@@ -1,18 +1,11 @@
 import 'package:camerax_android/src/ml.dart';
+import 'package:camerax_android/src/visionx.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'vision_image_impl.dart';
-import 'vision_object_impl.dart';
-
-final class VisionDetectorImpl extends VisionDetector {
+final class VisionDetectorImpl implements VisionDetector {
   final List<VisionObjectType> types;
 
-  VisionDetectorImpl.internal(this.types) : super.impl();
-
-  factory VisionDetectorImpl({List<VisionObjectType>? types}) {
-    types ??= VisionObjectType.values;
-    return VisionDetectorImpl.internal(types);
-  }
+  VisionDetectorImpl.internal(this.types);
 
   @override
   Future<List<VisionObject>> detect(VisionImage image) async {
@@ -20,9 +13,10 @@ final class VisionDetectorImpl extends VisionDetector {
     final imageSize = await image.inputImage.getSize();
     final formats = types.map((e) => e.formatOrNull).nonNulls.toList();
     if (formats.isNotEmpty) {
-      final detector = BarcodeScanner.options(
-        BarcodeScannerOptions(formats: formats),
-      );
+      final options = await BarcodeScannerOptions$Builder()
+          .setBarcodeFormats(formats)
+          .then((e) => e.build());
+      final detector = BarcodeScanner.options(options);
       final codeObjects = await detector
           .process(image.inputImage)
           .then(
@@ -36,9 +30,10 @@ final class VisionDetectorImpl extends VisionDetector {
       objects.addAll(codeObjects);
     }
     if (types.contains(VisionObjectType.face)) {
-      final detector = FaceDetector.options(
-        FaceDetectorOptions(enableTracking: false),
+      final options = await FaceDetectorOptions$Builder().enableTracking().then(
+        (e) => e.build(),
       );
+      final detector = FaceDetector.options(options);
       final faceObjects = await detector
           .process(image.inputImage)
           .then(
@@ -49,5 +44,13 @@ final class VisionDetectorImpl extends VisionDetector {
       objects.addAll(faceObjects);
     }
     return objects;
+  }
+}
+
+final class VisionDetectorChannelImpl extends VisionDetectorChannel {
+  @override
+  VisionDetector create({List<VisionObjectType>? types}) {
+    types ??= VisionObjectType.values;
+    return VisionDetectorImpl.internal(types);
   }
 }

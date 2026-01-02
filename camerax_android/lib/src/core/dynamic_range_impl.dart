@@ -1,4 +1,4 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class DynamicRangeImpl implements DynamicRange {
@@ -53,7 +53,7 @@ final class DynamicRangeChannelImpl extends DynamicRangeChannel {
   }
 }
 
-extension DynamicRangeEncodingX on DynamicRange$Encoding {
+extension DynamicRange$EncodingX on DynamicRange$Encoding {
   DynamicRangeEncodingApi get api => DynamicRangeEncodingApi.values[index];
 }
 
@@ -61,7 +61,7 @@ extension DynamicRangeEncodingApiX on DynamicRangeEncodingApi {
   DynamicRange$Encoding get impl => DynamicRange$Encoding.values[index];
 }
 
-extension DynamicRangeBitDepthX on DynamicRange$BitDepth {
+extension DynamicRange$BitDepthX on DynamicRange$BitDepth {
   DynamicRangeBitDepthApi get api => DynamicRangeBitDepthApi.values[index];
 }
 

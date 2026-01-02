@@ -1,11 +1,11 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class OutputResultsImpl extends OutputResults {
+final class OutputResultsImpl implements OutputResults {
   final OutputResultsProxyApi api;
 
-  OutputResultsImpl.internal(this.api) : super.impl();
+  OutputResultsImpl.internal(this.api);
 
   @override
   Uri? get outputUri => api.outputUri?.uriImpl;

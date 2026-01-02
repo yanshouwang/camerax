@@ -2,13 +2,12 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin VisionObjectImpl on VisionObject {
+abstract base class VisionObjectImpl implements VisionObject {
   Size<int>? get imageSize;
 }
 
-final class VisionMachineReadableCodeObjectImpl
-    extends VisionMachineReadableCodeObject
-    with VisionObjectImpl {
+final class VisionMachineReadableCodeObjectImpl extends VisionObjectImpl
+    implements VisionMachineReadableCodeObject {
   final Barcode barcode;
   @override
   final Size<int>? imageSize;
@@ -16,7 +15,7 @@ final class VisionMachineReadableCodeObjectImpl
   VisionMachineReadableCodeObjectImpl.internal(
     this.barcode, {
     required this.imageSize,
-  }) : super.impl();
+  });
 
   @override
   Rect<double> get bounds => ArgumentError.checkNotNull(
@@ -40,14 +39,13 @@ final class VisionMachineReadableCodeObjectImpl
   );
 }
 
-final class VisionFaceObjectImpl extends VisionFaceObject
-    with VisionObjectImpl {
+final class VisionFaceObjectImpl extends VisionObjectImpl
+    implements VisionFaceObject {
   final Face face;
   @override
   final Size<int>? imageSize;
 
-  VisionFaceObjectImpl.internal(this.face, {required this.imageSize})
-    : super.impl();
+  VisionFaceObjectImpl.internal(this.face, {required this.imageSize});
 
   @override
   Rect<double> get bounds => face.boundingBox.vision(imageSize);
