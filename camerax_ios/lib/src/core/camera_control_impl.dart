@@ -1,13 +1,11 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'focus_metering_action_impl.dart';
-import 'focus_metering_result_impl.dart';
-
-final class CameraControlImpl extends CameraControl {
+final class CameraControlImpl implements CameraControl {
   final CameraControlProxyApi api;
 
-  CameraControlImpl.internal(this.api) : super.impl();
+  CameraControlImpl.internal(this.api);
 
   @override
   Future<void> cancelFocusAndMetering() => api.cancelFocusAndMetering();
@@ -34,12 +32,10 @@ final class CameraControlImpl extends CameraControl {
   @override
   Future<void> enableLowLightBoostAsync(bool lowLightBoost) =>
       throw UnimplementedError();
-  // api.enableLowLightBoostAsync(lowLightBoost);
 
   @override
   Future<void> setTorchStrengthLevel(int torchStrengthLevel) =>
       throw UnimplementedError();
-  // api.setTorchStrengthLevel(torchStrengthLevel);
 }
 
 extension CameraControlX on CameraControl {

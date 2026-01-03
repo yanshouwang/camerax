@@ -1,6 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/view.dart';
-import 'package:flutter/widgets.dart' hide View;
+import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 enum PreviewView$ScaleType {
@@ -12,7 +12,7 @@ enum PreviewView$ScaleType {
   fitStart,
 }
 
-abstract interface class PreviewView implements View {
+abstract interface class PreviewView implements WidgetAdapter {
   factory PreviewView() => PreviewViewChannel.instance.create();
 
   Future<void> setController(CameraController controller);

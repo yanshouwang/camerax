@@ -12,9 +12,6 @@ final class CameraSelector$BuilderImpl implements CameraSelector$Builder {
       api.addCameraFilter(cameraFilter.api).then((e) => e.impl);
 
   @override
-  Future<CameraSelector> build() => api.build().then((e) => e.impl);
-
-  @override
   Future<CameraSelector$Builder> requireLensFacing(
     CameraSelector$LensFacing lensFacing,
   ) => api.requireLensFacing(lensFacing.api).then((e) => e.impl);
@@ -22,6 +19,9 @@ final class CameraSelector$BuilderImpl implements CameraSelector$Builder {
   @override
   Future<CameraSelector$Builder> setPhysicalCameraId(String physicalCameraId) =>
       api.setPhysicalCameraId(physicalCameraId).then((e) => e.impl);
+
+  @override
+  Future<CameraSelector> build() => api.build().then((e) => e.impl);
 }
 
 final class CameraSelectorImpl implements CameraSelector {

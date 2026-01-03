@@ -1,10 +1,10 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ZoomStateImpl extends ZoomState {
+final class ZoomStateImpl implements ZoomState {
   final ZoomStateProxyApi api;
 
-  ZoomStateImpl.internal(this.api) : super.impl();
+  ZoomStateImpl.internal(this.api);
 
   @override
   double get linearZoom => api.linearZoom;

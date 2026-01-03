@@ -1,4 +1,4 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/visionx.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
@@ -360,7 +360,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
         duration: duration,
         bounds: bounds,
       );
-    } else if (api is AVMetadataDogHeadObjectProxyApi) {
+    }
+    if (api is AVMetadataDogHeadObjectProxyApi) {
       return AVMetadataDogHeadObjectImpl.internal(
         api,
         type: type,
@@ -368,7 +369,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
         duration: duration,
         bounds: bounds,
       );
-    } else if (api is AVMetadataBodyObjectProxyApi) {
+    }
+    if (api is AVMetadataBodyObjectProxyApi) {
       final bodyID = await api.getBodyID();
       if (api is AVMetadataCatBodyObjectProxyApi) {
         return AVMetadataCatBodyObjectImpl.internal(
@@ -379,7 +381,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
           bounds: bounds,
           bodyID: bodyID,
         );
-      } else if (api is AVMetadataDogBodyObjectProxyApi) {
+      }
+      if (api is AVMetadataDogBodyObjectProxyApi) {
         return AVMetadataDogBodyObjectImpl.internal(
           api,
           type: type,
@@ -388,7 +391,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
           bounds: bounds,
           bodyID: bodyID,
         );
-      } else if (api is AVMetadataHumanBodyObjectProxyApi) {
+      }
+      if (api is AVMetadataHumanBodyObjectProxyApi) {
         return AVMetadataHumanBodyObjectImpl.internal(
           api,
           type: type,
@@ -397,7 +401,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
           bounds: bounds,
           bodyID: bodyID,
         );
-      } else if (api is AVMetadataHumanFullBodyObjectProxyApi) {
+      }
+      if (api is AVMetadataHumanFullBodyObjectProxyApi) {
         return AVMetadataHumanFullBodyObjectImpl.internal(
           api,
           type: type,
@@ -406,10 +411,10 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
           bounds: bounds,
           bodyID: bodyID,
         );
-      } else {
-        throw TypeError();
       }
-    } else if (api is AVMetadataFaceObjectProxyApi) {
+      throw TypeError();
+    }
+    if (api is AVMetadataFaceObjectProxyApi) {
       final faceID = await api.getFaceID();
       final hasRollAngle = await api.hasRollAngle();
       final rollAngle = await api.getRollAngle();
@@ -427,7 +432,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
         hasYawAngle: hasYawAngle,
         yawAngle: yawAngle,
       );
-    } else if (api is AVMetadataMachineReadableCodeObjectProxyApi) {
+    }
+    if (api is AVMetadataMachineReadableCodeObjectProxyApi) {
       final corners = await api.getCorners().then(
         (e) => e.map((e1) => e1.impl).toList(),
       );
@@ -441,7 +447,8 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
         corners: corners,
         stringValue: stringValue,
       );
-    } else if (api is AVMetadataSalientObjectProxyApi) {
+    }
+    if (api is AVMetadataSalientObjectProxyApi) {
       final objectID = await api.getObjectID();
       return AVMetadataSalientObjectImpl.internal(
         api,
@@ -451,8 +458,7 @@ extension AVMetadataObjectProxyApiX on AVMetadataObjectProxyApi {
         bounds: bounds,
         objectID: objectID,
       );
-    } else {
-      throw TypeError();
     }
+    throw TypeError();
   }
 }

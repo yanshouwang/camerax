@@ -2,17 +2,21 @@ import 'dart:io';
 
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class VisionImageImpl extends VisionImage {
+final class VisionImageImpl implements VisionImage {
   final VNImageRequestHandler handler;
 
-  VisionImageImpl.internal(this.handler) : super.impl();
+  VisionImageImpl.internal(this.handler);
+}
 
-  factory VisionImageImpl.uri(Uri uri) {
+final class VisionImageChannelImpl extends VisionImageChannel {
+  @override
+  VisionImage createWithUri(Uri uri) {
     final handler = VNImageRequestHandler.uri(uri);
     return VisionImageImpl.internal(handler);
   }
 
-  factory VisionImageImpl.file(File file) {
+  @override
+  VisionImage createWithFile(File file) {
     final handler = VNImageRequestHandler.uri(file.uri);
     return VisionImageImpl.internal(handler);
   }

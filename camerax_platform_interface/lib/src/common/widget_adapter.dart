@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-abstract interface class View {
+abstract interface class WidgetAdapter {
   Widget build(BuildContext context);
 }

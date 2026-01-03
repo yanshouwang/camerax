@@ -1,35 +1,14 @@
-// import 'package:camerax_ios/src/camerax_api.g.dart';
+// import 'package:camerax_ios/src/api.dart';
 // import 'package:camerax_ios/src/core/aspect_ratio_impl.dart';
 // import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-// final class AspectRatioStrategyImpl extends AspectRatioStrategy {
-//   static AspectRatioStrategyImpl get ratio4_3FallbackAutoStrategy =>
-//       AspectRatioStrategyImpl.internal(
-//         AspectRatioStrategyProxyApi.ratio4_3FallbackAutoStrategy,
-//       );
-
-//   static AspectRatioStrategyImpl get ratio16_9FallbackAutoStrategy =>
-//       AspectRatioStrategyImpl.internal(
-//         AspectRatioStrategyProxyApi.ratio16_9FallbackAutoStrategy,
-//       );
-
+// final class AspectRatioStrategyImpl implements AspectRatioStrategy {
 //   final AspectRatioStrategyProxyApi api;
 
-//   AspectRatioStrategyImpl.internal(this.api) : super.impl();
-
-//   factory AspectRatioStrategyImpl({
-//     required AspectRatio preferredAspectRatio,
-//     required AspectRatioStrategyFallbackRule fallbackRule,
-//   }) {
-//     final api = AspectRatioStrategyProxyApi(
-//       preferredAspectRatio: preferredAspectRatio.api,
-//       fallbackRule: fallbackRule.api,
-//     );
-//     return AspectRatioStrategyImpl.internal(api);
-//   }
+//   AspectRatioStrategyImpl.internal(this.api);
 
 //   @override
-//   Future<AspectRatioStrategyFallbackRule> getFallbackRule() =>
+//   Future<AspectRatioStrategy$FallbackRule> getFallbackRule() =>
 //       api.getFallbackRule().then((e) => e.impl);
 
 //   @override
@@ -37,15 +16,41 @@
 //       api.getPreferredAspectRatio().then((e) => e.impl);
 // }
 
-// extension AspectRatioStrategyFallbackRuleX on AspectRatioStrategyFallbackRule {
+// final class AspectRatioStrategyChannelImpl extends AspectRatioStrategyChannel {
+//   @override
+//   AspectRatioStrategy get ratio4_3FallbackAutoStrategy =>
+//       AspectRatioStrategyImpl.internal(
+//         AspectRatioStrategyProxyApi.ratio4_3FallbackAutoStrategy,
+//       );
+//   @override
+//   AspectRatioStrategy get ratio16_9FallbackAutoStrategy =>
+//       AspectRatioStrategyImpl.internal(
+//         AspectRatioStrategyProxyApi.ratio16_9FallbackAutoStrategy,
+//       );
+
+//   @override
+//   AspectRatioStrategy create({
+//     required AspectRatio preferredAspectRatio,
+//     required AspectRatioStrategy$FallbackRule fallbackRule,
+//   }) {
+//     final api = AspectRatioStrategyProxyApi(
+//       preferredAspectRatio: preferredAspectRatio.api,
+//       fallbackRule: fallbackRule.api,
+//     );
+//     return AspectRatioStrategyImpl.internal(api);
+//   }
+// }
+
+// extension AspectRatioStrategy$FallbackRuleX
+//     on AspectRatioStrategy$FallbackRule {
 //   AspectRatioStrategyFallbackRuleApi get api =>
 //       AspectRatioStrategyFallbackRuleApi.values[index];
 // }
 
 // extension AspectRatioStrategyFallbackRuleApiX
 //     on AspectRatioStrategyFallbackRuleApi {
-//   AspectRatioStrategyFallbackRule get impl =>
-//       AspectRatioStrategyFallbackRule.values[index];
+//   AspectRatioStrategy$FallbackRule get impl =>
+//       AspectRatioStrategy$FallbackRule.values[index];
 // }
 
 // extension AspectRatioStrategyX on AspectRatioStrategy {

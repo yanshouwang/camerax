@@ -1,27 +1,42 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'metering_point_impl.dart';
+final class FocusMeteringAction$BuilderImpl
+    implements FocusMeteringAction$Builder {
+  final FocusMeteringActionBuilderProxyApi api;
 
-final class FocusMeteringActionImpl extends FocusMeteringAction {
+  FocusMeteringAction$BuilderImpl.internal(this.api);
+
+  @override
+  Future<FocusMeteringAction$Builder> addPoint(
+    MeteringPoint point, [
+    List<FocusMeteringAction$MeteringMode>? meteringModes,
+  ]) => meteringModes == null
+      ? api.addPoint1(point.api).then((e) => e.impl)
+      : api
+            .addPoint2(point.api, meteringModes.map((e) => e.api).toList())
+            .then((e) => e.impl);
+
+  @override
+  Future<FocusMeteringAction$Builder> disableAutoCancel() =>
+      api.disableAutoCancel().then((e) => e.impl);
+
+  @override
+  Future<FocusMeteringAction$Builder> setAutoCancelDuration(
+    Duration duration,
+  ) => api
+      .setAutoCancelDuration(duration.inMicroseconds, TimeUnitApi.microseconds)
+      .then((e) => e.impl);
+
+  @override
+  Future<FocusMeteringAction> build() => api.build().then((e) => e.impl);
+}
+
+final class FocusMeteringActionImpl implements FocusMeteringAction {
   final FocusMeteringActionProxyApi api;
 
-  FocusMeteringActionImpl.internal(this.api) : super.impl();
-
-  factory FocusMeteringActionImpl(
-    (MeteringPoint, List<FocusMeteringAction$MeteringMode>) point, {
-    List<(MeteringPoint, List<FocusMeteringAction$MeteringMode>)>? morePoints,
-    bool? disableAutoCancel,
-    Duration? autoCancelDuration,
-  }) {
-    final api = FocusMeteringActionProxyApi.build(
-      point: point.api,
-      morePoints: morePoints?.map((e) => e.api).toList(),
-      disableAutoCancel: disableAutoCancel,
-      autoCancelDuration: autoCancelDuration?.api,
-    );
-    return FocusMeteringActionImpl.internal(api);
-  }
+  FocusMeteringActionImpl.internal(this.api);
 
   @override
   Future<Duration> getAutoCancelDuration() => api
@@ -44,26 +59,32 @@ final class FocusMeteringActionImpl extends FocusMeteringAction {
   Future<bool> isAutoCancelEnabled() => api.isAutoCancelEnabled();
 }
 
-extension MeteringPointApiTupleX
-    on (MeteringPoint, List<FocusMeteringAction$MeteringMode>) {
-  MeteringPointTupleProxyApi get api => MeteringPointTupleProxyApi(
-    point: $1.api,
-    modes: $2.map((e) => e.api).toList(),
-  );
-}
-
-extension DurationX on Duration {
-  DurationTupleProxyApi get api {
-    return DurationTupleProxyApi(
-      duration: inMilliseconds,
-      timeUnit: TimeUnitApi.milliseconds,
-    );
+final class FocusMeteringActionChannelImpl extends FocusMeteringActionChannel {
+  @override
+  FocusMeteringAction$Builder createBuilder(
+    MeteringPoint point, [
+    List<FocusMeteringAction$MeteringMode>? meteringModes,
+  ]) {
+    final api = meteringModes == null
+        ? FocusMeteringActionBuilderProxyApi.new1(point: point.api)
+        : FocusMeteringActionBuilderProxyApi.new2(
+            point: point.api,
+            meteringModes: meteringModes.map((e) => e.api).toList(),
+          );
+    return FocusMeteringAction$BuilderImpl.internal(api);
   }
 }
 
-extension FocusMeteringActionMeteringModeX on FocusMeteringAction$MeteringMode {
+extension FocusMeteringAction$MeteringModeX
+    on FocusMeteringAction$MeteringMode {
   FocusMeteringActionMeteringModeApi get api =>
       FocusMeteringActionMeteringModeApi.values[index];
+}
+
+extension FocusMeteringActionBuilderProxyApiX
+    on FocusMeteringActionBuilderProxyApi {
+  FocusMeteringAction$Builder get impl =>
+      FocusMeteringAction$BuilderImpl.internal(this);
 }
 
 extension FocusMeteringActionX on FocusMeteringAction {
@@ -72,4 +93,8 @@ extension FocusMeteringActionX on FocusMeteringAction {
     if (impl is! FocusMeteringActionImpl) throw TypeError();
     return impl.api;
   }
+}
+
+extension FocusMeteringActionProxyApiX on FocusMeteringActionProxyApi {
+  FocusMeteringAction get impl => FocusMeteringActionImpl.internal(this);
 }

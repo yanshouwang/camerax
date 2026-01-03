@@ -1,31 +1,17 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class RotationProviderListenerImpl extends RotationProvider$Listener {
+final class RotationProvider$ListenerImpl implements RotationProvider$Listener {
   final RotationProviderListenerProxyApi api;
 
-  RotationProviderListenerImpl.internal(this.api) : super.impl();
-
-  factory RotationProviderListenerImpl({
-    required void Function(Surface$Rotation rotation) onRotationChanged,
-  }) {
-    final api = RotationProviderListenerProxyApi(
-      onRotationChanged: (_, e) => onRotationChanged(e.impl),
-    );
-    return RotationProviderListenerImpl.internal(api);
-  }
+  RotationProvider$ListenerImpl.internal(this.api);
 }
 
-final class RotationProviderImpl extends RotationProvider {
+final class RotationProviderImpl implements RotationProvider {
   final RotationProviderProxyApi api;
 
-  RotationProviderImpl.internal(this.api) : super.impl();
-
-  factory RotationProviderImpl() {
-    final api = RotationProviderProxyApi();
-    return RotationProviderImpl.internal(api);
-  }
+  RotationProviderImpl.internal(this.api);
 
   @override
   Future<void> addListener(RotationProvider$Listener listener) =>
@@ -36,10 +22,28 @@ final class RotationProviderImpl extends RotationProvider {
       api.removeListener(listener.api);
 }
 
-extension RotationProviderListenerX on RotationProvider$Listener {
+final class RotationProviderChannelImpl extends RotationProviderChannel {
+  @override
+  RotationProvider$Listener createListener({
+    required void Function(Surface$Rotation rotation) onRotationChanged,
+  }) {
+    final api = RotationProviderListenerProxyApi(
+      onRotationChanged: (_, e) => onRotationChanged(e.impl),
+    );
+    return RotationProvider$ListenerImpl.internal(api);
+  }
+
+  @override
+  RotationProvider create() {
+    final api = RotationProviderProxyApi();
+    return RotationProviderImpl.internal(api);
+  }
+}
+
+extension RotationProvider$ListenerX on RotationProvider$Listener {
   RotationProviderListenerProxyApi get api {
     final impl = this;
-    if (impl is! RotationProviderListenerImpl) throw TypeError();
+    if (impl is! RotationProvider$ListenerImpl) throw TypeError();
     return impl.api;
   }
 }

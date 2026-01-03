@@ -22,7 +22,7 @@ final class Barcode$CalendarDateTimeImpl implements Barcode$CalendarDateTime {
   Barcode$CalendarDateTimeImpl.internal(this.api);
 
   @override
-  int get day => throw UnimplementedError();
+  int get day => api.day;
   @override
   int get hours => api.hours;
   @override

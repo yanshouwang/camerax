@@ -1,12 +1,8 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'metering_point_impl.dart';
-
-base mixin MeteringPointFactoryImpl on MeteringPointFactory {
-  static Future<double> getDefaultPointSize() =>
-      MeteringPointFactoryProxyApi.getDefaultPointSize();
-
+abstract base class MeteringPointFactoryImpl implements MeteringPointFactory {
   MeteringPointFactoryProxyApi get api;
 
   @override
@@ -14,4 +10,11 @@ base mixin MeteringPointFactoryImpl on MeteringPointFactory {
       size == null
       ? api.createPoint1(x, y).then((e) => e.impl)
       : api.createPoint2(x, y, size).then((e) => e.impl);
+}
+
+final class MeteringPointFactoryChannelImpl
+    extends MeteringPointFactoryChannel {
+  @override
+  Future<double> getDefaultPointSize() =>
+      MeteringPointFactoryProxyApi.getDefaultPointSize();
 }

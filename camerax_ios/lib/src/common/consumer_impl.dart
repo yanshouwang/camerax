@@ -1,5 +1,5 @@
 import 'package:camerax_ios/src/avfoundation.dart';
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_ios/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';

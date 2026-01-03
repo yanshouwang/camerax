@@ -1,27 +1,14 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'vn_barcode_observation_impl.dart';
-import 'vn_image_based_request_impl.dart';
-import 'vn_request_impl.dart';
-
-final class VNDetectBarcodesRequestImpl extends VNDetectBarcodesRequest
-    with VNRequestImpl, VNImageBasedRequestImpl {
+final class VNDetectBarcodesRequestImpl extends VNImageBasedRequestImpl
+    implements VNDetectBarcodesRequest {
   @override
   final VNDetectBarcodesRequestProxyApi api;
 
-  VNDetectBarcodesRequestImpl.internal(this.api) : super.impl();
-
-  factory VNDetectBarcodesRequestImpl({
-    required VNRequestCompletionHandler completionHandler,
-  }) {
-    final api = VNDetectBarcodesRequestProxyApi(
-      completionHandler: (request, error) =>
-          completionHandler(request.impl, error?.impl),
-    );
-    return VNDetectBarcodesRequestImpl.internal(api);
-  }
+  VNDetectBarcodesRequestImpl.internal(this.api);
 
   @override
   Future<List<VNBarcodeSymbology>> getSupportedSymbologies() => api
@@ -40,4 +27,18 @@ final class VNDetectBarcodesRequestImpl extends VNDetectBarcodesRequest
   Future<List<VNBarcodeObservation>?> getResults() => api.getResults().then(
     (e) async => e == null ? null : await Future.wait(e.map((e1) => e1.impl())),
   );
+}
+
+final class VNDetectBarcodesRequestChannelImpl
+    extends VNDetectBarcodesRequestChannel {
+  @override
+  VNDetectBarcodesRequest create({
+    required VNRequestCompletionHandler completionHandler,
+  }) {
+    final api = VNDetectBarcodesRequestProxyApi(
+      completionHandler: (request, error) =>
+          completionHandler(request.impl, error?.impl),
+    );
+    return VNDetectBarcodesRequestImpl.internal(api);
+  }
 }

@@ -1,10 +1,9 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'vn_observation_impl.dart';
-
-base mixin VNDetectedObjectObservationImpl
-    on VNDetectedObjectObservation, VNObservationImpl {
+abstract base class VNDetectedObjectObservationImpl extends VNObservationImpl
+    implements VNDetectedObjectObservation {
   @override
   VNDetectedObjectObservationProxyApi get api;
 }

@@ -3,7 +3,7 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class PreviewViewImpl extends ViewImpl implements PreviewView {
+final class PreviewViewImpl with WidgetAdapterImpl implements PreviewView {
   final PreviewViewProxyApi api;
 
   PreviewViewImpl.internal(this.api);

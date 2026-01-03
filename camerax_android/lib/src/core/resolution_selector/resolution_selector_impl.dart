@@ -9,9 +9,6 @@ final class ResolutionSelector$BuilderImpl
   ResolutionSelector$BuilderImpl.internal(this.api);
 
   @override
-  Future<ResolutionSelector> build() => api.build().then((e) => e.impl);
-
-  @override
   Future<ResolutionSelector$Builder> setAllowedResolutionMode(
     ResolutionSelector$Mode mode,
   ) => api.setAllowedResolutionMode(mode.api).then((e) => e.impl);
@@ -30,6 +27,9 @@ final class ResolutionSelector$BuilderImpl
   Future<ResolutionSelector$Builder> setResolutionStrategy(
     ResolutionStrategy resolutionStrategy,
   ) => api.setResolutionStrategy(resolutionStrategy.api).then((e) => e.impl);
+
+  @override
+  Future<ResolutionSelector> build() => api.build().then((e) => e.impl);
 }
 
 final class ResolutionSelectorImpl implements ResolutionSelector {

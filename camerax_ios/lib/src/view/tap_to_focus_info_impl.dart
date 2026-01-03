@@ -1,16 +1,15 @@
-// import 'package:camerax_ios/src/camerax_api.g.dart';
+// import 'package:camerax_ios/src/api.dart';
 // import 'package:camerax_ios/src/common.dart';
+// import 'package:camerax_ios/src/view.dart';
 // import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-// import 'camera_controller_impl.dart';
-
-// final class TapToFocusInfoImpl extends TapToFocusInfo {
+// final class TapToFocusInfoImpl implements TapToFocusInfo {
 //   final TapToFocusInfoProxyApi api;
 
-//   TapToFocusInfoImpl.internal(this.api) : super.impl();
+//   TapToFocusInfoImpl.internal(this.api);
 
 //   @override
-//   CameraControllerTapToFocus get focusState => api.focusState.impl;
+//   CameraController$TapToFocus get focusState => api.focusState.impl;
 
 //   @override
 //   Point<double>? get tapPoint => api.tapPoint?.impl;

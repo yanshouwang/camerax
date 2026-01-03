@@ -3,7 +3,7 @@ import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin VisionObjectAVImpl on VisionObject {
+abstract base class VisionObjectAVImpl implements VisionObject {
   AVMetadataObject get object;
 
   @override
@@ -14,20 +14,19 @@ base mixin VisionObjectAVImpl on VisionObject {
   Rect<double> get bounds => object.bounds;
 }
 
-base mixin VisionObjectVNImpl on VisionObject {
+abstract base class VisionObjectVNImpl implements VisionObject {
   VNDetectedObjectObservation get observation;
 
   @override
   Rect<double> get bounds => observation.boundingBox.vnFixed;
 }
 
-final class VisionMachineReadableCodeObjectAVImpl
-    extends VisionMachineReadableCodeObject
-    with VisionObjectAVImpl {
+final class VisionMachineReadableCodeObjectAVImpl extends VisionObjectAVImpl
+    implements VisionMachineReadableCodeObject {
   @override
   final AVMetadataMachineReadableCodeObject object;
 
-  VisionMachineReadableCodeObjectAVImpl.internal(this.object) : super.impl();
+  VisionMachineReadableCodeObjectAVImpl.internal(this.object);
 
   @override
   List<Point<double>> get corners => object.corners;
@@ -36,14 +35,12 @@ final class VisionMachineReadableCodeObjectAVImpl
   String? get value => object.stringValue;
 }
 
-final class VisionMachineReadableCodeObjectVNImpl
-    extends VisionMachineReadableCodeObject
-    with VisionObjectVNImpl {
+final class VisionMachineReadableCodeObjectVNImpl extends VisionObjectVNImpl
+    implements VisionMachineReadableCodeObject {
   @override
   final VNBarcodeObservation observation;
 
-  VisionMachineReadableCodeObjectVNImpl.internal(this.observation)
-    : super.impl();
+  VisionMachineReadableCodeObjectVNImpl.internal(this.observation);
 
   @override
   List<Point<double>> get corners => [
@@ -63,12 +60,12 @@ final class VisionMachineReadableCodeObjectVNImpl
   String? get value => observation.payloadStringValue;
 }
 
-final class VisionFaceObjectAVImpl extends VisionFaceObject
-    with VisionObjectAVImpl {
+final class VisionFaceObjectAVImpl extends VisionObjectAVImpl
+    implements VisionFaceObject {
   @override
   final AVMetadataFaceObject object;
 
-  VisionFaceObjectAVImpl.internal(this.object) : super.impl();
+  VisionFaceObjectAVImpl.internal(this.object);
 
   @override
   int? get id => object.faceID;
@@ -83,12 +80,12 @@ final class VisionFaceObjectAVImpl extends VisionFaceObject
   double? get yaw => object.hasYawAngle ? object.yawAngle : null;
 }
 
-final class VisionFaceObjectVNImpl extends VisionFaceObject
-    with VisionObjectVNImpl {
+final class VisionFaceObjectVNImpl extends VisionObjectVNImpl
+    implements VisionFaceObject {
   @override
   final VNFaceObservation observation;
 
-  VisionFaceObjectVNImpl.internal(this.observation) : super.impl();
+  VisionFaceObjectVNImpl.internal(this.observation);
 
   @override
   int? get id => null;

@@ -1,25 +1,14 @@
 import 'dart:async';
 
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'camera_selector_impl.dart';
-import 'camera_state_impl.dart';
-// import 'dynamic_range_impl.dart';
-// import 'exposure_state_impl.dart';
-import 'focus_metering_action_impl.dart';
-// import 'low_light_boost_state_impl.dart';
-import 'torch_state_impl.dart';
-import 'zoom_state_impl.dart';
-
-final class CameraInfoImpl extends CameraInfo {
-  static Future<bool> mustPlayShutterSound() =>
-      CameraInfoProxyApi.mustPlayShutterSound();
-
+final class CameraInfoImpl implements CameraInfo {
   final CameraInfoProxyApi api;
 
-  CameraInfoImpl.internal(this.api) : super.impl();
+  CameraInfoImpl.internal(this.api);
 
   @override
   Future<CameraSelector> getCameraSelector() =>
@@ -31,7 +20,6 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<ExposureState> getExposureState() => throw UnimplementedError();
-  // api.getExposureState().then((e) => e.impl);
 
   @override
   Future<double> getIntrinsicZoomRatio() => api.getIntrinsicZoomRatio();
@@ -47,9 +35,6 @@ final class CameraInfoImpl extends CameraInfo {
   @override
   Future<Set<Range<int>>> getSupportedFrameRateRanges() =>
       throw UnimplementedError();
-  //  api
-  //     .getSupportedFrameRateRanges1()
-  //     .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<TorchState?> getTorchState() =>
@@ -76,11 +61,6 @@ final class CameraInfoImpl extends CameraInfo {
   Future<Set<DynamicRange>> querySupportedDynamicRanges(
     Set<DynamicRange> candidateDynamicRanges,
   ) => throw UnimplementedError();
-  // api
-  //     .querySupportedDynamicRanges(
-  //       candidateDynamicRanges.map((e) => e.api).toList(),
-  //     )
-  //     .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
   Future<void> observeCameraState(Observer<CameraState> observer) =>
@@ -109,11 +89,9 @@ final class CameraInfoImpl extends CameraInfo {
   @override
   Future<LowLightBoostState?> getLowLightBoostState() =>
       throw UnimplementedError();
-  // api.getLowLightBoostState().then((e) => e?.impl);
 
   @override
   Future<int> getMaxTorchStrengthLevel() => throw UnimplementedError();
-  //  api.getMaxTorchStrengthLevel();
 
   @override
   Future<int> getSensorRotationDegrees([Surface$Rotation? relativeRotation]) =>
@@ -123,7 +101,6 @@ final class CameraInfoImpl extends CameraInfo {
 
   @override
   Future<int?> getTorchStrengthLevel() => throw UnimplementedError();
-  //  api.getTorchStrengthLevel();
 
   @override
   Future<bool> isLowLightBoostSupported() => api.isLowLightBoostSupported();
@@ -135,23 +112,25 @@ final class CameraInfoImpl extends CameraInfo {
   Future<void> observeLowLightBoostState(
     Observer<LowLightBoostState> observer,
   ) => throw UnimplementedError();
-  // api.observeLowLightBoostState(observer.api);
 
   @override
   Future<void> observeTorchStrengthLevel(Observer<int> observer) =>
       throw UnimplementedError();
-  // api.observeTorchStrengthLevel(observer.api);
 
   @override
   Future<void> removeLowLightBoostStateObserver(
     Observer<LowLightBoostState> observer,
   ) => throw UnimplementedError();
-  //  api.removeLowLightBoostStateObserver(observer.api);
 
   @override
   Future<void> removeTorchStrengthLevelObserver(Observer<int> observer) =>
       throw UnimplementedError();
-  // api.removeTorchStrengthLevelObserver(observer.api);
+}
+
+final class CameraInfoChannelImpl extends CameraInfoChannel {
+  @override
+  Future<bool> mustPlayShutterSound() =>
+      CameraInfoProxyApi.mustPlayShutterSound();
 }
 
 extension CameraInfoX on CameraInfo {

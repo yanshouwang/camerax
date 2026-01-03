@@ -1,9 +1,9 @@
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart' hide View;
+import 'package:flutter/widgets.dart';
 
-abstract base class ViewImpl implements View {
+base mixin WidgetAdapterImpl implements WidgetAdapter {
   String get viewType;
   int? get identifier;
 

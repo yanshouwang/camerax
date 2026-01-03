@@ -1,16 +1,13 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-// import 'flash_state_impl.dart';
-
-final class ImageInfoImpl extends ImageInfo {
+final class ImageInfoImpl implements ImageInfo {
   final ImageInfoProxyApi api;
 
-  ImageInfoImpl.internal(this.api) : super.impl();
+  ImageInfoImpl.internal(this.api);
 
   @override
   FlashState get flashState => throw UnimplementedError();
-  //  api.flashState.impl;
   @override
   int get rotationDegrees => api.rotationDegrees;
   @override

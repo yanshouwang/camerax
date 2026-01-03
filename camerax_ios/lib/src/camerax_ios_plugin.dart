@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:ui';
-
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 import 'avfoundation.dart';
@@ -21,14 +18,14 @@ abstract final class CameraXiOSPlugin {
     ObserverChannel.instance = ObserverChannelImpl();
     PermissionManagerChannel.instance = PermissionManagerChannelImpl();
     // core.resolution_selector
-    AspectRatioStrategyChannel.instance = AspectRatioStrategyChannelImpl();
-    ResolutionFilterChannel.instance = ResolutionFilterChannelImpl();
+    // AspectRatioStrategyChannel.instance = AspectRatioStrategyChannelImpl();
+    // ResolutionFilterChannel.instance = ResolutionFilterChannelImpl();
     ResolutionSelectorChannel.instance = ResolutionSelectorChannelImpl();
     ResolutionStrategyChannel.instance = ResolutionStrategyChannelImpl();
     // core
     CameraInfoChannel.instance = CameraInfoChannelImpl();
     CameraSelectorChannel.instance = CameraSelectorChannelImpl();
-    DynamicRangeChannel.instance = DynamicRangeChannelImpl();
+    // DynamicRangeChannel.instance = DynamicRangeChannelImpl();
     FocusMeteringActionChannel.instance = FocusMeteringActionChannelImpl();
     ImageAnalysisChannel.instance = ImageAnalysisChannelImpl();
     ImageCaptureChannel.instance = ImageCaptureChannelImpl();
@@ -36,10 +33,10 @@ abstract final class CameraXiOSPlugin {
     SurfaceOrientedMeteringPointFactoryChannel.instance =
         SurfaceOrientedMeteringPointFactoryChannelImpl();
     // video
-    FallbackStrategyChannel.instance = FallbackStrategyChannelImpl();
+    // FallbackStrategyChannel.instance = FallbackStrategyChannelImpl();
     FileOutputOptionsChannel.instance = FileOutputOptionsChannelImpl();
-    QualityChannel.instance = QualityChannelImpl();
-    QualitySelectorChannel.instance = QualitySelectorChannelImpl();
+    // QualityChannel.instance = QualityChannelImpl();
+    // QualitySelectorChannel.instance = QualitySelectorChannelImpl();
     // view
     AudioConfigChannel.instance = AudioConfigChannelImpl();
     CameraControllerChannel.instance = CameraControllerChannelImpl();

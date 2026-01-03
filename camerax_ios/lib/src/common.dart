@@ -14,4 +14,4 @@ export 'common/rect_impl.dart';
 export 'common/size_impl.dart';
 export 'common/surface_impl.dart';
 export 'common/uri_impl.dart';
-export 'common/view_impl.dart';
+export 'common/widget_adapter_impl.dart';

@@ -1,18 +1,12 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'camera_controller_impl.dart';
-
-final class PreviewViewImpl extends PreviewView with ViewImpl {
+final class PreviewViewImpl with WidgetAdapterImpl implements PreviewView {
   final PreviewViewProxyApi api;
 
-  PreviewViewImpl.internal(this.api) : super.impl();
-
-  factory PreviewViewImpl() {
-    final api = PreviewViewProxyApi();
-    return PreviewViewImpl.internal(api);
-  }
+  PreviewViewImpl.internal(this.api);
 
   @override
   String get viewType => 'camerax.zeekr.dev/PreviewView';
@@ -22,4 +16,12 @@ final class PreviewViewImpl extends PreviewView with ViewImpl {
   @override
   Future<void> setController(CameraController controller) =>
       api.setController(controller.api);
+}
+
+final class PreviewViewChannelImpl extends PreviewViewChannel {
+  @override
+  PreviewView create() {
+    final api = PreviewViewProxyApi();
+    return PreviewViewImpl.internal(api);
+  }
 }

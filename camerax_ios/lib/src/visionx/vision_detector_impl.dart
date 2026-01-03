@@ -1,20 +1,13 @@
 import 'dart:async';
 
 import 'package:camerax_ios/src/vision.dart';
+import 'package:camerax_ios/src/visionx.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'vision_image_impl.dart';
-import 'vision_object_impl.dart';
-
-final class VisionDetectorImpl extends VisionDetector {
+final class VisionDetectorImpl implements VisionDetector {
   final List<VisionObjectType> types;
 
-  VisionDetectorImpl.internal(this.types) : super.impl();
-
-  factory VisionDetectorImpl({List<VisionObjectType>? types}) {
-    types ??= VisionObjectType.values;
-    return VisionDetectorImpl.internal(types);
-  }
+  VisionDetectorImpl.internal(this.types);
 
   @override
   Future<List<VisionObject>> detect(VisionImage image) async {
@@ -69,5 +62,13 @@ final class VisionDetectorImpl extends VisionDetector {
     final codes = await codesCompleter.future;
     final faces = await facesCompleter.future;
     return [...codes, ...faces];
+  }
+}
+
+final class VisionDetectorChannelImpl extends VisionDetectorChannel {
+  @override
+  VisionDetector create({List<VisionObjectType>? types}) {
+    types ??= VisionObjectType.values;
+    return VisionDetectorImpl.internal(types);
   }
 }

@@ -1,13 +1,14 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin VNFaceLandmarkRegionImpl on VNFaceLandmarkRegion {
+abstract base class VNFaceLandmarkRegionImpl implements VNFaceLandmarkRegion {
   VNFaceLandmarkRegionProxyApi get api;
 }
 
-final class VNFaceLandmarkRegion2DImpl extends VNFaceLandmarkRegion2D
-    with VNFaceLandmarkRegionImpl {
+final class VNFaceLandmarkRegion2DImpl extends VNFaceLandmarkRegionImpl
+    implements VNFaceLandmarkRegion2D {
   @override
   final VNFaceLandmarkRegion2DProxyApi api;
   @override
@@ -22,7 +23,7 @@ final class VNFaceLandmarkRegion2DImpl extends VNFaceLandmarkRegion2D
     required this.pointCount,
     required this.normalizedPoints,
     required this.precisionEstimatesPerPoint,
-  }) : super.impl();
+  });
 
   @override
   Future<List<Point<double>>> pointsInImage(Size<int> imageSize) => api
@@ -30,12 +31,12 @@ final class VNFaceLandmarkRegion2DImpl extends VNFaceLandmarkRegion2D
       .then((e) => e.map((e1) => e1.impl).toList());
 }
 
-base mixin VNFaceLandmarksImpl on VNFaceLandmarks {
+abstract base class VNFaceLandmarksImpl implements VNFaceLandmarks {
   VNFaceLandmarksProxyApi get api;
 }
 
-final class VNFaceLandmarks2DImpl extends VNFaceLandmarks2D
-    with VNFaceLandmarksImpl {
+final class VNFaceLandmarks2DImpl extends VNFaceLandmarksImpl
+    implements VNFaceLandmarks2D {
   @override
   final VNFaceLandmarks2DProxyApi api;
   @override
@@ -83,10 +84,12 @@ final class VNFaceLandmarks2DImpl extends VNFaceLandmarks2D
     required this.innerLips,
     required this.leftPupil,
     required this.rightPupil,
-  }) : super.impl();
+  });
 }
 
-final class VNFaceObservationImpl extends VNFaceObservation {
+final class VNFaceObservationImpl extends VNDetectedObjectObservationImpl
+    implements VNFaceObservation {
+  @override
   final VNFaceObservationProxyApi api;
   @override
   final double confidence;
@@ -109,7 +112,7 @@ final class VNFaceObservationImpl extends VNFaceObservation {
     required this.roll,
     required this.yaw,
     required this.pitch,
-  }) : super.impl();
+  });
 }
 
 extension VNFaceLandmarkRegion2DProxyApiX on VNFaceLandmarkRegion2DProxyApi {

@@ -369,19 +369,6 @@ abstract class SizeFProxyApi {
   late final double height;
 }
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'DurationTuple'))
-abstract class DurationTupleProxyApi {
-  DurationTupleProxyApi(int duration, TimeUnitApi timeUnit);
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'MeteringPointTuple'))
-abstract class MeteringPointTupleProxyApi {
-  MeteringPointTupleProxyApi(
-    MeteringPointProxyApi point, {
-    List<FocusMeteringActionMeteringModeApi>? modes,
-  });
-}
-
 // core
 enum AspectRatioStrategyFallbackRuleApi { none, auto }
 
@@ -450,15 +437,29 @@ abstract class ResolutionStrategyProxyApi {
   ResolutionStrategyFallbackRuleApi getFallbackRule();
 }
 
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'ResolutionSelector.Builder'),
+)
+abstract class ResolutionSelectorBuilderProxyApi {
+  ResolutionSelectorBuilderProxyApi();
+
+  // ResolutionSelectorBuilderProxyApi setAllowedResolutionMode(
+  //   ResolutionSelectorModeApi mode,
+  // );
+  // ResolutionSelectorBuilderProxyApi setAspectRatioStrategy(
+  //   AspectRatioStrategyProxyApi aspectRatioStrategy,
+  // );
+  // ResolutionSelectorBuilderProxyApi setResolutionFilter(
+  //   ResolutionFilterProxyApi resolutionFilter,
+  // );
+  ResolutionSelectorBuilderProxyApi setResolutionStrategy(
+    ResolutionStrategyProxyApi resolutionStrategy,
+  );
+  ResolutionSelectorProxyApi build();
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ResolutionSelector'))
 abstract class ResolutionSelectorProxyApi {
-  ResolutionSelectorProxyApi.build({
-    // ResolutionSelectorModeApi? mode,
-    // AspectRatioStrategyProxyApi? aspectRatioStrategy,
-    // ResolutionFilterProxyApi? resolutionFilter,
-    ResolutionStrategyProxyApi? resolutionStrategy,
-  });
-
   // ResolutionSelectorModeApi getAllowedResolutionMode();
   // AspectRatioStrategyProxyApi getAspectRatioStrategy();
   // ResolutionFilterProxyApi? getResolutionFilter();
@@ -524,6 +525,20 @@ abstract class CameraInfoProxyApi {
   //     List<DynamicRangeApi> candidateDynamicRanges);
 }
 
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraSelector.Builder'))
+abstract class CameraSelectorBuilderProxyApi {
+  CameraSelectorBuilderProxyApi();
+
+  // CameraSelectorBuilderProxyApi addCameraFilter(
+  //   CameraFilterProxyApi cameraFilter,
+  // );
+  CameraSelectorBuilderProxyApi requireLensFacing(
+    CameraSelectorLensFacingApi lensFacing,
+  );
+  // CameraSelectorBuilderProxyApi setPhysicalCameraId(String physicalCameraId);
+  CameraSelectorProxyApi build();
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraSelector'))
 abstract class CameraSelectorProxyApi {
   @static
@@ -533,22 +548,38 @@ abstract class CameraSelectorProxyApi {
   @static
   late final CameraSelectorProxyApi external;
 
-  CameraSelectorProxyApi.build({CameraSelectorLensFacingApi? lensFacing});
   // CameraSelectorProxyApi.of(List<CameraIdentifierProxyApi> cameraIdentifiers);
 
   // List<CameraInfoProxyApi> filter(List<CameraInfoProxyApi> cameraInfos);
   // String? getPhysicalCameraId();
 }
 
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'FocusMeteringAction.Builder'),
+)
+abstract class FocusMeteringActionBuilderProxyApi {
+  FocusMeteringActionBuilderProxyApi.new1(MeteringPointProxyApi point);
+
+  FocusMeteringActionBuilderProxyApi.new2(
+    MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi> meteringModes,
+  );
+
+  FocusMeteringActionBuilderProxyApi addPoint1(MeteringPointProxyApi point);
+  FocusMeteringActionBuilderProxyApi addPoint2(
+    MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi> meteringModes,
+  );
+  FocusMeteringActionBuilderProxyApi disableAutoCancel();
+  FocusMeteringActionBuilderProxyApi setAutoCancelDuration(
+    int duration,
+    TimeUnitApi timeUnit,
+  );
+  FocusMeteringActionProxyApi build();
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FocusMeteringAction'))
 abstract class FocusMeteringActionProxyApi {
-  FocusMeteringActionProxyApi.build(
-    MeteringPointTupleProxyApi point, {
-    List<MeteringPointTupleProxyApi>? morePoints,
-    bool? disableAutoCancel,
-    DurationTupleProxyApi? autoCancelDuration,
-  });
-
   int getAutoCancelDurationInMillis();
   List<MeteringPointProxyApi> getMeteringPointsAe();
   List<MeteringPointProxyApi> getMeteringPointsAf();
@@ -667,7 +698,7 @@ enum AudioStatsAudioStateApi {
   muted,
 }
 
-enum VideoRecordFinalizeEventErrorApi {
+enum VideoRecordEventFinalizeErrorApi {
   none,
   unknown,
   fileSizeLimitReached,
@@ -697,15 +728,20 @@ abstract class OutputOptionsProxyApi {
   CLLocationProxyApi? getLocation();
 }
 
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FileOutputOptions.Builder'))
+abstract class FileOutputOptionsBuilderProxyApi extends OutputOptionsProxyApi {
+  FileOutputOptionsBuilderProxyApi(String file);
+
+  FileOutputOptionsBuilderProxyApi setDurationLimitMillis(
+    int durationLimitMillis,
+  );
+  FileOutputOptionsBuilderProxyApi setFileSizeLimit(int fileSizeLimitBytes);
+  FileOutputOptionsBuilderProxyApi setLocation(CLLocationProxyApi? location);
+  FileOutputOptionsProxyApi build();
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'FileOutputOptions'))
 abstract class FileOutputOptionsProxyApi extends OutputOptionsProxyApi {
-  FileOutputOptionsProxyApi.build(
-    String file, {
-    int? durationLimitMillis,
-    int? fileSizeLimitBytes,
-    CLLocationProxyApi? location,
-  });
-
   String getFile();
 }
 
@@ -734,36 +770,36 @@ abstract class RecordingProxyApi extends AutoCloseableProxyApi {
 abstract class VideoRecordEventProxyApi {}
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Status'))
-abstract class VideoRecordStatusEventProxyApi extends VideoRecordEventProxyApi {
+abstract class VideoRecordEventStatusProxyApi extends VideoRecordEventProxyApi {
   // late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Start'))
-abstract class VideoRecordStartEventProxyApi extends VideoRecordEventProxyApi {
+abstract class VideoRecordEventStartProxyApi extends VideoRecordEventProxyApi {
   // late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Pause'))
-abstract class VideoRecordPauseEventProxyApi extends VideoRecordEventProxyApi {
+abstract class VideoRecordEventPauseProxyApi extends VideoRecordEventProxyApi {
   // late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Resume'))
-abstract class VideoRecordResumeEventProxyApi extends VideoRecordEventProxyApi {
+abstract class VideoRecordEventResumeProxyApi extends VideoRecordEventProxyApi {
   // late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'VideoRecordEvent.Finalize'))
-abstract class VideoRecordFinalizeEventProxyApi
+abstract class VideoRecordEventFinalizeProxyApi
     extends VideoRecordEventProxyApi {
   // late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
   late final List<Object?>? cause;
-  late final VideoRecordFinalizeEventErrorApi error;
+  late final VideoRecordEventFinalizeErrorApi error;
   late final OutputResultsProxyApi outputResults;
   late final bool hasError;
 }
@@ -820,7 +856,7 @@ abstract class CameraControllerProxyApi {
   // );
   bool isTapToFocusEnabled();
   void setTapToFocusEnabled(bool enabled);
-  // void setTapToFocusAutoCancelDuration(DurationTupleProxyApi duration);
+  // void setTapToFocusAutoCancelDuration(int duration, TimeUnitApi timeUnit);
   bool isImageCaptureEnabled();
   bool isImageAnalysisEnabled();
   bool isVideoCaptureEnabled();

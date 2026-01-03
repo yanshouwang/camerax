@@ -10,4 +10,4 @@ export 'common/range.dart';
 export 'common/rect.dart';
 export 'common/size.dart';
 export 'common/surface.dart';
-export 'common/view.dart';
+export 'common/widget_adapter.dart';
