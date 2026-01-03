@@ -110,13 +110,6 @@ abstract class Camera2CameraInfoProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'androidx.camera.camera2.interop.CaptureRequestOptions',
-  ),
-)
-abstract class CaptureRequestOptionsProxyApi {}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
         'androidx.camera.camera2.interop.CaptureRequestOptions.Builder',
   ),
@@ -142,6 +135,13 @@ abstract class CaptureRequestOptionsBuilderProxyApi {
   );
   CaptureRequestOptionsProxyApi build();
 }
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'androidx.camera.camera2.interop.CaptureRequestOptions',
+  ),
+)
+abstract class CaptureRequestOptionsProxyApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -253,10 +253,10 @@ abstract class CameraCharacteristicsProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'android.hardware.camera2.CameraMetatata',
+    fullClassName: 'dev.zeekr.camerax_android.camera2.CameraMetadataUtil',
   ),
 )
-abstract class CameraMetadataProxyApi {
+abstract class CameraMetadataUtilProxyApi {
   @static
   CameraMetadataInfoSupportedHardwareLevelApi fromInfoSupportedHardwareLevel(
     int value,
@@ -1294,15 +1294,18 @@ abstract class ExposureStateProxyApi {
   ),
 )
 abstract class FocusMeteringActionBuilderProxyApi {
-  FocusMeteringActionBuilderProxyApi(
-    MeteringPointProxyApi point, [
-    List<FocusMeteringActionMeteringModeApi>? meteringModes,
-  ]);
+  FocusMeteringActionBuilderProxyApi.new1(MeteringPointProxyApi point);
 
-  FocusMeteringActionBuilderProxyApi addPoint(
-    MeteringPointProxyApi point, [
-    List<FocusMeteringActionMeteringModeApi>? meteringModes,
-  ]);
+  FocusMeteringActionBuilderProxyApi.new2(
+    MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi> meteringModes,
+  );
+
+  FocusMeteringActionBuilderProxyApi addPoint1(MeteringPointProxyApi point);
+  FocusMeteringActionBuilderProxyApi addPoint2(
+    MeteringPointProxyApi point,
+    List<FocusMeteringActionMeteringModeApi> meteringModes,
+  );
   FocusMeteringActionBuilderProxyApi disableAutoCancel();
   FocusMeteringActionBuilderProxyApi setAutoCancelDuration(
     int duration,

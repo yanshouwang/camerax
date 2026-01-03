@@ -4,10 +4,40 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
 import dev.zeekr.camerax_android.BarcodeFormatApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiBarcodeScannerOptionsBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiBarcodeScannerOptionsProxyApi
 
 class BarcodeScannerOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiBarcodeScannerOptionsProxyApi(registrar) {
+    class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiBarcodeScannerOptionsBuilderProxyApi(registrar) {
+        override fun pigeon_defaultConstructor(): BarcodeScannerOptions.Builder {
+            return BarcodeScannerOptions.Builder()
+        }
+
+        override fun enableAllPotentialBarcodes(pigeon_instance: BarcodeScannerOptions.Builder): BarcodeScannerOptions.Builder {
+            return pigeon_instance.enableAllPotentialBarcodes()
+        }
+
+        override fun setBarcodeFormats(
+            pigeon_instance: BarcodeScannerOptions.Builder, formats: List<BarcodeFormatApi>
+        ): BarcodeScannerOptions.Builder {
+            val format = formats.first().impl
+            val moreFormats = formats.drop(1).map { it.impl }.toIntArray()
+            return pigeon_instance.setBarcodeFormats(format, *moreFormats)
+        }
+
+        override fun setZoomSuggestionOptions(
+            pigeon_instance: BarcodeScannerOptions.Builder, zoomSuggestionOptions: ZoomSuggestionOptions
+        ): BarcodeScannerOptions.Builder {
+            return pigeon_instance.setZoomSuggestionOptions(zoomSuggestionOptions)
+        }
+
+        override fun build(pigeon_instance: BarcodeScannerOptions.Builder): BarcodeScannerOptions {
+            return pigeon_instance.build()
+        }
+    }
+
     override fun build(
         enableAllPotentialBarcodes: Boolean?,
         formats: List<BarcodeFormatApi>?,

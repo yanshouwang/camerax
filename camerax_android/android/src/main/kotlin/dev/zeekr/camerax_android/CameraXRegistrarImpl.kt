@@ -3,7 +3,7 @@ package dev.zeekr.camerax_android
 import android.app.Activity
 import android.content.Context
 import dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl
-import dev.zeekr.camerax_android.camera2.CameraMetadataImpl
+import dev.zeekr.camerax_android.camera2.CameraMetadataUtilImpl
 import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraInfoImpl
@@ -11,14 +11,12 @@ import dev.zeekr.camerax_android.camera2.interop.CaptureRequestOptionsImpl
 import dev.zeekr.camerax_android.common.AutoCloseableImpl
 import dev.zeekr.camerax_android.common.BitmapImpl
 import dev.zeekr.camerax_android.common.CameraStateObserverImpl
-import dev.zeekr.camerax_android.common.DurationTupleImpl
 import dev.zeekr.camerax_android.common.ImageProxyConsumerImpl
 import dev.zeekr.camerax_android.common.IntObserverImpl
 import dev.zeekr.camerax_android.common.IntRangeImpl
 import dev.zeekr.camerax_android.common.LocationImpl
 import dev.zeekr.camerax_android.common.LongRangeImpl
 import dev.zeekr.camerax_android.common.LowLightBoostStateObserverImpl
-import dev.zeekr.camerax_android.common.MeteringPointTupleImpl
 import dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumerImpl
 import dev.zeekr.camerax_android.common.PermissionManagerImpl
 import dev.zeekr.camerax_android.common.PointFImpl
@@ -34,6 +32,7 @@ import dev.zeekr.camerax_android.core.BufferImpl
 import dev.zeekr.camerax_android.core.ByteArrayOutputStreamImpl
 import dev.zeekr.camerax_android.core.ByteBufferImpl
 import dev.zeekr.camerax_android.core.CameraControlImpl
+import dev.zeekr.camerax_android.core.CameraFilterImpl
 import dev.zeekr.camerax_android.core.CameraInfoImpl
 import dev.zeekr.camerax_android.core.CameraSelectorImpl
 import dev.zeekr.camerax_android.core.DynamicRangeImpl
@@ -127,8 +126,8 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return CameraCharacteristicsImpl(this)
     }
 
-    override fun getPigeonApiCameraMetadataProxyApi(): PigeonApiCameraMetadataProxyApi {
-        return CameraMetadataImpl(this)
+    override fun getPigeonApiCameraMetadataUtilProxyApi(): PigeonApiCameraMetadataUtilProxyApi {
+        return CameraMetadataUtilImpl(this)
     }
 
     override fun getPigeonApiCaptureRequestKeyProxyApi(): PigeonApiCaptureRequestKeyProxyApi {
@@ -239,14 +238,6 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return LongRangeImpl(this)
     }
 
-    override fun getPigeonApiMeteringPointTupleProxyApi(): PigeonApiMeteringPointTupleProxyApi {
-        return MeteringPointTupleImpl(this)
-    }
-
-    override fun getPigeonApiDurationTupleProxyApi(): PigeonApiDurationTupleProxyApi {
-        return DurationTupleImpl(this)
-    }
-
     override fun getPigeonApiAspectRatioStrategyProxyApi(): PigeonApiAspectRatioStrategyProxyApi {
         return AspectRatioStrategyImpl(this)
     }
@@ -259,6 +250,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ResolutionStrategyImpl(this)
     }
 
+    override fun getPigeonApiResolutionSelectorBuilderProxyApi(): PigeonApiResolutionSelectorBuilderProxyApi {
+        return ResolutionSelectorImpl.BuilderImpl(this)
+    }
+
     override fun getPigeonApiResolutionSelectorProxyApi(): PigeonApiResolutionSelectorProxyApi {
         return ResolutionSelectorImpl(this)
     }
@@ -267,8 +262,16 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return CameraControlImpl(this)
     }
 
+    override fun getPigeonApiCameraFilterProxyApi(): PigeonApiCameraFilterProxyApi {
+        return CameraFilterImpl(this)
+    }
+
     override fun getPigeonApiCameraInfoProxyApi(): PigeonApiCameraInfoProxyApi {
         return CameraInfoImpl(this)
+    }
+
+    override fun getPigeonApiCameraSelectorBuilderProxyApi(): PigeonApiCameraSelectorBuilderProxyApi {
+        return CameraSelectorImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiCameraSelectorProxyApi(): PigeonApiCameraSelectorProxyApi {
@@ -281,6 +284,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiExposureStateProxyApi(): PigeonApiExposureStateProxyApi {
         return ExposureStateImpl(this)
+    }
+
+    override fun getPigeonApiFocusMeteringActionBuilderProxyApi(): PigeonApiFocusMeteringActionBuilderProxyApi {
+        return FocusMeteringActionImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiFocusMeteringActionProxyApi(): PigeonApiFocusMeteringActionProxyApi {
@@ -391,8 +398,12 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ZoomSuggestionOptionsImpl.ZoomCallbackImpl(this)
     }
 
-    override fun getPigeonApiZoomSuggestionOptionsProxyApi(): PigeonApiZoomSuggestionOptionsProxyApi {
-        return ZoomSuggestionOptionsImpl(this)
+    override fun getPigeonApiZoomSuggestionOptionsBuilderProxyApi(): PigeonApiZoomSuggestionOptionsBuilderProxyApi {
+        return ZoomSuggestionOptionsImpl.BuilderImpl(this)
+    }
+
+    override fun getPigeonApiBarcodeScannerOptionsBuilderProxyApi(): PigeonApiBarcodeScannerOptionsBuilderProxyApi {
+        return BarcodeScannerOptionsImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiBarcodeScannerOptionsProxyApi(): PigeonApiBarcodeScannerOptionsProxyApi {
@@ -413,6 +424,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiFaceProxyApi(): PigeonApiFaceProxyApi {
         return FaceImpl(this)
+    }
+
+    override fun getPigeonApiFaceDetectorOptionsBuilderProxyApi(): PigeonApiFaceDetectorOptionsBuilderProxyApi {
+        return FaceDetectorOptionsImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiFaceDetectorOptionsProxyApi(): PigeonApiFaceDetectorOptionsProxyApi {
@@ -441,6 +456,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiOutputOptionsProxyApi(): PigeonApiOutputOptionsProxyApi {
         return OutputOptionsImpl(this)
+    }
+
+    override fun getPigeonApiFileOutputOptionsBuilderProxyApi(): PigeonApiFileOutputOptionsBuilderProxyApi {
+        return FileOutputOptionsImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiFileOutputOptionsProxyApi(): PigeonApiFileOutputOptionsProxyApi {

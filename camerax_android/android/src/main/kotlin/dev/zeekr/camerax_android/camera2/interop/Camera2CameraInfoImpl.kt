@@ -1,6 +1,8 @@
 package dev.zeekr.camerax_android.camera2.interop
 
+import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraInfo
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.CameraInfo
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCamera2CameraInfoProxyApi
@@ -8,6 +10,7 @@ import dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl
 import dev.zeekr.camerax_android.common.IntRange
 import dev.zeekr.camerax_android.common.LongRange
 
+@OptIn(ExperimentalCamera2Interop::class)
 class Camera2CameraInfoImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiCamera2CameraInfoProxyApi(registrar) {
     override fun from(cameraInfo: CameraInfo): Camera2CameraInfo {

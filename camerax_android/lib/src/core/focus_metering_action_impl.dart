@@ -12,9 +12,11 @@ final class FocusMeteringAction$BuilderImpl
   Future<FocusMeteringAction$Builder> addPoint(
     MeteringPoint point, [
     List<FocusMeteringAction$MeteringMode>? meteringModes,
-  ]) => api
-      .addPoint(point.api, meteringModes?.map((e) => e.api).toList())
-      .then((e) => e.impl);
+  ]) => meteringModes == null
+      ? api.addPoint1(point.api).then((e) => e.impl)
+      : api
+            .addPoint2(point.api, meteringModes.map((e) => e.api).toList())
+            .then((e) => e.impl);
 
   @override
   Future<FocusMeteringAction$Builder> disableAutoCancel() =>
@@ -63,10 +65,12 @@ final class FocusMeteringActionChannelImpl extends FocusMeteringActionChannel {
     MeteringPoint point, [
     List<FocusMeteringAction$MeteringMode>? meteringModes,
   ]) {
-    final api = FocusMeteringActionBuilderProxyApi(
-      point: point.api,
-      meteringModes: meteringModes?.map((e) => e.api).toList(),
-    );
+    final api = meteringModes == null
+        ? FocusMeteringActionBuilderProxyApi.new1(point: point.api)
+        : FocusMeteringActionBuilderProxyApi.new2(
+            point: point.api,
+            meteringModes: meteringModes.map((e) => e.api).toList(),
+          );
     return FocusMeteringAction$BuilderImpl.internal(api);
   }
 }

@@ -163,8 +163,10 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         pigeon_instance.previewResolutionSelector = resolutionSelector
     }
 
-    override fun setTapToFocusAutoCancelDuration(pigeon_instance: CameraController, duration: DurationTuple) {
-        pigeon_instance.setTapToFocusAutoCancelDuration(duration.duration, duration.timeUnit)
+    override fun setTapToFocusAutoCancelDuration(
+        pigeon_instance: CameraController, duration: Long, timeUnit: TimeUnitApi
+    ) {
+        pigeon_instance.setTapToFocusAutoCancelDuration(duration, timeUnit.impl)
     }
 
     override fun getImageCaptureResolutionSelector(pigeon_instance: CameraController): ResolutionSelector? {

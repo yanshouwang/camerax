@@ -1,10 +1,13 @@
 package dev.zeekr.camerax_android.camera2.interop
 
+import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.CaptureRequestOptions
+import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsBuilderProxyApi
 import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
 
+@OptIn(ExperimentalCamera2Interop::class)
 class CaptureRequestOptionsImpl {
     class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         PigeonApiCaptureRequestOptionsBuilderProxyApi(registrar) {

@@ -31,7 +31,7 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
             .then(
               (e) => e == null
                   ? null
-                  : CameraMetadataProxyApi.fromInfoSupportedHardwareLevel(
+                  : CameraMetadataUtilProxyApi.fromInfoSupportedHardwareLevel(
                       e,
                     ).then((e) => e.impl as T?),
             );
@@ -52,7 +52,7 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
                   ? null
                   : Stream.fromIterable(e)
                         .asyncMap(
-                          (e) => CameraMetadataProxyApi.fromControlMode(
+                          (e) => CameraMetadataUtilProxyApi.fromControlMode(
                             e,
                           ).then((e) => e.impl),
                         )
@@ -70,7 +70,7 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
                   ? null
                   : Stream.fromIterable(e)
                         .asyncMap(
-                          (e) => CameraMetadataProxyApi.fromControlAeMode(
+                          (e) => CameraMetadataUtilProxyApi.fromControlAeMode(
                             e,
                           ).then((e) => e.impl),
                         )
@@ -87,7 +87,7 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
                   ? null
                   : Stream.fromIterable(e)
                         .asyncMap(
-                          (e) => CameraMetadataProxyApi.fromControlAfMode(
+                          (e) => CameraMetadataUtilProxyApi.fromControlAfMode(
                             e,
                           ).then((e) => e.impl),
                         )
@@ -104,7 +104,7 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
                   ? null
                   : Stream.fromIterable(e)
                         .asyncMap(
-                          (e) => CameraMetadataProxyApi.fromControlAwbMode(
+                          (e) => CameraMetadataUtilProxyApi.fromControlAwbMode(
                             e,
                           ).then((e) => e.impl),
                         )

@@ -1,10 +1,14 @@
 package dev.zeekr.camerax_android.camera2
 
 import android.hardware.camera2.CameraMetadata
-import dev.zeekr.camerax_android.*
+import dev.zeekr.camerax_android.CameraMetadataControlAeModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAfModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAwbModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlModeApi
+import dev.zeekr.camerax_android.CameraMetadataInfoSupportedHardwareLevelApi
 
-class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraMetadataProxyApi(registrar) {
-    override fun fromInfoSupportedHardwareLevel(value: Long): CameraMetadataInfoSupportedHardwareLevelApi {
+object CameraMetadataUtil {
+    fun fromInfoSupportedHardwareLevel(value: Long): CameraMetadataInfoSupportedHardwareLevelApi {
         return when (value.toInt()) {
             CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED -> CameraMetadataInfoSupportedHardwareLevelApi.LIMITED
             CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_FULL -> CameraMetadataInfoSupportedHardwareLevelApi.FULL
@@ -15,7 +19,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
     }
 
-    override fun fromControlMode(value: Long): CameraMetadataControlModeApi {
+    fun fromControlMode(value: Long): CameraMetadataControlModeApi {
         return when (value.toInt()) {
             CameraMetadata.CONTROL_MODE_OFF -> CameraMetadataControlModeApi.OFF
             CameraMetadata.CONTROL_MODE_AUTO -> CameraMetadataControlModeApi.AUTO
@@ -26,7 +30,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
     }
 
-    override fun fromControlAeMode(value: Long): CameraMetadataControlAeModeApi {
+    fun fromControlAeMode(value: Long): CameraMetadataControlAeModeApi {
         return when (value.toInt()) {
             CameraMetadata.CONTROL_AE_MODE_OFF -> CameraMetadataControlAeModeApi.OFF
             CameraMetadata.CONTROL_AE_MODE_ON -> CameraMetadataControlAeModeApi.ON
@@ -39,7 +43,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
     }
 
-    override fun fromControlAfMode(value: Long): CameraMetadataControlAfModeApi {
+    fun fromControlAfMode(value: Long): CameraMetadataControlAfModeApi {
         return when (value.toInt()) {
             CameraMetadata.CONTROL_AF_MODE_OFF -> CameraMetadataControlAfModeApi.OFF
             CameraMetadata.CONTROL_AF_MODE_AUTO -> CameraMetadataControlAfModeApi.AUTO
@@ -51,7 +55,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
     }
 
-    override fun fromControlAwbMode(value: Long): CameraMetadataControlAwbModeApi {
+    fun fromControlAwbMode(value: Long): CameraMetadataControlAwbModeApi {
         return when (value.toInt()) {
             CameraMetadata.CONTROL_AWB_MODE_OFF -> CameraMetadataControlAwbModeApi.OFF
             CameraMetadata.CONTROL_AWB_MODE_AUTO -> CameraMetadataControlAwbModeApi.AUTO
@@ -66,7 +70,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
     }
 
-    override fun toInfoSupportedHardwareLevel(level: CameraMetadataInfoSupportedHardwareLevelApi): Long {
+    fun toInfoSupportedHardwareLevel(level: CameraMetadataInfoSupportedHardwareLevelApi): Long {
         return when (level) {
             CameraMetadataInfoSupportedHardwareLevelApi.LIMITED -> CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED
             CameraMetadataInfoSupportedHardwareLevelApi.FULL -> CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_FULL
@@ -76,7 +80,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }.toLong()
     }
 
-    override fun toControlMode(mode: CameraMetadataControlModeApi): Long {
+    fun toControlMode(mode: CameraMetadataControlModeApi): Long {
         return when (mode) {
             CameraMetadataControlModeApi.OFF -> CameraMetadata.CONTROL_MODE_OFF
             CameraMetadataControlModeApi.AUTO -> CameraMetadata.CONTROL_MODE_AUTO
@@ -86,7 +90,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }.toLong()
     }
 
-    override fun toControlAeMode(mode: CameraMetadataControlAeModeApi): Long {
+    fun toControlAeMode(mode: CameraMetadataControlAeModeApi): Long {
         return when (mode) {
             CameraMetadataControlAeModeApi.OFF -> CameraMetadata.CONTROL_AE_MODE_OFF
             CameraMetadataControlAeModeApi.ON -> CameraMetadata.CONTROL_AE_MODE_ON
@@ -98,7 +102,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }.toLong()
     }
 
-    override fun toControlAfMode(mode: CameraMetadataControlAfModeApi): Long {
+    fun toControlAfMode(mode: CameraMetadataControlAfModeApi): Long {
         return when (mode) {
             CameraMetadataControlAfModeApi.OFF -> CameraMetadata.CONTROL_AF_MODE_OFF
             CameraMetadataControlAfModeApi.AUTO -> CameraMetadata.CONTROL_AF_MODE_AUTO
@@ -109,7 +113,7 @@ class CameraMetadataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }.toLong()
     }
 
-    override fun toControlAwbMode(mode: CameraMetadataControlAwbModeApi): Long {
+    fun toControlAwbMode(mode: CameraMetadataControlAwbModeApi): Long {
         return when (mode) {
             CameraMetadataControlAwbModeApi.OFF -> CameraMetadata.CONTROL_AWB_MODE_OFF
             CameraMetadataControlAwbModeApi.AUTO -> CameraMetadata.CONTROL_AWB_MODE_AUTO

@@ -21,22 +21,22 @@ final class CaptureRequestOptions$BuilderImpl
             .then((e) => e.impl);
       }
       if (value is CameraMetadata$ControlMode) {
-        return CameraMetadataProxyApi.toControlMode(value.api)
+        return CameraMetadataUtilProxyApi.toControlMode(value.api)
             .then((e) => api.setIntCaptureRequestOption(keyApi, e))
             .then((e) => e.impl);
       }
       if (value is CameraMetadata$ControlAeMode) {
-        return CameraMetadataProxyApi.toControlAeMode(value.api)
+        return CameraMetadataUtilProxyApi.toControlAeMode(value.api)
             .then((e) => api.setIntCaptureRequestOption(keyApi, e))
             .then((e) => e.impl);
       }
       if (value is CameraMetadata$ControlAfMode) {
-        return CameraMetadataProxyApi.toControlAfMode(value.api)
+        return CameraMetadataUtilProxyApi.toControlAfMode(value.api)
             .then((e) => api.setIntCaptureRequestOption(keyApi, e))
             .then((e) => e.impl);
       }
       if (value is CameraMetadata$ControlAwbMode) {
-        return CameraMetadataProxyApi.toControlAwbMode(value.api)
+        return CameraMetadataUtilProxyApi.toControlAwbMode(value.api)
             .then((e) => api.setIntCaptureRequestOption(keyApi, e))
             .then((e) => e.impl);
       }

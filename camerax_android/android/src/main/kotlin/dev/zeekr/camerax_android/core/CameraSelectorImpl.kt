@@ -1,20 +1,43 @@
 package dev.zeekr.camerax_android.core
 
 import androidx.annotation.OptIn
+import androidx.camera.core.CameraFilter
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalLensFacing
 import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.PigeonApiCameraSelectorBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiCameraSelectorProxyApi
 
 class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorProxyApi(registrar) {
-    override fun build(lensFacing: CameraSelectorLensFacingApi?): CameraSelector {
-        val builder = CameraSelector.Builder()
-        if (lensFacing != null) {
-            builder.requireLensFacing(lensFacing.impl)
+    class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiCameraSelectorBuilderProxyApi(registrar) {
+        override fun pigeon_defaultConstructor(): CameraSelector.Builder {
+            return CameraSelector.Builder()
         }
-        return builder.build()
+
+        override fun addCameraFilter(
+            pigeon_instance: CameraSelector.Builder, cameraFilter: CameraFilter
+        ): CameraSelector.Builder {
+            return pigeon_instance.addCameraFilter(cameraFilter)
+        }
+
+        override fun requireLensFacing(
+            pigeon_instance: CameraSelector.Builder, lensFacing: CameraSelectorLensFacingApi
+        ): CameraSelector.Builder {
+            return pigeon_instance.requireLensFacing(lensFacing.impl)
+        }
+
+        override fun setPhysicalCameraId(
+            pigeon_instance: CameraSelector.Builder, physicalCameraId: String
+        ): CameraSelector.Builder {
+            return pigeon_instance.setPhysicalCameraId(physicalCameraId)
+        }
+
+        override fun build(pigeon_instance: CameraSelector.Builder): CameraSelector {
+            return pigeon_instance.build()
+        }
     }
 
     override fun back(): CameraSelector {
@@ -40,8 +63,7 @@ class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
 }
 
 val CameraSelectorLensFacingApi.impl: Int
-    @OptIn(ExperimentalLensFacing::class)
-    get() = when (this) {
+    @OptIn(ExperimentalLensFacing::class) get() = when (this) {
         CameraSelectorLensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
         CameraSelectorLensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
         CameraSelectorLensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
@@ -49,8 +71,7 @@ val CameraSelectorLensFacingApi.impl: Int
     }
 
 val Int.cameraSelectorLensFacingApi: CameraSelectorLensFacingApi
-    @OptIn(ExperimentalLensFacing::class)
-    get() = when (this) {
+    @OptIn(ExperimentalLensFacing::class) get() = when (this) {
         CameraSelector.LENS_FACING_UNKNOWN -> CameraSelectorLensFacingApi.UNKNOWN
         CameraSelector.LENS_FACING_FRONT -> CameraSelectorLensFacingApi.FRONT
         CameraSelector.LENS_FACING_BACK -> CameraSelectorLensFacingApi.BACK
