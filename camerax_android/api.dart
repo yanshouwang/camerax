@@ -141,7 +141,12 @@ abstract class CaptureRequestOptionsBuilderProxyApi {
     fullClassName: 'androidx.camera.camera2.interop.CaptureRequestOptions',
   ),
 )
-abstract class CaptureRequestOptionsProxyApi {}
+abstract class CaptureRequestOptionsProxyApi {
+  int? getIntCaptureRequestOption(CaptureRequestIntKeyProxyApi key);
+  int? getLongCaptureRequestOption(CaptureRequestLongKeyProxyApi key);
+  double? getFloatCaptureRequestOption(CaptureRequestFloatKeyProxyApi key);
+  bool? getBooleanCaptureRequestOption(CaptureRequestBooleanKeyProxyApi key);
+}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(

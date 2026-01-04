@@ -70,8 +70,68 @@ final class CaptureRequestOptionsImpl implements CaptureRequestOptions {
   Future<ValueT?> getCaptureRequestOption<ValueT>(
     CaptureRequest$Key<ValueT> key,
   ) {
-    // TODO: implement getCaptureRequestOption
-    throw UnimplementedError();
+    final keyApi = key.api;
+    if (keyApi is CaptureRequestIntKeyProxyApi) {
+      if (ValueT == int) {
+        return api.getIntCaptureRequestOption(keyApi).then((e) => e as ValueT?);
+      }
+      if (ValueT == CameraMetadata$ControlMode) {
+        return api
+            .getIntCaptureRequestOption(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlMode(
+                      e,
+                    ).then((e) => e.impl as ValueT?),
+            );
+      }
+      if (ValueT == CameraMetadata$ControlAeMode) {
+        return api
+            .getIntCaptureRequestOption(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAeMode(
+                      e,
+                    ).then((e) => e.impl as ValueT?),
+            );
+      }
+      if (ValueT == CameraMetadata$ControlAfMode) {
+        return api
+            .getIntCaptureRequestOption(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAfMode(
+                      e,
+                    ).then((e) => e.impl as ValueT?),
+            );
+      }
+      if (ValueT == CameraMetadata$ControlAwbMode) {
+        return api
+            .getIntCaptureRequestOption(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAwbMode(
+                      e,
+                    ).then((e) => e.impl as ValueT?),
+            );
+      }
+    }
+    if (keyApi is CaptureRequestLongKeyProxyApi) {
+      return api.getLongCaptureRequestOption(keyApi).then((e) => e as ValueT?);
+    }
+    if (keyApi is CaptureRequestFloatKeyProxyApi) {
+      return api.getFloatCaptureRequestOption(keyApi).then((e) => e as ValueT?);
+    }
+    if (keyApi is CaptureRequestBooleanKeyProxyApi) {
+      return api
+          .getBooleanCaptureRequestOption(keyApi)
+          .then((e) => e as ValueT?);
+    }
+    throw TypeError();
   }
 }
 

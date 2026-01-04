@@ -11,7 +11,7 @@ import CoreLocation
 public class FileOutputOptions: OutputOptions {
     public let url: URL
     
-    init(url: URL, fileSizeLimit: Int64, durationLimitMillis: Int64, location: CLLocation?) {
+    private init(url: URL, fileSizeLimit: Int64, durationLimitMillis: Int64, location: CLLocation?) {
         self.url = url
         super.init(fileSizeLimit: fileSizeLimit, durationLimitMillis: durationLimitMillis, location: location)
     }

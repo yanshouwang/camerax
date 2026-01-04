@@ -9,19 +9,26 @@ import Foundation
 import CoreLocation
 
 class FileOutputOptionsDelegate: PigeonApiDelegateFileOutputOptionsProxyApi {
-    func build(pigeonApi: PigeonApiFileOutputOptionsProxyApi, file: String, durationLimitMillis: Int64?, fileSizeLimitBytes: Int64?, location: CLLocation?) throws -> FileOutputOptions {
-        let url = URL(fileURLWithPath: file)
-        let builder = FileOutputOptions.Builder(url)
-        if let durationLimitMillis {
-            _ = builder.setDurationLimitMillis(durationLimitMillis)
+    class BuilderDelegate: PigeonApiDelegateFileOutputOptionsBuilderProxyApi {
+        func pigeonDefaultConstructor(pigeonApi: PigeonApiFileOutputOptionsBuilderProxyApi, file: String) throws -> FileOutputOptions.Builder {
+            return FileOutputOptions.Builder(file.urlDelegate)
         }
-        if let fileSizeLimitBytes {
-            _ = builder.setFileSizeLimit(fileSizeLimitBytes)
+        
+        func setDurationLimitMillis(pigeonApi: PigeonApiFileOutputOptionsBuilderProxyApi, pigeonInstance: FileOutputOptions.Builder, durationLimitMillis: Int64) throws -> FileOutputOptions.Builder {
+            return pigeonInstance.setDurationLimitMillis(durationLimitMillis)
         }
-        if let location {
-            _ = builder.setLocation(location)
+        
+        func setFileSizeLimit(pigeonApi: PigeonApiFileOutputOptionsBuilderProxyApi, pigeonInstance: FileOutputOptions.Builder, fileSizeLimitBytes: Int64) throws -> FileOutputOptions.Builder {
+            return pigeonInstance.setFileSizeLimit(fileSizeLimitBytes)
         }
-        return builder.build()
+        
+        func setLocation(pigeonApi: PigeonApiFileOutputOptionsBuilderProxyApi, pigeonInstance: FileOutputOptions.Builder, location: CLLocation?) throws -> FileOutputOptions.Builder {
+            return pigeonInstance.setLocation(location)
+        }
+        
+        func build(pigeonApi: PigeonApiFileOutputOptionsBuilderProxyApi, pigeonInstance: FileOutputOptions.Builder) throws -> FileOutputOptions {
+            return pigeonInstance.build()
+        }
     }
     
     func getFile(pigeonApi: PigeonApiFileOutputOptionsProxyApi, pigeonInstance: FileOutputOptions) throws -> String {

@@ -24,7 +24,7 @@ public class FocusMeteringAction: NSObject {
         return autoCancelDurationInMillis > 0
     }
     
-    init(_ builder: Builder) {
+    private init(_ builder: Builder) {
         self.meteringPointsAf = builder.meteringPointsAf
         self.meteringPointsAe = builder.meteringPointsAe
         self.meteringPointsAwb = builder.meteringPointsAwb
@@ -41,27 +41,27 @@ public class FocusMeteringAction: NSObject {
             self.init(point, defaultMeteringMode)
         }
         
-        public init(_ point: MeteringPoint, _ modes: [MeteringMode]) {
+        public init(_ point: MeteringPoint, _ meteringModes: [MeteringMode]) {
             self.meteringPointsAf = []
             self.meteringPointsAe = []
             self.meteringPointsAwb = []
             self.autoCancelDurationInMillis = defaultAutoCancelDurationMillis
             super.init()
-            _ = self.addPoint(point, modes)
+            _ = self.addPoint(point, meteringModes)
         }
         
         public func addPoint(_ point: MeteringPoint) -> Builder {
             return addPoint(point, defaultMeteringMode)
         }
         
-        public func addPoint(_ point: MeteringPoint, _ modes: [MeteringMode]) -> Builder {
-            if modes.contains(.af) {
+        public func addPoint(_ point: MeteringPoint, _ meteringModes: [MeteringMode]) -> Builder {
+            if meteringModes.contains(.af) {
                 meteringPointsAf.append(point)
             }
-            if modes.contains(.ae) {
+            if meteringModes.contains(.ae) {
                 meteringPointsAe.append(point)
             }
-            if modes.contains(.awb) {
+            if meteringModes.contains(.awb) {
                 meteringPointsAwb.append(point)
             }
             return self

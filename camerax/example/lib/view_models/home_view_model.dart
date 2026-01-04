@@ -23,6 +23,11 @@ class HomeViewModel extends ViewModel {
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
 
+  CameraInfo? _info;
+  CameraControl? _control;
+  Camera2CameraInfo? _camera2Info;
+  Camera2CameraControl? _camera2Control;
+
   HomeViewModel()
     : _permissionManager = PermissionManager(),
       _controller = CameraController(),
@@ -73,6 +78,30 @@ class HomeViewModel extends ViewModel {
   set zoomState(ZoomState? value) {
     if (_zoomState == value) return;
     _zoomState = value;
+    notifyListeners();
+  }
+
+  ExposureTimeState? _exposureTimeState;
+  ExposureTimeState? get exposureTimeState => _exposureTimeState;
+  set exposureTimeState(ExposureTimeState? value) {
+    if (_exposureTimeState == value) return;
+    _exposureTimeState = value;
+    notifyListeners();
+  }
+
+  ApertureState? _lensApertureState;
+  ApertureState? get lensApertureState => _lensApertureState;
+  set lensApertureState(ApertureState? value) {
+    if (_lensApertureState == value) return;
+    _lensApertureState = value;
+    notifyListeners();
+  }
+
+  SensitivityState? _sensitivityState;
+  SensitivityState? get sensitivityState => _sensitivityState;
+  set sensitivityState(SensitivityState? value) {
+    if (_sensitivityState == value) return;
+    _sensitivityState = value;
     notifyListeners();
   }
 
@@ -329,6 +358,50 @@ class HomeViewModel extends ViewModel {
     await _rotationProvider.addListener(rotationProviderListener);
     _rotationProviderListener = rotationProviderListener;
     await bind();
+
+    final info = await controller.getCameraInfo();
+    final control = await controller.getCameraControl();
+    if (info == null || control == null) {
+      _logger.warning('info or control is null');
+      return;
+    }
+    final camera2Info = Camera2CameraInfo.from(info);
+    final camera2Control = Camera2CameraControl.from(control);
+
+    _info = info;
+    _control = control;
+    _camera2Info = camera2Info;
+    _camera2Control = camera2Control;
+
+    final options = await camera2Control.getCaptureRequestOptions();
+
+    final availableApertures = await camera2Info.getCameraCharacteristic(
+      CameraCharacteristics.lensInfoAvailableApertures,
+    );
+    final aperture = await options.getCaptureRequestOption(
+      CaptureRequest.lensAperture,
+    );
+
+    _logger.info('availableApertures: $availableApertures');
+    _logger.info('aperture: $aperture');
+
+    final exposureTimeRange = await camera2Info.getCameraCharacteristic(
+      CameraCharacteristics.sensorInfoExposureTimeRange,
+    );
+    final exposureTime = await options.getCaptureRequestOption(
+      CaptureRequest.sensorExposureTime,
+    );
+    _logger.info('exposureTimeRagne: $exposureTimeRange');
+    _logger.info('exposureTime: $exposureTime');
+
+    final sensitivityRange = await camera2Info.getCameraCharacteristic(
+      CameraCharacteristics.sensorInfoSensitivityRange,
+    );
+    final sensitivity = await options.getCaptureRequestOption(
+      CaptureRequest.sensorSensitivity,
+    );
+    _logger.info('sensitivityRange: $sensitivityRange');
+    _logger.info('sensitivity: $sensitivity');
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {

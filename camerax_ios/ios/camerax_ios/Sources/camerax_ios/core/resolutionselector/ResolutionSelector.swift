@@ -8,9 +8,22 @@
 import Foundation
 
 public class ResolutionSelector: NSObject {
+    public class Builder: NSObject {
+        private var resolutionStrategy: ResolutionStrategy?
+        
+        func setResolutionStrategy(_ resolutionStrategy: ResolutionStrategy) -> Builder {
+            self.resolutionStrategy = resolutionStrategy
+            return self
+        }
+        
+        func build() -> ResolutionSelector {
+            return ResolutionSelector(resolutionStrategy: resolutionStrategy)
+        }
+    }
+    
     public let resolutionStrategy: ResolutionStrategy?
     
-    init(resolutionStrategy: ResolutionStrategy?) {
+    private init(resolutionStrategy: ResolutionStrategy?) {
         self.resolutionStrategy = resolutionStrategy
     }
 }

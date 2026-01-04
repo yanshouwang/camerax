@@ -118,6 +118,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return CaptureRequestOptionsImpl.BuilderImpl(this)
     }
 
+    override fun getPigeonApiCaptureRequestOptionsProxyApi(): PigeonApiCaptureRequestOptionsProxyApi {
+        return CaptureRequestOptionsImpl(this)
+    }
+
     override fun getPigeonApiCameraCharacteristicsKeyProxyApi(): PigeonApiCameraCharacteristicsKeyProxyApi {
         return CameraCharacteristicsImpl.KeyImpl(this)
     }

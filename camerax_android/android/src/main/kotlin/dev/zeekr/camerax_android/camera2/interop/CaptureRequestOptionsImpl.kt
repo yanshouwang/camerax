@@ -5,10 +5,12 @@ import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsBuilderProxyApi
+import dev.zeekr.camerax_android.PigeonApiCaptureRequestOptionsProxyApi
 import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
 
 @OptIn(ExperimentalCamera2Interop::class)
-class CaptureRequestOptionsImpl {
+class CaptureRequestOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCaptureRequestOptionsProxyApi(registrar) {
     class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         PigeonApiCaptureRequestOptionsBuilderProxyApi(registrar) {
         override fun pigeon_defaultConstructor(): CaptureRequestOptions.Builder {
@@ -42,5 +44,29 @@ class CaptureRequestOptionsImpl {
         override fun build(pigeon_instance: CaptureRequestOptions.Builder): CaptureRequestOptions {
             return pigeon_instance.build()
         }
+    }
+
+    override fun getIntCaptureRequestOption(
+        pigeon_instance: CaptureRequestOptions, key: CaptureRequestImpl.IntKey
+    ): Long? {
+        return pigeon_instance.getCaptureRequestOption(key.instance)?.toLong()
+    }
+
+    override fun getLongCaptureRequestOption(
+        pigeon_instance: CaptureRequestOptions, key: CaptureRequestImpl.LongKey
+    ): Long? {
+        return pigeon_instance.getCaptureRequestOption(key.instance)
+    }
+
+    override fun getFloatCaptureRequestOption(
+        pigeon_instance: CaptureRequestOptions, key: CaptureRequestImpl.FloatKey
+    ): Double? {
+        return pigeon_instance.getCaptureRequestOption(key.instance)?.toDouble()
+    }
+
+    override fun getBooleanCaptureRequestOption(
+        pigeon_instance: CaptureRequestOptions, key: CaptureRequestImpl.BooleanKey
+    ): Boolean? {
+        return pigeon_instance.getCaptureRequestOption(key.instance)
     }
 }
