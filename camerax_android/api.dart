@@ -61,6 +61,8 @@ enum CameraMetadataControlAwbModeApi {
   shade, // 8
 }
 
+enum CaptureFailureReasonApi { error, flushed }
+
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.camera2.interop.Camera2CameraControl',
@@ -111,12 +113,64 @@ abstract class Camera2CameraInfoProxyApi {
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
+        'dev.zeekr.camerax_android.camera2.interop.Camera2InteropImpl.Extender',
+  ),
+)
+abstract class Camera2InteropExtenderProxyApi {
+  Camera2InteropExtenderProxyApi.fromCaptureRequestOptionsBuilder(
+    CaptureRequestOptionsBuilderProxyApi builder,
+  );
+
+  Camera2InteropExtenderProxyApi setIntCaptureRequestOption(
+    CaptureRequestIntKeyProxyApi key,
+    int value,
+  );
+  Camera2InteropExtenderProxyApi setLongCaptureRequestOption(
+    CaptureRequestLongKeyProxyApi key,
+    int value,
+  );
+  Camera2InteropExtenderProxyApi setFloatCaptureRequestOption(
+    CaptureRequestFloatKeyProxyApi key,
+    double value,
+  );
+  Camera2InteropExtenderProxyApi setBooleanCaptureRequestOption(
+    CaptureRequestBooleanKeyProxyApi key,
+    bool value,
+  );
+  // Camera2InteropExtenderProxyApi setDeviceStateCallback(
+  //   CameraDevice$StateCallback stateCallback,
+  // );
+  Camera2InteropExtenderProxyApi setPhysicalCameraId(String cameraId);
+  Camera2InteropExtenderProxyApi setSessionCaptureCallback(
+    CameraCaptureSessionCaptureCallbackProxyApi captureCallback,
+  );
+  Camera2InteropExtenderProxyApi setSessionStateCallback(
+    CameraCaptureSessionStateCallbackProxyApi stateCallback,
+  );
+  // Camera2InteropExtenderProxyApi setStreamUseCase(int streamUseCase);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
         'androidx.camera.camera2.interop.CaptureRequestOptions.Builder',
   ),
 )
 abstract class CaptureRequestOptionsBuilderProxyApi {
   CaptureRequestOptionsBuilderProxyApi();
 
+  CaptureRequestOptionsBuilderProxyApi clearIntCaptureRequestOption(
+    CaptureRequestIntKeyProxyApi key,
+  );
+  CaptureRequestOptionsBuilderProxyApi clearLongCaptureRequestOption(
+    CaptureRequestLongKeyProxyApi key,
+  );
+  CaptureRequestOptionsBuilderProxyApi clearFloatCaptureRequestOption(
+    CaptureRequestFloatKeyProxyApi key,
+  );
+  CaptureRequestOptionsBuilderProxyApi clearBooleanCaptureRequestOption(
+    CaptureRequestBooleanKeyProxyApi key,
+  );
   CaptureRequestOptionsBuilderProxyApi setIntCaptureRequestOption(
     CaptureRequestIntKeyProxyApi key,
     int value,
@@ -147,6 +201,98 @@ abstract class CaptureRequestOptionsProxyApi {
   double? getFloatCaptureRequestOption(CaptureRequestFloatKeyProxyApi key);
   bool? getBooleanCaptureRequestOption(CaptureRequestBooleanKeyProxyApi key);
 }
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'android.hardware.camera2.CameraCaptureSession.CaptureCallback',
+  ),
+)
+abstract class CameraCaptureSessionCaptureCallbackProxyApi {
+  CameraCaptureSessionCaptureCallbackProxyApi();
+
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    CaptureRequestProxyApi request,
+    int timestamp,
+    int frameNumber,
+  )?
+  onCaptureStarted;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    CaptureRequestProxyApi request,
+    CaptureResultProxyApi partialResult,
+  )?
+  onCaptureProgressed;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    int sequenceId,
+    int frameNumber,
+  )?
+  onCaptureSequenceCompleted;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    int sequenceId,
+  )?
+  onCaptureSequenceAborted;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    CaptureRequestProxyApi request,
+    SurfaceProxyApi target,
+    int frameNumber,
+  )?
+  onCaptureBufferLost;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    CaptureRequestProxyApi request,
+    TotalCaptureResultProxyApi result,
+  )?
+  onCaptureCompleted;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    CaptureRequestProxyApi request,
+    CaptureFailureProxyApi failure,
+  )?
+  onCaptureFailed;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    CaptureRequestProxyApi request,
+    int timestamp,
+    int frameNumber,
+  )?
+  onReadoutStarted;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'android.hardware.camera2.CameraCaptureSession.StateCallback',
+  ),
+)
+abstract class CameraCaptureSessionStateCallbackProxyApi {
+  CameraCaptureSessionStateCallbackProxyApi();
+
+  late final void Function(CameraCaptureSessionProxyApi session)? onActive;
+  late final void Function(CameraCaptureSessionProxyApi session)?
+  onCaptureQueueEmpty;
+  late final void Function(CameraCaptureSessionProxyApi session)? onClosed;
+  late final void Function(CameraCaptureSessionProxyApi session)?
+  onConfigureFailed;
+  late final void Function(CameraCaptureSessionProxyApi session)? onConfigured;
+  late final void Function(CameraCaptureSessionProxyApi session)? onReady;
+  late final void Function(
+    CameraCaptureSessionProxyApi session,
+    SurfaceProxyApi surface,
+  )?
+  onSurfacePrepared;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.CameraCaptureSession',
+  ),
+)
+abstract class CameraCaptureSessionProxyApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -291,6 +437,25 @@ abstract class CameraMetadataUtilProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.CaptureFailure',
+  ),
+)
+abstract class CaptureFailureProxyApi {
+  @static
+  CaptureFailureReasonApi fromReason(int value);
+  @static
+  int toReason(CaptureFailureReasonApi reason);
+
+  int getFrameNumber();
+  String getPhysicalCameraId();
+  int getReason();
+  CaptureRequestProxyApi getRequest();
+  int getSequenceId();
+  bool wasImageCaptured();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.Key',
   ),
 )
@@ -357,6 +522,84 @@ abstract class CaptureRequestProxyApi {
   late final CaptureRequestLongKeyProxyApi sensorExposureTime;
   @static
   late final CaptureRequestIntKeyProxyApi sensorSensitivity;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.camera2.CaptureResultImpl.Key',
+  ),
+)
+abstract class CaptureResultKeyProxyApi {
+  String getName();
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.camera2.CaptureResultImpl.IntKey',
+  ),
+)
+abstract class CaptureResultIntKeyProxyApi extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.LongKey',
+  ),
+)
+abstract class CaptureResultLongKeyProxyApi extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.FloatKey',
+  ),
+)
+abstract class CaptureResultFloatKeyProxyApi extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.BooleanKey',
+  ),
+)
+abstract class CaptureResultBooleanKeyProxyApi
+    extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.CaptureResult',
+  ),
+)
+abstract class CaptureResultProxyApi {
+  @static
+  late final CaptureResultBooleanKeyProxyApi controlAeLock;
+  @static
+  late final CaptureResultIntKeyProxyApi controlAeMode;
+  @static
+  late final CaptureResultIntKeyProxyApi controlAfMode;
+  @static
+  late final CaptureResultBooleanKeyProxyApi controlAwbLock;
+  @static
+  late final CaptureResultIntKeyProxyApi controlAwbMode;
+  @static
+  late final CaptureResultIntKeyProxyApi controlMode;
+  @static
+  late final CaptureResultFloatKeyProxyApi lensAperture;
+  @static
+  late final CaptureResultLongKeyProxyApi sensorExposureTime;
+  @static
+  late final CaptureResultIntKeyProxyApi sensorSensitivity;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'android.hardware.camera2.TotalCaptureResult',
+  ),
+)
+abstract class TotalCaptureResultProxyApi {
+  List<CaptureResultProxyApi> getPartialResults();
+  Map<String, CaptureResultProxyApi> getPhysicalCameraResults();
+  Map<String, TotalCaptureResultProxyApi> getPhysicalCameraTotalResults();
 }
 
 // common
@@ -949,6 +1192,11 @@ abstract class SizeProxyApi {
   late final int width;
   late final int height;
 }
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.view.Surface'),
+)
+abstract class SurfaceProxyApi {}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(

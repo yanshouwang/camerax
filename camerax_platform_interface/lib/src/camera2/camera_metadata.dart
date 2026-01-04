@@ -44,3 +44,7 @@ enum CameraMetadata$ControlAwbMode {
   twilight, // 7
   shade, // 8
 }
+
+abstract interface class CameraMetadata<TKey> {
+  // Future<List<TKey>> getKeys();
+}

@@ -13,10 +13,13 @@ abstract final class CameraXAndroidPlugin {
     // camera2.interop
     Camera2CameraControlChannel.instance = Camera2CameraControlChannelImpl();
     Camera2CameraInfoChannel.instance = Camera2CameraInfoChannelImpl();
+    Camera2InteropChannel.instance = Camera2InteropChannelImpl();
     CaptureRequestOptionsChannel.instance = CaptureRequestOptionsChannelImpl();
     // camera2
+    CameraCaptureSessionChannel.instance = CameraCaptureSessionChannelImpl();
     CameraCharacteristicsChannel.instance = CameraCharacteristicsChannelImpl();
     CaptureRequestChannel.instance = CaptureRequestChannelImpl();
+    CaptureResultChannel.instance = CaptureResultChannelImpl();
     // common
     ConsumerChannel.instance = ConsumerChannelImpl();
     LocationChannel.instance = LocationChannelImpl();

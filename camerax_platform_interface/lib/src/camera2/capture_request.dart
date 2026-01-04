@@ -5,7 +5,8 @@ abstract interface class CaptureRequest$Key<T> {
   Future<String> getName();
 }
 
-abstract interface class CaptureRequest {
+abstract interface class CaptureRequest
+    implements CameraMetadata<CaptureRequest$Key> {
   // static CaptureRequest$Key<bool> get blackLevelLock;
   // static CaptureRequest$Key<int> get colorCorrectionAberrationMode;
   // static CaptureRequest$Key<int> get colorCorrectionColorTemprature;

@@ -6,7 +6,7 @@ abstract interface class CameraCharacteristics$Key<T> {
   Future<String> getName();
 }
 
-abstract interface class CameraCharacteristics {
+abstract interface class CameraCharacteristics implements CameraMetadata {
   // static CameraCharacteristics$Key<List<int>> get automotiveLensFacing;
   // static CameraCharacteristics$Key<int> get automotiveLocation;
   // static CameraCharacteristics$Key<List<int>>

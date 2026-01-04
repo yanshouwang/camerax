@@ -1,4 +1,5 @@
 import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CameraCharacteristics$KeyImpl<T>
@@ -11,7 +12,8 @@ final class CameraCharacteristics$KeyImpl<T>
   Future<String> getName() => api.getName();
 }
 
-final class CameraCharacteristicsImpl implements CameraCharacteristics {}
+final class CameraCharacteristicsImpl extends CameraMetadataImpl
+    implements CameraCharacteristics {}
 
 final class CameraCharacteristicsChannelImpl
     extends CameraCharacteristicsChannel {

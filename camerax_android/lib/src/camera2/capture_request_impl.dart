@@ -1,4 +1,5 @@
 import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CaptureRequest$KeyImpl<T> implements CaptureRequest$Key<T> {
@@ -10,7 +11,12 @@ final class CaptureRequest$KeyImpl<T> implements CaptureRequest$Key<T> {
   Future<String> getName() => api.getName();
 }
 
-final class CaptureRequestImpl implements CaptureRequest {}
+final class CaptureRequestImpl extends CameraMetadataImpl<CaptureRequest$Key>
+    implements CaptureRequest {
+  final CaptureRequestProxyApi api;
+
+  CaptureRequestImpl.internal(this.api);
+}
 
 final class CaptureRequestChannelImpl extends CaptureRequestChannel {
   @override
@@ -58,4 +64,8 @@ extension CaptureRequest$KeyX on CaptureRequest$Key {
     if (impl is! CaptureRequest$KeyImpl) throw TypeError();
     return impl.api;
   }
+}
+
+extension CaptureRequestProxyApiX on CaptureRequestProxyApi {
+  CaptureRequest get impl => CaptureRequestImpl.internal(this);
 }

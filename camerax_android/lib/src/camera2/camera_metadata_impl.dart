@@ -1,6 +1,8 @@
 import 'package:camerax_android/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
+abstract base class CameraMetadataImpl<T> implements CameraMetadata<T> {}
+
 extension CameraMetadataInfoSupportedHardwareLeveApilX
     on CameraMetadataInfoSupportedHardwareLevelApi {
   CameraMetadata$InfoSupportedHardwareLevel get impl =>

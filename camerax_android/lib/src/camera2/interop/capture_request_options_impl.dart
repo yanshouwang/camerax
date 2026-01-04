@@ -1,12 +1,34 @@
 import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 final class CaptureRequestOptions$BuilderImpl
+    extends ExtendableBuilderImpl<CaptureRequestOptions>
     implements CaptureRequestOptions$Builder {
   final CaptureRequestOptionsBuilderProxyApi api;
 
   CaptureRequestOptions$BuilderImpl.internal(this.api);
+
+  @override
+  Future<CaptureRequestOptions$Builder> clearCaptureRequestOption<ValueT>(
+    CaptureRequest$Key<ValueT> key,
+  ) {
+    final keyApi = key.api;
+    if (keyApi is CaptureRequestIntKeyProxyApi) {
+      return api.clearIntCaptureRequestOption(keyApi).then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestLongKeyProxyApi) {
+      return api.clearLongCaptureRequestOption(keyApi).then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestFloatKeyProxyApi) {
+      return api.clearFloatCaptureRequestOption(keyApi).then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestBooleanKeyProxyApi) {
+      return api.clearBooleanCaptureRequestOption(keyApi).then((e) => e.impl);
+    }
+    throw TypeError();
+  }
 
   @override
   Future<CaptureRequestOptions$Builder> setCaptureRequestOption<ValueT>(
