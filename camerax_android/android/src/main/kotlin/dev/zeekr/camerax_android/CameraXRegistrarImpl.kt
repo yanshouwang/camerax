@@ -2,11 +2,16 @@ package dev.zeekr.camerax_android
 
 import android.app.Activity
 import android.content.Context
+import dev.zeekr.camerax_android.camera2.CameraCaptureSessionImpl
 import dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl
 import dev.zeekr.camerax_android.camera2.CameraMetadataUtilImpl
+import dev.zeekr.camerax_android.camera2.CaptureFailureImpl
 import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
+import dev.zeekr.camerax_android.camera2.CaptureResultImpl
+import dev.zeekr.camerax_android.camera2.TotalCaptureResultImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraInfoImpl
+import dev.zeekr.camerax_android.camera2.interop.Camera2InteropImpl
 import dev.zeekr.camerax_android.camera2.interop.CaptureRequestOptionsImpl
 import dev.zeekr.camerax_android.common.AutoCloseableImpl
 import dev.zeekr.camerax_android.common.BitmapImpl
@@ -114,12 +119,24 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return Camera2CameraInfoImpl(this)
     }
 
+    override fun getPigeonApiCamera2InteropExtenderProxyApi(): PigeonApiCamera2InteropExtenderProxyApi {
+        return Camera2InteropImpl.ExtenderImpl(this)
+    }
+
     override fun getPigeonApiCaptureRequestOptionsBuilderProxyApi(): PigeonApiCaptureRequestOptionsBuilderProxyApi {
         return CaptureRequestOptionsImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiCaptureRequestOptionsProxyApi(): PigeonApiCaptureRequestOptionsProxyApi {
         return CaptureRequestOptionsImpl(this)
+    }
+
+    override fun getPigeonApiCameraCaptureSessionCaptureCallbackProxyApi(): PigeonApiCameraCaptureSessionCaptureCallbackProxyApi {
+        return CameraCaptureSessionImpl.CaptureCallbackImpl(this)
+    }
+
+    override fun getPigeonApiCameraCaptureSessionStateCallbackProxyApi(): PigeonApiCameraCaptureSessionStateCallbackProxyApi {
+        return CameraCaptureSessionImpl.StateCallbackImpl(this)
     }
 
     override fun getPigeonApiCameraCharacteristicsKeyProxyApi(): PigeonApiCameraCharacteristicsKeyProxyApi {
@@ -134,12 +151,28 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return CameraMetadataUtilImpl(this)
     }
 
+    override fun getPigeonApiCaptureFailureProxyApi(): PigeonApiCaptureFailureProxyApi {
+        return CaptureFailureImpl(this)
+    }
+
     override fun getPigeonApiCaptureRequestKeyProxyApi(): PigeonApiCaptureRequestKeyProxyApi {
         return CaptureRequestImpl.KeyImpl(this)
     }
 
     override fun getPigeonApiCaptureRequestProxyApi(): PigeonApiCaptureRequestProxyApi {
         return CaptureRequestImpl(this)
+    }
+
+    override fun getPigeonApiCaptureResultKeyProxyApi(): PigeonApiCaptureResultKeyProxyApi {
+        return CaptureResultImpl.KeyImpl(this)
+    }
+
+    override fun getPigeonApiCaptureResultProxyApi(): PigeonApiCaptureResultProxyApi {
+        return CaptureResultImpl(this)
+    }
+
+    override fun getPigeonApiTotalCaptureResultProxyApi(): PigeonApiTotalCaptureResultProxyApi {
+        return TotalCaptureResultImpl(this)
     }
 
     override fun getPigeonApiAutoCloseableProxyApi(): PigeonApiAutoCloseableProxyApi {

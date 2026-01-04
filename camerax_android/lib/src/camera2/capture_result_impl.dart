@@ -11,11 +11,87 @@ final class CaptureResult$KeyImpl<T> implements CaptureResult$Key<T> {
   Future<String> getName() => api.getName();
 }
 
-final class CaptureResultImpl extends CameraMetadataImpl<CaptureResult$Key>
+base class CaptureResultImpl extends CameraMetadataImpl<CaptureResult$Key>
     implements CaptureResult {
   final CaptureResultProxyApi api;
 
   CaptureResultImpl.internal(this.api);
+
+  @override
+  Future<T?> get<T>(CaptureResult$Key<T> key) {
+    final keyApi = key.api;
+    if (keyApi is CaptureResultIntKeyProxyApi) {
+      if (T == int) {
+        return api.getInt(keyApi).then((e) => e as T?);
+      }
+      if (T == CameraMetadata$ControlMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+      if (T == CameraMetadata$ControlAeMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAeMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+      if (T == CameraMetadata$ControlAfMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAfMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+      if (T == CameraMetadata$ControlAwbMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAwbMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+    }
+    if (keyApi is CaptureResultLongKeyProxyApi) {
+      return api.getLong(keyApi).then((e) => e as T?);
+    }
+    if (keyApi is CaptureResultFloatKeyProxyApi) {
+      return api.getFloat(keyApi).then((e) => e as T?);
+    }
+    if (keyApi is CaptureResultBooleanKeyProxyApi) {
+      return api.getBoolean(keyApi).then((e) => e as T?);
+    }
+    throw TypeError();
+  }
+
+  @override
+  Future<String> getCameraId() => api.getCameraId();
+
+  @override
+  Future<int> getFrameNumber() => api.getFrameNumber();
+
+  @override
+  Future<CaptureRequest> getRequest() => api.getRequest().then((e) => e.impl);
+
+  @override
+  Future<int> getSequenceId() => api.getSequenceId();
 }
 
 final class CaptureResultChannelImpl extends CaptureResultChannel {
@@ -46,6 +122,14 @@ final class CaptureResultChannelImpl extends CaptureResultChannel {
   @override
   CaptureResult$Key<int> get sensorSensitivity =>
       CaptureResult$KeyImpl.internal(CaptureResultProxyApi.sensorSensitivity);
+}
+
+extension CaptureResult$KeyX on CaptureResult$Key {
+  CaptureResultKeyProxyApi get api {
+    final impl = this;
+    if (impl is! CaptureResult$KeyImpl) throw TypeError();
+    return impl.api;
+  }
 }
 
 extension CaptureResultProxyApiX on CaptureResultProxyApi {

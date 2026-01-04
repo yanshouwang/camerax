@@ -17,6 +17,34 @@ class CaptureRequestOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
             return CaptureRequestOptions.Builder()
         }
 
+        override fun clearIntCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder,
+            key: CaptureRequestImpl.IntKey
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.clearCaptureRequestOption(key.instance)
+        }
+
+        override fun clearLongCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder,
+            key: CaptureRequestImpl.LongKey
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.clearCaptureRequestOption(key.instance)
+        }
+
+        override fun clearFloatCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder,
+            key: CaptureRequestImpl.FloatKey
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.clearCaptureRequestOption(key.instance)
+        }
+
+        override fun clearBooleanCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptions.Builder,
+            key: CaptureRequestImpl.BooleanKey
+        ): CaptureRequestOptions.Builder {
+            return pigeon_instance.clearCaptureRequestOption(key.instance)
+        }
+
         override fun setIntCaptureRequestOption(
             pigeon_instance: CaptureRequestOptions.Builder, key: CaptureRequestImpl.IntKey, value: Long
         ): CaptureRequestOptions.Builder {

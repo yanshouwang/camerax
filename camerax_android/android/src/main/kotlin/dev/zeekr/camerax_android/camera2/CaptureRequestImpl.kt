@@ -53,4 +53,36 @@ class CaptureRequestImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
     override fun sensorSensitivity(): IntKey {
         return IntKey(CaptureRequest.SENSOR_SENSITIVITY)
     }
+
+    override fun getInt(
+        pigeon_instance: CaptureRequest,
+        key: IntKey
+    ): Long? {
+        return pigeon_instance.get(key.instance)?.toLong()
+    }
+
+    override fun getLong(
+        pigeon_instance: CaptureRequest,
+        key: LongKey
+    ): Long? {
+        return pigeon_instance.get(key.instance)
+    }
+
+    override fun getFloat(
+        pigeon_instance: CaptureRequest,
+        key: FloatKey
+    ): Double? {
+        return pigeon_instance.get(key.instance)?.toDouble()
+    }
+
+    override fun getBoolean(
+        pigeon_instance: CaptureRequest,
+        key: BooleanKey
+    ): Boolean? {
+        return pigeon_instance.get(key.instance)
+    }
+
+    override fun isReprocess(pigeon_instance: CaptureRequest): Boolean {
+        return pigeon_instance.isReprocess
+    }
 }

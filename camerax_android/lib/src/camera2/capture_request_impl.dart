@@ -16,6 +16,73 @@ final class CaptureRequestImpl extends CameraMetadataImpl<CaptureRequest$Key>
   final CaptureRequestProxyApi api;
 
   CaptureRequestImpl.internal(this.api);
+
+  @override
+  Future<T?> get<T>(CaptureRequest$Key<T> key) {
+    final keyApi = key.api;
+    if (keyApi is CaptureRequestIntKeyProxyApi) {
+      if (T == int) {
+        return api.getInt(keyApi).then((e) => e as T?);
+      }
+      if (T == CameraMetadata$ControlMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+      if (T == CameraMetadata$ControlAeMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAeMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+      if (T == CameraMetadata$ControlAfMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAfMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+      if (T == CameraMetadata$ControlAwbMode) {
+        return api
+            .getInt(keyApi)
+            .then(
+              (e) => e == null
+                  ? null
+                  : CameraMetadataUtilProxyApi.fromControlAwbMode(
+                      e,
+                    ).then((e) => e.impl as T?),
+            );
+      }
+    }
+    if (keyApi is CaptureRequestLongKeyProxyApi) {
+      return api.getLong(keyApi).then((e) => e as T?);
+    }
+    if (keyApi is CaptureRequestFloatKeyProxyApi) {
+      return api.getFloat(keyApi).then((e) => e as T?);
+    }
+    if (keyApi is CaptureRequestBooleanKeyProxyApi) {
+      return api.getBoolean(keyApi).then((e) => e as T?);
+    }
+    throw TypeError();
+  }
+
+  @override
+  Future<bool> isReprocess() => api.isReprocess();
 }
 
 final class CaptureRequestChannelImpl extends CaptureRequestChannel {

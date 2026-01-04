@@ -85,10 +85,10 @@ abstract interface class CaptureRequest
   // static CaptureRequest$Key<int> get tonemapMode;
   // static CaptureRequest$Key<int> get tonemapPresetCurve;
 
-  // Future<T?> get<T>(CaptureRequest$Key<T> key);
+  Future<T?> get<T>(CaptureRequest$Key<T> key);
   // Future<List<CaptureRequest$Key>> getKeys();
   // Future<Object?> getTag();
-  // Future<bool> isReprocess();
+  Future<bool> isReprocess();
 }
 
 abstract base class CaptureRequestChannel extends PlatformInterface {

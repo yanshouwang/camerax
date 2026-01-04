@@ -121,12 +121,12 @@ abstract interface class CaptureResult
   // static CaptureResult$Key<int> get tonemapMode;
   // static CaptureResult$Key<int> get tonemapPresetCurve;
 
-  // Future<T?> get<T>(CaptureResult$Key<T> key);
-  // Future<String> getCameraId();
-  // Future<int> getFrameNumber();
-  // List<CaptureResult$Key> getKeys();
-  // CaptureRequest getRequest();
-  // int getSequenceId();
+  Future<T?> get<T>(CaptureResult$Key<T> key);
+  Future<String> getCameraId();
+  Future<int> getFrameNumber();
+  // Future<List<CaptureResult$Key>> getKeys();
+  Future<CaptureRequest> getRequest();
+  Future<int> getSequenceId();
 }
 
 abstract base class CaptureResultChannel extends PlatformInterface {

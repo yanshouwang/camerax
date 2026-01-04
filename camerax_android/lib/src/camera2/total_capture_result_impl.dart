@@ -2,10 +2,17 @@ import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/camera2.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class TotalCaptureResultImpl implements TotalCaptureResult {
-  final TotalCaptureResultProxyApi api;
+final class TotalCaptureResultImpl extends CaptureResultImpl
+    implements TotalCaptureResult {
+  @override
+  TotalCaptureResultProxyApi get api {
+    final api = super.api;
+    if (api is! TotalCaptureResultProxyApi) throw TypeError();
+    return api;
+  }
 
-  TotalCaptureResultImpl.internal(this.api);
+  TotalCaptureResultImpl.internal(TotalCaptureResultProxyApi super.api)
+    : super.internal();
 
   @override
   Future<List<CaptureResult>> getPartialResults() =>

@@ -447,7 +447,7 @@ abstract class CaptureFailureProxyApi {
   int toReason(CaptureFailureReasonApi reason);
 
   int getFrameNumber();
-  String getPhysicalCameraId();
+  String? getPhysicalCameraId();
   int getReason();
   CaptureRequestProxyApi getRequest();
   int getSequenceId();
@@ -522,6 +522,14 @@ abstract class CaptureRequestProxyApi {
   late final CaptureRequestLongKeyProxyApi sensorExposureTime;
   @static
   late final CaptureRequestIntKeyProxyApi sensorSensitivity;
+
+  int? getInt(CaptureRequestIntKeyProxyApi key);
+  int? getLong(CaptureRequestLongKeyProxyApi key);
+  double? getFloat(CaptureRequestFloatKeyProxyApi key);
+  bool? getBoolean(CaptureRequestBooleanKeyProxyApi key);
+  // List<CaptureRequest$Key> getKeys();
+  // Object? getTag();
+  bool isReprocess();
 }
 
 @ProxyApi(
@@ -589,6 +597,16 @@ abstract class CaptureResultProxyApi {
   late final CaptureResultLongKeyProxyApi sensorExposureTime;
   @static
   late final CaptureResultIntKeyProxyApi sensorSensitivity;
+
+  int? getInt(CaptureResultIntKeyProxyApi key);
+  int? getLong(CaptureResultLongKeyProxyApi key);
+  double? getFloat(CaptureResultFloatKeyProxyApi key);
+  bool? getBoolean(CaptureResultBooleanKeyProxyApi key);
+  String getCameraId();
+  int getFrameNumber();
+  // List<CaptureResult$Key>> getKeys();
+  CaptureRequestProxyApi getRequest();
+  int getSequenceId();
 }
 
 @ProxyApi(
@@ -596,7 +614,7 @@ abstract class CaptureResultProxyApi {
     fullClassName: 'android.hardware.camera2.TotalCaptureResult',
   ),
 )
-abstract class TotalCaptureResultProxyApi {
+abstract class TotalCaptureResultProxyApi extends CaptureResultProxyApi {
   List<CaptureResultProxyApi> getPartialResults();
   Map<String, CaptureResultProxyApi> getPhysicalCameraResults();
   Map<String, TotalCaptureResultProxyApi> getPhysicalCameraTotalResults();

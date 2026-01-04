@@ -1,6 +1,7 @@
 package dev.zeekr.camerax_android.camera2
 
 import android.hardware.camera2.CameraMetadata
+import android.os.Build
 import dev.zeekr.camerax_android.CameraMetadataControlAeModeApi
 import dev.zeekr.camerax_android.CameraMetadataControlAfModeApi
 import dev.zeekr.camerax_android.CameraMetadataControlAwbModeApi
@@ -76,7 +77,8 @@ object CameraMetadataUtil {
             CameraMetadataInfoSupportedHardwareLevelApi.FULL -> CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_FULL
             CameraMetadataInfoSupportedHardwareLevelApi.LEGACY -> CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY
             CameraMetadataInfoSupportedHardwareLevelApi.LEVEL3 -> CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_3
-            CameraMetadataInfoSupportedHardwareLevelApi.EXTERNAL -> CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_EXTERNAL
+            CameraMetadataInfoSupportedHardwareLevelApi.EXTERNAL -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) CameraMetadata.INFO_SUPPORTED_HARDWARE_LEVEL_EXTERNAL
+            else throw UnsupportedOperationException("Field requires API level 28")
         }.toLong()
     }
 
@@ -86,7 +88,8 @@ object CameraMetadataUtil {
             CameraMetadataControlModeApi.AUTO -> CameraMetadata.CONTROL_MODE_AUTO
             CameraMetadataControlModeApi.USE_SCENE_MODE -> CameraMetadata.CONTROL_MODE_USE_SCENE_MODE
             CameraMetadataControlModeApi.OFF_KEEP_STATE -> CameraMetadata.CONTROL_MODE_OFF_KEEP_STATE
-            CameraMetadataControlModeApi.USE_EXTENDED_SCENE_MODE -> CameraMetadata.CONTROL_MODE_USE_EXTENDED_SCENE_MODE
+            CameraMetadataControlModeApi.USE_EXTENDED_SCENE_MODE -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) CameraMetadata.CONTROL_MODE_USE_EXTENDED_SCENE_MODE
+            else throw UnsupportedOperationException("Field requires API level 30")
         }.toLong()
     }
 
@@ -97,8 +100,11 @@ object CameraMetadataUtil {
             CameraMetadataControlAeModeApi.ON_AUTO_FLASH -> CameraMetadata.CONTROL_AE_MODE_ON_AUTO_FLASH
             CameraMetadataControlAeModeApi.ON_ALWAYS_FLASH -> CameraMetadata.CONTROL_AE_MODE_ON_ALWAYS_FLASH
             CameraMetadataControlAeModeApi.ON_AUTO_FLASH_REDEYE -> CameraMetadata.CONTROL_AE_MODE_ON_AUTO_FLASH_REDEYE
-            CameraMetadataControlAeModeApi.ON_EXTERNAL_FLASH -> CameraMetadata.CONTROL_AE_MODE_ON_EXTERNAL_FLASH
-            CameraMetadataControlAeModeApi.ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY -> CameraMetadata.CONTROL_AE_MODE_ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY
+            CameraMetadataControlAeModeApi.ON_EXTERNAL_FLASH -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) CameraMetadata.CONTROL_AE_MODE_ON_EXTERNAL_FLASH
+            else throw UnsupportedOperationException("Field requires API level 28")
+
+            CameraMetadataControlAeModeApi.ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) CameraMetadata.CONTROL_AE_MODE_ON_LOW_LIGHT_BOOST_BRIGHTNESS_PRIORITY
+            else throw UnsupportedOperationException("Field requires API level 35")
         }.toLong()
     }
 
