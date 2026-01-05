@@ -7,30 +7,18 @@ abstract interface class CameraInfo {
       CameraInfoChannel.instance.mustPlayShutterSound();
 
   Future<CameraSelector> getCameraSelector();
-  Future<CameraState?> getCameraState();
-  Future<void> observeCameraState(Observer<CameraState> observer);
-  Future<void> removeCameraStateObserver(Observer<CameraState> observer);
+  Future<LiveData<CameraState>> getCameraState();
   Future<ExposureState> getExposureState();
   Future<double> getIntrinsicZoomRatio();
   Future<CameraSelector$LensFacing> getLensFacing();
-  Future<LowLightBoostState?> getLowLightBoostState();
-  Future<void> observeLowLightBoostState(Observer<LowLightBoostState> observer);
-  Future<void> removeLowLightBoostStateObserver(
-    Observer<LowLightBoostState> observer,
-  );
+  Future<LiveData<LowLightBoostState>> getLowLightBoostState();
   Future<int> getMaxTorchStrengthLevel();
   Future<Set<CameraInfo>> getPhysicalCameraInfos();
   Future<int> getSensorRotationDegrees([Surface$Rotation? relativeRotation]);
   Future<Set<Range<int>>> getSupportedFrameRateRanges();
-  Future<TorchState?> getTorchState();
-  Future<void> observeTorchState(Observer<TorchState> observer);
-  Future<void> removeTorchStateObserver(Observer<TorchState> observer);
-  Future<int?> getTorchStrengthLevel();
-  Future<void> observeTorchStrengthLevel(Observer<int> observer);
-  Future<void> removeTorchStrengthLevelObserver(Observer<int> observer);
-  Future<ZoomState?> getZoomState();
-  Future<void> observeZoomState(Observer<ZoomState> observer);
-  Future<void> removeZoomStateObserver(Observer<ZoomState> observer);
+  Future<LiveData<TorchState>> getTorchState();
+  Future<LiveData<int>> getTorchStrengthLevel();
+  Future<LiveData<ZoomState>> getZoomState();
   Future<bool> hasFlashUnit();
   Future<bool> isFocusMeteringSupported(FocusMeteringAction action);
   Future<bool> isLogicalMultiCameraSupported();

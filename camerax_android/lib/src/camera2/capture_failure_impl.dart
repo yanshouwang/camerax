@@ -16,7 +16,7 @@ final class CaptureFailureImpl implements CaptureFailure {
   @override
   Future<CaptureFailure$Reason> getReason() => api
       .getReason()
-      .then((e) => CaptureFailureProxyApi.fromReason(e))
+      .then((e) => CaptureFailureUtilProxyApi.fromReason(e))
       .then((e) => e.impl);
 
   @override

@@ -6,21 +6,34 @@ import android.os.Build
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.CaptureFailureReasonApi
 import dev.zeekr.camerax_android.PigeonApiCaptureFailureProxyApi
+import dev.zeekr.camerax_android.PigeonApiCaptureFailureUtilProxyApi
 
 class CaptureFailureImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCaptureFailureProxyApi(registrar) {
-    override fun fromReason(value: Long): CaptureFailureReasonApi {
-        return when (value.toInt()) {
-            CaptureFailure.REASON_ERROR -> CaptureFailureReasonApi.ERROR
-            CaptureFailure.REASON_FLUSHED -> CaptureFailureReasonApi.FLUSHED
-            else -> throw IllegalArgumentException()
+    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCaptureFailureUtilProxyApi(registrar) {
+        override fun fromReason(value: Long): CaptureFailureReasonApi {
+            return Util.fromReason(value.toInt())
+        }
+
+        override fun toReason(api: CaptureFailureReasonApi): Long {
+            return Util.toReason(api).toLong()
         }
     }
 
-    override fun toReason(reason: CaptureFailureReasonApi): Long {
-        return when (reason) {
-            CaptureFailureReasonApi.ERROR -> CaptureFailure.REASON_ERROR
-            CaptureFailureReasonApi.FLUSHED -> CaptureFailure.REASON_FLUSHED
-        }.toLong()
+    object Util {
+        fun fromReason(value: Int): CaptureFailureReasonApi {
+            return when (value) {
+                CaptureFailure.REASON_ERROR -> CaptureFailureReasonApi.ERROR
+                CaptureFailure.REASON_FLUSHED -> CaptureFailureReasonApi.FLUSHED
+                else -> throw IllegalArgumentException()
+            }
+        }
+
+        fun toReason(api: CaptureFailureReasonApi): Int {
+            return when (api) {
+                CaptureFailureReasonApi.ERROR -> CaptureFailure.REASON_ERROR
+                CaptureFailureReasonApi.FLUSHED -> CaptureFailure.REASON_FLUSHED
+            }
+        }
     }
 
     override fun getFrameNumber(pigeon_instance: CaptureFailure): Long {

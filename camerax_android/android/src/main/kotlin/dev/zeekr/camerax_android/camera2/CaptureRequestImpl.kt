@@ -55,29 +55,25 @@ class CaptureRequestImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
     }
 
     override fun getInt(
-        pigeon_instance: CaptureRequest,
-        key: IntKey
+        pigeon_instance: CaptureRequest, key: IntKey
     ): Long? {
         return pigeon_instance.get(key.instance)?.toLong()
     }
 
     override fun getLong(
-        pigeon_instance: CaptureRequest,
-        key: LongKey
+        pigeon_instance: CaptureRequest, key: LongKey
     ): Long? {
         return pigeon_instance.get(key.instance)
     }
 
     override fun getFloat(
-        pigeon_instance: CaptureRequest,
-        key: FloatKey
+        pigeon_instance: CaptureRequest, key: FloatKey
     ): Double? {
         return pigeon_instance.get(key.instance)?.toDouble()
     }
 
     override fun getBoolean(
-        pigeon_instance: CaptureRequest,
-        key: BooleanKey
+        pigeon_instance: CaptureRequest, key: BooleanKey
     ): Boolean? {
         return pigeon_instance.get(key.instance)
     }

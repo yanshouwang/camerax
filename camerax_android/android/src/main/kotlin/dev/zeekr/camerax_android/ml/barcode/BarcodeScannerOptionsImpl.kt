@@ -20,10 +20,10 @@ class BarcodeScannerOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
 
         override fun setBarcodeFormats(
-            pigeon_instance: BarcodeScannerOptions.Builder, formats: List<BarcodeFormatApi>
+            pigeon_instance: BarcodeScannerOptions.Builder, formats: List<Long>
         ): BarcodeScannerOptions.Builder {
-            val format = formats.first().impl
-            val moreFormats = formats.drop(1).map { it.impl }.toIntArray()
+            val format = formats.first().toInt()
+            val moreFormats = formats.drop(1).map { it.toInt() }.toIntArray()
             return pigeon_instance.setBarcodeFormats(format, *moreFormats)
         }
 
@@ -39,17 +39,15 @@ class BarcodeScannerOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 
     override fun build(
-        enableAllPotentialBarcodes: Boolean?,
-        formats: List<BarcodeFormatApi>?,
-        zoomSuggestionOptions: ZoomSuggestionOptions?
+        enableAllPotentialBarcodes: Boolean?, formats: List<Long>?, zoomSuggestionOptions: ZoomSuggestionOptions?
     ): BarcodeScannerOptions {
         val builder = BarcodeScannerOptions.Builder()
         if (enableAllPotentialBarcodes == true) {
             builder.enableAllPotentialBarcodes()
         }
         if (!formats.isNullOrEmpty()) {
-            val format = formats.first().impl
-            val moreFormats = formats.drop(1).map { it.impl }.toIntArray()
+            val format = formats.first().toInt()
+            val moreFormats = formats.drop(1).map { it.toInt() }.toIntArray()
             builder.setBarcodeFormats(format, *moreFormats)
         }
         if (zoomSuggestionOptions != null) {

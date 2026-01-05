@@ -16,37 +16,28 @@ class CameraCaptureSessionImpl {
         override fun pigeon_defaultConstructor(): CameraCaptureSession.CaptureCallback {
             return object : CameraCaptureSession.CaptureCallback() {
                 override fun onCaptureBufferLost(
-                    session: CameraCaptureSession,
-                    request: CaptureRequest,
-                    target: Surface,
-                    frameNumber: Long
+                    session: CameraCaptureSession, request: CaptureRequest, target: Surface, frameNumber: Long
                 ) {
                     super.onCaptureBufferLost(session, request, target, frameNumber)
                     this@CaptureCallbackImpl.onCaptureBufferLost(this, session, request, target, frameNumber) {}
                 }
 
                 override fun onCaptureCompleted(
-                    session: CameraCaptureSession,
-                    request: CaptureRequest,
-                    result: TotalCaptureResult
+                    session: CameraCaptureSession, request: CaptureRequest, result: TotalCaptureResult
                 ) {
                     super.onCaptureCompleted(session, request, result)
                     this@CaptureCallbackImpl.onCaptureCompleted(this, session, request, result) {}
                 }
 
                 override fun onCaptureFailed(
-                    session: CameraCaptureSession,
-                    request: CaptureRequest,
-                    failure: CaptureFailure
+                    session: CameraCaptureSession, request: CaptureRequest, failure: CaptureFailure
                 ) {
                     super.onCaptureFailed(session, request, failure)
                     this@CaptureCallbackImpl.onCaptureFailed(this, session, request, failure) {}
                 }
 
                 override fun onCaptureProgressed(
-                    session: CameraCaptureSession,
-                    request: CaptureRequest,
-                    partialResult: CaptureResult
+                    session: CameraCaptureSession, request: CaptureRequest, partialResult: CaptureResult
                 ) {
                     super.onCaptureProgressed(session, request, partialResult)
                     this@CaptureCallbackImpl.onCaptureProgressed(this, session, request, partialResult) {}
@@ -58,34 +49,23 @@ class CameraCaptureSessionImpl {
                 }
 
                 override fun onCaptureSequenceCompleted(
-                    session: CameraCaptureSession,
-                    sequenceId: Int,
-                    frameNumber: Long
+                    session: CameraCaptureSession, sequenceId: Int, frameNumber: Long
                 ) {
                     super.onCaptureSequenceCompleted(session, sequenceId, frameNumber)
                     this@CaptureCallbackImpl.onCaptureSequenceCompleted(
-                        this,
-                        session,
-                        sequenceId.toLong(),
-                        frameNumber
+                        this, session, sequenceId.toLong(), frameNumber
                     ) {}
                 }
 
                 override fun onCaptureStarted(
-                    session: CameraCaptureSession,
-                    request: CaptureRequest,
-                    timestamp: Long,
-                    frameNumber: Long
+                    session: CameraCaptureSession, request: CaptureRequest, timestamp: Long, frameNumber: Long
                 ) {
                     super.onCaptureStarted(session, request, timestamp, frameNumber)
                     this@CaptureCallbackImpl.onCaptureStarted(this, session, request, timestamp, frameNumber) {}
                 }
 
                 override fun onReadoutStarted(
-                    session: CameraCaptureSession,
-                    request: CaptureRequest,
-                    timestamp: Long,
-                    frameNumber: Long
+                    session: CameraCaptureSession, request: CaptureRequest, timestamp: Long, frameNumber: Long
                 ) {
                     super.onReadoutStarted(session, request, timestamp, frameNumber)
                     this@CaptureCallbackImpl.onReadoutStarted(this, session, request, timestamp, frameNumber) {}

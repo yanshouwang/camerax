@@ -36,8 +36,7 @@ class ImageProxyConsumer(private val impl: ImageProxyConsumerImpl) : Consumer<Im
     }
 }
 
-class MlKitAnalyzerResultConsumer(private val impl: MlKitAnalyzerResultConsumerImpl) :
-    Consumer<MlKitAnalyzer.Result> {
+class MlKitAnalyzerResultConsumer(private val impl: MlKitAnalyzerResultConsumerImpl) : Consumer<MlKitAnalyzer.Result> {
     override fun accept(value: MlKitAnalyzer.Result) {
         impl.accept(this, value) {}
     }

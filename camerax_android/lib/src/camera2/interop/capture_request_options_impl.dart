@@ -6,6 +6,7 @@ import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 final class CaptureRequestOptions$BuilderImpl
     extends ExtendableBuilderImpl<CaptureRequestOptions>
     implements CaptureRequestOptions$Builder {
+  @override
   final CaptureRequestOptionsBuilderProxyApi api;
 
   CaptureRequestOptions$BuilderImpl.internal(this.api);
@@ -163,6 +164,14 @@ final class CaptureRequestOptionsChannelImpl
   CaptureRequestOptions$Builder createBuilder() {
     final api = CaptureRequestOptionsBuilderProxyApi();
     return CaptureRequestOptions$BuilderImpl.internal(api);
+  }
+}
+
+extension CaptureRequestOptions$BuilderX on CaptureRequestOptions$Builder {
+  CaptureRequestOptionsBuilderProxyApi get api {
+    final impl = this;
+    if (impl is! CaptureRequestOptions$BuilderImpl) throw TypeError();
+    return impl.api;
   }
 }
 

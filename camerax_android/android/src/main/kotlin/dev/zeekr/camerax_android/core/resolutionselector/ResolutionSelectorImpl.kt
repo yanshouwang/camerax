@@ -7,10 +7,38 @@ import androidx.camera.core.resolutionselector.ResolutionStrategy
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiResolutionSelectorBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiResolutionSelectorProxyApi
+import dev.zeekr.camerax_android.PigeonApiResolutionSelectorUtilProxyApi
 import dev.zeekr.camerax_android.ResolutionSelectorModeApi
 
 class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiResolutionSelectorProxyApi(registrar) {
+    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiResolutionSelectorUtilProxyApi(registrar) {
+        override fun fromMode(value: Long): ResolutionSelectorModeApi {
+            return Util.fromMode(value.toInt())
+        }
+
+        override fun toMode(api: ResolutionSelectorModeApi): Long {
+            return Util.toMode(api).toLong()
+        }
+    }
+
+    object Util {
+        fun fromMode(value: Int): ResolutionSelectorModeApi {
+            return when (value) {
+                ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelectorModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+                ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelectorModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun toMode(api: ResolutionSelectorModeApi): Int {
+            return when (api) {
+                ResolutionSelectorModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+                ResolutionSelectorModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+            }
+        }
+    }
+
     class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         PigeonApiResolutionSelectorBuilderProxyApi(registrar) {
         override fun pigeon_defaultConstructor(): ResolutionSelector.Builder {
@@ -18,9 +46,9 @@ class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
 
         override fun setAllowedResolutionMode(
-            pigeon_instance: ResolutionSelector.Builder, mode: ResolutionSelectorModeApi
+            pigeon_instance: ResolutionSelector.Builder, mode: Long
         ): ResolutionSelector.Builder {
-            return pigeon_instance.setAllowedResolutionMode(mode.impl)
+            return pigeon_instance.setAllowedResolutionMode(mode.toInt())
         }
 
         override fun setAspectRatioStrategy(
@@ -46,8 +74,8 @@ class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
     }
 
-    override fun getAllowedResolutionMode(pigeon_instance: ResolutionSelector): ResolutionSelectorModeApi {
-        return pigeon_instance.allowedResolutionMode.resolutionSelectorModeApi
+    override fun getAllowedResolutionMode(pigeon_instance: ResolutionSelector): Long {
+        return pigeon_instance.allowedResolutionMode.toLong()
     }
 
     override fun getAspectRatioStrategy(pigeon_instance: ResolutionSelector): AspectRatioStrategy {
@@ -62,16 +90,3 @@ class ResolutionSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         return pigeon_instance.resolutionStrategy
     }
 }
-
-val ResolutionSelectorModeApi.impl: Int
-    get() = when (this) {
-        ResolutionSelectorModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-        ResolutionSelectorModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
-    }
-
-val Int.resolutionSelectorModeApi: ResolutionSelectorModeApi
-    get() = when (this) {
-        ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION -> ResolutionSelectorModeApi.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-        ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE -> ResolutionSelectorModeApi.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }

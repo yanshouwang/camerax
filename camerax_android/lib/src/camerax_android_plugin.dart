@@ -24,7 +24,6 @@ abstract final class CameraXAndroidPlugin {
     ConsumerChannel.instance = ConsumerChannelImpl();
     LocationChannel.instance = LocationChannelImpl();
     ObserverChannel.instance = ObserverChannelImpl();
-    PermissionManagerChannel.instance = PermissionManagerChannelImpl();
     // core.resolution_selector
     AspectRatioStrategyChannel.instance = AspectRatioStrategyChannelImpl();
     ResolutionFilterChannel.instance = ResolutionFilterChannelImpl();

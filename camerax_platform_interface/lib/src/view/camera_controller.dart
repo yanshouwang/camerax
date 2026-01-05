@@ -27,27 +27,21 @@ abstract interface class CameraController {
   Future<CameraInfo?> getCameraInfo();
   Future<CameraControl?> getCameraControl();
 
-  Future<TorchState?> getTorchState();
-  Future<void> observeTorchState(Observer<TorchState> observer);
-  Future<void> removeTorchStateObserver(Observer<TorchState> observer);
+  Future<LiveData<TorchState>> getTorchState();
   Future<void> enableTorch(bool enabled);
 
-  Future<bool> isPinchToZoomEnabled();
-  Future<void> setPinchToZoomEnabled(bool enabled);
-  Future<ZoomState?> getZoomState();
-  Future<void> observeZoomState(Observer<ZoomState> observer);
-  Future<void> removeZoomStateObserver(Observer<ZoomState> observer);
+  Future<LiveData<ZoomState>> getZoomState();
   Future<void> setZoomRatio(double zoomRatio);
   Future<void> setLinearZoom(double linearZoom);
 
+  Future<LiveData<TapToFocusInfo>> getTapToFocusInfoState();
+  Future<void> setTapToFocusAutoCancelDuration(Duration duration);
+
+  Future<bool> isPinchToZoomEnabled();
+  Future<void> setPinchToZoomEnabled(bool enabled);
+
   Future<bool> isTapToFocusEnabled();
   Future<void> setTapToFocusEnabled(bool enabled);
-  Future<void> setTapToFocusAutoCancelDuration(Duration duration);
-  Future<TapToFocusInfo?> getTapToFocusInfoState();
-  Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer);
-  Future<void> removeTapToFocusInfoStateObserver(
-    Observer<TapToFocusInfo> observer,
-  );
 
   Future<bool> isImageAnalysisEnabled();
   Future<bool> isImageCaptureEnabled();

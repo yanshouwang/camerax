@@ -14,6 +14,7 @@ import dev.zeekr.camerax_android.*
 import dev.zeekr.camerax_android.common.*
 import dev.zeekr.camerax_android.common.IntRange
 import dev.zeekr.camerax_android.core.*
+import dev.zeekr.camerax_android.view.api
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
@@ -21,6 +22,64 @@ import kotlinx.coroutines.launch
 
 class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiCameraControllerProxyApi(registrar) {
+    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraControllerUtilProxyApi(registrar) {
+        override fun fromTapToFocus(value: Long): CameraControllerTapToFocusApi {
+            return Util.fromTapToFocus(value.toInt())
+        }
+
+        override fun fromUseCase(value: Long): CameraControllerUseCaseApi {
+            return Util.fromUseCase(value.toInt())
+        }
+
+        override fun toTapToFocus(api: CameraControllerTapToFocusApi): Long {
+            return Util.toTapToFocus(api).toLong()
+        }
+
+        override fun toUseCase(api: CameraControllerUseCaseApi): Long {
+            return Util.toUseCase(api).toLong()
+        }
+    }
+
+    object Util {
+        fun fromTapToFocus(value: Int): CameraControllerTapToFocusApi {
+            return when (value) {
+                CameraController.TAP_TO_FOCUS_NOT_STARTED -> CameraControllerTapToFocusApi.NOT_STARTED
+                CameraController.TAP_TO_FOCUS_STARTED -> CameraControllerTapToFocusApi.STARTED
+                CameraController.TAP_TO_FOCUS_FOCUSED -> CameraControllerTapToFocusApi.FOCUSED
+                CameraController.TAP_TO_FOCUS_NOT_FOCUSED -> CameraControllerTapToFocusApi.NOT_FOCUSED
+                CameraController.TAP_TO_FOCUS_FAILED -> CameraControllerTapToFocusApi.FAILED
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun fromUseCase(value: Int): CameraControllerUseCaseApi {
+            return when (value) {
+                CameraController.IMAGE_CAPTURE -> CameraControllerUseCaseApi.IMAGE_CAPTURE
+                CameraController.IMAGE_ANALYSIS -> CameraControllerUseCaseApi.IMAGE_ANALYSIS
+                CameraController.VIDEO_CAPTURE -> CameraControllerUseCaseApi.VIDEO_CAPTURE
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun toTapToFocus(api: CameraControllerTapToFocusApi): Int {
+            return when (api) {
+                CameraControllerTapToFocusApi.NOT_STARTED -> CameraController.TAP_TO_FOCUS_NOT_STARTED
+                CameraControllerTapToFocusApi.STARTED -> CameraController.TAP_TO_FOCUS_STARTED
+                CameraControllerTapToFocusApi.FOCUSED -> CameraController.TAP_TO_FOCUS_FOCUSED
+                CameraControllerTapToFocusApi.NOT_FOCUSED -> CameraController.TAP_TO_FOCUS_NOT_FOCUSED
+                CameraControllerTapToFocusApi.FAILED -> CameraController.TAP_TO_FOCUS_FAILED
+            }
+        }
+
+        fun toUseCase(api: CameraControllerUseCaseApi): Int {
+            return when (api) {
+                CameraControllerUseCaseApi.IMAGE_CAPTURE -> CameraController.IMAGE_CAPTURE
+                CameraControllerUseCaseApi.IMAGE_ANALYSIS -> CameraController.IMAGE_ANALYSIS
+                CameraControllerUseCaseApi.VIDEO_CAPTURE -> CameraController.VIDEO_CAPTURE
+            }
+        }
+    }
+
     override fun hasCamera(pigeon_instance: CameraController, cameraSelector: CameraSelector): Boolean {
         return pigeon_instance.hasCamera(cameraSelector)
     }
@@ -41,17 +100,8 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         return pigeon_instance.cameraControl
     }
 
-    override fun getTorchState(pigeon_instance: CameraController): TorchStateApi? {
-        return pigeon_instance.torchState.value?.torchStateApi
-    }
-
-    override fun observeTorchState(pigeon_instance: CameraController, observer: TorchStateObserver) {
-        val owner = registrar.activity as LifecycleOwner
-        pigeon_instance.torchState.observe(owner, observer)
-    }
-
-    override fun removeTorchStateObserver(pigeon_instance: CameraController, observer: TorchStateObserver) {
-        pigeon_instance.torchState.removeObserver(observer)
+    override fun getTorchState(pigeon_instance: CameraController): IntLiveData {
+        return IntLiveData(pigeon_instance.torchState)
     }
 
     override fun enableTorch(
@@ -67,17 +117,8 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         }
     }
 
-    override fun getZoomState(pigeon_instance: CameraController): ZoomState? {
-        return pigeon_instance.zoomState.value
-    }
-
-    override fun observeZoomState(pigeon_instance: CameraController, observer: ZoomStateObserver) {
-        val owner = registrar.activity as LifecycleOwner
-        pigeon_instance.zoomState.observe(owner, observer)
-    }
-
-    override fun removeZoomStateObserver(pigeon_instance: CameraController, observer: ZoomStateObserver) {
-        pigeon_instance.zoomState.removeObserver(observer)
+    override fun getZoomState(pigeon_instance: CameraController): ZoomStateLiveData {
+        return ZoomStateLiveData(pigeon_instance.zoomState)
     }
 
     override fun setZoomRatio(pigeon_instance: CameraController, zoomRatio: Double, callback: (Result<Unit>) -> Unit) {
@@ -132,29 +173,16 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         return pigeon_instance.isVideoCaptureEnabled
     }
 
-    override fun setEnabledUseCases(
-        pigeon_instance: CameraController, enabledUseCases: List<CameraControllerUseCaseApi>
-    ) {
-        pigeon_instance.setEnabledUseCases(enabledUseCases.map { it.impl }.reduce { acc, unit -> acc or unit })
+    override fun setEnabledUseCases(pigeon_instance: CameraController, enabledUseCases: Long) {
+        pigeon_instance.setEnabledUseCases(enabledUseCases.toInt())
     }
 
     override fun getPreviewResolutionSelector(pigeon_instance: CameraController): ResolutionSelector? {
         return pigeon_instance.previewResolutionSelector
     }
 
-    override fun getTapToFocusInfoState(pigeon_instance: CameraController): TapToFocusInfo? {
-        return pigeon_instance.tapToFocusInfoState.value
-    }
-
-    override fun observeTapToFocusInfoState(pigeon_instance: CameraController, observer: TapToFocusInfoObserver) {
-        val owner = registrar.activity as LifecycleOwner
-        pigeon_instance.tapToFocusInfoState.observe(owner, observer)
-    }
-
-    override fun removeTapToFocusInfoStateObserver(
-        pigeon_instance: CameraController, observer: TapToFocusInfoObserver
-    ) {
-        pigeon_instance.tapToFocusInfoState.removeObserver(observer)
+    override fun getTapToFocusInfoState(pigeon_instance: CameraController): TapToFocusInfoLiveData {
+        return TapToFocusInfoLiveData(pigeon_instance.tapToFocusInfoState)
     }
 
     override fun setPreviewResolutionSelector(
@@ -179,20 +207,20 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         pigeon_instance.imageCaptureResolutionSelector = resolutionSelector
     }
 
-    override fun getImageCaptureMode(pigeon_instance: CameraController): ImageCaptureCaptureModeApi {
-        return pigeon_instance.imageCaptureMode.imageCaptureCaptureModeApi
+    override fun getImageCaptureMode(pigeon_instance: CameraController): Long {
+        return pigeon_instance.imageCaptureMode.toLong()
     }
 
-    override fun setImageCaptureMode(pigeon_instance: CameraController, captureMode: ImageCaptureCaptureModeApi) {
-        pigeon_instance.imageCaptureMode = captureMode.impl
+    override fun setImageCaptureMode(pigeon_instance: CameraController, captureMode: Long) {
+        pigeon_instance.imageCaptureMode = captureMode.toInt()
     }
 
-    override fun getImageCaptureFlashMode(pigeon_instance: CameraController): ImageCaptureFlashModeApi {
-        return pigeon_instance.imageCaptureFlashMode.flashModeApi
+    override fun getImageCaptureFlashMode(pigeon_instance: CameraController): Long {
+        return pigeon_instance.imageCaptureFlashMode.toLong()
     }
 
-    override fun setImageCaptureFlashMode(pigeon_instance: CameraController, flashMode: ImageCaptureFlashModeApi) {
-        pigeon_instance.imageCaptureFlashMode = flashMode.impl
+    override fun setImageCaptureFlashMode(pigeon_instance: CameraController, flashMode: Long) {
+        pigeon_instance.imageCaptureFlashMode = flashMode.toInt()
     }
 
     override fun takePicture1(
@@ -212,14 +240,12 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         pigeon_instance.imageAnalysisResolutionSelector = resolutionSelector
     }
 
-    override fun getImageAnalysisBackpressureStrategy(pigeon_instance: CameraController): ImageAnalysisStrategyApi {
-        return pigeon_instance.imageAnalysisBackpressureStrategy.imageAnalysisStrategyApi
+    override fun getImageAnalysisBackpressureStrategy(pigeon_instance: CameraController): Long {
+        return pigeon_instance.imageAnalysisBackpressureStrategy.toLong()
     }
 
-    override fun setImageAnalysisBackpressureStrategy(
-        pigeon_instance: CameraController, strategy: ImageAnalysisStrategyApi
-    ) {
-        pigeon_instance.imageAnalysisBackpressureStrategy = strategy.impl
+    override fun setImageAnalysisBackpressureStrategy(pigeon_instance: CameraController, strategy: Long) {
+        pigeon_instance.imageAnalysisBackpressureStrategy = strategy.toInt()
     }
 
     override fun getImageAnalysisImageQueueDepth(pigeon_instance: CameraController): Long {
@@ -230,14 +256,14 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         pigeon_instance.imageAnalysisImageQueueDepth = depth.toInt()
     }
 
-    override fun getImageAnalysisOutputImageFormat(pigeon_instance: CameraController): ImageAnalysisOutputImageFormatApi {
-        return pigeon_instance.imageAnalysisOutputImageFormat.imageAnalysisOutputImageFormatApi
+    override fun getImageAnalysisOutputImageFormat(pigeon_instance: CameraController): Long {
+        return pigeon_instance.imageAnalysisOutputImageFormat.toLong()
     }
 
     override fun setImageAnalysisOutputImageFormat(
-        pigeon_instance: CameraController, imageAnalysisOutputImageFormat: ImageAnalysisOutputImageFormatApi
+        pigeon_instance: CameraController, imageAnalysisOutputImageFormat: Long
     ) {
-        pigeon_instance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.impl
+        pigeon_instance.imageAnalysisOutputImageFormat = imageAnalysisOutputImageFormat.toInt()
     }
 
     override fun setImageAnalysisAnalyzer(pigeon_instance: CameraController, analyzer: ImageAnalysis.Analyzer) {
@@ -257,12 +283,12 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         pigeon_instance.videoCaptureDynamicRange = dynamicRange
     }
 
-    override fun getVideoCaptureMirrorMode(pigeon_instance: CameraController): MirrorModeApi {
-        return pigeon_instance.videoCaptureMirrorMode.mirrorModeApi
+    override fun getVideoCaptureMirrorMode(pigeon_instance: CameraController): Long {
+        return pigeon_instance.videoCaptureMirrorMode.toLong()
     }
 
-    override fun setVideoCaptureMirrorMode(pigeon_instance: CameraController, mirrorMode: MirrorModeApi) {
-        pigeon_instance.videoCaptureMirrorMode = mirrorMode.impl
+    override fun setVideoCaptureMirrorMode(pigeon_instance: CameraController, mirrorMode: Long) {
+        pigeon_instance.videoCaptureMirrorMode = mirrorMode.toInt()
     }
 
     override fun getVideoCaptureQualitySelector(pigeon_instance: CameraController): QualitySelector {
@@ -295,29 +321,3 @@ class CameraControllerImpl(private val registrar: CameraXApiPigeonProxyApiRegist
         return pigeon_instance.startRecording(outputOptions, audioConfig, executor, listener)
     }
 }
-
-val CameraControllerTapToFocusApi.impl: Int
-    get() = when (this) {
-        CameraControllerTapToFocusApi.NOT_STARTED -> CameraController.TAP_TO_FOCUS_NOT_STARTED
-        CameraControllerTapToFocusApi.STARTED -> CameraController.TAP_TO_FOCUS_STARTED
-        CameraControllerTapToFocusApi.FOCUSED -> CameraController.TAP_TO_FOCUS_FOCUSED
-        CameraControllerTapToFocusApi.NOT_FOCUSED -> CameraController.TAP_TO_FOCUS_NOT_FOCUSED
-        CameraControllerTapToFocusApi.FAILED -> CameraController.TAP_TO_FOCUS_FAILED
-    }
-
-val Int.cameraControllerTapToFocusApi: CameraControllerTapToFocusApi
-    get() = when (this) {
-        CameraController.TAP_TO_FOCUS_NOT_STARTED -> CameraControllerTapToFocusApi.NOT_STARTED
-        CameraController.TAP_TO_FOCUS_STARTED -> CameraControllerTapToFocusApi.STARTED
-        CameraController.TAP_TO_FOCUS_FOCUSED -> CameraControllerTapToFocusApi.FOCUSED
-        CameraController.TAP_TO_FOCUS_NOT_FOCUSED -> CameraControllerTapToFocusApi.NOT_FOCUSED
-        CameraController.TAP_TO_FOCUS_FAILED -> CameraControllerTapToFocusApi.FAILED
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }
-
-val CameraControllerUseCaseApi.impl: Int
-    get() = when (this) {
-        CameraControllerUseCaseApi.IMAGE_CAPTURE -> CameraController.IMAGE_CAPTURE
-        CameraControllerUseCaseApi.IMAGE_ANALYSIS -> CameraController.IMAGE_ANALYSIS
-        CameraControllerUseCaseApi.VIDEO_CAPTURE -> CameraController.VIDEO_CAPTURE
-    }

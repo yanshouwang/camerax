@@ -90,7 +90,7 @@ final class CameraCharacteristicsChannelImpl
       );
 }
 
-extension CameraCharacteristics$KeyX on CameraCharacteristics$Key {
+extension CameraCharacteristics$KeyX<T> on CameraCharacteristics$Key<T> {
   CameraCharacteristicsKeyProxyApi get api {
     final impl = this;
     if (impl is! CameraCharacteristics$KeyImpl) throw TypeError();

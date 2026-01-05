@@ -22,76 +22,13 @@ import dev.zeekr.camerax_android.PigeonApiBarcodePhoneProxyApi
 import dev.zeekr.camerax_android.PigeonApiBarcodeProxyApi
 import dev.zeekr.camerax_android.PigeonApiBarcodeSmsProxyApi
 import dev.zeekr.camerax_android.PigeonApiBarcodeUrlBookmarkProxyApi
+import dev.zeekr.camerax_android.PigeonApiBarcodeUtilProxyApi
 import dev.zeekr.camerax_android.PigeonApiBarcodeWiFiProxyApi
 
 class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeProxyApi(registrar) {
-    override fun boundingBox(pigeon_instance: Barcode): Rect? {
-        return pigeon_instance.boundingBox
-    }
-
-    override fun cornerPoints(pigeon_instance: Barcode): List<Point>? {
-        return pigeon_instance.cornerPoints?.toList()
-    }
-
-    override fun format(pigeon_instance: Barcode): BarcodeFormatApi {
-        return pigeon_instance.format.barcodeFormatApi
-    }
-
-    override fun valueType(pigeon_instance: Barcode): BarcodeTypeApi {
-        return pigeon_instance.valueType.barcodeTypeApi
-    }
-
-    override fun rawBytes(pigeon_instance: Barcode): ByteArray? {
-        return pigeon_instance.rawBytes
-    }
-
-    override fun rawValue(pigeon_instance: Barcode): String? {
-        return pigeon_instance.rawValue
-    }
-
-    override fun displayValue(pigeon_instance: Barcode): String? {
-        return pigeon_instance.displayValue
-    }
-
-    override fun calendarEvent(pigeon_instance: Barcode): Barcode.CalendarEvent? {
-        return pigeon_instance.calendarEvent
-    }
-
-    override fun contactInfo(pigeon_instance: Barcode): Barcode.ContactInfo? {
-        return pigeon_instance.contactInfo
-    }
-
-    override fun driverLicense(pigeon_instance: Barcode): Barcode.DriverLicense? {
-        return pigeon_instance.driverLicense
-    }
-
-    override fun email(pigeon_instance: Barcode): Barcode.Email? {
-        return pigeon_instance.email
-    }
-
-    override fun geoPoint(pigeon_instance: Barcode): Barcode.GeoPoint? {
-        return pigeon_instance.geoPoint
-    }
-
-    override fun phone(pigeon_instance: Barcode): Barcode.Phone? {
-        return pigeon_instance.phone
-    }
-
-    override fun sms(pigeon_instance: Barcode): Barcode.Sms? {
-        return pigeon_instance.sms
-    }
-
-    override fun url(pigeon_instance: Barcode): Barcode.UrlBookmark? {
-        return pigeon_instance.url
-    }
-
-    override fun wifi(pigeon_instance: Barcode): Barcode.WiFi? {
-        return pigeon_instance.wifi
-    }
-
     class AddressImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeAddressProxyApi(registrar) {
-        override fun type(pigeon_instance: Barcode.Address): BarcodeAddressTypeApi {
-            return pigeon_instance.type.barcodeAddressTypeApi
+        override fun type(pigeon_instance: Barcode.Address): Long {
+            return pigeon_instance.type.toLong()
         }
 
         override fun addressLines(pigeon_instance: Barcode.Address): List<String> {
@@ -256,8 +193,8 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
     }
 
     class EmailImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeEmailProxyApi(registrar) {
-        override fun type(pigeon_instance: Barcode.Email): BarcodeEmailTypeApi {
-            return pigeon_instance.type.barcodeEmailTypeApi
+        override fun type(pigeon_instance: Barcode.Email): Long {
+            return pigeon_instance.type.toLong()
         }
 
         override fun address(pigeon_instance: Barcode.Email): String? {
@@ -314,8 +251,8 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
     }
 
     class PhoneImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodePhoneProxyApi(registrar) {
-        override fun type(pigeon_instance: Barcode.Phone): BarcodePhoneTypeApi {
-            return pigeon_instance.type.barcodePhoneTypeApi
+        override fun type(pigeon_instance: Barcode.Phone): Long {
+            return pigeon_instance.type.toLong()
         }
 
         override fun number(pigeon_instance: Barcode.Phone): String? {
@@ -345,8 +282,8 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
     }
 
     class WiFiImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeWiFiProxyApi(registrar) {
-        override fun encryptionType(pigeon_instance: Barcode.WiFi): BarcodeWiFiTypeApi {
-            return pigeon_instance.encryptionType.barcodeWiFiTypeApi
+        override fun encryptionType(pigeon_instance: Barcode.WiFi): Long {
+            return pigeon_instance.encryptionType.toLong()
         }
 
         override fun ssid(pigeon_instance: Barcode.WiFi): String? {
@@ -357,95 +294,270 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
             return pigeon_instance.password
         }
     }
+
+    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeUtilProxyApi(registrar) {
+        override fun fromFormat(value: Long): BarcodeFormatApi {
+            return Util.fromFormat(value.toInt())
+        }
+
+        override fun fromType(value: Long): BarcodeTypeApi {
+            return Util.fromType(value.toInt())
+        }
+
+        override fun fromAddressType(value: Long): BarcodeAddressTypeApi {
+            return Util.fromAddressType(value.toInt())
+        }
+
+        override fun fromEmailType(value: Long): BarcodeEmailTypeApi {
+            return Util.fromEmailType(value.toInt())
+        }
+
+        override fun fromPhoneType(value: Long): BarcodePhoneTypeApi {
+            return Util.fromPhoneType(value.toInt())
+        }
+
+        override fun fromWiFiType(value: Long): BarcodeWiFiTypeApi {
+            return Util.fromWiFiType(value.toInt())
+        }
+
+        override fun toFormat(api: BarcodeFormatApi): Long {
+            return Util.toFormat(api).toLong()
+        }
+
+        override fun toType(value: BarcodeTypeApi): Long {
+            return Util.toType(value).toLong()
+        }
+
+        override fun toAddressType(api: BarcodeAddressTypeApi): Long {
+            return Util.toAddressType(api).toLong()
+        }
+
+        override fun toEmailType(api: BarcodeEmailTypeApi): Long {
+            return Util.toEmailType(api).toLong()
+        }
+
+        override fun toPhoneType(api: BarcodePhoneTypeApi): Long {
+            return Util.toPhoneType(api).toLong()
+        }
+
+        override fun toWiFiType(api: BarcodeWiFiTypeApi): Long {
+            return Util.toWiFiType(api).toLong()
+        }
+    }
+
+    object Util {
+        fun fromFormat(value: Int): BarcodeFormatApi {
+            return when (value) {
+                Barcode.FORMAT_UNKNOWN -> BarcodeFormatApi.UNKNOWN
+                Barcode.FORMAT_ALL_FORMATS -> BarcodeFormatApi.ALL
+                Barcode.FORMAT_CODE_128 -> BarcodeFormatApi.CODE128
+                Barcode.FORMAT_CODE_39 -> BarcodeFormatApi.CODE39
+                Barcode.FORMAT_CODE_93 -> BarcodeFormatApi.CODE93
+                Barcode.FORMAT_CODABAR -> BarcodeFormatApi.CODABAR
+                Barcode.FORMAT_DATA_MATRIX -> BarcodeFormatApi.DATA_MATRIX
+                Barcode.FORMAT_EAN_13 -> BarcodeFormatApi.EAN13
+                Barcode.FORMAT_EAN_8 -> BarcodeFormatApi.EAN8
+                Barcode.FORMAT_ITF -> BarcodeFormatApi.ITF
+                Barcode.FORMAT_QR_CODE -> BarcodeFormatApi.QR_CODE
+                Barcode.FORMAT_UPC_A -> BarcodeFormatApi.UPC_A
+                Barcode.FORMAT_UPC_E -> BarcodeFormatApi.UPC_E
+                Barcode.FORMAT_PDF417 -> BarcodeFormatApi.PDF417
+                Barcode.FORMAT_AZTEC -> BarcodeFormatApi.AZTEC
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun fromType(value: Int): BarcodeTypeApi {
+            return when (value) {
+                Barcode.TYPE_UNKNOWN -> BarcodeTypeApi.UNKNOWN
+                Barcode.TYPE_CONTACT_INFO -> BarcodeTypeApi.CONTACT_INFO
+                Barcode.TYPE_EMAIL -> BarcodeTypeApi.EMAIL
+                Barcode.TYPE_ISBN -> BarcodeTypeApi.ISBN
+                Barcode.TYPE_PHONE -> BarcodeTypeApi.PHONE
+                Barcode.TYPE_PRODUCT -> BarcodeTypeApi.PRODUCT
+                Barcode.TYPE_SMS -> BarcodeTypeApi.SMS
+                Barcode.TYPE_TEXT -> BarcodeTypeApi.TEXT
+                Barcode.TYPE_URL -> BarcodeTypeApi.URL
+                Barcode.TYPE_WIFI -> BarcodeTypeApi.WIFI
+                Barcode.TYPE_GEO -> BarcodeTypeApi.GEO
+                Barcode.TYPE_CALENDAR_EVENT -> BarcodeTypeApi.CALENDAR_EVENT
+                Barcode.TYPE_DRIVER_LICENSE -> BarcodeTypeApi.DRIVER_LICENSE
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun fromAddressType(value: Int): BarcodeAddressTypeApi {
+            return when (value) {
+                Barcode.Address.TYPE_UNKNOWN -> BarcodeAddressTypeApi.UNKNOWN
+                Barcode.Address.TYPE_WORK -> BarcodeAddressTypeApi.WORK
+                Barcode.Address.TYPE_HOME -> BarcodeAddressTypeApi.HOME
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun fromEmailType(value: Int): BarcodeEmailTypeApi {
+            return when (value) {
+                Barcode.Email.TYPE_UNKNOWN -> BarcodeEmailTypeApi.UNKNOWN
+                Barcode.Email.TYPE_WORK -> BarcodeEmailTypeApi.WORK
+                Barcode.Email.TYPE_HOME -> BarcodeEmailTypeApi.HOME
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun fromPhoneType(value: Int): BarcodePhoneTypeApi {
+            return when (value) {
+                Barcode.Phone.TYPE_UNKNOWN -> BarcodePhoneTypeApi.UNKNOWN
+                Barcode.Phone.TYPE_WORK -> BarcodePhoneTypeApi.WORK
+                Barcode.Phone.TYPE_HOME -> BarcodePhoneTypeApi.HOME
+                Barcode.Phone.TYPE_FAX -> BarcodePhoneTypeApi.FAX
+                Barcode.Phone.TYPE_MOBILE -> BarcodePhoneTypeApi.MOBILE
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun fromWiFiType(value: Int): BarcodeWiFiTypeApi {
+            return when (value) {
+                Barcode.WiFi.TYPE_OPEN -> BarcodeWiFiTypeApi.OPEN
+                Barcode.WiFi.TYPE_WPA -> BarcodeWiFiTypeApi.WPA
+                Barcode.WiFi.TYPE_WEP -> BarcodeWiFiTypeApi.WEP
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun toFormat(api: BarcodeFormatApi): Int {
+            return when (api) {
+                BarcodeFormatApi.UNKNOWN -> Barcode.FORMAT_UNKNOWN
+                BarcodeFormatApi.ALL -> Barcode.FORMAT_ALL_FORMATS
+                BarcodeFormatApi.CODE128 -> Barcode.FORMAT_CODE_128
+                BarcodeFormatApi.CODE39 -> Barcode.FORMAT_CODE_39
+                BarcodeFormatApi.CODE93 -> Barcode.FORMAT_CODE_93
+                BarcodeFormatApi.CODABAR -> Barcode.FORMAT_CODABAR
+                BarcodeFormatApi.DATA_MATRIX -> Barcode.FORMAT_DATA_MATRIX
+                BarcodeFormatApi.EAN13 -> Barcode.FORMAT_EAN_13
+                BarcodeFormatApi.EAN8 -> Barcode.FORMAT_EAN_8
+                BarcodeFormatApi.ITF -> Barcode.FORMAT_ITF
+                BarcodeFormatApi.QR_CODE -> Barcode.FORMAT_QR_CODE
+                BarcodeFormatApi.UPC_A -> Barcode.FORMAT_UPC_A
+                BarcodeFormatApi.UPC_E -> Barcode.FORMAT_UPC_E
+                BarcodeFormatApi.PDF417 -> Barcode.FORMAT_PDF417
+                BarcodeFormatApi.AZTEC -> Barcode.FORMAT_AZTEC
+            }
+        }
+
+        fun toType(value: BarcodeTypeApi): Int {
+            return when (value) {
+                BarcodeTypeApi.UNKNOWN -> Barcode.TYPE_UNKNOWN
+                BarcodeTypeApi.CONTACT_INFO -> Barcode.TYPE_CONTACT_INFO
+                BarcodeTypeApi.EMAIL -> Barcode.TYPE_EMAIL
+                BarcodeTypeApi.ISBN -> Barcode.TYPE_ISBN
+                BarcodeTypeApi.PHONE -> Barcode.TYPE_PHONE
+                BarcodeTypeApi.PRODUCT -> Barcode.TYPE_PRODUCT
+                BarcodeTypeApi.SMS -> Barcode.TYPE_SMS
+                BarcodeTypeApi.TEXT -> Barcode.TYPE_TEXT
+                BarcodeTypeApi.URL -> Barcode.TYPE_URL
+                BarcodeTypeApi.WIFI -> Barcode.TYPE_WIFI
+                BarcodeTypeApi.GEO -> Barcode.TYPE_GEO
+                BarcodeTypeApi.CALENDAR_EVENT -> Barcode.TYPE_CALENDAR_EVENT
+                BarcodeTypeApi.DRIVER_LICENSE -> Barcode.TYPE_DRIVER_LICENSE
+            }
+        }
+
+        fun toAddressType(api: BarcodeAddressTypeApi): Int {
+            return when (api) {
+                BarcodeAddressTypeApi.UNKNOWN -> Barcode.Address.TYPE_UNKNOWN
+                BarcodeAddressTypeApi.WORK -> Barcode.Address.TYPE_WORK
+                BarcodeAddressTypeApi.HOME -> Barcode.Address.TYPE_HOME
+            }
+        }
+
+        fun toEmailType(api: BarcodeEmailTypeApi): Int {
+            return when (api) {
+                BarcodeEmailTypeApi.UNKNOWN -> Barcode.Email.TYPE_UNKNOWN
+                BarcodeEmailTypeApi.WORK -> Barcode.Email.TYPE_WORK
+                BarcodeEmailTypeApi.HOME -> Barcode.Email.TYPE_HOME
+            }
+        }
+
+        fun toPhoneType(api: BarcodePhoneTypeApi): Int {
+            return when (api) {
+                BarcodePhoneTypeApi.UNKNOWN -> Barcode.Phone.TYPE_UNKNOWN
+                BarcodePhoneTypeApi.WORK -> Barcode.Phone.TYPE_WORK
+                BarcodePhoneTypeApi.HOME -> Barcode.Phone.TYPE_HOME
+                BarcodePhoneTypeApi.FAX -> Barcode.Phone.TYPE_FAX
+                BarcodePhoneTypeApi.MOBILE -> Barcode.Phone.TYPE_MOBILE
+            }
+        }
+
+        fun toWiFiType(api: BarcodeWiFiTypeApi): Int {
+            return when (api) {
+                BarcodeWiFiTypeApi.OPEN -> Barcode.WiFi.TYPE_OPEN
+                BarcodeWiFiTypeApi.WPA -> Barcode.WiFi.TYPE_WPA
+                BarcodeWiFiTypeApi.WEP -> Barcode.WiFi.TYPE_WEP
+            }
+        }
+    }
+
+    override fun boundingBox(pigeon_instance: Barcode): Rect? {
+        return pigeon_instance.boundingBox
+    }
+
+    override fun cornerPoints(pigeon_instance: Barcode): List<Point>? {
+        return pigeon_instance.cornerPoints?.toList()
+    }
+
+    override fun format(pigeon_instance: Barcode): Long {
+        return pigeon_instance.format.toLong()
+    }
+
+    override fun valueType(pigeon_instance: Barcode): Long {
+        return pigeon_instance.valueType.toLong()
+    }
+
+    override fun rawBytes(pigeon_instance: Barcode): ByteArray? {
+        return pigeon_instance.rawBytes
+    }
+
+    override fun rawValue(pigeon_instance: Barcode): String? {
+        return pigeon_instance.rawValue
+    }
+
+    override fun displayValue(pigeon_instance: Barcode): String? {
+        return pigeon_instance.displayValue
+    }
+
+    override fun calendarEvent(pigeon_instance: Barcode): Barcode.CalendarEvent? {
+        return pigeon_instance.calendarEvent
+    }
+
+    override fun contactInfo(pigeon_instance: Barcode): Barcode.ContactInfo? {
+        return pigeon_instance.contactInfo
+    }
+
+    override fun driverLicense(pigeon_instance: Barcode): Barcode.DriverLicense? {
+        return pigeon_instance.driverLicense
+    }
+
+    override fun email(pigeon_instance: Barcode): Barcode.Email? {
+        return pigeon_instance.email
+    }
+
+    override fun geoPoint(pigeon_instance: Barcode): Barcode.GeoPoint? {
+        return pigeon_instance.geoPoint
+    }
+
+    override fun phone(pigeon_instance: Barcode): Barcode.Phone? {
+        return pigeon_instance.phone
+    }
+
+    override fun sms(pigeon_instance: Barcode): Barcode.Sms? {
+        return pigeon_instance.sms
+    }
+
+    override fun url(pigeon_instance: Barcode): Barcode.UrlBookmark? {
+        return pigeon_instance.url
+    }
+
+    override fun wifi(pigeon_instance: Barcode): Barcode.WiFi? {
+        return pigeon_instance.wifi
+    }
 }
-
-val BarcodeFormatApi.impl: Int
-    get() = when (this) {
-        BarcodeFormatApi.UNKNOWN -> Barcode.FORMAT_UNKNOWN
-        BarcodeFormatApi.ALL -> Barcode.FORMAT_ALL_FORMATS
-        BarcodeFormatApi.CODE128 -> Barcode.FORMAT_CODE_128
-        BarcodeFormatApi.CODE39 -> Barcode.FORMAT_CODE_39
-        BarcodeFormatApi.CODE93 -> Barcode.FORMAT_CODE_93
-        BarcodeFormatApi.CODABAR -> Barcode.FORMAT_CODABAR
-        BarcodeFormatApi.DATA_MATRIX -> Barcode.FORMAT_DATA_MATRIX
-        BarcodeFormatApi.EAN13 -> Barcode.FORMAT_EAN_13
-        BarcodeFormatApi.EAN8 -> Barcode.FORMAT_EAN_8
-        BarcodeFormatApi.ITF -> Barcode.FORMAT_ITF
-        BarcodeFormatApi.QR_CODE -> Barcode.FORMAT_QR_CODE
-        BarcodeFormatApi.UPC_A -> Barcode.FORMAT_UPC_A
-        BarcodeFormatApi.UPC_E -> Barcode.FORMAT_UPC_E
-        BarcodeFormatApi.PDF417 -> Barcode.FORMAT_PDF417
-        BarcodeFormatApi.AZTEC -> Barcode.FORMAT_AZTEC
-    }
-
-val Int.barcodeFormatApi: BarcodeFormatApi
-    get() = when (this) {
-        Barcode.FORMAT_UNKNOWN -> BarcodeFormatApi.UNKNOWN
-        Barcode.FORMAT_ALL_FORMATS -> BarcodeFormatApi.ALL
-        Barcode.FORMAT_CODE_128 -> BarcodeFormatApi.CODE128
-        Barcode.FORMAT_CODE_39 -> BarcodeFormatApi.CODE39
-        Barcode.FORMAT_CODE_93 -> BarcodeFormatApi.CODE93
-        Barcode.FORMAT_CODABAR -> BarcodeFormatApi.CODABAR
-        Barcode.FORMAT_DATA_MATRIX -> BarcodeFormatApi.DATA_MATRIX
-        Barcode.FORMAT_EAN_13 -> BarcodeFormatApi.EAN13
-        Barcode.FORMAT_EAN_8 -> BarcodeFormatApi.EAN8
-        Barcode.FORMAT_ITF -> BarcodeFormatApi.ITF
-        Barcode.FORMAT_QR_CODE -> BarcodeFormatApi.QR_CODE
-        Barcode.FORMAT_UPC_A -> BarcodeFormatApi.UPC_A
-        Barcode.FORMAT_UPC_E -> BarcodeFormatApi.UPC_E
-        Barcode.FORMAT_PDF417 -> BarcodeFormatApi.PDF417
-        Barcode.FORMAT_AZTEC -> BarcodeFormatApi.AZTEC
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }
-
-val Int.barcodeTypeApi: BarcodeTypeApi
-    get() = when (this) {
-        Barcode.TYPE_UNKNOWN -> BarcodeTypeApi.UNKNOWN
-        Barcode.TYPE_CONTACT_INFO -> BarcodeTypeApi.CONTACT_INFO
-        Barcode.TYPE_EMAIL -> BarcodeTypeApi.EMAIL
-        Barcode.TYPE_ISBN -> BarcodeTypeApi.ISBN
-        Barcode.TYPE_PHONE -> BarcodeTypeApi.PHONE
-        Barcode.TYPE_PRODUCT -> BarcodeTypeApi.PRODUCT
-        Barcode.TYPE_SMS -> BarcodeTypeApi.SMS
-        Barcode.TYPE_TEXT -> BarcodeTypeApi.TEXT
-        Barcode.TYPE_URL -> BarcodeTypeApi.URL
-        Barcode.TYPE_WIFI -> BarcodeTypeApi.WIFI
-        Barcode.TYPE_GEO -> BarcodeTypeApi.GEO
-        Barcode.TYPE_CALENDAR_EVENT -> BarcodeTypeApi.CALENDAR_EVENT
-        Barcode.TYPE_DRIVER_LICENSE -> BarcodeTypeApi.DRIVER_LICENSE
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }
-
-val Int.barcodeAddressTypeApi: BarcodeAddressTypeApi
-    get() = when (this) {
-        Barcode.Address.TYPE_UNKNOWN -> BarcodeAddressTypeApi.UNKNOWN
-        Barcode.Address.TYPE_WORK -> BarcodeAddressTypeApi.WORK
-        Barcode.Address.TYPE_HOME -> BarcodeAddressTypeApi.HOME
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }
-
-val Int.barcodeEmailTypeApi: BarcodeEmailTypeApi
-    get() = when (this) {
-        Barcode.Email.TYPE_UNKNOWN -> BarcodeEmailTypeApi.UNKNOWN
-        Barcode.Email.TYPE_WORK -> BarcodeEmailTypeApi.WORK
-        Barcode.Email.TYPE_HOME -> BarcodeEmailTypeApi.HOME
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }
-
-val Int.barcodePhoneTypeApi: BarcodePhoneTypeApi
-    get() = when (this) {
-        Barcode.Phone.TYPE_UNKNOWN -> BarcodePhoneTypeApi.UNKNOWN
-        Barcode.Phone.TYPE_WORK -> BarcodePhoneTypeApi.WORK
-        Barcode.Phone.TYPE_HOME -> BarcodePhoneTypeApi.HOME
-        Barcode.Phone.TYPE_FAX -> BarcodePhoneTypeApi.FAX
-        Barcode.Phone.TYPE_MOBILE -> BarcodePhoneTypeApi.MOBILE
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }
-
-val Int.barcodeWiFiTypeApi: BarcodeWiFiTypeApi
-    get() = when (this) {
-        Barcode.WiFi.TYPE_OPEN -> BarcodeWiFiTypeApi.OPEN
-        Barcode.WiFi.TYPE_WPA -> BarcodeWiFiTypeApi.WPA
-        Barcode.WiFi.TYPE_WEP -> BarcodeWiFiTypeApi.WEP
-        else -> throw NotImplementedError("Not implemented value: $this")
-    }

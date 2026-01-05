@@ -6,6 +6,7 @@ import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.FocusMeteringActionMeteringModeApi
 import dev.zeekr.camerax_android.PigeonApiFocusMeteringActionBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiFocusMeteringActionProxyApi
+import dev.zeekr.camerax_android.PigeonApiFocusMeteringActionUtilProxyApi
 import dev.zeekr.camerax_android.TimeUnitApi
 import dev.zeekr.camerax_android.common.impl
 
@@ -17,10 +18,8 @@ class FocusMeteringActionImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
             return FocusMeteringAction.Builder(point)
         }
 
-        override fun new2(
-            point: MeteringPoint, meteringModes: List<FocusMeteringActionMeteringModeApi>
-        ): FocusMeteringAction.Builder {
-            return FocusMeteringAction.Builder(point, meteringModes.map { it.impl }.reduce { acc, i -> acc or i })
+        override fun new2(point: MeteringPoint, meteringMode: Long): FocusMeteringAction.Builder {
+            return FocusMeteringAction.Builder(point, meteringMode.toInt())
         }
 
         override fun addPoint1(
@@ -30,11 +29,9 @@ class FocusMeteringActionImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
 
         override fun addPoint2(
-            pigeon_instance: FocusMeteringAction.Builder,
-            point: MeteringPoint,
-            meteringModes: List<FocusMeteringActionMeteringModeApi>
+            pigeon_instance: FocusMeteringAction.Builder, point: MeteringPoint, meteringMode: Long
         ): FocusMeteringAction.Builder {
-            return pigeon_instance.addPoint(point, meteringModes.map { it.impl }.reduce { acc, i -> acc or i })
+            return pigeon_instance.addPoint(point, meteringMode.toInt())
         }
 
         override fun disableAutoCancel(pigeon_instance: FocusMeteringAction.Builder): FocusMeteringAction.Builder {
@@ -49,6 +46,35 @@ class FocusMeteringActionImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
 
         override fun build(pigeon_instance: FocusMeteringAction.Builder): FocusMeteringAction {
             return pigeon_instance.build()
+        }
+    }
+
+    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFocusMeteringActionUtilProxyApi(registrar) {
+        override fun fromMeteringMode(value: Long): FocusMeteringActionMeteringModeApi {
+            return Util.fromMeteringMode(value.toInt())
+        }
+
+        override fun toMeteringMode(api: FocusMeteringActionMeteringModeApi): Long {
+            return Util.toMeteringMode(api).toLong()
+        }
+    }
+
+    object Util {
+        fun fromMeteringMode(value: Int): FocusMeteringActionMeteringModeApi {
+            return when (value) {
+                FocusMeteringAction.FLAG_AF -> FocusMeteringActionMeteringModeApi.AF
+                FocusMeteringAction.FLAG_AE -> FocusMeteringActionMeteringModeApi.AE
+                FocusMeteringAction.FLAG_AWB -> FocusMeteringActionMeteringModeApi.AWB
+                else -> throw NotImplementedError("Not implemented value: $this")
+            }
+        }
+
+        fun toMeteringMode(api: FocusMeteringActionMeteringModeApi): Int {
+            return when (api) {
+                FocusMeteringActionMeteringModeApi.AF -> FocusMeteringAction.FLAG_AF
+                FocusMeteringActionMeteringModeApi.AE -> FocusMeteringAction.FLAG_AE
+                FocusMeteringActionMeteringModeApi.AWB -> FocusMeteringAction.FLAG_AWB
+            }
         }
     }
 
@@ -72,10 +98,3 @@ class FocusMeteringActionImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         return pigeon_instance.isAutoCancelEnabled
     }
 }
-
-val FocusMeteringActionMeteringModeApi.impl: Int
-    get() = when (this) {
-        FocusMeteringActionMeteringModeApi.AF -> FocusMeteringAction.FLAG_AF
-        FocusMeteringActionMeteringModeApi.AE -> FocusMeteringAction.FLAG_AE
-        FocusMeteringActionMeteringModeApi.AWB -> FocusMeteringAction.FLAG_AWB
-    }

@@ -11,6 +11,7 @@ import dev.zeekr.camerax_android.PreviewViewImplementationModeApi
 import dev.zeekr.camerax_android.PreviewViewScaleTypeApi
 import dev.zeekr.camerax_android.PreviewViewStreamStateApi
 import dev.zeekr.camerax_android.activity
+import dev.zeekr.camerax_android.common.PreviewViewStreamStateLiveData
 import dev.zeekr.camerax_android.common.PreviewViewStreamStateObserver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,19 +41,8 @@ class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) 
         return pigeon_instance.meteringPointFactory
     }
 
-    override fun getPreviewStreamState(pigeon_instance: PreviewView): PreviewViewStreamStateApi? {
-        return pigeon_instance.previewStreamState.value?.api
-    }
-
-    override fun observePreviewStreamState(pigeon_instance: PreviewView, observer: PreviewViewStreamStateObserver) {
-        val owner = registrar.activity as LifecycleOwner
-        pigeon_instance.previewStreamState.observe(owner, observer)
-    }
-
-    override fun removePreviewStreamStateObserver(
-        pigeon_instance: PreviewView, observer: PreviewViewStreamStateObserver
-    ) {
-        pigeon_instance.previewStreamState.removeObserver(observer)
+    override fun getPreviewStreamState(pigeon_instance: PreviewView): PreviewViewStreamStateLiveData {
+        return PreviewViewStreamStateLiveData(pigeon_instance.previewStreamState)
     }
 
     override fun setController(pigeon_instance: PreviewView, controller: CameraController?) {

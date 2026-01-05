@@ -21,12 +21,12 @@ class FaceImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceProx
         return pigeon_instance.allLandmarks
     }
 
-    override fun getContour(pigeon_instance: Face, contourType: FaceContourTypeApi): FaceContour? {
-        return pigeon_instance.getContour(contourType.impl)
+    override fun getContour(pigeon_instance: Face, contourType: Long): FaceContour? {
+        return pigeon_instance.getContour(contourType.toInt())
     }
 
-    override fun getLandmark(pigeon_instance: Face, landmarkType: FaceLandmarkTypeApi): FaceLandmark? {
-        return pigeon_instance.getLandmark(landmarkType.impl)
+    override fun getLandmark(pigeon_instance: Face, landmarkType: Long): FaceLandmark? {
+        return pigeon_instance.getLandmark(landmarkType.toInt())
     }
 
     override fun headEulerAngleX(pigeon_instance: Face): Double {

@@ -15,7 +15,6 @@ Logger get _logger => Logger('HomeViewModel');
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
 class HomeViewModel extends ViewModel {
-  final PermissionManager _permissionManager;
   final CameraController _controller;
   final RotationProvider _rotationProvider;
 
@@ -29,8 +28,7 @@ class HomeViewModel extends ViewModel {
   Camera2CameraControl? _camera2Control;
 
   HomeViewModel()
-    : _permissionManager = PermissionManager(),
-      _controller = CameraController(),
+    : _controller = CameraController(),
       _rotationProvider = RotationProvider(),
       _mode = CameraMode.takePicture,
       _lensFacing = CameraSelector$LensFacing.back,
@@ -149,10 +147,58 @@ class HomeViewModel extends ViewModel {
 
   Future<void> bind() async {
     await controller.bind();
+
+    final info = await controller.getCameraInfo();
+    final control = await controller.getCameraControl();
+    if (info == null || control == null) {
+      _logger.warning('info or control is null');
+      return;
+    }
+    final camera2Info = Camera2CameraInfo.from(info);
+    final camera2Control = Camera2CameraControl.from(control);
+
+    _info = info;
+    _control = control;
+    _camera2Info = camera2Info;
+    _camera2Control = camera2Control;
+
+    final options = await camera2Control.getCaptureRequestOptions();
+
+    final availableApertures = await camera2Info.getCameraCharacteristic(
+      CameraCharacteristics.lensInfoAvailableApertures,
+    );
+    final aperture = await options.getCaptureRequestOption(
+      CaptureRequest.lensAperture,
+    );
+
+    _logger.info('availableApertures: $availableApertures');
+    _logger.info('aperture: $aperture');
+
+    final exposureTimeRange = await camera2Info.getCameraCharacteristic(
+      CameraCharacteristics.sensorInfoExposureTimeRange,
+    );
+    final exposureTime = await options.getCaptureRequestOption(
+      CaptureRequest.sensorExposureTime,
+    );
+    _logger.info('exposureTimeRagne: $exposureTimeRange');
+    _logger.info('exposureTime: $exposureTime');
+
+    final sensitivityRange = await camera2Info.getCameraCharacteristic(
+      CameraCharacteristics.sensorInfoSensitivityRange,
+    );
+    final sensitivity = await options.getCaptureRequestOption(
+      CaptureRequest.sensorSensitivity,
+    );
+    _logger.info('sensitivityRange: $sensitivityRange');
+    _logger.info('sensitivity: $sensitivity');
   }
 
   Future<void> unbind() async {
     await controller.unbind();
+    _info = null;
+    _control = null;
+    _camera2Info = null;
+    _camera2Control = null;
   }
 
   Future<void> setMode(CameraMode mode) async {
@@ -336,16 +382,16 @@ class HomeViewModel extends ViewModel {
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
     final torchState = await controller.getTorchState();
     final zoomState = await controller.getZoomState();
-    this.torchState = torchState;
-    this.zoomState = zoomState;
+    this.torchState = await torchState.getValue();
+    this.zoomState = await zoomState.getValue();
     final torchStateObserver = Observer<TorchState>(
       onChanged: (e) => this.torchState = e,
     );
     final zoomStateObserver = Observer<ZoomState>(
       onChanged: (e) => this.zoomState = e,
     );
-    await controller.observeTorchState(torchStateObserver);
-    await controller.observeZoomState(zoomStateObserver);
+    await torchState.observeForever(torchStateObserver);
+    await zoomState.observeForever(zoomStateObserver);
     _torchStateObserver = torchStateObserver;
     _zoomStateObserver = zoomStateObserver;
     final rotationProviderListener = RotationProvider$Listener(
@@ -358,50 +404,6 @@ class HomeViewModel extends ViewModel {
     await _rotationProvider.addListener(rotationProviderListener);
     _rotationProviderListener = rotationProviderListener;
     await bind();
-
-    final info = await controller.getCameraInfo();
-    final control = await controller.getCameraControl();
-    if (info == null || control == null) {
-      _logger.warning('info or control is null');
-      return;
-    }
-    final camera2Info = Camera2CameraInfo.from(info);
-    final camera2Control = Camera2CameraControl.from(control);
-
-    _info = info;
-    _control = control;
-    _camera2Info = camera2Info;
-    _camera2Control = camera2Control;
-
-    final options = await camera2Control.getCaptureRequestOptions();
-
-    final availableApertures = await camera2Info.getCameraCharacteristic(
-      CameraCharacteristics.lensInfoAvailableApertures,
-    );
-    final aperture = await options.getCaptureRequestOption(
-      CaptureRequest.lensAperture,
-    );
-
-    _logger.info('availableApertures: $availableApertures');
-    _logger.info('aperture: $aperture');
-
-    final exposureTimeRange = await camera2Info.getCameraCharacteristic(
-      CameraCharacteristics.sensorInfoExposureTimeRange,
-    );
-    final exposureTime = await options.getCaptureRequestOption(
-      CaptureRequest.sensorExposureTime,
-    );
-    _logger.info('exposureTimeRagne: $exposureTimeRange');
-    _logger.info('exposureTime: $exposureTime');
-
-    final sensitivityRange = await camera2Info.getCameraCharacteristic(
-      CameraCharacteristics.sensorInfoSensitivityRange,
-    );
-    final sensitivity = await options.getCaptureRequestOption(
-      CaptureRequest.sensorSensitivity,
-    );
-    _logger.info('sensitivityRange: $sensitivityRange');
-    _logger.info('sensitivity: $sensitivity');
   }
 
   Future<void> _setCameraSelector(CameraSelector cameraSelector) async {
@@ -487,10 +489,14 @@ class HomeViewModel extends ViewModel {
     final torchStateObserver = _torchStateObserver;
     final zoomStateObserver = _zoomStateObserver;
     if (torchStateObserver != null) {
-      controller.removeTorchStateObserver(torchStateObserver);
+      controller.getTorchState().then(
+        (e) => e.removeObserver(torchStateObserver),
+      );
     }
     if (zoomStateObserver != null) {
-      controller.removeZoomStateObserver(zoomStateObserver);
+      controller.getZoomState().then(
+        (e) => e.removeObserver(zoomStateObserver),
+      );
     }
     _clearImageAnalysisAnalyzer();
     unbind();
