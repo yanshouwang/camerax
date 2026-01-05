@@ -21,53 +21,7 @@ base class CaptureResultImpl extends CameraMetadataImpl<CaptureResult$Key>
   Future<T?> get<T>(CaptureResult$Key<T> key) {
     final keyApi = key.api;
     if (keyApi is CaptureResultIntKeyProxyApi) {
-      if (T == int) {
-        return api.getInt(keyApi).then((e) => e as T?);
-      }
-      if (T == CameraMetadata$ControlMode) {
-        return api
-            .getInt(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlMode(
-                      e,
-                    ).then((e) => e.impl as T?),
-            );
-      }
-      if (T == CameraMetadata$ControlAeMode) {
-        return api
-            .getInt(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlAeMode(
-                      e,
-                    ).then((e) => e.impl as T?),
-            );
-      }
-      if (T == CameraMetadata$ControlAfMode) {
-        return api
-            .getInt(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlAfMode(
-                      e,
-                    ).then((e) => e.impl as T?),
-            );
-      }
-      if (T == CameraMetadata$ControlAwbMode) {
-        return api
-            .getInt(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlAwbMode(
-                      e,
-                    ).then((e) => e.impl as T?),
-            );
-      }
+      return api.getInt(keyApi).then((e) => e as T?);
     }
     if (keyApi is CaptureResultLongKeyProxyApi) {
       return api.getLong(keyApi).then((e) => e as T?);
@@ -77,6 +31,26 @@ base class CaptureResultImpl extends CameraMetadataImpl<CaptureResult$Key>
     }
     if (keyApi is CaptureResultBooleanKeyProxyApi) {
       return api.getBoolean(keyApi).then((e) => e as T?);
+    }
+    if (keyApi is CaptureResultCameraMetadataControlModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlMode(keyApi)
+          .then((e) => e?.impl as T?);
+    }
+    if (keyApi is CaptureResultCameraMetadataControlAeModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAeMode(keyApi)
+          .then((e) => e?.impl as T?);
+    }
+    if (keyApi is CaptureResultCameraMetadataControlAfModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAfMode(keyApi)
+          .then((e) => e?.impl as T?);
+    }
+    if (keyApi is CaptureResultCameraMetadataControlAwbModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAwbMode(keyApi)
+          .then((e) => e?.impl as T?);
     }
     throw TypeError();
   }

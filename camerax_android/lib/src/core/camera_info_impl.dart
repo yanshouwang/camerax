@@ -15,8 +15,8 @@ final class CameraInfoImpl implements CameraInfo {
       api.getCameraSelector().then((e) => e.impl);
 
   @override
-  Future<CameraState?> getCameraState() =>
-      api.getCameraState().then((e) => e?.impl);
+  Future<LiveData<CameraState>> getCameraState() =>
+      api.getCameraState().then((e) => e.impl);
 
   @override
   Future<ExposureState> getExposureState() =>
@@ -39,11 +39,12 @@ final class CameraInfoImpl implements CameraInfo {
       .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e?.impl);
+  Future<LiveData<TorchState>> getTorchState() =>
+      api.getTorchState().then((e) => e.impl);
 
   @override
-  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
+  Future<LiveData<ZoomState>> getZoomState() =>
+      api.getZoomState().then((e) => e.impl);
 
   @override
   Future<bool> hasFlashUnit() => api.hasFlashUnit();
@@ -69,32 +70,8 @@ final class CameraInfoImpl implements CameraInfo {
       .then((e) => e.map((e1) => e1.impl).toSet());
 
   @override
-  Future<void> observeCameraState(Observer<CameraState> observer) =>
-      api.observeCameraState(observer.api);
-
-  @override
-  Future<void> observeTorchState(Observer<TorchState> observer) =>
-      api.observeTorchState(observer.api);
-
-  @override
-  Future<void> observeZoomState(Observer<ZoomState> observer) =>
-      api.observeZoomState(observer.api);
-
-  @override
-  Future<void> removeCameraStateObserver(Observer<CameraState> observer) =>
-      api.removeCameraStateObserver(observer.api);
-
-  @override
-  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
-      api.removeTorchStateObserver(observer.api);
-
-  @override
-  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
-      api.removeZoomStateObserver(observer.api);
-
-  @override
-  Future<LowLightBoostState?> getLowLightBoostState() =>
-      api.getLowLightBoostState().then((e) => e?.impl);
+  Future<LiveData<LowLightBoostState>> getLowLightBoostState() =>
+      api.getLowLightBoostState().then((e) => e.impl);
 
   @override
   Future<int> getMaxTorchStrengthLevel() => api.getMaxTorchStrengthLevel();
@@ -106,31 +83,14 @@ final class CameraInfoImpl implements CameraInfo {
       : api.getSensorRotationDegrees2(relativeRotation.api);
 
   @override
-  Future<int?> getTorchStrengthLevel() => api.getTorchStrengthLevel();
+  Future<LiveData<int>> getTorchStrengthLevel() =>
+      api.getTorchStrengthLevel().then((e) => e.impl);
 
   @override
   Future<bool> isLowLightBoostSupported() => api.isLowLightBoostSupported();
 
   @override
   Future<bool> isTorchStrengthSupported() => api.isTorchStrengthSupported();
-
-  @override
-  Future<void> observeLowLightBoostState(
-    Observer<LowLightBoostState> observer,
-  ) => api.observeLowLightBoostState(observer.api);
-
-  @override
-  Future<void> observeTorchStrengthLevel(Observer<int> observer) =>
-      api.observeTorchStrengthLevel(observer.api);
-
-  @override
-  Future<void> removeLowLightBoostStateObserver(
-    Observer<LowLightBoostState> observer,
-  ) => api.removeLowLightBoostStateObserver(observer.api);
-
-  @override
-  Future<void> removeTorchStrengthLevelObserver(Observer<int> observer) =>
-      api.removeTorchStrengthLevelObserver(observer.api);
 }
 
 final class CameraInfoChannelImpl extends CameraInfoChannel {

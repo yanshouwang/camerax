@@ -65,51 +65,6 @@ enum CaptureFailureReasonApi { error, flushed }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.camera2.CameraMetadataImpl.Util',
-  ),
-)
-abstract class CameraMetadataUtilProxyApi {
-  @static
-  CameraMetadataInfoSupportedHardwareLevelApi fromInfoSupportedHardwareLevel(
-    int value,
-  );
-  @static
-  CameraMetadataControlModeApi fromControlMode(int value);
-  @static
-  CameraMetadataControlAeModeApi fromControlAeMode(int value);
-  @static
-  CameraMetadataControlAfModeApi fromControlAfMode(int value);
-  @static
-  CameraMetadataControlAwbModeApi fromControlAwbMode(int value);
-
-  @static
-  int toInfoSupportedHardwareLevel(
-    CameraMetadataInfoSupportedHardwareLevelApi api,
-  );
-  @static
-  int toControlMode(CameraMetadataControlModeApi api);
-  @static
-  int toControlAeMode(CameraMetadataControlAeModeApi api);
-  @static
-  int toControlAfMode(CameraMetadataControlAfModeApi api);
-  @static
-  int toControlAwbMode(CameraMetadataControlAwbModeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.camera2.CaptureFailureImpl.Util',
-  ),
-)
-abstract class CaptureFailureUtilProxyApi {
-  @static
-  CaptureFailureReasonApi fromReason(int value);
-  @static
-  int toReason(CaptureFailureReasonApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.camera2.interop.Camera2CameraControl',
   ),
 )
@@ -153,6 +108,23 @@ abstract class Camera2CameraInfoProxyApi {
   LongRangeProxyApi? getLongRangeCameraCharacteristic(
     CameraCharacteristicsLongRangeKeyProxyApi key,
   );
+  List<CameraMetadataControlModeApi>? getCameraMetadataControlModeArray(
+    CameraCharacteristicsCameraMetadataControlModeArrayKeyProxyApi key,
+  );
+  List<CameraMetadataControlAeModeApi>? getCameraMetadataControlAeModeArray(
+    CameraCharacteristicsCameraMetadataControlAeModeArrayKeyProxyApi key,
+  );
+  List<CameraMetadataControlAfModeApi>? getCameraMetadataControlAfModeArray(
+    CameraCharacteristicsCameraMetadataControlAfModeArrayKeyProxyApi key,
+  );
+  List<CameraMetadataControlAwbModeApi>? getCameraMetadataControlAwbModeArray(
+    CameraCharacteristicsCameraMetadataControlAwbModeArrayKeyProxyApi key,
+  );
+  CameraMetadataInfoSupportedHardwareLevelApi?
+  getCameraMetadataInfoSupportedHardwareLevel(
+    CameraCharacteristicsCameraMetadataInfoSupportedHardwareLevelKeyProxyApi
+    key,
+  );
 }
 
 @ProxyApi(
@@ -179,6 +151,27 @@ abstract class Camera2InteropCaptureRequestOptionsExtenderProxyApi {
     CaptureRequestBooleanKeyProxyApi key,
     bool value,
   );
+  Camera2InteropCaptureRequestOptionsExtenderProxyApi
+  setCameraMetadataControlModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlModeKeyProxyApi key,
+    CameraMetadataControlModeApi value,
+  );
+  Camera2InteropCaptureRequestOptionsExtenderProxyApi
+  setCameraMetadataControlAeModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAeModeKeyProxyApi key,
+    CameraMetadataControlAeModeApi value,
+  );
+  Camera2InteropCaptureRequestOptionsExtenderProxyApi
+  setCameraMetadataControlAfModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAfModeKeyProxyApi key,
+    CameraMetadataControlAfModeApi value,
+  );
+  Camera2InteropCaptureRequestOptionsExtenderProxyApi
+  setCameraMetadataControlAwbModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAwbModeKeyProxyApi key,
+    CameraMetadataControlAwbModeApi value,
+  );
+
   // Camera2InteropCaptureRequestOptionsExtenderProxyApi setDeviceStateCallback(
   //   CameraDevice$StateCallback stateCallback,
   // );
@@ -216,6 +209,23 @@ abstract class CaptureRequestOptionsBuilderProxyApi
   CaptureRequestOptionsBuilderProxyApi clearBooleanCaptureRequestOption(
     CaptureRequestBooleanKeyProxyApi key,
   );
+  CaptureRequestOptionsBuilderProxyApi
+  clearCameraMetadataControlModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlModeKeyProxyApi key,
+  );
+  CaptureRequestOptionsBuilderProxyApi
+  clearCameraMetadataControlAeModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAeModeKeyProxyApi key,
+  );
+  CaptureRequestOptionsBuilderProxyApi
+  clearCameraMetadataControlAfModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAfModeKeyProxyApi key,
+  );
+  CaptureRequestOptionsBuilderProxyApi
+  clearCameraMetadataControlAwbModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAwbModeKeyProxyApi key,
+  );
+
   CaptureRequestOptionsBuilderProxyApi setIntCaptureRequestOption(
     CaptureRequestIntKeyProxyApi key,
     int value,
@@ -232,6 +242,26 @@ abstract class CaptureRequestOptionsBuilderProxyApi
     CaptureRequestBooleanKeyProxyApi key,
     bool value,
   );
+  CaptureRequestOptionsBuilderProxyApi
+  setCameraMetadataControlModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlModeKeyProxyApi key,
+    CameraMetadataControlModeApi value,
+  );
+  CaptureRequestOptionsBuilderProxyApi
+  setCameraMetadataControlAeModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAeModeKeyProxyApi key,
+    CameraMetadataControlAeModeApi value,
+  );
+  CaptureRequestOptionsBuilderProxyApi
+  setCameraMetadataControlAfModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAfModeKeyProxyApi key,
+    CameraMetadataControlAfModeApi value,
+  );
+  CaptureRequestOptionsBuilderProxyApi
+  setCameraMetadataControlAwbModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAwbModeKeyProxyApi key,
+    CameraMetadataControlAwbModeApi value,
+  );
   CaptureRequestOptionsProxyApi build();
 }
 
@@ -245,6 +275,22 @@ abstract class CaptureRequestOptionsProxyApi {
   int? getLongCaptureRequestOption(CaptureRequestLongKeyProxyApi key);
   double? getFloatCaptureRequestOption(CaptureRequestFloatKeyProxyApi key);
   bool? getBooleanCaptureRequestOption(CaptureRequestBooleanKeyProxyApi key);
+  CameraMetadataControlModeApi?
+  getCameraMetadataControlModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlModeKeyProxyApi key,
+  );
+  CameraMetadataControlAeModeApi?
+  getCameraMetadataControlAeModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAeModeKeyProxyApi key,
+  );
+  CameraMetadataControlAfModeApi?
+  getCameraMetadataControlAfModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAfModeKeyProxyApi key,
+  );
+  CameraMetadataControlAwbModeApi?
+  getCameraMetadataControlAwbModeCaptureRequestOption(
+    CaptureRequestCameraMetadataControlAwbModeKeyProxyApi key,
+  );
 }
 
 @ProxyApi(
@@ -414,24 +460,74 @@ abstract class CameraCharacteristicsLongRangeKeyProxyApi
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.CameraMetadataControlModeArrayKey',
+  ),
+)
+abstract class CameraCharacteristicsCameraMetadataControlModeArrayKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.CameraMetadataControlAeModeArrayKey',
+  ),
+)
+abstract class CameraCharacteristicsCameraMetadataControlAeModeArrayKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.CameraMetadataControlAfModeArrayKey',
+  ),
+)
+abstract class CameraCharacteristicsCameraMetadataControlAfModeArrayKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.CameraMetadataControlAwbModeArrayKey',
+  ),
+)
+abstract class CameraCharacteristicsCameraMetadataControlAwbModeArrayKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl.CameraMetadataInfoSupportedHardwareLevelKey',
+  ),
+)
+abstract class CameraCharacteristicsCameraMetadataInfoSupportedHardwareLevelKeyProxyApi
+    extends CameraCharacteristicsKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.hardware.camera2.CameraCharacteristics',
   ),
 )
 abstract class CameraCharacteristicsProxyApi {
   @static
-  late final CameraCharacteristicsIntArrayKeyProxyApi controlAeAvailableModes;
+  late final CameraCharacteristicsCameraMetadataControlAeModeArrayKeyProxyApi
+  controlAeAvailableModes;
   @static
   late final CameraCharacteristicsBooleanKeyProxyApi controlAeLockAvailable;
   @static
-  late final CameraCharacteristicsIntArrayKeyProxyApi controlAfAvailableModes;
+  late final CameraCharacteristicsCameraMetadataControlAfModeArrayKeyProxyApi
+  controlAfAvailableModes;
   @static
-  late final CameraCharacteristicsIntArrayKeyProxyApi controlAvailableModes;
+  late final CameraCharacteristicsCameraMetadataControlModeArrayKeyProxyApi
+  controlAvailableModes;
   @static
-  late final CameraCharacteristicsIntArrayKeyProxyApi controlAwbAvailableModes;
+  late final CameraCharacteristicsCameraMetadataControlAwbModeArrayKeyProxyApi
+  controlAwbAvailableModes;
   @static
   late final CameraCharacteristicsBooleanKeyProxyApi controlAwbLockAvailable;
   @static
-  late final CameraCharacteristicsIntKeyProxyApi infoSupportedHardwareLevel;
+  late final CameraCharacteristicsCameraMetadataInfoSupportedHardwareLevelKeyProxyApi
+  infoSupportedHardwareLevel;
   @static
   late final CameraCharacteristicsStringKeyProxyApi infoVersion;
   @static
@@ -455,7 +551,7 @@ abstract class CameraCharacteristicsProxyApi {
 abstract class CaptureFailureProxyApi {
   int getFrameNumber();
   String? getPhysicalCameraId();
-  int getReason();
+  CaptureFailureReasonApi getReason();
   CaptureRequestProxyApi getRequest();
   int getSequenceId();
   bool wasImageCaptured();
@@ -507,6 +603,42 @@ abstract class CaptureRequestBooleanKeyProxyApi
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.CameraMetadataControlModeKey',
+  ),
+)
+abstract class CaptureRequestCameraMetadataControlModeKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.CameraMetadataControlAeModeKey',
+  ),
+)
+abstract class CaptureRequestCameraMetadataControlAeModeKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.CameraMetadataControlAfModeKey',
+  ),
+)
+abstract class CaptureRequestCameraMetadataControlAfModeKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureRequestImpl.CameraMetadataControlAwbModeKey',
+  ),
+)
+abstract class CaptureRequestCameraMetadataControlAwbModeKeyProxyApi
+    extends CaptureRequestKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.hardware.camera2.CaptureRequest',
   ),
 )
@@ -514,15 +646,16 @@ abstract class CaptureRequestProxyApi {
   @static
   late final CaptureRequestBooleanKeyProxyApi controlAeLock;
   @static
-  late final CaptureRequestIntKeyProxyApi controlAeMode;
+  late final CaptureRequestCameraMetadataControlAeModeKeyProxyApi controlAeMode;
   @static
-  late final CaptureRequestIntKeyProxyApi controlAfMode;
+  late final CaptureRequestCameraMetadataControlAfModeKeyProxyApi controlAfMode;
   @static
   late final CaptureRequestBooleanKeyProxyApi controlAwbLock;
   @static
-  late final CaptureRequestIntKeyProxyApi controlAwbMode;
+  late final CaptureRequestCameraMetadataControlAwbModeKeyProxyApi
+  controlAwbMode;
   @static
-  late final CaptureRequestIntKeyProxyApi controlMode;
+  late final CaptureRequestCameraMetadataControlModeKeyProxyApi controlMode;
   @static
   late final CaptureRequestFloatKeyProxyApi lensAperture;
   @static
@@ -534,6 +667,18 @@ abstract class CaptureRequestProxyApi {
   int? getLong(CaptureRequestLongKeyProxyApi key);
   double? getFloat(CaptureRequestFloatKeyProxyApi key);
   bool? getBoolean(CaptureRequestBooleanKeyProxyApi key);
+  CameraMetadataControlModeApi? getCameraMetadataControlMode(
+    CaptureRequestCameraMetadataControlModeKeyProxyApi key,
+  );
+  CameraMetadataControlAeModeApi? getCameraMetadataControlAeMode(
+    CaptureRequestCameraMetadataControlAeModeKeyProxyApi key,
+  );
+  CameraMetadataControlAfModeApi? getCameraMetadataControlAfMode(
+    CaptureRequestCameraMetadataControlAfModeKeyProxyApi key,
+  );
+  CameraMetadataControlAwbModeApi? getCameraMetadataControlAwbMode(
+    CaptureRequestCameraMetadataControlAwbModeKeyProxyApi key,
+  );
   // List<CaptureRequest$Key> getKeys();
   // Object? getTag();
   bool isReprocess();
@@ -582,6 +727,42 @@ abstract class CaptureResultBooleanKeyProxyApi
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.CameraMetadataControlModeKey',
+  ),
+)
+abstract class CaptureResultCameraMetadataControlModeKeyProxyApi
+    extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.CameraMetadataControlAeModeKey',
+  ),
+)
+abstract class CaptureResultCameraMetadataControlAeModeKeyProxyApi
+    extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.CameraMetadataControlAfModeKey',
+  ),
+)
+abstract class CaptureResultCameraMetadataControlAfModeKeyProxyApi
+    extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.camera2.CaptureResultImpl.CameraMetadataControlAwbModeKey',
+  ),
+)
+abstract class CaptureResultCameraMetadataControlAwbModeKeyProxyApi
+    extends CaptureResultKeyProxyApi {}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'android.hardware.camera2.CaptureResult',
   ),
 )
@@ -589,15 +770,16 @@ abstract class CaptureResultProxyApi {
   @static
   late final CaptureResultBooleanKeyProxyApi controlAeLock;
   @static
-  late final CaptureResultIntKeyProxyApi controlAeMode;
+  late final CaptureResultCameraMetadataControlAeModeKeyProxyApi controlAeMode;
   @static
-  late final CaptureResultIntKeyProxyApi controlAfMode;
+  late final CaptureResultCameraMetadataControlAfModeKeyProxyApi controlAfMode;
   @static
   late final CaptureResultBooleanKeyProxyApi controlAwbLock;
   @static
-  late final CaptureResultIntKeyProxyApi controlAwbMode;
+  late final CaptureResultCameraMetadataControlAwbModeKeyProxyApi
+  controlAwbMode;
   @static
-  late final CaptureResultIntKeyProxyApi controlMode;
+  late final CaptureResultCameraMetadataControlModeKeyProxyApi controlMode;
   @static
   late final CaptureResultFloatKeyProxyApi lensAperture;
   @static
@@ -609,6 +791,18 @@ abstract class CaptureResultProxyApi {
   int? getLong(CaptureResultLongKeyProxyApi key);
   double? getFloat(CaptureResultFloatKeyProxyApi key);
   bool? getBoolean(CaptureResultBooleanKeyProxyApi key);
+  CameraMetadataControlModeApi? getCameraMetadataControlMode(
+    CaptureResultCameraMetadataControlModeKeyProxyApi key,
+  );
+  CameraMetadataControlAeModeApi? getCameraMetadataControlAeMode(
+    CaptureResultCameraMetadataControlAeModeKeyProxyApi key,
+  );
+  CameraMetadataControlAfModeApi? getCameraMetadataControlAfMode(
+    CaptureResultCameraMetadataControlAfModeKeyProxyApi key,
+  );
+  CameraMetadataControlAwbModeApi? getCameraMetadataControlAwbMode(
+    CaptureResultCameraMetadataControlAwbModeKeyProxyApi key,
+  );
   String getCameraId();
   int getFrameNumber();
   // List<CaptureResult$Key>> getKeys();
@@ -701,30 +895,6 @@ enum ImageFormatApi {
 }
 
 enum SurfaceRotationApi { rotation0, rotation90, rotation180, rotation270 }
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.common.ImageFormatImpl.Util',
-  ),
-)
-abstract class ImageFormatUtilProxyApi {
-  @static
-  ImageFormatApi fromImageFormat(int value);
-  @static
-  int toImageFormat(ImageFormatApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.common.SurfaceImpl.Util',
-  ),
-)
-abstract class SurfaceUtilProxyApi {
-  @static
-  SurfaceRotationApi fromRotation(int value);
-  @static
-  int toRotation(SurfaceRotationApi api);
-}
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
@@ -1159,6 +1329,33 @@ abstract class CameraStateObserverProxyApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.TorchStateLiveData',
+  ),
+)
+abstract class TorchStateLiveDataProxyApi {
+  TorchStateApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, TorchStateObserverProxyApi observer);
+  void observeForever(TorchStateObserverProxyApi observer);
+  void removeObserver(TorchStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName: 'dev.zeekr.camerax_android.common.TorchStateObserver',
+  ),
+)
+abstract class TorchStateObserverProxyApi {
+  TorchStateObserverProxyApi();
+
+  late final void Function(TorchStateApi value) onChanged;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'dev.zeekr.camerax_android.common.ZoomStateLiveData',
   ),
 )
@@ -1209,6 +1406,35 @@ abstract class TapToFocusInfoObserverProxyApi {
   TapToFocusInfoObserverProxyApi();
 
   late final void Function(TapToFocusInfoProxyApi value) onChanged;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.common.LowLightBoostStateLiveData',
+  ),
+)
+abstract class LowLightBoostStateLiveDataProxyApi {
+  LowLightBoostStateApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, LowLightBoostStateObserverProxyApi observer);
+  void observeForever(LowLightBoostStateObserverProxyApi observer);
+  void removeObserver(LowLightBoostStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(
+    fullClassName:
+        'dev.zeekr.camerax_android.common.LowLightBoostStateObserver',
+  ),
+)
+abstract class LowLightBoostStateObserverProxyApi {
+  LowLightBoostStateObserverProxyApi();
+
+  late final void Function(LowLightBoostStateApi value) onChanged;
 }
 
 @ProxyApi(
@@ -1374,180 +1600,6 @@ enum TorchStateApi { off, on }
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.zeekr.camerax_android.core.AspectRatioStrategyImpl.Util',
-  ),
-)
-abstract class AspectRatioStrategyUtilProxyApi {
-  @static
-  AspectRatioStrategyFallbackRuleApi fromFallbackRule(int value);
-  @static
-  int toFallbackRule(AspectRatioStrategyFallbackRuleApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.ResolutionSelectorImpl.Util',
-  ),
-)
-abstract class ResolutionSelectorUtilProxyApi {
-  @static
-  ResolutionSelectorModeApi fromMode(int value);
-  @static
-  int toMode(ResolutionSelectorModeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.ResolutionStrategyImpl.Util',
-  ),
-)
-abstract class ResolutionStrategyUtilProxyApi {
-  @static
-  ResolutionStrategyFallbackRuleApi fromFallbackRule(int value);
-  @static
-  int toFallbackRule(ResolutionStrategyFallbackRuleApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.AspectRatioImpl.Util',
-  ),
-)
-abstract class AspectRatioUtilProxyApi {
-  @static
-  AspectRatioApi fromAspectRatio(int value);
-  @static
-  int toAspectRatio(AspectRatioApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.CameraSelectorImpl.Util',
-  ),
-)
-abstract class CameraSelectorUtilProxyApi {
-  @static
-  CameraSelectorLensFacingApi fromLensFacing(int value);
-  @static
-  int toLensFacing(CameraSelectorLensFacingApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.DynamicRangeImpl.Util',
-  ),
-)
-abstract class DynamicRangeUtilProxyApi {
-  @static
-  DynamicRangeEncodingApi fromEncoding(int value);
-  @static
-  DynamicRangeBitDepthApi fromBitDepth(int value);
-  @static
-  int toEncoding(DynamicRangeEncodingApi api);
-  @static
-  int toBitDepth(DynamicRangeBitDepthApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.FlashStateImpl.Util',
-  ),
-)
-abstract class FlashStateUtilProxyApi {
-  @static
-  FlashStateApi fromFlashState(int value);
-  @static
-  int toFlashState(FlashStateApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.ImageAnalysisImpl.Util',
-  ),
-)
-abstract class ImageAnalysisUtilProxyApi {
-  @static
-  ImageAnalysisStrategyApi fromStrategy(int value);
-  @static
-  ImageAnalysisCoordinateSystemApi fromCoordinateSystem(int value);
-  @static
-  ImageAnalysisOutputImageFormatApi fromOutputImageFormat(int value);
-  @static
-  int toStrategy(ImageAnalysisStrategyApi api);
-  @static
-  int toCoordinateSystem(ImageAnalysisCoordinateSystemApi api);
-  @static
-  int toOutputImageFormat(ImageAnalysisOutputImageFormatApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.ImageCaptureImpl.Util',
-  ),
-)
-abstract class ImageCaptureUtilProxyApi {
-  @static
-  ImageCaptureCaptureModeApi fromCaptureMode(int value);
-  @static
-  ImageCaptureFlashModeApi fromFlashMode(int value);
-  @static
-  int toCaptureMode(ImageCaptureCaptureModeApi api);
-  @static
-  int toFlashMode(ImageCaptureFlashModeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.zeekr.camerax_android.core.FocusMeteringActionImpl.Util',
-  ),
-)
-abstract class FocusMeteringActionUtilProxyApi {
-  @static
-  FocusMeteringActionMeteringModeApi fromMeteringMode(int value);
-  @static
-  int toMeteringMode(FocusMeteringActionMeteringModeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.LowLightBoostStateImpl.Util',
-  ),
-)
-abstract class LowLightBoostStateUtilProxyApi {
-  @static
-  LowLightBoostStateApi fromLowLightBoostState(int value);
-  @static
-  int toLowLightBoostState(LowLightBoostStateApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.MirrorModeImpl.Util',
-  ),
-)
-abstract class MirrorModeUtilProxyApi {
-  @static
-  MirrorModeApi fromMirrorMode(int value);
-  @static
-  int toMirrorMode(MirrorModeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.TorchStateImpl.Util',
-  ),
-)
-abstract class TorchStateUtilProxyApi {
-  @static
-  TorchStateApi fromTorchState(int value);
-  @static
-  int toTorchState(TorchStateApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
         'androidx.camera.core.resolutionselector.AspectRatioStrategy',
   ),
 )
@@ -1557,10 +1609,13 @@ abstract class AspectRatioStrategyProxyApi {
   @static
   late final AspectRatioStrategyProxyApi ratio16_9FallbackAutoStrategy;
 
-  AspectRatioStrategyProxyApi(int preferredAspectRatio, int fallbackRule);
+  AspectRatioStrategyProxyApi(
+    AspectRatioApi preferredAspectRatio,
+    AspectRatioStrategyFallbackRuleApi fallbackRule,
+  );
 
-  int getFallbackRule();
-  int getPreferredAspectRatio();
+  AspectRatioStrategyFallbackRuleApi getFallbackRule();
+  AspectRatioApi getPreferredAspectRatio();
 }
 
 @ProxyApi(
@@ -1587,10 +1642,13 @@ abstract class ResolutionStrategyProxyApi {
   @static
   late final ResolutionStrategyProxyApi highestAvailableStrategy;
 
-  ResolutionStrategyProxyApi(SizeProxyApi boundSize, int fallbackRule);
+  ResolutionStrategyProxyApi(
+    SizeProxyApi boundSize,
+    ResolutionStrategyFallbackRuleApi fallbackRule,
+  );
 
   SizeProxyApi? getBoundSize();
-  int getFallbackRule();
+  ResolutionStrategyFallbackRuleApi getFallbackRule();
 }
 
 @ProxyApi(
@@ -1602,7 +1660,9 @@ abstract class ResolutionStrategyProxyApi {
 abstract class ResolutionSelectorBuilderProxyApi {
   ResolutionSelectorBuilderProxyApi();
 
-  ResolutionSelectorBuilderProxyApi setAllowedResolutionMode(int mode);
+  ResolutionSelectorBuilderProxyApi setAllowedResolutionMode(
+    ResolutionSelectorModeApi mode,
+  );
   ResolutionSelectorBuilderProxyApi setAspectRatioStrategy(
     AspectRatioStrategyProxyApi aspectRatioStrategy,
   );
@@ -1621,7 +1681,7 @@ abstract class ResolutionSelectorBuilderProxyApi {
   ),
 )
 abstract class ResolutionSelectorProxyApi {
-  int getAllowedResolutionMode();
+  ResolutionSelectorModeApi getAllowedResolutionMode();
   AspectRatioStrategyProxyApi getAspectRatioStrategy();
   ResolutionFilterProxyApi? getResolutionFilter();
   ResolutionStrategyProxyApi? getResolutionStrategy();
@@ -1680,17 +1740,17 @@ abstract class CameraInfoProxyApi {
   CameraStateLiveDataProxyApi getCameraState();
   ExposureStateProxyApi getExposureState();
   double getIntrinsicZoomRatio();
-  int getLensFacing();
-  IntLiveDataProxyApi getLowLightBoostState();
+  CameraSelectorLensFacingApi getLensFacing();
+  LowLightBoostStateLiveDataProxyApi getLowLightBoostState();
   int getMaxTorchStrengthLevel();
   List<CameraInfoProxyApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees1();
-  int getSensorRotationDegrees2(int relativeRotation);
+  int getSensorRotationDegrees2(SurfaceRotationApi relativeRotation);
   List<IntRangeProxyApi> getSupportedFrameRateRanges1();
   // List<IntRangeProxyApi> getSupportedFrameRateRanges2(
   //   SessionConfigProxyApi sessionConfig,
   // );
-  IntLiveDataProxyApi getTorchState();
+  TorchStateLiveDataProxyApi getTorchState();
   IntLiveDataProxyApi getTorchStrengthLevel();
   ZoomStateLiveDataProxyApi getZoomState();
   bool hasFlashUnit();
@@ -1716,7 +1776,9 @@ abstract class CameraSelectorBuilderProxyApi {
   CameraSelectorBuilderProxyApi addCameraFilter(
     CameraFilterProxyApi cameraFilter,
   );
-  CameraSelectorBuilderProxyApi requireLensFacing(int lensFacing);
+  CameraSelectorBuilderProxyApi requireLensFacing(
+    CameraSelectorLensFacingApi lensFacing,
+  );
   CameraSelectorBuilderProxyApi setPhysicalCameraId(String physicalCameraId);
   CameraSelectorProxyApi build();
 }
@@ -1763,10 +1825,13 @@ abstract class DynamicRangeProxyApi {
   @static
   late final DynamicRangeProxyApi dolbyVision10Bit;
 
-  DynamicRangeProxyApi(int encoding, int bitDepth);
+  DynamicRangeProxyApi(
+    DynamicRangeEncodingApi encoding,
+    DynamicRangeBitDepthApi bitDepth,
+  );
 
-  int getBitDepth();
-  int getEncoding();
+  DynamicRangeBitDepthApi getBitDepth();
+  DynamicRangeEncodingApi getEncoding();
 }
 
 @ProxyApi(
@@ -1799,13 +1864,13 @@ abstract class FocusMeteringActionBuilderProxyApi {
 
   FocusMeteringActionBuilderProxyApi.new2(
     MeteringPointProxyApi point,
-    int meteringMode,
+    List<FocusMeteringActionMeteringModeApi> meteringModes,
   );
 
   FocusMeteringActionBuilderProxyApi addPoint1(MeteringPointProxyApi point);
   FocusMeteringActionBuilderProxyApi addPoint2(
     MeteringPointProxyApi point,
-    int meteringMode,
+    List<FocusMeteringActionMeteringModeApi> meteringModes,
   );
   FocusMeteringActionBuilderProxyApi disableAutoCancel();
   FocusMeteringActionBuilderProxyApi setAutoCancelDuration(
@@ -1845,7 +1910,7 @@ abstract class FocusMeteringResultProxyApi {
 abstract class ImageAnalysisAnalyzerProxyApi {
   void analyze(ImageProxyProxyApi image);
   SizeProxyApi? getDefaultTargetResolution();
-  int getTargetCoordinateSystem();
+  ImageAnalysisCoordinateSystemApi getTargetCoordinateSystem();
   // void updateTransform(MatrixProxyApi? matrix);
 }
 
@@ -1884,7 +1949,7 @@ abstract class ImageCaptureOnImageCapturedCallbackProxyApi {
 abstract class ImageInfoProxyApi {
   late final int timestamp;
   late final int rotationDegrees;
-  late final int flashState;
+  late final FlashStateApi flashState;
 }
 
 @ProxyApi(
@@ -1904,7 +1969,7 @@ abstract class ImageProxyPlaneProxyProxyApi {
   ),
 )
 abstract class ImageProxyProxyApi extends AutoCloseableProxyApi {
-  late final int format;
+  late final ImageFormatApi format;
   late final int width;
   late final int height;
   late final ImageInfoProxyApi imageInfo;
@@ -2049,92 +2114,11 @@ enum FaceLandmarkTypeApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.BarcodeImpl.Util',
-  ),
-)
-abstract class BarcodeUtilProxyApi {
-  @static
-  BarcodeFormatApi fromFormat(int value);
-  @static
-  BarcodeTypeApi fromType(int value);
-  @static
-  BarcodeAddressTypeApi fromAddressType(int value);
-  @static
-  BarcodeEmailTypeApi fromEmailType(int value);
-  @static
-  BarcodePhoneTypeApi fromPhoneType(int value);
-  @static
-  BarcodeWiFiTypeApi fromWiFiType(int value);
-  @static
-  int toFormat(BarcodeFormatApi api);
-  @static
-  int toType(BarcodeTypeApi value);
-  @static
-  int toAddressType(BarcodeAddressTypeApi api);
-  @static
-  int toEmailType(BarcodeEmailTypeApi api);
-  @static
-  int toPhoneType(BarcodePhoneTypeApi api);
-  @static
-  int toWiFiType(BarcodeWiFiTypeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName:
-        'dev.zeekr.camerax_android.core.FaceDetectorOptionsImpl.Util',
-  ),
-)
-abstract class FaceDetectorOptionsUtilProxyApi {
-  @static
-  FaceDetectorOptionsClassificationModeApi fromClassificationMode(int value);
-  @static
-  FaceDetectorOptionsContourModeApi fromContourMode(int value);
-  @static
-  FaceDetectorOptionsLandmarkModeApi fromLandmarkMode(int value);
-  @static
-  FaceDetectorOptionsPerformanceModeApi fromPerformanceMode(int value);
-  @static
-  int toClassificationMode(FaceDetectorOptionsClassificationModeApi api);
-  @static
-  int toContourMode(FaceDetectorOptionsContourModeApi api);
-  @static
-  int toLandmarkMode(FaceDetectorOptionsLandmarkModeApi api);
-  @static
-  int toPerformanceMode(FaceDetectorOptionsPerformanceModeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.FaceContourImpl.Util',
-  ),
-)
-abstract class FaceContourUtilProxyApi {
-  @static
-  FaceContourTypeApi fromType(int value);
-  @static
-  int toType(FaceContourTypeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.FaceLandmarkImpl.Util',
-  ),
-)
-abstract class FaceLandmarkUtilProxyApi {
-  @static
-  FaceLandmarkTypeApi fromType(int value);
-  @static
-  int toType(FaceLandmarkTypeApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'com.google.mlkit.vision.barcode.common.Barcode.Address',
   ),
 )
 abstract class BarcodeAddressProxyApi {
-  late final int type;
+  late final BarcodeAddressTypeApi type;
   late final List<String> addressLines;
 }
 
@@ -2215,7 +2199,7 @@ abstract class BarcodeDriverLicenseProxyApi {
   ),
 )
 abstract class BarcodeEmailProxyApi {
-  late final int type;
+  late final BarcodeEmailTypeApi type;
   late final String? address;
   late final String? subject;
   late final String? body;
@@ -2252,7 +2236,7 @@ abstract class BarcodePersonNameProxyApi {
   ),
 )
 abstract class BarcodePhoneProxyApi {
-  late final int type;
+  late final BarcodePhoneTypeApi type;
   late final String? number;
 }
 
@@ -2282,7 +2266,7 @@ abstract class BarcodeUrlBookmarkProxyApi {
   ),
 )
 abstract class BarcodeWiFiProxyApi {
-  late final int encryptionType;
+  late final BarcodeWiFiTypeApi encryptionType;
   late final String? ssid;
   late final String? password;
 }
@@ -2293,13 +2277,13 @@ abstract class BarcodeWiFiProxyApi {
   ),
 )
 abstract class BarcodeProxyApi {
-  late final int format;
+  late final BarcodeFormatApi format;
   late final RectProxyApi? boundingBox;
   late final List<PointProxyApi>? cornerPoints;
   late final Uint8List? rawBytes;
   late final String? rawValue;
   late final String? displayValue;
-  late final int valueType;
+  late final BarcodeTypeApi valueType;
   late final BarcodeCalendarEventProxyApi? calendarEvent;
   late final BarcodeContactInfoProxyApi? contactInfo;
   late final BarcodeDriverLicenseProxyApi? driverLicense;
@@ -2369,7 +2353,9 @@ abstract class BarcodeScannerOptionsBuilderProxyApi {
   BarcodeScannerOptionsBuilderProxyApi();
 
   BarcodeScannerOptionsBuilderProxyApi enableAllPotentialBarcodes();
-  BarcodeScannerOptionsBuilderProxyApi setBarcodeFormats(List<int> formats);
+  BarcodeScannerOptionsBuilderProxyApi setBarcodeFormats(
+    List<BarcodeFormatApi> formats,
+  );
   // BarcodeScannerOptionsBuilderProxyApi setExecutor(ExecutorProxyApi executor);
   BarcodeScannerOptionsBuilderProxyApi setZoomSuggestionOptions(
     ZoomSuggestionOptionsProxyApi zoomSuggestionOptions,
@@ -2385,7 +2371,7 @@ abstract class BarcodeScannerOptionsBuilderProxyApi {
 abstract class BarcodeScannerOptionsProxyApi {
   BarcodeScannerOptionsProxyApi.build({
     bool? enableAllPotentialBarcodes,
-    List<int>? formats,
+    List<BarcodeFormatApi>? formats,
     ZoomSuggestionOptionsProxyApi? zoomSuggestionOptions,
   });
 }
@@ -2409,7 +2395,7 @@ abstract class BarcodeScannerProxyApi extends CloseableProxyApi {
   ),
 )
 abstract class FaceContourProxyApi {
-  late final int type;
+  late final FaceContourTypeApi type;
   late final List<PointFProxyApi> points;
 }
 
@@ -2419,7 +2405,7 @@ abstract class FaceContourProxyApi {
   ),
 )
 abstract class FaceLandmarkProxyApi {
-  late final int type;
+  late final FaceLandmarkTypeApi type;
   late final PointFProxyApi position;
 }
 
@@ -2440,8 +2426,8 @@ abstract class FaceProxyApi {
   late final double? smilingProbability;
   late final int? trackingId;
 
-  FaceContourProxyApi? getContour(int contourType);
-  FaceLandmarkProxyApi? getLandmark(int landmarkType);
+  FaceContourProxyApi? getContour(FaceContourTypeApi contourType);
+  FaceLandmarkProxyApi? getLandmark(FaceLandmarkTypeApi landmarkType);
 }
 
 @ProxyApi(
@@ -2454,13 +2440,19 @@ abstract class FaceDetectorOptionsBuilderProxyApi {
 
   FaceDetectorOptionsBuilderProxyApi enableTracking();
   FaceDetectorOptionsBuilderProxyApi setClassificationMode(
-    int classificationMode,
+    FaceDetectorOptionsClassificationModeApi classificationMode,
   );
-  FaceDetectorOptionsBuilderProxyApi setContourMode(int contourMode);
+  FaceDetectorOptionsBuilderProxyApi setContourMode(
+    FaceDetectorOptionsContourModeApi contourMode,
+  );
   // FaceDetectorOptionsBuilderProxyApi setExecutor(ExecutorProxyApi executor);
-  FaceDetectorOptionsBuilderProxyApi setLandmarkMode(int landmarkMode);
+  FaceDetectorOptionsBuilderProxyApi setLandmarkMode(
+    FaceDetectorOptionsLandmarkModeApi landmarkMode,
+  );
   FaceDetectorOptionsBuilderProxyApi setMinFaceSize(double minFaceSize);
-  FaceDetectorOptionsBuilderProxyApi setPerformanceMode(int performanceMode);
+  FaceDetectorOptionsBuilderProxyApi setPerformanceMode(
+    FaceDetectorOptionsPerformanceModeApi performanceMode,
+  );
   FaceDetectorOptionsProxyApi build();
 }
 
@@ -2472,11 +2464,11 @@ abstract class FaceDetectorOptionsBuilderProxyApi {
 abstract class FaceDetectorOptionsProxyApi {
   FaceDetectorOptionsProxyApi.build({
     bool? enableTracking,
-    int? classificationMode,
-    int? contourMode,
-    int? landmarkMode,
+    FaceDetectorOptionsClassificationModeApi? classificationMode,
+    FaceDetectorOptionsContourModeApi? contourMode,
+    FaceDetectorOptionsLandmarkModeApi? landmarkMode,
     double? minFaceSize,
-    int? performanceMode,
+    FaceDetectorOptionsPerformanceModeApi? performanceMode,
   });
 }
 
@@ -2516,7 +2508,7 @@ abstract class MlKitAnalyzerProxyApi extends ImageAnalysisAnalyzerProxyApi {
   MlKitAnalyzerProxyApi({
     required List<BarcodeScannerProxyApi> detectors1,
     required List<FaceDetectorProxyApi> detectors2,
-    required int targetCoordinateSystem,
+    required ImageAnalysisCoordinateSystemApi targetCoordinateSystem,
     required MlKitAnalyzerResultConsumerProxyApi consumer,
   });
 }
@@ -2547,36 +2539,12 @@ enum VideoRecordEventFinalizeErrorApi {
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.AudioStatsImpl.Util',
-  ),
-)
-abstract class AudioStatsUtilProxyApi {
-  @static
-  AudioStatsAudioStateApi fromAudioState(int value);
-  @static
-  int toAudioState(AudioStatsAudioStateApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.VideoRecordEventImpl.Util',
-  ),
-)
-abstract class VideoRecordEventFinalizeUtilProxyApi {
-  @static
-  VideoRecordEventFinalizeErrorApi fromError(int value);
-  @static
-  int toError(VideoRecordEventFinalizeErrorApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.video.AudioStats',
   ),
 )
 abstract class AudioStatsProxyApi {
   late final double audioAmplitude;
-  late final int audioState;
+  late final AudioStatsAudioStateApi audioState;
   late final List<Object?>? errorCause;
   late final bool hasAudio;
   late final bool hasError;
@@ -2764,7 +2732,7 @@ abstract class VideoRecordEventFinalizeProxyApi
   late final OutputOptionsProxyApi outputOptions;
   late final RecordingStatsProxyApi recordingStats;
   late final List<Object?>? cause;
-  late final int error;
+  late final VideoRecordEventFinalizeErrorApi error;
   late final OutputResultsProxyApi outputResults;
   late final bool hasError;
 }
@@ -2795,22 +2763,6 @@ enum PreviewViewStreamStateApi { idle, streaming }
 
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
-    fullClassName: 'dev.zeekr.camerax_android.core.CameraControllerImpl.Util',
-  ),
-)
-abstract class CameraControllerUtilProxyApi {
-  @static
-  CameraControllerTapToFocusApi fromTapToFocus(int value);
-  @static
-  CameraControllerUseCaseApi fromUseCase(int value);
-  @static
-  int toTapToFocus(CameraControllerTapToFocusApi api);
-  @static
-  int toUseCase(CameraControllerUseCaseApi api);
-}
-
-@ProxyApi(
-  kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'androidx.camera.view.video.AudioConfig',
   ),
 )
@@ -2835,7 +2787,7 @@ abstract class CameraControllerProxyApi {
   void setCameraSelector(CameraSelectorProxyApi cameraSelector);
   CameraInfoProxyApi? getCameraInfo();
   CameraControlProxyApi? getCameraControl();
-  IntLiveDataProxyApi getTorchState();
+  TorchStateLiveDataProxyApi getTorchState();
   @async
   void enableTorch(bool torchEnabled);
   ZoomStateLiveDataProxyApi getZoomState();
@@ -2845,14 +2797,14 @@ abstract class CameraControllerProxyApi {
   void setLinearZoom(double linearZoom);
   bool isPinchToZoomEnabled();
   void setPinchToZoomEnabled(bool enabled);
-  TapToFocusInfoLiveDataProxyApi? getTapToFocusInfoState();
+  TapToFocusInfoLiveDataProxyApi getTapToFocusInfoState();
   bool isTapToFocusEnabled();
   void setTapToFocusEnabled(bool enabled);
   void setTapToFocusAutoCancelDuration(int duration, TimeUnitApi timeUnit);
   bool isImageCaptureEnabled();
   bool isImageAnalysisEnabled();
   bool isVideoCaptureEnabled();
-  void setEnabledUseCases(int enabledUseCases);
+  void setEnabledUseCases(List<CameraControllerUseCaseApi> enabledUseCases);
   ResolutionSelectorProxyApi? getPreviewResolutionSelector();
   void setPreviewResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
@@ -2861,10 +2813,10 @@ abstract class CameraControllerProxyApi {
   void setImageCaptureResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
   );
-  int getImageCaptureMode();
-  void setImageCaptureMode(int captureMode);
-  int getImageCaptureFlashMode();
-  void setImageCaptureFlashMode(int flashMode);
+  ImageCaptureCaptureModeApi getImageCaptureMode();
+  void setImageCaptureMode(ImageCaptureCaptureModeApi captureMode);
+  ImageCaptureFlashModeApi getImageCaptureFlashMode();
+  void setImageCaptureFlashMode(ImageCaptureFlashModeApi flashMode);
   // ExecutorProxyApi? getImageCaptureIoExecutor();
   // void setImageCaptureIoExecutor(ExecutorProxyApi executor);
   void takePicture1(
@@ -2878,12 +2830,14 @@ abstract class CameraControllerProxyApi {
   void setImageAnalysisResolutionSelector(
     ResolutionSelectorProxyApi? resolutionSelector,
   );
-  int getImageAnalysisBackpressureStrategy();
-  void setImageAnalysisBackpressureStrategy(int strategy);
+  ImageAnalysisStrategyApi getImageAnalysisBackpressureStrategy();
+  void setImageAnalysisBackpressureStrategy(ImageAnalysisStrategyApi strategy);
   int getImageAnalysisImageQueueDepth();
   void setImageAnalysisImageQueueDepth(int depth);
-  int getImageAnalysisOutputImageFormat();
-  void setImageAnalysisOutputImageFormat(int imageAnalysisOutputImageFormat);
+  ImageAnalysisOutputImageFormatApi getImageAnalysisOutputImageFormat();
+  void setImageAnalysisOutputImageFormat(
+    ImageAnalysisOutputImageFormatApi imageAnalysisOutputImageFormat,
+  );
   // ExecutorProxyApi? getImageAnalysisBackgroundExecutor();
   // void setImageAnalysisBackgroundExecutor(ExecutorProxyApi? executor);
   void setImageAnalysisAnalyzer(ImageAnalysisAnalyzerProxyApi analyzer);
@@ -2892,8 +2846,8 @@ abstract class CameraControllerProxyApi {
   void setVideoCaptureQualitySelector(QualitySelectorProxyApi qualitySelector);
   DynamicRangeProxyApi getVideoCaptureDynamicRange();
   void setVideoCaptureDynamicRange(DynamicRangeProxyApi dynamicRange);
-  int getVideoCaptureMirrorMode();
-  void setVideoCaptureMirrorMode(int mirrorMode);
+  MirrorModeApi getVideoCaptureMirrorMode();
+  void setVideoCaptureMirrorMode(MirrorModeApi mirrorMode);
   IntRangeProxyApi getVideoCaptureTargetFrameRate();
   void setVideoCaptureTargetFrameRate(IntRangeProxyApi targetFrameRate);
   bool isRecording();
@@ -2955,7 +2909,7 @@ abstract class PreviewViewProxyApi {
   // MatrixProxyApi? getSensorToViewTransform();
   // PreviewSurfaceProviderProxyApi getSurfaceProvider();
   // VidePortProxyApi? getViewPort1();
-  // VidePortProxyApi? getViewPort2(int targetRotation);
+  // VidePortProxyApi? getViewPort2(SurfaceRotationApi targetRotation);
   // bool onTouchEvent(MotionEventProxyApi event);
 }
 
@@ -2967,7 +2921,7 @@ abstract class PreviewViewProxyApi {
 abstract class RotationProviderListenerProxyApi {
   RotationProviderListenerProxyApi();
 
-  late final void Function(int rotation) onRotationChanged;
+  late final void Function(SurfaceRotationApi rotation) onRotationChanged;
 }
 
 @ProxyApi(
@@ -2990,6 +2944,6 @@ abstract class RotationProviderProxyApi {
 abstract class TapToFocusInfoProxyApi {
   TapToFocusInfoProxyApi();
 
-  late final int focusState;
+  late final CameraControllerTapToFocusApi focusState;
   late final PointFProxyApi? tapPoint;
 }

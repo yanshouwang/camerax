@@ -14,10 +14,8 @@ final class CaptureFailureImpl implements CaptureFailure {
   Future<String?> getPhysicalCameraId() => api.getPhysicalCameraId();
 
   @override
-  Future<CaptureFailure$Reason> getReason() => api
-      .getReason()
-      .then((e) => CaptureFailureUtilProxyApi.fromReason(e))
-      .then((e) => e.impl);
+  Future<CaptureFailure$Reason> getReason() =>
+      api.getReason().then((e) => e.impl);
 
   @override
   Future<CaptureRequest> getRequest() => api.getRequest().then((e) => e.impl);

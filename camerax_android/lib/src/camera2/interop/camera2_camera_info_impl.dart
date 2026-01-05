@@ -19,99 +19,13 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
       return api.getStringCameraCharacteristic(keyApi).then((e) => e as T?);
     }
     if (keyApi is CameraCharacteristicsIntKeyProxyApi) {
-      if (key is CameraCharacteristics$Key<int>) {
-        return api.getIntCameraCharacteristic(keyApi).then((e) => e as T?);
-      }
-      if (key
-          is CameraCharacteristics$Key<
-            CameraMetadata$InfoSupportedHardwareLevel
-          >) {
-        return api
-            .getIntCameraCharacteristic(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromInfoSupportedHardwareLevel(
-                      e,
-                    ).then((e) => e.impl as T?),
-            );
-      }
+      return api.getIntCameraCharacteristic(keyApi).then((e) => e as T?);
     }
     if (keyApi is CameraCharacteristicsBooleanKeyProxyApi) {
       return api.getBooleanCameraCharacteristic(keyApi).then((e) => e as T?);
     }
     if (keyApi is CameraCharacteristicsIntArrayKeyProxyApi) {
-      if (key is CameraCharacteristics$Key<List<int>>) {
-        return api.getIntArrayCameraCharacteristic(keyApi).then((e) => e as T?);
-      }
-      if (key is CameraCharacteristics$Key<List<CameraMetadata$ControlMode>>) {
-        return api
-            .getIntArrayCameraCharacteristic(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : Stream.fromIterable(e)
-                        .asyncMap(
-                          (e) => CameraMetadataUtilProxyApi.fromControlMode(
-                            e,
-                          ).then((e) => e.impl),
-                        )
-                        .toList()
-                        .then((e) => e as T?),
-            );
-      }
-
-      if (key
-          is CameraCharacteristics$Key<List<CameraMetadata$ControlAeMode>>) {
-        return api
-            .getIntArrayCameraCharacteristic(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : Stream.fromIterable(e)
-                        .asyncMap(
-                          (e) => CameraMetadataUtilProxyApi.fromControlAeMode(
-                            e,
-                          ).then((e) => e.impl),
-                        )
-                        .toList()
-                        .then((e) => e as T?),
-            );
-      }
-      if (key
-          is CameraCharacteristics$Key<List<CameraMetadata$ControlAfMode>>) {
-        return api
-            .getIntArrayCameraCharacteristic(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : Stream.fromIterable(e)
-                        .asyncMap(
-                          (e) => CameraMetadataUtilProxyApi.fromControlAfMode(
-                            e,
-                          ).then((e) => e.impl),
-                        )
-                        .toList()
-                        .then((e) => e as T?),
-            );
-      }
-      if (key
-          is CameraCharacteristics$Key<List<CameraMetadata$ControlAwbMode>>) {
-        return api
-            .getIntArrayCameraCharacteristic(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : Stream.fromIterable(e)
-                        .asyncMap(
-                          (e) => CameraMetadataUtilProxyApi.fromControlAwbMode(
-                            e,
-                          ).then((e) => e.impl),
-                        )
-                        .toList()
-                        .then((e) => e as T?),
-            );
-      }
+      return api.getIntArrayCameraCharacteristic(keyApi).then((e) => e as T?);
     }
     if (keyApi is CameraCharacteristicsFloatArrayKeyProxyApi) {
       return api.getFloatArrayCameraCharacteristic(keyApi).then((e) => e as T?);
@@ -125,6 +39,36 @@ final class Camera2CameraInfoImpl implements Camera2CameraInfo {
       return api
           .getLongRangeCameraCharacteristic(keyApi)
           .then((e) => e?.impl as T?);
+    }
+    if (keyApi
+        is CameraCharacteristicsCameraMetadataInfoSupportedHardwareLevelKeyProxyApi) {
+      return api
+          .getCameraMetadataInfoSupportedHardwareLevel(keyApi)
+          .then((e) => e?.impl as T?);
+    }
+    if (keyApi
+        is CameraCharacteristicsCameraMetadataControlModeArrayKeyProxyApi) {
+      return api
+          .getCameraMetadataControlModeArray(keyApi)
+          .then((e) => e?.map((e) => e.impl).toList() as T?);
+    }
+    if (keyApi
+        is CameraCharacteristicsCameraMetadataControlAeModeArrayKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAeModeArray(keyApi)
+          .then((e) => e?.map((e) => e.impl).toList() as T?);
+    }
+    if (keyApi
+        is CameraCharacteristicsCameraMetadataControlAfModeArrayKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAfModeArray(keyApi)
+          .then((e) => e?.map((e) => e.impl).toList() as T?);
+    }
+    if (keyApi
+        is CameraCharacteristicsCameraMetadataControlAwbModeArrayKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAwbModeArray(keyApi)
+          .then((e) => e?.map((e) => e.impl).toList() as T?);
     }
     throw TypeError();
   }

@@ -9,6 +9,7 @@ import 'package:exif/exif.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Logger get _logger => Logger('HomeViewModel');
 
@@ -357,17 +358,13 @@ class HomeViewModel extends ViewModel {
 
   void _setUp() async {
     var isGranted =
-        await _permissionManager.checkPermission(
-          PermissionManager$Permission.audio,
-        ) &&
-        await _permissionManager.checkPermission(
-          PermissionManager$Permission.video,
-        );
+        await Permission.camera.isGranted &&
+        await Permission.microphone.isGranted;
     if (!isGranted) {
-      isGranted = await _permissionManager.requestPermissions([
-        PermissionManager$Permission.video,
-        PermissionManager$Permission.audio,
-      ]);
+      isGranted = await [
+        Permission.camera,
+        Permission.microphone,
+      ].request().then((e) => e.values.every((e) => e.isGranted));
     }
     if (!isGranted) {
       throw StateError('requestPermissions failed.');

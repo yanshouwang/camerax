@@ -28,6 +28,26 @@ final class CaptureRequestOptions$BuilderImpl
     if (keyApi is CaptureRequestBooleanKeyProxyApi) {
       return api.clearBooleanCaptureRequestOption(keyApi).then((e) => e.impl);
     }
+    if (keyApi is CaptureRequestCameraMetadataControlModeKeyProxyApi) {
+      return api
+          .clearCameraMetadataControlModeCaptureRequestOption(keyApi)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAeModeKeyProxyApi) {
+      return api
+          .clearCameraMetadataControlAeModeCaptureRequestOption(keyApi)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAfModeKeyProxyApi) {
+      return api
+          .clearCameraMetadataControlAfModeCaptureRequestOption(keyApi)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAwbModeKeyProxyApi) {
+      return api
+          .clearCameraMetadataControlAwbModeCaptureRequestOption(keyApi)
+          .then((e) => e.impl);
+    }
     throw TypeError();
   }
 
@@ -37,32 +57,8 @@ final class CaptureRequestOptions$BuilderImpl
     ValueT value,
   ) {
     final keyApi = key.api;
-    if (keyApi is CaptureRequestIntKeyProxyApi) {
-      if (value is int) {
-        return api
-            .setIntCaptureRequestOption(keyApi, value)
-            .then((e) => e.impl);
-      }
-      if (value is CameraMetadata$ControlMode) {
-        return CameraMetadataUtilProxyApi.toControlMode(value.api)
-            .then((e) => api.setIntCaptureRequestOption(keyApi, e))
-            .then((e) => e.impl);
-      }
-      if (value is CameraMetadata$ControlAeMode) {
-        return CameraMetadataUtilProxyApi.toControlAeMode(value.api)
-            .then((e) => api.setIntCaptureRequestOption(keyApi, e))
-            .then((e) => e.impl);
-      }
-      if (value is CameraMetadata$ControlAfMode) {
-        return CameraMetadataUtilProxyApi.toControlAfMode(value.api)
-            .then((e) => api.setIntCaptureRequestOption(keyApi, e))
-            .then((e) => e.impl);
-      }
-      if (value is CameraMetadata$ControlAwbMode) {
-        return CameraMetadataUtilProxyApi.toControlAwbMode(value.api)
-            .then((e) => api.setIntCaptureRequestOption(keyApi, e))
-            .then((e) => e.impl);
-      }
+    if (keyApi is CaptureRequestIntKeyProxyApi && value is int) {
+      return api.setIntCaptureRequestOption(keyApi, value).then((e) => e.impl);
     }
     if (keyApi is CaptureRequestLongKeyProxyApi && value is int) {
       return api.setLongCaptureRequestOption(keyApi, value).then((e) => e.impl);
@@ -75,6 +71,33 @@ final class CaptureRequestOptions$BuilderImpl
     if (keyApi is CaptureRequestBooleanKeyProxyApi && value is bool) {
       return api
           .setBooleanCaptureRequestOption(keyApi, value)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlModeKeyProxyApi &&
+        value is CameraMetadata$ControlMode) {
+      return api
+          .setCameraMetadataControlModeCaptureRequestOption(keyApi, value.api)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAeModeKeyProxyApi &&
+        value is CameraMetadata$ControlAeMode) {
+      return api
+          .setCameraMetadataControlAeModeCaptureRequestOption(keyApi, value.api)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAfModeKeyProxyApi &&
+        value is CameraMetadata$ControlAfMode) {
+      return api
+          .setCameraMetadataControlAfModeCaptureRequestOption(keyApi, value.api)
+          .then((e) => e.impl);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAwbModeKeyProxyApi &&
+        value is CameraMetadata$ControlAwbMode) {
+      return api
+          .setCameraMetadataControlAwbModeCaptureRequestOption(
+            keyApi,
+            value.api,
+          )
           .then((e) => e.impl);
     }
     throw TypeError();
@@ -95,53 +118,7 @@ final class CaptureRequestOptionsImpl implements CaptureRequestOptions {
   ) {
     final keyApi = key.api;
     if (keyApi is CaptureRequestIntKeyProxyApi) {
-      if (ValueT == int) {
-        return api.getIntCaptureRequestOption(keyApi).then((e) => e as ValueT?);
-      }
-      if (ValueT == CameraMetadata$ControlMode) {
-        return api
-            .getIntCaptureRequestOption(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlMode(
-                      e,
-                    ).then((e) => e.impl as ValueT?),
-            );
-      }
-      if (ValueT == CameraMetadata$ControlAeMode) {
-        return api
-            .getIntCaptureRequestOption(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlAeMode(
-                      e,
-                    ).then((e) => e.impl as ValueT?),
-            );
-      }
-      if (ValueT == CameraMetadata$ControlAfMode) {
-        return api
-            .getIntCaptureRequestOption(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlAfMode(
-                      e,
-                    ).then((e) => e.impl as ValueT?),
-            );
-      }
-      if (ValueT == CameraMetadata$ControlAwbMode) {
-        return api
-            .getIntCaptureRequestOption(keyApi)
-            .then(
-              (e) => e == null
-                  ? null
-                  : CameraMetadataUtilProxyApi.fromControlAwbMode(
-                      e,
-                    ).then((e) => e.impl as ValueT?),
-            );
-      }
+      return api.getIntCaptureRequestOption(keyApi).then((e) => e as ValueT?);
     }
     if (keyApi is CaptureRequestLongKeyProxyApi) {
       return api.getLongCaptureRequestOption(keyApi).then((e) => e as ValueT?);
@@ -153,6 +130,26 @@ final class CaptureRequestOptionsImpl implements CaptureRequestOptions {
       return api
           .getBooleanCaptureRequestOption(keyApi)
           .then((e) => e as ValueT?);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlModeCaptureRequestOption(keyApi)
+          .then((e) => e?.impl as ValueT?);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAeModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAeModeCaptureRequestOption(keyApi)
+          .then((e) => e?.impl as ValueT?);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAfModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAfModeCaptureRequestOption(keyApi)
+          .then((e) => e?.impl as ValueT?);
+    }
+    if (keyApi is CaptureRequestCameraMetadataControlAwbModeKeyProxyApi) {
+      return api
+          .getCameraMetadataControlAwbModeCaptureRequestOption(keyApi)
+          .then((e) => e?.impl as ValueT?);
     }
     throw TypeError();
   }

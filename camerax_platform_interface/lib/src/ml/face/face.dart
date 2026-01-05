@@ -13,6 +13,6 @@ abstract interface class Face {
   double? get smilingProbability;
   int? get trackingId;
 
-  Future<FaceContour?> getContour(FaceContour$Type type);
-  Future<FaceLandmark?> getLandmark(FaceLandmark$Type type);
+  Future<FaceContour?> getContour(FaceContour$Type contourType);
+  Future<FaceLandmark?> getLandmark(FaceLandmark$Type landmarkType);
 }

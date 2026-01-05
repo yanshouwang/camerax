@@ -235,8 +235,6 @@ enum ImageFormatApi {
   yCbCr422Sp,
 }
 
-enum PermissionManagerPermissionApi { video, audio }
-
 enum SurfaceRotationApi { rotation0, rotation90, rotation180, rotation270 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AutoCloseable'))
@@ -286,11 +284,35 @@ abstract class VideoRecordEventConsumerProxyApi {
   late final void Function(VideoRecordEventProxyApi value) accept;
 }
 
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraStateLiveData'))
+abstract class CameraStateLiveDataProxyApi {
+  CameraStateApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, CameraStateObserverProxyApi observer);
+  void observeForever(CameraStateObserverProxyApi observer);
+  void removeObserver(CameraStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'CameraStateObserver'))
 abstract class CameraStateObserverProxyApi {
   CameraStateObserverProxyApi();
 
   late final void Function(CameraStateApi value) onChanged;
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'TorchStateLiveData'))
+abstract class TorchStateLiveDataProxyApi {
+  TorchStateApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, TorchStateObserverProxyApi observer);
+  void observeForever(TorchStateObserverProxyApi observer);
+  void removeObserver(TorchStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'TorchStateObserver'))
@@ -300,21 +322,23 @@ abstract class TorchStateObserverProxyApi {
   late final void Function(TorchStateApi value) onChanged;
 }
 
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ZoomStateLiveData'))
+abstract class ZoomStateLiveDataProxyApi {
+  ZoomStateProxyApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, ZoomStateObserverProxyApi observer);
+  void observeForever(ZoomStateObserverProxyApi observer);
+  void removeObserver(ZoomStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'ZoomStateObserver'))
 abstract class ZoomStateObserverProxyApi {
   ZoomStateObserverProxyApi();
 
   late final void Function(ZoomStateProxyApi value) onChanged;
-}
-
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PermissionManager'))
-abstract class PermissionManagerProxyApi {
-  @static
-  late final PermissionManagerProxyApi instance;
-
-  bool checkPermissioin(PermissionManagerPermissionApi permission);
-  @async
-  bool requestPermissions(List<PermissionManagerPermissionApi> permissions);
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Point'))
@@ -486,17 +510,11 @@ abstract class CameraInfoProxyApi {
   bool mustPlayShutterSound();
 
   CameraSelectorProxyApi getCameraSelector();
-  CameraStateApi? getCameraState();
-  void observeCameraState(CameraStateObserverProxyApi observer);
-  void removeCameraStateObserver(CameraStateObserverProxyApi observer);
+  CameraStateLiveDataProxyApi getCameraState();
   // ExposureStateApi getExposureState();
   double getIntrinsicZoomRatio();
   CameraSelectorLensFacingApi getLensFacing();
-  // LowLightBoostStateApi? getLowLightBoostState();
-  // void observeLowLightBoostState(LowLightBoostStateObserverProxyApi observer);
-  // void removeLowLightBoostStateObserver(
-  //   LowLightBoostStateObserverProxyApi observer,
-  // );
+  // LowLightBoostStateLiveDataProxyApi getLowLightBoostState();
   // int getMaxTorchStrengthLevel();
   List<CameraInfoProxyApi> getPhysicalCameraInfos();
   int getSensorRotationDegrees1();
@@ -505,15 +523,9 @@ abstract class CameraInfoProxyApi {
   // List<IntRangeProxyApi> getSupportedFrameRateRanges2(
   //   SessionConfigProxyApi sessionConfig,
   // );
-  TorchStateApi? getTorchState();
-  void observeTorchState(TorchStateObserverProxyApi observer);
-  void removeTorchStateObserver(TorchStateObserverProxyApi observer);
-  // int? getTorchStrengthLevel();
-  // void observeTorchStrengthLevel(IntObserverProxyApi observer);
-  // void removeTorchStrengthLevelObserver(IntObserverProxyApi observer);
-  ZoomStateProxyApi? getZoomState();
-  void observeZoomState(ZoomStateObserverProxyApi observer);
-  void removeZoomStateObserver(ZoomStateObserverProxyApi observer);
+  TorchStateLiveDataProxyApi getTorchState();
+  // IntLiveDataProxyApi getTorchStrengthLevel();
+  ZoomStateLiveDataProxyApi getZoomState();
   bool hasFlashUnit();
   // bool isFeatureGroupSupported(SessionConfigProxyApi sessionConfig);
   bool isFocusMeteringSupported(FocusMeteringActionProxyApi action);
@@ -838,22 +850,14 @@ abstract class CameraControllerProxyApi {
   void setCameraSelector(CameraSelectorProxyApi cameraSelector);
   CameraInfoProxyApi? getCameraInfo();
   CameraControlProxyApi? getCameraControl();
-  TorchStateApi? getTorchState();
-  void observeTorchState(TorchStateObserverProxyApi observer);
-  void removeTorchStateObserver(TorchStateObserverProxyApi observer);
+  TorchStateLiveDataProxyApi getTorchState();
   void enableTorch(bool torchEnabled);
-  ZoomStateProxyApi? getZoomState();
-  void observeZoomState(ZoomStateObserverProxyApi observer);
-  void removeZoomStateObserver(ZoomStateObserverProxyApi observer);
+  ZoomStateLiveDataProxyApi getZoomState();
   void setZoomRatio(double zoomRatio);
   void setLinearZoom(double linearZoom);
   bool isPinchToZoomEnabled();
   void setPinchToZoomEnabled(bool enabled);
-  // TapToFocusInfoProxyApi? getTapToFocusInfoState();
-  // void observeTapToFocusInfoState(TapToFocusInfoObserverProxyApi observer);
-  // void removeTapToFocusInfoStateObserver(
-  //   TapToFocusInfoObserverProxyApi observer,
-  // );
+  // TapToFocusInfoLiveDataProxyApi getTapToFocusInfoState();
   bool isTapToFocusEnabled();
   void setTapToFocusEnabled(bool enabled);
   // void setTapToFocusAutoCancelDuration(int duration, TimeUnitApi timeUnit);
@@ -937,13 +941,7 @@ abstract class PreviewViewProxyApi {
   // );
   // MeteringPointFactoryProxyApi getMeteringPointFactory();
   // OutputTransformProxyApi? getOutputTransform();
-  // PreviewViewStreamStateApi? getPreviewStreamState();
-  // void observePreviewStreamState(
-  //   PreviewViewStreamStateObserverProxyApi observer,
-  // );
-  // void removePreviewStreamStateObserver(
-  //   PreviewViewStreamStateObserverProxyApi observer,
-  // );
+  // PreviewViewStreamStateLiveDataProxyApi getPreviewStreamState();
   // ImageCaptureScreenFalshProxyApi? getScreenFlash();
   // void setScreenFlashWindow(WindowProxyApi? screenFlashWindow);
   // void setScreenFlashOverlayColor(int color);

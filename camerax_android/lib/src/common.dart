@@ -5,6 +5,7 @@ export 'common/exception_impl.dart';
 export 'common/file_impl.dart';
 export 'common/image_format_impl.dart';
 export 'common/image_impl.dart';
+export 'common/live_data_impl.dart';
 export 'common/location_impl.dart';
 export 'common/observer_impl.dart';
 export 'common/point_impl.dart';

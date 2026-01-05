@@ -33,16 +33,12 @@ final class FaceImpl implements Face {
   int? get trackingId => api.trackingId;
 
   @override
-  Future<FaceContour?> getContour(FaceContour$Type type) {
-    // TODO: implement getContour
-    throw UnimplementedError();
-  }
+  Future<FaceContour?> getContour(FaceContour$Type contourType) =>
+      api.getContour(contourType.api).then((e) => e?.impl);
 
   @override
-  Future<FaceLandmark?> getLandmark(FaceLandmark$Type type) {
-    // TODO: implement getLandmark
-    throw UnimplementedError();
-  }
+  Future<FaceLandmark?> getLandmark(FaceLandmark$Type landmarkType) =>
+      api.getLandmark(landmarkType.api).then((e) => e?.impl);
 }
 
 extension FaceX on Face {

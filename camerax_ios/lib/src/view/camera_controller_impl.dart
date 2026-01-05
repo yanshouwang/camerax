@@ -39,14 +39,15 @@ final class CameraControllerImpl implements CameraController {
   Future<void> unbind() => api.unbind();
 
   @override
-  Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e?.impl);
+  Future<LiveData<TorchState>> getTorchState() =>
+      api.getTorchState().then((e) => e.impl);
 
   @override
   Future<void> enableTorch(bool enabled) => api.enableTorch(enabled);
 
   @override
-  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
+  Future<LiveData<ZoomState>> getZoomState() =>
+      api.getZoomState().then((e) => e.impl);
 
   @override
   Future<void> setZoomRatio(double zoomRatio) => api.setZoomRatio(zoomRatio);
@@ -211,33 +212,8 @@ final class CameraControllerImpl implements CameraController {
       .then((e) => e.impl);
 
   @override
-  Future<void> observeTorchState(Observer<TorchState> observer) =>
-      api.observeTorchState(observer.api);
-
-  @override
-  Future<void> observeZoomState(Observer<ZoomState> observer) =>
-      api.observeZoomState(observer.api);
-
-  @override
-  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
-      api.removeTorchStateObserver(observer.api);
-
-  @override
-  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
-      api.removeZoomStateObserver(observer.api);
-
-  @override
-  Future<TapToFocusInfo?> getTapToFocusInfoState() =>
+  Future<LiveData<TapToFocusInfo>> getTapToFocusInfoState() =>
       throw UnimplementedError();
-
-  @override
-  Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer) =>
-      throw UnimplementedError();
-
-  @override
-  Future<void> removeTapToFocusInfoStateObserver(
-    Observer<TapToFocusInfo> observer,
-  ) => throw UnimplementedError();
 
   @override
   Future<void> setTapToFocusAutoCancelDuration(Duration duration) =>

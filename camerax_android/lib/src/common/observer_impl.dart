@@ -17,6 +17,12 @@ final class CameraStateObserverImpl extends ObserverImpl<CameraState> {
   CameraStateObserverImpl.internal(this.api);
 }
 
+final class TorchStateObserverImpl extends ObserverImpl<TorchState> {
+  final TorchStateObserverProxyApi api;
+
+  TorchStateObserverImpl.internal(this.api);
+}
+
 final class ZoomStateObserverImpl extends ObserverImpl<ZoomState> {
   final ZoomStateObserverProxyApi api;
 
@@ -27,6 +33,13 @@ final class TapToFocusInfoObserverImpl extends ObserverImpl<TapToFocusInfo> {
   final TapToFocusInfoObserverProxyApi api;
 
   TapToFocusInfoObserverImpl.internal(this.api);
+}
+
+final class LowLightBoostStateObserverImpl
+    extends ObserverImpl<LowLightBoostState> {
+  final LowLightBoostStateObserverProxyApi api;
+
+  LowLightBoostStateObserverImpl.internal(this.api);
 }
 
 final class OtherObserverImpl<T> extends ObserverImpl<T> {
@@ -49,12 +62,10 @@ final class ObserverChannelImpl extends ObserverChannel {
       return CameraStateObserverImpl.internal(api) as ObserverImpl<T>;
     }
     if (T == TorchState) {
-      final api = IntObserverProxyApi(
-        onChanged: (_, e) => TorchStateUtilProxyApi.fromTorchState(
-          e,
-        ).then((e) => onChanged(e.impl as T)),
+      final api = TorchStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
       );
-      return IntObserverImpl.internal(api) as ObserverImpl<T>;
+      return TorchStateObserverImpl.internal(api) as ObserverImpl<T>;
     }
     if (T == ZoomState) {
       final api = ZoomStateObserverProxyApi(
@@ -69,14 +80,10 @@ final class ObserverChannelImpl extends ObserverChannel {
       return TapToFocusInfoObserverImpl.internal(api) as ObserverImpl<T>;
     }
     if (T == LowLightBoostState) {
-      final api = IntObserverProxyApi(
-        onChanged: (_, e) {
-          LowLightBoostStateUtilProxyApi.fromLowLightBoostState(
-            e,
-          ).then((e) => onChanged(e.impl as T));
-        },
+      final api = LowLightBoostStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
       );
-      return IntObserverImpl.internal(api) as ObserverImpl<T>;
+      return LowLightBoostStateObserverImpl.internal(api) as ObserverImpl<T>;
     }
     return OtherObserverImpl(onChanged: onChanged);
   }
@@ -106,6 +113,14 @@ extension CameraStateObserverX on Observer<CameraState> {
   }
 }
 
+extension TorchStateObserverX on Observer<TorchState> {
+  TorchStateObserverProxyApi get api {
+    final impl = this;
+    if (impl is! TorchStateObserverImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
 extension ZoomStateObserverX on Observer<ZoomState> {
   ZoomStateObserverProxyApi get api {
     final impl = this;
@@ -118,6 +133,14 @@ extension TapToFocusInfoObserverX on Observer<TapToFocusInfo> {
   TapToFocusInfoObserverProxyApi get api {
     final impl = this;
     if (impl is! TapToFocusInfoObserverImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension LowLightBoostStateObserverX on Observer<LowLightBoostState> {
+  LowLightBoostStateObserverProxyApi get api {
+    final impl = this;
+    if (impl is! LowLightBoostStateObserverImpl) throw TypeError();
     return impl.api;
   }
 }
