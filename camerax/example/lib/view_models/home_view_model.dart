@@ -20,6 +20,8 @@ class HomeViewModel extends ViewModel {
   final RotationProvider _rotationProvider;
 
   RotationProvider$Listener? _rotationProviderListener;
+  LiveData<TorchState>? _torchStateLiveData;
+  LiveData<ZoomState>? _zoomStateLiveData;
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
 
@@ -377,20 +379,24 @@ class HomeViewModel extends ViewModel {
         .setResolutionStrategy(resolutionStrategy)
         .then((e) => e.build());
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
-    final torchState = await controller.getTorchState();
-    final zoomState = await controller.getZoomState();
-    this.torchState = await torchState.getValue();
-    this.zoomState = await zoomState.getValue();
+    final torchStateLiveData = await controller.getTorchState();
+    final zoomStateLiveData = await controller.getZoomState();
+    final torchState = await torchStateLiveData.getValue();
+    final zoomState = await zoomStateLiveData.getValue();
     final torchStateObserver = Observer<TorchState>(
       onChanged: (e) => this.torchState = e,
     );
     final zoomStateObserver = Observer<ZoomState>(
       onChanged: (e) => this.zoomState = e,
     );
-    await torchState.observeForever(torchStateObserver);
-    await zoomState.observeForever(zoomStateObserver);
+    await torchStateLiveData.observeForever(torchStateObserver);
+    await zoomStateLiveData.observeForever(zoomStateObserver);
+    _torchStateLiveData = torchStateLiveData;
+    _zoomStateLiveData = zoomStateLiveData;
     _torchStateObserver = torchStateObserver;
     _zoomStateObserver = zoomStateObserver;
+    this.torchState = torchState;
+    this.zoomState = zoomState;
     final rotationProviderListener = RotationProvider$Listener(
       onRotationChanged: (rotation) {
         _logger.info(
@@ -483,17 +489,15 @@ class HomeViewModel extends ViewModel {
     if (rotationProviderListener != null) {
       _rotationProvider.removeListener(rotationProviderListener);
     }
+    final torchStateLiveData = _torchStateLiveData;
+    final zoomStateLiveData = _zoomStateLiveData;
     final torchStateObserver = _torchStateObserver;
     final zoomStateObserver = _zoomStateObserver;
-    if (torchStateObserver != null) {
-      controller.getTorchState().then(
-        (e) => e.removeObserver(torchStateObserver),
-      );
+    if (torchStateLiveData != null && torchStateObserver != null) {
+      torchStateLiveData.removeObserver(torchStateObserver);
     }
-    if (zoomStateObserver != null) {
-      controller.getZoomState().then(
-        (e) => e.removeObserver(zoomStateObserver),
-      );
+    if (zoomStateLiveData != null && zoomStateObserver != null) {
+      zoomStateLiveData.removeObserver(zoomStateObserver);
     }
     _clearImageAnalysisAnalyzer();
     unbind();
