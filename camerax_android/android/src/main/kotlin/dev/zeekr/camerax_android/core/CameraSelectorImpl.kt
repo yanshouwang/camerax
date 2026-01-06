@@ -5,46 +5,12 @@ import androidx.camera.core.CameraFilter
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalLensFacing
-import dev.zeekr.camerax_android.AspectRatioApi
 import dev.zeekr.camerax_android.CameraSelectorLensFacingApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraSelectorBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiCameraSelectorProxyApi
-import dev.zeekr.camerax_android.PigeonApiCameraSelectorUtilProxyApi
 
 class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorProxyApi(registrar) {
-    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCameraSelectorUtilProxyApi(registrar) {
-        override fun fromLensFacing(value: Long): CameraSelectorLensFacingApi {
-            return Util.fromLensFacing(value.toInt())
-        }
-
-        override fun toLensFacing(api: CameraSelectorLensFacingApi): Long {
-            return Util.toLensFacing(api).toLong()
-        }
-    }
-
-    @OptIn(ExperimentalLensFacing::class)
-    object Util {
-        fun fromLensFacing(value: Int): CameraSelectorLensFacingApi {
-            return when (value) {
-                CameraSelector.LENS_FACING_UNKNOWN -> CameraSelectorLensFacingApi.UNKNOWN
-                CameraSelector.LENS_FACING_FRONT -> CameraSelectorLensFacingApi.FRONT
-                CameraSelector.LENS_FACING_BACK -> CameraSelectorLensFacingApi.BACK
-                CameraSelector.LENS_FACING_EXTERNAL -> CameraSelectorLensFacingApi.EXTERNAL
-                else -> throw NotImplementedError("Not implemented value: $this")
-            }
-        }
-
-        fun toLensFacing(api: CameraSelectorLensFacingApi): Int {
-            return when (api) {
-                CameraSelectorLensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
-                CameraSelectorLensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
-                CameraSelectorLensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
-                CameraSelectorLensFacingApi.EXTERNAL -> CameraSelector.LENS_FACING_EXTERNAL
-            }
-        }
-    }
-
     class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         PigeonApiCameraSelectorBuilderProxyApi(registrar) {
         override fun pigeon_defaultConstructor(): CameraSelector.Builder {
@@ -58,9 +24,9 @@ class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
 
         override fun requireLensFacing(
-            pigeon_instance: CameraSelector.Builder, lensFacing: Long
+            pigeon_instance: CameraSelector.Builder, lensFacing: CameraSelectorLensFacingApi
         ): CameraSelector.Builder {
-            return pigeon_instance.requireLensFacing(lensFacing.toInt())
+            return pigeon_instance.requireLensFacing(lensFacing.impl)
         }
 
         override fun setPhysicalCameraId(
@@ -95,3 +61,20 @@ class CameraSelectorImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         return pigeon_instance.physicalCameraId
     }
 }
+
+val Int.cameraSelectorLensFacingApi: CameraSelectorLensFacingApi
+    @OptIn(ExperimentalLensFacing::class) get() = when (this) {
+        CameraSelector.LENS_FACING_UNKNOWN -> CameraSelectorLensFacingApi.UNKNOWN
+        CameraSelector.LENS_FACING_FRONT -> CameraSelectorLensFacingApi.FRONT
+        CameraSelector.LENS_FACING_BACK -> CameraSelectorLensFacingApi.BACK
+        CameraSelector.LENS_FACING_EXTERNAL -> CameraSelectorLensFacingApi.EXTERNAL
+        else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val CameraSelectorLensFacingApi.impl: Int
+    @OptIn(ExperimentalLensFacing::class) get() = when (this) {
+        CameraSelectorLensFacingApi.UNKNOWN -> CameraSelector.LENS_FACING_UNKNOWN
+        CameraSelectorLensFacingApi.FRONT -> CameraSelector.LENS_FACING_FRONT
+        CameraSelectorLensFacingApi.BACK -> CameraSelector.LENS_FACING_BACK
+        CameraSelectorLensFacingApi.EXTERNAL -> CameraSelector.LENS_FACING_EXTERNAL
+    }

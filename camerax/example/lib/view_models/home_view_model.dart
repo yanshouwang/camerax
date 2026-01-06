@@ -41,6 +41,11 @@ class HomeViewModel extends ViewModel {
   }
 
   CameraController get controller => _controller;
+  CameraInfo get info => ArgumentError.checkNotNull(_info);
+  CameraControl get control => ArgumentError.checkNotNull(_control);
+  Camera2CameraInfo get camera2Info => ArgumentError.checkNotNull(_camera2Info);
+  Camera2CameraControl get camera2Control =>
+      ArgumentError.checkNotNull(_camera2Control);
 
   CameraMode _mode;
   CameraMode get mode => _mode;
@@ -165,39 +170,45 @@ class HomeViewModel extends ViewModel {
     _camera2Info = camera2Info;
     _camera2Control = camera2Control;
 
-    final options = await camera2Control.getCaptureRequestOptions();
-
     final availableApertures = await camera2Info.getCameraCharacteristic(
       CameraCharacteristics.lensInfoAvailableApertures,
     );
-    final aperture = await options.getCaptureRequestOption(
-      CaptureRequest.lensAperture,
-    );
-
-    _logger.info('availableApertures: $availableApertures');
-    _logger.info('aperture: $aperture');
+    _logger.info('lensInfoAvailableApertures: $availableApertures');
+    if (availableApertures != null && availableApertures.isNotEmpty) {
+      lensApertureState = ApertureState(
+        availableValues: availableApertures,
+        value: availableApertures.first,
+      );
+    }
 
     final exposureTimeRange = await camera2Info.getCameraCharacteristic(
       CameraCharacteristics.sensorInfoExposureTimeRange,
     );
-    final exposureTime = await options.getCaptureRequestOption(
-      CaptureRequest.sensorExposureTime,
-    );
-    _logger.info('exposureTimeRagne: $exposureTimeRange');
-    _logger.info('exposureTime: $exposureTime');
+    _logger.info('sensorInfoExposureTimeRange: $exposureTimeRange');
+    if (exposureTimeRange != null) {
+      exposureTimeState = ExposureTimeState(
+        range: exposureTimeRange,
+        value: exposureTimeRange.lower,
+      );
+    }
 
     final sensitivityRange = await camera2Info.getCameraCharacteristic(
       CameraCharacteristics.sensorInfoSensitivityRange,
     );
-    final sensitivity = await options.getCaptureRequestOption(
-      CaptureRequest.sensorSensitivity,
-    );
-    _logger.info('sensitivityRange: $sensitivityRange');
-    _logger.info('sensitivity: $sensitivity');
+    _logger.info('sensorInfoSensitivityRange: $sensitivityRange');
+    if (sensitivityRange != null) {
+      sensitivityState = SensitivityState(
+        range: sensitivityRange,
+        value: sensitivityRange.lower,
+      );
+    }
   }
 
   Future<void> unbind() async {
     await controller.unbind();
+    lensApertureState = null;
+    exposureTimeState = null;
+    sensitivityState = null;
     _info = null;
     _control = null;
     _camera2Info = null;
@@ -278,6 +289,73 @@ class HomeViewModel extends ViewModel {
 
   Future<void> setZoomRatio(double zoomRatio) async {
     await controller.setZoomRatio(zoomRatio);
+  }
+
+  Future<void> setLensAsperture(double value) async {
+    final builder = CaptureRequestOptions$Builder();
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlMode,
+      CameraMetadata$ControlMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlAeMode,
+      CameraMetadata$ControlAeMode.off,
+    );
+    await builder.setCaptureRequestOption(CaptureRequest.lensAperture, value);
+    final bundle = await builder.build();
+    await camera2Control.setCaptureRequestOptions(bundle);
+    lensApertureState = lensApertureState?.copyWith(value: value);
+  }
+
+  Future<void> setExposureTime(int value) async {
+    final builder = CaptureRequestOptions$Builder();
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlMode,
+      CameraMetadata$ControlMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlAeMode,
+      CameraMetadata$ControlAeMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.sensorExposureTime,
+      value,
+    );
+    final bundle = await builder.build();
+    await camera2Control.setCaptureRequestOptions(bundle);
+    exposureTimeState = exposureTimeState?.copyWith(value: value);
+  }
+
+  Future<void> setSensitivity(int value) async {
+    final builder = CaptureRequestOptions$Builder();
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlMode,
+      CameraMetadata$ControlMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlAeMode,
+      CameraMetadata$ControlAeMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.sensorSensitivity,
+      value,
+    );
+    final bundle = await builder.build();
+    await camera2Control.setCaptureRequestOptions(bundle);
+    sensitivityState = sensitivityState?.copyWith(value: value);
+  }
+
+  Future<void> clearArguments() async {
+    await camera2Control.clearCaptureRequestOptions();
+    lensApertureState = lensApertureState?.copyWith(
+      value: lensApertureState?.availableValues.first,
+    );
+    exposureTimeState = exposureTimeState?.copyWith(
+      value: exposureTimeState?.range.lower,
+    );
+    sensitivityState = sensitivityState?.copyWith(
+      value: sensitivityState?.range.lower,
+    );
   }
 
   Future<void> setFlashMode(ImageCapture$FlashMode flashMode) async {

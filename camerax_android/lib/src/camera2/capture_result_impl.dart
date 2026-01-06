@@ -98,7 +98,7 @@ final class CaptureResultChannelImpl extends CaptureResultChannel {
       CaptureResult$KeyImpl.internal(CaptureResultProxyApi.sensorSensitivity);
 }
 
-extension CaptureResult$KeyX<T> on CaptureResult$Key<T> {
+extension CaptureResult$KeyX on CaptureResult$Key {
   CaptureResultKeyProxyApi get api {
     final impl = this;
     if (impl is! CaptureResult$KeyImpl) throw TypeError();

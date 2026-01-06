@@ -4,9 +4,19 @@ import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.CameraInfo
+import dev.zeekr.camerax_android.CameraMetadataControlAeModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAfModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAwbModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlModeApi
+import dev.zeekr.camerax_android.CameraMetadataInfoSupportedHardwareLevelApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCamera2CameraInfoProxyApi
 import dev.zeekr.camerax_android.camera2.CameraCharacteristicsImpl
+import dev.zeekr.camerax_android.camera2.cameraMetadataControlAeModeApi
+import dev.zeekr.camerax_android.camera2.cameraMetadataControlAfModeApi
+import dev.zeekr.camerax_android.camera2.cameraMetadataControlAwbModeApi
+import dev.zeekr.camerax_android.camera2.cameraMetadataControlModeApi
+import dev.zeekr.camerax_android.camera2.cameraMetadataInfoSupportedHardwareLevelApi
 import dev.zeekr.camerax_android.common.IntRange
 import dev.zeekr.camerax_android.common.LongRange
 
@@ -65,5 +75,35 @@ class Camera2CameraInfoImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         val value = pigeon_instance.getCameraCharacteristic(key.instance)
         return if (value == null) null
         else LongRange(value)
+    }
+
+    override fun getCameraMetadataControlModeArray(
+        pigeon_instance: Camera2CameraInfo, key: CameraCharacteristicsImpl.CameraMetadataControlModeArrayKey
+    ): List<CameraMetadataControlModeApi>? {
+        return pigeon_instance.getCameraCharacteristic(key.instance)?.map { it.cameraMetadataControlModeApi }
+    }
+
+    override fun getCameraMetadataControlAeModeArray(
+        pigeon_instance: Camera2CameraInfo, key: CameraCharacteristicsImpl.CameraMetadataControlAeModeArrayKey
+    ): List<CameraMetadataControlAeModeApi>? {
+        return pigeon_instance.getCameraCharacteristic(key.instance)?.map { it.cameraMetadataControlAeModeApi }
+    }
+
+    override fun getCameraMetadataControlAfModeArray(
+        pigeon_instance: Camera2CameraInfo, key: CameraCharacteristicsImpl.CameraMetadataControlAfModeArrayKey
+    ): List<CameraMetadataControlAfModeApi>? {
+        return pigeon_instance.getCameraCharacteristic(key.instance)?.map { it.cameraMetadataControlAfModeApi }
+    }
+
+    override fun getCameraMetadataControlAwbModeArray(
+        pigeon_instance: Camera2CameraInfo, key: CameraCharacteristicsImpl.CameraMetadataControlAwbModeArrayKey
+    ): List<CameraMetadataControlAwbModeApi>? {
+        return pigeon_instance.getCameraCharacteristic(key.instance)?.map { it.cameraMetadataControlAwbModeApi }
+    }
+
+    override fun getCameraMetadataInfoSupportedHardwareLevel(
+        pigeon_instance: Camera2CameraInfo, key: CameraCharacteristicsImpl.CameraMetadataInfoSupportedHardwareLevelKey
+    ): CameraMetadataInfoSupportedHardwareLevelApi? {
+        return pigeon_instance.getCameraCharacteristic(key.instance)?.cameraMetadataInfoSupportedHardwareLevelApi
     }
 }

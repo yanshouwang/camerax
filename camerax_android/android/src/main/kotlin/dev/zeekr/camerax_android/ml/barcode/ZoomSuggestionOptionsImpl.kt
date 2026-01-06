@@ -4,7 +4,6 @@ import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsBuilderProxyApi
-import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsProxyApi
 import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsZoomCallbackProxyApi
 
 class ZoomSuggestionOptionsImpl {

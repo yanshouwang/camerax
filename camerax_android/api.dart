@@ -1849,7 +1849,7 @@ abstract class ExposureStateProxyApi {
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName:
-        'dev.zeekr.camerax_android.core.ExtendableBuilderImpl.ExtendableBuilder',
+        'dev.zeekr.camerax_android.core.ExtendableBuilder',
   ),
 )
 abstract class ExtendableBuilderProxyApi {}

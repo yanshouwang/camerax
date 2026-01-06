@@ -6,36 +6,8 @@ import android.os.Build
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.CaptureFailureReasonApi
 import dev.zeekr.camerax_android.PigeonApiCaptureFailureProxyApi
-import dev.zeekr.camerax_android.PigeonApiCaptureFailureUtilProxyApi
 
 class CaptureFailureImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCaptureFailureProxyApi(registrar) {
-    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiCaptureFailureUtilProxyApi(registrar) {
-        override fun fromReason(value: Long): CaptureFailureReasonApi {
-            return Util.fromReason(value.toInt())
-        }
-
-        override fun toReason(api: CaptureFailureReasonApi): Long {
-            return Util.toReason(api).toLong()
-        }
-    }
-
-    object Util {
-        fun fromReason(value: Int): CaptureFailureReasonApi {
-            return when (value) {
-                CaptureFailure.REASON_ERROR -> CaptureFailureReasonApi.ERROR
-                CaptureFailure.REASON_FLUSHED -> CaptureFailureReasonApi.FLUSHED
-                else -> throw IllegalArgumentException()
-            }
-        }
-
-        fun toReason(api: CaptureFailureReasonApi): Int {
-            return when (api) {
-                CaptureFailureReasonApi.ERROR -> CaptureFailure.REASON_ERROR
-                CaptureFailureReasonApi.FLUSHED -> CaptureFailure.REASON_FLUSHED
-            }
-        }
-    }
-
     override fun getFrameNumber(pigeon_instance: CaptureFailure): Long {
         return pigeon_instance.frameNumber
     }
@@ -48,8 +20,8 @@ class CaptureFailureImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         }
     }
 
-    override fun getReason(pigeon_instance: CaptureFailure): Long {
-        return pigeon_instance.reason.toLong()
+    override fun getReason(pigeon_instance: CaptureFailure): CaptureFailureReasonApi {
+        return pigeon_instance.reason.captureFailureReasonApi
     }
 
     override fun getRequest(pigeon_instance: CaptureFailure): CaptureRequest {
@@ -64,3 +36,10 @@ class CaptureFailureImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonA
         return pigeon_instance.wasImageCaptured()
     }
 }
+
+val Int.captureFailureReasonApi: CaptureFailureReasonApi
+    get() = when (this) {
+        CaptureFailure.REASON_ERROR -> CaptureFailureReasonApi.ERROR
+        CaptureFailure.REASON_FLUSHED -> CaptureFailureReasonApi.FLUSHED
+        else -> throw IllegalArgumentException()
+    }

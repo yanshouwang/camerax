@@ -1,6 +1,7 @@
 package dev.zeekr.camerax_android.camera2
 
 import android.hardware.camera2.CameraCharacteristics
+import android.os.Build
 import android.util.Range
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraCharacteristicsKeyProxyApi
@@ -22,37 +23,53 @@ class CameraCharacteristicsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     class FloatArrayKey(override val instance: CameraCharacteristics.Key<FloatArray>) : Key(instance)
     class IntRangeKey(override val instance: CameraCharacteristics.Key<Range<Int>>) : Key(instance)
     class LongRangeKey(override val instance: CameraCharacteristics.Key<Range<Long>>) : Key(instance)
+    class CameraMetadataControlModeArrayKey(override val instance: CameraCharacteristics.Key<IntArray>) : Key(instance)
+    class CameraMetadataControlAeModeArrayKey(override val instance: CameraCharacteristics.Key<IntArray>) :
+        Key(instance)
 
-    override fun controlAeAvailableModes(): IntArrayKey {
-        return IntArrayKey(CameraCharacteristics.CONTROL_AE_AVAILABLE_MODES)
+    class CameraMetadataControlAfModeArrayKey(override val instance: CameraCharacteristics.Key<IntArray>) :
+        Key(instance)
+
+    class CameraMetadataControlAwbModeArrayKey(override val instance: CameraCharacteristics.Key<IntArray>) :
+        Key(instance)
+
+    class CameraMetadataInfoSupportedHardwareLevelKey(override val instance: CameraCharacteristics.Key<Int>) :
+        Key(instance)
+
+    override fun controlAeAvailableModes(): CameraMetadataControlAeModeArrayKey {
+        return CameraMetadataControlAeModeArrayKey(CameraCharacteristics.CONTROL_AE_AVAILABLE_MODES)
     }
 
     override fun controlAeLockAvailable(): BooleanKey {
         return BooleanKey(CameraCharacteristics.CONTROL_AE_LOCK_AVAILABLE)
     }
 
-    override fun controlAfAvailableModes(): IntArrayKey {
-        return IntArrayKey(CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES)
+    override fun controlAfAvailableModes(): CameraMetadataControlAfModeArrayKey {
+        return CameraMetadataControlAfModeArrayKey(CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES)
     }
 
-    override fun controlAvailableModes(): IntArrayKey {
-        return IntArrayKey(CameraCharacteristics.CONTROL_AVAILABLE_MODES)
+    override fun controlAvailableModes(): CameraMetadataControlModeArrayKey {
+        return CameraMetadataControlModeArrayKey(CameraCharacteristics.CONTROL_AVAILABLE_MODES)
     }
 
-    override fun controlAwbAvailableModes(): IntArrayKey {
-        return IntArrayKey(CameraCharacteristics.CONTROL_AWB_AVAILABLE_MODES)
+    override fun controlAwbAvailableModes(): CameraMetadataControlAwbModeArrayKey {
+        return CameraMetadataControlAwbModeArrayKey(CameraCharacteristics.CONTROL_AWB_AVAILABLE_MODES)
     }
 
     override fun controlAwbLockAvailable(): BooleanKey {
         return BooleanKey(CameraCharacteristics.CONTROL_AWB_LOCK_AVAILABLE)
     }
 
-    override fun infoSupportedHardwareLevel(): IntKey {
-        return IntKey(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL)
+    override fun infoSupportedHardwareLevel(): CameraMetadataInfoSupportedHardwareLevelKey {
+        return CameraMetadataInfoSupportedHardwareLevelKey(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL)
     }
 
     override fun infoVersion(): StringKey {
-        return StringKey(CameraCharacteristics.INFO_VERSION)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            return StringKey(CameraCharacteristics.INFO_VERSION)
+        } else {
+            throw UnsupportedOperationException("Field requires API level 28")
+        }
     }
 
     override fun lensInfoAvailableApertures(): FloatArrayKey {

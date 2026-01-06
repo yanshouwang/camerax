@@ -7,13 +7,19 @@ import androidx.camera.view.TapToFocusInfo
 import androidx.lifecycle.LiveData
 import dev.zeekr.camerax_android.CameraStateApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
+import dev.zeekr.camerax_android.LowLightBoostStateApi
 import dev.zeekr.camerax_android.PigeonApiCameraStateLiveDataProxyApi
 import dev.zeekr.camerax_android.PigeonApiIntLiveDataProxyApi
+import dev.zeekr.camerax_android.PigeonApiLowLightBoostStateLiveDataProxyApi
 import dev.zeekr.camerax_android.PigeonApiPreviewViewStreamStateLiveDataProxyApi
 import dev.zeekr.camerax_android.PigeonApiTapToFocusInfoLiveDataProxyApi
+import dev.zeekr.camerax_android.PigeonApiTorchStateLiveDataProxyApi
 import dev.zeekr.camerax_android.PigeonApiZoomStateLiveDataProxyApi
 import dev.zeekr.camerax_android.PreviewViewStreamStateApi
+import dev.zeekr.camerax_android.TorchStateApi
 import dev.zeekr.camerax_android.core.api
+import dev.zeekr.camerax_android.core.lowLightBoostStateApi
+import dev.zeekr.camerax_android.core.torchStateApi
 import dev.zeekr.camerax_android.view.api
 
 class IntLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIntLiveDataProxyApi(registrar) {
@@ -42,6 +48,21 @@ class CameraStateLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
 
     override fun removeObserver(pigeon_instance: CameraStateLiveData, observer: CameraStateObserver) {
         return pigeon_instance.instance.removeObserver(observer)
+    }
+}
+
+class TorchStateLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiTorchStateLiveDataProxyApi(registrar) {
+    override fun getValue(pigeon_instance: TorchStateLiveData): TorchStateApi? {
+        return pigeon_instance.instance.value?.torchStateApi
+    }
+
+    override fun observeForever(pigeon_instance: TorchStateLiveData, observer: TorchStateObserver) {
+        pigeon_instance.instance.observeForever(observer)
+    }
+
+    override fun removeObserver(pigeon_instance: TorchStateLiveData, observer: TorchStateObserver) {
+        pigeon_instance.instance.removeObserver(observer)
     }
 }
 
@@ -75,6 +96,21 @@ class TapToFocusInfoLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 }
 
+class LowLightBoostStateLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiLowLightBoostStateLiveDataProxyApi(registrar) {
+    override fun getValue(pigeon_instance: LowLightBoostStateLiveData): LowLightBoostStateApi? {
+        return pigeon_instance.instance.value?.lowLightBoostStateApi
+    }
+
+    override fun observeForever(pigeon_instance: LowLightBoostStateLiveData, observer: LowLightBoostStateObserver) {
+        pigeon_instance.instance.observeForever(observer)
+    }
+
+    override fun removeObserver(pigeon_instance: LowLightBoostStateLiveData, observer: LowLightBoostStateObserver) {
+        pigeon_instance.instance.removeObserver(observer)
+    }
+}
+
 class PreviewViewStreamStateLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiPreviewViewStreamStateLiveDataProxyApi(registrar) {
     override fun getValue(pigeon_instance: PreviewViewStreamStateLiveData): PreviewViewStreamStateApi? {
@@ -96,6 +132,8 @@ class PreviewViewStreamStateLiveDataImpl(registrar: CameraXApiPigeonProxyApiRegi
 
 class IntLiveData(val instance: LiveData<Int>)
 class CameraStateLiveData(val instance: LiveData<CameraState>)
+class TorchStateLiveData(val instance: LiveData<Int>)
 class ZoomStateLiveData(val instance: LiveData<ZoomState>)
 class TapToFocusInfoLiveData(val instance: LiveData<TapToFocusInfo>)
+class LowLightBoostStateLiveData(val instance: LiveData<Int>)
 class PreviewViewStreamStateLiveData(val instance: LiveData<PreviewView.StreamState>)

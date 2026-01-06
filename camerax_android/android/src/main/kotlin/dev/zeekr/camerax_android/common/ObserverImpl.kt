@@ -8,10 +8,14 @@ import androidx.lifecycle.Observer
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCameraStateObserverProxyApi
 import dev.zeekr.camerax_android.PigeonApiIntObserverProxyApi
+import dev.zeekr.camerax_android.PigeonApiLowLightBoostStateObserverProxyApi
 import dev.zeekr.camerax_android.PigeonApiPreviewViewStreamStateObserverProxyApi
 import dev.zeekr.camerax_android.PigeonApiTapToFocusInfoObserverProxyApi
+import dev.zeekr.camerax_android.PigeonApiTorchStateObserverProxyApi
 import dev.zeekr.camerax_android.PigeonApiZoomStateObserverProxyApi
 import dev.zeekr.camerax_android.core.api
+import dev.zeekr.camerax_android.core.lowLightBoostStateApi
+import dev.zeekr.camerax_android.core.torchStateApi
 import dev.zeekr.camerax_android.view.api
 
 class IntObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIntObserverProxyApi(registrar) {
@@ -24,6 +28,13 @@ class CameraStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiCameraStateObserverProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): CameraStateObserver {
         return CameraStateObserver(this)
+    }
+}
+
+class TorchStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiTorchStateObserverProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): TorchStateObserver {
+        return TorchStateObserver(this)
     }
 }
 
@@ -41,6 +52,13 @@ class TapToFocusInfoObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 }
 
+class LowLightBoostStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiLowLightBoostStateObserverProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): LowLightBoostStateObserver {
+        return LowLightBoostStateObserver(this)
+    }
+}
+
 class PreviewViewStreamStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiPreviewViewStreamStateObserverProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): PreviewViewStreamStateObserver {
@@ -48,33 +66,45 @@ class PreviewViewStreamStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegi
     }
 }
 
-class IntObserver(private val impl: IntObserverImpl) : Observer<Int> {
+class IntObserver(private val api: PigeonApiIntObserverProxyApi) : Observer<Int> {
     override fun onChanged(value: Int) {
-        impl.onChanged(this, value.toLong()) {}
+        api.onChanged(this, value.toLong()) {}
     }
 }
 
-class CameraStateObserver(private val impl: CameraStateObserverImpl) : Observer<CameraState> {
+class CameraStateObserver(private val api: PigeonApiCameraStateObserverProxyApi) : Observer<CameraState> {
     override fun onChanged(value: CameraState) {
-        impl.onChanged(this, value.api) {}
+        api.onChanged(this, value.api) {}
     }
 }
 
-class ZoomStateObserver(private val impl: ZoomStateObserverImpl) : Observer<ZoomState> {
+class TorchStateObserver(private val api: PigeonApiTorchStateObserverProxyApi) : Observer<Int> {
+    override fun onChanged(value: Int) {
+        return api.onChanged(this, value.torchStateApi) {}
+    }
+}
+
+class ZoomStateObserver(private val api: PigeonApiZoomStateObserverProxyApi) : Observer<ZoomState> {
     override fun onChanged(value: ZoomState) {
-        impl.onChanged(this, value) {}
+        api.onChanged(this, value) {}
     }
 }
 
-class TapToFocusInfoObserver(private val impl: TapToFocusInfoObserverImpl) : Observer<TapToFocusInfo> {
+class TapToFocusInfoObserver(private val api: PigeonApiTapToFocusInfoObserverProxyApi) : Observer<TapToFocusInfo> {
     override fun onChanged(value: TapToFocusInfo) {
-        impl.onChanged(this, value) {}
+        api.onChanged(this, value) {}
     }
 }
 
-class PreviewViewStreamStateObserver(private val impl: PreviewViewStreamStateObserverImpl) :
+class LowLightBoostStateObserver(private val api: PigeonApiLowLightBoostStateObserverProxyApi) : Observer<Int> {
+    override fun onChanged(value: Int) {
+        api.onChanged(this, value.lowLightBoostStateApi) {}
+    }
+}
+
+class PreviewViewStreamStateObserver(private val api: PigeonApiPreviewViewStreamStateObserverProxyApi) :
     Observer<PreviewView.StreamState> {
     override fun onChanged(value: PreviewView.StreamState) {
-        impl.onChanged(this, value.api) {}
+        api.onChanged(this, value.api) {}
     }
 }

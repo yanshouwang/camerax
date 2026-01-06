@@ -6,9 +6,14 @@ import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2Interop
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
+import dev.zeekr.camerax_android.CameraMetadataControlAeModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAfModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlAwbModeApi
+import dev.zeekr.camerax_android.CameraMetadataControlModeApi
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiCamera2InteropCaptureRequestOptionsExtenderProxyApi
 import dev.zeekr.camerax_android.camera2.CaptureRequestImpl
+import dev.zeekr.camerax_android.camera2.impl
 
 @OptIn(ExperimentalCamera2Interop::class)
 class Camera2InteropImpl {
@@ -44,6 +49,42 @@ class Camera2InteropImpl {
             pigeon_instance: CaptureRequestOptionsExtender, key: CaptureRequestImpl.BooleanKey, value: Boolean
         ): CaptureRequestOptionsExtender {
             val instance = pigeon_instance.instance.setCaptureRequestOption(key.instance, value)
+            return CaptureRequestOptionsExtender(instance)
+        }
+
+        override fun setCameraMetadataControlModeCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptionsExtender,
+            key: CaptureRequestImpl.CameraMetadataControlModeKey,
+            value: CameraMetadataControlModeApi
+        ): CaptureRequestOptionsExtender {
+            val instance = pigeon_instance.instance.setCaptureRequestOption(key.instance, value.impl)
+            return CaptureRequestOptionsExtender(instance)
+        }
+
+        override fun setCameraMetadataControlAeModeCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptionsExtender,
+            key: CaptureRequestImpl.CameraMetadataControlAeModeKey,
+            value: CameraMetadataControlAeModeApi
+        ): CaptureRequestOptionsExtender {
+            val instance = pigeon_instance.instance.setCaptureRequestOption(key.instance, value.impl)
+            return CaptureRequestOptionsExtender(instance)
+        }
+
+        override fun setCameraMetadataControlAfModeCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptionsExtender,
+            key: CaptureRequestImpl.CameraMetadataControlAfModeKey,
+            value: CameraMetadataControlAfModeApi
+        ): CaptureRequestOptionsExtender {
+            val instance = pigeon_instance.instance.setCaptureRequestOption(key.instance, value.impl)
+            return CaptureRequestOptionsExtender(instance)
+        }
+
+        override fun setCameraMetadataControlAwbModeCaptureRequestOption(
+            pigeon_instance: CaptureRequestOptionsExtender,
+            key: CaptureRequestImpl.CameraMetadataControlAwbModeKey,
+            value: CameraMetadataControlAwbModeApi
+        ): CaptureRequestOptionsExtender {
+            val instance = pigeon_instance.instance.setCaptureRequestOption(key.instance, value.impl)
             return CaptureRequestOptionsExtender(instance)
         }
 

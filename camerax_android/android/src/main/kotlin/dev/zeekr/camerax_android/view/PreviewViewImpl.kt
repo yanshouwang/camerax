@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import androidx.camera.core.MeteringPointFactory
 import androidx.camera.view.CameraController
 import androidx.camera.view.PreviewView
-import androidx.lifecycle.LifecycleOwner
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiPreviewViewProxyApi
 import dev.zeekr.camerax_android.PreviewViewImplementationModeApi
@@ -12,10 +11,6 @@ import dev.zeekr.camerax_android.PreviewViewScaleTypeApi
 import dev.zeekr.camerax_android.PreviewViewStreamStateApi
 import dev.zeekr.camerax_android.activity
 import dev.zeekr.camerax_android.common.PreviewViewStreamStateLiveData
-import dev.zeekr.camerax_android.common.PreviewViewStreamStateObserver
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiPreviewViewProxyApi(registrar) {

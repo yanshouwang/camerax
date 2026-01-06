@@ -19,7 +19,7 @@ class BitmapAnalyzer(private val consumer: Consumer<Bitmap>) : ImageAnalysis.Ana
     }
 
     override fun analyze(image: ImageProxy) {
-        try {
+        image.use { image ->
             val source = image.toBitmap()
             val x = 0
             val y = 0
@@ -29,8 +29,6 @@ class BitmapAnalyzer(private val consumer: Consumer<Bitmap>) : ImageAnalysis.Ana
             val filter = true
             val bitmap = Bitmap.createBitmap(source, x, y, width, height, m, filter)
             consumer.accept(bitmap)
-        } finally {
-            image.close()
         }
     }
 }

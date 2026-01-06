@@ -2,6 +2,7 @@ package dev.zeekr.camerax_android.camera2
 
 import android.hardware.camera2.CaptureResult
 import android.hardware.camera2.TotalCaptureResult
+import android.os.Build
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiTotalCaptureResultProxyApi
 
@@ -12,10 +13,18 @@ class TotalCaptureResultImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 
     override fun getPhysicalCameraResults(pigeon_instance: TotalCaptureResult): Map<String, CaptureResult> {
-        return pigeon_instance.physicalCameraResults
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            return pigeon_instance.physicalCameraResults
+        } else {
+            throw UnsupportedOperationException("Call requires API level 28")
+        }
     }
 
     override fun getPhysicalCameraTotalResults(pigeon_instance: TotalCaptureResult): Map<String, TotalCaptureResult> {
-        return pigeon_instance.physicalCameraTotalResults
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            return pigeon_instance.physicalCameraTotalResults
+        } else {
+            throw UnsupportedOperationException("Call requires API level 31")
+        }
     }
 }

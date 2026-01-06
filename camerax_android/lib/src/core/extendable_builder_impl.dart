@@ -5,7 +5,7 @@ abstract base class ExtendableBuilderImpl<T> implements ExtendableBuilder<T> {
   ExtendableBuilderProxyApi get api;
 }
 
-extension ExtendableBuilderX<T> on ExtendableBuilder<T> {
+extension ExtendableBuilderX on ExtendableBuilder {
   ExtendableBuilderProxyApi get api {
     final impl = this;
     if (impl is! ExtendableBuilderImpl) throw TypeError();

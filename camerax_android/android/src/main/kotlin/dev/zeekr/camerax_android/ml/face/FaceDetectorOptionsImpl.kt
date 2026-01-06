@@ -8,7 +8,6 @@ import dev.zeekr.camerax_android.FaceDetectorOptionsLandmarkModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsPerformanceModeApi
 import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsProxyApi
-import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsUtilProxyApi
 
 class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiFaceDetectorOptionsProxyApi(registrar) {
@@ -23,21 +22,21 @@ class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
 
         override fun setClassificationMode(
-            pigeon_instance: FaceDetectorOptions.Builder, classificationMode: Long
+            pigeon_instance: FaceDetectorOptions.Builder, classificationMode: FaceDetectorOptionsClassificationModeApi
         ): FaceDetectorOptions.Builder {
-            return pigeon_instance.setClassificationMode(classificationMode.toInt())
+            return pigeon_instance.setClassificationMode(classificationMode.impl)
         }
 
         override fun setContourMode(
-            pigeon_instance: FaceDetectorOptions.Builder, contourMode: Long
+            pigeon_instance: FaceDetectorOptions.Builder, contourMode: FaceDetectorOptionsContourModeApi
         ): FaceDetectorOptions.Builder {
-            return pigeon_instance.setContourMode(contourMode.toInt())
+            return pigeon_instance.setContourMode(contourMode.impl)
         }
 
         override fun setLandmarkMode(
-            pigeon_instance: FaceDetectorOptions.Builder, landmarkMode: Long
+            pigeon_instance: FaceDetectorOptions.Builder, landmarkMode: FaceDetectorOptionsLandmarkModeApi
         ): FaceDetectorOptions.Builder {
-            return pigeon_instance.setLandmarkMode(landmarkMode.toInt())
+            return pigeon_instance.setLandmarkMode(landmarkMode.impl)
         }
 
         override fun setMinFaceSize(
@@ -47,9 +46,9 @@ class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
 
         override fun setPerformanceMode(
-            pigeon_instance: FaceDetectorOptions.Builder, performanceMode: Long
+            pigeon_instance: FaceDetectorOptions.Builder, performanceMode: FaceDetectorOptionsPerformanceModeApi
         ): FaceDetectorOptions.Builder {
-            return pigeon_instance.setPerformanceMode(performanceMode.toInt())
+            return pigeon_instance.setPerformanceMode(performanceMode.impl)
         }
 
         override fun build(pigeon_instance: FaceDetectorOptions.Builder): FaceDetectorOptions {
@@ -57,129 +56,57 @@ class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
         }
     }
 
-    class UtilImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiFaceDetectorOptionsUtilProxyApi(registrar) {
-        override fun fromClassificationMode(value: Long): FaceDetectorOptionsClassificationModeApi {
-            return Util.fromClassificationMode(value.toInt())
-        }
-
-        override fun fromContourMode(value: Long): FaceDetectorOptionsContourModeApi {
-            return Util.fromContourMode(value.toInt())
-        }
-
-        override fun fromLandmarkMode(value: Long): FaceDetectorOptionsLandmarkModeApi {
-            return Util.fromLandmarkMode(value.toInt())
-        }
-
-        override fun fromPerformanceMode(value: Long): FaceDetectorOptionsPerformanceModeApi {
-            return Util.fromPerformanceMode(value.toInt())
-        }
-
-        override fun toClassificationMode(api: FaceDetectorOptionsClassificationModeApi): Long {
-            return Util.toClassificationMode(api).toLong()
-        }
-
-        override fun toContourMode(api: FaceDetectorOptionsContourModeApi): Long {
-            return Util.toContourMode(api).toLong()
-        }
-
-        override fun toLandmarkMode(api: FaceDetectorOptionsLandmarkModeApi): Long {
-            return Util.toLandmarkMode(api).toLong()
-        }
-
-        override fun toPerformanceMode(api: FaceDetectorOptionsPerformanceModeApi): Long {
-            return Util.toPerformanceMode(api).toLong()
-        }
-    }
-
-    object Util {
-        fun fromClassificationMode(value: Int): FaceDetectorOptionsClassificationModeApi {
-            return when (value) {
-                FaceDetectorOptions.CLASSIFICATION_MODE_NONE -> FaceDetectorOptionsClassificationModeApi.NONE
-                FaceDetectorOptions.CLASSIFICATION_MODE_ALL -> FaceDetectorOptionsClassificationModeApi.ALL
-                else -> throw NotImplementedError("Not implemented value: $this")
-            }
-        }
-
-        fun fromContourMode(value: Int): FaceDetectorOptionsContourModeApi {
-            return when (value) {
-                FaceDetectorOptions.CONTOUR_MODE_NONE -> FaceDetectorOptionsContourModeApi.NONE
-                FaceDetectorOptions.CONTOUR_MODE_ALL -> FaceDetectorOptionsContourModeApi.ALL
-                else -> throw NotImplementedError("Not implemented value: $this")
-            }
-        }
-
-        fun fromLandmarkMode(value: Int): FaceDetectorOptionsLandmarkModeApi {
-            return when (value) {
-                FaceDetectorOptions.LANDMARK_MODE_NONE -> FaceDetectorOptionsLandmarkModeApi.NONE
-                FaceDetectorOptions.LANDMARK_MODE_ALL -> FaceDetectorOptionsLandmarkModeApi.ALL
-                else -> throw NotImplementedError("Not implemented value: $this")
-            }
-        }
-
-        fun fromPerformanceMode(value: Int): FaceDetectorOptionsPerformanceModeApi {
-            return when (value) {
-                FaceDetectorOptions.PERFORMANCE_MODE_FAST -> FaceDetectorOptionsPerformanceModeApi.FAST
-                FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE -> FaceDetectorOptionsPerformanceModeApi.ACCURATE
-                else -> throw NotImplementedError("Not implemented value: $this")
-            }
-        }
-
-        fun toClassificationMode(api: FaceDetectorOptionsClassificationModeApi): Int {
-            return when (api) {
-                FaceDetectorOptionsClassificationModeApi.NONE -> FaceDetectorOptions.CLASSIFICATION_MODE_NONE
-                FaceDetectorOptionsClassificationModeApi.ALL -> FaceDetectorOptions.CLASSIFICATION_MODE_ALL
-            }
-        }
-
-        fun toContourMode(api: FaceDetectorOptionsContourModeApi): Int {
-            return when (api) {
-                FaceDetectorOptionsContourModeApi.NONE -> FaceDetectorOptions.CONTOUR_MODE_NONE
-                FaceDetectorOptionsContourModeApi.ALL -> FaceDetectorOptions.CONTOUR_MODE_ALL
-            }
-        }
-
-        fun toLandmarkMode(api: FaceDetectorOptionsLandmarkModeApi): Int {
-            return when (api) {
-                FaceDetectorOptionsLandmarkModeApi.NONE -> FaceDetectorOptions.LANDMARK_MODE_NONE
-                FaceDetectorOptionsLandmarkModeApi.ALL -> FaceDetectorOptions.LANDMARK_MODE_ALL
-            }
-        }
-
-        fun toPerformanceMode(api: FaceDetectorOptionsPerformanceModeApi): Int {
-            return when (api) {
-                FaceDetectorOptionsPerformanceModeApi.FAST -> FaceDetectorOptions.PERFORMANCE_MODE_FAST
-                FaceDetectorOptionsPerformanceModeApi.ACCURATE -> FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE
-            }
-        }
-    }
-
     override fun build(
         enableTracking: Boolean?,
-        classificationMode: Long?,
-        contourMode: Long?,
-        landmarkMode: Long?,
+        classificationMode: FaceDetectorOptionsClassificationModeApi?,
+        contourMode: FaceDetectorOptionsContourModeApi?,
+        landmarkMode: FaceDetectorOptionsLandmarkModeApi?,
         minFaceSize: Double?,
-        performanceMode: Long?
+        performanceMode: FaceDetectorOptionsPerformanceModeApi?
     ): FaceDetectorOptions {
         val builder = FaceDetectorOptions.Builder()
         if (enableTracking == true) {
             builder.enableTracking()
         }
         if (classificationMode != null) {
-            builder.setClassificationMode(classificationMode.toInt())
+            builder.setClassificationMode(classificationMode.impl)
         }
         if (contourMode != null) {
-            builder.setContourMode(contourMode.toInt())
+            builder.setContourMode(contourMode.impl)
         }
         if (landmarkMode != null) {
-            builder.setLandmarkMode(landmarkMode.toInt())
+            builder.setLandmarkMode(landmarkMode.impl)
         }
         if (minFaceSize != null) {
             builder.setMinFaceSize(minFaceSize.toFloat())
         }
         if (performanceMode != null) {
-            builder.setPerformanceMode(performanceMode.toInt())
+            builder.setPerformanceMode(performanceMode.impl)
         }
         return builder.build()
     }
 }
+
+val FaceDetectorOptionsClassificationModeApi.impl: Int
+    get() = when (this) {
+        FaceDetectorOptionsClassificationModeApi.NONE -> FaceDetectorOptions.CLASSIFICATION_MODE_NONE
+        FaceDetectorOptionsClassificationModeApi.ALL -> FaceDetectorOptions.CLASSIFICATION_MODE_ALL
+    }
+
+val FaceDetectorOptionsContourModeApi.impl: Int
+    get() = when (this) {
+        FaceDetectorOptionsContourModeApi.NONE -> FaceDetectorOptions.CONTOUR_MODE_NONE
+        FaceDetectorOptionsContourModeApi.ALL -> FaceDetectorOptions.CONTOUR_MODE_ALL
+    }
+
+val FaceDetectorOptionsLandmarkModeApi.impl: Int
+    get() = when (this) {
+        FaceDetectorOptionsLandmarkModeApi.NONE -> FaceDetectorOptions.LANDMARK_MODE_NONE
+        FaceDetectorOptionsLandmarkModeApi.ALL -> FaceDetectorOptions.LANDMARK_MODE_ALL
+    }
+
+val FaceDetectorOptionsPerformanceModeApi.impl: Int
+    get() = when (this) {
+        FaceDetectorOptionsPerformanceModeApi.FAST -> FaceDetectorOptions.PERFORMANCE_MODE_FAST
+        FaceDetectorOptionsPerformanceModeApi.ACCURATE -> FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE
+    }
