@@ -5,7 +5,6 @@ import 'package:camerax_example/view_models.dart';
 import 'package:camerax_example/widgets.dart';
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
