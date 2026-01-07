@@ -130,53 +130,53 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         onChanged: (value) => viewModel.setZoomRatio(value),
                       ),
                     ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    spacing: 16.0,
-                    children: [
-                      if (lensApertureState != null)
-                        Text('A: ${lensApertureState.availableValues}'),
-                      if (exposureTimeState != null)
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('E [${exposureTimeState.value}]'),
-                            CupertinoSlider(
-                              min: exposureTimeState.range.lower.toDouble(),
-                              max: exposureTimeState.range.upper.toDouble(),
-                              value: exposureTimeState.value.toDouble(),
-                              divisions: 10,
-                              onChanged: (value) {
-                                viewModel.setExposureTime(value.toInt());
-                              },
-                            ),
-                          ],
-                        ),
-                      if (sensitivityState != null)
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('S [${sensitivityState.value}]'),
-                            CupertinoSlider(
-                              min: sensitivityState.range.lower.toDouble(),
-                              max: sensitivityState.range.upper.toDouble(),
-                              value: sensitivityState.value.toDouble(),
-                              divisions: 10,
-                              onChanged: (value) {
-                                viewModel.setSensitivity(value.toInt());
-                              },
-                            ),
-                          ],
-                        ),
-                      CupertinoButton(
-                        onPressed: () {
-                          viewModel.clearArguments();
-                        },
-                        child: Text('Clear'),
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   spacing: 16.0,
+                  //   children: [
+                  //     if (lensApertureState != null)
+                  //       Text('A: ${lensApertureState.availableValues}'),
+                  //     if (exposureTimeState != null)
+                  //       Row(
+                  //         mainAxisSize: MainAxisSize.min,
+                  //         children: [
+                  //           Text('E [${exposureTimeState.value}]'),
+                  //           CupertinoSlider(
+                  //             min: exposureTimeState.range.lower.toDouble(),
+                  //             max: exposureTimeState.range.upper.toDouble(),
+                  //             value: exposureTimeState.value.toDouble(),
+                  //             divisions: 10,
+                  //             onChanged: (value) {
+                  //               viewModel.setExposureTime(value.toInt());
+                  //             },
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     if (sensitivityState != null)
+                  //       Row(
+                  //         mainAxisSize: MainAxisSize.min,
+                  //         children: [
+                  //           Text('S [${sensitivityState.value}]'),
+                  //           CupertinoSlider(
+                  //             min: sensitivityState.range.lower.toDouble(),
+                  //             max: sensitivityState.range.upper.toDouble(),
+                  //             value: sensitivityState.value.toDouble(),
+                  //             divisions: 10,
+                  //             onChanged: (value) {
+                  //               viewModel.setSensitivity(value.toInt());
+                  //             },
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     CupertinoButton(
+                  //       onPressed: () {
+                  //         viewModel.clearArguments();
+                  //       },
+                  //       child: Text('Clear'),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

@@ -156,63 +156,64 @@ class HomeViewModel extends ViewModel {
   Future<void> bind() async {
     await controller.bind();
 
-    final info = await controller.getCameraInfo();
-    final control = await controller.getCameraControl();
-    if (info == null || control == null) {
-      _logger.warning('info or control is null');
-      return;
-    }
-    final camera2Info = Camera2CameraInfo.from(info);
-    final camera2Control = Camera2CameraControl.from(control);
+    // final info = await controller.getCameraInfo();
+    // final control = await controller.getCameraControl();
+    // if (info == null || control == null) {
+    //   _logger.warning('info or control is null');
+    //   return;
+    // }
+    // final camera2Info = Camera2CameraInfo.from(info);
+    // final camera2Control = Camera2CameraControl.from(control);
 
-    _info = info;
-    _control = control;
-    _camera2Info = camera2Info;
-    _camera2Control = camera2Control;
+    // final availableApertures = await camera2Info.getCameraCharacteristic(
+    //   CameraCharacteristics.lensInfoAvailableApertures,
+    // );
+    // _logger.info('lensInfoAvailableApertures: $availableApertures');
 
-    final availableApertures = await camera2Info.getCameraCharacteristic(
-      CameraCharacteristics.lensInfoAvailableApertures,
-    );
-    _logger.info('lensInfoAvailableApertures: $availableApertures');
-    if (availableApertures != null && availableApertures.isNotEmpty) {
-      lensApertureState = ApertureState(
-        availableValues: availableApertures,
-        value: availableApertures.first,
-      );
-    }
+    // final exposureTimeRange = await camera2Info.getCameraCharacteristic(
+    //   CameraCharacteristics.sensorInfoExposureTimeRange,
+    // );
+    // _logger.info('sensorInfoExposureTimeRange: $exposureTimeRange');
 
-    final exposureTimeRange = await camera2Info.getCameraCharacteristic(
-      CameraCharacteristics.sensorInfoExposureTimeRange,
-    );
-    _logger.info('sensorInfoExposureTimeRange: $exposureTimeRange');
-    if (exposureTimeRange != null) {
-      exposureTimeState = ExposureTimeState(
-        range: exposureTimeRange,
-        value: exposureTimeRange.lower,
-      );
-    }
+    // final sensitivityRange = await camera2Info.getCameraCharacteristic(
+    //   CameraCharacteristics.sensorInfoSensitivityRange,
+    // );
+    // _logger.info('sensorInfoSensitivityRange: $sensitivityRange');
 
-    final sensitivityRange = await camera2Info.getCameraCharacteristic(
-      CameraCharacteristics.sensorInfoSensitivityRange,
-    );
-    _logger.info('sensorInfoSensitivityRange: $sensitivityRange');
-    if (sensitivityRange != null) {
-      sensitivityState = SensitivityState(
-        range: sensitivityRange,
-        value: sensitivityRange.lower,
-      );
-    }
+    // _info = info;
+    // _control = control;
+    // _camera2Info = camera2Info;
+    // _camera2Control = camera2Control;
+
+    // if (availableApertures != null && availableApertures.isNotEmpty) {
+    //   lensApertureState = ApertureState(
+    //     availableValues: availableApertures,
+    //     value: availableApertures.first,
+    //   );
+    // }
+    // if (exposureTimeRange != null) {
+    //   exposureTimeState = ExposureTimeState(
+    //     range: exposureTimeRange,
+    //     value: exposureTimeRange.lower,
+    //   );
+    // }
+    // if (sensitivityRange != null) {
+    //   sensitivityState = SensitivityState(
+    //     range: sensitivityRange,
+    //     value: sensitivityRange.lower,
+    //   );
+    // }
   }
 
   Future<void> unbind() async {
     await controller.unbind();
-    lensApertureState = null;
-    exposureTimeState = null;
-    sensitivityState = null;
-    _info = null;
-    _control = null;
-    _camera2Info = null;
-    _camera2Control = null;
+    // _info = null;
+    // _control = null;
+    // _camera2Info = null;
+    // _camera2Control = null;
+    // lensApertureState = null;
+    // exposureTimeState = null;
+    // sensitivityState = null;
   }
 
   Future<void> setMode(CameraMode mode) async {
