@@ -1,8 +1,8 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/visionx.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin VNObservationImpl on VNObservation {
+abstract base class VNObservationImpl implements VNObservation {
   VNObservationProxyApi get api;
 }
 

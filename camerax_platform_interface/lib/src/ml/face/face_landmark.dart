@@ -1,6 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
 
-enum FaceLandmarkType {
+enum FaceLandmark$Type {
   leftCheek,
   leftEar,
   leftEye,
@@ -13,9 +13,7 @@ enum FaceLandmarkType {
   rightEye,
 }
 
-abstract base class FaceLandmark {
-  FaceLandmark.impl();
-
-  FaceLandmarkType get type;
+abstract interface class FaceLandmark {
+  FaceLandmark$Type get type;
   Point<double> get position;
 }

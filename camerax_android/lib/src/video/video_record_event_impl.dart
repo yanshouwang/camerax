@@ -1,34 +1,18 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
+import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'output_options_impl.dart';
-import 'output_results_impl.dart';
-import 'recording_stats_impl.dart';
-
-base mixin VideoRecordEventImpl on VideoRecordEvent {
+abstract base class VideoRecordEventImpl implements VideoRecordEvent {
   VideoRecordEventProxyApi get api;
 }
 
-final class VideoRecordStatusEventImpl extends VideoRecordStatusEvent
-    with VideoRecordEventImpl {
+final class VideoRecordEvent$StatusImpl extends VideoRecordEventImpl
+    implements VideoRecordEvent$Status {
   @override
-  final VideoRecordStatusEventProxyApi api;
+  final VideoRecordEventStatusProxyApi api;
 
-  VideoRecordStatusEventImpl.internal(this.api) : super.impl();
-
-  @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
-  @override
-  RecordingStats get recordingStats => api.recordingStats.impl;
-}
-
-final class VideoRecordStartEventImpl extends VideoRecordStartEvent
-    with VideoRecordEventImpl {
-  @override
-  final VideoRecordStartEventProxyApi api;
-
-  VideoRecordStartEventImpl.internal(this.api) : super.impl();
+  VideoRecordEvent$StatusImpl.internal(this.api);
 
   @override
   OutputOptions get outputOptions => api.outputOptions.impl;
@@ -36,25 +20,12 @@ final class VideoRecordStartEventImpl extends VideoRecordStartEvent
   RecordingStats get recordingStats => api.recordingStats.impl;
 }
 
-final class VideoRecordPauseEventImpl extends VideoRecordPauseEvent
-    with VideoRecordEventImpl {
+final class VideoRecordEvent$StartImpl extends VideoRecordEventImpl
+    implements VideoRecordEvent$Start {
   @override
-  final VideoRecordPauseEventProxyApi api;
+  final VideoRecordEventStartProxyApi api;
 
-  VideoRecordPauseEventImpl.internal(this.api) : super.impl();
-
-  @override
-  OutputOptions get outputOptions => api.outputOptions.impl;
-  @override
-  RecordingStats get recordingStats => api.recordingStats.impl;
-}
-
-final class VideoRecordResumeEventImpl extends VideoRecordResumeEvent
-    with VideoRecordEventImpl {
-  @override
-  final VideoRecordResumeEventProxyApi api;
-
-  VideoRecordResumeEventImpl.internal(this.api) : super.impl();
+  VideoRecordEvent$StartImpl.internal(this.api);
 
   @override
   OutputOptions get outputOptions => api.outputOptions.impl;
@@ -62,12 +33,38 @@ final class VideoRecordResumeEventImpl extends VideoRecordResumeEvent
   RecordingStats get recordingStats => api.recordingStats.impl;
 }
 
-final class VideoRecordFinalizeEventImpl extends VideoRecordFinalizeEvent
-    with VideoRecordEventImpl {
+final class VideoRecordEvent$PauseImpl extends VideoRecordEventImpl
+    implements VideoRecordEvent$Pause {
   @override
-  final VideoRecordFinalizeEventProxyApi api;
+  final VideoRecordEventPauseProxyApi api;
 
-  VideoRecordFinalizeEventImpl.internal(this.api) : super.impl();
+  VideoRecordEvent$PauseImpl.internal(this.api);
+
+  @override
+  OutputOptions get outputOptions => api.outputOptions.impl;
+  @override
+  RecordingStats get recordingStats => api.recordingStats.impl;
+}
+
+final class VideoRecordEvent$ResumeImpl extends VideoRecordEventImpl
+    implements VideoRecordEvent$Resume {
+  @override
+  final VideoRecordEventResumeProxyApi api;
+
+  VideoRecordEvent$ResumeImpl.internal(this.api);
+
+  @override
+  OutputOptions get outputOptions => api.outputOptions.impl;
+  @override
+  RecordingStats get recordingStats => api.recordingStats.impl;
+}
+
+final class VideoRecordEvent$FinalizeImpl extends VideoRecordEventImpl
+    implements VideoRecordEvent$Finalize {
+  @override
+  final VideoRecordEventFinalizeProxyApi api;
+
+  VideoRecordEvent$FinalizeImpl.internal(this.api);
 
   @override
   OutputOptions get outputOptions => api.outputOptions.impl;
@@ -76,34 +73,37 @@ final class VideoRecordFinalizeEventImpl extends VideoRecordFinalizeEvent
   @override
   Object? get cause => api.cause?.impl;
   @override
-  VideoRecordFinalizeEventError get error => api.error.impl;
+  VideoRecordEvent$Finalize$Error get error => api.error.impl;
   @override
   bool get hasError => api.hasError;
   @override
   OutputResults get outputResults => api.outputResults.impl;
 }
 
-extension VideoRecordFinalizeEventErrorApiX
-    on VideoRecordFinalizeEventErrorApi {
-  VideoRecordFinalizeEventError get impl =>
-      VideoRecordFinalizeEventError.values[index];
+extension VideoRecordEventFinalizeErrorApiX
+    on VideoRecordEventFinalizeErrorApi {
+  VideoRecordEvent$Finalize$Error get impl =>
+      VideoRecordEvent$Finalize$Error.values[index];
 }
 
 extension VideoRecordEventProxyApiX on VideoRecordEventProxyApi {
   VideoRecordEvent get impl {
     final api = this;
-    if (api is VideoRecordStatusEventProxyApi) {
-      return VideoRecordStatusEventImpl.internal(api);
-    } else if (api is VideoRecordStartEventProxyApi) {
-      return VideoRecordStartEventImpl.internal(api);
-    } else if (api is VideoRecordPauseEventProxyApi) {
-      return VideoRecordPauseEventImpl.internal(api);
-    } else if (api is VideoRecordResumeEventProxyApi) {
-      return VideoRecordResumeEventImpl.internal(api);
-    } else if (api is VideoRecordFinalizeEventProxyApi) {
-      return VideoRecordFinalizeEventImpl.internal(api);
-    } else {
-      throw TypeError();
+    if (api is VideoRecordEventStatusProxyApi) {
+      return VideoRecordEvent$StatusImpl.internal(api);
     }
+    if (api is VideoRecordEventStartProxyApi) {
+      return VideoRecordEvent$StartImpl.internal(api);
+    }
+    if (api is VideoRecordEventPauseProxyApi) {
+      return VideoRecordEvent$PauseImpl.internal(api);
+    }
+    if (api is VideoRecordEventResumeProxyApi) {
+      return VideoRecordEvent$ResumeImpl.internal(api);
+    }
+    if (api is VideoRecordEventFinalizeProxyApi) {
+      return VideoRecordEvent$FinalizeImpl.internal(api);
+    }
+    throw TypeError();
   }
 }

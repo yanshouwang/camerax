@@ -3,9 +3,7 @@ import 'package:camerax_platform_interface/src/common.dart';
 /// An interface which contains the camera exposure related information.
 ///
 /// Applications can retrieve an instance via getExposureState.
-abstract base class ExposureState {
-  ExposureState.impl();
-
+abstract interface class ExposureState {
   /// Get the current exposure compensation index.
   ///
   /// The exposure value (EV) is the compensation index multiplied by the step

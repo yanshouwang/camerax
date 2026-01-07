@@ -8,14 +8,6 @@
 import Foundation
 
 class CameraInfoDelegate: PigeonApiDelegateCameraInfoProxyApi {
-    func observeCameraState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, observer: CameraStateObserver) throws {
-        throw CameraXError(code: "unimplemented-error", message: "observeCameraState is not implemented", details: nil)
-    }
-    
-    func removeCameraStateObserver(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, observer: CameraStateObserver) throws {
-        throw CameraXError(code: "unimplemented-error", message: "removeCameraStateObserver is not implemented", details: nil)
-    }
-    
     func getIntrinsicZoomRatio(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> Double {
         throw CameraXError(code: "unimplemented-error", message: "getIntrinsicZoomRatio is not implemented", details: nil)
     }
@@ -26,22 +18,6 @@ class CameraInfoDelegate: PigeonApiDelegateCameraInfoProxyApi {
     
     func getSensorRotationDegrees2(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, relativeRotation: SurfaceRotationApi) throws -> Int64 {
         throw CameraXError(code: "unimplemented-error", message: "getSensorRotationDegrees2 is not implemented", details: nil)
-    }
-    
-    func observeTorchState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, observer: TorchStateObserver) throws {
-        pigeonInstance.getTorchState().observe(observer)
-    }
-    
-    func removeTorchStateObserver(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, observer: TorchStateObserver) throws {
-        pigeonInstance.getTorchState().removeObserver(observer)
-    }
-    
-    func observeZoomState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, observer: ZoomStateObserver) throws {
-        pigeonInstance.getZoomState().observe(observer)
-    }
-    
-    func removeZoomStateObserver(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo, observer: ZoomStateObserver) throws {
-        pigeonInstance.getZoomState().removeObserver(observer)
     }
     
     func isLowLightBoostSupported(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> Bool {
@@ -60,16 +36,16 @@ class CameraInfoDelegate: PigeonApiDelegateCameraInfoProxyApi {
         return pigeonInstance.getCameraSelector()
     }
     
-    func getCameraState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> CameraStateApi? {
+    func getCameraState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> CameraStateLiveData {
         throw CameraXError(code: "unimplemented-error", message: "getCameraState is not implemented", details: nil)
     }
     
-    func getTorchState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> TorchStateApi? {
-        return pigeonInstance.getTorchState().getValue()?.api
+    func getTorchState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> TorchStateLiveData {
+        return TorchStateLiveData(pigeonInstance.getTorchState())
     }
     
-    func getZoomState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> ZoomState? {
-        return pigeonInstance.getZoomState().getValue()
+    func getZoomState(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> ZoomStateLiveData {
+        return ZoomStateLiveData(pigeonInstance.getZoomState())
     }
     
     func getIntrinsticZoomRatio(pigeonApi: PigeonApiCameraInfoProxyApi, pigeonInstance: CameraInfo) throws -> Double {

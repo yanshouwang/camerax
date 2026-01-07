@@ -9,32 +9,43 @@ import 'package:exif/exif.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Logger get _logger => Logger('HomeViewModel');
 
 typedef ImageModelCallback = void Function(ImageModel imageModel);
 
 class HomeViewModel extends ViewModel {
-  final PermissionManager _permissionManager;
   final CameraController _controller;
   final RotationProvider _rotationProvider;
 
-  RotationProviderListener? _rotationProviderListener;
+  RotationProvider$Listener? _rotationProviderListener;
+  LiveData<TorchState>? _torchStateLiveData;
+  LiveData<ZoomState>? _zoomStateLiveData;
   Observer<TorchState>? _torchStateObserver;
   Observer<ZoomState>? _zoomStateObserver;
 
+  CameraInfo? _info;
+  CameraControl? _control;
+  Camera2CameraInfo? _camera2Info;
+  Camera2CameraControl? _camera2Control;
+
   HomeViewModel()
-    : _permissionManager = PermissionManager(),
-      _controller = CameraController(),
+    : _controller = CameraController(),
       _rotationProvider = RotationProvider(),
       _mode = CameraMode.takePicture,
-      _lensFacing = CameraSelectorLensFacing.back,
+      _lensFacing = CameraSelector$LensFacing.back,
       _codes = [],
       _faces = [] {
     _setUp();
   }
 
   CameraController get controller => _controller;
+  CameraInfo get info => ArgumentError.checkNotNull(_info);
+  CameraControl get control => ArgumentError.checkNotNull(_control);
+  Camera2CameraInfo get camera2Info => ArgumentError.checkNotNull(_camera2Info);
+  Camera2CameraControl get camera2Control =>
+      ArgumentError.checkNotNull(_camera2Control);
 
   CameraMode _mode;
   CameraMode get mode => _mode;
@@ -44,17 +55,17 @@ class HomeViewModel extends ViewModel {
     notifyListeners();
   }
 
-  CameraSelectorLensFacing _lensFacing;
-  CameraSelectorLensFacing get lensFacing => _lensFacing;
-  set lensFacing(CameraSelectorLensFacing value) {
+  CameraSelector$LensFacing _lensFacing;
+  CameraSelector$LensFacing get lensFacing => _lensFacing;
+  set lensFacing(CameraSelector$LensFacing value) {
     if (_lensFacing == value) return;
     _lensFacing = value;
     notifyListeners();
   }
 
-  ImageCaptureFlashMode? _flashMode;
-  ImageCaptureFlashMode? get flashMode => _flashMode;
-  set flashMode(ImageCaptureFlashMode? value) {
+  ImageCapture$FlashMode? _flashMode;
+  ImageCapture$FlashMode? get flashMode => _flashMode;
+  set flashMode(ImageCapture$FlashMode? value) {
     if (_flashMode == value) return;
     _flashMode = value;
     notifyListeners();
@@ -73,6 +84,30 @@ class HomeViewModel extends ViewModel {
   set zoomState(ZoomState? value) {
     if (_zoomState == value) return;
     _zoomState = value;
+    notifyListeners();
+  }
+
+  ExposureTimeState? _exposureTimeState;
+  ExposureTimeState? get exposureTimeState => _exposureTimeState;
+  set exposureTimeState(ExposureTimeState? value) {
+    if (_exposureTimeState == value) return;
+    _exposureTimeState = value;
+    notifyListeners();
+  }
+
+  ApertureState? _lensApertureState;
+  ApertureState? get lensApertureState => _lensApertureState;
+  set lensApertureState(ApertureState? value) {
+    if (_lensApertureState == value) return;
+    _lensApertureState = value;
+    notifyListeners();
+  }
+
+  SensitivityState? _sensitivityState;
+  SensitivityState? get sensitivityState => _sensitivityState;
+  set sensitivityState(SensitivityState? value) {
+    if (_sensitivityState == value) return;
+    _sensitivityState = value;
     notifyListeners();
   }
 
@@ -120,10 +155,65 @@ class HomeViewModel extends ViewModel {
 
   Future<void> bind() async {
     await controller.bind();
+
+    // final info = await controller.getCameraInfo();
+    // final control = await controller.getCameraControl();
+    // if (info == null || control == null) {
+    //   _logger.warning('info or control is null');
+    //   return;
+    // }
+    // final camera2Info = Camera2CameraInfo.from(info);
+    // final camera2Control = Camera2CameraControl.from(control);
+
+    // final availableApertures = await camera2Info.getCameraCharacteristic(
+    //   CameraCharacteristics.lensInfoAvailableApertures,
+    // );
+    // _logger.info('lensInfoAvailableApertures: $availableApertures');
+
+    // final exposureTimeRange = await camera2Info.getCameraCharacteristic(
+    //   CameraCharacteristics.sensorInfoExposureTimeRange,
+    // );
+    // _logger.info('sensorInfoExposureTimeRange: $exposureTimeRange');
+
+    // final sensitivityRange = await camera2Info.getCameraCharacteristic(
+    //   CameraCharacteristics.sensorInfoSensitivityRange,
+    // );
+    // _logger.info('sensorInfoSensitivityRange: $sensitivityRange');
+
+    // _info = info;
+    // _control = control;
+    // _camera2Info = camera2Info;
+    // _camera2Control = camera2Control;
+
+    // if (availableApertures != null && availableApertures.isNotEmpty) {
+    //   lensApertureState = ApertureState(
+    //     availableValues: availableApertures,
+    //     value: availableApertures.first,
+    //   );
+    // }
+    // if (exposureTimeRange != null) {
+    //   exposureTimeState = ExposureTimeState(
+    //     range: exposureTimeRange,
+    //     value: exposureTimeRange.lower,
+    //   );
+    // }
+    // if (sensitivityRange != null) {
+    //   sensitivityState = SensitivityState(
+    //     range: sensitivityRange,
+    //     value: sensitivityRange.lower,
+    //   );
+    // }
   }
 
   Future<void> unbind() async {
     await controller.unbind();
+    // _info = null;
+    // _control = null;
+    // _camera2Info = null;
+    // _camera2Control = null;
+    // lensApertureState = null;
+    // exposureTimeState = null;
+    // sensitivityState = null;
   }
 
   Future<void> setMode(CameraMode mode) async {
@@ -131,12 +221,12 @@ class HomeViewModel extends ViewModel {
       // See https://developer.android.com/reference/kotlin/androidx/camera/view/CameraController#setEnabledUseCases(int)
       if (mode == CameraMode.recordVideo) {
         await controller.setEnabledUseCases([
-          CameraControllerUseCase.videoCapture,
+          CameraController$UseCase.videoCapture,
         ]);
       } else {
         await controller.setEnabledUseCases([
-          CameraControllerUseCase.imageCapture,
-          CameraControllerUseCase.imageAnalysis,
+          CameraController$UseCase.imageCapture,
+          CameraController$UseCase.imageAnalysis,
         ]);
       }
     }
@@ -180,12 +270,12 @@ class HomeViewModel extends ViewModel {
   }
 
   Future<void> toggleLensFacing() async {
-    if (lensFacing == CameraSelectorLensFacing.back) {
+    if (lensFacing == CameraSelector$LensFacing.back) {
       await _setCameraSelector(CameraSelector.front);
-      lensFacing = CameraSelectorLensFacing.front;
+      lensFacing = CameraSelector$LensFacing.front;
     } else {
       await _setCameraSelector(CameraSelector.back);
-      lensFacing = CameraSelectorLensFacing.back;
+      lensFacing = CameraSelector$LensFacing.back;
     }
   }
 
@@ -202,13 +292,80 @@ class HomeViewModel extends ViewModel {
     await controller.setZoomRatio(zoomRatio);
   }
 
-  Future<void> setFlashMode(ImageCaptureFlashMode flashMode) async {
+  Future<void> setLensAsperture(double value) async {
+    final builder = CaptureRequestOptions$Builder();
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlMode,
+      CameraMetadata$ControlMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlAeMode,
+      CameraMetadata$ControlAeMode.off,
+    );
+    await builder.setCaptureRequestOption(CaptureRequest.lensAperture, value);
+    final bundle = await builder.build();
+    await camera2Control.setCaptureRequestOptions(bundle);
+    lensApertureState = lensApertureState?.copyWith(value: value);
+  }
+
+  Future<void> setExposureTime(int value) async {
+    final builder = CaptureRequestOptions$Builder();
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlMode,
+      CameraMetadata$ControlMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlAeMode,
+      CameraMetadata$ControlAeMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.sensorExposureTime,
+      value,
+    );
+    final bundle = await builder.build();
+    await camera2Control.setCaptureRequestOptions(bundle);
+    exposureTimeState = exposureTimeState?.copyWith(value: value);
+  }
+
+  Future<void> setSensitivity(int value) async {
+    final builder = CaptureRequestOptions$Builder();
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlMode,
+      CameraMetadata$ControlMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.controlAeMode,
+      CameraMetadata$ControlAeMode.off,
+    );
+    await builder.setCaptureRequestOption(
+      CaptureRequest.sensorSensitivity,
+      value,
+    );
+    final bundle = await builder.build();
+    await camera2Control.setCaptureRequestOptions(bundle);
+    sensitivityState = sensitivityState?.copyWith(value: value);
+  }
+
+  Future<void> clearArguments() async {
+    await camera2Control.clearCaptureRequestOptions();
+    lensApertureState = lensApertureState?.copyWith(
+      value: lensApertureState?.availableValues.first,
+    );
+    exposureTimeState = exposureTimeState?.copyWith(
+      value: exposureTimeState?.range.lower,
+    );
+    sensitivityState = sensitivityState?.copyWith(
+      value: sensitivityState?.range.lower,
+    );
+  }
+
+  Future<void> setFlashMode(ImageCapture$FlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
     flashMode = await controller.getImageCaptureFlashMode();
   }
 
   Future<void> takePicture() async {
-    final callback = ImageCaptureOnImageCapturedCallback(
+    final callback = ImageCapture$OnImageCapturedCallback(
       onCaptureStarted: () {
         _logger.info('onCaptureStarted');
       },
@@ -254,11 +411,11 @@ class HomeViewModel extends ViewModel {
       'MOV_${DateTime.timestamp().millisecondsSinceEpoch}.MOV',
     );
     final file = File(filePath);
-    final outputOptions = FileOutputOptions(file);
+    final outputOptions = await FileOutputOptions$Builder(file).build();
     final listener = Consumer<VideoRecordEvent>(
       accept: (event) {
         _logger.info('${event.runtimeType}');
-        if (event is! VideoRecordFinalizeEvent) {
+        if (event is! VideoRecordEvent$Finalize) {
           return;
         }
         if (event.hasError) {
@@ -282,43 +439,44 @@ class HomeViewModel extends ViewModel {
 
   void _setUp() async {
     var isGranted =
-        await _permissionManager.checkPermission(
-          PermissionManagerPermission.audio,
-        ) &&
-        await _permissionManager.checkPermission(
-          PermissionManagerPermission.video,
-        );
+        await Permission.camera.isGranted &&
+        await Permission.microphone.isGranted;
     if (!isGranted) {
-      isGranted = await _permissionManager.requestPermissions([
-        PermissionManagerPermission.video,
-        PermissionManagerPermission.audio,
-      ]);
+      isGranted = await [
+        Permission.camera,
+        Permission.microphone,
+      ].request().then((e) => e.values.every((e) => e.isGranted));
     }
     if (!isGranted) {
       throw StateError('requestPermissions failed.');
     }
-    final resolutionSelector = ResolutionSelector(
-      resolutionStrategy: ResolutionStrategy(
-        boundSize: Size(1024, 768),
-        fallbackRule: ResolutionStrategyFallbackRule.closestHigherThenLower,
-      ),
+    final resolutionStrategy = ResolutionStrategy(
+      boundSize: Size(1024, 768),
+      fallbackRule: ResolutionStrategy$FallbackRule.closestHigherThenLower,
     );
+    final resolutionSelector = await ResolutionSelector$Builder()
+        .setResolutionStrategy(resolutionStrategy)
+        .then((e) => e.build());
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
-    final torchState = await controller.getTorchState();
-    final zoomState = await controller.getZoomState();
-    this.torchState = torchState;
-    this.zoomState = zoomState;
+    final torchStateLiveData = await controller.getTorchState();
+    final zoomStateLiveData = await controller.getZoomState();
+    final torchState = await torchStateLiveData.getValue();
+    final zoomState = await zoomStateLiveData.getValue();
     final torchStateObserver = Observer<TorchState>(
       onChanged: (e) => this.torchState = e,
     );
     final zoomStateObserver = Observer<ZoomState>(
       onChanged: (e) => this.zoomState = e,
     );
-    await controller.observeTorchState(torchStateObserver);
-    await controller.observeZoomState(zoomStateObserver);
+    await torchStateLiveData.observeForever(torchStateObserver);
+    await zoomStateLiveData.observeForever(zoomStateObserver);
+    _torchStateLiveData = torchStateLiveData;
+    _zoomStateLiveData = zoomStateLiveData;
     _torchStateObserver = torchStateObserver;
     _zoomStateObserver = zoomStateObserver;
-    final rotationProviderListener = RotationProviderListener(
+    this.torchState = torchState;
+    this.zoomState = zoomState;
+    final rotationProviderListener = RotationProvider$Listener(
       onRotationChanged: (rotation) {
         _logger.info(
           'RotationProviderListener.onRotationChanged: ${rotation.name}',
@@ -341,9 +499,9 @@ class HomeViewModel extends ViewModel {
   Future<void> _setImageAnalyzer() async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(
-      ImageAnalysisOutputImageFormat.rgba8888,
+      ImageAnalysis$OutputImageFormat.rgba8888,
     );
-    final analyzer = ImageAnalysisAnalyzer(
+    final analyzer = ImageAnalysis$Analyzer(
       consumer: Consumer(
         accept: (image) async {
           try {
@@ -394,7 +552,7 @@ class HomeViewModel extends ViewModel {
   Future<void> _setVisionAnalyzer(VisionAnalyzer analyzer) async {
     await controller.unbind();
     await controller.setImageAnalysisOutputImageFormat(
-      ImageAnalysisOutputImageFormat.yuv420_888,
+      ImageAnalysis$OutputImageFormat.yuv420_888,
     );
     await controller.setImageAnalysisAnalyzer(analyzer);
     await controller.bind();
@@ -410,13 +568,15 @@ class HomeViewModel extends ViewModel {
     if (rotationProviderListener != null) {
       _rotationProvider.removeListener(rotationProviderListener);
     }
+    final torchStateLiveData = _torchStateLiveData;
+    final zoomStateLiveData = _zoomStateLiveData;
     final torchStateObserver = _torchStateObserver;
     final zoomStateObserver = _zoomStateObserver;
-    if (torchStateObserver != null) {
-      controller.removeTorchStateObserver(torchStateObserver);
+    if (torchStateLiveData != null && torchStateObserver != null) {
+      torchStateLiveData.removeObserver(torchStateObserver);
     }
-    if (zoomStateObserver != null) {
-      controller.removeZoomStateObserver(zoomStateObserver);
+    if (zoomStateLiveData != null && zoomStateObserver != null) {
+      zoomStateLiveData.removeObserver(zoomStateObserver);
     }
     _clearImageAnalysisAnalyzer();
     unbind();

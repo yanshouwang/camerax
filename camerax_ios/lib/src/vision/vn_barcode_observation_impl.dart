@@ -1,16 +1,10 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
+import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'vn_detected_object_observation_impl.dart';
-import 'vn_observation_impl.dart';
-import 'vn_rectangle_observation_impl.dart';
-
-final class VNBarcodeObservationImpl extends VNBarcodeObservation
-    with
-        VNObservationImpl,
-        VNDetectedObjectObservationImpl,
-        VNRectangleObservationImpl {
+final class VNBarcodeObservationImpl extends VNRectangleObservationImpl
+    implements VNBarcodeObservation {
   @override
   final VNBarcodeObservationProxyApi api;
   @override
@@ -40,7 +34,7 @@ final class VNBarcodeObservationImpl extends VNBarcodeObservation
     required this.topRight,
     required this.payloadStringValue,
     required this.symbology,
-  }) : super.impl();
+  });
 }
 
 extension VNBarcodeSymbologyX on VNBarcodeSymbology {

@@ -1,55 +1,78 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-// import 'aspect_ratio_strategy_impl.dart';
-// import 'resolution_filter_impl.dart';
-import 'resolution_strategy_impl.dart';
+final class ResolutionSelector$BuilderImpl
+    implements ResolutionSelector$Builder {
+  final ResolutionSelectorBuilderProxyApi api;
 
-final class ResolutionSelectorImpl extends ResolutionSelector {
-  final ResolutionSelectorProxyApi api;
-
-  ResolutionSelectorImpl.internal(this.api) : super.impl();
-
-  factory ResolutionSelectorImpl({
-    ResolutionSelectorMode? mode,
-    AspectRatioStrategy? aspectRatioStrategy,
-    ResolutionFilter? resolutionFilter,
-    ResolutionStrategy? resolutionStrategy,
-  }) {
-    final api = ResolutionSelectorProxyApi.build(
-      // mode: mode?.api,
-      // aspectRatioStrategy: aspectRatioStrategy?.api,
-      // resolutionFilter: resolutionFilter?.api,
-      resolutionStrategy: resolutionStrategy?.api,
-    );
-    return ResolutionSelectorImpl.internal(api);
-  }
+  ResolutionSelector$BuilderImpl.internal(this.api);
 
   @override
-  Future<ResolutionSelectorMode> getAllowedResolutionMode() =>
+  Future<ResolutionSelector$Builder> setAllowedResolutionMode(
+    ResolutionSelector$Mode mode,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<ResolutionSelector$Builder> setAspectRatioStrategy(
+    AspectRatioStrategy aspectRatioStrategy,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<ResolutionSelector$Builder> setResolutionFilter(
+    ResolutionFilter resolutionFilter,
+  ) => throw UnimplementedError();
+
+  @override
+  Future<ResolutionSelector$Builder> setResolutionStrategy(
+    ResolutionStrategy resolutionStrategy,
+  ) => api.setResolutionStrategy(resolutionStrategy.api).then((e) => e.impl);
+
+  @override
+  Future<ResolutionSelector> build() => api.build().then((e) => e.impl);
+}
+
+final class ResolutionSelectorImpl implements ResolutionSelector {
+  final ResolutionSelectorProxyApi api;
+
+  ResolutionSelectorImpl.internal(this.api);
+
+  @override
+  Future<ResolutionSelector$Mode> getAllowedResolutionMode() =>
       throw UnimplementedError();
-  // api.getAllowedResolutionMode().then((e) => e.impl);
 
   @override
   Future<AspectRatioStrategy> getAspectRatioStrategy() =>
       throw UnimplementedError();
-  // api.getAspectRatioStrategy().then((e) => e.impl);
 
   @override
   Future<ResolutionFilter?> getResolutionFilter() => throw UnimplementedError();
-  // api.getResolutionFilter().then((e) => e?.impl);
 
   @override
   Future<ResolutionStrategy?> getResolutionStrategy() =>
       api.getResolutionStrategy().then((e) => e?.impl);
 }
 
-extension ResolutionSelectorModeX on ResolutionSelectorMode {
+final class ResolutionSelectorChannelImpl extends ResolutionSelectorChannel {
+  @override
+  ResolutionSelector$Builder createBuilder() {
+    final api = ResolutionSelectorBuilderProxyApi();
+    return ResolutionSelector$BuilderImpl.internal(api);
+  }
+}
+
+extension ResolutionSelector$ModeX on ResolutionSelector$Mode {
   ResolutionSelectorModeApi get api => ResolutionSelectorModeApi.values[index];
 }
 
 extension ResolutionSelectorModeApiX on ResolutionSelectorModeApi {
-  ResolutionSelectorMode get impl => ResolutionSelectorMode.values[index];
+  ResolutionSelector$Mode get impl => ResolutionSelector$Mode.values[index];
+}
+
+extension ResolutionSelectorBuilderProxyApiX
+    on ResolutionSelectorBuilderProxyApi {
+  ResolutionSelector$Builder get impl =>
+      ResolutionSelector$BuilderImpl.internal(this);
 }
 
 extension ResolutionSelectorX on ResolutionSelector {

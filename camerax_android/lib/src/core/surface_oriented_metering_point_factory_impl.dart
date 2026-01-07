@@ -1,17 +1,20 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'metering_point_factory_impl.dart';
-
 final class SurfaceOrientedMeteringPointFactoryImpl
-    extends SurfaceOrientedMeteringPointFactory
-    with MeteringPointFactoryImpl {
+    extends MeteringPointFactoryImpl
+    implements SurfaceOrientedMeteringPointFactory {
   @override
   final SurfaceOrientedMeteringPointFactoryProxyApi api;
 
-  SurfaceOrientedMeteringPointFactoryImpl.internal(this.api) : super.impl();
+  SurfaceOrientedMeteringPointFactoryImpl.internal(this.api);
+}
 
-  factory SurfaceOrientedMeteringPointFactoryImpl(double width, double height) {
+final class SurfaceOrientedMeteringPointFactoryChannelImpl
+    extends SurfaceOrientedMeteringPointFactoryChannel {
+  @override
+  SurfaceOrientedMeteringPointFactory create(double width, double height) {
     final api = SurfaceOrientedMeteringPointFactoryProxyApi(
       width: width,
       height: height,

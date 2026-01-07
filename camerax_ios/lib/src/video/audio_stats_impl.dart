@@ -1,16 +1,16 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class AudioStatsImpl extends AudioStats {
+final class AudioStatsImpl implements AudioStats {
   final AudioStatsProxyApi api;
 
-  AudioStatsImpl.internal(this.api) : super.impl();
+  AudioStatsImpl.internal(this.api);
 
   @override
   double get audioAmplitude => api.audioAmplitude;
   @override
-  AudioStatsAudioState get audioState => api.audioState.impl;
+  AudioStats$AudioState get audioState => api.audioState.impl;
   @override
   Object? get errorCause => api.errorCause?.impl;
   @override
@@ -19,12 +19,12 @@ final class AudioStatsImpl extends AudioStats {
   bool get hasError => api.hasError;
 }
 
-extension AudioStatsAudioStateX on AudioStatsAudioState {
+extension AudioStats$AudioStateX on AudioStats$AudioState {
   AudioStatsAudioStateApi get api => AudioStatsAudioStateApi.values[index];
 }
 
 extension AudioStatsAudioStateApiX on AudioStatsAudioStateApi {
-  AudioStatsAudioState get impl => AudioStatsAudioState.values[index];
+  AudioStats$AudioState get impl => AudioStats$AudioState.values[index];
 }
 
 extension AudioStatsProxyApiX on AudioStatsProxyApi {

@@ -9,3 +9,9 @@ val Int.torchStateApi: TorchStateApi
         TorchState.ON -> TorchStateApi.ON
         else -> throw NotImplementedError("Not implemented value: $this")
     }
+
+val TorchStateApi.impl: Int
+    get() = when (this) {
+        TorchStateApi.OFF -> TorchState.OFF
+        TorchStateApi.ON -> TorchState.ON
+    }

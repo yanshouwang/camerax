@@ -1,3 +1,9 @@
+## 1.2.0
+
+* Remove PermissionManager impl.
+* Use builder classes instead of factory methods.
+* Use LiveData instead of `get`, `observe`, `removeObserver` methods.
+
 ## 1.1.1
 
 * Fix PreviewView is stretched when using front camera on iPhone 17 Pro.

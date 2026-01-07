@@ -39,6 +39,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final viewModel = ViewModel.of<HomeViewModel>(context);
     final controller = viewModel.controller;
     final zoomState = viewModel.zoomState;
+    final lensApertureState = viewModel.lensApertureState;
+    final exposureTimeState = viewModel.exposureTimeState;
+    final sensitivityState = viewModel.sensitivityState;
     final mode = viewModel.mode;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
@@ -63,15 +66,15 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       duration: const Duration(milliseconds: 100),
                       onTap: () {
                         switch (flashMode) {
-                          case ImageCaptureFlashMode.auto:
-                            viewModel.setFlashMode(ImageCaptureFlashMode.on);
-                          case ImageCaptureFlashMode.on:
-                            viewModel.setFlashMode(ImageCaptureFlashMode.off);
-                          case ImageCaptureFlashMode.off:
-                            viewModel.setFlashMode(ImageCaptureFlashMode.auto);
-                          case ImageCaptureFlashMode.screen:
+                          case ImageCapture$FlashMode.auto:
+                            viewModel.setFlashMode(ImageCapture$FlashMode.on);
+                          case ImageCapture$FlashMode.on:
+                            viewModel.setFlashMode(ImageCapture$FlashMode.off);
+                          case ImageCapture$FlashMode.off:
+                            viewModel.setFlashMode(ImageCapture$FlashMode.auto);
+                          case ImageCapture$FlashMode.screen:
                             viewModel.setFlashMode(
-                              ImageCaptureFlashMode.screen,
+                              ImageCapture$FlashMode.screen,
                             );
                         }
                       },
@@ -84,9 +87,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                               .resolveFrom(context),
                         ),
                         child: Icon(
-                          flashMode == ImageCaptureFlashMode.auto
+                          flashMode == ImageCapture$FlashMode.auto
                               ? Symbols.flash_auto
-                              : flashMode == ImageCaptureFlashMode.on
+                              : flashMode == ImageCapture$FlashMode.on
                               ? Symbols.flash_on
                               : Symbols.flash_off,
                           color: CupertinoColors.label.resolveFrom(context),
@@ -127,6 +130,53 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         onChanged: (value) => viewModel.setZoomRatio(value),
                       ),
                     ),
+                  // Column(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   spacing: 16.0,
+                  //   children: [
+                  //     if (lensApertureState != null)
+                  //       Text('A: ${lensApertureState.availableValues}'),
+                  //     if (exposureTimeState != null)
+                  //       Row(
+                  //         mainAxisSize: MainAxisSize.min,
+                  //         children: [
+                  //           Text('E [${exposureTimeState.value}]'),
+                  //           CupertinoSlider(
+                  //             min: exposureTimeState.range.lower.toDouble(),
+                  //             max: exposureTimeState.range.upper.toDouble(),
+                  //             value: exposureTimeState.value.toDouble(),
+                  //             divisions: 10,
+                  //             onChanged: (value) {
+                  //               viewModel.setExposureTime(value.toInt());
+                  //             },
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     if (sensitivityState != null)
+                  //       Row(
+                  //         mainAxisSize: MainAxisSize.min,
+                  //         children: [
+                  //           Text('S [${sensitivityState.value}]'),
+                  //           CupertinoSlider(
+                  //             min: sensitivityState.range.lower.toDouble(),
+                  //             max: sensitivityState.range.upper.toDouble(),
+                  //             value: sensitivityState.value.toDouble(),
+                  //             divisions: 10,
+                  //             onChanged: (value) {
+                  //               viewModel.setSensitivity(value.toInt());
+                  //             },
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     CupertinoButton(
+                  //       onPressed: () {
+                  //         viewModel.clearArguments();
+                  //       },
+                  //       child: Text('Clear'),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
@@ -414,7 +464,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         ),
                         flip:
                             viewModel.lensFacing ==
-                            CameraSelectorLensFacing.back,
+                            CameraSelector$LensFacing.back,
                       ),
                     ),
                   ),

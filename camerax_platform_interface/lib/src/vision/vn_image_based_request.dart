@@ -1,10 +1,7 @@
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
 
-import 'vn_request.dart';
-
-abstract base class VNImageBasedRequest extends VNRequest {
-  VNImageBasedRequest.impl() : super.impl();
-
+abstract interface class VNImageBasedRequest implements VNRequest {
   Future<Rect<double>> getRegionOfInterest();
   Future<void> setRegionOfInterest(Rect<double> value);
 }

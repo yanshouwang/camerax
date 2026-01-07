@@ -2,13 +2,12 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/ml.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-base mixin VisionObjectImpl on VisionObject {
+abstract base class VisionObjectImpl implements VisionObject {
   Size<int>? get imageSize;
 }
 
-final class VisionMachineReadableCodeObjectImpl
-    extends VisionMachineReadableCodeObject
-    with VisionObjectImpl {
+final class VisionMachineReadableCodeObjectImpl extends VisionObjectImpl
+    implements VisionMachineReadableCodeObject {
   final Barcode barcode;
   @override
   final Size<int>? imageSize;
@@ -16,7 +15,7 @@ final class VisionMachineReadableCodeObjectImpl
   VisionMachineReadableCodeObjectImpl.internal(
     this.barcode, {
     required this.imageSize,
-  }) : super.impl();
+  });
 
   @override
   Rect<double> get bounds => ArgumentError.checkNotNull(
@@ -40,14 +39,13 @@ final class VisionMachineReadableCodeObjectImpl
   );
 }
 
-final class VisionFaceObjectImpl extends VisionFaceObject
-    with VisionObjectImpl {
+final class VisionFaceObjectImpl extends VisionObjectImpl
+    implements VisionFaceObject {
   final Face face;
   @override
   final Size<int>? imageSize;
 
-  VisionFaceObjectImpl.internal(this.face, {required this.imageSize})
-    : super.impl();
+  VisionFaceObjectImpl.internal(this.face, {required this.imageSize});
 
   @override
   Rect<double> get bounds => face.boundingBox.vision(imageSize);
@@ -64,42 +62,42 @@ final class VisionFaceObjectImpl extends VisionFaceObject
 }
 
 extension VisionObjectTypeX on VisionObjectType {
-  BarcodeFormat? get formatOrNull {
+  Barcode$Format? get formatOrNull {
     switch (this) {
       case VisionObjectType.codabar:
-        return BarcodeFormat.codabar;
+        return Barcode$Format.codabar;
       case VisionObjectType.code39:
-        return BarcodeFormat.code39;
+        return Barcode$Format.code39;
       // case VisionObjectType.code39Mod43:
       //   return null;
       case VisionObjectType.code93:
-        return BarcodeFormat.code93;
+        return Barcode$Format.code93;
       case VisionObjectType.code128:
-        return BarcodeFormat.code128;
+        return Barcode$Format.code128;
       case VisionObjectType.ean8:
-        return BarcodeFormat.ean8;
+        return Barcode$Format.ean8;
       case VisionObjectType.ean13:
-        return BarcodeFormat.ean13;
+        return Barcode$Format.ean13;
       // case VisionObjectType.gs1DataBar:
       // case VisionObjectType.gs1DataBarExpanded:
       // case VisionObjectType.gs1DataBarLimited:
       // case VisionObjectType.interleaved2of5:
       //   return null;
       case VisionObjectType.itf14:
-        return BarcodeFormat.itf;
+        return Barcode$Format.itf;
       case VisionObjectType.upce:
-        return BarcodeFormat.upcE;
+        return Barcode$Format.upcE;
       case VisionObjectType.aztec:
-        return BarcodeFormat.aztec;
+        return Barcode$Format.aztec;
       case VisionObjectType.dataMatrix:
-        return BarcodeFormat.dataMatrix;
+        return Barcode$Format.dataMatrix;
       // case VisionObjectType.microPDF417:
       // case VisionObjectType.microQR:
       //   return null;
       case VisionObjectType.pdf417:
-        return BarcodeFormat.pdf417;
+        return Barcode$Format.pdf417;
       case VisionObjectType.qr:
-        return BarcodeFormat.qrCode;
+        return Barcode$Format.qrCode;
       // case VisionObjectType.humanBody:
       // case VisionObjectType.humanFullBody:
       // case VisionObjectType.dogBody:

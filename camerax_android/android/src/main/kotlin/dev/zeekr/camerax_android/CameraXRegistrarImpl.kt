@@ -2,51 +2,13 @@ package dev.zeekr.camerax_android
 
 import android.app.Activity
 import android.content.Context
+import dev.zeekr.camerax_android.camera2.*
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraControlImpl
 import dev.zeekr.camerax_android.camera2.interop.Camera2CameraInfoImpl
+import dev.zeekr.camerax_android.camera2.interop.Camera2InteropImpl
 import dev.zeekr.camerax_android.camera2.interop.CaptureRequestOptionsImpl
-import dev.zeekr.camerax_android.common.AutoCloseableImpl
-import dev.zeekr.camerax_android.common.BitmapImpl
-import dev.zeekr.camerax_android.common.CameraStateObserverImpl
-import dev.zeekr.camerax_android.common.DurationTupleImpl
-import dev.zeekr.camerax_android.common.ImageProxyConsumerImpl
-import dev.zeekr.camerax_android.common.IntObserverImpl
-import dev.zeekr.camerax_android.common.IntRangeImpl
-import dev.zeekr.camerax_android.common.LocationImpl
-import dev.zeekr.camerax_android.common.LongRangeImpl
-import dev.zeekr.camerax_android.common.LowLightBoostStateObserverImpl
-import dev.zeekr.camerax_android.common.MeteringPointTupleImpl
-import dev.zeekr.camerax_android.common.MlKitAnalyzerResultConsumerImpl
-import dev.zeekr.camerax_android.common.PermissionManagerImpl
-import dev.zeekr.camerax_android.common.PointFImpl
-import dev.zeekr.camerax_android.common.PointImpl
-import dev.zeekr.camerax_android.common.PreviewViewStreamStateObserverImpl
-import dev.zeekr.camerax_android.common.RectImpl
-import dev.zeekr.camerax_android.common.SizeImpl
-import dev.zeekr.camerax_android.common.TapToFocusInfoObserverImpl
-import dev.zeekr.camerax_android.common.TorchStateObserverImpl
-import dev.zeekr.camerax_android.common.VideoRecordEventConsumerImpl
-import dev.zeekr.camerax_android.common.ZoomStateObserverImpl
-import dev.zeekr.camerax_android.core.BufferImpl
-import dev.zeekr.camerax_android.core.ByteArrayOutputStreamImpl
-import dev.zeekr.camerax_android.core.ByteBufferImpl
-import dev.zeekr.camerax_android.core.CameraControlImpl
-import dev.zeekr.camerax_android.core.CameraInfoImpl
-import dev.zeekr.camerax_android.core.CameraSelectorImpl
-import dev.zeekr.camerax_android.core.DynamicRangeImpl
-import dev.zeekr.camerax_android.core.ExposureStateImpl
-import dev.zeekr.camerax_android.core.FocusMeteringActionImpl
-import dev.zeekr.camerax_android.core.FocusMeteringResultImpl
-import dev.zeekr.camerax_android.core.ImageAnalysisImpl
-import dev.zeekr.camerax_android.core.ImageCaptureImpl
-import dev.zeekr.camerax_android.core.ImageInfoImpl
-import dev.zeekr.camerax_android.core.ImageProxyImpl
-import dev.zeekr.camerax_android.core.MeteringPointFactoryImpl
-import dev.zeekr.camerax_android.core.MeteringPointImpl
-import dev.zeekr.camerax_android.core.NullOutputStreamImpl
-import dev.zeekr.camerax_android.core.OutputStreamImpl
-import dev.zeekr.camerax_android.core.SurfaceOrientedMeteringPointFactoryImpl
-import dev.zeekr.camerax_android.core.ZoomStateImpl
+import dev.zeekr.camerax_android.common.*
+import dev.zeekr.camerax_android.core.*
 import dev.zeekr.camerax_android.core.resolutionselector.AspectRatioStrategyImpl
 import dev.zeekr.camerax_android.core.resolutionselector.ResolutionFilterImpl
 import dev.zeekr.camerax_android.core.resolutionselector.ResolutionSelectorImpl
@@ -57,26 +19,9 @@ import dev.zeekr.camerax_android.ml.barcode.BarcodeScannerImpl
 import dev.zeekr.camerax_android.ml.barcode.BarcodeScannerOptionsImpl
 import dev.zeekr.camerax_android.ml.barcode.ZoomSuggestionOptionsImpl
 import dev.zeekr.camerax_android.ml.common.InputImageImpl
-import dev.zeekr.camerax_android.ml.face.FaceContourImpl
-import dev.zeekr.camerax_android.ml.face.FaceDetectorImpl
-import dev.zeekr.camerax_android.ml.face.FaceDetectorOptionsImpl
-import dev.zeekr.camerax_android.ml.face.FaceImpl
-import dev.zeekr.camerax_android.ml.face.FaceLandmarkImpl
-import dev.zeekr.camerax_android.video.AudioStatsImpl
-import dev.zeekr.camerax_android.video.FallbackStrategyImpl
-import dev.zeekr.camerax_android.video.FileOutputOptionsImpl
-import dev.zeekr.camerax_android.video.OutputOptionsImpl
-import dev.zeekr.camerax_android.video.OutputResultsImpl
-import dev.zeekr.camerax_android.video.QualityImpl
-import dev.zeekr.camerax_android.video.QualitySelectorImpl
-import dev.zeekr.camerax_android.video.RecordingImpl
-import dev.zeekr.camerax_android.video.RecordingStatsImpl
-import dev.zeekr.camerax_android.video.VideoRecordEventImpl
-import dev.zeekr.camerax_android.view.CameraControllerImpl
-import dev.zeekr.camerax_android.view.LifecycleCameraControllerImpl
-import dev.zeekr.camerax_android.view.PreviewViewImpl
-import dev.zeekr.camerax_android.view.RotationProviderImpl
-import dev.zeekr.camerax_android.view.TapToFocusInfoImpl
+import dev.zeekr.camerax_android.ml.face.*
+import dev.zeekr.camerax_android.video.*
+import dev.zeekr.camerax_android.view.*
 import dev.zeekr.camerax_android.view.video.AudioConfigImpl
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -112,8 +57,56 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return Camera2CameraInfoImpl(this)
     }
 
+    override fun getPigeonApiCamera2InteropCaptureRequestOptionsExtenderProxyApi(): PigeonApiCamera2InteropCaptureRequestOptionsExtenderProxyApi {
+        return Camera2InteropImpl.CaptureRequestOptionsExtenderImpl(this)
+    }
+
+    override fun getPigeonApiCaptureRequestOptionsBuilderProxyApi(): PigeonApiCaptureRequestOptionsBuilderProxyApi {
+        return CaptureRequestOptionsImpl.BuilderImpl(this)
+    }
+
     override fun getPigeonApiCaptureRequestOptionsProxyApi(): PigeonApiCaptureRequestOptionsProxyApi {
         return CaptureRequestOptionsImpl(this)
+    }
+
+    override fun getPigeonApiCameraCaptureSessionCaptureCallbackProxyApi(): PigeonApiCameraCaptureSessionCaptureCallbackProxyApi {
+        return CameraCaptureSessionImpl.CaptureCallbackImpl(this)
+    }
+
+    override fun getPigeonApiCameraCaptureSessionStateCallbackProxyApi(): PigeonApiCameraCaptureSessionStateCallbackProxyApi {
+        return CameraCaptureSessionImpl.StateCallbackImpl(this)
+    }
+
+    override fun getPigeonApiCameraCharacteristicsKeyProxyApi(): PigeonApiCameraCharacteristicsKeyProxyApi {
+        return CameraCharacteristicsImpl.KeyImpl(this)
+    }
+
+    override fun getPigeonApiCameraCharacteristicsProxyApi(): PigeonApiCameraCharacteristicsProxyApi {
+        return CameraCharacteristicsImpl(this)
+    }
+
+    override fun getPigeonApiCaptureFailureProxyApi(): PigeonApiCaptureFailureProxyApi {
+        return CaptureFailureImpl(this)
+    }
+
+    override fun getPigeonApiCaptureRequestKeyProxyApi(): PigeonApiCaptureRequestKeyProxyApi {
+        return CaptureRequestImpl.KeyImpl(this)
+    }
+
+    override fun getPigeonApiCaptureRequestProxyApi(): PigeonApiCaptureRequestProxyApi {
+        return CaptureRequestImpl(this)
+    }
+
+    override fun getPigeonApiCaptureResultKeyProxyApi(): PigeonApiCaptureResultKeyProxyApi {
+        return CaptureResultImpl.KeyImpl(this)
+    }
+
+    override fun getPigeonApiCaptureResultProxyApi(): PigeonApiCaptureResultProxyApi {
+        return CaptureResultImpl(this)
+    }
+
+    override fun getPigeonApiTotalCaptureResultProxyApi(): PigeonApiTotalCaptureResultProxyApi {
+        return TotalCaptureResultImpl(this)
     }
 
     override fun getPigeonApiAutoCloseableProxyApi(): PigeonApiAutoCloseableProxyApi {
@@ -160,36 +153,60 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return LocationImpl(this)
     }
 
-    override fun getPigeonApiCameraStateObserverProxyApi(): PigeonApiCameraStateObserverProxyApi {
-        return CameraStateObserverImpl(this)
+    override fun getPigeonApiIntLiveDataProxyApi(): PigeonApiIntLiveDataProxyApi {
+        return IntLiveDataImpl(this)
     }
 
     override fun getPigeonApiIntObserverProxyApi(): PigeonApiIntObserverProxyApi {
         return IntObserverImpl(this)
     }
 
-    override fun getPigeonApiLowLightBoostStateObserverProxyApi(): PigeonApiLowLightBoostStateObserverProxyApi {
-        return LowLightBoostStateObserverImpl(this)
+    override fun getPigeonApiCameraStateLiveDataProxyApi(): PigeonApiCameraStateLiveDataProxyApi {
+        return CameraStateLiveDataImpl(this)
     }
 
-    override fun getPigeonApiPreviewViewStreamStateObserverProxyApi(): PigeonApiPreviewViewStreamStateObserverProxyApi {
-        return PreviewViewStreamStateObserverImpl(this)
+    override fun getPigeonApiCameraStateObserverProxyApi(): PigeonApiCameraStateObserverProxyApi {
+        return CameraStateObserverImpl(this)
     }
 
-    override fun getPigeonApiTapToFocusInfoObserverProxyApi(): PigeonApiTapToFocusInfoObserverProxyApi {
-        return TapToFocusInfoObserverImpl(this)
+    override fun getPigeonApiTorchStateLiveDataProxyApi(): PigeonApiTorchStateLiveDataProxyApi {
+        return TorchStateLiveDataImpl(this)
     }
 
     override fun getPigeonApiTorchStateObserverProxyApi(): PigeonApiTorchStateObserverProxyApi {
         return TorchStateObserverImpl(this)
     }
 
+    override fun getPigeonApiZoomStateLiveDataProxyApi(): PigeonApiZoomStateLiveDataProxyApi {
+        return ZoomStateLiveDataImpl(this)
+    }
+
     override fun getPigeonApiZoomStateObserverProxyApi(): PigeonApiZoomStateObserverProxyApi {
         return ZoomStateObserverImpl(this)
     }
 
-    override fun getPigeonApiPermissionManagerProxyApi(): PigeonApiPermissionManagerProxyApi {
-        return PermissionManagerImpl(this)
+    override fun getPigeonApiTapToFocusInfoLiveDataProxyApi(): PigeonApiTapToFocusInfoLiveDataProxyApi {
+        return TapToFocusInfoLiveDataImpl(this)
+    }
+
+    override fun getPigeonApiTapToFocusInfoObserverProxyApi(): PigeonApiTapToFocusInfoObserverProxyApi {
+        return TapToFocusInfoObserverImpl(this)
+    }
+
+    override fun getPigeonApiLowLightBoostStateLiveDataProxyApi(): PigeonApiLowLightBoostStateLiveDataProxyApi {
+        return LowLightBoostStateLiveDataImpl(this)
+    }
+
+    override fun getPigeonApiLowLightBoostStateObserverProxyApi(): PigeonApiLowLightBoostStateObserverProxyApi {
+        return LowLightBoostStateObserverImpl(this)
+    }
+
+    override fun getPigeonApiPreviewViewStreamStateLiveDataProxyApi(): PigeonApiPreviewViewStreamStateLiveDataProxyApi {
+        return PreviewViewStreamStateLiveDataImpl(this)
+    }
+
+    override fun getPigeonApiPreviewViewStreamStateObserverProxyApi(): PigeonApiPreviewViewStreamStateObserverProxyApi {
+        return PreviewViewStreamStateObserverImpl(this)
     }
 
     override fun getPigeonApiPointProxyApi(): PigeonApiPointProxyApi {
@@ -216,14 +233,6 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return LongRangeImpl(this)
     }
 
-    override fun getPigeonApiMeteringPointTupleProxyApi(): PigeonApiMeteringPointTupleProxyApi {
-        return MeteringPointTupleImpl(this)
-    }
-
-    override fun getPigeonApiDurationTupleProxyApi(): PigeonApiDurationTupleProxyApi {
-        return DurationTupleImpl(this)
-    }
-
     override fun getPigeonApiAspectRatioStrategyProxyApi(): PigeonApiAspectRatioStrategyProxyApi {
         return AspectRatioStrategyImpl(this)
     }
@@ -236,6 +245,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ResolutionStrategyImpl(this)
     }
 
+    override fun getPigeonApiResolutionSelectorBuilderProxyApi(): PigeonApiResolutionSelectorBuilderProxyApi {
+        return ResolutionSelectorImpl.BuilderImpl(this)
+    }
+
     override fun getPigeonApiResolutionSelectorProxyApi(): PigeonApiResolutionSelectorProxyApi {
         return ResolutionSelectorImpl(this)
     }
@@ -244,8 +257,16 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return CameraControlImpl(this)
     }
 
+    override fun getPigeonApiCameraFilterProxyApi(): PigeonApiCameraFilterProxyApi {
+        return CameraFilterImpl(this)
+    }
+
     override fun getPigeonApiCameraInfoProxyApi(): PigeonApiCameraInfoProxyApi {
         return CameraInfoImpl(this)
+    }
+
+    override fun getPigeonApiCameraSelectorBuilderProxyApi(): PigeonApiCameraSelectorBuilderProxyApi {
+        return CameraSelectorImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiCameraSelectorProxyApi(): PigeonApiCameraSelectorProxyApi {
@@ -258,6 +279,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiExposureStateProxyApi(): PigeonApiExposureStateProxyApi {
         return ExposureStateImpl(this)
+    }
+
+    override fun getPigeonApiFocusMeteringActionBuilderProxyApi(): PigeonApiFocusMeteringActionBuilderProxyApi {
+        return FocusMeteringActionImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiFocusMeteringActionProxyApi(): PigeonApiFocusMeteringActionProxyApi {
@@ -368,8 +393,12 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return ZoomSuggestionOptionsImpl.ZoomCallbackImpl(this)
     }
 
-    override fun getPigeonApiZoomSuggestionOptionsProxyApi(): PigeonApiZoomSuggestionOptionsProxyApi {
-        return ZoomSuggestionOptionsImpl(this)
+    override fun getPigeonApiZoomSuggestionOptionsBuilderProxyApi(): PigeonApiZoomSuggestionOptionsBuilderProxyApi {
+        return ZoomSuggestionOptionsImpl.BuilderImpl(this)
+    }
+
+    override fun getPigeonApiBarcodeScannerOptionsBuilderProxyApi(): PigeonApiBarcodeScannerOptionsBuilderProxyApi {
+        return BarcodeScannerOptionsImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiBarcodeScannerOptionsProxyApi(): PigeonApiBarcodeScannerOptionsProxyApi {
@@ -390,6 +419,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
 
     override fun getPigeonApiFaceProxyApi(): PigeonApiFaceProxyApi {
         return FaceImpl(this)
+    }
+
+    override fun getPigeonApiFaceDetectorOptionsBuilderProxyApi(): PigeonApiFaceDetectorOptionsBuilderProxyApi {
+        return FaceDetectorOptionsImpl.BuilderImpl(this)
     }
 
     override fun getPigeonApiFaceDetectorOptionsProxyApi(): PigeonApiFaceDetectorOptionsProxyApi {
@@ -420,6 +453,10 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return OutputOptionsImpl(this)
     }
 
+    override fun getPigeonApiFileOutputOptionsBuilderProxyApi(): PigeonApiFileOutputOptionsBuilderProxyApi {
+        return FileOutputOptionsImpl.BuilderImpl(this)
+    }
+
     override fun getPigeonApiFileOutputOptionsProxyApi(): PigeonApiFileOutputOptionsProxyApi {
         return FileOutputOptionsImpl(this)
     }
@@ -444,23 +481,23 @@ class CameraXRegistrarImpl(binaryMessenger: BinaryMessenger, val context: Contex
         return RecordingImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordStatusEventProxyApi(): PigeonApiVideoRecordStatusEventProxyApi {
+    override fun getPigeonApiVideoRecordEventStatusProxyApi(): PigeonApiVideoRecordEventStatusProxyApi {
         return VideoRecordEventImpl.StatusImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordStartEventProxyApi(): PigeonApiVideoRecordStartEventProxyApi {
+    override fun getPigeonApiVideoRecordEventStartProxyApi(): PigeonApiVideoRecordEventStartProxyApi {
         return VideoRecordEventImpl.StartImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordPauseEventProxyApi(): PigeonApiVideoRecordPauseEventProxyApi {
+    override fun getPigeonApiVideoRecordEventPauseProxyApi(): PigeonApiVideoRecordEventPauseProxyApi {
         return VideoRecordEventImpl.PauseImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordResumeEventProxyApi(): PigeonApiVideoRecordResumeEventProxyApi {
+    override fun getPigeonApiVideoRecordEventResumeProxyApi(): PigeonApiVideoRecordEventResumeProxyApi {
         return VideoRecordEventImpl.ResumeImpl(this)
     }
 
-    override fun getPigeonApiVideoRecordFinalizeEventProxyApi(): PigeonApiVideoRecordFinalizeEventProxyApi {
+    override fun getPigeonApiVideoRecordEventFinalizeProxyApi(): PigeonApiVideoRecordEventFinalizeProxyApi {
         return VideoRecordEventImpl.FinalizeImpl(this)
     }
 

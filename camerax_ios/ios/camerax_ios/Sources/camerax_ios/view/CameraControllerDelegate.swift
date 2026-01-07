@@ -8,22 +8,6 @@
 import Foundation
 
 class CameraControllerDelegate: PigeonApiDelegateCameraControllerProxyApi {
-    func observeTorchState(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws {
-        pigeonInstance.getTorchState().observe(observer)
-    }
-    
-    func removeTorchStateObserver(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, observer: TorchStateObserver) throws {
-        pigeonInstance.getTorchState().removeObserver(observer)
-    }
-    
-    func observeZoomState(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws {
-        pigeonInstance.getZoomState().observe(observer)
-    }
-    
-    func removeZoomStateObserver(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, observer: ZoomStateObserver) throws {
-        pigeonInstance.getZoomState().removeObserver(observer)
-    }
-    
     func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraControllerProxyApi) throws -> CameraController {
         return CameraController()
     }
@@ -56,16 +40,16 @@ class CameraControllerDelegate: PigeonApiDelegateCameraControllerProxyApi {
         return pigeonInstance.getCameraControl()
     }
     
-    func getTorchState(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController) throws -> TorchStateApi? {
-        return pigeonInstance.getTorchState().getValue()?.api
+    func getTorchState(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController) throws -> TorchStateLiveData {
+        return TorchStateLiveData(pigeonInstance.getTorchState())
     }
     
     func enableTorch(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, torchEnabled: Bool) throws {
         try pigeonInstance.enableTorch(torchEnabled)
     }
     
-    func getZoomState(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController) throws -> ZoomState? {
-        return pigeonInstance.getZoomState().getValue()
+    func getZoomState(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController) throws -> ZoomStateLiveData {
+        return ZoomStateLiveData(pigeonInstance.getZoomState())
     }
     
     func setZoomRatio(pigeonApi: PigeonApiCameraControllerProxyApi, pigeonInstance: CameraController, zoomRatio: Double) throws {

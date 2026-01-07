@@ -1,28 +1,28 @@
 import 'dart:typed_data';
 
 import 'package:camerax_android/src/visionx.dart';
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class BarcodeAddressImpl extends BarcodeAddress {
+final class Barcode$AddressImpl implements Barcode$Address {
   final BarcodeAddressProxyApi api;
 
-  BarcodeAddressImpl.internal(this.api) : super.impl();
+  Barcode$AddressImpl.internal(this.api);
 
   @override
   List<String> get addressLines => api.addressLines;
   @override
-  BarcodeAddressType get type => api.type.impl;
+  Barcode$Address$Type get type => api.type.impl;
 }
 
-final class BarcodeCalendarDateTimeImpl extends BarcodeCalendarDateTime {
+final class Barcode$CalendarDateTimeImpl implements Barcode$CalendarDateTime {
   final BarcodeCalendarDateTimeProxyApi api;
 
-  BarcodeCalendarDateTimeImpl.internal(this.api) : super.impl();
+  Barcode$CalendarDateTimeImpl.internal(this.api);
 
   @override
-  int get day => throw UnimplementedError();
+  int get day => api.day;
   @override
   int get hours => api.hours;
   @override
@@ -39,53 +39,53 @@ final class BarcodeCalendarDateTimeImpl extends BarcodeCalendarDateTime {
   int get year => api.year;
 }
 
-final class BarcodeCalendarEventImpl extends BarcodeCalendarEvent {
+final class Barcode$CalendarEventImpl implements Barcode$CalendarEvent {
   final BarcodeCalendarEventProxyApi api;
 
-  BarcodeCalendarEventImpl.internal(this.api) : super.impl();
+  Barcode$CalendarEventImpl.internal(this.api);
 
   @override
   String? get description => api.description;
   @override
-  BarcodeCalendarDateTime? get end => api.end?.impl;
+  Barcode$CalendarDateTime? get end => api.end?.impl;
   @override
   String? get location => api.location;
   @override
   String? get organizer => api.organizer;
   @override
-  BarcodeCalendarDateTime? get start => api.start?.impl;
+  Barcode$CalendarDateTime? get start => api.start?.impl;
   @override
   String? get status => api.status;
   @override
   String? get summary => api.summary;
 }
 
-final class BarcodeContactInfoImpl extends BarcodeContactInfo {
+final class Barcode$ContactInfoImpl implements Barcode$ContactInfo {
   final BarcodeContactInfoProxyApi api;
 
-  BarcodeContactInfoImpl.internal(this.api) : super.impl();
+  Barcode$ContactInfoImpl.internal(this.api);
 
   @override
-  List<BarcodeAddress> get addresses =>
+  List<Barcode$Address> get addresses =>
       api.addresses.map((e) => e.impl).toList();
   @override
-  List<BarcodeEmail> get emails => api.emails.map((e) => e.impl).toList();
+  List<Barcode$Email> get emails => api.emails.map((e) => e.impl).toList();
   @override
-  BarcodePersonName? get name => api.name?.impl;
+  Barcode$PersonName? get name => api.name?.impl;
   @override
   String? get organization => api.organization;
   @override
-  List<BarcodePhone> get phones => api.phones.map((e) => e.impl).toList();
+  List<Barcode$Phone> get phones => api.phones.map((e) => e.impl).toList();
   @override
   String? get title => api.title;
   @override
   List<String> get urls => api.urls;
 }
 
-final class BarcodeDriverLicenseImpl extends BarcodeDriverLicense {
+final class Barcode$DriverLicenseImpl implements Barcode$DriverLicense {
   final BarcodeDriverLicenseProxyApi api;
 
-  BarcodeDriverLicenseImpl.internal(this.api) : super.impl();
+  Barcode$DriverLicenseImpl.internal(this.api);
 
   @override
   String? get addressCity => api.addressCity;
@@ -117,28 +117,25 @@ final class BarcodeDriverLicenseImpl extends BarcodeDriverLicense {
   String? get middleName => api.middleName;
 }
 
-final class BarcodeEmailImpl extends BarcodeEmail {
+final class Barcode$EmailImpl implements Barcode$Email {
   final BarcodeEmailProxyApi api;
 
-  BarcodeEmailImpl.internal(this.api) : super.impl();
+  Barcode$EmailImpl.internal(this.api);
 
   @override
   String? get address => api.address;
-
   @override
   String? get body => api.body;
-
   @override
   String? get subject => api.subject;
-
   @override
-  BarcodeEmailType get type => api.type.impl;
+  Barcode$Email$Type get type => api.type.impl;
 }
 
-final class BarcodeGeoPointImpl extends BarcodeGeoPoint {
+final class Barcode$GeoPointImpl implements Barcode$GeoPoint {
   final BarcodeGeoPointProxyApi api;
 
-  BarcodeGeoPointImpl.internal(this.api) : super.impl();
+  Barcode$GeoPointImpl.internal(this.api);
 
   @override
   double get lat => api.lat;
@@ -146,10 +143,10 @@ final class BarcodeGeoPointImpl extends BarcodeGeoPoint {
   double get lng => api.lng;
 }
 
-final class BarcodePersonNameImpl extends BarcodePersonName {
+final class Barcode$PersonNameImpl implements Barcode$PersonName {
   final BarcodePersonNameProxyApi api;
 
-  BarcodePersonNameImpl.internal(this.api) : super.impl();
+  Barcode$PersonNameImpl.internal(this.api);
 
   @override
   String? get first => api.first;
@@ -167,21 +164,21 @@ final class BarcodePersonNameImpl extends BarcodePersonName {
   String? get suffix => api.suffix;
 }
 
-final class BarcodePhoneImpl extends BarcodePhone {
+final class Barcode$PhoneImpl implements Barcode$Phone {
   final BarcodePhoneProxyApi api;
 
-  BarcodePhoneImpl.internal(this.api) : super.impl();
+  Barcode$PhoneImpl.internal(this.api);
 
   @override
   String? get number => api.number;
   @override
-  BarcodePhoneType get type => api.type.impl;
+  Barcode$Phone$Type get type => api.type.impl;
 }
 
-final class BarcodeSmsImpl extends BarcodeSms {
+final class Barcode$SmsImpl implements Barcode$Sms {
   final BarcodeSmsProxyApi api;
 
-  BarcodeSmsImpl.internal(this.api) : super.impl();
+  Barcode$SmsImpl.internal(this.api);
 
   @override
   String? get message => api.message;
@@ -189,10 +186,10 @@ final class BarcodeSmsImpl extends BarcodeSms {
   String? get phoneNumber => api.phoneNumber;
 }
 
-final class BarcodeUrlBookmarkImpl extends BarcodeUrlBookmark {
+final class Barcode$UrlBookmarkImpl implements Barcode$UrlBookmark {
   final BarcodeUrlBookmarkProxyApi api;
 
-  BarcodeUrlBookmarkImpl.internal(this.api) : super.impl();
+  Barcode$UrlBookmarkImpl.internal(this.api);
 
   @override
   String? get title => api.title;
@@ -200,168 +197,168 @@ final class BarcodeUrlBookmarkImpl extends BarcodeUrlBookmark {
   String? get url => api.url;
 }
 
-final class BarcodeWiFiImpl extends BarcodeWiFi {
+final class Barcode$WiFiImpl implements Barcode$WiFi {
   final BarcodeWiFiProxyApi api;
 
-  BarcodeWiFiImpl.internal(this.api) : super.impl();
+  Barcode$WiFiImpl.internal(this.api);
 
   @override
-  BarcodeWiFiType get encryptionType => api.encryptionType.impl;
+  Barcode$WiFi$Type get encryptionType => api.encryptionType.impl;
   @override
   String? get password => api.password;
   @override
   String? get ssid => api.ssid;
 }
 
-final class BarcodeImpl extends Barcode {
+final class BarcodeImpl implements Barcode {
   final BarcodeProxyApi api;
 
-  BarcodeImpl.internal(this.api) : super.impl();
+  BarcodeImpl.internal(this.api);
 
   @override
   Rect<int>? get boundingBox => api.boundingBox?.impl;
   @override
-  BarcodeCalendarEvent? get calendarEvent => api.calendarEvent?.impl;
+  Barcode$CalendarEvent? get calendarEvent => api.calendarEvent?.impl;
   @override
-  BarcodeContactInfo? get contactInfo => api.contactInfo?.impl;
+  Barcode$ContactInfo? get contactInfo => api.contactInfo?.impl;
   @override
   List<Point<int>>? get cornerPoints =>
       api.cornerPoints?.map((e) => e.impl).toList();
   @override
   String? get displayValue => api.displayValue;
   @override
-  BarcodeDriverLicense? get driverLicense => api.driverLicense?.impl;
+  Barcode$DriverLicense? get driverLicense => api.driverLicense?.impl;
   @override
-  BarcodeEmail? get email => api.email?.impl;
+  Barcode$Email? get email => api.email?.impl;
   @override
-  BarcodeFormat get format => api.format.impl;
+  Barcode$Format get format => api.format.impl;
   @override
-  BarcodeGeoPoint? get geoPoint => api.geoPoint?.impl;
+  Barcode$GeoPoint? get geoPoint => api.geoPoint?.impl;
   @override
-  BarcodePhone? get phone => api.phone?.impl;
+  Barcode$Phone? get phone => api.phone?.impl;
   @override
   Uint8List? get rawBytes => api.rawBytes;
   @override
   String? get rawValue => api.rawValue;
   @override
-  BarcodeSms? get sms => api.sms?.impl;
+  Barcode$Sms? get sms => api.sms?.impl;
   @override
-  BarcodeUrlBookmark? get url => api.url?.impl;
+  Barcode$UrlBookmark? get url => api.url?.impl;
   @override
-  BarcodeType get valueType => api.valueType.impl;
+  Barcode$Type get valueType => api.valueType.impl;
   @override
-  BarcodeWiFi? get wifi => api.wifi?.impl;
+  Barcode$WiFi? get wifi => api.wifi?.impl;
 }
 
-extension BarcodeFormatX on BarcodeFormat {
+extension Barcode$FormatX on Barcode$Format {
   BarcodeFormatApi get api => BarcodeFormatApi.values[index];
 
   VisionObjectType? get visionObjectTypeOrNull {
     switch (this) {
-      case BarcodeFormat.unknown:
-      case BarcodeFormat.all:
+      case Barcode$Format.unknown:
+      case Barcode$Format.all:
         return null;
-      case BarcodeFormat.code128:
+      case Barcode$Format.code128:
         return VisionObjectType.code128;
-      case BarcodeFormat.code39:
+      case Barcode$Format.code39:
         return VisionObjectType.code39;
-      case BarcodeFormat.code93:
+      case Barcode$Format.code93:
         return VisionObjectType.code93;
-      case BarcodeFormat.codabar:
+      case Barcode$Format.codabar:
         return VisionObjectType.codabar;
-      case BarcodeFormat.dataMatrix:
+      case Barcode$Format.dataMatrix:
         return VisionObjectType.dataMatrix;
-      case BarcodeFormat.ean13:
+      case Barcode$Format.ean13:
         return VisionObjectType.ean13;
-      case BarcodeFormat.ean8:
+      case Barcode$Format.ean8:
         return VisionObjectType.ean8;
-      case BarcodeFormat.itf:
+      case Barcode$Format.itf:
         return VisionObjectType.itf14;
-      case BarcodeFormat.qrCode:
+      case Barcode$Format.qrCode:
         return VisionObjectType.qr;
-      case BarcodeFormat.upcA:
+      case Barcode$Format.upcA:
         return null;
-      case BarcodeFormat.upcE:
+      case Barcode$Format.upcE:
         return VisionObjectType.upce;
-      case BarcodeFormat.pdf417:
+      case Barcode$Format.pdf417:
         return VisionObjectType.pdf417;
-      case BarcodeFormat.aztec:
+      case Barcode$Format.aztec:
         return VisionObjectType.aztec;
     }
   }
 }
 
 extension BarcodeFormatApiX on BarcodeFormatApi {
-  BarcodeFormat get impl => BarcodeFormat.values[index];
+  Barcode$Format get impl => Barcode$Format.values[index];
 }
 
 extension BarcodeTypeApiX on BarcodeTypeApi {
-  BarcodeType get impl => BarcodeType.values[index];
+  Barcode$Type get impl => Barcode$Type.values[index];
 }
 
 extension BarcodeAddressTypeApiX on BarcodeAddressTypeApi {
-  BarcodeAddressType get impl => BarcodeAddressType.values[index];
+  Barcode$Address$Type get impl => Barcode$Address$Type.values[index];
 }
 
 extension BarcodeEmailTypeApiX on BarcodeEmailTypeApi {
-  BarcodeEmailType get impl => BarcodeEmailType.values[index];
+  Barcode$Email$Type get impl => Barcode$Email$Type.values[index];
 }
 
 extension BarcodePhoneTypeApiX on BarcodePhoneTypeApi {
-  BarcodePhoneType get impl => BarcodePhoneType.values[index];
+  Barcode$Phone$Type get impl => Barcode$Phone$Type.values[index];
 }
 
 extension BarcodeWiFiTypeApiX on BarcodeWiFiTypeApi {
-  BarcodeWiFiType get impl => BarcodeWiFiType.values[index];
+  Barcode$WiFi$Type get impl => Barcode$WiFi$Type.values[index];
 }
 
 extension BarcodeAddressProxyApiX on BarcodeAddressProxyApi {
-  BarcodeAddress get impl => BarcodeAddressImpl.internal(this);
+  Barcode$Address get impl => Barcode$AddressImpl.internal(this);
 }
 
 extension BarcodeCalendarDateTimeProxyApiX on BarcodeCalendarDateTimeProxyApi {
-  BarcodeCalendarDateTime get impl =>
-      BarcodeCalendarDateTimeImpl.internal(this);
+  Barcode$CalendarDateTime get impl =>
+      Barcode$CalendarDateTimeImpl.internal(this);
 }
 
 extension BarcodeCalendarEventProxyApiX on BarcodeCalendarEventProxyApi {
-  BarcodeCalendarEvent get impl => BarcodeCalendarEventImpl.internal(this);
+  Barcode$CalendarEvent get impl => Barcode$CalendarEventImpl.internal(this);
 }
 
 extension BarcodeContactInfoProxyApiX on BarcodeContactInfoProxyApi {
-  BarcodeContactInfo get impl => BarcodeContactInfoImpl.internal(this);
+  Barcode$ContactInfo get impl => Barcode$ContactInfoImpl.internal(this);
 }
 
 extension BarcodeDriverLicenseProxyApiX on BarcodeDriverLicenseProxyApi {
-  BarcodeDriverLicense get impl => BarcodeDriverLicenseImpl.internal(this);
+  Barcode$DriverLicense get impl => Barcode$DriverLicenseImpl.internal(this);
 }
 
 extension BarcodeEmailProxyApiX on BarcodeEmailProxyApi {
-  BarcodeEmail get impl => BarcodeEmailImpl.internal(this);
+  Barcode$Email get impl => Barcode$EmailImpl.internal(this);
 }
 
 extension BarcodeGeoPointProxyApiX on BarcodeGeoPointProxyApi {
-  BarcodeGeoPoint get impl => BarcodeGeoPointImpl.internal(this);
+  Barcode$GeoPoint get impl => Barcode$GeoPointImpl.internal(this);
 }
 
 extension BarcodePersonNameProxyApiX on BarcodePersonNameProxyApi {
-  BarcodePersonName get impl => BarcodePersonNameImpl.internal(this);
+  Barcode$PersonName get impl => Barcode$PersonNameImpl.internal(this);
 }
 
 extension BarcodePhoneProxyApiX on BarcodePhoneProxyApi {
-  BarcodePhone get impl => BarcodePhoneImpl.internal(this);
+  Barcode$Phone get impl => Barcode$PhoneImpl.internal(this);
 }
 
 extension BarcodeSmsProxyApiX on BarcodeSmsProxyApi {
-  BarcodeSms get impl => BarcodeSmsImpl.internal(this);
+  Barcode$Sms get impl => Barcode$SmsImpl.internal(this);
 }
 
 extension BarcodeUrlBookmarkProxyApiX on BarcodeUrlBookmarkProxyApi {
-  BarcodeUrlBookmark get impl => BarcodeUrlBookmarkImpl.internal(this);
+  Barcode$UrlBookmark get impl => Barcode$UrlBookmarkImpl.internal(this);
 }
 
 extension BarcodeWiFiProxyApiX on BarcodeWiFiProxyApi {
-  BarcodeWiFi get impl => BarcodeWiFiImpl.internal(this);
+  Barcode$WiFi get impl => Barcode$WiFiImpl.internal(this);
 }
 
 extension BarcodeX on Barcode {

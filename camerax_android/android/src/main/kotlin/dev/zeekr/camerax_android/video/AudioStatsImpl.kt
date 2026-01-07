@@ -38,3 +38,13 @@ val Int.audioStatsAudioStateApi: AudioStatsAudioStateApi
         AudioStats.AUDIO_STATE_MUTED -> AudioStatsAudioStateApi.MUTED
         else -> throw NotImplementedError("Not implemented value: $this")
     }
+
+val AudioStatsAudioStateApi.impl: Int
+    get() = when (this) {
+        AudioStatsAudioStateApi.ACTIVE -> AudioStats.AUDIO_STATE_ACTIVE
+        AudioStatsAudioStateApi.DISABLED -> AudioStats.AUDIO_STATE_DISABLED
+        AudioStatsAudioStateApi.SOURCE_SILENCED -> AudioStats.AUDIO_STATE_SOURCE_SILENCED
+        AudioStatsAudioStateApi.ENCODER_ERROR -> AudioStats.AUDIO_STATE_ENCODER_ERROR
+        AudioStatsAudioStateApi.SOURCE_ERROR -> AudioStats.AUDIO_STATE_SOURCE_ERROR
+        AudioStatsAudioStateApi.MUTED -> AudioStats.AUDIO_STATE_MUTED
+    }

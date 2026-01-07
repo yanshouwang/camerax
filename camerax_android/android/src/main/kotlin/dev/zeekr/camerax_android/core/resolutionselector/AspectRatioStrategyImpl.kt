@@ -33,15 +33,15 @@ class AspectRatioStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 }
 
-val AspectRatioStrategyFallbackRuleApi.impl: Int
-    get() = when (this) {
-        AspectRatioStrategyFallbackRuleApi.NONE -> AspectRatioStrategy.FALLBACK_RULE_NONE
-        AspectRatioStrategyFallbackRuleApi.AUTO -> AspectRatioStrategy.FALLBACK_RULE_AUTO
-    }
-
 val Int.aspectRatioStrategyFallbackRuleApi: AspectRatioStrategyFallbackRuleApi
     get() = when (this) {
         AspectRatioStrategy.FALLBACK_RULE_NONE -> AspectRatioStrategyFallbackRuleApi.NONE
         AspectRatioStrategy.FALLBACK_RULE_AUTO -> AspectRatioStrategyFallbackRuleApi.AUTO
         else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val AspectRatioStrategyFallbackRuleApi.impl: Int
+    get() = when (this) {
+        AspectRatioStrategyFallbackRuleApi.NONE -> AspectRatioStrategy.FALLBACK_RULE_NONE
+        AspectRatioStrategyFallbackRuleApi.AUTO -> AspectRatioStrategy.FALLBACK_RULE_AUTO
     }

@@ -1,5 +1,3 @@
-abstract base class VNObservation {
-  VNObservation.impl();
-
+abstract interface class VNObservation {
   double get confidence;
 }

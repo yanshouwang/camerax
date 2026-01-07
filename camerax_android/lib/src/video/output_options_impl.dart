@@ -1,10 +1,9 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
+import 'package:camerax_android/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'file_output_options_impl.dart';
-
-base mixin OutputOptionsImpl on OutputOptions {
+abstract base class OutputOptionsImpl implements OutputOptions {
   OutputOptionsProxyApi get api;
 
   @override

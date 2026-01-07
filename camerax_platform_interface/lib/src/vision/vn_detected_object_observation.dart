@@ -1,9 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
 
-import 'vn_observation.dart';
-
-abstract base class VNDetectedObjectObservation extends VNObservation {
-  VNDetectedObjectObservation.impl() : super.impl();
-
+abstract interface class VNDetectedObjectObservation implements VNObservation {
   Rect<double> get boundingBox;
 }

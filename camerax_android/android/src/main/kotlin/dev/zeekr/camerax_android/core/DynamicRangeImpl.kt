@@ -8,8 +8,7 @@ import dev.zeekr.camerax_android.PigeonApiDynamicRangeProxyApi
 
 class DynamicRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiDynamicRangeProxyApi(registrar) {
     override fun pigeon_defaultConstructor(
-        encoding: DynamicRangeEncodingApi,
-        bitDepth: DynamicRangeBitDepthApi
+        encoding: DynamicRangeEncodingApi, bitDepth: DynamicRangeBitDepthApi
     ): DynamicRange {
         return DynamicRange(encoding.impl, bitDepth.impl)
     }
@@ -55,24 +54,6 @@ class DynamicRangeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApi
     }
 }
 
-val DynamicRangeEncodingApi.impl: Int
-    get() = when (this) {
-        DynamicRangeEncodingApi.UNSPECIFIED -> DynamicRange.ENCODING_UNSPECIFIED
-        DynamicRangeEncodingApi.SDR -> DynamicRange.ENCODING_SDR
-        DynamicRangeEncodingApi.HDR_UNSPECIFIED -> DynamicRange.ENCODING_HDR_UNSPECIFIED
-        DynamicRangeEncodingApi.HLG -> DynamicRange.ENCODING_HLG
-        DynamicRangeEncodingApi.HDR10 -> DynamicRange.ENCODING_HDR10
-        DynamicRangeEncodingApi.HDR10PLUS -> DynamicRange.ENCODING_HDR10_PLUS
-        DynamicRangeEncodingApi.DOLBY_VISION -> DynamicRange.ENCODING_DOLBY_VISION
-    }
-
-val DynamicRangeBitDepthApi.impl: Int
-    get() = when (this) {
-        DynamicRangeBitDepthApi.UNSPECIFIED -> DynamicRange.BIT_DEPTH_UNSPECIFIED
-        DynamicRangeBitDepthApi.EIGHT_BIT -> DynamicRange.BIT_DEPTH_8_BIT
-        DynamicRangeBitDepthApi.TEN_BIT -> DynamicRange.BIT_DEPTH_10_BIT
-    }
-
 val Int.dynamicRangeEncodingApi: DynamicRangeEncodingApi
     get() = when (this) {
         DynamicRange.ENCODING_UNSPECIFIED -> DynamicRangeEncodingApi.UNSPECIFIED
@@ -91,4 +72,22 @@ val Int.dynamicRangeBitDepthApi: DynamicRangeBitDepthApi
         DynamicRange.BIT_DEPTH_8_BIT -> DynamicRangeBitDepthApi.EIGHT_BIT
         DynamicRange.BIT_DEPTH_10_BIT -> DynamicRangeBitDepthApi.TEN_BIT
         else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val DynamicRangeEncodingApi.impl: Int
+    get() = when (this) {
+        DynamicRangeEncodingApi.UNSPECIFIED -> DynamicRange.ENCODING_UNSPECIFIED
+        DynamicRangeEncodingApi.SDR -> DynamicRange.ENCODING_SDR
+        DynamicRangeEncodingApi.HDR_UNSPECIFIED -> DynamicRange.ENCODING_HDR_UNSPECIFIED
+        DynamicRangeEncodingApi.HLG -> DynamicRange.ENCODING_HLG
+        DynamicRangeEncodingApi.HDR10 -> DynamicRange.ENCODING_HDR10
+        DynamicRangeEncodingApi.HDR10PLUS -> DynamicRange.ENCODING_HDR10_PLUS
+        DynamicRangeEncodingApi.DOLBY_VISION -> DynamicRange.ENCODING_DOLBY_VISION
+    }
+
+val DynamicRangeBitDepthApi.impl: Int
+    get() = when (this) {
+        DynamicRangeBitDepthApi.UNSPECIFIED -> DynamicRange.BIT_DEPTH_UNSPECIFIED
+        DynamicRangeBitDepthApi.EIGHT_BIT -> DynamicRange.BIT_DEPTH_8_BIT
+        DynamicRangeBitDepthApi.TEN_BIT -> DynamicRange.BIT_DEPTH_10_BIT
     }

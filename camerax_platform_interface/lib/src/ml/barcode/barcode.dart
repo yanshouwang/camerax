@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:camerax_platform_interface/src/common.dart';
 
-enum BarcodeFormat {
+enum Barcode$Format {
   unknown,
   all,
   code128,
@@ -20,7 +20,7 @@ enum BarcodeFormat {
   aztec,
 }
 
-enum BarcodeType {
+enum Barcode$Type {
   unknown,
   contactInfo,
   email,
@@ -36,24 +36,20 @@ enum BarcodeType {
   driverLicense,
 }
 
-enum BarcodeAddressType { unknown, work, home }
+enum Barcode$Address$Type { unknown, work, home }
 
-enum BarcodeEmailType { unknown, work, home }
+enum Barcode$Email$Type { unknown, work, home }
 
-enum BarcodePhoneType { unknown, work, home, fax, mobile }
+enum Barcode$Phone$Type { unknown, work, home, fax, mobile }
 
-enum BarcodeWiFiType { open, wpa, wep }
+enum Barcode$WiFi$Type { open, wpa, wep }
 
-abstract base class BarcodeAddress {
-  BarcodeAddress.impl();
-
-  BarcodeAddressType get type;
+abstract interface class Barcode$Address {
+  Barcode$Address$Type get type;
   List<String> get addressLines;
 }
 
-abstract base class BarcodeCalendarDateTime {
-  BarcodeCalendarDateTime.impl();
-
+abstract interface class Barcode$CalendarDateTime {
   String? get rawValue;
   int get year;
   int get month;
@@ -64,11 +60,9 @@ abstract base class BarcodeCalendarDateTime {
   bool get isUtc;
 }
 
-abstract base class BarcodeCalendarEvent {
-  BarcodeCalendarEvent.impl();
-
-  BarcodeCalendarDateTime? get start;
-  BarcodeCalendarDateTime? get end;
+abstract interface class Barcode$CalendarEvent {
+  Barcode$CalendarDateTime? get start;
+  Barcode$CalendarDateTime? get end;
   String? get location;
   String? get organizer;
   String? get summary;
@@ -76,21 +70,17 @@ abstract base class BarcodeCalendarEvent {
   String? get status;
 }
 
-abstract base class BarcodeContactInfo {
-  BarcodeContactInfo.impl();
-
-  BarcodePersonName? get name;
+abstract interface class Barcode$ContactInfo {
+  Barcode$PersonName? get name;
   String? get organization;
   String? get title;
-  List<BarcodePhone> get phones;
-  List<BarcodeEmail> get emails;
-  List<BarcodeAddress> get addresses;
+  List<Barcode$Phone> get phones;
+  List<Barcode$Email> get emails;
+  List<Barcode$Address> get addresses;
   List<String> get urls;
 }
 
-abstract base class BarcodeDriverLicense {
-  BarcodeDriverLicense.impl();
-
+abstract interface class Barcode$DriverLicense {
   String? get licenseNumber;
   String? get documentType;
   String? get firstName;
@@ -107,25 +97,19 @@ abstract base class BarcodeDriverLicense {
   String? get expiryDate;
 }
 
-abstract base class BarcodeEmail {
-  BarcodeEmail.impl();
-
-  BarcodeEmailType get type;
+abstract interface class Barcode$Email {
+  Barcode$Email$Type get type;
   String? get address;
   String? get subject;
   String? get body;
 }
 
-abstract base class BarcodeGeoPoint {
-  BarcodeGeoPoint.impl();
-
+abstract interface class Barcode$GeoPoint {
   double get lat;
   double get lng;
 }
 
-abstract base class BarcodePersonName {
-  BarcodePersonName.impl();
-
+abstract interface class Barcode$PersonName {
   String? get prefix;
   String? get first;
   String? get middle;
@@ -135,52 +119,42 @@ abstract base class BarcodePersonName {
   String? get pronunciation;
 }
 
-abstract base class BarcodePhone {
-  BarcodePhone.impl();
-
-  BarcodePhoneType get type;
+abstract interface class Barcode$Phone {
+  Barcode$Phone$Type get type;
   String? get number;
 }
 
-abstract base class BarcodeSms {
-  BarcodeSms.impl();
-
+abstract interface class Barcode$Sms {
   String? get phoneNumber;
   String? get message;
 }
 
-abstract base class BarcodeUrlBookmark {
-  BarcodeUrlBookmark.impl();
-
+abstract interface class Barcode$UrlBookmark {
   String? get title;
   String? get url;
 }
 
-abstract base class BarcodeWiFi {
-  BarcodeWiFi.impl();
-
-  BarcodeWiFiType get encryptionType;
+abstract interface class Barcode$WiFi {
+  Barcode$WiFi$Type get encryptionType;
   String? get ssid;
   String? get password;
 }
 
-abstract base class Barcode {
-  Barcode.impl();
-
-  BarcodeFormat get format;
+abstract interface class Barcode {
+  Barcode$Format get format;
   Rect<int>? get boundingBox;
   List<Point<int>>? get cornerPoints;
   Uint8List? get rawBytes;
   String? get rawValue;
   String? get displayValue;
-  BarcodeType get valueType;
-  BarcodeCalendarEvent? get calendarEvent;
-  BarcodeContactInfo? get contactInfo;
-  BarcodeDriverLicense? get driverLicense;
-  BarcodeEmail? get email;
-  BarcodeGeoPoint? get geoPoint;
-  BarcodePhone? get phone;
-  BarcodeSms? get sms;
-  BarcodeUrlBookmark? get url;
-  BarcodeWiFi? get wifi;
+  Barcode$Type get valueType;
+  Barcode$CalendarEvent? get calendarEvent;
+  Barcode$ContactInfo? get contactInfo;
+  Barcode$DriverLicense? get driverLicense;
+  Barcode$Email? get email;
+  Barcode$GeoPoint? get geoPoint;
+  Barcode$Phone? get phone;
+  Barcode$Sms? get sms;
+  Barcode$UrlBookmark? get url;
+  Barcode$WiFi? get wifi;
 }

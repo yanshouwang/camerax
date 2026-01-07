@@ -1,9 +1,6 @@
-import 'focus_metering_action.dart';
-import 'focus_metering_result.dart';
+import 'package:camerax_platform_interface/src/core.dart';
 
-abstract base class CameraControl {
-  CameraControl.impl();
-
+abstract interface class CameraControl {
   Future<void> cancelFocusAndMetering();
   Future<void> enableLowLightBoostAsync(bool lowLightBoost);
   Future<void> enableTorch(bool torch);

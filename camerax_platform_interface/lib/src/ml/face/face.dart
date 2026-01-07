@@ -1,12 +1,7 @@
 import 'package:camerax_platform_interface/src/common.dart';
-import 'package:collection/collection.dart';
+import 'package:camerax_platform_interface/src/ml.dart';
 
-import 'face_contour.dart';
-import 'face_landmark.dart';
-
-abstract base class Face {
-  Face.impl();
-
+abstract interface class Face {
   Rect<int> get boundingBox;
   List<FaceContour> get allContours;
   List<FaceLandmark> get allLandmarks;
@@ -18,9 +13,6 @@ abstract base class Face {
   double? get smilingProbability;
   int? get trackingId;
 
-  FaceContour? getContour(FaceContourType type) =>
-      allContours.firstWhereOrNull((e) => e.type == type);
-
-  FaceLandmark? getLandmark(FaceLandmarkType type) =>
-      allLandmarks.firstWhereOrNull((e) => e.type == type);
+  Future<FaceContour?> getContour(FaceContour$Type contourType);
+  Future<FaceLandmark?> getLandmark(FaceLandmark$Type landmarkType);
 }

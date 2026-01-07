@@ -1,15 +1,11 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'vn_barcode_observation.dart';
-import 'vn_image_based_request.dart';
-import 'vn_request.dart';
-
-abstract base class VNDetectBarcodesRequest extends VNImageBasedRequest {
-  VNDetectBarcodesRequest.impl() : super.impl();
-
+abstract interface class VNDetectBarcodesRequest
+    implements VNImageBasedRequest {
   factory VNDetectBarcodesRequest({
     required VNRequestCompletionHandler completionHandler,
-  }) => CameraXPlugin.instance.$VNDetectBarcodesRequest(
+  }) => VNDetectBarcodesRequestChannel.instance.create(
     completionHandler: completionHandler,
   );
 
@@ -18,4 +14,24 @@ abstract base class VNDetectBarcodesRequest extends VNImageBasedRequest {
   Future<void> setSymbologies(List<VNBarcodeSymbology> value);
   @override
   Future<List<VNBarcodeObservation>?> getResults();
+}
+
+abstract base class VNDetectBarcodesRequestChannel extends PlatformInterface {
+  VNDetectBarcodesRequestChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static VNDetectBarcodesRequestChannel? _instance;
+
+  static VNDetectBarcodesRequestChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(VNDetectBarcodesRequestChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  VNDetectBarcodesRequest create({
+    required VNRequestCompletionHandler completionHandler,
+  });
 }

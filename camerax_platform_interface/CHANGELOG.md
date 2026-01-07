@@ -1,3 +1,10 @@
+## 1.2.0
+
+* Add more camera2 apis.
+* Remove PermissionManager api.
+* Use builder classes instead of factory methods.
+* Use LiveData instead of `get`, `observe`, `removeObserver` methods.
+
 ## 1.1.1
 
 * Bump version.

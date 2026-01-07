@@ -1,21 +1,24 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class LocationImpl extends Location {
+final class LocationImpl implements Location {
   final CLLocationProxyApi api;
 
-  LocationImpl.internal(this.api) : super.impl();
-
-  factory LocationImpl(double latitude, double longitude) {
-    final api = CLLocationProxyApi(latitude: latitude, longitude: longitude);
-    return LocationImpl.internal(api);
-  }
+  LocationImpl.internal(this.api);
 
   @override
   double get latitude => api.latitude;
 
   @override
   double get longitude => api.longitude;
+}
+
+final class LocationChannelImpl extends LocationChannel {
+  @override
+  Location create(double latitude, double longitude) {
+    final api = CLLocationProxyApi(latitude: latitude, longitude: longitude);
+    return LocationImpl.internal(api);
+  }
 }
 
 extension LocationX on Location {

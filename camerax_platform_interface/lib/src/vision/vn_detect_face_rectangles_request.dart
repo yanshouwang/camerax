@@ -1,18 +1,35 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
+import 'package:camerax_platform_interface/src/vision.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'vn_face_observation.dart';
-import 'vn_image_based_request.dart';
-import 'vn_request.dart';
-
-abstract base class VNDetectFaceRectanglesRequest extends VNImageBasedRequest {
-  VNDetectFaceRectanglesRequest.impl() : super.impl();
-
+abstract interface class VNDetectFaceRectanglesRequest
+    implements VNImageBasedRequest {
   factory VNDetectFaceRectanglesRequest({
     required VNRequestCompletionHandler completionHandler,
-  }) => CameraXPlugin.instance.$VNDetectFaceRectanglesRequest(
+  }) => VNDetectFaceRectanglesRequestChannel.instance.create(
     completionHandler: completionHandler,
   );
 
   @override
   Future<List<VNFaceObservation>?> getResults();
+}
+
+abstract base class VNDetectFaceRectanglesRequestChannel
+    extends PlatformInterface {
+  VNDetectFaceRectanglesRequestChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static VNDetectFaceRectanglesRequestChannel? _instance;
+
+  static VNDetectFaceRectanglesRequestChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(VNDetectFaceRectanglesRequestChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  VNDetectFaceRectanglesRequest create({
+    required VNRequestCompletionHandler completionHandler,
+  });
 }

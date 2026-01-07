@@ -1,21 +1,36 @@
-import 'package:camerax_platform_interface/src/camerax_plugin.dart';
 import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/core.dart';
+import 'package:camerax_platform_interface/src/visionx.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'vision_object.dart';
-
-abstract base class VisionAnalyzerResult {
+abstract interface class VisionAnalyzer$Result {
   List<VisionObject> get objects;
-
-  VisionAnalyzerResult.impl();
 }
 
-abstract base class VisionAnalyzer extends ImageAnalysisAnalyzer {
-  VisionAnalyzer.impl() : super.impl();
-
+abstract interface class VisionAnalyzer implements ImageAnalysis$Analyzer {
   factory VisionAnalyzer({
     List<VisionObjectType>? types,
-    required Consumer<VisionAnalyzerResult> consumer,
-  }) =>
-      CameraXPlugin.instance.$VisionAnalyzer(types: types, consumer: consumer);
+    required Consumer<VisionAnalyzer$Result> consumer,
+  }) => VisionAnalyzerChannel.instance.create(types: types, consumer: consumer);
+}
+
+abstract base class VisionAnalyzerChannel extends PlatformInterface {
+  VisionAnalyzerChannel() : super(token: _token);
+
+  static final _token = Object();
+
+  static VisionAnalyzerChannel? _instance;
+
+  static VisionAnalyzerChannel get instance =>
+      ArgumentError.checkNotNull(_instance, 'instance');
+
+  static set instance(VisionAnalyzerChannel instance) {
+    PlatformInterface.verify(instance, _token);
+    _instance = instance;
+  }
+
+  VisionAnalyzer create({
+    List<VisionObjectType>? types,
+    required Consumer<VisionAnalyzer$Result> consumer,
+  });
 }

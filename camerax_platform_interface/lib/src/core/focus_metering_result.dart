@@ -1,5 +1,3 @@
-abstract base class FocusMeteringResult {
-  FocusMeteringResult.impl();
-
+abstract interface class FocusMeteringResult {
   bool get isFocusSuccessful;
 }

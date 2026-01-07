@@ -3,7 +3,7 @@ version = "1.0-SNAPSHOT"
 
 buildscript {
     ext.kotlin_version = "2.1.0"
-    ext.camerax_version = "1.5.1"
+    ext.camerax_version = "1.5.2"
     repositories {
         google()
         mavenCentral()
@@ -73,7 +73,7 @@ android {
         // implementation "com.google.mlkit:segmentation-selfie:16.0.0-beta5"
         // implementation "com.google.mlkit:text-recognition:16.0.0"
 
-        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2'
         implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.10.2'
 
         testImplementation("org.jetbrains.kotlin:kotlin-test")

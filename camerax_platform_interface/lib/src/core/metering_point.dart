@@ -1,5 +1,3 @@
-abstract base class MeteringPoint {
-  MeteringPoint.impl();
-
+abstract interface class MeteringPoint {
   double get size;
 }

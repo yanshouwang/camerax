@@ -1,23 +1,16 @@
 import 'dart:async';
 
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/core.dart';
 import 'package:camerax_ios/src/video.dart';
+import 'package:camerax_ios/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-// import 'tap_to_focus_info_impl.dart';
-import 'video.dart';
-
-final class CameraControllerImpl extends CameraController {
+final class CameraControllerImpl implements CameraController {
   final CameraControllerProxyApi api;
 
-  CameraControllerImpl.internal(this.api) : super.impl();
-
-  factory CameraControllerImpl() {
-    final api = CameraControllerProxyApi();
-    return CameraControllerImpl.internal(api);
-  }
+  CameraControllerImpl.internal(this.api);
 
   @override
   Future<bool> hasCamera(CameraSelector cameraSelector) =>
@@ -46,14 +39,15 @@ final class CameraControllerImpl extends CameraController {
   Future<void> unbind() => api.unbind();
 
   @override
-  Future<TorchState?> getTorchState() =>
-      api.getTorchState().then((e) => e?.impl);
+  Future<LiveData<TorchState>> getTorchState() =>
+      api.getTorchState().then((e) => e.impl);
 
   @override
   Future<void> enableTorch(bool enabled) => api.enableTorch(enabled);
 
   @override
-  Future<ZoomState?> getZoomState() => api.getZoomState().then((e) => e?.impl);
+  Future<LiveData<ZoomState>> getZoomState() =>
+      api.getZoomState().then((e) => e.impl);
 
   @override
   Future<void> setZoomRatio(double zoomRatio) => api.setZoomRatio(zoomRatio);
@@ -86,7 +80,7 @@ final class CameraControllerImpl extends CameraController {
   Future<bool> isVideoCaptureEnabled() => api.isVideoCaptureEnabled();
 
   @override
-  Future<void> setEnabledUseCases(List<CameraControllerUseCase> useCases) {
+  Future<void> setEnabledUseCases(List<CameraController$UseCase> useCases) {
     final useCaseApis = useCases.map((e) => e.api).toList();
     return api.setEnabledUseCases(useCaseApis);
   }
@@ -94,44 +88,40 @@ final class CameraControllerImpl extends CameraController {
   @override
   Future<ResolutionSelector?> getPreviewResolutionSelector() =>
       throw UnimplementedError();
-  // api.getPreviewResolutionSelector().then((e) => e?.impl);
 
   @override
   Future<void> setPreviewResolutionSelector(
     ResolutionSelector? resolutionSelector,
   ) => throw UnimplementedError();
-  // api.setPreviewResolutionSelector(resolutionSelector?.api);
 
   @override
   Future<ResolutionSelector?> getImageCaptureResolutionSelector() =>
       throw UnimplementedError();
-  // api.getImageCaptureResolutionSelector().then((e) => e?.impl);
 
   @override
   Future<void> setImageCaptureResolutionSelector(
     ResolutionSelector? resolutionSelector,
   ) => throw UnimplementedError();
-  // api.setImageCaptureResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<ImageCaptureCaptureMode> getImageCaptureMode() =>
+  Future<ImageCapture$CaptureMode> getImageCaptureMode() =>
       api.getImageCaptureMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureMode(ImageCaptureCaptureMode captureMode) =>
+  Future<void> setImageCaptureMode(ImageCapture$CaptureMode captureMode) =>
       api.setImageCaptureMode(captureMode.api);
 
   @override
-  Future<ImageCaptureFlashMode> getImageCaptureFlashMode() =>
+  Future<ImageCapture$FlashMode> getImageCaptureFlashMode() =>
       api.getImageCaptureFlashMode().then((e) => e.impl);
 
   @override
-  Future<void> setImageCaptureFlashMode(ImageCaptureFlashMode flashMode) =>
+  Future<void> setImageCaptureFlashMode(ImageCapture$FlashMode flashMode) =>
       api.setImageCaptureFlashMode(flashMode.api);
 
   @override
   Future<void> takePicture(
-    ImageCaptureOnImageCapturedCallback imageCapturedCallback,
+    ImageCapture$OnImageCapturedCallback imageCapturedCallback,
   ) => api.takePicture1(imageCapturedCallback.api);
 
   @override
@@ -144,12 +134,12 @@ final class CameraControllerImpl extends CameraController {
   ) => api.setImageAnalysisResolutionSelector(resolutionSelector?.api);
 
   @override
-  Future<ImageAnalysisStrategy> getImageAnalysisBackpressureStrategy() =>
+  Future<ImageAnalysis$Strategy> getImageAnalysisBackpressureStrategy() =>
       api.getImageAnalysisBackpressureStrategy().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisBackpressureStrategy(
-    ImageAnalysisStrategy strategy,
+    ImageAnalysis$Strategy strategy,
   ) => api.setImageAnalysisBackpressureStrategy(strategy.api);
 
   @override
@@ -161,16 +151,16 @@ final class CameraControllerImpl extends CameraController {
       api.setImageAnalysisImageQueueDepth(depth);
 
   @override
-  Future<ImageAnalysisOutputImageFormat> getImageAnalysisOutputImageFormat() =>
+  Future<ImageAnalysis$OutputImageFormat> getImageAnalysisOutputImageFormat() =>
       api.getImageAnalysisOutputImageFormat().then((e) => e.impl);
 
   @override
   Future<void> setImageAnalysisOutputImageFormat(
-    ImageAnalysisOutputImageFormat format,
+    ImageAnalysis$OutputImageFormat format,
   ) => api.setImageAnalysisOutputImageFormat(format.api);
 
   @override
-  Future<void> setImageAnalysisAnalyzer(ImageAnalysisAnalyzer analyzer) =>
+  Future<void> setImageAnalysisAnalyzer(ImageAnalysis$Analyzer analyzer) =>
       api.setImageAnalysisAnalyzer(analyzer.api);
 
   @override
@@ -179,12 +169,10 @@ final class CameraControllerImpl extends CameraController {
   @override
   Future<DynamicRange> getVideoCaptureDynamicRange() =>
       throw UnimplementedError();
-  // api.getVideoCaptureDynamicRange().then((e) => e.impl);
 
   @override
   Future<void> setVideoCaptureDynamicRange(DynamicRange dynamicRange) =>
       throw UnimplementedError();
-  // api.setVideoCaptureDynamicRange(dynamicRange.api);
 
   @override
   Future<MirrorMode> getVideoCaptureMirrorMode() =>
@@ -197,23 +185,19 @@ final class CameraControllerImpl extends CameraController {
   @override
   Future<QualitySelector> getVideoCaptureQualitySelector() =>
       throw UnimplementedError();
-  // api.getVideoCaptureQualitySelector().then((e) => e.impl);
 
   @override
   Future<void> setVideoCaptureQualitySelector(
     QualitySelector qualitySelector,
   ) => throw UnimplementedError();
-  // api.setVideoCaptureQualitySelector(qualitySelector.api);
 
   @override
   Future<Range<int>> getVideoCaptureTargetFrameRate() =>
       throw UnimplementedError();
-  // api.getVideoCaptureTargetFrameRate().then((e) => e.impl);
 
   @override
   Future<void> setVideoCaptureTargetFrameRate(Range<int> targetFrameRate) =>
       throw UnimplementedError();
-  // api.setVideoCaptureTargetFrameRate(targetFrameRate.intApi);
 
   @override
   Future<bool> isRecording() => api.isRecording();
@@ -228,49 +212,28 @@ final class CameraControllerImpl extends CameraController {
       .then((e) => e.impl);
 
   @override
-  Future<void> observeTorchState(Observer<TorchState> observer) =>
-      api.observeTorchState(observer.api);
-
-  @override
-  Future<void> observeZoomState(Observer<ZoomState> observer) =>
-      api.observeZoomState(observer.api);
-
-  @override
-  Future<void> removeTorchStateObserver(Observer<TorchState> observer) =>
-      api.removeTorchStateObserver(observer.api);
-
-  @override
-  Future<void> removeZoomStateObserver(Observer<ZoomState> observer) =>
-      api.removeZoomStateObserver(observer.api);
-
-  @override
-  Future<TapToFocusInfo?> getTapToFocusInfoState() =>
+  Future<LiveData<TapToFocusInfo>> getTapToFocusInfoState() =>
       throw UnimplementedError();
-  // api.getTapToFocusInfoState().then((e) => e?.impl);
-
-  @override
-  Future<void> observeTapToFocusInfoState(Observer<TapToFocusInfo> observer) =>
-      throw UnimplementedError();
-  // api.observeTapToFocusInfoState(observer.api);
-
-  @override
-  Future<void> removeTapToFocusInfoStateObserver(
-    Observer<TapToFocusInfo> observer,
-  ) => throw UnimplementedError();
-  // api.removeTapToFocusInfoStateObserver(observer.api);
 
   @override
   Future<void> setTapToFocusAutoCancelDuration(Duration duration) =>
       throw UnimplementedError();
-  // api.setTapToFocusAutoCancelDuration(duration.api);
+}
+
+final class CameraControllerChannelImpl extends CameraControllerChannel {
+  @override
+  CameraController create() {
+    final api = CameraControllerProxyApi();
+    return CameraControllerImpl.internal(api);
+  }
 }
 
 // extension CameraControllerTapToFocusApiX on CameraControllerTapToFocusApi {
-//   CameraControllerTapToFocus get impl =>
-//       CameraControllerTapToFocus.values[index];
+//   CameraController$TapToFocus get impl =>
+//       CameraController$TapToFocus.values[index];
 // }
 
-extension CameraControllerUseCaseX on CameraControllerUseCase {
+extension CameraController$UseCaseX on CameraController$UseCase {
   CameraControllerUseCaseApi get api =>
       CameraControllerUseCaseApi.values[index];
 }

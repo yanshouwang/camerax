@@ -1,10 +1,8 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
-import 'package:camerax_ios/src/vision/vn_detect_face_rectangles_request_impl.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/vision.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'vn_detect_barcodes_request_impl.dart';
-
-base mixin VNRequestImpl on VNRequest {
+abstract base class VNRequestImpl implements VNRequest {
   VNRequestProxyApi get api;
 
   @override

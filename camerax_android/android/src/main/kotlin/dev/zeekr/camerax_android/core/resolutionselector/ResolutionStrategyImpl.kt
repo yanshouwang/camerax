@@ -9,8 +9,7 @@ import dev.zeekr.camerax_android.ResolutionStrategyFallbackRuleApi
 class ResolutionStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiResolutionStrategyProxyApi(registrar) {
     override fun pigeon_defaultConstructor(
-        boundSize: Size,
-        fallbackRule: ResolutionStrategyFallbackRuleApi
+        boundSize: Size, fallbackRule: ResolutionStrategyFallbackRuleApi
     ): ResolutionStrategy {
         return ResolutionStrategy(boundSize, fallbackRule.impl)
     }
@@ -28,15 +27,6 @@ class ResolutionStrategyImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 }
 
-val ResolutionStrategyFallbackRuleApi.impl: Int
-    get() = when (this) {
-        ResolutionStrategyFallbackRuleApi.NONE -> ResolutionStrategy.FALLBACK_RULE_NONE
-        ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER_THEN_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
-        ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER
-        ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER
-        ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER
-    }
-
 val Int.resolutionStrategyFallbackRuleApi: ResolutionStrategyFallbackRuleApi
     get() = when (this) {
         ResolutionStrategy.FALLBACK_RULE_NONE -> ResolutionStrategyFallbackRuleApi.NONE
@@ -45,4 +35,13 @@ val Int.resolutionStrategyFallbackRuleApi: ResolutionStrategyFallbackRuleApi
         ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER -> ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER
         ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER -> ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER
         else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val ResolutionStrategyFallbackRuleApi.impl: Int
+    get() = when (this) {
+        ResolutionStrategyFallbackRuleApi.NONE -> ResolutionStrategy.FALLBACK_RULE_NONE
+        ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER_THEN_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
+        ResolutionStrategyFallbackRuleApi.CLOSEST_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER
+        ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER_THEN_HIGHER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER
+        ResolutionStrategyFallbackRuleApi.CLOSEST_LOWER -> ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER
     }

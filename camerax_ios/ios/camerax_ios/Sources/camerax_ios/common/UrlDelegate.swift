@@ -8,6 +8,10 @@
 import Foundation
 
 extension String {
+    var urlDelegate: URL {
+        return URL(fileURLWithPath: self)
+    }
+    
     var urlDelegateOrNil: URL? {
         return URL(string: self)
     }

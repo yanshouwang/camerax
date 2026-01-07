@@ -4,17 +4,13 @@ import android.graphics.Bitmap
 import androidx.camera.core.MeteringPointFactory
 import androidx.camera.view.CameraController
 import androidx.camera.view.PreviewView
-import androidx.lifecycle.LifecycleOwner
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
 import dev.zeekr.camerax_android.PigeonApiPreviewViewProxyApi
 import dev.zeekr.camerax_android.PreviewViewImplementationModeApi
 import dev.zeekr.camerax_android.PreviewViewScaleTypeApi
 import dev.zeekr.camerax_android.PreviewViewStreamStateApi
 import dev.zeekr.camerax_android.activity
-import dev.zeekr.camerax_android.common.PreviewViewStreamStateObserver
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import dev.zeekr.camerax_android.common.PreviewViewStreamStateLiveData
 
 class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiPreviewViewProxyApi(registrar) {
@@ -40,19 +36,8 @@ class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) 
         return pigeon_instance.meteringPointFactory
     }
 
-    override fun getPreviewStreamState(pigeon_instance: PreviewView): PreviewViewStreamStateApi? {
-        return pigeon_instance.previewStreamState.value?.api
-    }
-
-    override fun observePreviewStreamState(pigeon_instance: PreviewView, observer: PreviewViewStreamStateObserver) {
-        val owner = registrar.activity as LifecycleOwner
-        pigeon_instance.previewStreamState.observe(owner, observer)
-    }
-
-    override fun removePreviewStreamStateObserver(
-        pigeon_instance: PreviewView, observer: PreviewViewStreamStateObserver
-    ) {
-        pigeon_instance.previewStreamState.removeObserver(observer)
+    override fun getPreviewStreamState(pigeon_instance: PreviewView): PreviewViewStreamStateLiveData {
+        return PreviewViewStreamStateLiveData(pigeon_instance.previewStreamState)
     }
 
     override fun setController(pigeon_instance: PreviewView, controller: CameraController?) {

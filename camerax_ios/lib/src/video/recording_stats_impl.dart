@@ -1,12 +1,11 @@
-import 'package:camerax_ios/src/camerax_api.g.dart';
+import 'package:camerax_ios/src/api.dart';
+import 'package:camerax_ios/src/video.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'audio_stats_impl.dart';
-
-final class RecordingStatsImpl extends RecordingStats {
+final class RecordingStatsImpl implements RecordingStats {
   final RecordingStatsProxyApi api;
 
-  RecordingStatsImpl.internal(this.api) : super.impl();
+  RecordingStatsImpl.internal(this.api);
 
   @override
   AudioStats get audioStats => api.audioStats.impl;

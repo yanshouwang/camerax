@@ -3,19 +3,25 @@ package dev.zeekr.camerax_android.ml.barcode
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
 import dev.zeekr.camerax_android.CameraXApiPigeonProxyApiRegistrar
-import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsProxyApi
+import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiZoomSuggestionOptionsZoomCallbackProxyApi
 
-class ZoomSuggestionOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiZoomSuggestionOptionsProxyApi(registrar) {
-    override fun build(
-        zoomCallback: ZoomSuggestionOptions.ZoomCallback, maxSupportedZoomRatio: Double?
-    ): ZoomSuggestionOptions {
-        val builder = ZoomSuggestionOptions.Builder(zoomCallback)
-        if (maxSupportedZoomRatio != null) {
-            builder.setMaxSupportedZoomRatio(maxSupportedZoomRatio.toFloat())
+class ZoomSuggestionOptionsImpl {
+    class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiZoomSuggestionOptionsBuilderProxyApi(registrar) {
+        override fun pigeon_defaultConstructor(zoomCallback: ZoomSuggestionOptions.ZoomCallback): ZoomSuggestionOptions.Builder {
+            return ZoomSuggestionOptions.Builder(zoomCallback)
         }
-        return builder.build()
+
+        override fun setMaxSupportedZoomRatio(
+            pigeon_instance: ZoomSuggestionOptions.Builder, maxSupportedZoomRatio: Double
+        ): ZoomSuggestionOptions.Builder {
+            return pigeon_instance.setMaxSupportedZoomRatio(maxSupportedZoomRatio.toFloat())
+        }
+
+        override fun build(pigeon_instance: ZoomSuggestionOptions.Builder): ZoomSuggestionOptions {
+            return pigeon_instance.build()
+        }
     }
 
     class ZoomCallbackImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :

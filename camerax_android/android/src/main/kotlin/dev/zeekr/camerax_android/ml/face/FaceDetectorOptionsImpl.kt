@@ -6,10 +6,56 @@ import dev.zeekr.camerax_android.FaceDetectorOptionsClassificationModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsContourModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsLandmarkModeApi
 import dev.zeekr.camerax_android.FaceDetectorOptionsPerformanceModeApi
+import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsBuilderProxyApi
 import dev.zeekr.camerax_android.PigeonApiFaceDetectorOptionsProxyApi
 
 class FaceDetectorOptionsImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiFaceDetectorOptionsProxyApi(registrar) {
+    class BuilderImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+        PigeonApiFaceDetectorOptionsBuilderProxyApi(registrar) {
+        override fun pigeon_defaultConstructor(): FaceDetectorOptions.Builder {
+            return FaceDetectorOptions.Builder()
+        }
+
+        override fun enableTracking(pigeon_instance: FaceDetectorOptions.Builder): FaceDetectorOptions.Builder {
+            return pigeon_instance.enableTracking()
+        }
+
+        override fun setClassificationMode(
+            pigeon_instance: FaceDetectorOptions.Builder, classificationMode: FaceDetectorOptionsClassificationModeApi
+        ): FaceDetectorOptions.Builder {
+            return pigeon_instance.setClassificationMode(classificationMode.impl)
+        }
+
+        override fun setContourMode(
+            pigeon_instance: FaceDetectorOptions.Builder, contourMode: FaceDetectorOptionsContourModeApi
+        ): FaceDetectorOptions.Builder {
+            return pigeon_instance.setContourMode(contourMode.impl)
+        }
+
+        override fun setLandmarkMode(
+            pigeon_instance: FaceDetectorOptions.Builder, landmarkMode: FaceDetectorOptionsLandmarkModeApi
+        ): FaceDetectorOptions.Builder {
+            return pigeon_instance.setLandmarkMode(landmarkMode.impl)
+        }
+
+        override fun setMinFaceSize(
+            pigeon_instance: FaceDetectorOptions.Builder, minFaceSize: Double
+        ): FaceDetectorOptions.Builder {
+            return pigeon_instance.setMinFaceSize(minFaceSize.toFloat())
+        }
+
+        override fun setPerformanceMode(
+            pigeon_instance: FaceDetectorOptions.Builder, performanceMode: FaceDetectorOptionsPerformanceModeApi
+        ): FaceDetectorOptions.Builder {
+            return pigeon_instance.setPerformanceMode(performanceMode.impl)
+        }
+
+        override fun build(pigeon_instance: FaceDetectorOptions.Builder): FaceDetectorOptions {
+            return pigeon_instance.build()
+        }
+    }
+
     override fun build(
         enableTracking: Boolean?,
         classificationMode: FaceDetectorOptionsClassificationModeApi?,

@@ -1,15 +1,14 @@
-import 'package:camerax_android/src/visionx.dart';
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/core.dart';
-import 'package:camerax_android/src/ml/barcode.dart';
-import 'package:camerax_android/src/ml/face.dart';
+import 'package:camerax_android/src/ml.dart';
+import 'package:camerax_android/src/visionx.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
+final class MlKitAnalyzer$ResultImpl implements MlKitAnalyzer$Result {
   final MlKitAnalyzerResultProxyApi api;
 
-  MlKitAnalyzerResultImpl.internal(this.api) : super.impl();
+  MlKitAnalyzer$ResultImpl.internal(this.api);
 
   @override
   int get timestamp => api.timestamp;
@@ -43,17 +42,20 @@ final class MlKitAnalyzerResultImpl extends MlKitAnalyzerResult {
   }
 }
 
-final class MlKitAnalyzerImpl extends MlKitAnalyzer
-    with ImageAnalysisAnalyzerImpl {
+final class MlKitAnalyzerImpl extends ImageAnalysis$AnalyzerImpl
+    implements MlKitAnalyzer {
   @override
   final MlKitAnalyzerProxyApi api;
 
-  MlKitAnalyzerImpl.internal(this.api) : super.impl();
+  MlKitAnalyzerImpl.internal(this.api);
+}
 
-  factory MlKitAnalyzerImpl({
+final class MlKitAnalyzerChannelImpl extends MlKitAnalyzerChannel {
+  @override
+  MlKitAnalyzer create({
     required List<Detector> detectors,
-    required ImageAnalysisCoordinateSystem targetCoordinateSystem,
-    required Consumer<MlKitAnalyzerResult> consumer,
+    required ImageAnalysis$CoordinateSystem targetCoordinateSystem,
+    required Consumer<MlKitAnalyzer$Result> consumer,
   }) {
     final api = MlKitAnalyzerProxyApi(
       detectors1: detectors
@@ -71,8 +73,8 @@ final class MlKitAnalyzerImpl extends MlKitAnalyzer
   }
 }
 
-extension MlKitAnalyzerResultX on MlKitAnalyzerResult {
-  Future<VisionAnalyzerResult> visionAnalyzerResult(
+extension MlKitAnalyzer$ResultX on MlKitAnalyzer$Result {
+  Future<VisionAnalyzer$Result> visionAnalyzerResult(
     List<Detector> detectors,
   ) async {
     final objects = <VisionObject>[];
@@ -94,10 +96,10 @@ extension MlKitAnalyzerResultX on MlKitAnalyzerResult {
       if (faceObjects == null) continue;
       objects.addAll(faceObjects);
     }
-    return VisionAnalyzerResultImpl.internal(this, objects);
+    return VisionAnalyzer$ResultImpl.internal(this, objects);
   }
 }
 
 extension MlKitAnalyzerResultProxyApiX on MlKitAnalyzerResultProxyApi {
-  MlKitAnalyzerResult get impl => MlKitAnalyzerResultImpl.internal(this);
+  MlKitAnalyzer$Result get impl => MlKitAnalyzer$ResultImpl.internal(this);
 }

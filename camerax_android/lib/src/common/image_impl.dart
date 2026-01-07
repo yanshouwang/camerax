@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 
 extension BitmapProxyApiX on BitmapProxyApi {
   Future<ui.Image> impl() async {

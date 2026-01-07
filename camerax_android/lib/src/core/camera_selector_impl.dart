@@ -1,24 +1,33 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'camera_info_impl.dart';
+final class CameraSelector$BuilderImpl implements CameraSelector$Builder {
+  final CameraSelectorBuilderProxyApi api;
 
-final class CameraSelectorImpl extends CameraSelector {
-  static CameraSelectorImpl get back =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
-  static CameraSelectorImpl get front =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
-  static CameraSelectorImpl get external =>
-      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
+  CameraSelector$BuilderImpl.internal(this.api);
 
+  @override
+  Future<CameraSelector$Builder> addCameraFilter(CameraFilter cameraFilter) =>
+      api.addCameraFilter(cameraFilter.api).then((e) => e.impl);
+
+  @override
+  Future<CameraSelector$Builder> requireLensFacing(
+    CameraSelector$LensFacing lensFacing,
+  ) => api.requireLensFacing(lensFacing.api).then((e) => e.impl);
+
+  @override
+  Future<CameraSelector$Builder> setPhysicalCameraId(String physicalCameraId) =>
+      api.setPhysicalCameraId(physicalCameraId).then((e) => e.impl);
+
+  @override
+  Future<CameraSelector> build() => api.build().then((e) => e.impl);
+}
+
+final class CameraSelectorImpl implements CameraSelector {
   final CameraSelectorProxyApi api;
 
-  CameraSelectorImpl.internal(this.api) : super.impl();
-
-  factory CameraSelectorImpl({CameraSelectorLensFacing? lensFacing}) {
-    final api = CameraSelectorProxyApi.build(lensFacing: lensFacing?.api);
-    return CameraSelectorImpl.internal(api);
-  }
+  CameraSelectorImpl.internal(this.api);
 
   @override
   Future<List<CameraInfo>> filter(List<CameraInfo> cameraInfos) => api
@@ -29,13 +38,35 @@ final class CameraSelectorImpl extends CameraSelector {
   Future<String?> getPhysicalCameraId() => api.getPhysicalCameraId();
 }
 
-extension CameraSelectorLensFacingX on CameraSelectorLensFacing {
+final class CameraSelectorChannelImpl extends CameraSelectorChannel {
+  @override
+  CameraSelector get back =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.back);
+  @override
+  CameraSelector get front =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.front);
+  @override
+  CameraSelector get external =>
+      CameraSelectorImpl.internal(CameraSelectorProxyApi.external);
+
+  @override
+  CameraSelector$Builder createBuilder() {
+    final api = CameraSelectorBuilderProxyApi();
+    return CameraSelector$BuilderImpl.internal(api);
+  }
+}
+
+extension CameraSelector$LensFacingX on CameraSelector$LensFacing {
   CameraSelectorLensFacingApi get api =>
       CameraSelectorLensFacingApi.values[index];
 }
 
 extension CameraSelectorLensFacingApiX on CameraSelectorLensFacingApi {
-  CameraSelectorLensFacing get impl => CameraSelectorLensFacing.values[index];
+  CameraSelector$LensFacing get impl => CameraSelector$LensFacing.values[index];
+}
+
+extension CameraSelectorBuilderProxyApiX on CameraSelectorBuilderProxyApi {
+  CameraSelector$Builder get impl => CameraSelector$BuilderImpl.internal(this);
 }
 
 extension CameraSelectorX on CameraSelector {

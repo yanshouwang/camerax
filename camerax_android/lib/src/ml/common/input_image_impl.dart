@@ -1,21 +1,23 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class InputImageImpl extends InputImage {
+final class InputImageImpl implements InputImage {
   final InputImageProxyApi api;
 
-  InputImageImpl.internal(this.api) : super.impl();
-
-  factory InputImageImpl.fromFilePath(Uri imageUri) {
-    final api = InputImageProxyApi.fromFilePath(imageUri: '$imageUri');
-    return InputImageImpl.internal(api);
-  }
-
-  @override
-  Future<int> getHeight() => api.getHeight();
+  InputImageImpl.internal(this.api);
 
   @override
   Future<int> getWidth() => api.getWidth();
+  @override
+  Future<int> getHeight() => api.getHeight();
+}
+
+final class InputImageChannelImpl extends InputImageChannel {
+  @override
+  InputImage fromFilePath(Uri imageUri) {
+    final api = InputImageProxyApi.fromFilePath(imageUri: '$imageUri');
+    return InputImageImpl.internal(api);
+  }
 }
 
 extension InputImageX on InputImage {

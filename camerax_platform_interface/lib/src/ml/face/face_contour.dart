@@ -1,6 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
 
-enum FaceContourType {
+enum FaceContour$Type {
   face,
   leftCheek,
   leftEye,
@@ -18,9 +18,7 @@ enum FaceContourType {
   upperLipTop,
 }
 
-abstract base class FaceContour {
-  FaceContour.impl();
-
-  FaceContourType get type;
+abstract interface class FaceContour {
+  FaceContour$Type get type;
   List<Point<double>> get points;
 }

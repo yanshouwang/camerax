@@ -1,8 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
-import 'package:camerax_platform_interface/src/ml/common.dart';
+import 'package:camerax_platform_interface/src/ml.dart';
 
-abstract base class Detector<T> extends Closeable {
-  Detector.impl() : super.impl();
-
+abstract interface class Detector<T> implements Closeable {
   Future<T> process(InputImage image);
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCamera2Interop::class)
-class Camera2CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
+class Camera2CameraControlImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiCamera2CameraControlProxyApi(registrar) {
     override fun from(cameraControl: CameraControl): Camera2CameraControl {
         return Camera2CameraControl.from(cameraControl)

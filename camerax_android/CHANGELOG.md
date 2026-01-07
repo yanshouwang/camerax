@@ -1,3 +1,10 @@
+## 1.2.0
+
+* Add more camera2 impls.
+* Remove PermissionManager impl.
+* Use builder classes instead of factory methods.
+* Use LiveData instead of `get`, `observe`, `removeObserver` methods.
+
 ## 1.1.1
 
 * Fix the ANR crash caused by PermissionManager.requestPermissions.

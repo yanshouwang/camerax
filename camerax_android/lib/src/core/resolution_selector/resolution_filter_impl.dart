@@ -1,13 +1,16 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class ResolutionFilterImpl extends ResolutionFilter {
+final class ResolutionFilterImpl implements ResolutionFilter {
   final ResolutionFilterProxyApi api;
 
-  ResolutionFilterImpl.internal(this.api) : super.impl();
+  ResolutionFilterImpl.internal(this.api);
+}
 
-  factory ResolutionFilterImpl({
+final class ResolutionFilterChannelImpl extends ResolutionFilterChannel {
+  @override
+  ResolutionFilter create({
     required List<Size<int>> Function(
       List<Size<int>> supportedSizes,
       int rotationDegrees,

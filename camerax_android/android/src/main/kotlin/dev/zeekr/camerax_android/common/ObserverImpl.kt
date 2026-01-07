@@ -18,37 +18,16 @@ import dev.zeekr.camerax_android.core.lowLightBoostStateApi
 import dev.zeekr.camerax_android.core.torchStateApi
 import dev.zeekr.camerax_android.view.api
 
-class CameraStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiCameraStateObserverProxyApi(registrar) {
-    override fun pigeon_defaultConstructor(): CameraStateObserver {
-        return CameraStateObserver(this)
-    }
-}
-
 class IntObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiIntObserverProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): IntObserver {
         return IntObserver(this)
     }
 }
 
-class LowLightBoostStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiLowLightBoostStateObserverProxyApi(registrar) {
-    override fun pigeon_defaultConstructor(): LowLightBoostStateObserver {
-        return LowLightBoostStateObserver(this)
-    }
-}
-
-class PreviewViewStreamStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiPreviewViewStreamStateObserverProxyApi(registrar) {
-    override fun pigeon_defaultConstructor(): PreviewViewStreamStateObserver {
-        return PreviewViewStreamStateObserver(this)
-    }
-}
-
-class TapToFocusInfoObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
-    PigeonApiTapToFocusInfoObserverProxyApi(registrar) {
-    override fun pigeon_defaultConstructor(): TapToFocusInfoObserver {
-        return TapToFocusInfoObserver(this)
+class CameraStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiCameraStateObserverProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): CameraStateObserver {
+        return CameraStateObserver(this)
     }
 }
 
@@ -66,45 +45,66 @@ class ZoomStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 }
 
-class CameraStateObserver(private val impl: CameraStateObserverImpl) : Observer<CameraState> {
+class TapToFocusInfoObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiTapToFocusInfoObserverProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): TapToFocusInfoObserver {
+        return TapToFocusInfoObserver(this)
+    }
+}
+
+class LowLightBoostStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiLowLightBoostStateObserverProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): LowLightBoostStateObserver {
+        return LowLightBoostStateObserver(this)
+    }
+}
+
+class PreviewViewStreamStateObserverImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
+    PigeonApiPreviewViewStreamStateObserverProxyApi(registrar) {
+    override fun pigeon_defaultConstructor(): PreviewViewStreamStateObserver {
+        return PreviewViewStreamStateObserver(this)
+    }
+}
+
+class IntObserver(private val api: PigeonApiIntObserverProxyApi) : Observer<Int> {
+    override fun onChanged(value: Int) {
+        api.onChanged(this, value.toLong()) {}
+    }
+}
+
+class CameraStateObserver(private val api: PigeonApiCameraStateObserverProxyApi) : Observer<CameraState> {
     override fun onChanged(value: CameraState) {
-        impl.onChanged(this, value.api) {}
+        api.onChanged(this, value.api) {}
     }
 }
 
-class IntObserver(private val impl: IntObserverImpl) : Observer<Int> {
+class TorchStateObserver(private val api: PigeonApiTorchStateObserverProxyApi) : Observer<Int> {
     override fun onChanged(value: Int) {
-        impl.onChanged(this, value.toLong()) {}
+        return api.onChanged(this, value.torchStateApi) {}
     }
 }
 
-class LowLightBoostStateObserver(private val impl: LowLightBoostStateObserverImpl) : Observer<Int> {
+class ZoomStateObserver(private val api: PigeonApiZoomStateObserverProxyApi) : Observer<ZoomState> {
+    override fun onChanged(value: ZoomState) {
+        api.onChanged(this, value) {}
+    }
+}
+
+class TapToFocusInfoObserver(private val api: PigeonApiTapToFocusInfoObserverProxyApi) : Observer<TapToFocusInfo> {
+    override fun onChanged(value: TapToFocusInfo) {
+        api.onChanged(this, value) {}
+    }
+}
+
+class LowLightBoostStateObserver(private val api: PigeonApiLowLightBoostStateObserverProxyApi) : Observer<Int> {
     override fun onChanged(value: Int) {
-        impl.onChanged(this, value.lowLightBoostStateApi) {}
+        api.onChanged(this, value.lowLightBoostStateApi) {}
     }
 }
 
-class PreviewViewStreamStateObserver(private val impl: PreviewViewStreamStateObserverImpl) :
+class PreviewViewStreamStateObserver(private val api: PigeonApiPreviewViewStreamStateObserverProxyApi) :
     Observer<PreviewView.StreamState> {
     override fun onChanged(value: PreviewView.StreamState) {
-        impl.onChanged(this, value.api) {}
-    }
-}
-
-class TapToFocusInfoObserver(private val impl: TapToFocusInfoObserverImpl) : Observer<TapToFocusInfo> {
-    override fun onChanged(value: TapToFocusInfo) {
-        impl.onChanged(this, value) {}
-    }
-}
-
-class TorchStateObserver(private val impl: TorchStateObserverImpl) : Observer<Int> {
-    override fun onChanged(value: Int) {
-        impl.onChanged(this, value.torchStateApi) {}
-    }
-}
-
-class ZoomStateObserver(private val impl: ZoomStateObserverImpl) : Observer<ZoomState> {
-    override fun onChanged(value: ZoomState) {
-        impl.onChanged(this, value) {}
+        api.onChanged(this, value.api) {}
     }
 }

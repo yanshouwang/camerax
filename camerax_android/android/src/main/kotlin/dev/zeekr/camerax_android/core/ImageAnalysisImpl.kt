@@ -35,24 +35,19 @@ class ImageAnalysisImpl {
     }
 }
 
-val ImageAnalysisStrategyApi.impl: Int
-    get() = when (this) {
-        ImageAnalysisStrategyApi.KEEP_ONLY_LATEST -> ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
-        ImageAnalysisStrategyApi.BLOCK_PRODUCER -> ImageAnalysis.STRATEGY_BLOCK_PRODUCER
-    }
-
 val Int.imageAnalysisStrategyApi: ImageAnalysisStrategyApi
     get() = when (this) {
         ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST -> ImageAnalysisStrategyApi.KEEP_ONLY_LATEST
         ImageAnalysis.STRATEGY_BLOCK_PRODUCER -> ImageAnalysisStrategyApi.BLOCK_PRODUCER
-        else -> throw IllegalArgumentException()
+        else -> throw NotImplementedError("Not implemented value: $this")
     }
 
-val ImageAnalysisOutputImageFormatApi.impl: Int
+val Int.imageAnalysisCoordinateSystemApi: ImageAnalysisCoordinateSystemApi
     get() = when (this) {
-        ImageAnalysisOutputImageFormatApi.YUV420_888 -> ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888
-        ImageAnalysisOutputImageFormatApi.RGBA8888 -> ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
-        ImageAnalysisOutputImageFormatApi.NV21 -> ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
+        ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL -> ImageAnalysisCoordinateSystemApi.ORIGINAL
+        ImageAnalysis.COORDINATE_SYSTEM_SENSOR -> ImageAnalysisCoordinateSystemApi.SENSOR
+        ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED -> ImageAnalysisCoordinateSystemApi.VIEW_REFERENCED
+        else -> throw NotImplementedError("Not implemented value: $this")
     }
 
 val Int.imageAnalysisOutputImageFormatApi: ImageAnalysisOutputImageFormatApi
@@ -60,7 +55,13 @@ val Int.imageAnalysisOutputImageFormatApi: ImageAnalysisOutputImageFormatApi
         ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888 -> ImageAnalysisOutputImageFormatApi.YUV420_888
         ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888 -> ImageAnalysisOutputImageFormatApi.RGBA8888
         ImageAnalysis.OUTPUT_IMAGE_FORMAT_NV21 -> ImageAnalysisOutputImageFormatApi.NV21
-        else -> throw IllegalArgumentException()
+        else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val ImageAnalysisStrategyApi.impl: Int
+    get() = when (this) {
+        ImageAnalysisStrategyApi.KEEP_ONLY_LATEST -> ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
+        ImageAnalysisStrategyApi.BLOCK_PRODUCER -> ImageAnalysis.STRATEGY_BLOCK_PRODUCER
     }
 
 val ImageAnalysisCoordinateSystemApi.impl: Int
@@ -70,10 +71,9 @@ val ImageAnalysisCoordinateSystemApi.impl: Int
         ImageAnalysisCoordinateSystemApi.VIEW_REFERENCED -> ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED
     }
 
-val Int.imageAnalysisCoordinateSystemApi: ImageAnalysisCoordinateSystemApi
+val ImageAnalysisOutputImageFormatApi.impl: Int
     get() = when (this) {
-        ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL -> ImageAnalysisCoordinateSystemApi.ORIGINAL
-        ImageAnalysis.COORDINATE_SYSTEM_SENSOR -> ImageAnalysisCoordinateSystemApi.SENSOR
-        ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED -> ImageAnalysisCoordinateSystemApi.VIEW_REFERENCED
-        else -> throw NotImplementedError("Not implemented value: $this")
+        ImageAnalysisOutputImageFormatApi.YUV420_888 -> ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888
+        ImageAnalysisOutputImageFormatApi.RGBA8888 -> ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
+        ImageAnalysisOutputImageFormatApi.NV21 -> ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
     }

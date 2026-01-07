@@ -1,9 +1,9 @@
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
+import 'package:camerax_android/src/common.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'auto_closeable_impl.dart';
-
-base mixin CloseableImpl on Closeable, AutoCloseableImpl {
+abstract base class CloseableImpl extends AutoCloseableImpl
+    implements Closeable {
   @override
   CloseableProxyApi get api;
 }

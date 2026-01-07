@@ -16,25 +16,6 @@ class FaceContourImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiF
     }
 }
 
-val FaceContourTypeApi.impl: Int
-    get() = when (this) {
-        FaceContourTypeApi.FACE -> FaceContour.FACE
-        FaceContourTypeApi.LEFT_CHEEK -> FaceContour.LEFT_CHEEK
-        FaceContourTypeApi.LEFT_EYE -> FaceContour.LEFT_EYE
-        FaceContourTypeApi.LEFT_EYEBROW_BOTTOM -> FaceContour.LEFT_EYEBROW_BOTTOM
-        FaceContourTypeApi.LEFT_EYEBROW_TOP -> FaceContour.LEFT_EYEBROW_TOP
-        FaceContourTypeApi.LOWER_LIP_BOTTOM -> FaceContour.LOWER_LIP_BOTTOM
-        FaceContourTypeApi.LOWER_LIP_TOP -> FaceContour.LOWER_LIP_TOP
-        FaceContourTypeApi.NOSE_BOTTOM -> FaceContour.NOSE_BOTTOM
-        FaceContourTypeApi.NOSE_BRIDGE -> FaceContour.NOSE_BRIDGE
-        FaceContourTypeApi.RIGHT_CHEEK -> FaceContour.RIGHT_CHEEK
-        FaceContourTypeApi.RIGHT_EYE -> FaceContour.RIGHT_EYE
-        FaceContourTypeApi.RIGHT_EYEBROW_BOTTOM -> FaceContour.RIGHT_EYEBROW_BOTTOM
-        FaceContourTypeApi.RIGHT_EYEBROW_TOP -> FaceContour.RIGHT_EYEBROW_TOP
-        FaceContourTypeApi.UPPER_LIP_BOTTOM -> FaceContour.UPPER_LIP_BOTTOM
-        FaceContourTypeApi.UPPER_LIP_TOP -> FaceContour.UPPER_LIP_TOP
-    }
-
 val Int.faceContourTypeApi: FaceContourTypeApi
     get() = when (this) {
         FaceContour.FACE -> FaceContourTypeApi.FACE
@@ -53,4 +34,23 @@ val Int.faceContourTypeApi: FaceContourTypeApi
         FaceContour.UPPER_LIP_BOTTOM -> FaceContourTypeApi.UPPER_LIP_BOTTOM
         FaceContour.UPPER_LIP_TOP -> FaceContourTypeApi.UPPER_LIP_TOP
         else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val FaceContourTypeApi.impl: Int
+    get() = when (this) {
+        FaceContourTypeApi.FACE -> FaceContour.FACE
+        FaceContourTypeApi.LEFT_CHEEK -> FaceContour.LEFT_CHEEK
+        FaceContourTypeApi.LEFT_EYE -> FaceContour.LEFT_EYE
+        FaceContourTypeApi.LEFT_EYEBROW_BOTTOM -> FaceContour.LEFT_EYEBROW_BOTTOM
+        FaceContourTypeApi.LEFT_EYEBROW_TOP -> FaceContour.LEFT_EYEBROW_TOP
+        FaceContourTypeApi.LOWER_LIP_BOTTOM -> FaceContour.LOWER_LIP_BOTTOM
+        FaceContourTypeApi.LOWER_LIP_TOP -> FaceContour.LOWER_LIP_TOP
+        FaceContourTypeApi.NOSE_BOTTOM -> FaceContour.NOSE_BOTTOM
+        FaceContourTypeApi.NOSE_BRIDGE -> FaceContour.NOSE_BRIDGE
+        FaceContourTypeApi.RIGHT_CHEEK -> FaceContour.RIGHT_CHEEK
+        FaceContourTypeApi.RIGHT_EYE -> FaceContour.RIGHT_EYE
+        FaceContourTypeApi.RIGHT_EYEBROW_BOTTOM -> FaceContour.RIGHT_EYEBROW_BOTTOM
+        FaceContourTypeApi.RIGHT_EYEBROW_TOP -> FaceContour.RIGHT_EYEBROW_TOP
+        FaceContourTypeApi.UPPER_LIP_BOTTOM -> FaceContour.UPPER_LIP_BOTTOM
+        FaceContourTypeApi.UPPER_LIP_TOP -> FaceContour.UPPER_LIP_TOP
     }

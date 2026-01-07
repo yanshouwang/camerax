@@ -25,70 +25,6 @@ import dev.zeekr.camerax_android.PigeonApiBarcodeUrlBookmarkProxyApi
 import dev.zeekr.camerax_android.PigeonApiBarcodeWiFiProxyApi
 
 class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeProxyApi(registrar) {
-    override fun boundingBox(pigeon_instance: Barcode): Rect? {
-        return pigeon_instance.boundingBox
-    }
-
-    override fun cornerPoints(pigeon_instance: Barcode): List<Point>? {
-        return pigeon_instance.cornerPoints?.toList()
-    }
-
-    override fun format(pigeon_instance: Barcode): BarcodeFormatApi {
-        return pigeon_instance.format.barcodeFormatApi
-    }
-
-    override fun valueType(pigeon_instance: Barcode): BarcodeTypeApi {
-        return pigeon_instance.valueType.barcodeTypeApi
-    }
-
-    override fun rawBytes(pigeon_instance: Barcode): ByteArray? {
-        return pigeon_instance.rawBytes
-    }
-
-    override fun rawValue(pigeon_instance: Barcode): String? {
-        return pigeon_instance.rawValue
-    }
-
-    override fun displayValue(pigeon_instance: Barcode): String? {
-        return pigeon_instance.displayValue
-    }
-
-    override fun calendarEvent(pigeon_instance: Barcode): Barcode.CalendarEvent? {
-        return pigeon_instance.calendarEvent
-    }
-
-    override fun contactInfo(pigeon_instance: Barcode): Barcode.ContactInfo? {
-        return pigeon_instance.contactInfo
-    }
-
-    override fun driverLicense(pigeon_instance: Barcode): Barcode.DriverLicense? {
-        return pigeon_instance.driverLicense
-    }
-
-    override fun email(pigeon_instance: Barcode): Barcode.Email? {
-        return pigeon_instance.email
-    }
-
-    override fun geoPoint(pigeon_instance: Barcode): Barcode.GeoPoint? {
-        return pigeon_instance.geoPoint
-    }
-
-    override fun phone(pigeon_instance: Barcode): Barcode.Phone? {
-        return pigeon_instance.phone
-    }
-
-    override fun sms(pigeon_instance: Barcode): Barcode.Sms? {
-        return pigeon_instance.sms
-    }
-
-    override fun url(pigeon_instance: Barcode): Barcode.UrlBookmark? {
-        return pigeon_instance.url
-    }
-
-    override fun wifi(pigeon_instance: Barcode): Barcode.WiFi? {
-        return pigeon_instance.wifi
-    }
-
     class AddressImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarcodeAddressProxyApi(registrar) {
         override fun type(pigeon_instance: Barcode.Address): BarcodeAddressTypeApi {
             return pigeon_instance.type.barcodeAddressTypeApi
@@ -357,26 +293,71 @@ class BarcodeImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBarco
             return pigeon_instance.password
         }
     }
-}
 
-val BarcodeFormatApi.impl: Int
-    get() = when (this) {
-        BarcodeFormatApi.UNKNOWN -> Barcode.FORMAT_UNKNOWN
-        BarcodeFormatApi.ALL -> Barcode.FORMAT_ALL_FORMATS
-        BarcodeFormatApi.CODE128 -> Barcode.FORMAT_CODE_128
-        BarcodeFormatApi.CODE39 -> Barcode.FORMAT_CODE_39
-        BarcodeFormatApi.CODE93 -> Barcode.FORMAT_CODE_93
-        BarcodeFormatApi.CODABAR -> Barcode.FORMAT_CODABAR
-        BarcodeFormatApi.DATA_MATRIX -> Barcode.FORMAT_DATA_MATRIX
-        BarcodeFormatApi.EAN13 -> Barcode.FORMAT_EAN_13
-        BarcodeFormatApi.EAN8 -> Barcode.FORMAT_EAN_8
-        BarcodeFormatApi.ITF -> Barcode.FORMAT_ITF
-        BarcodeFormatApi.QR_CODE -> Barcode.FORMAT_QR_CODE
-        BarcodeFormatApi.UPC_A -> Barcode.FORMAT_UPC_A
-        BarcodeFormatApi.UPC_E -> Barcode.FORMAT_UPC_E
-        BarcodeFormatApi.PDF417 -> Barcode.FORMAT_PDF417
-        BarcodeFormatApi.AZTEC -> Barcode.FORMAT_AZTEC
+    override fun boundingBox(pigeon_instance: Barcode): Rect? {
+        return pigeon_instance.boundingBox
     }
+
+    override fun cornerPoints(pigeon_instance: Barcode): List<Point>? {
+        return pigeon_instance.cornerPoints?.toList()
+    }
+
+    override fun format(pigeon_instance: Barcode): BarcodeFormatApi {
+        return pigeon_instance.format.barcodeFormatApi
+    }
+
+    override fun valueType(pigeon_instance: Barcode): BarcodeTypeApi {
+        return pigeon_instance.valueType.barcodeTypeApi
+    }
+
+    override fun rawBytes(pigeon_instance: Barcode): ByteArray? {
+        return pigeon_instance.rawBytes
+    }
+
+    override fun rawValue(pigeon_instance: Barcode): String? {
+        return pigeon_instance.rawValue
+    }
+
+    override fun displayValue(pigeon_instance: Barcode): String? {
+        return pigeon_instance.displayValue
+    }
+
+    override fun calendarEvent(pigeon_instance: Barcode): Barcode.CalendarEvent? {
+        return pigeon_instance.calendarEvent
+    }
+
+    override fun contactInfo(pigeon_instance: Barcode): Barcode.ContactInfo? {
+        return pigeon_instance.contactInfo
+    }
+
+    override fun driverLicense(pigeon_instance: Barcode): Barcode.DriverLicense? {
+        return pigeon_instance.driverLicense
+    }
+
+    override fun email(pigeon_instance: Barcode): Barcode.Email? {
+        return pigeon_instance.email
+    }
+
+    override fun geoPoint(pigeon_instance: Barcode): Barcode.GeoPoint? {
+        return pigeon_instance.geoPoint
+    }
+
+    override fun phone(pigeon_instance: Barcode): Barcode.Phone? {
+        return pigeon_instance.phone
+    }
+
+    override fun sms(pigeon_instance: Barcode): Barcode.Sms? {
+        return pigeon_instance.sms
+    }
+
+    override fun url(pigeon_instance: Barcode): Barcode.UrlBookmark? {
+        return pigeon_instance.url
+    }
+
+    override fun wifi(pigeon_instance: Barcode): Barcode.WiFi? {
+        return pigeon_instance.wifi
+    }
+}
 
 val Int.barcodeFormatApi: BarcodeFormatApi
     get() = when (this) {
@@ -448,4 +429,70 @@ val Int.barcodeWiFiTypeApi: BarcodeWiFiTypeApi
         Barcode.WiFi.TYPE_WPA -> BarcodeWiFiTypeApi.WPA
         Barcode.WiFi.TYPE_WEP -> BarcodeWiFiTypeApi.WEP
         else -> throw NotImplementedError("Not implemented value: $this")
+    }
+
+val BarcodeFormatApi.impl: Int
+    get() = when (this) {
+        BarcodeFormatApi.UNKNOWN -> Barcode.FORMAT_UNKNOWN
+        BarcodeFormatApi.ALL -> Barcode.FORMAT_ALL_FORMATS
+        BarcodeFormatApi.CODE128 -> Barcode.FORMAT_CODE_128
+        BarcodeFormatApi.CODE39 -> Barcode.FORMAT_CODE_39
+        BarcodeFormatApi.CODE93 -> Barcode.FORMAT_CODE_93
+        BarcodeFormatApi.CODABAR -> Barcode.FORMAT_CODABAR
+        BarcodeFormatApi.DATA_MATRIX -> Barcode.FORMAT_DATA_MATRIX
+        BarcodeFormatApi.EAN13 -> Barcode.FORMAT_EAN_13
+        BarcodeFormatApi.EAN8 -> Barcode.FORMAT_EAN_8
+        BarcodeFormatApi.ITF -> Barcode.FORMAT_ITF
+        BarcodeFormatApi.QR_CODE -> Barcode.FORMAT_QR_CODE
+        BarcodeFormatApi.UPC_A -> Barcode.FORMAT_UPC_A
+        BarcodeFormatApi.UPC_E -> Barcode.FORMAT_UPC_E
+        BarcodeFormatApi.PDF417 -> Barcode.FORMAT_PDF417
+        BarcodeFormatApi.AZTEC -> Barcode.FORMAT_AZTEC
+    }
+
+val BarcodeTypeApi.impl: Int
+    get() = when (this) {
+        BarcodeTypeApi.UNKNOWN -> Barcode.TYPE_UNKNOWN
+        BarcodeTypeApi.CONTACT_INFO -> Barcode.TYPE_CONTACT_INFO
+        BarcodeTypeApi.EMAIL -> Barcode.TYPE_EMAIL
+        BarcodeTypeApi.ISBN -> Barcode.TYPE_ISBN
+        BarcodeTypeApi.PHONE -> Barcode.TYPE_PHONE
+        BarcodeTypeApi.PRODUCT -> Barcode.TYPE_PRODUCT
+        BarcodeTypeApi.SMS -> Barcode.TYPE_SMS
+        BarcodeTypeApi.TEXT -> Barcode.TYPE_TEXT
+        BarcodeTypeApi.URL -> Barcode.TYPE_URL
+        BarcodeTypeApi.WIFI -> Barcode.TYPE_WIFI
+        BarcodeTypeApi.GEO -> Barcode.TYPE_GEO
+        BarcodeTypeApi.CALENDAR_EVENT -> Barcode.TYPE_CALENDAR_EVENT
+        BarcodeTypeApi.DRIVER_LICENSE -> Barcode.TYPE_DRIVER_LICENSE
+    }
+
+val BarcodeAddressTypeApi.impl: Int
+    get() = when (this) {
+        BarcodeAddressTypeApi.UNKNOWN -> Barcode.Address.TYPE_UNKNOWN
+        BarcodeAddressTypeApi.WORK -> Barcode.Address.TYPE_WORK
+        BarcodeAddressTypeApi.HOME -> Barcode.Address.TYPE_HOME
+    }
+
+val BarcodeEmailTypeApi.impl: Int
+    get() = when (this) {
+        BarcodeEmailTypeApi.UNKNOWN -> Barcode.Email.TYPE_UNKNOWN
+        BarcodeEmailTypeApi.WORK -> Barcode.Email.TYPE_WORK
+        BarcodeEmailTypeApi.HOME -> Barcode.Email.TYPE_HOME
+    }
+
+val BarcodePhoneTypeApi.impl: Int
+    get() = when (this) {
+        BarcodePhoneTypeApi.UNKNOWN -> Barcode.Phone.TYPE_UNKNOWN
+        BarcodePhoneTypeApi.WORK -> Barcode.Phone.TYPE_WORK
+        BarcodePhoneTypeApi.HOME -> Barcode.Phone.TYPE_HOME
+        BarcodePhoneTypeApi.FAX -> Barcode.Phone.TYPE_FAX
+        BarcodePhoneTypeApi.MOBILE -> Barcode.Phone.TYPE_MOBILE
+    }
+
+val BarcodeWiFiTypeApi.impl: Int
+    get() = when (this) {
+        BarcodeWiFiTypeApi.OPEN -> Barcode.WiFi.TYPE_OPEN
+        BarcodeWiFiTypeApi.WPA -> Barcode.WiFi.TYPE_WPA
+        BarcodeWiFiTypeApi.WEP -> Barcode.WiFi.TYPE_WEP
     }

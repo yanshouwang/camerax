@@ -8,8 +8,18 @@
 import Foundation
 
 class CameraSelectorDelegate: PigeonApiDelegateCameraSelectorProxyApi {
-    func build(pigeonApi: PigeonApiCameraSelectorProxyApi, lensFacing: CameraSelectorLensFacingApi?) throws -> CameraSelector {
-        return CameraSelector(lensFacing: lensFacing?.delegate)
+    class BuilderDelegate: PigeonApiDelegateCameraSelectorBuilderProxyApi {
+        func pigeonDefaultConstructor(pigeonApi: PigeonApiCameraSelectorBuilderProxyApi) throws -> CameraSelector.Builder {
+            return CameraSelector.Builder()
+        }
+        
+        func requireLensFacing(pigeonApi: PigeonApiCameraSelectorBuilderProxyApi, pigeonInstance: CameraSelector.Builder, lensFacing: CameraSelectorLensFacingApi) throws -> CameraSelector.Builder {
+            return try pigeonInstance.requireLensFacing(lensFacing.delegate)
+        }
+        
+        func build(pigeonApi: PigeonApiCameraSelectorBuilderProxyApi, pigeonInstance: CameraSelector.Builder) throws -> CameraSelector {
+            return pigeonInstance.build()
+        }
     }
     
     func front(pigeonApi: PigeonApiCameraSelectorProxyApi) throws -> CameraSelector {

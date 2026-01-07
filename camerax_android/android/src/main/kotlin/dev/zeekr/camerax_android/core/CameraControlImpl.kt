@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 
-class CameraControlImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) :
+class CameraControlImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     PigeonApiCameraControlProxyApi(registrar) {
     override fun enableTorch(pigeon_instance: CameraControl, torch: Boolean, callback: (Result<Unit>) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {

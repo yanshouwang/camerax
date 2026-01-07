@@ -1,18 +1,20 @@
 import 'dart:ui' as ui;
 
-import 'package:camerax_android/src/camerax_api.g.dart';
+import 'package:camerax_android/src/api.dart';
 import 'package:camerax_android/src/common.dart';
+import 'package:camerax_android/src/core.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-import 'image_proxy_impl.dart';
-
 final class ImageCaptureOnImageCapturedCallbackImpl
-    extends ImageCaptureOnImageCapturedCallback {
+    implements ImageCapture$OnImageCapturedCallback {
   final ImageCaptureOnImageCapturedCallbackProxyApi api;
 
-  ImageCaptureOnImageCapturedCallbackImpl.internal(this.api) : super.impl();
+  ImageCaptureOnImageCapturedCallbackImpl.internal(this.api);
+}
 
-  factory ImageCaptureOnImageCapturedCallbackImpl({
+final class ImageCaptureChannelImpl extends ImageCaptureChannel {
+  @override
+  ImageCapture$OnImageCapturedCallback createOnImageCapturedCallback({
     void Function()? onCaptureStarted,
     void Function(int progress)? onCaptureProcessProgressed,
     void Function(ui.Image bitmap)? onPostviewBitmapAvailable,
@@ -41,25 +43,25 @@ final class ImageCaptureOnImageCapturedCallbackImpl
   }
 }
 
-extension ImageCaptureCaptureModeX on ImageCaptureCaptureMode {
+extension ImageCapture$CaptureModeX on ImageCapture$CaptureMode {
   ImageCaptureCaptureModeApi get api =>
       ImageCaptureCaptureModeApi.values[index];
 }
 
 extension ImageCaptureCaptureModeApiX on ImageCaptureCaptureModeApi {
-  ImageCaptureCaptureMode get impl => ImageCaptureCaptureMode.values[index];
+  ImageCapture$CaptureMode get impl => ImageCapture$CaptureMode.values[index];
 }
 
-extension ImageCaptureFlashModeX on ImageCaptureFlashMode {
+extension ImageCapture$FlashModeX on ImageCapture$FlashMode {
   ImageCaptureFlashModeApi get api => ImageCaptureFlashModeApi.values[index];
 }
 
 extension ImageCaptureFlashModeApiX on ImageCaptureFlashModeApi {
-  ImageCaptureFlashMode get impl => ImageCaptureFlashMode.values[index];
+  ImageCapture$FlashMode get impl => ImageCapture$FlashMode.values[index];
 }
 
-extension ImageCaptureOnImageCapturedCallbackX
-    on ImageCaptureOnImageCapturedCallback {
+extension ImageCapture$OnImageCapturedCallbackX
+    on ImageCapture$OnImageCapturedCallback {
   ImageCaptureOnImageCapturedCallbackProxyApi get api {
     final impl = this;
     if (impl is! ImageCaptureOnImageCapturedCallbackImpl) throw TypeError();

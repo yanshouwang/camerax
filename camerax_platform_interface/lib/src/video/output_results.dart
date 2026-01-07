@@ -1,5 +1,3 @@
-abstract base class OutputResults {
-  OutputResults.impl();
-
+abstract interface class OutputResults {
   Uri? get outputUri;
 }

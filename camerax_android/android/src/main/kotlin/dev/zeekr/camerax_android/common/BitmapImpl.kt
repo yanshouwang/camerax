@@ -15,20 +15,13 @@ import java.nio.Buffer
 
 class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmapProxyApi(registrar) {
     override fun createBitmap1(
-        source: Bitmap,
-        x: Long,
-        y: Long,
-        width: Long,
-        height: Long
+        source: Bitmap, x: Long, y: Long, width: Long, height: Long
     ): Bitmap {
         return Bitmap.createBitmap(source, x.toInt(), y.toInt(), width.toInt(), height.toInt())
     }
 
     override fun createBitmap2(
-        colors: List<Long>,
-        width: Long,
-        height: Long,
-        config: BitmapConfigApi
+        colors: List<Long>, width: Long, height: Long, config: BitmapConfigApi
     ): Bitmap {
         return Bitmap.createBitmap(colors.map { it.toInt() }.toIntArray(), width.toInt(), height.toInt(), config.impl)
     }
@@ -38,12 +31,7 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun createBitmap10(
-        colors: List<Long>,
-        offset: Long,
-        stride: Long,
-        width: Long,
-        height: Long,
-        config: BitmapConfigApi
+        colors: List<Long>, offset: Long, stride: Long, width: Long, height: Long, config: BitmapConfigApi
     ): Bitmap {
         return Bitmap.createBitmap(
             colors.map { it.toInt() }.toIntArray(),
@@ -56,18 +44,13 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun createBitmap14(
-        width: Long,
-        height: Long,
-        config: BitmapConfigApi
+        width: Long, height: Long, config: BitmapConfigApi
     ): Bitmap {
         return createBitmap(width.toInt(), height.toInt(), config.impl)
     }
 
     override fun createBitmap15(
-        width: Long,
-        height: Long,
-        config: BitmapConfigApi,
-        hasAlpha: Boolean
+        width: Long, height: Long, config: BitmapConfigApi, hasAlpha: Boolean
     ): Bitmap {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Bitmap.createBitmap(width.toInt(), height.toInt(), config.impl, hasAlpha)
@@ -77,10 +60,7 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun createScaledBitmap(
-        src: Bitmap,
-        dstWidth: Long,
-        dstHeight: Long,
-        filter: Boolean
+        src: Bitmap, dstWidth: Long, dstHeight: Long, filter: Boolean
     ): Bitmap {
         return src.scale(dstWidth.toInt(), dstHeight.toInt(), filter)
     }
@@ -91,18 +71,13 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun compress(
-        pigeon_instance: Bitmap,
-        format: BitmapCompressFormatApi,
-        quality: Long,
-        stream: OutputStream
+        pigeon_instance: Bitmap, format: BitmapCompressFormatApi, quality: Long, stream: OutputStream
     ): Boolean {
         return pigeon_instance.compress(format.impl, quality.toInt(), stream)
     }
 
     override fun copy(
-        pigeon_instance: Bitmap,
-        config: BitmapConfigApi,
-        isMutalbe: Boolean
+        pigeon_instance: Bitmap, config: BitmapConfigApi, isMutalbe: Boolean
     ): Bitmap {
         return pigeon_instance.copy(config.impl, isMutalbe)
     }
@@ -201,10 +176,7 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun reconfigure(
-        pigeon_instance: Bitmap,
-        width: Long,
-        height: Long,
-        config: BitmapConfigApi
+        pigeon_instance: Bitmap, width: Long, height: Long, config: BitmapConfigApi
     ) {
         pigeon_instance.reconfigure(width.toInt(), height.toInt(), config.impl)
     }
@@ -218,8 +190,7 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun setConfig(
-        pigeon_instance: Bitmap,
-        config: BitmapConfigApi
+        pigeon_instance: Bitmap, config: BitmapConfigApi
     ) {
         return pigeon_instance.setConfig(config.impl)
     }
@@ -241,10 +212,7 @@ class BitmapImpl(registrar: CameraXApiPigeonProxyApiRegistrar) : PigeonApiBitmap
     }
 
     override fun setPixel(
-        pigeon_instance: Bitmap,
-        x: Long,
-        y: Long,
-        color: Long
+        pigeon_instance: Bitmap, x: Long, y: Long, color: Long
     ) {
         pigeon_instance[x.toInt(), y.toInt()] = color.toInt()
     }

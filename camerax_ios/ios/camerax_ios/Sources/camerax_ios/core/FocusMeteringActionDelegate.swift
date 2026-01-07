@@ -8,22 +8,34 @@
 import Foundation
 
 class FocusMeteringActionDelegate: PigeonApiDelegateFocusMeteringActionProxyApi {
-    func build(pigeonApi: PigeonApiFocusMeteringActionProxyApi, point: MeteringPointTuple, morePoints: [MeteringPointTuple]?, disableAutoCancel: Bool?, autoCancelDuration: DurationTuple?) throws -> FocusMeteringAction {
-        let builder = if let modes = point.modes { FocusMeteringAction.Builder(point.point, modes) }
-        else { FocusMeteringAction.Builder(point.point) }
-        if let morePoints {
-            for morePoint in morePoints {
-                _ = if let modes = morePoint.modes { builder.addPoint(morePoint.point, modes) }
-                else { builder.addPoint(morePoint.point) }
-            }
+    class BuilderDelegate: PigeonApiDelegateFocusMeteringActionBuilderProxyApi {
+        func new1(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, point: MeteringPoint) throws -> FocusMeteringAction.Builder {
+            return FocusMeteringAction.Builder(point)
         }
-        if disableAutoCancel != nil {
-            _ = builder.disableAutoCancel()
+        
+        func new2(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, point: MeteringPoint, meteringModes: [FocusMeteringActionMeteringModeApi]) throws -> FocusMeteringAction.Builder {
+            return FocusMeteringAction.Builder(point, meteringModes.map { $0.delegate })
         }
-        if let autoCancelDuration {
-            _ = try builder.setAutoCancelDuration(autoCancelDuration.duration, autoCancelDuration.timeUnit)
+        
+        func addPoint1(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, pigeonInstance: FocusMeteringAction.Builder, point: MeteringPoint) throws -> FocusMeteringAction.Builder {
+            return pigeonInstance.addPoint(point)
         }
-        return builder.build()
+        
+        func addPoint2(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, pigeonInstance: FocusMeteringAction.Builder, point: MeteringPoint, meteringModes: [FocusMeteringActionMeteringModeApi]) throws -> FocusMeteringAction.Builder {
+            return pigeonInstance.addPoint(point, meteringModes.map { $0.delegate })
+        }
+        
+        func disableAutoCancel(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, pigeonInstance: FocusMeteringAction.Builder) throws -> FocusMeteringAction.Builder {
+            return pigeonInstance.disableAutoCancel()
+        }
+        
+        func setAutoCancelDuration(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, pigeonInstance: FocusMeteringAction.Builder, duration: Int64, timeUnit: TimeUnitApi) throws -> FocusMeteringAction.Builder {
+            return try pigeonInstance.setAutoCancelDuration(duration, timeUnit.delegate)
+        }
+        
+        func build(pigeonApi: PigeonApiFocusMeteringActionBuilderProxyApi, pigeonInstance: FocusMeteringAction.Builder) throws -> FocusMeteringAction {
+            return pigeonInstance.build()
+        }
     }
     
     func getAutoCancelDurationInMillis(pigeonApi: PigeonApiFocusMeteringActionProxyApi, pigeonInstance: FocusMeteringAction) throws -> Int64 {

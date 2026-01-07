@@ -46,21 +46,28 @@ class ImageCaptureImpl {
     }
 }
 
-val ImageCaptureCaptureModeApi.impl: Int
-    @OptIn(ExperimentalZeroShutterLag::class)
-    get() = when (this) {
-        ImageCaptureCaptureModeApi.MAXIMIZE_QUALITY -> ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
-        ImageCaptureCaptureModeApi.MINIMIZE_LATENCY -> ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
-        ImageCaptureCaptureModeApi.ZERO_SHUTTER_LAG -> ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
-    }
-
 val Int.imageCaptureCaptureModeApi: ImageCaptureCaptureModeApi
-    @OptIn(ExperimentalZeroShutterLag::class)
-    get() = when (this) {
+    @OptIn(ExperimentalZeroShutterLag::class) get() = when (this) {
         ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY -> ImageCaptureCaptureModeApi.MINIMIZE_LATENCY
         ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY -> ImageCaptureCaptureModeApi.MINIMIZE_LATENCY
         ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG -> ImageCaptureCaptureModeApi.MINIMIZE_LATENCY
         else -> throw IllegalArgumentException()
+    }
+
+val Int.imageCaptureFlashModeApi: ImageCaptureFlashModeApi
+    get() = when (this) {
+        ImageCapture.FLASH_MODE_AUTO -> ImageCaptureFlashModeApi.AUTO
+        ImageCapture.FLASH_MODE_ON -> ImageCaptureFlashModeApi.ON
+        ImageCapture.FLASH_MODE_OFF -> ImageCaptureFlashModeApi.OFF
+        ImageCapture.FLASH_MODE_SCREEN -> ImageCaptureFlashModeApi.SCREEN
+        else -> throw IllegalArgumentException()
+    }
+
+val ImageCaptureCaptureModeApi.impl: Int
+    @OptIn(ExperimentalZeroShutterLag::class) get() = when (this) {
+        ImageCaptureCaptureModeApi.MAXIMIZE_QUALITY -> ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
+        ImageCaptureCaptureModeApi.MINIMIZE_LATENCY -> ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
+        ImageCaptureCaptureModeApi.ZERO_SHUTTER_LAG -> ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
     }
 
 val ImageCaptureFlashModeApi.impl: Int
@@ -69,13 +76,4 @@ val ImageCaptureFlashModeApi.impl: Int
         ImageCaptureFlashModeApi.ON -> ImageCapture.FLASH_MODE_ON
         ImageCaptureFlashModeApi.OFF -> ImageCapture.FLASH_MODE_OFF
         ImageCaptureFlashModeApi.SCREEN -> ImageCapture.FLASH_MODE_SCREEN
-    }
-
-val Int.flashModeApi: ImageCaptureFlashModeApi
-    get() = when (this) {
-        ImageCapture.FLASH_MODE_AUTO -> ImageCaptureFlashModeApi.AUTO
-        ImageCapture.FLASH_MODE_ON -> ImageCaptureFlashModeApi.ON
-        ImageCapture.FLASH_MODE_OFF -> ImageCaptureFlashModeApi.OFF
-        ImageCapture.FLASH_MODE_SCREEN -> ImageCaptureFlashModeApi.SCREEN
-        else -> throw IllegalArgumentException()
     }

@@ -1,10 +1,12 @@
 export 'core/aspect_ratio_impl.dart';
 export 'core/camera_control_impl.dart';
+export 'core/camera_filter_impl.dart';
 export 'core/camera_info_impl.dart';
 export 'core/camera_selector_impl.dart';
 export 'core/camera_state_impl.dart';
 export 'core/dynamic_range_impl.dart';
 export 'core/exposure_state_impl.dart';
+export 'core/extendable_builder_impl.dart';
 export 'core/flash_state_impl.dart';
 export 'core/focus_metering_action_impl.dart';
 export 'core/focus_metering_result_impl.dart';

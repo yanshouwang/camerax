@@ -1,1 +1,1 @@
-enum AspectRatio { ratioDefault, ratio4_3, ratio16_9 }
+enum AspectRatio { $default, $4_3, $16_9 }

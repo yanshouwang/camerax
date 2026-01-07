@@ -10,3 +10,10 @@ val Int.lowLightBoostStateApi: LowLightBoostStateApi
         LowLightBoostState.ACTIVE -> LowLightBoostStateApi.ACTIVE
         else -> throw NotImplementedError("Not implemented value: $this")
     }
+
+val LowLightBoostStateApi.impl: Int
+    get() = when (this) {
+        LowLightBoostStateApi.OFF -> LowLightBoostState.OFF
+        LowLightBoostStateApi.INACTIVE -> LowLightBoostState.INACTIVE
+        LowLightBoostStateApi.ACTIVE -> LowLightBoostState.ACTIVE
+    }

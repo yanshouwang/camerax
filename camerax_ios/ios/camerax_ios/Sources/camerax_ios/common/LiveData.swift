@@ -33,7 +33,7 @@ public class LiveData<T: Equatable>: NSObject {
         }
     }
     
-    public func observe(_ observer: any Observer<T>) {
+    public func observeForever(_ observer: any Observer<T>) {
         guard !self.stubs.contains(where: { $0.instance === observer}) else { return }
         let stub = ObserverStub(observer)
         self.stubs.append(stub)

@@ -1,28 +1,25 @@
-// import 'package:camerax_ios/src/camerax_api.g.dart';
+// import 'package:camerax_ios/src/api.dart';
 // import 'package:camerax_ios/src/common.dart';
 // import 'package:camerax_ios/src/core.dart';
+// import 'package:camerax_ios/src/video.dart';
 // import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-// import 'fallback_strategy_impl.dart';
-// import 'quality_impl.dart';
-
-// final class QualitySelectorImpl extends QualitySelector {
-//   static Future<Size<int>?> getResolution(
-//     CameraInfo cameraInfo,
-//     Quality quality,
-//   ) => QualitySelectorProxyApi.getResolution(
-//     cameraInfo.api,
-//     quality.api,
-//   ).then((e) => e?.impl);
-
+// final class QualitySelectorImpl implements QualitySelector {
 //   final QualitySelectorProxyApi api;
 
-//   QualitySelectorImpl.internal(this.api) : super.impl();
+//   QualitySelectorImpl.internal(this.api);
+// }
 
-//   factory QualitySelectorImpl.from(
-//     Quality quality, {
-//     FallbackStrategy? fallbackStrategy,
-//   }) {
+// final class QualitySelectorChannelImpl extends QualitySelectorChannel {
+//   @override
+//   Future<Size<int>?> getResolution(CameraInfo cameraInfo, Quality quality) =>
+//       QualitySelectorProxyApi.getResolution(
+//         cameraInfo.api,
+//         quality.api,
+//       ).then((e) => e?.impl);
+
+//   @override
+//   QualitySelector from(Quality quality, [FallbackStrategy? fallbackStrategy]) {
 //     final api = fallbackStrategy == null
 //         ? QualitySelectorProxyApi.from1(quality: quality.api)
 //         : QualitySelectorProxyApi.from2(
@@ -32,10 +29,11 @@
 //     return QualitySelectorImpl.internal(api);
 //   }
 
-//   factory QualitySelectorImpl.fromOrderedList(
-//     List<Quality> qualities, {
+//   @override
+//   QualitySelector fromOrderedList(
+//     List<Quality> qualities, [
 //     FallbackStrategy? fallbackStrategy,
-//   }) {
+//   ]) {
 //     final api = fallbackStrategy == null
 //         ? QualitySelectorProxyApi.fromOrderedList1(
 //             qualities: qualities.map((e) => e.api).toList(),

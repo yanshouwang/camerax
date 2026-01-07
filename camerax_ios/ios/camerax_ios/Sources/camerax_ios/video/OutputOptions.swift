@@ -45,7 +45,7 @@ public class OutputOptions: NSObject {
             return self as! B
         }
         
-        public func setLocation(_ location: CLLocation) -> B {
+        public func setLocation(_ location: CLLocation?) -> B {
             self.location = location
             return self as! B
         }
