@@ -1,3 +1,8 @@
+## 1.2.1
+
+* Impl `tlhc` of `WidgetAdapter.build`.
+* Impl `setScaleType` of `PreviewView`.
+
 ## 1.2.0
 
 * Remove PermissionManager impl.

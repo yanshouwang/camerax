@@ -1,3 +1,9 @@
+## 1.2.1
+
+* Add `tlhc` to `WidgetAdapter.build`.
+* Add `setImplementationMode`, `setScaleType`, `setScreenFlashOverlayColor` to `PreviewView`.
+* Remove `PreviewWidget`.
+
 ## 1.2.0
 
 * Add more camera2 apis.

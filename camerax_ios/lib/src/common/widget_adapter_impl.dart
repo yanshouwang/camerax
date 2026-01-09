@@ -7,7 +7,7 @@ base mixin WidgetAdapterImpl implements WidgetAdapter {
   int? get identifier;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {bool tlhc = false}) {
     return UiKitView(
       viewType: viewType,
       layoutDirection: TextDirection.ltr,

@@ -1,3 +1,7 @@
+## 1.2.1
+
+* Add `tlhc`, `implementationMode`, `scaleType`, `screenFlashOverlayColor` to `PreviewWidget`.
+
 ## 1.2.0
 
 * Add more camera2 apis.

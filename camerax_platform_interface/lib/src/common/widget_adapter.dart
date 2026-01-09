@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
 
 abstract interface class WidgetAdapter {
-  Widget build(BuildContext context);
+  Widget build(BuildContext context, {bool tlhc = false});
 }
