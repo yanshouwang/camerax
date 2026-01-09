@@ -3,19 +3,26 @@ import 'package:camerax_platform_interface/src/view.dart';
 import 'package:flutter/widgets.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+enum PreviewView$ImplementationMode { compatible, performance }
+
 enum PreviewView$ScaleType {
+  fillStart,
   fillCenter,
   fillEnd,
-  fillStart,
+  fitStart,
   fitCenter,
   fitEnd,
-  fitStart,
 }
 
 abstract interface class PreviewView implements WidgetAdapter {
   factory PreviewView() => PreviewViewChannel.instance.create();
 
-  Future<void> setController(CameraController controller);
+  Future<void> setController(CameraController? controller);
+  Future<void> setImplementationMode(
+    PreviewView$ImplementationMode implementationMode,
+  );
+  Future<void> setScaleType(PreviewView$ScaleType scaleType);
+  Future<void> setScreenFlashOverlayColor(Color color);
 }
 
 abstract base class PreviewViewChannel extends PlatformInterface {
@@ -34,42 +41,4 @@ abstract base class PreviewViewChannel extends PlatformInterface {
   }
 
   PreviewView create();
-}
-
-class PreviewWidget extends StatefulWidget {
-  final CameraController controller;
-
-  const PreviewWidget({super.key, required this.controller});
-
-  @override
-  State<PreviewWidget> createState() => _PreviewWidgetState();
-}
-
-class _PreviewWidgetState extends State<PreviewWidget> {
-  late final PreviewView _view;
-
-  @override
-  void initState() {
-    super.initState();
-    _view = PreviewView();
-    _view.setController(widget.controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _view.build(context);
-  }
-
-  @override
-  void didUpdateWidget(covariant PreviewWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.controller != oldWidget.controller) {
-      _view.setController(widget.controller);
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

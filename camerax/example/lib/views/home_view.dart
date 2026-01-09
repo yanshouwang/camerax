@@ -5,6 +5,7 @@ import 'package:camerax_example/view_models.dart';
 import 'package:camerax_example/widgets.dart';
 import 'package:clover/clover.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -39,9 +40,9 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final viewModel = ViewModel.of<HomeViewModel>(context);
     final controller = viewModel.controller;
     final zoomState = viewModel.zoomState;
-    final lensApertureState = viewModel.lensApertureState;
-    final exposureTimeState = viewModel.exposureTimeState;
-    final sensitivityState = viewModel.sensitivityState;
+    // final lensApertureState = viewModel.lensApertureState;
+    // final exposureTimeState = viewModel.exposureTimeState;
+    // final sensitivityState = viewModel.sensitivityState;
     final mode = viewModel.mode;
     final flashMode = viewModel.flashMode;
     final savedUri = viewModel.savedUri;
@@ -49,11 +50,10 @@ class _HomeViewState extends State<HomeView> with RouteAware {
     final imageModel = viewModel.imageModel;
     final codes = viewModel.codes;
     final faces = viewModel.faces;
-    const pageDuration = Duration(milliseconds: 300);
+    final pageDuration = 300.ms;
     const pageCurve = Curves.ease;
     return CupertinoPageScaffold(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SafeArea(
@@ -63,7 +63,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                 children: [
                   if (flashMode != null)
                     AnimatedTapWidget(
-                      duration: const Duration(milliseconds: 100),
+                      duration: 100.ms,
                       onTap: () {
                         switch (flashMode) {
                           case ImageCapture$FlashMode.auto:
@@ -71,11 +71,11 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                           case ImageCapture$FlashMode.on:
                             viewModel.setFlashMode(ImageCapture$FlashMode.off);
                           case ImageCapture$FlashMode.off:
-                            viewModel.setFlashMode(ImageCapture$FlashMode.auto);
-                          case ImageCapture$FlashMode.screen:
                             viewModel.setFlashMode(
                               ImageCapture$FlashMode.screen,
                             );
+                          case ImageCapture$FlashMode.screen:
+                            viewModel.setFlashMode(ImageCapture$FlashMode.auto);
                         }
                       },
                       child: Container(
@@ -89,9 +89,11 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         child: Icon(
                           flashMode == ImageCapture$FlashMode.auto
                               ? Symbols.flash_auto
-                              : flashMode == ImageCapture$FlashMode.on
-                              ? Symbols.flash_on
-                              : Symbols.flash_off,
+                              : flashMode == ImageCapture$FlashMode.off
+                              ? Symbols.flash_off
+                              : flashMode == ImageCapture$FlashMode.screen
+                              ? Symbols.screen_lock_landscape
+                              : Symbols.flash_on,
                           color: CupertinoColors.label.resolveFrom(context),
                         ),
                       ),
@@ -104,8 +106,29 @@ class _HomeViewState extends State<HomeView> with RouteAware {
             child: ClipRect(
               child: Stack(
                 fit: StackFit.expand,
+                // alignment: Alignment.center,
                 children: [
-                  PreviewWidget(controller: controller),
+                  PreviewWidget(
+                    controller: controller,
+                    // tlhc: true,
+                    // implementationMode:
+                    //     PreviewView$ImplementationMode.compatible,
+                    // scaleType: PreviewView$ScaleType.fitCenter,
+                    screenFlashOverlayColor: CupertinoColors.activeGreen,
+                  ),
+                  // AnimatedContainer(
+                  //   duration: 400.ms,
+                  //   width: 240.0,
+                  //   height: 240.0,
+                  //   child: PreviewWidget(
+                  //     controller: controller,
+                  //     tlhc: false,
+                  //     implementationMode:
+                  //         PreviewView$ImplementationMode.performance,
+                  //     scaleType: PreviewView$ScaleType.fillCenter,
+                  //     screenFlashOverlayColor: CupertinoColors.activeGreen,
+                  //   ),
+                  // ),
                   if (imageModel != null)
                     Container(
                       alignment: Alignment.topRight,
@@ -373,7 +396,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   AnimatedTapWidget(
-                    duration: const Duration(milliseconds: 100),
+                    duration: 100.ms,
                     onTap: savedUri == null
                         ? null
                         : () {
@@ -403,7 +426,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                       shape: BoxShape.circle,
                     ),
                     child: AnimatedTapWidget(
-                      duration: const Duration(milliseconds: 100),
+                      duration: 100.ms,
                       onTap:
                           mode == CameraMode.takePicture ||
                               mode == CameraMode.recordVideo
@@ -436,7 +459,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                     ),
                   ),
                   AnimatedTapWidget(
-                    duration: const Duration(milliseconds: 100),
+                    duration: 100.ms,
                     onTap: () {
                       viewModel.toggleLensFacing();
                     },
@@ -450,7 +473,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         ),
                       ),
                       child: FlipWidget(
-                        duration: const Duration(milliseconds: 100),
+                        duration: 100.ms,
                         front: Icon(
                           Symbols.camera_front,
                           color: CupertinoColors.label.resolveFrom(context),

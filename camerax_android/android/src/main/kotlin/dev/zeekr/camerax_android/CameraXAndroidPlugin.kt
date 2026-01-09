@@ -18,7 +18,10 @@ class CameraXAndroidPlugin : FlutterPlugin, ActivityAware {
         val viewRegistry = binding.platformViewRegistry
         val viewTypeId = "camerax.zeekr.dev/PreviewView"
         val viewFactory = ViewFactory(registrar.instanceManager)
-        viewRegistry.registerViewFactory(viewTypeId, viewFactory)
+        viewRegistry.registerViewFactory("$viewTypeId.PERFORMANCE", viewFactory)
+        viewRegistry.registerViewFactory("$viewTypeId.PERFORMANCE.TLHC", viewFactory)
+        viewRegistry.registerViewFactory("$viewTypeId.COMPATIBLE", viewFactory)
+        viewRegistry.registerViewFactory("$viewTypeId.COMPATIBLE.TLHC", viewFactory)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {

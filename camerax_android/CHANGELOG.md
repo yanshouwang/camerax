@@ -1,3 +1,8 @@
+## 1.2.1
+
+* Impl `tlhc` of `WidgetAdapter.build`.
+* Impl `setImplementationMode`, `setScaleType`, `setScreenFlashOverlayColor` of `PreviewView`.
+
 ## 1.2.0
 
 * Add more camera2 impls.

@@ -361,7 +361,7 @@ class HomeViewModel extends ViewModel {
 
   Future<void> setFlashMode(ImageCapture$FlashMode flashMode) async {
     await controller.setImageCaptureFlashMode(flashMode);
-    flashMode = await controller.getImageCaptureFlashMode();
+    this.flashMode = await controller.getImageCaptureFlashMode();
   }
 
   Future<void> takePicture() async {
@@ -450,6 +450,9 @@ class HomeViewModel extends ViewModel {
     if (!isGranted) {
       throw StateError('requestPermissions failed.');
     }
+    final flashMode = await controller.getImageCaptureFlashMode();
+    this.flashMode = flashMode;
+
     final resolutionStrategy = ResolutionStrategy(
       boundSize: Size(1024, 768),
       fallbackRule: ResolutionStrategy$FallbackRule.closestHigherThenLower,
@@ -458,6 +461,7 @@ class HomeViewModel extends ViewModel {
         .setResolutionStrategy(resolutionStrategy)
         .then((e) => e.build());
     await controller.setImageAnalysisResolutionSelector(resolutionSelector);
+
     final torchStateLiveData = await controller.getTorchState();
     final zoomStateLiveData = await controller.getZoomState();
     final torchState = await torchStateLiveData.getValue();
@@ -476,6 +480,7 @@ class HomeViewModel extends ViewModel {
     _zoomStateObserver = zoomStateObserver;
     this.torchState = torchState;
     this.zoomState = zoomState;
+
     final rotationProviderListener = RotationProvider$Listener(
       onRotationChanged: (rotation) {
         _logger.info(
@@ -485,6 +490,7 @@ class HomeViewModel extends ViewModel {
     );
     await _rotationProvider.addListener(rotationProviderListener);
     _rotationProviderListener = rotationProviderListener;
+
     await bind();
   }
 

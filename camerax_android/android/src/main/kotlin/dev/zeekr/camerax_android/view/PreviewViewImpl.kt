@@ -16,7 +16,7 @@ class PreviewViewImpl(private val registrar: CameraXApiPigeonProxyApiRegistrar) 
     PigeonApiPreviewViewProxyApi(registrar) {
     override fun pigeon_defaultConstructor(): PreviewView {
         return PreviewView(registrar.activity).apply {
-            this.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
+            this.setScreenFlashWindow(registrar.activity.window)
         }
     }
 

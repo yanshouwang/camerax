@@ -8,9 +8,9 @@ base mixin WidgetAdapterImpl implements WidgetAdapter {
   int? get identifier;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {bool tlhc = false}) {
     return PlatformViewLink(
-      viewType: viewType,
+      viewType: tlhc ? '$viewType.TLHC' : viewType,
       surfaceFactory: (context, controller) => AndroidViewSurface(
         controller: controller as AndroidViewController,
         hitTestBehavior: PlatformViewHitTestBehavior.opaque,
@@ -19,7 +19,7 @@ base mixin WidgetAdapterImpl implements WidgetAdapter {
       onCreatePlatformView: (params) =>
           initAndroidView(
               params,
-              hybridComposition: false,
+              tlhc: tlhc,
               creationParams: identifier,
               creationParamsCodec: const StandardMessageCodec(),
             )
@@ -30,13 +30,13 @@ base mixin WidgetAdapterImpl implements WidgetAdapter {
 
   AndroidViewController initAndroidView(
     PlatformViewCreationParams params, {
-    required bool hybridComposition,
+    required bool tlhc,
     TextDirection layoutDirection = TextDirection.ltr,
     dynamic creationParams,
     MessageCodec<dynamic>? creationParamsCodec,
   }) {
-    if (hybridComposition) {
-      return PlatformViewsService.initExpensiveAndroidView(
+    if (tlhc) {
+      return PlatformViewsService.initSurfaceAndroidView(
         id: params.id,
         viewType: params.viewType,
         layoutDirection: layoutDirection,
@@ -44,7 +44,7 @@ base mixin WidgetAdapterImpl implements WidgetAdapter {
         creationParamsCodec: creationParamsCodec,
       );
     } else {
-      return PlatformViewsService.initSurfaceAndroidView(
+      return PlatformViewsService.initExpensiveAndroidView(
         id: params.id,
         viewType: params.viewType,
         layoutDirection: layoutDirection,

@@ -1,5 +1,6 @@
 export 'common/auto_closeable_impl.dart';
 export 'common/closeable_impl.dart';
+export 'common/color_impl.dart';
 export 'common/consumer_impl.dart';
 export 'common/exception_impl.dart';
 export 'common/file_impl.dart';
