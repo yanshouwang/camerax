@@ -1,6 +1,7 @@
 import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/core.dart';
+import 'package:camerax_ios/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 abstract base class LiveDataImpl<T> implements LiveData<T> {}
@@ -56,6 +57,25 @@ final class ZoomStateLiveDataImpl extends LiveDataImpl<ZoomState> {
       api.removeObserver(observer.api);
 }
 
+final class PreviewView$StreamStateLiveDataImpl
+    extends LiveDataImpl<PreviewView$StreamState> {
+  final PreviewViewStreamStateLiveDataProxyApi api;
+
+  PreviewView$StreamStateLiveDataImpl.internal(this.api);
+
+  @override
+  Future<PreviewView$StreamState?> getValue() =>
+      api.getValue().then((e) => e?.impl);
+
+  @override
+  Future<void> observeForever(Observer<PreviewView$StreamState> observer) =>
+      api.observeForever(observer.api);
+
+  @override
+  Future<void> removeObserver(Observer<PreviewView$StreamState> observer) =>
+      api.removeObserver(observer.api);
+}
+
 extension CameraStateLiveDataProxyApiX on CameraStateLiveDataProxyApi {
   LiveData<CameraState> get impl => CameraStateLiveDataImpl.internal(this);
 }
@@ -66,4 +86,10 @@ extension TorchStateLiveDataProxyApiX on TorchStateLiveDataProxyApi {
 
 extension ZoomStateLiveDataProxyApiX on ZoomStateLiveDataProxyApi {
   LiveData<ZoomState> get impl => ZoomStateLiveDataImpl.internal(this);
+}
+
+extension PreviewViewStreamStateLiveDataProxyApiX
+    on PreviewViewStreamStateLiveDataProxyApi {
+  LiveData<PreviewView$StreamState> get impl =>
+      PreviewView$StreamStateLiveDataImpl.internal(this);
 }

@@ -341,6 +341,25 @@ abstract class ZoomStateObserverProxyApi {
   late final void Function(ZoomStateProxyApi value) onChanged;
 }
 
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateLiveData'))
+abstract class PreviewViewStreamStateLiveDataProxyApi {
+  PreviewViewStreamStateApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, PreviewViewStreamStateObserverProxyApi observer);
+  void observeForever(PreviewViewStreamStateObserverProxyApi observer);
+  void removeObserver(PreviewViewStreamStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
+}
+
+@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateObserver'))
+abstract class PreviewViewStreamStateObserverProxyApi {
+  PreviewViewStreamStateObserverProxyApi();
+
+  late final void Function(PreviewViewStreamStateApi value) onChanged;
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Point'))
 abstract class PointProxyApi {
   PointProxyApi();
@@ -828,6 +847,8 @@ enum PreviewViewScaleTypeApi {
   fitEnd,
 }
 
+enum PreviewViewStreamStateApi { idle, streaming }
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AudioConfig'))
 abstract class AudioConfigProxyApi {
   @static
@@ -941,7 +962,7 @@ abstract class PreviewViewProxyApi {
   // );
   // MeteringPointFactoryProxyApi getMeteringPointFactory();
   // OutputTransformProxyApi? getOutputTransform();
-  // PreviewViewStreamStateLiveDataProxyApi getPreviewStreamState();
+  PreviewViewStreamStateLiveDataProxyApi getPreviewStreamState();
   // ImageCaptureScreenFalshProxyApi? getScreenFlash();
   // void setScreenFlashWindow(WindowProxyApi? screenFlashWindow);
   // void setScreenFlashOverlayColor(int color);

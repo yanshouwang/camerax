@@ -25,6 +25,12 @@ class ZoomStateObserverDelegate: PigeonApiDelegateZoomStateObserverProxyApi {
     }
 }
 
+class PreviewViewStreamStateObserverDelegate: PigeonApiDelegatePreviewViewStreamStateObserverProxyApi {
+    func pigeonDefaultConstructor(pigeonApi: PigeonApiPreviewViewStreamStateObserverProxyApi) throws -> PreviewViewStreamStateObserver {
+        return PreviewViewStreamStateObserver(pigeonApi)
+    }
+}
+
 class CameraStateObserver: NSObject, Observer {
     private let api: PigeonApiCameraStateObserverProxyApi
     
@@ -33,7 +39,7 @@ class CameraStateObserver: NSObject, Observer {
     }
     
     func onChanged(_ value: CameraState) {
-        api.onChanged(pigeonInstance: self, value: value.api) { _ in }
+        self.api.onChanged(pigeonInstance: self, value: value.api) { _ in }
     }
 }
 
@@ -45,7 +51,7 @@ class TorchStateObserver: NSObject, Observer {
     }
     
     func onChanged(_ value: TorchState) {
-        api.onChanged(pigeonInstance: self, value: value.api) { _ in }
+        self.api.onChanged(pigeonInstance: self, value: value.api) { _ in }
     }
 }
 
@@ -57,6 +63,18 @@ class ZoomStateObserver: NSObject, Observer {
     }
     
     func onChanged(_ value: ZoomState) {
-        api.onChanged(pigeonInstance: self, value: value) { _ in }
+        self.api.onChanged(pigeonInstance: self, value: value) { _ in }
+    }
+}
+
+class PreviewViewStreamStateObserver: NSObject, Observer {
+    private let api: PigeonApiPreviewViewStreamStateObserverProxyApi
+    
+    init(_ api: PigeonApiPreviewViewStreamStateObserverProxyApi) {
+        self.api = api
+    }
+    
+    func onChanged(_ value: PreviewView.StreamState) {
+        self.api.onChanged(pigeonInstance: self, value: value.api) { _ in }
     }
 }

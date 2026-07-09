@@ -31,6 +31,10 @@ final class PreviewViewImpl with WidgetAdapterImpl implements PreviewView {
   @override
   Future<void> setScreenFlashOverlayColor(Color color) =>
       throw UnimplementedError();
+
+  @override
+  Future<LiveData<PreviewView$StreamState>> getPreviewStreamState() =>
+      api.getPreviewStreamState().then((e) => e.impl);
 }
 
 final class PreviewViewChannelImpl extends PreviewViewChannel {
@@ -43,4 +47,8 @@ final class PreviewViewChannelImpl extends PreviewViewChannel {
 
 extension PreviewView$ScaleTypeX on PreviewView$ScaleType {
   PreviewViewScaleTypeApi get api => PreviewViewScaleTypeApi.values[index];
+}
+
+extension PreviewViewStreamStateApiX on PreviewViewStreamStateApi {
+  PreviewView$StreamState get impl => PreviewView$StreamState.values[index];
 }

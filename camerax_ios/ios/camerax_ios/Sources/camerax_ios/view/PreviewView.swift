@@ -23,6 +23,9 @@ public class PreviewView: UIView {
     
     private let tapGestureRecognizer: UITapGestureRecognizer
     private let pinchGestureRecognizer: UIPinchGestureRecognizer
+    private let previewStreamState: LiveData<StreamState>
+    
+    private var isPreviewingObservation: NSKeyValueObservation?
     private var controller: CameraController?
     
     private var session: AVCaptureSession? {
@@ -38,8 +41,13 @@ public class PreviewView: UIView {
     public override init(frame: CGRect) {
         self.tapGestureRecognizer = UITapGestureRecognizer()
         self.pinchGestureRecognizer = UIPinchGestureRecognizer()
+        self.previewStreamState = LiveData(value: .idle)
         super.init(frame: frame)
         self.videoPreviewLayer.videoGravity = .resizeAspectFill
+        self.isPreviewingObservation = self.videoPreviewLayer.observe(\.isPreviewing, options: [.initial,.new]) { session, change in
+            guard let newValue = change.newValue else { return }
+            self.previewStreamState.setValue(newValue.cxPreviewViewStreamState)
+        }
         self.tapGestureRecognizer.addTarget(self, action: .handleTapGestureRecognizer)
         self.pinchGestureRecognizer.addTarget(self, action: .handlePinchGestureRecognizer)
         self.addGestureRecognizer(self.tapGestureRecognizer)
@@ -52,6 +60,7 @@ public class PreviewView: UIView {
     }
     
     deinit {
+        self.isPreviewingObservation?.invalidate()
         self.tapGestureRecognizer.removeTarget(self, action: .handleTapGestureRecognizer)
         self.pinchGestureRecognizer.removeTarget(self, action: .handlePinchGestureRecognizer)
         self.removeGestureRecognizer(self.tapGestureRecognizer)
@@ -90,6 +99,10 @@ public class PreviewView: UIView {
             throw CameraXError(code: "nil-error", message: "videoGravity is nil", details: nil)
         }
         self.videoGravity = videoGravity
+    }
+    
+    public func getPreviewStreamState() -> LiveData<StreamState> {
+        return self.previewStreamState
     }
     
     @objc fileprivate func handleTapGestureRecognizer(_ sender: UITapGestureRecognizer) {
@@ -137,6 +150,10 @@ public class PreviewView: UIView {
     
     public enum ScaleType: Int {
         case fillCenter, fillEnd, fillStart, fitCenter, fitEnd, fitStart
+    }
+    
+    public enum StreamState: Int {
+        case idle, streaming
     }
 }
 
@@ -186,5 +203,11 @@ fileprivate extension UIDeviceOrientation {
         case .landscapeRight: .landscapeLeft
         default: nil
         }
+    }
+}
+
+fileprivate extension Bool {
+    var cxPreviewViewStreamState: PreviewView.StreamState {
+        return self ? .streaming : .idle
     }
 }

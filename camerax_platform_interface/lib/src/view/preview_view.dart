@@ -14,6 +14,8 @@ enum PreviewView$ScaleType {
   fitEnd,
 }
 
+enum PreviewView$StreamState { idle, streaming }
+
 abstract interface class PreviewView implements WidgetAdapter {
   factory PreviewView() => PreviewViewChannel.instance.create();
 
@@ -23,6 +25,7 @@ abstract interface class PreviewView implements WidgetAdapter {
   );
   Future<void> setScaleType(PreviewView$ScaleType scaleType);
   Future<void> setScreenFlashOverlayColor(Color color);
+  Future<LiveData<PreviewView$StreamState>> getPreviewStreamState();
 }
 
 abstract base class PreviewViewChannel extends PlatformInterface {

@@ -47,6 +47,20 @@ class ZoomStateLiveDataDelegate: PigeonApiDelegateZoomStateLiveDataProxyApi {
     }
 }
 
+class PreviewViewStreamStateLiveDataDelegate: PigeonApiDelegatePreviewViewStreamStateLiveDataProxyApi {
+    func getValue(pigeonApi: PigeonApiPreviewViewStreamStateLiveDataProxyApi, pigeonInstance: PreviewViewStreamStateLiveData) throws -> PreviewViewStreamStateApi? {
+        return pigeonInstance.instance.getValue()?.api
+    }
+    
+    func observeForever(pigeonApi: PigeonApiPreviewViewStreamStateLiveDataProxyApi, pigeonInstance: PreviewViewStreamStateLiveData, observer: PreviewViewStreamStateObserver) throws {
+        pigeonInstance.instance.observeForever(observer)
+    }
+    
+    func removeObserver(pigeonApi: PigeonApiPreviewViewStreamStateLiveDataProxyApi, pigeonInstance: PreviewViewStreamStateLiveData, observer: PreviewViewStreamStateObserver) throws {
+        pigeonInstance.instance.removeObserver(observer)
+    }
+}
+
 class CameraStateLiveData: NSObject {
     public let instance: LiveData<CameraState>
     
@@ -67,6 +81,14 @@ class ZoomStateLiveData: NSObject {
     public let instance: LiveData<ZoomState>
     
     init(_ instance: LiveData<ZoomState>) {
+        self.instance = instance
+    }
+}
+
+class PreviewViewStreamStateLiveData: NSObject {
+    public let instance: LiveData<PreviewView.StreamState>
+    
+    init(_ instance: LiveData<PreviewView.StreamState>) {
         self.instance = instance
     }
 }
