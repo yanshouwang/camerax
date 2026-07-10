@@ -1,3 +1,10 @@
+## 1.2.2
+
+* fvm use 3.38.10
+* Update CameraX version to 1.6.1
+* Add `View` impl
+* Add `PreviewView#getPreviewStreamState` impl
+
 ## 1.2.1
 
 * Impl `tlhc` of `WidgetAdapter.build`.

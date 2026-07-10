@@ -1,3 +1,8 @@
+## 1.2.2
+
+* fvm use 3.38.10
+* Hide `PreviewView` when camera is closed
+
 ## 1.2.1
 
 * Add `tlhc`, `implementationMode`, `scaleType`, `screenFlashOverlayColor` to `PreviewWidget`.
