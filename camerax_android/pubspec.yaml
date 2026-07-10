@@ -17,6 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
   camerax_platform_interface: ^1.2.2
+  meta: ^1.17.0
 
 dev_dependencies:
   flutter_test:
