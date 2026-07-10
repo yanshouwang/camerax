@@ -1,3 +1,9 @@
+## 1.2.2
+
+* fvm use 3.38.10
+* Add `View` api
+* Add `PreviewView#getPreviewStreamState` api
+
 ## 1.2.1
 
 * Add `tlhc` to `WidgetAdapter.build`.

@@ -1,5 +1,6 @@
 import 'package:camerax_ios/src/api.dart';
 import 'package:camerax_ios/src/core.dart';
+import 'package:camerax_ios/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
 abstract base class ObserverImpl<T> implements Observer<T> {}
@@ -20,6 +21,13 @@ final class ZoomStateObserverImpl extends ObserverImpl<ZoomState> {
   final ZoomStateObserverProxyApi api;
 
   ZoomStateObserverImpl.internal(this.api);
+}
+
+final class PreviewView$StreamStateObserverImpl
+    extends ObserverImpl<PreviewView$StreamState> {
+  final PreviewViewStreamStateObserverProxyApi api;
+
+  PreviewView$StreamStateObserverImpl.internal(this.api);
 }
 
 final class OtherObserverImpl<T> extends ObserverImpl<T> {
@@ -48,6 +56,13 @@ final class ObserverChannelImpl extends ObserverChannel {
         onChanged: (_, e) => onChanged(e.impl as T),
       );
       return ZoomStateObserverImpl.internal(api) as ObserverImpl<T>;
+    }
+    if (T == PreviewView$StreamState) {
+      final api = PreviewViewStreamStateObserverProxyApi(
+        onChanged: (_, e) => onChanged(e.impl as T),
+      );
+      return PreviewView$StreamStateObserverImpl.internal(api)
+          as ObserverImpl<T>;
     }
     return OtherObserverImpl(onChanged: onChanged);
   }
@@ -81,6 +96,15 @@ extension ZoomStateObserverX on Observer<ZoomState> {
   ZoomStateObserverProxyApi get api {
     final impl = this;
     if (impl is! ZoomStateObserverImpl) throw TypeError();
+    return impl.api;
+  }
+}
+
+extension PreviewView$StreamStateObserverX
+    on Observer<PreviewView$StreamState> {
+  PreviewViewStreamStateObserverProxyApi get api {
+    final impl = this;
+    if (impl is! PreviewView$StreamStateObserverImpl) throw TypeError();
     return impl.api;
   }
 }

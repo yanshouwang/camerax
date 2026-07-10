@@ -60,6 +60,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
             child: Container(
               margin: const EdgeInsets.all(16.0),
               child: Row(
+                spacing: 20.0,
                 children: [
                   if (flashMode != null)
                     AnimatedTapWidget(
@@ -98,6 +99,46 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                         ),
                       ),
                     ),
+                  AnimatedTapWidget(
+                    duration: 100.ms,
+                    onTap: () {
+                      viewModel.bind();
+                    },
+                    child: Container(
+                      width: 48.0,
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: CupertinoColors.quaternarySystemFill.resolveFrom(
+                          context,
+                        ),
+                      ),
+                      child: Icon(
+                        Symbols.abc,
+                        color: CupertinoColors.label.resolveFrom(context),
+                      ),
+                    ),
+                  ),
+                  AnimatedTapWidget(
+                    duration: 100.ms,
+                    onTap: () {
+                      viewModel.unbind();
+                    },
+                    child: Container(
+                      width: 48.0,
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: CupertinoColors.quaternarySystemFill.resolveFrom(
+                          context,
+                        ),
+                      ),
+                      child: Icon(
+                        Symbols.close,
+                        color: CupertinoColors.label.resolveFrom(context),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -114,7 +155,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                     // implementationMode:
                     //     PreviewView$ImplementationMode.compatible,
                     // scaleType: PreviewView$ScaleType.fitCenter,
-                    screenFlashOverlayColor: CupertinoColors.activeGreen,
+                    // screenFlashOverlayColor: CupertinoColors.activeGreen,
                   ),
                   // AnimatedContainer(
                   //   duration: 400.ms,

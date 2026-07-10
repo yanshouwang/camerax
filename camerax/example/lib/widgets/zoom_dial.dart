@@ -32,7 +32,7 @@ class ZoomDial extends StatelessWidget {
         value: value,
         backgroundColor: CupertinoColors.systemBackground
             .resolveFrom(context)
-            .withOpacity(0.5),
+            .withValues(alpha: 0.5),
         scalesColor: CupertinoColors.label.resolveFrom(context),
         indicatorColor: CupertinoTheme.of(context).primaryColor,
         textStyle: CupertinoTheme.of(context).textTheme.textStyle,

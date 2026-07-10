@@ -2,15 +2,15 @@ group = "dev.zeekr.camerax_android"
 version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "2.1.0"
-    ext.camerax_version = "1.5.2"
+    ext.kotlin_version = "2.2.20"
+    ext.camerax_version = "1.6.1"
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.9.1")
+        classpath("com.android.tools.build:gradle:8.11.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
@@ -27,17 +27,7 @@ apply plugin: "kotlin-android"
 
 android {
     namespace = "dev.zeekr.camerax_android"
-
     compileSdk = 36
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
-    }
 
     sourceSets {
         main.java.srcDirs += "src/main/kotlin"
@@ -50,34 +40,13 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
-    dependencies {
-        // The following line is optional, as the core library is included indirectly by camera-camera2
-        implementation "androidx.camera:camera-core:${camerax_version}"
-        implementation "androidx.camera:camera-camera2:${camerax_version}"
-        // If you want to additionally use the CameraX Lifecycle library
-        implementation "androidx.camera:camera-lifecycle:${camerax_version}"
-        // If you want to additionally use the CameraX VideoCapture library
-        implementation "androidx.camera:camera-video:${camerax_version}"
-        // If you want to additionally use the CameraX View class
-        implementation "androidx.camera:camera-view:${camerax_version}"
-        // If you want to additionally add CameraX ML Kit Vision Integration
-        implementation "androidx.camera:camera-mlkit-vision:${camerax_version}"
-        // If you want to additionally use the CameraX Extensions library
-        implementation "androidx.camera:camera-extensions:${camerax_version}"
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 
-        implementation "com.google.mlkit:barcode-scanning:17.3.0"
-        implementation "com.google.mlkit:face-detection:16.1.7"
-        // implementation "com.google.mlkit:image-labeling:17.0.8"
-        // implementation "com.google.mlkit:object-detection:17.0.1"
-        // implementation "com.google.mlkit:pose-detection:17.0.0"
-        // implementation "com.google.mlkit:segmentation-selfie:16.0.0-beta5"
-        // implementation "com.google.mlkit:text-recognition:16.0.0"
-
-        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2'
-        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.10.2'
-
-        testImplementation("org.jetbrains.kotlin:kotlin-test")
-        testImplementation("org.mockito:mockito-core:5.0.0")
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     testOptions {
@@ -91,4 +60,34 @@ android {
             }
         }
     }
+}
+
+dependencies {
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX VideoCapture library
+    implementation "androidx.camera:camera-video:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    // If you want to additionally add CameraX ML Kit Vision Integration
+    implementation "androidx.camera:camera-mlkit-vision:${camerax_version}"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    implementation "com.google.mlkit:barcode-scanning:17.3.0"
+    implementation "com.google.mlkit:face-detection:16.1.7"
+    // implementation "com.google.mlkit:image-labeling:17.0.8"
+    // implementation "com.google.mlkit:object-detection:17.0.1"
+    // implementation "com.google.mlkit:pose-detection:17.0.0"
+    // implementation "com.google.mlkit:segmentation-selfie:16.0.0-beta5"
+    // implementation "com.google.mlkit:text-recognition:16.0.0"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.11.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.11.0'
+
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.mockito:mockito-core:5.23.0")
 }

@@ -32,12 +32,26 @@ class PreviewWidget extends StatefulWidget {
 }
 
 class _PreviewWidgetState extends State<PreviewWidget> {
+  late final Observer<PreviewView$StreamState> _observer;
   late PreviewView _view;
 
   @override
   void initState() {
     super.initState();
-    _view = _createView();
+    _observer = Observer(
+      onChanged: (state) {
+        switch (state) {
+          case .idle:
+            _view.setAlpha(0.0);
+            break;
+          case .streaming:
+            _view.setAlpha(1.0);
+            break;
+        }
+      },
+    );
+    _view = PreviewView();
+    _initView();
   }
 
   @override
@@ -48,38 +62,49 @@ class _PreviewWidgetState extends State<PreviewWidget> {
   @override
   void didUpdateWidget(covariant PreviewWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final isViewOutdate =
-        widget.tlhc != oldWidget.tlhc ||
-        widget.implementationMode != oldWidget.implementationMode;
-    if (isViewOutdate && Platform.isAndroid) {
-      // _view.setController(null);
-      _view = _createView();
-      return;
-    }
-    if (widget.controller != oldWidget.controller) {
-      _view.setController(widget.controller);
+    if (Platform.isAndroid) {
+      if (widget.tlhc != oldWidget.tlhc) {
+        _deinitView();
+        _view = PreviewView();
+        _initView();
+        _view.getPreviewStreamState().then((e) => e.observeForever(_observer));
+        return;
+      }
+      if (widget.implementationMode != oldWidget.implementationMode) {
+        _view.setController(null);
+        _view.setImplementationMode(widget.implementationMode);
+        _view.setController(oldWidget.controller);
+      }
+      if (widget.screenFlashOverlayColor != oldWidget.screenFlashOverlayColor) {
+        _view.setScreenFlashOverlayColor(widget.screenFlashOverlayColor);
+      }
     }
     if (widget.scaleType != oldWidget.scaleType) {
       _view.setScaleType(widget.scaleType);
     }
-    if (widget.screenFlashOverlayColor != oldWidget.screenFlashOverlayColor) {
-      _view.setScreenFlashOverlayColor(widget.screenFlashOverlayColor);
+    if (widget.controller != oldWidget.controller) {
+      _view.setController(widget.controller);
     }
   }
 
   @override
   void dispose() {
+    _deinitView();
     super.dispose();
   }
 
-  PreviewView _createView() {
-    final view = PreviewView();
+  void _initView() {
     if (Platform.isAndroid) {
-      view.setImplementationMode(widget.implementationMode);
-      view.setScreenFlashOverlayColor(widget.screenFlashOverlayColor);
+      _view.setImplementationMode(widget.implementationMode);
+      _view.setScreenFlashOverlayColor(widget.screenFlashOverlayColor);
     }
-    view.setScaleType(widget.scaleType);
-    view.setController(widget.controller);
-    return view;
+    _view.setAlpha(0.0);
+    _view.setScaleType(widget.scaleType);
+    _view.setController(widget.controller);
+    _view.getPreviewStreamState().then((e) => e.observeForever(_observer));
+  }
+
+  void _deinitView() {
+    _view.getPreviewStreamState().then((e) => e.removeObserver(_observer));
   }
 }

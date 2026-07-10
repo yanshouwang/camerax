@@ -187,7 +187,7 @@ class _ZoomWidgetState extends State<ZoomWidget> {
             shape: BoxShape.circle,
             color: CupertinoColors.systemBackground
                 .resolveFrom(context)
-                .withOpacity(0.5),
+                .withValues(alpha: 0.5),
           ),
           child: Text(
             text,

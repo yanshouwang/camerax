@@ -27,6 +27,10 @@ class PreviewViewDelegate: PigeonApiDelegatePreviewViewProxyApi {
     func setScaleType(pigeonApi: PigeonApiPreviewViewProxyApi, pigeonInstance: PreviewView, scaleType: PreviewViewScaleTypeApi) throws {
         try pigeonInstance.setScaleType(scaleType.delegate)
     }
+    
+    func getPreviewStreamState(pigeonApi: PigeonApiPreviewViewProxyApi, pigeonInstance: PreviewView) throws -> PreviewViewStreamStateLiveData {
+        return PreviewViewStreamStateLiveData(pigeonInstance.getPreviewStreamState())
+    }
 }
 
 extension PreviewView.ScaleType {
@@ -51,6 +55,15 @@ extension PreviewViewScaleTypeApi {
         case .fitCenter: .fitCenter
         case .fitEnd: .fitEnd
         case .fitStart: .fitStart
+        }
+    }
+}
+
+extension PreviewView.StreamState {
+    var api: PreviewViewStreamStateApi {
+        return switch self {
+        case .idle: .idle
+        case .streaming: .streaming
         }
     }
 }

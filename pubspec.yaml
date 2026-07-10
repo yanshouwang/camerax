@@ -1,7 +1,7 @@
 name: _
 publish_to: none
 environment:
-  sdk: ^3.9.2
+  sdk: ^3.10.9
 workspace:
   - camerax_platform_interface
   - camerax_android

@@ -143,6 +143,11 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
         return PigeonApiRectFProxyApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
+    func pigeonApiUIViewProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiUIViewProxyApi {
+        let delegate = UIViewDelegate()
+        return PigeonApiUIViewProxyApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
     func pigeonApiCameraSelectorBuilderProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraSelectorBuilderProxyApi {
         let delegate = CameraSelectorDelegate.BuilderDelegate()
         return PigeonApiCameraSelectorBuilderProxyApi(pigeonRegistrar: registrar, delegate: delegate)
@@ -186,6 +191,16 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
     func pigeonApiZoomStateObserverProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiZoomStateObserverProxyApi {
         let delegate = ZoomStateObserverDelegate()
         return PigeonApiZoomStateObserverProxyApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiPreviewViewStreamStateLiveDataProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiPreviewViewStreamStateLiveDataProxyApi {
+        let delegate = PreviewViewStreamStateLiveDataDelegate()
+        return PigeonApiPreviewViewStreamStateLiveDataProxyApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
+    func pigeonApiPreviewViewStreamStateObserverProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiPreviewViewStreamStateObserverProxyApi {
+        let delegate = PreviewViewStreamStateObserverDelegate()
+        return PigeonApiPreviewViewStreamStateObserverProxyApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
     func pigeonApiMeteringPointProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiMeteringPointProxyApi {

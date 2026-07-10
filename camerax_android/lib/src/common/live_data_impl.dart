@@ -109,6 +109,25 @@ final class LowLightBoostStateLiveDataImpl
       api.removeObserver(observer.api);
 }
 
+final class PreviewView$StreamStateLiveDataImpl
+    extends LiveDataImpl<PreviewView$StreamState> {
+  final PreviewViewStreamStateLiveDataProxyApi api;
+
+  PreviewView$StreamStateLiveDataImpl.internal(this.api);
+
+  @override
+  Future<PreviewView$StreamState?> getValue() =>
+      api.getValue().then((e) => e?.impl);
+
+  @override
+  Future<void> observeForever(Observer<PreviewView$StreamState> observer) =>
+      api.observeForever(observer.api);
+
+  @override
+  Future<void> removeObserver(Observer<PreviewView$StreamState> observer) =>
+      api.removeObserver(observer.api);
+}
+
 extension IntLiveDataProxyApiX on IntLiveDataProxyApi {
   LiveData<int> get impl => IntLiveDataImpl.internal(this);
 }
@@ -134,4 +153,10 @@ extension LowLightBoostStateLiveDataProxyApiX
     on LowLightBoostStateLiveDataProxyApi {
   LiveData<LowLightBoostState> get impl =>
       LowLightBoostStateLiveDataImpl.internal(this);
+}
+
+extension PreviewViewStreamStateLiveDataProxyApiX
+    on PreviewViewStreamStateLiveDataProxyApi {
+  LiveData<PreviewView$StreamState> get impl =>
+      PreviewView$StreamStateLiveDataImpl.internal(this);
 }

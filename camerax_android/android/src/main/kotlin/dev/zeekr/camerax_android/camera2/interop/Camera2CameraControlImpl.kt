@@ -44,7 +44,7 @@ class Camera2CameraControlImpl(registrar: CameraXApiPigeonProxyApiRegistrar) :
     }
 
     override fun getCaptureRequestOptions(pigeon_instance: Camera2CameraControl): CaptureRequestOptions {
-        return pigeon_instance.captureRequestOptions
+        return pigeon_instance.getCaptureRequestOptions()
     }
 
     override fun setCaptureRequestOptions(

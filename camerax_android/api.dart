@@ -896,6 +896,8 @@ enum ImageFormatApi {
 
 enum SurfaceRotationApi { rotation0, rotation90, rotation180, rotation270 }
 
+enum ViewVisibilityApi { visible, invisible, gone }
+
 @ProxyApi(
   kotlinOptions: KotlinProxyApiOptions(
     fullClassName: 'java.lang.AutoCloseable',
@@ -1537,6 +1539,26 @@ abstract class LongRangeProxyApi {
 
   late final int lower;
   late final int upper;
+}
+
+@ProxyApi(
+  kotlinOptions: KotlinProxyApiOptions(fullClassName: 'android.view.View'),
+)
+abstract class ViewProxyApi {
+  ViewVisibilityApi getVisibility();
+  void setVisibility(ViewVisibilityApi value);
+
+  double getAlpha();
+  void setAlpha(double value);
+
+  bool isVisible();
+  bool isInvisible();
+  bool isGone();
+  bool isOpaque();
+
+  void setVisible(bool value);
+  void setInvisible(bool value);
+  void setGone(bool value);
 }
 
 // core
@@ -2887,7 +2909,7 @@ abstract class LifecycleCameraControllerProxyApi
     fullClassName: 'androidx.camera.view.PreviewView',
   ),
 )
-abstract class PreviewViewProxyApi {
+abstract class PreviewViewProxyApi extends ViewProxyApi {
   PreviewViewProxyApi();
 
   BitmapProxyApi? getBitmap();

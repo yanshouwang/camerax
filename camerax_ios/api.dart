@@ -341,6 +341,29 @@ abstract class ZoomStateObserverProxyApi {
   late final void Function(ZoomStateProxyApi value) onChanged;
 }
 
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateLiveData'),
+)
+abstract class PreviewViewStreamStateLiveDataProxyApi {
+  PreviewViewStreamStateApi? getValue();
+  // bool hasActivieObservers();
+  // bool hasObservers();
+  // bool isInitialized();
+  // void observe(LifecycleOwner owner, PreviewViewStreamStateObserverProxyApi observer);
+  void observeForever(PreviewViewStreamStateObserverProxyApi observer);
+  void removeObserver(PreviewViewStreamStateObserverProxyApi observer);
+  // void removeObservers(LifecycleOwner owner);
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateObserver'),
+)
+abstract class PreviewViewStreamStateObserverProxyApi {
+  PreviewViewStreamStateObserverProxyApi();
+
+  late final void Function(PreviewViewStreamStateApi value) onChanged;
+}
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'Point'))
 abstract class PointProxyApi {
   PointProxyApi();
@@ -391,6 +414,20 @@ abstract class SizeFProxyApi {
 
   late final double width;
   late final double height;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'UIView', import: 'UIKit'),
+)
+abstract class UIViewProxyApi {
+  double getAlpha();
+  void setAlpha(double value);
+
+  bool isHidden();
+  bool isOpaque();
+
+  void setHidden(bool value);
+  void setOpaque(bool value);
 }
 
 // core
@@ -828,6 +865,8 @@ enum PreviewViewScaleTypeApi {
   fitEnd,
 }
 
+enum PreviewViewStreamStateApi { idle, streaming }
+
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'AudioConfig'))
 abstract class AudioConfigProxyApi {
   @static
@@ -928,7 +967,7 @@ abstract class CameraControllerProxyApi {
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewView'))
-abstract class PreviewViewProxyApi {
+abstract class PreviewViewProxyApi extends UIViewProxyApi {
   PreviewViewProxyApi();
 
   CameraControllerProxyApi? getController();
@@ -941,7 +980,7 @@ abstract class PreviewViewProxyApi {
   // );
   // MeteringPointFactoryProxyApi getMeteringPointFactory();
   // OutputTransformProxyApi? getOutputTransform();
-  // PreviewViewStreamStateLiveDataProxyApi getPreviewStreamState();
+  PreviewViewStreamStateLiveDataProxyApi getPreviewStreamState();
   // ImageCaptureScreenFalshProxyApi? getScreenFlash();
   // void setScreenFlashWindow(WindowProxyApi? screenFlashWindow);
   // void setScreenFlashOverlayColor(int color);

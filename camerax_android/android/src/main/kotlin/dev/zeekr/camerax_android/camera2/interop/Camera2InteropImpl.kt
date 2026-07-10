@@ -114,5 +114,5 @@ class Camera2InteropImpl {
         }
     }
 
-    class CaptureRequestOptionsExtender(val instance: Camera2Interop.Extender<CaptureRequestOptions>)
+    class CaptureRequestOptionsExtender(val instance: Camera2Interop.Extender<CaptureRequestOptions?>)
 }
