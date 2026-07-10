@@ -1,6 +1,6 @@
 import 'package:camerax_platform_interface/src/common.dart';
 import 'package:camerax_platform_interface/src/view.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' hide View;
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 enum PreviewView$ImplementationMode { compatible, performance }
@@ -16,7 +16,7 @@ enum PreviewView$ScaleType {
 
 enum PreviewView$StreamState { idle, streaming }
 
-abstract interface class PreviewView implements WidgetAdapter {
+abstract interface class PreviewView implements View, WidgetAdapter {
   factory PreviewView() => PreviewViewChannel.instance.create();
 
   Future<void> setController(CameraController? controller);

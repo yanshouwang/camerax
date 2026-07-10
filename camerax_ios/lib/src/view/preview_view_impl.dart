@@ -5,7 +5,10 @@ import 'package:camerax_ios/src/common.dart';
 import 'package:camerax_ios/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class PreviewViewImpl with WidgetAdapterImpl implements PreviewView {
+final class PreviewViewImpl extends ViewImpl
+    with WidgetAdapterImpl
+    implements PreviewView {
+  @override
   final PreviewViewProxyApi api;
 
   PreviewViewImpl.internal(this.api);

@@ -60,6 +60,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
             child: Container(
               margin: const EdgeInsets.all(16.0),
               child: Row(
+                spacing: 20.0,
                 children: [
                   if (flashMode != null)
                     AnimatedTapWidget(
@@ -154,7 +155,7 @@ class _HomeViewState extends State<HomeView> with RouteAware {
                     // implementationMode:
                     //     PreviewView$ImplementationMode.compatible,
                     // scaleType: PreviewView$ScaleType.fitCenter,
-                    screenFlashOverlayColor: CupertinoColors.activeGreen,
+                    // screenFlashOverlayColor: CupertinoColors.activeGreen,
                   ),
                   // AnimatedContainer(
                   //   duration: 400.ms,

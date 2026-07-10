@@ -143,6 +143,11 @@ class CameraXDelegate: CameraXApiPigeonProxyApiDelegate {
         return PigeonApiRectFProxyApi(pigeonRegistrar: registrar, delegate: delegate)
     }
     
+    func pigeonApiUIViewProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiUIViewProxyApi {
+        let delegate = UIViewDelegate()
+        return PigeonApiUIViewProxyApi(pigeonRegistrar: registrar, delegate: delegate)
+    }
+    
     func pigeonApiCameraSelectorBuilderProxyApi(_ registrar: CameraXApiPigeonProxyApiRegistrar) -> PigeonApiCameraSelectorBuilderProxyApi {
         let delegate = CameraSelectorDelegate.BuilderDelegate()
         return PigeonApiCameraSelectorBuilderProxyApi(pigeonRegistrar: registrar, delegate: delegate)

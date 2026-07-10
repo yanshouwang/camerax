@@ -5,15 +5,16 @@ import 'package:camerax_android/src/common.dart';
 import 'package:camerax_android/src/view.dart';
 import 'package:camerax_platform_interface/camerax_platform_interface.dart';
 
-final class PreviewViewImpl with WidgetAdapterImpl implements PreviewView {
+final class PreviewViewImpl extends ViewImpl
+    with WidgetAdapterImpl
+    implements PreviewView {
+  @override
   final PreviewViewProxyApi api;
-  late final PreviewView$ImplementationMode implementationMode;
 
   PreviewViewImpl.internal(this.api);
 
   @override
-  String get viewType =>
-      'camerax.zeekr.dev/PreviewView.${implementationMode.name.toUpperCase()}';
+  String get viewType => 'camerax.zeekr.dev/PreviewView';
   @override
   int? get identifier => api.pigeon_instanceManager.getIdentifier(api);
 
@@ -24,10 +25,7 @@ final class PreviewViewImpl with WidgetAdapterImpl implements PreviewView {
   @override
   Future<void> setImplementationMode(
     PreviewView$ImplementationMode implementationMode,
-  ) {
-    this.implementationMode = implementationMode;
-    return api.setImplementationMode(implementationMode.api);
-  }
+  ) => api.setImplementationMode(implementationMode.api);
 
   @override
   Future<void> setScaleType(PreviewView$ScaleType scaleType) =>

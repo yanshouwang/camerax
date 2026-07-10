@@ -341,7 +341,9 @@ abstract class ZoomStateObserverProxyApi {
   late final void Function(ZoomStateProxyApi value) onChanged;
 }
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateLiveData'))
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateLiveData'),
+)
 abstract class PreviewViewStreamStateLiveDataProxyApi {
   PreviewViewStreamStateApi? getValue();
   // bool hasActivieObservers();
@@ -353,7 +355,9 @@ abstract class PreviewViewStreamStateLiveDataProxyApi {
   // void removeObservers(LifecycleOwner owner);
 }
 
-@ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateObserver'))
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'PreviewViewStreamStateObserver'),
+)
 abstract class PreviewViewStreamStateObserverProxyApi {
   PreviewViewStreamStateObserverProxyApi();
 
@@ -410,6 +414,20 @@ abstract class SizeFProxyApi {
 
   late final double width;
   late final double height;
+}
+
+@ProxyApi(
+  swiftOptions: SwiftProxyApiOptions(name: 'UIView', import: 'UIKit'),
+)
+abstract class UIViewProxyApi {
+  double getAlpha();
+  void setAlpha(double value);
+
+  bool isHidden();
+  bool isOpaque();
+
+  void setHidden(bool value);
+  void setOpaque(bool value);
 }
 
 // core
@@ -949,7 +967,7 @@ abstract class CameraControllerProxyApi {
 }
 
 @ProxyApi(swiftOptions: SwiftProxyApiOptions(name: 'PreviewView'))
-abstract class PreviewViewProxyApi {
+abstract class PreviewViewProxyApi extends UIViewProxyApi {
   PreviewViewProxyApi();
 
   CameraControllerProxyApi? getController();

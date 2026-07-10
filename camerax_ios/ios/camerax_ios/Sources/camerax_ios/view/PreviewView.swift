@@ -44,7 +44,7 @@ public class PreviewView: UIView {
         self.previewStreamState = LiveData(value: .idle)
         super.init(frame: frame)
         self.videoPreviewLayer.videoGravity = .resizeAspectFill
-        self.isPreviewingObservation = self.videoPreviewLayer.observe(\.isPreviewing, options: [.initial,.new]) { session, change in
+        self.isPreviewingObservation = self.videoPreviewLayer.observe(\.isPreviewing, options: [.initial, .new]) { session, change in
             guard let newValue = change.newValue else { return }
             self.previewStreamState.setValue(newValue.cxPreviewViewStreamState)
         }
